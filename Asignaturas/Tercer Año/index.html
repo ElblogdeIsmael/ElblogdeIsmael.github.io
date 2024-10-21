@@ -26,7 +26,25 @@
         a.textContent = subject.name;
         a.href = subject.url;
         a.style.color = '#333';
+
+        // Crear un span para mostrar el contador de visitas
+        var span = document.createElement('span');
+        span.style.marginLeft = '10px';
+        span.style.color = '#666';
+
+        // Obtener el contador de visitas del almacenamiento local
+        var count = localStorage.getItem(subject.url) || 0;
+        span.textContent = `👁️ ${count}`;
+
+        // Incrementar el contador de visitas al hacer clic en el enlace
+        a.addEventListener('click', function() {
+            count++;
+            localStorage.setItem(subject.url, count);
+            span.textContent = `👁️ ${count}`;
+        });
+
         li.appendChild(a);
+        li.appendChild(span);
         subjectsList.appendChild(li);
     });
 </script>
