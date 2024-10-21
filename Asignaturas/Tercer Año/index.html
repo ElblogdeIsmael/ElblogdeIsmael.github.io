@@ -1,0 +1,32 @@
+<div style="background-color: #f1f1f1; padding: 20px; font-size:30px;">
+    <h1 style="color: #333;">3º curso del doble grado de Ingeniería Informática y ADE - <span id="year"></span></h1>
+    <ul id="subjects" style="list-style-type: none; padding: 0; font-size: 25px;"></ul>
+        <!-- Listado de asignaturas -->
+    </ul>
+</div>
+
+<script>
+    // Obtener el año actual
+    var currentYear = new Date().getFullYear();
+    document.getElementById('year').textContent = currentYear;
+
+    // Añadir asignaturas al listado con enlaces
+    var subjects = [
+        { name: 'Dirección y Administración de Empresas', url: 'DAE.html' },
+        { name: 'Sistemas Concurrentes y Distribuidos', url: 'SCD.html' },
+        { name: 'Fundamentos de Redes', url: 'FR.html' },
+        { name: 'Programación y Diseño Orientado a Objetos', url: 'PDOO.html' },
+        { name: 'Econometría', url: 'ECO.html' },
+        { name: 'Contabilidad Financiera 1', url: 'CF1.html' }
+    ];
+    var subjectsList = document.getElementById('subjects');
+    subjects.forEach(function(subject) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.textContent = subject.name;
+        a.href = subject.url;
+        a.style.color = '#333';
+        li.appendChild(a);
+        subjectsList.appendChild(li);
+    });
+</script>
