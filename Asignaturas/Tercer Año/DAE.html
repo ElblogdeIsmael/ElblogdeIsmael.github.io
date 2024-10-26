@@ -20,35 +20,83 @@
 
 <!-- CSS for styling the folders and files -->
 <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #ece9e6, #ffffff);
+        margin: 0;
+        padding: 20px;
+    }
     #fileExplorer {
-        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        background: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
     }
     .folder {
         margin-bottom: 20px;
         border: 1px solid #ccc;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #f9f9f9;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: #e3f2fd;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .folder:hover {
+        background-color: #bbdefb;
+        transform: scale(1.02);
     }
     .folder h3 {
         font-weight: bold;
         margin-bottom: 10px;
+        color: #0d47a1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+    .folder h3 i {
+        margin-right: 10px;
+        transition: transform 0.3s ease;
+    }
+    .folder h3:hover i {
+        transform: rotate(20deg);
     }
     .folder ul {
         list-style-type: none;
         padding-left: 0;
+        display: none;
     }
     .folder ul li {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
     .folder ul li a {
         text-decoration: none;
-        color: #333;
+        color: #1a237e;
+        font-weight: 500;
+        transition: color 0.3s ease, text-decoration 0.3s ease;
     }
     .folder ul li a:hover {
         text-decoration: underline;
+        color: #0d47a1;
     }
     .folder ul li a i {
-        margin-right: 5px;
+        margin-right: 8px;
+        color: #1976d2;
     }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var folders = document.querySelectorAll('.folder h3');
+        folders.forEach(function(folder) {
+            folder.addEventListener('click', function() {
+                var ul = this.nextElementSibling;
+                if (ul.style.display === 'none' || ul.style.display === '') {
+                    ul.style.display = 'block';
+                } else {
+                    ul.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>

@@ -1,8 +1,50 @@
-<div style="background-color: #f1f1f1; padding: 20px; font-size:30px;">
-    <h1 style="color: #333;">3º curso del doble grado de Ingeniería Informática y ADE - <span id="year"></span></h1>
-    <ul id="subjects" style="list-style-type: none; padding: 0; font-size: 25px;"></ul>
-        <!-- Listado de asignaturas -->
-    </ul>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #ece9e6, #ffffff);
+        margin: 0;
+        padding: 20px;
+    }
+    #content {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+    }
+    h1 {
+        color: #333;
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+    ul#subjects {
+        list-style-type: none;
+        padding: 0;
+        font-size: 25px;
+    }
+    ul#subjects li {
+        margin-bottom: 15px;
+    }
+    ul#subjects li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease, text-decoration 0.3s ease;
+    }
+    ul#subjects li a:hover {
+        text-decoration: underline;
+        color: #0d47a1;
+    }
+    ul#subjects li span {
+        margin-left: 10px;
+        color: #666;
+    }
+</style>
+
+<div id="content">
+    <h1>3º curso del doble grado de Ingeniería Informática y ADE - <span id="year"></span></h1>
+    <ul id="subjects"></ul>
 </div>
 
 <script>
@@ -25,12 +67,9 @@
         var a = document.createElement('a');
         a.textContent = subject.name;
         a.href = subject.url;
-        a.style.color = '#333';
 
         // Crear un span para mostrar el contador de visitas
         var span = document.createElement('span');
-        span.style.marginLeft = '10px';
-        span.style.color = '#666';
 
         // Obtener el contador de visitas del almacenamiento local
         var count = localStorage.getItem(subject.url) || 0;
