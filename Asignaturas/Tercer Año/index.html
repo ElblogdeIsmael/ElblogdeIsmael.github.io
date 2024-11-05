@@ -1,20 +1,21 @@
 <style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(to right, #ece9e6, #ffffff);
+        background: #282c34;
+        color: #abb2bf;
         margin: 0;
         padding: 20px;
     }
     #content {
         max-width: 800px;
         margin: 0 auto;
-        background: #f3bb71;
+        background: #21252b;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
         padding: 20px;
     }
     h1 {
-        color: #333;
+        color: #61afef;
         font-size: 30px;
         margin-bottom: 20px;
     }
@@ -28,17 +29,23 @@
     }
     ul#subjects li a {
         text-decoration: none;
-        color: #333;
+        color: #61afef;
         font-weight: 500;
         transition: color 0.3s ease, text-decoration 0.3s ease;
+        display: flex;
+        align-items: center;
+        background: #21252b;
+        padding: 10px;
+        border-radius: 5px;
     }
     ul#subjects li a:hover {
         text-decoration: underline;
-        color: #0d47a1;
+        color: #98c379;
+        background: #3a3f4b;
     }
-    ul#subjects li span {
-        margin-left: 10px;
-        color: #666;
+    ul#subjects li a i {
+        margin-right: 8px;
+        color: #61afef;
     }
 </style>
 
@@ -68,22 +75,7 @@
         a.textContent = subject.name;
         a.href = subject.url;
 
-        // Crear un span para mostrar el contador de visitas
-        var span = document.createElement('span');
-
-        // Obtener el contador de visitas del almacenamiento local
-        var count = localStorage.getItem(subject.url) || 0;
-        span.textContent = `👁️ ${count}`;
-
-        // Incrementar el contador de visitas al hacer clic en el enlace
-        a.addEventListener('click', function() {
-            count++;
-            localStorage.setItem(subject.url, count);
-            span.textContent = `👁️ ${count}`;
-        });
-
         li.appendChild(a);
-        li.appendChild(span);
         subjectsList.appendChild(li);
     });
 </script>
