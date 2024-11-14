@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 1</title>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            font-size: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .question {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .question.correct {
+            border-color: #4CAF50;
+            background-color: #d4edda;
+        }
+        .question.incorrect {
+            border-color: #f44336;
+            background-color: #f8d7da;
+        }
+        .explanation {
+            background: #e7f3fe;
+            border: 1px solid #b2d4fe;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .author {
+            margin-top: 20px;
+            font-style: italic;
+            text-align: center;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.5); /* Aumentar el tamaño del botón de radio */
+        }
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 20px; /* Aumentar el tamaño del botón */
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px; /* Aumentar el tamaño del texto */
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 1</h1>
+
+
+
+
+    <!-- Añadir las preguntas adicionales de la misma manera -->
+
+    <input type="button" value="¿Aprobarás?" onclick="checkAnswers()">
+</form>
+
+<div class="author">
+    <p>Autor: Ismael Sallami Moreno</p>
+</div>
+
+<div id="results" style="margin-top: 20px;"></div>
+
+<script>
+    function checkAnswers() {
+        let score = 0;
+        const totalQuestions = 20;
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
+
+        // Respuestas correctas
+        const answers = {
+            q1: { answer: 'c', explanation: 'Los programas concurrentes generan muchas intercalaciones de instrucciones posibles, por lo que es poco probable que se repitan caminos.' },
+            q2: { answer: 'b', explanation: 'Las trazas garantizan que se producirán errores.' },
+            q3: { answer: 'd', explanation: 'Errores que aparecen siempre en la misma ejecución.' },
+            q4: { answer: 'b', explanation: 'Porque los errores transitorios aparecen en cada traza.' },
+            q5: { answer: 'a', explanation: 'Confiar sólo en la comprobación manual de errores.' },
+            q6: { answer: 'd', explanation: 'La ejecución de un único proceso de forma aislada.' },
+            q7: { answer: 'e', explanation: 'La velocidad de ejecución es irrelevante para la programación concurrente.' },
+            q8: { answer: 'b', explanation: 'Una situación en la que el orden de ejecución de los procesos no afecta a la salida final del programa.' },
+            q9: { answer: 'b', explanation: 'Producen resultados impredecibles o incorrectos según el orden de ejecución de los procesos.' },
+            q10: { answer: 'd', explanation: 'Sólo sistemas distribuidos.' },
+            q11: { answer: 'c', explanation: 'La corrección del proceso debe depender de la velocidad relativa de los procesos.' },
+            q12: { answer: 'd', explanation: 'Permite que algunos procesos no terminen nunca sus tareas.' },
+            q13: { answer: 'a', explanation: 'Requiere que todos los procesos se ejecuten al mismo tiempo.' },
+            q14: { answer: 'e', explanation: 'Una vez que un proceso empieza a ejecutar una sección de código, debe completarla sin interrupción.' },
+            q15: { answer: 'b', explanation: 'Imponiendo límites temporales estrictos a la ejecución de los procesos.' },
+            q16: { answer: 'a', explanation: 'Una condición que sólo se aplica a los programas secuenciales.' },
+            q17: { answer: 'c', explanation: 'P y Q son variables que representan el tiempo de ejecución de C.' },
+            q18: { answer: 'a', explanation: 'Es difícil definir precondiciones y postcondiciones para cada proceso.' },
+            q19: { answer: 'a', explanation: 'Sólo se aplica a los programas secuenciales, no a los concurrentes.' },
+            q20: { answer: 'a', explanation: 'Las precondiciones y postcondiciones de los procesos deben combinarse, y ningún proceso debe invalidar las afirmaciones de los demás.' }
+        };
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            const question = document.querySelector(`input[name="q${i}"]:checked`);
+            if (question) {
+                if (question.value === answers[`q${i}`].answer) {
+                    score++;
+                    document.getElementById(`q${i}`).classList.add('correct');
+                } else {
+                    document.getElementById(`q${i}`).classList.add('incorrect');
+                    // Mostrar la respuesta correcta y su justificación
+                    const correctAnswer = answers[`q${i}`].answer;
+                    const explanation = answers[`q${i}`].explanation;
+                    const explanationDiv = document.createElement("div");
+                    explanationDiv.className = "explanation";
+                    explanationDiv.innerHTML = `<strong>Respuesta correcta:</strong> ${correctAnswer}<br><strong>Justificación:</strong> ${explanation}`;
+                    document.getElementById(`q${i}`).appendChild(explanationDiv);
+                }
+            }
+        }
+
+        // Cálculo de la nota sobre 10
+        const grade = (score / totalQuestions) * 10;
+        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
+        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
+    }
+</script>
+
+</body>
+</html>
