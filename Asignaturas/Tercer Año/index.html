@@ -1,81 +1,285 @@
-<style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asignaturas Tercer Año</title>
+  <style>
+    /*-----------------------------------*\
+      #style.css
+    \*-----------------------------------*/
+
+    :root {
+      --bg-gradient-onyx: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
+      --bg-gradient-jet: linear-gradient(to bottom right, hsla(240, 1%, 18%, 0.251) 0%, hsla(240, 2%, 11%, 0) 100%), hsl(240, 2%, 13%);
+      --jet: hsl(0, 0%, 22%);
+      --onyx: hsl(240, 1%, 17%);
+      --eerie-black-1: hsl(240, 2%, 13%);
+      --eerie-black-2: hsl(240, 2%, 12%);
+      --smoky-black: hsl(0, 0%, 7%);
+      --white-1: hsl(0, 0%, 100%);
+      --white-2: hsl(0, 0%, 98%);
+      --orange-yellow-crayola: hsl(45, 100%, 72%);
+      --light-gray: hsl(0, 0%, 84%);
+      --ff-poppins: 'Roboto', sans-serif;
+      --fs-1: 24px;
+      --fs-2: 18px;
+      --fs-3: 17px;
+      --fs-4: 16px;
+      --fs-5: 15px;
+      --fs-6: 14px;
+      --fs-7: 13px;
+      --fs-8: 11px;
+      --fw-300: 300;
+      --fw-400: 400;
+      --fw-500: 500;
+      --fw-600: 600;
+      --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
+      --transition-1: 0.25s ease;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    a { text-decoration: none; }
+
+    li { list-style: none; }
+
     body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #282c34;
-        color: #abb2bf;
-        margin: 0;
-        padding: 20px;
+      font-family: var(--ff-poppins);
+      background: var(--smoky-black);
+      color: var(--white-2);
+      margin: 0;
+      padding: 20px;
     }
+
     #content {
-        max-width: 800px;
-        margin: 0 auto;
-        background: #21252b;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--eerie-black-2);
+      box-shadow: var(--shadow-1);
+      border-radius: 10px;
+      padding: 20px;
     }
+
     h1 {
-        color: #61afef;
-        font-size: 30px;
-        margin-bottom: 20px;
+      color: var(--orange-yellow-crayola);
+      font-size: var(--fs-1);
+      margin-bottom: 20px;
     }
+    h2 {
+      color: var(--orange-yellow-crayola);
+      font-size: var(--fs-1);
+      margin-bottom: 20px;
+    }
+
     ul#subjects {
-        list-style-type: none;
-        padding: 0;
-        font-size: 25px;
+      list-style-type: none;
+      padding: 0;
+      font-size: var(--fs-2);
     }
+
     ul#subjects li {
-        margin-bottom: 15px;
+      margin-bottom: 15px;
     }
+
     ul#subjects li a {
-        text-decoration: none;
-        color: #61afef;
-        font-weight: 500;
-        transition: color 0.3s ease, text-decoration 0.3s ease;
-        display: flex;
-        align-items: center;
-        background: #21252b;
-        padding: 10px;
-        border-radius: 5px;
+      text-decoration: none;
+      color: var(--orange-yellow-crayola);
+      font-weight: var(--fw-500);
+      transition: color var(--transition-1), text-decoration var(--transition-1);
+      display: flex;
+      align-items: center;
+      background: var(--eerie-black-1);
+      padding: 10px;
+      border-radius: 5px;
     }
+
     ul#subjects li a:hover {
-        text-decoration: underline;
-        color: #98c379;
-        background: #3a3f4b;
+      text-decoration: underline;
+      color: var(--light-gray);
+      background: var(--onyx);
     }
+
     ul#subjects li a i {
-        margin-right: 8px;
-        color: #61afef;
+      margin-right: 8px;
+      color: var(--orange-yellow-crayola);
     }
-</style>
 
-<div id="content">
+    ul ul {
+      margin-left: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="content">
     <h1>3º curso del doble grado de Ingeniería Informática y ADE - <span id="year"></span></h1>
+    <h2>1º Semestre</h2>
     <ul id="subjects"></ul>
-</div>
+  </div>
 
-<script>
-    // Obtener el año actual
+  <script>
     var currentYear = new Date().getFullYear();
     document.getElementById('year').textContent = currentYear;
 
-    // Añadir asignaturas al listado con enlaces
     var subjects = [
-        { name: 'Dirección y Administración de Empresas', url: 'DAE.html' },
-        { name: 'Sistemas Concurrentes y Distribuidos', url: 'SCD.html' },
-        { name: 'Fundamentos de Redes', url: 'FR.html' },
-        { name: 'Programación y Diseño Orientado a Objetos', url: 'PDOO.html' },
-        { name: 'Econometría', url: 'ECO.html' },
-        { name: 'Contabilidad Financiera 1', url: 'CF1.html' }
+      {
+        name: 'Dirección y Administración de Empresas',
+        subfolders: [
+            { name: 'Prácticas', files: [
+            { name: 'Practica1.pdf', path: '/Asignaturas/Tercer Año/PracticasDAE/ACT1.pdf' },
+            { name: 'Practica2.pdf', path: '/Asignaturas/Tercer Año/PracticasDAE/ACT2.pdf' },
+            { name: 'Practica3.pdf', path: '/Asignaturas/Tercer Año/PracticasDAE/ACT3.pdf' },
+            { name: 'Practica4.pdf', path: '/Asignaturas/Tercer Año/PracticasDAE/ACT4.pdf' },
+            { name: 'Practica5.pdf', path: '/Asignaturas/Tercer Año/PracticasDAE/ACT5.pdf' },
+            { name: 'Practica6.pdf', path: '/Asignaturas/Tercer Año/PracticasDAE/ACT6.pdf' },
+            { name: 'Practica7.pdf', path: '/Asignaturas/Tercer Año/PracticasDAE/ACT7.pdf' }
+            ] },
+          { name: 'Teoría', files: [
+            { name: 'Vacío', path: '#' }
+            ] }
+        ]
+      },
+      {
+        name: 'Sistemas Concurrentes y Distribuidos',
+        subfolders: [
+          { name: 'Prácticas', files: [{ name: 'Practica1.zip', path: '/Asignaturas/Tercer Año/SCD/Practicas/Practica1.zip' }, { name: 'Practica2.zip', path: '/Asignaturas/Tercer Año/SCD/Practicas/Practica2.zip' }] },
+
+          { name: 'Seminarios', files: [{ name: 'Seminario1.zip', path: '/Asignaturas/Tercer Año/SCD/Seminarios/Seminario1.zip' }, { name: 'Seminario2.zip', path: '/Asignaturas/Tercer Año/SCD/Seminarios/Seminario2.zip' }]},
+
+          { name: 'Teoría', files: [{ name: 'RelacionEjerciciosTeoria1.pdf', path: '/Asignaturas/Tercer Año/SCD/Tema1-teoria.pdf' }] },
+
+          { name: 'Exámenes', files: [{ name: 'Primer_Parcial_SCD.zip', path: '/Asignaturas/Tercer Año/SCD/Examenes/Primer_Parcial_SCD.zip' }]},
+
+          { name: 'Autoevaluaciones', files: [{ name: 'Autoevaluacion1', path: '/Asignaturas/Tercer Año/AutoevalSCD/Autoeval1.html' }, { name: 'Autoevaluacion2', path: '/Asignaturas/Tercer Año/AutoevalSCD/Autoeval2.html' }]},
+        ]
+      },
+      // Add other subjects similarly
     ];
+    subjects.push(
+      {
+      name: 'Fundamentos de Redes',
+      subfolders: [
+      { name: 'Prácticas', files: [{ name: 'Practica1', path: '/Asignaturas/Tercer Año/FR/Practicas/p1.pdf' }, { name: 'Practica2', path: '/Asignaturas/Tercer Año/FR/Practicas/p2.pdf' }] },
+      { name: 'Teoría', files: [
+        { name: 'Tema1', path: '/Asignaturas/Tercer Año/FR/Teoria/t1.pdf' },
+        { name: 'Tema2', path: '/Asignaturas/Tercer Año/FR/Teoria/t2.pdf' },
+        { name: 'Tema3', path: '/Asignaturas/Tercer Año/FR/Teoria/t3.pdf' },
+        { name: 'Tema4', path: '/Asignaturas/Tercer Año/FR/Teoria/t4.pdf' }
+      ] },
+      ,
+      { name: 'Tipo Test Practica', files: [{ name: 'Test1.html', path: '/Asignaturas/Tercer Año/TestsFR/TestPractica1.html' }, { name: 'Test2.html', path: '/Asignaturas/Tercer Año/TestsFR/TestPractica1.html' }] }
+      ]
+      },
+      
+      {
+      name: 'Programación y Diseño Orientado a Objetos',
+      subfolders: [
+      { name: 'Guiones Practicas', files: [{ name: 'Guiones', path: '/Asignaturas/Tercer Año/PracticasPDOO/Guiones.zip' }] },
+
+
+      { name: 'Prácticas', files: [{ name: 'Practica1', path: '/Asignaturas/Tercer Año/PracticasPDOO/Pr1.zip' },{ name: 'Practica2', path: '/Asignaturas/Tercer Año/PracticasPDOO/Pr2.zip' },{ name: 'Practica3', path: '/Asignaturas/Tercer Año/PracticasPDOO/Pr3.zip' }] },
+
+      { name: 'Teoría', files: [{ name: 'Teoria Tema 1', path: '/Asignaturas/Tercer Año/PDOOteoria/Teoria/Tema 1 TEORÍA.pdf' } , { name: 'Teoria Tema 2', path: '/Asignaturas/Tercer Año/PDOOteoria/Teoria/Tema 2 TEORÍA.pdf'}] }, 
+
+      { name: 'Relaciones de Ejercicios', files: [{ name: 'Tema 2', path: '/Asignaturas/Tercer Año/PDOOteoria/Relaciones de ejercicios/Tema 2 EJERCICIOS.pdf' } ] }, 
+      
+      { name: 'Examenes', files: [{ name: 'Parcial 1 Practica', path: '/Asignaturas/Tercer Año/PracticasPDOO/Examenes/parcial1.pdf' }, { name: 'Parcial 1 Teoria', path: '/Asignaturas/Tercer Año/PracticasPDOO/Examenes/parcial1Teoria.pdf' }]},
+      
+      ]
+      }, 
+      {
+      name: 'Econometría',
+      subfolders: [
+      { name: 'Prácticas', files: [{ name: 'Base de Datos', path: '/Asignaturas/Tercer Año/ECO/Data_Obesity.zip' },{name: 'Modelo Preliminar', path:'/Asignaturas/Tercer Año/ECO/Modelo_Preliminar.pdf'}] },
+      { name: 'Teoría', files: [
+        { name: 'Tema 1', path: '/Asignaturas/Tercer Año/ECO/Teoria/Tema1.pdf' },
+        { name: 'Tema 2', path: '/Asignaturas/Tercer Año/ECO/Teoria/Tema2.pdf' },
+        { name: 'Tema 3', path: '/Asignaturas/Tercer Año/ECO/Teoria/Tema3.pdf' },
+        { name: 'Tema 4', path: '/Asignaturas/Tercer Año/ECO/Teoria/Tema4.pdf' },
+        { name: 'Tema 5', path: '/Asignaturas/Tercer Año/ECO/Teoria/Tema5.pdf' }
+      ] }, 
+      { name: 'Tablas de Estadística', files: [{ name: 'Tablas', path: '/Asignaturas/Tercer Año/ECO/Teoria/Tablas Estadísticas-20241122.zip' } ] },
+      ]
+      },
+
+      {
+      name: 'Contabilidad Financiera 1',
+      subfolders: [
+      { name: 'Prácticas', files: [{ name: 'Practica del Tema 1 al 3', path: '/Asignaturas/Tercer Año/CF1/practicas/casosTema1al3.zip' }] },
+      { name: 'Teoría', files: [{ name: 'Teoria del Tema 1 al 3', path: '/Asignaturas/Tercer Año/CF1/teoria/TeoriaTema1al3.zip' }] },
+      { name: 'Tests', files: [
+      { name: 'Test T1 del libro', path: '/Asignaturas/Tercer Año/CF1/Tests/testT1Libro.html' }, 
+
+      { name: 'Test T2 del libro', path: '/Asignaturas/Tercer Año/CF1/Tests/testT2Libro.html' }, 
+
+      { name: 'Test T3 del libro', path: '/Asignaturas/Tercer Año/CF1/Tests/testT3Libro.html' }, 
+      
+      { name: 'Test T1', path: '/Asignaturas/Tercer Año/CF1/Tests/test-tema1.html' },
+
+      { name: 'Test T2', path: '/Asignaturas/Tercer Año/CF1/Tests/testT2Libro.html' }
+      
+      ] },
+      { name: 'Libros', files: [{ name: 'Libro Teoria', path: '/Asignaturas/Tercer Año/CF1/teoria/Libro Teoría.pdf' } ,
+      { name: 'Libro Practicas', path: '/Asignaturas/Tercer Año/CF1/teoria/Libro Practicas.pdf' }
+      ] }
+      ]
+      }
+    );
+
     var subjectsList = document.getElementById('subjects');
     subjects.forEach(function(subject) {
-        var li = document.createElement('li');
-        var a = document.createElement('a');
-        a.textContent = subject.name;
-        a.href = subject.url;
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.textContent = subject.name;
+      a.href = '#';
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var subfolderList = li.querySelector('ul');
+        if (subfolderList) {
+          subfolderList.classList.toggle('hidden');
+        } else {
+          subfolderList = document.createElement('ul');
+          subject.subfolders.forEach(function(subfolder) {
+            var subfolderLi = document.createElement('li');
+            var subfolderA = document.createElement('a');
+            subfolderA.textContent = subfolder.name;
+            subfolderA.href = '#';
+            subfolderA.addEventListener('click', function(e) {
+              e.preventDefault();
+              var fileList = subfolderLi.querySelector('ul');
+              if (fileList) {
+                fileList.classList.toggle('hidden');
+              } else {
+                fileList = document.createElement('ul');
+                subfolder.files.forEach(function(file) {
+                  var fileLi = document.createElement('li');
+                  var fileA = document.createElement('a');
+                  fileA.textContent = file.name;
+                  fileA.href = file.path;
+                  fileLi.appendChild(fileA);
+                  fileList.appendChild(fileLi);
+                });
+                subfolderLi.appendChild(fileList);
+              }
+            });
+            subfolderLi.appendChild(subfolderA);
+            subfolderList.appendChild(subfolderLi);
+          });
+          li.appendChild(subfolderList);
+        }
+      });
 
-        li.appendChild(a);
-        subjectsList.appendChild(li);
+      li.appendChild(a);
+      subjectsList.appendChild(li);
     });
-</script>
+  </script>
+</body>
+</html>
