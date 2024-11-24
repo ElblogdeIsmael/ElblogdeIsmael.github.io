@@ -422,4 +422,407 @@ salir_chica():
     
     end
 ```
+## 53. Aunque un monitor garantiza la EM, los procedimientos tiene que ser reentrantes. Explicar por qué.
 
+Los procedimientos de un monitor deben ser **reentrantes** porque los monitores son diseñados para garantizar la **exclusión mutua (EM)** entre los procesos que acceden a recursos compartidos. Sin embargo, la **reentrancia** es necesaria para manejar situaciones donde los procesos pueden ser interrumpidos o bloqueados antes de completar la ejecución de un procedimiento.
+
+### Razones clave:
+
+1. **Interrupciones durante la ejecución**:
+   - Si un proceso está ejecutando un procedimiento de un monitor y ocurre una interrupción (por ejemplo, una señal o cambio de contexto), otro proceso podría intentar acceder al monitor. 
+   - Para que el sistema no entre en un estado inconsistente, los procedimientos deben ser reentrantes. Esto significa que su estado interno y las variables locales no deben depender de la ejecución previa, permitiendo una entrada segura cuando se reanuda o cuando otros procesos acceden.
+
+2. **Variables locales protegidas**:
+   - Los monitores garantizan la EM sobre las variables compartidas, pero las variables **locales** dentro de un procedimiento deben mantenerse independientes entre diferentes invocaciones. Si un procedimiento no es reentrante, podría sobrescribir valores en memoria que se están usando en otra instancia del procedimiento.
+
+3. **Esperas condicionadas (condition variables)**:
+   - Los monitores permiten suspender procesos que no pueden continuar su ejecución mediante variables de condición (wait/signal). Si un proceso llama a `wait`, libera el monitor y se bloquea. En este caso, otro proceso podría entrar al monitor y ejecutar el mismo procedimiento, por lo que este debe ser capaz de manejar múltiples invocaciones de manera concurrente.
+
+4. **Ejecución segura tras reanudación**:
+   - Si un procedimiento no es reentrante, al ser reanudado podría encontrarse con estados inconsistentes, lo que podría llevar a errores lógicos o bloqueos en el sistema.
+
+### Ejemplo:
+
+Un monitor con un procedimiento que no es reentrante podría fallar de la siguiente manera:
+
+- **Código no reentrante (mala práctica):**
+  ```cpp
+  monitor Ejemplo {
+      int contador = 0; // Variable compartida entre instancias
+
+      procedure incrementar() {
+          contador++; // Modifica una variable compartida
+          wait(condicion); // Libera el monitor y espera
+          contador--; // No es seguro si otro proceso también modifica "contador"
+      }
+  }
+  ```
+
+- **Problema**: Si dos procesos ejecutan `incrementar` de forma intercalada, ambos podrían modificar el mismo `contador`, resultando en inconsistencias.
+
+- **Código reentrante (buena práctica):**
+  ```cpp
+  monitor Ejemplo {
+      int contador = 0; // Variable compartida correctamente protegida
+
+      procedure incrementar() {
+          int local = 0; // Uso de variable local para evitar interferencias
+          contador++;
+          wait(condicion); // Libera el monitor y espera
+          local = contador; // Restaura estado si es necesario
+          contador--;
+      }
+  }
+  ```
+
+- **Ventaja**: El uso de variables locales asegura que cada instancia del procedimiento funcione de forma independiente.
+
+### Conclusión:
+
+La reentrancia es crucial en procedimientos de monitores para garantizar que la lógica interna sea **segura y consistente**, incluso bajo interrupciones o concurrencia entre procesos. Aunque la EM del monitor protege las variables compartidas, los procedimientos deben diseñarse de forma que no dependan de estados externos ni compartan datos inseguros entre invocaciones.
+
+## 53.1 ¿A que se refiere el término reentrante en este contexto?
+Un procedimiento **reentrante** es aquel que puede ser llamado de manera segura incluso si:
+
+1. **Ya está en ejecución** por otro hilo o proceso.
+2. Se **interrumpe y se vuelve a invocar** antes de que su ejecución original haya terminado.
+
+Esto significa que el procedimiento no depende de variables globales o estáticas compartidas que puedan ser modificadas por otras instancias del mismo procedimiento o por otros procesos.
+
+En otras palabras, un procedimiento es reentrante si puede ejecutarse simultáneamente en diferentes contextos sin que una instancia interfiera con las demás.
+
+---
+
+### Ejemplo simple de no reentrancia:
+```cpp
+int global = 0; // Variable global
+
+void no_reentrante() {
+    global++;  // Modifica una variable compartida
+    // Si es interrumpido aquí y otra instancia de no_reentrante se ejecuta,
+    // se altera "global" de forma impredecible.
+    global--;
+}
+```
+
+En este caso:
+- Si la función `no_reentrante` es llamada por varios hilos, **el valor de `global` puede corromperse** porque está siendo modificado de forma concurrente.
+- La función depende de un estado global (`global`), por lo que no puede ejecutarse en paralelo sin problemas.
+
+---
+
+### Ejemplo de reentrancia:
+```cpp
+void reentrante() {
+    int local = 0;  // Variable local, exclusiva para cada instancia
+    local++;        // Modificación segura porque "local" es independiente.
+    local--;
+}
+```
+
+En este caso:
+- Cada instancia de `reentrante` utiliza una variable local, por lo que las invocaciones concurrentes no interfieren entre sí.
+- No hay acceso a datos globales compartidos que puedan corromperse.
+
+---
+
+### En el contexto de monitores:
+
+Para que un monitor garantice exclusión mutua de forma segura, los procedimientos deben ser reentrantes porque:
+1. **Variables protegidas**: Si el monitor protege variables compartidas, el procedimiento no debe depender de variables no protegidas o accesibles globalmente.
+2. **Bloqueos y reanudaciones**: Durante la ejecución de un procedimiento, un proceso puede bloquearse (por ejemplo, al llamar a `wait`). Esto libera el monitor, permitiendo que otro proceso entre y potencialmente invoque el mismo procedimiento. Si el procedimiento no es reentrante, las dos instancias podrían interferir entre sí.
+
+### Resumen:
+Un procedimiento reentrante:
+- No usa variables globales ni estáticas compartidas.
+- Almacena sus datos en variables locales o en estructuras adecuadamente protegidas.
+- Es seguro de ejecutar de manera concurrente, interrumpida y reanudada sin inconsistencias.
+
+Aquí tienes el enunciado del ejercicio 54 transcrito a Markdown:
+
+---
+
+## 54. Se consideran dos tipos de recursos accesibles por varios procesos concurrentes (denominamos a los recursos como recursos de tipo 1 y de tipo 2). Existen `N_1` ejemplares de recursos de tipo 1 y `N_2` ejemplares de recursos de tipo 2. Para la gestión de estos ejemplares, queremos diseñar un monitor (con semántica SU) que exporta un procedimiento (`pedir_recurso`), para pedir un ejemplar de uno de los dos tipos de recursos. Este procedimiento incluye un parámetro entero (`tipo`), que valdrá 1 ó 2 indicando el tipo del ejemplar que se desea usar, así mismo, el monitor incorpora otro procedimiento (`liberar_recurso`) para indicar que se deja de usar un ejemplar de un recurso previamente solicitado (este procedimiento también admite un entero que puede valer 1 ó 2, según el tipo de ejemplar que se quiera liberar). En ningún momento puede haber un ejemplar de un tipo de recurso en uso por más de un proceso.En este contexto, responde a estas cuestiones:
+
+### (a) Implementa el monitor con los dos procedimientos citados, suponiendo que \(N_1\) y \(N_2\) son dos constantes arbitrarias, mayores que cero.
+
+### (b) El uso de este monitor puede dar lugar a interbloqueo. Esto ocurre cuando más de un proceso, en algún punto en su código, tiene la necesidad de usar dos ejemplares de recursos de distinto tipo a la vez. Describe la secuencia de peticiones (llamadas al procedimiento correspondiente del monitor) que da lugar a interbloqueo.
+
+### (c) Una posible solución al problema anterior es obligar a que si un proceso necesita dos ejemplares, uno de tipo 1 y otro de tipo 2, al llamar a `pedir_recurso`, dando un parámetro especial (por ejemplo, 0 para los recursos de tipo 1 y 2). Esta solución puede dar lugar a inanición. Indica por qué, y da un código, en pseudocódigo, para solicitar dos ejemplares.
+
+---
+
+<!-- ### a)
+
+```cpp
+Monitor Recursos_v1;
+    var libres: array[1..2] of integer;
+        cola: array[1..2] of condition;
+    
+    begin
+        libres[1] = N1;
+        libres[2] = N2;
+    end
+``` -->
+### Solución al problema
+
+#### (a) Implementación del monitor
+
+El monitor asegura que en ningún momento dos procesos utilicen el mismo recurso del mismo tipo. Se utilizan contadores para controlar los recursos disponibles y variables de condición para manejar la espera de procesos.
+
+---
+`Suponemos que no estamos usando los monitores de Hoare de la clase scd.h, si no que implementamos la clase monitor en base a semáforos, si usamos la clase Monitor Hoare eliminamos el uso de semáforos ya que por defecto las operaciones que se realicen con el monitor cumplirá con el requisito de EM. En esta resolución lo estamos llevando al ámbito de aplicación directamente.`
+
+```cpp
+#include <iostream>
+#include <thread>
+#include <semaphore.h>
+#include <vector>
+
+using namespace std;
+
+// Constantes arbitrarias
+const int N1 = 3; // Ejemplares de recursos de tipo 1
+const int N2 = 2; // Ejemplares de recursos de tipo 2
+
+class Monitor {
+private:
+    sem_t mutex;  // Exclusión mutua
+    sem_t tipo1, tipo2; // Semáforos para manejar espera de recursos
+    int disponibles1; // Recursos disponibles de tipo 1
+    int disponibles2; // Recursos disponibles de tipo 2
+
+public:
+    Monitor() {
+        disponibles1 = N1;
+        disponibles2 = N2;
+        sem_init(&mutex, 0, 1);
+        sem_init(&tipo1, 0, 0);
+        sem_init(&tipo2, 0, 0);
+    }
+
+    ~Monitor() {
+        sem_destroy(&mutex);
+        sem_destroy(&tipo1);
+        sem_destroy(&tipo2);
+    }
+
+    void pedir_recurso(int tipo) {
+        sem_wait(&mutex); // Exclusión mutua
+        if (tipo == 1) {
+            if (disponibles1 > 0) {
+                disponibles1--;
+            } else {
+                sem_post(&mutex); // Libera el monitor antes de bloquearse
+                sem_wait(&tipo1); // Espera por recursos de tipo 1
+                sem_wait(&mutex); // Recupera el monitor
+                disponibles1--;
+            }
+        } else if (tipo == 2) {
+            if (disponibles2 > 0) {
+                disponibles2--;
+            } else {
+                sem_post(&mutex); // Libera el monitor antes de bloquearse
+                sem_wait(&tipo2); // Espera por recursos de tipo 2
+                sem_wait(&mutex); // Recupera el monitor
+                disponibles2--;
+            }
+        }
+        sem_post(&mutex); // Libera el monitor
+    }
+
+    void liberar_recurso(int tipo) {
+        sem_wait(&mutex); // Exclusión mutua
+        if (tipo == 1) {
+            disponibles1++;
+            sem_post(&tipo1); // Desbloquea procesos esperando por tipo 1
+        } else if (tipo == 2) {
+            disponibles2++;
+            sem_post(&tipo2); // Desbloquea procesos esperando por tipo 2
+        }
+        sem_post(&mutex); // Libera el monitor
+    }
+};
+
+// Función de prueba
+void proceso(Monitor &monitor, int tipo) {
+    cout << "Proceso solicitando recurso de tipo " << tipo << endl;
+    monitor.pedir_recurso(tipo);
+    cout << "Proceso usando recurso de tipo " << tipo << endl;
+    this_thread::sleep_for(chrono::milliseconds(500)); // Simula uso del recurso
+    cout << "Proceso liberando recurso de tipo " << tipo << endl;
+    monitor.liberar_recurso(tipo);
+}
+
+int main() {
+    Monitor monitor;
+
+    // Simulamos procesos que piden recursos de tipo 1 y 2
+    thread procesos[6];
+    for (int i = 0; i < 3; ++i) {
+        procesos[i] = thread(proceso, ref(monitor), 1); // Tipo 1
+    }
+    for (int i = 3; i < 6; ++i) {
+        procesos[i] = thread(proceso, ref(monitor), 2); // Tipo 2
+    }
+
+    for (int i = 0; i < 6; ++i) {
+        procesos[i].join();
+    }
+
+    return 0;
+}
+```
+
+---
+
+#### (b) Secuencia que puede causar interbloqueo
+
+El interbloqueo ocurre cuando:
+1. **Dos o más procesos necesitan simultáneamente recursos de ambos tipos.**
+2. Cada proceso adquiere el primer recurso que necesita y luego intenta adquirir el segundo, pero queda bloqueado porque otro proceso ya lo posee.
+
+**Ejemplo de interbloqueo:**
+1. Proceso A solicita un recurso de tipo 1 (se lo concede el monitor).
+2. Proceso B solicita un recurso de tipo 2 (se lo concede el monitor).
+3. Proceso A intenta solicitar un recurso de tipo 2, pero debe esperar porque el recurso de tipo 2 está ocupado.
+4. Proceso B intenta solicitar un recurso de tipo 1, pero debe esperar porque el recurso de tipo 1 está ocupado.
+
+Ambos procesos quedan bloqueados indefinidamente, esperando que el otro libere el recurso.
+
+---
+
+#### (c) Solución al interbloqueo con la opción de solicitar ambos recursos a la vez
+
+Para evitar el interbloqueo, se puede modificar el monitor para permitir la solicitud de ambos recursos al mismo tiempo. Esto asegura que un proceso adquiera ambos recursos o ninguno, eliminando la posibilidad de que uno obtenga un recurso mientras espera por el otro.
+
+**Razón por la inanición:**
+- Si hay muchos procesos que necesitan un solo recurso (tipo 1 o tipo 2), podrían acaparar constantemente los recursos, impidiendo que los procesos que necesitan ambos recursos sean atendidos.
+
+**Implementación en pseudocódigo:**
+```cpp
+void pedir_recursos(int tipo) {
+    sem_wait(&mutex);
+    if (tipo == 0) { // Solicita ambos recursos
+        while (disponibles1 == 0 || disponibles2 == 0) {
+            sem_post(&mutex);
+            sem_wait(&espera_ambos);
+            sem_wait(&mutex);
+        }
+        disponibles1--;
+        disponibles2--;
+    } else if (tipo == 1) { // Solicita recurso de tipo 1
+        while (disponibles1 == 0) {
+            sem_post(&mutex);
+            sem_wait(&tipo1);
+            sem_wait(&mutex);
+        }
+        disponibles1--;
+    } else if (tipo == 2) { // Solicita recurso de tipo 2
+        while (disponibles2 == 0) {
+            sem_post(&mutex);
+            sem_wait(&tipo2);
+            sem_wait(&mutex);
+        }
+        disponibles2--;
+    }
+    sem_post(&mutex);
+}
+
+void liberar_recursos(int tipo) {
+    sem_wait(&mutex);
+    if (tipo == 0) { // Libera ambos recursos
+        disponibles1++;
+        disponibles2++;
+        sem_post(&tipo1);
+        sem_post(&tipo2);
+        sem_post(&espera_ambos);
+    } else if (tipo == 1) {
+        disponibles1++;
+        sem_post(&tipo1);
+    } else if (tipo == 2) {
+        disponibles2++;
+        sem_post(&tipo2);
+    }
+    sem_post(&mutex);
+}
+```
+
+En este esquema, los procesos que solicitan ambos recursos (`tipo == 0`) tienen prioridad en situaciones donde ambos recursos están disponibles, pero el sistema debe estar diseñado cuidadosamente para evitar inanición. Una solución adicional podría incluir un contador de espera para garantizar una política de justicia (FIFO).
+
+### Solución al problema: Método profesor
+
+#### a)
+```cpp
+Monitor Recursos_v1;
+    var libres: array[1..2] of integer;
+        cola: array[1..2] of condition;
+    
+    begin
+        libres[1] = N1;
+        libres[2] = N2;
+    end
+
+    procedure adquiriendo(tipo:1..2);
+        begin
+            if libres[tipo] == 0 then //si no hay recursos libres del tipo indicado
+                cola[tipo].wait(); //esperamos a que el recurso este disponible
+            
+            libres[tipo]--; //reducimos el n de recursos libres del tipo indicado
+        end;
+    
+    procedure liberarRecursos(tipo:1..2);
+        begin
+            libres[tipo]++;
+            cola[tipo].signal();
+        end
+    
+
+``` 
+
+#### b) mismo que en el ejemplo de resolución anterior
+
+#### c) 
+
+```cpp
+Monitor Recursos_v1;
+    var libres: array[0..2] of integer;
+        cola: array[0..2] of condition;
+    
+    begin
+        // libres[0] = min{N1,N2}; -> otra manera de verlo -> debido a que necesitan los dos recursos disponibles a la vez
+        libres[1] = N1;
+        libres[2] = N2;
+    end
+
+    procedure adquiriendo(tipo:0..2);
+        begin
+            if(tipo == 0) then
+                begin
+                    if libres[1] == 0 or libres[2] == 0 then
+                        cola[0].wait(); 
+                        libres[1]--; libres[2]--;
+                end
+                    else 
+                        begin
+                        if libres[tipo] == 0 then
+                            cola[tipo].wait();
+                            libres[tipo]--;
+                        end
+        end
+    
+    procedure liberarRecursos(tipo:1..2);
+        begin
+            if tipo == 0 then 
+                libres[1]++; libres[2]++;
+                cola[1].signal(); cola[2].signal();
+            else if tipo == 1 then 
+                libres[1]++;
+                cola[1].signal();
+            else if tipo ==2 then 
+                libres[2]++;
+                cola[2].signal();
+        end
+    
+
+``` 
