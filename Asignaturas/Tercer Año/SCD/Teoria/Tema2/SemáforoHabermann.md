@@ -1,9 +1,8 @@
----
 # SCD. Semáforo de Habermann. Tema 2: Monitores
 
-**Ismael Sallami Moreno**
+ - **Ismael Sallami Moreno**
+ ---
 
----
 
 ### Ejercicio: Semáforo de Habermann
 
