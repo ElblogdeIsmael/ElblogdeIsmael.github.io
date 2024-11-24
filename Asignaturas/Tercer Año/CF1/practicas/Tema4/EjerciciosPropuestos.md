@@ -44,3 +44,61 @@ La sociedad FAITH, S.A. realiza las siguientes operaciones durante el mes de dic
 |                                    | Proveedores               | 3.000 €                              |
 |                                    | Diferencias de cambio (ganancias)| 1.000 €                             |
 | 1.000 € (20.000 × 0,05 = 1.000 €)  | Bancos (Cuenta dólares)   |                                       |
+
+
+
+## Ejercicio Propuesto 8 del Libro Nuevo (2024-2025)
+
+La empresa Beta S.A. entregó un anticipo el 15 de septiembre de 2022 a uno de sus empleados por 20.000 €. El 31 de diciembre de 2022 esta empresa contabiliza la nómina de los empleados que corresponden a 5 trabajadores con las mismas remuneraciones.
+
+El sueldo bruto de los empleados fue de 130.000 €. Las cuotas de Seguridad Social fueron 10.000 € a cargo de los empleados y 40.000 € a cargo de la empresa. Las retenciones por IRPF supusieron el 15%. Por problemas de liquidez, Beta S.A. solo pudo pagar la nómina de dos empleados, entre los que estaba el que había dado un anticipo, el cual fue descontado completamente en su nómina. La nómina de los 3 empleados restantes quedó pendiente de pago.
+
+Por otra parte, esta empresa Beta adquirió el 01/09/2023 a una de sus empresas mercaderías por valor de 25.000 € sin IVA a fecha de 30.000 \$, usando la cotización de 1,2 €/\$. (operación exenta de IVA). El tipo de cambio al 31/12/2023 era 1,5 €/\$. 
+
+Además, la empresa Beta formalizó un contrato para la limpieza de sus instalaciones con la empresa Sigma S.L. El contrato se formalizó el 01/09/2023 firmando una letra por importe de 9.982,5 € (IVA incluido del 21%) y vencimiento a 3 meses. El contrato incluía la prestación del servicio de limpieza 6 meses, iniciándose el servicio el 15/12/2023.
+
+### SE PIDE:
+Teniendo en cuenta la información anterior contabilice:
+
+### (a) Devengo de la nómina y seguridad social de la empresa a 31/12/2022
+
+| DEBE | HABER |
+|------|-------|
+|      |       |
+|      |       |
+|      |       |
+|      |       |
+|      |       |
+|      |       |
+|      |       |
+
+
+
+
+### b) Contabilice el devengo de intereses de la deuda en moneda extranjera el 31/12/2023
+
+| DEBE |      | HABER |
+|------|------|-------|
+|      |      |       |
+|      |      |       |
+|      |      |       |
+|      |      |       |
+
+### c) Contabilice el ajuste de la moneda extranjera en su caso, el 31/12/2023
+
+| DEBE |      | HABER |
+|------|------|-------|
+|      |      |       |
+|      |      |       |
+|      |      |       |
+|      |      |       |
+
+### d) Asientos a realizar a 31/12/2023 referente al devengo del contrato de limpieza si el 01/09/2023 se contabilizó todo el contrato como gasto
+
+| DEBE |      | HABER |
+|------|------|-------|
+|      |      |       |
+|      |      |       |
+|      |      |       |
+|      |      |       |
+
