@@ -13,9 +13,9 @@ La sociedad FAITH, S.A. realiza las siguientes operaciones durante el mes de dic
 
 | DEBE |    CUENTA  | HABER |
 |------|------|-------|
-|      |  (4004) Proveedores moneda extranjera    |  15.000 * 1,4 = 21.000 €     |
+|      |  (4004) Proveedores moneda extranjera    |  15.000 * 1,4 * 1,21= 25.410 €     |
 |  4.410 €    |  (472) H.P. IVA soportado    |       |
-|  25.410 €    |   (600) Compra de mercaderías   |       |
+|  21.000 €    |   (600) Compra de mercaderías   |       |
 |      |      |       |
 
 ### 2ª. Contabilice la compra en EE.UU.
@@ -31,16 +31,16 @@ La sociedad FAITH, S.A. realiza las siguientes operaciones durante el mes de dic
 
 | DEBE |   CUENTA   | HABER |
 |------|------|-------|
-|      |      |       |
-|      |      |       |
-|      |      |       |
+|      | (572)     |  15.000     |
+|  15.000 * 0,75 = 11.250    |    (573)  |       |
+|   3.750   |  (668) Diferencias negativas de cambio    |       |
 |      |      |       |
 
 ### 4ª. Contabilice las operaciones derivadas de la regularización de las diferentes monedas a 31 de diciembre
 
 | DEBE |   CUENTA   | HABER |
 |------|------|-------|
-|      |      |       |
-|      |      |       |
-|      |      |       |
-|      |      |       |
+| 3.000 € (15.000 × 0,2 = 3.000 €)   | Diferencias de cambio (pérdidas)|                                       |
+|                                    | Proveedores               | 3.000 €                              |
+|                                    | Diferencias de cambio (ganancias)| 1.000 €                             |
+| 1.000 € (20.000 × 0,05 = 1.000 €)  | Bancos (Cuenta dólares)   |                                       |
