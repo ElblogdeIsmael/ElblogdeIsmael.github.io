@@ -1074,3 +1074,75 @@ public:
 
 ### Anotaciones
 Cada solución utiliza las condiciones (`condition`) para manejar las prioridades y respetar las restricciones de cada caso. La implementación de prioridades iguales asegura un acceso justo entre lectores y escritores.
+
+Claro, aquí tienes el ejercicio de la imagen transcrito a Markdown:
+
+---
+
+## 56. Varios coches que vienen del norte y del sur pretenden cruzar un puente sobre un río (ver Fig 1). Solo existe un carril sobre dicho puente. Por lo tanto, en un momento dado, el puente solo puede ser cruzado por uno o más coches en la misma dirección (pero no en direcciones opuestas).
+
+<!-- Insertar imagen -->
+![Figura 1: Problema de exclusión mutua en el acceso de coches desde 2 sentidos opuestos a un puente
+de un solo carril.](ej56figura.png)
+
+### (a) Completar el código del siguiente monitor que resuelve el problema del acceso al puente suponiendo que llega un coche del norte (sur) y cruza el puente si no hay otro coche del sur (norte) cruzando el puente en ese momento.
+
+```cpp
+Monitor Puente
+var ... ;
+procedure EntrarCocheDelNorte()
+begin
+...
+end
+procedure SalirCocheDelNorte()
+begin
+....
+end
+procedure EntrarCocheDelSur()
+begin
+....
+end
+procedure SalirCocheDelSur()
+begin
+...
+end
+{ Inicialización }
+begin
+....
+end
+
+```
+
+### (b) Mejorar el monitor anterior, de forma que la dirección del tráfico a través del puente cambie cada vez que lo hayan cruzado 10 coches en una dirección, mientras 1 o más coches estuviesen esperando cruzar el puente en dirección opuesta.
+---
+### Resolución:
+
+### a)
+
+```cpp
+Monitor Puente
+var ... ;
+procedure EntrarCocheDelNorte()
+begin
+...
+end
+procedure SalirCocheDelNorte()
+begin
+....
+end
+procedure EntrarCocheDelSur()
+begin
+....
+end
+procedure SalirCocheDelSur()
+begin
+...
+end
+{ Inicialización }
+begin
+....
+end
+
+```
+
+### b)
