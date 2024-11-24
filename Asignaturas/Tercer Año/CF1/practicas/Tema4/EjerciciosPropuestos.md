@@ -53,7 +53,7 @@ La empresa Beta S.A. entregó un anticipo el 15 de septiembre de 2022 a uno de s
 
 El sueldo bruto de los empleados fue de 130.000 €. Las cuotas de Seguridad Social fueron 10.000 € a cargo de los empleados y 40.000 € a cargo de la empresa. Las retenciones por IRPF supusieron el 15%. Por problemas de liquidez, Beta S.A. solo pudo pagar la nómina de dos empleados, entre los que estaba el que había dado un anticipo, el cual fue descontado completamente en su nómina. La nómina de los 3 empleados restantes quedó pendiente de pago.
 
-Por otra parte, esta empresa Beta adquirió el 01/09/2023 a una de sus empresas mercaderías por valor de 25.000 € sin IVA a fecha de 30.000 \$, usando la cotización de 1,2 €/\$. (operación exenta de IVA). El tipo de cambio al 31/12/2023 era 1,5 €/\$. 
+Por otra parte, esta empresa Beta adquirió el 01/09/2023 a una empresa estadounidense mercaderías por valor actual  de 30.000 €, cuando la cotización era de 1,2 €/\$.(sin IVA)  (operación exenta de IVA). El pago de la mitad de esta compra se aplazó 12 meses acordando un interés contractual efectivo compuesto anual del 5\%. La cotización a 31/12/2023 era 1,5 €/\$. 
 
 Además, la empresa Beta formalizó un contrato para la limpieza de sus instalaciones con la empresa Sigma S.L. El contrato se formalizó el 01/09/2023 firmando una letra por importe de 9.982,5 € (IVA incluido del 21%) y vencimiento a 3 meses. El contrato incluía la prestación del servicio de limpieza 6 meses, iniciándose el servicio el 15/12/2023.
 
@@ -61,41 +61,43 @@ Además, la empresa Beta formalizó un contrato para la limpieza de sus instalac
 Teniendo en cuenta la información anterior contabilice:
 
 ### (a) Devengo de la nómina y seguridad social de la empresa a 31/12/2022
+| DEBE |  CUENTA    | HABER |
+|------|------|-------|
+|   20.000   |  (460) Anticipo de remuneraciones   |       |
+|  110.000 (130.000 - 20.000)   |   (640) Sueldos y Salarios   |       |
+|   40.000   |  (642) S.S a cargo de la empresa    |       |
+|      |  (476) Org S.S Acreedores    |  10.000 a cargo de los empleados  ¿Resto?    |
+|      |   (4751) IRPF  |   0,15 * 130.000 = 19.500    |
+|      |   (572)   |  130.000 / 5 * 2 = 52.000     |
+|      |     (465) | 130.000 - 52.000 = 78.000      |
 
-| DEBE | HABER |
-|------|-------|
-|      |       |
-|      |       |
-|      |       |
-|      |       |
-|      |       |
-|      |       |
-|      |       |
 
 
 
 
 ### b) Contabilice el devengo de intereses de la deuda en moneda extranjera el 31/12/2023
 
-| DEBE |      | HABER |
+| DEBE |  CUENTA    | HABER |
 |------|------|-------|
+|     |      |       |
 |      |      |       |
 |      |      |       |
 |      |      |       |
-|      |      |       |
+
 
 ### c) Contabilice el ajuste de la moneda extranjera en su caso, el 31/12/2023
 
-| DEBE |      | HABER |
+| DEBE |  CUENTA    | HABER |
 |------|------|-------|
 |      |      |       |
 |      |      |       |
 |      |      |       |
 |      |      |       |
 
+
 ### d) Asientos a realizar a 31/12/2023 referente al devengo del contrato de limpieza si el 01/09/2023 se contabilizó todo el contrato como gasto
 
-| DEBE |      | HABER |
+| DEBE |  CUENTA    | HABER |
 |------|------|-------|
 |      |      |       |
 |      |      |       |
