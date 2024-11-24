@@ -13,18 +13,18 @@ La sociedad FAITH, S.A. realiza las siguientes operaciones durante el mes de dic
 
 | DEBE |    CUENTA  | HABER |
 |------|------|-------|
-|      |  (4004) PROVEEDORES MONEDA EXTRANJERA    |  15.000 * 1,4 = 21000     |
-|      |   (700) COMPRA DE MERCADERIAS   |       |
-|      |      |       |
+|      |  (4004) Proveedores moneda extranjera    |  15.000 * 1,4 = 21.000 €     |
+|  4.410 €    |  (472) H.P. IVA soportado    |       |
+|  25.410 €    |   (600) Compra de mercaderías   |       |
 |      |      |       |
 
 ### 2ª. Contabilice la compra en EE.UU.
 
 | DEBE |  CUENTA    | HABER |
 |------|------|-------|
-|      |      |       |
-|      |      |       |
-|      |      |       |
+|      |     (700) Venta de Mercaderías |  20.000 * 0.7 = 14.000    |
+|      |   (477) H.P IVA r   |  2.940     |
+|   16.940   |  (572) Bancos c/c    |       |
 |      |      |       |
 
 ### 3ª. Contabilice la compra de dólares
