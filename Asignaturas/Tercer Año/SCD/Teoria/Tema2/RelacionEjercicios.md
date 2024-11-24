@@ -1121,26 +1121,39 @@ end
 
 ```cpp
 Monitor Puente
-var ... ;
+
+var n_cruzando, s_cruzando;
+condition norte, sur;
+
 procedure EntrarCocheDelNorte()
 begin
-...
+if(s_cruzando ) then norte.wait();
+n_cruzando++;
+if(norte.queue()) then norte.signal();
 end
+
 procedure SalirCocheDelNorte()
 begin
-....
+if(n_cruzando) then n_cruzando--;
+if(sur.queue() and n_cruzando == 0) then sur.signal();
 end
+
 procedure EntrarCocheDelSur()
 begin
-....
+if(n_cruzando ) then sur.wait();
+s_cruzando++;
+if(sur.queue()) then sur.signal();
 end
+
 procedure SalirCocheDelSur()
 begin
-...
+if(s_cruzando) then s_cruzando--;
+if(norte.queue() and s_cruzando == 0) then norte.signal();
 end
+
 { Inicialización }
 begin
-....
+n_cruzando = s_cruzando = 0;
 end
 
 ```
