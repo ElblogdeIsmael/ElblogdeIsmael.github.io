@@ -826,3 +826,251 @@ Monitor Recursos_v1;
     
 
 ``` 
+
+## 55. Escribir una solución al problema de lectores-escritores con monitores:
+
+### (a) Con prioridad a los lectores
+Quiere decir que, si en un momento puede acceder al recurso tanto un lector como un escritor, se da paso preferentemente al lector.
+
+### (b) Con prioridad a los escritores
+Quiere decir que, si en un momento puede acceder tanto un lector como un escritor, se da paso preferentemente al escritor.
+
+### (c) Con prioridades iguales
+En este caso, los procesos acceden al recurso estrictamente en orden de llegada, lo cual implica, en particular, que si hay lectores leyendo y un escritor esperando, los lectores que intenten acceder después del escritor no podrán hacerlo hasta que no lo haga dicho escritor.
+
+---
+
+Bajo el supuesto de que disponemos de una clase para implementar **monitores de Hoare** (por ejemplo, usando `include<scd.h>`), aquí tienes la solución a cada caso:
+
+---
+
+### Estructura general con monitores de Hoare
+
+- Se usa la exclusión mutua que proporciona el monitor de Hoare.
+- Las variables de condición (`condition`) permiten bloquear y despertar procesos cuando se cumplen ciertas condiciones.
+- La semántica de Hoare implica que las señales a un proceso (`signal`) ceden inmediatamente el control a ese proceso, garantizando un comportamiento ordenado.
+
+---
+
+### (a) **Con prioridad a los lectores**
+
+#### Descripción:
+- Los lectores tienen prioridad para acceder al recurso compartido.
+- Si hay lectores leyendo o esperando, no se permite que los escritores accedan.
+
+#### Código:
+```cpp
+#include <scd.h>
+#include <iostream>
+#include <thread>
+#include <chrono>
+
+using namespace std;
+
+class LectoresEscritores : public HoareMonitor {
+private:
+    int lectores_leyendo;         // Número de lectores activos
+    int escritores_esperando;    // Escritores esperando para escribir
+    bool escritor_escribiendo;   // Si un escritor está escribiendo
+    condition leer;              // Condición para lectores
+    condition escribir;          // Condición para escritores
+
+public:
+    LectoresEscritores() {
+        lectores_leyendo = 0;
+        escritores_esperando = 0;
+        escritor_escribiendo = false;
+    }
+
+    void entrar_lector() {
+        if (escritor_escribiendo || escritores_esperando > 0) {
+            leer.wait(); // Espera hasta que sea seguro leer
+        }
+        lectores_leyendo++;
+        leer.signal(); // Permite que otros lectores entren si es posible
+    }
+
+    void salir_lector() {
+        lectores_leyendo--;
+        if (lectores_leyendo == 0 && escritores_esperando > 0) {
+            escribir.signal(); // Da paso al escritor
+        }
+    }
+
+    void entrar_escritor() {
+        escritores_esperando++;
+        if (escritor_escribiendo || lectores_leyendo > 0) {
+            escribir.wait(); // Espera hasta que sea seguro escribir
+        }
+        escritores_esperando--;
+        escritor_escribiendo = true;
+    }
+
+    void salir_escritor() {
+        escritor_escribiendo = false;
+        if (escritores_esperando > 0) {
+            escribir.signal(); // Da paso al siguiente escritor
+        } else {
+            leer.signal(); // Permite a los lectores entrar
+        }
+    }
+};
+
+// Funciones de prueba
+void lector(LectoresEscritores &monitor, int id) {
+    monitor.entrar_lector();
+    cout << "Lector " << id << " está leyendo." << endl;
+    this_thread::sleep_for(chrono::milliseconds(100)); // Simula lectura
+    cout << "Lector " << id << " terminó de leer." << endl;
+    monitor.salir_lector();
+}
+
+void escritor(LectoresEscritores &monitor, int id) {
+    monitor.entrar_escritor();
+    cout << "Escritor " << id << " está escribiendo." << endl;
+    this_thread::sleep_for(chrono::milliseconds(200)); // Simula escritura
+    cout << "Escritor " << id << " terminó de escribir." << endl;
+    monitor.salir_escritor();
+}
+
+int main() {
+    MRef<LectoresEscritores> monitor = Create<LectoresEscritores>();
+
+    thread t1(lector, ref(monitor), 1);
+    thread t2(lector, ref(monitor), 2);
+    thread t3(escritor, ref(monitor), 1);
+    thread t4(lector, ref(monitor), 3);
+
+    t1.join();
+    t2.join();
+    t3.join();
+    t4.join();
+
+    return 0;
+}
+```
+
+---
+
+### (b) **Con prioridad a los escritores**
+
+#### Descripción:
+- Los escritores tienen prioridad para acceder al recurso compartido.
+- Si hay escritores esperando, los lectores no podrán acceder al recurso.
+
+#### Código:
+```cpp
+class LectoresEscritores : public HoareMonitor {
+private:
+    int lectores_leyendo;         // Número de lectores activos
+    int escritores_esperando;    // Escritores esperando para escribir
+    bool escritor_escribiendo;   // Si un escritor está escribiendo
+    condition leer;              // Condición para lectores
+    condition escribir;          // Condición para escritores
+
+public:
+    LectoresEscritores() {
+        lectores_leyendo = 0;
+        escritores_esperando = 0;
+        escritor_escribiendo = false;
+    }
+
+    void entrar_lector() {
+        if (escritor_escribiendo || escritores_esperando > 0) {
+            leer.wait(); // Espera hasta que sea seguro leer
+        }
+        lectores_leyendo++;
+    }
+
+    void salir_lector() {
+        lectores_leyendo--;
+        if (lectores_leyendo == 0 && escritores_esperando > 0) {
+            escribir.signal(); // Da paso al escritor
+        }
+    }
+
+    void entrar_escritor() {
+        escritores_esperando++;
+        if (escritor_escribiendo || lectores_leyendo > 0) {
+            escribir.wait(); // Espera hasta que sea seguro escribir
+        }
+        escritores_esperando--;
+        escritor_escribiendo = true;
+    }
+
+    void salir_escritor() {
+        escritor_escribiendo = false;
+        if (escritores_esperando > 0) {
+            escribir.signal(); // Da paso al siguiente escritor
+        } else if (!leer.empty()) {
+            leer.signal(); // Permite a los lectores entrar
+        }
+    }
+};
+```
+
+---
+
+### (c) **Con prioridades iguales**
+
+#### Descripción:
+- Lectores y escritores se atienden estrictamente en orden de llegada.
+- Se asegura que si un escritor está esperando, ningún lector posterior puede adelantarse.
+
+#### Código:
+```cpp
+class LectoresEscritores : public HoareMonitor {
+private:
+    int lectores_leyendo;         // Número de lectores activos
+    int escritores_esperando;    // Escritores esperando para escribir
+    bool escritor_escribiendo;   // Si un escritor está escribiendo
+    condition leer;              // Condición para lectores
+    condition escribir;          // Condición para escritores
+    condition turno;             // Controla el orden de llegada
+
+public:
+    LectoresEscritores() {
+        lectores_leyendo = 0;
+        escritores_esperando = 0;
+        escritor_escribiendo = false;
+    }
+
+    void entrar_lector() {
+        if (escritor_escribiendo || escritores_esperando > 0) {
+            leer.wait(); // Espera hasta que sea seguro leer
+        }
+        lectores_leyendo++;
+        leer.signal(); // Permite a otros lectores en espera entrar
+    }
+
+    void salir_lector() {
+        lectores_leyendo--;
+        if (lectores_leyendo == 0 && !turno.empty()) {
+            turno.signal(); // Da paso al siguiente en el turno
+        }
+    }
+
+    void entrar_escritor() {
+        escritores_esperando++;
+        if (escritor_escribiendo || lectores_leyendo > 0) {
+            turno.wait(); // Espera su turno
+        }
+        escritores_esperando--;
+        escritor_escribiendo = true;
+    }
+
+    void salir_escritor() {
+        escritor_escribiendo = false;
+        if (!turno.empty()) {
+            turno.signal(); // Da paso al siguiente en el turno
+        } else if (!leer.empty()) {
+            leer.signal(); // Permite a los lectores entrar
+        }
+    }
+};
+```
+
+---
+
+### Anotaciones
+Cada solución utiliza las condiciones (`condition`) para manejar las prioridades y respetar las restricciones de cada caso. La implementación de prioridades iguales asegura un acceso justo entre lectores y escritores.
