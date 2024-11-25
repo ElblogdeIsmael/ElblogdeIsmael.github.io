@@ -1159,3 +1159,338 @@ end
 ```
 
 ### b)
+
+```cpp
+Monitor Puente
+
+var n_cruzando, s_cruzando, n_pueden, s_pueden;
+condition norte, sur;
+
+procedure EntrarCocheDelNorte()
+begin
+if(s_cruzando or n_pueden == 0) then norte.wait();
+n_cruzando++;
+if(sur.queue()>0) then n_pueden--;
+if(norte.queue() and n_pueden>0) then norte.signal();
+end
+
+procedure SalirCocheDelNorte()
+begin
+if(n_cruzando) then n_cruzando--;
+if(sur.queue() and n_cruzando == 0) begin; then s_pueden = 10; sur.signal(); end;
+end
+
+procedure EntrarCocheDelSur()
+begin
+if(n_cruzando or s_pueden == 0 ) then sur.wait();
+s_cruzando++;
+if(norte.queue()>0) s_pueden--;
+if(sur.queue() and s_pueden>0) then sur.signal();
+end
+
+procedure SalirCocheDelSur()
+begin
+if(s_cruzando) then s_cruzando--;
+if(norte.queue() and s_cruzando == 0) begin; then n_pueden=10; norte.signal(); end;
+end
+
+{ Inicialización }
+begin
+n_cruzando = s_cruzando = 0;
+n_pueden = 10; s_pueden=10;
+end
+
+```
+
+---
+
+## 57. Una tribu de antropófagos comparte una olla en la que caben \(M\) misioneros. Cuando algún salvaje quiere comer, se sirve directamente de la olla, a no ser que ésta esté vacía. Si la olla está vacía, el salvaje despertará al cocinero y esperará a que éste haya rellenado la olla con otros \(M\) misioneros. Para solucionar la sincronización usamos un monitor llamado Olla, que se puede usar así:
+
+```cpp
+monitor Olla;
+...
+begin
+...
+end;
+
+proceso ProcSalvaje[ i:1..N ];
+begin
+while true do begin
+    Olla.Servirse_1_misionero();
+    Comer(); { es un retraso aleatorio }
+end
+end;
+
+proceso ProcCocinero;
+begin
+while true do begin
+    Olla.Dormir();
+    Olla.Rellenar_Olla();
+end
+end;
+```
+
+
+Se pide: diseñar el código del monitor Olla para que se satisfaga la sincronización requerida en el enunciado del problema, teniendo en cuenta que:
+* La solución propuesta no debe producir interbloqueos.
+* Los salvajes podrán comer siempre que haya comida en la olla.
+* Sólo se ha de despertar al proceso cocinero cuando la olla esté vacía.
+
+---
+
+### Resolución
+
+
+
+```cpp
+monitor Olla;
+var
+    num_misioneros : integer;
+    dormir, comer : condition;
+begin
+num_misioneros = M_0; //M_0 -> es el número inicial de misioneros que hay en la olla
+end;
+
+procedure Servirse_1_misionero();
+    begin
+    if (num_misioneros == 0)
+        begin
+        dormir.signal();
+        comer.wait();
+        end
+    
+    num_misioneros--;
+    if(num_misioneros > 0)
+        comer.signal();
+    else dormir.signal();
+
+    end
+
+procedure dormir();
+    begin
+    if(num_misioneros >0)
+        dormir.wait();
+    end
+
+procedure rellenar_Olla();
+    begin
+    num_misioneros = M_0;
+    comer.signal();
+    end
+
+//ADVERTENCIA -> SOLAMENTE FUNCIONA CON SEÑALES SU -> SEÑALAR Y ESPERA URGENTE
+
+proceso ProcSalvaje[ i:1..N ];
+begin
+while true do begin
+    Olla.Servirse_1_misionero();
+    Comer(); { es un retraso aleatorio }
+end
+end;
+
+proceso ProcCocinero;
+begin
+while true do begin
+    Olla.Dormir();
+    Olla.Rellenar_Olla();
+end
+end;
+```
+
+## 58. Ejercicio
+
+Una cuenta de ahorros es compartida por varias personas (procesos). Cada persona puede depositar o retirar fondos de la cuenta. El saldo actual de la cuenta es la suma de todos los depósitos menos la suma de todos los retiros. El saldo nunca puede ser negativo. Queremos usar un monitor para resolver el problema.
+
+El monitor debe tener 2 procedimientos: `depositar(c)` y `retirar(c)`. Suponer que los argumentos de las 2 operaciones son siempre positivos, e indican las cantidades a depositar o retirar. El monitor usará la semántica señalar y espera urgente (SU). Se deben de escribir varias versiones de la solución, según las variaciones de los requerimientos que se describen a continuación:
+
+### (a) 
+Todo proceso puede retirar fondos mientras la cantidad solicitada `c` sea menor o igual que el saldo disponible en la cuenta en ese momento. Si un proceso intenta retirar una cantidad `c` mayor que el saldo, debe quedar bloqueado hasta que el saldo se incremente lo suficiente (como consecuencia de que otros procesos depositen fondos en la cuenta) para que se pueda atender la petición.
+- Hacer dos versiones del monitor: (a.1) colas normales FIFO sin prioridad y (a.2) con colas de prioridad.
+
+### (b) 
+El reintegro de fondos a los clientes se hace únicamente según el orden de llegada. Si hay más de un cliente esperando, solo el primero que llegó puede optar a retirar la cantidad que desea; mientras esto no sea posible, esperarán todos los clientes, independientemente de cuánto quieran retirar los demás. Por ejemplo, suponer que el saldo es 200 unidades y un cliente está esperando un reintegro de 300 unidades; entonces, si llega otro cliente, debe esperar, incluso si quiere retirar 200 unidades. De nuevo, resolverlo utilizando dos versiones: (b.1) colas normales (FIFO) sin prioridad y (b.2) con colas de prioridad.
+
+---
+#### a.1) cola FIFO sin prioridad
+
+```cpp
+procedure retirar(cantidad: positive)
+    begin
+    while cantidad > saldo do 
+        begin
+        cola.signal();
+        cola.wait();
+        end
+    
+    saldo -= cantidad;
+    cola.signal();
+    end;
+
+procedure ingresar(cantidad: positive)
+    begin
+    saldo += cantidad;
+    cola.signal();
+    end
+
+
+```
+
+#### ¿Porque esta solución cumple con la semántica SU?
+
+La solución presentada cumple con la semántica de **señalar y espera urgente (SU)** debido a la manera en que se manejan las señales y los bloqueos dentro del monitor.
+
+---
+
+##### **¿Qué es la semántica de Señalar y Espera Urgente (SU)?**
+
+En SU:
+1. Cuando un proceso hace un `signal` sobre una condición, cede inmediatamente el monitor al proceso que fue despertado. Es decir, el proceso que hizo el `signal` se suspende hasta que el despertado abandone el monitor.
+2. Esto garantiza que los procesos en espera puedan ejecutar sus acciones tan pronto como se satisfaga la condición, asegurando una respuesta "urgente".
+
+En contraste, otras semánticas como **señalar y continuar (SC)** permiten que el proceso que hace el `signal` continúe su ejecución, lo que puede retrasar a los procesos despertados.
+
+---
+
+##### **Análisis del Código**
+
+##### **Código de `retirar(cantidad)`**
+```cpp
+procedure retirar(cantidad: positive)
+    begin
+    while cantidad > saldo do 
+        begin
+        cola.signal(); // Señala a otro proceso que podría desbloquearse
+        cola.wait();   // Se bloquea hasta que el saldo sea suficiente
+        end
+    
+    saldo -= cantidad; // Realiza el retiro
+    cola.signal();      // Despierta a otro proceso (si hay alguno esperando)
+    end;
+```
+
+1. **Uso de `while`:** 
+   - El uso del `while` garantiza que un proceso reevalúe la condición `cantidad > saldo` después de ser despertado, lo que es esencial para evitar errores de concurrencia en escenarios con múltiples procesos.
+
+2. **Señalización (`cola.signal()`):**
+   - Cada vez que un proceso intenta retirar una cantidad mayor al saldo disponible, antes de bloquearse (`cola.wait()`), se llama a `cola.signal()` para dar la oportunidad a otro proceso de desbloquearse y potencialmente modificar el saldo (por ejemplo, a través de un depósito).
+
+3. **Espera (`cola.wait()`):**
+   - Si el saldo no es suficiente, el proceso se bloquea en `cola.wait()`, cediendo el control del monitor a otros procesos.
+
+4. **Semántica SU:**
+   - Cuando un proceso hace `cola.signal()`, el proceso despertado tiene prioridad y ejecuta inmediatamente. Esto asegura que cualquier proceso que esté en espera y pueda realizar su acción (como depositar fondos o realizar un retiro válido) lo haga de forma prioritaria.
+
+---
+
+##### **Código de `ingresar(cantidad)`**
+```cpp
+procedure ingresar(cantidad: positive)
+    begin Vamos a analizarlo en detalle
+    saldo += cantidad; // Incrementa el saldo
+    cola.signal();      // Despierta a algún proceso que esté esperando por fondos
+    end
+```
+
+1. **Actualización del saldo:**
+   - Incrementa el saldo disponible inmediatamente al recibir un depósito.
+
+2. **Señalización (`cola.signal()`):**
+   - Despierta a un proceso bloqueado en `cola.wait()`. Gracias a la semántica SU, el proceso despertado podrá reintentar su operación de retiro antes de que el proceso actual (el que está depositando) continúe.
+
+3. **Sin uso de `wait`:**
+   - Este procedimiento no necesita bloquearse porque no hay condiciones adicionales que verificar después de depositar.
+
+---
+
+##### **¿Cómo se cumple la semántica SU?**
+
+- **Señalar inmediatamente:**
+  - Cada vez que se hace un `cola.signal()`, se cede el control del monitor al proceso que estaba esperando en la cola (si existe). Este proceso tiene prioridad para ejecutar su lógica.
+
+- **Espera urgente:**
+  - Si un proceso no puede continuar (`cantidad > saldo` en `retirar`), se bloquea en `cola.wait()` y cede el control. Cuando sea despertado, verifica de inmediato si ya puede realizar la acción.
+
+- **Ejemplo de flujo (retirar y depositar):**
+  - Si el saldo es 100 y dos procesos quieren retirar cantidades (150 y 50, respectivamente):
+    1. El proceso que quiere retirar 150 encuentra que `cantidad > saldo`, hace `signal` para despertar a otro proceso y se bloquea con `wait`.
+    2. El proceso que quiere retirar 50 se despierta, encuentra que su solicitud es válida, retira los fondos y hace `signal` para despertar al siguiente proceso.
+    3. Si se hace un depósito, el proceso bloqueado (150) se despierta prioritariamente y reevalúa su condición.
+
+---
+
+##### **Cumplimiento del esquema FIFO sin prioridad**
+
+La cola `cola` maneja a los procesos de forma **FIFO**, porque:
+- Cuando un proceso hace `wait`, se encola al final de la lista de espera.
+- El `signal` despierta al proceso que lleva más tiempo esperando.
+
+---
+
+##### **Ventajas de SU en este caso**
+
+1. **Eficiencia en el desbloqueo:**
+   - Los procesos no esperan innecesariamente, ya que los procesos despertados tienen prioridad.
+
+2. **Evita inanición:**
+   - Con la cola FIFO, los procesos se desbloquean en el orden en que se bloquearon.
+
+3. **Concurrencia controlada:**
+   - Los procesos despertados verifican de inmediato si pueden continuar, evitando inconsistencias.
+
+---
+
+En resumen, esta solución cumple con la semántica de señalar y espera urgente (SU) al dar prioridad a los procesos bloqueados y garantizar que puedan realizar su acción tan pronto como la condición lo permita, cediendo el control del monitor oportunamente.
+
+
+#### a.2) Cola FIFO con prioridad, primero retira el cliente con menor cantidad
+
+```cpp
+
+
+procedure retirar(cantidad : positive) 
+    begin
+    while cantidad > saldo
+        begin
+            cola.wait();
+            saldo -= cantidad;
+            cola.signal();
+        end
+    end
+```
+#### b.1) se respeta el orden de llegada a la oficina
+```cpp
+//SE DEBE DE RESPETAR EL ORDEN DE LLEGADA A LA OFICINA
+var
+    ventanilla, resto : condition
+    // ventanilla -> el que esta con el banquero
+    // resto los demas integrantes de la cuenta
+procedure retirar(cantidad : positive)
+    begin
+    if ventanilla.queue() then 
+        resto.wait();
+    while cantidad > saldo do
+        ventas.wait();
+    saldo -= cantidad;
+    resto.signal();
+    end
+
+```
+
+#### b.2) con prioridad, pero se respeta el orden de llegada a la oficina
+
+```cpp
+procedure retirar(cantidad : positive)
+    var 
+        ticket : integer
+
+    begin
+    ticket:=contador;
+    contador+=1;
+    if cola.queue() then cola.wait(ticket);
+    while cantidad > saldo do
+        cola.wait(ticket);
+    saldo -= cantidad;+
+    cola.signal();
+
+    end
+```
