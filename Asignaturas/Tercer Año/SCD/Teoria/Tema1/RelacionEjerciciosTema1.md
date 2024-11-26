@@ -340,7 +340,6 @@ begin
     finalizado[j] := false ;
 end
 ```
-
 # Ejercicio 10
 
 Obtener la poscondición adecuada para convertir los siguientes fragmentos de código en un triple demostrable con la Lógica de Programas:
@@ -420,25 +419,3 @@ $$
 (e) $\{P\} \vdash \{Q \land P\}$
 
 ## Resolución
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
