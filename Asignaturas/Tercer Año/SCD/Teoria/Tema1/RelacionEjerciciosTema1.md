@@ -339,83 +339,85 @@ begin
   else for j := 1 to 9 do
     finalizado[j] := false ;
 end
+
 ```
+
 # Ejercicio 10
 
 Obtener la poscondición adecuada para convertir los siguientes fragmentos de código en un triple demostrable con la Lógica de Programas:
 
-#### (a) $\{i < 10\} \; i = 2 \cdot i + 1 \; \{\}$
+#### (a) {i < 10} ; i = 2 * i + 1 ; {}
 
-#### (b) $\{i > 0\} \; i = i - 1; \; \{\}$
+#### (b) {i > 0} ; i = i - 1; ; {}
 
-#### (c) $\{i > j\} \; i = i + 1; \; j = j + 1 \; \{\}$
+#### (c) {i > j} ; i = i + 1; ; j = j + 1 ; {}
 
-#### (d) $\{\text{falso}\} \; a = a + 7; \; \{\}$
+#### (d) {falso} ; a = a + 7; ; {}
 
-#### (e) $\{\text{verdad}\} \; i = 3; \; j = 2 \cdot i \; \{\}$
+#### (e) {verdad} ; i = 3; ; j = 2 * i ; {}
 
-#### (f) $\{\text{verdad}\} \; c = a + b; \; c = \frac{c}{2} \; \{\}$
+#### (f) {verdad} ; c = a + b; ; c = c / 2 ; {}
 
 ## Resolución
 
-$$
-\text{Se resuelve aplicando directamente el axioma de asignación basado en la sustitución textual de } \{P\} \text{ por } \{P\}^x_e \text{ en la precondición de los triples:}
-$$
+Se resuelve aplicando directamente el axioma de asignación basado en la sustitución textual de {P} por {P}^x_e en la precondición de los triples:
 
-1. $\{i < 10\} \; i = 2 \cdot i + 1 \; \{i < 21\}$ puesto que:
-    $\{i < 21\}^i_{2 \cdot i + 1} \equiv \{2 \cdot i + 1 < 21\} \equiv \{i < 10\}$
+1. {i < 10} ; i = 2 * i + 1 ; {i < 21} puesto que:
+    {i < 21}^i_{2 * i + 1} ≡ {2 * i + 1 < 21} ≡ {i < 10}
 
-2. $\{i > 0\} \; i = i - 1; \; \{i > -1\}$
+2. {i > 0} ; i = i - 1; ; {i > -1}
 
-3. $\{i > j\} \; i = i + 1; \; \{i > j + 1\} \; j = j + 1 \; \{i > j\}$
+3. {i > j} ; i = i + 1; ; {i > j + 1} ; j = j + 1 ; {i > j}
 
-4. $\{\text{F}\} \; a = a + 7; \; \{\text{V}\}$
+4. {F} ; a = a + 7; ; {V}
 
-5. $\{\text{V}\} \; i = 3; \; \{i = 3\} \; j = 2 \cdot i \; \{j = 6\}$
+5. {V} ; i = 3; ; {i = 3} ; j = 2 * i ; {j = 6}
 
-6. $\{\text{V}\} \; c = a + b; \; \{c = a + b\} \; c = c / 2 \; \{c = (a + b) / 2\}$
+6. {V} ; c = a + b; ; {c = a + b} ; c = c / 2 ; {c = (a + b) / 2}
 
 # Ejercicio 11
 
 ¿Cuáles de los siguientes triples no son demostrables con la Lógica de Programas?
 
-#### (a) $\{i > 0\} \; i = i - 1; \; \{i \geq 0\}$
+#### (a) {i > 0} ; i = i - 1; ; {i >= 0}
 
-#### (b) $\{x \geq 7\} \; x = x + 3; \; \{x \geq 9\}$
+#### (b) {x >= 7} ; x = x + 3; ; {x >= 9}
 
-#### (c) $\{i < 9\} \; i = 2 \cdot i + 1; \; \{i \leq 20\}$
+#### (c) {i < 9} ; i = 2 * i + 1; ; {i <= 20}
 
-#### (d) $\{a > 0\} \; a = a - 7; \; \{a > -6\}$
+#### (d) {a > 0} ; a = a - 7; ; {a > -6}
 
 ### Resolución
 
 *i, x, a ∈ ℤ*
 
-1. **$\{i > 0\} \; i = i - 1; \; \{i + 1 > 0\} \Rightarrow \{i \geq 0\}$**
+1. **{i > 0} ; i = i - 1; ; {i + 1 > 0} ⇒ {i >= 0}**
 
-2. **$\{x \geq 7\} \; x = x + 3; \; \{x \geq 10\} \Rightarrow \{x \geq 9\}$**
+2. **{x >= 7} ; x = x + 3; ; {x >= 10} ⇒ {x >= 9}**
 
-3. **$\{i < 9\} \; i = 2 \cdot i + 1; \; \{i < 19\} \Rightarrow \{i \leq 20\}$**
+3. **{i < 9} ; i = 2 * i + 1; ; {i < 19} ⇒ {i <= 20}**
 
-4. **$\{a > 0\} \; a = a - 7; \; \{a > -7\} \text{ NOT} \Rightarrow \{a > -6\}$**
+4. **{a > 0} ; a = a - 7; ; {a > -7} NOT ⇒ {a > -6}**
 
 ### Anotaciones de la resolución 
-Por ejemplo, en el caso del apartado 1, calculamos la antigua  **${ i = i + 1}$** y la sustituimos en la precondición, asegurándonos de que se cumple.
+Por ejemplo, en el caso del apartado 1, calculamos la antigua  **{ i = i + 1}** y la sustituimos en la precondición, asegurándonos de que se cumple.
 
 
 # Ejercicio 12
-$$
-\text{Si el triple } \{P\} \vdash \{Q\} \text{ es demostrable, indicar por qué los siguientes triples también lo son (o no se pueden demostrar y por qué):}
-$$
 
-(a) $\{P\} \vdash \{Q \lor P\}$
+Si el triple {P} ⊢ {Q} es demostrable, indicar por qué los siguientes triples también lo son (o no se pueden demostrar y por qué):
 
-(b) $\{P \land D\} \vdash \{Q\}$
+(a) {P} ⊢ {Q ∨ P}
 
-(c) $\{P \lor D\} \vdash \{Q\}$
+(b) {P ∧ D} ⊢ {Q}
 
-(d) $\{P\} \vdash \{Q \lor D\}$
+(c) {P ∨ D} ⊢ {Q}
 
-(e) $\{P\} \vdash \{Q \land P\}$
+(d) {P} ⊢ {Q ∨ D}
+
+(e) {P} ⊢ {Q ∧ P}
 
 ## Resolución
+
+
+
