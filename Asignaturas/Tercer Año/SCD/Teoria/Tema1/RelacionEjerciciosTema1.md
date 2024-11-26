@@ -405,19 +405,46 @@ Por ejemplo, en el caso del apartado 1, calculamos la antigua  **{ i = i + 1}** 
 
 # Ejercicio 12
 
-Si el triple {P} ⊢ {Q} es demostrable, indicar por qué los siguientes triples también lo son (o no se pueden demostrar y por qué):
+Si el triple {P} C {Q} es demostrable, indicar por qué los siguientes triples también lo son (o no se pueden demostrar y por qué):
 
-(a) {P} ⊢ {Q ∨ P}
+(a) {P} C {Q ∨ P}
 
-(b) {P ∧ D} ⊢ {Q}
+(b) {P ∧ D} C {Q}
 
-(c) {P ∨ D} ⊢ {Q}
+(c) {P ∨ D} C {Q}
 
-(d) {P} ⊢ {Q ∨ D}
+(d) {P} C {Q ∨ D}
 
-(e) {P} ⊢ {Q ∧ P}
+(e) {P} C {Q ∧ P}
 
 ## Resolución
 
+El triple {P} C {Q} es demostrable,
 
+1. {P} C {Q ∨ P} también lo es por debilitamiento de la poscondición
+2. {P ∧ D} C {Q} también lo es por fortalecimiento de la precondición
+3. {P ∨ D} C {Q} No lo es porque se debilita la precondición
+4. {P} C {Q ∨ D} lo mismo que (1)
+5. {P} C {Q ∧ P} No lo es porque se fortalece la poscondición
 
+# Ejercicio 13
+
+Si el triple {P} C {Q} es demostrable, ¿cuál de los siguientes triples no se puede demostrar?**
+
+(a) {P ∧ D} C {Q}
+
+(b) {P ∨ D} C {Q}
+
+(c) {P} C {Q ∨ D}
+
+(d) {P} C {Q ∨ P}
+
+## Resolución
+
+1. {P ∧ D} C {Q}
+
+2. {P ∨ D} C {Q} No se puede demostrar porque se debilita la precondición
+
+3. {P} C {Q ∨ D}
+
+4. {P} C {Q ∨ P}
