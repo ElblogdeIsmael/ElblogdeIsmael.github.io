@@ -429,7 +429,7 @@ El triple {P} C {Q} es demostrable,
 
 # Ejercicio 13
 
-Si el triple {P} C {Q} es demostrable, ¿cuál de los siguientes triples no se puede demostrar?**
+Si el triple {P} C {Q} es demostrable, ¿cuál de los siguientes triples no se puede demostrar?
 
 (a) {P ∧ D} C {Q}
 
@@ -448,3 +448,186 @@ Si el triple {P} C {Q} es demostrable, ¿cuál de los siguientes triples no se p
 3. {P} C {Q ∨ D}
 
 4. {P} C {Q ∨ P}
+
+
+# Ejercicio 14
+
+Dado el programa `int x = 5, y = 2; cobegin < x = x + y >; < y = x * y > coend;`, obtener:
+
+(a) Valores finales de `x` e `y`
+
+(b) Valores finales de `x` e `y` si quitamos los símbolos `< >` de instrucción atómica.
+
+## Resolución
+
+int x = 5, y = 2; cobegin < x = x + y >;< y = x * y > coend;;
+
+a) Considerando operaciones atómicas (con los símbolos <, >)
+  1. {x == 5 ∧ y == 2} < x = x + y >;< y = x * y >
+     {x == 7 ∧ y == 14}
+  2. {x == 5 ∧ y == 2} < y = x * y >;< x = x + y >
+     {x == 15 ∧ y == 10}
+
+b) Sin considerarlas operaciones atómicas (quitando los símbolos <, >)
+  1. Los valores de (a) y además {x == 7 ∧ y == 10}
+
+
+# Ejercicio 15
+
+Comprobar si la demostración del triple `{x ≥ 2} < x = x - 2 > {x ≥ 0}` interfiere con los teoremas siguientes:
+
+(a) `{x ≥ 0} < x = x + 3 > {x ≥ 3}`
+
+(b) `{x ≥ 0} < x = x + 3 > {x ≥ 0}`
+
+(c) `{x ≥ 7} < x = x + 3 > {x ≥ 10}`
+
+(d) `{x ≥ 0} < y = y + 3 > {y ≥ 3}`
+
+(e) `{x es impar} < y = x + 1 > {y es par}`
+
+## Resolución
+
+**Regla no de interferencia de predicado**
+
+
+
+
+$$
+\{P\} \text{ con acción atómica } \{P \wedge \text{pre}(a)\} < a > \{P\}
+$$
+
+
+
+
+
+#### Tabla de Interferencias
+
+| Condición inicial | Acción           | Condición final | Interfiere | Justificación                                                                         |
+|-------------------|------------------|-----------------|------------|---------------------------------------------------------------------------------------|
+| {x ≥ 0}           | `< x = x + 3 >`  | {x ≥ 3}         | Sí         | `{x ≥ 3} < x = x - 2 > {x ≥ 1}`                                                        |
+| {x ≥ 0}           | `< x = x + 3 >`  | {x ≥ 0}         | No         | `{x ≥ 2 ∧ x ≥ 0} < x = x - 2 > {x ≥ 0}`                                                |
+| {x ≥ 7}           | `< x = x + 3 >`  | {x ≥ 10}        | Sí         | `{x ≥ 7} < x = x - 2 > {x ≥ 5} ⇒ {x ≥ 7}`                                              |
+| {y ≥ 0}           | `< y = y + 3 >`  | {y ≥ 3}         | No         | Las variables x e y son disjuntas                                                      |
+| {x es impar}      | `< y = x + 1 >`  | {y es par}      | No         | `{x ∈ 2 + 1 ∧ x ≥ 2} < x = x - 2 > {x ∈ 2 + 1} < x + 2 ∈ 2 + 1 > {x ∈ 2 + 1}`      |
+
+### Explicación Detallada del Ejercicio 15
+
+El objetivo del ejercicio es verificar si la demostración del triple de Hoare \(\{x \geq 2\} \; < x = x - 2 > \; \{x \geq 0\}\) **interfiere** con los triples dados. Esto se realiza aplicando la **regla de no interferencia de predicado**: si una acción modifica el estado del programa de forma que el predicado de otro triple no se cumple, entonces existe interferencia.
+
+#### Triple Original
+\[
+\{x \geq 2\} \; < x = x - 2 > \; \{x \geq 0\}
+\]
+- **Condición inicial**: \(x \geq 2\)
+- **Acción**: \(x := x - 2\)
+- **Condición final**: \(x \geq 0\)
+
+### Análisis Fila por Fila
+
+#### 1. **Primera fila**
+Triple: \(\{x \geq 0\} \; < x = x + 3 > \; \{x \geq 3\}\)
+
+1. **Condición inicial**: \(x \geq 0\)
+2. **Acción**: \(x := x + 3\)
+3. **Condición final**: \(x \geq 3\)
+
+- **Interferencia**: **Sí**
+- **Justificación**:
+  - Si aplicamos \(x := x + 3\), la condición final \(x \geq 3\) se cumple.
+  - Pero si después aplicamos \(x := x - 2\), el nuevo valor de \(x\) será \(x - 2\), lo que puede dar como resultado \(x < 3\). Por ejemplo:
+    - Si \(x = 2\), después de \(x := x + 3\), tenemos \(x = 5\).
+    - Después de \(x := x - 2\), tenemos \(x = 3\), lo cual aún cumple \(x \geq 3\).
+    - Pero para valores iniciales más bajos (\(x = 0\)), no se garantiza \(x \geq 3\). Por esto, hay interferencia.
+
+---
+
+#### 2. **Segunda fila**
+Triple: \(\{x \geq 0\} \; < x = x + 3 > \; \{x \geq 0\}\)
+
+1. **Condición inicial**: \(x \geq 0\)
+2. **Acción**: \(x := x + 3\)
+3. **Condición final**: \(x \geq 0\)
+
+- **Interferencia**: **No**
+- **Justificación**:
+  - La condición inicial (\(x \geq 0\)) no cambia su validez después de \(x := x - 2\).
+  - Por ejemplo:
+    - Si \(x = 2\), después de \(x := x + 3\), \(x = 5\).
+    - Aplicando \(x := x - 2\), \(x = 3\), y aún \(x \geq 0\). La condición final sigue cumpliéndose.
+
+---
+
+#### 3. **Tercera fila**
+Triple: \(\{x \geq 7\} \; < x = x + 3 > \; \{x \geq 10\}\)
+
+1. **Condición inicial**: \(x \geq 7\)
+2. **Acción**: \(x := x + 3\)
+3. **Condición final**: \(x \geq 10\)
+
+- **Interferencia**: **Sí**
+- **Justificación**:
+  - Si \(x := x + 3\), la condición final \(x \geq 10\) se cumple.
+  - Pero al aplicar \(x := x - 2\), el valor de \(x\) disminuye y puede no cumplir \(x \geq 10\).
+  - Por ejemplo:
+    - Si \(x = 7\), después de \(x := x + 3\), tenemos \(x = 10\).
+    - Después de \(x := x - 2\), \(x = 8\), lo cual viola \(x \geq 10\).
+
+---
+
+#### 4. **Cuarta fila**
+Triple: \(\{y \geq 0\} \; < y = y + 3 > \; \{y \geq 3\}\)
+
+1. **Condición inicial**: \(y \geq 0\)
+2. **Acción**: \(y := y + 3\)
+3. **Condición final**: \(y \geq 3\)
+
+- **Interferencia**: **No**
+- **Justificación**:
+  - La acción modifica la variable \(y\), pero el triple original afecta solo a \(x\).
+  - Dado que las variables \(x\) e \(y\) son disjuntas, no hay interferencia.
+
+---
+
+#### 5. **Quinta fila**
+Triple: \(\{x \text{ es impar}\} \; < y = x + 1 > \; \{y \text{ es par}\}\)
+
+1. **Condición inicial**: \(x \text{ es impar}\)
+2. **Acción**: \(y := x + 1\)
+3. **Condición final**: \(y \text{ es par}\)
+
+- **Interferencia**: **No**
+- **Justificación**:
+  - Aunque \(y\) depende de \(x\), la acción \(x := x - 2\) no afecta la paridad de \(x\).
+  - Ejemplo:
+    - Si \(x = 3\) (\(x \text{ es impar}\)), entonces \(y := x + 1 = 4\) (\(y \text{ es par}\)).
+    - Si aplicamos \(x := x - 2\), \(x = 1\) sigue siendo impar, y \(y = x + 1 = 2\) sigue siendo par.
+
+---
+
+### Resumen Final
+
+| Condición inicial | Acción           | Condición final | Interfiere | Justificación                                                                         |
+|-------------------|------------------|-----------------|------------|---------------------------------------------------------------------------------------|
+| \(\{x \geq 0\}\)  | \(< x = x + 3 >\) | \(\{x \geq 3\}\) | Sí         | \(x - 2\) puede violar \(x \geq 3\).                                                  |
+| \(\{x \geq 0\}\)  | \(< x = x + 3 >\) | \(\{x \geq 0\}\) | No         | \(x - 2\) mantiene \(x \geq 0\).                                                     |
+| \(\{x \geq 7\}\)  | \(< x = x + 3 >\) | \(\{x \geq 10\}\) | Sí         | \(x - 2\) puede violar \(x \geq 10\).                                                |
+| \(\{y \geq 0\}\)  | \(< y = y + 3 >\) | \(\{y \geq 3\}\) | No         | \(x\) y \(y\) son disjuntos.                                                         |
+| \(\{x \text{ es impar}\}\) | \(< y = x + 1 >\) | \(\{y \text{ es par}\}\) | No         | \(x - 2\) no afecta la paridad de \(x\), y por ende tampoco la de \(y\).              |
+# Ejercicio 16
+
+Dado el siguiente triple:
+
+```pascal
+{x==0}
+cobegin
+<x=x+a> || <x=x+b> || <x=x+c>
+coend
+{x==a+b+c}
+```
+
+   Demostrarlo utilizando la lógica de asertos para cada una de las tres instrucciones atómicas y después que se llega a la poscondición final `{x==a+b+c}` utilizando para ello la regla de la composición concurrente de instrucciones atómicas.
+
+## Resolución
+
+
