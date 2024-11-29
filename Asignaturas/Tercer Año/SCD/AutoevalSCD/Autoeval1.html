@@ -6,38 +6,44 @@
     <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 1</title>
     <style>
         body {
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
             color: #333;
             line-height: 1.6;
             padding: 20px;
-            font-size: 30px;
+            font-size: 18px;
         }
         h1 {
             text-align: center;
-            color: #4CAF50;
+            color: #007bff;
+            margin-bottom: 30px;
         }
         .question {
             background: #fff;
             border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
+            border-radius: 8px;
+            padding: 20px;
             margin-bottom: 20px;
-            transition: 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .question.correct {
-            border-color: #4CAF50;
+            border-color: #28a745;
             background-color: #d4edda;
         }
         .question.incorrect {
-            border-color: #f44336;
+            border-color: #dc3545;
             background-color: #f8d7da;
         }
         .explanation {
             background: #e7f3fe;
             border: 1px solid #b2d4fe;
-            border-radius: 5px;
-            padding: 10px;
+            border-radius: 8px;
+            padding: 15px;
             margin-top: 10px;
         }
         .author {
@@ -47,27 +53,21 @@
         }
         input[type="radio"] {
             margin-right: 10px;
-            transform: scale(1.5); /* Aumentar el tamaño del botón de radio */
+            transform: scale(1.2);
         }
         input[type="button"] {
-            background-color: #4CAF50;
+            background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 15px 30px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
         }
-        input[type="button"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 15px 20px; /* Aumentar el tamaño del botón */
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 20px; /* Aumentar el tamaño del texto */
-            transition: background-color 0.3s;
+        input[type="button"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -78,13 +78,13 @@
 <form id="quizForm">
     <!-- Aquí puedes agregar las preguntas y respuestas -->
     <!-- Pregunta 1 -->
-    <div class="question" id="q2">
+    <div class="question" id="q1">
         <p><strong>1. ¿Qué significa «irrepetibilidad de las secuencias de instrucciones» en la programación concurrente?</strong></p>
-        <input type="radio" name="q2" value="a"> a. Los programas concurrentes nunca tienen errores. <br>
-        <input type="radio" name="q2" value="b"> b. La velocidad de ejecución determina la secuencia de instrucciones. <br>
-        <input type="radio" name="q2" value="c"> c. Los programas concurrentes generan muchas intercalaciones de instrucciones posibles, por lo que es poco probable que se repitan caminos. <br>
-        <input type="radio" name="q2" value="d"> d. Los procesos siguen siempre la misma secuencia de ejecución. <br>
-        <input type="radio" name="q2" value="e"> e. Dos ejecuciones seguirán probablemente el mismo camino. <br>
+        <input type="radio" name="q1" value="a"> a. Los programas concurrentes nunca tienen errores. <br>
+        <input type="radio" name="q1" value="b"> b. La velocidad de ejecución determina la secuencia de instrucciones. <br>
+        <input type="radio" name="q1" value="c"> c. Los programas concurrentes generan muchas intercalaciones de instrucciones posibles, por lo que es poco probable que se repitan caminos. <br>
+        <input type="radio" name="q1" value="d"> d. Los procesos siguen siempre la misma secuencia de ejecución. <br>
+        <input type="radio" name="q1" value="e"> e. Dos ejecuciones seguirán probablemente el mismo camino. <br>
     </div>
         <!-- Pregunta 2 -->
     <div class="question" id="q2">
@@ -300,24 +300,24 @@
         // Respuestas correctas
         const answers = {
             q1: { answer: 'c', explanation: 'Los programas concurrentes generan muchas intercalaciones de instrucciones posibles, por lo que es poco probable que se repitan caminos.' },
-            q2: { answer: 'b', explanation: 'Las trazas garantizan que se producirán errores.' },
-            q3: { answer: 'd', explanation: 'Errores que aparecen siempre en la misma ejecución.' },
-            q4: { answer: 'b', explanation: 'Porque los errores transitorios aparecen en cada traza.' },
-            q5: { answer: 'a', explanation: 'Confiar sólo en la comprobación manual de errores.' },
-            q6: { answer: 'd', explanation: 'La ejecución de un único proceso de forma aislada.' },
-            q7: { answer: 'e', explanation: 'La velocidad de ejecución es irrelevante para la programación concurrente.' },
-            q8: { answer: 'b', explanation: 'Una situación en la que el orden de ejecución de los procesos no afecta a la salida final del programa.' },
+            q2: { answer: 'd', explanation: 'Las trazas no pueden utilizarse con fines de depuración.' },
+            q3: { answer: 'e', explanation: 'Errores que aparecen en algunas ejecuciones pero no en otras, lo que dificulta su detección.' },
+            q4: { answer: 'd', explanation: 'Debido a la imprevisibilidad de las secuencias de ejecución y a la posibilidad de que haya trazas diferentes en cada ejecución.' },
+            q5: { answer: 'b', explanation: 'Utilizar métodos formales basados en la lógica matemática para verificar la corrección.' },
+            q6: { answer: 'a', explanation: 'Una secuencia de estados del programa producidos por un intercalado específico de instrucciones.' },
+            q7: { answer: 'd', explanation: 'Los procesos pueden no funcionar correctamente en diferentes plataformas si se hacen suposiciones sobre la velocidad de ejecución.' },
+            q8: { answer: 'e', explanation: 'Cuando dos procesos acceden a variables compartidas en un orden impredecible en función de la velocidad de ejecución.' },
             q9: { answer: 'b', explanation: 'Producen resultados impredecibles o incorrectos según el orden de ejecución de los procesos.' },
-            q10: { answer: 'd', explanation: 'Sólo sistemas distribuidos.' },
-            q11: { answer: 'c', explanation: 'La corrección del proceso debe depender de la velocidad relativa de los procesos.' },
-            q12: { answer: 'd', explanation: 'Permite que algunos procesos no terminen nunca sus tareas.' },
-            q13: { answer: 'a', explanation: 'Requiere que todos los procesos se ejecuten al mismo tiempo.' },
-            q14: { answer: 'e', explanation: 'Una vez que un proceso empieza a ejecutar una sección de código, debe completarla sin interrupción.' },
-            q15: { answer: 'b', explanation: 'Imponiendo límites temporales estrictos a la ejecución de los procesos.' },
-            q16: { answer: 'a', explanation: 'Una condición que sólo se aplica a los programas secuenciales.' },
-            q17: { answer: 'c', explanation: 'P y Q son variables que representan el tiempo de ejecución de C.' },
-            q18: { answer: 'a', explanation: 'Es difícil definir precondiciones y postcondiciones para cada proceso.' },
-            q19: { answer: 'a', explanation: 'Sólo se aplica a los programas secuenciales, no a los concurrentes.' },
+            q10: { answer: 'b', explanation: 'En los sistemas en tiempo real, donde la velocidad y el orden de ejecución son críticos.' },
+            q11: { answer: 'd', explanation: 'La corrección del proceso debe ser independiente de la velocidad de ejecución, evitando las condiciones de carrera.' },
+            q12: { answer: 'c', explanation: 'Garantiza que todos los procesos completen la ejecución y progresen, evitando el bloqueo.' },
+            q13: { answer: 'd', explanation: 'Garantiza que al menos un proceso listo para ejecutarse llegue a ejecutarse, evitando el bloqueo.' },
+            q14: { answer: 'a', explanation: 'Un proceso puede detenerse a mitad de ejecución y reanudarse más tarde sin completar la sección actual.' },
+            q15: { answer: 'e', explanation: 'Garantizando que todos los procesos acaben progresando, evitando que se atasquen.' },
+            q16: { answer: 'b', explanation: 'Una condición que establece que algo bueno debe suceder eventualmente en el futuro.' },
+            q17: { answer: 'a', explanation: 'Si el programa C comienza en un estado en el que P es verdadero, entonces Q será verdadero después de que C termine de ejecutarse.' },
+            q18: { answer: 'c', explanation: 'La interferencia entre procesos de ejecución concurrente complica el razonamiento.' },
+            q19: { answer: 'c', explanation: 'Garantiza que dos procesos no interfieran entre sí en sus precondiciones y postcondiciones cuando se ejecutan simultáneamente.' },
             q20: { answer: 'a', explanation: 'Las precondiciones y postcondiciones de los procesos deben combinarse, y ningún proceso debe invalidar las afirmaciones de los demás.' }
         };
 

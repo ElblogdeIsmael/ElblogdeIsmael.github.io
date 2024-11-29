@@ -6,38 +6,44 @@
     <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 2 - Exclusión Mutua</title>
     <style>
         body {
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
             color: #333;
             line-height: 1.6;
             padding: 20px;
-            font-size: 30px;
+            font-size: 18px;
         }
         h1 {
             text-align: center;
-            color: #4CAF50;
+            color: #007bff;
+            margin-bottom: 30px;
         }
         .question {
             background: #fff;
             border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
+            border-radius: 8px;
+            padding: 20px;
             margin-bottom: 20px;
-            transition: 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .question.correct {
-            border-color: #4CAF50;
+            border-color: #28a745;
             background-color: #d4edda;
         }
         .question.incorrect {
-            border-color: #f44336;
+            border-color: #dc3545;
             background-color: #f8d7da;
         }
         .explanation {
             background: #e7f3fe;
             border: 1px solid #b2d4fe;
-            border-radius: 5px;
-            padding: 10px;
+            border-radius: 8px;
+            padding: 15px;
             margin-top: 10px;
         }
         .author {
@@ -47,27 +53,21 @@
         }
         input[type="radio"] {
             margin-right: 10px;
-            transform: scale(1.5); /* Aumentar el tamaño del botón de radio */
+            transform: scale(1.2);
         }
         input[type="button"] {
-            background-color: #4CAF50;
+            background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 15px 30px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
         }
-        input[type="button"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 15px 20px; /* Aumentar el tamaño del botón */
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 20px; /* Aumentar el tamaño del texto */
-            transition: background-color 0.3s;
+        input[type="button"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -79,9 +79,9 @@
         <ol type="a">
             <li><label><input type="radio" name="q1" value="0"> Acceso simultáneo a la sección crítica</label></li>
             <li><label><input type="radio" name="q1" value="0"> Eliminación de la necesidad de turnos</label></li>
-            <li><label><input type="radio" name="q1" value="1"> Exclusión mutua con tiempo de espera limitado</label></li>
+            <li><label><input type="radio" name="q1" value="0"> Exclusión mutua con tiempo de espera limitado</label></li>
             <li><label><input type="radio" name="q1" value="0"> Uso de variables globales compartidas</label></li>
-            <li><label><input type="radio" name="q1" value="0"> Exclusión mutua sin control de inanición</label></li>
+            <li><label><input type="radio" name="q1" value="1"> Exclusión mutua sin control de inanición</label></li>
         </ol>
     </div>
     <div class="question" id="q2">
@@ -95,13 +95,13 @@
         </ol>
     </div>
     <div class="question" id="q3">
-        <p>¿Qué representa el turno en un algoritmo de exclusión mutua?(M)</p>
+        <p>¿Qué representa el turno en un algoritmo de exclusión mutua?</p>
         <ol type="a">
-            <li><label><input type="checkbox" name="q3" value="0"> La señal para finalizar el programa</label></li>
-            <li><label><input type="checkbox" name="q3" value="1"> La prioridad fija de un proceso</label></li>
-            <li><label><input type="checkbox" name="q3" value="1"> El permiso para acceder a la sección crítica</label></li>
-            <li><label><input type="checkbox" name="q3" value="0"> La posición en la cola de espera</label></li>
-            <li><label><input type="checkbox" name="q3" value="0"> La cantidad de procesos activos en el sistema</label></li>
+            <li><label><input type="radio" name="q3" value="0"> La señal para finalizar el programa</label></li>
+            <li><label><input type="radio" name="q3" value="0"> La prioridad fija de un proceso</label></li>
+            <li><label><input type="radio" name="q3" value="1"> El permiso para acceder a la sección crítica</label></li>
+            <li><label><input type="radio" name="q3" value="0"> La posición en la cola de espera</label></li>
+            <li><label><input type="radio" name="q3" value="0"> La cantidad de procesos activos en el sistema</label></li>
         </ol>
     </div>
     <div class="question" id="q4">
@@ -225,23 +225,23 @@
         </ol>
     </div>
     <div class="question" id="q16">
-        <p>¿Qué es una "etapa" en el algoritmo de Peterson para N procesos? (M)</p>
+        <p>¿Qué es una "etapa" en el algoritmo de Peterson para N procesos? </p>
         <ol type="a">
-            <li><label><input type="checkbox" name="q16" value="0"> Un mecanismo de exclusión global</label></li>
-            <li><label><input type="checkbox" name="q16" value="1"> Un nivel de prioridad fijo para los procesos</label></li>
-            <li><label><input type="checkbox" name="q16" value="0"> Un bucle infinito en la ejecución</label></li>
-            <li><label><input type="checkbox" name="q16" value="1"> Una fase de sincronización antes de la sección crítica</label></li>
-            <li><label><input type="checkbox" name="q16" value="0"> Una señal de error en el sistema</label></li>
+            <li><label><input type="radio" name="q16" value="0"> Un mecanismo de exclusión global</label></li>
+            <li><label><input type="radio" name="q16" value="0"> Un nivel de prioridad fijo para los procesos</label></li>
+            <li><label><input type="radio" name="q16" value="0"> Un bucle infinito en la ejecución</label></li>
+            <li><label><input type="radio" name="q16" value="1"> Una fase de sincronización antes de la sección crítica</label></li>
+            <li><label><input type="radio" name="q16" value="0"> Una señal de error en el sistema</label></li>
         </ol>
     </div>
     <div class="question" id="q17">
         <p>¿Qué condición debe cumplirse para que un proceso entre a la sección crítica en el algoritmo de Peterson? (M)</p>
         <ol type="a">
-            <li><label><input type="checkbox" name="q17" value="1"> Su turno no debe coincidir o la clave del otro proceso debe ser falsa</label></li>
-            <li><label><input type="checkbox" name="q17" value="0"> Su contador debe superar al de los demás procesos</label></li>
-            <li><label><input type="checkbox" name="q17" value="0"> Su clave de solicitud debe ser verdadera</label></li>
-            <li><label><input type="checkbox" name="q17" value="1"> Su prioridad debe ser la más alta</label></li>
-            <li><label><input type="checkbox" name="q17" value="0"> Su solicitud debe ser la primera en la cola</label></li>
+            <li><label><input type="radio" name="q17" value="1"> Su turno no debe coincidir o la clave del otro proceso debe ser falsa</label></li>
+            <li><label><input type="radio" name="q17" value="0"> Su contador debe superar al de los demás procesos</label></li>
+            <li><label><input type="radio" name="q17" value="0"> Su clave de solicitud debe ser verdadera</label></li>
+            <li><label><input type="radio" name="q17" value="0"> Su prioridad debe ser la más alta</label></li>
+            <li><label><input type="radio" name="q17" value="0"> Su solicitud debe ser la primera en la cola</label></li>
         </ol>
     </div>
     <div class="question" id="q18">
@@ -362,9 +362,9 @@
 
         // Respuestas correctas
         const answers = {
-            q1: { answer: "1", explanation: "El algoritmo de Dijkstra garantiza la exclusión mutua con tiempo de espera limitado." },
+            q1: { answer: "1", explanation: " Exclusión mutua sin control de inanición." },
             q2: { answer: "1", explanation: "El algoritmo de Dijkstra no garantiza la ausencia de inanición." },
-            q3: { answer: ["1", "1"], explanation: "El turno representa la prioridad fija de un proceso y el permiso para acceder a la sección crítica." },
+            q3: { answer: "1", explanation: "El permiso para acceder a la sección crítica." },
             q4: { answer: "1", explanation: "El algoritmo de Peterson asegura que un proceso no avanza solo si no está más adelantado que los demás y es el último en asignar el turno." },
             q5: { answer: "1", explanation: "El uso de etapas en el algoritmo de Peterson asegura la exclusión mutua y equidad." },
             q6: { answer: "1", explanation: "Una de las condiciones de Dijkstra para la exclusión mutua es que un proceso fuera de la sección crítica no debe bloquear a otros procesos." },
@@ -372,13 +372,13 @@
             q8: { answer: "1", explanation: "El algoritmo de Peterson garantiza exclusión mutua y evita inanición." },
             q9: { answer: "1", explanation: "Progreso finito significa que los procesos tienen un tiempo finito para entrar a la sección crítica." },
             q10: { answer: "1", explanation: "El algoritmo de Peterson para N procesos garantiza exclusión mutua para cualquier cantidad de procesos." },
-            q11: { answer: ["1"], explanation: "El algoritmo de Knuth soluciona la inanición garantizando que el tiempo de espera sea limitado para cada proceso y usando turnos circulares para la asignación de recursos." },
+            q11: { answer: "1", explanation: "El algoritmo de Knuth soluciona la inanición garantizando que el tiempo de espera sea limitado para cada proceso y usando turnos circulares para la asignación de recursos." },
             q12: { answer: "1", explanation: "Después de usar la sección crítica, un proceso en el algoritmo de Peterson libera su bandera de 'solicitado'." },
             q13: { answer: "1", explanation: "Si dos procesos intentan acceder simultáneamente en el algoritmo de Peterson, se respetan las reglas de exclusión mutua." },
             q14: { answer: "1", explanation: "El algoritmo de Knuth introduce la técnica de retraso limitado en el acceso a la sección crítica." },
             q15: { answer: "1", explanation: "El método de refinamiento sucesivo resuelve el problema de exclusión mutua implementando bucles de espera activa para decidir el acceso." },
-            q16: { answer: ["1", "1"], explanation: "Una 'etapa' en el algoritmo de Peterson para N procesos es un nivel de prioridad fijo para los procesos y una fase de sincronización antes de la sección crítica." },
-            q17: { answer: ["1", "1"], explanation: "Para que un proceso entre a la sección crítica en el algoritmo de Peterson, su turno no debe coincidir o la clave del otro proceso debe ser falsa." },
+            q16: { answer: "1", explanation: "Una 'etapa' en el algoritmo de Peterson para N procesos es un nivel de prioridad fijo para los procesos y una fase de sincronización antes de la sección crítica." },
+            q17: { answer: "1", explanation: "Para que un proceso entre a la sección crítica en el algoritmo de Peterson, su turno no debe coincidir o la clave del otro proceso debe ser falsa." },
             q18: { answer: "1", explanation: "Al verificar las claves en algoritmos de refinamiento sucesivo, se pueden producir interrupciones aleatorias." },
             q19: { answer: "1", explanation: "La exclusión mutua intenta evitar el acceso simultáneo de múltiples procesos a una sección crítica." },
             q20: { answer: "1", explanation: "Si todos los procesos solicitan acceso simultáneamente en el algoritmo de Dijkstra, uno de ellos accede según el turno asignado." },
