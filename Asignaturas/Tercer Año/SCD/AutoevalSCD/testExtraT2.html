@@ -392,23 +392,22 @@
         for (let i = 1; i <= totalQuestions; i++) {
             const question = document.querySelectorAll(`input[name="q${i}"]:checked`);
             if (question.length > 0) {
-                const selectedValues = Array.from(question).map(q => q.value);
-                const correctAnswers = Array.isArray(answers[`q${i}`].answer) ? answers[`q${i}`].answer : [answers[`q${i}`].answer];
-                const isCorrect = selectedValues.length === correctAnswers.length && selectedValues.every(val => correctAnswers.includes(val));
-                
-                if (isCorrect) {
-                    score++;
-                    document.getElementById(`q${i}`).classList.add('correct');
-                } else {
-                    document.getElementById(`q${i}`).classList.add('incorrect');
-                    // Mostrar la respuesta correcta y su justificación
-                    const correctAnswer = correctAnswers.map(ans => String.fromCharCode(96 + parseInt(ans))).join(", ");
-                    const explanation = answers[`q${i}`].explanation;
-                    const explanationDiv = document.createElement("div");
-                    explanationDiv.className = "explanation";
-                    explanationDiv.innerHTML = `<strong>Respuesta correcta:</strong> ${correctAnswer}<br><strong>Justificación:</strong> ${explanation}`;
-                    document.getElementById(`q${i}`).appendChild(explanationDiv);
-                }
+            const selectedValues = Array.from(question).map(q => q.value);
+            const correctAnswers = Array.isArray(answers[`q${i}`].answer) ? answers[`q${i}`].answer : [answers[`q${i}`].answer];
+            const isCorrect = selectedValues.length === correctAnswers.length && selectedValues.every(val => correctAnswers.includes(val));
+            
+            if (isCorrect) {
+                score++;
+                document.getElementById(`q${i}`).classList.add('correct');
+            } else {
+                document.getElementById(`q${i}`).classList.add('incorrect');
+                // Mostrar solo la justificación
+                const explanation = answers[`q${i}`].explanation;
+                const explanationDiv = document.createElement("div");
+                explanationDiv.className = "explanation";
+                explanationDiv.innerHTML = `<strong>Justificación:</strong> ${explanation}`;
+                document.getElementById(`q${i}`).appendChild(explanationDiv);
+            }
             }
         }
 
