@@ -18,7 +18,6 @@ int puntos_ronda = 0; // Puntos que se ganan en la ronda actual
 bool fin = false;   // Booleano que ayuda a determinar si se ha terminado el juego
 
 mutex mtx_cout;     // Mutex para proteger la salida por pantalla
-mutex mtx_direction; // Mutex para proteger la generación de la dirección aleatoria
 mutex mtx_operacion; // Mutex para cambiar el valor de variables
 
 int direccion_corazon; // Dirección del corazón
@@ -61,20 +60,14 @@ string nombre_jugador(int i) {
  */
 void funcion_hebra_NPC() {
    for (int i = 0; i < num_rondas; ++i) {
-      mtx_operacion.lock();
       jugadores_actuales = 0; // Reseteamos el contador al inicio de cada ronda
       puestoJugador = 0;        // Reseteamos el puesto al inicio de cada ronda
-      mtx_operacion.unlock();
 
       sem_wait(puedo_generar); // Esperamos a que se pueda generar un nuevo corazón
 
-      mtx_direction.lock();
       direccion_corazon = aleatorio<0, 3>(); // Generamos dirección aleatoria en la que poner el corazón
-      mtx_direction.unlock();
 
-      mtx_cout.lock();
       cout << "NPC: Corazón visible en la dirección " << direccion_corazon << " ." << endl << flush;
-      mtx_cout.unlock();
 
       for (int i = 0; i < num_jugadores; ++i) {
          sem_signal(corazon_disponible); // Despertamos a todos los jugadores 
@@ -84,12 +77,9 @@ void funcion_hebra_NPC() {
       sem_wait(fin_ronda);
 
       // Fin de ronda
-      mtx_cout.lock();
       cout << "+++++++-----+++++-----++++ FIN DE LA RONDA " << i+1 << " +++++++-----+++++-----++++" << endl << flush;
       mostrar_puntos();
-      mtx_cout.unlock();
 
-      sem_signal(puedo_generar); // Permitimos que se genere la siguiente ronda
    }
 
    // Señalizamos el fin del juego
@@ -98,10 +88,8 @@ void funcion_hebra_NPC() {
       sem_signal(corazon_disponible);
    }
    //Imprimimos por pantalla el fin del juego
-   mtx_cout.lock();
-      cout << endl << "+++++++-----+++++-----++++ FIN DEL JUEGO DE MARIO PARTY CON 10 RONDAS" << " +++++++-----+++++-----++++" << endl << flush;
-      mostrar_puntos();
-      mtx_cout.unlock();
+   cout << endl << "+++++++-----+++++-----++++ FIN DEL JUEGO DE MARIO PARTY CON 10 RONDAS" << " +++++++-----+++++-----++++" << endl << flush;
+   mostrar_puntos();
 }
 
 /**
@@ -111,7 +99,7 @@ void funcion_hebra_NPC() {
  */
 void funcion_hebra_jugador(int num_jugador) {
    while (!fin) {
-      sem_wait(corazon_disponible); // Como hemos despertado anteriormente a todos los jugadores, cuando este adquiere el monitor, los demás pueden entrar de igual manera
+      sem_wait(corazon_disponible); // Como hemos despertado anteriormente a todos los jugadores, cuando este adquiere el semáforo, los demás pueden entrar de igual manera
       if (!fin) { // Necesario comprobarlo. Por si se ha puesto fin=true mientras estaba bloqueado
          string nombre = nombre_jugador(num_jugador);
          mtx_operacion.lock();
@@ -123,24 +111,22 @@ void funcion_hebra_jugador(int num_jugador) {
 
          if (direccion_correcta) {
             mtx_cout.lock();
-
             cout << nombre << ": mira hacia la dirección del corazón." << endl << flush; // Imprimimos que efectivamente mira hacia la dirección del corazón
             mtx_cout.unlock();
 
             mtx_operacion.lock();
             puntos_ronda = puntosParaGanar[puestoJugador]; // Hacer que gane los puntos correspondientes
-            if (puestoJugador < 2) { // Si es 2 es el máximo de puntos que puede ganar según el array, luego al inicio de cada ronda se resetea (puestoJugador = 0)
+            if (puestoJugador < 3) { // Garantizamos que no sobrepase el tamaño de puntosParaGanar
+               puntos_ronda = puntosParaGanar[puestoJugador];
                puestoJugador++;
+            } else {
+               puntos_ronda = 0; // Si se excede, no gana puntos
             }
             mtx_operacion.unlock();
          } else { //si no mira hacia la dirección en la que se ha puesto el corazón, se le suma 0 puntos
             mtx_cout.lock();
             cout << nombre << ": mira hacia la dirección incorrecta." << endl << flush; // No ha mirado hacia la misma dirección
             mtx_cout.unlock();
-
-            mtx_operacion.lock();
-            puntos_ronda = 0; // En este caso no gana ningún punto
-            mtx_operacion.unlock();
          }
 
          mtx_cout.lock();
@@ -153,7 +139,8 @@ void funcion_hebra_jugador(int num_jugador) {
 
          // Si es el último jugador que actúa, liberamos el semáforo de fin de ronda
          if (jugadores_actuales == num_jugadores) {
-            sem_signal(fin_ronda);
+            sem_signal(fin_ronda); // indicamos que la ronda ha finalizado
+            sem_signal(puedo_generar); //indicamos que ya puede generar el corazón
          }
       }
    }
