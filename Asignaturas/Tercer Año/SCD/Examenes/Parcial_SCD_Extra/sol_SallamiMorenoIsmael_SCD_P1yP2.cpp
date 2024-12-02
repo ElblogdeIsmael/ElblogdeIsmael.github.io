@@ -70,7 +70,10 @@ void funcion_hebra_NPC() {
       cout << "NPC: Corazón visible en la dirección " << direccion_corazon << " ." << endl << flush;
 
       for (int i = 0; i < num_jugadores; ++i) {
+         //compruebo si el semáforo corazon_disponible tiene procesos esperando
+         int sval;
          sem_signal(corazon_disponible); // Despertamos a todos los jugadores 
+         //sem_signal(corazon_disponible); // Despertamos a todos los jugadores 
       }
 
       // Esperamos a que todos los jugadores terminen la ronda
@@ -116,17 +119,18 @@ void funcion_hebra_jugador(int num_jugador) {
 
             mtx_operacion.lock();
             puntos_ronda = puntosParaGanar[puestoJugador]; // Hacer que gane los puntos correspondientes
-            if (puestoJugador < 3) { // Garantizamos que no sobrepase el tamaño de puntosParaGanar
-               puntos_ronda = puntosParaGanar[puestoJugador];
+            if ( puestoJugador < 2) { // Si es 2 es el máximo de puntos que puede ganar según el array , luego al inicio de cada ronda se resetea ( puestoJugador = 0)
                puestoJugador++;
-            } else {
-               puntos_ronda = 0; // Si se excede, no gana puntos
             }
             mtx_operacion.unlock();
          } else { //si no mira hacia la dirección en la que se ha puesto el corazón, se le suma 0 puntos
             mtx_cout.lock();
             cout << nombre << ": mira hacia la dirección incorrecta." << endl << flush; // No ha mirado hacia la misma dirección
             mtx_cout.unlock();
+
+            mtx_operacion.lock();
+            puntos_ronda = 0;
+            mtx_operacion.unlock();
          }
 
          mtx_cout.lock();
@@ -166,7 +170,6 @@ int main() {
 
 
 
-   mtx_cout.lock();
    cout << R"(
    M   M   A   RRRR  III  OOO      PPPP   A   RRRR  TTTTT  Y   Y
    MM MM  A A  R   R  I  O   O     P   P A A  R   R   T     Y Y
@@ -174,5 +177,4 @@ int main() {
    M   M A   A R   R  I  O   O     P    A   A R   R   T      Y
    M   M A   A R   R III  OOO      P    A   A R   R   T      Y
    )" << endl;
-   mtx_cout.unlock();
 }
