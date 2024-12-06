@@ -105,7 +105,7 @@
     position=current page.south,
     vshift=0pt,
     hshift=0pt,
-    contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{images/granada.jpg}}
+    %contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{images/granada.jpg}}
 }
 
 % Inicio del documento
@@ -115,10 +115,10 @@
 \maketitle
 \thispagestyle{empty}
 
-\begin{center}
-    \includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{images/algEM.jpg} \\ % Añade tu imagen de fondo
-    \vfill
-\end{center}
+% \begin{center}
+%     \includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{images/algEM.jpg} \\ % Añade tu imagen de fondo
+%     \vfill
+% \end{center}
 
 \newpage
 
@@ -255,6 +255,8 @@ Las condiciones de entrada y salida interactúan de la siguiente manera para gar
     \item En cualquier configuración, solo un proceso puede cumplir las condiciones de entrada, lo que garantiza \textbf{exclusión mutua}.
 \end{itemize}
 
+Por lo que queda demostrado que el algoritmo asegura la Exclusión Mutua.
+
 
 
 % \subsection{Parte II: Progreso y justicia}
@@ -295,7 +297,7 @@ El progreso significa que, en cualquier configuración válida, siempre habrá a
     \item \textbf{Dependencia local de las condiciones de entrada:}  
     Cada proceso $i$ puede decidir entrar en la SC únicamente basándose en el valor de $s[i]$ y $s[i-1]$ (o $s[n-1]$ si $i = 0$). Por lo tanto:
     \begin{itemize}
-        \item La decisión de un proceso $i$ no depende de los valores de procesos distantes, lo que permite que las decisiones se tomen de forma local y eficiente.
+        \item La decisión de un proceso $i$ no depende de los valores de procesos distantes, lo que permite que las decisiones se tomen de forma local y eficiente, es decir, depende de sus vecinos inmediatos.
         \item Esto implica que el estado global del anillo no bloquea el progreso de ningún proceso en particular.
     \end{itemize}
 
@@ -358,13 +360,13 @@ Esto podemos garantizarlo en base a las siguientes razones:
     Si un proceso $i$ no puede entrar porque su vecino $i-1$ no ha actualizado $s[i-1]$, ese vecino eventualmente tendrá la oportunidad de entrar y actualizar $s[i-1]$. Esto evita bloqueos indefinidos y asegura que todos los procesos accedan a la SC un número infinito de veces.
 \end{enumerate}
 
-Por lo tanto, se cumplen las propiedades de \textbf{progreso} y \textbf{acceso infinito a la sección crítica}, asegurando que ningún proceso quede bloqueado indefinidamente y que todos los procesos puedan acceder a la SC un número infinito de veces.
+Por lo tanto, se cumplen las propiedades de \textbf{progreso} y \textbf{acceso infinito a la sección crítica}, asegurando que ningún proceso quede bloqueado indefinidamente y que todos los procesos puedan acceder a la SC un número infinito de veces, por lo que esta propiedad queda demostrada.
 
 \subsection{Relación con los axiomas de la programación concurrente}
 
 El algoritmo cumple con los cinco axiomas fundamentales de la programación concurrente. A continuación, se describe cómo se satisfacen:
 
-\subsubsection{1. Atomicidad e Intercalación de Instrucciones}
+\subsubsection{Atomicidad e Intercalación de Instrucciones}
 
 Este axioma establece que cada instrucción del programa concurrente se ejecuta de forma atómica y el resultado depende del orden en que las instrucciones se intercalan. En el contexto del algoritmo:
 
@@ -376,7 +378,7 @@ Este axioma establece que cada instrucción del programa concurrente se ejecuta 
     Los procesos avanzan en su ejecución intercalando las instrucciones, asegurando que sólo un proceso a la vez pueda acceder a la sección crítica. Esto se deriva de las condiciones de entrada (\( s[i] \neq s[i-1] \) y \( s[0] = s[n-1] \)) y de las actualizaciones consistentes al salir de la sección crítica.
 \end{itemize}
 
-\subsubsection{2. Consistencia de datos después del acceso concurrente}
+\subsubsection{Consistencia de datos después del acceso concurrente}
 
 Este axioma requiere que el estado del sistema sea consistente después de cualquier acceso concurrente. En el algoritmo:
 
@@ -389,7 +391,7 @@ Este axioma requiere que el estado del sistema sea consistente después de cualq
     \item Estas reglas evitan inconsistencias, como permitir que dos procesos cumplan simultáneamente las condiciones para entrar en la sección crítica.
 \end{itemize}
 
-\subsubsection{3. Irrepetibilidad de las secuencias de instrucciones}
+\subsubsection{Irrepetibilidad de las secuencias de instrucciones}
 
 Este axioma implica que una misma secuencia de instrucciones puede producir diferentes resultados en ejecuciones distintas debido a la concurrencia. En el algoritmo:
 
@@ -400,7 +402,7 @@ Este axioma implica que una misma secuencia de instrucciones puede producir dife
 
 Esta irrepetibilidad asegura que el comportamiento del sistema no sea rígido, adaptándose a las condiciones cambiantes del entorno concurrente.
 
-\subsubsection{4. Independencia de la velocidad de proceso}
+\subsubsection{Independencia de la velocidad de proceso}
 
 Este axioma establece que el sistema debe funcionar correctamente independientemente de las velocidades relativas de los procesos. En el algoritmo:
 
@@ -413,7 +415,7 @@ Este axioma establece que el sistema debe funcionar correctamente independientem
     \end{itemize}
 \end{itemize}
 
-\subsubsection{5. Hipótesis de progreso finito}
+\subsubsection{Hipótesis de progreso finito}
 
 Este axioma implica que cada proceso debe avanzar y alcanzar su objetivo (por ejemplo, entrar en la sección crítica) en un tiempo finito. En el algoritmo:
 
@@ -462,8 +464,28 @@ La seguridad garantiza que nunca se violan las reglas del sistema, como permitir
 
 Podemos concluir que el algoritmo cumple con las propiedades de vivacidad y de seguridad.
 
+\section{Bibliografía}
+
+\begin{thebibliography}{9}
+
+\bibitem{Diapositivas de clase}
+Diapositivas de la asignatura \textit{Sistemas Concurrentes y Distribuidos}, en la Universidad de Granada.
 
 
+\bibitem{lamport1978}
+L. Lamport, 
+\textit{Time, Clocks, and the Ordering of Events in a Distributed System}, 
+Communications of the ACM, vol. 21, no. 7, pp. 558-565, 1978.
 
+\bibitem{concurrencyaxioms}
+M. Ben-Ari, 
+\textit{Principles of Concurrent and Distributed Programming}, 
+2nd Edition, Addison-Wesley, 2006.
+
+\end{thebibliography}
+
+\section{Anotaciones}
+
+Cabe destacar que la extensión de esta práctica se debe a la intención de utilizar la mayor cantidad posible de conceptos del temario, así como de proporcionar una demostración y explicación detallada de las propiedades de un algoritmo de exclusión mutua.
 
 \end{document}
