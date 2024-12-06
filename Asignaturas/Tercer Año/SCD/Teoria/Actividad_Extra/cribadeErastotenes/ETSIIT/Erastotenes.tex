@@ -96,12 +96,15 @@
 % Información del documento
 \title{
     \vspace{-2cm}
-    \includegraphics[width=0.3\textwidth]{images/etsiit.png} \\ % Cambia el logo si es necesario
-    \LARGE Ingeniería Informática + ADE\\
-    \large Universidad de Granada (UGR)\\[1cm]
+    \includegraphics[width=0.2\textwidth]{images/etsiit.png} \\ % Cambia el logo si es necesario
+    \LARGE \textbf{Algoritmo de la Criba de Eratóstenes usando MPI (Message Passing Interface)} \\[0.5cm]
+    \large \textbf{Sistemas Concurrentes y Distribuidos} \\[0.5cm]}
+\author{
+    \textbf{Ismael Sallami Moreno} \\
+    \textit{Ingenería Informática + ADE} \\
+    \textit{Universidad de Granada (UGR)} \\
 }
-\author{\textbf{Autor:} Ismael Sallami Moreno}
-\date{\textbf{Asignatura:} Sistemas Concurrentes y Distribuidos: Criba de Eratóstenes}
+\date{\today}
 
 % Configuración del fondo
 \backgroundsetup{
@@ -112,7 +115,7 @@
     position=current page.south,
     vshift=0pt,
     hshift=0pt,
-    contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{images/Eratóstenes1.jpg}}
+    %contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{images/Eratóstenes1.jpg}}
 }
 
 %pon el customc del estilo de lstlisting
@@ -125,10 +128,10 @@
 \maketitle
 \thispagestyle{empty}
 
-\begin{center}
-    \includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{images/Eratóstenes1.jpg} \\ % Añade tu imagen de fondo
-    \vfill
-\end{center}
+% \begin{center}
+%     \includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{images/Eratóstenes1.jpg} \\ % Añade tu imagen de fondo
+%     \vfill
+% \end{center}
 
 \newpage
 
@@ -183,40 +186,66 @@ La solución propuesta consiste en ejecutar el programa de la criba de Eratóste
 
 
 
-\subsection{Explicación detallada del código: Algoritmo de la Criba de Eratóstenes con MPI}
+% \subsection{Explicación detallada del código: Algoritmo de la Criba de Eratóstenes con MPI}
 
-En esta implementación, utilizamos el modelo de programación paralelo de \textit{Message Passing Interface} (MPI) para distribuir el trabajo de la Criba de Eratóstenes entre varios procesos. La idea principal es dividir la tarea de identificar números primos en un rango determinado, permitiendo que cada proceso se encargue de una parte específica del cálculo. Siguiendo el esquema de la Figura 1.
+% En esta implementación, utilizamos el modelo de programación paralelo de \textit{Message Passing Interface} (MPI) para distribuir el trabajo de la Criba de Eratóstenes entre varios procesos. La idea principal es dividir la tarea de identificar números primos en un rango determinado, permitiendo que cada proceso se encargue de una parte específica del cálculo. Siguiendo el esquema de la Figura 1.
 
-\subsubsection{Descripción del Algoritmo}
+% \subsubsection{Descripción del Algoritmo}
 
-El algoritmo se organiza en tres roles principales para los procesos:
-\begin{itemize}
-    \item \textbf{Proceso principal} (\texttt{rank == 0}): Este proceso es responsable de generar números naturales, comenzando desde el número 2, y enviarlos al primer proceso filtro (\texttt{rank == 1}). Los números se envían uno a uno utilizando \texttt{MPI\_Send}. Además, este proceso envía una señal de finalización (\texttt{-1}) cuando se ha alcanzado el rango máximo (en este caso, 100).
-    \item \textbf{Procesos filtros intermedios} (\texttt{1 <= rank < size - 1}): Cada proceso filtro recibe números del proceso anterior y aplica un filtro basado en la divisibilidad por el número primo asociado a ese filtro. Los números no divisibles se envían al siguiente filtro, y el proceso finaliza cuando recibe la señal de terminación.
-    \item \textbf{Proceso impresor} (\texttt{rank == size - 1}): Este proceso imprime los números primos recibidos. También maneja explícitamente los casos especiales del número 2 y 3, imprimiendo directamente que son primos al inicio del programa.
-\end{itemize}
+% El algoritmo se organiza en tres roles principales para los procesos:
+% \begin{itemize}
+%     \item \textbf{Proceso principal} (\texttt{rank == 0}): Este proceso es responsable de generar números naturales, comenzando desde el número 2, y enviarlos al primer proceso filtro (\texttt{rank == 1}). Los números se envían uno a uno utilizando \texttt{MPI\_Send}. Además, este proceso envía una señal de finalización (\texttt{-1}) cuando se ha alcanzado el rango máximo (en este caso, 100).
+%     \item \textbf{Procesos filtros intermedios} (\texttt{1 <= rank < size - 1}): Cada proceso filtro recibe números del proceso anterior y aplica un filtro basado en la divisibilidad por el número primo asociado a ese filtro. Los números no divisibles se envían al siguiente filtro, y el proceso finaliza cuando recibe la señal de terminación.
+%     \item \textbf{Proceso impresor} (\texttt{rank == size - 1}): Este proceso imprime los números primos recibidos. También maneja explícitamente los casos especiales del número 2 y 3, imprimiendo directamente que son primos al inicio del programa.
+% \end{itemize}
 
-\subsubsection{Implementación}
+% \subsubsection{Implementación}
 
-La implementación comienza inicializando el entorno MPI con \texttt{MPI\_Init}. Luego, cada proceso determina su rol basándose en su rango (\texttt{rank}):
+% La implementación comienza inicializando el entorno MPI con \texttt{MPI\_Init}. Luego, cada proceso determina su rol basándose en su rango (\texttt{rank}):
 
-\begin{itemize}
-    \item En el \textbf{proceso principal}, un bucle itera sobre números naturales, comenzando en 2. Cada número se envía al primer filtro mediante \texttt{MPI\_Send}. Cuando se supera el rango de números (100 en este caso), el proceso envía una señal de terminación (-1) y finaliza.
-    \item Los \textbf{procesos filtros intermedios} comienzan recibiendo un número primo inicial, que se convierte en su referencia para filtrar. Posteriormente, filtran los números recibidos y envían los que no son divisibles al siguiente filtro o al proceso impresor. Cuando reciben la señal de terminación (-1), la propagan al siguiente proceso y finalizan.
-    \item El \textbf{proceso impresor} recibe números desde el último filtro y los imprime como primos. Adicionalmente, este proceso imprime explícitamente los números 2 y 3 como primos al inicio, asegurando que no sean ignorados por los filtros.
-\end{itemize}
+% \begin{itemize}
+%     \item En el \textbf{proceso principal}, un bucle itera sobre números naturales, comenzando en 2. Cada número se envía al primer filtro mediante \texttt{MPI\_Send}. Cuando se supera el rango de números (100 en este caso), el proceso envía una señal de terminación (-1) y finaliza.
+%     \item Los \textbf{procesos filtros intermedios} comienzan recibiendo un número primo inicial, que se convierte en su referencia para filtrar. Posteriormente, filtran los números recibidos y envían los que no son divisibles al siguiente filtro o al proceso impresor. Cuando reciben la señal de terminación (-1), la propagan al siguiente proceso y finalizan.
+%     \item El \textbf{proceso impresor} recibe números desde el último filtro y los imprime como primos. Adicionalmente, este proceso imprime explícitamente los números 2 y 3 como primos al inicio, asegurando que no sean ignorados por los filtros.
+% \end{itemize}
 
-Finalmente, el entorno MPI se finaliza utilizando \texttt{MPI\_Finalize}.
+% Finalmente, el entorno MPI se finaliza utilizando \texttt{MPI\_Finalize}.
 
-\subsubsection{Detalles de Implementación}
+% \subsubsection{Detalles de Implementación}
 
-Para garantizar que los números 2 y 3 sean manejados adecuadamente:
-\begin{itemize}
-    \item El proceso impresor imprime explícitamente estos valores al inicio.
-    \item En el proceso principal, los números 2 y 3 se envían al primer filtro y también directamente al impresor.
-\end{itemize}
+% Para garantizar que los números 2 y 3 sean manejados adecuadamente:
+% \begin{itemize}
+%     \item El proceso impresor imprime explícitamente estos valores al inicio.
+%     \item En el proceso principal, los números 2 y 3 se envían al primer filtro y también directamente al impresor.
+% \end{itemize}
 
-Esta estructura asegura una distribución eficiente del trabajo entre los procesos, con una adecuada coordinación entre ellos para identificar y reportar los números primos dentro del rango especificado.
+% Esta estructura asegura una distribución eficiente del trabajo entre los procesos, con una adecuada coordinación entre ellos para identificar y reportar los números primos dentro del rango especificado.
+
+\subsection{Explicación detallada del código}
+
+El código presentado implementa la criba de Eratóstenes utilizando \textit{MPI} (Message Passing Interface) para calcular números primos de forma concurrente y distribuida. A continuación, se describen las funciones principales de cada bloque del programa:
+
+\subsubsection{Inicialización y configuración}
+El programa comienza inicializando el entorno de ejecución con \texttt{MPI\_Init}, obteniendo el rango (\texttt{rank}) y el tamaño (\texttt{size}) del comunicador global \texttt{MPI\_COMM\_WORLD}. Si el número de procesos es menor que 3, el programa imprime un mensaje de error y aborta la ejecución mediante \texttt{MPI\_Abort}. Esto asegura que haya al menos un generador, un filtro y un impresor.
+
+\subsubsection{Generador de números (Proceso 0)}
+El proceso con \texttt{rank = 0} actúa como generador de números naturales. Inicialmente, envía el número 2 (el primer número primo) directamente al impresor (\texttt{rank = size - 1}). Luego, comienza un bucle que genera números naturales secuenciales. Cada número se envía al primer filtro (\texttt{rank = 1}) usando \texttt{MPI\_Send}.
+
+El generador finaliza cuando el número actual supera el límite predefinido (\texttt{nLimite}). En ese momento, envía una señal especial de terminación (\texttt{x = -1}) al primer filtro.
+
+\subsubsection{Filtros intermedios (Procesos con $1 \leq \texttt{rank} < \texttt{size} - 1$)}
+Cada filtro intermedio tiene la responsabilidad de descartar números que no son primos. El primer número recibido por un filtro se considera su número primo característico (\texttt{primo}). 
+
+Los filtros reciben números desde el proceso anterior mediante \texttt{MPI\_Recv}. Si el número recibido no es divisible por \texttt{primo}, el filtro lo reenvía al siguiente filtro usando \texttt{MPI\_Send}. Si el filtro detecta la señal de terminación (\texttt{x = -1}), la propaga al siguiente proceso y termina su ejecución.
+
+Este diseño asegura que cada filtro actúe como un módulo de exclusión para números no primos, delegando la validación de números más grandes a los filtros siguientes.
+
+\subsubsection{Impresor de números primos (Último proceso)}
+El proceso con \texttt{rank = size - 1} es responsable de imprimir los números primos. Recibe números desde el último filtro intermedio y los imprime en pantalla. Al recibir la señal de terminación (\texttt{x = -1}), el impresor detiene su ejecución.
+
+\subsubsection{Finalización del programa}
+Todos los procesos llaman a \texttt{MPI\_Finalize} para limpiar el entorno de ejecución de MPI y asegurar una terminación ordenada.
+
 
 
 
@@ -225,7 +254,39 @@ Esta estructura asegura una distribución eficiente del trabajo entre los proces
 \lstinputlisting{../comandoEjecucion.txt}
 
 \subsection{Ejecución y/o salida }
-\lstinputlisting{../salida.txt}
+\subsubsection{Con 3 procesos}
+\lstinputlisting{../salida3.txt}
+
+\subsubsection{Con 4 procesos}
+\lstinputlisting{../salida4.txt}
+
+\subsubsection{Con 5 procesos}
+\lstinputlisting{../salida5.txt}
+
+\subsubsection{Con 10 procesos}
+\lstinputlisting{../salida10.txt}
+\subsubsection{Con 20 procesos}
+\lstinputlisting{../salida20.txt}
+
+\subsubsection{Justificación del comportamiento según el número de procesos}
+
+El comportamiento del programa varía significativamente dependiendo del número de procesos utilizados en la ejecución. Este fenómeno puede explicarse en términos de cómo los procesos filtran números no primos y cómo se organiza la comunicación entre ellos.
+
+\paragraph{Con un menor número de procesos (por ejemplo, 3):}
+Cuando el número de procesos es bajo, la cantidad de filtros disponibles es insuficiente para eliminar todos los números compuestos (no primos). Por ejemplo, con 3 procesos:
+\begin{itemize}
+    \item El primer proceso (\texttt{rank = 1}) filtra números divisibles por 2.
+    \item El segundo proceso (\texttt{rank = 2}) filtra números divisibles por 3.
+\end{itemize}
+Sin embargo, no hay suficientes procesos para filtrar números compuestos mayores, como los divisibles por 5, 7, etc. Como resultado, algunos números no primos pasan a través del sistema y son enviados al impresor. Esto genera una salida con más números, pero no todos son primos.
+
+\paragraph{Con un mayor número de procesos:}
+A medida que se incrementa el número de procesos, se añaden más filtros, cada uno dedicado a eliminar los números divisibles por un número primo específico. Por ejemplo:
+\begin{itemize}
+    \item Un proceso adicional (\texttt{rank = 3}) filtra los números divisibles por 5.
+    \item Otro proceso (\texttt{rank = 4}) filtra los números divisibles por 7.
+\end{itemize}
+Con más procesos, los números compuestos tienen más probabilidades de ser eliminados antes de llegar al impresor, lo que garantiza que la salida sea exclusivamente números primos. Sin embargo, este aumento de precisión también implica que se procesen menos números, ya que cada filtro elimina una mayor cantidad de candidatos.
 
 
 \subsection{Demostración Matemática de la Correctitud del Algoritmo}
@@ -284,6 +345,6 @@ El algoritmo implementado en MPI garantiza que:
     \item Ningún número compuesto es identificado como primo.
 \end{itemize}
 
-Esto demuestra matemáticamente que el algoritmo es correcto y cumple con los requisitos de la Criba de Eratóstenes para la identificación de números primos.
+Esto demuestra matemáticamente que el algoritmo es correcto y cumple con los requisitos de la Criba de Eratóstenes para la identificación de números primos, por lo tanto queda demostrado el algoritmo de la Criba de Eratóstenes.
 
 \end{document}
