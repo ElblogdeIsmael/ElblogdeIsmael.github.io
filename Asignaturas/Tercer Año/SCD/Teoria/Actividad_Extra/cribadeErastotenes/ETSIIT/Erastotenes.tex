@@ -184,43 +184,6 @@ La solución propuesta consiste en ejecutar el programa de la criba de Eratóste
 
 \lstinputlisting{../criba.cpp}
 
-
-
-% \subsection{Explicación detallada del código: Algoritmo de la Criba de Eratóstenes con MPI}
-
-% En esta implementación, utilizamos el modelo de programación paralelo de \textit{Message Passing Interface} (MPI) para distribuir el trabajo de la Criba de Eratóstenes entre varios procesos. La idea principal es dividir la tarea de identificar números primos en un rango determinado, permitiendo que cada proceso se encargue de una parte específica del cálculo. Siguiendo el esquema de la Figura 1.
-
-% \subsubsection{Descripción del Algoritmo}
-
-% El algoritmo se organiza en tres roles principales para los procesos:
-% \begin{itemize}
-%     \item \textbf{Proceso principal} (\texttt{rank == 0}): Este proceso es responsable de generar números naturales, comenzando desde el número 2, y enviarlos al primer proceso filtro (\texttt{rank == 1}). Los números se envían uno a uno utilizando \texttt{MPI\_Send}. Además, este proceso envía una señal de finalización (\texttt{-1}) cuando se ha alcanzado el rango máximo (en este caso, 100).
-%     \item \textbf{Procesos filtros intermedios} (\texttt{1 <= rank < size - 1}): Cada proceso filtro recibe números del proceso anterior y aplica un filtro basado en la divisibilidad por el número primo asociado a ese filtro. Los números no divisibles se envían al siguiente filtro, y el proceso finaliza cuando recibe la señal de terminación.
-%     \item \textbf{Proceso impresor} (\texttt{rank == size - 1}): Este proceso imprime los números primos recibidos. También maneja explícitamente los casos especiales del número 2 y 3, imprimiendo directamente que son primos al inicio del programa.
-% \end{itemize}
-
-% \subsubsection{Implementación}
-
-% La implementación comienza inicializando el entorno MPI con \texttt{MPI\_Init}. Luego, cada proceso determina su rol basándose en su rango (\texttt{rank}):
-
-% \begin{itemize}
-%     \item En el \textbf{proceso principal}, un bucle itera sobre números naturales, comenzando en 2. Cada número se envía al primer filtro mediante \texttt{MPI\_Send}. Cuando se supera el rango de números (100 en este caso), el proceso envía una señal de terminación (-1) y finaliza.
-%     \item Los \textbf{procesos filtros intermedios} comienzan recibiendo un número primo inicial, que se convierte en su referencia para filtrar. Posteriormente, filtran los números recibidos y envían los que no son divisibles al siguiente filtro o al proceso impresor. Cuando reciben la señal de terminación (-1), la propagan al siguiente proceso y finalizan.
-%     \item El \textbf{proceso impresor} recibe números desde el último filtro y los imprime como primos. Adicionalmente, este proceso imprime explícitamente los números 2 y 3 como primos al inicio, asegurando que no sean ignorados por los filtros.
-% \end{itemize}
-
-% Finalmente, el entorno MPI se finaliza utilizando \texttt{MPI\_Finalize}.
-
-% \subsubsection{Detalles de Implementación}
-
-% Para garantizar que los números 2 y 3 sean manejados adecuadamente:
-% \begin{itemize}
-%     \item El proceso impresor imprime explícitamente estos valores al inicio.
-%     \item En el proceso principal, los números 2 y 3 se envían al primer filtro y también directamente al impresor.
-% \end{itemize}
-
-% Esta estructura asegura una distribución eficiente del trabajo entre los procesos, con una adecuada coordinación entre ellos para identificar y reportar los números primos dentro del rango especificado.
-
 \subsection{Explicación detallada del código}
 
 El código presentado implementa la criba de Eratóstenes utilizando \textit{MPI} (Message Passing Interface) para calcular números primos de forma concurrente y distribuida. A continuación, se describen las funciones principales de cada bloque del programa:
