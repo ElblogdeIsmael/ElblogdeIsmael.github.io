@@ -1,240 +1,227 @@
-// -----------------------------------------------------------------------------
-//
-// Sistemas concurrentes y Distribuidos.
-// Práctica 3. Implementación de algoritmos distribuidos con MPI
-//
-// Archivo: prodcons2.cpp
-// Implementación del problema del productor-consumidor con
-// un proceso intermedio que gestiona un buffer finito y recibe peticiones
-// en orden arbitrario
-// (versión con un único productor y un único consumidor)
-//
-// Historial:
-// Actualizado a C++11 en Septiembre de 2017
-// -----------------------------------------------------------------------------
-
-#include <iostream>
-#include <thread> // this_thread::sleep_for
-#include <random> // dispositivos, generadores y distribuciones aleatorias
 #include <chrono> // duraciones (duration), unidades de tiempo
+#include <cstdlib>
+#include <iostream>
 #include <mpi.h>
+#include <random> // dispositivos, generadores y distribuciones aleatorias
+#include <thread> // this_thread::sleep_for
 
 using namespace std;
-using namespace std::this_thread ;
-using namespace std::chrono ;
+using namespace std::this_thread;
+using namespace std::chrono;
+
+#define TERM -1 // Valor especial para finalizar
 
 const int
-   num_items             = 20,
-   tam_vector            = 10,
-   n_p = 4,
-   n_c = 5,
-   num_procesos_esperado = n_p + n_c + 1,
-   k = num_items/n_p,
-   valor_especial        = -1; // apartado 2.2: valor especial para finalizar
+    etiq_prod = 1, // Etiqueta para mensajes de productores
+    etiq_cons = 2, // Etiqueta para mensajes de consumidores
+    num_prod = 4, // Número de productores
+    num_cons = 5, // Número de consumidores
+    id_ini_productores = 0, // ID inicial de los productores
+    id_ini_consumidores = num_prod + 1, // ID inicial de los consumidores
+    id_buffer = num_prod, // ID del buffer
+    num_procesos_esperado = num_prod + num_cons + 1, // Número total de procesos esperados
+    num_items = 20, // Número total de ítems a producir/consumir
+    tam_vector = 10; // Tamaño del buffer
 
-//variables para el test de produccion de valores
-int valores_producidos[n_p] = {0};
-int valores_consumidos [n_c] = {0};
-
-const int etiq_productor = 0, // etiqueta de productor
-    etiq_consumidor = 1; // etiqueta de consumidor
-   
-
-//**********************************************************************
-// plantilla de función para generar un entero aleatorio uniformemente
-// distribuido entre dos valores enteros, ambos incluidos
-// (ambos tienen que ser dos constantes, conocidas en tiempo de compilación)
-//----------------------------------------------------------------------
-
-template< int min, int max > int aleatorio()
-{
-  static default_random_engine generador( (random_device())() );
-  static uniform_int_distribution<int> distribucion_uniforme( min, max ) ;
-  return distribucion_uniforme( generador );
+/**
+ * @brief Función que produce un número aleatorio entre dos valores
+ * 
+ * @tparam min Valor mínimo. Constante conocida en tiempo de compilación
+ * @tparam max Valor máximo. Constante conocida en tiempo de compilación
+ */
+template <int min, int max> int aleatorio() {
+    static default_random_engine generador((random_device())());
+    static uniform_int_distribution<int> distribucion_uniforme(min, max);
+    return distribucion_uniforme(generador);
 }
 // ---------------------------------------------------------------------
-// producir produce un número aleatorio entre 0 y 9
-// y lleva espera aleatorio
-int producir(int numero_productor) {
-   int valor = aleatorio<0, 9>();
-   sleep_for(milliseconds(aleatorio<10, 100>()));
-   cout << "Productor " << numero_productor << " ha producido valor " << valor << endl << flush;
-   valores_producidos[numero_productor]++;
-   return valor;
+/**
+ * @brief Función que simula la producción de un valor entre 0 y 9
+ * 
+ * @note Duerme un tiempo aleatorio entre 10 y 100 milisegundos
+ * 
+ * @return int Valor producido
+ */
+int producir() {
+    sleep_for(milliseconds(aleatorio<10, 100>())); // Simula tiempo de producción
+    return aleatorio<0, 9>(); // Devuelve un valor aleatorio entre 0 y 9
 }
-// ---------------------------------------------------------------------
 
-void funcion_productor(int numero_productor) {
-   int peticion = 1;
-   for (int i = 0; i < k; i++) {
-      int valor_prod = producir(numero_productor);
-      MPI_Ssend(&peticion, 1, MPI_INT, n_p, etiq_productor, MPI_COMM_WORLD);
-      MPI_Ssend(&valor_prod, 1, MPI_INT, n_p, etiq_productor, MPI_COMM_WORLD);
-      cout << "Productor " << numero_productor << " envió valor " << valor_prod << endl << flush;
-   }
-   // apartado 2.2: enviar valor especial para finalizar
-   MPI_Ssend(&peticion, 1, MPI_INT, n_p, etiq_productor, MPI_COMM_WORLD);
-   MPI_Ssend(&valor_especial, 1, MPI_INT, n_p, etiq_productor, MPI_COMM_WORLD);
-   cout << "Productor " << numero_productor << " finaliza." << endl << flush;
-}
-// ---------------------------------------------------------------------
-
-void consumir( int valor_cons )
-{
-   // espera bloqueada
-   sleep_for( milliseconds( aleatorio<110,200>()) );
-   cout << "Consumidor ha consumido valor " << valor_cons << endl << flush ;
-}
-// ---------------------------------------------------------------------
-
-void funcion_consumidor(int numero_consumidor)
-{
-   int         peticion = 1,
-               valor_rec;
-   MPI_Status  estado ;
-
-   while (true) // apartado 2.2: cambiar a bucle infinito
-   {
-      MPI_Ssend( &peticion,  1, MPI_INT, n_p, etiq_consumidor, MPI_COMM_WORLD); //n_p hace referencia al id de buffer
-      MPI_Recv ( &valor_rec, 1, MPI_INT, n_p, etiq_consumidor, MPI_COMM_WORLD,&estado );
-      if (valor_rec == valor_especial) { // apartado 2.2: verificar valor especial
-         cout << "Consumidor " << numero_consumidor << " finaliza." << endl << flush;
-         break;
-      }
-      cout << "Consumidor con rol " << numero_consumidor << " ha recibido valor " << valor_rec << endl << flush ;
-      consumir( valor_rec );
-      valores_consumidos[numero_consumidor]++;
-   }
-}
-// ---------------------------------------------------------------------
-
-void funcion_buffer()
-{
-   int        buffer[tam_vector],      // buffer con celdas ocupadas y vacías
-              valor,                   // valor recibido o enviado
-              primera_libre       = 0, // índice de primera celda libre
-              primera_ocupada     = 0, // índice de primera celda ocupada
-              num_celdas_ocupadas = 0, // número de celdas ocupadas
-              ultimo_valor        = -2; // apartado 2.2: último valor recibido
-   MPI_Status estado ;                 // metadatos del mensaje recibido
-
-   int etiq_aceptable; // etiqueta aceptable, almacena el valor de la etiqueta del mensaje recibido
-   int peticion_productor = 0;
-   bool finalizar = false; // apartado 2.2: bandera para finalizar
-
-   while (!finalizar) // apartado 2.2: cambiar a bucle infinito
-   {
-      etiq_aceptable = (num_celdas_ocupadas == 0) ? etiq_productor
-                        : (num_celdas_ocupadas == tam_vector) ? etiq_consumidor
-                        : MPI_ANY_TAG;
-
-      // 2. recibir un mensaje del emisor o emisores aceptables
-      
-      MPI_Recv( &valor, 1, MPI_INT, MPI_ANY_SOURCE, etiq_aceptable, MPI_COMM_WORLD, &estado );
-
-      // 3. procesar el mensaje recibido
-
-      switch( estado.MPI_TAG ) // leer emisor del mensaje en metadatos
-      {
-         case etiq_productor: // si ha sido el productor: insertar en buffer
-            MPI_Recv( &peticion_productor, 1, MPI_INT, MPI_ANY_SOURCE, etiq_productor, MPI_COMM_WORLD, &estado );
-            if (valor == valor_especial) { // apartado 2.2: verificar valor especial
-               finalizar = true;
-               break;
-            }
-            buffer[primera_libre] = valor ;
-            primera_libre = (primera_libre+1) % tam_vector ;
-            num_celdas_ocupadas++ ;
-            cout << "Buffer ha recibido valor " << valor << endl ;
-            if (valor == ultimo_valor) { // apartado 2.2: verificar valores consecutivos
-               finalizar = true;
-            }
-            ultimo_valor = valor;
+/**
+ * @brief Función que simula la producción de valores por un productor
+ * 
+ * @param orden Orden del productor (global)
+ */
+void funcion_productor(int orden) {
+    for (unsigned int i = 0; i < num_items / num_prod; i++) {
+        // producir valor
+        int valor_prod = producir();
+        int rec;
+        MPI_Status estado;
+        // enviar valor
+        cout << "Productor va a enviar valor " << valor_prod << endl << flush;
+        MPI_Ssend(&valor_prod, 1, MPI_INT, id_buffer, etiq_prod, MPI_COMM_WORLD); // Enviar valor al buffer
+        MPI_Recv(&rec, 1, MPI_INT, id_buffer, 0, MPI_COMM_WORLD, &estado); // Recibir confirmación del buffer
+        if (rec == TERM) { // Si recibe el valor especial, termina
             break;
+        }
+        MPI_Ssend(&valor_prod, 1, MPI_INT, id_buffer, 0, MPI_COMM_WORLD); // Enviar valor al buffer
+    }
+    cout << "Termina productor " << orden << endl; // Mensaje de finalización del productor
+}
+// ---------------------------------------------------------------------
 
-         case etiq_consumidor: // si ha sido el consumidor: extraer y enviarle
-            valor = buffer[primera_ocupada] ;
-            primera_ocupada = (primera_ocupada+1) % tam_vector ;
-            num_celdas_ocupadas-- ;
-            cout << "Buffer va a enviar valor " << valor << endl ;
-            MPI_Ssend( &valor, 1, MPI_INT, estado.MPI_SOURCE , etiq_consumidor, MPI_COMM_WORLD);
+/**
+ * @brief Función que simula la consumición de un valor
+ * 
+ * @param valor_cons Valor a consumir
+ */
+void consumir(int valor_cons) {
+    // espera bloqueada
+    sleep_for(milliseconds(aleatorio<110, 200>())); // Simula tiempo de consumo
+    cout << "Consumidor ha consumido valor " << valor_cons << endl << flush;
+}
+// ---------------------------------------------------------------------
+
+/**
+ * @brief Función que simula la consumición de valores por un consumidor
+ * 
+ * @param orden Orden del consumidor (global)
+ */
+void funcion_consumidor(int orden) {
+    int peticion, valor_rec = 1;
+    MPI_Status estado;
+
+    for (unsigned int i = 0; i < num_items / num_cons; i++) {
+        MPI_Ssend(&peticion, 1, MPI_INT, id_buffer, etiq_cons, MPI_COMM_WORLD); // Enviar petición al buffer
+        MPI_Recv(&valor_rec, 1, MPI_INT, id_buffer, 0, MPI_COMM_WORLD, &estado); // Recibir valor del buffer
+        if (valor_rec == TERM) { // Si recibe el valor especial, termina
             break;
-      }
-   }
-
-   // apartado 2.2: notificar a todos los productores y consumidores para finalizar
-   for (int i = 0; i < n_p; i++) {
-      MPI_Ssend(&peticion_productor, 1, MPI_INT, i, etiq_productor, MPI_COMM_WORLD);
-      MPI_Ssend(&valor_especial, 1, MPI_INT, i, etiq_productor, MPI_COMM_WORLD);
-   }
-   for (int i = 0; i < n_c; i++) {
-      MPI_Ssend(&peticion_productor, 1, MPI_INT, n_p + 1 + i, etiq_consumidor, MPI_COMM_WORLD);
-      MPI_Ssend(&valor_especial, 1, MPI_INT, n_p + 1 + i, etiq_consumidor, MPI_COMM_WORLD);
-   }
-   cout << "Buffer finaliza." << endl << flush;
+        }
+        cout << "Consumidor ha recibido valor " << valor_rec << endl << flush;
+        consumir(valor_rec); // Consumir el valor recibido
+    }
+    cout << "Termina consumidor " << orden << endl; // Mensaje de finalización del consumidor
 }
 
-//Función extra para verificar que cada productor ha producido la cantidad correcta de ítems
-void test_produccion() {
-   
-   for (int i = 0; i < n_p; i++)
-   {
-      if(valores_producidos[i] == k){
-         cout << endl << "----------------------------------------------------------" << endl;
-         cout << "| Productor " << i << " ha producido la cantidad correcta de ítems |" << endl;
-         cout << "----------------------------------------------------------" << endl;
-      }      
-   }
+/**
+ * @brief Función que simula un buffer de tamaño tam_vector
+ */
+void funcion_buffer() {
+    int buffer[tam_vector],      // buffer con celdas ocupadas y vacías
+        valor,                   // valor recibido o enviado
+        primera_libre = 0,       // índice de primera celda libre
+        primera_ocupada = 0,     // índice de primera celda ocupada
+        num_celdas_ocupadas = 0; // número de celdas ocupadas
+    MPI_Status estado;           // metadatos del mensaje recibido
+    bool terminar = false;       // bandera para finalizar
 
-   for (int i = 0; i < n_c; i++)
-   {
-      if (valores_consumidos[i] == num_items/n_c)
-      {
-         cout << endl << "----------------------------------------------------------" << endl;
-         cout << "| Consumidor " << i << " ha consumido la cantidad correcta de ítems |" << endl;
-         cout << "----------------------------------------------------------" << endl;
-      }    
-   }
-      
-   
-   
-   
+    for (unsigned int i = 0; i < num_items * 2 && !terminar; i++) {
+        // 1. determinar si puede enviar solo prod., solo cons, o todos
+        int etiq;
+
+        if (num_celdas_ocupadas == 0)               // si buffer vacío
+            // solo prods
+            etiq = etiq_prod;
+        else if (num_celdas_ocupadas == tam_vector) // si buffer lleno
+            // solo cons
+            etiq = etiq_cons;
+        else                                        // si no vacío ni lleno
+            // cualquiera
+            etiq = MPI_ANY_TAG;
+
+        // 2. recibir un mensaje del emisor o emisores aceptables
+
+        MPI_Recv(&valor, 1, MPI_INT, MPI_ANY_SOURCE, etiq, MPI_COMM_WORLD,
+                 &estado); // Recibir mensaje del productor o consumidor
+
+        // 3. procesar el mensaje recibido
+
+        switch (estado.MPI_TAG) { // leer emisor del mensaje en metadatos
+
+            case etiq_prod: // si ha sido el productor: insertar en buffer
+                // Da permiso
+                MPI_Ssend(&valor, 1, MPI_INT, estado.MPI_SOURCE, 0, MPI_COMM_WORLD); // Enviar confirmación al productor
+                MPI_Recv(&valor, 1, MPI_INT, estado.MPI_SOURCE, 0, MPI_COMM_WORLD, &estado); // Recibir valor del productor
+
+                // Dos valores iguales consecutivos recibidos
+                if (valor == buffer[(primera_libre - 1 + tam_vector) % tam_vector]) {
+                    cout << "Empezamos a terminar el programa" << endl;
+                    terminar = true;
+                    int aux;
+                    MPI_Request request;
+                    // terminar procesos productores
+                    for (int i = 0; i < id_buffer; i++) {
+                        MPI_Irecv(&aux, 1, MPI_INT, i, MPI_ANY_TAG, MPI_COMM_WORLD, &request); // Recibir cualquier mensaje pendiente
+                        MPI_Irecv(&aux, 1, MPI_INT, i, MPI_ANY_TAG, MPI_COMM_WORLD, &request); // Recibir cualquier mensaje pendiente
+                        aux = TERM;
+                        MPI_Ssend(&aux, 1, MPI_INT, i, 0, MPI_COMM_WORLD); // Enviar valor especial para finalizar
+                    }
+
+                    // terminar procesos consumidores
+                    for (int i = id_buffer + 1; i < num_procesos_esperado; i++) {
+                        MPI_Irecv(&aux, 1, MPI_INT, i, MPI_ANY_TAG, MPI_COMM_WORLD, &request); // Recibir cualquier mensaje pendiente
+                        aux = TERM;
+                        MPI_Ssend(&aux, 1, MPI_INT, i, 0, MPI_COMM_WORLD); // Enviar valor especial para finalizar
+                    }
+                }
+                if (!terminar) {
+                    buffer[primera_libre] = valor; // Insertar valor en el buffer
+                    primera_libre = (primera_libre + 1) % tam_vector; // Actualizar índice de primera celda libre
+                    num_celdas_ocupadas++; // Incrementar número de celdas ocupadas
+                    cout << "Buffer ha recibido valor " << valor << endl;
+                }
+                break;
+
+            case etiq_cons: // si ha sido el consumidor: extraer y enviarle
+                if (!terminar) {
+                    valor = buffer[primera_ocupada]; // Extraer valor del buffer
+                    primera_ocupada = (primera_ocupada + 1) % tam_vector; // Actualizar índice de primera celda ocupada
+                    num_celdas_ocupadas--; // Decrementar número de celdas ocupadas
+                    cout << "Buffer va a enviar valor " << valor << endl;
+                    MPI_Ssend(&valor, 1, MPI_INT, estado.MPI_SOURCE, 0, MPI_COMM_WORLD); // Enviar valor al consumidor
+                }
+                break;
+        }
+    }
+    cout << "Termina buffer" << endl; // Mensaje de finalización del buffer
 }
-
 
 // ---------------------------------------------------------------------
-int main( int argc, char *argv[] )
-{
-   int id_propio, num_procesos_actual;
 
-   // inicializar MPI, leer identif. de proceso y número de procesos
-   MPI_Init( &argc, &argv );
-   MPI_Comm_rank( MPI_COMM_WORLD, &id_propio );
-   MPI_Comm_size( MPI_COMM_WORLD, &num_procesos_actual );
+int main(int argc, char *argv[]) {
+    int id_propio, num_procesos_actual;
 
-   if(num_procesos_esperado == num_procesos_actual) {
-      if(id_propio < n_p) {
-         funcion_productor(id_propio);
-         
-      }
-      else if (id_propio == n_p) {
-         funcion_buffer();
+    if (num_items % num_prod != 0 || num_items % num_cons != 0) {
+        cout << "Numero de productores y consumidores no valido" << endl;
+        exit(1);
+    }
 
-      }
-      else {
-         funcion_consumidor(id_propio - n_p - 1); // debemos de restarlo para que coincida con el numero del proceso consumidor
-      }
-   } else {
-      if ( id_propio == 0 ) // solo el primero escribe error, indep. del rol
-      { cout << "el número de procesos esperados es:    " << num_procesos_esperado << endl
-            << "el número de procesos en ejecución es: " << num_procesos_actual << endl
-            << "(programa abortado)" << endl ;
-      }
-   }
+    // inicializar MPI, leer identif. de proceso y número de procesos
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &id_propio);
+    MPI_Comm_size(MPI_COMM_WORLD, &num_procesos_actual);
 
-   // al terminar el proceso, finalizar MPI
-   MPI_Finalize( );
-   
-   test_produccion();
-   return 0;
+    if (num_procesos_esperado == num_procesos_actual) {
+        // ejecutar la operación apropiada a 'id_propio'
+        if (id_ini_productores <= id_propio && id_propio < id_ini_productores + num_prod)
+            funcion_productor(id_propio - id_ini_productores); // Ejecutar función productor
+        else if (id_propio == id_buffer)
+            funcion_buffer(); // Ejecutar función buffer
+        else
+            funcion_consumidor(id_propio - id_ini_consumidores); // Ejecutar función consumidor
+    } else {
+        if (id_propio == 0) // solo el primero escribe error, indep. del rol
+        {
+            cout << "el número de procesos esperados es:    "
+                 << num_procesos_esperado << endl
+                 << "el número de procesos en ejecución es: "
+                 << num_procesos_actual << endl
+                 << "(programa abortado)" << endl;
+        }
+    }
+
+    // al terminar el proceso, finalizar MPI
+    MPI_Finalize();
+    return 0;
 }
