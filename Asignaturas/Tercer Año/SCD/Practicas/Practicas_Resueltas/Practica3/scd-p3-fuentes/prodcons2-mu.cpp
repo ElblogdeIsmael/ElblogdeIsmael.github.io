@@ -89,7 +89,7 @@ void funcion_consumidor(int numero_consumidor)
 
    for( unsigned int i=0 ; i < num_items/n_c; i++ )
    {
-      MPI_Ssend( &peticion,  1, MPI_INT, n_p, etiq_consumidor, MPI_COMM_WORLD);
+      MPI_Ssend( &peticion,  1, MPI_INT, n_p, etiq_consumidor, MPI_COMM_WORLD); //n_p hace referencia al id de buffer
       MPI_Recv ( &valor_rec, 1, MPI_INT, n_p, etiq_consumidor, MPI_COMM_WORLD,&estado );
       cout << "Consumidor con rol " << numero_consumidor << " ha recibido valor " << valor_rec << endl << flush ;
       consumir( valor_rec );
@@ -141,7 +141,7 @@ void funcion_buffer()
    }
 }
 
-//Función extra para verificar que cada productor produjo la cantidad correcta de ítems
+//Función extra para verificar que cada productor ha producido la cantidad correcta de ítems
 void test_produccion() {
    
    for (int i = 0; i < n_p; i++)
