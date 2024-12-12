@@ -97,7 +97,7 @@
     \large Universidad de Granada (UGR)\\[1cm]
 }
 \author{\textbf{Autor:} Ismael Sallami Moreno}
-\date{\textbf{Asignatura:} Examenes Anteriores del 2º Parcial SCD}
+\date{\textbf{Asignatura:} 2º Parcial SCD}
 
 % Configuración del fondo
 \backgroundsetup{
@@ -129,8 +129,9 @@
 \tableofcontents
 \newpage
 
-\section{Enunciado Carlos Ureña 2014-2015}  
+\section{Examen Carlos Ureña 2014-2015}  
 
+\subsection{Enunciado}
 \noindent
 \textbf{Asignatura:} Sistemas Concurrentes y Distribuidos. \\
 \textbf{Año Académico:} 2014/2015. \\
@@ -140,7 +141,7 @@
 \textbf{Fecha:} 12 de enero de 2015. \\
 
 
-\subsection{Ejercicio 1. Corrección de errores (6 puntos)}
+\subsubsection{Ejercicio 1. Corrección de errores (6 puntos)}
 
 Considerar el código del archivo disponible en la subsection de plantilla de este documento o \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/SCD/Examenes/SegundoParcial/ETSIIT/code/plantilla.cpp}{aquí}, que intenta plantear una solución al problema de la cena de los filósofos con camarero. Hay diversos errores en el código proporcionado que deberás solucionar:
 \begin{enumerate}
@@ -156,7 +157,7 @@ Considerar el código del archivo disponible en la subsection de plantilla de es
 
 % En cuanto al diseño, el error en la salida está en que ningún filósofo puede levantarse de la mesa cuando termina de comer. Debe haber algún fallo al enviar el mensaje al camarero para solicitar levantarse. Este se encuentra en la línea 101, en el paso del mensaje al camarero para solicitar levantarse, el tag del mensaje es el de sentarse (\texttt{TAG\_SENTARSE}), en lugar del de levantarse (\texttt{TAG\_LEVANTARSE}).
 
-\subsection{Ejercicio 2. Problema de múltiples Productores-Consumidores con Paso de Mensajes (4 puntos)}
+\subsubsection{Ejercicio 2. Problema de múltiples Productores-Consumidores con Paso de Mensajes (4 puntos)}
 
 Partiendo del algoritmo desarrollado durante la Práctica 3 para resolver el problema de múltiples Productores-Consumidores usando paso de mensajes MPI, se pide realizar los siguientes cambios:
 \begin{itemize}
@@ -170,15 +171,15 @@ Realiza los cambios necesarios para que, en el caso de que en el buffer se almac
     \item Implementa esta condición de forma que cuando cualquier proceso vaya a finalizar, imprima un mensaje en pantalla informando de ello.
 \end{itemize}
 
-\subsection{Plantilla}
+\subsubsection{Plantilla}
 
-\lstinputlisting[style=customcpp]{code/plantilla.cpp}
+\lstinputlisting[style=customcpp]{code/ExamenCarlos/plantilla.cpp}
 % iconv -f ISO-8859-1 -t UTF-8 plantilla.cpp -o plantilla_utf8.cpp
 
 
-\section{Solución Carlos Ureña 2014-2015}
+\subsection{Solución Carlos Ureña 2014-2015}
 
-\subsection*{Ejercicio 1}
+\subsubsection*{Ejercicio 1}
 \begin{itemize}
     \item Errores:
     \begin{itemize}
@@ -193,10 +194,10 @@ Realiza los cambios necesarios para que, en el caso de que en el buffer se almac
         \item además, debemos de cambiar la asignación de los tenedores en la línea 68 y 69, debido a que la presente no es coherente ni consistente desembocando en un error en el que varios filósofos quieren coger el mismo tenedor.
     \end{itemize}
 \end{itemize}
-\lstinputlisting[style=customcpp]{code/ejercicio.cpp}
+\lstinputlisting[style=customcpp]{code/ExamenCarlos/ejercicio.cpp}
 La solución en código se encuentra \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/SCD/Examenes/SegundoParcial/ETSIIT/code/ejercicio.cpp}{aqui}.
 
-\subsection*{Ejercicio 2}
+\subsubsection*{Ejercicio 2}
 
 En la resolución de este ejercicio usamos esta \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/SCD/Examenes/SegundoParcial/ETSIIT/code/prodcons2-muPlantilla.cpp}{(plantilla)}(pincha en plantilla para acceder a ella).
 
@@ -208,9 +209,118 @@ En la resolución de este ejercicio usamos esta \href{https://github.com/Elblogd
 
 Para la solución del apartado 2.2 revisa este código donde los comentarios \textbf{apartado2.2} reflejan los cambios que se han realizado.
 
-\lstinputlisting[style=customcpp]{code/prodcons2-mu.cpp}
+\lstinputlisting[style=customcpp]{code/ExamenCarlos/prodcons2-mu.cpp}
 Pincha \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/SCD/Examenes/SegundoParcial/ETSIIT/code/prodcons2-mu.cpp}{aqui} para acceder al fichero.
 
 
+\section{Examen de Mario Bros con Yoshi como NPC}
+
+\subsection{Enunciado}
+
+Se pide resolver el siguiente ejercicio utilizando directivas MPI vistas en clase. El juego consiste en comer tantas tartas como sea posible. El que más kg de tartas haya comido, gana. Contaremos con las siguientes restricciones:
+
+\begin{itemize}
+    \item Habrá solamente dos jugadores, Mario y Peach.
+    \item Habrá un NPC, Yoshi, que será el árbitro.
+    \item El proceso Yoshi se encargará:
+    \begin{itemize}
+        \item Por un lado, de proveer tartas a cada equipo. Repondrá un máximo de x veces.
+        \begin{itemize}
+            \item Cada vez que repone, decide si provee de 1 o 2 tartas a la vez. Creará un vector con 1 o 2 elementos.
+            \item Cada tarta tendrá un peso asociado que será también aleatorio entre 1 y 10 kg. Un vector [1,10] indicará el peso mínimo y máximo de las tartas.
+            \item Mostrará cuántas tartas va a reponer y a qué equipo.
+        \end{itemize}
+        \item Por otro lado, recibirá la suma de los kg que cada equipo se ha comido en cada tanda. Para cada tanda servida:
+        \begin{itemize}
+            \item Comparará quién ha comido más kg de tarta en dicha tanda.
+            \item Sumará 1 punto al equipo que más kg haya comido.
+        \end{itemize}
+        \item Finalmente, comparará los puntos de ambos equipos y proclamará vencedor al que más kg de tarta comió.
+    \end{itemize}
+    \item Los procesos Mario y Peach realizarán las siguientes operaciones:
+    \begin{itemize}
+        \item Recibirán las tartas que se van a comer.
+        \item Mostrarán las tartas que han recibido y sus pesos.
+        \item Sumarán el peso de cada tarta y aleatoriamente se comerán una porción.
+        \item La cantidad que se han comido se la notificarán a Yoshi.
+    \end{itemize}
+    \item Mientras haya envíos que hacer, se han de poder realizar, evitando que haya ningún tipo de bloqueo. Es decir, Yoshi podrá reponer tartas sin tener que sufrir ningún tipo de bloqueo por otras operaciones (a excepción de retrasos aleatorios).
+    \item Se han de incluir retrasos aleatorios.
+\end{itemize}
+%enunciado
+
+\subsection{Solución}
+\lstinputlisting[style=customcpp]{code/ExamenYoshi/Solucion.cpp}
+
+\section{Examen de Consumidores (valores pares e impares)}
+
+\subsection{Enunciado}
+%enunciado
+Se pide modificar la solución al problema de múltiples productores y consumidores realizada en clase utilizando directivas MPI, de forma que:
+
+\begin{itemize}
+    \item El número de productores sea 3 (y que pueda variar fácilmente).
+    \item El número de consumidores sea 2, de forma que:
+    \begin{itemize}
+        \item Habrá un consumidor que solo pueda consumir los valores pares.
+        \item El otro consumidor solo podrá consumir los valores impares.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Solución}
+\subsubsection{Partimos de la plantilla}
+\lstinputlisting[style=customcpp]{code/ExamenConsumidoresParesImpares/prodcons2-mu.cpp}
+\subsubsection{Solución}
+\lstinputlisting[style=customcpp]{code/ExamenConsumidoresParesImpares/prodcons2-muSolucion.cpp}
+
+\section{Examen de modificar camarero y filósofos}
+\subsection{Enunciado}
+
+El archivo plantilla proporcionado contiene una solución básica al problema de los filósofos con camarero. En esta solución, el camarero se encarga de controlar el acceso a la mesa, permitiendo que se sienten a la mesa un máximo de 4 filósofos. Hay 5 filósofos.
+
+Modificar este archivo como sigue:
+
+\begin{itemize}
+    \item El filósofo 4, cuyo rango es 8, tendrá un comportamiento algo diferente del resto. El filósofo 4 no pide ni suelta ningún tenedor ya que come con las manos. No obstante, este filósofo sí debe pedir permiso para sentarse y levantarse al camarero.
+    \item Como el filósofo 4 no puede comer si no se siente muy acompañado, el camarero solo permite que se siente cuando hay 4 filósofos sentados en ella.
+    \item El camarero además no permite levantarse a ninguno de ellos mientras está comiendo el filósofo 4, para que se sienta acompañado.
+    \item Como ahora ya no hay interbloqueo, podría haber 5 sentados en la mesa. Han de usarse unas etiquetas especiales para el filósofo 4.
+\end{itemize}
+
+El camarero deberá, en un bucle infinito:
+
+\begin{itemize}
+    \item Paso 1 (Usar Iprobe)
+    \begin{itemize}
+        \item IF (hay menos de 4 sentados)
+        \begin{itemize}
+            \item Sondeo en un bucle de las peticiones de sentarse o levantarse de cualquier filósofo distinto al 4, hasta detectar una.
+            \item Recibe el primer mensaje detectado.
+        \end{itemize}
+        \item ELSE IF (hay 4)
+        \begin{itemize}
+            \item Sondeo en un bucle de las peticiones de levantarse de los filósofos distintos al 4 y de sentarse del 4, hasta detectar una.
+            \item Recibe el primer mensaje detectado.
+        \end{itemize}
+        \item ELSE
+        \begin{itemize}
+            \item Recibe la petición de levantarse del filósofo 4.
+        \end{itemize}
+    \end{itemize}
+    \item Paso 2
+    \begin{itemize}
+        \item Actualiza el número de sentados (en función de la etiqueta recibida).
+    \end{itemize}
+\end{itemize}
+%enunciado
+
+\subsection{Solución}
+\subsubsection{Partimos de la plantilla}
+\lstinputlisting[style=customcpp]{code/ExamenCamarero/plantilla.cpp}
+\subsubsection{Solución}
+\lstinputlisting[style=customcpp]{code/ExamenCamarero/Solucion.cpp}
+
+\section{Materiles}
+Los materiales se encuentran en mi página web (pincha \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/Asignaturas/Tercer%20A%C3%B1o/SCD/Examenes/SegundoParcial/ETSIIT/code}{aqui}.)
 
 \end{document}
