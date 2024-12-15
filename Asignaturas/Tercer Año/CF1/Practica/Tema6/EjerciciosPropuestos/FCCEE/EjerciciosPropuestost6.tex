@@ -140,22 +140,25 @@
 \newcommand{\cursiva}[1]{\textit{#1}}
 \newcommand{\negrita}[1]{\textbf{#1}}
 %comandos extra
-% \newcommand{\cuenta2800}{2800. Amortización acumulada de investigación}
-% \newcommand{\cuenta2801}{2801. Amortización acumulada de desarrollo}
-% \newcommand{\cuenta2802}{2802. Amortización acumulada de concesiones administrativas}
-% \newcommand{\cuenta2803}{2803. Amortización acumulada de propiedad industrial}
-% \newcommand{\cuenta2805}{2805. Amortización acumulada de derechos de traspaso}
-% \newcommand{\cuenta2806}{2806. Amortización acumulada de aplicaciones informáticas}
-% \newcommand{\cuenta2811}{2811. Amortización acumulada de construcciones}
-% \newcommand{\cuenta2812}{2812. Amortización acumulada de instalaciones técnicas}
-% \newcommand{\cuenta2813}{2813. Amortización acumulada de maquinaria}
-% \newcommand{\cuenta2814}{2814. Amortización acumulada de utillaje}
-% \newcommand{\cuenta2815}{2815. Amortización acumulada de otras instalaciones}
-% \newcommand{\cuenta2816}{2816. Amortización acumulada de mobiliario}
-% \newcommand{\cuenta2817}{2817. Amortización acumulada de equipos para procesos de información}
-% \newcommand{\cuenta2818}{2818. Amortización acumulada de elementos de transporte}
-% \newcommand{\cuenta2819}{2819. Amortización acumulada de otro inmovilizado material}
-% \newcommand{\cuenta282}{282. Amortización acumulada de las inversiones inmobiliarias}
+\newcommand{\cuenta}[1]{
+    \ifnum#1=2800 2800. Amortización acumulada de investigación\fi
+    \ifnum#1=2801 2801. Amortización acumulada de desarrollo\fi
+    \ifnum#1=2802 2802. Amortización acumulada de concesiones administrativas\fi
+    \ifnum#1=2803 2803. Amortización acumulada de propiedad industrial\fi
+    \ifnum#1=2804 2804. Amortización acumulada de fondo de comercio\fi
+    \ifnum#1=2805 2805. Amortización acumulada de derechos de traspaso\fi
+    \ifnum#1=2806 2806. Amortización acumulada de aplicaciones informáticas\fi
+    \ifnum#1=2811 2811. Amortización acumulada de construcciones\fi
+    \ifnum#1=2812 2812. Amortización acumulada de instalaciones técnicas\fi
+    \ifnum#1=2813 2813. Amortización acumulada de maquinaria\fi
+    \ifnum#1=2814 2814. Amortización acumulada de utillaje\fi
+    \ifnum#1=2815 2815. Amortización acumulada de otras instalaciones\fi
+    \ifnum#1=2816 2816. Amortización acumulada de mobiliario\fi
+    \ifnum#1=2817 2817. Amortización acumulada de equipos para procesos de información\fi
+    \ifnum#1=2818 2818. Amortización acumulada de elementos de transporte\fi
+    \ifnum#1=2819 2819. Amortización acumulada de otro inmovilizado material\fi
+    \ifnum#1=282 282. Amortización acumulada de las inversiones inmobiliarias\fi
+}
 
 
 % Configuración de lstlisting
@@ -413,6 +416,124 @@
     \hline
     \end{tabular}
 \end{table}
+
+\section{Ejercicio 3}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Reconocimiento contable incial de al adquisición de la UGE} & \textbf{HABER} \\
+    \hline
+    900.000& 213 maquinaria& \\
+    \hline
+    300.000& 216 mobiliario& \\
+    \hline
+    & 400 Proveedores & 200.000\\
+    \hline
+    & \bancos & 1.100.000\\
+    \hline
+    100.000& 204 Fondo de Comercio& \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item \valorrecuperable 1.000.000
+    \item Valor contable de la UGE:
+    \begin{itemize}
+        \item Fondo de comercio = \cuotaamort \myequation{100.000}{10} = 10.000 \flechita \VC 100.000 - 10.000 = 90.000
+        \item Proveedores \flechita nada porque se supone que ya se pagó en Febrero.
+    \end{itemize}
+    \item TOTAL = 810.000 + 270.000 + 90.000 = 1.170.000
+    \item Deterioro = 1.170.000 - 1.000.000 = 170.000
+    \item No hay suficiente fondo de comercio para cubrir el deterioro, por lo que se reparte entre los otros dos activos. (siguiente apartado)
+\end{itemize}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Deterioro del valor del fonde de comercio} & \textbf{HABER} \\
+    \hline
+    10.000& \cuenta{2804}& \\
+    \hline
+    90.000& 690 Pérdidas por deterioro del inmovilizado intangible& \\
+    \hline
+    & 204 Fondo de comercio& 100.000\\
+    \hline
+    \end{tabular}
+\end{table}
+
+Como no ha bastado con el fonde de comercio, debemos de calcular la proporción que asume cada inmobilizado.
+\begin{itemize}
+    \item Maquinaria = \cuotaamort \myequation{900.000}{10} = 90.000 \flechita \VC 900.000 - 90.000 = 810.000
+    \item Mobiliario = \cuotaamort \myequation{300.000}{10} = 30.000 \flechita \VC 300.000 - 30.000 = 270.000
+    \item REPARTO :
+    \begin{itemize}
+        \item Maquinaria = 810.000/1.080.000 = 0.75*100 = 75\%
+        \item Mobiliario = 270.000/1.080.000 = 0.25*100 = 25\%
+    \end{itemize}
+    \item Parte monetaria que cubrimos con cada uno de los otros dos activos:
+    \begin{itemize}
+        \item Maquinaria = 170.000 * 0.75 = 127.500 
+        \item Mobiliario = 170.000 * 0.25 = 42.500 
+    \end{itemize}
+\end{itemize}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Deterioro del valor de la maquinaria y inmobiliario} & \textbf{HABER} \\
+    \hline
+    & 2913 Deterioro de valor de maquinaria& 127.500\\
+    \hline
+    & 2916 Deterioro de valor de inmobiliario& 452.500\\
+    \hline
+    170.000& Pérdidas por deterioro del inmovilizado material& \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item Nos olvidamos del fondo de comercio, ya que ya le hemos dado de baja.
+    \item Debemos de calcular nuevos valores de cuotas de amortización, debido a las pérdidas anteriores.
+    \begin{itemize}
+        \item Maquinaria
+        \begin{itemize}
+            \item \VC 900.000 - 90.000 - 127.500 = 682.500
+            \item los años restantes son: 9
+            \item \cuotaamort \myequation{682.500}{9} = 75.833
+            \item a \fec X2 maquinaria tiene un \VC de 682.500 - 75.833 = 606.667  
+        \end{itemize}
+        \item Mobiliario
+        \begin{itemize}
+            \item \VC 300.000 - 30.000 - 42.500 = 227.500
+            \item los años restantes son: 9
+            \item \cuotaamort \myequation{227.500}{9} = 25.277
+            \item a \fec X2 mobiliario tiene un \VC de 227.500 - 25.277 = 202.223
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Amortizaciones a \fec X2} & \textbf{HABER} \\
+    \hline
+    & 2813 AA de maquinaria& 75.833\\
+    \hline
+    & 2816 AA de mobiliario& 25.277\\
+    \hline
+    25.277+75.833=101110& 280 Amortización del Inmovilizado Material& \\
+    \hline
+    \end{tabular}
+\end{table}
+
+
 
 
 
