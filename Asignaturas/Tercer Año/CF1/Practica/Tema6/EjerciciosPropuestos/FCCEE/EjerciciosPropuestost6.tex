@@ -158,6 +158,8 @@
     \ifnum#1=2818 2818. Amortización acumulada de elementos de transporte\fi
     \ifnum#1=2819 2819. Amortización acumulada de otro inmovilizado material\fi
     \ifnum#1=282 282. Amortización acumulada de las inversiones inmobiliarias\fi
+    \ifnum#1=280 280. Amortización acumulada del inmovilizado intagible\fi
+    \ifnum#1=281 281. Amortización acumulada del inmovilizado material\fi
 }
 
 
@@ -393,7 +395,7 @@
     \hline
     Lo restante = 7.000& 203 Propiedad Industrial& \\
     \hline
-    500 (2018)+1.500(2019)& 2801 Amortización acumulada de desarollo& \\
+    $500 (2018)+1500(2019)$& 2801 Amortización acumulada de desarollo& \\
     \hline
     & \bancos & 1.000\\
     \hline
@@ -466,7 +468,7 @@
     \end{tabular}
 \end{table}
 
-Como no ha bastado con el fonde de comercio, debemos de calcular la proporción que asume cada inmobilizado.
+Como no ha bastado con el fonde de comercio, debemos de calcular la proporción que asume cada inmovilizado.
 \begin{itemize}
     \item Maquinaria = \cuotaamort \myequation{900.000}{10} = 90.000 \flechita \VC 900.000 - 90.000 = 810.000
     \item Mobiliario = \cuotaamort \myequation{300.000}{10} = 30.000 \flechita \VC 300.000 - 30.000 = 270.000
@@ -528,15 +530,415 @@ Como no ha bastado con el fonde de comercio, debemos de calcular la proporción 
     \hline
     & 2816 AA de mobiliario& 25.277\\
     \hline
-    25.277+75.833=101110& 280 Amortización del Inmovilizado Material& \\
+    $25277+75833=101110$& 280 Amortización del Inmovilizado Material& \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\section{Ejercicio 4}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=yellow!75!black!,title=IMPORTANTE]
+    \textit{NO SE USA IVA}
+\end{tcolorbox}
+
+\begin{itemize}
+    \item Cálculo de la amortziación:
+    \begin{itemize}
+        \item \cuotaamort \myequation{300000}{5} = 60.000 (como son 6 meses) * \myequation{6}{12} = 30.000
+    \end{itemize}
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Amortización del programa a \fec2019} & \textbf{HABER} \\
+    \hline
+    & \cuenta{2806} & 30.000\\
+    \hline
+    30.000& 281 Amortización del Inmovilizado Material& \\
     \hline
     \end{tabular}
 \end{table}
 
 
+\begin{itemize}
+    \item  \valorrecuperable \{200.000, 252.000\} = 252.000
+    \item \VC 300.000 - 30.000 = 270.000
+    \item Deterioro = 270.000 - 252.000 = 18.000
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Deterioro a \fec2019} & \textbf{HABER} \\
+    \hline
+    18.000& 671 Pérdidas procedente del inmovilizado material& \\
+    \hline
+    & 2906 Deterioro de las aplicaciones informáticas& 18.000\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item \VC 300.000 - 30.000 - 18.000 = 252.000 a inicios de 2019
+    \item Meses restantes = 60 - 6 de primer año = 54 meses
+    \item \cuotaamort \myequation{252000}{54 \text{ meses}} = 4.666,67 * 12 = 56.000 al año
+    \item A \fec2020:
+    \begin{itemize}
+        \item \valorrecuperable \{199.500,188.000\} = 199.500
+        \item \VC 252.000 - 56.000 = 196.000
+        \item No hay deterioro debido a que el valor recuperable es mayor que el valor contable, \textit{debemos de revertir el deterioro}
+        \item Para ello:
+        \begin{itemize}
+            \item Cálculamos el límite que podemos revertir:
+            \begin{itemize}
+                \item $\text{Valor contable}_{\text{Sin deterioro}} = $ 300.000 - 30.000 - 60.000  = 210.000
+                \item $\text{Límite}_{\text{Reversión}} = 210000 - 196000 = 14.000$
+                \item \textbf{Debemos de revertir 14.000}
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Valoración del programa a \fec2020} & \textbf{HABER} \\
+    \hline
+    14.000& 2906 Deterioro de las AP INF& \\
+    \hline
+    & 790 Reversión del deterioro inmovilizado intangible & 14.000\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item Al reveretir el deterioro tenemos una nueva cuota de amortización 
+    \item  \negrita{\textcolor{red}{CUIDADO}} En este caso la reversión del deterioro era mayor que la diferencia entre el valor contable y el valor recuperable, pero para calcular la cuota de amortización debemos de hacerlo en base a el valor de verdad, es decir, en este caso tenemos que revertimos 14.000 aunque lo que sumemos a el valor contable sea 3500 que es la diferencia mencionada anteriormente.
+    \item la nueva \cuotaamort \myequation{199500}{60 - 6 - 12 = 42} = 4750 * 12 = 57.000
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Venta del programa en \fec2021} & \textbf{HABER} \\
+    \hline
+    140.000 & \bancos & \\
+    \hline
+    $30000 + 56000 + 57000 = 143000 $& \cuenta{2806}& \\
+    \hline
+    4.000 & 2906 Deterioro de las aplicaciones informáticas & \\
+    \hline
+    13000& 670 Pérdidas procedentes del inmovilzado intangible& \\
+    \hline
+    & 206 aplicaciones informáticas& 300.000\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\section{Ejercicio 5}
+
+\subsubsection*{Dado que se cumple las condiciones de activación}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{activación de los gastos y correciones valorativas a \fec2022} & \textbf{HABER} \\
+    \hline
+    13.000 suma total de los valores de la t tabla en la fecha indicada& 201 Desarrollo & \\
+    \hline
+    & \trabajosrealizadosII& 13.000\\
+    \hline
+    & \cuenta{2800}& $\frac{16000}{5} + \frac{15000}{5} = 6200 $\\
+    \hline
+    6200& 680 Amortización del inmovilizado intangible& \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=yellow!75!black!,title=IMPORTANTE]
+    No contabilizamos aún el desarrollo porque aún no ha acabado su periodo, mientras que de la investigación sí.
+    La amortización del desarrollo comienza cuando acaba el proceso de este, mientras que la de la investigación comienza en el momento de la activación(Al igual que el resto).
+\end{tcolorbox}
+
+\begin{itemize}
+    \item Investigación:
+    \begin{itemize}
+        \item Los dos primeros años de investigación
+            \begin{itemize}
+                \item 2018 = $\frac{16000}{5} = 3200 $
+                \item  2019 = $\frac{15000}{5} = 3000 $
+            \end{itemize}
+        \item Nos queda:
+        \begin{itemize}
+            \item 2019 \flechita 3200 
+            \item 2020 \flechita 3200 + 3000 = 6200
+            \item 2021 \flechita 3200 + 3000 = 6200
+            \item 2022 \flechita 3200 + 3000 = 6200
+            \item 2023 \flechita 3200*\myequation{3}{12} + 3000*\myequation{3}{12} = 1550
+        \end{itemize}
+        \item TOTAL = 3200 + 6200 * 3 + 1550 = 23.350
+    \end{itemize}
+    \item Desarrollo:
+    \begin{itemize}
+        \item 2022 = como son solo 3 meses de 2023, el total es $14000+15000+13000 = 42000$ \flechita 42000/5  * 3/12 = 2100
+    \end{itemize}
+\end{itemize}
 
 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{asiento del 1/4/2023 de la baja del proyecto} & \textbf{HABER} \\
+    \hline
+     & 201 Desarrollo& $14000 + 13000+15000= 42000$\\
+    \hline
+    & 200 Investigación& $ 16000+15000 = 31000$\\
+    \hline
+    23.350& \cuenta{2800}& \\
+    \hline
+    2100& \cuenta{2801}& \\
+    \hline
+    \end{tabular}
+\end{table}
 
+\subsubsection*{Se consideran como gastos del ejercicio}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{gastos ocasionados durante el ejercicio de 2019} & \textbf{HABER} \\
+    \hline
+    15.000& 620 Gastos en I+D& \\
+    \hline
+    & \bancos & 15.000\\
+    \hline
+    \end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Asientos a realizar el 1/4/2023 relativas a la baja del proyecto} & \textbf{HABER} \\
+    \hline
+    & Al considerarse las operaciones como gasto del ejercicio \textcolor{red}{NO PROCEDE ASIENTO CONTABLE}& \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+\section{Ejercicio 6}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{adquisición de la fábrica de aceite el 1/1/2020} & \textbf{HABER} \\
+    \hline
+    500.000& 213 Maquinaria & \\
+    \hline
+    200.000& 217 Equipos para procesos de información& \\
+    \hline
+    100.000&204 Fondo de comercio&\\
+    \hline
+    & 523 Proveedores a cp& 50.000\\
+    \hline
+    & \bancos& 750.000\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item \valorrecuperable \{450.000,445.000\} = 450.000
+    \item Valor contable a \fec2021:
+    \begin{itemize}
+        \item Maquinaria \cuotaamort \myequation{500000}{5} = 100.000
+        \item Equipos \cuotaamort \myequation{200000}{4} = 50.000
+        \item Fondo de comercio \cuotaamort \myequation{100000}{10} = 10.000
+        \item Maquinaria \flechita 500.000 - 200.000  = 300.000
+        \item Equipos \flechita 200.000 - 100.000 = 100.000
+        \item En cuanto a la deuda con los proveedores se supone que se salda un mes después de la adquisición del negocio.
+        \item Fondo de comercio \flechita 100.000 - 20.000 = 80.000
+    \end{itemize}
+    \item \VC TOTAL = 300.000 + 100.000 + 80.000 = 480.000
+    \item Deterioro = 480.000 - 450.000 = 30.000
+    \item Pero como el fondo de comercio tiene un valor de 80.000, si puede cubrir el deterioro.
+\end{itemize}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Deterioro a \fec2021} & \textbf{HABER} \\
+    \hline
+    30.000& 690 Pérdidas por el inmovilizado intangible& \\
+    \hline
+    & 204 Fondo de comercio& 30.000\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=yellow!75!black!,title=IMPORTANTE]
+    Este caso es distinto al del ejercicio 3 ya que en este caso hay suficiente fondo de comercio, por lo que no debemos de dar de baja a la Amortización Acumulada del Fondo de comercio.
+\end{tcolorbox}
+
+\begin{itemize}
+    \item Debemos de calcular las nuevas cuotas de amortización:  
+    \begin{itemize}
+        \item Fondo de comercio :
+        \begin{itemize}
+            \item \VC 100.000 - 10.000 - 10.000 - 30.000 = 50.000
+            \item Tiempo restante = 10 años - 2 años = 8 años
+            \item \cuotaamort \myequation{50000}{8} = 6.250
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Amortización del inmovilizado el \fec2022} & \textbf{HABER} \\
+    \hline
+    6.250 & \cuenta{280}& \\
+    \hline
+    & \cuenta{2804}& 6.250\\
+    \hline
+    150.000& \cuenta{281}& \\
+    \hline
+    & \cuenta{2813} &100.000 \\
+    \hline
+    & \cuenta{2817}&50.000 \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item Valor contable a \fec2022:
+    \begin{itemize}
+        \item Maquinaria = 500.000 - 100.000*3 = 200.000
+        \item Equipos = 200.000 - 50.000*3 = 50.000
+        \item Fondo de comercio = 100.000 - 10.000 - 10.000 - 30.000 - 6.250 = 43.750
+    \end{itemize}
+    \item \VC TOTAL = 200.000 + 50.000 + 43.750 = 293.750
+    \item \valorrecuperable \{220.000, 200.000\} = 220.000
+    \item Deterioro = 293.750 - 220.000 = 73.750
+    \item Pero como el fondo de comercio tiene un valor de 43.750, puede cubrir el deterioro en parte, el resto será divido entre maquinaria y equipos, \textit{se realiza en el siguiente apartado}
+\end{itemize}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Deterioro del fondo de comercio a \fec2022} & \textbf{HABER} \\
+    \hline
+    26.250& \cuenta{2804}& \\
+    \hline
+    46.750& 690 Pérdidas del inmovilizado intangible& \\
+    \hline
+    & 204 Fondo de comercio& 70.000\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item Maquinaria = 200.000
+    \item Equipos = 50.000
+    \item Porcentaje de deterioro que asume cada uno:
+    \begin{itemize}
+        \item Maquinaria = \myequation{200000}{250000}= 0.8*30.000 = 24.000
+        \item Equipos = \myequation{50000}{250000} = 0.2*30.000 = 6.000
+    \end{itemize}
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{deterioro del valor de la maquinaria y de los ordenadores a \fec2022} & \textbf{HABER} \\
+    \hline
+    30.000& 691 Pérdidas procedentes del inmovilizado intangible& \\
+    \hline
+    & \cuenta{2913}&24.000 \\
+    \hline
+    & \cuenta{2917}& 6.000 \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item Nuevas cupotas de amortización a \fec2023:
+    \begin{itemize}
+        \item Maquinaria:
+        \begin{itemize}
+            \item \VC 200.000 - 24.000 = 176.000
+            \item Tiempo restante = 2 años
+            \item \cuotaamort \myequation{176000}{2} = 88.000 al año
+        \end{itemize}
+        \item Equipos:
+        \begin{itemize}
+            \item \VC 50.000 - 6.000 = 44.000
+            \item Tiempo restante = 1 año
+            \item \cuotaamort \myequation{44000}{1} = 44.000 al año
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Amortización del inmovilizado el \fec2023} & \textbf{HABER} \\
+    \hline
+    132.000& \cuenta{281}& \\
+    \hline
+    & \cuenta{2813}&88.000 \\
+    \hline
+    & \cuenta{2817}& 44.000\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item \valorrecuperable 100.000
+    \item \VC (solo queda Maquinaria) = 176.000 - 88.000 = 88.000
+    \item No hay deterioro, sino que hay beneficio, por lo que debemos de revertir el deterioro.
+    \item Para ello calculamos el límite que podemos revertir:
+    \begin{itemize}
+        \item $\text{Valor contable}_{\text{Sin deterioro}} = 500.000 - 100.000*4 = 100.000$
+        \item \item $\text{Valor contable}_{\text{Con deterioro}} = 88.000$
+        \item $\text{Límite}_{\text{Reversión}} = 100.000 - 88.000 = 12.000$
+    \end{itemize}
+    \item \textbf{Debemos de revertir 12.000}
+    \item \textcolor{red}{TRUCO}: hemos supuesto que los demás inmovilizados ya estaban amortizados, por lo que no hay que hacer nada con ellos, para simplificar de esta manera los cáculos.
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{reversión del deterioro del valor de la maquinaria y de los equipos a \fec2023} & \textbf{HABER} \\
+    \hline
+    & 791 Reversión del deterioro del inmovilizado material &12.000 \\
+    \hline
+    12.000 & 2913 Deterioro maquinaria& \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\section{Ejercicio 7, 8 y 9}
+
+Son ideńticos a los que ya hemos resuelto anteriormente, por lo que no los vamos a resolver.
 
 
 
