@@ -127,11 +127,49 @@
         <p>A continuación se presentan diferentes ejemplos de fases necesarias para el reconocimiento de ingresos. Indique cuál de estas opciones es correcta:</p>
         <ol type="a">
             <li><label><input type="radio" name="q5" value="0"> Una empresa firma un acuerdo de suministro para la venta de sus productos con un cliente, lo que permite considerar la existencia de un contrato.</label></li>
-            <li><label><input type="radio" name="q5" value="1"> Una empresa adquiere un software contable basado en inteligencia artificial muy específico que no ofrece otra empresa en el mercado junto con el servicio de asesoramiento contable anual por un precio conjunto de 1.500 €. En este caso estamos ante un único contrato con una única obligación.</label></li>
+            <li><label><input type="radio" name="q5" value="0"> Una empresa adquiere un software contable basado en inteligencia artificial muy específico que no ofrece otra empresa en el mercado junto con el servicio de asesoramiento contable anual por un precio conjunto de 1.500 €. En este caso estamos ante un único contrato con una única obligación.</label></li>
             <li><label><input type="radio" name="q5" value="0"> Una empresa pretende aplicar una contraprestación variable (descuento en función del volumen de ventas alcanzado) por lo que podemos calcular el precio de la transacción calculando el valor medio de las ventas más probables o valor medio esperado, aunque existe una alta probabilidad de que se produzcan reversiones en el precio significativas.</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Todas las respuestas anteriores son correctas.</label></li>
+            <li><label><input type="radio" name="q5" value="1"> Todas las respuestas anteriores son correctas.</label></li>
         </ol>
+    
+    <!-- boton de explicacion desplegable -->
+    <input type="button" value="Mostrar Explicaciones" onclick="toggleExplanations()">
     </div>
+    <script>
+        function toggleExplanations() {
+            const explanations = [
+                {
+                    option: "a",
+                    text: "Una empresa firma un acuerdo de suministro para la venta de sus productos con un cliente, lo que permite considerar la existencia de un contrato.",
+                    explanation: "Esta afirmación es correcta, ya que la firma de un acuerdo de suministro establece un contrato válido para el reconocimiento de ingresos."
+                },
+                {
+                    option: "b",
+                    text: "Una empresa adquiere un software contable basado en inteligencia artificial muy específico que no ofrece otra empresa en el mercado junto con el servicio de asesoramiento contable anual por un precio conjunto de 1.500 €. En este caso estamos ante un único contrato con una única obligación.",
+                    explanation: "Aunque el contrato incluye dos componentes (software y servicio de asesoramiento), en este caso específico se considera una única obligación de desempeño debido a la alta interrelación entre ambos componentes."
+                },
+                {
+                    option: "c",
+                    text: "Una empresa pretende aplicar una contraprestación variable (descuento en función del volumen de ventas alcanzado) por lo que podemos calcular el precio de la transacción calculando el valor medio de las ventas más probables o valor medio esperado, aunque existe una alta probabilidad de que se produzcan reversiones en el precio significativas.",
+                    explanation: "Aunque existe una alta probabilidad de reversiones significativas, es posible estimar el precio de la transacción utilizando el valor medio esperado o el monto más probable, siempre que se apliquen las restricciones adecuadas para reflejar dicha incertidumbre."
+                }
+            ];
+
+            const questionDiv = document.getElementById("q5");
+            const existingExplanations = questionDiv.querySelectorAll(".explanation");
+
+            if (existingExplanations.length > 0) {
+                existingExplanations.forEach(exp => exp.remove());
+            } else {
+                explanations.forEach(exp => {
+                    const explanationDiv = document.createElement("div");
+                    explanationDiv.className = "explanation";
+                    explanationDiv.innerHTML = `<strong>Opción (${exp.option}):</strong> ${exp.text}<br><strong>Explicación:</strong> ${exp.explanation}`;
+                    questionDiv.appendChild(explanationDiv);
+                });
+            }
+        }
+    </script>
     
     <div class="question" id="q6">
         <p>La cuenta 476. Organismos Seguridad Social acreedores recoge:</p>
