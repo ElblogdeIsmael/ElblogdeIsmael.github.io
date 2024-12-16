@@ -10,6 +10,7 @@
 \usepackage{geometry}
 \geometry{top=3cm, bottom=3cm, left=2.5cm, right=2.5cm}
 
+
 % Paquetes para diseño
 \usepackage{titlesec}
 \usepackage{fancyhdr}
@@ -43,6 +44,33 @@
     captionpos=b,
     showstringspaces=false
 }
+
+\newcommand{\fec}{31/12/}
+\newcommand{\AIM}{681 Amortización del inmovilizado material }
+\newcommand{\AAMAQ}{2813 Amortización acumulada de maquinaria }
+\newcommand{\valorrecuperable}{Valor recuperable = max\{valor neto realizable, valor en uso\} =}
+\newcommand{\PDI}{691 Pérdidas por deterioro de inmovilizado material}
+\newcommand{\DVM}{2913 Deterioro del valor de la maquinaria }
+\newcommand{\RDIM}{791 Reversión deterioro inmovilizado material}
+\newcommand{\VC}{Valor contable = }
+\newcommand{\PPIM}{671 Pérdidas procedentes del inmovilizado material}
+\newcommand{\bancos}{572 Bancos cuenta corriente}
+\newcommand{\cuotaamort}{Cuota de amortización = }
+\newcommand{\enajenacion}{543 Créditos a corto plazo por enajenación del inmovilizado}
+\newcommand{\benefIM}{771 Beneficios procedentes del inmovilizado material}
+\usepackage{amsmath}
+\newcommand{\myequation}[2]{\ensuremath{\frac{#1}{#2}}}
+\newcommand{\flechita}{$\rightarrow$}
+%comando de tcolorbox
+\newcommand{\mytcolorbox}[1]{
+    \begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=NOTA]
+        #1
+    \end{tcolorbox}
+}
+
+
+
+
 
 % Configuración de título
 \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
@@ -249,6 +277,13 @@
                 \hline
                 \end{tabular}
                 \end{table}
+    
+                \subsubsection*{Resultado del ejercicio:}
+                Podemos ver como el saldo de la cuenta 129 Resultado del ejercicio al final del período es:
+                \begin{equation}
+                    469,4 - 2209,4 = -1740
+                \end{equation}
+                \textit{Este resultado indica que el saldo de la cuenta 129 Resultado del ejercicio al final del período es negativo, lo que significa que la empresa ha obtenido pérdidas de 1740 euros.}
 
 \section{Ejercicio Propuesto 2}
 \subsection*{Datos}
@@ -263,6 +298,101 @@
     \item al cierre el tipo de cambio es de 1 rublo = 2,6 euros
     \item el dia del vencimiento es 2,4 euros = 1 rublo
 \end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{compra de mercaderias a 1/4/2020} & \textbf{HABER} \\
+    \hline
+    26.250& 600 Compra de mercaderias& \\
+    \hline
+    & 4004 Proveedores en moneda extranjera& 11.000 rublos a 2,5 euros/rublo = 25.000\\
+    \hline
+    & 572 Bancos & 500 * 2,5 = 1250\\
+    \hline
+    \end{tabular}
+\end{table}
+\begin{itemize}
+    \item Cambio en el tipo de cambio de la moneda, que pasa de 2,5 euro/rublo a 2,6 euro/rublo.
+    \item Por lo que debemos de dotar las diferencias negativas de cambio ya que le vamos a pagar más al proveedor al valorarse el rublo.
+    \item El valor de la deuda pasa de 10.000 * 2,5 a 10.000 * 2,6 = 26.000, siendo la diferencia de: 1.000 euros.
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{a \fec2020 operaciones relacionadas con la deuda del proveedor} & \textbf{HABER} \\
+    \hline
+    & 4004 Proveedores en moneda extranjera& 1000\\
+    \hline
+    1000& 668 Diferencias negativas de Cambio& \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item El cálculo de los intereses es:
+    \begin{itemize}
+        \item 9 meses
+        \item 4 \% de intereses
+        \item $10000 \textbf{ rublos } * 1,04^{\frac{9}{12}} - 10000 = 298,52$
+    \end{itemize}
+\end{itemize}
+\begin{tcolorbox}[colback=red!5!white,colframe=yellow!75!black, title={Nota}]
+    El tipo de cambio también se calcula tomando como montante el valor en la moneda del extranjero.
+\end{tcolorbox}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{a \fec2020 devengo de los intereses por aplazamiento de pago a los prooveedores} & \textbf{HABER} \\
+    \hline
+    298,52& 662 Intereses de deudas& \\
+    \hline
+    & 4004 Proveedores moneda extranjera& 298,52\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item Intereses de los 9 meses restantes
+    \begin{itemize}
+        \item $\left(10000 + 298.52\right)*1,04^{\frac{9}{12}}-\left(10000 + 298.52\right)  = 307,44$
+    \end{itemize}
+    \item Nuevo tipo de cambio de 2,4
+    \begin{itemize}
+        \item 307,44 * 2,4 = 737,86
+    \end{itemize}
+    \item La deuda es:
+    \begin{itemize}
+        \item 10000 + 298,52 + 307,44 = 10605,96
+        \item 10605,96 * 2,4 = 25454,30
+        \item Antes debíamos el saldo de la cuenta 4004 = 27.514,02
+        \item La diferencia es de 27.514,02 - 25454,30 = 2059,72
+    \end{itemize}
+\end{itemize}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{liquidación definitiva de la deuda del proveedor al vencimiento de la misma} & \textbf{HABER} \\
+    \hline
+    737,86& 662 Intereses de deudas& \\
+    \hline
+    & 4004 Proveedores moneda extranjera& 737,86\\
+    \hline
+    27.514,02& 4004 Proveedores moneda extranjera& \\
+    \hline
+    & 768 Diferencias positivas de Cambio& 2059,72\\
+    \hline
+    & \bancos & 25454,30\\
+    \hline
+    \end{tabular}
+\end{table}
+
 
 \section{Ejercicio Propuesto 3}
 
@@ -308,13 +438,13 @@ Algunos datos se van a obviar\dots
     \hline
     \textbf{DEBE} & \textbf{Compra de mercaderías} & \textbf{HABER} \\
     \hline
-    30000& 600 compra de mercaderías & \\
+    $30000*0,95=28500$& 600 compra de mercaderías & \\
     \hline
      & 572 bancos & 20000 \\
     \hline
     $30000*0,95*0,21 = 5985$& 472 HP IVA s & \\
     \hline
-    15985& 401 proveedores ef comerciales a pagar& \\
+    & 401 proveedores ef comerciales a pagar& $14485$\\
     \hline
     \end{tabular}
 \end{table}
@@ -411,9 +541,9 @@ Para este caso, antes de vender, debemos de dar de baja la cuenta de la amortiza
     \hline
     & 436 cliente dudoso cobro & 40000\\
     \hline
-    & 490 deterioro op comerciales & \\
+    32000(debido a que era el 80\%)& 490 deterioro op comerciales & \\
     \hline
-    & 794 & reversión del deterioro op comerciales\\
+    & 794 reversión del deterioro op comerciales& 32000\\
     \hline
     \end{tabular}
 \end{table}
@@ -439,7 +569,7 @@ Para este caso, antes de vender, debemos de dar de baja la cuenta de la amortiza
     \centering
     \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
     \hline
-    \textbf{DEBE} & \textbf{Amortzaciones} & \textbf{HABER} \\
+    \textbf{DEBE} & \textbf{Amortizaciones} & \textbf{HABER} \\
     \hline
     50 & 680 amort inm intangible& \\
     \hline
@@ -511,23 +641,25 @@ Para este caso, antes de vender, debemos de dar de baja la cuenta de la amortiza
     \item cuando se compró el tipo de cambio era de 1,3 \$ / \euro
     \item cuando se iba a pagar era de 1,2 \$ / \euro
 \end{itemize}
-Se ha apreciado el dólar, debemos de dotar diferencias negativas de cambio.
+Se ha depreciado el dólar, debemos de dotar diferencias negativas de cambio.
+Antes teníamos que pagar a 1,2 \$ / \euro y ahora es a 1,3 \$ /\euro, por lo que 1 euro ahora es más cantidad de \$.
 
 \begin{table}[H]
     \centering
     \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
     \hline
-    \textbf{DEBE} & \textbf{Pago a 01/04/2021 de la compra de enero} & \textbf{HABER} \\
+    \textbf{DEBE} & \textbf{pago de la compra realizada en enero de 2021 en 1/4/2021(cuando realizo el pago ) } & \textbf{HABER} \\
     \hline
-    $2000 / 1,3$= 1538,46& 600 compra de mercaderias & \\
+    $\frac{2000}{1,3} = 1666,67$& 4004 Proveedores en moneda extranjera& \\
     \hline
-    128,21& 668 dif negativas de cambio & \\
+    & \bancos & \myequation{2000}{1,3}=1538,46\\
     \hline
-    & 572 bancos & $2000*1,2=1666,67$\\
+    & 768 Diferencias positivas de cambio& 128,21\\
     \hline
     \end{tabular}
-    \end{table}
+\end{table}
 
+\mytcolorbox{Debemos de tener en cuenta que la cuenta 573 aunque sea de moneda extranjera tendrá el contenido en moneda funcional, por lo que las operaciones contables realizadas en base a estas deberán de ser en moneda funcional.}
 
 \begin{table}[H]
     \centering
@@ -535,9 +667,9 @@ Se ha apreciado el dólar, debemos de dotar diferencias negativas de cambio.
     \hline
     \textbf{DEBE} & \textbf{Apertura el 23/05/2021 de al c/c en dólares} & \textbf{HABER} \\
     \hline
-    & 572 bancos & $5000*1,25=6250$\\
+    & 572 bancos & $5000$\\
     \hline
-    6250 & 573 bancos en moneda exranjera & \\
+    5000 & 573 bancos en moneda extranjera & \\
     \hline
     \end{tabular}
     \end{table}
@@ -550,24 +682,39 @@ Se ha apreciado el dólar, debemos de dotar diferencias negativas de cambio.
     \item cuando se realizó la venta el tipo de cambio era de 1,38 \$/\euro
 \end{itemize}
 
+\mytcolorbox{\begin{itemize}
+    \item Cuando se realizó la venta el tipo de cambio era de 1,38 \$/\euro = 6000 / 1,38 = 4347,83 \euro
+    \item Ahora es de 1,34 \$/\euro = 6000/1,34 = 4477,61 \euro
+    \item Diferencia de 129,79 \euro como diferencias positivas de cambio
+\end{itemize}}
+
 \begin{table}[H]
-        \centering
-        \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
-        \hline
-        \textbf{DEBE} & \textbf{cobro a 4/11/2021 de la venta realizada en abril} & \textbf{HABER} \\
-        \hline
-        6179,10 = $\frac{6000 \text{ dólares}}{1,34} * 1,38$ & 573 bancos en moneda extranjera & \\
-        \hline
-        & 700 venta de mercaderias & 6000 \\
-        \hline
-        & 768 diferencias positivas de cambio & 179,10 \\
-        \hline
-        \end{tabular}
-        \end{table}
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{cobro a 4/11/2021 de la venta realizada en abril} & \textbf{HABER} \\
+    \hline
+    4477,61& 573 bancos en moneda extranjera & \\
+    \hline
+    & 4304  Clientes en moneda extranjera& 4347,83\\
+    \hline
+    & 768 Diferencias positivas de cambio& 129,79\\
+    \hline
+    \end{tabular}
+\end{table}
 
 \begin{itemize}
-    \item a 31 de diciembre el tipo de cambio es de 0,9 \$/\euro
-    \item en la cuenta hay 12429,10 \$, si el tipo de cambio baja quiere decir que el dólar se ha apreciado, por lo que tendríamos $\frac{12429,10}{0,9} = 13810,1 \euro $ 
+    \item En la cuenta 573 tenemos:
+    \begin{itemize}
+        \item Mayo: 5000*1,25 = 6250
+        \item Noviembre: $\frac{6000\text{ dólares}}{1,34}=4477,61$ 
+        \item \textbf{9477,61}
+    \end{itemize}
+    \item Si el tipo de cambio pasa a 0,9 \euro/\$:
+    \begin{itemize}
+        \item 12250 * 0,9 = 11025 \euro
+    \end{itemize}
+    \item Diferencia de 11025 - 9477,61 = 1547,39 \euro
 \end{itemize}
 
 \begin{table}[H]
@@ -576,9 +723,9 @@ Se ha apreciado el dólar, debemos de dotar diferencias negativas de cambio.
             \hline
             \textbf{DEBE} & \textbf{Regularización de la cuenta corriente bancaria en moneda extranjera a 31/12/2021} & \textbf{HABER} \\
             \hline
-            & 780 diferencias positivas de cambio & $13810,1-12429,10=1381,01$\\
+            1547,39 & 573 bancos moneda extranjera & \\
             \hline
-            1381,01& 572 bancos & \\
+            & 768 Diferencias positivas de cambio & 1547,39\\
             \hline
             \end{tabular}
             \end{table}  
