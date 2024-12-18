@@ -14,34 +14,34 @@ module Irrgarten
     # Representa el juego, manejando el estado actual, los jugadores, monstruos y el laberinto.
     class Game
         # Número máximo de rondas en el juego.
-        MAX_ROUNDS = 10
+        @@MAX_ROUNDS = 10
 
         #--------VARIABLES PARA MI LABERINTO----------
         # Número de monstruos
-        NUM_MONSTER = 3
+        @@NUM_MONSTER = 3
 
         # Número de obstáculos
-        NUM_BLOCKS = 5
+        @@NUM_BLOCKS = 5
 
         # Número de filas
-        N_ROW = 7
+        @@N_ROW = 7
 
         # Número de columnas
-        N_COL = 7
+        @@N_COL = 7
 
         # Número de salida (fila)
-        EXIT_ROW = 6
+        @@EXIT_ROW = 6
 
         # Número de salida (columna)
-        EXIT_COL = 6
+        @@EXIT_COL = 6
 
         # Número aleatorio para generar longitud de muro
-        RANDOM_POS = 5
+        @@RANDOM_POS = 5
 
         # Número aleatorio para generar la orientación
-        RANDOM_ORIENTATION = 2
+        @@RANDOM_ORIENTATION = 2
 
-
+        #------Accessors para las variables de clase------
 
         # @!attribute [rw] currentPlayerIndex
         #   @return [Integer] Índice del jugador actual en la lista de jugadores.
@@ -67,14 +67,19 @@ module Irrgarten
         #   @return [Labyrinth] El laberinto en el que se juega.
         attr_accessor :labyrinth
 
+        #------Accessors para las variables de clase------
+
         # Inicializa una nueva instancia del juego con los jugadores, monstruos y el laberinto configurados.
         #
         # @param nPlayers [Integer] Número de jugadores en el juego.
         def initialize(nPlayers)
             @currentPlayerIndex = Dice.whoStarts(nPlayers)
+
             @log = ""
-            @monsters = Array.new(NUM_MONSTER) #ya que los decidimos nosotros, inicializo ya el constructor aquí
+
+            @monsters = Array.new(@@NUM_MONSTER) #ya que los decidimos nosotros, inicializo ya el constructor aquí
             @players = Array.new(nPlayers)
+
             nPlayers.times do |i|
                 @players[i]= Player.new(i,Dice.randomIntelligence, Dice.randomStrength)
             end
@@ -83,7 +88,7 @@ module Irrgarten
 
             configureLabyrinth()
 
-            labyrinth.spreadPlayers(players)
+            @labyrinth.spreadPlayers(players)
         end
 
         # Configura el laberinto añadiendo bloques y colocando monstruos.
@@ -91,16 +96,17 @@ module Irrgarten
         # @return [void]
         def configureLabyrinth 
             #creamos el laberinto
-            @labyrinth = Labyrinth.new(N_ROW,N_COL,EXIT_ROW,EXIT_COL) 
+            @labyrinth = Labyrinth.new(@@N_ROW,@@N_COL,@@EXIT_ROW,@@EXIT_COL) 
 
             #añiadimos 5 bloques por ejemplo
-            NUM_BLOCKS.times do
+            @@NUM_BLOCKS.times do
                 startRow = Dice.randomPos(labyrinth.nRows)
                 startCol = Dice.randomPos(labyrinth.nCols)
-                length = Dice.randomPos(NUM_BLOCKS) 
-                orientation = Dice.randomPos(RANDOM_POS) == 0 ? Orientation::HORIZONTAL : Orientation::VERTICAL
+                length = Dice.randomPos(@@NUM_BLOCKS) # definimos la longitud de los blocks
+                orientation = Dice.randomPos(@@RANDOM_POS) == 0 ? Orientation::HORIZONTAL : Orientation::VERTICAL
                 labyrinth.addBlock(orientation, startRow, startCol, length)
             end
+
             #creamos los monstruos
             monsters[0] = Monster.new("Goblin", Dice.randomIntelligence, Dice.randomStrength);
             monsters[1] = Monster.new("Orc", Dice.randomIntelligence, Dice.randomStrength);
@@ -110,8 +116,8 @@ module Irrgarten
 
             #añadimos los monstruos
             monsters.each do |monster|
-                pos = labyrinth.randomEmptyPos()
-                labyrinth.addMonster(pos[0], pos[1], monster)
+                pos = @labyrinth.randomEmptyPos()
+                @labyrinth.addMonster(pos[0], pos[1], monster)
             end
         end
 
@@ -121,7 +127,7 @@ module Irrgarten
         #
         # @return [Boolean] `true` si el juego ha finalizado, `false` en caso contrario.
         def finished
-            labyrinth.haveAWinner
+            @labyrinth.haveAWinner
         end
 
         # Obtiene el estado actual del juego.
@@ -147,7 +153,7 @@ module Irrgarten
         #
         # @return [void]
         def nextPlayer
-            @currentPlayerIndex = (@currentPlayerIndex + 1) % @players.length
+            @currentPlayerIndex = (@currentPlayerIndex + 1) % @players.size
             @currentPlayer = @players[@currentPlayerIndex]
         end
 
@@ -275,7 +281,7 @@ module Irrgarten
             playerAttack = currentPlayer.attack
             lose = monster.defend(playerAttack)
             
-            while !lose && rounds < MAX_ROUNDS
+            while !lose && rounds < @@MAX_ROUNDS
                 winner = GameCharacter::MONSTER
                 rounds += 1
                 monster_attack = monster.attack
@@ -287,7 +293,7 @@ module Irrgarten
                     lose = monster.defend(player_attack)
                 end
             end
-            logRounds(rounds, MAX_ROUNDS)
+            logRounds(rounds, @@MAX_ROUNDS)
             
             winner
 

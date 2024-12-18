@@ -29,7 +29,7 @@ module Irrgarten
 
         # Calcula la intensidad del ataque basado en la fuerza y las armas.
         #
-        # @return [Integer] la intensidad del ataque
+        # @return [float] la intensidad del ataque
         def attack
             Dice.intensity(@strength) + sumWeapons
         end
@@ -38,14 +38,14 @@ module Irrgarten
         #
         # @return [String] la representación en cadena
         def to_s
-            "(Fuzzy) #{super.to_s} "
+            "[Fuzzy] #{super.to_s} "
         end
 
         protected
 
         # Calcula la energía defensiva basada en la inteligencia y los escudos.
         #
-        # @return [Integer] la energía defensiva
+        # @return [float] la energía defensiva
         def defensive_energy
             Dice.intensity(@intelligence) + sumShields
         end

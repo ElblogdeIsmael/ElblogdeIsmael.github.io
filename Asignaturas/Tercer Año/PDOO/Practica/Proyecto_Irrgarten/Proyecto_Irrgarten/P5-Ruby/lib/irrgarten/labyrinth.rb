@@ -13,23 +13,26 @@ module Irrgarten
     # Representa el laberinto en el juego, donde se encuentran monstruos, jugadores, y la salida.
     class Labyrinth 
         # Carácter que representa un bloque en el laberinto.
-        BLOCK_CHAR = 'X'
+        @@BLOCK_CHAR = 'X'
 
         # Carácter que representa una posición vacía en el laberinto.
-        EMPTY_CHAR = '-'
+        @@EMPTY_CHAR = '-'
 
         # Carácter que representa un monstruo en el laberinto.
-        MONSTER_CHAR = 'M'
+        @@MONSTER_CHAR = 'M'
 
         # Carácter que representa un combate en el laberinto.
-        COMBAT_CHAR = 'C'
+        @@COMBAT_CHAR = 'C'
 
         # Carácter que representa la salida del laberinto.
-        EXIT_CHAR = 'E'
+        @@EXIT_CHAR = 'E'
 
         # Constantes de posición.
-        ROW = 0
-        COL = 1
+        @@ROW = 0
+        @@COL = 1
+
+        # Posición inválida.
+        @@INVALID_POS = -1
 
         # @!attribute [rw] nRows
         #   @return [Integer] Número de filas en el laberinto.
@@ -70,10 +73,10 @@ module Irrgarten
             @nCols = nCols
             @exitRow = exitRow
             @exitCol = exitCol
-            @labyrinth = Array.new(nRows) { Array.new(nCols, EMPTY_CHAR) }
-            @labyrinth[exitRow][exitCol] = EXIT_CHAR
-            @monsters = Array.new(nRows) { Array.new(nCols) }
-            @players = Array.new(nRows) { Array.new(nCols) }
+            @labyrinth = Array.new(@nRows) { Array.new(@nCols, @@EMPTY_CHAR) }
+            @labyrinth[@exitRow][@exitCol] = @@EXIT_CHAR
+            @monsters = Array.new(@nRows) { Array.new(@nCols) }
+            @players = Array.new(@nRows) { Array.new(@nCols) }
         end
 
         # Distribuye los jugadores en el laberinto (implementación pendiente).
@@ -84,9 +87,7 @@ module Irrgarten
             for i in 0...players.size
                 p = players[i]
                 pos = randomEmptyPos
-                oldRow = -1
-                oldCol = -1
-                putPlayer2D(oldRow, oldCol, pos[ROW], pos[COL], p)
+                putPlayer2D(@@INVALID_POS, @@INVALID_POS, pos[@@ROW], pos[@@COL], p)
             end
         end
 
@@ -94,7 +95,7 @@ module Irrgarten
         #
         # @return [Boolean] `true` si un jugador está en la posición de salida, `false` en caso contrario.
         def haveAWinner
-            return players[exitRow][exitCol] != nil
+            return @players[@exitRow][@exitCol] != nil
         end
 
         # Convierte el estado del laberinto en un string para representación.
@@ -113,9 +114,8 @@ module Irrgarten
             end
             s+="\n"
             #Esta parte de impresión la añado para que el usuario pueda visualizar el juego
-            
-            
-            s
+
+            s #devolvemos el string
         end
 
         # Verifica si la posición especificada está dentro de los límites del laberinto.
@@ -134,10 +134,10 @@ module Irrgarten
         # @param monster [Monster] El monstruo a añadir.
         # @return [void]
         def addMonster(row, col, monster)
-            if(emptyPos(row, col))
+            if(emptyPos(row, col) && posOK(row, col))
                 monster.setPos(row, col)
-                monsters[row][col] = monster
-                labyrinth[row][col] = MONSTER_CHAR
+                @monsters[row][col] = monster
+                @labyrinth[row][col] = @@MONSTER_CHAR
             end
         end
 
@@ -147,7 +147,7 @@ module Irrgarten
         # @param col [Integer] La columna de la posición.
         # @return [Boolean] `true` si la posición está vacía, `false` en caso contrario.
         def emptyPos(row, col)
-            posOK(row, col) && labyrinth[row][col] == EMPTY_CHAR
+            @labyrinth[row][col] == @@EMPTY_CHAR
         end
 
         # Verifica si una posición específica contiene un monstruo.
@@ -156,7 +156,7 @@ module Irrgarten
         # @param col [Integer] La columna de la posición.
         # @return [Boolean] `true` si la posición contiene un monstruo, `false` en caso contrario.
         def monsterPos(row, col)
-            posOK(row, col) && labyrinth[row][col] == MONSTER_CHAR
+            posOK(row, col) && @labyrinth[row][col] == @@MONSTER_CHAR
         end
 
         # Verifica si una posición específica es la salida.
@@ -165,7 +165,7 @@ module Irrgarten
         # @param col [Integer] La columna de la posición.
         # @return [Boolean] `true` si la posición es la salida, `false` en caso contrario.
         def exitPos(row, col)
-            posOK(row, col) && labyrinth[row][col] == EXIT_CHAR
+            posOK(row, col) && @labyrinth[row][col] == @@EXIT_CHAR
         end
 
         # Verifica si una posición específica es un área de combate.
@@ -174,7 +174,7 @@ module Irrgarten
         # @param col [Integer] La columna de la posición.
         # @return [Boolean] `true` si la posición es un área de combate, `false` en caso contrario.
         def combatPos(row, col)
-            posOK(row, col) && labyrinth[row][col] == COMBAT_CHAR
+            posOK(row, col) && @labyrinth[row][col] == @@COMBAT_CHAR
         end
 
         # Verifica si una posición es transitable (vacía, con monstruo o con salida).
@@ -193,7 +193,7 @@ module Irrgarten
         # @return [void]
         def updateOldPos(row, col)
             if posOK(row, col)
-                @labyrinth[row][col] = (@labyrinth[row][col]==COMBAT_CHAR) ? MONSTER_CHAR : EMPTY_CHAR
+                @labyrinth[row][col] = (@labyrinth[row][col]==@@COMBAT_CHAR) ? @@MONSTER_CHAR : @@EMPTY_CHAR
                 @players[row][col] = nil
             end
         end
@@ -206,19 +206,17 @@ module Irrgarten
         # @return [Array<Integer>] Las nuevas coordenadas (fila, columna).
         def dir2Pos(row, col, direction)
             pos = Array.new(2)
+            pos[@@ROW] = row
+            pos[@@COL] = col
             case direction
                 when Irrgarten::Directions::UP
-                    pos[ROW] = row - 1
-                    pos[COL] = col
+                    pos[@@ROW] = row - 1
                 when Irrgarten::Directions::DOWN
-                    pos[ROW] = row + 1
-                    pos[COL] = col
+                    pos[@@ROW] = row + 1
                 when Irrgarten::Directions::RIGHT
-                    pos[ROW] = row
-                    pos[COL] = col + 1
+                    pos[@@COL] = col + 1
                 when Irrgarten::Directions::LEFT
-                    pos[ROW] = row
-                    pos[COL] = col - 1
+                    pos[@@COL] = col - 1
             else
                 raise ArgumentError, "Invalid direction: #{direction}"
             #implementamos un raise al final del case para que no se pueda pasar un valor que no sea UP, DOWN, RIGHT o LEFT
@@ -232,8 +230,8 @@ module Irrgarten
         def randomEmptyPos
             pos = Array.new(2)
             while true
-                pos[ROW] = Dice.randomPos(nRows)
-                pos[COL] = Dice.randomPos(nCols)
+                pos[@@ROW] = Dice.randomPos(@nRows)
+                pos[@@COL] = Dice.randomPos(@nCols)
                 if emptyPos(pos[0],pos[1])
                     break
                 end
@@ -264,7 +262,7 @@ module Irrgarten
                 monsterPosVar = monsterPos(row, col)
 
                 if monsterPosVar
-                    @labyrinth[row][col] = COMBAT_CHAR
+                    @labyrinth[row][col] = @@COMBAT_CHAR
                     output = @monsters[row][col]
                 else
                     number = player.number
@@ -286,7 +284,7 @@ module Irrgarten
             oldCol = player.col
 
             newPos = dir2Pos(oldRow, oldCol, direction)
-            monster = putPlayer2D(oldRow, oldCol, newPos[ROW], newPos[COL], player) 
+            monster = putPlayer2D(oldRow, oldCol, newPos[@@ROW], newPos[@@COL], player) 
             monster
         end
 
@@ -298,8 +296,6 @@ module Irrgarten
         # @param length [Integer] La longitud del bloque.
         # @return [void]
         def addBlock(orientation, startRow, startCol, length)
-            incRow = 0
-            incCol = 0
             if orientation == Orientation::VERTICAL
                 incRow = 1
                 incCol = 0
@@ -310,13 +306,11 @@ module Irrgarten
             row = startRow
             col = startCol
 
-            i = 0
-            while posOK(row, col) && emptyPos(row, col) && length > 0
-                labyrinth[row][col] = BLOCK_CHAR
+            while posOK(row, col) && emptyPos(row, col) && (length > 0)
+                @labyrinth[row][col] = @@BLOCK_CHAR
                 length -= 1
                 row += incRow
                 col += incCol
-                i += 1
             end
         end
 
@@ -380,7 +374,7 @@ module Irrgarten
         # @param col [Integer] Columna de la casilla.
         # @return [void]
         def addCombat(row, col)
-            @labyrinth[row][col] = COMBAT_CHAR
+            @labyrinth[row][col] = @@COMBAT_CHAR
         end
 
         # Muestra las posiciones de las casillas de combate en el laberinto.
@@ -395,6 +389,8 @@ module Irrgarten
                 end
             end
         end
+
+        # -------------Añadidas extra para pruebas--------------------------------
 
         # Convierte un jugador en un FuzzyPlayer y lo actualiza en la matriz de jugadores si coincide el número.
         #

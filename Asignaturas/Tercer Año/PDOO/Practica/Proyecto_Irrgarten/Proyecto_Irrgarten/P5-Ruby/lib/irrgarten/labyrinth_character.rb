@@ -2,7 +2,9 @@
 # @autor: Ismael Sallami Moreno
 module Irrgarten
     class LabyrinthCharacter
+        # La fila o columna inválida.
         @@INVALID_POS=-1
+        
         # Initializes a new LabyrinthCharacter object.
         #
         # @param name [String] el nombre del personaje
@@ -46,6 +48,9 @@ module Irrgarten
         # @return [int] columna de la posición del personaje
         attr_reader :col
 
+        #-----------definición de accessor, reader, ...-----------
+
+
         # Modificador de la posición del personaje
         #
         # @param row [int] fila de la posición del personaje
@@ -55,7 +60,6 @@ module Irrgarten
             @col = col
         end
 
-        #-----------definición de accessor, reader, ...-----------
 
 
 
@@ -115,12 +119,12 @@ module Irrgarten
             @health
         end
 
-        # Establece el nivel de salud del personaje.
-        #
-        # @param health [Integer] el nuevo nivel de salud del personaje
-        def set_health(health)
-            @health = health
-        end
+        # # Establece el nivel de salud del personaje.
+        # #
+        # # @param health [Integer] el nuevo nivel de salud del personaje
+        # def set_health(health)
+        #     @health = health
+        # end
 
         public
 
@@ -128,7 +132,7 @@ module Irrgarten
         #
         # @param row [Integer] la nueva fila del personaje
         # @param col [Integer] la nueva columna del personaje
-        def set_pos(row, col)
+        def setPos(row, col)
             @row = row
             @col = col
         end
@@ -137,13 +141,13 @@ module Irrgarten
         #
         # @return [String] una cadena que representa al personaje
         def to_s
-            "Labyrinth Character#{@name} (Row: #{@row}, Col: #{@col})"
+            "#{@name} (Intelligence: #{@intelligence}, Strength: #{@strength}, Health: #{@health}, Row: #{@row}, Col: #{@col})"
         end
 
         protected
         
         # Reduce la salud del personaje en 1.
-        def got_wounded
+        def gotWounded
             @health -= 1
         end
 
