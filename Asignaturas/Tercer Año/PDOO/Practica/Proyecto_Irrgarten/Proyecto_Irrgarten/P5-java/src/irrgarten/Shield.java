@@ -31,15 +31,7 @@ package irrgarten;
  * 
  * @author ismael
  */
-public class Shield extends CombatElement {
-    /**
-     *  El valor de protección que ofrece el escudo.
-     */
-    private float protection; 
-    /**
-     * El número de veces que el escudo puede ser utilizado.
-     */
-    private int uses;         
+public class Shield extends CombatElement {      
 
     /**
      * Constructor para crear un nuevo escudo con un valor de protección y un número de usos.

@@ -30,36 +30,7 @@ public class Monster extends LabyrinthCharacter{
      * Salud inicial predeterminada para cada monstruo.
      */
     private static final int INITIAL_HEALTH = 5;
-    
-    /**
-     * Nombre del monstruo.
-     */
-    private String name;
-    
-    /**
-     * Nivel de inteligencia del monstruo.
-     */
-    private float intelligence;
-    
-    /**
-     * Nivel de fuerza del monstruo.
-     */
-    private float strength;
-    
-    /**
-     * Salud actual del monstruo.
-     */
-    private float health;
-    
-    /**
-     * Fila en la que se encuentra el monstruo dentro del laberinto.
-     */
-    private int row;
-    
-    /**
-     * Columna en la que se encuentra el monstruo dentro del laberinto.
-     */
-    private int col;
+ 
     
     /**
      * Crea una instancia de {@code Monster} con los atributos especificados.
@@ -91,7 +62,7 @@ public class Monster extends LabyrinthCharacter{
     public boolean defend(float receivedAttack)  {
         boolean isDead = dead();
         if(isDead){
-            float defensiveEnergy=Dice.intensity(intelligence);
+            float defensiveEnergy=Dice.intensity(getIntelligence());
             
             if(defensiveEnergy<receivedAttack){
                 gotWounded();

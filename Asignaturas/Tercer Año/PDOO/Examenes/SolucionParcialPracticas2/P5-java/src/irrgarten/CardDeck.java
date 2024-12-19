@@ -7,7 +7,8 @@ import  java.util.ArrayList;
 import java.util.Collections;
 
 /**
- *
+ * Clase parametrizable, además de ser abstracta para las barajas del juego.
+ * 
  * @author ismael
  */
 abstract class CardDeck <T extends CombatElement> {
@@ -44,7 +45,6 @@ abstract class CardDeck <T extends CombatElement> {
      * Devuelve la siguiente carta
      */
     public T nextCard(){
-        T next;
         if(cardDeck.isEmpty()){
             addCards();
             Collections.shuffle(cardDeck);

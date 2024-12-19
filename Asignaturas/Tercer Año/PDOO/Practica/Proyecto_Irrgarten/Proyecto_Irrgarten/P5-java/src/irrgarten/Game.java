@@ -23,7 +23,7 @@ public class Game {
     /**
      * Número máximo de rondas que puede tener el juego.
      */
-    private final int MAX_ROUNDS = 10;
+    private static final int MAX_ROUNDS = 10;
     
     /**
      * Índice del jugador actual en el arreglo de jugadores.
@@ -88,7 +88,7 @@ public class Game {
     private final int EXIT_COL = 6;
     
     /**
-     * Número aleatorio para generar longitud de muro
+     * Número aleatorio para generar longitud del muro
      */
     private final int RANDOM_POS = 5;
     
@@ -109,12 +109,12 @@ public class Game {
         log = "Game has started.\n";
 
         // crear los jugadores y añadirlos al contenedor adecuado
-        players = new ArrayList<>();
         for (int i = 0; i < nPlayers; i++) {
             char c = (char) ('0' + i); //asignar índice pero en formato char
             players.add(new Player(c, Dice.randomIntelligence(), Dice.randomStrength()));
         }
         
+        //asignamos el jugador actual
          currentPlayer = players.get(currentPlayerIndex);
          
         //Método que configura el laberinto
@@ -167,7 +167,7 @@ public class Game {
         for (int i = 0; i < NUM_MONSTER-1; i++) { // Iterar sobre cada monstruo en el arreglo de monstruos
             monsters.add(new Monster("Monster " + (i + 1), Dice.randomIntelligence(), Dice.randomStrength())); // Crear un monstruo con nombre y atributos aleatorios
         }
-        monsters.add(new Monster("Monster 3", 30000, 30000)); // Crear un monstruo con nombre y atributos fijos
+        monsters.add(new Monster("The Killer", 30000, 30000)); // Crear un monstruo con nombre y atributos fijos
 
         // Añadir monstruos
         for (Monster monster : monsters) { // Itera sobre cada monstruo en el arreglo de monstruos
@@ -259,17 +259,23 @@ public class Game {
         boolean dead = currentPlayer.dead();
         
         if(!dead){
+            // Se obtiene la dirección real a la que se mueve el jugador.
+            // Si no se puede mover, se indica en el log
             Directions direction = actualDirection(preferredDirection);
             System.out.print("direction es: " + direction.toString() + "y preferred es" + preferredDirection.toString() );
             if(direction != preferredDirection) logPlayerNoOrders();
         
+            // Se mueve al jugador y se obtiene el monstruo que haya en la casilla
             Monster monster = labyrinth.putPlayer(preferredDirection, currentPlayer);
 
+            // Se estudia si hay un monstruo en la casilla a la que se ha movido el jugador
             if(monster == null){
                 logNoMonster();
             }
             else{
+                //comienza el combate
                 GameCharacter winner = combat(monster);
+                //recompensa
                 manageReward(winner);
             }
         }
@@ -277,7 +283,7 @@ public class Game {
             manageResurrection();
         }
         boolean endGame = finished();
-        if(!endGame) nextPlayer();
+        if(!endGame) nextPlayer(); //comprobamos si ha finalizado el juego, si no pasamos al siguiente jugador
         
         return endGame;
     }
@@ -291,9 +297,12 @@ public class Game {
      *         si es válida, o otra dirección válida si la preferida no es posible.
      */
     public Directions actualDirection(Directions preferredDirection) {
+        // Se obtiene la fila y columna actual del jugador
         int currentRow=currentPlayer.getRow();
         int currentCol=currentPlayer.getCol();
+        // Direcciones posibles desde la casilla actual
         ArrayList<Directions> validMoves = labyrinth.validMoves(currentRow, currentCol);
+        // Se mueve al jugador y devolvemos esa dirección
          return currentPlayer.move(preferredDirection, validMoves);
     }
 
@@ -305,21 +314,23 @@ public class Game {
      * @return el ganador del combate, ya sea GameCharacter.PLAYER o GameCharacter.MONSTER
      */
     public GameCharacter combat(Monster monster) {
-        int rounds = 0;
-        GameCharacter winner = GameCharacter.PLAYER;
+        int rounds = 0; //inicializamos el numero de rondas a 0
         
+        // Suponemos que el jugador ganará, y empieza este atacando.
+        GameCharacter winner = GameCharacter.PLAYER;
         float playerAttack = currentPlayer.attack();
         boolean lose = monster.defend(playerAttack);
         
+        // Bucle que simula el combate entre el jugador y el monstruo
         while(!lose && rounds<MAX_ROUNDS){
-            rounds++;
+            rounds++; // incrementamos rondas
             
-            winner = GameCharacter.MONSTER;
-            
+            // Suponemos que el monstruo ganará, y continúa este atacando.
+            winner = GameCharacter.MONSTER; 
             float monsterAttack = monster.attack();
             lose = currentPlayer.defend(monsterAttack);
             
-            if(!lose){
+            if(!lose){ // si no ha perdido, suponemos que el jugador gana y este seguirá atacando
                 playerAttack = currentPlayer.attack();
                 winner = GameCharacter.PLAYER;
                 lose = monster.defend(playerAttack);
@@ -370,10 +381,11 @@ public class Game {
         }
     }
 
+    //------FUNCIÓN EXTRA------
     /**
      * Función que me pinta el laberinto que tengo de la mejor manera posible
      */
-    public void printLabyrinth(){
+    /*public void printLabyrinth(){
         System.out.println("\n Laberinto: \n");
         for(int i = 0; i <labyrinth.getnRows(); i++){
             for(int j = 0; j <labyrinth.getnCols(); j++){
@@ -381,7 +393,7 @@ public class Game {
             }
             System.out.print("\n");
         }
-    }
+    }*/
 
 }
 

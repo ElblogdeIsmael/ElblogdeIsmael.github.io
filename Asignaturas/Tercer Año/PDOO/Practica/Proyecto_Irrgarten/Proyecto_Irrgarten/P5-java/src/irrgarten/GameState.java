@@ -128,6 +128,7 @@ public class GameState {
         return log; 
     }
 
+    //------FUNCION EXTRA -----
     /**
      * Devuelve el estado de GameState en formato string
      * @return el estado de GameState en formato string

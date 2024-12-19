@@ -43,39 +43,10 @@ public class Player extends LabyrinthCharacter{
     private static final int HITS2LOSE = 3;
 
     /**
-     * El nombre del jugador.
-     */
-    private String name;
-
-    /**
      * El número identificador del jugador.
      */
     private char number;
 
-    /**
-     * El nivel de inteligencia del jugador.
-     */
-    private float intelligence;
-
-    /**
-     * El nivel de fuerza del jugador.
-     */
-    private float strength;
-
-    /**
-     * El nivel de salud del jugador.
-     */
-    private int health;
-
-    /**
-     * La posición de fila del jugador en el laberinto.
-     */
-    private int row;
-
-    /**
-     * La posición de columna del jugador en el laberinto.
-     */
-    private int col;
 
     /**
      * El número de golpes consecutivos recibidos por el jugador.
@@ -112,8 +83,12 @@ public class Player extends LabyrinthCharacter{
     public Player(char number, float intelligence, float strength) {
         super("Player #" + number, intelligence, strength, INITIAL_HEALTH);
         this.number = number;
+        
+        //inicializamos los arrays
         this.weapons = new ArrayList<>();
         this.shields = new ArrayList<>();
+        
+        //inicializamos las barajas
         this.weaponCardDeck = new WeaponCardDeck();
         this.shieldCardDeck = new ShieldCardDeck();
     }
@@ -123,7 +98,8 @@ public class Player extends LabyrinthCharacter{
      * @param other objeto de la clase Player para realizar la copia
      */
     public Player (Player other){
-        super(other);
+        super(other); //usamos el constructor de copia de la clase LabyrinthCharacter
+        
         this.number = other.number;
         this.consecutiveHits = other.consecutiveHits;
         
@@ -142,9 +118,10 @@ public class Player extends LabyrinthCharacter{
      * Resucita al jugador restaurando su salud, hits consecutivos y reiniciando armas y escudos.
      */
     public void resurrect() {    
-        health = INITIAL_HEALTH;
+        setHealth(INITIAL_HEALTH);
         resetHits();
         
+        //vaciamos los vectores
         weapons.clear();
         shields.clear();
     }
@@ -163,7 +140,7 @@ public class Player extends LabyrinthCharacter{
      * @return El poder total de ataque.
      */
     public float attack() {
-        return (strength + sumWeapons());
+        return (getStrength() + sumWeapons());
     }
 
     /**
@@ -203,8 +180,7 @@ public class Player extends LabyrinthCharacter{
      * @return Una nueva instancia de {@code Weapon}.
      */
     public Weapon newWeapon() {
-        Weapon w = new Weapon(Dice.weaponPower(), Dice.usesLeft());
-        return w;
+        return weaponCardDeck.nextCard();
     }
 
     /**
@@ -212,8 +188,7 @@ public class Player extends LabyrinthCharacter{
      * @return Una nueva instancia de {@code Shield}.
      */
     public Shield newShield() {
-        Shield s = new Shield(Dice.shieldPower(), Dice.usesLeft());
-        return s;
+        return shieldCardDeck.nextCard();
     }
 
     /**
@@ -221,7 +196,7 @@ public class Player extends LabyrinthCharacter{
      * @return La energía defensiva acumulada.
      */
     protected float defensiveEnergy() {
-        return (intelligence + sumShields());
+        return (getIntelligence() + sumShields());
     }
 
     /**
@@ -314,6 +289,7 @@ public class Player extends LabyrinthCharacter{
             boolean discard = wi.discard();
             if(discard){
                 weapons.remove(i);
+                i--; //debemos de restar 1, ya que hemos eliminado una posicion
             }
         }
         int size = weapons.size();
@@ -332,6 +308,7 @@ public class Player extends LabyrinthCharacter{
             boolean discard = si.discard();
             if(discard){
                 shields.remove(i);
+                i--; //debemos de restar 1, ya que hemos eliminado una posicion
             }
             
         }
@@ -356,13 +333,15 @@ public class Player extends LabyrinthCharacter{
         else{
             resetHits();
         }
-        if(consecutiveHits==HITS2LOSE || dead()){
+        if(consecutiveHits==Player.HITS2LOSE || dead()){
             resetHits();
             lose=true;
         }
         return lose;
         
     }
+    
+    //------FUNCIONES EXTRAS PARA REALIZAR TESTS----------------
     /**
      * Añade una arma a weapons
      * @param w Arma a añadir
@@ -379,5 +358,6 @@ public class Player extends LabyrinthCharacter{
         shields.add(s);
     }   
     
+    //------FUNCIONES EXTRAS PARA REALIZAR TESTS----------------
 
 }

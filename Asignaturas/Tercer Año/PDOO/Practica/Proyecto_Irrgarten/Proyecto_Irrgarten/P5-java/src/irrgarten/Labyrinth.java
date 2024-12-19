@@ -4,7 +4,6 @@
  */
 package irrgarten;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -27,62 +26,75 @@ public class Labyrinth {
     /**
      * Carácter que representa un bloque en el laberinto.
      */
-    private final char BLOCK_CHAR = 'X';
+    private static final char BLOCK_CHAR = 'X';
     
     /**
      * Carácter que representa una posición vacía en el laberinto.
      */
-    private final char EMPTY_CHAR = '-';
+    private static final char EMPTY_CHAR = '-';
     
     /**
      * Carácter que representa la posición de un monstruo en el laberinto.
      */
-    private final char MONSTER_CHAR = 'M';
+    private static final char MONSTER_CHAR = 'M';
     
     /**
      * Carácter que representa una posición de combate en el laberinto.
      */
-    private final char COMBAT_CHAR = 'C';
+    private static final char COMBAT_CHAR = 'C';
     
     /**
      * Carácter que representa la salida del laberinto.
      */
-    private final char EXIT_CHAR = 'E';
+    private static final char EXIT_CHAR = 'E';
     
     /**
      * Constante que indica el índice de la fila.
      */
-    private final int ROW = 0;
+    private static final int ROW = 0;
     
     /**
      * Constante que indica el índice de la columna.
      */
-    private final int COL = 1;
+    private static final int COL = 1;
     
     /**
      * Constante que indica una posición inválida
      */
-    private final int INVALID_POS=-1;
+    private static final int INVALID_POS=-1;
     
+    /**
+     * Número de filas del laberinto.
+     */
     private int nRows;
+    /**
+     * Número de columnas del laberinto.
+     */
     private int nCols;
+    
+    /**
+     * Fila de la casilla de salida.
+     */
     private int exitRow;
+    /**
+     * Columna de la casilla de salida.
+     */
     private int exitCol;
     
     /**
      * Matriz que representa el laberinto con los diferentes tipos de posiciones.
      */
-    private char labyrinth[][];
+    private char [][] labyrinth;
     
     /**
      * Matriz que contiene los monstruos ubicados en el laberinto.
      */
-    private Monster monsters[][];
+    private Monster [][] monsters;
     
     /**
      * Matriz que contiene los jugadores ubicados en el laberinto.
      */
-    private Player players[][];
+    private Player [][] players;
     
     /**
      * Crea una nueva instancia de {@code Labyrinth} con las dimensiones y la posición de salida especificadas.
@@ -93,18 +105,22 @@ public class Labyrinth {
      * @param exitCol columna de la posición de salida
      */
     public Labyrinth(int nRows, int nCols, int exitRow, int exitCol) {
+        //incializamos las variables privadas
         this.nRows = nRows;
         this.nCols = nCols;
         this.exitRow = exitRow;
         this.exitCol = exitCol;
         
+        //definimos el laberinto
         labyrinth = new char[nRows][nCols];
-        for(int i=0;i<nRows;i++){ //inicializamos la matriz a casillas vacias
+        for(int i=0;i<nRows;i++){ //inicializamos la matriz
             for(int j=0;j<nCols;j++){
-                labyrinth[i][j]=EMPTY_CHAR;
+                labyrinth[i][j]=EMPTY_CHAR; //inicializamos todas las casillas como casillas vacias
             }
         }
-        labyrinth[exitRow][exitCol]=EXIT_CHAR;
+        labyrinth[exitRow][exitCol]=EXIT_CHAR; //casilla de salida
+        
+        //inicializamos las matrices de jugadores y de monstruos
         monsters = new Monster[nRows][nCols];
         players = new Player[nRows][nCols];
     }
@@ -189,9 +205,9 @@ public class Labyrinth {
      */
     public void spreadPlayers(ArrayList<Player>players) {
         for(int i=0;i<players.size();i++){
-            int [] pos = randomEmptyPos();
-            System.out.println("La posicion random generada es: " + pos[0] + pos[1] + "n");
-            putPlayer2D(INVALID_POS, INVALID_POS, pos[ROW], pos[COL], players.get(i));
+            int [] pos = randomEmptyPos(); // calculamos una posicion vacia para colocar el jugador
+            //System.out.println("La posicion random generada es: " + pos[0] + pos[1] + "n");
+            putPlayer2D(INVALID_POS, INVALID_POS, pos[ROW], pos[COL], players.get(i)); // colocamos el jugador
         }
     }
 
@@ -212,9 +228,12 @@ public class Labyrinth {
      */
     @Override
     public String toString() {
-        showCombat();
+        //Funciones implementadas por mi parte para mejorar la cohesion y modularizacion del codigo
+        //Ademas, es para asegurarme de que comienza como debe
+        showCombat(); 
         showMonstersAndPlayers();
         
+        //añado a la salida
         String s =  "nRows: " + nRows + " nCols: " + nCols + " exitRow: " + exitRow + " exitCol: " + exitCol;
         s+="\n Laberinto: \n";
         for(int i = 0; i <getnRows(); i++){
@@ -241,6 +260,12 @@ public class Labyrinth {
             monsters[row][col]=monster;
         }
     }
+    
+    //-------------------------------------------------------------------------------
+    //  Nota: en las comprobaciones de casillas siempre realice 
+    // comprobaciones sobre si era correcta pero limite la 
+    // implementacion a lo que pedia
+    //-------------------------------------------------------------------------------
 
     /**
      * Verifica si una posición en el laberinto es válida.
@@ -260,8 +285,11 @@ public class Labyrinth {
      * @param col la columna de la posición
      * @return {@code true} si la posición está vacía; {@code false} de lo contrario
      */
-    public boolean emptyPos(int row, int col) {
-        return posOK(row, col) &&  labyrinth[row][col] == EMPTY_CHAR ;
+    public boolean emptyPos(int row, int col) { 
+        // he decidido añadir en la comprobacion de que la casilla 
+        //este vacia el ver si esta dentro del laberinto
+        //return posOK(row, col) &&  labyrinth[row][col] == EMPTY_CHAR ;
+        return labyrinth[row][col] == EMPTY_CHAR;
     }
 
     /**
@@ -272,7 +300,8 @@ public class Labyrinth {
      * @return {@code true} si la posición contiene un monstruo; {@code false} de lo contrario
      */
     public boolean monsterPos(int row, int col) {
-        return posOK(row, col) && labyrinth[row][col]==MONSTER_CHAR;
+        //return posOK(row, col) && labyrinth[row][col]==MONSTER_CHAR;
+        return labyrinth[row][col] == MONSTER_CHAR;
     }
 
     /**
@@ -283,7 +312,8 @@ public class Labyrinth {
      * @return {@code true} si la posición es la salida; {@code false} de lo contrario
      */
     public boolean exitPos(int row, int col) {
-        return posOK(row, col) && labyrinth[row][col]==EXIT_CHAR;
+        //return posOK(row, col) && labyrinth[row][col]==EXIT_CHAR;
+        return labyrinth[row][col] == EXIT_CHAR;
     }
 
     /**
@@ -294,7 +324,8 @@ public class Labyrinth {
      * @return {@code true} si la posición es de combate; {@code false} de lo contrario
      */
     public boolean combatPos(int row, int col) {
-        return posOK(row, col) && labyrinth[row][col]==COMBAT_CHAR;
+        //return posOK(row, col) && labyrinth[row][col]==COMBAT_CHAR;
+        return labyrinth[row][col] == COMBAT_CHAR;
     }
 
     /**
@@ -336,16 +367,16 @@ public class Labyrinth {
         pos[ROW] = row;
         switch (direction) {
             case UP:
-                pos[ROW] = row - 1;
+                pos[ROW]--;
                 break;
             case DOWN:
-                pos[ROW] = row + 1;
+                pos[ROW]++;
                 break;
             case RIGHT:
-                pos[COL] = col + 1;
+                pos[COL]++;
                 break;
             case LEFT:
-                pos[COL] = col - 1;
+                pos[COL]--;
                 break;
         }
         return pos;
@@ -411,7 +442,7 @@ public class Labyrinth {
      * @return El monstruo encontrado en la nueva posición, si lo hay.
      */
     public Monster putPlayer(Directions direction, Player player) {
-        int oldRow = player.getRow();
+        int oldRow = player.getRow(); 
         int oldCol = player.getCol();
         
         int[] newPos = dir2Pos(oldRow, oldCol, direction);
@@ -471,8 +502,9 @@ public class Labyrinth {
         }
 
         return validMoves;
-        //usamos to array para convertir la lista en un array, que es lo que tiene que devolver esta función
     }
+    
+    //----- FUNCIONES EXTRA-------------------------------
     /**
      * Añade un jugador en la casilla que se indica.
      * @param row fila de la casilla
@@ -520,6 +552,9 @@ public class Labyrinth {
             }
         }
     }
+    
+//----- FUNCIONES EXTRA-------------------------------
+
     
     /**
      * Funcion para convertir un player normal a fuzzy

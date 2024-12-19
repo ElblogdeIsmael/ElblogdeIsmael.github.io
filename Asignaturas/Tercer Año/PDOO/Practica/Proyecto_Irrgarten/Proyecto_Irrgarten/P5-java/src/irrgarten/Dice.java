@@ -121,55 +121,55 @@ public class Dice {
     /**
      * Genera una cantidad aleatoria de armas recibidas como recompensa.
      *
-     * @return un valor entero entre 0 y WEAPONS_REWARD - 1.
+     * @return un valor entero entre 0 y WEAPONS_REWARD .
      */
     static public int weaponsReward(){
-        return generator.nextInt(WEAPONS_REWARD)+1;
+        return generator.nextInt(WEAPONS_REWARD+1);
     }
     
     /**
      * Genera una cantidad aleatoria de escudos recibidos como recompensa.
      *
-     * @return un valor entero entre 0 y SHIELDS_REWARD - 1.
+     * @return un valor entero entre 0 y SHIELDS_REWARD.
      */
     static public int shieldsReward(){
-        return generator.nextInt(SHIELDS_REWARD)+1;
+        return generator.nextInt(SHIELDS_REWARD+1); //Intervalo cerrado, debemos de incluir el ultimo
    }
     
     /**
      * Genera una cantidad aleatoria de salud recibida como recompensa.
      *
-     * @return un valor entero entre 0 y HEALTH_REWARD - 1.
+     * @return un valor entero entre 0 y HEALTH_REWARD .
      */
     static public int healthReward(){
-        return generator.nextInt(HEALTH_REWARD)+1;
+        return generator.nextInt(HEALTH_REWARD+1);
     }
     
     /**
      * Genera un valor aleatorio de potencia para un arma.
      *
-     * @return un valor flotante entre 0 y MAX_ATTACK - 1.
+     * @return un valor flotante entre 0 y MAX_ATTACK .
      */
     static public float weaponPower(){
-        return generator.nextInt(MAX_ATTACK);
+        return generator.nextFloat()*MAX_ATTACK;
     }
    
     /**
      * Genera un valor aleatorio de potencia para un escudo.
      *
-     * @return un valor flotante entre 0 y MAX_SHIELD - 1.
+     * @return un valor flotante entre 0 y MAX_SHIELD .
      */
     static public float shieldPower(){
-        return generator.nextInt(MAX_SHIELD);
+        return generator.nextFloat()*MAX_SHIELD;
     }
     
     /**
      * Genera un número aleatorio de usos restantes para armas o escudos.
      *
-     * @return un valor entero entre 0 y MAX_USES - 1.
+     * @return un valor entero entre 0 y MAX_USES .
      */
     static public int usesLeft(){
-        return generator.nextInt(MAX_USES)+1;
+        return generator.nextInt(MAX_USES+1);
     }
     
     /**
@@ -212,6 +212,16 @@ public class Dice {
             out =  validMoves.get(generator.nextInt(validMoves.size()));
         }
          return out;
+         
+         //Otra implementacion:
+         /*Directions toReturn=preference;
+        
+        if(Dice.randomIntelligence()>intelligence){
+            int indice=generator.nextInt(validMoves.size());
+            toReturn=validMoves.get(indice);          
+        }
+        
+        return toReturn;*/
     }
 }
     

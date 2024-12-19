@@ -32,14 +32,6 @@ package irrgarten;
  * @author ismael
  */
 class Weapon extends CombatElement{
-    /**
-     * El poder de ataque que tiene el arma.
-     */
-    private float power; 
-    /**
-     * El número de veces que el arma puede ser utilizada.
-     */
-    private int uses;    
 
     /**
      * Constructor para crear un nuevo arma con un poder de ataque y un número de usos.
