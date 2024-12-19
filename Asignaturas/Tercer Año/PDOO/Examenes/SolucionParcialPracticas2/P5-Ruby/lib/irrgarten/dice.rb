@@ -1,4 +1,5 @@
 #encoding:utf-8
+require_relative 'PlayerTypes'
 module Irrgarten
     # Clase que representa un dado para generar valores aleatorios en el juego.
     # Contiene métodos para calcular atributos y valores relacionados con jugadores, monstruos, armas, y escudos.
@@ -136,7 +137,14 @@ module Irrgarten
             out
         end
 
-        
-
-    end
-end 
+	      def self.WhoPlayerIs
+		      prob = @@generator.rand        
+		      p = PlayerTypes::SUPER
+		      if prob<=0.2
+			      p = PlayerTypes::FUZZY			
+          end
+		      p
+	      end
+  end 
+  
+end

@@ -224,5 +224,22 @@ public class Dice {
         
         return p;
     }
+    
+    static public Directions RandomPosition(){
+        float prob = generator.nextInt(4);
+        Directions out;
+        if(prob == 0){
+           out = Directions.DOWN;
+        }
+        else if(prob==1){
+            out = Directions.LEFT;
+        }
+        else if(prob ==2){
+            out = Directions.RIGHT;
+        }
+        else out = Directions.UP;
+        
+       return out;
+    }
 }
     

@@ -405,6 +405,16 @@ module Irrgarten
             end
 
         end
+        
+        def PlayerTOSuperPlayer(superPlayer)
+            row = superPlayer.row
+            col = superPlayer.col
+
+            if @players[row][col].number == superPlayer.number
+                @players[row][col] = superPlayer
+            end
+
+        end
 
 
 

@@ -52,6 +52,7 @@ module Irrgarten
         # @return [int] número de golpes consecutivos recibidos
         attr_reader :consecutiveHits
 
+
         public
 
         # Constructor de copia

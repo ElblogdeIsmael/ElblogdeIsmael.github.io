@@ -364,18 +364,18 @@ public class Game {
             logResurrected();
             
             //añadir la funcionalidad del fuzzyplayer
-            //PlayerTypes p = Dice.fuzzyORsuper();
-            //if(p==PlayerTypes.FUZZY){
+            PlayerTypes p = Dice.fuzzyORsuper();
+            if(p==PlayerTypes.FUZZY){
                 FuzzyPlayer fuzzyPlayer = new FuzzyPlayer(currentPlayer);
                 players.set(currentPlayerIndex, fuzzyPlayer);
                 labyrinth.PlayerTOfuzzyPlayer(fuzzyPlayer);
                 System.out.print("Ha cambiado la posiicion exitosamente \n");
-            //}
-            /*else{
+            }
+            else{
                 SuperPlayer superPlayer = new SuperPlayer(currentPlayer);
                 players.set(currentPlayerIndex, superPlayer);
                 labyrinth.PlayerTOsuperPlayer(superPlayer);
-            }*/
+            }
         }
         else{
             logPlayerSkipTurn();

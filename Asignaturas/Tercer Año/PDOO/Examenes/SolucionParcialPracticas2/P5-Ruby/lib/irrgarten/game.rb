@@ -7,6 +7,8 @@ require_relative 'game_state'
 require_relative 'game_character'
 require_relative 'orientation'
 require_relative 'fuzzy_player'
+require_relative 'super_player'
+
 
 
 # Módulo principal del juego Irrgarten, que contiene las clases de jugadores, monstruos y el laberinto.
@@ -320,11 +322,18 @@ module Irrgarten
             if resurrect
                 currentPlayer.resurrect
                 logResurrected
-
-                #debemos de usar fuzzy player
-                fuzzy = FuzzyPlayer.new(@currentPlayer)
-                @players[@currentPlayerIndex] = fuzzy
-                @labyrinth.PlayerTOFuzzyPlayer(fuzzy)
+                
+                p = Dice.WhoPlayerIs
+                if(p == PlayerTypes::FUZZY)
+                  fuzzy = FuzzyPlayer.new(@currentPlayer)
+                  @players[@currentPlayerIndex] = fuzzy
+                  @labyrinth.PlayerTOFuzzyPlayer(fuzzy)
+                else
+                  superPlayer = SuperPlayer.new(@currentPlayer)
+                  @players[@currentPlayerIndex] = superPlayer
+                  @labyrinth.PlayerTOSuperPlayer(superPlayer)
+                end
+                
             else
                 logPlayerSkipTurn
             end
