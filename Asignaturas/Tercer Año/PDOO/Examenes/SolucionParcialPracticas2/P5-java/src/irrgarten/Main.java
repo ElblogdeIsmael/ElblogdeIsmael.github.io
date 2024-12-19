@@ -21,9 +21,10 @@ import irrgarten.controller.Controller;
 
 public class Main {
     public static void main(String[] args) {
+        final int PLAYERS = 1;
         //TextUI textUI = new TextUI();
         GraphicUI graphicUI = new GraphicUI();
-        Game game = new Game(1);
+        Game game = new Game(PLAYERS );
         //Controller controller = new Controller(game,textUI);
         Controller controller = new Controller(game,graphicUI);
         controller.play();  // Inicia el juego con la interfaz de texto.

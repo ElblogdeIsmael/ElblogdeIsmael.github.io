@@ -190,6 +190,7 @@ public class Labyrinth {
     public void spreadPlayers(ArrayList<Player>players) {
         for(int i=0;i<players.size();i++){
             int [] pos = randomEmptyPos();
+            System.out.println("La posicion random generada es: " + pos[0] + pos[1] + "n");
             putPlayer2D(INVALID_POS, INVALID_POS, pos[ROW], pos[COL], players.get(i));
         }
     }
@@ -531,4 +532,12 @@ public class Labyrinth {
             players[row][col]=other;
         }
     }
+    public void PlayerTOsuperPlayer(SuperPlayer other){
+        int row = other.getRow();
+        int col = other.getCol();
+        if(players[row][col].getNumber() == other.getNumber()){
+            players[row][col]=other;
+        }
+    }
+    
 }

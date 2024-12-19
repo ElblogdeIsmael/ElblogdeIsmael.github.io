@@ -147,7 +147,7 @@ protected float getStrength(){
  * @param health la nueva salud.
  */
 protected void setHealth(float health){
-    health = health;
+    this.health = health;
 }
 
 /**

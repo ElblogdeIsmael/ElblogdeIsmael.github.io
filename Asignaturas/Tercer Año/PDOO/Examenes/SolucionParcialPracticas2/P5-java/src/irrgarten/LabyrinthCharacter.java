@@ -147,7 +147,7 @@ protected float getStrength(){
  * @param health la nueva salud.
  */
 protected void setHealth(float health){
-    health = health;
+    this.health = health;
 }
 
 /**
@@ -157,8 +157,8 @@ protected void setHealth(float health){
  * @param col la nueva columna.
  */
 public void setPos(int row, int col){
-    row = row;
-    col = col;
+    this.row = row;
+    this.col = col;
 }
 
 /**

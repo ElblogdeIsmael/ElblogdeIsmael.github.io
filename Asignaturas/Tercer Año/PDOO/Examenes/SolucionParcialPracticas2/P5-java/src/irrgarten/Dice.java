@@ -213,5 +213,16 @@ public class Dice {
         }
          return out;
     }
+    
+    static public PlayerTypes fuzzyORsuper(){
+        float prob = generator.nextFloat();
+        PlayerTypes p;
+        if(prob<= 0.2){
+            p = PlayerTypes.FUZZY;
+        }
+        else p = PlayerTypes.SUPER;
+        
+        return p;
+    }
 }
     

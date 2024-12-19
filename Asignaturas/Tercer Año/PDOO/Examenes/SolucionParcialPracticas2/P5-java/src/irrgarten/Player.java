@@ -142,7 +142,7 @@ public class Player extends LabyrinthCharacter{
      * Resucita al jugador restaurando su salud, hits consecutivos y reiniciando armas y escudos.
      */
     public void resurrect() {    
-        health = INITIAL_HEALTH;
+        setHealth(INITIAL_HEALTH);
         resetHits();
         
         weapons.clear();

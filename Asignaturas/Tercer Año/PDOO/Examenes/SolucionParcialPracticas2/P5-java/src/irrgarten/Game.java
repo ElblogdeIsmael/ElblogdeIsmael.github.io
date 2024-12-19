@@ -257,8 +257,10 @@ public class Game {
     public boolean nextStep(Directions preferredDirection) {
         log="";
         boolean dead = currentPlayer.dead();
+        System.out.print("ENTRA EN NEXTSTEP \n " );
         
         if(!dead){
+            System.out.print("ENTRA EN NEXTSTEP cuando no esta muerto\n " );
             Directions direction = actualDirection(preferredDirection);
             System.out.print("direction es: " + direction.toString() + "y preferred es" + preferredDirection.toString() );
             if(direction != preferredDirection) logPlayerNoOrders();
@@ -274,6 +276,7 @@ public class Game {
             }
         }
         else{
+            System.out.print("Quiere revivir en el else\n " );
             manageResurrection();
         }
         boolean endGame = finished();
@@ -361,9 +364,18 @@ public class Game {
             logResurrected();
             
             //añadir la funcionalidad del fuzzyplayer
-            FuzzyPlayer fuzzyPlayer = new FuzzyPlayer(currentPlayer);
-            players.set(currentPlayerIndex, fuzzyPlayer);
-            labyrinth.PlayerTOfuzzyPlayer(fuzzyPlayer);
+            //PlayerTypes p = Dice.fuzzyORsuper();
+            //if(p==PlayerTypes.FUZZY){
+                FuzzyPlayer fuzzyPlayer = new FuzzyPlayer(currentPlayer);
+                players.set(currentPlayerIndex, fuzzyPlayer);
+                labyrinth.PlayerTOfuzzyPlayer(fuzzyPlayer);
+                System.out.print("Ha cambiado la posiicion exitosamente \n");
+            //}
+            /*else{
+                SuperPlayer superPlayer = new SuperPlayer(currentPlayer);
+                players.set(currentPlayerIndex, superPlayer);
+                labyrinth.PlayerTOsuperPlayer(superPlayer);
+            }*/
         }
         else{
             logPlayerSkipTurn();
