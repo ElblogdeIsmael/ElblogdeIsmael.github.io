@@ -1,3 +1,33 @@
+// -----------------------------------------------------------------------------
+// Ismael Sallami Moreno DNI:20888108Z
+
+// Sistemas concurrentes y Distribuidos.
+// Práctica 4. Implementación de sistemas de tiempo real.
+//
+// Archivo: ejecutivo1.cpp
+// Implementación del primer ejemplo de ejecutivo cíclico:
+//
+//   Datos de las tareas:
+//   ------------
+//   Ta.  T    C
+//   ------------
+//   A  250  100
+//   B  250   80
+//   C  500   50
+//   D  500   40
+//   E 1000   20
+//  -------------
+//
+//  Planificación (con Ts == 250 ms)
+//  *---------*----------*---------*--------*
+//  | A B C   | A B D E  | A B C   | A B D  |
+//  *---------*----------*---------*--------*
+//
+//
+// Historial:
+// Creado en Diciembre de 2017
+// -----------------------------------------------------------------------------
+
 #include <string>
 #include <iostream> // cout, cerr
 #include <thread>
@@ -9,6 +39,7 @@ using namespace std::chrono ;
 using namespace std::this_thread ;
 
 // tipo para duraciones en segundos y milisegundos, en coma flotante:
+//typedef duration<float,ratio<1,1>>    seconds_f ;
 typedef duration<float,ratio<1,1000>> milliseconds_f ;
 
 // -----------------------------------------------------------------------------
@@ -43,6 +74,7 @@ int main( int argc, char *argv[] )
 
    while( true ) // ciclo principal
    {
+//   ------------
       cout << endl
            << "---------------------------------------" << endl
            << "Comienza iteración del ciclo principal." << endl ;
@@ -71,6 +103,6 @@ int main( int argc, char *argv[] )
 
          // informar del retraso
          cout << "Retraso en esta iteración: " << retraso.count() << " ms." << endl;
-      }  
+      }
    }
 }
