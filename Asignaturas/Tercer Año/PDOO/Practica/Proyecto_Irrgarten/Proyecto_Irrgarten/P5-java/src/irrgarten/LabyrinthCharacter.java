@@ -157,8 +157,8 @@ protected void setHealth(float health){
  * @param col la nueva columna.
  */
 public void setPos(int row, int col){
-    row = row;
-    col = col;
+    this.row = row;
+    this.col = col;
 }
 
 /**
