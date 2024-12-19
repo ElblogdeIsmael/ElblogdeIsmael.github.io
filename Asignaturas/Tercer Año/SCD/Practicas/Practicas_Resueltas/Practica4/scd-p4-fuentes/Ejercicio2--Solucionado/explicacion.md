@@ -145,9 +145,9 @@ Por lo tanto, el **mínimo tiempo de espera** es **250 ms**.
 
 Si el tiempo de cómputo de la tarea D fuese **250 ms**, se verificaría lo siguiente:
 - La duración del ciclo secundario es **500 ms**.
-- El tiempo total de cómputo en la iteración 4 sería **250 ms**, lo cual cabe perfectamente dentro de los 500 ms disponibles.
+- El tiempo total de cómputo en la iteración 4 sería **250 ms**, lo cual cabe perfectamente dentro de los 500 ms disponibles. Tenemos que sobran 10 ms que podemos tomarlos para el retraso ya que no suelen exceder 1 ms.
 
-Por lo tanto, **sí sería planificable**.
+Por lo tanto, **si sería planificable**.
 
 ---
 

@@ -107,7 +107,8 @@ int main(int argc, char *argv[])
 
             // medir el retraso respecto al tiempo teórico esperado
             time_point<steady_clock> fin_iteracion = steady_clock::now();
-            milliseconds retraso = duration_cast<milliseconds>(fin_iteracion - ini_sec);
+            //milliseconds retraso = duration_cast<milliseconds>(fin_iteracion - ini_sec);
+            milliseconds_f retraso =(fin_iteracion - ini_sec);
             cout << "Retraso al final de la iteración " << i << ": " << retraso.count() << " ms." << endl;
         }
     }
