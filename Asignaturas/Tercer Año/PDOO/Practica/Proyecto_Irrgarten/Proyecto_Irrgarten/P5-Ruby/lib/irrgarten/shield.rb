@@ -10,14 +10,14 @@ module Irrgarten
         #
         # @return [Integer] Nivel de protección si tiene usos restantes, 0 en caso contrario.
         def protect
-            self.produce_effect
+            produce_effect
         end
         
         # Convierte el escudo a una representación en cadena.
         #
         # @return [String] Representación en cadena del escudo, formato "S[protection, uses]".
         def to_s    
-            "S[#{@protection}, #{@uses}]"
+            "[SHIELD]" + super
         end
     end
 end

@@ -13,15 +13,15 @@ module Irrgarten
         # @param effect [Float] Efecto del elemento de combate
         # @param uses [Int] Número de usos del elemento de combate
         def initialize(effect, uses)
-            @effect = effect
-            @uses = uses
+            @effect = effect.to_f
+            @uses = uses.to_i
         end
 
         protected
         # Método que devuelve el efecto si quedan usos
         # @return [Float] Efecto del elemento de combate
         def produce_effect
-            val = 0
+            val = 0.0
             if @uses>0
                 @uses -= 1
                 val = @effect
@@ -38,7 +38,7 @@ module Irrgarten
         # Método que devuelve el string del elemento de combate
         # @return [String] String del elemento de combate
         def to_s
-            "Elemento de Combate: Effect: #{@effect}, Uses: #{@uses}"
+            "[Elemento de Combate]: Effect: #{@effect}, Uses: #{@uses}"
         end
 
     end

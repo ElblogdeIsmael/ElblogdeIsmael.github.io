@@ -75,13 +75,14 @@ module Irrgarten
         def initialize(nPlayers)
             @currentPlayerIndex = Dice.whoStarts(nPlayers)
 
-            @log = ""
+            @log = "Game has started.\n"
 
             @monsters = Array.new(@@NUM_MONSTER) #ya que los decidimos nosotros, inicializo ya el constructor aquí
             @players = Array.new(nPlayers)
 
             nPlayers.times do |i|
                 @players[i]= Player.new(i,Dice.randomIntelligence, Dice.randomStrength)
+                # o bien usando push
             end
 
             @currentPlayer = @players[@currentPlayerIndex]
@@ -91,43 +92,51 @@ module Irrgarten
             @labyrinth.spreadPlayers(players)
         end
 
-        # Configura el laberinto añadiendo bloques y colocando monstruos.
-        #
-        # @return [void]
-        def configureLabyrinth 
-            #creamos el laberinto
-            @labyrinth = Labyrinth.new(@@N_ROW,@@N_COL,@@EXIT_ROW,@@EXIT_COL) 
-
-            #añiadimos 5 bloques por ejemplo
-            @@NUM_BLOCKS.times do
-                startRow = Dice.randomPos(labyrinth.nRows)
-                startCol = Dice.randomPos(labyrinth.nCols)
-                length = Dice.randomPos(@@NUM_BLOCKS) # definimos la longitud de los blocks
-                orientation = Dice.randomPos(@@RANDOM_POS) == 0 ? Orientation::HORIZONTAL : Orientation::VERTICAL
-                labyrinth.addBlock(orientation, startRow, startCol, length)
-            end
-
-            #creamos los monstruos
-            monsters[0] = Monster.new("Goblin", Dice.randomIntelligence, Dice.randomStrength);
-            monsters[1] = Monster.new("Orc", Dice.randomIntelligence, Dice.randomStrength);
-            monsters[2] = Monster.new("Troll", Dice.randomIntelligence, Dice.randomStrength);
-            monsters[2] = Monster.new("THEKILLER", 100000, 100000); #para probar que el jugador no puede ganar
-
-
-            #añadimos los monstruos
-            monsters.each do |monster|
-                pos = @labyrinth.randomEmptyPos()
-                @labyrinth.addMonster(pos[0], pos[1], monster)
-            end
-        end
-
-
-
         # Verifica si el juego ha terminado.
         #
         # @return [Boolean] `true` si el juego ha finalizado, `false` en caso contrario.
         def finished
             @labyrinth.haveAWinner
+        end
+
+        # Ejecuta el siguiente paso en el juego para el jugador actual.
+        #
+        # @param preferredDirection [Symbol] La dirección preferida en la que el jugador quiere moverse.
+        # @return [Boolean] Devuelve true si el juego ha terminado, de lo contrario false.
+        #
+        # El método realiza las siguientes acciones:
+        # - Verifica si el jugador actual está muerto. Si es así, maneja el proceso de resurrección.
+        # - Determina la dirección real en la que el jugador se moverá.
+        # - Registra un mensaje si la dirección real difiere de la dirección preferida.
+        # - Intenta mover al jugador en el laberinto.
+        # - Si se encuentra con un monstruo, se inicia un combate y se recompensa al ganador.
+        # - Verifica si el juego ha terminado.
+        # - Si el juego no ha terminado, procede al siguiente jugador.
+        def nextStep(preferredDirection)
+            @log=""
+            dead=@currentPlayer.dead
+            unless dead
+                direction = actualDirection(preferredDirection)
+
+                if direction != preferredDirection
+                    logPlayerNoOrders
+                end
+                monster = @labyrinth.putPlayer(preferredDirection, @currentPlayer)
+
+                if (monster == nil)
+                    logNoMonster
+                else 
+                    winner = combat(monster)
+                    manageReward(winner)
+                end
+            else
+                manageResurrection
+            end
+            endGame = finished
+            unless endGame
+                nextPlayer
+            end
+            endGame
         end
 
         # Obtiene el estado actual del juego.
@@ -147,7 +156,40 @@ module Irrgarten
             GameState.new(@labyrinth.to_s, player_string, monster_string, @currentPlayerIndex, finished, @log)
         end
 
-        
+        #--------A PARTIR DE AQUÍ SON PRIVADOS----------
+        private
+
+        # Configura el laberinto añadiendo bloques y colocando monstruos.
+        #
+        # @return [void]
+        def configureLabyrinth 
+            #creamos el laberinto
+            @labyrinth = Labyrinth.new(@@N_ROW,@@N_COL,@@EXIT_ROW,@@EXIT_COL) 
+
+            #añiadimos 5 bloques por ejemplo
+            @@NUM_BLOCKS.times do
+                startRow = Dice.randomPos(@labyrinth.nRows)
+                startCol = Dice.randomPos(@labyrinth.nCols)
+                length = Dice.randomPos(@@NUM_BLOCKS) # definimos la longitud de los blocks
+                orientation = Dice.randomPos(@@RANDOM_POS) == 0 ? Orientation::HORIZONTAL : Orientation::VERTICAL
+                @labyrinth.addBlock(orientation, startRow, startCol, length)
+            end
+
+            #creamos los monstruos
+            @monsters[0] = Monster.new("Goblin", Dice.randomIntelligence, Dice.randomStrength);
+            @monsters[1] = Monster.new("Orc", Dice.randomIntelligence, Dice.randomStrength);
+            @monsters[2] = Monster.new("Troll", Dice.randomIntelligence, Dice.randomStrength);
+            @monsters[2] = Monster.new("THEKILLER", 100000, 100000); #para probar que el jugador no puede ganar
+
+
+            #añadimos los monstruos
+            @monsters.each do |monster|
+                pos = @labyrinth.randomEmptyPos()
+                @labyrinth.addMonster(pos[0], pos[1], monster)
+            end
+        end
+
+
 
         # Cambia el turno al siguiente jugador.
         #
@@ -212,48 +254,6 @@ module Irrgarten
             @log += "Rounds played " + rounds.to_s + " out of " + max.to_s + ".\n"
         end
 
-
-        # Ejecuta el siguiente paso en el juego para el jugador actual.
-        #
-        # @param preferredDirection [Symbol] La dirección preferida en la que el jugador quiere moverse.
-        # @return [Boolean] Devuelve true si el juego ha terminado, de lo contrario false.
-        #
-        # El método realiza las siguientes acciones:
-        # - Verifica si el jugador actual está muerto. Si es así, maneja el proceso de resurrección.
-        # - Determina la dirección real en la que el jugador se moverá.
-        # - Registra un mensaje si la dirección real difiere de la dirección preferida.
-        # - Intenta mover al jugador en el laberinto.
-        # - Si se encuentra con un monstruo, se inicia un combate y se recompensa al ganador.
-        # - Verifica si el juego ha terminado.
-        # - Si el juego no ha terminado, procede al siguiente jugador.
-        def nextStep(preferredDirection)
-            @log=""
-            dead=@currentPlayer.dead
-            unless dead
-                direction = actualDirection(preferredDirection)
-
-                if direction != preferredDirection
-                    logPlayerNoOrders
-                end
-                monster = labyrinth.putPlayer(preferredDirection, @currentPlayer)
-
-                if (monster == nil)
-                    logNoMonster
-                else 
-                    winner = combat(monster)
-                    manageReward(winner)
-                end
-            else
-                manageResurrection
-            end
-            endGame = finished
-            unless endGame
-                nextPlayer
-            end
-            endGame
-        end
-
-    
         
         # Determina la dirección real en la que el jugador puede moverse según su dirección preferida y los movimientos válidos.
         #
@@ -278,14 +278,14 @@ module Irrgarten
             rounds = 0
             winner = GameCharacter::PLAYER
 
-            playerAttack = currentPlayer.attack
+            playerAttack = @currentPlayer.attack
             lose = monster.defend(playerAttack)
             
             while !lose && rounds < @@MAX_ROUNDS
                 winner = GameCharacter::MONSTER
                 rounds += 1
                 monster_attack = monster.attack
-                lose = currentPlayer.defend(monster_attack)
+                lose = @currentPlayer.defend(monster_attack)
             
                 unless lose
                     player_attack = currentPlayer.attack
@@ -305,7 +305,7 @@ module Irrgarten
         # @return [void]
         def manageReward(winner)
             if winner == GameCharacter::PLAYER
-                currentPlayer.receiveReward
+                @currentPlayer.receiveReward
                 logPlayerWon
             else
                 logMonsterWon
@@ -318,12 +318,14 @@ module Irrgarten
         def manageResurrection
             resurrect = Dice.resurrectPlayer
             if resurrect
-                currentPlayer.resurrect
+                @currentPlayer.resurrect
                 logResurrected
 
                 #debemos de usar fuzzy player
                 fuzzy = FuzzyPlayer.new(@currentPlayer)
+                #modificamos el array de jugadores
                 @players[@currentPlayerIndex] = fuzzy
+                #añadimos al fuzzy player al laberinto para que se mueva y se mueva con los demás jugadores
                 @labyrinth.PlayerTOFuzzyPlayer(fuzzy)
             else
                 logPlayerSkipTurn

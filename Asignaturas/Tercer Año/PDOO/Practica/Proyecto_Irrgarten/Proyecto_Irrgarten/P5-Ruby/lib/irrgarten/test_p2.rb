@@ -35,7 +35,7 @@ module Irrgarten
 
       # comprobamos la funcion de setPos
       monster1.setPos(10, 15)
-      puts "Monster 1 pos: (#{monster1.get_pos_x}, #{monster1.get_pos_y})"
+      puts "Monster 1 pos: (#{monster1.row}, #{monster1.col})"
       #-------------------------------------------------------------------------------
 
       # pruebas de la clase Player

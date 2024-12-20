@@ -3,7 +3,6 @@
 require_relative 'weapon'
 require_relative 'shield'
 require_relative 'dice'
-require_relative 'directions'
 require_relative 'labyrinth_character'
 
 
@@ -28,10 +27,10 @@ module Irrgarten
         # @param number [Integer] El número de identificación del jugador.
         def initialize(number, intelligence, strength)
             super("Player#{number}", intelligence, strength, @@INITIAL_HEALTH)
-            @number = number
-            @consecutiveHits = 0
-            @weapons = Array.new
-            @shields = Array.new
+            @number = number.to_s
+            @consecutiveHits = 0 # Número de golpes consecutivos recibidos
+            @weapons = Array.new # Array de armas
+            @shields = Array.new # Array de escudos
 
         end 
 
@@ -78,24 +77,6 @@ module Irrgarten
             @shields = Array.new
         end
 
-        # # Establece la posición del jugador en una fila y columna específicas.
-        # #
-        # # @param row [Integer] La fila de la posición.
-        # # @param col [Integer] La columna de la posición.
-        # # @return [void]
-        # def setPos(row, col)
-        #     @row = row
-        #     @col = col
-        # end
-        # # Ya esta en la clase LabyrinthCharacter
-
-        # Verifica si el jugador está muerto (salud <= 0).
-        #
-        # @return [Boolean] `true` si la salud es 0 o menor, `false` en caso contrario.
-        def dead 
-            return @health <= 0
-        end
-
         # Realiza un ataque utilizando la fuerza del jugador y el poder de sus armas.
         #
         # @return [Integer] La intensidad del ataque.
@@ -116,36 +97,17 @@ module Irrgarten
         # @return [String] La representación del jugador en formato `P[nombre, inteligencia, fuerza, salud, fila, columna]`.
         def to_s
             output = ""
-            #output = "Player[name: #{@name}, intelligence: #{@intelligence}, strength: #{@strength}, health: #{@health}, row: #{@row}, col: #{@col}]"
             output += "[PLAYER]" + super.to_s
             output += "\nWeapons:"
             weapons.each do |w|
-                output += "\n#{w}"
+                output += "\n#{w.to_s}"
             end
             output += "\nShields:"
             shields.each do |s|
-                output += "\n#{s}"
+                output += "\n#{s.to_s}"
             end
-            output
+            output += "\nConsecutive hits: #{@consecutiveHits}\n"
         end
-
-        
-
-        
-
-        
-
-        # # Reduce la salud del jugador en 1 punto, indicando que ha sido herido.
-        # #
-        # # @return [void]
-        # def gotWounded
-        #     @health = @health - 1
-        # end
-
-        
-
-        
-
 
 
         
@@ -186,7 +148,7 @@ module Irrgarten
             end
 
             extraHealth = Dice.healthReward
-            @health = @health + extraHealth
+            @health += extraHealth
         end
         
         private 
@@ -196,11 +158,11 @@ module Irrgarten
         # @param w [Weapon] La nueva arma a recibir.
         # @return [void]
         def receiveWeapon(w)
-            @weapons.delete_if do |wi|
+            @weapons.delete_if do |wi| # eliminamos las armas que debemos de eliminar
                 wi.discard
             end
 
-            if(@weapons.length < @@MAX_WEAPONS)
+            if(@weapons.length < @@MAX_WEAPONS) # si caben se añaden
                 @weapons.push(w)
             end
         end
@@ -210,11 +172,11 @@ module Irrgarten
         # @param s [Shield] El nuevo escudo a recibir.
         # @return [void]    
         def receiveShield(s)
-            @shields.delete_if do |si|
+            @shields.delete_if do |si| # eliminamos los escudos que debemos de eliminar
                 si.discard
             end
 
-            if(@shields.length < @@MAX_SHIELDS)
+            if(@shields.length < @@MAX_SHIELDS) # si caben se añaden
                 @shields.push(s)
             end
         end
@@ -234,6 +196,7 @@ module Irrgarten
             s = Shield.new(Dice.shieldPower, Dice.usesLeft)
             return s
         end
+        
 
         # Gestiona los golpes recibidos por el jugador y determina si pierde la partida.
         #
@@ -281,7 +244,7 @@ module Irrgarten
             @weapons.each do |w|
                 sum += w.attack
             end
-            return sum
+            sum
         end
 
         # Suma la energía defensiva de todos los escudos del jugador.
@@ -292,7 +255,7 @@ module Irrgarten
             @shields.each do |s|
                 sum += s.protect
             end
-            return sum
+            sum
         end
 
         # Calcula la energía defensiva total del jugador sumando el poder de todos sus escudos.
@@ -302,10 +265,10 @@ module Irrgarten
             return @intelligence + sumShields
         end
 
-        public
+        
 
         # -----###-----###-----###--FUNCIONES AUXILIARES IMPLEMENTADAS DE MI PARTE PARA AYUDARME A REALIZAR PRUEBAS---###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-
-
+        public
         #añade una nueva arma
         #
         # @param weapon [Weapon] La nueva arma a añadir.

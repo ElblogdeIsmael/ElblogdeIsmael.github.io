@@ -20,7 +20,7 @@ module Irrgarten
         # @param max [Integer] Valor máximo para la posición.
         # @return [Integer] Posición aleatoria entre 0 y max - 1.
         def self.randomPos(max)
-            @@generator.rand(max)
+            @@generator.rand(max.to_i)
         end
 
         # Determina qué jugador comienza el juego.
@@ -28,21 +28,21 @@ module Irrgarten
         # @param nplayers [Integer] Número de jugadores.
         # @return [Integer] Índice del jugador que empieza, entre 0 y nplayers - 1.
         def self.whoStarts(nplayers)
-            @@generator.rand(nplayers)
+            @@generator.rand(nplayers.to_i)
         end
         
         # Genera un valor aleatorio para la inteligencia de un jugador o monstruo.
         #
         # @return [Float] Valor de inteligencia entre 0 y MAX_INTELLIGENCE.
         def self.randomIntelligence
-            @@generator.rand(@@MAX_INTELLIGENCE)
+            @@generator.rand(@@MAX_INTELLIGENCE.to_f)
         end
 
         # Genera un valor aleatorio para la fuerza de un jugador o monstruo.
         #
         # @return [Float] Valor de fuerza entre 0 y MAX_STRENGTH.
         def self.randomStrength
-            @@generator.rand(@@MAX_STRENGTH)
+            @@generator.rand(@@MAX_STRENGTH.to_f)
         end
 
         # Determina si un jugador es resucitado según la probabilidad definida.
@@ -56,42 +56,42 @@ module Irrgarten
         #
         # @return [Integer] Cantidad de armas recibidas, entre 1 y WEAPONS_REWARD.
         def self.weaponReward
-            @@generator.rand(@@WEAPONS_REWARD+1)
+            @@generator.rand(@@WEAPONS_REWARD.to_i+1)
         end  
 
         # Genera un número aleatorio de escudos como recompensa tras ganar un combate.
         #
         # @return [Integer] Cantidad de escudos recibidos, entre 1 y SHIELDS_REWARD.
         def self.shieldReward
-            @@generator.rand(@@SHIELDS_REWARD+1)
+            @@generator.rand(@@SHIELDS_REWARD.to_i+1)
         end
 
         # Genera una cantidad aleatoria de salud como recompensa tras ganar un combate.
         #
         # @return [Integer] Cantidad de salud recibida, entre 1 y HEALTH_REWARD.
         def self.healthReward
-            @@generator.rand(@@HEALTH_REWARD+1)
+            @@generator.rand(@@HEALTH_REWARD.to_i+1)
         end
 
         # Genera la potencia de un arma aleatoria.
         #
         # @return [Integer] Potencia del arma, entre 0 y MAX_ATTACK.
         def self.weaponPower
-            @@generator.rand(@@MAX_ATTACK)
+            @@generator.rand(@@MAX_ATTACK.to_f)
         end
 
         # Genera la potencia de un escudo aleatorio.
         #
         # @return [Integer] Potencia del escudo, entre 0 y MAX_SHIELD.
         def self.shieldPower
-            @@generator.rand(@@MAX_SHIELD)
+            @@generator.rand(@@MAX_SHIELD.to_f)
         end
 
         # Genera un número aleatorio de usos restantes para un arma o escudo.
         #
         # @return [Integer] Número de usos, entre 1 y MAX_USES.
         def self.usesLeft
-            @@generator.rand(@@MAX_USES+1)
+            @@generator.rand(@@MAX_USES.to_i+1)
         end 
 
         # Calcula la intensidad de un ataque o defensa según una competencia.
@@ -99,7 +99,7 @@ module Irrgarten
         # @param competence [Float] Competencia del jugador o monstruo.
         # @return [Float] Intensidad aleatoria entre 0 y el valor de competencia.
         def self.intensity(competence)
-            @@generator.rand(competence)
+            @@generator.rand(competence.to_f)
         end
 
         # Genera un valor booleano que indica si un elemento debe ser descartado
@@ -107,7 +107,7 @@ module Irrgarten
         # @param usesLeft [Integer] El número de usos restantes del elemento
         # @return [Boolean] `true` si el elemento debe ser descartado, `false` en caso contrario
         def self.discardElement(usesLeft)
-            probabilidad=usesLeft/@@MAX_USES
+            probabilidad=usesLeft.to_f/@@MAX_USES
             return (@@generator.rand >= probabilidad)
         end
 

@@ -17,12 +17,6 @@ module Irrgarten
             super(name, intelligence, strength, @@INITIAL_HEALTH)
         end
 
-        # Verifica si el monstruo está muerto (salud <= 0).
-        #
-        # @return [Boolean] `true` si la salud es 0 o menor, `false` en caso contrario.
-        def dead 
-            return @health <= 0
-        end
 
         # Realiza un ataque utilizando la fuerza del monstruo.
         #
@@ -31,31 +25,6 @@ module Irrgarten
             return Dice.intensity(@strength)
         end
 
-        # # Establece la posición del monstruo en una fila y columna específicas.
-        # #
-        # # @param row [Integer] La fila de la nueva posición.
-        # # @param col [Integer] La columna de la nueva posición.
-        # # @return [void]
-        # def setPos(row, col)
-        #     @row = row
-        #     @col = col
-        # end
-
-        # # Convierte el estado del monstruo en un string para representación.
-        # #
-        # # @return [String] La representación del monstruo en formato `M[nombre, inteligencia, fuerza, salud, fila, columna]`.
-        # def to_s
-        #     #return "Monster[name: #{@name}, intelligence: #{@intelligence}, strength: #{@strength}, health: #{@health}, row: #{@row}, col: #{@col}]"
-        #     output = "[MONSTER]"
-        #     output += super.to_s
-        # end
-
-        # # Reduce la salud del monstruo en 1 punto, indicando que ha sido herido.
-        # #
-        # # @return [void]
-        # def gotWounded 
-        #     @health -= 1
-        # end
 
         # Gestiona la defensa del monstruo (detalles en prácticas futuras).
         #
@@ -70,24 +39,7 @@ module Irrgarten
                     isDead = dead
                 end
             end
-            return isDead
+            isDead
         end
-
-        # -----###-----###-----###--FUNCIONES AUXILIARES IMPLEMENTADAS DE MI PARTE PARA AYUDARME A REALIZAR PRUEBAS---###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-
-
-        # Obtiene la fila de la posición actual del monstruo.
-        #
-        # @return [Integer] La fila de la posición actual.
-        def get_pos_x
-            return @row
-        end
-
-        # Obtiene la columna de la posición actual del monstruo.
-        #
-        # @return [Integer] La columna de la posición actual.
-        def get_pos_y
-            return @col
-        end
-        # -----###-----###-----###--FUNCIONES AUXILIARES IMPLEMENTADAS DE MI PARTE PARA AYUDARME A REALIZAR PRUEBAS---###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-
     end
 end

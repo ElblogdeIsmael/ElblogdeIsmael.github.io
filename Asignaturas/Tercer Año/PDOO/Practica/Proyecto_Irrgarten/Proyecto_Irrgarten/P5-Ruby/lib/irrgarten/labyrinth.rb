@@ -135,7 +135,7 @@ module Irrgarten
         # @return [void]
         def addMonster(row, col, monster)
             if(emptyPos(row, col) && posOK(row, col))
-                monster.setPos(row, col)
+                monster.pos(row, col)
                 @monsters[row][col] = monster
                 @labyrinth[row][col] = @@MONSTER_CHAR
             end
@@ -269,7 +269,7 @@ module Irrgarten
                     @labyrinth[row][col] = number
                 end
                 @players[row][col] = player
-                player.setPos(row, col)
+                player.pos(row, col)
             end
             output
         end
@@ -347,7 +347,7 @@ module Irrgarten
         def addPlayer(row, col, player)
             if emptyPos(row, col)
                 @labyrinth[row][col] = player.name
-                player.setPos(row, col)
+                player.pos(row, col)
                 @players[row][col] = player
             end
         end
