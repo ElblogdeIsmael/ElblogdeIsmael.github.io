@@ -8,7 +8,7 @@
 # - {Directions::UP} - Movimiento hacia arriba
 # - {Directions::DOWN} - Movimiento hacia abajo
 module Irrgarten
-    class Directions
+    module Directions
         # Movimiento hacia la izquierda.
         LEFT = :left
         

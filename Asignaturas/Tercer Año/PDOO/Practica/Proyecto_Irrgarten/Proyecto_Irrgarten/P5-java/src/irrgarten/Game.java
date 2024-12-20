@@ -303,7 +303,7 @@ public class Game {
         // Direcciones posibles desde la casilla actual
         ArrayList<Directions> validMoves = labyrinth.validMoves(currentRow, currentCol);
         // Se mueve al jugador y devolvemos esa dirección
-         return currentPlayer.move(preferredDirection, validMoves);
+        return currentPlayer.move(preferredDirection, validMoves);
     }
 
     /**
@@ -380,20 +380,6 @@ public class Game {
             logPlayerSkipTurn();
         }
     }
-
-    //------FUNCIÓN EXTRA------
-    /**
-     * Función que me pinta el laberinto que tengo de la mejor manera posible
-     */
-    /*public void printLabyrinth(){
-        System.out.println("\n Laberinto: \n");
-        for(int i = 0; i <labyrinth.getnRows(); i++){
-            for(int j = 0; j <labyrinth.getnCols(); j++){
-                System.out.print("[ "+labyrinth.getLabyrinth(i, j)+" ]  ");
-            }
-            System.out.print("\n");
-        }
-    }*/
 
 }
 

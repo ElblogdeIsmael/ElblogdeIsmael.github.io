@@ -3,7 +3,7 @@
 # The Irrgarten module serves as a namespace for classes and constants related to the maze (Irrgarten) functionality.
 module Irrgarten        
     # The Orientation class defines constants for vertical and horizontal orientations.
-    class Orientation
+    module Orientation
         # Constant representing vertical orientation.
         VERTICAL = :vertical
         

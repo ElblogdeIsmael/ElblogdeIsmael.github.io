@@ -125,11 +125,7 @@ module Irrgarten
         def self.nextStep(preference, validMoves, intelligence)
             out = preference
 
-            # if @@generator.rand < intelligence/@@MAX_INTELLIGENCE
-            #     out = validMoves[@@generator.rand(validMoves.size)]
-            # end
-
-            if randomIntelligence > intelligence
+            if randomIntelligence >= intelligence
                 out = validMoves[@@generator.rand(validMoves.size)]
             end
 

@@ -264,7 +264,7 @@ public class Labyrinth {
     //-------------------------------------------------------------------------------
     //  Nota: en las comprobaciones de casillas siempre realice 
     // comprobaciones sobre si era correcta pero limite la 
-    // implementacion a lo que pedia
+    // implementación a lo que pedia
     //-------------------------------------------------------------------------------
 
     /**
@@ -390,7 +390,7 @@ public class Labyrinth {
      */
     public int[] randomEmptyPos() {
         int[] pos = new int[2];
-         do{
+        do{
             pos[ROW] = Dice.randomPos(nRows);
             pos[COL] = Dice.randomPos(nCols);
         }while (!emptyPos(pos[0], pos[1]));
@@ -461,12 +461,12 @@ public class Labyrinth {
     public void addBlock(Orientation orientation, int startRow, int startCol, int length) {
         int incRow, incCol;
         if(orientation==Orientation.VERTICAL){
-             incRow=1;
-             incCol=0;
+            incRow=1;
+            incCol=0;
         }
         else{
-             incRow=0;
-             incCol=1;
+            incRow=0;
+            incCol=1;
         }
         int row=startRow;
         int col=startCol;

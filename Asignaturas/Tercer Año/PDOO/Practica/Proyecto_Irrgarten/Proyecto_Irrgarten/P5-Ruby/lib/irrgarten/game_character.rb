@@ -6,7 +6,7 @@
 # - PLAYER: Representa a un jugador en el juego.
 # - MONSTER: Representa a un monstruo en el juego.
 module Irrgarten
-    class GameCharacter
+    module GameCharacter
         PLAYER = :player
         MONSTER = :monster
     end 
