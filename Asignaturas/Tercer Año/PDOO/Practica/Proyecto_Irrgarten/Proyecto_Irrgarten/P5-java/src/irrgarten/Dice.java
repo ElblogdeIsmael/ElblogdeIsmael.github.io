@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author ismael
+ * @author Ismael Sallami Moreno
  */
 
 /**
@@ -211,17 +211,8 @@ public class Dice {
         } else {
             out =  validMoves.get(generator.nextInt(validMoves.size()));
         }
-         return out;
-         
-         //Otra implementacion:
-         /*Directions toReturn=preference;
+        return out;
         
-        if(Dice.randomIntelligence()>intelligence){
-            int indice=generator.nextInt(validMoves.size());
-            toReturn=validMoves.get(indice);          
-        }
-        
-        return toReturn;*/
     }
 }
     

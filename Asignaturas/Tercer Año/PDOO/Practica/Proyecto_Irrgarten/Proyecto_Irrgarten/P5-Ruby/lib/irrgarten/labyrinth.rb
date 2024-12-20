@@ -118,15 +118,6 @@ module Irrgarten
             s #devolvemos el string
         end
 
-        # Verifica si la posición especificada está dentro de los límites del laberinto.
-        #
-        # @param row [Integer] La fila de la posición a verificar.
-        # @param col [Integer] La columna de la posición a verificar.
-        # @return [Boolean] `true` si la posición está dentro del laberinto, `false` en caso contrario.
-        def posOK(row, col)
-            (0..nRows-1).include?(row) && (0..nCols-1).include?(col) #he usado la función include para hacer más legible el código
-        end
-
         # Agrega un monstruo a una posición específica en el laberinto si está vacía.
         #
         # @param row [Integer] Fila en la que se colocará el monstruo.
@@ -140,6 +131,19 @@ module Irrgarten
                 @labyrinth[row][col] = @@MONSTER_CHAR
             end
         end
+
+        private # -----A partir de aquí son privados-----
+
+        # Verifica si la posición especificada está dentro de los límites del laberinto.
+        #
+        # @param row [Integer] La fila de la posición a verificar.
+        # @param col [Integer] La columna de la posición a verificar.
+        # @return [Boolean] `true` si la posición está dentro del laberinto, `false` en caso contrario.
+        def posOK(row, col)
+            (0..nRows-1).include?(row) && (0..nCols-1).include?(col) #he usado la función include para hacer más legible el código
+        end
+
+        
 
         # Verifica si una posición específica está vacía.
         #
@@ -156,7 +160,7 @@ module Irrgarten
         # @param col [Integer] La columna de la posición.
         # @return [Boolean] `true` si la posición contiene un monstruo, `false` en caso contrario.
         def monsterPos(row, col)
-            posOK(row, col) && @labyrinth[row][col] == @@MONSTER_CHAR
+            @labyrinth[row][col] == @@MONSTER_CHAR
         end
 
         # Verifica si una posición específica es la salida.
@@ -165,7 +169,7 @@ module Irrgarten
         # @param col [Integer] La columna de la posición.
         # @return [Boolean] `true` si la posición es la salida, `false` en caso contrario.
         def exitPos(row, col)
-            posOK(row, col) && @labyrinth[row][col] == @@EXIT_CHAR
+            @labyrinth[row][col] == @@EXIT_CHAR
         end
 
         # Verifica si una posición específica es un área de combate.
@@ -174,7 +178,7 @@ module Irrgarten
         # @param col [Integer] La columna de la posición.
         # @return [Boolean] `true` si la posición es un área de combate, `false` en caso contrario.
         def combatPos(row, col)
-            posOK(row, col) && @labyrinth[row][col] == @@COMBAT_CHAR
+            @labyrinth[row][col] == @@COMBAT_CHAR
         end
 
         # Verifica si una posición es transitable (vacía, con monstruo o con salida).
@@ -274,6 +278,8 @@ module Irrgarten
             output
         end
 
+        public # -----A partir de aquí son públicos-----
+
         # Coloca un jugador en una nueva posición basada en una dirección, devolviendo el monstruo si lo hay.
         #
         # @param direction [String] La dirección a tomar ('UP', 'DOWN', 'RIGHT', 'LEFT').
@@ -335,62 +341,6 @@ module Irrgarten
             end
             valid_moves
         end
-
-        # -----###-----###-----###--FUNCIONES AUXILIARES IMPLEMENTADAS DE MI PARTE PARA AYUDARME A REALIZAR PRUEBAS---###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-
-
-        # Añade un jugador a una posición específica en el laberinto si está vacía.
-        #
-        # @param row [Integer] Fila en la que se colocará el jugador.
-        # @param col [Integer] Columna en la que se colocará el jugador.
-        # @param player [Player] El jugador a añadir.
-        # @return [void]
-        def addPlayer(row, col, player)
-            if emptyPos(row, col)
-                @labyrinth[row][col] = player.name
-                player.pos(row, col)
-                @players[row][col] = player
-            end
-        end
-
-        # Muestra las posiciones de los monstruos y jugadores en el laberinto.
-        #
-        # @return [void]
-        def showMonstersAndPlayers
-            @nRows.times do |i|
-                @nCols.times do |j|
-                    if monsterPos(i, j)
-                        puts "Hay un monstruo en la posición: #{i}, #{j}"
-                    end
-                    if @players[i][j]
-                        puts "Hay un jugador en la posición: #{i}, #{j}"
-                    end
-                end
-            end
-        end
-
-        # Añade una casilla de combate en una posición específica del laberinto.
-        #
-        # @param row [Integer] Fila de la casilla.
-        # @param col [Integer] Columna de la casilla.
-        # @return [void]
-        def addCombat(row, col)
-            @labyrinth[row][col] = @@COMBAT_CHAR
-        end
-
-        # Muestra las posiciones de las casillas de combate en el laberinto.
-        #
-        # @return [void]
-        def showCombat
-            @nRows.times do |i|
-                @nCols.times do |j|
-                    if combatPos(i, j)
-                        puts "Hay combate en la posición: #{i}, #{j}"
-                    end
-                end
-            end
-        end
-
-        # -------------Añadidas extra para pruebas--------------------------------
 
         # Convierte un jugador en un FuzzyPlayer y lo actualiza en la matriz de jugadores si coincide el número.
         #

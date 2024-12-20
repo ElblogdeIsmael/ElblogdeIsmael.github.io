@@ -20,6 +20,11 @@ module Irrgarten
         # Número de monstruos
         @@NUM_MONSTER = 3
 
+        #
+        # Matriz que almacena las posiciones de los monstruos en el juego
+        #
+        @@MONSTER_MATRIX = [[1, 2], [3, 3], [2, 1]]
+
         # Número de obstáculos
         @@NUM_BLOCKS = 5
 
@@ -175,18 +180,13 @@ module Irrgarten
                 @labyrinth.addBlock(orientation, startRow, startCol, length)
             end
 
-            #creamos los monstruos
-            @monsters[0] = Monster.new("Goblin", Dice.randomIntelligence, Dice.randomStrength);
-            @monsters[1] = Monster.new("Orc", Dice.randomIntelligence, Dice.randomStrength);
-            @monsters[2] = Monster.new("Troll", Dice.randomIntelligence, Dice.randomStrength);
-            @monsters[2] = Monster.new("THEKILLER", 100000, 100000); #para probar que el jugador no puede ganar
-
-
-            #añadimos los monstruos
-            @monsters.each do |monster|
-                pos = @labyrinth.randomEmptyPos()
-                @labyrinth.addMonster(pos[0], pos[1], monster)
+            @@NUM_MONSTER.times do |i|
+                m = Monster.new("Goblin", Dice.randomIntelligence, Dice.randomStrength)
+                @monsters.push(m)
+                @labyrinth.addMonster(@@MONSTER_MATRIX[i][0], @@MONSTER_MATRIX[i][1], m)
             end
+            #@monsters[2] = Monster.new("THEKILLER", 100000, 100000) #para probar que el jugador no puede ganar
+
         end
 
 

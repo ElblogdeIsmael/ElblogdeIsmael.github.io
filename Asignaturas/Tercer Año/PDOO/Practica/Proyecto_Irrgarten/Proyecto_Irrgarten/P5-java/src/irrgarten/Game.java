@@ -4,7 +4,6 @@
  */
 package irrgarten;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 /** 
@@ -28,7 +27,7 @@ public class Game {
     /**
      * Índice del jugador actual en el arreglo de jugadores.
      */
-   private  int currentPlayerIndex;
+    private  int currentPlayerIndex;
     
     /**
      * Registro de los eventos que ocurren durante el juego.
@@ -61,9 +60,14 @@ public class Game {
      * Número de monstruos
      */
     private final int NUM_MONSTER = 3;
+
+    /**
+     * Matriz que almacena las posiciones de los monstruos en el juego
+     */
+    private static final int [][] MONSTER_MATRIX= {{1,2}, {3,3}, {2,1}};
     
     /**
-     * Número de obtáculos
+     * Número de obstáculos
      */
     private final int NUM_BLOCKS = 5;
     
@@ -115,8 +119,8 @@ public class Game {
         }
         
         //asignamos el jugador actual
-         currentPlayer = players.get(currentPlayerIndex);
-         
+        currentPlayer = players.get(currentPlayerIndex);
+        
         //Método que configura el laberinto
         configureLabyrinth();
 
@@ -151,7 +155,7 @@ public class Game {
      * Los monstruos, además de en el laberinto, son guardados en el contenedor propio de esta clase para
      * este tipo de objetos.
      */
-    public void configureLabyrinth(){
+    private void configureLabyrinth(){
         // Crear el laberinto
         labyrinth  = new Labyrinth(N_ROW, N_COL, EXIT_ROW, EXIT_COL);
         // Añadir bloques de obstáculos
@@ -164,89 +168,24 @@ public class Game {
         }
 
         // Crear los monstruos (añadimos 3 monstruos como ejemplo)
-        for (int i = 0; i < NUM_MONSTER-1; i++) { // Iterar sobre cada monstruo en el arreglo de monstruos
-            monsters.add(new Monster("Monster " + (i + 1), Dice.randomIntelligence(), Dice.randomStrength())); // Crear un monstruo con nombre y atributos aleatorios
+        for (int i = 0; i < NUM_MONSTER; i++) { // Iterar sobre cada monstruo en el arreglo de monstruos
+            Monster m = new Monster("Monster " + (i + 1), Dice.randomIntelligence(), Dice.randomStrength());
+            monsters.add(m); // Crear un monstruo con nombre y atributos aleatorios
+            labyrinth.addMonster(MONSTER_MATRIX[i][0], MONSTER_MATRIX[i][1], m); // Añade el monstruo al laberinto en la posición encontrada
         }
-        monsters.add(new Monster("The Killer", 30000, 30000)); // Crear un monstruo con nombre y atributos fijos
-
-        // Añadir monstruos
-        for (Monster monster : monsters) { // Itera sobre cada monstruo en el arreglo de monstruos
-            int[] pos = labyrinth.randomEmptyPos(); // Encuentra una posición vacía aleatoria en el laberinto
-            labyrinth.addMonster(pos[0], pos[1], monster); // Añade el monstruo al laberinto en la posición encontrada
-        }
+        //monsters.add(new Monster("The Killer", 30000, 30000)); // Crear un monstruo con nombre y atributos fijos
     }
 
     /**
      * Actualiza los dos atributos que indican el jugador (current*) con el turno pasando
      * al siguiente jugador.
      */
-    public void nextPlayer(){
+    private void nextPlayer(){
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
         currentPlayer = players.get(currentPlayerIndex);
     }
 
-    /**
-     * Añade al final del atributo log (concatena cadena al final) el mensaje
-     * indicando que el jugador ha ganado el combate. También añade el indicador de 
-     * nueva línea al final.
-     */
-    public void logPlayerWon(){
-        log += "Player " + currentPlayer.getNumber() + " won the combat.\n";
-    }
-
-    /**
-     * Añade al final del atributo log (concatena cadena al final) el mensaje
-     * indicando que el monstruo ha ganado el combate. También añade el indicador de 
-     * nueva línea al final.
-     */
-    public void logMonsterWon(){
-        log += "Monster won the combat against player " + currentPlayer.getNumber() + ".\n";
-    }
-
-    /**
-     * Añade al final del atributo log (concatena cadena al final) el mensaje
-     * indicando que el jugador ha resucitado. También añade el indicador de nueva línea * al final.
-     */
-    public void logResurrected(){
-        log += "Player " + currentPlayer.getNumber() + " was resurrected.\n";
-    }
-
-    /**
-     * Añade al final del atributo log (concatena cadena al final) el mensaje
-     * indicando que el jugador ha perdido el turno por estar muerto. También añade el indicador de nueva línea al final.
-     */
-    public void logPlayerSkipTurn() {
-        log += "Player " + currentPlayer.getNumber() + " skipped the turn because they are dead.\n";
-    }
-
-    /**
-     * Añade al final del atributo log (concatena cadena al final) el mensaje
-     * indicando que el jugador no ha seguido las instrucciones del jugador humano (no fue posible).
-     * También añade el indicador de nueva línea al final.
-     */
-    public void logPlayerNoOrders() {
-        log += "Player " + currentPlayer.getNumber() + " did not follow the human player's instructions.\n";
-    }
-
-    /**
-     * Añade al final del atributo log (concatena cadena al final) el mensaje
-     * indicando que el jugador se ha movido a una celda vacía o no le ha sido posible moverse.
-     * También añade el indicador de nueva línea al final.
-     */
-    public void logNoMonster() {
-        log += "Player " + currentPlayer.getNumber() + " moved to an empty cell or couldn't move.\n";
-        //y cuando no se puede mover que?
-    }
-
-    /**
-     * Añade al final del atributo log (concatena cadena al final) el
-     * mensaje que se han producido rounds de max rondas de combate. 
-     * También añade el indicador de
-     * nueva línea al final.
-     */
-    public void logRounds(int rounds, int max) {
-        log += "Rounds played: " + rounds + " out of " + max + ".\n";
-    }
+    
 
     /**
      * Ejecuta el siguiente paso en el juego para el jugador actual.
@@ -296,7 +235,7 @@ public class Game {
      * @return La dirección real en la que el jugador se moverá, que puede ser la dirección preferida
      *         si es válida, o otra dirección válida si la preferida no es posible.
      */
-    public Directions actualDirection(Directions preferredDirection) {
+    private Directions actualDirection(Directions preferredDirection) {
         // Se obtiene la fila y columna actual del jugador
         int currentRow=currentPlayer.getRow();
         int currentCol=currentPlayer.getCol();
@@ -313,7 +252,7 @@ public class Game {
      * @param monster el monstruo contra el que luchar
      * @return el ganador del combate, ya sea GameCharacter.PLAYER o GameCharacter.MONSTER
      */
-    public GameCharacter combat(Monster monster) {
+    private GameCharacter combat(Monster monster) {
         int rounds = 0; //inicializamos el numero de rondas a 0
         
         // Suponemos que el jugador ganará, y empieza este atacando.
@@ -348,7 +287,7 @@ public class Game {
      *
      * @param winner el personaje del juego que ganó, ya sea GameCharacter.PLAYER u otro personaje.
      */
-    public void manageReward(GameCharacter winner) {
+    private void manageReward(GameCharacter winner) {
         if(winner==GameCharacter.PLAYER){
             currentPlayer.receiveReward();
             logPlayerWon();
@@ -365,7 +304,7 @@ public class Game {
      * y registra el evento de resurrección. Si el jugador no es resucitado, 
      * registra que el jugador perderá su turno.
      */
-    public void manageResurrection() {
+    private void manageResurrection() {
         boolean resurrect = Dice.resurrectPlayer();
         if(resurrect){
             currentPlayer.resurrect();
@@ -379,6 +318,72 @@ public class Game {
         else{
             logPlayerSkipTurn();
         }
+    }
+
+
+    //-------------------LOG------------------------
+
+    /**
+     * Añade al final del atributo log (concatena cadena al final) el mensaje
+     * indicando que el jugador ha ganado el combate. También añade el indicador de 
+     * nueva línea al final.
+     */
+    private void logPlayerWon(){
+        log += "Player " + currentPlayer.getNumber() + " won the combat.\n";
+    }
+
+    /**
+     * Añade al final del atributo log (concatena cadena al final) el mensaje
+     * indicando que el monstruo ha ganado el combate. También añade el indicador de 
+     * nueva línea al final.
+     */
+    private void logMonsterWon(){
+        log += "Monster won the combat against player " + currentPlayer.getNumber() + ".\n";
+    }
+
+    /**
+     * Añade al final del atributo log (concatena cadena al final) el mensaje
+     * indicando que el jugador ha resucitado. También añade el indicador de nueva línea * al final.
+     */
+    private void logResurrected(){
+        log += "Player " + currentPlayer.getNumber() + " was resurrected.\n";
+    }
+
+    /**
+     * Añade al final del atributo log (concatena cadena al final) el mensaje
+     * indicando que el jugador ha perdido el turno por estar muerto. También añade el indicador de nueva línea al final.
+     */
+    private void logPlayerSkipTurn() {
+        log += "Player " + currentPlayer.getNumber() + " skipped the turn because they are dead.\n";
+    }
+
+    /**
+     * Añade al final del atributo log (concatena cadena al final) el mensaje
+     * indicando que el jugador no ha seguido las instrucciones del jugador humano (no fue posible).
+     * También añade el indicador de nueva línea al final.
+     */
+    private void logPlayerNoOrders() {
+        log += "Player " + currentPlayer.getNumber() + " did not follow the human player's instructions.\n";
+    }
+
+    /**
+     * Añade al final del atributo log (concatena cadena al final) el mensaje
+     * indicando que el jugador se ha movido a una celda vacía o no le ha sido posible moverse.
+     * También añade el indicador de nueva línea al final.
+     */
+    private void logNoMonster() {
+        log += "Player " + currentPlayer.getNumber() + " moved to an empty cell or couldn't move.\n";
+        //y cuando no se puede mover que?
+    }
+
+    /**
+     * Añade al final del atributo log (concatena cadena al final) el
+     * mensaje que se han producido rounds de max rondas de combate. 
+     * También añade el indicador de
+     * nueva línea al final.
+     */
+    private void logRounds(int rounds, int max) {
+        log += "Rounds played: " + rounds + " out of " + max + ".\n";
     }
 
 }

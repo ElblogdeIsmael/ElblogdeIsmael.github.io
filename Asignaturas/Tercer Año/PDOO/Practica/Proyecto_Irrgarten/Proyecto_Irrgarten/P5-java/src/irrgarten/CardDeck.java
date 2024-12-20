@@ -44,7 +44,6 @@ abstract class CardDeck <T extends CombatElement> {
      * Devuelve la siguiente carta
      */
     public T nextCard(){
-        T next;
         if(cardDeck.isEmpty()){
             addCards();
             Collections.shuffle(cardDeck);

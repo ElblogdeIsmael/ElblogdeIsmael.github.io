@@ -45,19 +45,6 @@ module Irrgarten
             @winner = winner
             @log = log
         end
-
-        # Método que devuelve el estado del laberinto
-        # @return [String] Devuelve el estado del laberinto
-        #FUNCION AUXILIAR PARA SIMPLIFICAR Y MODULARIZAR EL CÓDIGO
-        def to_s
-            "\nlabyrinth=#{@labyrinth}" +
-            "\n \nplayers=#{@players}" +
-            "\n \nmonsters=#{@monsters}" +
-            "\n \ncurrent_player=#{@currentPlayer}" +
-            "\n \nwinner=#{@winner}" +
-            "\n \nlog=#{@log}" +
-            "\n"
-        end
             
     end
 end

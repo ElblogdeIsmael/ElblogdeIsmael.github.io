@@ -28,32 +28,32 @@ public class GameState {
     /**
      * Estado actual del laberinto en forma de cadena.
      */
-    static private String labyrinth;
+    private String labyrinth;
     
     /**
      * Información sobre los jugadores en el juego en forma de cadena.
      */
-    static private String players;
+    private String players;
     
     /**
      * Información sobre los monstruos en el juego en forma de cadena.
      */
-    static private String monster;
+    private String monster;
     
     /**
      * Índice del jugador que tiene el turno actual.
      */
-    static private int currentPlayer;
+    private int currentPlayer;
     
     /**
      * Indica si existe un ganador en el juego.
      */
-    static private boolean winner;
+    private boolean winner;
     
     /**
      * Registro de eventos en el juego en forma de cadena.
      */
-    static private String log;
+    private String log;
     
     /**
      * Crea una nueva instancia de {@code GameState} con el estado especificado del juego.
@@ -127,20 +127,4 @@ public class GameState {
     public String getlog() {
         return log; 
     }
-
-    //------FUNCION EXTRA -----
-    /**
-     * Devuelve el estado de GameState en formato string
-     * @return el estado de GameState en formato string
-     */
-    @Override
-    public String toString() {
-        return "\nlabyrinth=" + labyrinth +
-            "\n \nplayers=" + players +
-            "\n \nmonster=" + monster +
-            "\n \ncurrentPlayer=" + currentPlayer +
-            "\n \nwinner=" + winner +
-            "\n \nlog=" + log +
-            "\n";
-        }
 }

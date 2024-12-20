@@ -267,21 +267,6 @@ module Irrgarten
 
         
 
-        # -----###-----###-----###--FUNCIONES AUXILIARES IMPLEMENTADAS DE MI PARTE PARA AYUDARME A REALIZAR PRUEBAS---###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-----###-
-        public
-        #añade una nueva arma
-        #
-        # @param weapon [Weapon] La nueva arma a añadir.
-        def addWeapon(weapon)
-            @weapons.push(weapon)
-        end
-
-        #añade un nuevo escudo
-        #
-        # @param shield [Shield] El nuevo escudo a añadir.
-        def addShield(shield)
-            @shields.push(shield)
-        end
 
 
 

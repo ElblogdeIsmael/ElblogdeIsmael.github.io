@@ -179,7 +179,7 @@ public class Player extends LabyrinthCharacter{
      * Crea una nueva arma para el jugador.
      * @return Una nueva instancia de {@code Weapon}.
      */
-    public Weapon newWeapon() {
+    private Weapon newWeapon() {
         return weaponCardDeck.nextCard();
     }
 
@@ -187,7 +187,7 @@ public class Player extends LabyrinthCharacter{
      * Crea un nuevo escudo para el jugador.
      * @return Una nueva instancia de {@code Shield}.
      */
-    public Shield newShield() {
+    private Shield newShield() {
         return shieldCardDeck.nextCard();
     }
 
@@ -202,7 +202,7 @@ public class Player extends LabyrinthCharacter{
     /**
      * Reinicia el contador de golpes consecutivos recibidos.
      */
-    public void resetHits() {
+    private void resetHits() {
         consecutiveHits = 0;
     }
 
@@ -210,7 +210,7 @@ public class Player extends LabyrinthCharacter{
     /**
      * Incrementa el contador de golpes consecutivos en 1.
      */
-    public void incConsecutiveHits() {
+    private void incConsecutiveHits() {
         consecutiveHits++;
     }
 
@@ -218,7 +218,7 @@ public class Player extends LabyrinthCharacter{
      * Suma la potencia de ataque de todas las armas del jugador.
      * @return El poder total de ataque de todas las armas.
      */
-    public float sumWeapons() {
+    protected float sumWeapons() {
         float sum = 0;
         for (Weapon w : weapons) {
             sum += w.attack();
@@ -230,7 +230,7 @@ public class Player extends LabyrinthCharacter{
      * Suma el poder defensivo de todos los escudos del jugador.
      * @return El poder total defensivo de todos los escudos.
      */
-    public float sumShields() {
+    protected float sumShields() {
         float sum = 0;
         for (Shield s : shields) {
             sum += s.protect();
@@ -283,7 +283,7 @@ public class Player extends LabyrinthCharacter{
      * Recibe un arma y la agrega al inventario.
      * @param w El arma a recibir.
      */
-    public void receiveWeapon(Weapon w) {
+    private void receiveWeapon(Weapon w) {
         for(int i=0;i<weapons.size();i++){
             Weapon wi = weapons.get(i);
             boolean discard = wi.discard();
@@ -302,7 +302,7 @@ public class Player extends LabyrinthCharacter{
      * Recibe un escudo y lo agrega al inventario.
      * @param s El escudo a recibir.
      */
-    public void receiveShield(Shield s) {
+    private void receiveShield(Shield s) {
         for(int i=0;i<shields.size();i++){
             Shield si = shields.get(i);
             boolean discard = si.discard();
@@ -323,7 +323,7 @@ public class Player extends LabyrinthCharacter{
      * @param receivedAttack La potencia del ataque recibido.
      * @return {@code true} si el impacto fue gestionado exitosamente, {@code false} en caso contrario.
      */
-    public boolean manageHit(float receivedAttack) {
+    private boolean manageHit(float receivedAttack) {
         boolean lose=false;
         float defense=defensiveEnergy();
         if(defense<receivedAttack){
@@ -341,23 +341,5 @@ public class Player extends LabyrinthCharacter{
         
     }
     
-    //------FUNCIONES EXTRAS PARA REALIZAR TESTS----------------
-    /**
-     * Añade una arma a weapons
-     * @param w Arma a añadir
-     */
-    public void addWeapon(Weapon w) {
-        weapons.add(w);
-    }
-
-    /**
-     * Añade un escudo a shields
-     * @param s Escudo a añadir
-     */
-    public void addShield(Shield s) {
-        shields.add(s);
-    }   
-    
-    //------FUNCIONES EXTRAS PARA REALIZAR TESTS----------------
 
 }

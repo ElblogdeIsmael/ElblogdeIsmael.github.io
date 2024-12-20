@@ -111,17 +111,7 @@ module Irrgarten
             return (@@generator.rand >= probabilidad)
         end
 
-        #Otra forma de hacerlo
-        # def self.discardElement(usesLeft)
-        #     return @@generator.rand(1)<(@@MAX_USES-usesLeft)/(1.0*@@MAX_USES)
-        # end
-        
-        # Genera el siguiente paso que debe de dar en base a los parámetros proporcionados y en base a la probabilidad calculada
-        #
-        # @param preference [Symbol] El paso que el jugador prefiere realizar.
-        # @param validMoves [Array<Symbol>] Los pasos válidos que el jugador puede realizar.
-        # @param intelligence [Float] La inteligencia del jugador.
-        # @return [Symbol] El siguiente paso que el jugador debe dar.
+
         def self.nextStep(preference, validMoves, intelligence)
             out = preference
 

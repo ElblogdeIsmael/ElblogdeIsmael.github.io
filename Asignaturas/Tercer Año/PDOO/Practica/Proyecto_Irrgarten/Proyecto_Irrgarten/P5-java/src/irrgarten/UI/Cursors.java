@@ -5,7 +5,6 @@
 package irrgarten.UI;
 
 import irrgarten.Directions;
-import irrgarten.Directions;
 
 /**
  *

@@ -228,11 +228,6 @@ public class Labyrinth {
      */
     @Override
     public String toString() {
-        //Funciones implementadas por mi parte para mejorar la cohesion y modularizacion del codigo
-        //Ademas, es para asegurarme de que comienza como debe
-        showCombat(); 
-        showMonstersAndPlayers();
-        
         //añado a la salida
         String s =  "nRows: " + nRows + " nCols: " + nCols + " exitRow: " + exitRow + " exitCol: " + exitCol;
         s+="\n Laberinto: \n";
@@ -261,12 +256,6 @@ public class Labyrinth {
         }
     }
     
-    //-------------------------------------------------------------------------------
-    //  Nota: en las comprobaciones de casillas siempre realice 
-    // comprobaciones sobre si era correcta pero limite la 
-    // implementación a lo que pedia
-    //-------------------------------------------------------------------------------
-
     /**
      * Verifica si una posición en el laberinto es válida.
      *
@@ -274,7 +263,7 @@ public class Labyrinth {
      * @param col la columna de la posición
      * @return {@code true} si la posición es válida; {@code false} de lo contrario
      */
-    public boolean posOK(int row, int col) {
+    private boolean posOK(int row, int col) {
         return row >= 0 && row < nRows && col >= 0 && col < nCols;
     }
 
@@ -285,10 +274,7 @@ public class Labyrinth {
      * @param col la columna de la posición
      * @return {@code true} si la posición está vacía; {@code false} de lo contrario
      */
-    public boolean emptyPos(int row, int col) { 
-        // he decidido añadir en la comprobacion de que la casilla 
-        //este vacia el ver si esta dentro del laberinto
-        //return posOK(row, col) &&  labyrinth[row][col] == EMPTY_CHAR ;
+    private boolean emptyPos(int row, int col) { 
         return labyrinth[row][col] == EMPTY_CHAR;
     }
 
@@ -299,8 +285,7 @@ public class Labyrinth {
      * @param col la columna de la posición
      * @return {@code true} si la posición contiene un monstruo; {@code false} de lo contrario
      */
-    public boolean monsterPos(int row, int col) {
-        //return posOK(row, col) && labyrinth[row][col]==MONSTER_CHAR;
+    private boolean monsterPos(int row, int col) {
         return labyrinth[row][col] == MONSTER_CHAR;
     }
 
@@ -311,7 +296,7 @@ public class Labyrinth {
      * @param col la columna de la posición
      * @return {@code true} si la posición es la salida; {@code false} de lo contrario
      */
-    public boolean exitPos(int row, int col) {
+    private boolean exitPos(int row, int col) {
         //return posOK(row, col) && labyrinth[row][col]==EXIT_CHAR;
         return labyrinth[row][col] == EXIT_CHAR;
     }
@@ -323,7 +308,7 @@ public class Labyrinth {
      * @param col la columna de la posición
      * @return {@code true} si la posición es de combate; {@code false} de lo contrario
      */
-    public boolean combatPos(int row, int col) {
+    private boolean combatPos(int row, int col) {
         //return posOK(row, col) && labyrinth[row][col]==COMBAT_CHAR;
         return labyrinth[row][col] == COMBAT_CHAR;
     }
@@ -335,7 +320,7 @@ public class Labyrinth {
      * @param col la columna de la posición
      * @return {@code true} si la posición es válida y se puede pisar; {@code false} de lo contrario
      */
-    public boolean canStepOn(int row, int col) {
+    private boolean canStepOn(int row, int col) {
         return posOK(row, col) && (emptyPos(row, col) || monsterPos(row, col) || exitPos(row, col));
     }
 
@@ -345,7 +330,7 @@ public class Labyrinth {
      * @param row la fila de la posición anterior
      * @param col la columna de la posición anterior
      */
-    public void updateOldPos(int row, int col) {
+    private void updateOldPos(int row, int col) {
         if (posOK(row, col)) {
             labyrinth[row][col] = (combatPos(row, col)) ? MONSTER_CHAR : EMPTY_CHAR;
             players[row][col] = null;
@@ -361,7 +346,7 @@ public class Labyrinth {
      * @return un arreglo de enteros donde el primer elemento es la nueva posición de la fila
      *         y el segundo elemento es la nueva posición de la columna
      */
-    public int[] dir2Pos(int row, int col, Directions direction) {
+    private int[] dir2Pos(int row, int col, Directions direction) {
         int[] pos = new int[2];
         pos[COL] = col;
         pos[ROW] = row;
@@ -388,7 +373,7 @@ public class Labyrinth {
      *
      * @return un arreglo de enteros que representa la posición vacía [fila, columna]
      */
-    public int[] randomEmptyPos() {
+    private int[] randomEmptyPos() {
         int[] pos = new int[2];
         do{
             pos[ROW] = Dice.randomPos(nRows);
@@ -407,7 +392,7 @@ public class Labyrinth {
      * @param player el jugador que será movido
      * @return el monstruo en la nueva posición si hay uno, de lo contrario null
      */
-    public Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player) {
+    private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player) {
         Monster output = null;
         if(canStepOn(row,col)){
             if(posOK(oldRow,oldCol)){
@@ -471,7 +456,7 @@ public class Labyrinth {
         int row=startRow;
         int col=startCol;
         
-        for(int i=0;(posOK(row,col)) && emptyPos(row,col) && (length>0);i++){
+        while((posOK(row,col)) && emptyPos(row,col) && (length>0)){
             labyrinth[row][col] = BLOCK_CHAR;
             length -=1;
             row+=incRow;
@@ -504,57 +489,6 @@ public class Labyrinth {
         return validMoves;
     }
     
-    //----- FUNCIONES EXTRA-------------------------------
-    /**
-     * Añade un jugador en la casilla que se indica.
-     * @param row fila de la casilla
-     * @param col columna de la casilla
-     * @param player jugador a añadir
-     */
-    public void addPlayer(int row, int col, Player player) {
-        players[row][col]=player;
-    }
-    
-    /**
-     * Funcion que me diga donde hay monstruos y jugadores 
-     */
-    public void showMonstersAndPlayers() {
-        for(int i = 0; i < nRows; i++) {
-            for(int j = 0; j < nCols; j++) {
-                if(monsterPos(i, j)) {
-                    System.out.println("Hay un monstruo en la posición: " + i + ", " + j);
-                }
-                if(players[i][j] != null) {
-                    System.out.println("Hay un jugador en la posición: " + i + ", " + j);
-                }
-            }
-        }
-    }
-    
-    /**
-     * Añadir casilla de combate
-     * @param row fila de la casilla
-     * @param col columna de la casilla
-     */
-    public void addCombat(int row, int col) {
-        labyrinth[row][col] = COMBAT_CHAR;
-    }
-    
-    /**
-     * Funcion que me dice en que casillas hay combate
-     */
-    public void showCombat() {
-        for(int i = 0; i < nRows; i++) {
-            for(int j = 0; j < nCols; j++) {
-                if(combatPos(i, j)) {
-                    System.out.println("Hay combate en la posición: " + i + ", " + j);
-                }
-            }
-        }
-    }
-    
-//----- FUNCIONES EXTRA-------------------------------
-
     
     /**
      * Funcion para convertir un player normal a fuzzy

@@ -57,7 +57,20 @@ module UI
     end
 
     def show_game(game_state)
-      puts game_state.to_s
+      puts game_state.labyrinth
+      puts "\n"
+      puts game_state.players
+      puts "\n"
+      puts game_state.monsters
+      puts "\n"
+
+      puts "Log:\n" + game_state.log + "\n"
+
+      if (game_state.winner)
+        puts "We have a winner! Player " + game_state.current_player.to_s + "\n"
+      else
+        puts "Current player: " + game_state.current_player.to_s + "\n"
+      end
     end
 
   end # class   
