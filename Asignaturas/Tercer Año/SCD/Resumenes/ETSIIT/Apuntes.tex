@@ -283,9 +283,102 @@ int MPI_Recv(void *buf, int count, MPI_Datatype datatype, int source, int tag, M
 Para ello pincha \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/SCD/Resumenes/ETSIIT/cribaExplicacion.md}{aquí}. Además la actividad extra se encuentra \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/SCD/Teoria/Actividad_Extra/cribadeErastotenes/ETSIIT/build/Erastotenes.pdf}{aquí}.
 
 
+\subsubsection{Explicación del problema del museo}
 
+\begin{lstlisting}[style = customcpp]
+    PUERTA(i:1..2)::
+{ int s=0;
+do
+if (s<HORA.CIERRE && PERSONA())->
+{send(CONTROL, S()); //envia una se\~nal de entrada
+de persona
+DELAY.UNTIL(s+1);//espera hasta el siguiente
+instante
+s:=s+1;// cuenta un nuevo tick de reloj
+}
+[]
+(s<HORA.CIERRE && NOT PERSONA())->
+DELAY.UNTIL(s+1);//espera hasta el siguiente
+instante
+s:=s+1;]//cuenta otro tick
+[]
+TRUE->DELAY.UNTIL (TIME() + 16*3600);
+//es la hora de cierre del museo; hay
+//que esperar 16 horas para activar el controlador
+.
+// TIME() devuelve una cuenta en segundos.
+fi
+do;
+send(CONTROL, Start();}
+CONTROL::
+{ int cont= 0;
+if receive(PUERTA(1), Start());
+//desde cualquiera de los sensores
+[] //de las puertas se arranca
+receive(PUERTA(2), Start());//el controlador
+fi
+do
+[]*[(j:1..2) receive(PUERTA(j), S())-> cont:= cont
++1];
+//cuenta una persona mas, porque ha recibido la se\~nal
+//de cualquiera de las 2 puertas (no se puede saber cual)
+od;
+printf("numero de personas", %d, cont));
+}
+main(){
+cobegin PUERTA;CONTROL coend;}
+\end{lstlisting}
 
+\subsection{Orden Select}
+\begin{itemize}
+    \item versión de orden alternativa no determinista
+    \item modo síncrono de comunicación, paso de mensajes bloqueantes
+    \item resuelve el problema de la recepción de tener varias variables pendientes sin dependencias del orden temporal
+\end{itemize}
 
+\subsubsection{Semántica de la orden select}
+\begin{itemize}
+    \item cada bloque que comienza con \textit{when} se denomina alternativa (orden guarda)
+    \item desde when hasta do se denomina guarda de dicha alternativa
+    \item instrucciones receive nombran a otros procesos del programa concurrente y cada uno referencia a una variable local
+\end{itemize}
+\begin{lstlisting}[style=customcpp]
+    select
+when condicion1 receive( variable1, proceso1 ) do
+sentencias1
+when condicion2 receive( variable2, proceso2 ) do
+sentencias2
+...
+when condicionn receive( variablen, proceson ) do
+sentenciasn
+end
+\end{lstlisting}
+
+\subsubsection{Formas de poner la guarda de una orden select}
+
+\begin{itemize}
+    \item when receive(mensaje, proceso) do sentencias 
+    \item when true receive(mensaje, proceso) do sentencias
+    \item when condicion do sentencias (puede omitirse el receive, decimos que es una guarda sin sentencia de entrada)
+\end{itemize}
+
+\subsubsection{Tipos de ejecución de las guardas}
+\begin{itemize}
+    \item guarda ejecutable: si la condición es verdadera y ya ha iniciado la sentencia send
+    \item guarda potencialmente ejecutable: si la condición es verdadera pero no ha iniciado la sentencia send
+    \item guarda no ejecutable
+\end{itemize}
+
+\subsubsection{Determinación de la guarda a ejecutar}
+\begin{itemize}
+    \item aquella que inicio el send antes
+    \item se selecciona no determinísticamente una cualquiera si no hay guardas con sentencias de entrada
+    \item si hay solo guardas potenciablemente ejecutables, se inicia la guarda cuando esta inicia la sentencia send
+    \item si no hay ningún tipo de guarda se genera una excepción/error.
+\end{itemize}
+
+%diapositiva 32 de la tablet
+%https://chatgpt.com/c/676941fc-2ae8-8012-afcb-4f356a5273ee
 
 
 \section{Tema 4: Introducción a los Sistemas de Tiempo Real}
