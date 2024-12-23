@@ -1,6 +1,3 @@
-Aquí tienes una explicación detallada, línea por línea, del código en formato Markdown:
-
-```markdown
 # Explicación del código MPI
 
 ## Inicialización del entorno MPI
