@@ -21,6 +21,8 @@
 \usepackage{listings}
 \usepackage{inconsolata}
 
+\usepackage{float}
+
 %encabezado y pie de página nivel profesional
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -143,6 +145,142 @@
 % Índice (opcional)
 \tableofcontents
 \newpage
+
+\section{Tema 3: Sistemas basados en el paso de mensajes}
+
+\subsection{El cuello de botella de Von Neumann}
+
+El \textbf{cuello de botella de Von Neumann} se refiere a una limitación inherente en las arquitecturas de computación clásicas basadas en el modelo de programa único almacenado. Este problema surge debido a la dependencia de un único bus para transferir datos e instrucciones entre la memoria y la unidad de procesamiento central (CPU). A continuación, se presentan sus principales características y consecuencias:
+
+\begin{itemize}
+    \item \textbf{Limitación de velocidad del bus:} La transferencia de datos entre la memoria y la CPU está restringida por la velocidad máxima del bus, lo que afecta el rendimiento general del sistema.
+    \item \textbf{Cuello de botella:} Dado que no es posible realizar simultáneamente una operación de búsqueda de instrucciones y una operación de datos, se genera un retraso en el flujo de ejecución de las instrucciones.
+    \item \textbf{Impacto en el rendimiento:} Esta arquitectura requiere más tiempo de ejecución para los programas, lo que reduce la eficiencia del sistema computacional.
+\end{itemize}
+
+El cuello de botella de Von Neumann es una de las razones principales por las cuales las arquitecturas modernas buscan soluciones más eficientes, como los sistemas multiprocesadores o arquitecturas paralelas.
+
+\subsection{Clasificación de Flynn}
+
+La \textbf{clasificación de Flynn} es un esquema que categoriza las arquitecturas de sistemas computacionales en función de cómo manejan las instrucciones y los datos durante la ejecución. Esta clasificación es fundamental para entender los diferentes modelos de procesamiento y se divide en cuatro categorías principales:
+
+\begin{itemize}
+    \item \textbf{SISD (Single Instruction, Single Data):} 
+    \begin{itemize}
+        \item Una sola unidad de control ejecuta una única secuencia de instrucciones.
+        \item Procesa un único flujo de datos.
+        \item Ejemplo: computadores monoprocesador tradicionales.
+    \end{itemize}
+
+    \item \textbf{SIMD (Single Instruction, Multiple Data):}
+    \begin{itemize}
+        \item Una única instrucción se aplica simultáneamente a múltiples flujos de datos.
+        \item Común en aplicaciones con operaciones repetitivas sobre grandes conjuntos de datos, como gráficos y procesamiento de señales.
+        \item Ejemplo: procesadores vectoriales y GPU.
+    \end{itemize}
+
+    \item \textbf{MISD (Multiple Instruction, Single Data):}
+    \begin{itemize}
+        \item Múltiples unidades de control ejecutan distintas instrucciones sobre un único flujo de datos.
+        \item Es menos común en sistemas reales debido a limitaciones prácticas.
+    \end{itemize}
+
+    \item \textbf{MIMD (Multiple Instruction, Multiple Data):}
+    \begin{itemize}
+        \item Múltiples unidades de control ejecutan distintas secuencias de instrucciones sobre múltiples flujos de datos.
+        \item Flexible y utilizado en sistemas paralelos modernos.
+        \item Ejemplo: arquitecturas multicore y clusters de computadoras.
+    \end{itemize}
+\end{itemize}
+
+Esta clasificación permite identificar las capacidades y limitaciones de las diferentes arquitecturas, sirviendo como guía para diseñar y optimizar sistemas computacionales.
+
+%https://chatgpt.com/c/676941fc-2ae8-8012-afcb-4f356a5273ee
+
+\subsection{Diferencias entre Multiprocesador SMP y AMP}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{6cm}|p{5cm}|}
+\hline
+\textbf{Características}        & \textbf{SMP (Multiprocesamiento Simétrico)}  & \textbf{AMP (Multiprocesamiento Asimétrico)}  \\ \hline
+\textbf{Arquitectura}           & Todos los procesadores son iguales y comparten el acceso a la memoria & Un procesador principal controla el sistema y los otros son secundarios  \\ \hline
+\textbf{Acceso a memoria}       & Todos los procesadores tienen acceso compartido a la memoria central  & Solo el procesador principal tiene acceso a la memoria central  \\ \hline
+\textbf{Control de procesos}    & Los procesadores pueden trabajar independientemente & El procesador principal gestiona los procesos y asigna tareas a los secundarios \\ \hline
+\textbf{Escalabilidad}          & Alta escalabilidad; se pueden agregar más procesadores sin mucha complicación  & Baja escalabilidad; añadir más procesadores no mejora el rendimiento de forma eficiente \\ \hline
+\textbf{Costo}                  & Más costoso debido a la necesidad de múltiples procesadores iguales y una memoria compartida  & Menos costoso, ya que solo se necesita un procesador principal y algunos secundarios \\ \hline
+\textbf{Rendimiento}            & Mejor rendimiento en tareas paralelas y de procesamiento intensivo  & Menor rendimiento en tareas paralelas, debido a la dependencia del procesador principal \\ \hline
+\textbf{Sistemas típicos}       & Servidores, estaciones de trabajo y sistemas de alta gama  & Sistemas embebidos, estaciones de trabajo de menor escala y dispositivos con recursos limitados \\ \hline
+\end{tabular}
+\caption{Diferencias entre Multiprocesador SMP y AMP}
+\end{table}
+
+
+\subsection{Mecanismo de citas}
+
+Se trata de una operación de comunicación NO bloqueante y sin búfer. La cita tiene lugar antes de que comience la transmisión de datos.
+
+\subsection{Paso de mensajes bloqueante con búfer}
+
+El proceso emisor vuelve inmediatamente al ejecutar la operación de envío, \textit{salvo que el proceso buffer esté lleno}. En este caso, el proceso emisor se bloquea hasta que haya espacio en el buffer. La operación \textit{receive} no vuelve hasta que se han recibido los datos.
+
+\subsection{Paso de mensajes no bloqueante con búfer}
+
+En este caso se reduce el tiempo de espera debido a que la operación \textit{receive} provoca la transferencia inmediata de datos del búfer a la memoria del proceso receptor.
+
+\subsection{MPI}
+\subsubsection{Comunicación bloqueante}
+\subsubsection*{Campos de operación MPI de envío con buffer}
+\begin{lstlisting}[language=c++]
+int MPI_Send(void *buf, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm);
+\end{lstlisting}
+\subsubsection*{Campos de operación MPI de recepción con buffer}
+\begin{lstlisting}[language=c++]
+int MPI_Recv(void *buf, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Status *status);
+\end{lstlisting}
+
+\begin{itemize}
+    \item El \textit{origen, tag, comunicador} deben de coincidir en el mensaje enviado y recibido.
+    \item \textit{MPI\_Send, MPI\_Recv, MPI\_Ssend} no vuelven hasta que se completan.
+\end{itemize}
+
+\subsubsection{Comunicación No bloqueante}
+\begin{itemize}
+    \item \textit{MPI\_Isend, MPI\_Irecv, MPI\_Iprobe, MPI\_Test} son operaciones no bloqueantes.
+\begin{itemize}
+    \item \textit{MPI\_Isend:} Inicia una operación de envío no bloqueante. Permite que el programa continúe ejecutándose mientras se realiza la operación de envío en segundo plano.
+    \item \textit{MPI\_Irecv:} Inicia una operación de recepción no bloqueante. Permite que el programa continúe ejecutándose mientras se realiza la operación de recepción en segundo plano.
+    \item \textit{MPI\_Iprobe:} Permite comprobar de manera no bloqueante si hay un mensaje disponible para ser recibido. Esto es útil para evitar que el programa se bloquee esperando un mensaje.
+    \item \textit{MPI\_Test:} Verifica si una operación no bloqueante ha completado. Esto permite al programa comprobar el estado de las operaciones no bloqueantes y actuar en consecuencia.
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Sondeo de Mensajes}
+\begin{itemize}
+    \item \textit{MPI\_Iprobe} y \textit{MPI\_Probe} son operaciones de sondeo de mensajes que permiten a un proceso verificar si hay mensajes disponibles para ser recibidos.
+    \begin{itemize}
+        \item \textit{MPI\_Iprobe:} Permite sondear de manera no bloqueante si hay mensajes disponibles para ser recibidos. Devuelve un valor verdadero si hay mensajes pendientes y falso en caso contrario. El valor que modifica es el flag, es decir, si flag>0, hay que recibirlo con MPI\_Recv, debido a que se da la existencia de un mensaje no bloqueante.
+        \item \textit{MPI\_Probe:} Permite sondear de manera bloqueante si hay mensajes disponibles para ser recibidos. Se bloquea hasta que llega un mensaje.
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Diferencias entre MPI\_Probe y MPI\_IProbe}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{Característica}        & \textbf{MPI\_Probe} & \textbf{MPI\_IProbe}  \\ \hline
+\textbf{Bloqueante}           & Sí & No  \\ \hline
+\textbf{Comportamiento}       & Espera hasta que haya un mensaje disponible & Vuelve inmediatamente con el estado del mensaje  \\ \hline
+\textbf{Eficiencia}           & Puede causar ineficiencia en ausencia de mensajes mientras se espera & Permite trabajar en paralelo mientras se espera  \\ \hline
+\end{tabular}
+\caption{Diferencias entre MPI\_Probe y MPI\_IProbe}
+\end{table}
+
+%Diapositiva 30 de mis t3 de la tablet
+%https://chatgpt.com/c/676945a9-3f34-8012-aa20-cf60be59451c
+
 
 \section{Tema 4: Introducción a los Sistemas de Tiempo Real}
 

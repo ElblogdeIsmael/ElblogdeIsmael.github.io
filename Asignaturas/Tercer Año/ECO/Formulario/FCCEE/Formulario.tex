@@ -84,6 +84,112 @@
 \tableofcontents
 \newpage
 
+\section{Tema 2}
+
+\subsection{Modelo Lineal Simple}
+
+\begin{equation}
+    Y_i \approx a + bx_i
+\end{equation}
+
+\subsection{Modelo Lineal Múltiple}
+
+\begin{equation}
+    Y_i = \beta_1 + \beta_2 x_{i2} + \beta_3 x_{i3} + \ldots + \beta_k x_{ik} + u_i
+\end{equation}
+
+\begin{itemize}
+    \item El subíndice $i$ indica la observación.
+    \item El subíndice $k$ indica el número de variables explicativas.
+    \item El subíndice $u$ indica el término de error.
+    \item Nota: $\beta_1$ es la constante, lleva asociado el valor 1 = $x_{i1}$ (por eso no se pone).
+\end{itemize}
+
+\subsection{Notación MLP}
+
+\begin{equation}
+    \vec{y} = \begin{pmatrix}
+    Y_1 \\
+    Y_2 \\
+    \vdots \\
+    Y_n
+    \end{pmatrix}
+    \end{equation}
+    
+    \begin{equation}
+    X = \begin{pmatrix}
+    1 & X_{21} & \cdots & X_{k1} \\
+    1 & X_{22} & \cdots & X_{k2} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    1 & X_{2n} & \cdots & X_{kn}
+    \end{pmatrix}
+    \end{equation}
+    
+    \begin{equation}
+    \vec{\beta} = \begin{pmatrix}
+    \beta_1 \\
+    \beta_2 \\
+    \vdots \\
+    \beta_k
+    \end{pmatrix}
+    \end{equation}
+    
+    \begin{equation}
+    \vec{u} = \begin{pmatrix}
+    u_1 \\
+    u_2 \\
+    \vdots \\
+    u_n
+    \end{pmatrix}
+    \end{equation}
+
+\subsection{Supuestos}
+\subsubsection{Linealidad}
+\begin{equation}
+    Y_i = \beta_1 + \beta_2 x_{i2} + \beta_3 x_{i3} + \ldots + \beta_k x_{ik} + u_i
+\end{equation}
+
+\subsubsection{Rango Completo Por Columnas}
+
+\begin{equation}
+    rango(X) = k
+\end{equation}
+
+\subsubsection{Exogeneidad}
+\begin{equation}
+    E(u_i|X_i) = 0
+\end{equation}
+\begin{itemize}
+    \item El valor esperado de la esperanza que toman las variables explicativas es 0.
+\end{itemize}
+
+Por lo que si tenemos que: $Y_i = \vec{X_i^{t}}\vec{\beta}$, tenemos de forma inmediata que:
+\begin{equation}
+    E(Y_i|X_i) = \vec{X_i^{t}}\vec{\beta}
+\end{equation}
+
+\subsubsection{Causalidad}
+
+\begin{itemize}
+    \item Relación de causalidad es unidireccional.
+    \item Las variables aparecen en el lado derecho de la ecuación, pero no al contrario.
+    \item La variable dependiente $Y_i$ adoptará un carácter aleatorio.
+\end{itemize}
+
+\subsubsection{Perturbación}
+\begin{itemize}
+    \item Esta centrada, es decir, $E(u_i) = 0 \forall i=1,2,\ldots,n$
+    \item Es homocedástica, es decir, $Var(u_i) = E[u_i^{2}]= \sigma^2 \forall i=1,2,\ldots,n$
+    \item Si es incorrelada implica que $cov[u_iu_j] = E[u_iu_j]=0$. Cuando es $neq$ 0 decimos que hay un problema de autocorrelación.
+\end{itemize}
+
+Como consecuencia tenemos que:
+\begin{equation}
+    var[\vec{u}] = E[(\vec{u}-E[\vec{u}])(\vec{u}-E[\vec{u}])^{t}] = E[\vec{u}\vec{u}^{t}]
+\end{equation}
+Para la demostración de esta operación pincha \href{URL}{aquí} para verla en formato md.
+    
+
 \section{Tema 3}
 
 \begin{itemize}
