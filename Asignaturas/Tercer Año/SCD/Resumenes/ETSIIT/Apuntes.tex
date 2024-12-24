@@ -377,9 +377,142 @@ end
     \item si no hay ningún tipo de guarda se genera una excepción/error.
 \end{itemize}
 
-%diapositiva 32 de la tablet
-%https://chatgpt.com/c/676941fc-2ae8-8012-afcb-4f356a5273ee
+Hay que tener en cuenta que la ejecución de un instrucción select conlleva esperas, por lo que pueden producirse situaciones de interbloqueo.\\
 
+Existe una orden select con prioridad, por lo que dejaría de ser no determinística.\\
+
+Para programar a un servicio servidor se debe de ejecutar el select dentro de un bucle para que se evalúe de nuevo la guarda y se seleccione no determinísticamente a una de ellas para poder ejecutarlas.
+
+\subsubsection{Ejemplo: Productor-Consumidor con Búfer FIFO}
+
+Este ejemplo ilustra el patrón clásico de \textbf{productor-consumidor} utilizando un búfer FIFO intermedio. En este esquema:
+
+\begin{itemize}
+    \item El \textbf{productor} genera elementos y los envía al búfer.
+    \item El \textbf{intermedio} actúa como un búfer que controla la inserción y extracción de datos, garantizando condiciones de sincronización mediante guardas.
+    \item El \textbf{consumidor} extrae elementos del búfer y los procesa.
+\end{itemize}
+
+La clave de este diseño radica en que el intermedio no conoce de antemano el orden de las peticiones de inserción y extracción, pero asegura la propiedad de \textbf{seguridad} en el acceso concurrente al búfer.
+
+\begin{lstlisting}[style=customcpp, caption={Productor-Consumidor con Búfer FIFO}, label={lst:prod-cons}]
+    { Productor (P) }
+    while true do                        // Inicia un bucle infinito en el productor.
+    begin
+        v := Produce();                  // El productor genera un valor 'v'.
+        s_send(v, B);                    // El productor envía el valor 'v' al búfer 'B'.
+    end
+    
+    { Intermedio (B) }
+    var esc, lec, cont: integer := 0;    // Inicializa las variables: 'esc' (índice de escritura), 'lec' (índice de lectura) y 'cont' (contador de elementos en el búfer).
+    buf: array[0..tam-1] of integer;    // Declara el búfer 'buf' como un arreglo de tamaño 'tam', donde se almacenarán los valores producidos.
+    begin
+        while true do                    // Inicia un bucle infinito en el intermedio (el búfer).
+            select                         // Comienza una selección de condiciones para ser ejecutadas.
+                when cont < tam receive(v, P) do       // Si el número de elementos en el búfer es menor que 'tam', hay espacio para almacenar más elementos, El intermedio recibe un valor 'v' del productor (P).
+
+                    buf[esc] := v;        // El valor recibido se almacena en la posición 'esc' del búfer.
+                    esc := (esc + 1) mod tam;  // Se actualiza el índice de escritura 'esc' de manera circular (se vuelve a 0 cuando alcanza 'tam').
+                    cont := cont + 1;     // Se incrementa el contador de elementos en el búfer.
+                when 0 < cont receive(s, C) do             // Si el número de elementos en el búfer es mayor que 0, hay datos para consumir, El intermedio recibe una solicitud del consumidor (C).
+
+                    s_send(buf[lec], C);  // El intermedio envía el valor almacenado en 'lec' al consumidor.
+                    lec := (lec + 1) mod tam;  // Se actualiza el índice de lectura 'lec' de manera circular.
+                    cont := cont - 1;     // Se decrementa el contador de elementos en el búfer.
+            end
+    end
+    
+    { Consumidor (C) }
+    while true do                        // Inicia un bucle infinito en el consumidor.
+    begin
+        s_send(s, B);                    // El consumidor solicita un valor del búfer (envía una solicitud 's' al búfer).
+        receive(v, B);                   // El consumidor recibe el valor 'v' del búfer.
+        Consume(v);                      // El consumidor procesa el valor recibido.
+    end
+\end{lstlisting}
+
+
+    
+    
+
+%explicacion
+\subsubsection*{Breve Explicación}
+
+\begin{itemize}
+    \item \textbf{Productor (P):} Un bucle infinito genera valores (\textit{Produce}) y los envía al búfer (\textit{s\_send(v, B)}).
+    \item \textbf{Intermedio (B):} Administra las operaciones de inserción y extracción usando un arreglo cíclico:
+    \begin{itemize}
+        \item Inserta valores en el búfer si no está lleno (\textit{cont < tam}).
+        \item Extrae valores del búfer si no está vacío (\textit{cont > 0}).
+        \item Las guardas en las sentencias \textit{select} controlan estas condiciones.
+    \end{itemize}
+    \item \textbf{Consumidor (C):} Recibe valores del búfer y los consume (\textit{Consume(v)}).
+\end{itemize}
+
+Este modelo asegura la sincronización entre los procesos mediante las condiciones de las guardas, evitando inconsistencias en el acceso concurrente al búfer.
+
+
+\subsubsection{Select con Guardas Indexadas}
+
+\textbf{Instrucción \texttt{Select} con guardas indexadas}  
+Cuando es necesario replicar alternativas en una estructura de espera selectiva, se puede utilizar una construcción que evita la redundancia de código. La sintaxis para lograrlo es:
+
+\begin{lstlisting}[style=customcpp]
+for indice := inicial to final
+when condicion receive(mensaje, proceso) do
+    sentencias(indice);
+\end{lstlisting}
+
+En esta construcción, tanto la condición, el mensaje, el proceso y las sentencias pueden referirse al índice de la iteración. Esta forma compacta es equivalente a expandir explícitamente las alternativas, como se muestra a continuación:
+
+\begin{lstlisting}[style=customcpp]
+when condicion receive(mensaje, proceso) do
+    sentencias { se sustituye indice por inicial }
+when condicion receive(mensaje, proceso) do
+    sentencias { se sustituye indice por inicial + 1 }
+...
+\end{lstlisting}
+
+Este mecanismo facilita la creación de programas distribuidos más legibles y eficientes, reduciendo la redundancia en el código fuente.
+
+
+\subsubsection{Select con sentencia else}
+
+En este caso es similar al uso del \textit{when}, pero en este caso debemos de hacer uso del \textit{else}, podemos concebir que el uso y desempeño es similar al de in if\-else, pero en este caso es un when\-else. Ejemplo:
+\begin{lstlisting}[style=customcpp, caption={Select con sentencia else}, label={lst:select-else}]
+    // Declaración de variables globales
+    var suma : array[0..n-1] of integer := (0,0,...,0) ; // Arreglo para almacenar las sumas parciales de cada proceso.
+    continuar : boolean := true ;                       // Variable de control para el bucle principal.
+    numero : integer ;                                  // Variable para recibir el número enviado por un proceso.
+    
+    begin
+    while continuar do begin                            // Bucle principal que se ejecuta mientras 'continuar' sea verdadero.
+        select                                           // Inicia la estructura de selección para manejar múltiples condiciones.
+            for i := 0 to n - 1                         // Itera sobre todos los procesos del 0 al n-1.
+            when suma[i] < 100 receive( numero, emisor[i] ) // Si la suma parcial del proceso i es menor que 100,
+                                                             // recibe un número de dicho proceso (emisor[i]).
+            do
+                suma[i] := suma[i] + numero ;            // Actualiza la suma parcial del proceso i con el número recibido.
+                continuar := true ;                      // Establece 'continuar' como verdadero para seguir ejecutando el bucle.
+                                                          // Nota: esta instrucción no es estrictamente necesaria, pero aclara
+                                                          // que el bucle continuará.
+        end
+        else continuar := false;                        // Si no se cumple ninguna condición, establece 'continuar' como falso
+                                                        // para salir del bucle principal.
+    end
+    end
+\end{lstlisting}
+    
+
+
+
+
+
+
+
+
+%https://chatgpt.com/c/676941fc-2ae8-8012-afcb-4f356a5273ee---4o
+%https://chatgpt.com/c/676ae4b6-51a8-8012-a6fb-f0bf91751044---normal
 
 \section{Tema 4: Introducción a los Sistemas de Tiempo Real}
 
