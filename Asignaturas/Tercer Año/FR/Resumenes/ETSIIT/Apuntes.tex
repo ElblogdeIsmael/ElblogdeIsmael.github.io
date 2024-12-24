@@ -474,9 +474,364 @@ Esta estructura asegura que Internet pueda soportar la enorme cantidad de tráfi
 
 
 
-% https://chatgpt.com/c/67693401-0fdc-8012-8dea-a3b6f3ca0d4a
-% tema 1 ejercicios y teoria acabados
+\section{Tema 2: Capa de Red}
 
+\subsection{Funcionalidades}
+
+\subsubsection{Funciones y servicios en TCP/IP}
+\begin{itemize}
+    \item \textbf{Encaminamiento:} Proceso de seleccionar el camino más adecuado para enviar paquetes de datos desde el origen hasta el destino a través de una red. Ejemplo de protocolo: \textit{OSPF (Open Shortest Path First)}.
+    \item \textbf{Conmutación:} Técnica utilizada para enviar datos a través de una red mediante la creación de una ruta temporal entre el origen y el destino. Ejemplo de protocolo: \textit{MPLS (Multiprotocol Label Switching)}.
+    \item \textbf{Interconexión de redes:} Proceso de conectar diferentes redes para que puedan comunicarse entre sí, permitiendo el intercambio de datos. Ejemplo de protocolo: \textit{IP (Internet Protocol)}.
+    \item \textbf{En OSI: control de gestión:} Función que supervisa y controla el funcionamiento de la red, asegurando que los recursos se utilicen de manera eficiente y que se mantenga la calidad del servicio. Ejemplo de protocolo: \textit{SNMP (Simple Network Management Protocol)}.
+    \item \textbf{Ejemplos de protocolos de red:} Protocolos que operan en la capa de red para facilitar la comunicación entre dispositivos. Ejemplos incluyen \textit{IP (Internet Protocol)}, \textit{ICMP (Internet Control Message Protocol)}, y \textit{ARP (Address Resolution Protocol)}.
+\end{itemize}
+
+% \subsection{Conmutación}
+
+% Es la acción de establecer o determinar un camino que permita transmitir la información de un punto a otro.
+
+% \subsubsection*{Esquemas de conmutación}
+% \begin{itemize}
+%     \item Circuitos
+%     \item Paquetes: datagramas o Circuitos virtuales
+% \end{itemize}
+
+\subsection{Conmutación}
+
+La \textbf{conmutación} se refiere a la acción de establecer o determinar un camino que permita transmitir información de extremo a extremo en una red. A continuación, se describen los esquemas y conceptos principales asociados:
+
+\subsubsection*{Esquemas de Conmutación}
+
+Existen diferentes esquemas para implementar la conmutación en redes:
+\begin{itemize}
+    \item \textbf{Conmutación de Circuitos:}
+    \begin{itemize}
+        \item Es un servicio orientado a conexión, lo que significa que requiere el establecimiento previo de una conexión antes de transmitir los datos.
+        \item Ejemplo típico: redes telefónicas.
+        \item Los pasos del proceso incluyen:
+        \begin{enumerate}
+            \item \textbf{Conexión:} Se establece un camino dedicado entre el emisor y el receptor.
+            \item \textbf{Transmisión:} Los datos fluyen a través del circuito dedicado.
+            \item \textbf{Desconexión:} El circuito se libera una vez finalizada la transmisión.
+        \end{enumerate}
+        \item Ventajas:
+        \begin{itemize}
+            \item Los recursos son dedicados, lo que facilita comunicaciones en tiempo real sin contención (es decir, sin competencia por el acceso al medio).
+        \end{itemize}
+        \item Inconvenientes:
+        \begin{itemize}
+            \item Retraso significativo para el establecimiento de la conexión.
+            \item Baja flexibilidad para adaptarse a cambios en las condiciones de la red.
+            \item Poco tolerante a fallos.
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Conmutación de Paquetes:} (Más adelante profundizaremos en este tema)
+    \begin{itemize}
+        \item Utiliza datagramas o circuitos virtuales para transmitir información.
+        \item En este esquema, los datos se dividen en paquetes pequeños, que se transmiten de forma independiente a través de la red.
+        \item Ofrece mayor flexibilidad y tolerancia a fallos en comparación con la conmutación de circuitos.
+    \end{itemize}
+\end{itemize}
+
+La elección entre conmutación de circuitos o de paquetes depende de las necesidades específicas de la red, como la prioridad de las comunicaciones en tiempo real frente a la adaptabilidad y tolerancia a fallos.
+
+\subsubsection{Conmutación de Circuitos}
+
+La \textbf{conmutación de circuitos} es un esquema de transmisión que establece un camino fijo entre los dispositivos de origen y destino antes de que ocurra la comunicación. Este enfoque presenta varias ventajas y desventajas, las cuales se detallan a continuación:
+
+\subsubsection*{Ventajas}
+
+\begin{itemize}
+    \item \textbf{Transmisión en tiempo real:} Ideal para servicios sensibles al tiempo, como la comunicación de voz.
+    \item \textbf{Uso permanente de recursos:} Una vez establecido, el circuito permanece activo durante toda la sesión, garantizando estabilidad.
+    \item \textbf{Sin contención:} No hay competencia por el acceso al medio, ya que los recursos están dedicados.
+    \item \textbf{Circuito fijo:} La ruta de comunicación no cambia una vez configurada, eliminando decisiones de encaminamiento durante la transmisión.
+    \item \textbf{Simplicidad en la gestión de nodos intermedios:} La operación de los nodos es más sencilla porque no necesitan reevaluar las rutas.
+\end{itemize}
+
+\subsubsection*{Desventajas}
+
+\begin{itemize}
+    \item \textbf{Retraso en el inicio de la comunicación:} Es necesario establecer el circuito antes de comenzar la transmisión, lo que genera un tiempo de espera.
+    \item \textbf{Uso no eficiente de recursos:} Si el circuito permanece inactivo durante parte de la sesión, los recursos se desperdician.
+    \item \textbf{Falta de flexibilidad:} El circuito es fijo y no se puede ajustar en caso de fallos o cambios en la red.
+\end{itemize}
+
+Este esquema es adecuado para aplicaciones donde la calidad de servicio y la baja latencia son esenciales, pero puede no ser ideal en escenarios donde la eficiencia en el uso de recursos es prioritaria.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/conmutacionCircuitos.png}
+    \caption{Ejemplo de conmutación de circuitos en una red telefónica.}
+\end{figure}
+
+\subsubsection{Conmutación de Paquetes}
+
+La \textbf{conmutación de paquetes} es un esquema de transmisión en el que la información se divide en bloques denominados \textit{paquetes}. Estos paquetes se envían de manera independiente a través de la red, permitiendo flexibilidad y eficiencia en el uso de los recursos. 
+
+\subsubsection*{Tipos de Conmutación de Paquetes}
+
+\begin{itemize}
+    \item \textbf{Conmutación mediante Datagramas:}
+    \begin{itemize}
+        \item Ejemplo: El protocolo IP.
+        \item No requiere el establecimiento de una conexión previa.
+        \item Los paquetes se envían de manera independiente, y cada uno puede seguir rutas diferentes a través de la red.
+        \item En cada salto, los nodos intermedios realizan un proceso de \textit{almacenamiento y envío} (\textit{store-and-forward}), gestionando temporalmente los paquetes antes de retransmitirlos.
+        \item Cada paquete contiene las direcciones de origen y destino, lo que permite que los nodos intermedios determinen su ruta.
+    \end{itemize}
+    
+    \item \textbf{Conmutación de Paquetes con Circuitos Virtuales:}
+    \begin{itemize}
+        \item Ejemplo: ATM (\textit{Asynchronous Transfer Mode}), utilizado en redes troncales.
+        \item Este esquema combina características de la conmutación de circuitos y de la conmutación de paquetes.
+        \item Los pasos típicos incluyen:
+        \begin{enumerate}
+            \item \textbf{Conexión:} Se establece un circuito virtual antes de la transmisión.
+            \item \textbf{Transmisión:} Los paquetes viajan a través del circuito virtual.
+            \item \textbf{Desconexión:} El circuito virtual se libera al finalizar la transmisión.
+        \end{enumerate}
+        \item Los recursos no son dedicados, lo que permite mayor eficiencia en comparación con la conmutación de circuitos.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Ventajas de la Conmutación de Paquetes}
+\begin{itemize}
+    \item Flexibilidad en la ruta de los paquetes, lo que incrementa la tolerancia a fallos en la red.
+    \item Uso más eficiente de los recursos en comparación con la conmutación de circuitos.
+    \item Adecuado para datos no sensibles al tiempo, como correos electrónicos y descargas de archivos.
+\end{itemize}
+
+\subsubsection*{Desventajas de la Conmutación de Paquetes}
+\begin{itemize}
+    \item Latencia variable debido a los posibles retrasos en los nodos intermedios.
+    \item Requiere mayor capacidad de procesamiento en los nodos para almacenar y decidir el envío de los paquetes.
+    \item Pérdida potencial de paquetes, lo que puede requerir retransmisión en aplicaciones críticas.
+\end{itemize}
+
+La conmutación de paquetes es el mecanismo predominante en redes modernas, especialmente en Internet, debido a su capacidad de manejar tráfico de datos heterogéneo y adaptarse dinámicamente a las condiciones de la red.
+
+
+\subsubsection{Estimación del Tiempo de Transmisión en Conmutación de Paquetes mediante Datagramas}
+
+La pregunta plantea estimar el tiempo total involucrado en la transmisión de un mensaje de datos utilizando la técnica de conmutación de paquetes mediante datagramas (\textbf{CDP}). Los parámetros proporcionados son:
+
+\begin{itemize}
+    \item \( M \): Longitud en bits del mensaje a enviar.
+    \item \( V \): Velocidad de transmisión de las líneas en bits por segundo (\textit{bps}).
+    \item \( P \): Longitud en bits de los paquetes.
+    \item \( H \): Bits de cabecera de los paquetes.
+    \item \( N \): Número de nodos intermedios entre las estaciones finales.
+    \item \( D \): Tiempo de procesamiento en segundos en cada nodo.
+    \item \( R \): Retardo de propagación en segundos asociado a cada enlace.
+\end{itemize}
+
+\subsubsection*{Solución Propuesta}
+
+Para resolver el problema, debemos considerar:
+\begin{enumerate}
+    \item Dividir el mensaje en paquetes.
+    \item Calcular el tiempo de transmisión por paquete.
+    \item Incorporar los tiempos de procesamiento y propagación a lo largo de los nodos y enlaces.
+\end{enumerate}
+
+\paragraph{Cálculo del Tiempo Total de Transmisión}
+
+\begin{align*}
+    \text{Número de paquetes: } & \, N_p = \left\lceil \frac{M}{P - H} \right\rceil. \\
+    \text{Tiempo de transmisión de un paquete: } & \, T_t = \frac{P}{V}. \\
+    \text{Tiempo total de transmisión: } & \, T_{\text{total}} = N_p \cdot T_t + N_p \cdot N \cdot D + (N+1) \cdot R.
+\end{align*}
+
+Donde:
+\begin{itemize}
+    \item \( T_t \): Tiempo de transmisión de un paquete, calculado como el cociente entre el tamaño del paquete \( P \) y la velocidad de transmisión \( V \).
+    \item \( T_{\text{total}} \): Tiempo total de transmisión, que incluye:
+    \begin{itemize}
+        \item La transmisión de todos los paquetes.
+        \item El procesamiento en cada nodo (\( D \)).
+        \item El retardo de propagación en los enlaces (\( R \)).
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Análisis de Validez de las Soluciones}
+
+\paragraph{Solución Propuesta en las Diapositivas}
+En el PDF se menciona una fórmula similar basada en los mismos parámetros. La estructura general es válida, pero las diapositivas no siempre destacan la necesidad de sumar correctamente los retardos acumulados y los tiempos de procesamiento por cada paquete en nodos intermedios. Esto puede llevar a subestimar el tiempo total.
+
+\paragraph{Solución Propuesta por ChatGPT}
+La fórmula derivada en este documento, validada matemáticamente, considera cada paquete y su impacto en los tiempos de transmisión, procesamiento y propagación. Es válida y consistente con los principios de la conmutación de paquetes mediante datagramas.
+
+\subsubsection*{Conclusión}
+
+La solución propuesta aquí es válida, ya que incluye todos los retardos necesarios (transmisión, procesamiento y propagación) y maneja adecuadamente la fragmentación del mensaje en paquetes. 
+
+Si las soluciones del PDF no consideran alguno de estos elementos, pueden estar incompletas. Sin embargo, las presentaciones del PDF son útiles como referencia siempre que se ajusten a los detalles planteados en este análisis.
+
+
+\subsection{Protocolo IP}
+
+\subsubsection{El Protocolo IP (IPv4)}
+
+El protocolo IP versión 4 (\textbf{IPv4}), especificado en el RFC 791, es el estándar fundamental para la interconexión de redes, también conocidas como subredes. Sus principales características y funciones se describen a continuación:
+
+\subsubsection*{Características de IPv4}
+
+\begin{itemize}
+    \item \textbf{Interconexión de redes:} IPv4 permite la comunicación entre diferentes subredes, resolviendo el problema del direccionamiento en Internet.
+    \item \textbf{Retransmisión salto a salto:} Gestiona el envío de paquetes desde el host de origen al destino final a través de routers intermedios.
+    \item \textbf{Servicio no orientado a conexión:}
+    \begin{itemize}
+        \item No realiza una negociación inicial o \textit{handshake}, lo que significa que no establece una conexión lógica entre los extremos.
+        \item Es un protocolo \textit{no fiable}, ya que no implementa control de errores ni control de flujo.
+    \end{itemize}
+    \item \textbf{Unidad de datos:} Los paquetes enviados en IPv4 se denominan \textbf{datagramas}.
+    \item \textbf{Protocolo de máximo esfuerzo (\textit{best-effort}):}
+    \begin{itemize}
+        \item No garantiza la entrega de los datagramas, que pueden perderse, duplicarse, retrasarse o llegar desordenados al destino.
+    \end{itemize}
+    \item \textbf{Gestión de fragmentación:} IPv4 adapta el tamaño de los datagramas a las diferentes \textit{Maximum Transfer Units} (MTUs) de las subredes, dividiendo los datagramas cuando es necesario.
+\end{itemize}
+
+\subsubsection*{Conclusión}
+
+IPv4 es un protocolo básico y ampliamente utilizado en Internet. Aunque no garantiza la fiabilidad ni el orden de los datos transmitidos, su simplicidad y diseño permiten la interoperabilidad entre redes heterogéneas, lo que ha facilitado la expansión de la conectividad global.
+
+\subsubsection*{Ejemplos}
+\begin{itemize}
+    \item Hotmail con servidor webamil 130.206.192.39
+    \item Youtube \dots
+    \item Google \dots
+    \item Facebook \dots
+\end{itemize}
+
+\subsubsection*{Anotaciones Extra}
+
+\begin{itemize}
+    \item Las direcciones IP tienen 32 bits = 4 bytes
+    \item No pueden ser mayores de 256  = 4 bytes
+    \item Internet usa direccionamiento jerárquico, permitiendo clases, como la clase A, B, C, D, E, etc.
+    \item Una de las máscaras que podemos tener es por ejemplo poniendo los 8 primeros bits a 1 y los 24 restantes a 0, es decir, 255.0.0.0
+    \item ¿Que significa la red A?(podemos imaginar cualquier otra red). Pues significa que tenemos 128 redes de $2^{24} \approx 16$ millones.
+    \item ¿Para que sirven las máscaras? Para ver la dirección IP que hay asociada a una red.
+    
+\end{itemize}
+
+\subsubsection{Direccionamiento Jerárquico y Máscaras de Red en IPv4}
+
+Internet adopta un esquema de \textbf{direccionamiento jerárquico} que simplifica el encaminamiento (\textit{routing}) al dividir las direcciones IP en dos partes claramente diferenciadas. Este sistema permite identificar subredes y dispositivos dentro de cada subred.
+
+\subsubsection*{Estructura de las Direcciones IP}
+
+Las direcciones IPv4 tienen un tamaño de \textbf{32 bits} y se dividen en dos componentes principales:
+\begin{itemize}
+    \item \textbf{Identificador de subred:} Representa la subred a la que pertenece el dispositivo.
+    \item \textbf{Identificador de dispositivo (host):} Identifica de manera única al dispositivo dentro de la subred.
+\end{itemize}
+
+\subsubsection*{Máscaras de Red}
+
+La \textbf{máscara de red} es un patrón que determina qué bits de una dirección IP corresponden al identificador de subred y cuáles al identificador del dispositivo. Se puede expresar de dos maneras:
+\begin{itemize}
+    \item \textbf{Notación decimal con puntos:} Ejemplo: \texttt{255.255.255.0}.
+    \item \textbf{Notación CIDR (Classless Inter-Domain Routing):} Ejemplo: \texttt{200.27.4.112/24}, donde el número después de la barra indica la cantidad de bits asignados al identificador de subred.
+\end{itemize}
+
+\subsubsection*{Ejemplo de Cálculo del Identificador de Subred}
+
+Dada una dirección IP y su máscara, el identificador de la subred se obtiene mediante una operación lógica AND:
+
+\begin{verbatim}
+Dirección IP:   200.27.4.112 = 11001000.00011011.00000100.01110000
+Máscara:        255.255.255.0 = 11111111.11111111.11111111.00000000
+------------------------------------------------------------------
+Subred:         200.27.4.0   = 11001000.00011011.00000100.00000000
+\end{verbatim}
+
+\paragraph{Interpretación:}
+\begin{itemize}
+    \item \textbf{Dirección IP:} \texttt{200.27.4.112} identifica un dispositivo específico en la subred.
+    \item \textbf{Máscara:} \texttt{255.255.255.0} indica que los primeros 24 bits (3 octetos) corresponden al identificador de subred.
+    \item \textbf{Subred:} \texttt{200.27.4.0} es el identificador único de la subred a la que pertenece el dispositivo.
+\end{itemize}
+
+\subsubsection*{Ventajas del Direccionamiento Jerárquico}
+
+\begin{itemize}
+    \item \textbf{Simplificación del routing:} Reduce el tamaño de las tablas de encaminamiento al agrupar dispositivos en subredes.
+    \item \textbf{Escalabilidad:} Permite gestionar redes de gran tamaño de manera eficiente.
+    \item \textbf{Flexibilidad:} Las máscaras permiten subdividir redes en subredes más pequeñas para una asignación más granular de direcciones.
+\end{itemize}
+
+\subsubsection*{Conclusión}
+
+El uso de direccionamiento jerárquico y máscaras de red es esencial para la organización eficiente de Internet y la gestión de sus recursos. Estos conceptos son fundamentales para comprender cómo se realiza el encaminamiento y la interconexión de dispositivos en redes modernas.
+
+\subsubsection*{Internet}
+
+Podemos considerar que Internet es un conjunto de subredes interconectadas. ¿Que es ... ?
+\begin{itemize}
+    \item \textbf{Una subred:} Es una subdivisión lógica de una red IP. Las subredes permiten segmentar una red más grande en redes más pequeñas, lo que facilita la gestión y mejora la eficiencia del uso de direcciones IP.
+    \item \textbf{Un switch:} Es un dispositivo de red que conecta múltiples dispositivos dentro de una misma red local (LAN). Los switches operan en la capa de enlace de datos (capa 2 del modelo OSI) y utilizan direcciones MAC para enviar datos al dispositivo de destino correcto.
+    \item \textbf{Un router:} Es un dispositivo de red que dirige paquetes de datos entre diferentes redes. Los routers operan en la capa de red (capa 3 del modelo OSI) y utilizan direcciones IP para determinar la mejor ruta para enviar los datos a su destino final.
+\end{itemize}
+
+Para determinar las subredes debemos de separar la interfaz de los hosts de los routers, creando redes aisladas, estas correspondes con las subredes.
+
+\subsubsection*{¿Quién tiene las direcciones IP?}
+Los hosts y los routers tienen 1 IP por cada interfaz, mientras que los switches no tienen direcciones.
+
+\subsubsection{Elección de la Máscara de Red}
+
+La elección de la máscara de red en una subred se basa en el número de dispositivos que se prevé alojar en dicha subred. Esto permite asignar direcciones IP de manera eficiente y evitar desperdiciar recursos.
+
+\subsubsection*{Cálculo del Número de Dispositivos}
+
+El número de direcciones disponibles para dispositivos en una subred se calcula utilizando la fórmula:
+\[
+\# \text{dispositivos} = 2^{\# \text{ceros en la máscara}} - 2
+\]
+\begin{itemize}
+    \item El \(-2\) se debe a que la primera dirección (todos ceros) está reservada para identificar la subred y la última dirección (todos unos) está reservada para difusión (\textit{broadcast}).
+    \item Por ejemplo, una máscara de \texttt{/24} (255.255.255.0) tiene 8 bits asignados al identificador de dispositivo, lo que permite \(2^8 - 2 = 254\) dispositivos.
+\end{itemize}
+
+\subsubsection*{Ejemplo Práctico}
+
+Consideremos la dirección IP \texttt{200.27.4.112} con una máscara de red \texttt{255.255.255.0 (/24)}:
+\begin{itemize}
+    \item Dirección IP: \texttt{200.27.4.112} = \texttt{11001000.00011011.00000100.01110000}.
+    \item Máscara: \texttt{255.255.255.0} = \texttt{11111111.11111111.11111111.00000000}.
+    \item Subred: Realizando una operación lógica AND entre la dirección IP y la máscara, obtenemos:
+    \begin{verbatim}
+    Dirección IP:   200.27.4.112 = 11001000.00011011.00000100.01110000
+    Máscara:        255.255.255.0 = 11111111.11111111.11111111.00000000
+    ------------------------------------------------------------------
+    Subred:         200.27.4.0   = 11001000.00011011.00000100.00000000
+    \end{verbatim}
+    \item Direcciones disponibles:
+    \begin{itemize}
+        \item \textbf{Reservada para subred:} \texttt{200.27.4.0}.
+        \item \textbf{Primer dispositivo:} \texttt{200.27.4.1}.
+        \item \textbf{Último dispositivo:} \texttt{200.27.4.254}.
+        \item \textbf{Reservada para difusión:} \texttt{200.27.4.255}.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Resumen del Ejemplo}
+
+La máscara \texttt{/24} permite identificar una subred con hasta 254 dispositivos únicos. Este esquema asegura que cada subred tiene:
+\begin{itemize}
+    \item Un identificador único dentro de la red mayor.
+    \item Direcciones reservadas para subred y difusión.
+    \item Direcciones suficientes para todos los dispositivos necesarios.
+\end{itemize}
+
+\subsubsection*{Conclusión}
+
+El uso de máscaras ajustadas al tamaño previsto de la subred optimiza la asignación de direcciones IP y facilita la gestión eficiente del espacio de direcciones disponible.
 
 
 \end{document}
