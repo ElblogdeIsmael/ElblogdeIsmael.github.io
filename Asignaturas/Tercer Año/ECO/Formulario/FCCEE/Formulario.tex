@@ -41,6 +41,10 @@
     showstringspaces=false
 }
 
+%COMANDOS
+\newcommand{\betaEstimada}{\vec{\hat{\beta}}}
+\newcommand{\ecuacion}[1]{$#1$}
+
 % Configuración de título
 \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
 
@@ -189,7 +193,110 @@ Como consecuencia tenemos que:
 \end{equation}
 Para la demostración de esta operación pincha \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/ECO/Formulario/FCCEE/ecotema2_1.pdf}{aquí} para verla.
 
-% diapos 28 de mi tablet teoria tema 2
+\subsubsection{Normalidad de la perturbación}
+
+Se considera que la perturbación aleatoria $u_i$ se distribuye normalmente con media 0 y varianza $\sigma^2$, es decir, $u_i \sim N(0,\sigma^2)\forall i=1,\ldots,n$.\\
+
+En este caso supondremos que $\vec{u}$ se distribuye normalmente, es decir, $\vec{u} \sim N(\vec{0},\sigma^2I_n)$\footnote{distribución normal multivariante con vector de medias nulo y matriz de varianzas-covarianzas $\sigma^2I_n$}.
+
+\subsection{Estimación Míminos Cuadrados Ordinarios (MCO)}
+
+Para estimar los parámetros $\beta$ utilizaremos el MCO, denotando a $\hat{\vec{y}}$ el valor ajustado de $\vec{y}$, es decir, $\hat{\vec{y}} = X\hat{\vec{\beta}}$. \\
+
+En este caso el valor de los residuos se obtiene como:
+\begin{equation}
+    \vec{e}=\vec{y}-\hat{\vec{y}} = \vec{y}-X\hat{\vec{\beta}}
+\end{equation}
+
+Debemos de minimizar la suma de los cuadrados de los residuos:
+
+\begin{equation}
+    \min_{\vec{\beta}} \sum_{i=1}^{n} e_i^2
+\end{equation}
+
+Tendremos como función a minimizar: $f(\hat{\vec{\beta}})=\vec{e}^{\,\,t}  \vec{e}$
+
+\subsubsection{Pasos a seguir}
+\begin{enumerate}
+    \item Definimos la expresión a minimizar. Se debe de definir la suma de los cuadrados de los residuos:
+    \begin{equation}
+        f(\vec{\hat{\beta}}) = (\vec{y} - X\vec{\hat{\beta}})^{t}(\vec{y} - X\vec{\hat{\beta}})
+    \end{equation}
+    \item Derivamos con respecto a $\vec{\hat{\beta}}$ e igualamos a 0:
+    \begin{equation}
+        \frac{\partial f(\vec{\hat{\beta}})}{\partial \vec{\hat{\beta}}} = 0
+    \end{equation}
+    \item Despejamos el vector de parámetros, debemos de considerar el supuesto del rango completo por columnas, verificándose que $\rho (X^tX) = 1$, condición necesaria para que exista $(X^tX)^{-1}$
+    \item Para que la solución sea mínimo se ha de cumplir:
+    \begin{equation}
+        \text{Hess}(f) = 2X^tX > 0 \text{ and } 
+        (A>0 \text{ si } z^tAz > 0 \,\,\forall z \neq 0)
+    \end{equation}
+\end{enumerate}
+
+% Si el modelo tiene término independiente entonces se tiene
+\subsubsection*{Si el modelo tiene término independiente entonces se tiene}
+$\vec{\beta} = \left( \begin{array}{cccc}
+    n & \sum_{i=1}^{n} X_{2i} & \cdots & \sum_{i=1}^{n} X_{ki} \\
+    \sum_{i=1}^{n} X_{2i} & \sum_{i=1}^{n} X_{2i}^2 & \cdots & \sum_{i=1}^{n} X_{2i}X_{ki} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \sum_{i=1}^{n} X_{ki} & \sum_{i=1}^{n} X_{ki}X_{2i} & \cdots & \sum_{i=1}^{n} X_{ki}^2 \\
+    \end{array} \right)^{-1}
+    \left( \begin{array}{c}
+    \sum_{i=1}^{n} Y_{i} \\
+    \sum_{i=1}^{n} X_{2i}Y_{i} \\
+    \vdots \\
+    \sum_{i=1}^{n} X_{ki}Y_{i} \\
+\end{array} \right)$
+    
+    % En el caso de que el modelo carezca del término independiente entonces:
+    \subsubsection*{En el caso de que el modelo carezca del término independiente entonces:}
+    $\vec{\beta} = \left( \begin{array}{cccc}
+    \sum_{i=1}^{n} X_{1i}^2 & \sum_{i=1}^{n} X_{1i}X_{2i} & \cdots & \sum_{i=1}^{n} X_{1i}X_{ki} \\
+    \sum_{i=1}^{n} X_{2i}X_{1i} & \sum_{i=1}^{n} X_{2i}^2 & \cdots & \sum_{i=1}^{n} X_{2i}X_{ki} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \sum_{i=1}^{n} X_{ki}X_{1i} & \sum_{i=1}^{n} X_{ki}X_{2i} & \cdots & \sum_{i=1}^{n} X_{ki}^2 \\
+    \end{array} \right)^{-1}
+    \left( \begin{array}{c}
+    \sum_{i=1}^{n} X_{1i}Y_{i} \\
+    \sum_{i=1}^{n} X_{2i}Y_{i} \\
+    \vdots \\
+    \sum_{i=1}^{n} X_{ki}Y_{i} \\
+\end{array} \right)$
+    
+\subsection{Propiedades Algebraicas de los MCO}
+
+\subsubsection*{Considerando que SI hay ti}
+
+\begin{itemize}
+    \item Las variables exógenas son ortogonales al vector de los residuos: $X^t\vec{e}=\vec{0}$
+    \subsubsection*{Demostración}
+    \begin{enumerate}
+        \item Tenemos que $-2X^t\vec{y} + 2X^tX\betaEstimada = \vec{0}$
+        \item Si operamos nos queda que $X^t(\vec{y}- X\betaEstimada) = \vec{0}$
+        \item Aplicando que $\vec{\hat{y}} = X\betaEstimada$
+        \item Queda demostrado que $X^t\vec{e}=\vec{0}$
+    \end{enumerate}
+    \item La suma de los residuos mínimos cuadráticos es 0: $\sum_{i=1}^{n} e_i = 0$
+    \item La suma de los valores observados coincide con la suma de los valores estimados: $\sum_{i=1}^{n} y_i = \sum_{i=1}^{n} \hat{y}_i$
+    \item Suma Cuadrados 
+    \begin{itemize}
+        \item $SCT = \sum_{i=1}^{n} (y_i - \bar{y})^2 = \vec{y}^{\,\,t} \vec{y} - n \cdot \bar{Y}^2$
+        \item $SCR = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 = \vec{y}^{\,\,t}  \vec{y} - \vec{\beta}^t \vec{X}^t \vec{y}$
+        \item $SCE = \sum_{i=1}^{n} (\hat{y}_i - \bar{y})^2 = \vec{\beta}^t \vec{X}^t \vec{y} - n \cdot \bar{Y}^2$
+    \end{itemize}
+    \item  SCT = SCR + SCE
+    \item \ecuacion{\vec{\hat{y}}\vec{e}=0}
+    % % Explicación de la ecuación
+    % \noindent
+    % La ecuación \(\vec{\hat{y}}\vec{e}=0\) representa un producto vectorial entre dos vectores, \(\vec{\hat{y}}\) y \(\vec{e}\), que resulta en el vector nulo. En esta ecuación:
+    % \begin{itemize}
+    %     \item \(\vec{\hat{y}}\) es un vector unitario en la dirección \(y\).
+    %     \item \(\vec{e}\) es otro vector en el espacio.
+    %     \item El producto vectorial \(\vec{\hat{y}} \times \vec{e}\) da como resultado el vector nulo \(\vec{0}\), lo que implica que los vectores \(\vec{\hat{y}}\) y \(\vec{e}\) son paralelos o uno de ellos es el vector nulo.
+    % \end{itemize}
+\end{itemize}
+
 
 \section{Tema 3}
 
@@ -246,6 +353,7 @@ Siendo $M_{ii}$ la matriz $\hat{\sigma}^{2}(XX^{\prime})$ en la posición $i,i$.
 
 
 \end{itemize}
+
 
 
 \end{document}
