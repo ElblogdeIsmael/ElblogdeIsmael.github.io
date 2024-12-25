@@ -16,6 +16,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{float}
 
 % Paquetes para el entorno lstlisting
 \usepackage{listings}
@@ -241,6 +243,148 @@ end
 
 Este enfoque asegura que los clientes se sincronizan correctamente antes de realizar la tarea grupal, tal como se requiere en el enunciado.
 
+\section{Ejercicio 78}
 
+\subsection{Enunciado}
+En un sistema distribuido, 3 procesos productores producen continuamente valores enteros y los envían a un proceso buffer que los almacena temporalmente en un array local de 4 celdas enteras para ir enviándoselos a un proceso consumidor. A su vez, el proceso buffer realiza lo siguiente, sirviendo de forma equitativa al resto de procesos:
+\begin{itemize}
+  \item Envía enteros al proceso consumidor siempre que su array local tenga al menos dos elementos disponibles.
+  \item Acepta envíos de los productores mientras el array no esté lleno, pero no acepta que cualquier productor pueda escribir dos veces consecutivas en el búfer.
+\end{itemize}
 
+El código del productor y del consumidor es el siguiente:
+
+\lstset{style=customcpp}
+
+\begin{lstlisting}[language=C++]
+process Productor[ i : 0..2 ] ;
+var dato : integer ;
+begin
+  while true do begin
+    dato := Producir();
+    send( dato, Buffer );
+  end
+end
+
+process Consumidor ;
+begin
+  while true do begin
+    receive ( dato, Buffer );
+    Consumir( dato );
+  end
+end
+
+process Buffer ;
+begin
+  while true do begin
+    ...
+  end
+end
+\end{lstlisting}
+
+Se pide: describir en pseudocódigo el comportamiento del proceso buffer, utilizando una orden de espera selectiva que permita implementar la sincronización requerida entre los procesos.
+
+\subsection{Solución}
+
+\begin{lstlisting}[style=customcpp, caption={Pseudocódigo del proceso Buffer}]
+  Process Buffer;
+  var
+    buffer : array[0..3] of integer; // Array local de 4 celdas enteras.
+    count : integer := 0;             // Contador de elementos en el buffer.
+    lastProducer : integer := -1;     // Índice del último productor que escribió en el buffer.
+
+    begin
+    
+      while true do begin
+
+        select
+          when receive(dato, Productor[0]) do 
+            if(count <4 and lastProducer != 0) then
+              buffer[count] := dato; // Almacena el dato en el buffer.
+              count := count + 1;   // Incrementa el contador de elementos.
+              lastProducer := 0; // Actualiza el índice del último productor.
+            end
+          
+          when receive(dato, Productor[1]) do
+            if(count <4 and lastProducer != 1) then
+              buffer[count] := dato; // Almacena el dato en el buffer.
+              count := count + 1;   // Incrementa el contador de elementos.
+              lastProducer := 1; // Actualiza el índice del último productor.
+            end
+          
+          when receive(dato, Productor[2]) do
+            if(count <4 and lastProducer != 2) then
+              buffer[count] := dato; // Almacena el dato en el buffer.
+              count := count + 1;   // Incrementa el contador de elementos.
+              lastProducer := 2; // Actualiza el índice del último productor.
+            end
+          
+          when count >= 2 do // Si hay al menos dos elementos en el buffer...
+            send(buffer[0], Consumidor); // Envía el primer elemento al consumidor.
+            for i := 0 to 2 do
+              buffer[i] := buffer[i + 1]; // Desplaza los elementos restantes.
+            end
+            count := count - 1; // Decrementa el contador de elementos.
+              
+
+      end
+    
+    
+    end
+\end{lstlisting}
+
+\section{Ejercicio 79}
+
+\subsection{Enunciado}
+
+Suponer un proceso productor y 3 procesos consumidores que comparten un buffer acotado de tamaño \( B \). Cada elemento depositado por el proceso productor debe ser retirado por todos los 3 procesos consumidores para ser eliminado del buffer. Cada consumidor retirará los datos del buffer en el mismo orden en el que son depositados, aunque los diferentes consumidores pueden ir retirando los elementos a ritmo diferente unos de otros. 
+
+Por ejemplo, mientras un consumidor ha retirado los elementos 1, 2 y 3, otro consumidor puede haber retirado solamente el elemento 1. De esta forma, el consumidor más rápido podría retirar hasta \( B \) elementos más que el consumidor más lento. 
+
+Describir en pseudocódigo el comportamiento de un proceso que implemente el buffer de acuerdo con el esquema de interacción descrito usando una construcción de espera selectiva, así como el del proceso productor y de los procesos consumidores. Comenzar identificando qué información es necesario representar, para después resolver las cuestiones de sincronización. 
+
+Una posible implementación del buffer mantendría, para cada proceso consumidor, el puntero de salida y el número de elementos que quedan en el buffer por consumir:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/ej79.png}
+  \caption{Esquema de interacción entre el productor y los consumidores.}
+  \label{fig:ejercicio79}
+\end{figure}
+
+\subsection{Solución}
+
+\begin{lstlisting}[style=customcpp, caption={Pseudocódigo del proceso Buffer}]
+  process Buffer;
+
+  var
+    out: array[0..2] of integer; // Punteros de salida para cada consumidor.
+    nElems: array[0..2] of integer; // Número de elementos que quedan por consumir para cada consumidor.
+    
+    B: integer; // Tamaño del buffer.
+    buf: array[0..B-1]; // Buffer acotado de tamaño B.
+    begin
+    select for i:=0 to 2 do 
+      
+      when nElemens[i] != 0 do // Si el consumidor i tiene elementos por consumir...
+        send (buf[out[i]], consumidor[i]); // Envía el elemento al consumidor i.
+        out[i] + 1 mod B; // Actualiza el puntero de salida del consumidor i.
+        nElemens[i] = nElemens[i]-1; // Decrementa el número de elementos por consumir del consumidor i.
+      end do
+      
+      when nElemens[0] != B or nElemens[1] != B or nElemens[2] != B do // Si el buffer no está lleno para algún consumidor...
+        receive(dato, productor); // Recibe un dato del productor.
+        bufer[i] = dato; // Almacena el dato en el buffer.
+        for j:=0 to 2 do
+          nElemens[j] = nElemens[j] + 1; // Incrementa el número de elementos por consumir para cada consumidor.
+        end do
+      end do
+    end select
+  end
+\end{lstlisting}
+
+\subsubsection*{Explicación del código del proceso Buffer}
+
+El proceso Buffer se encarga de gestionar la interacción entre un productor y tres consumidores que comparten un buffer acotado de tamaño \( B \). Cada elemento depositado por el productor debe ser retirado por todos los consumidores para ser eliminado del buffer.
+La idea general del código es mantener un buffer acotado de tamaño \( B \) donde el productor puede depositar elementos y los consumidores pueden retirarlos. Cada consumidor tiene su propio puntero de salida y contador de elementos por consumir. El proceso Buffer asegura que cada elemento depositado por el productor sea retirado por todos los consumidores antes de ser eliminado del buffer. Además, se asegura de que el buffer no se llene completamente para ningún consumidor y que los consumidores retiren los elementos en el mismo orden en el que fueron depositados.
 \end{document}

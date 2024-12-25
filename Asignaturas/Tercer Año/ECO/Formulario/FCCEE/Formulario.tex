@@ -43,7 +43,7 @@
 
 %COMANDOS
 \newcommand{\betaEstimada}{\vec{\hat{\beta}}}
-\newcommand{\ecuacion}[1]{$#1$}
+\newcommand{\ecuacion}[1]{\ensuremath{#1}}
 
 % Configuración de título
 \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
@@ -56,7 +56,7 @@
     \large Universidad de Granada (UGR)\\[1cm]
 }
 \author{\textbf{Autor:} Ismael Sallami Moreno}
-\date{\textbf{Asignatura:} Formulario Econometía}
+\date{\textbf{Asignatura:} Formulario y Resumen Econometría}
 
 % Configuración del fondo
 \backgroundsetup{
@@ -297,24 +297,225 @@ $\vec{\beta} = \left( \begin{array}{cccc}
     % \end{itemize}
 \end{itemize}
 
-%pagina 49 de las diapos de mi tablet 
-%https://copilot.microsoft.com/chats/52xMhimRaepEkiQpje5Z7
+
+\subsection{Bondad del Ajuste}
+
+\begin{equation}
+    R^2 = \frac{SCE}{SCT} = \frac{\sum_{i=1}^n(\hat{Y}-\bar{Y})^2}{\sum_{i=1}^n(Y_i-\bar{Y})^2}
+\end{equation}
+
+\subsubsection*{NOTA IMPORTANTE:}
+Si el modelo tiene término independiente entonces $R^2$ se puede expresar como:
+\begin{equation}
+    R^2 = 1 - \frac{SCR}{SCT}
+\end{equation}
+
+\subsection{Bondad del Ajuste Corregido}
+
+\begin{equation}
+    \bar{R^2} = 1- \frac{SCR/(n-k)}{SCT/n-1} = 1-(1-R^2) * \frac{n-1}{n-k}
+\end{equation}
+
+
+\subsection{Criterio de Akaike}
+\begin{equation}
+    AIC = ln(\frac{SCR}{n}) + \frac{2k}{n}
+\end{equation}
+
+\subsection{Criterio de Schwarz}
+\begin{equation}
+    BIC = ln(\frac{SCR}{n}) + \frac{kln(n)}{n}
+\end{equation}
 
 \section{Tema 3}
 
+
+\subsection{Valor Esperado y Varianza de los EMCO (Estimadores mínimos cuadrados ordinarios)}
+
+\subsubsection{Valor Esperado de los EMCO}
+\begin{enumerate}
+    \item El estimador de \ecuacion{\vec{\beta}} del modelo \ecuacion{\vec{y}=X\vec{\beta}+\vec{u}} es: 
+    \[
+        \hat{\vec{\beta}} = (X^tX)^{-1}X^t\vec{y}
+    \]
+    \item Si en esta sustituimos \ecuacion{\vec{y} = X\vec{\beta}+\vec{u}} nos quedaría:
+    \[
+        \hat{\vec{\beta}} = (X^tX)^{-1}X^t(X\vec{\beta}+\vec{u}) = \vec{\beta} + (X^tX)^{-1}X^t\vec{u}
+    \]
+    \item Por lo que E[\ecuacion{\hat{\vec{\beta}}}] = \ecuacion{\vec{\beta}}
+    \begin{itemize}
+        \item Debido a que E[\ecuacion{\vec{u}}] = \ecuacion{\vec{0}} \ecuacion{\rightarrow} \textbf{\ecuacion{\vec{\hat{B}}} es un estimador insesgado de \ecuacion{\vec{\beta}}}
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Varianza de los EMCO}
+
+\begin{enumerate}
+    \item \(\text{var}(\hat{\vec{\beta}}) = \sigma^2(X^tX)^{-1}\)
+    Para ello debemos de seguir estos pasos:   
+    \begin{enumerate}
+        \item La varianza es igual a:
+        \[
+            \text{var}(\hat{\vec{\beta}}) = E[(\hat{\vec{\beta}}-E[\hat{\beta}]) (\hat{\vec{\beta}}-E[\hat{\beta}])^{t}]
+        \]
+        \item Si en la ecuación anterior sustituiimos \ecuacion{\hat{\vec{\beta}} = \vec{\beta} + (X^tX)^{-1}X^t\vec{u}} nos queda:
+        \[
+            \text{var}(\hat{\vec{\beta}}) = E[((X^tX)^{-1}X^t\vec{u})((X^tX)^{-1}X^t\vec{u})^{t}]
+        \]
+        \item Acto seguido, debemos de aplicar la propiedad de las matrices de \ecuacion{(AB)^t = B^tA^t}:
+        \[
+            \text{var}(\hat{\vec{\beta}}) = E[(X^tX)^{-1}X^t\vec{u}\vec{u}^tX(X^tX)^{-1}]
+        \]
+        \item Si aplicamos la propiedad de la esperanza de un producto de matrices \ecuacion{E[AB] = E[A]E[B]}:
+        \[
+            \text{var}(\hat{\vec{\beta}}) = (X^tX)^{-1}X^tE[\vec{u}\vec{u}^t]X(X^tX)^{-1}
+        \]
+        \item Si aplicamos la propiedad de la varianza de un vector \ecuacion{E[\vec{u}\vec{u}^t] = \sigma^2I_n}:
+        \[
+            \text{var}(\hat{\vec{\beta}}) = \sigma^2(X^tX)^{-1}X^tX(X^tX)^{-1} = \sigma^2(X^tX)^{-1}
+        \]
+        \item Con esto quedaría demostrado que \ecuacion{\text{var}(\hat{\vec{\beta}}) = \sigma^2(X^tX)^{-1}}
+    \end{enumerate}
+\end{enumerate}
+
+
+\subsection{Teorema de Gauss-Markov}
+
+Según este teorema tenemos que los estimadores de los mínimos cuadrados ordinarios son:
 \begin{itemize}
+    \item óptimos
+    \item lineales
+    \item insesgados    
+\end{itemize}
+
+\subsubsection*{Nota:}
+Podemos decir que de todos los estimadores de \ecuacion{\vec{\beta}} el EMCO es el que presenta \textit{ menor matriz de varianzas-covarianzas}.
+
+\subsubsection{Demos}
+\begin{itemize}
+    \item \textbf{Demo I}: \ecuacion{\betaEstimada} es lineal con respecto a \ecuacion{\vec{y}}
+    \subsubsection*{Demostración}
+    \begin{enumerate}
+        \item si definimos una matriz de dimensiones k*n \ecuacion{W = (X^tX)^{-1}X^t}
+        \item es fácil demostrar que que \ecuacion{\vec{B} = W\vec{y}} ya que \ecuacion{\vec{B} = (X^tX)^{-1}X^t\vec{y}}
+    \end{enumerate}
+    \item \textbf{Demo II}: \ecuacion{\betaEstimada} es insesgado de \ecuacion{\vec{\beta}}\footnote{Queda demostrado anteriormente ya que se verificaba que la esperanza del parámetro a estimar era igual al parámetro.}
+    \item  \textbf{Demo III}: \ecuacion{\betaEstimada} es un estimador óptimo de \ecuacion{\vec{\beta}}
+    \subsubsection*{Demostración}
+    \subsubsection*{- Esperanza}
+    Para la demostración debemos de seguir los siguientes pasos:
+    \begin{enumerate}
+        \item Suponemos un estimador alternativo \ecuacion{\vec{\hat{\beta}}^*}
+        \item Como se cumple que es lineal respecto de \ecuacion{\vec{\beta}}, entonces tenemos que \ecuacion{\vec{\hat{\beta}}^* = C\vec{y}}, es decir, existe un C que cumple la anterior condición de dimensiones k*n
+        \item Además ha de ser insesgado, por lo que tenemos que \ecuacion{E[\vec{\hat{\beta}}^*] = \vec{\beta}}
+        \item Si seguimos resolviendo tenemos que:
+        \[
+            E[\vec{\hat{\beta}}^*] = E[C\vec{y}]
+        \]
+        \item Aplicamos que \ecuacion{\vec{y} = X\vec{\beta}+\vec{u}}:
+        \[
+            E[C\vec{y}] = E[C(X\vec{\beta}+\vec{u})] = E[CX\vec{\beta}+C\vec{u}] = CX\vec{\beta}+C\vec{u}
+        \]
+        \item Como sabemos que \ecuacion{E[\vec{u}] = 0}, nos queda:
+        \[
+            CX\vec{\beta}+C\vec{u} = CX\vec{\beta}
+        \]
+        \item Volvemos al tema de insesgadez, para que sea insesgado (que se debe de cumplir en este punto) debe de que \ecuacion{Cx=I_k}
+        \item Por lo que tenemos de nuevo nuestro estimado anterior, podemos concluir la demostración afirmando que \ecuacion{\betaEstimada} es un estimador óptimo de \ecuacion{\vec{\beta}}
+    \end{enumerate}
+    \subsubsection*{- Varianza}
+    \begin{itemize}
+        \item Si la calulamos de igual manera a la anterior y usando la matriz C, nos queda que:
+        \[
+            = E[C\vec{u}*\vec{u}^tC^t] = C\sigma^2I_nC^t = \sigma^2CC^t \footnote{Hemos usado que \ecuacion{E[\vec{u}\vec{u}^t] = \sigma^2I_n}}
+        \] 
+        \item  Sabiendo que \ecuacion{\betaEstimada = W\vec{y}} y \ecuacion{\betaEstimada^* = C\vec{y}}
+        \item Denotamos D = C-W
+        \item Tenemos que:
+        \[
+            DX = (C-W)X = CX-WX = CX - (X^tX)^{-1}X^tX = I_k - I_k = 0_k
+        \]
+        \item podemos afirmar además, que en base a lo definido anteriormente:
+        \[
+            \text{var}(\betaEstimada^*) = \sigma^2CC^t = \sigma^2(W+D)\footnote{Usamos que \ecuacion{C = W+D}}(W+D)^t = \sigma^2(WW^t + WD^t + DW^t + DD^t)\footnote{De la anterior forma también es válida esta es más extensa, esta sirve para comparar las varianzas como vamos a ver a continuación}
+        \]
+        \subsubsection*{Comparación de varianzas}
+        \begin{itemize}
+            \item \ecuacion{WW^t = ((X^tX)^{-1}X^t)((X^tX)^{-1}X^t) = (X^tX)^{-1}X^tX(X^tX)^{-1} = (X^tX)^{-1}}
+            \item \ecuacion{WD^t = ((X^tX)^{-1}X^t)(D)^t = (X^tX)^{-1}X^t(C-W)^t = (X^tX)^{-1}X^t(C^t-W^t) = (X^tX)^{-1}X^tC^t - (X^tX)^{-1}X^tW^t = 0}
+            \item \ecuacion{D((X^tX)^{-1}X^t)^t = 0}
+        \end{itemize}
+        \item Aplicando esto nos queda que:
+        \[
+            \ecuacion{\text{var}(\vec{\hat{\beta}}^*) = \sigma^2DD^t + \text{var}(\vec{\hat{\beta}})}
+        \]
+        \item Como sabemos el primer término es siempre positivo, por lo que podemos afirmar que:
+        \[
+            \ecuacion{\text{var}(\vec{\hat{\beta}}^*) - \text{var}(\vec{\hat{\beta}}) = \sigma^2DD^t \geq 0 \rightarrow \text{var}(\vec{\hat{\beta}}^*) \geq \text{var}(\vec{\hat{\beta}})}
+        \]
+        \item Vemos que la  varianza también es mayor, por lo que podemos concluir que \ecuacion{\vec{\hat{\beta}}^*} es un estimador peor que \ecuacion{\vec{\hat{\beta}}}
+    \end{itemize}
+
+\end{itemize}
+
+\subsection{Estimación de \ecuacion{\sigma_u^2}}
+
+Sabemos que el vector de los residuos es;
+\[
+    \vec{e} = \vec{y} - \hat{\vec{y}} = \vec{y} - X\hat{\vec{\beta}}
+\]
+
+Si desarrollamos nos queda que:
+
+\[
+    (I_n - X(X^tX)^{-1}X^t)\vec{y} = M_x\vec{y}
+\]
+
+La matriz \ecuacion{M_x} se conoce como la matriz complemento del proyector ortogonal, cuyas propiedades son:
+\begin{itemize}
+    \item simétrica\footnote{Una matriz es simétrica si es igual a su traspuesta \ecuacion{A = A^t}}
+    \item idempotente\footnote{Una matriz es idempotente si al elevarla al cuadrado nos da la misma matriz \ecuacion{A^2 = A}}
+    \item traza(\ecuacion{M_x}) = n - k
+    \item \ecuacion{M_xX} = X - X = 0   
+\end{itemize} 
+
+Si sustituimos \ecuacion{\vec{y} = X\vec{\beta} + \vec{u}} en la ecuación anterior nos queda que:
+\[
+    \vec{y} = M_x\vec{y} = M_xX\vec{\beta} + M_x\vec{u} = M_x\vec{u}\footnote{Ya que \ecuacion{M_xX = 0}}
+\]
+
+Si tomamos valores esperados obtenemos que (\ecuacion{E[\vec{e^t}\vec{e}] = }):
+\begin{enumerate}
+    \item \ecuacion{E[(M_x\vec{u})^t(M_x\vec{u})] }
+    \item = \ecuacion{E[\vec{u}^tM_x\vec{u}]}\footnote{Ya que \ecuacion{M_x} es simétrica e idempotente}
+    \item = \ecuacion{E[\text{traza}(\vec{u^t}M_x)\vec{u}]}
+    \item = \ecuacion{\text{traza}(M_xE[\vec{u^t}\vec{u}])}
+    \item = \ecuacion{\text{traza}(\sigma^2M_x)}
+    \item = \ecuacion{\sigma^2\text{traza}(M_x)}
+    \item = \ecuacion{\sigma^2(n-k)}
+\end{enumerate}
+
+Finalmente, nos queda que \ecuacion{E[\vec{e^t}\vec{e}] = \sigma^2(n-k)}, por lo que como \ecuacion{E[\frac{\vec{e^t}\vec{e}}{n - k}] = \sigma^2} podemos afirmar que \ecuacion{\hat{\sigma}^2 = \frac{\vec{e^t}\vec{e}}{n - k} = \frac{SCR}{n-k}} es un estimador insesgado de \ecuacion{\sigma_u^2}
+
+
+%diapo 22 eco t3
+
+
+
+\section{Tema 3: específicos de la práctica}
+
     
-\item Varianza de las perturbaciones:
+\subsection{ Varianza de las perturbaciones:}
 \begin{equation}
     \hat{\sigma}^2 = \frac{SCT}{n-k}
 \end{equation}
 
-\item Matriz de varianzas y covarianzas de los estimadores:
+\subsection{ Matriz de varianzas y covarianzas de los estimadores:}
 \begin{equation}
     \hat{var}(\hat{\beta}) = \hat{\sigma}^2 (X'X)^{-1}
 \end{equation}
 
-\item Hipótesis para estimar la significación individual para la constante:
+\subsection{ Hipótesis para estimar la significación individual para la constante:}
 \begin{align}
     H_0: \beta_{1} = 0 \\
     H_1: \beta_{1} \neq 0
@@ -325,36 +526,35 @@ Siendo el estadístico experimental:
     t_{exp} = \frac{\hat{\beta_1}}{\sqrt{\hat{var}(\hat{\beta_1})}} ; t_{teorico} = t_{n-k,1-\frac{\alpha}{2}}
 \end{equation}
 
-\item Para la tabla ANOVA el F experimental es:
+\subsection{ Para la tabla ANOVA el F experimental es:}
 \begin{equation}
     F_{exp} = \frac{SCE/k-1}{SCR/n-k} ; F_{teorico} = F_{k-1,n-k,1-\alpha}
 \end{equation}
 
-\item Intervalo de confianza para los estimadores y la varianza de la perturbación.
+\subsection{ Intervalo de confianza para los estimadores y la varianza de la perturbación}.
 En este caso vamos a usar una notación distinta a la de la teoría para simplificar la interpretación:
-\begin{itemize}
-\item IC para los estimadores
+\subsubsection{ IC para los estimadores}
 \begin{equation}
     \beta_i \in (\hat{\beta_i} \pm t_{n-k, 1-\frac{\alpha}{2}} \cdot \sqrt{M_{ii}})
 \end{equation}
 
 Siendo $M_{ii}$ la matriz $\hat{\sigma}^{2}(XX^{\prime})$ en la posición $i,i$.
 
-\item IC para la varianza de la perturbación
+\subsubsection{ IC para la varianza de la perturbación}
 \begin{equation}
     \frac{(n-k)\hat{\sigma^2}}{\chi^2_{n-k}(\frac{\alpha}{2})};\frac{(n-k)\hat{\sigma^2}}{\chi^2_{n-k}(\frac{1-\alpha}{2})}
 \end{equation}
 
-\end{itemize}
 
-\item Sabiendo el valor del $R^2$, contrastar la significación global del modelo:
+
+\subsubsection{ Sabiendo el valor del $R^2$, contrastar la significación global del modelo:}
 
 \begin{equation}
     \frac{\frac{R^2}{k-1}}{\frac{1-R^2}{n-k}} \sim F_{k-1,n-k}(1-\alpha)
 \end{equation}
 
 
-\end{itemize}
+
 
 
 

@@ -147,6 +147,8 @@
 \tableofcontents
 \newpage
 
+\textbf{Nota:}\textit{Se aconseja estudiar con ayuda de las diapositivas.}
+
 \section{Tema 1: Introducción a los fundamentos de las redes}
 
 \subsection{Sistemas de comunicación y redes}
@@ -914,7 +916,7 @@ Una dirección IP en clase C, como \texttt{192.168.212.60}, tiene la siguiente e
 % \subsubsection*{Conclusión}
 % El esquema de clases de direcciones IP permite una organización jerárquica que facilita el \textit{routing} y la asignación eficiente de direcciones en redes de diferentes tamaños. Sin embargo, el modelo de clases ha sido reemplazado en gran medida por la notación \textbf{CIDR} (\textit{Classless Inter-Domain Routing}) en redes modernas.
 
-Para ver detalladamente el cáculo de los rangos pincha \href{URL}{aquí}.
+Para ver detalladamente el cáculo de los rangos pincha \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/FR/Resumenes/ETSIIT/rangosIPcalculo.md}{aquí}.
 
 \subsubsection{Clases de Direcciones IP y Reglas Especiales}
 
@@ -996,6 +998,201 @@ La asignación y gestión de direcciones IP está a cargo de la organización \t
 % \subsubsection*{Conclusión}
 % El esquema de clases de direcciones IP, combinado con las reglas especiales y direcciones privadas, proporciona una base estructurada para el direccionamiento en redes IPv4. Aunque ha sido parcialmente reemplazado por la notación CIDR, sigue siendo relevante en redes privadas y para fines educativos.
 
+Para  ver el cálculo de los hosts y demás pincha \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/FR/Resumenes/ETSIIT/CalculoHosts.md}{aquí}.
+
+\subsubsection{Agotamiento de Direcciones IPv4 y Transición a IPv6}
+
+El agotamiento de las direcciones IPv4 y la implementación de IPv6 marcan un hito importante en la evolución de las redes de comunicación. A continuación, se describen los aspectos clave de este fenómeno.
+
+\paragraph{Agotamiento de Direcciones IPv4}
+
+El espacio de direcciones IPv4, con un total de \(2^{32}\) direcciones (\(4,294,967,296\)), está prácticamente agotado. Desde noviembre de 2019:
+\begin{itemize}
+    \item Sólo quedan disponibles bloques muy pequeños:
+    \begin{itemize}
+        \item Bloques \texttt{/24}: 256 direcciones.
+        \item Bloques \texttt{/32}: 1 dirección.
+    \end{itemize}
+    \item Las direcciones se recuperan de:
+    \begin{itemize}
+        \item Sitios obsoletos.
+        \item Empresas que han desaparecido.
+        \item Proyectos terminados.
+        \item Hostings que ya no están en uso.
+    \end{itemize}
+\end{itemize}
+
+Este agotamiento ha generado la necesidad de una solución más escalable para manejar el creciente número de dispositivos conectados a Internet.
+
+\paragraph{IPv6: El Futuro del Direccionamiento}
+
+IPv6 es la versión más reciente del Protocolo de Internet y aborda las limitaciones de IPv4 mediante un esquema de direccionamiento más amplio y eficiente.
+
+\subparagraph{Características Principales de IPv6:}
+\begin{itemize}
+    \item \textbf{Longitud de las direcciones:} IPv6 utiliza direcciones de 128 bits, proporcionando un espacio de direccionamiento vastamente mayor.
+    \item \textbf{Notación hexadecimal:} Las direcciones se expresan en 8 grupos de 4 dígitos hexadecimales, separados por dos puntos (\texttt{:}).
+    \begin{itemize}
+        \item Ejemplo: \texttt{2001:0db8:85a3:0000:0000:8a2e:0370:7334}.
+        \item Cada dígito hexadecimal corresponde a 4 bits en binario.
+    \end{itemize}
+    \item \textbf{Rango de direcciones:} 
+    \[
+    \texttt{0000:0000:0000:0000:0000:0000:0000:0000} \quad \text{a} \] \[\quad \texttt{FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF}.
+    \]
+    Esto equivale a un total de 340.282.366.920.938.463.463.374.607.431.768.211.456 direcciones (340 sextillones).
+    \item \textbf{Compatibilidad con IPv4:} IPv6 puede coexistir con IPv4 mediante técnicas como el \textit{tunneling} y el uso de direcciones mixtas (IPv4-mapeadas en IPv6).
+\end{itemize}
+
+\paragraph{Ventajas de IPv6}
+
+\begin{itemize}
+    \item \textbf{Espacio de direcciones prácticamente ilimitado:} Satisface las necesidades de crecimiento de dispositivos conectados.
+    \item \textbf{Simplificación del routing:} Reduce la necesidad de NAT (Traducción de Direcciones de Red).
+    \item \textbf{Mejoras en la seguridad y la calidad de servicio:} IPv6 incluye soporte nativo para IPSec y etiquetado de tráfico.
+\end{itemize}
+
+\subsubsection{NAT(Network Address Translation)}
+
+Es un método encargado de reasignar las direcciones (normalmente suelen ser privadas) a otras (públicas) modificando la dirección IP de los paquetes mientras se retransmiten a través de un rooter.\\\\
+Optimiza el uso de direcciones públicas mediante la utilización de direcciones privadas.\\\\
+Reemplaza las direcciones privadas origen salientes por públicas y al reves con las reetrantes.\\\\
+Posee un Tabla de Instrucciones. \textbf{Importante:} No se puede implementar servidores detrás de un NAT, por ello tiene una zona pública (DMZ) y una privada.\\\\
+
+% \subsubsection{Problema con la escasez de direcciones IP}
+
+% Hay un problema con la direcciones IP ya que se necesitan más de las que hay. Si necesitamos m direcciones solo hay n, siendo $n<m$, y si n=1, se denomina masquerading o enmascaramiento.
+
+\subsubsection{Problema de Escasez de Direcciones IP}
+
+El problema de la escasez de direcciones IP surge cuando se necesitan \( m \) direcciones, pero solo se dispone de \( n \), siendo \( n < m \). Este escenario ha llevado al desarrollo de técnicas como el enmascaramiento y la traducción de direcciones de red (NAT) para optimizar el uso de las direcciones disponibles.
+
+\paragraph{Enmascaramiento (Masquerading)}
+
+Cuando \( n = 1 \), se utiliza el enmascaramiento, una técnica en la que una única dirección IP pública se comparte entre múltiples dispositivos en una red privada. 
+\begin{itemize}
+    \item Es comúnmente usado por los Proveedores de Servicios de Internet (ISPs) para ofrecer acceso a Internet a más usuarios de los que disponen de direcciones IP públicas.
+    \item Supone que no todos los usuarios acceden simultáneamente.
+    \item Las direcciones IP se asignan de forma dinámica a los usuarios a medida que las necesitan.
+\end{itemize}
+
+\paragraph{Traducción de Direcciones de Red (NAT)}
+
+NAT (\textit{Network Address Translation}) es una técnica que permite modificar las direcciones IP en los paquetes que atraviesan un router. Se utiliza para conectar redes privadas con la red pública (Internet). Existen dos tipos principales:
+
+\begin{itemize}
+    \item \textbf{SNAT (Source NAT):}
+    \begin{itemize}
+        \item Se aplica cuando el origen de los datos está en una red privada.
+        \item Cambia la dirección IP de origen en los paquetes.
+        \item Se realiza después del encaminamiento (\textit{postrouting}).
+    \end{itemize}
+
+    \item \textbf{DNAT (Destination NAT):}
+    \begin{itemize}
+        \item Se aplica cuando el origen de los datos está en la red pública.
+        \item Cambia la dirección IP de destino en los paquetes.
+        \item Requiere configurar en el router qué puerto irá dirigido a qué máquina específica.
+        \item Se realiza antes del encaminamiento (\textit{prerouting}).
+    \end{itemize}
+\end{itemize}
+
+\subparagraph{Ejemplo de Uso de NAT}
+\begin{itemize}
+    \item \textbf{SNAT:} Un dispositivo en una red doméstica con dirección IP privada \( 192.168.1.10 \) envía un paquete a Internet. El router reemplaza la dirección de origen con la dirección IP pública \( 203.0.113.1 \).
+    \item \textbf{DNAT:} Un paquete entrante desde Internet con destino al puerto 80 de la dirección pública \( 203.0.113.1 \) se redirige al servidor web interno con dirección IP \( 192.168.1.20 \).
+\end{itemize}
+
+\paragraph{Conclusión}
+
+Las técnicas de enmascaramiento y NAT han sido fundamentales para mitigar el problema de la escasez de direcciones IPv4, permitiendo un uso más eficiente de las direcciones disponibles. Sin embargo, estas técnicas también introducen desafíos, como la complejidad en la configuración y la pérdida de visibilidad directa de los dispositivos internos en Internet.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/ProtocoloIp.png}
+\end{figure}
+
+\subsubsection{Ejercicio de Asignar Direcciones}
+
+\subsubsection*{Enunciado}
+Vamos a suponer que tenemos redes corporativas con 30 dispositivos, direcciones privadas 192.168.0.0, y subred de acceso: dirección pública (ISP)
+
+\subsubsection*{Resolución}
+
+\begin{itemize}
+    \item Red 1:
+    \begin{itemize}
+        \item 30 dispositivos (suponemos que tenemos el router incluido, si no debemos de añadir una dirección para el router)
+        \item 30 + 1 dirección de red + 1 dirección de broadcast/difusión = 32 direcciones
+        \item 32 = \(2^5\), por lo que necesitamos 5 bits para la subred(para cada equipo) 
+        \item Máscara de red: 32 bits - 5 bits = 27 bits = /27
+        \item 192.168.0.0/27
+        \begin{itemize}
+            \item red: \textbf{192.168.0.0}
+            \item broadcast: 192.168.0.31
+        \end{itemize}
+    \end{itemize}
+    \item Red 2: \textbf{192.168.0.32}
+    \item Red 3: \textbf{192.168.0.65}
+\end{itemize}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Pregunta de Examen]
+    ¿Se puede varios servidores en un mismo punto en la zona privada?
+    Sí, sin problema, porque lo que debe de ser distinto es el puerto externo.
+    
+\end{tcolorbox}
+
+\subsubsection{Encaminamiento}
+
+Se tratade encontrar el mejor camino para transportar paquetes desde un origen a un destino. Se decide paquete a paquete y salto a salto en función de la IP destino del paquete y de las tablas de encaminamiento de cada uno de los routers.
+
+\subsubsection*{Retransmisión salto a salto}
+Se puede hacer mediante la resolución local del camino o en el dispositivo origen y todos los intermediarios.
+
+\subsubsection*{Modos de encaminamiento}
+\begin{itemize}
+    \item Directo: se conoce la dirección IP destino y se envía directamente.
+    \item No Directo: se envía a un router que se encargará de enviarlo al destino.
+\end{itemize}
+
+\textbf{Nota:} Un router suele estar en varias redes distintas, mientras que un host solo está en una red. En caso de que hay un error a la hora de diriguir debido a la tabla de encamiento, se elige a ruta con máscara más larga.\\
+
+Si no hay fragmentación ni traducción de direcciones (NAT), el datagrama IP no se modifica a lo largo de su recorrido (excepto por campos como el \textit{TTL}, las opciones y el campo de comprobación). A continuación, se describe el proceso de encaminamiento salto a salto para cada datagrama IP:
+
+\paragraph{Proceso de Encaminamiento}
+\begin{itemize}
+    \item Se extrae la dirección de destino (\texttt{IP\_DESTINO}) del datagrama.
+    \item Por cada entrada \( i \) (\( i = 1, \dots, N \)) en la tabla de encaminamiento del nodo, se calcula:
+    \[
+    \texttt{IPi} = \texttt{IP\_DESTINO} \, \text{AND} \, \texttt{MASCARA\_i}.
+    \]
+    \item Se verifica si \texttt{IPi} coincide con el identificador de destino (\texttt{Di}):
+    \begin{itemize}
+        \item Si hay coincidencia y se trata de un \textbf{routing directo}, el datagrama se envía al destino final a través de la interfaz \( i \).
+        \item Si hay coincidencia pero no es un \textbf{routing directo}, el datagrama se envía al siguiente salto (\textit{next hop}) a través de la interfaz \( i \).
+    \end{itemize}
+    \item Si hay varias coincidencias, se selecciona la entrada con la máscara más larga (más específica).
+    \item Si no hay coincidencias tras revisar toda la tabla, se genera un error, y es posible que se envíe un mensaje ICMP al origen del datagrama.
+\end{itemize}
+
+\paragraph{Encapsulación del Datagrama}
+Para encapsular el datagrama en una trama física correspondiente (por ejemplo, Ethernet), se debe consultar la tabla ARP (\textit{Address Resolution Protocol}) para obtener la dirección física del siguiente salto:
+\begin{itemize}
+    \item Si la dirección física está disponible en la tabla ARP, se utiliza directamente.
+    \item Si no se conoce la dirección física, se envía un mensaje de \textbf{broadcast ARP} solicitando la dirección física asociada a la dirección IP destino del enlace.
+\end{itemize}
+
+\paragraph{Resumen del Proceso}
+El encaminamiento en un nodo IP involucra:
+\begin{enumerate}
+    \item Determinar la interfaz de salida en función de la tabla de encaminamiento.
+    \item Encapsular el datagrama en una trama física usando ARP si es necesario.
+    \item Reenviar el datagrama al destino final (en routing directo) o al siguiente salto (en routing indirecto).
+\end{enumerate}
+Este proceso se repite en cada nodo intermedio hasta que el datagrama llega a su destino final.
+
+%diapos 43 de mi tablet
+%https://chatgpt.com/c/67693401-0fdc-8012-8dea-a3b6f3ca0d4a
 
 
 \end{document}
