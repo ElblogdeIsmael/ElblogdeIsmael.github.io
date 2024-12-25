@@ -1191,7 +1191,199 @@ El encaminamiento en un nodo IP involucra:
 \end{enumerate}
 Este proceso se repite en cada nodo intermedio hasta que el datagrama llega a su destino final.
 
-%diapos 43 de mi tablet
+\subsubsection*{Comparación de Dirección de Destino y máscara}
+
+Para adivinar que dirección de destino se va a utilizar, se compara la dirección de destino and máscara con la dirección de la tabla de encaminamiento. Si la dirección de destino es igual a la dirección de la tabla de encaminamiento, se envía directamente, si no, se envía al siguiente salto. \textit{Si hay más de una coincidencia(colisión) se elige la entrada de máscara más restrictiva.}
+
+\subsubsection*{Problemas de la tabla de encaminamiento}
+
+Pueden presentar varios problemas como no direccionar algunos tipos de redes, como Internet y demás. Además, es recomendable usar la entrada por defecto que es la que posee la máscara \texttt{0.0.0.0}.
+
+\subsubsection*{Ejercicio: Diseñar la tabla de encaminamiento de un router}
+
+En este caso vamos a diseñar la de R2:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/ejercicioDireR2.png}
+\end{figure}
+Como podemos ver en esta imagen se trata de asignar en primer lugar las que están más cercanas con una máscara adecuada, luego la del internet, que como dirección de destino usamos la de por defecto ya que no sabemos cómo llegar a ella, y por último la red a la cual tenemos que poner como dirección de destino la más cercana a la red de destino, haciendo de esta manera que el switch haga su función.
+
+\subsection*{Ejercicio}
+
+\subsubsection*{Enunciado}
+
+Imagine una situación donde hay cinco routers RA-RE. RA, RB y RC se conectan cada uno a una red local A, B y C, siendo cada router única puerta de enlace de cada red. RA, RB y RD están conectados entre sí a través de un switch. RC, RD y RE están conectados entre sí a través de un switch. RE conecta a Internet a través de la puerta de acceso especificada por el ISP. Especifique tablas de encaminamiento en los routers. Asigne a voluntad las direcciones IP e interfaces necesarias.
+
+\subsubsection*{Solución}
+
+Asignaremos direcciones IP e interfaces para cada red y router. Luego, especificaremos las tablas de encaminamiento necesarias para cada router.
+
+\textbf{Direcciones asignadas:}
+\begin{itemize}
+    \item Red A: 192.168.1.0/24 (RA conectado en interfaz \texttt{fa0/0})
+    \item Red B: 192.168.2.0/24 (RB conectado en interfaz \texttt{fa0/0})
+    \item Red C: 192.168.3.0/24 (RC conectado en interfaz \texttt{fa0/0})
+    \item Conexión RA-RB-RD: 192.168.4.0/24
+    \item Conexión RC-RD-RE: 192.168.5.0/24
+    \item Conexión RE-ISP: 203.0.113.0/24
+\end{itemize}
+
+\textbf{Tablas de encaminamiento:}
+
+\textit{Router RA:}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Red Destino & Máscara & Puerta de Enlace & Interfaz \\
+\hline
+192.168.2.0 & 255.255.255.0 & 192.168.4.2 & \texttt{fa0/1} \\
+192.168.3.0 & 255.255.255.0 & 192.168.4.3 & \texttt{fa0/1} \\
+203.0.113.0 & 255.255.255.0 & 192.168.4.3 & \texttt{fa0/1} \\
+\hline
+\end{tabular}
+
+\textit{Router RB:}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Red Destino & Máscara & Puerta de Enlace & Interfaz \\
+\hline
+192.168.1.0 & 255.255.255.0 & 192.168.4.1 & \texttt{fa0/1} \\
+192.168.3.0 & 255.255.255.0 & 192.168.4.3 & \texttt{fa0/1} \\
+203.0.113.0 & 255.255.255.0 & 192.168.4.3 & \texttt{fa0/1} \\
+\hline
+\end{tabular}
+
+\textit{Router RC:}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Red Destino & Máscara & Puerta de Enlace & Interfaz \\
+\hline
+192.168.1.0 & 255.255.255.0 & 192.168.5.2 & \texttt{fa0/1} \\
+192.168.2.0 & 255.255.255.0 & 192.168.5.2 & \texttt{fa0/1} \\
+203.0.113.0 & 255.255.255.0 & 192.168.5.3 & \texttt{fa0/1} \\
+\hline
+\end{tabular}
+
+\textit{Router RD:}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Red Destino & Máscara & Puerta de Enlace & Interfaz \\
+\hline
+192.168.1.0 & 255.255.255.0 & 192.168.4.1 & \texttt{fa0/0} \\
+192.168.2.0 & 255.255.255.0 & 192.168.4.2 & \texttt{fa0/0} \\
+192.168.3.0 & 255.255.255.0 & 192.168.5.1 & \texttt{fa0/1} \\
+203.0.113.0 & 255.255.255.0 & 192.168.5.3 & \texttt{fa0/1} \\
+\hline
+\end{tabular}
+
+\textit{Router RE:}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Red Destino & Máscara & Puerta de Enlace & Interfaz \\
+\hline
+192.168.1.0 & 255.255.255.0 & 192.168.5.1 & \texttt{fa0/0} \\
+192.168.2.0 & 255.255.255.0 & 192.168.5.1 & \texttt{fa0/0} \\
+192.168.3.0 & 255.255.255.0 & 192.168.5.1 & \texttt{fa0/0} \\
+\hline
+\end{tabular}
+
+Esto asegura que cada router pueda alcanzar las demás redes y enrutar tráfico hacia Internet a través de RE.
+
+
+\subsubsection*{Aumento de escalabilidad y de administración}
+
+Internet se jerarquiza mediante Sistemas Autónomos(SA). Un SA es un conjunto de redes y de routers que son gestionados por una autoridad. Cada uno informa a otros SA de las redes accesibles, existen un router responsable de ello, llamado router exterior. Cada uno de los SA se identifica mediante un entero de 16 bits \textbf{pero, desde 2007 es de 32 bits}.
+
+
+\subsubsection*{Niveles de Encaminamiento}
+
+\begin{itemize}
+    \item \textbf{Algoritmos IGP (Interior Gateway Protocol):}
+        \begin{itemize}
+            \item Se utilizan dentro de un Sistema Autónomo (SA) para el encaminamiento de paquetes.
+            \item Los administradores de red tienen libertad para elegir el protocolo que mejor se adapte a sus necesidades.
+            \item Ejemplos comunes incluyen:
+                \begin{itemize}
+                    \item \textbf{OSPF (Open Shortest Path First):} Un protocolo de estado de enlace que utiliza el algoritmo de Dijkstra para calcular la ruta más corta.
+                    \item \textbf{RIP (Routing Information Protocol):} Un protocolo de vector de distancia que utiliza el número de saltos como métrica.
+                    \item \textbf{EIGRP (Enhanced Interior Gateway Routing Protocol):} Un protocolo híbrido desarrollado por Cisco que combina características de los protocolos de vector de distancia y de estado de enlace.
+                \end{itemize}
+        \end{itemize}
+
+    \item \textbf{Algoritmos EGP (Exterior Gateway Protocol):}
+        \begin{itemize}
+            \item Se utilizan para el encaminamiento de paquetes entre diferentes Sistemas Autónomos (SA).
+            \item En Internet, existe una norma única para el encaminamiento entre SA, que es el protocolo BGP.
+            \item \textbf{BGP (Border Gateway Protocol):} 
+                \begin{itemize}
+                    \item Es el protocolo estándar utilizado para el intercambio de información de encaminamiento entre Sistemas Autónomos.
+                    \item Utiliza una tabla de encaminamiento para mantener la información de las rutas disponibles y toma decisiones basadas en políticas configuradas por los administradores de red.
+                    \item BGP es un protocolo de vector de ruta que considera múltiples atributos para determinar la mejor ruta.
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+\subsubsection*{Diferentes protocolos}
+
+\begin{itemize}
+    \item RIP (Routing Information Protocol)
+    \subsubsection*{RIP (“Routing Information Protocol” RFC 1058, 2453, 4822)}
+
+    \begin{itemize}
+        \item \textbf{Protocolo de la capa de aplicación:} Opera sobre UDP, puerto 520.
+        \item \textbf{Algoritmo:} Vector-distancia (métrica basada en el número de saltos).
+        \item \textbf{Funcionamiento:}
+        \begin{itemize}
+            \item Periódicamente (por defecto cada 30 segundos), cada router RIP recibe de todos sus vecinos (usando la dirección multicast \texttt{224.0.0.9}) los vectores-distancia para todos los posibles destinos.
+            \item Para cada destino, se selecciona como siguiente salto el vecino que anuncie el menor coste. La métrica para ese destino se actualiza sumando uno al coste anunciado.
+        \end{itemize}
+        \item \textbf{Problemas:}
+        \begin{itemize}
+            \item \textbf{Convergencia lenta:} Las malas noticias tardan en propagarse.
+            \item \textbf{“Cuenta al infinito”:} Los costos pueden incrementarse indefinidamente.
+        \end{itemize}
+        \item \textbf{Soluciones:}
+        \begin{itemize}
+            \item Split horizon.
+            \item Hold down.
+            \item Poison reverse.
+        \end{itemize}
+        \item \textbf{Comando útil:} Para más detalles, consultar el manual del comando \texttt{routed} en sistemas Linux (\texttt{man routed}).
+    \end{itemize}
+
+    \item OSPF 
+    \subsubsection*{OSPF (RFC 2328)}
+
+    \begin{itemize}
+        \item Basado en estado del enlace (\textit{link state}), donde el coste es proporcional a \(1 / \text{velocidad del enlace}\).
+        \item Permite rutas alternativas y balanceo de carga.
+        \item Gestión en base a áreas independientes.
+        \item Minimiza difusión mediante routers designados (\textit{Designated Routers, DR}).
+        \item Mensajes utilizados:
+        \begin{itemize}
+            \item Hello.
+            \item Database description.
+            \item Link status request, update y acknowledgment.
+        \end{itemize}
+    \end{itemize}
+
+    Enlace de imagen: \url{https://i0.wp.com/theosnews.com/wp-content/uploads/2015/05/2-Configuraci%C3%B3n-de-OSPF-Redes-directamente-conectadas.jpg?ssl=1}
+
+\end{itemize}
+
+
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Pregunta de Examen]
+    \textbf{Si R1 quiere ir a R3 por dos caminos con el mismo número de saltos pero con A=100Mbps y B=10Mbps,¿Cuál cojo?}
+    Solo cojo un camino si mejora el primero que me dan.
+\end{tcolorbox}
+
+\subsubsection*{Formato del Datagrama}
+
+Imagen: \url{https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEEYTrMsBMcUuMgs5GyGPSG0T5O2QECfeWvZaik5PAOFnwYuSL3oMsYZKoTSd4F8kEhdOBzseuzHFQyWU4F22N2D7eWP_JwpUukMVGNcF5EbRSWdFb2B0qndVeLgDerXWbrSH79YsKmlA/w1200-h630-p-k-no-nu/Datagrama+IP.+IP+Datagram.jpg}
+
+
+
+%diapos 56 de mi tablet
 %https://chatgpt.com/c/67693401-0fdc-8012-8dea-a3b6f3ca0d4a
 
 
