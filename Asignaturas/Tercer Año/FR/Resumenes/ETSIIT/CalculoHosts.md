@@ -6,6 +6,7 @@ El número de hosts disponibles en una subred depende de la cantidad de bits asi
 ```
 Número de hosts = 2 ^ (# bits del identificador de host) - 2
 ```
+**Nota**: En la teoría no se le resta 2, pero esta es la fórmula general
 
 El -2 es necesario porque:
 - La primera dirección (00...000) está reservada para identificar la subred.
