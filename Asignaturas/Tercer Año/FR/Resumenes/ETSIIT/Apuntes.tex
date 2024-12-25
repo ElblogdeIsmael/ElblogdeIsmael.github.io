@@ -841,7 +841,161 @@ Para saber que es un \textit{Intranet} pincha \href{https://github.com/ElblogdeI
     \item Direcciones Privadas: solo en intranets, se pueden repetir en distintas intranets. Las asigna el usuario según su criterio.
 \end{itemize}
 
-%diapo 23 de mi tablet tema 2
-%https://chatgpt.com/c/67693401-0fdc-8012-8dea-a3b6f3ca0d4a
+% \subsubsection{Direccione IP Clases}
+
+% Los hosts y routers tienen 1 IP por cada una de sus interfaz
+
+\subsubsection{Direcciones IP: Clases}
+
+Las direcciones IP, según el estándar IPv4, tienen un tamaño de \textbf{32 bits} y se representan en \textit{notación decimal con puntos}. Cada dirección identifica un dispositivo o interfaz en una red. 
+
+\subsubsection*{Aspectos generales de las direcciones IP}
+\begin{itemize}
+    \item Cada \textbf{host} o \textbf{router} tiene una dirección IP para cada una de sus interfaces de red.
+    \item Las direcciones IP están organizadas en \textbf{5 clases principales}, descritas en el \textbf{RFC 1166}.
+    \item La estructura de las clases determina la jerarquía y el uso de las direcciones:
+    \begin{itemize}
+        \item Clases \textbf{A}, \textbf{B}, y \textbf{C} son jerárquicas a dos niveles: \textit{identificador de red} + \textit{identificador de dispositivo}.
+        \item Clases \textbf{D} y \textbf{E} tienen propósitos específicos (multidifusión y uso futuro, respectivamente).
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Descripción de las Clases}
+\begin{itemize}
+    \item \textbf{Clase A:}
+    \begin{itemize}
+        \item Primer bit: \(0\).
+        \item Identificador de red: \(7\) bits.
+        \item Identificador de host: \(24\) bits.
+        \item Rango de direcciones: \(0.0.0.0\) a \(127.255.255.255\).
+        \item Uso: Redes muy grandes, con muchas direcciones de host disponibles.
+    \end{itemize}
+
+    \item \textbf{Clase B:}
+    \begin{itemize}
+        \item Primeros dos bits: \(10\).
+        \item Identificador de red: \(14\) bits.
+        \item Identificador de host: \(16\) bits.
+        \item Rango de direcciones: \(128.0.0.0\) a \(191.255.255.255\).
+        \item Uso: Redes medianas a grandes.
+    \end{itemize}
+
+    \item \textbf{Clase C:}
+    \begin{itemize}
+        \item Primeros tres bits: \(110\).
+        \item Identificador de red: \(21\) bits.
+        \item Identificador de host: \(8\) bits.
+        \item Rango de direcciones: \(192.0.0.0\) a \(223.255.255.255\).
+        \item Uso: Redes pequeñas, con pocos dispositivos por red.
+    \end{itemize}
+
+    \item \textbf{Clase D:}
+    \begin{itemize}
+        \item Primeros cuatro bits: \(1110\).
+        \item Rango de direcciones: \(224.0.0.0\) a \(239.255.255.255\).
+        \item Uso: Multidifusión (\textit{multicast}).
+    \end{itemize}
+
+    \item \textbf{Clase E:}
+    \begin{itemize}
+        \item Primeros cinco bits: \(11110\).
+        \item Rango de direcciones: \(240.0.0.0\) a \(255.255.255.255\).
+        \item Uso: Reservadas para propósitos futuros.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Ejemplo}
+Una dirección IP en clase C, como \texttt{192.168.212.60}, tiene la siguiente estructura:
+\begin{itemize}
+    \item Identificador de red: \(192.168.212\).
+    \item Identificador de host: \(60\).
+\end{itemize}
+
+% \subsubsection*{Conclusión}
+% El esquema de clases de direcciones IP permite una organización jerárquica que facilita el \textit{routing} y la asignación eficiente de direcciones en redes de diferentes tamaños. Sin embargo, el modelo de clases ha sido reemplazado en gran medida por la notación \textbf{CIDR} (\textit{Classless Inter-Domain Routing}) en redes modernas.
+
+Para ver detalladamente el cáculo de los rangos pincha \href{URL}{aquí}.
+
+\subsubsection{Clases de Direcciones IP y Reglas Especiales}
+
+Las direcciones IPv4 están organizadas en cinco clases principales (A, B, C, D y E) según su propósito y estructura. A continuación, se describen sus rangos, usos y reglas especiales.
+
+\subsubsection*{Rangos y Capacidad por Clase}
+\begin{itemize}
+    \item \textbf{Clase A:}
+    \begin{itemize}
+        \item Rango: \texttt{0.0.0.0 – 127.255.255.255}.
+        \item Redes disponibles: \(128\) redes.
+        \item Capacidad: \(16,777,216\) hosts por red.
+    \end{itemize}
+
+    \item \textbf{Clase B:}
+    \begin{itemize}
+        \item Rango: \texttt{128.0.0.0 – 191.255.255.255}.
+        \item Redes disponibles: \(16,384\) redes.
+        \item Capacidad: \(65,536\) hosts por red.
+    \end{itemize}
+
+    \item \textbf{Clase C:}
+    \begin{itemize}
+        \item Rango: \texttt{192.0.0.0 – 223.255.255.255}.
+        \item Redes disponibles: \(2,097,152\) redes.
+        \item Capacidad: \(256\) hosts por red.
+    \end{itemize}
+
+    \item \textbf{Clase D:}
+    \begin{itemize}
+        \item Rango: \texttt{224.0.0.0 – 239.255.255.255}.
+        \item Uso: Reservado para \textbf{multidifusión (multicast)}.
+    \end{itemize}
+
+    \item \textbf{Clase E:}
+    \begin{itemize}
+        \item Rango: \texttt{240.0.0.0 – 255.255.255.255}.
+        \item Uso: Reservado para \textbf{fines futuros}.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Reglas Especiales}
+\begin{itemize}
+    \item Direcciones con el identificador de host \(00\ldots0\): 
+    \begin{itemize}
+        \item Identifican una red.
+        \item Nunca se usan como dirección de origen ni se asignan a dispositivos.
+    \end{itemize}
+    
+    \item Direcciones con el identificador de host \(11\ldots1\):
+    \begin{itemize}
+        \item Se utilizan para difusión (\textbf{broadcast}) dentro de la red especificada.
+        \item Nunca se asignan a dispositivos.
+    \end{itemize}
+
+    \item Dirección especial \texttt{127.0.0.0}:
+    \begin{itemize}
+        \item Reservada para pruebas de \textbf{autobucle (loopback)}.
+        \item Utilizada para comprobar la configuración de red local.
+    \end{itemize}
+    
+    \item Restricción adicional:
+    \begin{itemize}
+        \item Para evitar ambigüedades, el identificador de dispositivo no debe ser \(255\) ni \(0\).
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Direcciones IP Privadas (RFC 1918)}
+El \textbf{RFC 1918} reserva rangos de direcciones IP para uso privado dentro de redes internas. Estas direcciones no se enrutan en Internet y se utilizan comúnmente en intranets.
+\begin{itemize}
+    \item \textbf{Clase A:} \texttt{10.0.0.0} – \(1\) red privada.
+    \item \textbf{Clase B:} \texttt{172.16.0.0 – 172.31.0.0} – \(16\) redes privadas.
+    \item \textbf{Clase C:} \texttt{192.168.0.0 – 192.168.255.0} – \(256\) redes privadas.
+\end{itemize}
+
+\subsubsection*{Gestión de Direcciones IP}
+La asignación y gestión de direcciones IP está a cargo de la organización \textbf{IANA (Internet Assigned Numbers Authority)}. Actualmente, esta función es supervisada por \textbf{ICANN (Internet Corporation for Assigned Names and Numbers)}, que distribuye bloques de direcciones a organizaciones regionales (RIRs) y locales.
+
+% \subsubsection*{Conclusión}
+% El esquema de clases de direcciones IP, combinado con las reglas especiales y direcciones privadas, proporciona una base estructurada para el direccionamiento en redes IPv4. Aunque ha sido parcialmente reemplazado por la notación CIDR, sigue siendo relevante en redes privadas y para fines educativos.
+
+
 
 \end{document}
