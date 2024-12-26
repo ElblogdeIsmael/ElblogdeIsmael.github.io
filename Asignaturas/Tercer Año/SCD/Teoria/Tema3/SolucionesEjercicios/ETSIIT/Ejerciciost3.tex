@@ -387,4 +387,235 @@ Una posible implementación del buffer mantendría, para cada proceso consumidor
 
 El proceso Buffer se encarga de gestionar la interacción entre un productor y tres consumidores que comparten un buffer acotado de tamaño \( B \). Cada elemento depositado por el productor debe ser retirado por todos los consumidores para ser eliminado del buffer.
 La idea general del código es mantener un buffer acotado de tamaño \( B \) donde el productor puede depositar elementos y los consumidores pueden retirarlos. Cada consumidor tiene su propio puntero de salida y contador de elementos por consumir. El proceso Buffer asegura que cada elemento depositado por el productor sea retirado por todos los consumidores antes de ser eliminado del buffer. Además, se asegura de que el buffer no se llene completamente para ningún consumidor y que los consumidores retiren los elementos en el mismo orden en el que fueron depositados.
+
+\section{Ejercicio 80}
+
+\subsection{Enunciado}
+
+\subsection*{Implementación de los procesos Salvajes y Cocinero}
+
+Una tribu de antropófagos comparte una olla en la que caben \(M\) misioneros. Cuando algún salvaje quiere comer, se sirve directamente de la olla, a no ser que ésta esté vacía. Si la olla está vacía, el salvaje despertará al cocinero y esperará a que éste haya rellenado la olla con otros \(M\) misioneros.
+
+\begin{lstlisting}[style=customcpp]
+process Salvaje[ i : 0..2 ] ;
+begin
+    var peticion : integer := ... ;
+    begin
+        while true do begin
+            // esperar a servirse un misionero
+            s_send( peticion, Olla );
+            // comer:
+            Comer();
+        end
+    end
+end
+
+process Cocinero ;
+begin 
+    while true do begin
+        // dormir esperando solicitud para llenar
+        // ...
+        // confirmar que se ha rellenado la olla
+        // ...
+    end
+end
+\end{lstlisting}
+
+Implementar los procesos salvajes y cocinero usando paso de mensajes, utilizando un proceso Olla que incluye una construcción de espera selectiva que sirve peticiones de los salvajes y el cocinero para mantener la sincronización requerida, teniendo en cuenta que:
+
+\begin{itemize}
+    \item La solución no debe producir interbloqueo.
+    \item Los salvajes podrán comer siempre que haya comida en la olla.
+    \item Solamente se despertará al cocinero cuando la olla esté vacía.
+\end{itemize}
+
+\subsection{Solución}
+
+\begin{lstlisting}[style=customcpp, caption={Pseudocódigo del proceso Olla}]
+process Olla;
+
+var
+    comida: integer := 0; // Cantidad de comida disponible en la olla.
+    capacidad: integer := M; // Capacidad máxima de la olla.
+    peticiones: queue of integer; // Cola para gestionar las peticiones de los salvajes.
+
+begin
+    select
+        when not peticiones.empty() and comida > 0 do
+            // Atender a un salvaje que quiere comer
+            salvaje := peticiones.pop();
+            comida := comida - 1;
+            send("comer", salvaje);
+        end
+
+        when comida = 0 do
+            // Solicitar al cocinero que rellene la olla
+            send("rellenar", cocinero);
+            receive("rellenado", cocinero);
+            comida := capacidad;
+        end
+    end select
+end
+\end{lstlisting}
+
+\begin{lstlisting}[style=customcpp, caption={Pseudocódigo del proceso Salvaje}]
+process Salvaje[i: 0..N-1];
+
+begin
+    while true do
+        // Solicitar comida a la olla
+        send(i, Olla);
+        receive("comer", Olla);
+        Comer();
+    end
+end
+\end{lstlisting}
+
+\begin{lstlisting}[style=customcpp, caption={Pseudocódigo del proceso Cocinero}]
+process Cocinero;
+
+begin
+    while true do
+        // Esperar solicitud para rellenar la olla
+        receive("rellenar", Olla);
+        // Rellenar la olla
+        Rellenar();
+        send("rellenado", Olla);
+    end
+end
+\end{lstlisting}
+
+Esta solución asegura:
+
+\begin{itemize}
+    \item Sincronización adecuada entre salvajes y cocinero mediante paso de mensajes.
+    \item Los salvajes pueden comer siempre que haya comida en la olla.
+    \item El cocinero solo se despierta cuando la olla esté vacía.
+    \item Evita el interbloqueo utilizando una cola para gestionar las peticiones de los salvajes.
+\end{itemize}
+
+
+
+\section{Ejercicio 81}
+
+\subsection{Enunciado}
+
+Considerar un conjunto de $N$ procesos, $P[i]$, $(i = 0, \dots, N - 1)$ que se pasan mensajes cada uno al siguiente (y el primero al último), en forma de anillo. Cada proceso tiene un valor local almacenado en su variable local \texttt{mi\_valor}. Deseamos calcular la suma de los valores locales almacenados por los procesos de acuerdo con el algoritmo que se expone a continuación. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{images/ej81.png}
+  \caption{Esquema de interacción entre los procesos.}
+  \label{fig:ejercicio81}
+\end{figure}
+
+
+Los procesos realizan una serie de iteraciones para hacer circular sus valores locales por el anillo. En la primera iteración, cada proceso envía su valor local al siguiente proceso del anillo, al mismo tiempo que recibe del proceso anterior el valor local de éste. A continuación acumula la suma de su valor local y el recibido desde el proceso anterior. En las siguientes iteraciones, cada proceso envía al siguiente proceso siguiente el valor recibido en la anterior iteración, al mismo tiempo que recibe del proceso anterior un nuevo valor. Después acumula la suma. Tras un total de $N - 1$ iteraciones, cada proceso conocerá la suma de todos los valores locales de los procesos.
+
+
+
+Dar una descripción en pseudocódigo de los procesos siguiendo un estilo SPMD y usando operaciones de envío y recepción síncronas:
+
+\begin{lstlisting}[style=customcpp]
+process P[ i : 0..N-1 ] ;
+var mi_valor : integer := ... ; // valor arbitrario (== i en la figura, por ejemplo)
+    suma : integer := mi_valor ; // suma inicializada a mi_valor
+begin
+    for j := 0 to N-1 do begin
+        ...
+    end
+end
+\end{lstlisting}
+
+
+\subsection{Solución}
+
+En este caso se afirma que se debe de seguir un estilo SPMD (Single Program Multiple Data), lo que significa que todos los procesos ejecutan el mismo código, pero con datos diferentes. En este caso, cada proceso $P[i]$ tiene un valor local $mi\_valor$ que se suma a la suma total.
+
+\begin{lstlisting}[style=customcpp]
+  process P[ i : 0..N-1 ] ;
+  var mi_valor : integer := i ; // valor arbitrario (== i en la figura, por ejemplo)
+      suma : integer := mi_valor ; // suma inicializada a mi_valor
+  begin
+      for j := 0 to N-1 do begin
+          send( mi_valor, P[ (i + 1) mod N ] );
+          receive( valor_recibido, P[ (i - 1 + N) mod N ] );
+          suma := suma + valor_recibido;
+          mi_valor := valor_recibido; 
+      end
+  end
+\end{lstlisting}
+
+\section{Ejercicio 82}
+
+\subsection{Enunciado}
+
+Considerar un estanco en el que hay tres fumadores y un estanquero. Cada fumador continuamente lía un cigarro y se lo fuma. Para liar un cigarro, el fumador necesita tres ingredientes: tabaco, papel y cerillas. Uno de los fumadores tiene solamente papel, otro tiene solamente tabaco, y el otro tiene solamente cerillas. El estanquero tiene una cantidad infinita de los tres ingredientes.
+
+El estanquero coloca aleatoriamente dos ingredientes diferentes de los tres que se necesitan para hacer un cigarro, desbloquea al fumador que tiene el tercer ingrediente y después se bloquea. El fumador seleccionado se puede obtener fácilmente mediante una función \texttt{genera\_ingredientes} que devuelve el índice (0, 1, ó 2) del fumador escogido.
+
+El fumador desbloqueado toma los dos ingredientes del mostrador, desbloqueando al estanquero, lía un cigarro y fuma durante un tiempo. El estanquero, una vez desbloqueado, vuelve a poner dos ingredientes aleatorios en el mostrador, y se repite el ciclo.
+
+Describir una solución distribuida que use envío asíncrono seguro y recepción síncrona para este problema usando un proceso Estanquero y tres procesos fumadores Fumador(i) (con $i=0,1$ y $2$).
+
+\begin{lstlisting}[style=customcpp]
+process Estanquero ;
+begin
+    while true do begin
+        // El estanquero coloca dos ingredientes aleatorios en el mostrador
+        // y desbloquea al fumador que tiene el tercer ingrediente
+        ...
+    end
+end
+
+process Fumador[ i : 0..2 ] ;
+begin
+    while true do begin
+        // El fumador espera hasta que sea desbloqueado
+        // Toma los dos ingredientes del mostrador, lía un cigarro y fuma
+        ...
+    end
+end
+\end{lstlisting}
+
+\subsection{Solución}
+
+\textit{Usando envío asíncrono seguro y recepción síncrona.} Para ello debemos de usar MPI\_Isend y MPI\_Recv.
+
+\begin{lstlisting}[style=customcpp]
+  process Estanquero ;
+  begin
+      while true do begin
+          // El estanquero coloca dos ingredientes aleatorios en el mostrador
+          int ingrediente1, ingrediente2;
+          ingrediente1 = generarIngrediente();
+          do{
+              ingrediente2 = generarIngrediente();
+          }
+          while(ingrediente1 == ingrediente2);
+          // y desbloquea al fumador que tiene el tercer ingrediente
+          MPI_Isend(ingrediente1, 1, MPI_INT, Fumador[3 - ingrediente1 - ingrediente2], 0, MPI_COMM_WORLD);
+          MPI_Isend(ingrediente2, 1, MPI_INT, Fumador[3 - ingrediente1 - ingrediente2], 0, MPI_COMM_WORLD);
+      end
+  end
+  
+  process Fumador[ i : 0..2 ] ;
+  begin
+      while true do begin
+          // El fumador espera hasta que sea desbloqueado
+          int ingrediente1, ingrediente2;
+          MPI_Recv(ingrediente1, 1, MPI_INT, Estanquero, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+          MPI_Recv(ingrediente2, 1, MPI_INT, Estanquero, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+          // Toma los dos ingredientes del mostrador, lía un cigarro y fuma
+          LiarCigarro();
+          Fumar();
+      end
+  end
+\end{lstlisting}
+
+
+
+
+%https://chatgpt.com/c/676d2a12-a978-8012-b24a-a87e821ecddf
+
 \end{document}
