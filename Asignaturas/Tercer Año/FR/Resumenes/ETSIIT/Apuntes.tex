@@ -1383,6 +1383,63 @@ Imagen: \url{https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEEYTrMs
 
 
 
+\subsubsection*{Fragmentación IPv4}
+
+La fragmentación en IPv4 es un mecanismo que permite dividir un datagrama en fragmentos más pequeños para que puedan adaptarse al tamaño máximo permitido por la Unidad Máxima de Transferencia (\textit{MTU}) de las subredes por las que pasa. A continuación, se explican los aspectos más relevantes:
+
+\begin{itemize}
+    \item \textbf{Tamaño máximo del datagrama:} El tamaño máximo permitido para un datagrama IPv4 es de 65535 bytes (\(2^{16} - 1\)), incluyendo el encabezado y los datos.
+    \item \textbf{Adaptación a la MTU:} Cada enlace en una red puede tener una MTU diferente. Si el tamaño de un datagrama excede la MTU de una subred, debe ser fragmentado para poder ser transmitido.
+    \item \textbf{Ensamblado en el destino final:} Los fragmentos de un datagrama solo pueden ser ensamblados en el destino final. Los nodos intermedios no realizan ensamblado, lo que evita complejidad adicional en el encaminamiento.
+    \item \textbf{Desplazamiento (\textit{offset}):} Cada fragmento incluye un campo que indica su posición relativa dentro del datagrama original. Esto permite que los fragmentos se ensamblen correctamente en el destino final.
+    \item \textbf{Indicadores de control:}
+    \begin{itemize}
+        \item \textbf{Don't Fragment (DF):} Si este indicador está activado, el datagrama no puede ser fragmentado. Si el datagrama excede la MTU, se descarta y se envía un mensaje ICMP al origen.
+        \item \textbf{More Fragments (MF):} Este indicador se activa para todos los fragmentos excepto el último, indicando que el datagrama original está dividido en partes.
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Ejemplo de Fragmentación}
+
+Supongamos un datagrama con un tamaño total de 4000 bytes que necesita ser transmitido a través de una subred con una MTU de 1500 bytes. La fragmentación se realiza de la siguiente manera:
+\begin{itemize}
+    \item El encabezado IP ocupa 20 bytes, dejando 1480 bytes para los datos en cada fragmento.
+    \item Se generan los siguientes fragmentos:
+    \begin{itemize}
+        \item \textbf{Fragmento 1:} Datos del byte 0 al byte 1479 (\texttt{offset = 0}).
+        \item \textbf{Fragmento 2:} Datos del byte 1480 al byte 2959 (\texttt{offset = 185}, ya que cada unidad de \textit{offset} corresponde a 8 bytes).
+        \item \textbf{Fragmento 3:} Datos del byte 2960 al byte 3999 (\texttt{offset = 370}, último fragmento con \texttt{MF = 0}).
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Ventajas y Desventajas de la Fragmentación}
+\begin{itemize}
+    \item \textbf{Ventajas:} Permite la transmisión de datagramas grandes a través de redes con diferentes MTUs.
+    \item \textbf{Desventajas:} Introduce sobrecarga adicional en términos de encabezados y complica el ensamblado en el destino. Además, si un fragmento se pierde, el datagrama completo debe ser retransmitido.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %diapos 56 de mi tablet
 %https://chatgpt.com/c/67693401-0fdc-8012-8dea-a3b6f3ca0d4a
 
