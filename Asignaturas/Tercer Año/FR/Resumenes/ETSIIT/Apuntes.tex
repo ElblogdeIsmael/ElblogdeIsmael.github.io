@@ -1377,13 +1377,13 @@ Internet se jerarquiza mediante Sistemas Autónomos(SA). Un SA es un conjunto de
     Solo cojo un camino si mejora el primero que me dan.
 \end{tcolorbox}
 
-\subsubsection*{Formato del Datagrama}
+\subsubsection{Formato del Datagrama}
 
 Imagen: \url{https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEEYTrMsBMcUuMgs5GyGPSG0T5O2QECfeWvZaik5PAOFnwYuSL3oMsYZKoTSd4F8kEhdOBzseuzHFQyWU4F22N2D7eWP_JwpUukMVGNcF5EbRSWdFb2B0qndVeLgDerXWbrSH79YsKmlA/w1200-h630-p-k-no-nu/Datagrama+IP.+IP+Datagram.jpg}
 
 
 
-\subsubsection*{Fragmentación IPv4}
+\subsubsection{Fragmentación IPv4}
 
 La fragmentación en IPv4 es un mecanismo que permite dividir un datagrama en fragmentos más pequeños para que puedan adaptarse al tamaño máximo permitido por la Unidad Máxima de Transferencia (\textit{MTU}) de las subredes por las que pasa. A continuación, se explican los aspectos más relevantes:
 
@@ -1412,6 +1412,8 @@ Supongamos un datagrama con un tamaño total de 4000 bytes que necesita ser tran
     \end{itemize}
 \end{itemize}
 
+Para profundizar en el tema de offset accede al siguiente enlace: \url{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/FR/Resumenes/ETSIIT/offset.md}
+
 \paragraph{Ventajas y Desventajas de la Fragmentación}
 \begin{itemize}
     \item \textbf{Ventajas:} Permite la transmisión de datagramas grandes a través de redes con diferentes MTUs.
@@ -1419,6 +1421,182 @@ Supongamos un datagrama con un tamaño total de 4000 bytes que necesita ser tran
 \end{itemize}
 
 
+\subsubsection{Ejercicio Típico de Examen sobre la fragmentacion IPv4}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/fragIPV4.png}
+\end{figure}
+
+\subsubsection*{Comentarios del Ejercicio}
+
+Para la realización del ejercicio debemos de seguir los siguientes pasos y repetirlos hasta que no se necesiten más fragmentos, es decir, hasta que el MF = 0. Debemos de tener en cuenta que la cabecera ocupa siempre 20 bytes, por lo tanto, si nuestro MTU es 1500, solo podremos transportar el paquete en unidades de 1480 bytes, siendo esto el valor máximo. El offset mide el desplazamiento del paquete, en otras palabras, la suma total de los bytes que se han transmitido.
+
+
+\subsubsection{Diferencias entre IPv4 y IPv6}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{4cm}|p{4cm}|p{7cm}|}
+    \hline
+    \textbf{Característica} & \textbf{IPv4} & \textbf{IPv6} \\ \hline
+    Longitud de la dirección & 32 bits & 128 bits \\ \hline
+    Espacio de direcciones & \textasciitilde 4.3 mil millones & 340 undecillones (casi ilimitado) \\ \hline
+    Formato & Decimal (ej. 192.168.0.1) & Hexadecimal (ej. 2001:0db8:8a2e:0370:7334) \\ \hline
+    Configuración & Manual o DHCP & Autoconfiguración sin estado (SLAAC) \\ \hline
+    Seguridad & Opcional (IPsec) & IPsec obligatorio \\ \hline
+    Fragmentación & Los routers pueden fragmentar & Solo el dispositivo emisor fragmenta \\ \hline
+    Encabezado de paquetes & Complejo y variable & Simplificado y fijo \\ \hline
+    QoS & Limitado (TOS) & Optimizado (Flow Label) \\ \hline
+    Compatibilidad & Amplia, pero limitado por direcciones & No compatible directamente con IPv4 \\ \hline
+    Optimización para móviles & Menos eficiente & Mejor rendimiento en redes móviles \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection*{Tabla comentada}
+
+\begin{itemize}
+    \item \textbf{Longitud de la dirección:}
+    \begin{itemize}
+        \item IPv4 utiliza direcciones de 32 bits, lo que limita el espacio de direcciones disponibles.
+        \item IPv6 expande las direcciones a 128 bits, proporcionando un espacio de direccionamiento prácticamente ilimitado.
+    \end{itemize}
+
+    \item \textbf{Espacio de direcciones:}
+    \begin{itemize}
+        \item IPv4 puede manejar aproximadamente 4.3 mil millones de direcciones únicas, un recurso que ya se ha agotado en gran medida.
+        \item IPv6 proporciona \( 340 \) undecillones de direcciones, suficientes para las necesidades actuales y futuras.
+    \end{itemize}
+
+    \item \textbf{Formato:}
+    \begin{itemize}
+        \item IPv4 utiliza un formato decimal, como \texttt{192.168.0.1}.
+        \item IPv6 adopta un formato hexadecimal, más eficiente para expresar direcciones largas, como \texttt{2001:0db8:8a2e:0370:7334}.
+    \end{itemize}
+
+    \item \textbf{Configuración:}
+    \begin{itemize}
+        \item IPv4 requiere configuración manual o el uso de DHCP.
+        \item IPv6 ofrece autoconfiguración sin estado mediante SLAAC, simplificando la gestión de redes.
+    \end{itemize}
+
+    \item \textbf{Seguridad:}
+    \begin{itemize}
+        \item IPv4 soporta IPsec de forma opcional.
+        \item IPv6 integra IPsec de manera obligatoria, mejorando la seguridad por defecto.
+    \end{itemize}
+
+    \item \textbf{Fragmentación:}
+    \begin{itemize}
+        \item En IPv4, los routers pueden fragmentar los paquetes.
+        \item En IPv6, la fragmentación solo se realiza en el dispositivo emisor, mejorando la eficiencia del encaminamiento.
+    \end{itemize}
+
+    \item \textbf{Encabezado de paquetes:}
+    \begin{itemize}
+        \item IPv4 tiene un encabezado complejo y variable, lo que puede aumentar la latencia.
+        \item IPv6 utiliza un encabezado simplificado y fijo, optimizando el procesamiento en los nodos.
+    \end{itemize}
+
+    \item \textbf{Calidad de servicio (QoS):}
+    \begin{itemize}
+        \item IPv4 ofrece un soporte limitado mediante el campo TOS (\textit{Type of Service}).
+        \item IPv6 mejora la QoS mediante etiquetas de flujo (\textit{Flow Label}), proporcionando mayor granularidad.
+    \end{itemize}
+
+    \item \textbf{Compatibilidad:}
+    \begin{itemize}
+        \item IPv4 es ampliamente compatible con sistemas y dispositivos existentes.
+        \item IPv6 no es directamente compatible con IPv4, lo que requiere mecanismos de transición como túneles o direcciones mixtas.
+    \end{itemize}
+
+    \item \textbf{Optimización para móviles:}
+    \begin{itemize}
+        \item IPv4 es menos eficiente en redes móviles.
+        \item IPv6 está diseñado para mejorar el rendimiento en estas redes, adaptándose a las necesidades modernas.
+    \end{itemize}
+\end{itemize}
+
+
+    
+
+\subsection{Asociación de la capa de enlace: protocolo ARP}
+
+
+\subsubsection{Direcciones MAC}
+
+Las direcciones \textbf{MAC (Medium Access Control)} son identificadores únicos que se utilizan para direccionar paquetes a nivel de la capa de enlace en redes Ethernet (cableadas) y WiFi. Estas direcciones juegan un papel clave en el encaminamiento de datos dentro de una red local.
+
+\paragraph{Uso de las Direcciones MAC}
+
+Una vez que se realiza la redirección a nivel de IP, el paquete debe ser enviado a la dirección MAC del siguiente nodo en la ruta hacia el destino final. Este proceso asegura que los datos lleguen al nodo correcto dentro de la red local antes de ser enviados a la siguiente etapa.
+
+\paragraph{Formato de las Direcciones MAC}
+
+Las direcciones MAC tienen un formato estándar de 6 bytes (48 bits) representados en notación hexadecimal y separados por guiones:
+\[
+\texttt{HH-HH-HH-HH-HH-HH}
+\]
+Por ejemplo:
+\[
+\texttt{00-24-21-A8-F7-6A}
+\]
+
+\paragraph{Asignación de Direcciones MAC}
+
+\begin{itemize}
+    \item Cada dirección MAC es única y está asignada por la \textbf{IEEE (Institute of Electrical and Electronics Engineers)}.
+    \item Las direcciones se asignan en lotes de \(2^{24}\) direcciones para cada fabricante de dispositivos de red.
+\end{itemize}
+
+\paragraph{Dirección de Difusión (Broadcast)}
+
+En las redes locales, la dirección \textbf{FF-FF-FF-FF-FF-FF} se utiliza para enviar paquetes a todos los dispositivos conectados en la red. Esto es útil para realizar descubrimientos, como en el caso del protocolo ARP (Address Resolution Protocol).
+
+Para ver el formato ARP accede al siguiente enlace: \url{https://i.ytimg.com/vi/qJZzX0V8Opg/maxresdefault.jpg}
+
+\paragraph{Resumen}
+
+Las direcciones MAC son esenciales para la comunicación dentro de redes locales, permitiendo la identificación única de dispositivos y facilitando tanto la comunicación unicast (entre dos nodos específicos) como la difusión a todos los nodos de la red.
+
+
+
+\subsection{El Protocolo ICMP}
+
+El \textbf{ICMP (Internet Control Message Protocol)} es un protocolo de la capa de red utilizado para gestionar y reportar situaciones de error o eventos relacionados con el funcionamiento de IP. Se clasifica como un protocolo de señalización, ya que no transporta datos de usuario, sino información sobre el estado de la red.
+
+\subsubsection*{Características del Protocolo ICMP}
+
+\begin{itemize}
+    \item \textbf{Propósito:} ICMP se utiliza para informar sobre errores en el funcionamiento de IP y para facilitar diagnósticos de red.
+    \item \textbf{Dirección del mensaje:} Los mensajes ICMP suelen enviarse hacia el origen del datagrama IP que generó el evento, excepto en casos como solicitudes de eco (\textit{ping}).
+    \item \textbf{Encapsulación:} Los mensajes ICMP se encapsulan dentro de paquetes IP para su transmisión.
+    \item \textbf{Cabecera:} La cabecera ICMP tiene un tamaño fijo de 32 bits y contiene la siguiente información:
+    \begin{itemize}
+        \item \textbf{Tipo (8 bits):} Indica el tipo de mensaje ICMP.
+        \item \textbf{Código (8 bits):} Especifica el subtipo del mensaje, proporcionando mayor detalle.
+        \item \textbf{Comprobación (16 bits):} Un campo para la detección de errores en el mensaje ICMP.
+    \end{itemize}
+    \item \textbf{Incluye información del datagrama original:} El mensaje ICMP incluye la cabecera del datagrama IP que disparó el evento, para que el origen pueda identificar el problema.
+\end{itemize}
+
+\subsubsection*{Tipos Comunes de Mensajes ICMP}
+
+\begin{itemize}
+    \item \textbf{Destino inalcanzable:} Informa al origen que un datagrama no pudo ser entregado.
+    \item \textbf{Tiempo excedido:} Indica que un datagrama ha sido descartado porque excedió su tiempo de vida (\textit{Time-to-Live, TTL}).
+    \item \textbf{Redirección:} Notifica a un host que debe utilizar otra ruta para alcanzar un destino.
+    \item \textbf{Solicitud y respuesta de eco (\textit{Ping}):} Se utiliza para comprobar la conectividad y medir el tiempo de respuesta entre dos dispositivos.
+\end{itemize}
+
+\subsubsection*{Resumen}
+
+El protocolo ICMP es una herramienta esencial para la gestión de redes IP. Al proporcionar información sobre errores y diagnósticos, permite mantener la integridad y el rendimiento de la comunicación en la red. Aunque no transporta datos de usuario, su papel en la señalización lo convierte en un componente fundamental de la capa de red.
+
+
+Para ver los mensajes ICMP, accede a este enlace: \url{https://w3.ual.es/~vruiz/Docencia/Apuntes/Networking/Protocols/Level-3/04-ICMP/mensajes_ICMP.png}
 
 
 
@@ -1426,15 +1604,54 @@ Supongamos un datagrama con un tamaño total de 4000 bytes que necesita ser tran
 
 
 
+\subsection{DHCP: Autoconfiguración de la capa de red}
 
 
+El \textbf{DHCP (Dynamic Host Configuration Protocol)} es un protocolo de red que permite a los dispositivos obtener automáticamente configuraciones esenciales para su conexión en una red IP. Es ampliamente utilizado para asignar dinámicamente direcciones IP, así como otros parámetros de configuración de red.
 
+\subsubsection*{Funcionamiento del DHCP}
 
+El protocolo DHCP sigue un modelo cliente-servidor en el que los clientes solicitan información de configuración y el servidor responde con los datos necesarios. El proceso se compone de cuatro etapas principales:
+\begin{enumerate}
+    \item \textbf{Discover:} El cliente envía un mensaje de difusión DHCP Discover buscando servidores DHCP disponibles en la red.
+    \item \textbf{Offer:} El servidor responde con un mensaje DHCP Offer, que incluye una dirección IP disponible y otros parámetros.
+    \item \textbf{Request:} El cliente envía un mensaje DHCP Request indicando su intención de usar la dirección IP ofrecida.
+    \item \textbf{Acknowledge:} El servidor confirma la asignación con un mensaje DHCP Acknowledge, y el cliente puede comenzar a usar la dirección IP.
+\end{enumerate}
 
+\subsubsection*{Parámetros Configurados por DHCP}
 
+El servidor DHCP no solo asigna direcciones IP, sino que también puede proporcionar otros parámetros de configuración importantes, tales como:
+\begin{itemize}
+    \item Máscara de subred.
+    \item Puerta de enlace predeterminada (\textit{default gateway}).
+    \item Servidores DNS.
+    \item Tiempo de arrendamiento (\textit{lease time}) para la dirección IP asignada.
+    \item Opciones específicas de la red, como rutas estáticas.
+\end{itemize}
 
+\subsubsection*{Ventajas del DHCP}
 
+\begin{itemize}
+    \item \textbf{Automatización:} Reduce la necesidad de configurar manualmente cada dispositivo en la red.
+    \item \textbf{Eficiencia:} Permite reutilizar direcciones IP, lo que es especialmente útil en redes con un número limitado de direcciones disponibles.
+    \item \textbf{Facilidad de gestión:} Centraliza la administración de la configuración de red.
+\end{itemize}
 
+\subsubsection*{Desventajas del DHCP}
+
+\begin{itemize}
+    \item \textbf{Dependencia del servidor:} Si el servidor DHCP falla, los nuevos dispositivos no podrán obtener configuración de red.
+    \item \textbf{Falta de control fijo:} Aunque es posible asignar direcciones fijas, DHCP está diseñado principalmente para asignaciones dinámicas.
+\end{itemize}
+
+\subsubsection*{Ejemplo de Funcionamiento}
+
+Proceso de una sesión DHCP entre cliente y servidor: \url{https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyvPCPxrYJdM7ra-zKKv-9ptw5el9t7mQUvzKB6GGjV8I07_0URHw1aHtl652Ks0vCRss-PWtPG1BWwn8xnimpH_klN0Eac_Wr6-gvvJzzPccANoflbWWt0KkuT3zidC59Do4A8bCYHDoe/s1600/DHCP_Cliente_Servidor.png}
+
+\subsubsection*{Resumen}
+
+El protocolo DHCP es fundamental para la gestión dinámica y automatizada de redes IP. Su capacidad para asignar y gestionar parámetros de configuración de red de manera eficiente lo convierte en una herramienta esencial en redes modernas, tanto domésticas como empresariales.
 
 
 
@@ -1443,5 +1660,18 @@ Supongamos un datagrama con un tamaño total de 4000 bytes que necesita ser tran
 %diapos 56 de mi tablet
 %https://chatgpt.com/c/67693401-0fdc-8012-8dea-a3b6f3ca0d4a
 
+
+
+
+
+% \section{Otras definiciones}
+
+% \begin{itemize}
+%     \item El programa \textbf{ping} se utiliza para comprobar el estado de un host utilizando el protocolo
+%     ICMP. El host origen manda un mensaje de solicitud de eco con un identificador. Si el
+%     destino está conectado, la comunicación es posible y está correctamente configurada,
+%     el host origen recibirá un mensaje de respuesta de eco con el mismo código. Este
+%     programa sirve asimismo para calcular empíricamente la latencia de la conexión.
+% \end{itemize}
 
 \end{document}
