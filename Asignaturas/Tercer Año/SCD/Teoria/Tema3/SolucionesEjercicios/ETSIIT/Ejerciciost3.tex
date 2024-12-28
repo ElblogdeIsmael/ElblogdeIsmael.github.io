@@ -29,6 +29,7 @@
 \fancyhf{}
 \fancyhead[L]{\leftmark}
 \fancyhead[R]{\rightmark}
+\fancyfoot[L]{\textit{Ismael Sallami Moreno - GIIADE}}
 \fancyfoot[C]{\thepage}
 \fancyfoot[R]{\textbf{(UGR)} \today}
 \renewcommand{\headrulewidth}{0.4pt}
@@ -613,9 +614,214 @@ end
   end
 \end{lstlisting}
 
+\section{Ejercicio 83}
+
+\subsection{Enunciado}
+
+En un sistema distribuido, un gran número de procesos clientes usa frecuentemente un determinado recurso y se desea que puedan usarlo simultáneamente el máximo número de procesos. Para ello, los clientes envían peticiones a un proceso controlador para usar el recurso y esperan respuesta para poder usarlo (véase el código de los procesos clientes). Cuando un cliente termina de usar el recurso, envía una solicitud para dejar de usarlo y espera respuesta del Controlador. El proceso controlador se encarga de asegurar la sincronización adecuada imponiendo una única restricción por razones supersticiosas: nunca habrá 13 procesos exactamente usando el recurso al mismo tiempo.
+
+\begin{lstlisting}[style=customcpp]
+process Cli[ i : 0....n ] ;
+var pet_usar : integer := +1 ;
+    pet_liberar : integer := -1 ;
+    permiso : integer := ... ;
+begin
+    while true do begin
+        send( pet_usar, Controlador );
+        receive( permiso, Controlador );
+        Usar_recurso( );
+        send( pet_liberar, Controlador );
+        receive( permiso, Controlador );
+    end
+end
+\end{lstlisting}
+
+\begin{lstlisting}[style=customcpp]
+process Controlador ;
+begin
+    while true do begin
+        select
+            ...
+        end
+end
+\end{lstlisting}
+
+Describir en pseudocódigo el comportamiento del proceso controlador, utilizando una orden de espera selectiva que permita implementar la sincronización requerida entre los procesos. Es posible utilizar una sentencia del tipo select for i=... to ... para especificar diferentes ramas de una sentencia selectiva que comparten el mismo código dependiente del valor de un índice i.
+
+\newpage
+\subsection{Solución}
+
+\begin{lstlisting}[style=customcpp]
+  
+  process Controlador ;
+  var contador: integer;
+  begin
+      while true do begin
+          select
+            for i:= 0 to n do 
+
+              when receive(pet_usar,Cli[i]) do 
+                if contador < 13 then 
+                  send(permiso,Cli[i]);
+                  contador := contador + 1;
+                end if
+
+              when receive(pet_liberar,Cli[i]) do 
+                send(permiso,Cli[i]);
+                contador := contador - 1;
+              end do
+          
+          end select
+      end 
+  end
+
+\end{lstlisting}
+
+\subsubsection*{Lógica de la solución}
+
+En este caso se ha pensado la solución de manera simple. Se trata de un controlador que recibe peticiones de los clientes para usar un recurso. Si el contador de procesos que están usando el recurso es menor que 13, el controlador envía un permiso al cliente para que pueda usar el recurso. Cuando un cliente termina de usar el recurso, envía una petición para liberarlo y el controlador disminuye el contador. De esta forma, se asegura que nunca haya exactamente 13 procesos usando el recurso al mismo tiempo. Es impotante \textbf{uso del if} para asegurarnos de que solo se usan los 13 procesos a la vez, y debemos de asegurarnos de que actualizamos de manera correcta la variable contador.
+
+\section{Ejercicio 84}
+
+\subsection{Enunciado}
+
+En un sistema distribuido, tres procesos Productor se comunican con un proceso Impresor que se encarga de ir imprimiendo en pantalla una cadena con los datos generados por los procesos productores. Cada proceso productor (\texttt{Productor[i]} con \(i = 0, 1, 2\)) genera continuamente el correspondiente entero \(i\), y lo envía al proceso Impresor.
+
+El proceso Impresor se encarga de ir recibiendo los datos generados por los productores y los imprime por pantalla (usando el procedimiento \texttt{imprime(entero)}) generando una cadena de dígitos en la salida. No obstante, los procesos se han de sincronizar adecuadamente para que la impresión por pantalla cumpla las siguientes restricciones:
+
+\begin{itemize}
+    \item Los dígitos 0 y 1 deben aceptarse por el impresor de forma alterna. Es decir, si se acepta un 0 no podrá volver a aceptarse un 0 hasta que se haya aceptado un 1, y viceversa, si se acepta un 1 no podrá volver a aceptarse un 1 hasta que se haya aceptado un 0.
+    \item El número total de dígitos 0 o 1 aceptados en un instante no puede superar el doble de número de dígitos 2 ya aceptados en dicho instante.
+\end{itemize}
+
+Cuando un productor envía un dígito que no se puede aceptar por el impresor, el productor quedará bloqueado esperando completar el \texttt{s\_send}. El pseudocódigo de los procesos productores (\texttt{Productor}) se muestra a continuación, asumiendo que se usan operaciones bloqueantes no buferizadas (síncronas):
+
+\begin{lstlisting}[style=customcpp]
+process Productor[ i : 0,1,2 ]
+while true do begin
+    s_send( i, Impresor ) ;
+end
+\end{lstlisting}
+
+\begin{lstlisting}[style=customcpp, caption={Pseudocódigo del proceso Impresor}]
+process Impresor
+  var
+      .....
+    begin
+      while true do begin
+        select
+          .....
+        end
+      end
+    end
+\end{lstlisting}
+
+
+\subsection{Solución}
+
+% \begin{lstlisting}[style=customcpp]
+% process Impresor
+% var
+%     contador_0_1 : integer := 0 ;
+%     contador_2 : integer := 0 ;
+%     turno : integer := 0 ; // 0: turno para aceptar 0, 1: turno para aceptar 1
+% begin
+%     while true do begin
+%         select
+%             when receive(dato, Productor[0]) do
+%                 if (dato == 0 and turno == 0 and contador_0_1 < 2 * contador_2) then
+%                     imprime(dato);
+%                     contador_0_1 := contador_0_1 + 1;
+%                     turno := 1;
+%                 else if (dato == 1 and turno == 1 and contador_0_1 < 2 * contador_2) then
+%                     imprime(dato);
+%                     contador_0_1 := contador_0_1 + 1;
+%                     turno := 0;
+%                 else if (dato == 2) then
+%                     imprime(dato);
+%                     contador_2 := contador_2 + 1;
+%                 end if;
+%             end when
+%             when receive(dato, Productor[1]) do
+%                 if (dato == 0 and turno == 0 and contador_0_1 < 2 * contador_2) then
+%                     imprime(dato);
+%                     contador_0_1 := contador_0_1 + 1;
+%                     turno := 1;
+%                 else if (dato == 1 and turno == 1 and contador_0_1 < 2 * contador_2) then
+%                     imprime(dato);
+%                     contador_0_1 := contador_0_1 + 1;
+%                     turno := 0;
+%                 else if (dato == 2) then
+%                     imprime(dato);
+%                     contador_2 := contador_2 + 1;
+%                 end if;
+%             end when
+%             when receive(dato, Productor[2]) do
+%                 if (dato == 0 and turno == 0 and contador_0_1 < 2 * contador_2) then
+%                     imprime(dato);
+%                     contador_0_1 := contador_0_1 + 1;
+%                     turno := 1;
+%                 else if (dato == 1 and turno == 1 and contador_0_1 < 2 * contador_2) then
+%                     imprime(dato);
+%                     contador_0_1 := contador_0_1 + 1;
+%                     turno := 0;
+%                 else if (dato == 2) then
+%                     imprime(dato);
+%                     contador_2 := contador_2 + 1;
+%                 end if;
+%             end when
+%         end select
+%     end
+% end
+% \end{lstlisting}
+
+\begin{lstlisting}[style=customcpp]
+  process Impresor
+  var
+      contador_0_1 : integer := 0 ;
+      contador_2 : integer := 0 ;
+      turno : integer := 0 ; // 0: turno para aceptar 0, 1: turno para aceptar 1
+  begin
+      while true do begin
+          select
+            for i:= 0 to 2
+              when receive(dato, Productor[i]) do
+                  if (dato == 0 and turno == 0 and contador_0_1 < 2 * contador_2) then
+                      imprime(dato);
+                      contador_0_1 := contador_0_1 + 1;
+                      turno := 1;
+                  else if (dato == 1 and turno == 1 and contador_0_1 < 2 * contador_2) then
+                      imprime(dato);
+                      contador_0_1 := contador_0_1 + 1;
+                      turno := 0;
+                  else if (dato == 2) then
+                      imprime(dato);
+                      contador_2 := contador_2 + 1;
+                  end if;
+              end when
+          end select
+      end
+  end
+  \end{lstlisting}
+
+
+\subsubsection*{Lógica de la solución}
+
+En este código del proceso \texttt{Impresor}, se maneja la sincronización entre los productores y el impresor usando un \texttt{select}, y además diseñandolo la solución usando la opción for para hacer más simple el código. Para cada productor, se controla la aceptación de los dígitos 0, 1 y 2, con las restricciones mencionadas en el enunciado. El proceso acepta un dígito según las condiciones del turno (alternancia entre 0 y 1) y el límite sobre el número de dígitos 0 y 1 que pueden aceptarse en comparación con los dígitos 2.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 %https://chatgpt.com/c/676d2a12-a978-8012-b24a-a87e821ecddf
-
+%https://chatgpt.com/c/676fe014-a80c-8012-a689-ad7fa676d93d
 \end{document}

@@ -498,7 +498,147 @@ Si tomamos valores esperados obtenemos que (\ecuacion{E[\vec{e^t}\vec{e}] = }):
 Finalmente, nos queda que \ecuacion{E[\vec{e^t}\vec{e}] = \sigma^2(n-k)}, por lo que como \ecuacion{E[\frac{\vec{e^t}\vec{e}}{n - k}] = \sigma^2} podemos afirmar que \ecuacion{\hat{\sigma}^2 = \frac{\vec{e^t}\vec{e}}{n - k} = \frac{SCR}{n-k}} es un estimador insesgado de \ecuacion{\sigma_u^2}
 
 
-%diapo 22 eco t3
+\subsection{Estimación de la varianza de los EMCO}
+
+Como sabemos la varianza del EMCO \ecuacion{\vec{\beta}} es \ecuacion{\sigma^2(X^tX)^{-1}}, por lo que depende de la varianza de la perturbación y como sabemos el estimador de la varianza de la perturbación es: \ecuacion{\hat{\sigma}^2 = \frac{SCR}{n-k}}.\\
+
+Por lo que nos queda que la varianza del EMCO es:
+\begin{equation}
+    \text{var}(\vec{\hat{\beta}}) = \frac{SCR}{n-k} * (X^tX)^{-1}
+\end{equation}
+
+\subsection{Supuesto de Normalidad e Inferencia}
+
+\textbf{Supuesto de normalidad:} Supongamos que \( \vec{u} \sim N(\vec{0}, \sigma^2 I_n) \).
+
+\textbf{Propiedades del estimador}: 
+\begin{itemize}
+    \item Dado que \( \vec{\hat{\beta}} = \vec{\beta} + (X^t X)^{-1} X^t \vec{u} \), por el Teorema de Gauss-Markov, se tiene que:
+    \[ \vec{\hat{\beta}} \sim N(E[\vec{\hat{\beta}}], \text{var}(\vec{\hat{\beta}})) = N(\vec{\beta}, \sigma^2 (X^t X)^{-1}). \]
+
+    \item Equivalentemente, se cumple:
+    \[ (\vec{\hat{\beta}} - \vec{\beta}) \sim N(\vec{0}, \sigma^2 (X^t X)^{-1}). \]
+
+\end{itemize}
+
+\textbf{Distribución del residuo:}
+\begin{itemize}
+    \item Como se verifica que \( \vec{e}^{\,\,t} \vec{e} = \vec{u}^t M_X \vec{u} \), y dado que \( \vec{u} \sim N(\vec{0}, \sigma^2 I_n) \), y que \( M_X \) es simétrica, idempotente y tiene rango \( \rho(M_X) = n - k \), concluimos que:
+    \[ \frac{1}{\sigma^2} \vec{u}^t M_X \vec{u} \sim \chi^2_{n-k}. \]
+
+    \item Por tanto, se tiene que:
+    \[ \frac{(n-k) \hat{\sigma}^2}{\sigma^2} \sim \chi^2_{n-k}. \]
+\end{itemize}
+
+\subsection*{Más desarrollado, paso a paso:}
+
+\subsection{Supuesto de Normalidad e Inferencia}
+
+\textbf{Supuesto de normalidad:} Supongamos que \( \vec{u} \sim N(\vec{0}, \sigma^2 I_n) \).
+
+\textbf{Paso 1: Propiedades del estimador \( \vec{\hat{\beta}} \)} 
+\begin{itemize}
+    \item Recordemos que el estimador \( \vec{\hat{\beta}} \) se define como:
+    \[
+    \vec{\hat{\beta}} = \vec{\beta} + (X^t X)^{-1} X^t \vec{u}.
+    \]
+    \item Dado que \( \vec{u} \sim N(\vec{0}, \sigma^2 I_n) \), el término \( (X^t X)^{-1} X^t \vec{u} \) también tiene distribución normal, ya que es una combinación lineal de \( \vec{u} \).
+    \item Por lo tanto, \( \vec{\hat{\beta}} \) sigue una distribución normal:
+    \[
+    \vec{\hat{\beta}} \sim N(\vec{\beta}, \sigma^2 (X^t X)^{-1}).
+    \]
+\end{itemize}
+
+\textbf{Paso 2: Distribución de \( \vec{\hat{\beta}} - \vec{\beta} \)}
+\begin{itemize}
+    \item Al restar \( \vec{\beta} \) del estimador \( \vec{\hat{\beta}} \):
+    \[
+    \vec{\hat{\beta}} - \vec{\beta} = (X^t X)^{-1} X^t \vec{u}.
+    \]
+    \item Este término sigue una distribución normal con media cero y varianza \( \sigma^2 (X^t X)^{-1} \):
+    \[
+    (\vec{\hat{\beta}} - \vec{\beta}) \sim N(\vec{0}, \sigma^2 (X^t X)^{-1}).
+    \]
+\end{itemize}
+
+\textbf{Paso 3: Distribución del residuo \( \vec{e} \)}
+\begin{itemize}
+    \item Recordemos que el residuo se define como:
+    \[
+    \vec{e} = \vec{y} - \hat{\vec{y}} = \vec{y} - X \vec{\hat{\beta}}.
+    \]
+    \item Sustituyendo \( \vec{y} = X \vec{\beta} + \vec{u} \):
+    \[
+    \vec{e} = \vec{y} - X \vec{\hat{\beta}} = (X \vec{\beta} + \vec{u}) - X \vec{\hat{\beta}}.
+    \]
+    \item Simplificando:
+    \[
+    \vec{e} = \vec{u} - X (\vec{\hat{\beta}} - \vec{\beta}).
+    \]
+    \item Como \( \vec{\hat{\beta}} \) depende de \( \vec{u} \), al aplicar propiedades de matrices y el operador \( M_X = I_n - X (X^t X)^{-1} X^t \):
+    \[
+    \vec{e} = M_X \vec{u}.
+    \]
+\end{itemize}
+
+\textbf{Paso 4: Distribución de \( \vec{e}^t \vec{e} \)}
+\begin{itemize}
+    \item El término \( \vec{e}^t \vec{e} \) puede escribirse como:
+    \[
+    \vec{e}^t \vec{e} = \vec{u}^t M_X \vec{u}.
+    \]
+    \item Dado que \( \vec{u} \sim N(\vec{0}, \sigma^2 I_n) \) y que \( M_X \) es simétrica, idempotente, y tiene rango \( n-k \):
+    \[
+    \frac{1}{\sigma^2} \vec{u}^t M_X \vec{u} \sim \chi^2_{n-k}.
+    \]
+    \item Por lo tanto, podemos concluir que:
+    \[
+    \frac{(n-k) \hat{\sigma}^2}{\sigma^2} \sim \chi^2_{n-k},
+    \]
+    donde \( \hat{\sigma}^2 = \frac{\vec{e}^t \vec{e}}{n-k} \) es el estimador insesgado de \( \sigma^2 \).
+\end{itemize}
+
+\subsection{Intervalos de Confianza}
+
+\subsubsection{IC para \ecuacion{\beta_i}}
+
+\begin{equation}
+    \hat{\beta_i} \pm t_{n-k,1-\frac{\alpha}{2}} * \sqrt{\hat{\text{var}}\hat{\beta_i}}\,\,, i = 1, \ldots, k.
+\end{equation}
+
+\subsubsection{IC para \ecuacion{\sigma^2}}
+
+\begin{equation}
+    \left[\frac{(n-k)\sigma^2}{\chi_{n-k,1-\frac{\alpha}{2}}^2},\frac{(n-k)\sigma^2}{\chi_{n-k,\frac{\alpha}{2}}^2}\right]
+\end{equation}
+
+\subsection{Contraste de hipótesis}
+
+\begin{eqnarray}
+    H_0: R\vec{\beta} = \vec{r} \nonumber \\
+\end{eqnarray}
+
+donde:
+\begin{eqnarray}
+    R = \begin{matrix}
+        a_{11} & \cdots & a_{1k} \\
+        \vdots & \ddots & \vdots \\
+        a_{m1} & \cdots & a_{mk}
+    \end{matrix}
+    \quad,
+    \quad
+    \vec{r} = \begin{matrix}
+        r_1 \\
+        \vdots \\
+        r_m
+    \end{matrix}
+\end{eqnarray}
+
+
+%diapo 39 t3
+
+
+
 
 
 
