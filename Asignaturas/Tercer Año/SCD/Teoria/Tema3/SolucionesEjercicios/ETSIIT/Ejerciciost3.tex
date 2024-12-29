@@ -18,6 +18,10 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{float}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tcolorbox}
 
 % Paquetes para el entorno lstlisting
 \usepackage{listings}
@@ -840,6 +844,275 @@ end
 
 
 \subsection{Solución}
+
+Para resolver este problema, utilizamos un enfoque basado en \texttt{select}, ya que ni \texttt{receive} ni \texttt{i\_receive} permiten detectar si no hay mensajes pendientes de forma directa. Esto se debe a que:
+
+\begin{itemize}
+    \item \texttt{receive} es una operación bloqueante que espera hasta que haya un mensaje disponible, impidiendo que podamos comprobar si no hay mensajes sin bloquear el proceso.
+    \item \texttt{i\_receive} es una operación no bloqueante, pero simplemente devuelve un indicador de éxito o fallo y no permite implementar un mecanismo de espera como el solicitado.
+\end{itemize}
+
+Con \texttt{select}, podemos implementar un mecanismo de espera que permita al proceso receptor manejar mensajes cuando estén disponibles, o ejecutar una acción alternativa (como imprimir "no hay mensajes, duermo") si no hay mensajes. La solución se describe a continuación:
+
+\begin{lstlisting}[style=customcpp]
+process Emisor[ i : 1..n ]
+var dato : integer ;
+begin
+    while true do begin
+        dato := Producir(); // Generar un nuevo dato
+        send(dato, Receptor); // Enviar el dato al Receptor
+    end
+end
+\end{lstlisting}
+
+\begin{lstlisting}[style=customcpp]
+process Receptor()
+var dato : integer ;
+begin
+    while true do begin
+        select
+            when receive(dato, Emisor[1..n]) do // Si hay mensajes
+                imprime(dato); // Imprimir el mensaje recibido
+            else // Si no hay mensajes pendientes
+                imprime("no hay mensajes, duermo");
+                sleep_for(10); // Bloquear durante 10 segundos
+        end select
+    end
+end
+\end{lstlisting}
+
+\subsubsection*{\textbf{Explicación de la solución}}
+
+\textbf{1. Emisor:}  
+Cada proceso \texttt{Emisor[i]} produce un valor entero con la función \texttt{Producir()} y lo envía al \texttt{Receptor} utilizando la operación \texttt{send}. Este proceso se ejecuta en un bucle infinito.
+
+\textbf{2. Receptor:}  
+El proceso \texttt{Receptor} implementa un bucle infinito que realiza las siguientes acciones:
+\begin{itemize}
+  \item Usa una sentencia \texttt{select} para manejar dos escenarios:
+  \begin{itemize}
+    \item Si hay mensajes disponibles, el receptor los consume con \texttt{receive} y los imprime utilizando \texttt{imprime(dato)}.
+    \item Si no hay mensajes pendientes (gracias al \texttt{else} del \texttt{select}), el receptor imprime ``no hay mensajes, duermo'' y entra en un estado de espera por 10 segundos usando \texttt{sleep\_for(10)}.
+  \end{itemize}
+\end{itemize}
+\textbf{3. Uso de \texttt{select}:}  
+La operación \texttt{select} permite al proceso \texttt{Receptor} manejar la recepción de mensajes de múltiples emisores (\texttt{Emisor[1..n]}), así como realizar una acción alternativa (\texttt{else}) cuando no hay mensajes pendientes.
+
+\subsubsection*{\textbf{Respuesta a las preguntas planteadas}}
+
+\textbf{1. ¿Por qué no se puede solucionar el problema con \texttt{receive} o \texttt{i\_receive}?}  
+\begin{itemize}
+  \item \texttt{receive} es bloqueante, lo que significa que el receptor esperará indefinidamente hasta que llegue un mensaje, impidiendo detectar que no hay mensajes.
+  \item \texttt{i\_receive} no es bloqueante, pero solo devuelve un indicador de éxito o fallo. No proporciona un mecanismo para realizar acciones alternativas cuando no hay mensajes pendientes, como el que se implementa con \texttt{select}.
+\end{itemize}
+
+\textbf{2. ¿Por qué es útil \texttt{select}?}  
+\begin{itemize}
+  \item \texttt{select} permite manejar múltiples condiciones de recepción de mensajes y, además, proporciona un mecanismo \texttt{else} para definir acciones alternativas cuando ninguna condición se cumple. Esto es crucial para implementar el comportamiento del receptor cuando no hay mensajes.
+\end{itemize}
+
+Con esta implementación, se garantiza que el \texttt{Receptor} cumpla con las especificaciones planteadas: procesar mensajes cuando estén disponibles o entrar en un estado de espera eficiente si no hay mensajes.
+
+
+
+\section{Ejercicio 86}
+\subsection{Enunciado}
+
+En un sistema tenemos \textbf{N procesos emisores} que envían de forma segura un único mensaje cada uno de ellos a un proceso receptor. El mensaje contiene un entero con el número del proceso emisor. El proceso receptor debe imprimir el número del proceso emisor que inició el envío en primer lugar. Dicho emisor debe terminar, y el resto quedarse bloqueados:
+
+\begin{lstlisting}[style=customcpp]
+process Emisor[ i : 1.. N ]
+begin
+    s_send(i, Receptor);
+end
+
+process Receptor ;
+var ganador : integer ;
+begin
+    // calcular ganador
+    ....
+    ....
+    print "El primer envío lo ha realizado: ....", ganador;
+end
+\end{lstlisting}
+
+Para cada uno de los siguientes casos, describir razonadamente si es posible diseñar una solución a este problema o no lo es. En caso afirmativo, escribe una posible solución:
+
+\begin{enumerate}
+    \item[(a)] El proceso receptor usa exclusivamente recepción mediante una o varias llamadas a \texttt{receive}.
+    \item[(b)] El proceso receptor usa exclusivamente recepción mediante una o varias llamadas a \texttt{i\_receive}.
+    \item[(c)] El proceso receptor usa exclusivamente recepción mediante una o varias instrucciones \texttt{select}.
+\end{enumerate}
+
+\subsection{Solución}
+
+A continuación, se analiza cada uno de los casos planteados y se proporciona una solución cuando es posible:
+\begin{enumerate}[label=\alph*)]
+
+\item \textbf{ Recepción exclusivamente mediante \texttt{receive}:}
+
+Usar \texttt{receive} garantiza que el proceso receptor obtiene un mensaje completo antes de procesarlo, lo que permite determinar cuál fue el primer emisor. Sin embargo, \texttt{receive} no tiene orden garantizado cuando varios emisores envían simultáneamente. Para garantizar que se identifica correctamente al primer emisor, los mensajes deben llegar en el orden en que fueron enviados.
+
+\textbf{Solución:}
+
+\begin{lstlisting}[style=customcpp]
+process Receptor ;
+var ganador : integer ;
+    recibido : integer ;
+    encontrado : boolean := false ;
+begin
+    while not encontrado do begin
+        receive(recibido, *);  // Recibir de cualquier emisor
+        if not encontrado then begin
+            ganador := recibido;  // El primer mensaje recibido
+            encontrado := true;
+            print "El primer envío lo ha realizado: ", ganador;
+        end
+    end
+end
+\end{lstlisting}
+
+En esta solución:
+\begin{itemize}
+    \item El receptor procesa el primer mensaje recibido y almacena el identificador del emisor como \texttt{ganador}.
+    \item Los demás emisores quedan bloqueados porque el receptor no solicita más mensajes.
+\end{itemize}
+
+\item \textbf{ Recepción exclusivamente mediante \texttt{i\_receive}:}
+
+La operación \texttt{i\_receive} permite verificar si un mensaje está disponible sin bloquearse. Sin embargo, \texttt{i\_receive} no garantiza un orden, por lo que sería necesario iterar constantemente para determinar el primer emisor. Esto puede generar comportamiento indeterminado, ya que \texttt{i\_receive} solo indica disponibilidad y no un orden temporal.
+
+\textbf{Conclusión:} No es posible garantizar que el primer mensaje sea procesado correctamente usando solo \texttt{i\_receive}.
+
+\item \textbf{ Recepción exclusivamente mediante \texttt{select}:}
+
+La instrucción \texttt{select} permite manejar múltiples canales de recepción simultáneamente. Esto asegura que el receptor atienda el primer mensaje recibido en cualquiera de los canales, determinando así correctamente al primer emisor.
+
+\textbf{Solución:}
+
+\begin{lstlisting}[style=customcpp]
+process Receptor ;
+var ganador : integer ;
+    recibido : integer ;
+    encontrado : boolean := false ;
+begin
+    while not encontrado do begin
+        select
+            for i := 1 to N do
+                when receive(recibido, Emisor[i]) do begin
+                    ganador := recibido;  // El primer mensaje recibido
+                    encontrado := true;
+                    print "El primer envío lo ha realizado: ", ganador;
+                end
+            end for
+        end select
+    end
+end
+\end{lstlisting}
+
+En esta solución:
+\begin{itemize}
+    \item El receptor utiliza \texttt{select} para atender al primer mensaje recibido desde cualquier emisor.
+    \item El bucle asegura que se identifica al emisor más rápido, y se imprime su número.
+    \item Los emisores restantes quedan bloqueados, ya que no se procesan más mensajes después de encontrar al ganador.
+\end{itemize}
+
+\end{enumerate}
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Resumen:}]
+
+  
+
+  \begin{enumerate}[label=\alph*)]
+    \item Es posible resolver el problema usando \texttt{receive}, y la solución es viable.
+    \item No es posible garantizar una solución con \texttt{i\_receive}, debido a la falta de orden y bloqueo.
+    \item Es posible resolver el problema con \texttt{select}, y la solución es eficiente y correcta.
+  \end{enumerate}
+\end{tcolorbox}
+
+
+
+
+
+
+
+
+
+
+\section{Ejercicio 87}
+
+\subsection{Enunciado}
+
+Supongamos que tenemos \textbf{N} procesos concurrentes semejantes:
+
+\begin{lstlisting}[style=customcpp]
+process P[ i : 1..N ] ;
+    ....
+  begin
+    ....
+  end
+\end{lstlisting}
+
+Cada proceso produce \textbf{N-1 caracteres} (con \texttt{N-1} llamadas a la función \texttt{ProduceCaracter}) y envía cada carácter a los otros \texttt{N-1} procesos. Además, cada proceso debe imprimir todos los caracteres recibidos de los otros procesos (el orden en el que se escriben es indiferente).
+
+\begin{itemize}
+    \item \textbf{Describe razonadamente si es o no posible hacer esto usando exclusivamente \texttt{s\_send} para los envíos.} En caso afirmativo, escribe una solución.
+    \item \textbf{Escribe una solución usando \texttt{send} y \texttt{receive}.}
+\end{itemize}
+
+\subsection{Solución}
+
+\begin{itemize} 
+
+\item \textbf{1. Análisis del uso exclusivo de \texttt{s\_send}:}
+
+El uso exclusivo de \texttt{s\_send} (envío sin búfer y bloqueante) puede causar problemas de interbloqueo en este escenario. Dado que \texttt{s\_send} requiere que el receptor esté listo para recibir el mensaje en el momento del envío, si todos los procesos están intentando enviar al mismo tiempo y ninguno está recibiendo, el sistema se bloqueará.\\
+
+Por lo tanto, \textbf{no es posible implementar esta solución utilizando exclusivamente \texttt{s\_send}} debido a la naturaleza de la operación bloqueante.\\
+
+
+\item  \textbf{2. Solución utilizando \texttt{send} y \texttt{receive}:}
+
+Para resolver este problema, se utiliza una combinación de \texttt{send} y \texttt{receive}, asegurando que cada proceso envíe sus caracteres a los demás procesos y, al mismo tiempo, reciba los caracteres enviados por otros procesos.\\
+
+\begin{lstlisting}[style=customcpp]
+process P[ i : 1..N ] ;
+var
+    caract : char ;       // Carácter producido
+    recibido : char ;     // Carácter recibido
+begin
+    // Enviar N-1 caracteres a los otros procesos
+    for j := 1 to N do
+        if j != i then begin
+            caract := ProduceCaracter(); // Produce un carácter
+            send(caract, P[j]);          // Enviar al proceso P[j]
+        end
+    end
+
+    // Recibir N-1 caracteres de los otros procesos
+    for j := 1 to N do
+        if j != i then begin
+            receive(recibido, P[j]);      // Recibir de proceso P[j]
+            imprime(recibido);           // Imprimir el carácter recibido
+        end
+    end
+end
+\end{lstlisting}
+
+\textbf{Explicación de la solución:}
+
+\begin{itemize}
+    \item Cada proceso \texttt{P[i]} realiza dos bucles:
+    \begin{itemize}
+        \item En el primer bucle, genera \texttt{N-1} caracteres con la función \texttt{ProduceCaracter} y los envía a los otros \texttt{N-1} procesos utilizando \texttt{send}.
+        \item En el segundo bucle, recibe los caracteres enviados por los otros \texttt{N-1} procesos utilizando \texttt{receive} y los imprime.
+    \end{itemize}
+    \item Para evitar enviar mensajes a sí mismo, se incluye la condición \texttt{if j != i}.
+    \item El uso de \texttt{send} y \texttt{receive} permite que los procesos se sincronicen correctamente sin riesgo de interbloqueo, ya que las operaciones de recepción permiten manejar los mensajes enviados.
+\end{itemize}
+
+\end{itemize}
+
 
 
 
