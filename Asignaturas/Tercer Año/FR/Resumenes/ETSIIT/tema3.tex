@@ -102,7 +102,7 @@
     escapeinside={(*@}{@*)},     % Delimitadores para escapar a LaTeX
     morecomment=[l][\color{magenta}]{\#}, % Comentarios de una línea
     morecomment=[s][\color{orange}]{/*}{*/}, % Comentarios multilínea
-    morestring=[b]",             % Strings entre comillas dobles
+    morestring=[b],             % Strings entre comillas dobles
     morestring=[b]'              % Strings entre comillas simples
 }
 
@@ -295,7 +295,7 @@ TCP ofrece un servicio orientado a conexión. El intercambio de la información 
 
 \subsection*{Three-way Handshake en TCP}
 
-El \textbf{three-way handshake} (o "apretón de manos en tres pasos") es un proceso fundamental en el protocolo TCP (Transmission Control Protocol) que permite establecer una conexión confiable entre dos dispositivos (por ejemplo, un cliente y un servidor) antes de comenzar a transmitir datos. Este proceso asegura que ambos dispositivos están listos para la comunicación y pueden manejar los datos de manera adecuada.
+El \textbf{three-way handshake} (o apretón de manos en tres pasos) es un proceso fundamental en el protocolo TCP (Transmission Control Protocol) que permite establecer una conexión confiable entre dos dispositivos (por ejemplo, un cliente y un servidor) antes de comenzar a transmitir datos. Este proceso asegura que ambos dispositivos están listos para la comunicación y pueden manejar los datos de manera adecuada.
 
 El \textbf{three-way handshake} se lleva a cabo en tres pasos:
 
@@ -335,7 +335,7 @@ Este método es una de las razones por las que TCP es considerado un protocolo o
 
 \subsubsection{Números de Secuencia.}
 
-El número de secuencia es un campo de 32 bits que cuenta bytes en módulo $2^{32}$ (el contador se da la vuelta cuando llega al valor máximo). Este número de secuencia no empieza normalmente en 0, sino en un valor denominado \textit{ISN} (Initial Sequence Number), elegido "teóricamente" al azar, para evitar confusiones con solicitudes anteriores.\\\\
+El número de secuencia es un campo de 32 bits que cuenta bytes en módulo $2^{32}$ (el contador se da la vuelta cuando llega al valor máximo). Este número de secuencia no empieza normalmente en 0, sino en un valor denominado \textit{ISN} (Initial Sequence Number), elegido teóricamente al azar, para evitar confusiones con solicitudes anteriores.\\\\
 
 El \textit{ISN} es elegido por el sistema (cliente o servidor). El estándar sugiere utilizar un contador entero incrementado en 1 cada 4 μs aproximadamente. En este caso, el contador se da la vuelta (y el \textit{ISN} reaparece) al cabo de 4 horas y 46 minutos.\\\\
 El mecanismo de selección de los \textit{ISN} es suficientemente fiable para proteger de coincidencias, pero no es un mecanismo de protección frente a sabotajes. Es relativamente fácil averiguar el \textit{ISN} de una conexión e interceptarla, suplantando a alguno de los dos participantes.\\\\
@@ -431,7 +431,7 @@ Se trata de la liberación de recursos y la finalización de la conexión. Para 
 
 El control de errores y de flujo son aspectos fundamentales del protocolo TCP para asegurar la entrega fiable y ordenada de los datos entre dos dispositivos. Estos mecanismos son esenciales para optimizar el rendimiento y garantizar que los datos se transmitan correctamente y sin pérdidas.\\\\
 \textbf{Mejorar rendimiento $\rightarrow$ ventana deslizante.}  
-Para mejorar el rendimiento y optimizar el uso del ancho de banda, TCP utiliza un mecanismo conocido como \textit{ventana deslizante} (sliding window). Este enfoque permite que el emisor envíe múltiples segmentos de datos sin esperar confirmaciones para cada uno, lo que mejora la eficiencia. La ventana deslizante controla cuántos datos puede enviar el emisor antes de que se necesite una confirmación. A medida que se reciben los segmentos, la ventana "se desliza" hacia adelante, permitiendo al emisor continuar enviando más datos..\\\\
+Para mejorar el rendimiento y optimizar el uso del ancho de banda, TCP utiliza un mecanismo conocido como \textit{ventana deslizante} (sliding window). Este enfoque permite que el emisor envíe múltiples segmentos de datos sin esperar confirmaciones para cada uno, lo que mejora la eficiencia. La ventana deslizante controla cuántos datos puede enviar el emisor antes de que se necesite una confirmación. A medida que se reciben los segmentos, la ventana se desliza hacia adelante, permitiendo al emisor continuar enviando más datos..\\\\
 
 \textbf{Control de errores: esquema ARQ con confirmaciones positivas y acumulativas.}  
 TCP implementa un esquema de control de errores basado en ARQ (Automatic Repeat reQuest), que utiliza confirmaciones positivas y acumulativas. Esto significa que el receptor envía un mensaje de confirmación (ACK) para indicar que ha recibido correctamente los datos. Si el emisor no recibe esta confirmación en un tiempo determinado, retransmite el segmento de datos. Además, las confirmaciones son acumulativas, es decir, un solo ACK puede confirmar la recepción de múltiples segmentos de datos hasta un número determinado..\\\\
@@ -455,7 +455,7 @@ En conjunto, estos mecanismos de control de errores y de flujo permiten a TCP pr
 
 En la imagen se muestran dos diagramas de secuencia que ilustran la comunicación entre dos hosts, Host A y Host B, en una red. La imagen está dividida en dos partes:\\
 
-1. \textbf{Pérdida de ACK}: En esta parte del diagrama, Host A envía un paquete con el número de secuencia 92 y 8 bytes de datos a Host B. Host B recibe el paquete y envía un ACK con el número 100 de vuelta a Host A. Sin embargo, este ACK se pierde en la red (indicado por una X y la palabra "pérdida"). Debido a la pérdida del ACK, Host A no recibe la confirmación y, después de un tiempo de espera (timeout), retransmite el paquete con el número de secuencia 92 y 8 bytes de datos. Finalmente, Host B recibe el paquete retransmitido y envía nuevamente el ACK con el número 100.\\
+1. \textbf{Pérdida de ACK}: En esta parte del diagrama, Host A envía un paquete con el número de secuencia 92 y 8 bytes de datos a Host B. Host B recibe el paquete y envía un ACK con el número 100 de vuelta a Host A. Sin embargo, este ACK se pierde en la red (indicado por una X y la palabra pérdida). Debido a la pérdida del ACK, Host A no recibe la confirmación y, después de un tiempo de espera (timeout), retransmite el paquete con el número de secuencia 92 y 8 bytes de datos. Finalmente, Host B recibe el paquete retransmitido y envía nuevamente el ACK con el número 100.\\
 
 2. \textbf{Timeout Prematuro y ACK Acumulativo}: En esta parte del diagrama, Host A envía un paquete con el número de secuencia 92 y 8 bytes de datos a Host B. Luego, Host A envía otro paquete con el número de secuencia 100 y 20 bytes de datos. Host B recibe ambos paquetes y envía un ACK con el número 100 y luego un ACK con el número 120 de vuelta a Host A. Sin embargo, debido a un timeout prematuro, Host A retransmite el paquete con el número de secuencia 92 y 8 bytes de datos antes de recibir el ACK acumulativo con el número 120. Finalmente, Host B recibe el paquete retransmitido y envía nuevamente el ACK con el número 120.\\
 
