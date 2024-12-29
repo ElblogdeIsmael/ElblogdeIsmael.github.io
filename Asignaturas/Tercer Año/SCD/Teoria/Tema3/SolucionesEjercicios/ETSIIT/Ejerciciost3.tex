@@ -810,6 +810,43 @@ process Impresor
 En este código del proceso \texttt{Impresor}, se maneja la sincronización entre los productores y el impresor usando un \texttt{select}, y además diseñandolo la solución usando la opción for para hacer más simple el código. Para cada productor, se controla la aceptación de los dígitos 0, 1 y 2, con las restricciones mencionadas en el enunciado. El proceso acepta un dígito según las condiciones del turno (alternancia entre 0 y 1) y el límite sobre el número de dígitos 0 y 1 que pueden aceptarse en comparación con los dígitos 2.
 
 
+\section{Ejercicio 85}
+
+\subsection{Enunciado}
+
+En un sistema distribuido hay un vector de \(n\) procesos iguales que envían con \texttt{send} (en un bucle infinito) valores enteros a un proceso receptor, que los imprime. Si en algún momento no hay ningún mensaje pendiente de recibir en el receptor, este proceso debe imprimir "no hay mensajes, duermo"; después de bloquearse durante 10 segundos (con \texttt{sleep\_for(10)}), antes de volver a comprobar si hay mensajes (esto podría hacerse para ahorrar energía, ya que el procesamiento de mensajes se hace en ráfagas separadas por 10 segundos).
+
+Este problema no se puede solucionar usando \texttt{receive} o \texttt{i\_receive}. Indica a qué se debe esto. Sin embargo, sí se puede hacer con \texttt{select}. Diseña una solución a este problema con \texttt{select}:
+
+\begin{lstlisting}[style=customcpp]
+process Emisor[ i : 1..n ]
+var dato : integer ;
+begin
+    while true do begin
+        dato := Producir() ;
+        send( dato, Receptor );
+    end
+end
+\end{lstlisting}
+
+\begin{lstlisting}[style=customcpp]
+process Receptor()
+var dato : integer ;
+begin
+    while true do
+        ......
+end
+\end{lstlisting}
+
+
+\subsection{Solución}
+
+
+
+
+
+
+
 
 
 
