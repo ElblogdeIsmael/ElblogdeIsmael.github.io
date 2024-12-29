@@ -179,6 +179,34 @@
     \end{pmatrix}
     \end{equation}
 
+
+
+\subsubsection{Notación Extra}
+
+\subsubsection*{Matriz \ecuacion{X'X}}
+
+\begin{equation}
+    \begin{pmatrix}
+        n & \sum_{i=0}^n X_{1i} & \cdots & \sum_{i=0}^n X_{ki} \\
+        \sum_{i=0}^n X_{1i} & \sum_{i=0}^n X_{1i}^2 & \cdots & \sum_{i=0}^n X_{1i}X_{ki} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \sum_{i=0}^n X_{ki} & \sum_{i=0}^n X_{ki}X_{1i} & \cdots & \sum_{i=0}^n X_{ki}^2 \\
+    \end{pmatrix}
+\end{equation}
+
+\subsubsection*{Matriz \ecuacion{X'Y}}
+
+\begin{equation}
+    \begin{pmatrix}
+        \sum_{i=0}^n Y_{i} \\
+        \sum_{i=0}^n X_{2i}Y_{i} \\
+        \vdots \\
+        \sum_{i=0}^n X_{ki}Y_{i} \\
+    \end{pmatrix}
+\end{equation}
+
+
+
 \subsection{Supuestos}
 \subsubsection{Linealidad}
 \begin{equation}
@@ -296,6 +324,12 @@ $\vec{\beta} = \left( \begin{array}{cccc}
     \sum_{i=1}^{n} X_{ki}Y_{i} \\
 \end{array} \right)$
     
+\subsection{Estimación Míminos Cuadrados Ordinarios Restringidos(MCO(R))}
+
+\begin{equation}
+    \widehat{\beta_R} = \widehat{\beta} - (R(X'X)^{-1})^t \times [R(X'X)^{-1}R']^{-1} \times R\widehat{\beta}
+\end{equation}
+
 \subsection{Propiedades Algebraicas de los MCO}
 
 \subsubsection*{Considerando que SI hay ti}
@@ -315,7 +349,7 @@ $\vec{\beta} = \left( \begin{array}{cccc}
     \begin{itemize}
         \item $SCT = \sum_{i=1}^{n} (y_i - \bar{y})^2 = \vec{y}^{\,\,t} \vec{y} - n \cdot \bar{Y}^2$
         \item $SCR = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 = \vec{y}^{\,\,t}  \vec{y} - \vec{\beta}^t \vec{X}^t \vec{y}$
-        \item $SCE = \sum_{i=1}^{n} (\hat{y}_i - \bar{y})^2 = \vec{\beta}^t \vec{X}^t \vec{y} - n \cdot \bar{Y}^2$
+        \item $SCE = \sum_{i=1}^{n} (\hat{y}_i - \bar{y})^2 = \vec{\beta}^t\footnote{En la práctica la simbología de t = traspuesta = \textit{prima = '}} \vec{X}^t \vec{y} - n \cdot \bar{Y}^2$
     \end{itemize}
     \item  SCT = SCR + SCE
     \item \ecuacion{\vec{\hat{y}}\vec{e}=0}
@@ -644,11 +678,19 @@ Por lo que nos queda que la varianza del EMCO es:
     \left[\frac{(n-k)\sigma^2}{\chi_{n-k,1-\frac{\alpha}{2}}^2},\frac{(n-k)\sigma^2}{\chi_{n-k,\frac{\alpha}{2}}^2}\right]
 \end{equation}
 
+% \subsubsection{Intervalos de confianza aplicados a la práctica: Estimadores y varianza de la perturbación}
+
+% \subsubsection*{Estimadores}
+
+% \begin{equation}
+%     \beta_i \in (\widehat{\beta_i} \)
+% \end{equation}
+
 \subsection{Contraste de hipótesis}
 
-\begin{eqnarray}
-    H_0: R\vec{\beta} = \vec{r} \nonumber \\
-\end{eqnarray}
+\begin{equation}
+    H_0: R\footnote{En la práctica hace referencia a la matriz de restricciones que se saca mediante el enunciado y/o los datos que se proporcionan}\vec{\beta} = \vec{r} \nonumber \\
+\end{equation}
 
 donde:
 \begin{eqnarray}
@@ -701,7 +743,7 @@ Si m = 1 y $r_i = 0 \,\,\forall i$, tenemos las siguientes hipótesis:
 
 Con un estadístico de contraste:
 \begin{equation}
-    t_{\text{exp}} = \frac{\hat{\beta_i}}{\sqrt{\hat{\text{var}}\hat{\beta_i}}}
+    t_{\text{exp}} = \frac{\hat{\beta_i}}{\sqrt{\hat{\text{var}}\hat{\beta_i}}} 
 \end{equation}
 
 Se rechazaría la hipótesis nula si \ecuacion{|t_{\text{exp}}| > t_{n-k,1-\frac{\alpha}{2}}}.
@@ -719,7 +761,7 @@ Cuando m = 1 y $r_i \neq 0 \,\, \forall i$, se tiene un contraste de hipótesis 
 
 Con un estadístico de contraste:
 \begin{equation}
-    t_{\text{exp}} = \frac{\hat{\beta_i} - r_i}{\sqrt{\hat{\text{var}}\hat{\beta_i}}}
+    t_{\text{exp}} = \frac{\hat{\beta_i} - r_i}{\sqrt{\hat{\text{var}}\hat{\beta_i}}} 
 \end{equation}
 
 Se rechazaría la hipótesis nula si \ecuacion{|t_{\text{exp}}| > t_{n-k,1-\frac{\alpha}{2}}}.
@@ -737,7 +779,7 @@ Si m = k-1 y $r_i = 0 \,\, i=2, 3, \ldots , k.$
 
 Con un estadístico de contraste:
 \begin{equation}
-    F_{\text{exp}} = (R\vec{\hat{\beta}})^t \times \frac{[R(X^tX)^{-1}R^t]^{-1}}{(k-1)\times \sigma^2} \times (R\vec{\hat{\beta}})
+    F_{\text{exp}} = (R\vec{\hat{\beta}})^t \times \frac{[R(X^tX)^{-1}R^t]^{-1}}{(k-1)\times \sigma^2} \times (R\vec{\hat{\beta}}) \quad \text{  ó } \quad F_{exp }= \frac{\frac{R^2}{k-1}}{\frac{1-R^2}{n-k}}
 \end{equation}
 
 Se rechazaría la hipótesis nula si \ecuacion{F_{\text{exp}} > F_{k-1,n-k,1-\alpha}}.
@@ -812,7 +854,7 @@ Tenemos que:
     Teniendo en cuanta que podemos sacar el sigma de raíz y de que \ecuacion{\hat{y_0} = \vec{x_0^{\,t}}\vec{\hat{\beta}}}, nos queda:
 
     \begin{equation}
-        IC_{y_0} = \vec{x_0^{\,t}}\vec{\hat{\beta}} \pm t_{n-k,1-\frac{\alpha}{2}}\hat{\sigma}\sqrt{1+\vec{x_0^{\,t}}(X^tX)^{-1}\vec{x_0}}
+        IC_{y_0} = \vec{x_0^{\,t}}\footnote{Este término se refiere, por simplicidad, a algún punto en específico, es decir, en la práctica corresponde con unos valores que nos da el enunciado para sacar el IC en base a esos valores.}\vec{\hat{\beta}} \pm t_{n-k,1-\frac{\alpha}{2}}\hat{\sigma}\sqrt{1+\vec{x_0^{\,t}}(X^tX)^{-1}\vec{x_0}}
     \end{equation}
 
     \item Intervalo de confianza para el valor esperado \ecuacion{E[y_0 \mid \vec{x_0}]}:
