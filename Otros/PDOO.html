@@ -1,0 +1,118 @@
+<!-- Include Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- Inside the parent HTML element where you want to display the folders and files -->
+<div id="fileExplorer">
+    <!-- Folder 1 -->
+    <div class="folder">
+        <h3><i class="fas fa-folder"></i> Proyecto Game - Laberinto </h3>
+        <ul>
+            <li><a href="PracticasPDOO/Pr1.zip" target="_blank"><i class="fas fa-file-archive"></i> Practica1.zip</a></li>
+            <li><a href="PracticasPDOO/Pr2.zip" target="_blank"><i class="fas fa-file-archive"></i> Practica2.zip</a></li>
+            <li><a href="PracticasPDOO/Pr3.zip" target="_blank"><i class="fas fa-file-archive"></i> Practica3.zip</a></li>
+            <!-- Add more files as needed -->
+        </ul>
+    </div>
+
+    
+
+    <!-- Add more folders as needed -->
+</div>
+
+<!-- CSS for styling the folders and files -->
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #282c34;
+        color: #abb2bf;
+        margin: 0;
+        padding: 20px;
+    }
+    #fileExplorer {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #21252b;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+    }
+    .folder {
+        margin-bottom: 20px;
+        border: 1px solid #3a3f4b;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: #2c313c;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .folder:hover {
+        background-color: #3a3f4b;
+        transform: scale(1.02);
+    }
+    .folder h3 {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #61afef;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        background: #21252b;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+    .folder h3:hover {
+        background: #3a3f4b;
+    }
+    .folder h3 i {
+        margin-right: 10px;
+        transition: transform 0.3s ease;
+    }
+    .folder h3:hover i {
+        transform: rotate(20deg);
+    }
+    .folder ul {
+        list-style-type: none;
+        padding-left: 0;
+        display: none;
+    }
+    .folder ul li {
+        margin-bottom: 10px;
+    }
+    .folder ul li a {
+        text-decoration: none;
+        color: #61afef;
+        font-weight: 500;
+        transition: color 0.3s ease, text-decoration 0.3s ease;
+        display: flex;
+        align-items: center;
+        background: #21252b;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .folder ul li a:hover {
+        text-decoration: underline;
+        color: #98c379;
+        background: #3a3f4b;
+    }
+    .folder ul li a i {
+        margin-right: 8px;
+        color: #61afef;
+    }
+</style>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var folders = document.querySelectorAll('.folder h3');
+        folders.forEach(function(folder) {
+            folder.addEventListener('click', function() {
+                var ul = this.nextElementSibling;
+                if (ul.style.display === 'none' || ul.style.display === '') {
+                    ul.style.display = 'block';
+                } else {
+                    ul.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
