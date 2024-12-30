@@ -1021,20 +1021,12 @@ En esta solución:
 
 \begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=\textbf{Resumen:}]
 
-  
-
   \begin{enumerate}[label=\alph*)]
     \item Es posible resolver el problema usando \texttt{receive}, y la solución es viable.
     \item No es posible garantizar una solución con \texttt{i\_receive}, debido a la falta de orden y bloqueo.
     \item Es posible resolver el problema con \texttt{select}, y la solución es eficiente y correcta.
   \end{enumerate}
 \end{tcolorbox}
-
-
-
-
-
-
 
 
 
@@ -1118,9 +1110,228 @@ end
 
 
 
+\section{Ejercicio 88}
+
+\subsection{Enunciado}
+
+Escribe una nueva solución al problema anterior en la cual se garantice que el orden en el que se imprimen los caracteres es el mismo orden en el que se inician los envíos de dichos caracteres. 
+
+\textbf{Pista:} usa \texttt{select} para recibir.
+
+\subsection{Solución}
+
+Para garantizar que los caracteres se impriman en el mismo orden en el que se inician los envíos, utilizamos la instrucción \texttt{select} en el proceso receptor. Esto permite gestionar de manera ordenada la recepción de los caracteres basándose en el orden de llegada de los mensajes.
+
+\begin{lstlisting}[style=customcpp]
+process P[ i : 1..N ] ;
+var
+    caract : char ;       // Carácter producido
+begin
+    // Enviar N-1 caracteres a los otros procesos
+    for j := 1 to N do
+        if j != i then begin
+            caract := ProduceCaracter(); // Produce un carácter
+            send(caract, Receptor);      // Enviar al proceso Receptor
+        end
+    end
+end
+
+process Receptor ;
+var
+    caract : char ;       // Carácter recibido
+    sender : integer ;    // ID del proceso emisor, se supone que se usa en imprime
+    recibido[N] : integer := [0, ..., 0]; // Vector de contadores por emisor, se usa como extra
+begin
+    while true do begin
+        select
+            for i := 1 to N do
+                when receive(caract, P[i]) do begin
+                    imprime(caract, sender);        // Imprimir el carácter recibido
+                    //imprime(caract);
+                    recibido[i] := recibido[i] + 1; // Actualizar contador
+                end
+            end
+        end select
+    end
+end
+\end{lstlisting}
+
+\textbf{Explicación de la solución:}
+
+\begin{itemize}
+    \item \textbf{Proceso \texttt{P[i]}:} 
+    \begin{itemize}
+        \item Cada proceso genera \texttt{N-1} caracteres usando la función \texttt{ProduceCaracter}.
+        \item Los caracteres se envían al proceso \texttt{Receptor} mediante \texttt{send}.
+    \end{itemize}
+    
+    \item \textbf{Proceso \texttt{Receptor}:}
+    \begin{itemize}
+        \item Utiliza una instrucción \texttt{select} para manejar los mensajes recibidos desde los procesos \texttt{P[i]} en orden de llegada.
+        \item Cada mensaje contiene el carácter producido por el proceso emisor y su ID (implícito en la recepción).
+        \item Los caracteres se imprimen en el orden de recepción, asegurando que se respeta el orden en el que se iniciaron los envíos.
+        \item Un vector \texttt{recibido[i]} se utiliza para llevar un conteo del número de caracteres recibidos de cada proceso, si fuera necesario para el análisis.
+    \end{itemize}
+\end{itemize}
 
 
 
+
+
+
+
+\section{Ejercicio 89}
+
+\subsection{Enunciado}
+
+Supongamos de nuevo el problema anterior en el cual todos los procesos envían a todos. Ahora cada \textbf{item de datos} a producir y transmitir es un \textbf{bloque de bytes} con muchos valores (por ejemplo, es una imagen que puede tener varios megabytes de tamaño). Se dispone del tipo de datos \texttt{TipoBloque} para ello, y el procedimiento \texttt{ProducirBloque}, de forma que si \texttt{b} es una variable de tipo \texttt{TipoBloque}, entonces la llamada a \texttt{ProducirBloque(b)} produce y escribe una secuencia de bytes en \texttt{b}. 
+
+En lugar de imprimir los datos, se deben consumir con una llamada a \texttt{ConsumirBloque(b)}.
+
+\begin{itemize}
+    \item Cada proceso se ejecuta en un ordenador, y se garantiza que hay la suficiente memoria en ese ordenador como para contener simultáneamente, al menos, hasta \texttt{N} bloques.
+    \item Sin embargo, el sistema de paso de mensajes (SPM) podría no tener memoria suficiente como para contener los \((N - 1)^2\) mensajes en tránsito simultáneos que podría llegar a haber en un momento dado con la solución anterior.
+    \item En estas condiciones, si el \textbf{SPM} agota la memoria, debe retrasar los \texttt{send} dejando bloqueados los procesos y, en esas circunstancias, se podría producir \textbf{interbloqueo}.
+    \item Para evitarlo, se pueden usar operaciones inseguras de envío, \texttt{i\_send}. 
+\end{itemize}
+
+\textbf{Escribe dicha solución, usando como orden de recepción el mismo que en el problema anterior.}
+
+
+\subsection{Solución}
+
+
+\subsection{Solución}
+
+Para resolver el problema en el que los procesos envían bloques de datos grandes y garantizar que no haya interbloqueo debido a limitaciones de memoria en el sistema de paso de mensajes, utilizamos operaciones inseguras de envío \texttt{i\_send}. Además, aseguramos que los bloques se reciben en el mismo orden en que se inician los envíos mediante el uso de \texttt{select}.
+
+\begin{lstlisting}[style=customcpp]
+process P[ i : 1..N ] ;
+var
+    bloque : TipoBloque;  // Bloque de datos producido
+begin
+    // Enviar N-1 bloques de datos a los otros procesos
+    for j := 1 to N do
+        if j != i then begin
+            ProducirBloque(bloque);       // Producir un bloque de datos
+            i_send(bloque, Receptor);    // Enviar de manera insegura al Receptor
+        end
+    end
+end
+
+process Receptor ;
+var
+    bloque : TipoBloque;   // Bloque de datos recibido
+    sender : integer;      // ID del proceso emisor
+    recibido[N] : integer := [0, ..., 0]; // Vector de contadores por emisor
+begin
+    while true do begin
+        select
+            for i := 1 to N do
+                when receive(bloque, P[i]) do begin
+                    ConsumirBloque(bloque);         // Consumir el bloque recibido
+                    recibido[i] := recibido[i] + 1; // Actualizar contador
+                end
+            end
+        end select
+    end
+end
+\end{lstlisting}
+
+\textbf{Explicación de la solución:}
+
+\begin{itemize}
+    \item \textbf{Proceso \texttt{P[i]}:} 
+    \begin{itemize}
+        \item Cada proceso genera \texttt{N-1} bloques de datos usando la función \texttt{ProducirBloque}.
+        \item Los bloques se envían al proceso \texttt{Receptor} utilizando \texttt{i\_send}, que es una operación de envío no bloqueante.
+        \item Esto garantiza que los procesos emisores no se bloqueen entre sí debido a las limitaciones de memoria del sistema de paso de mensajes.
+    \end{itemize}
+
+    \item \textbf{Proceso \texttt{Receptor}:}
+    \begin{itemize}
+        \item Utiliza una instrucción \texttt{select} para manejar los mensajes recibidos desde los procesos \texttt{P[i]} en orden de llegada.
+        \item Cada mensaje contiene el bloque de datos producido por el proceso emisor.
+        \item Los bloques se consumen inmediatamente con \texttt{ConsumirBloque}, liberando la memoria del sistema de paso de mensajes.
+        \item Un vector \texttt{recibido[i]} se utiliza para llevar un conteo del número de bloques recibidos de cada proceso, si fuera necesario para análisis o depuración.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Garantías de esta solución:}
+\begin{itemize}
+    \item \textbf{Evita interbloqueos:} El uso de \texttt{i\_send} permite que los procesos emisores no queden bloqueados si el sistema de paso de mensajes agota la memoria.
+    \item \textbf{Orden de recepción:} La instrucción \texttt{select} garantiza que los bloques se procesen en el orden en el que llegan al receptor.
+    \item \textbf{Consumo eficiente de memoria:} Los bloques se consumen tan pronto como son recibidos, liberando memoria en el sistema de paso de mensajes.
+\end{itemize}
+
+\section{Ejercicio 90}
+
+\subsection{Enunciado}
+
+En los tres problemas anteriores, cada proceso va esperando a recibir un ítem de datos de cada uno de los otros procesos, consume dicho ítem, y después pasa a recibir del siguiente emisor (en distintos órdenes). Esto implica que un envío ya iniciado, pero pendiente, no puede completarse hasta que el receptor no haya consumido los anteriores bloques. Es decir, se podría estar consumiendo mucha memoria en el sistema de paso de mensajes (SPM) por mensajes en tránsito pendientes cuya recepción se ve retrasada.
+
+Escribe una solución en la cual cada proceso inicia sus envíos y recepciones y después espera a que se completen todas las recepciones antes de iniciar el primer consumo de un bloque recibido. De esta forma, todos los mensajes pueden transferirse potencialmente de forma simultánea. Se debe intentar que la transmisión y la producción de bloques sean lo más simultáneas posible.
+
+\textbf{Suponer:} 
+\begin{itemize}
+    \item Cada proceso puede almacenar como mínimo \texttt{2*N} bloques en su memoria local.
+    \item El orden de recepción o de consumo de los bloques es indiferente.
+\end{itemize}
+
+\subsection{Solución}
+
+Para implementar esta solución, cada proceso realiza los siguientes pasos:
+\begin{enumerate}
+  \item Produce \texttt{N-1} bloques y los envía a los otros procesos utilizando \texttt{i\_send}.
+  \item Recibe \texttt{N-1} bloques utilizando \texttt{receive}, asegurándose de completar todas las recepciones antes de comenzar a consumir los bloques.
+  \item Consume los bloques recibidos en cualquier orden.
+\end{enumerate}
+
+\begin{lstlisting}[style=customcpp]
+process P[ i : 1..N ] ;
+var
+    bloquesEnviados[N-1] : TipoBloque;  // Bloques producidos para enviar
+    bloquesRecibidos[N-1] : TipoBloque; // Bloques recibidos
+    j : integer;                        // Iterador
+begin
+    // Paso 1: Producir y enviar bloques
+    for j := 1 to N do
+        if j != i then begin
+            ProducirBloque(bloquesEnviados[j]); // Producir un bloque
+            i_send(bloquesEnviados[j], P[j]);   // Enviar al proceso P[j]
+        end
+    end
+
+    // Paso 2: Recibir bloques
+    for j := 1 to N do
+        if j != i then
+            receive(bloquesRecibidos[j], P[j]); // Recibir bloque de P[j]
+        end
+    end
+
+    // Paso 3: Consumir bloques
+    for j := 1 to N do
+        if j != i then
+            ConsumirBloque(bloquesRecibidos[j]); // Consumir bloque recibido
+        end
+    end
+end
+\end{lstlisting}
+
+\textbf{Explicación de la solución:}
+
+\begin{itemize}
+    \item \textbf{Producción y envío simultáneos:} Cada proceso genera los bloques para los otros \texttt{N-1} procesos de manera concurrente, enviándolos de inmediato mediante \texttt{i\_send}. Esto permite que la producción y la transmisión sean simultáneas y aprovechen al máximo los recursos del sistema.
+    \item \textbf{Recepción antes de consumo:} Cada proceso espera a recibir todos los bloques de los otros procesos antes de comenzar a consumirlos. Esto reduce la memoria ocupada en el sistema de paso de mensajes, ya que los mensajes en tránsito se procesan rápidamente.
+    \item \textbf{Orden indiferente:} Dado que no se requiere un orden específico de consumo, los bloques pueden procesarse en cualquier secuencia tras completar las recepciones.
+\end{itemize}
+
+\textbf{Ventajas de esta solución:}
+\begin{itemize}
+    \item \textbf{Minimización del uso de memoria del SPM:} Al completar las recepciones antes de comenzar el consumo, los mensajes en tránsito pendientes se reducen significativamente.
+    \item \textbf{Simultaneidad:} Producción, transmisión y recepción ocurren de forma paralela, aprovechando la capacidad del sistema.
+    \item \textbf{Simplicidad:} La solución es sencilla y asegura que no se producen interbloqueos, ya que las recepciones son bloqueantes y se manejan de manera ordenada.
+\end{itemize}
 
 
 
@@ -1134,4 +1345,7 @@ end
 
 %https://chatgpt.com/c/676d2a12-a978-8012-b24a-a87e821ecddf
 %https://chatgpt.com/c/676fe014-a80c-8012-a689-ad7fa676d93d
+
+
+
 \end{document}
