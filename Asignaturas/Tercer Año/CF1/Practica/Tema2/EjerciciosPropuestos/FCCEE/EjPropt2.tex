@@ -1,3 +1,4 @@
+% chktex-file 44
 \documentclass[a4paper,12pt]{article}
 
 % Paquetes básicos
@@ -118,6 +119,7 @@
 % Paquete para fondo
 \usepackage{background}
 \usepackage{float}
+\usepackage{multirow}
 
 % Configuración de lstlisting
 \lstset{
@@ -337,6 +339,129 @@
 
 \section{Ejercicio 2}
 
+\begin{itemize}
+    \item Compra 500 unidades a 10,5 \euro/unidad
+    \item Descuento por pronto pago incluido en factura de 250 \euro
+    \item Precio de compra = \ecuacion{500 \times 10,5} = 5250 - 250 = 5000 \euro
+    \item Gastos de transporte 500 \euro y se dejan a deber
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Compra de Mercaderías 02/03/2020} & \textbf{HABER} \\
+    \hline
+    5500 & \compraMercaderias & \\
+    \hline
+    \ecuacion{5500\times 0,21 = 1155}& \IVAs& \\
+    \hline
+    & (400) Proveedores & 6050\\
+    \hline
+    & (410) Acreedores por prestación de servicios & \ecuacion{500 \times 1,21 = 605}\\
+    \hline
+    \end{tabular}
+\end{table}
+
+
+\begin{itemize}
+    \item El 23 de mayo se jubila el proveedor
+    \item Descuento especial concedido de 425 \euro IVA no incluido
+    \item Disminuye la deuda con él en esa cuantía
+    \item Antes se produce una venta de 300 unidades por un importe de 4500 \euro
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Descuento especial concedido el 23/05/2020} & \textbf{HABER} \\
+    \hline
+    \ecuacion{4500\times1,21=5445}& (430) Clientes  & \\
+    \hline
+     & \ventaMercaderias & 4500\\
+    \hline
+    &\IVAr & 945\\
+    \hline
+    & (400) Proveedores & \\
+    \hline
+    & (778) Ingresos Excepcionales & 425\\
+    \hline
+    &\IVAs & 89,25\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item A \fec2020 la empresa tiene una pérdida irreversible 1000 \euro
+    \item Precio de mercado = 17000 \euro
+    \item Costes de comercialización 800 \euro
+    \item Valor neto realizable = 17000 - 800 = 16200 \euro
+    \item \VC = 17425 \euro
+    \item \valorrecuperable = 17425 \euro
+\end{itemize}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Regularización de las Mercaderías a \fec2020} & \textbf{HABER} \\
+    \hline
+    15000& 610& \\
+    \hline
+    & 300 &15000 \\
+    \hline
+    & 610 &16000\\
+    \hline
+    16000 & 300& \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item Deterioro al inicio del ejercicio de 600 \euro
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Correcciones Valorativas} & \textbf{HABER} \\
+    \hline
+    600 & 390 & \\
+    \hline
+    & 793 & 600\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Ficha de almacén}
+\textit{Usamos el Precio Medio Ponderado}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c}
+        \hline
+        \textbf{Categoría}  & \multicolumn{3}{c|}{\textbf{ENTRADAS}} & \multicolumn{3}{c|}{\textbf{SALIDAS}} & \multicolumn{3}{c|}{\textbf{EXISTENCIAS}} \\  \hline
+        Existencias Iniciales & & & & & & & 1500 & 10 & 15000\\
+        \hline
+        Compra & 500 & 10,5 & 5250 & & & & 2000 & 10,25 & \\
+        \hline
+        Venta & & & & 300 & 10,25 & 4500&1700 &10,25 & 17425\\
+        \hline
+        Descuento & & (425)& & & & & 1700& 10& 17000\\
+        \hline
+        Pérdida& & (1000)& & & & & & & 16000\\
+        \hline
+        
+    \end{tabular}    
+\end{table}
+
+
+
+\begin{itemize}
+    \item En la compra el precio pasa a ser 10,25 \euro/unidad\footnote{\ecuacion{\text{Usando la fórmula de PMP} \rightarrow \frac{1500\times10+500\times10,5}{1500+500}=10,25}}.
+    \item La venta se registra en la ficha de almacén por el valor que figura en la misma, no por lo que se vende.
+\end{itemize}
 
 
 \end{document}
