@@ -975,4 +975,94 @@ Cociente entre dos \ecuacion{\chi^2} de Pearson divididas por sus grados de libe
 
 
 
+
+
+
+
+\section{Tema 4: Multicolinealidadad}
+
+\subsection{Concepto}
+
+Existencia de relaciones entre dos o más variables independientes del modelo lineal uniecuacional múltiple.
+
+\subsection{Clasificación}
+
+\begin{itemize}
+    \item \textbf{Multicolinealidadad exacta: }Existencia de una relación exacta entre dos o más variables independientes. Las \textbf{causas} son básicamente el incumplimientos de una de las hipótesis del modelo uniecuacional múltiple, la matriz X no es de rango completo por columnas: \ecuacion{rango(X) < k}. Esto tiene como \textbf{consecuencias} que no se pueda invertir la matriz \ecuacion{X^tX} y que no se pueda estimar el modelo, haciendo que el sistema sea indeterminado y por ende, no haya una solución única para \ecuacion{\hat{\beta}}, sino que haya infinitas soluciones.
+    \item \textbf{Multicolinealidadad aproximada: }Existencia de una relación aproximada entre dos o más variables independientes. Las causas son:
+    \begin{itemize}
+        \item relación causal entre las variables explicativas del modelo.
+        \item escasa variabilidad de las observaciones.
+        \item tamaño de la muestra pequeño.
+    \end{itemize}
+    \subsubsection{Clasificaciones de la multicolinealidadad aproximada}
+    \begin{itemize}
+        \item Según \textit{Spanos y McGuirk}:
+        \begin{itemize}
+            \item Sistemática: alta correlación lineal entre las variables exógenas.
+            \item Errática: mal condicionamiento de los datos considerados.
+        \end{itemize}
+        \item Según \textit{Marquardt y Snee}:
+        \begin{itemize}
+            \item No esencial: relacion lineal de las variables exógenas, incluyendo la constante.
+            \item Esencial: relación lineal de las variables exógenas sin incluir la constante.
+        \end{itemize}
+        Las \textbf{consecuencias} de la multicolinealidadad aproximada son:
+        \begin{itemize}
+            \item En este caso si se puede invertir la matriz \ecuacion{X^tX}, pero el determinante de la matriz es muy pequeño, lo que hace que la varianza de los estimadores sea muy grande, lo que hace que los estimadores sean poco precisos.
+            \item Contrastes individuales no rechazaran la hipótesis nula y los globales si.
+            \item Coeficientes estimados serán sensibles a pequeñas variaciones en los datos.
+            \item Coeficiente de determinación alto.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Factor de inflación de la varianza}
+
+Sirve para detectar el grado de multicolinealidadad de las variables, se define como:
+\begin{equation}
+    FIV_i = \frac{1}{1-R_i^2} \quad i = 2, 3, \ldots, p
+\end{equation}
+
+Si esta medida es superior a 10, se considera que hay multicolinealidadad de grado preocupante. Al no tener en cuenta la relación de las varibales exógenes con la constante no detecta si hay multicolinealidadad no esencial.
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+    \textit{Nota: No detecta la multicolinealidadad entre variables cualitaticas ni dicotómicas.}
+\end{tcolorbox}
+
+\subsection{Número de condición}
+
+Se define como:
+\begin{equation}
+    \text{Número de condición} = \sqrt{\frac{\lambda_{\text{max}}}{\lambda_{\text{min}}}}
+\end{equation}
+
+Donde \ecuacion{\lambda_{\text{max}}} y \ecuacion{\lambda_{\text{min}}} son los autovalores máximos y mínimos de la matriz \ecuacion{X^tX}.Si el número de condición alcanza valores superiores a 20 es moderado y si el número de condición es mayor que 30, se considera que hay multicolinealidadad de grado preocupante. \textit{En este caso si tiene en cuenta la relación de las variables exógenas con la constante.}
+
+\subsection{Otras Medidas}
+
+\subsubsection{Matriz de Correlaciones (R)}
+
+Ignora la constante y solo es capaz de detectar la multicolinealidad aproximada del tipo esencial dos a dos.
+
+\subsubsection{Determinante de la matriz de correlaciones \textit{det(R)}}
+
+Sigue ignorando la relación con la constante, por lo que solo detecta la multicolinealidad aproximada del tipo esencial. En este caso valores cercanos a 0 indican un caso preocupante.
+
+\subsubsection{Coeficiente de variación de las variables explicativas}
+
+Detectar una escasa variabilidad de las observaciones, lo que puede ser una causa de la multicolinealidad aproximada del tipo no esencial.
+
+\subsection{Soluciones}
+
+\begin{itemize}
+    \item Mejora del diseño de la investigación, extrayendo información máxima de las variables observadas.
+    \item Eliminación de variables redundantes o que sean sospechosas en cuanto a las causantes de la multicolinealidad.
+    \item Aumentar el tamaño de la muestra.
+    \item Utilizar la relación extramuestral entre las variables, es decir, utilizar información de otras fuentes.
+\end{itemize}
+
+
+
+
 \end{document}

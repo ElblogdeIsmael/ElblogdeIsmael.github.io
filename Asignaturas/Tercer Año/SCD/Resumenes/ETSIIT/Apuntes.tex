@@ -639,10 +639,337 @@ A continuación se muestra la relación entre la precisión y el intervalo para 
     Estos valores indican el intervalo máximo que un contador de 32 bits puede medir antes de que se produzca un desbordamiento. Cuanto mayor sea la precisión, menor será el intervalo que el contador podrá gestionar antes de desbordarse.
 \end{itemize}
 
-% https://chatgpt.com/c/6761aab9-5664-8005-8cee-6ce962c0483e
 
-% Página 4.7 de las diapositivas
 
+
+
+\subsection{Temporizadores}
+
+Los temporizadores son elementos clave en los sistemas operativos y en los sistemas concurrentes y distribuidos, particularmente en sistemas de tiempo real. A continuación, se describen sus características y cómo se utilizan para gestionar el tiempo y las tareas dentro del sistema.
+
+\subsubsection{Ideas Fundamentales}
+
+Los temporizadores no son instrucciones nativas de los lenguajes de programación, sino que se activan mediante una llamada o operación de sistema operativo. Funcionan como relojes especializados en la gestión de tareas con temporización. Para programar un temporizador, los elementos básicos que se necesitan son:
+\begin{itemize}
+    \item \textbf{Tiempo de arranque:} El instante en que se inicia el temporizador.
+    \item \textbf{Tiempo de parada:} El instante en que se detiene el temporizador.
+\end{itemize}
+
+\subsubsection{Tipos de Temporizadores}
+
+Existen varios tipos de temporizadores, entre los cuales destacan:
+\begin{itemize}
+    \item \textbf{De 1 solo disparo:} Se activan una única vez, y luego se desactivan.
+    \item \textbf{Periódicos:} Se activan repetidamente a intervalos regulares.
+    \item \textbf{Con deriva:} Pueden presentar una pequeña desviación en el tiempo de activación, lo que se denomina deriva acumulativa.
+\end{itemize}
+
+\subsubsection{Retardos en las Tareas}
+
+Las tareas en sistemas de tiempo real a menudo requieren programar retardos. Para ello, se pueden usar temporizadores o instrucciones específicas de los lenguajes de programación. Un ejemplo de tarea con retardo programado es la siguiente:
+
+\begin{lstlisting}[style=customcpp]
+void tareaT(int t_computo_p) {
+    int t_computo = t_computo_p; // Ejemplo: 100 milisegundos
+    do {
+        // Acción a realizar
+        sleep_for(t_computo); // Afectada por la deriva local
+    } while (true);
+}
+\end{lstlisting}
+
+Aquí, la función \texttt{sleep\_for} introduce un retardo de \texttt{t\_computo}, el cual está afectado por la deriva local del sistema.
+
+\subsubsection{Deriva Acumulativa y Activación Periódica de las Tareas}
+
+Un problema común al trabajar con temporizadores en sistemas de tiempo real es la \textbf{deriva acumulativa}. La deriva acumulativa ocurre cuando las tareas no se activan exactamente en los intervalos deseados, lo que puede afectar el comportamiento del sistema, especialmente cuando se trata de tareas periódicas.
+
+\textbf{Eliminación de la Deriva Acumulativa:}
+
+Para mitigar este problema, se puede programar una tarea periódica que se active de manera precisa en cada ciclo, ajustando la hora de activación a medida que se acerca al siguiente ciclo. A continuación, se muestra un ejemplo de cómo programar una tarea periódica en C++:
+
+\begin{lstlisting}[style=customcpp]
+void tareaPeriodica() {
+    int t_ciclo = 100; // milisegundos
+    auto siguiente_instante = std::chrono::steady_clock::now(); // milisegundos
+    do {
+        // Acción a realizar
+        siguiente_instante += std::chrono::milliseconds(t_ciclo);
+        std::this_thread::sleep_until(siguiente_instante); // Sin deriva acumulativa
+    } while (true);
+}
+\end{lstlisting}
+
+En este ejemplo, la función \texttt{std::this\_thread::sleep\_until} asegura que la tarea se active exactamente en el siguiente instante deseado, ajustando la activación para evitar la deriva acumulativa.
+
+\subsubsection{Conclusión}
+
+Los temporizadores son herramientas fundamentales en los sistemas de tiempo real, ya que permiten gestionar tareas con precisión en cuanto al tiempo. Sin embargo, es importante tener en cuenta la deriva acumulativa y utilizar mecanismos adecuados para eliminarla, como se mostró en el ejemplo de la tarea periódica. 
+
+
+\subsection{Tareas y Recursos}
+
+En los sistemas de tiempo real (STR), las tareas y los recursos son elementos clave para el diseño y la ejecución de procesos que deben cumplir restricciones temporales específicas. A continuación, se detallan los tipos de elementos que componen un STR.
+
+\subsubsection{Tipos de Elementos de un STR}
+
+\begin{itemize}
+    \item \textbf{Tarea ($\equiv$ ``Proceso''):} Es el componente fundamental en los sistemas de tiempo real. Una tarea está sujeta a restricciones de tiempo definidas por sus atributos temporales, como el tiempo de ejecución y los plazos de respuesta.
+    \item \textbf{Recurso:} Son los elementos necesarios para la ejecución de las tareas. Los recursos pueden ser:
+    \begin{itemize}
+        \item \textbf{Activos:} Procesador, red de comunicaciones, etc.
+        \item \textbf{Pasivos:} Datos, memoria, discos, etc.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Atributos Temporales Principales de una Tarea}
+
+Las tareas en los sistemas de tiempo real tienen varios atributos temporales que determinan su comportamiento dentro del sistema. Algunos de los principales son:
+\begin{itemize}
+    \item \textbf{Tiempo de cómputo máximo o de ejecución (Ci):} El tiempo máximo que una tarea puede tardar en ejecutarse.
+    \item \textbf{Tiempo de respuesta (Ri):} El tiempo total que transcurre desde que se solicita la tarea hasta que se completa.
+    \item \textbf{Plazo de respuesta máximo ("deadline") (Di):} El límite máximo de tiempo en el que la tarea debe completarse.
+    \item \textbf{Período (Ti):} Es el tiempo exacto entre dos activaciones sucesivas de una tarea periódica.
+\end{itemize}
+
+\subsubsection{Tipos de Tareas}
+
+Las tareas pueden clasificarse según su patrón de activación y periodicidad. Los principales tipos son:
+
+\begin{itemize}
+    \item \textbf{Aperiódica:} Estas tareas se activan en instantes arbitrarios. La activación no sigue un patrón fijo.
+    \item \textbf{Periódica:} Estas tareas se activan en intervalos regulares, donde \(T_i\) representa el período (el tiempo exacto entre dos activaciones sucesivas).
+    \item \textbf{Esporádica:} Son tareas repetitivas que tienen un intervalo mínimo \(T_i\) entre sus activaciones. No son estrictamente periódicas, pero se repiten con una frecuencia mínima.
+\end{itemize}
+
+
+\subsection{Planificación de Tareas}
+
+La planificación de tareas consiste en asignar las tareas a los recursos activos de un sistema, principalmente al procesador o los procesadores, con el objetivo de garantizar la ejecución de todas las tareas de acuerdo con un conjunto de restricciones específicas. En los sistemas de tiempo real, estas restricciones suelen estar asociadas a restricciones temporales, como los plazos límites.
+
+\subsubsection{Planificación de Tareas de Tiempo Real}
+
+En los sistemas de tiempo real, se debe garantizar que cada tarea se ejecute completamente antes de que expire su plazo de respuesta máximo \(D_i\). El problema central en la planificación de tareas de tiempo real es determinar si, dado un conjunto arbitrario de tareas, estas pueden ejecutarse completamente antes de que termine el plazo de respuesta máximo en cada una de sus activaciones.
+
+El cálculo anterior para un conjunto de tareas que pueden interrumpirse mutuamente varias veces durante su ejecución no tiene una solución matemática sencilla. Sin embargo, este problema puede abordarse de manera estática o dinámica. Una de las soluciones dinámicas es utilizar un modelo simple de tareas de tiempo real.
+
+\subsubsection{Planificación Cíclica}
+
+La planificación cíclica se basa en una estructura de activación fija de las tareas periódicas. El plan principal es un ciclo que tiene una duración constante denominada hiperperiodo (\(T_M\)):
+
+\[
+T_M = \text{mcm}(T_1, T_2, \dots, T_n)
+\]
+
+donde \(T_1, T_2, \dots, T_n\) son los períodos de las tareas. La unidad que cuenta el tiempo es siempre entera (por ejemplo, los ticks de reloj del sistema).
+
+El ciclo principal se descompone en varios ciclos secundarios de igual duración (\(T_S\)), y este ciclo se repite de manera continua.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/ciclico.png}
+    \caption{Planificación cíclica}
+    \label{fig:ciclico}
+\end{figure}
+
+\subsubsection{Ideas Fundamentales de la Planificación Cíclica}
+
+En la planificación cíclica, el plan principal de ejecución de las tareas es explícito y se define fuera de línea (``off-line''), es decir, sin acceso concurrente al procesador según la prioridad de cada tarea. Las tareas están definidas en un ciclo con una estructura fija.
+
+Algunas características clave de la planificación cíclica son:
+\begin{itemize}
+    \item El plan principal establece de antemano cómo se entrelazan las tareas en cualquier ejecución del programa, aunque la ordenación relativa de las tareas puede variar en cada ciclo secundario.
+    \item Cada tarea se ejecuta completamente una sola vez dentro de cada repetición de su período.
+    \item Si una tarea se inicia dentro de una iteración del ciclo secundario, debe terminar antes del final de esa iteración.
+\end{itemize}
+
+\subsubsection{Implementación de la Planificación Cíclica}
+
+A continuación se muestra un ejemplo de implementación en C++ para la planificación cíclica:
+
+\begin{lstlisting}[style=customcpp]
+void EjecutivoCiclico()
+{
+    const milliseconds tmp_secundario(25);
+    const int nciclos = 4; // Número de ciclos secundarios
+    auto siguiente_instante = clock::now();
+    int frame = 0; // Número del siguiente ciclo secundario
+
+    while (true) {
+        for (frame = 1; frame <= nciclos; frame++) { // Ejecuta las tareas del ciclo secundario actual
+            switch (frame) {
+                case 0: A(); B(); C(); break;
+                case 1: A(); B(); D(); E(); break;
+                case 2: A(); B(); C(); break;
+                case 3: A(); B(); D(); break;
+            }
+            siguiente_instante += tmp_secundario; // Pasar al siguiente ciclo secundario
+            sleep_until(siguiente_instante); // Esperar inicio siguiente periodo de 25 miliseg.
+        }
+    }
+}
+\end{lstlisting}
+
+Cada iteración del bucle \texttt{for} ejecuta un ciclo secundario, y cada 4 iteraciones del bucle se ejecuta un ciclo principal.
+
+\subsubsection{Diseño del Ejecutivo Cíclico}
+
+Para obtener un buen valor de \(T_S\) (duración del ciclo secundario), es necesario considerar algunas restricciones:
+
+\begin{itemize}
+    \item El período del ciclo secundario debe ser un divisor del período del ciclo principal, es decir, existe un entero \(k\) tal que: 
+    \[
+    T_M = k \cdot T_S
+    \]
+    \item El valor de \(T_S\) debe ser al menos el tiempo de cómputo máximo (\(C_w\)) de cualquier tarea, es decir, \(T_S \geq \max(C_1, C_2, \dots, C_n)\).
+    \item \(T_S\) debe ser menor o igual que el mínimo plazo de respuesta máximo (\(D\)) de todas las tareas, es decir, \(T_S \leq \min(D_1, D_2, \dots, D_n)\).
+\end{itemize}
+
+Así, el ciclo secundario debe cumplir la siguiente restricción:
+
+\[
+\max(C_1, C_2, \dots, C_n) \leq T_S \leq \min(D_1, D_2, \dots, D_n)
+\]
+
+\subsubsection{Propiedades del Ejecutivo Cíclico}
+
+Entre las principales propiedades del ejecutivo cíclico destacan:
+
+\begin{itemize}
+    \item No existe concurrencia en la ejecución: Cada ciclo secundario es una secuencia de llamadas a procedimientos, sin necesidad de lanzar la ejecución de las tareas.
+    \item No es necesario un sistema operativo multitarea ni un núcleo de ejecución en tiempo real.
+    \item Los procedimientos acceden secuencialmente a los datos compartidos entre tareas, lo que elimina la necesidad de mecanismos de exclusión mutua (como semáforos o monitores).
+    \item No es necesario realizar un análisis de planificabilidad del conjunto de tareas, ya que el sistema es correcto por construcción.
+\end{itemize}
+
+\subsubsection{Problemas del Ejecutivo Cíclico}
+
+Sin embargo, la planificación cíclica presenta ciertos problemas, entre los cuales se incluyen:
+
+\begin{itemize}
+    \item Dificultad para incorporar tareas con períodos largos.
+    \item Las tareas esporádicas son difíciles de tratar, aunque se podría utilizar un servidor de consulta para gestionar su activación.
+    \item El plan cíclico es difícil de construir cuando los períodos son de diferentes órdenes de magnitud, lo que hace que el número de ciclos secundarios sea muy grande.
+    \item Puede ser necesario dividir una tarea en varios procedimientos.
+    \item La planificación es poco flexible y difícil de mantener: cualquier cambio en las tareas implica rehacer toda la planificación.
+\end{itemize}
+
+\subsection{Esquema de Planificación de Tareas}
+
+\subsubsection{Determinación de la Planificabilidad de un Conjunto de Tareas}
+
+La planificación de tareas se refiere al proceso de asignar el acceso de las tareas a los procesadores. Para determinar si un conjunto de tareas puede ejecutarse correctamente, se utilizan dos enfoques principales:
+
+\begin{itemize}
+    \item \textbf{Algoritmo de planificación}: Determina el orden en que las tareas acceden a los procesadores.
+    \item \textbf{Método de análisis de planificabilidad}: Se basa en un test que predice si las tareas son planificables conjuntamente, teniendo en cuenta las condiciones y restricciones especificadas a priori. Este análisis se realiza durante:
+    \begin{itemize}
+        \item Todas las activaciones posibles de las tareas en su ejecución.
+        \item La ejecución de estas tareas, suponiendo la situación más desfavorable, es decir, el \textit{WCET} (Worst Case Execution Time) para cada tarea.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Modelo Simple de Tareas}
+
+El modelo simple de tareas se basa en las siguientes suposiciones:
+
+\begin{itemize}
+    \item \textbf{Programa}: Conjunto fijo de tareas que comparten el tiempo de un único procesador.
+    \item \textbf{Tareas periódicas}: Con períodos conocidos.
+    \item \textbf{Independencia}: Las tareas no se bloquean entre sí al acceder a recursos compartidos.
+    \item \textbf{Plazo de respuesta máximo}: Todas las tareas tienen un plazo de respuesta máximo (\(D\)) que coincide con su período (\(T\)).
+    \item \textbf{Ignorancia de retrasos del sistema}: Los retrasos debidos al sistema, como los cambios de contexto, son ignorados.
+    \item \textbf{Tiempo máximo de cómputo}: El tiempo máximo de ejecución de las tareas (\(C_i\)) es conocido y fijo.
+    \item No se contemplan tareas esporádicas ni aperiódicas.
+\end{itemize}
+
+\subsubsection{Modelo de Tareas-II: Notación}
+
+La notación utilizada para describir las tareas es la siguiente:
+
+\begin{itemize}
+    \item \(P\): Prioridad de la tarea (si fuera aplicable).
+    \item \(\tau\): Tarea (nombre de la tarea).
+    \item \(t_a\): Tiempo de activación (instante en que la tarea está lista para su ejecución).
+    \item \(t_s\): Tiempo de comienzo (instante en que la tarea comienza realmente su ejecución).
+    \item \(t_f\): Tiempo de finalización (instante en que la tarea finaliza su ejecución).
+    \item \(t_l, d\): Tiempo límite (instante límite para la ejecución de la tarea, \(t_l(k) = d = t_a + D\)).
+    \item \(T\): Periodo de ejecución (intervalo entre dos activaciones sucesivas de una tarea periódica).
+    \item \(J\): Latencia (tiempo entre la activación y el inicio de la ejecución de la tarea, \(J(k) = t_s(k) - t_a(k)\)).
+    \item \(C\): Tiempo de cómputo (tiempo de ejecución de la tarea).
+    \item \(C_{\text{max}}\): Cómputo máximo (tiempo de ejecución en el peor caso de la tarea).
+    \item \(e\): Tiempo transcurrido (tiempo entre el comienzo y la finalización de la tarea, \(e(k) = t_f(k) - t_s(k)\)).
+    \item \(R\): Tiempo de respuesta (tiempo total para completar la ejecución de la tarea, \(R(k) = J(k) + e(k)\)).
+\end{itemize}
+
+\subsubsection{Propósito de la Planificación de Tareas}
+
+La planificación de tareas, o \textit{task-scheduling}, estudia técnicas de Programación Entera para obtener una asignación eficiente de recursos y tiempo a las actividades. El objetivo es cumplir ciertos requisitos de eficiencia, utilizando heurísticas que maximicen la función objetivo \(U(N)\), que representa la utilización del procesador para \(N\) tareas de tiempo real.
+
+\subsubsection{Planificación con Prioridades}
+
+La planificación con prioridades permite solucionar los problemas mencionados previamente. Cada tarea tiene asociada un valor entero positivo, conocido como la prioridad de la tarea, que refleja su importancia relativa en el conjunto de tareas. Las principales características de la planificación con prioridades incluyen:
+
+\begin{itemize}
+    \item La prioridad se asigna en función de las necesidades temporales de la tarea, no de su rendimiento o comportamiento.
+    \item Las tareas ejecutables se despachan para su ejecución en orden de prioridad.
+    \item La prioridad de una tarea puede depender de su \textit{urgencia}, pero no de su \textit{criticidad} en términos de tiempo real.
+\end{itemize}
+
+\subsubsection{Esquema de Planificación de Tareas}
+
+El esquema de planificación de tareas generalmente consta de los siguientes elementos:
+
+\begin{enumerate}
+    \item Un algoritmo para ordenar el acceso de las tareas al procesador.
+    \item Un test para predecir el comportamiento del sistema en el peor caso de planificación, es decir, cuando existe mayor interferencia entre las tareas.
+    \item Características principales de un esquema de planificación de tareas de tiempo real:
+    \begin{itemize}
+        \item Dinámico vs. estático.
+        \item Desplazante (preemptive) de tareas menos prioritarias.
+        \item Análisis de tareas dentro de una "ventana temporal".
+        \item Concepto de instante crítico.
+    \end{itemize}
+    \item Una posible solución al problema de análisis temporal de las tareas esporádicas y aperiódicas.
+\end{enumerate}
+
+\subsubsection{Planificación con Prioridades-II: Tipos de Esquemas}
+
+Existen dos tipos de esquemas de planificación con prioridades:
+
+\begin{itemize}
+    \item \textbf{Prioridades asignadas estáticamente a las tareas}: Cada tarea tiene una prioridad fija durante toda la ejecución del sistema.
+    \begin{itemize}
+        \item \textit{Cadencia monótona o RMS (Rate Monotonic Scheduling)}: La prioridad se asigna a la tarea con el período más corto (mayor frecuencia de activación).
+        \item \textit{Plazo de respuesta monótono o DMS (Deadline Monotonic Scheduling)}: Se asigna mayor prioridad a la tarea con el plazo de respuesta más corto.
+    \end{itemize}
+    \item \textbf{Prioridades asignadas dinámicamente a las tareas}: Las prioridades de las tareas cambian durante la ejecución del sistema.
+    \begin{itemize}
+        \item \textit{EDF (Earliest Deadline First)}: Se asigna prioridad a la tarea cuyo plazo de respuesta absoluto es más cercano.
+        \item \textit{LLF (Least Laxity First)}: Se asigna prioridad a la tarea con menor holgura temporal.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Modelo de Tareas-IV: Notación Adicional}
+
+Se introducen más parámetros de interés en la planificación de tareas:
+
+\begin{itemize}
+    \item \(D\): Plazo de respuesta máximo.
+    \item \(\varphi\): Desplazamiento o fase, el tiempo para activarse por primera vez.
+    \item \(RJ\): Fluctuación relativa o jitter, la máxima desviación en el tiempo de comienzo entre dos activaciones sucesivas de una tarea, definida como:
+    \[
+    RJ = \max((t_s(k+1) - t_a(k+1)) - (t_s(k) - t_a(k)))
+    \]
+    \item \(H\): Holgura o slack time, el tiempo disponible para permanecer activa dentro del plazo de respuesta máximo:
+    \[
+    H(k) = t_l - t_a(k) - e(k) = D - e(k)
+    \]
+\end{itemize}
+
+
+%https://chatgpt.com/c/6773c8fa-1130-8012-ac66-c118329a5a9b
+% por la 4.35
 
 
 
