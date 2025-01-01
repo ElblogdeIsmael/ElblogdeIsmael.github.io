@@ -1063,6 +1063,146 @@ Detectar una escasa variabilidad de las observaciones, lo que puede ser una caus
 \end{itemize}
 
 
+\section{Heteroscedasticidad}
+
+\subsection{Concepto}
+
+En este caso la matriz de varianzas--covarianzas puede tomar la siguiente forma:
+\begin{equation}
+    \text{var}(u) = \sigma^2 \Omega\footnote{donde \ecuacion{\omega} es una matriz simétrica y definida positiva}
+\end{equation}
+
+Se dice que un modelo presenta Heteroscedasticidad cuando la varianza de la perturbación no permanece constante a lo largo del tiempo.
+
+\begin{equation}
+    \sigma^2 \omega = 
+    \begin{pmatrix}
+        \sigma_1^2 & 0 & \cdots & 0 \\
+        0 & \sigma_2^2 & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & \sigma_n^2
+    \end{pmatrix}
+\end{equation}
+
+\subsection{Causas de la Heteroscedasticidad}
+
+La heteroscedasticidad ocurre cuando la varianza del término de error no es constante a lo largo de las observaciones en un modelo de regresión. A continuación, se enumeran algunas de las principales causas:
+
+\begin{enumerate}
+    \item \textbf{Variación en la escala de la variable dependiente:} 
+    En datos de sección cruzada, la escala de la variable dependiente y el poder explicativo del modelo pueden variar entre las observaciones, provocando diferencias en la varianza del error.
+
+    \item \textbf{Agrupación de datos:} 
+    Si las observaciones se agrupan en categorías y se reemplazan los datos originales (que son homoscedásticos) por las medias aritméticas de cada categoría, estas pueden presentar heteroscedasticidad.
+
+    \item \textbf{Omisión de variables relevantes:} 
+    Si una variable relevante no se incluye en el modelo, el término de error puede depender de dicha variable omitida, lo que genera que su varianza no sea constante. Por ejemplo, en un modelo que relaciona el consumo familiar con la renta familiar, omitir factores como el tamaño del hogar puede introducir heteroscedasticidad.
+
+    \item \textbf{Estructura de los datos:} 
+    En series temporales o datos panel, factores como cambios estructurales, shocks económicos o eventos externos pueden provocar que la varianza del error varíe con el tiempo o entre grupos.
+
+    \item \textbf{Relación no lineal entre variables:} 
+    Cuando las variables explicativas están relacionadas de manera no lineal con la variable dependiente, la dispersión de los errores tiende a cambiar a lo largo del rango de las observaciones.
+\end{enumerate}
+
+Estas causas reflejan que la heteroscedasticidad está asociada a la estructura del modelo, los datos y la especificación del mismo.
+
+\subsection{Consecuencias de la Heteroscedasticidad}
+
+La heteroscedasticidad tiene varias implicaciones importantes en los modelos de regresión estimados mediante el método de mínimos cuadrados ordinarios (MCO). A continuación, se detallan las consecuencias principales:
+
+\begin{enumerate}
+    \item \textbf{Linealidad e insesgadez:} 
+    El estimador por MCO, dado por la expresión:
+
+    \[
+    \hat{\beta}_{\text{MCO}} = (X^\top X)^{-1} X^\top y,
+    \]
+
+    sigue siendo un estimador lineal e insesgado. Esto significa que el valor esperado de \(\hat{\beta}_{\text{MCO}}\) coincide con el verdadero parámetro poblacional \(\beta\).
+
+    \item \textbf{Pérdida de eficiencia:} 
+    Aunque \(\hat{\beta}_{\text{MCO}}\) es insesgado, su varianza ya no es mínima. La varianza del estimador se calcula como:
+
+    \[
+    \text{Var}(\hat{\beta}_{\text{MCO}}) = (X^\top X)^{-1} X^\top \mathbb{E}[u u^\top] X (X^\top X)^{-1},
+    \]
+
+    donde \(\mathbb{E}[u u^\top] = \Omega\) es la matriz de varianzas-covarianzas del término de error. En presencia de heteroscedasticidad, esta varianza es distinta de la del modelo con perturbaciones esféricas:
+
+    \[
+    \text{Var}(\hat{\beta}_{\text{MCO}}) = \sigma^2 (X^\top X)^{-1}.
+    \]
+
+    Por lo tanto, los estimadores ya no son óptimos, lo que significa que no cumplen con el criterio de mínima varianza entre los estimadores lineales insesgados (BLUE, por sus siglas en inglés).
+
+    \item \textbf{Inferencia no confiable:} 
+    La heteroscedasticidad afecta la validez de los intervalos de confianza y las pruebas de hipótesis, ya que las estimaciones de las varianzas no son correctas. Esto puede llevar a conclusiones incorrectas sobre la significancia de los coeficientes del modelo.
+
+\end{enumerate}
+
+En resumen, aunque los estimadores por MCO permanecen lineales e insesgados en presencia de heteroscedasticidad, pierden eficiencia y afectan la confiabilidad de la inferencia estadística.
+
+\subsection{Procedimientos de Detección}
+
+\subsubsection{Métodos gráficos}
+En estos métodos se estudiarán los gráficos de los residuos y de dispersión.
+
+\begin{itemize}
+    \item \textbf{Gráfico de residuos:} dispersión de los residuos, si en estos podemos observar grupos de observaciones con distinta varianza, podemos afirmar que el modelo es heteroscedástico.
+    \item \textbf{Gráficos de dispersión:} Si la variabilidad de los residuos aumenta o disminuye conforme aumenta el valor de la variable dependiente, podemos pensar que la varianza depende de dicha variable, por lo que nos llevaría a pensar que el modelo es heteroscedástico.   
+\end{itemize}
+
+\subsubsection{Métodos analíticos}
+En estos se llevará a cabo diversos tests.\\\\
+Cuando la muestra es pequeña y una variables es la causa de la heteroscedasticidad:
+\begin{itemize}
+    \item \textbf{Test de Glesjer}
+    \subsubsection*{Pasos}
+    \begin{enumerate}
+        \item Estimamos el modelo \ecuacion{y = X\beta + u} y \ecuacion{e = y - \hat{y}}
+        \item Se ajusta usando el MCO el modelo en el que la varible endógena es \ecuacion{\lvert e^t \rvert} y la exógena es \ecuacion{X_i} que es la que creemos que causa la heteroscedasticidad, que será denotada por \ecuacion{z_t}, es decir:
+        \begin{equation}
+            \lvert e^t \rvert = \delta_0 + \delta_1 z_t^h + v_t
+        \end{equation}
+        Donde \ecuacion{v_t} es ruido blanco\footnote{Ruido blanco en el contexto de las ecuaciones de econometría es un término que se añade a la ecuación para representar el error en la medición de las variables.} y \ecuacion{z_t^h} es la variable que creemos que causa la heteroscedasticidad\footnote{donde h puede llegar a tomar valores de \ecuacion{h = \pm 1, \pm 2, \pm \frac{1}{2}\ldots, \pm n}}.
+        \item Para cada \ecuacion{h} contrastar \ecuacion{H_0 : \delta_1 = 0}, si se rechaza la hipótesis nula, se puede afirmar que la variable \ecuacion{z_t} es la causante de la heteroscedasticidad.
+    \end{enumerate}
+    \item \textbf{Test de Goldfeld-Quandt}
+    Los pasos a seguir para la realización de este test son los siguientes\footnote{Para ver ejemplos de estos tests, se puede mirar la diapositivas del tema 5}:
+    \begin{itemize}
+        \item Ordenar la información muestral en función de los valores crecientes de este regresor \footnote{Se entiende por regresor a la variable que se sospecha que es la causante de la heteroscedasticidad.} de \textit{menor a mayor.}
+        \item Omitimos los m valores de las variables centrales.
+        \item Ajustar mediante el MCO los subgrupos obtenidos en el paso anterior. La estimación del modelo del primer subgrupo nos permitirá obtener la \ecuacion{SCR_1} y de la misma forma, la estimación del modelo del segundo subgrupo nos permitirá obtener la \ecuacion{SCR_2}.
+        \item Bajo la ausencia de heteroscedasticidad (\ecuacion{\sigma_1^2 = \sigma_2^2 = sigma_3^2})
+        \begin{equation}
+            F_{exp} = \frac{SCR_2}{SCR_1} > F_{\frac{n-m}{2}-k, \frac{n-m}{2}-k, 1-\alpha}
+        \end{equation}
+        En este caso se rechará la hipótesis de homocedasticidad, por lo que podemos afirmar que hay heteroscedasticidad.
+    \end{itemize}
+\end{itemize}
+Cuando la muestra es grande y no se sabe que variables causan la heteroscedasticidad:
+
+\begin{itemize}
+    \item \textbf{Test de Breusch-Pagan y White}\footnote{La hipótesis nula de todos estos contrastes es que el modelo es homoscedásticos, por lo que si se rechaza la hipótesis nula, se puede afirmar que el modelo es heteroscedástico.}
+    \subsubsection*{Pasos}
+    \begin{enumerate}
+        \item Estimos el modelo \ecuacion{ y =X\beta + u} y el vector correspondiente de mínimos cuadrados ordinarios, \ecuacion{e = y - \hat{y}}.
+        \item Breusch-Pagan:
+        \begin{equation}
+            e^2 = \delta_0 + \delta_1 x_1 + \delta_2 x_2 + \ldots + \delta_k x_k + v
+        \end{equation}
+        \item White:
+        \begin{equation}
+            e^2 = \delta_0 + \delta_1 x_1 + \delta_2 x_2 + \ldots + \delta_k x_k + \delta_{k+1} x_1^2 + \delta_{k+2} x_2^2 + \ldots + \delta_{k+n} x_k^2 + v
+        \end{equation}
+        \item Se contrasta \ecuacion{H_0 : \delta_1 = \delta_2 = \ldots = \delta_k = 0} (homocedasticidad)
+        \item Si se rechaza la hipótesis nula, se puede afirmar que el modelo es heteroscedástico.
+    \end{enumerate}
+    
+\end{itemize}
+
+%diapositiva 42 de mi tablet tema 5
 
 
 \end{document}
