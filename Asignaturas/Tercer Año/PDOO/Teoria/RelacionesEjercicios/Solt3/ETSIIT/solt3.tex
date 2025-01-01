@@ -10,9 +10,12 @@
 \usepackage{geometry}
 \geometry{top=3cm, bottom=3cm, left=2.5cm, right=2.5cm}
 
+
+
 % Paquetes para figuras
 \usepackage{tikz}
 \usetikzlibrary{positioning, arrows}
+\usetikzlibrary{positioning, shapes.geometric, decorations.pathreplacing, arrows.meta}
 
 % Define styles for the diagram
 \tikzstyle{class} = [rectangle, draw, fill=blue!10, rounded corners, minimum height=2em, minimum width=4cm, text centered]
@@ -199,6 +202,8 @@
     contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{images/granada.jpg}}
 }
 
+\usetikzlibrary{positioning}
+
 % Inicio del documento
 \begin{document}
 
@@ -218,6 +223,8 @@
 \newpage
 
 \section{Ejercicio 1}
+\subsection{Enunciado}
+
 
 
 
@@ -234,6 +241,9 @@ public class Vertebrado
 \end{lstlisting}
 
 Indica con una cruz en la casilla correspondiente según si la declaración de los siguientes métodos de la clase \texttt{Mamifero}, subclase de \texttt{Vertebrado}, sobrecargan (\emph{overloading}) o redefinen (\emph{overriding}) a los de la clase \texttt{Vertebrado}.
+
+\subsection{Solución}
+
 
 \begin{table}[H]
     \centering
@@ -253,6 +263,8 @@ Indica con una cruz en la casilla correspondiente según si la declaración de l
     
 
 \section{Ejercicio 2}
+\subsection{Enunciado}
+
 
 
 
@@ -360,6 +372,7 @@ Implementa este problema en Java y Ruby:
 % end
 % \end{lstlisting}
 
+\subsection{Solución}
 
 \begin{lstlisting}[style=customjava, caption={Clase Estudiante de Informática}]
     public class EstudianteInformatica extends Estudiante {
@@ -395,6 +408,8 @@ Implementa este problema en Java y Ruby:
 
 
 \section{Ejercicio 3 }
+\subsection{Enunciado}
+
 
 \textit{Nota: En las diapositivas de la Relación hay un error, donde pone 3, no es el ejercicio 3 es la parte 2 del ejercicio 2, es decir, otra clase, el ejercicio 3 es el marcado con el número 4.}
 
@@ -419,6 +434,7 @@ abstract class Transporte {
 
 Crea dos nuevas clases, \texttt{Bicicleta} y \texttt{NaveEspacial}, que hereden de \texttt{Transporte} e implementen el método \texttt{hacerRuta} de forma diferente:
 
+\subsection{Solución}
 
 
 \begin{lstlisting}[style=customjava, caption={Clase Bicicleta}]
@@ -458,7 +474,10 @@ Crea dos nuevas clases, \texttt{Bicicleta} y \texttt{NaveEspacial}, que hereden 
 
 \newpage
 \section{Ejercicio 4} 
-Hacer el ejercicio anterior pero en Ruby.
+\subsection{Enunciado}
+Hacer el ejercicio anterior, pero en Ruby.
+\subsection{Solución}
+
 
 \begin{lstlisting}[style=customrb, caption={Clase Bicicleta}]
     def Bicicleta < Transporte 
@@ -473,6 +492,210 @@ Hacer el ejercicio anterior pero en Ruby.
         end
     end
 \end{lstlisting}
+
+\subsection{Enunciado}
+
+Implementa en Java una clase paramétrica a partir de la cual se puedan definir clases de grupos de personas con un líder, como por ejemplo grupos de música con un cantante, o empresas con un jefe. Implementa también alguna de esas clases a partir de la clase paramétrica definida.
+
+\subsection{Solución}
+
+A continuación, se implementa una clase paramétrica en Java para definir grupos de personas con un líder. Posteriormente, se muestra un ejemplo de uso creando un grupo de música con un cantante.
+
+\begin{lstlisting}[style=customjava]
+// Clase paramétrica genérica
+public class Grupo<T> {
+    private T lider;
+    private List<T> miembros;
+
+    public Grupo(T lider) {
+        this.lider = lider;
+        this.miembros = new ArrayList<>();
+    }
+
+    public T getLider() {
+        return lider;
+    }
+
+    public void setLider(T lider) {
+        this.lider = lider;
+    }
+
+    public void agregarMiembro(T miembro) {
+        this.miembros.add(miembro);
+    }
+
+    public List<T> getMiembros() {
+        return miembros;
+    }
+
+    @Override
+    public String toString() {
+        return "Líder: " + lider + ", Miembros: " + miembros;
+    }
+}
+
+// Ejemplo de uso con un grupo de música
+public class Musico {
+    private String nombre;
+
+    public Musico(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Musico cantante = new Musico("Freddie Mercury");
+        Grupo<Musico> banda = new Grupo<>(cantante);
+        
+        banda.agregarMiembro(new Musico("Brian May"));
+        banda.agregarMiembro(new Musico("Roger Taylor"));
+        banda.agregarMiembro(new Musico("John Deacon"));
+
+        System.out.println(banda);
+    }
+}
+\end{lstlisting}
+
+Si queremos implementar esta misma solución en Ruby, sería como sigue:
+
+\begin{lstlisting}[style=customrb]
+# Clase paramétrica genérica
+class Grupo
+  attr_accessor :lider, :miembros
+
+  def initialize(lider)
+    @lider = lider
+    @miembros = []
+  end
+
+  def agregar_miembro(miembro)
+    @miembros << miembro
+  end
+
+  def to_s
+    "Líder: #{@lider}, Miembros: #{@miembros.join(', ')}"
+  end
+end
+
+# Ejemplo de uso con un grupo de música
+class Musico
+  attr_accessor :nombre
+
+  def initialize(nombre)
+    @nombre = nombre
+  end
+
+  def to_s
+    @nombre
+  end
+end
+
+# Crear grupo de música
+cantante = Musico.new("Freddie Mercury")
+banda = Grupo.new(cantante)
+
+banda.agregar_miembro(Musico.new("Brian May"))
+banda.agregar_miembro(Musico.new("Roger Taylor"))
+banda.agregar_miembro(Musico.new("John Deacon"))
+
+puts banda
+\end{lstlisting}
+
+\section{Ejercicio 6}
+\subsection{Enunciado}
+Partiendo del siguiente diagrama de clases, modifícalo añadiendo una interfaz Prestable
+implementada por la clase ElementoPrestable y sus subclases. Añade a este diagrama de
+clases los atributos y operaciones de las distintas clases y de la interfaz Prestable.
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.9\textwidth]{images/ej7.png}
+%     \caption{Diagrama de clases}
+%     \label{fig:ejercicio6}
+% \end{figure}
+
+\begin{center}
+    \begin{tikzpicture}[node distance=0.8cm, auto, scale=0.75, transform shape]
+    
+    % Main class
+    \node[class] (Biblioteca) {\textbf{Biblioteca}};
+    
+    % Subclass
+    \node[class, below=0.4cm of Biblioteca] (ElementoBiblioteca) {\textbf{ElementoBiblioteca}};
+    \node[right=0.00001cm of ElementoBiblioteca] {1...*};
+    
+    % Subclasses of ElementoBiblioteca
+    \node[class, below left=0.4cm and 0.4cm of ElementoBiblioteca] (ElementoPrestable) {\textbf{ElementoPrestable}};
+    \node[class, below right=0.4cm and 0.4cm of ElementoBiblioteca] (ElementoNoPrestable) {\textbf{ElementoNoPrestable}};
+    
+    % Subclasses of ElementoPrestable
+    \node[class, below left=0.4cm and 0.4cm of ElementoPrestable] (Libro) {\textbf{Libro}};
+    \node[class, below right=0.4cm and 0.4cm of ElementoPrestable] (CD) {\textbf{CD}};
+    
+    % Subclass of ElementoNoPrestable
+    \node[class, below=0.4cm of ElementoNoPrestable] (Revista) {\textbf{Revista}};
+    
+    % Arrows
+    \draw[arrow] (ElementoBiblioteca.north) -- (Biblioteca.south);
+    \draw[arrow] (ElementoPrestable.north) -- (ElementoBiblioteca.south west);
+    \draw[arrow] (ElementoNoPrestable.north) -- (ElementoBiblioteca.south east);
+    \draw[arrow] (Libro.north) -- (ElementoPrestable.south west);
+    \draw[arrow] (CD.north) -- (ElementoPrestable.south east);
+    \draw[arrow] (Revista.north) -- (ElementoNoPrestable.south);
+    
+    \end{tikzpicture}
+\end{center}
+
+
+\subsection{Solución}
+
+\begin{center}
+    \begin{tikzpicture}[node distance=0.8cm, auto, scale=0.75, transform shape]
+
+    % Define the style for the classes
+    \tikzstyle{class} = [rectangle, draw, text width=4cm, text centered, rounded corners, minimum height=2em]
+    \tikzstyle{diamondline} = [thick, -{Diamond[open, scale=1.5]}]
+    
+    %Main class
+    \node[class] (Biblioteca) {\textbf{Biblioteca} \\ \textit{+elementos: ElementoBiblioteca[] }};    
+        
+
+    % Subclass
+    \node[class, below=0.6cm of Biblioteca] (ElementoBiblioteca) {\textbf{ElementoBiblioteca} +titulo: String \\ +autor: String \\ +prestado: boolean \\ +fechaPrestamo: Date \\ +fechaDevolucion: Date \\ +prestar() \\ +devolver() \\ +estaPrestado() \\ +tiempoPrestamo() \\ +toString()};
+    \node[above right=0.00001cm of ElementoBiblioteca] {1...*};
+    
+    % Subclasses of ElementoBiblioteca
+    \node[class, below left=0.4cm and 0.4cm of ElementoBiblioteca] (interfacePrestable) {\textbf{Interfaz Prestable} \\ +prestar() \\ +devolver() \\ +estaPrestado() \\ +tiempoPrestamo() \\ +toString()};
+    \node[class, below right=0.4cm and 0.4cm of ElementoBiblioteca] (ElementoNoPrestable) {\textbf{ElementoNoPrestable} +tipo: String \\ +toString()};
+
+    % Subclasses of interfacePrestable
+    \node[class, below left=0.4cm and 0.4cm of interfacePrestable] (ElementoPrestable) {\textbf{ElementoPrestable} \\ +prestar() \\ +devolver() \\ +estaPrestado() \\ +tiempoPrestamo() \\ +toString()};
+    
+    % Subclasses of ElementoPrestable
+    \node[class, below left=0.4cm and 0.4cm of ElementoPrestable] (Libro) {\textbf{Libro} +numPaginas: int \\ +toString()};
+    \node[class, below right=0.4cm and 0.4cm of ElementoPrestable] (CD) {\textbf{CD} +duracion: int \\ +toString()};
+    
+    % Subclass of ElementoNoPrestable
+    \node[class, below=0.4cm of ElementoNoPrestable] (Revista) {\textbf{Revista} +periodicidad: String \\ +toString()};
+    
+    % Arrows
+    \draw[diamondline] (ElementoBiblioteca.north) -- (Biblioteca.south);
+    \draw[arrow] (interfacePrestable.north) -- (ElementoBiblioteca.south west);
+    \draw[arrow] (ElementoPrestable.north) -- (interfacePrestable.south west);
+    \draw[arrow] (ElementoNoPrestable.north) -- (ElementoBiblioteca.south east);
+    \draw[arrow] (Libro.north) -- (ElementoPrestable.south west);
+    \draw[arrow] (CD.north) -- (ElementoPrestable.south east);
+    \draw[arrow] (Revista.north) -- (ElementoNoPrestable.south);
+    
+    \end{tikzpicture}
+\end{center}
+
 
 
 \end{document}
