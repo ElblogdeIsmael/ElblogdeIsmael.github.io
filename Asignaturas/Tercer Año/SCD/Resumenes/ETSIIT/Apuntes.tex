@@ -22,6 +22,7 @@
 \usepackage{inconsolata}
 
 \usepackage{float}
+\usepackage{enumitem}
 
 %encabezado y pie de página nivel profesional
 \usepackage{fancyhdr}
@@ -968,8 +969,399 @@ Se introducen más parámetros de interés en la planificación de tareas:
 \end{itemize}
 
 
-%https://chatgpt.com/c/6773c8fa-1130-8012-ac66-c118329a5a9b
-% por la 4.35
+\subsection{Esquema de Planificación de Tareas de Tiempo Real Basado en el Algoritmo de Cadencia Monótona (RMS)}
+
+\subsubsection{1. Algoritmo de Cadencia Monótona (Rate Monotonic Scheduling)}
+
+El algoritmo de cadencia monótona (RMS)\footnote{Para un ejemplo de ello accede  a la diapositiva 4.39 del tema 4} se basa en los siguientes principios:
+
+\begin{itemize}
+    \item Las prioridades se asignan de manera estática a cada tarea (\(\tau_i\)).
+    \item La prioridad es mayor para las tareas con menor período (\(T_i\)):
+    \[
+    \forall i, j : T_i < T_j \implies P_i > P_j
+    \]
+    \item Este algoritmo no tiene en cuenta la criticidad de las tareas, sino su urgencia, definida como \( \frac{1}{T_i} \).
+    \item El RMS es óptimo entre los algoritmos de asignación estática de prioridades bajo las siguientes condiciones:
+    \begin{itemize}
+        \item Las tareas son periódicas.
+        \item El plazo de respuesta de cada tarea coincide con su período (\(D_i = T_i\)).
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{2. Test de Planificabilidad Basado en el Factor de Utilización del Procesador}
+
+El test de planificabilidad para un conjunto de tareas periódicas \(\{\tau_1, \tau_2, \ldots, \tau_N\}\) verifica la suma del factor de utilización del procesador:
+
+\[
+U = \sum_{i=1}^N \frac{C_i}{T_i}
+\]
+
+\begin{itemize}
+    \item En un sistema de \(N\) tareas periódicas, independientes y con prioridades asignadas según su frecuencia (inverso al período), el sistema es planificable si el factor de utilización del procesador (\(U(N)\)) cumple la siguiente condición:
+    \[
+    U = \sum_{i=1}^N \frac{C_i}{T_i} < U_0 = N \cdot (2^{\frac{1}{N}} - 1)
+    \]
+    \item Si \(U \leq U_0(N)\), el sistema es planificable. En caso contrario, el test no puede determinar si el sistema es planificable (es una condición suficiente, pero no necesaria).
+\end{itemize}
+
+\subsubsection{3. Inexactitud del Test de Planificabilidad RM}
+
+El límite máximo de utilización \(U_0(N)\) depende del número de tareas \(N\) y decrece conforme aumenta \(N\). A continuación, se muestran algunos valores:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{\(N\)} & \textbf{\(U_0(N)\) (\%)} \\
+\hline
+1 & 100 \\
+2 & 82.85 \\
+3 & 78.0 \\
+4 & 75.7 \\
+5 & 74.3 \\
+10 & 71.8 \\
+\(\infty\) & 69.3 \\
+\hline
+\end{tabular}
+\caption{Límite máximo de utilización del procesador \(U_0(N)\) en función del número de tareas \(N\).}
+\end{table}
+
+\subsubsection{4. Características del Test RMS}
+
+\begin{itemize}
+    \item El test basado en el factor de utilización es solo una condición suficiente para determinar si un conjunto de tareas es planificable.
+    \item En caso de que un conjunto de tareas no pase el test, es posible realizar un análisis más detallado utilizando diagramas de Gantt en una ventana temporal definida como:
+    \[
+    M_i = \text{m.c.m.}\{T_1, T_2, \ldots, T_i\}
+    \]
+    \item Los tests de planificabilidad basados en la utilización del procesador no proporcionan información sobre los tiempos de respuesta de las tareas.
+\end{itemize}
+
+\subsection{Segundo Teorema de Planificabilidad de un Conjunto de Tareas Periódicas}
+
+El segundo teorema de planificabilidad establece las siguientes condiciones para un sistema de \(N\) tareas periódicas independientes, con prioridades asignadas en orden de su frecuencia (menor período, mayor prioridad):
+
+\begin{itemize}
+    \item Todas las tareas cumplen sus tiempos límite si, cuando se activan simultáneamente, cada tarea finaliza su ejecución antes de que expire el tiempo límite asignado en su primera activación.
+    \item Con este criterio, se puede alcanzar una utilización máxima del procesador:
+    \[
+    \sum_{i=1}^N \frac{C_i}{T_i} \leq 1
+    \]
+\end{itemize}
+
+\subsubsection{Características del Segundo Teorema}
+
+\begin{itemize}
+    \item La cota máxima que puede alcanzar el factor de utilización (\(U\)) es ahora mayor que la permitida por el test RMS.
+    \item Este test es más flexible y puede aplicarse a un mayor número de conjuntos de tareas, ya que permite un mayor factor de utilización del procesador.
+    \item A diferencia del test de RMS, este test es exacto:
+    \begin{itemize}
+        \item Proporciona una condición necesaria y suficiente para determinar si un conjunto de tareas es planificable.
+        \item Si las tareas pasan este test, el sistema es planificable en todos los casos.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ventajas de los Esquemas de Planificación Estáticos}
+
+Los esquemas de planificación estáticos presentan varias ventajas importantes:
+
+\begin{itemize}
+    \item \textbf{Simplicidad y eficiencia}: 
+    \begin{itemize}
+        \item Son más sencillos y eficientes de implementar en comparación con los esquemas dinámicos.
+        \item Requieren menos recursos computacionales para su ejecución.
+    \end{itemize}
+    \item \textbf{Facilidad de diseño}: 
+    \begin{itemize}
+        \item Es más sencillo diseñar un sistema con tiempos límite (plazos de respuesta absolutos) calculados exactamente.
+    \end{itemize}
+    \item \textbf{Flexibilidad}: 
+    \begin{itemize}
+        \item Permiten la incorporación de otros factores que influyen en la planificación de tareas, especialmente cuando las prioridades no están directamente asociadas a los tiempos límite.
+    \end{itemize}
+    \item \textbf{Predictibilidad bajo sobrecarga transitoria}:
+    \begin{itemize}
+        \item Durante períodos de sobrecarga transitoria, los esquemas estáticos suelen ser más predecibles.
+        \item Esto no siempre es cierto en los esquemas dinámicos, como el algoritmo \textit{Earliest Deadline First} (EDF\footnote{Ejemplo en la diapositiva 4.44 del tema 4}).
+    \end{itemize}
+\end{itemize}
+
+\subsection{Modelo General de Tareas de Tiempo Real (TR)}
+
+La estructura general asumida para resolver el problema de planificabilidad incluye las siguientes características:
+
+\begin{itemize}
+    \item \textbf{Programa:} Conjunto fijo de tareas que comparten el tiempo de un procesador. Pueden incluirse tareas aperiódicas o esporádicas.
+    \item \textbf{Bloqueo:} Las tareas pueden bloquearse al acceder a recursos compartidos, como semáforos utilizados en su código.
+    \item \textbf{Plazo de respuesta máximo (\(D\)):} 
+    \begin{itemize}
+        \item Generalmente, no coincide con su período (\(T\)).
+        \item En el caso de las tareas esporádicas, el plazo de respuesta máximo suele ser muy corto.
+    \end{itemize}
+    \item \textbf{Simplificaciones:}
+    \begin{itemize}
+        \item Se ignoran los retrasos debidos al sistema (como cambios de contexto).
+        \item No se guardan eventos de tiempo real.
+        \item El tiempo máximo de cómputo de las tareas (\(C\)) se considera conocido y fijo.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Inversión de Prioridad}
+
+\subsubsection{Descripción del Problema}
+
+El problema de la inversión de prioridad ocurre en los siguientes casos:
+
+\begin{itemize}
+    \item Una tarea más prioritaria queda bloqueada y debe esperar arbitrariamente largo tiempo debido a la ejecución continua de tareas menos prioritarias.
+    \item Esto invalida cualquier previsión sobre la planificación del conjunto de tareas, incluso si han pasado el test de planificabilidad como el RMS.
+    \item Surge como consecuencia del esquema estático de asignación de prioridades a las tareas.
+\end{itemize}
+
+\subsubsection{Características de la Inversión de Prioridad}
+
+\begin{itemize}
+    \item La inversión de prioridad no puede eliminarse completamente, pero sus efectos adversos sobre la planificación pueden minimizarse.
+\end{itemize}
+
+\subsection{Protocolo de Sección Crítica No Expulsable}
+
+\subsubsection{Descripción del Protocolo}
+
+\begin{itemize}
+    \item Durante la ejecución de las secciones críticas, las tareas tienen una prioridad estática igual a la prioridad máxima del sistema.
+\end{itemize}
+
+\subsubsection{Características del Protocolo}
+
+\begin{itemize}
+    \item Es el protocolo más simple para evitar la inversión de prioridad.
+    \item Puede inducir bloqueos excesivamente largos en las tareas más prioritarias.
+    \item En ciertos casos, puede interferir con la ejecución de todas las tareas, incluso si estas no hacen uso de recursos compartidos.
+\end{itemize}
+
+\subsection{Tiempo de Bloqueo en Sección Crítica No Expulsable}
+
+\begin{itemize}
+    \item Para una tarea \(\tau_i\), el tiempo de ejecución en el peor caso se incrementará por un factor constante:
+    \[
+    C_i^* = C_i + B_i
+    \]
+    \item La tarea más prioritaria \(\tau_i\) puede ser bloqueada, como máximo, durante la ejecución de una única sección crítica:
+    \[
+    B_i = \max_{j, j > i} \left( \max_k \text{Dur}(s_{jk}) \right)
+    \]
+    \item Aquí:
+    \begin{itemize}
+        \item \(s_{jk}\) representa la sección crítica \(k\) ejecutada por la tarea \(\tau_j\), que tiene menor prioridad que \(\tau_i\).
+        \item \(\text{Dur}(s_{jk})\) es la duración de dicha sección crítica.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Protocolo de Herencia de Prioridad}
+
+\subsubsection{Descripción del Protocolo}
+
+El protocolo de herencia de prioridad se basa en el siguiente principio\footnote{Ejemplo de esto se encuentra en la diapositiva 4.52 del tema 4}:
+
+\begin{itemize}
+    \item La \textbf{prioridad efectiva} de una tarea en ejecución será el máximo entre:
+    \begin{itemize}
+        \item Su \textbf{prioridad por defecto}, asignada al inicio del programa.
+        \item Las \textbf{prioridades} de otras tareas con las que comparte recursos y que mantiene bloqueadas en ese momento.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Características del Protocolo}
+
+\begin{itemize}
+    \item Las prioridades de las tareas no son estáticas; pueden variar dinámicamente durante la ejecución del programa.
+    \item Este enfoque permite:
+    \begin{itemize}
+        \item \textbf{Minimizar el efecto de la inversión de prioridad}: 
+        Al elevar temporalmente la prioridad de las tareas bloqueadas, se evita que estas queden en espera indefinidamente.
+        \item \textbf{Optimizar el aprovechamiento del procesador}: 
+        Se prioriza la resolución de bloqueos en recursos compartidos, reduciendo el tiempo total de ejecución.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Ventajas del Protocolo}
+
+\begin{itemize}
+    \item Reducción de los bloqueos prolongados.
+    \item Mayor predictibilidad en la planificación de tareas.
+    \item Mejor utilización de los recursos del sistema.
+\end{itemize}
+
+
+
+
+
+
+
+\section{Tipos de Bloqueos en el Protocolo de Herencia de Prioridad}
+
+\subsection{Tipos de Bloqueos}
+Con el protocolo de herencia de prioridad, se identifican los siguientes tipos de bloqueos:
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Bloqueos directos:} Ocurren cuando una tarea de mayor prioridad se encuentra bloqueada esperando un recurso compartido que está siendo utilizado por una tarea de menor prioridad.
+    \item \textbf{Bloqueos indirectos:} Ocurren cuando una tarea de mayor prioridad es bloqueada debido a que otra tarea de menor prioridad está esperando un recurso bloqueado por una tercera tarea.
+\end{enumerate}
+
+\subsection{Características del Protocolo}
+\begin{itemize}
+    \item Las tareas sólo pueden ser bloqueadas un número limitado de veces por otras tareas de menor prioridad.
+    \item Consecuencias:
+    \begin{enumerate}
+        \item Si una tarea tiene definidas \(M\) secciones críticas, entonces el número máximo de veces que puede ser bloqueada es \(M\).
+        \item Si hay \(N < M\) tareas de menor prioridad, el número máximo de bloqueos se reduce a \(N\).
+    \end{enumerate}
+\end{itemize}
+
+\section{Cálculo del Factor de Bloqueo}
+
+El factor de bloqueo (\(B_i\)) para una tarea \(\tau_i\) está dado por el mínimo entre dos términos:
+
+\begin{enumerate}
+    \item \(Bl_i:\) Bloqueo debido a tareas \(\tau_j\) menos prioritarias que acceden a secciones críticas \(k\) compartidas con tareas de mayor prioridad:
+    \[
+    Bl_i = \sum_{j=i+1}^{n} \max_k[Dur_{j,k} : Limite(S_k) \geq P_i]
+    \]
+
+    \item \(Bs_i:\) Bloqueo debido a todas las secciones críticas a las que accede la tarea \(\tau_i\):
+    \[
+    Bs_i = \sum_{k=1}^{m} \max_{j>i}[Dur_{j,k} : Limite(S_k) \geq P_i]
+    \]
+\end{enumerate}
+
+El factor de bloqueo total para la tarea \(\tau_i\) es:
+\[
+B_i = \min(Bl_i, Bs_i)
+\]
+
+\section{Protocolos de Techo de Prioridad}
+
+\subsection{Techo de Prioridad de un Recurso}
+El \textbf{techo de prioridad} de un recurso es la prioridad de la tarea más prioritaria que puede bloquear el acceso al recurso.
+
+\subsection{Características de los Protocolos de Techo de Prioridad}
+\begin{itemize}
+    \item Garantizan que una tarea prioritaria sólo puede ser bloqueada como máximo una vez por otras de menor prioridad.
+    \item Previenen los interbloqueos.
+    \item Eliminan los bloqueos transitivos.
+    \item Aseguran el acceso en exclusión mutua a los recursos compartidos.
+\end{itemize}
+
+\section{Protocolo de Techo de Prioridad Inmediato (PPP)}
+
+\begin{enumerate}
+    \item Cada tarea tiene una \textbf{prioridad estática} asignada por defecto.
+    \item Cada recurso tiene un valor de \textbf{techo de prioridad} definido.
+    \item Una tarea tiene una \textbf{prioridad dinámica}, que es el máximo entre:
+    \begin{itemize}
+        \item Su prioridad estática inicial.
+        \item Los valores de los techos de prioridad de los recursos que mantiene bloqueados\footnote{Ejemplo del PPP en la diapositiva 4.57 del tema 4}.
+    \end{itemize}
+\end{enumerate}
+
+\section{Tiempo de Bloqueo}
+
+\subsection{Cálculo del Tiempo de Bloqueo}
+El tiempo máximo de bloqueo de una tarea \(\tau_i\) está dado por la duración de la sección crítica más larga a la que acceden las tareas de prioridad inferior, siempre que el techo de prioridad del recurso sea igual o superior a la prioridad de \(\tau_i\):
+\[
+B_i = \max_{\{j,k\}} \{Dur_{j,k} \, | \, \text{prio}(\tau_j) < \text{prio}(\tau_i), \, \text{techo\_prioridad}(S_k) \geq \text{prio}(\tau_i)\}
+\]
+
+\subsection{Comportamiento con el Protocolo de Techo de Prioridad Inmediato (PPP)}
+Con el protocolo PPP:
+\begin{itemize}
+    \item Una tarea puede ser bloqueada por otra de menor prioridad aunque no accedan a recursos comunes.
+    \item Esto ocurre debido a la dinámica del techo de prioridad que se asigna a los recursos bloqueados.
+\end{itemize}
+
+\section{Asignación de Prioridades a las Tareas Aperiódicas}
+
+\begin{itemize}
+    \item En aplicaciones de tiempo real, las tareas aperiódicas no deben tener una prioridad inferior a la de las tareas de misión crítica.
+    \item Para gestionar las tareas aperiódicas, se utiliza un \textbf{servidor aperiódico}, que puede ser:
+    \begin{itemize}
+        \item Una tarea real o conceptual.
+        \item Diseñado para ejecutar procesos aperiódicos tan pronto como sea posible, sin afectar las garantías de las tareas periódicas.
+    \end{itemize}
+\end{itemize}
+
+\section{Servicio de Tareas Aperiódicas}
+
+\subsection{Servicio con Tiempo en Segundo Plano}
+\begin{itemize}
+    \item El tiempo aperiódico se incrementa a intervalos regulares.
+    \item Estas tareas tienen la prioridad más baja del sistema.
+    \item Si no hay peticiones aperiódicas, el tiempo asignado a estas tareas se pierde\footnote{Ejemplo en la diapositiva 4.60 del tema 4}.
+\end{itemize}
+
+\subsection{Servicio de Aperiódicas con Sondeos}
+\begin{itemize}
+    \item Se incluye una tarea adicional, denominada \textbf{tarea sondeante}, dentro del conjunto de tareas periódicas.
+    \item Características de la tarea sondeante:
+    \begin{itemize}
+        \item Tiene un periodo \(T_s\) y un tiempo de ejecución en el peor caso \(C_s\).
+        \item Se le asigna una prioridad adecuada dentro del sistema.
+    \end{itemize}
+    \item El test de planificabilidad de cadencia monótona se aplica considerando la tarea sondeante\footnote{Ejemplo en la diapositiva 4.62 del tema 4}:
+    \[
+    \sum_{i=1}^{N} \frac{C_i}{T_i} + \frac{C_s}{T_s} \leq (N + 1)\left(2^{\frac{1}{N+1}} - 1\right)
+    \]
+\end{itemize}
+
+\section{Servidor Diferido}
+
+\subsection{Características del Servidor Diferido}
+\begin{itemize}
+    \item Preserva el tiempo dedicado a tareas aperiódicas, incluso si temporalmente no hay peticiones de este tipo.
+    \item Se asigna un tamaño de servidor \(C_s\) que se utiliza únicamente para atender peticiones aperiódicas.
+    \item El tamaño del servidor \(C_s\) se recarga hasta su valor máximo al inicio de cada periodo del servidor \(T_s\).
+    \item El valor inicial de \(C_s\) se establece tras un análisis previo de planificabilidad del conjunto de tareas.
+    \item Las peticiones aperiódicas se atienden con una prioridad alta, siempre que el tiempo del servidor no se haya agotado.
+\end{itemize}
+
+\subsection{Análisis de Planificabilidad con el Servidor Diferido}
+
+\subsubsection{Configuración del Sistema}
+\begin{itemize}
+    \item Conjunto de \(N\) tareas periódicas: \(\tau_1, \tau_2, \dots, \tau_N\).
+    \item Un servidor diferido con prioridad más alta, y un tamaño \(C_s\) asociado a un periodo \(T_s\).
+\end{itemize}
+
+\subsubsection{Cálculo del Límite Superior de Utilización}
+El límite superior de utilización se calcula como:
+\[
+U_{\text{mls}} = U_s + N \left[\left(\frac{U_s + 2}{2U_s + 1}\right)^{\frac{1}{N}} - 1\right]
+\]
+
+\textbf{Límite cuando \(N \to \infty\):}
+\[
+\lim_{N \to \infty} U_{\text{mls}} = U_s + \ln\left(\frac{U_s + 2}{2U_s + 1}\right)
+\]
+
+\subsubsection{Condición de Planificabilidad}
+Para un conjunto de \(N\) tareas periódicas y un servidor diferido con límites de utilización \(U_p\) y \(U_s\), respectivamente, se garantiza la planificabilidad con el algoritmo de cadencia monótona si:
+\[
+U_p + U_s \leq U_{\text{mls}}
+\]
+
+\textbf{Forma equivalente:}
+\[
+U_p \leq \ln\left(\frac{U_s + 2}{2U_s + 1}\right)
+\]
+
+\subsection{Ventajas del Servidor Diferido}
+\begin{itemize}
+    \item Maximiza el tiempo disponible para las tareas aperiódicas.
+    \item Permite una respuesta eficiente a las tareas aperiódicas con prioridad alta.
+    \item Reduce el impacto de las tareas aperiódicas en la planificación de las tareas periódicas\footnote{Ejemplo del servidor diferido en la diapositiva 4.65 del tema 4}.
+\end{itemize}
+
 
 
 
