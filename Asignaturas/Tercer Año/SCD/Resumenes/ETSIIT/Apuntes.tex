@@ -107,6 +107,28 @@
 % Configuración de título
 \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
 
+
+%definir subsubsubsection
+% Paquete necesario para manipular títulos
+\usepackage{titlesec}
+
+% Definir subsubsubsection
+\setcounter{secnumdepth}{4} % Aumentar el nivel de numeración
+\setcounter{tocdepth}{4}    % Aumentar el nivel para la tabla de contenidos
+
+\titleformat{\paragraph}[runin]
+  {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+  {0pt}{3.25ex plus 1ex minus .2ex}{1em}
+
+\makeatletter
+\newcommand\subsubsubsection{\@startsection{paragraph}{4}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+
+
 % Información del documento
 \title{
     \vspace{-2cm}
@@ -1200,16 +1222,16 @@ El protocolo de herencia de prioridad se basa en el siguiente principio\footnote
 
 
 
-\section{Tipos de Bloqueos en el Protocolo de Herencia de Prioridad}
+\subsection{Tipos de Bloqueos en el Protocolo de Herencia de Prioridad}
 
-\subsection{Tipos de Bloqueos}
+\subsubsection{Tipos de Bloqueos}
 Con el protocolo de herencia de prioridad, se identifican los siguientes tipos de bloqueos:
 \begin{enumerate}[label=\alph*)]
     \item \textbf{Bloqueos directos:} Ocurren cuando una tarea de mayor prioridad se encuentra bloqueada esperando un recurso compartido que está siendo utilizado por una tarea de menor prioridad.
     \item \textbf{Bloqueos indirectos:} Ocurren cuando una tarea de mayor prioridad es bloqueada debido a que otra tarea de menor prioridad está esperando un recurso bloqueado por una tercera tarea.
 \end{enumerate}
 
-\subsection{Características del Protocolo}
+\subsubsection{Características del Protocolo}
 \begin{itemize}
     \item Las tareas sólo pueden ser bloqueadas un número limitado de veces por otras tareas de menor prioridad.
     \item Consecuencias:
@@ -1219,7 +1241,7 @@ Con el protocolo de herencia de prioridad, se identifican los siguientes tipos d
     \end{enumerate}
 \end{itemize}
 
-\section{Cálculo del Factor de Bloqueo}
+\subsection{Cálculo del Factor de Bloqueo}
 
 El factor de bloqueo (\(B_i\)) para una tarea \(\tau_i\) está dado por el mínimo entre dos términos:
 
@@ -1240,12 +1262,12 @@ El factor de bloqueo total para la tarea \(\tau_i\) es:
 B_i = \min(Bl_i, Bs_i)
 \]
 
-\section{Protocolos de Techo de Prioridad}
+\subsection{Protocolos de Techo de Prioridad}
 
-\subsection{Techo de Prioridad de un Recurso}
+\subsubsection{Techo de Prioridad de un Recurso}
 El \textbf{techo de prioridad} de un recurso es la prioridad de la tarea más prioritaria que puede bloquear el acceso al recurso.
 
-\subsection{Características de los Protocolos de Techo de Prioridad}
+\subsubsection{Características de los Protocolos de Techo de Prioridad}
 \begin{itemize}
     \item Garantizan que una tarea prioritaria sólo puede ser bloqueada como máximo una vez por otras de menor prioridad.
     \item Previenen los interbloqueos.
@@ -1253,7 +1275,7 @@ El \textbf{techo de prioridad} de un recurso es la prioridad de la tarea más pr
     \item Aseguran el acceso en exclusión mutua a los recursos compartidos.
 \end{itemize}
 
-\section{Protocolo de Techo de Prioridad Inmediato (PPP)}
+\subsection{Protocolo de Techo de Prioridad Inmediato (PPP)}
 
 \begin{enumerate}
     \item Cada tarea tiene una \textbf{prioridad estática} asignada por defecto.
@@ -1265,22 +1287,22 @@ El \textbf{techo de prioridad} de un recurso es la prioridad de la tarea más pr
     \end{itemize}
 \end{enumerate}
 
-\section{Tiempo de Bloqueo}
+\subsection{Tiempo de Bloqueo}
 
-\subsection{Cálculo del Tiempo de Bloqueo}
+\subsubsection{Cálculo del Tiempo de Bloqueo}
 El tiempo máximo de bloqueo de una tarea \(\tau_i\) está dado por la duración de la sección crítica más larga a la que acceden las tareas de prioridad inferior, siempre que el techo de prioridad del recurso sea igual o superior a la prioridad de \(\tau_i\):
 \[
 B_i = \max_{\{j,k\}} \{Dur_{j,k} \, | \, \text{prio}(\tau_j) < \text{prio}(\tau_i), \, \text{techo\_prioridad}(S_k) \geq \text{prio}(\tau_i)\}
 \]
 
-\subsection{Comportamiento con el Protocolo de Techo de Prioridad Inmediato (PPP)}
+\subsubsection{Comportamiento con el Protocolo de Techo de Prioridad Inmediato (PPP)}
 Con el protocolo PPP:
 \begin{itemize}
     \item Una tarea puede ser bloqueada por otra de menor prioridad aunque no accedan a recursos comunes.
     \item Esto ocurre debido a la dinámica del techo de prioridad que se asigna a los recursos bloqueados.
 \end{itemize}
 
-\section{Asignación de Prioridades a las Tareas Aperiódicas}
+\subsection{Asignación de Prioridades a las Tareas Aperiódicas}
 
 \begin{itemize}
     \item En aplicaciones de tiempo real, las tareas aperiódicas no deben tener una prioridad inferior a la de las tareas de misión crítica.
@@ -1291,16 +1313,16 @@ Con el protocolo PPP:
     \end{itemize}
 \end{itemize}
 
-\section{Servicio de Tareas Aperiódicas}
+\subsection{Servicio de Tareas Aperiódicas}
 
-\subsection{Servicio con Tiempo en Segundo Plano}
+\subsubsection{Servicio con Tiempo en Segundo Plano}
 \begin{itemize}
     \item El tiempo aperiódico se incrementa a intervalos regulares.
     \item Estas tareas tienen la prioridad más baja del sistema.
     \item Si no hay peticiones aperiódicas, el tiempo asignado a estas tareas se pierde\footnote{Ejemplo en la diapositiva 4.60 del tema 4}.
 \end{itemize}
 
-\subsection{Servicio de Aperiódicas con Sondeos}
+\subsubsection{Servicio de Aperiódicas con Sondeos}
 \begin{itemize}
     \item Se incluye una tarea adicional, denominada \textbf{tarea sondeante}, dentro del conjunto de tareas periódicas.
     \item Características de la tarea sondeante:
@@ -1314,9 +1336,9 @@ Con el protocolo PPP:
     \]
 \end{itemize}
 
-\section{Servidor Diferido}
+\subsection{Servidor Diferido}
 
-\subsection{Características del Servidor Diferido}
+\subsubsection{Características del Servidor Diferido}
 \begin{itemize}
     \item Preserva el tiempo dedicado a tareas aperiódicas, incluso si temporalmente no hay peticiones de este tipo.
     \item Se asigna un tamaño de servidor \(C_s\) que se utiliza únicamente para atender peticiones aperiódicas.
@@ -1325,15 +1347,15 @@ Con el protocolo PPP:
     \item Las peticiones aperiódicas se atienden con una prioridad alta, siempre que el tiempo del servidor no se haya agotado.
 \end{itemize}
 
-\subsection{Análisis de Planificabilidad con el Servidor Diferido}
+\subsubsection{Análisis de Planificabilidad con el Servidor Diferido}
 
-\subsubsection{Configuración del Sistema}
+\subsubsubsection{Configuración del Sistema}
 \begin{itemize}
     \item Conjunto de \(N\) tareas periódicas: \(\tau_1, \tau_2, \dots, \tau_N\).
     \item Un servidor diferido con prioridad más alta, y un tamaño \(C_s\) asociado a un periodo \(T_s\).
 \end{itemize}
 
-\subsubsection{Cálculo del Límite Superior de Utilización}
+\subsubsubsection{Cálculo del Límite Superior de Utilización}
 El límite superior de utilización se calcula como:
 \[
 U_{\text{mls}} = U_s + N \left[\left(\frac{U_s + 2}{2U_s + 1}\right)^{\frac{1}{N}} - 1\right]
@@ -1344,7 +1366,7 @@ U_{\text{mls}} = U_s + N \left[\left(\frac{U_s + 2}{2U_s + 1}\right)^{\frac{1}{N
 \lim_{N \to \infty} U_{\text{mls}} = U_s + \ln\left(\frac{U_s + 2}{2U_s + 1}\right)
 \]
 
-\subsubsection{Condición de Planificabilidad}
+\subsubsubsection{Condición de Planificabilidad}
 Para un conjunto de \(N\) tareas periódicas y un servidor diferido con límites de utilización \(U_p\) y \(U_s\), respectivamente, se garantiza la planificabilidad con el algoritmo de cadencia monótona si:
 \[
 U_p + U_s \leq U_{\text{mls}}
@@ -1355,7 +1377,7 @@ U_p + U_s \leq U_{\text{mls}}
 U_p \leq \ln\left(\frac{U_s + 2}{2U_s + 1}\right)
 \]
 
-\subsection{Ventajas del Servidor Diferido}
+\subsubsection{Ventajas del Servidor Diferido}
 \begin{itemize}
     \item Maximiza el tiempo disponible para las tareas aperiódicas.
     \item Permite una respuesta eficiente a las tareas aperiódicas con prioridad alta.
