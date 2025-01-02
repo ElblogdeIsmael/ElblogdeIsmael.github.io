@@ -120,7 +120,7 @@
 \tableofcontents
 \newpage
 
-\section{Tema 2}
+\section{Tema 2. Modelos de Regresión Lineal}
 
 \subsection{Modelo Lineal Simple}
 
@@ -393,7 +393,7 @@ Si el modelo tiene término independiente entonces $R^2$ se puede expresar como:
     BIC = ln(\frac{SCR}{n}) + \frac{kln(n)}{n}
 \end{equation}
 
-\section{Tema 3}
+\section{Tema 3: Estimación y Contraste de Hipótesis}
 
 
 \subsection{Valor Esperado y Varianza de los EMCO (Estimadores mínimos cuadrados ordinarios)}
@@ -1063,7 +1063,7 @@ Detectar una escasa variabilidad de las observaciones, lo que puede ser una caus
 \end{itemize}
 
 
-\section{Heteroscedasticidad}
+\section{Tema 5:Heteroscedasticidad}
 
 \subsection{Concepto}
 
@@ -1202,7 +1202,559 @@ Cuando la muestra es grande y no se sabe que variables causan la heteroscedastic
     
 \end{itemize}
 
-%diapositiva 42 de mi tablet tema 5
+
+
+
+
+\subsection{Estimación bajo Heterocedasticidad}
+
+Supongamos que tenemos el modelo \ecuacion{y = X\beta + u}, donde sabemos que existe heteroscedasticidad, es decir:
+
+\begin{equation}
+    E[uu^t] = \begin{pmatrix}
+        \sigma_1^2 & 0 & \cdots & 0 \\
+        0 & \sigma_2^2 & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & \sigma_n^2
+    \end{pmatrix} \rightarrow (\sigma^2 = \sigma_1^2)  = \sigma^2 \begin{pmatrix}
+        1 & 0 & \cdots & 0 \\
+        0 & \frac{\sigma_2^2}{\sigma_1^2} & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & \frac{\sigma_n^2}{\sigma_1^2}
+    \end{pmatrix} = 
+\end{equation}
+\[\sigma^2 \Omega, \Omega = diag (w_1, w_2, \ldots, w_n) \,\, y \,\, w_i = \frac{\sigma_i^2}{\sigma_1^2}\]
+
+\[\rightarrow Var(u_i)  = E[u_i^2] = \sigma^2w_i , \forall i.\]
+
+
+% \subsection{Míminos Cuadrados Generalizados}
+
+% Sabemos que \ecuacion{\omega > 0} y es simétrica, así que por descomposición de Cholesky, existirá una matriz P(=\ecuacion{Q^{-1}}), no singular\footnote{no singular es que no es única }, tal que \ecuacion{\omega^{-1} = P^tP}.
+
+% De manera 
+
+
+
+\subsection{Mínimos Cuadrados Generalizados (MCG)}
+
+El método de Mínimos Cuadrados Generalizados (MCG) se aplica cuando la matriz de varianzas y covarianzas de los errores, $\Omega$, no es escalar. Dado que $\Omega \succ 0$ y es simétrica, por la \textbf{Descomposición de Cholesky}, existe una matriz $P$ (con $P = Q^{-1}$), no singular, tal que:
+
+\[
+\Omega^{-1} = P^\top P
+\]
+
+Esto permite transformar el modelo original de tal manera que $\Omega$ se convierta en la matriz identidad. De esta forma, se puede aplicar el método de Mínimos Cuadrados Ordinarios (MCO) al modelo transformado. Las expresiones resultantes son:
+
+\[
+\hat{\beta}_{\text{MCG}} = [(X^*)^\top X^*]^{-1} [(X^*)^\top y^*] = [X^\top P^\top P X]^{-1} [X^\top P^\top P y] = [X^\top \Omega^{-1} X]^{-1} [X^\top \Omega^{-1} y]
+\]
+
+La varianza de los estimadores se calcula como:
+
+\[
+\text{Var}(\hat{\beta}_{\text{MCG}}) = \sigma^2 [(X^*)^\top X^*]^{-1} = \sigma^2 [X^\top P^\top P X]^{-1} = \sigma^2 [X^\top \Omega^{-1} X]^{-1}
+\]
+
+Donde:
+\begin{itemize}
+    \item $X^* = PX$ y $y^* = Py$ son las versiones transformadas de las matrices de diseño y el vector de observaciones, respectivamente.
+    \item $\Omega$ es la matriz de varianzas y covarianzas de los errores.
+    \item $\sigma^2$ es la varianza de los errores.
+\end{itemize}
+
+El uso de estas transformaciones permite trabajar con errores heterocedásticos o autocorrelacionados de forma más eficiente.
+
+\subsection{Estimador de Mínimos Cuadrados Ponderados (MCP)}
+
+En el caso particular de la heterocedasticidad, la matriz de varianzas y covarianzas de los errores, $\Omega$, se presenta como una matriz diagonal cuyos elementos corresponden a las varianzas de los errores. Su forma es:
+
+\[
+\Omega =
+\begin{pmatrix}
+w_1 & 0 & \cdots & 0 \\
+0 & w_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & w_n
+\end{pmatrix}
+\]
+
+Por lo tanto, su inversa, $\Omega^{-1}$, se calcula fácilmente como:
+
+\[
+\Omega^{-1} =
+\begin{pmatrix}
+\frac{1}{w_1} & 0 & \cdots & 0 \\
+0 & \frac{1}{w_2} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \frac{1}{w_n}
+\end{pmatrix}
+\]
+
+De acuerdo con la descomposición de Cholesky, existe una matriz $P$ tal que:
+
+\[
+\Omega^{-1} = P^\top P
+\]
+
+En este caso particular, la matriz $P$ se define como:
+
+\[
+P =
+\begin{pmatrix}
+\frac{1}{\sqrt{w_1}} & 0 & \cdots & 0 \\
+0 & \frac{1}{\sqrt{w_2}} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \frac{1}{\sqrt{w_n}}
+\end{pmatrix}
+\]
+
+Esta descomposición permite transformar el modelo original y aplicar el método de Mínimos Cuadrados Ponderados (MCP). La transformación se realiza multiplicando ambos lados del modelo por la matriz $P$, de manera que:
+
+\[
+P y = P X \beta + P u
+\]
+
+Donde las nuevas variables transformadas son:
+\begin{itemize}
+    \item $y^* = P y$, el vector de observaciones transformado.
+    \item $X^* = P X$, la matriz de diseño transformada.
+    \item $u^* = P u$, el nuevo término de error.
+\end{itemize}
+
+Esto permite estimar $\beta$ aplicando el método de Mínimos Cuadrados Ordinarios al modelo transformado.
+
+
+
+\subsection{Mínimos Cuadrados Ponderados (MCP)}
+
+El método de Mínimos Cuadrados Ponderados (MCP) se aplica al transformar el modelo original utilizando la matriz $P$ definida previamente. Esto genera nuevas variables transformadas, que son:
+
+\[
+y^* = P y, \quad X^* = P X, \quad u^* = P u
+\]
+
+Las expresiones de estas transformaciones son:
+
+\[
+y^* =
+\begin{pmatrix}
+\frac{y_1}{\sqrt{w_1}} \\
+\vdots \\
+\frac{y_n}{\sqrt{w_n}}
+\end{pmatrix},
+\quad
+X^* =
+\begin{pmatrix}
+\frac{1}{\sqrt{w_1}} & \frac{x_{21}}{\sqrt{w_1}} & \cdots & \frac{x_{k1}}{\sqrt{w_1}} \\
+\frac{1}{\sqrt{w_2}} & \frac{x_{22}}{\sqrt{w_2}} & \cdots & \frac{x_{k2}}{\sqrt{w_2}} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{1}{\sqrt{w_n}} & \frac{x_{2n}}{\sqrt{w_n}} & \cdots & \frac{x_{kn}}{\sqrt{w_n}}
+\end{pmatrix},
+\quad
+u^* =
+\begin{pmatrix}
+\frac{u_1}{\sqrt{w_1}} \\
+\vdots \\
+\frac{u_n}{\sqrt{w_n}}
+\end{pmatrix}
+\]
+
+Tras esta transformación, las propiedades del nuevo término de error $u^*$ se definen como:
+
+\begin{itemize}
+    \item Esperanza: 
+    \[
+    \mathbb{E}[u^*_i] = \mathbb{E}\left[\frac{u_i}{\sqrt{w_i}}\right] = \frac{1}{\sqrt{w_i}} \mathbb{E}[u_i] = 0
+    \]
+    \item Varianza:
+    \[
+    \text{Var}(u^*_i) = \text{Var}\left(\frac{u_i}{\sqrt{w_i}}\right) = \frac{1}{w_i} \text{Var}(u_i) = \frac{1}{w_i} \sigma^2 w_i = \sigma^2
+    \]
+    Esto muestra que los errores transformados son homocedásticos.
+    \item Covarianza:
+    \[
+    \mathbb{E}[u^*_i u^*_j] = \mathbb{E}\left[\frac{u_i}{\sqrt{w_i}} \frac{u_j}{\sqrt{w_j}}\right] = \frac{1}{\sqrt{w_i w_j}} \mathbb{E}[u_i u_j] = 0
+    \]
+    Esto indica que los errores transformados son incorrelacionados.
+\end{itemize}
+
+Dado que los errores transformados son homocedásticos e incorrelacionados, se puede aplicar el método de Mínimos Cuadrados Ordinarios (MCO) al modelo transformado:
+
+\[
+y^* = X^* \beta + u^*
+\]
+
+Esto permite estimar $\beta$ de manera eficiente incluso en presencia de heterocedasticidad en el modelo original.
+
+
+
+\section{Tema 6: Autocorrelación}
+
+\subsection{Naturaleza}
+
+
+\[
+E[u_i,u_j] = \text{Cov}[u_t,u_j] = 0 \quad \forall \, i \neq j \quad \in 1, \ldots, n \, (\text{Incorrelación})
+\]
+
+\[
+\text{Si} \quad Cov[u_t,u_{t-k}] \neq 0 \quad \forall k > 0 \rightarrow \text{se dice que hay autocorrelación}
+\]
+
+Entonces tenemos que \ecuacion{u_t = \rho u_{t-1} + \epsilon_t}, donde \ecuacion{\epsilon_t} es ruido blanco gaussiano.
+
+\subsection{Causas de la Autocorrelación}
+
+La autocorrelación en un modelo econométrico puede surgir por diversas razones, entre las cuales se destacan:
+
+\begin{itemize}
+    \item \textbf{Error en la especificación del modelo:}  
+    Esto ocurre cuando se omiten variables exógenas relevantes en la construcción del modelo. Dichas variables pueden ser esenciales para explicar el comportamiento de la variable endógena, y su omisión provoca dependencia serial en los términos de error.
+
+    \item \textbf{Existencia de ciclos y tendencias:}  
+    Si la variable endógena presenta ciclos o tendencias que no están adecuadamente explicados por las variables exógenas, estos patrones residuales se reflejan en el término de perturbación, generando autocorrelación.
+
+    \item \textbf{Existencia de relaciones no lineales:}  
+    Cuando la verdadera relación entre las variables no es lineal y se utiliza un modelo lineal para estimarla, las discrepancias pueden generar dependencia serial en los errores.
+
+    \item \textbf{Existencia de relaciones dinámicas:}  
+    Si el modelo no incorpora adecuadamente los efectos dinámicos entre las variables (como rezagos de la variable dependiente o de las exógenas), el término de perturbación puede presentar autocorrelación.
+\end{itemize}
+
+La detección y corrección de la autocorrelación son esenciales para garantizar la validez de las inferencias en el modelo econométrico.
+
+\subsection{Consecuencias y Detección de la Autocorrelación}
+
+\subsubsection{Consecuencias de la Autocorrelación}
+
+La autocorrelación en el término de error tiene importantes implicaciones para los estimadores y la validez del modelo econométrico. Entre sus consecuencias se destacan:
+
+\begin{itemize}
+    \item Los estimadores obtenidos por el método de Mínimos Cuadrados Ordinarios (MCO) son \textbf{insesgados} pero \textbf{no óptimos}, debido a que no minimizan la varianza entre todos los estimadores lineales insesgados.
+    \item El estimador por Mínimos Cuadrados Generalizados (MCG), definido como:
+    \[
+    \hat{\beta}_{\text{MCG}} = [X^\top \Omega^{-1} X]^{-1} [X^\top \Omega^{-1} y]
+    \]
+    es \textbf{insesgado y óptimo}. Su matriz de varianzas-covarianzas viene dada por:
+    \[
+    \text{Var}(\hat{\beta}_{\text{MCG}}) = \sigma^2 [X^\top \Omega^{-1} X]^{-1}
+    \]
+\end{itemize}
+
+\subsubsection{Detección de la Autocorrelación}
+
+La autocorrelación se puede detectar de manera gráfica y analítica, según los métodos siguientes:
+
+\paragraph{Gráficamente}
+\begin{itemize}
+    \item \textbf{Gráfico temporal de los residuos:}  
+    Si los residuos obtenidos por MCO están incorrelados, deben distribuirse de manera aleatoria alrededor de cero. Sin embargo, si están correlacionados:
+    \begin{itemize}
+        \item Observaremos \textbf{rachas de residuos} por debajo y por encima de la media (autocorrelación positiva).
+        \item Observaremos \textbf{alternancia en el signo} de los residuos (autocorrelación negativa).
+    \end{itemize}
+    
+    \item \textbf{Gráficos de dispersión:}  
+    El gráfico de dispersión de los residuos $e_t$ frente a algún retardo suyo, $e_{t-k}$ (normalmente se considera $k=1$), puede revelar:
+    \begin{itemize}
+        \item Una \textbf{tendencia creciente}, lo que sugiere autocorrelación positiva.
+        \item Una \textbf{tendencia decreciente}, lo que indica autocorrelación negativa.
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Analíticamente}
+Existen diversos contrastes estadísticos para la detección de autocorrelación:
+\begin{itemize}
+    \item \textbf{Contraste de Durbin-Watson:} Evalúa la autocorrelación de primer orden en los residuos.
+    \item \textbf{Estadístico H de Durbin:} Diseñado para detectar autocorrelación en modelos con variables dependientes rezagadas.
+    \item \textbf{Contraste de Ljung-Box:} Prueba la autocorrelación en retardos múltiples.
+\end{itemize}
+
+\subsection{Contraste de Durbin-Watson}
+
+El contraste de Durbin-Watson es adecuado para detectar autocorrelación en los términos de error, bajo el supuesto de que el término de perturbación sigue un proceso autorregresivo de orden uno:
+
+\[
+u_t = \rho u_{t-1} + \epsilon_t
+\]
+
+donde $\epsilon_t$ es ruido blanco\footnote{En este contexto, el término ''ruido blanco'' se refiere a un proceso estocástico con media cero, varianza constante, y ausencia de autocorrelación. Es decir, los errores no tienen ninguna estructura predecible.}. 
+
+El contraste evalúa si el coeficiente $\rho$ es significativo, mediante las siguientes hipótesis:
+
+\[
+\begin{cases}
+H_0 : \rho = 0 & \text{(Incorrelación)} \\
+H_1 : \rho > 0 & \text{(Correlación positiva)}
+\end{cases}
+\quad \text{o} \quad
+\begin{cases}
+H_0 : \rho = 0 & \text{(Incorrelación)} \\
+H_1 : \rho < 0 & \text{(Correlación negativa)}
+\end{cases}
+\]
+
+El estadístico de contraste de Durbin-Watson se define como:
+
+\[
+DW = \frac{\sum_{t=2}^n (e_t - e_{t-1})^2}{\sum_{t=1}^n e_t^2} = \frac{\sum_{t=2}^n (e_t^2 - 2 e_t e_{t-1} + e_{t-1}^2)}{\sum_{t=1}^n e_t^2}
+\]
+
+donde $e_t$ son los residuos obtenidos por MCO: $e_t = y_t - \hat{y}_t = y_t - x^\top \hat{\beta}$.
+
+Si el tamaño de muestra es lo suficientemente grande, se puede aproximar que $\sum_{t=2}^n e_t^2 \simeq \sum_{t=2}^n e_{t-1}^2$, dado que estas sumatorias difieren únicamente en la primera observación muestral. Entonces, el estadístico se puede expresar como:
+
+\[
+DW = 2 \left( \frac{\sum_{t=2}^n e_t^2}{\sum_{t=1}^n e_t^2} - \frac{\sum_{t=2}^n e_t e_{t-1}}{\sum_{t=1}^n e_t^2} \right) \simeq 2(1 - \hat{\rho})
+\]
+
+donde $\hat{\rho}$ es la estimación del parámetro $\rho$. Según el valor de $\hat{\rho}$, podemos interpretar:
+
+\begin{itemize}
+    \item $DW \simeq 0$ cuando $\hat{\rho} \simeq 1$ (correlación positiva).
+    \item $DW \simeq 2$ cuando $\hat{\rho} \simeq 0$ (residuos incorrelacionados).
+    \item $DW \simeq 4$ cuando $\hat{\rho} \simeq -1$ (correlación negativa).
+\end{itemize}
+
+El estadístico se puede calcular directamente utilizando el paquete \texttt{statsmodels} en Python:
+
+\begin{verbatim}
+from statsmodels.stats.stattools import durbin_watson
+durbin_watson(mco.resid)
+\end{verbatim}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/dw.png}
+    \caption{Interpretación del estadístico de Durbin-Watson.}
+    \label{fig:DW}
+\end{figure}
+
+\subsubsection{Reglas de Decisión con el Contraste de Durbin-Watson}
+
+Las tablas estadísticas para el contraste de Durbin-Watson proporcionan dos cotas: una cota inferior ($d_L$) y una cota superior ($d_U$). Las reglas de decisión para evaluar la autocorrelación son las siguientes:
+
+\begin{itemize}
+    \item Si $0 < DW < d_L$, se rechaza $H_0$ y se concluye que $\rho > 0$, es decir, existe \textbf{autocorrelación positiva}.
+    \item Si $d_L < DW < d_U$, el test es \textbf{no concluyente}.
+    \item Si $d_U < DW < 4 - d_U$, se mantiene $H_0$ y se concluye que $\rho = 0$, es decir, los residuos están \textbf{incorrelacionados}.
+    \item Si $4 - d_U < DW < 4 - d_L$, el test es \textbf{no concluyente}.
+    \item Si $4 - d_L < DW < 4$, se rechaza $H_0$ y se concluye que $\rho < 0$, es decir, existe \textbf{autocorrelación negativa}.
+\end{itemize}
+
+Estas reglas permiten interpretar el valor del estadístico $DW$ en función de las cotas obtenidas para el tamaño de muestra y el número de regresores del modelo.
+
+
+\subsection{Contraste H de Durbin}
+
+El contraste de Durbin-Watson no es válido si en la regresión se incluye algún retardo de la variable dependiente entre las variables explicativas. En este caso, se utiliza el contraste $h$ de Durbin, especialmente en modelos como:
+
+\[
+Y_t = \alpha Y_{t-1} + \beta_1 + \beta_2 X_{2t} + \cdots + \beta_k X_{kt} + u_t,
+\]
+donde $u_t = \rho u_{t-1} + v_t$.
+
+Las hipótesis a contrastar son:
+
+\[
+\begin{cases}
+H_0 : \rho = 0 & \text{(incorrelación)} \\
+H_1 : \rho \neq 0 & \text{(correlación)}
+\end{cases}
+\]
+
+El estadístico utilizado es:
+
+\[
+h = \frac{\rho \cdot \sqrt{n}}{\sqrt{1 - n \cdot \widehat{\text{Var}}(\widehat{\alpha})}} \sim N(0, 1),
+\]
+
+donde se rechaza la hipótesis nula si $|h| > Z_{1 - \alpha / 2}$.
+
+\subsection{Contraste de Ljung-Box}
+
+El contraste de Ljung-Box es utilizado para verificar la independencia de los residuos, bajo la hipótesis de que las primeras $m$ autocorrelaciones son iguales a cero. Las hipótesis planteadas son:
+
+\[
+\begin{cases}
+H_0 : \rho_1 = \rho_2 = \cdots = \rho_m = 0 & \text{(incorrelación)} \\
+H_1 : \exists i \in \{1, 2, \dots, m\} \, \text{tal que } \rho_i \neq 0 & \text{(correlación)}
+\end{cases}
+\]
+
+El estadístico de contraste se define como:
+
+\[
+QLB = n(n + 2) \sum_{s=1}^m \frac{r(s)^2}{n - s},
+\]
+
+donde $r(s)$ es el coeficiente de autocorrelación muestral de orden $s$:
+
+\[
+r(s) = \frac{\sum_{t=s+1}^n e_t e_{t-s}}{\sum_{t=1}^n e_t^2}.
+\]
+
+La hipótesis nula se rechaza si:
+
+\[
+QLB > \chi^2_{m-1}(1 - \alpha).
+\]
+
+Si las observaciones son independientes, los coeficientes $r(s)$ serán cercanos a cero, y no se rechazará la hipótesis nula.
+
+El contraste puede ser implementado en Python utilizando el siguiente comando:
+
+\begin{verbatim}
+from statsmodels.stats.diagnostic import acorr_ljungbox
+acorr_ljungbox(mco.resid, lags=3)
+\end{verbatim}
+
+\subsection{Estimación bajo Autocorrelación}
+
+Consideremos el modelo:
+
+\[
+y = X\beta + u,
+\]
+
+donde:
+
+\begin{itemize}
+    \item $\mathbb{E}[u] = 0$,
+    \item $\mathbb{E}[u_i u_j] \neq 0$ para $i \neq j$ con $i, j \in \{1, \dots, n\}$,
+    \item $\text{Var}[u] = \sigma^2 \Omega$.
+\end{itemize}
+
+Estos supuestos implican que no se cumplen las condiciones de los Mínimos Cuadrados Ordinarios (MCO). Por lo tanto, utilizamos el método de Mínimos Cuadrados Generalizados (MCG), para lo cual necesitamos calcular $P$ tal que $\Omega^{-1} = P^\top P$.
+
+\subsubsection{Modelo Autorregresivo de Orden 1}
+
+Suponemos que $u_t$ sigue un proceso autorregresivo de orden 1, AR(1):
+
+\[
+u_t = \rho u_{t-1} + \varepsilon_t,
+\]
+
+donde $\varepsilon_t$ es ruido blanco\footnote{El término ruido blanco se refiere a un proceso estocástico con media cero, varianza constante y ausencia de correlación serial.}, $\rho$ es el coeficiente de autocorrelación con $-1 < \rho < 1$.
+
+A partir de esta especificación, se derivan las siguientes relaciones:
+
+\[
+\begin{aligned}
+    \mathbb{E}[u_t u_{t-1}] &= \rho \sigma^2, \\
+    \mathbb{E}[u_t u_{t-2}] &= \rho^2 \sigma^2, \\
+    \mathbb{E}[u_t u_{t-3}] &= \rho^3 \sigma^2, \\
+    \mathbb{E}[u_t u_{t-k}] &= \rho^k \sigma^2.
+\end{aligned}
+\]
+
+La matriz de covarianza de $u$, $\Omega$, toma la forma:
+
+\[
+\Omega = 
+\begin{pmatrix}
+1 & \rho & \rho^2 & \cdots & \rho^{n-1} \\
+\rho & 1 & \rho & \cdots & \rho^{n-2} \\
+\rho^2 & \rho & 1 & \cdots & \rho^{n-3} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+\rho^{n-1} & \rho^{n-2} & \rho^{n-3} & \cdots & 1
+\end{pmatrix}.
+\]
+
+Su inversa es:
+
+\[
+\Omega^{-1} = \frac{1}{1 - \rho^2}
+\begin{pmatrix}
+1 & -\rho & 0 & \cdots & 0 \\
+-\rho & 1 + \rho^2 & -\rho & \cdots & 0 \\
+0 & -\rho & 1 + \rho^2 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & -\rho \\
+0 & 0 & 0 & -\rho & 1
+\end{pmatrix}.
+\]
+
+\subsubsection{Transformación del Modelo}
+
+Partiendo del modelo original:
+
+\[
+\begin{aligned}
+    y_t &= \beta_1 + \beta_2 X_{2t} + \cdots + \beta_k X_{kt} + u_t, \\
+    y_{t-1} &= \beta_1 + \beta_2 X_{2,t-1} + \cdots + \beta_k X_{k,t-1} + u_{t-1},
+\end{aligned}
+\]
+
+obtenemos la transformación:
+
+\[
+y_t - \rho y_{t-1} = \beta_1 (1 - \rho) + \beta_2 (X_{2t} - \rho X_{2,t-1}) + \cdots + \beta_k (X_{kt} - \rho X_{k,t-1}) + (u_t - \rho u_{t-1}).
+\]
+
+Definiendo $y_t^* = y_t - \rho y_{t-1}$ y $X_{it}^* = X_{it} - \rho X_{i,t-1}$, el modelo queda:
+
+\[
+y_t^* = \beta_1 + \beta_2 X_{2t}^* + \cdots + \beta_k X_{kt}^* + \varepsilon_t,
+\]
+
+donde $\varepsilon_t$ cumple los supuestos para aplicar MCO. 
+
+\subsubsection{Primer Observación: Método Prais-Winsten}
+
+Para no perder la primera observación, Prais-Winsten propone:
+
+\[
+y_1^* = \sqrt{1 - \rho^2} y_1, \quad X_{i1}^* = \sqrt{1 - \rho^2} X_{i1}.
+\]
+
+\subsection{Modificación Prais-Winsten}
+
+El método de Prais-Winsten permite ajustar un modelo con autocorrelación mediante un procedimiento iterativo que combina transformaciones y reestimaciones. El proceso se describe a continuación:
+
+\begin{enumerate}
+    \item Estimación inicial por Mínimos Cuadrados Ordinarios (MCO), obteniendo los residuos $e_t$.
+    \item Estimación inicial de $\rho$ asumiendo el modelo $u_t = \rho u_{t-1} + \varepsilon_t$, utilizando los residuos $e_t$:
+    \[
+    \hat{\rho} = \frac{\sum_{t=2}^n e_t e_{t-1}}{\sum_{t=2}^n e_t^2}.
+    \]
+    \item Transformación del modelo a:
+    \[
+    y_t^* = y_t - \hat{\rho} y_{t-1}, \quad X_{it}^* = X_{it} - \hat{\rho} X_{i,t-1}.
+    \]
+    Se estima nuevamente por MCO el modelo transformado:
+    \[
+    y^* = X^* \beta + u^*,
+    \]
+    obteniendo nuevos residuos $e_t^*$.
+    \item Estimación actualizada de $\rho$ a partir de la regresión $e_t^* = \hat{\rho} e_{t-1}^* + \varepsilon_t^*$:
+    \[
+    \hat{\hat{\rho}} = \frac{\sum_{t=2}^n e_t^* e_{t-1}^*}{\sum_{t=2}^n (e_t^*)^2}.
+    \]
+    \item Repetición del proceso: el procedimiento se itera hasta que la estimación de $\rho$ se estabilice, es decir, la diferencia entre iteraciones consecutivas de $\hat{\rho}$ sea menor a $10^{-3}$.
+\end{enumerate}
+
+\subsubsection{Proceso Iterativo Cochrane-Orcutt}
+
+El proceso iterativo de Cochrane-Orcutt es similar al de Prais-Winsten, pero omite la primera observación en las transformaciones. Esto simplifica las estimaciones pero puede reducir la eficiencia en muestras pequeñas.
+
+\subsubsection{Implementación en Python}
+
+La implementación del procedimiento iterativo de Prais-Winsten puede realizarse utilizando la clase \texttt{GLSAR} de la biblioteca \texttt{statsmodels}:
+
+\begin{verbatim}
+import statsmodels.api as sm
+
+# Ajuste del modelo con iteraciones
+model = sm.GLSAR(y, sm.add_constant(x), rho=rho)
+results = model.iterative_fit(maxiter=100)
+\end{verbatim}
+
+\section{Recursos de Prácticas Relacionados con Python}
+
+Para ello pincha \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/Asignaturas/Tercer%20A%C3%B1o/ECO/Practicas/Python/econometria-main}{aquí}.
+
+
 
 
 \end{document}
