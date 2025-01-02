@@ -9,6 +9,7 @@
 \usepackage{lipsum}
 \usepackage{geometry}
 \geometry{top=3cm, bottom=3cm, left=2.5cm, right=2.5cm}
+\usepackage{pifont}
 
 
 
@@ -493,6 +494,8 @@ Hacer el ejercicio anterior, pero en Ruby.
     end
 \end{lstlisting}
 
+\section{Ejercicio 5}
+
 \subsection{Enunciado}
 
 Implementa en Java una clase paramétrica a partir de la cual se puedan definir clases de grupos de personas con un líder, como por ejemplo grupos de música con un cantante, o empresas con un jefe. Implementa también alguna de esas clases a partir de la clase paramétrica definida.
@@ -696,6 +699,590 @@ clases los atributos y operaciones de las distintas clases y de la interfaz Pres
     \end{tikzpicture}
 \end{center}
 
+\section{Ejercicio 7}
+
+\subsection{Enunciado}
+
+Teniendo el cuenta el siguiente diagrama de clases, señala en la segunda columna de la tabla
+aquellas líneas de código que contienen un error de compilación por incompatibilidad de
+tipos (ECIT) y escribe en la tercera columna la corrección necesaria para evitarlos.
+
+\subsection{Enunciado}
+
+Teniendo el cuenta el siguiente diagrama de clases, señala en la segunda columna de la tabla
+aquellas líneas de código que contienen un error de compilación por incompatibilidad de
+tipos (ECIT) y escribe en la tercera columna la corrección necesaria para evitarlos.
+
+\begin{center}
+    \begin{tikzpicture}[node distance=0.8cm, auto, scale=0.75, transform shape]
+
+    % Define the style for the classes
+    \tikzstyle{class} = [rectangle, draw, text width=4cm, text centered, rounded corners, minimum height=2em]
+    \tikzstyle{inherance} = [thick, -{Triangle[open, scale=1.5]}]
+    
+    %Main class
+    \node[class] (Girable) {\textit{<<interface>>}\textbf{Girable}};    
+
+    % artista
+    \node[class, right=0.6cm of Girable] (Artista) {\textbf{Artista}};
+
+    %subclasses
+    \node[class, below=0.6cm of Girable] (Cantante) {\textbf{Cantante}};
+    \node[class, below=0.6cm of Artista] (Bailarin) {\textbf{Bailarin}};
+    \node[class, below=0.6cm of Cantante] (Solista) {\textbf{Solista}};
+
+    %arrows
+    \draw[inherance] (Cantante.north) -- (Artista.south);
+    \draw[inherance] (Cantante.north) -- (Girable.south);
+    \draw[inherance] (Solista.north) -- (Cantante.south);
+    \draw[inherance] (Bailarin.north) -- (Artista.south);
+    
+
+    \end{tikzpicture}
+\end{center}
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Código} & \textbf{ECIT} & \textbf{Corrección} \\ \hline
+    Girable arti=new Artista(); &  &  \\ \hline
+    Cantante cant1=new Cantante(); &  &  \\ \hline
+    Cantante sol=new Solista(); &  &  \\ \hline
+    Solista cant2=new Cantante(); &  &  \\ \hline
+    Bailarin bail= new Artista(); &  &  \\ \hline
+    \end{tabular}
+    \caption{Tabla de código y corrección}
+\end{figure}
+
+\subsection{Solución}
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Código} & \textbf{ECIT} & \textbf{Corrección} \\ \hline
+    Girable arti=new Artista(); & X & Girable arti = new Cantante() \\ \hline
+    Cantante cant1=new Cantante(); & \ding{51} &  \\ \hline
+    Cantante sol=new Solista(); & \ding{51} &  \\ \hline
+    Solista cant2=new Cantante(); & X & Cantante cant2=new Cantante(); \\ \hline
+    Bailarin bail= new Artista(); & X & Bailarin bail= new Bailarin(); \\ \hline
+    \end{tabular}
+    \caption{Tabla de código y corrección}
+\end{figure}
+
+\section{Ejercicio 8}
+    \subsection{Enunciado}
+
+    Teniendo en cuenta:
+    \begin{itemize}
+        \item El diagrama de clases del ejercicio anterior
+        \item Que se han resuelto todos los errores del ejercicio
+        \item Que en Java la primera posición de los contenedores es la 0
+        \item Que todos los artistas actúan, pero sólo los cantantes cantan y sólo los solistas cantan solos
+    \end{itemize}
+
+    Marca las líneas donde se produce un error, indicando en la segunda columna si es de compilación (C) o de ejecución (E) y en la tercera el código correcto.
+
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{|l|c|l|}
+        \hline
+        \textbf{Código} & \textbf{Error (C/E)} & \textbf{Corrección} \\ \hline
+        List<Artista> lista = new ArrayList(); & &  \\ \hline
+        lista.add(arti); & &  \\ \hline
+        lista.add(cant1); & &  \\ \hline
+        lista.add(sol); & &  \\ \hline
+        lista.add(cant2); & &  \\ \hline
+        lista.add(bail); & &  \\ \hline
+        lista.get(1).canta(); & &  \\ \hline
+        lista.get(0).actua(); & &  \\ \hline
+        (Solista) lista.get(3).cantaSolo(); & &  \\ \hline
+        \end{tabular}
+        \caption{Tabla de código y corrección}
+    \end{figure}
+
+    \subsection{Solución}
+    
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{|l|c|p{5cm}|}
+        \hline
+        \textbf{Código} & \textbf{Error (C/E)} & \textbf{Corrección} \\ \hline
+        List<Artista> lista = new ArrayList(); & C & List<Artista> lista = new ArrayList<Artista>(); \\ \hline
+        lista.add(arti); & No & Debido a que es un cantante y es una subclase de artista \\ \hline
+        lista.add(cant1); & No & Debido a que cantante esta por debajo en el diagrama de clases \\ \hline
+        lista.add(sol); & No & Debido a que es una subclase de Cantante y esta también lo es de Artista \\ \hline
+        lista.add(cant2); & No & '' \\ \hline
+        lista.add(bail); & No & '' \\ \hline
+        lista.get(1).canta(); & No & Es un cantante \\ \hline
+        lista.get(0).actua(); & E & Es un cantante \\ \hline
+        (Solista) lista.get(3).cantaSolo(); & E & en la posición 3 es un cantante \\ \hline
+        \end{tabular}
+        \caption{Tabla de código y corrección}
+    \end{figure}
+    
+
+\section{Ejercicio 9}
+
+\subsection{Enunciado}
+
+Dado el siguiente diagrama de UML, impleméntalo en Java. Presta atención a que el
+nombre de la clase Vehículo y su método desplazarse() aparecen en cursiva.
+
+\begin{tikzpicture}[node distance=0.8cm, auto, scale=0.75, transform shape]
+
+    % Define the style for the classes
+    \tikzstyle{class} = [rectangle, draw, text width=4cm, text centered, rounded corners, minimum height=2em]
+    \tikzstyle{inherance} = [thick, -{Triangle[open, scale=1.5]}]
+    
+    %Main class
+    \node[class] (Vehiculo) {\textbf{Vehiculo} \\ -marca : String \\ -capacidad : double \\ -estado : String \\ +desplazarse() \\ +acelerar()};    
+    
+    % Interface
+    \node[class, right=1cm of Vehiculo] (Transporte) {\textit{<<interface>>} \\ \textbf{Transporte} \\ +desplazarse()};
+    
+    %subclasses
+    \node[class, below=0.6cm of Vehiculo] (Barco) {\textbf{Barco} \\ -eslora : double \\ +atracar() \\ +desplazarse()};
+    \node[class, right=0.6cm of Barco] (Avion) {\textbf{Avion} \\ -numMotores : int \\ +aterrizar() \\ +desplazarse()};
+    
+    %arrows
+    \draw[inherance] (Barco.north) -- (Vehiculo.south);
+    \draw[inherance] (Avion.north) -- (Vehiculo.south);
+    \draw[thick, dashed, -{Triangle[open, scale=1.5]}] (Vehiculo.east) -- (Transporte.west);
+    
+    \end{tikzpicture}
+
+\subsection{Solución}
+
+\begin{lstlisting}[style=customjava, caption={Clase Vehiculo} ]
+
+class Vehículo implements Transporte {
+    private String marca;
+    private double capacidad;
+    private String estado;
+
+    public void desplazarse() {
+        System.out.println("Desplazándose");
+    }
+
+    public void acelerar() {
+        System.out.println("Acelerando");
+    }
+}
+
+
+\end{lstlisting}
+
+\begin{lstlisting}[style=customjava, caption={Clase Barco} ]
+
+class Barco extends Vehículo {
+    private double eslora;
+
+    public void atracar() {
+        System.out.println("Atracando");
+    }
+
+    @Override
+    public void desplazarse() {
+        System.out.println("Desplazándose por el agua");
+    }
+}
+
+\end{lstlisting}
+
+
+\begin{lstlisting}[style=customjava, caption={Clase Avion} ]
+
+class Avion extends Vehículo {
+    private int numMotores;
+
+    public void aterrizar() {
+        System.out.println("Aterrizando");
+    }
+
+    @Override
+    public void desplazarse() {
+        System.out.println("Desplazándose por el aire");
+    }
+}
+
+\end{lstlisting}
+
+\begin{lstlisting}[style=customjava, caption={Interfaz Transporte} ]
+    
+interface Transporte {
+    void desplazarse();
+}
+
+\end{lstlisting}
+
+\section{Ejercicio 10}
+
+Teniendo presente el diagrama anterior, indica cuáles de los siguientes trozos de código
+son correctos y cuáles darían error de compilación o de ejecución. En caso de que den error,
+indica por qué y cómo lo solucionarías.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{6cm}|p{6cm}|}
+        \hline
+        \textbf{Código }& \textbf{Error si procede y corrección}\\
+        \hline
+        Transporte x = new Barco();
+        x.atracar(); & Error de compilación, ya que el tipo de la variable x es Transporte y no tiene el método atracar.\\
+        \hline
+        Avion av = new Avion();
+av.acelerar(); & Correcto.\\
+        \hline
+        Vehiculo v = new Vehiculo();
+v.desplazarse(); & Correcto.\\
+        \hline
+        Vehiculo v2 = new Vehiculo();
+v2.acelerar(); & Correcto.\\
+        \hline
+        Transporte t = new Avion():
+Barco b= new Barco();
+t = b; & Error de compilación, ya que no se puede asignar un objeto de tipo Barco a una variable de tipo Transporte.\\
+        \hline
+        Avion a = new Avion();
+String est = a.estado; & Error de compilación, ya que el atributo estado es privado en la clase Vehiculo.\\
+        \hline
+        Vehiculo v3 = new Barco();
+((Barco) v3).atracar(); & Correcto.\\
+        \hline
+        List<Transporte> listaTransportes = new
+ArrayList();
+listaTransportes.add(new Barco());
+listaTransportes.add(new Avion());
+listaTransportes.add(new Barco());
+for(Transporte tr: listaTransportes){
+tr.acelerar();
+tr.atracar();}  & Error de compilación, ya que el método atracar() no está definido en la interfaz Transporte.\\
+        \hline
+        List<Transporte> otraLista = new ArrayList();
+otraLista.add(new Barco());
+otraLista.add(new Avion());
+otraLista.add(new Barco());
+for(Transporte tr: otraLista){
+((Barco) tr).acelerar();
+((Barco) tr).atracar();} & Error de ejecución, ya que no se puede hacer un cast de un objeto de tipo Avion a Barco.\\
+        \hline
+    \end{tabular}
+\end{table}
+    
+\section{Ejercicio 11}
+
+\subsection{Enunciado}
+A partir del siguiente diagrama de clases y del código proporcionado, detecta errores de
+compilación y de ejecución. Corrígelos para que funcione correctamente.
+\begin{lstlisting}[style=customjava, caption={Ejercicio del Enunciado}]
+    class PruebaLigadura {
+        public static void main ( String args[]){
+            Coche c1 = new Coche();
+            c1.llevarCosas();
+            c1.correr();
+            Barco b = new Barco();
+            b.llevarCosas();
+            b.navegar();
+            b.correr();
+            b=c1;
+            Pesquero p = new Pesquero();
+            p.navegar();
+            p.pescar();
+            p.llevarCosas();
+            p=b;
+            b=p;
+            b.navegar();
+            b.pescar();
+            ArrayList v= new ArrayList();
+            v.add(c1);
+            v.add(p);
+            (v.get(1)).navegar();
+            (v.get(1)).llevarCosas();
+        }
+    }
+\end{lstlisting}
+
+\begin{tikzpicture}[node distance=0.8cm, auto, scale=0.75, transform shape]
+
+    % Define the style for the classes
+    \tikzstyle{class} = [rectangle, draw, text width=4cm, text centered, rounded corners, minimum height=2em]
+    \tikzstyle{inherance} = [thick, -{Triangle[open, scale=1.5]}]
+    
+    %Main class
+    \node[class] (Transporte) {\textbf{Transporte} \\ +llevarCosas() : void \\ +parar() : void};
+    
+    %subclasses
+    \node[class, below=0.6cm of Transporte] (Coche) {\textbf{Coche} \\ +llevarCosas() : void \\ +correr() : void};
+    \node[class, right=0.6cm of Coche] (Barco) {\textbf{Barco} \\ +llevarCosas() : void \\ +navegar() : void};
+    \node[class, below=0.6cm of Barco] (Pesquero) {\textbf{Pesquero} \\ +navegar() : void \\ +pescar() : void};
+    
+    %arrows
+    \draw[inherance] (Coche.north) -- (Transporte.south);
+    \draw[inherance] (Barco.north) -- (Transporte.south);
+    \draw[inherance] (Pesquero.north) -- (Barco.south);
+    
+\end{tikzpicture}
+
+\subsection{Solución}
+
+\begin{lstlisting}[style=customjava, caption={Ejercicio del Enunciado}]
+class PruebaLigadura {
+    public static void main ( String args[]){
+        Coche c1 = new Coche();
+        c1.llevarCosas();
+        c1.correr();
+        Barco b = new Barco();
+        b.llevarCosas();
+        b.navegar();
+        b.correr(); // Error: Barco no tiene el método correr
+        b=c1; // Error: No se puede asignar un Coche a un Barco
+        Pesquero p = new Pesquero();
+        p.navegar();
+        p.pescar();
+        p.llevarCosas();
+        p=b; // Error: No se puede asignar un Barco a un Pesquero
+        b=p;
+        b.navegar();    
+        b.pescar(); // Error: Barco no tiene el método pescar
+        ArrayList<Transporte> v= new ArrayList<>();
+        v.add(c1);
+        v.add(p);
+        ((Barco) v.get(1)).navegar();
+        v.get(1).llevarCosas();
+    }
+}
+
+//-----------Implementación de las clases------------------
+
+class Transporte {
+    public void llevarCosas() {
+        System.out.println("Llevando cosas");
+    }
+    public void parar() {
+        System.out.println("Parando");
+    }
+}
+
+class Coche extends Transporte {
+    public void correr() {
+        System.out.println("Corriendo");
+    }
+}
+
+class Barco extends Transporte {
+    public void navegar() {
+        System.out.println("Navegando");
+    }
+}
+
+class Pesquero extends Barco {
+    public void pescar() {
+        System.out.println("Pescando");
+    }
+}
+\end{lstlisting}
+
+\section{Ejercicio 12}
+
+\subsection{Enunciado}
+
+A partir de los siguientes diagramas de clases, resuelve las cuestiones que se plantea
+(siempre que sean de codificación hazlo en Java y en Ruby):
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth]{images/ej13.png}
+    \caption{Diagrama de clases}
+    \label{fig:ejercicio13}
+\end{figure}
+
+
+
+\begin{itemize}
+    \item Define la clase Documento (cabecera, atributos y cabeceras de los métodos).
+    \item Define la clase Articulo (cabecera, atributos y cabeceras de los métodos).
+    \item Implementa el constructor que se indica en la clase Artículo.
+    \item Define la interfaz Imprimible.
+    \item Indica los atributos que definen el estado de la clase BibliotecaElectronica.
+    \item La clase Documento figura en cursiva, lo que indica que es abstracta. Indica los dos motivos por los que lo es.
+    \item En este modelo, ¿puede haber artículos que no estén ligados a una revista?
+    \item Indica sobre las relaciones del diagrama de clases con cuál de los siguientes tipos se corresponden: asociación (AS), agregación (AG), composición (C), realización (R), herencia (H), dependencia (D).
+    \item Escribe el contenido del fichero VentanaBiblioteca completo (pero sin añadir nada que no aparezca en el diagrama).
+    \item En la clase Articulo, indica cuáles de sus métodos están sobrecargados o redefinidos. Justifica tu respuesta.
+    \item Corrige el código:
+    \begin{lstlisting}[style=customjava]
+    Imprimible docu = new Documento("Intemperie", fecha); // suponiendo que fecha está inicializada
+    docu.imprimir();
+    \end{lstlisting}
+    \item Corrige el código:
+    \begin{lstlisting}[style=customjava]
+    Documento docu = new Libro("ISBN10102030");
+    String codigo = docu.getIsbn();
+    \end{lstlisting}
+    \item Rellena la siguiente tabla indicando el tipo estático y dinámico de la variable docu en las siguientes líneas de código:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|l|l|l|}
+            \hline
+            \textbf{Código} & \textbf{Tipo estático} & \textbf{Tipo dinámico} \\ \hline
+            Documento docu = new Articulo(titulo, fecha, pagIni, pagFin); &  &  \\ \hline
+            docu.imprimir(pagIni, pagFin); &  &  \\ \hline
+            docu = new Libro(titulo, fecha, isbn, pags); &  &  \\ \hline
+            docu.imprimir(); &  &  \\ \hline
+        \end{tabular}
+    \end{table}
+    \item Indica si hay errores de compilación o ejecución en el código anterior (suponiendo que las variables titulo, fecha, pagIni, pagFin, isbn y pags han sido declaradas e inicializadas convenientemente con anterioridad). Justifica tu respuesta.
+    \item Rellena la siguiente tabla marcando con una “X” la situación que corresponda a cada una de las líneas del siguiente bloque de código (suponiendo que las variables titulo, fecha, pagIni y pagFin han sido declaradas e inicializadas convenientemente con anterioridad).
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
+            \hline
+            \textbf{Código} & \textbf{Ningún error} & \textbf{Sólo error de compilación} & \textbf{Sólo error de ejecución} \\ \hline
+            Imprimible imp = new Articulo(titulo, fecha, pagIni, pagFin); &  &  &  \\ \hline
+            Documento docu = imp; &  &  &  \\ \hline
+            imp.numeroPaginas(); &  &  &  \\ \hline
+            ((Libro) docu).getIsbn(); &  &  &  \\ \hline
+        \end{tabular}
+    \end{table}
+\end{itemize}
+
+\subsection{Solucion}
+Define la clase Documento (cabecera, atributos y cabeceras de los métodos).
+\begin{lstlisting}[style=customjava]
+public abstract class Documento {
+    private String titulo;
+    private Date fecha;
+
+    public String getTitulo();
+    public Date getFecha();
+    public void imprimir();
+}
+\end{lstlisting}
+
+Define la clase Articulo (cabecera, atributos y cabeceras de los métodos).
+\begin{lstlisting}[style=customjava]
+public class Articulo extends Documento {
+    private int pagIni;
+    private int pagFin;
+
+    public Articulo(String titulo, Date fecha, int pagIni, int pagFin);
+    public int getPagIni();
+    public int getPagFin();
+    @Override
+    public void imprimir();
+}
+\end{lstlisting}
+
+Implementa el constructor que se indica en la clase Artículo.
+\begin{lstlisting}[style=customjava]
+public Articulo(String titulo, Date fecha, int pagIni, int pagFin) {
+    super(titulo, fecha);
+    this.pagIni = pagIni;
+    this.pagFin = pagFin;
+}
+\end{lstlisting}
+
+Define la interfaz Imprimible.
+\begin{lstlisting}[style=customjava]
+public interface Imprimible {
+    void imprimir();
+}
+\end{lstlisting}
+
+Indica los atributos que definen el estado de la clase BibliotecaElectronica.
+\begin{lstlisting}[style=customjava]
+public class BibliotecaElectronica {
+    private List<Documento> documentos;
+}
+\end{lstlisting}
+
+La clase Documento figura en cursiva, lo que indica que es abstracta. Indica los dos motivos por los que lo es.
+\begin{itemize}
+    \item No se puede instanciar directamente.
+    \item Contiene al menos un método abstracto.
+\end{itemize}
+
+En este modelo, ¿puede haber artículos que no estén ligados a una revista?
+\begin{itemize}
+    \item No, todos los artículos deben estar ligados a una revista.
+\end{itemize}
+
+Indica sobre las relaciones del diagrama de clases con cuál de los siguientes tipos se corresponden: asociación (AS), agregación (AG), composición (C), realización (R), herencia (H), dependencia (D).
+\begin{itemize}
+    \item Documento - Articulo: H
+    \item Documento - Libro: H
+    \item Documento - Revista: H
+    \item BibliotecaElectronica - Documento: AG
+    \item Articulo - Revista: C
+    \item Documento - Imprimible: R
+\end{itemize}
+
+Escribe el contenido del fichero VentanaBiblioteca completo (pero sin añadir nada que no aparezca en el diagrama).
+\begin{lstlisting}[style=customjava]
+public class VentanaBiblioteca {
+    private BibliotecaElectronica biblioteca;
+
+    public VentanaBiblioteca(BibliotecaElectronica biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+
+    public void mostrar() {
+        // Implementación del método mostrar
+    }
+}
+\end{lstlisting}
+
+En la clase Articulo, indica cuáles de sus métodos están sobrecargados o redefinidos. Justifica tu respuesta.
+\begin{itemize}
+    \item El método \texttt{imprimir()} está redefinido porque sobrescribe el método de la clase \texttt{Documento}.
+\end{itemize}
+
+Corrige el código:
+\begin{lstlisting}[style=customjava]
+Imprimible docu = new Articulo("Intemperie", fecha, 1, 10);
+docu.imprimir();
+\end{lstlisting}
+
+Corrige el código:
+\begin{lstlisting}[style=customjava]
+Libro docu = new Libro("ISBN10102030");
+String codigo = docu.getIsbn();
+\end{lstlisting}
+
+Rellena la siguiente tabla indicando el tipo estático y dinámico de la variable docu en las siguientes líneas de código:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Código} & \textbf{Tipo estático} & \textbf{Tipo dinámico} \\ \hline
+        Documento docu = new Articulo(titulo, fecha, pagIni, pagFin); & Documento & Articulo \\ \hline
+        docu.imprimir(pagIni, pagFin); & Documento & Articulo \\ \hline
+        docu = new Libro(titulo, fecha, isbn, pags); & Documento & Libro \\ \hline
+        docu.imprimir(); & Documento & Libro \\ \hline
+    \end{tabular}
+\end{table}
+
+Indica si hay errores de compilación o ejecución en el código anterior (suponiendo que las variables titulo, fecha, pagIni, pagFin, isbn y pags han sido declaradas e inicializadas convenientemente con anterioridad). Justifica tu respuesta.
+\begin{itemize}
+    \item Hay un error de compilación en \texttt{docu.imprimir(pagIni, pagFin);} porque el método \texttt{imprimir()} no acepta parámetros en la clase \texttt{Documento}.
+\end{itemize}
+
+Rellena la siguiente tabla marcando con una “X” la situación que corresponda a cada una de las líneas del siguiente bloque de código (suponiendo que las variables titulo, fecha, pagIni y pagFin han sido declaradas e inicializadas convenientemente con anterioridad).
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
+        \hline
+        \textbf{Código} & \textbf{Ningún error} & \textbf{Sólo error de compilación} & \textbf{Sólo error de ejecución} \\ \hline
+        Imprimible imp = new Articulo(titulo, fecha, pagIni, pagFin); & X &  &  \\ \hline
+        Documento docu = imp; &  & X &  \\ \hline
+        imp.numeroPaginas(); &  & X &  \\ \hline
+        ((Libro) docu).getIsbn(); &  &  & X \\ \hline
+    \end{tabular}
+\end{table}
+
+        
 
 
 \end{document}
