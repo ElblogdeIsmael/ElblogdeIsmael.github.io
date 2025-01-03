@@ -1148,128 +1148,157 @@ A partir de los siguientes diagramas de clases, resuelve las cuestiones que se p
     \end{table}
 \end{itemize}
 
-\subsection{Solucion}
-Define la clase Documento (cabecera, atributos y cabeceras de los métodos).
-\begin{lstlisting}[style=customjava]
-public abstract class Documento {
-    private String titulo;
-    private Date fecha;
+\subsection{Solución en Java}
 
-    public String getTitulo();
-    public Date getFecha();
-    public void imprimir();
-}
-\end{lstlisting}
+\begin{lstlisting}[style=customjava, caption={lase Documento (cabecera, atributos y cabeceras de los métodos)}]
+    abstract class Documento implements Imprimible{
+        private String titulo;
+        private Date fechaPublicacion;
 
-Define la clase Articulo (cabecera, atributos y cabeceras de los métodos).
-\begin{lstlisting}[style=customjava]
-public class Articulo extends Documento {
-    private int pagIni;
-    private int pagFin;
 
-    public Articulo(String titulo, Date fecha, int pagIni, int pagFin);
-    public int getPagIni();
-    public int getPagFin();
-    @Override
-    public void imprimir();
-}
-\end{lstlisting}
+        public Documento(String titulo, Date fechaPublicacion);
 
-Implementa el constructor que se indica en la clase Artículo.
-\begin{lstlisting}[style=customjava]
-public Articulo(String titulo, Date fecha, int pagIni, int pagFin) {
-    super(titulo, fecha);
-    this.pagIni = pagIni;
-    this.pagFin = pagFin;
-}
-\end{lstlisting}
+        public Date getFechaPublicacion();
 
-Define la interfaz Imprimible.
-\begin{lstlisting}[style=customjava]
-public interface Imprimible {
-    void imprimir();
-}
-\end{lstlisting}
+        public abstract int numeroPaginas();
 
-Indica los atributos que definen el estado de la clase BibliotecaElectronica.
-\begin{lstlisting}[style=customjava]
-public class BibliotecaElectronica {
-    private List<Documento> documentos;
-}
-\end{lstlisting}
+        public void public incluirAutores(Autor[] autores);
 
-La clase Documento figura en cursiva, lo que indica que es abstracta. Indica los dos motivos por los que lo es.
-\begin{itemize}
-    \item No se puede instanciar directamente.
-    \item Contiene al menos un método abstracto.
-\end{itemize}
+        public void incluirDocuRelacionados(Documento[] docuRelacionados);
 
-En este modelo, ¿puede haber artículos que no estén ligados a una revista?
-\begin{itemize}
-    \item No, todos los artículos deben estar ligados a una revista.
-\end{itemize}
 
-Indica sobre las relaciones del diagrama de clases con cuál de los siguientes tipos se corresponden: asociación (AS), agregación (AG), composición (C), realización (R), herencia (H), dependencia (D).
-\begin{itemize}
-    \item Documento - Articulo: H
-    \item Documento - Libro: H
-    \item Documento - Revista: H
-    \item BibliotecaElectronica - Documento: AG
-    \item Articulo - Revista: C
-    \item Documento - Imprimible: R
-\end{itemize}
-
-Escribe el contenido del fichero VentanaBiblioteca completo (pero sin añadir nada que no aparezca en el diagrama).
-\begin{lstlisting}[style=customjava]
-public class VentanaBiblioteca {
-    private BibliotecaElectronica biblioteca;
-
-    public VentanaBiblioteca(BibliotecaElectronica biblioteca) {
-        this.biblioteca = biblioteca;
     }
 
-    public void mostrar() {
-        // Implementación del método mostrar
+\end{lstlisting}
+
+\begin{lstlisting}[style=customjava, caption={clase Articulo (cabecera, atributos y cabeceras de los métodos), constructor de la clase Artículo}]
+    class Articulo extends Documento{
+        private int paginaInicio;
+        private int paginaFin;
+
+        public Articulo(String tit, Date fecPubli, int pagI, int pagF){
+            super(tit, fecPubli);
+            this.paginaInicio = pagI;
+            this.paginaFin = pagF;
+        }
+        public int numeroPaginas();
+        public void imprimir();
+        public void imprimir(int numeroPagina);
+        public void imprimir(int pagInicio, int pagFin);
     }
-}
+    
 \end{lstlisting}
 
-En la clase Articulo, indica cuáles de sus métodos están sobrecargados o redefinidos. Justifica tu respuesta.
-\begin{itemize}
-    \item El método \texttt{imprimir()} está redefinido porque sobrescribe el método de la clase \texttt{Documento}.
-\end{itemize}
+\begin{lstlisting}[style=customjava, caption = {Intefaz Imprimible}]
+    interface Imprimible {
+        public void imprimir();
+        public void imprimir(int numeroPagina);
+        public void imprimir(int pagInicio, int pagFin);
+    }
 
-Corrige el código:
-\begin{lstlisting}[style=customjava]
-Imprimible docu = new Articulo("Intemperie", fecha, 1, 10);
-docu.imprimir();
+
+
 \end{lstlisting}
 
-Corrige el código:
-\begin{lstlisting}[style=customjava]
-Libro docu = new Libro("ISBN10102030");
-String codigo = docu.getIsbn();
+\begin{lstlisting}[style = customjava, caption = {Atributos que definen el estado de la clase BibliotecaElectronica}]
+    class BibliotecaElectronica{
+        private Autor autores[];
+        private Documento documentos[];
+        private Revista resvistas[];
+    }
 \end{lstlisting}
 
-Rellena la siguiente tabla indicando el tipo estático y dinámico de la variable docu en las siguientes líneas de código:
-\begin{table}[H]
+\subsubsection*{Motivos por los que la clase Documento es abstracta}
+\begin{enumerate}
+    \item Sirve como clase plantilla para las clases Libro y Revista que son clases hijas según el diagrama de clases.
+    \item Contiene al menos un método abstracto, que en este caso es el método \texttt{numeroPaginas()}.
+\end{enumerate}
+
+\subsubsection*{¿Puede haber artículos que no estén ligados a una revista?}
+
+En este modelo si, lo que no puede haber son revistas que no estén ligadas a un Artículo debido a que según el diagrama de clases y la lógica el rombo de la flecha de composición parte de la clase Artículo.
+
+\subsubsection*{Pintar en el diagrama de clases las uniones de: asociación (AS), agregación (AG), composición (C), realización (R), herencia (H), dependencia (D)}
+
+\begin{figure}[H]
     \centering
-    \begin{tabular}{|l|l|l|}
-        \hline
-        \textbf{Código} & \textbf{Tipo estático} & \textbf{Tipo dinámico} \\ \hline
-        Documento docu = new Articulo(titulo, fecha, pagIni, pagFin); & Documento & Articulo \\ \hline
-        docu.imprimir(pagIni, pagFin); & Documento & Articulo \\ \hline
-        docu = new Libro(titulo, fecha, isbn, pags); & Documento & Libro \\ \hline
-        docu.imprimir(); & Documento & Libro \\ \hline
-    \end{tabular}
-\end{table}
+    \includegraphics[width=0.9\textwidth]{images/ej12.png}
+    \caption{Diagrama de clases}
+    \label{fig:ejercicio12}
+\end{figure}
 
-Indica si hay errores de compilación o ejecución en el código anterior (suponiendo que las variables titulo, fecha, pagIni, pagFin, isbn y pags han sido declaradas e inicializadas convenientemente con anterioridad). Justifica tu respuesta.
+\subsubsection*{Contenido del fichero VentanaBiblioteca completo (pero sin añadir nada que no aparezca en el diagrama)}
+
+\begin{lstlisting}[style=customjava, caption={VentanaBiblioteca}]
+    class VentanaBiblioteca{
+        private BibliotecaElectronica biblioteca;
+
+        public VentanaBiblioteca(BibliotecaElectronica biblioteca){
+            this.biblioteca = biblioteca;
+        }
+    }
+\end{lstlisting}
+
+\subsubsection*{En la clase Articulo, indica cuáles de sus métodos están sobrecargados o redefinidos. Justifica tu respuesta.}
+
 \begin{itemize}
-    \item Hay un error de compilación en \texttt{docu.imprimir(pagIni, pagFin);} porque el método \texttt{imprimir()} no acepta parámetros en la clase \texttt{Documento}.
+    \item El método \texttt{imprimir()} está redefinido porque sobrescribe el método de la clase \texttt{Documento}, el cual lo implementa de la interfaz \texttt{Imprimible}.
+    \item El método \texttt{imprimir(int numeroPagina)} está sobrecargado porque tiene la misma firma que el método \texttt{imprimir()} pero con un parámetro adicional, el cual lo implementa de la interfaz \texttt{Imprimible}.
+    \item El método \texttt{imprimir(int pagInicio, int pagFin)} está sobrecargado porque tiene la misma firma que el método \texttt{imprimir()} pero con dos parámetros adicionales, el cual lo implementa de la interfaz \texttt{Imprimible}.
+    \item El método \texttt{numeroPaginas()} está redefinido porque sobrescribe el método de la clase \texttt{Documento}.
 \end{itemize}
 
-Rellena la siguiente tabla marcando con una “X” la situación que corresponda a cada una de las líneas del siguiente bloque de código (suponiendo que las variables titulo, fecha, pagIni y pagFin han sido declaradas e inicializadas convenientemente con anterioridad).
+\subsubsection*{Corrige el código}
+
+    \begin{lstlisting}[style=customjava, caption = {Código a corregir}]
+    Imprimible docu = new Documento("Intemperie", fecha); // suponiendo que fecha está inicializada
+    docu.imprimir();
+    \end{lstlisting}
+
+Corrección:
+\begin{lstlisting}[style=customjava, caption={Corrección del código}]
+    Documento docu = new Articulo("Intemperie", fecha, 1, 10);
+    docu.imprimir();
+\end{lstlisting}
+
+\subsubsection*{Corrige el código:}
+    \begin{lstlisting}[style=customjava, caption = {Código a corregir}]
+    Documento docu = new Libro("ISBN10102030");
+    String codigo = docu.getIsbn();
+    \end{lstlisting}
+
+Corrección:
+\begin{lstlisting}[style=customjava, caption={Corrección del código}]
+    Libro docu = new Libro("ISBN10102030");
+    String codigo = docu.getIsbn();
+\end{lstlisting}
+
+\subsubsection*{Rellena la siguiente tabla indicando el tipo estático y dinámico de la variable docu en las siguientes líneas de código:
+}    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|p{6cm}|l|l|}
+            \hline
+            \textbf{Código} & \textbf{Tipo estático} & \textbf{Tipo dinámico} \\ \hline
+            Documento docu = new Articulo(titulo, fecha, pagIni, pagFin); & Documento & Articulo \\ \hline
+            docu.imprimir(pagIni, pagFin); & Documento & Articulo \\ \hline
+            docu = new Libro(titulo, fecha, isbn, pags); & Documento & Libro \\ \hline
+            docu.imprimir(); & Documento & Libro \\ \hline
+        \end{tabular}
+    \end{table}
+
+
+\subsubsection*{Indica si hay errores de compilación o ejecución en el código anterior (suponiendo que las variables titulo, fecha, pagIni, pagFin, isbn y pags han sido declaradas e inicializadas convenientemente con anterioridad). Justifica tu respuesta.}
+
+\begin{itemize}
+    \item En la primera línea de código no hay errores de compilación ni de ejecución.
+    \item "
+    \item "
+    \item "
+\end{itemize}
+
+\subsubsection*{Rellena la siguiente tabla marcando con una “X” la situación que corresponda a cada una de las líneas del siguiente bloque de código (suponiendo que las variables titulo, fecha, pagIni y pagFin han sido declaradas e inicializadas convenientemente con anterioridad).}
+
 \begin{table}[H]
     \centering
     \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
@@ -1282,7 +1311,453 @@ Rellena la siguiente tabla marcando con una “X” la situación que correspond
     \end{tabular}
 \end{table}
 
-        
+\subsection{Solución en Ruby}
+
+\begin{lstlisting}[style=customrb, caption={Clase Documento (cabecera, atributos y cabeceras de los métodos)}]
+    class Documento
+        attr_reader :titulo, :fecha_publicacion
+
+        def initialize(titulo, fecha_publicacion)
+            @titulo = titulo
+            @fecha_publicacion = fecha_publicacion
+        end
+
+        def numero_paginas
+            raise NotImplementedError, 'Debe ser implementado en una subclase'
+        end
+
+        def incluir_autores(autores)
+            # Implementación
+        end
+
+        def incluir_documentos_relacionados(documentos)
+            # Implementación
+        end
+    end
+\end{lstlisting}
+
+\begin{lstlisting}[style=customrb, caption={Clase Articulo (cabecera, atributos y cabeceras de los métodos), constructor de la clase Artículo}]
+    class Articulo < Documento
+        attr_reader :pagina_inicio, :pagina_fin
+
+        def initialize(titulo, fecha_publicacion, pagina_inicio, pagina_fin)
+            super(titulo, fecha_publicacion)
+            @pagina_inicio = pagina_inicio
+            @pagina_fin = pagina_fin
+        end
+
+        def numero_paginas
+            @pagina_fin - @pagina_inicio + 1
+        end
+
+        def imprimir
+            # Implementación
+        end
+
+        def imprimir_por_pagina(numero_pagina)
+            # Implementación
+        end
+
+        def imprimir_por_rango(pagina_inicio, pagina_fin)
+            # Implementación
+        end
+    end
+\end{lstlisting}
+
+\begin{lstlisting}[style=customrb, caption={Interfaz Imprimible}]
+    module Imprimible
+        def imprimir
+            # Implementación
+        end
+
+        def imprimir_por_pagina(numero_pagina)
+            # Implementación
+        end
+
+        def imprimir_por_rango(pagina_inicio, pagina_fin)
+            # Implementación
+        end
+    end
+\end{lstlisting}
+
+\begin{lstlisting}[style=customrb, caption={Atributos que definen el estado de la clase BibliotecaElectronica}]
+    class BibliotecaElectronica
+        attr_accessor :autores, :documentos, :revistas
+    end
+\end{lstlisting}
+
+\subsubsection*{Motivos por los que la clase Documento es abstracta}
+\begin{enumerate}
+    \item Sirve como clase plantilla para las clases Libro y Revista que son clases hijas según el diagrama de clases.
+    \item Contiene al menos un método abstracto, que en este caso es el método \texttt{numero\_paginas}.
+\end{enumerate}
+
+\subsubsection*{¿Puede haber artículos que no estén ligados a una revista?}
+
+En este modelo sí, lo que no puede haber son revistas que no estén ligadas a un Artículo debido a que según el diagrama de clases y la lógica el rombo de la flecha de composición parte de la clase Artículo.
+
+\subsubsection*{Pintar en el diagrama de clases las uniones de: asociación (AS), agregación (AG), composición (C), realización (R), herencia (H), dependencia (D)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/ej12.png}
+    \caption{Diagrama de clases}
+    \label{fig:ejercicio12}
+\end{figure}
+
+\subsubsection*{Contenido del fichero VentanaBiblioteca completo (pero sin añadir nada que no aparezca en el diagrama)}
+
+\begin{lstlisting}[style=customrb, caption={VentanaBiblioteca}]
+    class VentanaBiblioteca
+        attr_accessor :biblioteca
+
+        def initialize(biblioteca)
+            @biblioteca = biblioteca
+        end
+    end
+\end{lstlisting}
+
+\subsubsection*{En la clase Articulo, indica cuáles de sus métodos están sobrecargados o redefinidos. Justifica tu respuesta.}
+
+\begin{itemize}
+    \item El método \texttt{imprimir} está redefinido porque sobrescribe el método de la clase \texttt{Documento}, el cual lo implementa de la interfaz \texttt{Imprimible}.
+    \item El método \texttt{imprimir\_por\_pagina} está sobrecargado porque tiene la misma firma que el método \texttt{imprimir}, pero con un parámetro adicional, el cual lo implementa de la interfaz \texttt{Imprimible}.
+    \item El método \texttt{imprimir\_por\_rango} está sobrecargado porque tiene la misma firma que el método \texttt{imprimir}, pero con dos parámetros adicionales, el cual lo implementa de la interfaz \texttt{Imprimible}.
+    \item El método \texttt{numero\_paginas} está redefinido porque sobrescribe el método de la clase \texttt{Documento}.
+\end{itemize}
+
+\subsubsection*{Corrige el código}
+
+    \begin{lstlisting}[style=customrb, caption = {Código a corregir}]
+    imp = Documento.new("Intemperie", fecha)  # suponiendo que fecha está inicializada
+    imp.imprimir
+    \end{lstlisting}
+
+Corrección:
+\begin{lstlisting}[style=customrb, caption={Corrección del código}]
+    imp = Articulo.new("Intemperie", fecha, 1, 10)
+    imp.imprimir
+\end{lstlisting}
+
+\subsubsection*{Corrige el código:}
+    \begin{lstlisting}[style=customrb, caption = {Código a corregir}]
+    docu = Libro.new("ISBN10102030")
+    codigo = docu.isbn
+    \end{lstlisting}
+
+Corrección:
+\begin{lstlisting}[style=customrb, caption={Corrección del código}]
+    docu = Libro.new("ISBN10102030")
+    codigo = docu.isbn
+\end{lstlisting}
+
+\subsubsection*{Rellena la siguiente tabla indicando el tipo estático y dinámico de la variable docu en las siguientes líneas de código:}
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|p{6cm}|l|l|}
+            \hline
+            \textbf{Código} & \textbf{Tipo estático} & \textbf{Tipo dinámico} \\ \hline
+            docu = Articulo.new(titulo, fecha, pag\_ini, pag\_fin) & Documento & Articulo \\ \hline
+            docu.imprimir(pag\_ini, pag\_fin) & Documento & Articulo \\ \hline
+            docu = Libro.new(titulo, fecha, isbn, pags) & Documento & Libro \\ \hline
+            docu.imprimir & Documento & Libro \\ \hline
+        \end{tabular}
+    \end{table}
+
+\subsubsection*{Indica si hay errores de compilación o ejecución en el código anterior (suponiendo que las variables titulo, fecha, pag\_ini, pag\_fin, isbn y pags han sido declaradas e inicializadas convenientemente con anterioridad). Justifica tu respuesta.}
+
+\begin{itemize}
+    \item En la primera línea de código no hay errores de compilación ni de ejecución.
+    \item En la segunda línea no hay errores de compilación ni de ejecución.
+    \item En la tercera línea no hay errores de compilación ni de ejecución.
+    \item En la cuarta línea no hay errores de compilación ni de ejecución.
+\end{itemize}
+
+\subsubsection*{Rellena la siguiente tabla marcando con una “X” la situación que corresponda a cada una de las líneas del siguiente bloque de código (suponiendo que las variables titulo, fecha, pag\_ini y pag\_fin han sido declaradas e inicializadas convenientemente con anterioridad).}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
+        \hline
+        \textbf{Código} & \textbf{Ningún error} & \textbf{Sólo error de compilación} & \textbf{Sólo error de ejecución} \\ \hline
+        imp = Articulo.new(titulo, fecha, pag\_ini, pag\_fin) & X &  &  \\ \hline
+        docu = imp &  & X &  \\ \hline
+        imp.numero\_paginas &  & X &  \\ \hline
+        docu.isbn &  &  & X \\ \hline
+    \end{tabular}
+\end{table}
+
+
+
+
+
+
+
+\section{Ejercicio 13}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth]{images/ej14.png}
+    \caption{Diagrama de clases}
+    \label{fig:ejercicio14}
+\end{figure}
+
+\subsection{Enunciado Y Solución}
+
+%tabla 1
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{7cm}|c|}
+    \hline
+    \textbf{Cuestión} & \textbf{Respuesta} \\ \hline
+    Desde la clase NoticiaDeportiva se puede acceder a todos los elementos públicos del paquete GestorCampeonatosAtletismo directamente & F \\ \hline
+    Un CorredorVallas es un Velocista y Saltador & V \\ \hline
+    El estado de un objeto de la clase Juez no viene determinado por el estado de un objeto de la clase PruebaAtletismo & V \\ \hline
+    Una PruebaAtletismo puede existir sin estar asociada a la clase Campeonato & V \\ \hline
+    Un Velocista es un Corredor & V \\ \hline
+    Un Deportista es un Corredor & F \\ \hline
+    La clase Corredor tiene 4 métodos, 3 abstractos y 1 concreto & F \\ \hline
+    La clase Marchista está mal representada en el diagrama, debe ser abstracta & F \\ \hline
+    La clase CorredorVallas presenta un conflicto de nombres & F \\ \hline
+    Todas las instancias de la clase Campeonato tienen una copia de la variable PresidenteFEA & V \\ \hline
+    \end{tabular}
+    \caption{Cuestiones Verdaderas o Falsas}
+\end{table}
+
+%tabla2
+% Tabla de métodos abstractos en Marchista
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|}
+    \hline
+    \textbf{Método} & \textbf{Abstracto} \\ \hline
+    correr() & No, porque es una redefinición   \\ \hline
+    comerSano() &  \\ \hline
+    entrenar() &  \\ \hline
+    entrenar(nombreEntrenador:String) &  \\ \hline
+    \end{tabular}
+    \caption{Métodos abstractos en Marchista}
+\end{table}
+
+% Tabla de métodos redefinidos y sobrecargados en Velocista
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|}
+    \hline
+    \textbf{Método} & \textbf{Redefinido} & \textbf{Sobrecargado} \\ \hline
+    correr() & X, porque cambia la cabecera &  \\ \hline
+    comerSano() & X &  \\ \hline
+    entrenar() & X, aunque sea de la interfaz &  \\ \hline
+    \end{tabular}
+    \caption{Métodos redefinidos o sobrecargados en Velocista}
+\end{table}
+
+% Tabla de tipo estático y dinámico de variables
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+    & \textbf{Variable} & \textbf{Tipo Estático} & \textbf{Tipo Dinámico} \\ \hline
+    Deportista c = new Velocista(); & c& Deportista & Velocista \\ \hline
+    Corredor d = new Marchista(); &d &Corredor & Marchista \\ \hline
+    c = new Marchista(); &c& Deportista & Marchista \\ \hline
+    d = c; & d&Corredor & Marchista \\ \hline
+    \end{tabular}
+    \caption{Tipo estático y dinámico de variables}
+\end{table}
+
+%ultima parte
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{7cm}|p{5cm}|p{3cm}|}
+        \hline
+        \textbf{Código} & \textbf{Corrección del error en Compilación} & \textbf{Error en ejecución} \\ \hline
+        Corredor c = new Velocista(); & Ninguno & Ninguno \\ \hline
+        Deportista d = new Marchista(); & Ninguno & Ninguno \\ \hline
+        d.comerSano(); & Ninguno & Ninguno \\ \hline
+        Marchista m = (Marchista) d; & Ninguno & Ninguno \\ \hline
+        d = c; & Ninguno & Ninguno \\ \hline
+        d.correr(150); & El método correr(int) no está definido en la interfaz Deportista & Ninguno \\ \hline
+        Velocista v = (Velocista) d; & Ninguno & Error en ejecución si d no es una instancia de Velocista \\ \hline
+        ArrayList<Corredor> corredores = new ArrayList<>(); & Ninguno & Ninguno \\ \hline
+        corredores.add(c); & Ninguno & Ninguno \\ \hline
+        corredores.add(m); & Ninguno & Ninguno \\ \hline
+        corredores.get(0).correr(10); & El método correr(int) no está definido en Corredor & Ninguno \\ \hline
+        corredores.get(1).correr(10); & El método correr(int) no está definido en Corredor & Ninguno \\ \hline
+        c = new Corredor(); & No se puede instanciar una clase abstracta & Ninguno \\ \hline
+    \end{tabular}
+    \caption{Corrección de errores de compilación y ejecución}
+\end{table}
+
+Para una explicación más detallada pincha \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/Asignaturas/Tercer%20A%C3%B1o/PDOO/Teoria/RelacionesEjercicios/Solt3/ETSIIT/explicacion_ej14.md}{aquí}.
+
+%codigo
+\begin{lstlisting}[style=customjava, caption={Código en java}]
+    public class Club<T> {
+    private Map<String, T> miembros; // key = número de licencia
+    private T lider;
+
+    // Constructor
+    public Club(T lider) {
+        this.lider = lider;
+        this.miembros = new HashMap<>();
+    }
+
+    // Consultor de un miembro del club a partir del numero de licencia
+    public T getMiembro(String numeroLicencia) {
+        return miembros.get(numeroLicencia);
+    }
+
+    // Incluir un nuevo miembro en el club
+    public void incluirMiembro(String numeroLicencia, T miembro) {
+        miembros.put(numeroLicencia, miembro);
+    }
+
+    // Cambiar el líder
+    public void setLider(T lider) {
+        this.lider = lider;
+    }
+
+    // Obtener el líder
+    public T getLider() {
+        return lider;
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=customcpp, caption={Main}]
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        // Creamos una instancia de Velocista
+        Velocista lider = new Velocista("Usain Bolt", "001", 9.58f);
+
+        // Creamos un club de Velocistas, con Usain Bolt como líder inicial
+        Club<Velocista> clubDeVelocistas = new Club<>(lider);
+
+        // Creamos más miembros del club
+        Velocista miembro1 = new Velocista("Carl Lewis", "002", 9.86f);
+        Velocista miembro2 = new Velocista("Tyson Gay", "003", 9.69f);
+
+        // Añadimos miembros al club
+        clubDeVelocistas.incluirMiembro("002", miembro1);
+        clubDeVelocistas.incluirMiembro("003", miembro2);
+
+        // Consultamos los miembros
+        System.out.println("Líder del club: " + clubDeVelocistas.getLider().getNombre());
+        System.out.println("Miembro con licencia 002: " + clubDeVelocistas.getMiembro("002").getNombre());
+        System.out.println("Miembro con licencia 003: " + clubDeVelocistas.getMiembro("003").getNombre());
+
+        // Cambiamos el líder del club
+        clubDeVelocistas.setLider(miembro1);
+        System.out.println("Nuevo líder del club: " + clubDeVelocistas.getLider().getNombre());
+    }
+}
+
+// Clase Velocista
+class Velocista {
+    private String nombre;
+    private String licencia;
+    private float mejorMarca;
+
+    // Constructor
+    public Velocista(String nombre, String licencia, float mejorMarca) {
+        this.nombre = nombre;
+        this.licencia = licencia;
+        this.mejorMarca = mejorMarca;
+    }
+
+    // Getters
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getLicencia() {
+        return licencia;
+    }
+
+    public float getMejorMarca() {
+        return mejorMarca;
+    }
+}
+
+\end{lstlisting}
+
+\begin{lstlisting}[caption = {Salida del Main}]
+Líder del club: Usain Bolt
+Miembro con licencia 002: Carl Lewis
+Miembro con licencia 003: Tyson Gay
+Nuevo líder del club: Carl Lewis
+
+\end{lstlisting}
+
+
+\section{Ejercicio 14}
+
+\subsection{Enunciado}
+
+Dado el siguiente diagrama de clases:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth]{images/ej15.png}
+    \caption{Diagrama de clases}
+    \label{fig:ejercicio15}
+\end{figure}
+
+\subsection{Enunciado}
+
+Indica si las siguientes líneas de código Java producen error de compilación, de ejecución, ambos o ninguno. Supón que están en un \texttt{main} en una clase nueva dentro del mismo paquete. Si hay error explica cómo lo arreglarías y si no hay error, indícalo explícitamente. Considera para este ejercicio que todas las clases tienen un constructor válido que no recibe atributos.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{6cm}|l|l|}
+        \hline
+        \textbf{Código} & \textbf{Error de compilación} & \textbf{Error de ejecución} \\ \hline
+        Formador f = new Intermediario(); & Ninguno & Ninguno \\ \hline
+        f.pagarSS(23.4); & Ninguno & Ninguno \\ \hline
+        Autonomo auto1 = f; & Sí & Ninguno \\ \hline
+        Autonomo auto2 = (Proveedor) f; & Sí & Ninguno \\ \hline
+        IntermediarioAgresivo emp1 = new IntermediarioAgresivo(); & Ninguno & Ninguno \\ \hline
+        emp1.ajustarPrecioProductos(); & Ninguno & Ninguno \\ \hline
+        Empresario emp2 = new Empresario(); & Ninguno & Ninguno \\ \hline
+        ArrayList<Formador> formadores = new ArrayList(); & Sí & Ninguno \\ \hline
+        formadores.add(f); & Ninguno & Ninguno \\ \hline
+        formadores.add(emp1); & Ninguno & Ninguno \\ \hline
+        formadores.get(1).impartirCurso(); & Ninguno & Ninguno \\ \hline
+        formadores.get(1).impartirCurso(f); & Sí & Ninguno \\ \hline
+        ((IntermediarioAgresivo)formadores.get(0)).impartirCurso(emp1); & Ninguno & Ninguno \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Solución}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{6cm}|l|l|}
+        \hline
+        \textbf{Código} & \textbf{Error de compilación} & \textbf{Error de ejecución} \\ \hline
+        Formador f = new Intermediario(); & Ninguno & Ninguno \\ \hline
+        f.pagarSS(23.4); & Ninguno & Ninguno \\ \hline
+        Autonomo auto1 = f; & Sí & Ninguno \\ \hline
+        Autonomo auto2 = (Proveedor) f; & Sí & Ninguno \\ \hline
+        IntermediarioAgresivo emp1 = new IntermediarioAgresivo(); & Ninguno & Ninguno \\ \hline
+        emp1.ajustarPrecioProductos(); & Ninguno & Ninguno \\ \hline
+        Empresario emp2 = new Empresario(); & Ninguno & Ninguno \\ \hline
+        ArrayList<Formador> formadores = new ArrayList(); & Sí & Ninguno \\ \hline
+        formadores.add(f); & Ninguno & Ninguno \\ \hline
+        formadores.add(emp1); & Ninguno & Ninguno \\ \hline
+        formadores.get(1).impartirCurso(); & Ninguno & Ninguno \\ \hline
+        formadores.get(1).impartirCurso(f); & Sí & Ninguno \\ \hline
+        ((IntermediarioAgresivo)formadores.get(0)).impartirCurso(emp1); & Ninguno & Ninguno \\ \hline
+    \end{tabular}
+\end{table}
+
+
+Para una explicación más detallada pincha \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/Asignaturas/Tercer%20A%C3%B1o/PDOO/Teoria/RelacionesEjercicios/Solt3/ETSIIT/explicacion_ej15.md}{aquí}.
+
 
 
 \end{document}
