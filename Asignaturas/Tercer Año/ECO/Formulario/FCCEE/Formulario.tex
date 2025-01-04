@@ -35,22 +35,22 @@
 % Paquete para fondo
 \usepackage{background}
 
-% Configuración de lstlisting
-\lstset{
-    language=Python,
-    basicstyle=\ttfamily\small,
-    keywordstyle=\color{blue}\bfseries,
-    stringstyle=\color{teal},
-    commentstyle=\color{gray}\itshape,
-    numbers=left,
-    numberstyle=\tiny\color{gray},
-    backgroundcolor=\color{black!5},
-    frame=single,
-    rulecolor=\color{black!50},
-    breaklines=true,
-    captionpos=b,
-    showstringspaces=false
-}
+% % Configuración de lstlisting
+% \lstset{
+%     language=Python,
+%     basicstyle=\ttfamily\small,
+%     keywordstyle=\color{blue}\bfseries,
+%     stringstyle=\color{teal},
+%     commentstyle=\color{gray}\itshape,
+%     numbers=left,
+%     numberstyle=\tiny\color{gray},
+%     backgroundcolor=\color{black!5},
+%     frame=single,
+%     rulecolor=\color{black!50},
+%     breaklines=true,
+%     captionpos=b,
+%     showstringspaces=false
+% }
 
 %COMANDOS
 \newcommand{\betaEstimada}{\vec{\hat{\beta}}}
@@ -100,6 +100,93 @@
     vshift=0pt,
     hshift=0pt,
     contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{images/granada.jpg}}
+}
+
+%lstlisting personalizado y completo para python
+% Configuración de lstlisting
+\lstset{
+    inputencoding=utf8,          % Permite UTF-8
+    extendedchars=true,          % Reconoce caracteres extendidos
+    literate=                    % Configuración manual para tildes y símbolos
+        {á}{{\'a}}1
+        {é}{{\'e}}1
+        {í}{{\'i}}1
+        {ó}{{\'o}}1
+        {ú}{{\'u}}1
+        {ñ}{{\~n}}1
+        {Á}{{\'A}}1
+        {É}{{\'E}}1
+        {Í}{{\'I}}1
+        {Ó}{{\'O}}1
+        {Ú}{{\'U}}1
+        {Ñ}{{\~N}}1
+        {¿}{{\textquestiondown}}1
+        {¡}{{\textexclamdown}}1,
+    basicstyle=\ttfamily,        % Fuente monoespaciada
+    breaklines=true,             % Habilita salto de línea automático
+    frame=single,                % Marco alrededor del código
+    backgroundcolor=\color{gray!10}, % Fondo gris claro
+    keywordstyle=\color{blue},   % Color para palabras clave
+    commentstyle=\color{green},  % Color para comentarios
+    stringstyle=\color{red}      % Color para strings
+}
+\lstdefinestyle{customcpp}{
+    language=C++,                % Lenguaje de programación
+    showspaces=false,            % No mostrar espacios
+    showtabs=false,              % No mostrar tabulaciones
+    tabsize=4,                   % Tamaño de tabulación
+    showstringspaces=false,      % No mostrar espacios en strings
+    numbers=left,                % Números de línea a la izquierda
+    numberstyle=\tiny\color{gray}, % Estilo de los números de línea
+    numbersep=5pt,               % Separación de los números de línea
+    stepnumber=1,                % Mostrar número en cada línea
+    basicstyle=\ttfamily\footnotesize, % Estilo básico del código
+    keywordstyle=\bfseries\color{blue}, % Estilo de las palabras clave
+    commentstyle=\itshape\color{green!50!black}, % Estilo de los comentarios
+    stringstyle=\color{red},     % Estilo de los strings
+    identifierstyle=\color{black}, % Estilo de los identificadores
+    % procnamekeys={def,class},    % Palabras clave para nombres de funciones
+    morekeywords={constexpr,nullptr,size_t}, % Más palabras clave
+    emph={int,char,double,float,unsigned}, % Palabras a enfatizar
+    emphstyle=\color{magenta},   % Estilo de las palabras enfatizadas
+    backgroundcolor=\color{gray!10}, % Color de fondo
+    frame=shadowbox,             % Marco con sombra
+    rulesepcolor=\color{gray},   % Color de la línea de separación
+    breakatwhitespace=false,     % No cortar en espacios en blanco
+    breaklines=true,             % Cortar líneas largas
+    captionpos=b,                % Posición del título (abajo)
+    escapeinside={(*@}{@*)},     % Delimitadores para escapar a LaTeX
+    morecomment=[l][\color{magenta}]{\#}, % Comentarios de una línea
+    morecomment=[s][\color{orange}]{/*}{*/}, % Comentarios multilínea
+    morestring=[b]",             % Strings entre comillas dobles
+    morestring=[b]'              % Strings entre comillas simples
+}
+\lstdefinestyle{custompython}{
+    language=Python,
+    showspaces=false,
+    showtabs=false,
+    tabsize=4,
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=5pt,
+    stepnumber=1,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\bfseries\color{blue},
+    commentstyle=\itshape\color{green!50!black},
+    stringstyle=\color{red},
+    identifierstyle=\color{black},
+    backgroundcolor=\color{gray!10},
+    frame=shadowbox,
+    rulesepcolor=\color{gray},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    escapeinside={(*@}{@*)},
+    morecomment=[l][\color{magenta}]{\#},
+    morecomment=[s][\color{orange}]{/*}{*/},
+    morestring=[b]",
+    morestring=[b]'
 }
 
 % Inicio del documento
@@ -1754,7 +1841,452 @@ results = model.iterative_fit(maxiter=100)
 
 Para ello pincha \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/Asignaturas/Tercer%20A%C3%B1o/ECO/Practicas/Python/econometria-main}{aquí}.
 
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black, title=Recursos de Prácticas en Econometría con Python]
+    \textbf{Nota:} A continuación, se van a ir explicando lo que se considere más relevante de las prácticas de Econometría con Python de cara al examen.
+    
+\end{tcolorbox}
+
+\subsection{Introducción}
 
 
+\begin{lstlisting}[style = custompython, caption={Importación de librerías}]
+import pandas as pd #librería para manejo de datos
+
+
+data= pd.read_csv("https://rtgodwin.com/data/houseprice.csv") #Lee base de datos de web...
+
+data
+\end{lstlisting}
+
+\begin{lstlisting}[style = custompython, caption={Modelo de Regresión Lineal}]
+    import statsmodels.api as sm
+    # Modelo Regresión:  modeldata=stock.values
+    X=data[["Age", "Rooms"]]
+    y=data["Price"]
+    
+    
+    results = sm.OLS(y, sm.add_constant(X)).fit()
+    
+    print(results.summary())
+
+
+\end{lstlisting}
+\newpage
+\subsubsection{Salida}
+
+\begin{verbatim}
+    OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Price   R-squared:                       0.303
+Model:                            OLS   Adj. R-squared:                  0.303
+Method:                 Least Squares   F-statistic:                     375.5
+Date:                Sat, 04 Jan 2025   Prob (F-statistic):          4.04e-136
+Time:                        17:03:06   Log-Likelihood:                -22006.
+No. Observations:                1728   AIC:                         4.402e+04
+Df Residuals:                    1725   BIC:                         4.404e+04
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const       7.036e+04   6767.987     10.395      0.000    5.71e+04    8.36e+04
+Age         -492.3251     67.957     -7.245      0.000    -625.613    -359.037
+Rooms       2.206e+04    856.930     25.746      0.000    2.04e+04    2.37e+04
+==============================================================================
+Omnibus:                      569.117   Durbin-Watson:                   1.572
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2391.072
+Skew:                           1.537   Prob(JB):                         0.00
+Kurtosis:                       7.874   Cond. No.                         140.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+\end{verbatim}
+
+\subsubsection{Interpretación de Resultados de la Regresión OLS}
+
+En este análisis, se ajustó un modelo de regresión lineal ordinaria (OLS) para predecir el precio (\textit{Price}) como variable dependiente, utilizando la edad (\textit{Age}) y el número de habitaciones (\textit{Rooms}) como variables explicativas. A continuación, se interpretan los principales resultados:
+
+\begin{itemize}
+    \item \textbf{R-cuadrado:} El valor del R-cuadrado es 0.303, lo que indica que el modelo explica aproximadamente el 30.3\% de la variabilidad observada en el precio. Aunque no es un ajuste muy alto, sugiere que las variables incluidas tienen cierta capacidad predictiva.
+
+    \item \textbf{Coeficientes:} 
+    \begin{itemize}
+        \item El intercepto (\textit{const}) tiene un coeficiente estimado de $7.036 \times 10^4$, lo que implica que, en promedio, cuando las variables explicativas son cero, el precio base es de 70,360 unidades monetarias.
+        \item Para la variable \textit{Age}, el coeficiente es de $-492.33$, lo que sugiere que, manteniendo las demás variables constantes, por cada año adicional de antigüedad, el precio disminuye en promedio 492.33 unidades monetarias. Este efecto es estadísticamente significativo ($p < 0.001$).
+        \item Para la variable \textit{Rooms}, el coeficiente es de $2.206 \times 10^4$, lo que indica que, manteniendo las demás variables constantes, cada habitación adicional incrementa el precio en promedio 22,060 unidades monetarias. Este efecto también es estadísticamente significativo ($p < 0.001$).
+    \end{itemize}
+
+    \item \textbf{Estadísticos de bondad de ajuste y pruebas de diagnóstico:}
+    \begin{itemize}
+        \item El valor del estadístico de Durbin-Watson es 1.572, lo que sugiere cierta autocorrelación positiva en los residuos.
+        \item Las pruebas de normalidad (Omnibus y Jarque-Bera) indican que los residuos no siguen una distribución normal ($p < 0.001$). Esto podría afectar la validez de algunas inferencias estadísticas.
+    \end{itemize}
+
+    \item \textbf{Notas:} Los errores estándar asumen que la matriz de covarianzas de los errores está correctamente especificada. La condición de número del modelo es 140, lo que no sugiere problemas graves de multicolinealidad.
+\end{itemize}
+
+En resumen, el modelo muestra que la antigüedad afecta negativamente el precio, mientras que el número de habitaciones tiene un impacto positivo y significativo. Sin embargo, la baja capacidad explicativa del modelo y las desviaciones de normalidad en los residuos sugieren que podrían explorarse variables adicionales o transformaciones para mejorar el ajuste.
+\newpage
+
+\begin{lstlisting}[style=custompython, caption=Generación de datos sintéticos con numpy]
+    # Definimos el número de muestras a generar
+    n = 100
+    
+    # Importamos el paquete numpy para trabajar con arrays y funciones matemáticas
+    import numpy as np
+    
+    # Generamos un array de n valores aleatorios con una distribución normal
+    # Media (loc) = 0, Desviación estándar (scale) = 10
+    X = np.random.normal(0, 10, n)
+    
+    # Generamos otra variable Y basada en X, sumándole un ruido aleatorio
+    # El ruido se extrae de una distribución normal con media 0 y desviación estándar 1
+    Y = X + np.random.normal(0, 1, n)
+    \end{lstlisting}
+    
+    \begin{lstlisting}[style=custompython, caption=Ajuste y visualización de un modelo OLS con statsmodels]
+        # Importamos el módulo de visualización matplotlib.pylab
+        import matplotlib.pylab as plt
+        
+        # Graficamos los puntos (X, Y) como un diagrama de dispersión con tamaño de marcador 1
+        plt.scatter(X, Y, s=1)
+        
+        # Mostramos el gráfico
+        plt.show()
+        
+        # Ajustamos un modelo de regresión OLS (Mínimos Cuadrados Ordinarios) a los datos
+        results = sm.OLS(Y, sm.add_constant(X)).fit()
+        
+        # Mostramos un resumen detallado de los resultados del modelo
+        results.summary()
+        
+        # Obtenemos los parámetros estimados: el intercepto (cte) y la pendiente (beta)
+        cte = results.params[0]
+        beta = results.params[1]
+        
+        # Graficamos la recta de regresión estimada
+        plt.plot([-20, 20], [cte + beta * (-20), cte + beta * 20], color='r')
+        
+        # Sobreponemos el gráfico de dispersión original
+        plt.scatter(X, Y, s=1)
+        
+        # Mostramos el gráfico con la línea de regresión
+        plt.show()
+        
+        # Importamos herramientas de análisis de estadísticas en statsmodels
+        import statsmodels.stats.api as sms
+        from statsmodels.compat import lzip
+        
+        # Cargamos un conjunto de datos de ejemplo sobre crímenes estatales desde statsmodels
+        data = sm.datasets.statecrime.load_pandas()
+        
+        # Accedemos a los datos (endógenos y exógenos)
+        data.data
+        data.exog
+        
+        # Definimos y ajustamos un modelo OLS a los datos
+        modeloMCO = sm.OLS(data.endog, sm.add_constant(data.exog))
+        resultado = modeloMCO.fit()
+        
+        # Mostramos un resumen de los resultados del modelo
+        print(resultado.summary())
+        \end{lstlisting}
+        
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.7\textwidth]{images/img1.png}
+            \caption{Modelo OLS.}
+            \label{fig:ols_regression}
+        \end{figure}
+
+        \subsubsection{Interpretación de Resultados de la Regresión OLS}
+
+Se ajustó un modelo de regresión lineal ordinaria (\textit{Ordinary Least Squares}, OLS) para explicar la variable dependiente $y$ en función de una única variable independiente $x_1$. A continuación, se presenta el análisis detallado de los resultados:
+
+\begin{itemize}
+    \item \textbf{Bondad de ajuste:}
+    \begin{itemize}
+        \item \textbf{R-cuadrado:} El valor de $R^2$ es 0.989, lo que indica que el modelo explica el 98.9\% de la variabilidad observada en la variable $y$. 
+        \item \textbf{R-cuadrado ajustado:} El valor ajustado es 0.988, lo que refleja una ligera penalización por el número de parámetros en el modelo.
+    \end{itemize}
+
+    \item \textbf{Coeficientes estimados:}
+    \begin{itemize}
+        \item El intercepto (\textit{const}) tiene un valor estimado de $-0.0007$, pero no es estadísticamente significativo ($p = 0.994$). Esto implica que el modelo no detecta un impacto relevante de la constante en el valor de $y$.
+        \item El coeficiente de la variable $x_1$ es 0.9923, lo que significa que, en promedio, por cada unidad adicional en $x_1$, $y$ aumenta en 0.9923 unidades. Este coeficiente es altamente significativo ($p < 0.001$), con un intervalo de confianza al 95\% que va de 0.971 a 1.014.
+    \end{itemize}
+
+    \item \textbf{Estadísticas del modelo:}
+    \begin{itemize}
+        \item \textbf{Estadístico F:} Con un valor de 8459 y una probabilidad asociada ($p$) de $6.21 \times 10^{-97}$, el modelo tiene una capacidad predictiva altamente significativa.
+        \item \textbf{Log-verosimilitud:} El valor de -145.16 es consistente con el ajuste observado.
+        \item \textbf{AIC y BIC:} Los valores del Criterio de Información de Akaike (AIC = 294.3) y el Criterio de Información Bayesiano (BIC = 299.5) son útiles para comparar este modelo con otros posibles modelos.
+    \end{itemize}
+
+    \item \textbf{Diagnósticos de los residuos:}
+    \begin{itemize}
+        \item \textbf{Pruebas de normalidad:} La prueba de Omnibus (valor $p = 0.051$) y la prueba de Jarque-Bera (valor $p = 0.0616$) no rechazan la hipótesis de que los residuos siguen una distribución normal al nivel de significancia del 5\%.
+        \item \textbf{Durbin-Watson:} El valor de 2.203 sugiere que no hay autocorrelación significativa en los residuos.
+        \item \textbf{Condición de número:} Con un valor de 9.78, el modelo no muestra problemas graves de multicolinealidad.
+    \end{itemize}
+\end{itemize}
+
+En conclusión, el modelo muestra un ajuste excelente, con un coeficiente significativo para $x_1$ que predice el 98.9\% de la variabilidad en $y$. Los diagnósticos no sugieren problemas relevantes en los residuos ni en la especificación del modelo.
+
+\subsubsection{Tipo de Covarianza: nonrobust}
+
+En los resultados del modelo de regresión, la línea \texttt{Covariance Type: nonrobust} indica el tipo de matriz de covarianza utilizado para calcular los errores estándar de los coeficientes estimados. A continuación, se detalla su significado:
+
+\begin{itemize}
+    \item \textbf{Nonrobust:} 
+    \begin{itemize}
+        \item Este tipo de matriz de covarianza supone que los errores (\textit{residuos}) del modelo son \textbf{homocedásticos} (tienen varianza constante) y \textbf{no están correlacionados}.
+        \item Bajo esta suposición, los errores estándar, los valores $t$, y los valores $p$ son válidos siempre que se cumplan las condiciones clásicas del modelo de regresión lineal (\textit{Classical Linear Regression Model, CLRM}).
+    \end{itemize}
+    \item \textbf{Alternativas robustas:} Si las condiciones del CLRM no se cumplen (por ejemplo, si hay heterocedasticidad o autocorrelación en los errores), es posible usar matrices de covarianza ajustadas:
+    \begin{itemize}
+        \item \textbf{HC0, HC1, HC2, HC3:} Correcciones robustas a la heterocedasticidad, que permiten obtener errores estándar válidos incluso si los residuos tienen varianza no constante.
+        \item \textbf{HAC (Heteroskedasticity and Autocorrelation Consistent):} Útil cuando los errores presentan tanto heterocedasticidad como autocorrelación.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Uso práctico:} En \textit{statsmodels}, se puede especificar un tipo de covarianza robusta al ajustar el modelo, utilizando el argumento \texttt{cov\_type} en el método \texttt{fit}. Por ejemplo:
+
+\begin{lstlisting}[style=custompython, caption=Ajuste de un modelo OLS con covarianza robusta]
+results = sm.OLS(Y, sm.add_constant(X)).fit(cov_type='HC3')
+\end{lstlisting}
+
+En este caso, se ajustan los errores estándar para ser robustos a la heterocedasticidad.
+
+\textbf{Conclusión:} El uso de \texttt{nonrobust} asume que los residuos cumplen con las condiciones clásicas de homocedasticidad y no autocorrelación. Si estas suposiciones no se verifican, es recomendable optar por una matriz de covarianza robusta para garantizar la validez de las inferencias estadísticas.
+
+\subsection{Autocorrelación}
+
+\begin{lstlisting}[style=custompython, caption=Selección y limpieza de datos en un DataFrame]
+    # Seleccionamos las columnas de interés en el DataFrame y eliminamos filas con valores nulos
+    datos = datos[['pm2.5', 'TEMP', 'PRES', 'Iws']].dropna()
+\end{lstlisting}
+
+\begin{lstlisting}[style=custompython, caption=Cálculo de la estadística de Durbin-Watson para residuos]
+    # Importamos la función durbin_watson desde statsmodels
+    from statsmodels.stats.stattools import durbin_watson
+    
+    # Calculamos la estadística de Durbin-Watson sobre los residuos del modelo ajustado
+    dw = durbin_watson(mco.resid)
+    
+    # Imprimimos el resultado de la estadística de Durbin-Watson
+    print("Durbin-Watson statistic:", dw)
+\end{lstlisting}
+
+\begin{lstlisting}[style=custompython, caption=Detección de autocorrelación con la estadística h de Durbin]
+    # Importamos las librerías necesarias
+    import numpy as np
+    import statsmodels.api as sm
+    from statsmodels.stats.stattools import durbin_watson
+    
+    # Datos simulados: serie autoregresiva
+    np.random.seed(0)  # Fijamos la semilla para reproducibilidad
+    n = 100  # Número de observaciones
+    y_original = datos["pm2.5"]  # Variable original de interés
+    y_retardada = np.roll(y_original, 1)  # Variable desplazada una posición hacia atrás
+    y_retardada[0] = 0  # Establecemos el primer valor como 0 para evitar problemas
+    
+    # Ajustamos un modelo OLS con la variable retardada
+    modelo = sm.OLS(y_original, sm.add_constant(y_retardada)).fit()
+    
+    # Extraemos los parámetros del modelo
+    beta = modelo.params["x1"]  # Coeficiente estimado para la variable retardada
+    var_beta = modelo.bse["x1"] ** 2  # Varianza estimada del coeficiente
+    
+    # Calculamos la estadística h de Durbin
+    h = (1 - dw / 2) * np.sqrt(n / (1 - var_beta))
+    
+    # Mostramos el valor de h
+    print("h-Durbin:", h)
+    
+    # Verificamos la significancia de h
+    if np.abs(h) > 1.96:  # Intervalo de confianza del 95%
+        print("Autocorrelación detectada.")
+    else:
+        print("Autocorrelación no significativa.")
+\end{lstlisting}
+    
+\begin{lstlisting}[style=custompython, caption=Prueba de Ljung-Box para detectar autocorrelación]
+    # Importamos la función acorr_ljungbox
+    from statsmodels.stats.diagnostic import acorr_ljungbox
+    
+    # Aplicamos la prueba de Ljung-Box a los residuos del modelo
+    # Evaluamos hasta 5 retardos (lags)
+    ljungbox_result = acorr_ljungbox(mco.resid, lags=5)
+    
+    # Mostramos el resultado
+    print(ljungbox_result)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, style=custompython, caption={Implementación de autocorrelación usando GLSAR en Python.}]
+    # Calcula el coeficiente rho basado en el estadístico de Durbin-Watson (DW)
+    rho = 1 - dw / 2  # dw = 2(1-rho) => rho = 1 - DW/2
+    print(rho)  # Imprime el valor calculado de rho
+    
+    # Ajusta un modelo de regresión generalizada de mínimos cuadrados con autocorrelación (GLSAR)
+    mco_autocorr = sm.GLSAR(y, sm.add_constant(X), rho=rho)
+    
+    # Realiza un ajuste iterativo del modelo hasta un máximo de 100 iteraciones o hasta alcanzar la tolerancia
+    res = mco_autocorr.iterative_fit(maxiter=100, rtol=10**(-10))
+    
+    # Muestra el número de iteraciones realizadas y si el modelo ha convergido
+    print('Iteraciones = %d -->  Converge: %s' % (res.iter, res.converged))
+    
+    # Imprime el valor final de rho utilizado en el modelo
+    print('Rho =  ', mco_autocorr.rho)
+    
+    # Imprime un resumen detallado de los resultados del modelo ajustado
+    print(res.summary())
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, style=custompython, caption={Cálculo del Coeficiente de Variación (CV) y prueba de normalidad en los residuos.}]
+    # Define una función lambda para calcular el Coeficiente de Variación (CV)
+    cv = lambda x: np.std(x, ddof=1) / np.mean(x) * 100
+    
+    # Aplica la función CV a cada columna del DataFrame 'datos'
+    datos.apply(cv)
+    
+    # Importa el módulo para realizar pruebas estadísticas de Statsmodels
+    import statsmodels.stats.diagnostic as diag
+    
+    # Realiza la prueba de Kolmogorov-Smirnov para verificar la normalidad de los residuos del modelo 'mco'
+    diag.kstest_normal(mco.resid)
+\end{lstlisting}
+
+\subsection{Práctica 1}
+
+\begin{lstlisting}[language=Python, style=custompython, caption={Conteo de frecuencias para la columna "Fuel.Type" del DataFrame.}]
+    # Calcula el conteo de valores únicos en la columna "Fuel.Type" del DataFrame 'datos'
+    datos["Fuel.Type"].value_counts()
+\end{lstlisting}
+
+\subsection{Test Heterocedasticidad}
+
+\begin{lstlisting}[language=Python, style=custompython, caption={Pruebas de heterocedasticidad y ajuste de mínimos cuadrados ponderados.}]
+    # Importa el módulo de diagnóstico estadístico de Statsmodels
+    import statsmodels.stats.diagnostic as sm_diagnostic
+    
+    # GOLDFELD-QUANDT (Prueba para heterocedasticidad en muestras pequeñas)
+    # Caso: Hipótesis alternativa de varianza creciente
+    GQ = sm_diagnostic.het_goldfeldquandt(y, sm.add_constant(datos["Age"]), alternative="increasing")
+    print("Goldfeld Quandt (increasing): ", GQ)
+    
+    # Caso: Hipótesis alternativa de varianza decreciente
+    GQ = sm_diagnostic.het_goldfeldquandt(y, sm.add_constant(datos["Age"]), alternative="decreasing")
+    print("Goldfeld Quandt (decreasing): ", GQ)
+    
+    # Caso: Hipótesis alternativa bilateral
+    GQ = sm_diagnostic.het_goldfeldquandt(y, sm.add_constant(datos["Age"]), alternative="two-sided")
+    print("Goldfeld Quandt (two-sided): ", GQ)
+    
+    # BREUSH-PAGAN (Prueba para detectar heterocedasticidad)
+    BP = sm_diagnostic.het_breuschpagan(mco.resid, mco.model.exog)
+    print("Breush Pagan: ", BP)
+    
+    # WHITE (Prueba para detectar heterocedasticidad generalizada)
+    W = sm_diagnostic.het_white(mco.resid, mco.model.exog)
+    print("White: ", W)
+    
+    # GLEJSER (Prueba para detectar heterocedasticidad con transformación de datos)
+    import numpy as np
+    z = np.array(datos["Land.Value"].values, dtype=float)
+    for h in [-2, -1, -0.5, 0.5, 1, 2]:
+        # Ajusta el modelo |e| = delta_0 + delta_1 z^h + eps
+        mcoaux = sm.OLS(abs(mco.resid), sm.add_constant(z**h)).fit()
+        pval = mcoaux.pvalues["x1"]
+        print("h: ", h, "-> pvalt: ", pval, "R2: ", mcoaux.rsquared)
+    
+    # MÍNIMOS CUADRADOS PONDERADOS (Weighted Least Squares, WLS)
+    # Ajusta un modelo ponderando por la raíz cuadrada inversa de z
+    mcp = sm.WLS(y, sm.add_constant(X), weights=1. / np.sqrt(z)).fit()
+    print(mcp.summary())
+\end{lstlisting}
+
+\subsection{Autocorrelación}
+
+\begin{lstlisting}[language=Python, style=custompython, caption={Cálculo del Número de Condición, Factor de Inflación de la Varianza (VIF) y Matriz de Correlaciones.}]
+    # IMPORTANTE: El Número de Condición evalúa la colinealidad en el diseño del modelo.
+    # Si es alto (típicamente >30 en su forma no raíz cuadrada), indica posible multicolinealidad.
+    import numpy as np
+    
+    # Calcula la raíz cuadrada del Número de Condición del modelo 'mco'
+    CN = np.sqrt(mco.condition_number)  # Número de Condición
+    print(CN)  # Imprime el Número de Condición para interpretar la estabilidad numérica
+    
+    # FACTOR DE INFLACIÓN DE LA VARIANZA (VIF)
+    # El VIF evalúa la multicolinealidad para cada variable independiente.
+    # Valores altos (típicamente >10) indican problemas de multicolinealidad.
+    import statsmodels.stats.outliers_influence as oi
+    
+    # Calcula el VIF para cada variable en el conjunto de predictores 'X'
+    vifs = [oi.variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
+    vifs  # Devuelve los VIFs calculados para interpretar colinealidad
+    
+    # MATRIZ DE CORRELACIONES
+    # Evalúa la relación lineal entre las variables independientes.
+    # Correlaciones altas (>0.8 o <-0.8) pueden sugerir multicolinealidad.
+    corr_matrix = np.corrcoef(X.T)  # Calcula la matriz de correlaciones de los predictores
+    print(corr_matrix)  # Imprime la matriz para inspeccionar las correlaciones
+    
+    # VISUALIZACIÓN DE LA MATRIZ DE CORRELACIONES
+    # Utiliza gráficos para identificar patrones visuales de multicolinealidad.
+    import statsmodels.graphics.api as smg
+    import matplotlib.pylab as plt
+    
+    # Genera un gráfico de correlaciones con nombres de las variables
+    smg.plot_corr(corr_matrix, xnames=['Lot.Size', 'Age', 'Land.Value', 'Bedrooms'])
+    plt.show()
+    \end{lstlisting}
+
+    \subsection{Normalidad}
+
+    \begin{lstlisting}[language=Python, style=custompython, caption={Pruebas estadísticas, estimación de varianza residual, suma de cuadrados y predicción del modelo.}]
+        # Prueba de normalidad de Kolmogorov-Smirnov para los residuos
+        # Diagnostica si los residuos del modelo siguen una distribución normal.
+        # Una p-valor bajo (<0.05) indica que los residuos no son normales.
+        import statsmodels.stats.api as sms
+        sms.diagnostic.kstest_normal(mco.resid)
+        
+        # Suma de cuadrados residual (SSR)
+        # Representa la variación no explicada por el modelo.
+        # Un valor bajo de SSR indica que el modelo ajusta bien los datos.
+        mco.ssr
+        
+        # Estimación de la varianza residual (sigma_gorro)
+        # Calcula la varianza de los errores basada en SSR, el número de observaciones (nobs),
+        # y el número de parámetros del modelo (params).
+        sigmagorro = mco.ssr / (mco.nobs - len(mco.params) - 1)
+        sigmagorro
+        
+        # Suma de cuadrados explicada (ESS)
+        # Representa la variación explicada por el modelo. Un valor alto indica que el modelo
+        # explica gran parte de la variabilidad de los datos.
+        mco.ess
+        
+        # Predicción del modelo para nuevos datos
+        # Estima el valor de la variable dependiente para un conjunto específico de predictores.
+        # Ejemplo: [1, 0.009, 0.42, 50000, 90.6, 2] representa los valores de las variables independientes.
+        mco.predict([1, 0.009, 0.42, 50000, 90.6, 2])
+\end{lstlisting}
+
+\subsection{Anotaciones Extras}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black, title=Recursos de Prácticas en Econometría con Python]
+    \textbf{Nota:} Los que no se hayan mencionado es porque se sobreentiende el código proporcionado anteriormente (Enlace Github).
+    
+\end{tcolorbox}
+        
+    
+    
+    
+    
+    
+        
 
 \end{document}
