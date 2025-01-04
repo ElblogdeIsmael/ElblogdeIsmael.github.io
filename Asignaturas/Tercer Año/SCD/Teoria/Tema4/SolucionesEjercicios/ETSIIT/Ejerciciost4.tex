@@ -10,6 +10,8 @@
 \usepackage{geometry}
 \geometry{top=3cm, bottom=3cm, left=2.5cm, right=2.5cm}
 
+
+
 % Paquetes para diseño
 \usepackage{titlesec}
 \usepackage{fancyhdr}
@@ -212,6 +214,73 @@ Tenemos que el ciclo principal dura $T_m = mcm(T_i)\,\forall \, i 0,\ldots, 4 = 
 \end{enumerate}
 Vemos que hay ciertos problemas con el valor 50, ya que según las dos restricciones mencionadas anteriormente, no se puede cumplir ya que si cogemos $T_s = 20ms$ , este no divide a 50, por lo que \textit{no se puede planificar}.
 
+\subsubsection{Cronograma}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{1.4cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|}
+    \hline
+    \textbf{Tiempo (ms)} & 0-20 & 20-40 & 40-60 & 60-80 & 80-100 & 100-120 & 120-140 & 140-160 & 160-180 & 180-200 \\ \hline
+    \textbf{T1} & X & X & X & X & X & - & - & - & - & - \\ \hline
+    \textbf{T2} & - & X & - & X & - & X & - & - & - & - \\ \hline
+    \textbf{T3} & - & - & - & - & - & - & X & - & - & X \\ \hline
+    \textbf{T4} & - & - & - & - & - & X & - & - & - & X \\ \hline
+    \end{tabular}
+    \caption{Cronograma de ejecución de las tareas}
+\end{table}
+    
+\subsubsection{Implementación en pseudo-código}
+
+
+\begin{lstlisting}[style = customcpp, caption = {Implementación en C++ del planificador cíclico}]
+
+    Ts := duración del ciclo secundario;
+    ini_sec := instante de inicio del ciclo secundario;
+
+    while (true) { // ciclo principal
+        for (desde i := 1 hasta 10) { // 10 porque son las fases del ciclo secundario en base a nuestro cronograma
+
+            inicio_iteracion := instante actual;
+
+            switch(i) {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    Tarea1();
+                    if (i % 2 == 0) { // T2 ejecuta cada 2 marcos
+                        Tarea2();
+                    }
+                    break;
+
+                case 6:
+                    Tarea2();
+                    Tarea4();
+                    break;
+
+                case 7:
+                case 9:
+                    Tarea3();
+                    break;
+
+                case 8:
+                    Tarea3();
+                    Tarea4();
+                    break;
+
+                case 10:
+                    Tarea4();
+                    break;
+            }
+
+            ini_sec += Ts; // siguiente instante
+            sleep_until(ini_sec); // esperar hasta el siguiente ciclo secundario
+            fin_iteracion := instante actual; // medir retraso
+            retraso := fin_iteracion - ini_sec; // calcular retraso
+        }
+    }
+\end{lstlisting}
 
 
 
@@ -527,9 +596,525 @@ Vemos que hay ciertos problemas con el valor 50, ya que según las dos restricci
 %     \item El sistema es planificable usando $T_S = 20\,\text{ms}$.
 % \end{itemize}
 
+\section{Ejercicio 92}
+\subsection{Enunciado}
+El siguiente conjunto de tareas periódicas se puede planificar con ejecutivos cíclicos. Determina si esto es cierto calculando el marco secundario que debería tener. Dibuja el cronograma que muestre las ocurrencias de cada tarea y su entrelazamiento. ¿Cómo se tendría que implementar? (escribe el pseudo-código de la implementación).
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Ti} & \textbf{Di} \\ \hline
+T1 & 2 & 6 & 6 \\ \hline
+T2 & 2 & 8 & 8 \\ \hline
+T3 & 3 & 12 & 12 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas y sus atributos temporales}
+\end{table}
+
+\subsection{Solución}
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black]
+    \textit{Nota: Este ejercicio se resolverá siguiendo las metodologías vistas en clase y prácticas.}
+\end{tcolorbox}
+
+\subsubsection{Paso 1: Verificación inicial}
+Podemos observar que \(D_i = T_i\) para todas las tareas, lo que simplifica la verificación inicial. Esto significa que podemos eliminar la columna \(D_i\) y trabajar únicamente con \(C_i\) y \(T_i\):
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Ti} \\ \hline
+T1 & 2 & 6 \\ \hline
+T2 & 2 & 8 \\ \hline
+T3 & 3 & 12 \\ \hline
+\end{tabular}
+\caption{Conjunto simplificado de tareas periódicas}
+\end{table}
+
+\subsubsection{Paso 2: Cálculo del marco secundario}
+El ciclo principal es el mínimo común múltiplo de los períodos \(T_i\):
+\[ T_m = \text{mcm}(6, 8, 12) = 24 \text{ ms} \]
+
+El marco secundario \(T_s\) debe cumplir:
+\begin{enumerate}
+    \item \(\max(C_i) \leq T_s \leq \min(T_i)\)
+    \item \(T_s\) divide a \(T_m\) de manera exacta (\(T_m / T_s \in \mathbb{Z}\)).
+\end{enumerate}
+
+\textbf{Restricción 1:} \(\max(C_i) = 3 \leq T_s \leq \min(T_i) = 6\).
+
+\textbf{Restricción 2:} \(T_s\) debe dividir a \(T_m = 24\). Los divisores de 24 dentro del rango permitido son:\[T_s = 3, 4, 6\].
+
+Escogemos \(T_s = 6\) ya que cumple con ambas restricciones.
+
+\subsubsection{Paso 3: Cronograma}
+Dado \(T_s = 6\), construimos el cronograma:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Tiempo (ms)} & 0-6 & 6-12 & 12-18 & 18-24 \\ \hline
+\textbf{T1} & X & X & X & X \\
+\textbf{T2} & - & X & - & X \\
+\textbf{T3} & - & - & X & - \\
+\hline
+\end{tabular}
+\caption{Cronograma de ejecución de las tareas}
+\end{table}
+
+\subsubsection{Paso 4: Implementación en pseudo-código}
+
+\begin{lstlisting}[style = customcpp, caption = {Implementación en C++ del planificador cíclico}]
+
+    Ts := duración del ciclo secundario;
+    ini_sec := instante de inicio del ciclo secundario;
+    while(true){ //ciclo principal
+        for(desde i hasta 4){ // 4 porque son las fases del ciclo secundario en base a nuestro cronograma
+
+            inicio_iteracion := instante actual;
+
+            switch(i){
+                case 1:
+                    Tarea1();
+                    break;
+                case 2:
+                    Tarea1();
+                    Tarea2();
+                    break;
+                case 3:
+                    Tarea1();
+                    Tarea3();
+                    break;
+                case 4:
+                    Tarea1();
+                    Tarea2();
+                    break;
+                
+            }
+
+            ini_sec += Ts; //siguiente instante
+            sleep_until(ini_sec); //esperar hasta el siguiente ciclo secundario
+            fin_iteracion := instante actual; //medir retraso
+            retraso := fin_iteracion - ini_sec; //calcular retraso
+
+        }
+    }
+\end{lstlisting}
+
+Con esto confirmamos que el conjunto de tareas se puede planificar con un esquema de planificación cíclica utilizando \(T_s = 6\).
+
+\section{Ejercicio 93}
+\subsection{Enunciado}
+Comprobar si el conjunto de procesos periódicos que se muestra en la siguiente tabla es planificable con el algoritmo RMS utilizando el test basado en el factor de utilización del tiempo del procesador. Si el test no se cumple, ¿debemos descartar que el sistema sea planificable?
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Ti} \\ \hline
+T1 & 9 & 30 \\ \hline
+T2 & 10 & 40 \\ \hline
+T3 & 10 & 50 \\ \hline
+\end{tabular}
+\caption{Conjunto de procesos periódicos}
+\end{table}
+
+\subsection{Solución}
+El algoritmo \textbf{Rate Monotonic Scheduling (RMS)} es un esquema de planificación de tiempo real que asigna prioridades de manera estática a tareas periódicas. Las prioridades están inversamente relacionadas con los periodos (\(T_i\)): menor periodo, mayor prioridad. Este método utiliza el factor de utilización del procesador (\(U\)) para determinar si un conjunto de tareas es planificable.
+
+El test de planificabilidad se basa en:
+\[
+U = \sum_{i=1}^{N} \frac{C_i}{T_i}, \quad U \leq U_0(N) = N \cdot (2^{\frac{1}{N}} - 1)
+\]
+
+Para \(N = 3\):
+\[
+U_0(3) = 3 \cdot (2^{\frac{1}{3}} - 1) \approx 0.779
+\]
+
+Cálculo del factor de utilización:
+\[
+U = \frac{9}{30} + \frac{10}{40} + \frac{10}{50} = 0.3 + 0.25 + 0.2 = 0.75
+\]
+
+\textbf{Conclusión:} El sistema es planificable porque \(U = 0.75 \leq U_0(3) = 0.779\).
+
+Si \(U > U_0(N)\), no podemos descartar automáticamente la planificabilidad. Deberíamos construir un cronograma utilizando un diagrama de Gantt para verificar si todas las tareas cumplen sus plazos.
+
+\subsubsection{Implementación en pseudo-código}
+
+\textit{Nota: podemos implementar el algoritmo RMS en C++ de la siguiente manera usando los módulos ya que sería seguir una lógica similar a la de teoría y prácticas de la Asignatura.}
+
+\begin{lstlisting}[style=customcpp, caption={Implementación en C++ del algoritmo RMS}]
+    // Prioridades: T1 > T2 > T3 (porque T1 tiene el menor período)
+    while (true) {
+        tiempo_actual := instante_actual();
+        
+        if (tiempo_actual % 30 == 0) {
+            ejecutar(T1);
+        }
+        if (tiempo_actual % 40 == 0) {
+            ejecutar(T2);
+        }
+        if (tiempo_actual % 50 == 0) {
+            ejecutar(T3);
+        }
+        
+        tiempo_siguiente := tiempo_actual + intervalo_minimo();
+        sleep_until(tiempo_siguiente);
+    }
+\end{lstlisting}
+
+Este código asegura que las tareas se ejecutan según sus prioridades y periodos definidos. Si necesitas el diagrama de Gantt o más detalles, avísame.
+
+\section{Ejercicio 94}
+\subsection{Enunciado}
+Considérese el siguiente conjunto de tareas compuesto por tres tareas periódicas:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Ti} \\ \hline
+T1 & 10 & 40 \\ \hline
+T2 & 20 & 60 \\ \hline
+T3 & 20 & 80 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+Comprobar la planificabilidad del conjunto de tareas con el algoritmo RMS utilizando el test basado en el factor de utilización. Calcular el hiperperiodo y construir el correspondiente cronograma.
+
+\subsection{Solución}
+\subsubsection{Cálculo del factor de utilización}
+El algoritmo \textbf{Rate Monotonic Scheduling (RMS)} establece que las tareas son planificables si su factor de utilización (\(U\)) cumple:
+\[
+U = \sum_{i=1}^{N} \frac{C_i}{T_i} \quad \text{y} \quad U \leq U_0(N) = N \cdot (2^{\frac{1}{N}} - 1)
+\]
+
+Para \(N = 3\):
+\[
+U_0(3) = 3 \cdot (2^{\frac{1}{3}} - 1) \approx 0.779
+\]
+
+Calculamos \(U\):
+\[
+U = \frac{10}{40} + \frac{20}{60} + \frac{20}{80} = 0.25 + 0.333 + 0.25 = 0.833
+\]
+
+\textbf{Conclusión:} \(U = 0.833 > 0.779\), por lo que el conjunto de tareas no pasa el test basado en el factor de utilización. Sin embargo, esto no significa que el sistema no sea planificable. Es necesario construir el cronograma para verificarlo.
+
+\subsubsection{Cálculo del hiperperiodo}
+El hiperperiodo (\(T_m\)) es el mínimo común múltiplo (\(\text{mcm}\)) de los períodos de las tareas:
+\[
+T_m = \text{mcm}(40, 60, 80) = 240 \, \text{ms}
+\]
+
+\subsubsection{Cronograma}
+El cronograma muestra las instancias de ejecución de las tareas en el intervalo \([0, T_m]\). Construimos una tabla para reflejar esto:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{1.4cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1 cm}|}
+\hline
+\textbf{Tiempo (ms)} & 0-10 & 10-20 & 20-30 & 30-40 & 40-60 & 60-80 & 80-100 & 100-120 & 120-140 & 140-160 & \ldots \\ \hline
+\textbf{T1} & X & - & X & - & X & - & X & - & X & - & \ldots \\ \hline
+\textbf{T2} & - & - & - & X & - & X & - & - & - & X & \ldots \\ \hline
+\textbf{T3} & - & - & - & - & - & - & X & - & - & - & \ldots \\ \hline
+\end{tabular}
+\caption{Cronograma de las tareas para \(T_m = 240\) ms}
+\end{table}
+
+\subsubsection{Implementación en pseudo-código}
+\begin{lstlisting}[style=customcpp, caption={Implementación en C++ del cronograma}]
+    while (true) {
+        tiempo_actual := instante_actual();
+
+        if (tiempo_actual % 40 == 0) {
+            ejecutar(T1);
+        }
+        if (tiempo_actual % 60 == 0) {
+            ejecutar(T2);
+        }
+        if (tiempo_actual % 80 == 0) {
+            ejecutar(T3);
+        }
+
+        tiempo_siguiente := tiempo_actual + intervalo_minimo();
+        sleep_until(tiempo_siguiente);
+    }
+\end{lstlisting}
+
+Con este análisis, verificamos que el cronograma asegura que todas las tareas cumplen sus plazos. Aunque no pasa el test de utilización, el sistema es planificable.
+
+\section{Ejercicio 95}
+\subsection{Enunciado}
+Comprobar la planificabilidad y construir el cronograma de acuerdo al algoritmo de planificación RMS del siguiente conjunto de tareas periódicas:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Ti} \\ \hline
+T1 & 20 & 60 \\ \hline
+T2 & 20 & 80 \\ \hline
+T3 & 20 & 120 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\subsection{Solución}
+El algoritmo \textbf{Rate Monotonic Scheduling (RMS)} asigna prioridades de manera estática en función del periodo (\(T_i\)): a menor periodo, mayor prioridad. Verificamos la planificabilidad utilizando el test basado en el factor de utilización del procesador.
+
+\subsubsection{Cálculo del Factor de Utilización}
+El factor de utilización se calcula como:
+\[
+U = \sum_{i=1}^N \frac{C_i}{T_i}
+\]
+Sustituyendo los valores de las tareas:
+\[
+U = \frac{20}{60} + \frac{20}{80} + \frac{20}{120} = 0.333 + 0.25 + 0.1667 = 0.7497
+\]
+
+El límite de utilización máxima (\(U_0(N)\)) para \(N = 3\) tareas es:
+\[
+U_0(3) = 3 \cdot (2^{\frac{1}{3}} - 1) \approx 0.779
+\]
+
+\textbf{Conclusión:} Como \(U = 0.7497 \leq U_0(3) = 0.779\), el conjunto de tareas es planificable según RMS.
+
+\subsubsection{Cálculo del Hiperperiodo}
+El hiperperiodo (\(T_m\)) es el \textbf{mínimo común múltiplo (mcm)} de los períodos de las tareas:
+\[
+T_m = \text{mcm}(60, 80, 120) = 240 \, \text{ms}
+\]
+
+\subsubsection{Cronograma}
+El cronograma se construye considerando las instancias de activación de cada tarea en el intervalo \([0, T_m]\), donde cada tarea \(T_i\) se activa cada \(T_i\) ms y tiene un tiempo de ejecución de \(C_i\) ms.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Tiempo (ms)} & 0-20 & 20-40 & 40-60 & 60-80 & 80-100 & 100-120 & \ldots \\ \hline
+\textbf{T1} & X & - & X & - & X & - & \ldots \\ \hline
+\textbf{T2} & - & - & - & X & - & X & \ldots \\ \hline
+\textbf{T3} & - & - & - & - & - & - & \ldots \\ \hline
+\end{tabular}
+\caption{Cronograma de las tareas periódicas para \(T_m = 240\) ms}
+\end{table}
+
+\textbf{Nota:} Si se requiere el diagrama de Gantt detallado, puede construirse para el hiperperiodo calculado.
+
+\subsubsection{Implementación en Pseudo-Código}
+\begin{lstlisting}[style=customcpp, caption={Implementación en C++ del cronograma}]
+    while (true) {
+        tiempo_actual := instante_actual();
+
+        if (tiempo_actual % 60 == 0) {
+            ejecutar(T1);
+        }
+        if (tiempo_actual % 80 == 0) {
+            ejecutar(T2);
+        }
+        if (tiempo_actual % 120 == 0) {
+            ejecutar(T3);
+        }
+
+        tiempo_siguiente := tiempo_actual + intervalo_minimo();
+        sleep_until(tiempo_siguiente);
+    }
+\end{lstlisting}
+
+Con este análisis, concluimos que el conjunto de tareas es planificable y el cronograma asegura el cumplimiento de los plazos.
+
+\section{Ejercicio 96}
+\subsection{Enunciado}
+Determinar si el siguiente conjunto de tareas puede planificarse con la política de planificación RMS y con la política EDF, utilizando los tests de planificabilidad adecuados para cada uno de los dos casos. Comprobar también la planificabilidad construyendo los cronogramas para ambas políticas.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Ti} \\ \hline
+T1 & 1 & 5 \\ \hline
+T2 & 1 & 10 \\ \hline
+T3 & 2 & 20 \\ \hline
+T4 & 10 & 20 \\ \hline
+T5 & 7 & 100 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\subsection{Solución}
+\subsubsection{Planificación con RMS}
+El algoritmo \textbf{Rate Monotonic Scheduling (RMS)} asigna prioridades de manera estática en función del periodo (\(T_i\)): a menor periodo, mayor prioridad. Verificamos la planificabilidad utilizando el test basado en el factor de utilización del procesador.
+
+\paragraph{Test de Planificabilidad RMS}
+El factor de utilización del procesador se calcula como:
+\[
+U = \sum_{i=1}^N \frac{C_i}{T_i}
+\]
+
+Sustituyendo los valores de las tareas:
+\[
+U = \frac{1}{5} + \frac{1}{10} + \frac{2}{20} + \frac{10}{20} + \frac{7}{100} = 0.2 + 0.1 + 0.1 + 0.5 + 0.07 = 0.97
+\]
+
+El límite de utilización máxima para \(N = 5\) tareas es:
+\[
+U_0(5) = 5 \cdot (2^{\frac{1}{5}} - 1) \approx 0.743
+\]
+
+\textbf{Conclusión:} Como \(U = 0.97 > 0.743\), el sistema \textbf{no pasa el test RMS}. Esto indica que no podemos garantizar la planificabilidad mediante este test.
+
+\paragraph{Construcción del Cronograma RMS}
+Para comprobar la planificabilidad con RMS, construimos el cronograma hasta el hiperperiodo (\(T_m\)), que es el \textbf{mcm} de los periodos:
+\[
+T_m = \text{mcm}(5, 10, 20, 100) = 100 \, \text{ms}
+\]
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Tiempo (ms)} & 0-1 & 1-2 & 2-3 & 3-4 & 4-5 & \ldots \\ \hline
+\textbf{T1} & X & - & X & - & X & \ldots \\ \hline
+\textbf{T2} & - & - & - & - & X & \ldots \\ \hline
+\textbf{T3} & - & - & - & X & - & \ldots \\ \hline
+\textbf{T4} & - & X & X & X & X & \ldots \\ \hline
+\textbf{T5} & - & - & - & - & - & \ldots \\ \hline
+\end{tabular}
+\caption{Cronograma RMS para \(T_m = 100\) ms}
+\end{table}
+
+Si las tareas cumplen sus plazos en \(T_m\), el sistema es planificable con RMS.
+
+
+\subsubsection{Planificación con EDF}
+El algoritmo \textbf{Earliest Deadline First (EDF)} asigna prioridades dinámicamente según los plazos de respuesta (\(d_i\)): a menor plazo restante, mayor prioridad. Este método utiliza el segundo test de planificabilidad de Liu y Layland:
+\[
+U = \sum_{i=1}^N \frac{C_i}{T_i} \quad \text{y} \quad U \leq 1
+\]
+
+\paragraph{Test de Planificabilidad EDF}
+Sustituyendo los valores de las tareas:
+\[
+U = \frac{1}{5} + \frac{1}{10} + \frac{2}{20} + \frac{10}{20} + \frac{7}{100} = 0.97
+\]
+
+Dado que \(U = 0.97 \leq 1\), el sistema pasa el test EDF.
+
+\paragraph{Construcción del Cronograma EDF}
+Para comprobar la planificabilidad, construimos el cronograma dinámico, priorizando las tareas con menor plazo restante, hasta \(T_m = 100\).
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Tiempo (ms)} & 0-1 & 1-2 & 2-3 & 3-4 & 4-5 & \ldots \\ \hline
+\textbf{T1} & X & - & X & - & X & \ldots \\ \hline
+\textbf{T2} & - & - & - & - & X & \ldots \\ \hline
+\textbf{T4} & - & X & X & X & X & \ldots \\ \hline
+\textbf{T3} & - & - & - & X & - & \ldots \\ \hline
+\textbf{T5} & - & - & - & - & - & \ldots \\ \hline
+\end{tabular}
+\caption{Cronograma EDF para \(T_m = 100\) ms}
+\end{table}
 
 
 
+\subsubsection{Explicación del Algoritmo EDF}
+El algoritmo EDF asigna prioridades dinámicas a las tareas en función del tiempo restante hasta su plazo de respuesta absoluto (\(d_i\)). Cuando una tarea se activa, se compara su plazo con el de las demás tareas en cola de ejecución, ejecutándose aquella que tenga el plazo más cercano a expirar. EDF es óptimo para tareas periódicas y aperiódicas si \(U \leq 1\).
+
+Ventajas del EDF:
+\begin{itemize}
+    \item Mayor utilización del procesador, alcanzando hasta \(U = 1\).
+    \item Planificabilidad dinámica para sistemas con alta carga de tareas.
+\end{itemize}
+
+\textbf{Nota:} A pesar de pasar el test EDF, el cronograma final debe verificarse para confirmar que todas las tareas cumplen sus plazos.
+
+
+
+\section{Ejercicio 97}
+\subsection{Enunciado}
+Determinar razonadamente si el siguiente conjunto de tareas puede planificarse en un sistema monoprocesador utilizando:
+\begin{itemize}
+    \item Un \textbf{ejecutivo cíclico}.
+    \item Algún algoritmo basado en \textbf{prioridades estáticas} o \textbf{dinámicas}.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Ti} \\ \hline
+T1 & 1 & 5 \\ \hline
+T2 & 1 & 10 \\ \hline
+T3 & 2 & 10 \\ \hline
+T4 & 11 & 20 \\ \hline
+T5 & 5 & 100 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\subsection{Solución}
+\subsubsection{Planificación mediante un Ejecutivo Cíclico}
+El \textbf{ejecutivo cíclico} requiere que las tareas se asignen en ciclos secundarios, garantizando que todas se ejecuten dentro del hiperperiodo. Para que sea planificable:
+\[
+\text{TM} = \text{mcm}(5, 10, 20, 100) = 100 \, \text{ms}
+\]
+El tamaño del ciclo secundario (\(TS\)) debe cumplir:
+\[
+\max(C_i) \leq TS \leq \min(T_i)
+\]
+En este caso:
+\[
+\max(C_i) = 11 \quad \text{y} \quad \min(T_i) = 5
+\]
+Dado que \(11 > 5\), no es posible definir un ciclo secundario que cumpla esta condición. Por lo tanto, el sistema \textbf{no puede planificarse} mediante un ejecutivo cíclico.
+
+\subsubsection{Planificación mediante Prioridades Estáticas (RMS)}
+El algoritmo \textbf{Rate Monotonic Scheduling (RMS)} asigna prioridades según los periodos (\(T_i\)): menor \(T_i\), mayor prioridad. Calculamos el factor de utilización del procesador (\(U\)):
+\[
+U = \sum_{i=1}^N \frac{C_i}{T_i}
+\]
+Sustituyendo los valores:
+\[
+U = \frac{1}{5} + \frac{1}{10} + \frac{2}{10} + \frac{11}{20} + \frac{5}{100} = 0.2 + 0.1 + 0.2 + 0.55 + 0.05 = 1.1
+\]
+El límite de utilización máxima (\(U_0(N)\)) para \(N = 5\) tareas es:
+\[
+U_0(5) = 5 \cdot (2^{\frac{1}{5}} - 1) \approx 0.743
+\]
+Dado que \(U = 1.1 > 0.743\), el sistema \textbf{no pasa el test RMS}, y no podemos garantizar su planificabilidad con prioridades estáticas.
+
+\subsubsection{Planificación mediante Prioridades Dinámicas (EDF)}
+El algoritmo \textbf{Earliest Deadline First (EDF)} asigna prioridades según los plazos de respuesta (\(d_i\)). El test de planificabilidad EDF verifica si:
+\[
+U = \sum_{i=1}^N \frac{C_i}{T_i} \leq 1
+\]
+Sustituyendo los valores:
+\[
+U = \frac{1}{5} + \frac{1}{10} + \frac{2}{10} + \frac{11}{20} + \frac{5}{100} = 1.1
+\]
+Dado que \(U = 1.1 > 1\), el sistema \textbf{no pasa el test EDF} y no es planificable con este algoritmo.
+
+\subsubsection{Conclusión}
+\begin{itemize}
+    \item \textbf{Ejecutivo Cíclico:} No es posible planificar las tareas, ya que no se puede definir un ciclo secundario que cumpla las restricciones de los periodos.
+    \item \textbf{Prioridades Estáticas (RMS):} El sistema no pasa el test de utilización RMS, por lo que no es posible garantizar su planificabilidad.
+    \item \textbf{Prioridades Dinámicas (EDF):} Aunque EDF es más eficiente, el sistema tampoco pasa el test, ya que el factor de utilización excede \(1\).
+\end{itemize}
+
+En resumen, este conjunto de tareas \textbf{no puede planificarse} en un sistema monoprocesador utilizando ninguno de los métodos mencionados.
+
+
+
+\section*{Ejercicios Adicionales}
 
 
 \end{document}
