@@ -1116,5 +1116,761 @@ En resumen, este conjunto de tareas \textbf{no puede planificarse} en un sistema
 
 \section*{Ejercicios Adicionales}
 
+\section{Ejercicio 98}
+\subsection{Enunciado}
+Para el conjunto de tareas cuyos datos se muestran más abajo, se pide:
+\begin{enumerate}
+    \item Dibujar el gráfico de ejecución y obtener el tiempo de respuesta de cada tarea.
+    \item Determinar, mediante inspección del gráfico anterior, cuántas veces interfiere la tarea \(T_1\) a la tarea \(T_3\) durante un intervalo temporal dado por el tiempo de respuesta de esta última tarea.
+    \item Hacer lo mismo que en (b), pero para las tareas \(T_1\) y \(T_2\).
+\end{enumerate}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Ti} & \textbf{Di} \\ \hline
+T1 & 1 & 3 & 2 \\ \hline
+T2 & 3 & 6 & 5 \\ \hline
+T3 & 2 & 13 & 13 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\subsection{Solución}
+\subsubsection{Paso 1: Cálculo del hiperperiodo y prioridades}
+El hiperperiodo (\(T_m\)) es el mínimo común múltiplo de los períodos (\(T_i\)):
+\[
+T_m = \text{mcm}(3, 6, 13) = 78 \, \text{ms}.
+\]
+
+Asignamos las prioridades utilizando el algoritmo \textbf{Rate Monotonic Scheduling (RMS)}, donde las tareas con menor período tienen mayor prioridad. Por lo tanto, el orden de prioridad es:
+\[
+T_1 > T_2 > T_3.
+\]
+
+\subsubsection{Paso 2: Construcción del cronograma}
+El cronograma refleja los momentos en que las tareas comienzan y terminan en el intervalo \([0, T_m = 78]\). Consideramos los tiempos de cómputo (\(C_i\)) y los períodos (\(T_i\)) de las tareas:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Tiempo (ms)} & 0--1 & 1--3 & 3--4 & 4--7 & 7--9 & 9--10 & 10--11 & 12--13 & 13--15 \\ \hline
+\textbf{T1} & X & -- & X & -- & X & -- & X & -- & X \\ \hline
+\textbf{T2} & -- & X & -- & X & X & X & -- & -- & X \\ \hline
+\textbf{T3} & -- & -- & -- & -- & -- & -- & -- & X & X \\ \hline
+\end{tabular}
+\caption{Cronograma de ejecución en el intervalo \([0, T_m = 78]\)}
+\end{table}
+
+\textbf{Explicación del cronograma:}
+\begin{itemize}
+    \item \(T_1\): Se ejecuta cada 3 ms durante \(C_1 = 1\) ms, comenzando en 0, 3, 6, etc.
+    \item \(T_2\): Se ejecuta cada 6 ms durante \(C_2 = 3\) ms, comenzando en 6, 12, etc.
+    \item \(T_3\): Se ejecuta cada 13 ms durante \(C_3 = 2\) ms, comenzando en 13, 26, etc.
+\end{itemize}
+
+\subsubsection{Paso 3: Cálculo de los tiempos de respuesta}
+El tiempo de respuesta (\(R_i\)) de cada tarea es el intervalo desde su activación hasta la finalización de su ejecución, considerando interferencias de tareas con mayor prioridad.
+
+\begin{enumerate}
+    \item \textbf{\(T_1\):} Tiene la mayor prioridad, por lo que no sufre interferencias. Su tiempo de respuesta es:
+    \[
+    R_1 = C_1 = 1 \, \text{ms}.
+    \]
+
+    \item \textbf{\(T_2\):} Sufre interferencias de \(T_1\), que se ejecuta una vez durante el período de \(T_2\):
+    \[
+    R_2 = C_2 + \text{interferencia de } T_1 = 3 + 1 = 4 \, \text{ms}.
+    \]
+
+    \item \textbf{\(T_3\):} Sufre interferencias de \(T_1\) y \(T_2\). Durante el tiempo de respuesta de \(T_3\), \(T_1\) se ejecuta 4 veces y \(T_2\) 2 veces:
+    \[
+    R_3 = C_3 + 4 \cdot C_1 + 2 \cdot C_2 = 2 + 4 \cdot 1 + 2 \cdot 3 = 2 + 4 + 6 = 12 \, \text{ms}.
+    \]
+\end{enumerate}
+
+\subsubsection{Paso 4: Interferencias entre tareas}
+\begin{itemize}
+    \item \textbf{\(T_1\) y \(T_3\):} Durante \(R_3 = 12 \, \text{ms}\), \(T_1\) se ejecuta 4 veces (en los intervalos 0-1, 3-4, 6-7, y 9-10).
+    \item \textbf{\(T_1\) y \(T_2\):} Durante \(R_2 = 4 \, \text{ms}\), \(T_1\) se ejecuta 1 vez (en el intervalo 0-1).
+\end{itemize}
+
+\subsubsection{Conclusión}
+\begin{itemize}
+    \item Todas las tareas cumplen sus plazos límites (\(D_i\)).
+    \item \(T_1\) interfiere con \(T_3\) 4 veces durante \(R_3\).
+    \item \(T_1\) interfiere con \(T_2\) 1 vez durante \(R_2\).
+\end{itemize}
+
+\section{Ejercicio 99}
+\subsection{Enunciado}
+Verificar la planificabilidad del siguiente conjunto de tareas utilizando para ello el algoritmo del \textbf{“Primero el del Tiempo Límite más Cercano” (EDF)}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Ti} \\ \hline
+T1 & 1 & 4 \\ \hline
+T2 & 2 & 6 \\ \hline
+T3 & 3 & 8 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\subsection{Solución}
+El algoritmo \textbf{EDF (Earliest Deadline First)} da prioridad a la tarea con el tiempo límite más cercano en cada instante de planificación. Para determinar la planificabilidad del sistema, usamos el test del factor de utilización y verificamos los plazos.
+
+\subsubsection{Paso 1: Cálculo del factor de utilización}
+El factor de utilización del procesador se define como:
+\[
+U = \sum_{i=1}^{N} \frac{C_i}{T_i},
+\]
+donde \(C_i\) es el tiempo de cómputo y \(T_i\) es el período de la tarea.
+
+Para este conjunto de tareas:
+\[
+U = \frac{1}{4} + \frac{2}{6} + \frac{3}{8} = 0.25 + 0.333 + 0.375 = 0.958.
+\]
+
+Dado que \(U \leq 1\), el sistema es potencialmente planificable.
+
+\subsubsection{Paso 2: Construcción del cronograma}
+Para verificar la planificabilidad, construimos el cronograma en el hiperperiodo (\(T_m\)) del sistema, que es el mínimo común múltiplo de los períodos:
+\[
+T_m = \text{mcm}(4, 6, 8) = 24 \, \text{ms}.
+\]
+
+En cada instante, seleccionamos la tarea con el tiempo límite más cercano que esté lista para ejecutarse.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Tiempo (ms)} & 0-1 & 1-2 & 2-3 & 3-4 & 4-5 & 5-6 & 6-7 & 7-8 \\ \hline
+\textbf{T1} & X & - & - & X & X & - & - & X \\ \hline
+\textbf{T2} & - & X & X & - & - & X & X & - \\ \hline
+\textbf{T3} & - & - & - & - & - & - & X & X \\ \hline
+\end{tabular}
+\caption{Cronograma de las tareas en el intervalo \([0, T_m = 24]\)}
+\end{table}
+
+\textbf{Explicación del cronograma:}
+\begin{itemize}
+    \item \(T_1\): Tiene un período de 4 ms y un tiempo de cómputo de 1 ms. Se ejecuta en los intervalos \(0-1\), \(4-5\), \(8-9\), etc.
+    \item \(T_2\): Tiene un período de 6 ms y un tiempo de cómputo de 2 ms. Se ejecuta en los intervalos \(1-3\), \(6-8\), \(12-14\), etc.
+    \item \(T_3\): Tiene un período de 8 ms y un tiempo de cómputo de 3 ms. Se ejecuta en los intervalos \(7-10\), \(15-18\), etc.
+\end{itemize}
+
+\subsubsection{Paso 3: Verificación de los plazos}
+El algoritmo EDF garantiza que las tareas cumplen sus plazos si \(U \leq 1\). Además, al observar el cronograma:
+\begin{itemize}
+    \item \(T_1\) cumple su plazo en cada instancia.
+    \item \(T_2\) cumple su plazo en cada instancia.
+    \item \(T_3\) cumple su plazo en cada instancia.
+\end{itemize}
+
+\subsubsection{Conclusión}
+El sistema es planificable\footnote{Se esta tomando como referencia que \(T_s = 1ms\) para la realización de los cronogramas para ver mejor la transición de lo que pasa en el tiempo real, pero lo aconsejable es hacerlo calculado el \(T_s\) como se menciona en el primer ejercicio de esta relación.} bajo el algoritmo EDF, ya que el factor de utilización es menor o igual a 1, y el cronograma demuestra que todas las tareas cumplen sus plazos.
+
+
+\section{Ejercicio 100}
+\subsection{Enunciado}
+Verificar la planificabilidad utilizando el algoritmo \textbf{EDF (Earliest Deadline First)} de asignación dinámica de prioridades a las tareas y construir el diagrama de ejecución de tareas para el siguiente conjunto:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Di} & \textbf{Ti} \\ \hline
+T1 & 2 & 5 & 6 \\ \hline
+T2 & 2 & 4 & 8 \\ \hline
+T3 & 4 & 8 & 12 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\subsection{Solución}
+\subsubsection{Paso 1: Test del factor de utilización}
+Para verificar la planificabilidad inicial, calculamos el factor de utilización del procesador:
+\[
+U = \sum_{i=1}^{N} \frac{C_i}{T_i}.
+\]
+
+Para este conjunto de tareas:
+\[
+U = \frac{2}{6} + \frac{2}{8} + \frac{4}{12} = 0.333 + 0.25 + 0.333 = 0.916.
+\]
+
+Dado que \(U \leq 1\), el sistema es potencialmente planificable bajo el algoritmo EDF. Sin embargo, para garantizar que todas las tareas cumplen sus plazos, construimos el cronograma.
+
+\subsubsection{Paso 2: Hiperperiodo del sistema}
+El hiperperiodo (\(T_m\)) es el mínimo común múltiplo de los períodos (\(T_i\)):
+\[
+T_m = \text{mcm}(6, 8, 12) = 24 \, \text{ms}.
+\]
+
+\subsubsection{Paso 3: Construcción del cronograma}
+Usamos el algoritmo EDF para construir el cronograma. Este algoritmo asigna prioridades dinámicas según el tiempo límite más cercano (\(D_i\)) de cada tarea en el instante de planificación.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Tiempo (ms)} & 0--2 & 2--4 & 4--6 & 6--8 & 8--10 & 10--12 & 12--14 & 14--16 & 16--18 \\ \hline
+\textbf{T1} & X & -- & X & -- & -- & -- & X & -- & X \\ \hline
+\textbf{T2} & -- & X & -- & X & -- & -- & -- & X & -- \\ \hline
+\textbf{T3} & -- & -- & -- & -- & X & X & -- & -- & X \\ \hline
+\end{tabular}
+\caption{Cronograma de ejecución de las tareas en el intervalo \([0, T_m = 24]\)}
+\end{table}
+
+\textbf{Explicación del cronograma:}
+\begin{itemize}
+    \item \textbf{T1:} Se ejecuta durante \(C_1 = 2\) ms con un período \(T_1 = 6\) ms y un tiempo límite \(D_1 = 5\). Se activa en los intervalos 0-2, 4-6, 12-14, etc.
+    \item \textbf{T2:} Se ejecuta durante \(C_2 = 2\) ms con un período \(T_2 = 8\) ms y un tiempo límite \(D_2 = 4\). Se activa en los intervalos 2-4, 6-8, 14-16, etc.
+    \item \textbf{T3:} Se ejecuta durante \(C_3 = 4\) ms con un período \(T_3 = 12\) ms y un tiempo límite \(D_3 = 8\). Se activa en los intervalos 8-12, 16-20, etc.
+\end{itemize}
+
+\subsubsection{Paso 4: Verificación de los plazos}
+Verificamos que cada tarea cumple su tiempo límite (\(D_i\)) observando el cronograma:
+\begin{itemize}
+    \item \textbf{T1:} Todas sus ejecuciones terminan antes del tiempo límite de 5 ms después de su activación.
+    \item \textbf{T2:} Todas sus ejecuciones terminan antes del tiempo límite de 4 ms después de su activación.
+    \item \textbf{T3:} Todas sus ejecuciones terminan antes del tiempo límite de 8 ms después de su activación.
+\end{itemize}
+
+\subsubsection{Conclusión}
+El sistema es planificable bajo el algoritmo EDF, ya que:
+\begin{itemize}
+    \item El factor de utilización es menor o igual a 1 (\(U = 0.916 \leq 1\)).
+    \item Todas las tareas cumplen sus tiempos límite (\(D_i\)).
+\end{itemize}
+
+
+\section{Ejercicio 101: Verificación de planificabilidad con Deadline Monotonic (DM)}
+\subsection{Enunciado}
+Verificar la planificabilidad del conjunto de tareas descrito en el ejercicio 100 utilizando el algoritmo del \textbf{plazo de respuesta máximo (D)} o \textbf{Deadline Monotonic (DM)}.
+
+\subsection{Solución}
+El algoritmo \textbf{DM (Deadline Monotonic)} asigna prioridades estáticas a las tareas en función de su plazo de respuesta máximo (\(D_i\)): a menor \(D_i\), mayor prioridad. Evaluaremos si el conjunto de tareas es planificable bajo este esquema.
+
+\subsubsection{Paso 1: Conjunto de tareas}
+Para referencia, el conjunto de tareas es:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Di} & \textbf{Ti} \\ \hline
+T1 & 2 & 5 & 6 \\ \hline
+T2 & 2 & 4 & 8 \\ \hline
+T3 & 4 & 8 & 12 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\subsubsection{Paso 2: Cálculo del tiempo de respuesta (\(R_i\))}
+Para determinar si las tareas son planificables, calculamos el tiempo de respuesta (\(R_i\)) para cada tarea mediante la fórmula iterativa:
+\[
+R_i^{(k+1)} = C_i + \sum_{j=1}^{i-1} \left\lceil \frac{R_i^{(k)}}{T_j} \right\rceil C_j
+\]
+\textbf{Criterio de planificabilidad:} Si \(R_i \leq D_i\) para todas las tareas, el sistema es planificable.
+
+\paragraph{Tarea T1 (\(D_1 = 5\)):}
+\[
+R_1 = C_1 = 2
+\]
+Como \(R_1 = 2 \leq D_1 = 5\), la tarea \(T_1\) es planificable.
+
+\paragraph{Tarea T2 (\(D_2 = 4\)):}
+Iteramos el cálculo:
+\[
+R_2^{(0)} = C_2 = 2
+\]
+\[
+R_2^{(1)} = C_2 + \left\lceil \frac{R_2^{(0)}}{T_1} \right\rceil C_1 = 2 + \left\lceil \frac{2}{6} \right\rceil 2 = 2 + 2 = 4
+\]
+Como \(R_2 = 4 \leq D_2 = 4\), la tarea \(T_2\) es planificable.
+
+\paragraph{Tarea T3 (\(D_3 = 8\)):}
+Iteramos el cálculo:
+\[
+R_3^{(0)} = C_3 = 4
+\]
+\[
+R_3^{(1)} = C_3 + \left\lceil \frac{R_3^{(0)}}{T_1} \right\rceil C_1 + \left\lceil \frac{R_3^{(0)}}{T_2} \right\rceil C_2
+\]
+\[
+R_3^{(1)} = 4 + \left\lceil \frac{4}{6} \right\rceil 2 + \left\lceil \frac{4}{8} \right\rceil 2 = 4 + 2 + 2 = 8
+\]
+Como \(R_3 = 8 \leq D_3 = 8\), la tarea \(T_3\) es planificable.
+
+\subsubsection{Paso 3: Conclusión}
+Todas las tareas cumplen sus plazos máximos (\(R_i \leq D_i\)):
+\begin{itemize}
+    \item \(R_1 = 2 \leq D_1 = 5\)
+    \item \(R_2 = 4 \leq D_2 = 4\)
+    \item \(R_3 = 8 \leq D_3 = 8\)
+\end{itemize}
+Por lo tanto, el conjunto de tareas es planificable bajo el algoritmo \textbf{Deadline Monotonic (DM)}.
+
+\section{Ejercicio 102: Análisis de afirmaciones sobre inversión de prioridad}
+\subsection{Enunciado}
+Indicar cuáles de las siguientes afirmaciones son correctas respecto de los algoritmos para resolver el problema de inversión de prioridad de las tareas en sistemas de tiempo real de misión crítica:
+
+\begin{enumerate}[label=(\alph*)]
+    \item Suponiendo que las tareas se planifican con el protocolo de herencia de prioridad: la prioridad heredada por una tarea sólo se mantiene mientras dicha tarea esté utilizando un recurso compartido con otra tarea más prioritaria.
+    \item Con el protocolo de techo de prioridad, cuando una tarea adquiere un recurso no puede verse interrumpida, hasta que termine su ejecución, por otras tareas que se activan después que ésta y que vayan a utilizar en el futuro un recurso con límite de prioridad igual o inferior.
+    \item Con el protocolo de techo de prioridad (PPP), una tarea no puede comenzar a ejecutarse si no están libres todos los recursos que va a utilizar durante su primer ciclo.
+    \item Si consideramos una tarea periódica que utilice el protocolo de techo de prioridad inmediato para cambiar su prioridad dinámica cuando accede a recursos, siempre se cumplirá que dicha tarea no puede ser interrumpida por otra menos prioritaria que ella.
+    \item Con el protocolo de techo de prioridad las tareas más prioritarias del sistema pueden ser interrumpidas durante cada ciclo de su ejecución como máximo 1 vez cuando acceden a recursos que comparten con otras tareas menos prioritarias.
+    \item El protocolo de techo de prioridad original producirá siempre tiempos de respuesta menores para las tareas que el algoritmo de herencia de prioridad.
+\end{enumerate}
+
+\subsection{Solución}
+\subsubsection{Análisis de cada afirmación}
+\begin{itemize}
+    \item \textbf{(a)} \textit{Correcta.} 
+    Según el protocolo de herencia de prioridad, una tarea que bloquea a otra más prioritaria hereda su prioridad mientras esté usando el recurso compartido. Al liberar el recurso, la tarea vuelve a su prioridad original.
+
+    \item \textbf{(b)} \textit{Incorrecta.} 
+    El protocolo de techo de prioridad asegura que una tarea puede ser interrumpida por otra más prioritaria, incluso si la nueva tarea no accede inmediatamente a un recurso con un techo de prioridad igual o inferior.
+
+    \item \textbf{(c)} \textit{Incorrecta.} 
+    Con el protocolo de techo de prioridad, una tarea puede comenzar a ejecutarse incluso si otros recursos que usará más adelante no están libres en ese momento.
+
+    \item \textbf{(d)} \textit{Incorrecta.} 
+    Con el protocolo de techo de prioridad inmediato, una tarea puede ser interrumpida por otra tarea que herede una prioridad más alta al acceder a un recurso compartido.
+
+    \item \textbf{(e)} \textit{Correcta.} 
+    Con el protocolo de techo de prioridad, una tarea puede ser bloqueada como máximo una vez por otras tareas menos prioritarias durante cada ciclo de su ejecución.
+
+    \item \textbf{(f)} \textit{Incorrecta.} 
+    El protocolo de techo de prioridad no garantiza tiempos de respuesta menores en todos los casos respecto al protocolo de herencia de prioridad. Dependerá de la configuración específica del sistema y las tareas.
+\end{itemize}
+
+\subsubsection{Conclusión}
+Las afirmaciones \textbf{(a)} y \textbf{(e)} son \textbf{correctas}, mientras que las restantes son \textbf{incorrectas}.
+
+\section{Ejercicio 103: Utilización máxima del procesador para un Servidor Esporádico}
+\subsection{Enunciado}
+Calcular la utilización máxima del procesador que se puede asignar al Servidor Esporádico para garantizar la planificabilidad del siguiente conjunto de tareas periódicas utilizando el algoritmo \textbf{Rate Monotonic (RM)}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Ti} \\ \hline
+$\tau_1$ & 1 & 5 \\ \hline
+$\tau_2$ & 2 & 8 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\subsection{Solución}
+\subsubsection{Paso 1: Utilización del procesador por las tareas periódicas}
+La utilización del procesador por las tareas periódicas (\(U_p\)) se calcula como:
+\[
+U_p = \sum_{i=1}^{N} \frac{C_i}{T_i}
+\]
+
+Sustituyendo los valores de las tareas:
+\[
+U_p = \frac{1}{5} + \frac{2}{8} = 0.2 + 0.25 = 0.45
+\]
+
+\subsubsection{Paso 2: Límite de utilización máxima para RM}
+El límite de utilización máxima (\(U_{max}\)) para \(N = 3\) tareas (las dos tareas periódicas más el Servidor Esporádico) es:
+\[
+U_{max}(3) = 3 \cdot (2^{\frac{1}{3}} - 1) \approx 0.779
+\]
+
+\subsubsection{Paso 3: Utilización restante para el Servidor Esporádico}
+La utilización máxima que puede asignarse al Servidor Esporádico (\(U_s\)) es:
+\[
+U_s = U_{max}(3) - U_p
+\]
+
+Sustituyendo los valores:
+\[
+U_s = 0.779 - 0.45 = 0.329
+\]
+
+\subsection{Conclusión}
+La utilización máxima del procesador que se puede asignar al Servidor Esporádico para garantizar la planificabilidad del conjunto de tareas periódicas utilizando RM es:
+\[
+\boxed{U_s = 0.329}
+\]
+\section{Ejercicio 104: Utilización máxima del procesador para un Servidor Diferido (SD)}
+\subsection{Enunciado}
+Calcular la utilización máxima del procesador que puede ser asignada al Servidor Diferido (SD) para garantizar la planificabilidad del conjunto de tareas periódicas dado en el ejercicio 103 anterior.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea} & \textbf{Ci} & \textbf{Ti} \\ \hline
+$\tau_1$ & 1 & 5 \\ \hline
+$\tau_2$ & 2 & 8 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\subsection{Solución}
+\subsubsection{Paso 1: Fórmula para el límite de utilización máxima}
+Para un Servidor Diferido (SD), la utilización máxima del procesador se calcula utilizando la fórmula de límite superior de utilización para \(N\) tareas periódicas y el servidor:
+\[
+U_{mls} = U_s + N \cdot \left( \left( \frac{U_s + 2}{2U_s + 1} \right)^{\frac{1}{N}} - 1 \right)
+\]
+
+Donde:
+\begin{itemize}
+    \item \(U_s\): Utilización asignada al servidor.
+    \item \(N\): Número de tareas periódicas más el servidor (\(N = 3\)).
+\end{itemize}
+
+\subsubsection{Paso 2: Sustitución de valores}
+Las tareas periódicas tienen una utilización total de:
+\[
+U_p = \frac{1}{5} + \frac{2}{8} = 0.45
+\]
+
+Queremos calcular el valor máximo de \(U_s\) tal que \(U_{mls} \geq U_p + U_s\).
+
+\subsubsection{Paso 3: Resolución numérica}
+Sustituyendo \(U_p = 0.45\) y \(N = 3\) en la fórmula, debemos resolver:
+\[
+0.45 + U_s \leq U_s + 3 \cdot \left( \left( \frac{U_s + 2}{2U_s + 1} \right)^{\frac{1}{3}} - 1 \right)
+\]
+
+Resolviendo numéricamente (por iteración o métodos de aproximación), obtenemos:
+\[
+U_s \approx 0.204
+\]
+
+\subsection{Conclusión}
+La utilización máxima del procesador que puede ser asignada al Servidor Diferido (SD) para garantizar la planificabilidad del conjunto de tareas periódicas es:
+\[
+\boxed{U_s \approx 0.204}
+\]
+
+\section{Ejercicio 105: Planificación de tareas aperiódicas con Servidor Diferido (SD)}
+\subsection{Enunciado}
+Junto con las tareas periódicas que se muestran en el ejercicio 103, definir un plan para planificar las siguientes tareas aperiódicas utilizando un Servidor Diferido (SD), que posea una utilización máxima del tiempo del procesador y prioridad intermedia.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Tarea Aperiódica} & \textbf{Ci} \\ \hline
+$J_1$ & 2 \\ \hline
+$J_2$ & 7 \\ \hline
+$J_3$ & 17 \\ \hline
+\end{tabular}
+\caption{Tareas aperiódicas}
+\end{table}
+
+\subsection{Solución}
+\subsubsection{Paso 1: Utilización máxima del SD}
+Del ejercicio 104, sabemos que la utilización máxima del Servidor Diferido (SD) para garantizar la planificabilidad de las tareas periódicas es:
+\[
+U_s = 0.204
+\]
+
+El período del SD (\(T_s\)) se define de manera que cumpla:
+\[
+U_s = \frac{C_s}{T_s}
+\]
+Podemos elegir un valor adecuado para \(T_s\). Por simplicidad, tomamos \(T_s = 10\):
+\[
+C_s = U_s \cdot T_s = 0.204 \cdot 10 = 2.04 \approx 2
+\]
+
+El SD tendrá un tiempo de cómputo \(C_s = 2\) y un período \(T_s = 10\).
+
+\subsubsection{Paso 2: Planificación de tareas periódicas y SD}
+El conjunto de tareas periódicas, junto con el SD, se planificará usando el algoritmo \textbf{Rate Monotonic (RM)}. Asignamos las prioridades:
+\begin{itemize}
+    \item \(\tau_1\): Período \(T_1 = 5\) (mayor prioridad).
+    \item \(\tau_2\): Período \(T_2 = 8\).
+    \item SD: Período \(T_s = 10\) (prioridad intermedia).
+\end{itemize}
+
+\subsubsection{Paso 3: Planificación de tareas aperiódicas con el SD}
+El SD atiende las tareas aperiódicas en sus ventanas de ejecución. Para \(C_s = 2\) y \(T_s = 10\), la ventana de ejecución del SD ocurre en cada intervalo de 10 ms.
+
+Planificamos las tareas aperiódicas \(J_1\), \(J_2\) y \(J_3\) de acuerdo con su tiempo de cómputo (\(C_i\)) y en el orden de llegada:
+\begin{itemize}
+    \item \(J_1\): Se completa en el primer intervalo del SD (0-10 ms).
+    \item \(J_2\): Su tiempo restante se ejecuta parcialmente en los intervalos del SD (10-20 ms y 20-30 ms).
+    \item \(J_3\): Comienza su ejecución después de que \(J_2\) se completa, y utiliza el intervalo del SD en (30-40 ms).
+\end{itemize}
+
+\subsubsection{Paso 4: Cronograma}
+El cronograma resultante es el siguiente (en ms):
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    \textbf{Tiempo} & 0--5 & 5--8 & 8--10 & 10--15 & 15--20 & 20--25 \\ \hline
+    \textbf{\(\tau_1\)} & X & -- & X & -- & X & -- \\ \hline
+    \textbf{\(\tau_2\)} & -- & X & -- & X & -- & X \\ \hline
+    \textbf{SD} & \(J_1\) & -- & \(J_1\) & \(J_2\) & \(J_2\) & \(J_3\) \\ \hline
+    \end{tabular}
+    \caption{Cronograma de tareas periódicas y aperiódicas}
+\end{table}
+
+\subsection{Conclusión}
+El Servidor Diferido garantiza que las tareas aperiódicas \(J_1\), \(J_2\) y \(J_3\) se ejecuten utilizando un tiempo de procesador máximo \(U_s = 0.204\), manteniendo la planificabilidad de las tareas periódicas bajo \textbf{Rate Monotonic (RM)}.
+
+\section{Ejercicio 106: Planificación con Servidor Esporádico (SS)}
+\subsection{Enunciado}
+Resolver el problema de planificación descrito en el ejercicio 105, utilizando un \textbf{Servidor Esporádico (SS)} que tenga una utilización máxima del procesador y prioridad intermedia.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Tarea Aperiódica} & \textbf{Ci} \\ \hline
+$J_1$ & 2 \\ \hline
+$J_2$ & 7 \\ \hline
+$J_3$ & 17 \\ \hline
+\end{tabular}
+\caption{Tareas aperiódicas}
+\end{table}
+
+El conjunto de tareas periódicas está definido en el ejercicio 103 como:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea Periódica} & \textbf{Ci} & \textbf{Ti} \\ \hline
+$\tau_1$ & 1 & 5 \\ \hline
+$\tau_2$ & 2 & 8 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\subsection{Solución}
+\subsubsection{Paso 1: Utilización máxima del Servidor Esporádico (SS)}
+Del ejercicio 103, sabemos que la utilización máxima asignada al servidor es \(U_s = 0.204\). La relación entre el tiempo de cómputo (\(C_s\)) y el período (\(T_s\)) del servidor es:
+\[
+U_s = \frac{C_s}{T_s}
+\]
+Eligiendo \(T_s = 10\), calculamos:
+\[
+C_s = U_s \cdot T_s = 0.204 \cdot 10 = 2.04 \approx 2
+\]
+El Servidor Esporádico tiene un tiempo de cómputo \(C_s = 2\) y un período \(T_s = 10\).
+
+\subsubsection{Paso 2: Funcionamiento del Servidor Esporádico}
+El Servidor Esporádico (SS) atiende tareas aperiódicas asignando tiempo de procesador según su tiempo disponible (\(C_s\)) y regenerando este tiempo en cada período (\(T_s\)). El servidor solo se activa cuando hay tareas aperiódicas pendientes en la cola de ejecución. 
+
+A diferencia del Servidor Diferido, el SS permite reutilizar el tiempo no consumido en un período, lo que puede mejorar la latencia para las tareas aperiódicas.
+
+\subsubsection{Paso 3: Planificación de las tareas aperiódicas}
+Las tareas aperiódicas (\(J_1\), \(J_2\), \(J_3\)) se ejecutarán en orden de llegada, utilizando el tiempo asignado al SS. Asumimos los tiempos de llegada:
+\begin{itemize}
+    \item \(J_1\): Llega en \(t = 0\).
+    \item \(J_2\): Llega en \(t = 8\).
+    \item \(J_3\): Llega en \(t = 18\).
+\end{itemize}
+
+\subsubsection{Paso 4: Cronograma de ejecución}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Tiempo (ms)} & 0--5 & 5--8 & 8--10 & 10--15 & 15--18 & 18--20 \\ \hline
+\textbf{\(\tau_1\)} & X & -- & X & -- & X & -- \\ \hline
+\textbf{\(\tau_2\)} & -- & X & -- & X & -- & X \\ \hline
+\textbf{SS} & \(J_1\) & -- & \(J_1\) & \(J_2\) & \(J_2\) & \(J_3\) \\ \hline
+\end{tabular}
+\caption{Cronograma de tareas periódicas y aperiódicas utilizando el SS}
+\end{table}
+
+\textbf{Explicación del cronograma:}
+\begin{itemize}
+    \item En \(t = 0\), \(J_1\) comienza a ejecutarse utilizando el tiempo del SS (\(C_s = 2\)).
+    \item En \(t = 8\), \(J_2\) llega y utiliza el tiempo disponible del SS en los períodos subsiguientes.
+    \item En \(t = 18\), \(J_3\) comienza a ejecutarse y continúa en el siguiente intervalo del SS.
+\end{itemize}
+
+\subsection{Conclusión}
+El Servidor Esporádico (\(U_s = 0.204\)) permite planificar las tareas aperiódicas sin afectar la planificabilidad de las tareas periódicas. Además, su capacidad de regeneración mejora la latencia de respuesta para las tareas aperiódicas en comparación con el Servidor Diferido.
+
+\section{Ejercicio 107: Planificación con Servidor Diferido (DS)}
+\subsection{Enunciado}
+Resolver el problema de planificación descrito en el ejercicio 105, utilizando un \textbf{Servidor Diferido (DS)} que tenga una utilización máxima del procesador y prioridad intermedia.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Tarea Aperiódica} & \textbf{Ci} \\ \hline
+$J_1$ & 2 \\ \hline
+$J_2$ & 7 \\ \hline
+$J_3$ & 17 \\ \hline
+\end{tabular}
+\caption{Tareas aperiódicas}
+\end{table}
+
+El conjunto de tareas periódicas está definido en el ejercicio 103 como:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea Periódica} & \textbf{Ci} & \textbf{Ti} \\ \hline
+$\tau_1$ & 1 & 5 \\ \hline
+$\tau_2$ & 2 & 8 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\subsection{Solución}
+\subsubsection{Paso 1: Utilización máxima del Servidor Diferido (DS)}
+La utilización del procesador del conjunto de tareas periódicas se calcula como:
+\[
+U_{\text{periodicas}} = \sum_{i=1}^{n} \frac{C_i}{T_i} = \frac{1}{5} + \frac{2}{8} = 0.2 + 0.25 = 0.45
+\]
+Para garantizar la planificabilidad del sistema con el Servidor Diferido, el total de utilización debe ser menor o igual a 1:
+\[
+U_{\text{total}} = U_{\text{periodicas}} + U_s \leq 1
+\]
+Donde \(U_s\) es la utilización asignada al servidor diferido. Resolviendo:
+\[
+U_s \leq 1 - U_{\text{periodicas}} = 1 - 0.45 = 0.55
+\]
+La relación entre el tiempo de cómputo (\(C_s\)) y el período (\(T_s\)) del servidor diferido es:
+\[
+U_s = \frac{C_s}{T_s}
+\]
+Eligiendo \(T_s = 10\), calculamos:
+\[
+C_s = U_s \cdot T_s = 0.55 \cdot 10 = 5.5 \approx 5
+\]
+Por lo tanto, el Servidor Diferido tiene \(C_s = 5\) y \(T_s = 10\).
+
+\subsubsection{Paso 2: Funcionamiento del Servidor Diferido}
+El Servidor Diferido (DS) preserva el tiempo asignado (\(C_s\)) hasta que haya tareas aperiódicas pendientes de ejecución. Cada período (\(T_s\)) el servidor recupera su tiempo de cómputo máximo (\(C_s = 5\)).  
+Dado que el DS se ejecuta con prioridad intermedia, las tareas periódicas más prioritarias no se ven afectadas.
+
+\subsubsection{Paso 3: Planificación de las tareas aperiódicas}
+Las tareas aperiódicas (\(J_1\), \(J_2\), \(J_3\)) se ejecutarán utilizando el tiempo asignado al DS. Asumimos los tiempos de llegada:
+\begin{itemize}
+    \item \(J_1\): Llega en \(t = 0\).
+    \item \(J_2\): Llega en \(t = 8\).
+    \item \(J_3\): Llega en \(t = 18\).
+\end{itemize}
+
+\subsubsection{Paso 4: Cronograma de ejecución}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Tiempo (ms)} & 0--5 & 5--8 & 8--10 & 10--15 & 15--18 & 18--20 \\ \hline
+\textbf{\(\tau_1\)} & X & -- & X & -- & X & -- \\ \hline
+\textbf{\(\tau_2\)} & -- & X & -- & X & -- & X \\ \hline
+\textbf{DS} & \(J_1\) & -- & \(J_1\) & \(J_2\) & \(J_2\) & \(J_3\) \\ \hline
+\end{tabular}
+\caption{Cronograma de tareas periódicas y aperiódicas utilizando el DS}
+\end{table}
+
+\textbf{Explicación del cronograma:}
+\begin{itemize}
+    \item En \(t = 0\), \(J_1\) comienza a ejecutarse utilizando \(C_s = 5\).
+    \item En \(t = 8\), \(J_2\) llega y utiliza el tiempo restante del DS en \(T_s = 10\).
+    \item En \(t = 18\), \(J_3\) utiliza el siguiente período del DS.
+\end{itemize}
+
+\subsection{Conclusión}
+El Servidor Diferido (\(U_s = 0.55\)) permite planificar las tareas aperiódicas sin afectar la planificabilidad de las tareas periódicas. Aunque el DS garantiza una latencia predecible, puede ser menos eficiente que el Servidor Esporádico en términos de reutilización del tiempo no consumido.
+
+\section{Ejercicio 108: Planificación con Servidor Esporádico (SS)}
+\subsection{Enunciado}
+Utilizar un \textbf{Servidor Esporádico (SS)} con capacidad \(C_s = 2\) y período \(T_s = 6\) para planificar las siguientes tareas:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea Periódica} & \textbf{Ci} & \textbf{Ti} \\ \hline
+$\tau_1$ & 1 & 4 \\ \hline
+$\tau_2$ & 2 & 6 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas periódicas}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tarea Aperiódica} & \textbf{Ci} & \textbf{ai} \\ \hline
+$J_1$ & 2 & 2 \\ \hline
+$J_2$ & 5 & 1 \\ \hline
+$J_3$ & 10 & 2 \\ \hline
+\end{tabular}
+\caption{Conjunto de tareas aperiódicas}
+\end{table}
+
+\subsection{Solución}
+\subsubsection{Paso 1: Verificación de la planificabilidad de las tareas periódicas}
+La utilización total del procesador por las tareas periódicas es:
+\[
+U_{\text{periodicas}} = \sum_{i=1}^{n} \frac{C_i}{T_i} = \frac{1}{4} + \frac{2}{6} = 0.25 + 0.333 = 0.583
+\]
+Con el Servidor Esporádico (\(U_s\)), la utilización total del procesador es:
+\[
+U_{\text{total}} = U_{\text{periodicas}} + U_s
+\]
+La utilización del SS se calcula como:
+\[
+U_s = \frac{C_s}{T_s} = \frac{2}{6} = 0.333
+\]
+Entonces:
+\[
+U_{\text{total}} = 0.583 + 0.333 = 0.916
+\]
+Dado que \(U_{\text{total}} < 1\), el sistema es planificable.
+
+\subsubsection{Paso 2: Funcionamiento del Servidor Esporádico (SS)}
+El SS asigna su capacidad (\(C_s = 2\)) únicamente cuando hay tareas aperiódicas en espera. Una vez consumido su tiempo, el servidor regenera su capacidad en el próximo período (\(T_s = 6\)).
+
+\subsubsection{Paso 3: Planificación de las tareas aperiódicas}
+Las tareas aperiódicas (\(J_1\), \(J_2\), \(J_3\)) se ejecutan en orden de llegada, utilizando el tiempo asignado al SS. Asumimos los tiempos de llegada (\(a_i\)):
+\begin{itemize}
+    \item \(J_1\): Llega en \(t = 2\).
+    \item \(J_2\): Llega en \(t = 1\).
+    \item \(J_3\): Llega en \(t = 2\).
+\end{itemize}
+
+\subsubsection{Paso 4: Cronograma de ejecución}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Tiempo (ms)} & 0--1 & 1--2 & 2--4 & 4--6 & 6--8 & 8--10 & 10--12 \\ \hline
+\textbf{\(\tau_1\)} & X & -- & X & -- & X & -- & X \\ \hline
+\textbf{\(\tau_2\)} & -- & X & -- & X & -- & X & -- \\ \hline
+\textbf{SS} & -- & \(J_2\) & \(J_1\) & \(J_3\) & \(J_3\) & -- & -- \\ \hline
+\end{tabular}
+\caption{Cronograma de tareas periódicas y aperiódicas utilizando el SS}
+\end{table}
+
+\textbf{Explicación del cronograma:}
+\begin{itemize}
+    \item En \(t = 1\), \(J_2\) comienza a ejecutarse con el tiempo del SS (\(C_s = 2\)).
+    \item En \(t = 2\), \(J_1\) y \(J_3\) llegan. El SS prioriza \(J_1\) por orden de llegada.
+    \item En \(t = 6\), el SS regenera su capacidad y continúa ejecutando \(J_3\).
+\end{itemize}
+
+\subsection{Conclusión}
+El Servidor Esporádico (\(C_s = 2\), \(T_s = 6\)) permite planificar las tareas aperiódicas sin afectar la planificabilidad de las tareas periódicas. Su capacidad de regenerar tiempo no consumido optimiza el uso del procesador.
+
+
+
 
 \end{document}
