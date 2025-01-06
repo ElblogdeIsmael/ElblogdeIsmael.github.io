@@ -331,7 +331,7 @@ Por lo que si tenemos que: $Y_i = \vec{X_i^{t}}\vec{\beta}$, tenemos de forma in
 \begin{itemize}
     \item Esta centrada, es decir, $E(u_i) = 0 \forall i=1,2,\ldots,n$
     \item Es homocedástica, es decir, $Var(u_i) = E[u_i^{2}]= \sigma^2 \forall i=1,2,\ldots,n$
-    \item Si es incorrelada implica que $cov[u_iu_j] = E[u_iu_j]=0$. Cuando es $neq$ 0 decimos que hay un problema de autocorrelación.
+    \item Si es incorrelada implica que $cov[u_iu_j] = E[u_iu_j]=0$. Cuando es $\neq$ 0 decimos que hay un problema de autocorrelación.
 \end{itemize}
 
 Como consecuencia tenemos que:
@@ -542,7 +542,7 @@ Según este teorema tenemos que los estimadores de los mínimos cuadrados ordina
 \end{itemize}
 
 \subsubsection*{Nota:}
-Podemos decir que de todos los estimadores de \ecuacion{\vec{\beta}} el EMCO es el que presenta \textit{ menor matriz de varianzas-covarianzas}.
+Podemos decir que de todos los estimadores de \ecuacion{\vec{\beta}}, el EMCO es el que presenta \textit{ menor matriz de varianzas-covarianzas}.
 
 \subsubsection{Demos}
 \begin{itemize}
@@ -567,18 +567,18 @@ Podemos decir que de todos los estimadores de \ecuacion{\vec{\beta}} el EMCO es 
         \]
         \item Aplicamos que \ecuacion{\vec{y} = X\vec{\beta}+\vec{u}}:
         \[
-            E[C\vec{y}] = E[C(X\vec{\beta}+\vec{u})] = E[CX\vec{\beta}+C\vec{u}] = CX\vec{\beta}+C\vec{u}
+            E[C\vec{y}] = E[C(X\vec{\beta}+\vec{u})] = E[CX\vec{\beta}+C\vec{u}] = CX\vec{\beta}+CE[\vec{u}]
         \]
         \item Como sabemos que \ecuacion{E[\vec{u}] = 0}, nos queda:
         \[
-            CX\vec{\beta}+C\vec{u} = CX\vec{\beta}
+            CX\vec{\beta}+CE[\vec{u}] = CX\vec{\beta}
         \]
-        \item Volvemos al tema de insesgadez, para que sea insesgado (que se debe de cumplir en este punto) debe de que \ecuacion{Cx=I_k}
-        \item Por lo que tenemos de nuevo nuestro estimado anterior, podemos concluir la demostración afirmando que \ecuacion{\betaEstimada} es un estimador óptimo de \ecuacion{\vec{\beta}}
+        \item Volvemos al tema de insesgadez, para que sea insesgado (que se debe de cumplir en este punto) debe de que \ecuacion{CX=I_k}
+        \item Por lo que tenemos de nuevo nuestro estimador anterior, podemos concluir la demostración afirmando que \ecuacion{\betaEstimada} es un estimador óptimo de \ecuacion{\vec{\beta}}
     \end{enumerate}
     \subsubsection*{- Varianza}
     \begin{itemize}
-        \item Si la calulamos de igual manera a la anterior y usando la matriz C, nos queda que:
+        \item Si la calulamos de igual manera a la anterior y usando la matriz C y aplicando que $E[(\widehat{\beta^*}^t)- E[\widehat{\beta^*}^t]] = C\vec{u}$, nos queda que:
         \[
             = E[C\vec{u}*\vec{u}^tC^t] = C\sigma^2I_nC^t = \sigma^2CC^t \footnote{Hemos usado que \ecuacion{E[\vec{u}\vec{u}^t] = \sigma^2I_n}}
         \] 
@@ -594,9 +594,9 @@ Podemos decir que de todos los estimadores de \ecuacion{\vec{\beta}} el EMCO es 
         \]
         \subsubsection*{Comparación de varianzas}
         \begin{itemize}
-            \item \ecuacion{WW^t = ((X^tX)^{-1}X^t)((X^tX)^{-1}X^t) = (X^tX)^{-1}X^tX(X^tX)^{-1} = (X^tX)^{-1}}
+            \item \ecuacion{WW^t = ((X^tX)^{-1}X^t)((X^tX)^{-1}X^t)^t = (X^tX)^{-1}X^tX(X^tX)^{-1} = (X^tX)^{-1}}
             \item \ecuacion{WD^t = ((X^tX)^{-1}X^t)(D)^t = (X^tX)^{-1}X^t(C-W)^t = (X^tX)^{-1}X^t(C^t-W^t) = (X^tX)^{-1}X^tC^t - (X^tX)^{-1}X^tW^t = 0}
-            \item \ecuacion{D((X^tX)^{-1}X^t)^t = 0}
+            \item \ecuacion{DW^t = D((X^tX)^{-1}X^t)^t = 0}
         \end{itemize}
         \item Aplicando esto nos queda que:
         \[
@@ -624,6 +624,13 @@ Si desarrollamos nos queda que:
     (I_n - X(X^tX)^{-1}X^t)\vec{y} = M_x\vec{y}
 \]
 
+Para ello debemos de aplicar que:
+\[
+\hat{\vec{y}} = X\hat{\vec{\beta}} = X(X^tX)^{-1}X^t\vec{y}
+\]
+
+Y sacar factor común \ecuacion{\vec{y}}. \\\\
+
 La matriz \ecuacion{M_x} se conoce como la matriz complemento del proyector ortogonal, cuyas propiedades son:
 \begin{itemize}
     \item simétrica\footnote{Una matriz es simétrica si es igual a su traspuesta \ecuacion{A = A^t}}
@@ -641,7 +648,7 @@ Si tomamos valores esperados obtenemos que (\ecuacion{E[\vec{e^t}\vec{e}] = }):
 \begin{enumerate}
     \item \ecuacion{E[(M_x\vec{u})^t(M_x\vec{u})] }
     \item = \ecuacion{E[\vec{u}^tM_x\vec{u}]}\footnote{Ya que \ecuacion{M_x} es simétrica e idempotente}
-    \item = \ecuacion{E[\text{traza}(\vec{u^t}M_x)\vec{u}]}
+    \item = \ecuacion{E[\text{traza}(\vec{u^t}M_x\vec{u})]}
     \item = \ecuacion{\text{traza}(M_xE[\vec{u^t}\vec{u}])}
     \item = \ecuacion{\text{traza}(\sigma^2M_x)}
     \item = \ecuacion{\sigma^2\text{traza}(M_x)}
@@ -804,6 +811,11 @@ donde:
 
 \begin{equation}
     F_{\text{exp}} \sim F_{m,n-k}\footnote{Cabe destacar que el estadístico desarrollado se encuentra en las diapositivas de la asignatura, en específico en la diapositiva 15/34 del tema 3}
+\end{equation}
+
+Como \(F_{exp}\) tenemos:
+\begin{equation}
+    F_{exp} = (R\vec{\hat{\beta}}) - \vec{r}^t \times \frac{[R(X^tX)^{-1}R^t]^{-1}}{m\hat{\sigma^2}} \times (R\vec{\hat{\beta}} - \vec{r})
 \end{equation}
 
 \begin{itemize}
