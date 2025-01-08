@@ -286,161 +286,315 @@ Los atributos @@ \textoverde{si pueden ser accedidos desde ámbito de instancia}
     package unPaquete;
     
     public class Padre {
-        private int privado;
-        protected int protegido;
-        int paquete;
-        public int publico;
+        private int privado;        // Campo accesible solo dentro de esta clase.
+        protected int protegido;    // Campo accesible dentro del paquete y subclases.
+        int paquete;                // Campo accesible solo dentro del paquete.
+        public int publico;         // Campo accesible desde cualquier lugar.
     
+        // Método de instancia que accede a elementos de otra instancia de la misma clase.
         public void testInstanciaPadre(Padre o) {
-            // No se puede acceder a 'privado' de otra instancia
-            // System.out.println(o.privado);
-            System.out.println(o.protegido);
-            System.out.println(o.paquete);
-            System.out.println(o.publico);
+            System.out.println(o.privado);   // Acceso permitido: "privado" es visible en la misma clase.
+            System.out.println(o.protegido);// Acceso permitido: "protegido" es visible dentro de la clase.
+            System.out.println(o.paquete);  // Acceso permitido: "paquete" es visible dentro del paquete.
+            System.out.println(o.publico);  // Acceso permitido: "publico" es accesible desde cualquier lugar.
         }
     
+        // Método estático que intenta acceder a elementos de una instancia.
         public static void testClasePadre(Padre o) {
-            // No se puede acceder a 'privado' de otra instancia
-            // System.out.println(o.privado);
-            System.out.println(o.protegido);
-            System.out.println(o.paquete);
-            System.out.println(o.publico);
+            System.out.println(o.privado);   // Acceso permitido: "privado" es visible dentro de la misma clase.
+            System.out.println(o.protegido);// Acceso permitido: "protegido" es visible dentro de la clase.
+            System.out.println(o.paquete);  // Acceso permitido: "paquete" es visible dentro del paquete.
+            System.out.println(o.publico);  // Acceso permitido: "publico" es accesible desde cualquier lugar.
         }
     }
-\end{lstlisting}
+    \end{lstlisting}
 
 \subsection{Ejemplo 2}
-
 \begin{lstlisting}[style=customjava]
-
-
-package unPaquete;
-
-public class HijaPaquete extends Padre {
-
-    public void testInstanciaHijaPaquete(Padre o) {
-        // No se puede acceder a 'privado' directamente ni a través de una instancia
-        // System.out.println(privado);
-        // System.out.println(o.privado);
-
-        System.out.println(protegido); // Se puede acceder porque es protegido
-        System.out.println(o.protegido); // Se puede acceder porque es protegido
-
-        System.out.println(o.paquete); // Se puede acceder porque está en el mismo paquete
-        System.out.println(o.publico); // Se puede acceder porque es público
+    package unPaquete;
+    
+    public class HijaPaquete extends Padre {
+    
+        // Método de instancia que accede a elementos de la superclase y otra instancia.
+        public void testInstanciaHijaPaquete(Padre o) {
+            System.out.println(privado);      // Error: "privado" no es accesible fuera de su clase.
+            System.out.println(o.privado);   // Error: "privado" no es accesible fuera de su clase.
+    
+            System.out.println(protegido);   // Acceso permitido: "protegido" es visible en subclases.
+            System.out.println(o.protegido);// Acceso permitido: "protegido" es visible en el mismo paquete.
+    
+            System.out.println(o.paquete);   // Acceso permitido: "paquete" es visible dentro del paquete.
+            System.out.println(o.publico);   // Acceso permitido: "publico" es accesible desde cualquier lugar.
+        }
+    
+        // Método estático que accede a elementos de una instancia.
+        public static void testClaseHijaPaquete(Padre o) {
+            System.out.println(o.privado);   // Error: "privado" no es accesible fuera de su clase.
+            System.out.println(o.protegido);// Acceso permitido: "protegido" es visible en el mismo paquete.
+            System.out.println(o.paquete);  // Acceso permitido: "paquete" es visible dentro del paquete.
+            System.out.println(o.publico);  // Acceso permitido: "publico" es accesible desde cualquier lugar.
+        }
     }
-
-    public static void testClaseHijaPaquete(Padre o) {
-        // No se puede acceder a 'privado' de otra instancia
-        // System.out.println(o.privado);
-
-        System.out.println(o.protegido); // Se puede acceder porque es protegido
-        System.out.println(o.paquete); // Se puede acceder porque está en el mismo paquete
-        System.out.println(o.publico); // Se puede acceder porque es público
-    }
-}
-\end{lstlisting}
+    \end{lstlisting}
 
 \subsection{Ejemplo 3}
-
-\begin{lstlisting}[style=customjava]
-
-
 package otroPaquete;
 
 public class HijaOtroPaquete extends Padre {
 
     public void testInstanciaHijaOtroPaquete(Padre o) {
         // Acceso a elementos heredados
-        // No se puede acceder a 'privado' directamente
-        // System.out.println(privado);
-        // No se puede acceder a 'paquete' porque no está en el mismo paquete
-        // System.out.println(paquete);
-        System.out.println(protegido); // Se puede acceder porque es protegido
+        System.out.println(privado);    // (Línea 7) Error: "privado" no es accesible fuera de la clase.
+        System.out.println(paquete);   // (Línea 8) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(protegido); // (Línea 9) Acceso permitido: "protegido" es visible en subclases.
 
         // Acceso a elementos de otra instancia
-        // No se puede acceder a 'privado' de otra instancia
-        // System.out.println(o.privado);
-        System.out.println(o.protegido); // Se puede acceder porque es protegido
-        // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
-        // System.out.println(o.paquete);
-        System.out.println(o.publico); // Se puede acceder porque es público
+        System.out.println(o.privado);   // (Línea 12) Error: "privado" no es accesible desde otra instancia.
+        System.out.println(o.protegido);// (Línea 13) Error: "protegido" no es accesible desde otra instancia en otro paquete.
+        System.out.println(o.paquete);  // (Línea 14) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 15) Acceso permitido: "publico" es accesible desde cualquier lugar.
     }
 
     public static void testClaseHijaOtroPaquete(Padre o) {
         // Acceso a elementos de otra instancia
-        // No se puede acceder a 'privado' de otra instancia
-        // System.out.println(o.privado);
-        System.out.println(o.protegido); // Se puede acceder porque es protegido
-        // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
-        // System.out.println(o.paquete);
-        System.out.println(o.publico); // Se puede acceder porque es público
+        System.out.println(o.privado);   // (Línea 20) Error: "privado" no es accesible desde otra clase.
+        System.out.println(o.protegido);// (Línea 21) Error: "protegido" no es accesible desde otra instancia en otro paquete.
+        System.out.println(o.paquete);  // (Línea 22) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 23) Acceso permitido: "publico" es accesible desde cualquier lugar.
     }
 }
-
-\end{lstlisting}
 
 \subsection{Ejemplo 4}
 
-\begin{lstlisting}[style=customjava]
-
 package otroPaquete;
 
 public class HijaOtroPaquete extends Padre {
 
-    // El mismo código cambiando solo el tipo del parámetro
     public void testInstanciaHijaOtroPaquete(HijaOtroPaquete o) {
-        // No se puede acceder a 'privado' de otra instancia
-        // System.out.println(o.privado);
-        System.out.println(o.protegido); // Se puede acceder porque es protegido
-        // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
-        // System.out.println(o.paquete);
-        System.out.println(o.publico); // Se puede acceder porque es público
+        System.out.println(o.privado);   // (Línea 8) Error: "privado" no es accesible fuera de la clase.
+        System.out.println(o.protegido);// (Línea 9) Acceso permitido: "protegido" es visible en subclases.
+        System.out.println(o.paquete);  // (Línea 10) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 11) Acceso permitido: "publico" es accesible desde cualquier lugar.
     }
 
     public static void testClaseHijaOtroPaquete(HijaOtroPaquete o) {
-        // No se puede acceder a 'privado' de otra instancia
-        // System.out.println(o.privado);
-        System.out.println(o.protegido); // Se puede acceder porque es protegido
-        // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
-        // System.out.println(o.paquete);
-        System.out.println(o.publico); // Se puede acceder porque es público
+        System.out.println(o.privado);   // (Línea 15) Error: "privado" no es accesible desde otra clase.
+        System.out.println(o.protegido);// (Línea 16) Acceso permitido: "protegido" es visible en subclases.
+        System.out.println(o.paquete);  // (Línea 17) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 18) Acceso permitido: "publico" es accesible desde cualquier lugar.
     }
 }
 
-\end{lstlisting}
-
 \subsection{Ejemplo 5}
-
-\begin{lstlisting}[style=customjava]
 
 package otroPaquete;
 
 public class HijaOtroPaquete extends Padre {
 
-    // El mismo código. El tipo del parámetro es subclase.
     public void testInstanciaHijaOtroPaquete(NietaOtroPaquete o) {
-        // No se puede acceder a 'privado' de otra instancia
-        // System.out.println(o.privado);
-        System.out.println(o.protegido); // Se puede acceder porque es protegido
-        // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
-        // System.out.println(o.paquete);
-        System.out.println(o.publico); // Se puede acceder porque es público
+        System.out.println(o.privado);   // (Línea 8) Error: "privado" no es accesible fuera de la clase.
+        System.out.println(o.protegido);// (Línea 9) Error: "protegido" no es accesible en instancias externas.
+        System.out.println(o.paquete);  // (Línea 10) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 11) Acceso permitido: "publico" es accesible desde cualquier lugar.
     }
 
     public static void testClaseHijaOtroPaquete(NietaOtroPaquete o) {
-        // No se puede acceder a 'privado' de otra instancia
-        // System.out.println(o.privado);
-        System.out.println(o.protegido); // Se puede acceder porque es protegido
-        // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
-        // System.out.println(o.paquete);
-        System.out.println(o.publico); // Se puede acceder porque es público
+        System.out.println(o.privado);   // (Línea 15) Error: "privado" no es accesible desde otra clase.
+        System.out.println(o.protegido);// (Línea 16) Error: "protegido" no es accesible en instancias externas.
+        System.out.println(o.paquete);  // (Línea 17) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 18) Acceso permitido: "publico" es accesible desde cualquier lugar.
     }
 }
 
-// NietaOtroPaquete deriva de HijaOtroPaquete (ambas están en otroPaquete)
+    
 
-\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \subsection{Ejemplo 1}
+
+% \begin{lstlisting}[style=customjava]
+%     package unPaquete;
+    
+%     public class Padre {
+%         private int privado;
+%         protected int protegido;
+%         int paquete;
+%         public int publico;
+    
+%         public void testInstanciaPadre(Padre o) {
+%             // No se puede acceder a 'privado' de otra instancia
+%             // System.out.println(o.privado);
+%             System.out.println(o.protegido);
+%             System.out.println(o.paquete);
+%             System.out.println(o.publico);
+%         }
+    
+%         public static void testClasePadre(Padre o) {
+%             // No se puede acceder a 'privado' de otra instancia
+%             // System.out.println(o.privado);
+%             System.out.println(o.protegido);
+%             System.out.println(o.paquete);
+%             System.out.println(o.publico);
+%         }
+%     }
+% \end{lstlisting}
+
+% \subsection{Ejemplo 2}
+
+% \begin{lstlisting}[style=customjava]
+
+
+% package unPaquete;
+
+% public class HijaPaquete extends Padre {
+
+%     public void testInstanciaHijaPaquete(Padre o) {
+%         // No se puede acceder a 'privado' directamente ni a través de una instancia
+%         // System.out.println(privado);
+%         // System.out.println(o.privado);
+
+%         System.out.println(protegido); // Se puede acceder porque es protegido
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+
+%         System.out.println(o.paquete); // Se puede acceder porque está en el mismo paquete
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+
+%     public static void testClaseHijaPaquete(Padre o) {
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         System.out.println(o.paquete); // Se puede acceder porque está en el mismo paquete
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+% }
+% \end{lstlisting}
+
+% \subsection{Ejemplo 3}
+
+% \begin{lstlisting}[style=customjava]
+
+
+% package otroPaquete;
+
+% public class HijaOtroPaquete extends Padre {
+
+%     public void testInstanciaHijaOtroPaquete(Padre o) {
+%         // Acceso a elementos heredados
+%         // No se puede acceder a 'privado' directamente
+%         // System.out.println(privado);
+%         // No se puede acceder a 'paquete' porque no está en el mismo paquete
+%         // System.out.println(paquete);
+%         System.out.println(protegido); // Se puede acceder porque es protegido
+
+%         // Acceso a elementos de otra instancia
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+
+%     public static void testClaseHijaOtroPaquete(Padre o) {
+%         // Acceso a elementos de otra instancia
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+% }
+
+% \end{lstlisting}
+
+% \subsection{Ejemplo 4}
+
+% \begin{lstlisting}[style=customjava]
+
+% package otroPaquete;
+
+% public class HijaOtroPaquete extends Padre {
+
+%     // El mismo código cambiando solo el tipo del parámetro
+%     public void testInstanciaHijaOtroPaquete(HijaOtroPaquete o) {
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+
+%     public static void testClaseHijaOtroPaquete(HijaOtroPaquete o) {
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+% }
+
+% \end{lstlisting}
+
+% \subsection{Ejemplo 5}
+
+% \begin{lstlisting}[style=customjava]
+
+% package otroPaquete;
+
+% public class HijaOtroPaquete extends Padre {
+
+%     // El mismo código. El tipo del parámetro es subclase.
+%     public void testInstanciaHijaOtroPaquete(NietaOtroPaquete o) {
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+
+%     public static void testClaseHijaOtroPaquete(NietaOtroPaquete o) {
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+% }
+
+% // NietaOtroPaquete deriva de HijaOtroPaquete (ambas están en otroPaquete)
+
+% \end{lstlisting}
 
 \subsection{Ejemplo 6}
 \begin{lstlisting}[style=customjava]
