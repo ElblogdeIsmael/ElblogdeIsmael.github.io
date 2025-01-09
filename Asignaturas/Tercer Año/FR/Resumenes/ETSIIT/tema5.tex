@@ -42,6 +42,7 @@
 \usepackage{mathpazo}
 \usepackage{tcolorbox}
 \usepackage{array}
+\usepackage{csquotes}
 
 
 
@@ -865,9 +866,9 @@ Una página web es un archivo (generalmente en formato \texttt{HTML}) que está 
 
 Cada objeto dentro de la página web es direccionado a través de una \textbf{URL (Uniform Resource Locator)} o \textbf{URI (Uniform Resource Identifier)}. El formato de la URL sigue una estructura estándar, que puede desglosarse de la siguiente manera:
 
-\begin{quote}
-\texttt{esquema:[//[usuario[:contraseña]@]dominio[:puerto][/ruta][/recurso][?solicitud][\#fragmento]}
-\end{quote}
+\begin{itemize}
+    \item \texttt{[usuario[:contrase\~na]@]dominio[:puerto][/ruta][/recurso][?solicitud][\#fragmento]}
+\end{itemize}
 
 \subsection{Protocolo HTTP}
 Las páginas web se sirven a través del protocolo \textbf{HTTP (Hypertext Transfer Protocol)}, que es un protocolo \textbf{cliente-servidor}. En este modelo:
@@ -914,6 +915,24 @@ Existen dos tipos principales de servidores HTTP:
 \end{enumerate}
 
 \subsection{Mensajes HTTP}
+\begin{enumerate}
+    \item El cliente HTTP (navegador) solicita un objeto identificado por su URL, en el ejemplo \texttt{www.ugr.es/pages/Universidad}. Según la configuración del servidor, si no se especifica nada, por defecto se sirve el fichero \texttt{index.html}.
+    \item El cliente consulta al resolver de DNS por la dirección IP de \texttt{www.ugr.es}.
+    \item DNS contesta \texttt{150.214.27.71} (IP virtual de un servicio balanceado).
+    \item El cliente abre una conexión TCP al puerto 80 de \texttt{150.214.27.71} (3 bandas).
+    \item El cliente envía una petición \texttt{GET /pages/universidad/ ...} (más otra información adicional: cabeceras, cookies, variables, etc).
+    \item El servidor responde enviando el fichero \texttt{index.html} por la misma conexión TCP.
+    \item Al usar TCP, el cliente y servidor de HTTP reciben un servicio orientado a conexión, fiable, sin errores, con control de flujo, con control de congestión, etc. Es decir, una comunicación TRANSPARENTE y FIABLE.
+    \item Si es persistente, se siguen solicitando objetos de la página (\texttt{GET ...}) por la conexión.
+    \item Se cierra la conexión TCP y se liberan recursos en el servidor y cliente.
+    \item El cliente visualiza el contenido.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/nav_web.png}
+    \caption{Ejemplo de comunicación HTTP.}
+\end{figure}
 
 HTTP define dos tipos de mensajes principales: las solicitudes del cliente al servidor (request) y las respuestas del servidor al cliente (response).
 
@@ -1122,7 +1141,8 @@ Además, algunas compañías emplean las cookies para realizar un seguimiento de
 Un servidor HTTP envía los diferentes campos de una cookie con la nueva cabecera HTTP \texttt{Set-Cookie}:
 
 \begin{verbatim}
-Set-Cookie: Domain=www.unican.es; Path=/; Nombre=Luis; Expires=Fri, 15-Jul-97 12:00:00 GMT
+Set-Cookie: Domain=www.unican.es; Path=/; 
+Nombre=Luis; Expires=Fri, 15-Jul-97 12:00:00 GMT
 \end{verbatim}
 
 Cuando se accede a una URL que verifica el par dominio/path registrado, el cliente enviará automáticamente la información de los diferentes campos de la cookie con la cabecera HTTP \texttt{Cookie}:
