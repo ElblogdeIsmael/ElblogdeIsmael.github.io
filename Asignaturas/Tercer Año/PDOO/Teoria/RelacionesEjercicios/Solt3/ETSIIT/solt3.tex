@@ -258,7 +258,7 @@ Indica con una cruz en la casilla correspondiente según si la declaración de l
     public String comunicarse(Vertebrado vertebrado) &  & X \\ \hline
     public String comunicarse(Mamifero mamifero) & X &  \\ \hline
     public Vertebrado obtenerCopia() &  & X \\ \hline
-    protected Mamiero obtenerCopia() &  & X \\ \hline
+    protected Mamifero obtenerCopia() &  & X \\ \hline
     \end{tabular}
 \end{table}
 
@@ -291,7 +291,7 @@ public class Estudiante extends Persona {
         carrera = carr;
         curso = cur;
     }
-    public void estudiar() { System.out.println("estudiando"); }
+    public void estudiar() { System.out.println("Estudiando"); }
 }
 \end{lstlisting}
 
@@ -387,7 +387,7 @@ Implementa este problema en Java y Ruby:
 
         @Override
         public void Estudiar(){
-            System.out.println("Estudiando Informatica con " + dispositivos.get(dispositivos.size() - 1));
+            System.out.println("Informatica con " + dispositivos.get(dispositivos.size() - 1));
         }
     } // Fin de la clase EstudianteInformatica
     
@@ -440,7 +440,7 @@ Crea dos nuevas clases, \texttt{Bicicleta} y \texttt{NaveEspacial}, que hereden 
 \subsection{Solución}
 
 
-\begin{lstlisting}[style=customjava, caption={Clase Bicicleta}]
+\begin{lstlisting}[style=customjava, caption={Clase Bicicleta y Clase Nave Espacial}]
     public class Bicicleta extends Transporte {
         @Override
         public String hacerRuta(String origen, String destino) {
@@ -448,11 +448,13 @@ Crea dos nuevas clases, \texttt{Bicicleta} y \texttt{NaveEspacial}, que hereden 
         }
     }
 
-    def NaveEspacial < Transporte 
-        def hacerRuta(origen, destino)
-            "Volando desde #{origen} hasta #{destino} por el espacio"
-        end
-    end
+    
+    public class NaveEspacial extends Transporte {
+        @Override
+        public String hacerRuta(String origen, String destino) {
+            return "Volando desde " + origen + " hasta " + destino + " por el espacio";
+        }
+    }
     
 \end{lstlisting}
 
@@ -475,14 +477,13 @@ Crea dos nuevas clases, \texttt{Bicicleta} y \texttt{NaveEspacial}, que hereden 
 \end{tikzpicture}
 \end{center}
 
-\newpage
 \section{Ejercicio 4} 
 \subsection{Enunciado}
 Hacer el ejercicio anterior, pero en Ruby.
 \subsection{Solución}
 
 
-\begin{lstlisting}[style=customrb, caption={Clase Bicicleta}]
+\begin{lstlisting}[style=customrb, caption={Clase Bicicleta y Clase Nave Espacial}]
     def Bicicleta < Transporte 
         def hacerRuta(origen, destino)
             "Pedaleando desde #{origen} hasta #{destino}"
@@ -581,6 +582,10 @@ class Grupo
 
   def agregar_miembro(miembro)
     @miembros << miembro
+    # Otras formas de añadir un miembro en Ruby
+    # @miembros.push(miembro)
+    # @miembros += [miembro]
+    # @miembros.concat([miembro])
   end
 
   def to_s
@@ -612,27 +617,108 @@ banda.agregar_miembro(Musico.new("John Deacon"))
 puts banda
 \end{lstlisting}
 
+% \section{Ejercicio 6}
+% \subsection{Enunciado}
+% Partiendo del siguiente diagrama de clases, modifícalo añadiendo una interfaz Prestable
+% implementada por la clase ElementoPrestable y sus subclases. Añade a este diagrama de
+% clases los atributos y operaciones de las distintas clases y de la interfaz Prestable.
+
+
+% \begin{center}
+%     \begin{tikzpicture}[node distance=0.8cm, auto, scale=0.75, transform shape]
+    
+%     % Main class
+%     \node[class] (Biblioteca) {\textbf{Biblioteca}};
+%     \tikzstyle{diamondline} = [thick, -{Diamond[open, scale=1.5]}]
+    
+%     % Subclass
+%     \node[class, below=0.5cm of Biblioteca] (ElementoBiblioteca) {\textbf{ElementoBiblioteca}};
+%     \node[right=0.00001cm of ElementoBiblioteca] {1...*};
+    
+%     % Subclasses of ElementoBiblioteca
+%     \node[class, below left=0.4cm and 0.4cm of ElementoBiblioteca] (ElementoPrestable) {\textbf{ElementoPrestable}};
+%     \node[class, below right=0.4cm and 0.4cm of ElementoBiblioteca] (ElementoNoPrestable) {\textbf{ElementoNoPrestable}};
+    
+%     % Subclasses of ElementoPrestable
+%     \node[class, below left=0.4cm and 0.4cm of ElementoPrestable] (Libro) {\textbf{Libro}};
+%     \node[class, below right=0.4cm and 0.4cm of ElementoPrestable] (CD) {\textbf{CD}};
+    
+%     % Subclass of ElementoNoPrestable
+%     \node[class, below=0.4cm of ElementoNoPrestable] (Revista) {\textbf{Revista}};
+    
+%     % Arrows
+%     \draw[diamondline] (ElementoBiblioteca.north) -- (Biblioteca.south);
+%     \draw[arrow] (ElementoPrestable.north) -- (ElementoBiblioteca.south west);
+%     \draw[arrow] (ElementoNoPrestable.north) -- (ElementoBiblioteca.south east);
+%     \draw[arrow] (Libro.north) -- (ElementoPrestable.south west);
+%     \draw[arrow] (CD.north) -- (ElementoPrestable.south east);
+%     \draw[arrow] (Revista.north) -- (ElementoNoPrestable.south);
+    
+%     \end{tikzpicture}
+% \end{center}
+
+
+% \subsection{Solución}
+
+% \begin{center}
+%     \begin{tikzpicture}[node distance=0.8cm, auto, scale=0.75, transform shape]
+
+%     % Define the style for the classes
+%     \tikzstyle{class} = [rectangle, draw, text width=4cm, text centered, rounded corners, minimum height=2em]
+%     \tikzstyle{diamondline} = [thick, -{Diamond[open, scale=1.5]}]
+    
+%     %Main class
+%     \node[class] (Biblioteca) {\textbf{Biblioteca} \\ \textit{+elementos: ElementoBiblioteca[] }};    
+        
+
+%     % Subclass
+%     \node[class, below=0.6cm of Biblioteca] (ElementoBiblioteca) {\textbf{ElementoBiblioteca} +titulo: String \\ +autor: String \\ +prestado: boolean \\ +fechaPrestamo: Date \\ +fechaDevolucion: Date \\ +prestar() \\ +devolver() \\ +estaPrestado() \\ +tiempoPrestamo() \\ +toString()};
+%     \node[above right=0.00001cm of ElementoBiblioteca] {1...*};
+    
+%     % Subclasses of ElementoBiblioteca
+%     \node[class, below left=0.4cm and 0.4cm of ElementoBiblioteca] (interfacePrestable) {\textbf{Interfaz Prestable} \\ +prestar() \\ +devolver() \\ +estaPrestado() \\ +tiempoPrestamo() \\ +toString()};
+%     \node[class, below right=0.4cm and 0.4cm of ElementoBiblioteca] (ElementoNoPrestable) {\textbf{ElementoNoPrestable} +tipo: String \\ +toString()};
+
+%     % Subclasses of interfacePrestable
+%     \node[class, below left=0.4cm and 0.4cm of interfacePrestable] (ElementoPrestable) {\textbf{ElementoPrestable} \\ +prestar() \\ +devolver() \\ +estaPrestado() \\ +tiempoPrestamo() \\ +toString()};
+    
+%     % Subclasses of ElementoPrestable
+%     \node[class, below left=0.4cm and 0.4cm of ElementoPrestable] (Libro) {\textbf{Libro} +numPaginas: int \\ +toString()};
+%     \node[class, below right=0.4cm and 0.4cm of ElementoPrestable] (CD) {\textbf{CD} +duracion: int \\ +toString()};
+    
+%     % Subclass of ElementoNoPrestable
+%     \node[class, below=0.4cm of ElementoNoPrestable] (Revista) {\textbf{Revista} +periodicidad: String \\ +toString()};
+    
+%     % Arrows
+%     \draw[diamondline] (ElementoBiblioteca.north) -- (Biblioteca.south);
+%     \draw[arrow] (interfacePrestable.north) -- (ElementoBiblioteca.south west);
+%     \draw[arrow] (ElementoPrestable.north) -- (interfacePrestable.south west);
+%     \draw[arrow] (ElementoNoPrestable.north) -- (ElementoBiblioteca.south east);
+%     \draw[arrow] (Libro.north) -- (ElementoPrestable.south west);
+%     \draw[arrow] (CD.north) -- (ElementoPrestable.south east);
+%     \draw[arrow] (Revista.north) -- (ElementoNoPrestable.south);
+    
+%     \end{tikzpicture}
+% \end{center}
+
+
+
+
 \section{Ejercicio 6}
 \subsection{Enunciado}
 Partiendo del siguiente diagrama de clases, modifícalo añadiendo una interfaz Prestable
 implementada por la clase ElementoPrestable y sus subclases. Añade a este diagrama de
 clases los atributos y operaciones de las distintas clases y de la interfaz Prestable.
 
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.9\textwidth]{images/ej7.png}
-%     \caption{Diagrama de clases}
-%     \label{fig:ejercicio6}
-% \end{figure}
-
 \begin{center}
     \begin{tikzpicture}[node distance=0.8cm, auto, scale=0.75, transform shape]
     
     % Main class
     \node[class] (Biblioteca) {\textbf{Biblioteca}};
+    \tikzstyle{diamondline} = [thick, -{Diamond[open, scale=1.5]}]
     
     % Subclass
-    \node[class, below=0.4cm of Biblioteca] (ElementoBiblioteca) {\textbf{ElementoBiblioteca}};
+    \node[class, below=0.5cm of Biblioteca] (ElementoBiblioteca) {\textbf{ElementoBiblioteca}};
     \node[right=0.00001cm of ElementoBiblioteca] {1...*};
     
     % Subclasses of ElementoBiblioteca
@@ -647,7 +733,7 @@ clases los atributos y operaciones de las distintas clases y de la interfaz Pres
     \node[class, below=0.4cm of ElementoNoPrestable] (Revista) {\textbf{Revista}};
     
     % Arrows
-    \draw[arrow] (ElementoBiblioteca.north) -- (Biblioteca.south);
+    \draw[diamondline] (ElementoBiblioteca.north) -- (Biblioteca.south);
     \draw[arrow] (ElementoPrestable.north) -- (ElementoBiblioteca.south west);
     \draw[arrow] (ElementoNoPrestable.north) -- (ElementoBiblioteca.south east);
     \draw[arrow] (Libro.north) -- (ElementoPrestable.south west);
@@ -657,57 +743,59 @@ clases los atributos y operaciones de las distintas clases y de la interfaz Pres
     \end{tikzpicture}
 \end{center}
 
-
 \subsection{Solución}
+
+Detalles:
+\begin{itemize}
+    \item Elemento Prestable hereda los métodos de la interfaz Prestable, por eso no se ponen en el diagrama.
+    \item En el diagrama se sobreentiende el tipo de los toString que son de tipo String.
+\end{itemize}
 
 \begin{center}
     \begin{tikzpicture}[node distance=0.8cm, auto, scale=0.75, transform shape]
 
-    % Define the style for the classes
+    % Define the style for the classes and interface
     \tikzstyle{class} = [rectangle, draw, text width=4cm, text centered, rounded corners, minimum height=2em]
+    \tikzstyle{interface} = [rectangle, draw, dashed, text width=5cm, text centered, rounded corners, minimum height=2em]
     \tikzstyle{diamondline} = [thick, -{Diamond[open, scale=1.5]}]
     
-    %Main class
-    \node[class] (Biblioteca) {\textbf{Biblioteca} \\ \textit{+elementos: ElementoBiblioteca[] }};    
-        
-
+    % Main class
+    \node[class] (Biblioteca) {\textbf{Biblioteca} \\ \textit{+elementos: ElementoBiblioteca[] }};
+    
     % Subclass
-    \node[class, below=0.6cm of Biblioteca] (ElementoBiblioteca) {\textbf{ElementoBiblioteca} +titulo: String \\ +autor: String \\ +prestado: boolean \\ +fechaPrestamo: Date \\ +fechaDevolucion: Date \\ +prestar() \\ +devolver() \\ +estaPrestado() \\ +tiempoPrestamo() \\ +toString()};
+    \node[class, below=0.6cm of Biblioteca] (ElementoBiblioteca) {\textbf{ElementoBiblioteca} \\ +titulo: String \\ +autor: String \\ +toString()};
     \node[above right=0.00001cm of ElementoBiblioteca] {1...*};
     
-    % Subclasses of ElementoBiblioteca
-    \node[class, below left=0.4cm and 0.4cm of ElementoBiblioteca] (interfacePrestable) {\textbf{Interfaz Prestable} \\ +prestar() \\ +devolver() \\ +estaPrestado() \\ +tiempoPrestamo() \\ +toString()};
-    \node[class, below right=0.4cm and 0.4cm of ElementoBiblioteca] (ElementoNoPrestable) {\textbf{ElementoNoPrestable} +tipo: String \\ +toString()};
-
-    % Subclasses of interfacePrestable
-    \node[class, below left=0.4cm and 0.4cm of interfacePrestable] (ElementoPrestable) {\textbf{ElementoPrestable} \\ +prestar() \\ +devolver() \\ +estaPrestado() \\ +tiempoPrestamo() \\ +toString()};
+    % Interface
+    \node[interface, below left=0.4cm and 0.4cm of ElementoBiblioteca] (Prestable) {\textbf{<<interface>> Prestable} \\ +prestar(): void \\ +devolver(): void \\ +isPrestado(): boolean \\ +getTiempoPrestamo(): int};
+    
+    % Subclass implementing interface
+    \node[class, below=0.4cm of Prestable] (ElementoPrestable) {\textbf{ElementoPrestable}};
     
     % Subclasses of ElementoPrestable
-    \node[class, below left=0.4cm and 0.4cm of ElementoPrestable] (Libro) {\textbf{Libro} +numPaginas: int \\ +toString()};
-    \node[class, below right=0.4cm and 0.4cm of ElementoPrestable] (CD) {\textbf{CD} +duracion: int \\ +toString()};
+    \node[class, below left=0.4cm and 0.4cm of ElementoPrestable] (Libro) {\textbf{Libro} \\ +numPaginas: int \\ +toString()};
+    \node[class, below right=0.4cm and 0.4cm of ElementoPrestable] (CD) {\textbf{CD} \\ +duracion: int \\ +toString()};
     
-    % Subclass of ElementoNoPrestable
-    \node[class, below=0.4cm of ElementoNoPrestable] (Revista) {\textbf{Revista} +periodicidad: String \\ +toString()};
+    % Subclasses of ElementoBiblioteca
+    \node[class, below right=0.4cm and 0.4cm of ElementoBiblioteca] (ElementoNoPrestable) {\textbf{ElementoNoPrestable} \\ +tipo: String \\ +toString()};
+    \node[class, below=0.4cm of ElementoNoPrestable] (Revista) {\textbf{Revista} \\ +periodicidad: String \\ +toString()};
     
     % Arrows
     \draw[diamondline] (ElementoBiblioteca.north) -- (Biblioteca.south);
-    \draw[arrow] (interfacePrestable.north) -- (ElementoBiblioteca.south west);
-    \draw[arrow] (ElementoPrestable.north) -- (interfacePrestable.south west);
-    \draw[arrow] (ElementoNoPrestable.north) -- (ElementoBiblioteca.south east);
+    \draw[dashed, thick] (Prestable.north) -- (ElementoBiblioteca.south west);
+    \draw[arrow] (ElementoPrestable.north) -- (Prestable.south);
     \draw[arrow] (Libro.north) -- (ElementoPrestable.south west);
     \draw[arrow] (CD.north) -- (ElementoPrestable.south east);
+    \draw[arrow] (ElementoNoPrestable.north) -- (ElementoBiblioteca.south east);
     \draw[arrow] (Revista.north) -- (ElementoNoPrestable.south);
     
     \end{tikzpicture}
 \end{center}
 
+
+
 \section{Ejercicio 7}
 
-\subsection{Enunciado}
-
-Teniendo el cuenta el siguiente diagrama de clases, señala en la segunda columna de la tabla
-aquellas líneas de código que contienen un error de compilación por incompatibilidad de
-tipos (ECIT) y escribe en la tercera columna la corrección necesaria para evitarlos.
 
 \subsection{Enunciado}
 
@@ -773,6 +861,45 @@ tipos (ECIT) y escribe en la tercera columna la corrección necesaria para evita
     \caption{Tabla de código y corrección}
 \end{figure}
 
+\subsubsection{Análisis línea por línea}
+
+    \begin{itemize}
+        \item \texttt{Girable arti = new Artista();}
+            \begin{itemize}
+                \item \textbf{Problema:} La clase \texttt{Artista} no implementa la interfaz \texttt{Girable}. Esto genera un error de compilación por incompatibilidad de tipos.
+                \item \textbf{Corrección:} Usar una clase que implemente la interfaz \texttt{Girable}, como \texttt{Cantante}.
+                \item \textbf{Resultado corregido:} \texttt{Girable arti = new Cantante();}
+            \end{itemize}
+
+        \item \texttt{Cantante cant1 = new Cantante();}
+            \begin{itemize}
+                \item \textbf{Problema:} Ninguno. La asignación es válida porque la referencia y la instancia son de la misma clase.
+                \item \textbf{Corrección:} No es necesario hacer ningún cambio.
+                \item \textbf{Resultado corregido:} (Sin cambios)
+            \end{itemize}
+
+        \item \texttt{Cantante sol = new Solista();}
+            \begin{itemize}
+                \item \textbf{Problema:} Ninguno. \texttt{Solista} es una subclase de \texttt{Cantante}, por lo que esta asignación es válida.
+                \item \textbf{Corrección:} No es necesario hacer ningún cambio.
+                \item \textbf{Resultado corregido:} (Sin cambios)
+            \end{itemize}
+
+        \item \texttt{Solista cant2 = new Cantante();}
+            \begin{itemize}
+                \item \textbf{Problema:} Incompatibilidad de tipos. \texttt{Cantante} es la clase base de \texttt{Solista}, y no se puede asignar una instancia de una clase base a una referencia de una subclase.
+                \item \textbf{Corrección:} Cambiar el tipo de referencia a \texttt{Cantante}.
+                \item \textbf{Resultado corregido:} \texttt{Cantante cant2 = new Cantante();}
+            \end{itemize}
+
+        \item \texttt{Bailarin bail = new Artista();}
+            \begin{itemize}
+                \item \textbf{Problema:} \texttt{Artista} es una clase base abstracta y no se puede asignar directamente a una referencia de su subclase \texttt{Bailarin}.
+                \item \textbf{Corrección:} Crear una instancia de \texttt{Bailarin} en lugar de \texttt{Artista}.
+                \item \textbf{Resultado corregido:} \texttt{Bailarin bail = new Bailarin();}
+            \end{itemize}
+    \end{itemize}
+
 \section{Ejercicio 8}
     \subsection{Enunciado}
 
@@ -823,6 +950,9 @@ tipos (ECIT) y escribe en la tercera columna la corrección necesaria para evita
         \end{tabular}
         \caption{Tabla de código y corrección}
     \end{figure}
+
+%análisis
+
     
 
 \section{Ejercicio 9}
