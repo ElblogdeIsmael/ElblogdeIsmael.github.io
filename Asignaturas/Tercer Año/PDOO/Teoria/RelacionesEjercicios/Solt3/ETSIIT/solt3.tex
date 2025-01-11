@@ -932,6 +932,22 @@ tipos (ECIT) y escribe en la tercera columna la corrección necesaria para evita
     \end{figure}
 
     \subsection{Solución}
+
+    \subsubsection{Tabla de diferencias}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|p{4cm}|p{6cm}|p{6cm}|}
+            \hline
+            \textbf{Criterio} & \textbf{Error de Compilación} & \textbf{Error de Ejecución} \\ \hline
+            Cuándo ocurre & Durante la compilación. & Durante la ejecución del programa. \\ \hline
+            Tipo de problema & Problemas de sintaxis, tipos o reglas del lenguaje. & Problemas lógicos o de recursos. \\ \hline
+            Detección & Detectado por el compilador antes de ejecutar. & Ocurre mientras el programa está en ejecución. \\ \hline
+            Ejemplo común & Declaración de tipos incompatibles. & Dividir por cero o acceder a un índice inválido. \\ \hline
+        \end{tabular}
+        \caption{Principales diferencias entre errores de compilación y errores de ejecución}
+    \end{table}
+
+    \subsubsection{Solucion}
     
     \begin{figure}[H]
         \centering
@@ -951,7 +967,7 @@ tipos (ECIT) y escribe en la tercera columna la corrección necesaria para evita
         \caption{Tabla de código y corrección}
     \end{figure}
 
-%análisis
+
 
     
 
@@ -962,17 +978,23 @@ tipos (ECIT) y escribe en la tercera columna la corrección necesaria para evita
 Dado el siguiente diagrama de UML, impleméntalo en Java. Presta atención a que el
 nombre de la clase Vehículo y su método desplazarse() aparecen en cursiva.
 
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black]
+    \textit{Nota: cuando en una clase no figura el tipo, es porque se trata de tipo void.}
+\end{tcolorbox}
+
 \begin{tikzpicture}[node distance=0.8cm, auto, scale=0.75, transform shape]
 
     % Define the style for the classes
     \tikzstyle{class} = [rectangle, draw, text width=4cm, text centered, rounded corners, minimum height=2em]
     \tikzstyle{inherance} = [thick, -{Triangle[open, scale=1.5]}]
+    \tikzstyle{interface} = [rectangle, draw, dashed, text width=5cm, text centered, rounded corners, minimum height=2em]
+
     
     %Main class
-    \node[class] (Vehiculo) {\textbf{Vehiculo} \\ -marca : String \\ -capacidad : double \\ -estado : String \\ +desplazarse() \\ +acelerar()};    
+    \node[class] (Vehiculo) {\textbf{Vehiculo} \\ -marca : String \\ -capacidad : double \\ -estado : String \\ \textit{+desplazarse() }\\ +acelerar()};    
     
     % Interface
-    \node[class, right=1cm of Vehiculo] (Transporte) {\textit{<<interface>>} \\ \textbf{Transporte} \\ +desplazarse()};
+    \node[interface, right=1cm of Vehiculo] (Transporte) {\textit{<<interface>>} \\ \textbf{Transporte} \\ +desplazarse()};
     
     %subclasses
     \node[class, below=0.6cm of Vehiculo] (Barco) {\textbf{Barco} \\ -eslora : double \\ +atracar() \\ +desplazarse()};
@@ -1057,40 +1079,41 @@ indica por qué y cómo lo solucionarías.
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|p{6cm}|p{6cm}|}
+    \begin{tabular}{|p{6cm}|p{5cm}|p{5cm}|}
         \hline
-        \textbf{Código }& \textbf{Error si procede y corrección}\\
+        \textbf{Código }& \textbf{Error si procede} & \textbf{Corrección}\\
         \hline
         Transporte x = new Barco();
-        x.atracar(); & Error de compilación, ya que el tipo de la variable x es Transporte y no tiene el método atracar.\\
+        x.atracar(); & Error de compilación, ya que el tipo de la variable x es Transporte y no tiene el método atracar. & Transporte x = new Barco();
+        ((Barco) x).atracar();
+        \\
         \hline
         Avion av = new Avion();
-av.acelerar(); & Correcto.\\
+av.acelerar(); & \ding{51}. & \\
         \hline
         Vehiculo v = new Vehiculo();
-v.desplazarse(); & Correcto.\\
+v.desplazarse(); & \ding{51}.& \\
         \hline
         Vehiculo v2 = new Vehiculo();
-v2.acelerar(); & Correcto.\\
+v2.acelerar(); & \ding{51}.& \\
         \hline
         Transporte t = new Avion():
 Barco b= new Barco();
-t = b; & Error de compilación, ya que no se puede asignar un objeto de tipo Barco a una variable de tipo Transporte.\\
+t = b; & \ding{51}. & \\
         \hline
         Avion a = new Avion();
-String est = a.estado; & Error de compilación, ya que el atributo estado es privado en la clase Vehiculo.\\
+String est = a.estado; & Error de compilación, ya que el atributo estado es privado en la clase Vehiculo. & Implementar un consultor para que devuelva el valor estado.\\
         \hline
         Vehiculo v3 = new Barco();
-((Barco) v3).atracar(); & Correcto.\\
+((Barco) v3).atracar(); & \ding{51}. &\\
         \hline
-        List<Transporte> listaTransportes = new
-ArrayList();
+        List<Transporte> listaTransportes = newArrayList();
 listaTransportes.add(new Barco());
 listaTransportes.add(new Avion());
 listaTransportes.add(new Barco());
 for(Transporte tr: listaTransportes){
 tr.acelerar();
-tr.atracar();}  & Error de compilación, ya que el método atracar() no está definido en la interfaz Transporte.\\
+tr.atracar();}  & Error de compilación, ya que el método atracar() no está definido en la interfaz Transporte. & No usar esos métodos. \\
         \hline
         List<Transporte> otraLista = new ArrayList();
 otraLista.add(new Barco());
@@ -1098,7 +1121,7 @@ otraLista.add(new Avion());
 otraLista.add(new Barco());
 for(Transporte tr: otraLista){
 ((Barco) tr).acelerar();
-((Barco) tr).atracar();} & Error de ejecución, ya que no se puede hacer un cast de un objeto de tipo Avion a Barco.\\
+((Barco) tr).atracar();} & Error de ejecución, ya que no se puede hacer un cast de un objeto de tipo Avion a Barco. & No usar esos métodos. \\
         \hline
     \end{tabular}
 \end{table}
@@ -1286,6 +1309,8 @@ A partir de los siguientes diagramas de clases, resuelve las cuestiones que se p
     abstract class Documento implements Imprimible{
         private String titulo;
         private Date fechaPublicacion;
+        private Autor misAutores[];
+        private Documento relacionados[];
 
 
         public Documento(String titulo, Date fechaPublicacion);
@@ -1323,9 +1348,9 @@ A partir de los siguientes diagramas de clases, resuelve las cuestiones que se p
 
 \begin{lstlisting}[style=customjava, caption = {Intefaz Imprimible}]
     interface Imprimible {
-        public void imprimir();
-        public void imprimir(int numeroPagina);
-        public void imprimir(int pagInicio, int pagFin);
+        void imprimir();
+        void imprimir(int numeroPagina);
+        void imprimir(int pagInicio, int pagFin);
     }
 
 
@@ -1348,7 +1373,7 @@ A partir de los siguientes diagramas de clases, resuelve las cuestiones que se p
 
 \subsubsection*{¿Puede haber artículos que no estén ligados a una revista?}
 
-En este modelo si, lo que no puede haber son revistas que no estén ligadas a un Artículo debido a que según el diagrama de clases y la lógica el rombo de la flecha de composición parte de la clase Artículo.
+En este modelo si, lo que no puede haber son revistas que no estén ligadas a un Artículo debido al diagrama de clases y la lógica del rombo de la flecha de composición de la clase Artículo (parte de esta).
 
 \subsubsection*{Pintar en el diagrama de clases las uniones de: asociación (AS), agregación (AG), composición (C), realización (R), herencia (H), dependencia (D)}
 
@@ -1361,7 +1386,7 @@ En este modelo si, lo que no puede haber son revistas que no estén ligadas a un
 
 \subsubsection*{Contenido del fichero VentanaBiblioteca completo (pero sin añadir nada que no aparezca en el diagrama)}
 
-\begin{lstlisting}[style=customjava, caption={VentanaBiblioteca}]
+\begin{lstlisting}[style=customjava, caption={VentanaBiblioteca, el constructor se puede obviar, ya que usaríamos el por defecto}]
     class VentanaBiblioteca{
         private BibliotecaElectronica biblioteca;
 
@@ -1374,10 +1399,10 @@ En este modelo si, lo que no puede haber son revistas que no estén ligadas a un
 \subsubsection*{En la clase Articulo, indica cuáles de sus métodos están sobrecargados o redefinidos. Justifica tu respuesta.}
 
 \begin{itemize}
-    \item El método \texttt{imprimir()} está redefinido porque sobrescribe el método de la clase \texttt{Documento}, el cual lo implementa de la interfaz \texttt{Imprimible}.
-    \item El método \texttt{imprimir(int numeroPagina)} está sobrecargado porque tiene la misma firma que el método \texttt{imprimir()} pero con un parámetro adicional, el cual lo implementa de la interfaz \texttt{Imprimible}.
-    \item El método \texttt{imprimir(int pagInicio, int pagFin)} está sobrecargado porque tiene la misma firma que el método \texttt{imprimir()} pero con dos parámetros adicionales, el cual lo implementa de la interfaz \texttt{Imprimible}.
-    \item El método \texttt{numeroPaginas()} está redefinido porque sobrescribe el método de la clase \texttt{Documento}.
+    \item El método \texttt{imprimir()} está redefinido porque aparece en la clase \texttt{Documento}, el cual lo implementa de la interfaz \texttt{Imprimible}.
+    \item El método \texttt{imprimir(int numeroPagina)} está redefinido porque aparece en la clase \texttt{Documento}, el cual lo implementa de la interfaz \texttt{Imprimible}.
+    \item El método \texttt{imprimir(int pagInicio, int pagFin)} está redefinido porque aparece en la clase \texttt{Documento}, el cual lo implementa de la interfaz \texttt{Imprimible}.
+    \item El método \texttt{numeroPaginas()} está redefinido porque sobrescribe el método de la clase \texttt{Documento}. Aunque sea abstracto, al cambiar únicamente el tipo se considera una redefinición\footnote{Mirar ejercicio 1.}.
 \end{itemize}
 
 \subsubsection*{Corrige el código}
@@ -1424,9 +1449,9 @@ Corrección:
 
 \begin{itemize}
     \item En la primera línea de código no hay errores de compilación ni de ejecución.
-    \item "
-    \item "
-    \item "
+    \item Si, debido a que no puedes usar imprimir de Documento, ya que aunque derive de la interfaz que lo tenga, no esta implementado en Documento. Vemos que esta en Artículo, pero para usarlo debemos de realizar un cast: \texttt{((Articulo)docu).imprimir();} \textit{Nota: en java solo se puedes usar las funciones de los tipos estáticos, por eso en este caso da error de compilación y lo tenemos que hacer de la manera indicada.}
+    \item En la tercera línea de código no hay errores de compilación ni de ejecución.
+    \item Pasa lo mismo que en la 2º explicación de este.
 \end{itemize}
 
 \subsubsection*{Rellena la siguiente tabla marcando con una “X” la situación que corresponda a cada una de las líneas del siguiente bloque de código (suponiendo que las variables titulo, fecha, pagIni y pagFin han sido declaradas e inicializadas convenientemente con anterioridad).}
@@ -1518,110 +1543,6 @@ Corrección:
     end
 \end{lstlisting}
 
-\subsubsection*{Motivos por los que la clase Documento es abstracta}
-\begin{enumerate}
-    \item Sirve como clase plantilla para las clases Libro y Revista que son clases hijas según el diagrama de clases.
-    \item Contiene al menos un método abstracto, que en este caso es el método \texttt{numero\_paginas}.
-\end{enumerate}
-
-\subsubsection*{¿Puede haber artículos que no estén ligados a una revista?}
-
-En este modelo sí, lo que no puede haber son revistas que no estén ligadas a un Artículo debido a que según el diagrama de clases y la lógica el rombo de la flecha de composición parte de la clase Artículo.
-
-\subsubsection*{Pintar en el diagrama de clases las uniones de: asociación (AS), agregación (AG), composición (C), realización (R), herencia (H), dependencia (D)}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{images/ej12.png}
-    \caption{Diagrama de clases}
-    \label{fig:ejercicio12}
-\end{figure}
-
-\subsubsection*{Contenido del fichero VentanaBiblioteca completo (pero sin añadir nada que no aparezca en el diagrama)}
-
-\begin{lstlisting}[style=customrb, caption={VentanaBiblioteca}]
-    class VentanaBiblioteca
-        attr_accessor :biblioteca
-
-        def initialize(biblioteca)
-            @biblioteca = biblioteca
-        end
-    end
-\end{lstlisting}
-
-\subsubsection*{En la clase Articulo, indica cuáles de sus métodos están sobrecargados o redefinidos. Justifica tu respuesta.}
-
-\begin{itemize}
-    \item El método \texttt{imprimir} está redefinido porque sobrescribe el método de la clase \texttt{Documento}, el cual lo implementa de la interfaz \texttt{Imprimible}.
-    \item El método \texttt{imprimir\_por\_pagina} está sobrecargado porque tiene la misma firma que el método \texttt{imprimir}, pero con un parámetro adicional, el cual lo implementa de la interfaz \texttt{Imprimible}.
-    \item El método \texttt{imprimir\_por\_rango} está sobrecargado porque tiene la misma firma que el método \texttt{imprimir}, pero con dos parámetros adicionales, el cual lo implementa de la interfaz \texttt{Imprimible}.
-    \item El método \texttt{numero\_paginas} está redefinido porque sobrescribe el método de la clase \texttt{Documento}.
-\end{itemize}
-
-\subsubsection*{Corrige el código}
-
-    \begin{lstlisting}[style=customrb, caption = {Código a corregir}]
-    imp = Documento.new("Intemperie", fecha)  # suponiendo que fecha está inicializada
-    imp.imprimir
-    \end{lstlisting}
-
-Corrección:
-\begin{lstlisting}[style=customrb, caption={Corrección del código}]
-    imp = Articulo.new("Intemperie", fecha, 1, 10)
-    imp.imprimir
-\end{lstlisting}
-
-\subsubsection*{Corrige el código:}
-    \begin{lstlisting}[style=customrb, caption = {Código a corregir}]
-    docu = Libro.new("ISBN10102030")
-    codigo = docu.isbn
-    \end{lstlisting}
-
-Corrección:
-\begin{lstlisting}[style=customrb, caption={Corrección del código}]
-    docu = Libro.new("ISBN10102030")
-    codigo = docu.isbn
-\end{lstlisting}
-
-\subsubsection*{Rellena la siguiente tabla indicando el tipo estático y dinámico de la variable docu en las siguientes líneas de código:}
-    
-    \begin{table}[H]
-        \centering
-        \begin{tabular}{|p{6cm}|l|l|}
-            \hline
-            \textbf{Código} & \textbf{Tipo estático} & \textbf{Tipo dinámico} \\ \hline
-            docu = Articulo.new(titulo, fecha, pag\_ini, pag\_fin) & Documento & Articulo \\ \hline
-            docu.imprimir(pag\_ini, pag\_fin) & Documento & Articulo \\ \hline
-            docu = Libro.new(titulo, fecha, isbn, pags) & Documento & Libro \\ \hline
-            docu.imprimir & Documento & Libro \\ \hline
-        \end{tabular}
-    \end{table}
-
-\subsubsection*{Indica si hay errores de compilación o ejecución en el código anterior (suponiendo que las variables titulo, fecha, pag\_ini, pag\_fin, isbn y pags han sido declaradas e inicializadas convenientemente con anterioridad). Justifica tu respuesta.}
-
-\begin{itemize}
-    \item En la primera línea de código no hay errores de compilación ni de ejecución.
-    \item En la segunda línea no hay errores de compilación ni de ejecución.
-    \item En la tercera línea no hay errores de compilación ni de ejecución.
-    \item En la cuarta línea no hay errores de compilación ni de ejecución.
-\end{itemize}
-
-\subsubsection*{Rellena la siguiente tabla marcando con una “X” la situación que corresponda a cada una de las líneas del siguiente bloque de código (suponiendo que las variables titulo, fecha, pag\_ini y pag\_fin han sido declaradas e inicializadas convenientemente con anterioridad).}
-
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
-        \hline
-        \textbf{Código} & \textbf{Ningún error} & \textbf{Sólo error de compilación} & \textbf{Sólo error de ejecución} \\ \hline
-        imp = Articulo.new(titulo, fecha, pag\_ini, pag\_fin) & X &  &  \\ \hline
-        docu = imp &  & X &  \\ \hline
-        imp.numero\_paginas &  & X &  \\ \hline
-        docu.isbn &  &  & X \\ \hline
-    \end{tabular}
-\end{table}
-
-
-
 
 
 
@@ -1664,10 +1585,10 @@ Corrección:
     \begin{tabular}{|l|c|}
     \hline
     \textbf{Método} & \textbf{Abstracto} \\ \hline
-    correr() & No, porque es una redefinición   \\ \hline
-    comerSano() &  \\ \hline
-    entrenar() &  \\ \hline
-    entrenar(nombreEntrenador:String) &  \\ \hline
+    correr() & No, porque es una redefinición de Corredor  \\ \hline
+    comerSano() &   No, es una redefinición de la clase Corredor \\ \hline
+    entrenar() &   No, porque es una redefinición de la interfaz Deportista \\ \hline
+    entrenar(nombreEntrenador:String) &  No, porque es una redefinición de la interfaz Deportista \\ \hline
     \end{tabular}
     \caption{Métodos abstractos en Marchista}
 \end{table}
