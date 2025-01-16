@@ -618,6 +618,55 @@ end
   end
 \end{lstlisting}
 
+\textit{En este caso no hemos usado select porque no es necesario, ya que el estanquero siempre coloca los ingredientes y los fumadores siempre esperan a recibirlos.}
+
+\subsection{Solución 2}
+
+\textit{Usando \texttt{select} para modelar la interacción entre el estanquero y los fumadores.}
+
+En esta solución, utilizamos el mecanismo de \texttt{select}, que permite manejar múltiples condiciones de sincronización para coordinar a los procesos. A continuación, se presenta el código:
+
+\begin{lstlisting}[style=customcpp]
+process Estanquero ;
+begin
+    while true do begin
+        // El estanquero coloca dos ingredientes aleatorios en el mostrador
+        int ingrediente1, ingrediente2;
+        ingrediente1 = generarIngrediente();
+        do {
+            ingrediente2 = generarIngrediente();
+        }
+        while (ingrediente1 == ingrediente2);
+        
+        // Selecciona al fumador que necesita el tercer ingrediente
+        int fumador = 3 - ingrediente1 - ingrediente2;
+        enviar(ingrediente1, fumador);
+        enviar(ingrediente2, fumador);
+    end
+end
+
+process Fumador[ i : 0..2 ] ;
+begin
+    while true do begin
+        select 
+            when recibir(ingrediente1, Estanquero) and  recibir(ingrediente2, Estanquero) do begin
+                // Toma los dos ingredientes del mostrador
+                LiarCigarro();
+                Fumar();
+        end // select
+    end
+end
+\end{lstlisting}
+
+En esta implementación:
+\begin{itemize}
+    \item El \texttt{process Estanquero} utiliza una lógica similar para seleccionar aleatoriamente los ingredientes y desbloquear al fumador correspondiente.
+    \item El \texttt{process Fumador} usa \texttt{select} para esperar a recibir los ingredientes necesarios. Este enfoque permite que el fumador gestione la recepción de ambos ingredientes de manera no bloqueante, mejorando la sincronización en sistemas distribuidos.
+\end{itemize}
+
+Ambas soluciones son válidas para el problema planteado, pero la elección entre ellas puede depender de las restricciones de diseño y el entorno de implementación.
+
+
 \section{Ejercicio 83}
 
 \subsection{Enunciado}
