@@ -175,7 +175,7 @@ T4 & 20 & 200 & 200 \\ \hline
     \textit{Nota: El código proporcionado en el enunciado se accede pinchando }\href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/SCD/Practicas/Practicas_Resueltas/Practica4/scd-p4-fuentes/SOLUCION_ACTIVIDAD_CLASE/ejecutivo2.cpp}{\textit{aquí}}.
 \end{tcolorbox}
 
-Para resolver este ejercicio aparte de poseer los conceptos teóricos necesarios de las diapositivas, vamos a servirnos de la metodología de resolución aprendida en prácticas. Este ejercicio al ser el primera será más \textit{didáctico} que el resto.
+Para resolver este ejercicio aparte de poseer los conceptos teóricos necesarios de las diapositivas, vamos a servirnos de la metodología de resolución aprendida en prácticas. Este ejercicio al ser el primero será más \textit{didáctico} que el resto.
 
 En base a este tabla:
 
@@ -211,28 +211,45 @@ Tenemos que el ciclo principal dura $T_m = mcm(T_i)\,\forall \, i 0,\ldots, 4 = 
 \begin{enumerate}
     \item $\max(C_i) \leq T_s \leq \min(D_i)$
     \item $T_s$ divide a $T_m$, siendo el resultado $\in \mathbb{Z}$
+    \item $T_s$ será un divisor del período del ciclo principal, que en este caso es 200, es decir, debe de existir un entero $K$, tal que $T_m = k \times T_S$
 \end{enumerate}
-Vemos que hay ciertos problemas con el valor 50, ya que según las dos restricciones mencionadas anteriormente, no se puede cumplir ya que si cogemos $T_s = 20ms$ , este no divide a 50, por lo que \textit{no se puede planificar}.
+
+En base a esto vamos a optar por escoger que el ciclo secundario debe de durar $T_s=20ms$.
+
+Entonces, las veces que se debe de ejecutar cada tarea es:
+\begin{itemize}
+    \item Tarea 1 $\rightarrow$ $\frac{200}{40} = 5$ veces con un tiempo de cómputo de 10. El tiempo de cómputo máximo calculado como la sumatoria de todos los que se ejecutan en ese instante no debe de sobrepasar 20. 
+    \item Tarea 2 $\rightarrow$ $\frac{200}{50} = 4$ veces con un tiempo de cómputo de 18.
+    \item Tarea 3 $\rightarrow$ $\frac{200}{25} = 8$ veces con un tiempo de cómputo de 10.
+    \item Tarea 4 $\rightarrow$ $\frac{200}{100} = 2$ veces con un tiempo de cómputo de 20.
+\end{itemize}
+
+
+Podemos afirmar que si es planificable y el cronograma quedaría de la siguiente manera:
+
+
 
 \subsubsection{Cronograma}
 
+
+
 \begin{table}[H]
     \centering
-    \begin{tabular}{|p{1.4cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|}
+    \begin{tabular}{|p{1.6cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|}
     \hline
     \textbf{Tiempo (ms)} & 0-20 & 20-40 & 40-60 & 60-80 & 80-100 & 100-120 & 120-140 & 140-160 & 160-180 & 180-200 \\ \hline
-    \textbf{T1} & X & X & X & X & X & - & - & - & - & - \\ \hline
-    \textbf{T2} & - & X & - & X & - & X & - & - & - & - \\ \hline
-    \textbf{T3} & - & - & - & - & - & - & X & - & - & X \\ \hline
-    \textbf{T4} & - & - & - & - & - & X & - & - & - & X \\ \hline
+    \textbf{T1} & - & X & - & X & - & 1 & - & 1 & - & X \\ \hline
+    \textbf{T2} & X & - & X & - & X & - & X & - & - & - \\ \hline
+    \textbf{T3} & - & X & - & - & - & - & - & - & - & - \\ \hline
+    \textbf{T4} & - & - & - & - & - & - & - & - & X & - \\ \hline
+    \textbf{Cómputo (ms)} & 18 & 20 & 18 & 10 & 18 & 10 & 18 & 10 & 20 & 10 \\ \hline
     \end{tabular}
     \caption{Cronograma de ejecución de las tareas}
 \end{table}
     
 \subsubsection{Implementación en pseudo-código}
 
-
-\begin{lstlisting}[style = customcpp, caption = {Implementación en C++ del planificador cíclico}]
+\begin{lstlisting}[style=customcpp, caption={Implementación en C++ del planificador cíclico}]
 
     Ts := duración del ciclo secundario;
     ini_sec := instante de inicio del ciclo secundario;
@@ -244,29 +261,43 @@ Vemos que hay ciertos problemas con el valor 50, ya que según las dos restricci
 
             switch(i) {
                 case 1:
+                    Tarea1();
+                    Tarea2();
+                    break;
+
                 case 2:
+                    Tarea1();
+                    break;
+
                 case 3:
+                    Tarea3();
+                    break;
+
                 case 4:
+                    Tarea1();
+                    Tarea2();
+                    break;
+
                 case 5:
                     Tarea1();
-                    if (i % 2 == 0) { // T2 ejecuta cada 2 marcos
-                        Tarea2();
-                    }
                     break;
 
                 case 6:
                     Tarea2();
-                    Tarea4();
                     break;
 
                 case 7:
-                case 9:
+                    Tarea1();
                     Tarea3();
                     break;
 
                 case 8:
-                    Tarea3();
-                    Tarea4();
+                    Tarea1();
+                    Tarea2();
+                    break;
+
+                case 9:
+                    Tarea1();
                     break;
 
                 case 10:
@@ -614,7 +645,7 @@ T3 & 3 & 12 & 12 \\ \hline
 
 \subsection{Solución}
 \begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black]
-    \textit{Nota: Este ejercicio se resolverá siguiendo las metodologías vistas en clase y prácticas.}
+    \textit{Nota: Este ejercicio se resolverá siguiendo las metodologías vistas en clase y prácticas. Además, será similar a la resolución anterior del ejercicio 91.}
 \end{tcolorbox}
 
 \subsubsection{Paso 1: Verificación inicial}
@@ -658,52 +689,54 @@ Dado \(T_s = 6\), construimos el cronograma:
 \textbf{Tiempo (ms)} & 0-6 & 6-12 & 12-18 & 18-24 \\ \hline
 \textbf{T1} & X & X & X & X \\
 \textbf{T2} & - & X & - & X \\
-\textbf{T3} & - & - & X & - \\
+\textbf{T3} & X & - & X & - \\
 \hline
 \end{tabular}
 \caption{Cronograma de ejecución de las tareas}
 \end{table}
 
-\subsubsection{Paso 4: Implementación en pseudo-código}
 
-\begin{lstlisting}[style = customcpp, caption = {Implementación en C++ del planificador cíclico}]
+\textit{Podemos afirmar que no es planificabgle, debido a que no se puede ejecutar correctamente, ya que la tarea 2 debe de ejecutarse 3 veces, pero no puede.}
+% \subsubsection{Paso 4: Implementación en pseudo-código}
 
-    Ts := duración del ciclo secundario;
-    ini_sec := instante de inicio del ciclo secundario;
-    while(true){ //ciclo principal
-        for(desde i hasta 4){ // 4 porque son las fases del ciclo secundario en base a nuestro cronograma
+% \begin{lstlisting}[style = customcpp, caption = {Implementación en C++ del planificador cíclico}]
 
-            inicio_iteracion := instante actual;
+%     Ts := duración del ciclo secundario;
+%     ini_sec := instante de inicio del ciclo secundario;
+%     while(true){ //ciclo principal
+%         for(desde i hasta 4){ // 4 porque son las fases del ciclo secundario en base a nuestro cronograma
 
-            switch(i){
-                case 1:
-                    Tarea1();
-                    break;
-                case 2:
-                    Tarea1();
-                    Tarea2();
-                    break;
-                case 3:
-                    Tarea1();
-                    Tarea3();
-                    break;
-                case 4:
-                    Tarea1();
-                    Tarea2();
-                    break;
+%             inicio_iteracion := instante actual;
+
+%             switch(i){
+%                 case 1:
+%                     Tarea1();
+%                     break;
+%                 case 2:
+%                     Tarea1();
+%                     Tarea2();
+%                     break;
+%                 case 3:
+%                     Tarea1();
+%                     Tarea3();
+%                     break;
+%                 case 4:
+%                     Tarea1();
+%                     Tarea2();
+%                     break;
                 
-            }
+%             }
 
-            ini_sec += Ts; //siguiente instante
-            sleep_until(ini_sec); //esperar hasta el siguiente ciclo secundario
-            fin_iteracion := instante actual; //medir retraso
-            retraso := fin_iteracion - ini_sec; //calcular retraso
+%             ini_sec += Ts; //siguiente instante
+%             sleep_until(ini_sec); //esperar hasta el siguiente ciclo secundario
+%             fin_iteracion := instante actual; //medir retraso
+%             retraso := fin_iteracion - ini_sec; //calcular retraso
 
-        }
-    }
-\end{lstlisting}
+%         }
+%     }
+% \end{lstlisting}
 
-Con esto confirmamos que el conjunto de tareas se puede planificar con un esquema de planificación cíclica utilizando \(T_s = 6\).
+% Con esto confirmamos que el conjunto de tareas se puede planificar con un esquema de planificación cíclica utilizando \(T_s = 6\).
 
 \section{Ejercicio 93}
 \subsection{Enunciado}
@@ -741,7 +774,7 @@ U = \frac{9}{30} + \frac{10}{40} + \frac{10}{50} = 0.3 + 0.25 + 0.2 = 0.75
 
 \textbf{Conclusión:} El sistema es planificable porque \(U = 0.75 \leq U_0(3) = 0.779\).
 
-Si \(U > U_0(N)\), no podemos descartar automáticamente la planificabilidad. Deberíamos construir un cronograma utilizando un diagrama de Gantt para verificar si todas las tareas cumplen sus plazos.
+Si \(U > U_0(N)\), no podemos descartar automáticamente la planificabilidad. Deberíamos construir un cronograma utilizando un diagrama de Gantt para verificar si todas las tareas cumplen sus plazos, ya que como se afirma en la teoría no se puede afirmar nada, es solo condición suficiente.
 
 \subsubsection{Implementación en pseudo-código}
 
