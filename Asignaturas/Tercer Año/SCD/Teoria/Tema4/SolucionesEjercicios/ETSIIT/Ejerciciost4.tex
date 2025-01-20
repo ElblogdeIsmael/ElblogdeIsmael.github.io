@@ -846,41 +846,43 @@ T_m = \text{mcm}(40, 60, 80) = 240 \, \text{ms}
 \]
 
 \subsubsection{Cronograma}
-El cronograma muestra las instancias de ejecución de las tareas en el intervalo \([0, T_m]\). Construimos una tabla para reflejar esto:
+Si intentamos hacer el cronograma vemos que no es posible debido a que en una de las fases no podemos ejecutar las 3 tareas debido a que sobrepasamos el tiempo de cómputo total y por ende, no podemos planificar este cronograma aunque cumpla el test RMS.
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{1.4cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1 cm}|}
-\hline
-\textbf{Tiempo (ms)} & 0-10 & 10-20 & 20-30 & 30-40 & 40-60 & 60-80 & 80-100 & 100-120 & 120-140 & 140-160 & \ldots \\ \hline
-\textbf{T1} & X & - & X & - & X & - & X & - & X & - & \ldots \\ \hline
-\textbf{T2} & - & - & - & X & - & X & - & - & - & X & \ldots \\ \hline
-\textbf{T3} & - & - & - & - & - & - & X & - & - & - & \ldots \\ \hline
-\end{tabular}
-\caption{Cronograma de las tareas para \(T_m = 240\) ms}
-\end{table}
+% El cronograma muestra las instancias de ejecución de las tareas en el intervalo \([0, T_m]\). Construimos una tabla para reflejar esto:
 
-\subsubsection{Implementación en pseudo-código}
-\begin{lstlisting}[style=customcpp, caption={Implementación en C++ del cronograma}]
-    while (true) {
-        tiempo_actual := instante_actual();
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{|p{1.4cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1 cm}|}
+% \hline
+% \textbf{Tiempo (ms)} & 0-10 & 10-20 & 20-30 & 30-40 & 40-60 & 60-80 & 80-100 & 100-120 & 120-140 & 140-160 & \ldots \\ \hline
+% \textbf{T1} & X & - & X & - & X & - & X & - & X & - & \ldots \\ \hline
+% \textbf{T2} & - & - & - & X & - & X & - & - & - & X & \ldots \\ \hline
+% \textbf{T3} & - & - & - & - & - & - & X & - & - & - & \ldots \\ \hline
+% \end{tabular}
+% \caption{Cronograma de las tareas para \(T_m = 240\) ms}
+% \end{table}
 
-        if (tiempo_actual % 40 == 0) {
-            ejecutar(T1);
-        }
-        if (tiempo_actual % 60 == 0) {
-            ejecutar(T2);
-        }
-        if (tiempo_actual % 80 == 0) {
-            ejecutar(T3);
-        }
+% \subsubsection{Implementación en pseudo-código}
+% \begin{lstlisting}[style=customcpp, caption={Implementación en C++ del cronograma}]
+%     while (true) {
+%         tiempo_actual := instante_actual();
 
-        tiempo_siguiente := tiempo_actual + intervalo_minimo();
-        sleep_until(tiempo_siguiente);
-    }
-\end{lstlisting}
+%         if (tiempo_actual % 40 == 0) {
+%             ejecutar(T1);
+%         }
+%         if (tiempo_actual % 60 == 0) {
+%             ejecutar(T2);
+%         }
+%         if (tiempo_actual % 80 == 0) {
+%             ejecutar(T3);
+%         }
 
-Con este análisis, verificamos que el cronograma asegura que todas las tareas cumplen sus plazos. Aunque no pasa el test de utilización, el sistema es planificable.
+%         tiempo_siguiente := tiempo_actual + intervalo_minimo();
+%         sleep_until(tiempo_siguiente);
+%     }
+% \end{lstlisting}
+
+% Con este análisis, verificamos que el cronograma asegura que todas las tareas cumplen sus plazos. Aunque no pasa el test de utilización, el sistema es planificable.
 
 \section{Ejercicio 95}
 \subsection{Enunciado}
@@ -927,41 +929,63 @@ T_m = \text{mcm}(60, 80, 120) = 240 \, \text{ms}
 \subsubsection{Cronograma}
 El cronograma se construye considerando las instancias de activación de cada tarea en el intervalo \([0, T_m]\), donde cada tarea \(T_i\) se activa cada \(T_i\) ms y tiene un tiempo de ejecución de \(C_i\) ms.
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline
-\textbf{Tiempo (ms)} & 0-20 & 20-40 & 40-60 & 60-80 & 80-100 & 100-120 & \ldots \\ \hline
-\textbf{T1} & X & - & X & - & X & - & \ldots \\ \hline
-\textbf{T2} & - & - & - & X & - & X & \ldots \\ \hline
-\textbf{T3} & - & - & - & - & - & - & \ldots \\ \hline
-\end{tabular}
-\caption{Cronograma de las tareas periódicas para \(T_m = 240\) ms}
-\end{table}
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{|c|c|c|c|c|c|c|c|}
+% \hline
+% \textbf{Tiempo (ms)} & 0-20 & 20-40 & 40-60 & 60-80 & 80-100 & 100-120 & \ldots \\ \hline
+% \textbf{T1} & X & - & X & - & X & - & \ldots \\ \hline
+% \textbf{T2} & - & - & - & X & - & X & \ldots \\ \hline
+% \textbf{T3} & - & - & - & - & - & - & \ldots \\ \hline
+% \end{tabular}
+% \caption{Cronograma de las tareas periódicas para \(T_m = 240\) ms}
+% \end{table}
+Si se puede planificar, la manera de desarollar el cronograma es similar a las realizadas anteriormente.
 
 \textbf{Nota:} Si se requiere el diagrama de Gantt detallado, puede construirse para el hiperperiodo calculado.
 
 \subsubsection{Implementación en Pseudo-Código}
-\begin{lstlisting}[style=customcpp, caption={Implementación en C++ del cronograma}]
-    while (true) {
-        tiempo_actual := instante_actual();
+% \begin{lstlisting}[style=customcpp, caption={Implementación en C++ del cronograma}]
+%     while (true) {
+%         tiempo_actual := instante_actual();
 
-        if (tiempo_actual % 60 == 0) {
-            ejecutar(T1);
-        }
-        if (tiempo_actual % 80 == 0) {
-            ejecutar(T2);
-        }
-        if (tiempo_actual % 120 == 0) {
-            ejecutar(T3);
-        }
+%         if (tiempo_actual % 60 == 0) {
+%             ejecutar(T1);
+%         }
+%         if (tiempo_actual % 80 == 0) {
+%             ejecutar(T2);
+%         }
+%         if (tiempo_actual % 120 == 0) {
+%             ejecutar(T3);
+%         }
 
-        tiempo_siguiente := tiempo_actual + intervalo_minimo();
-        sleep_until(tiempo_siguiente);
-    }
-\end{lstlisting}
+%         tiempo_siguiente := tiempo_actual + intervalo_minimo();
+%         sleep_until(tiempo_siguiente);
+%     }
+% \end{lstlisting}
+
+En cuanto a la implementación pasa de igual manera.
 
 Con este análisis, concluimos que el conjunto de tareas es planificable y el cronograma asegura el cumplimiento de los plazos.
+
+
+
+
+
+
+
+
+
+
+
+
+%---------------------------------------------------------------------------CORREGIR----------------------------------
+
+
+
+
+
+
 
 \section{Ejercicio 96}
 \subsection{Enunciado}
