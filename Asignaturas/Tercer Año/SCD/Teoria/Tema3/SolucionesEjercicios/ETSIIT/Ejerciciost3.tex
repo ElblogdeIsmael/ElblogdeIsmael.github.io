@@ -338,6 +338,40 @@ Se pide: describir en pseudocódigo el comportamiento del proceso buffer, utiliz
     end
 \end{lstlisting}
 
+
+\subsection{Solución usando select for}
+
+\begin{lstlisting}[style=customcpp, caption={Pseudocódigo del proceso Buffer con guardas indexadas}]
+    Process Buffer;
+    var
+      buffer : array[0..3] of integer; // Array local de 4 celdas enteras.
+      count : integer := 0;             // Contador de elementos en el buffer.
+      lastProducer : integer := -1;     // Índice del último productor que escribió en el buffer.
+    
+    begin
+      while true do begin
+        select for
+          // Guardas indexadas para los productores
+          for i := 0 to 2
+          when (count < 4 and lastProducer != i) receive(dato, Productor[i]) do
+            buffer[count] := dato;    // Almacena el dato en el buffer.
+            count := count + 1;      // Incrementa el contador de elementos.
+            lastProducer := i;       // Actualiza el índice del último productor.
+          end
+    
+          // Caso para consumir datos si hay al menos 2 elementos en el buffer.
+          when count >= 2 do
+            send(buffer[0], Consumidor); // Envía el primer elemento al consumidor.
+            for j := 0 to 2 do
+              buffer[j] := buffer[j + 1]; // Desplaza los elementos restantes.
+            end
+            count := count - 1;           // Decrementa el contador de elementos.
+            
+        end
+      end
+    end
+\end{lstlisting}
+
 \section{Ejercicio 79}
 
 \subsection{Enunciado}
@@ -357,7 +391,7 @@ Una posible implementación del buffer mantendría, para cada proceso consumidor
   \label{fig:ejercicio79}
 \end{figure}
 
-\subsection{Solución}
+\subsection{Solución versión Profesor}
 
 \begin{lstlisting}[style=customcpp, caption={Pseudocódigo del proceso Buffer}]
   process Buffer;
@@ -392,6 +426,77 @@ Una posible implementación del buffer mantendría, para cada proceso consumidor
 
 El proceso Buffer se encarga de gestionar la interacción entre un productor y tres consumidores que comparten un buffer acotado de tamaño \( B \). Cada elemento depositado por el productor debe ser retirado por todos los consumidores para ser eliminado del buffer.
 La idea general del código es mantener un buffer acotado de tamaño \( B \) donde el productor puede depositar elementos y los consumidores pueden retirarlos. Cada consumidor tiene su propio puntero de salida y contador de elementos por consumir. El proceso Buffer asegura que cada elemento depositado por el productor sea retirado por todos los consumidores antes de ser eliminado del buffer. Además, se asegura de que el buffer no se llene completamente para ningún consumidor y que los consumidores retiren los elementos en el mismo orden en el que fueron depositados.
+
+
+
+
+
+\subsection{Solución versión Propia}
+
+\begin{lstlisting}[style=customcpp, caption={Pseudocódigo del proceso Buffer}]
+  process Buffer;
+
+  var
+    out: array[0..2] of integer; // Punteros de salida para cada consumidor.
+    nElems: array[0..2] of integer; // Número de elementos que quedan por consumir para cada consumidor.
+    
+    B: integer; // Tamaño del buffer.
+    buf: array[0..B-1]; // Buffer acotado de tamaño B.
+    ocupadas: integer := 0; // Número de celdas ocupadas en el buffer.
+    begin
+    select for i:=0 to 2 do 
+
+      when nElemens[i] != 0 do // Si el consumidor i tiene elementos por consumir...
+        send (buf[out[i]], consumidor[i]); // Envía el elemento al consumidor i.
+        out[i] + 1 mod B; // Actualiza el puntero de salida del consumidor i.
+        nElemens[i] = nElemens[i]-1; // Decrementa el número de elementos por consumir del consumidor i.
+      end do
+      
+      when nElemens[0] != B or nElemens[1] != B or nElemens[2] != B do // Si el buffer no está lleno para algún consumidor...
+        receive(dato, productor); // Recibe un dato del productor.
+        bufer[ocupadas] = dato; // Almacena el dato en el buffer.
+        ocupadas++;
+        for j:=0 to 2 do
+          nElemens[j] = nElemens[j] + 1; // Incrementa el número de elementos por consumir para cada consumidor.
+        end do
+      end do
+
+    end select
+  end
+\end{lstlisting}
+
+\subsubsection*{Explicación del código del proceso Buffer}
+
+El proceso Buffer se encarga de gestionar la interacción entre un productor y tres consumidores que comparten un buffer acotado de tamaño \( B \). Cada elemento depositado por el productor debe ser retirado por todos los consumidores para ser eliminado del buffer.
+La idea general del código es mantener un buffer acotado de tamaño \( B \) donde el productor puede depositar elementos y los consumidores pueden retirarlos. Cada consumidor tiene su propio puntero de salida y contador de elementos por consumir. El proceso Buffer asegura que cada elemento depositado por el productor sea retirado por todos los consumidores antes de ser eliminado del buffer. Además, se asegura de que el buffer no se llene completamente para ningún consumidor y que los consumidores retiren los elementos en el mismo orden en el que fueron depositados.
+
+
+Ahora añadimos los procesos Productor y Consumidor:
+
+\begin{lstlisting}[language=C++]
+  process Productor[ i : 0..2 ] ;
+  var dato : integer ;
+  begin
+    while true do begin
+      dato := Producir();
+      send( dato, Buffer );
+    end
+  end
+  
+  process Consumidor ;
+  begin
+    while true do begin
+      receive ( dato, Buffer );
+      Consumir( dato );
+    end
+  end
+
+\end{lstlisting}
+
+    
+
+
+
 
 \section{Ejercicio 80}
 
@@ -701,7 +806,6 @@ end
 
 Describir en pseudocódigo el comportamiento del proceso controlador, utilizando una orden de espera selectiva que permita implementar la sincronización requerida entre los procesos. Es posible utilizar una sentencia del tipo select for i=... to ... para especificar diferentes ramas de una sentencia selectiva que comparten el mismo código dependiente del valor de un índice i.
 
-\newpage
 \subsection{Solución}
 
 \begin{lstlisting}[style=customcpp]
@@ -718,6 +822,7 @@ Describir en pseudocódigo el comportamiento del proceso controlador, utilizando
                   send(permiso,Cli[i]);
                   contador := contador + 1;
                 end if
+              end do  
 
               when receive(pet_liberar,Cli[i]) do 
                 send(permiso,Cli[i]);
