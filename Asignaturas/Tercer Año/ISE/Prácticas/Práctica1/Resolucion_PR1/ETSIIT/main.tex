@@ -1,0 +1,145 @@
+\documentclass[a4paper,12pt]{article}
+
+% Paquetes básicos
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{top=3cm, bottom=3cm, left=2.5cm, right=2.5cm}
+
+% Paquetes para diseño
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+% Paquetes para el entorno lstlisting
+\usepackage{listings}
+\usepackage{inconsolata}
+
+% Encabezado y pie de página
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+% Encabezado
+\fancyhead[L]{\leftmark}  % Título de sección
+\fancyhead[R]{\MakeUppercase{Ingeniería de Servidores}} % Nombre del trabajo o asignatura
+
+% Pie de página
+\fancyfoot[L]{\textbf{Ingeniería Informática + ADE}}  % Autor
+\fancyfoot[C]{\thepage}  % Número de página
+\fancyfoot[R]{\textbf{Universidad de Granada (UGR)}}  % Institución
+
+% Líneas de separación
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+% Ajuste de tamaños
+\setlength{\headheight}{15pt}
+\setlength{\headsep}{10pt}
+\setlength{\footskip}{20pt}
+
+% Fuente Times New Roman
+\usepackage{times}
+
+% Configuración de lstlisting
+\lstset{
+    inputencoding=utf8,          % Permite UTF-8
+    extendedchars=true,          % Reconoce caracteres extendidos
+    literate=                    % Configuración manual para tildes y símbolos
+        {á}{{\'a}}1
+        {é}{{\'e}}1
+        {í}{{\'i}}1
+        {ó}{{\'o}}1
+        {ú}{{\'u}}1
+        {ñ}{{\~n}}1
+        {Á}{{\'A}}1
+        {É}{{\'E}}1
+        {Í}{{\'I}}1
+        {Ó}{{\'O}}1
+        {Ú}{{\'U}}1
+        {Ñ}{{\~N}}1
+        {¿}{{\textquestiondown}}1
+        {¡}{{\textexclamdown}}1,
+    basicstyle=\ttfamily,        % Fuente monoespaciada
+    breaklines=true,             % Habilita salto de línea automático
+    frame=single,                % Marco alrededor del código
+    backgroundcolor=\color{gray!10}, % Fondo gris claro
+    keywordstyle=\color{blue},   % Color para palabras clave
+    commentstyle=\color{green},  % Color para comentarios
+    stringstyle=\color{red}      % Color para strings
+}
+
+% Configuración de título
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+% Información del documento
+\title{
+    \vspace{-2cm}
+    \LARGE \textbf{Ingeniería de Servidores: Práctica 1} \\
+    \large \textbf{Universidad de Granada (UGR)} \\
+    \vspace{1cm}
+}
+\author{\textbf{Autor:} Ismael Sallami Moreno}
+\date{\today}
+
+% Inicio del documento
+\begin{document}
+
+% Portada
+\maketitle
+\thispagestyle{empty}
+
+\vspace{2cm}
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{images/etsiit.png} \\ % Logo de la institución
+    \vspace{1cm}
+    \textbf{Resumen} \\
+    \vspace{0.5cm}
+    \parbox{0.8\textwidth}{
+        Este documento presenta los resultados de la Práctica 1 de la asignatura de Ingeniería de Servidores. Se abordan los conceptos teóricos y prácticos relacionados con la configuración y administración de servidores, incluyendo análisis de rendimiento y optimización. Los resultados obtenidos demuestran la eficacia de las técnicas implementadas.
+    }
+\end{center}
+
+\newpage
+
+% Índice
+\tableofcontents
+\newpage
+
+% Secciones
+
+% Ejercicio 1
+\section{Ejercicio 1 Opcional}
+El alumno/a debe ser capaz de presentar un MV con la configuración descrita en este apartado. La configuración debe ser permanente, es decir, en todo caso, tras reiniciar el equipo, la configuración será la esperada.
+Para validar la configuración de red, el alumno/a debe ser capaz de:
+\begin{itemize}
+    \item Hacer ping desde el equipo anfitrión a la MV y viceversa.
+    \item Hacer ping desde la MV a cualquier equipo accesible públicamente en Internet por FQHN o IP.
+    \item Conectar por ssh desde el equipo anfitrión a la MV .
+\end{itemize}
+
+\subsection{Solución}
+
+Antes de realizar el ejercicio hemos realizado una serie de modificaciones que se pedían en el guión de la práctica. Estas modificaciones son las siguientes:
+\begin{itemize}
+    \item Configurar la red NAT y una de tipo Host-Only, para ello en Herramientas en la VM debemos seleccionar la opción de Red y añadir una nueva interfaz de red de tipo Host-Only, y paso seguido configurar la red NAT.
+    \item Comprobar que el servicio SSH está instalado, por defecto se suele instalar, para asegurarnos debemos de ejecutar el comando \texttt{sudo systemctl status ssh}.
+    \item Cambiar la variable PS1 como se nos pedía, para ello debemos de editar el fichero de bashrc y exportar la variable PS1 con el valor que se nos pedía:
+    \begin{itemize}
+        \item \texttt{PS1='\textbackslash u@\textbackslash h:\textbackslash t:\textbackslash w \textbackslash\$ '}
+    \end{itemize}
+\end{itemize}
+
+% Bibliografía
+\newpage
+\begin{thebibliography}{9}
+    \bibitem{ref1} Autor, A. (Año). Título del artículo. \textit{Nombre de la revista}, \textbf{volumen}(número), páginas.
+    \bibitem{ref2} Autor, B. (Año). Título del libro. \textit{Editorial}.
+\end{thebibliography}
+
+\end{document}
