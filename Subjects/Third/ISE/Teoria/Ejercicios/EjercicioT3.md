@@ -2,7 +2,6 @@
 title: "Ingeniería de Servidores"
 subtitle: "Ejercicios"
 author: "Ismael Sallami Moreno"
-date: "DGIIADE"
 lang: es
 
 # Configuración Eisvogel para portada mejorada
