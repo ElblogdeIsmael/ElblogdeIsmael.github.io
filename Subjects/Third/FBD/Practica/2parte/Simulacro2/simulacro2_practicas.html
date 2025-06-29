@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuestionario DML</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Merriweather', serif;
+        background-color: #f5f5f5;
+        color: #222;
+        padding: 30px;
+        margin: 0;
+    }
+    .quiz-container {
+        max-width: 850px;
+        margin: auto;
+        background: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+        text-align: center;
+        font-size: 2.2em;
+        margin-bottom: 20px;
+    }
+    .author {
+        text-align: center;
+        font-size: 0.95em;
+        margin-bottom: 30px;
+        font-family: 'Roboto', sans-serif;
+        color: #555;
+    }
+    .author p {
+        margin: 4px 0;
+    }
+    .question-block {
+        margin-bottom: 30px;
+        padding: 20px;
+        border-left: 4px solid #3f51b5;
+        background-color: #fafafa;
+        border-radius: 8px;
+    }
+    .question-block p {
+        font-weight: 600;
+        font-size: 1.1em;
+    }
+    .options div {
+        background: #f0f0f0;
+        padding: 12px 15px;
+        margin: 8px 0;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-family: monospace;
+        white-space: pre-wrap;
+    }
+    .options div:hover {
+        background-color: #e0e0e0;
+    }
+    .options div.correct {
+        background-color: #c8e6c9 !important;
+        border-left: 5px solid #2e7d32;
+        color: #2e7d32;
+    }
+    .options div.incorrect {
+        background-color: #ffcdd2 !important;
+        border-left: 5px solid #c62828;
+        color: #c62828;
+    }
+    img {
+        max-width: 100%;
+        margin: 10px 0 15px;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+<div class="quiz-container">
+    <h1>Cuestionario DML</h1>
+    <div class="author">
+        <p><strong>Autor:</strong> Ismael Sallami Moreno</p>
+        <p><strong>Asignatura:</strong> Fundamentos Bases de Datos</p>
+        <p><strong>Titulación:</strong> Ingeniería Informática + ADE</p>
+    </div>
+
+    <div class="question-block" id="q1">
+        <p><strong>1.</strong> Ejercicio 1</p><img src="images_pr/ej1.png" alt="Pregunta 1"><div class="options">
+            <div onclick="checkAnswer(this, false, 'q1')">A -> partido
+
+B-> EquV#
+
+C-> partido
+
+D-> EquL#
+
+E-> equipos
+
+F-> Equ#=EquL#
+
+G-> nombre</div>
+            <div onclick="checkAnswer(this, false, 'q1')">A -> equipos
+
+B-> Equ#
+
+C-> partido
+
+D-> EquL#,EquV#
+
+E-> equipos
+
+F-> partido.Equ#=equipos.Equ#
+
+G-> nombre</div>
+            <div onclick="checkAnswer(this, true, 'q1')">A -> partido
+
+B-> EquV#
+
+C-> partido
+
+D-> EquL#,EquV#
+
+E-> equipos
+
+F-> Equ#=EquL#
+
+G-> nombre</div></div></div>
+    <div class="question-block" id="q2">
+        <p><strong>2.</strong> Ejercicio 2</p><img src="images_pr/ej2.png" alt="Pregunta 2"><div class="options">
+            <div onclick="checkAnswer(this, true, 'q2')">A-> E.nombre
+B-> NOT EXISTS
+C-> NOT EXISTS
+D-> P.EquV#=Ev.EquV# and E.equ#=P.EquL#</div>
+            <div onclick="checkAnswer(this, false, 'q2')">A-> E.nombre
+B-> ALL
+C-> EXISTS
+D-> P.EquV#=Ev.EquV# and E.equ#=P.EquL#</div>
+            <div onclick="checkAnswer(this, false, 'q2')">A-> E.nombre
+B-> EXISTS
+C-> EXISTS
+D-> P.EquV#=Ev.EquV# and E.equ#=P.EquL#</div>
+            <div onclick="checkAnswer(this, false, 'q2')">A-> E.nombre
+B-> ALL
+C-> ALL
+D-> P.EquV#=Ev.EquV# and E.equ#=P.EquL#</div></div></div>
+    <div class="question-block" id="q3">
+        <p><strong>3.</strong> Pregunta 3</p><img src="images_pr/ej3.png" alt="Pregunta 3"><div class="options">
+            <div onclick="checkAnswer(this, false, 'q3')">A -> ×
+B-> p1.fecha<>p2.fecha
+C-> p2.fecha
+D-> *
+E-> equipos</div>
+            <div onclick="checkAnswer(this, false, 'q3')">A -> ⋈
+B-> p2.fecha<p1.fecha
+C-> p1.fecha
+D-> fecha
+E-> partido</div>
+            <div onclick="checkAnswer(this, true, 'q3')">A -> ×
+B-> p1.fecha<p2.fecha
+C-> p1.fecha
+D-> fecha
+E-> partido</div>
+            <div onclick="checkAnswer(this, false, 'q3')">A -> ×
+B-> p1.fecha<p2.fecha
+C-> fecha
+D-> fecha
+E-> partido</div></div></div>
+    <div class="question-block" id="q4">
+        <p><strong>4.</strong> Pregunta 4</p><img src="images_pr/ej4.png" alt="Pregunta 4"><div class="options">
+            <div onclick="checkAnswer(this, false, 'q4')">A-> E.nombre
+B-> ALL
+C-> ALL
+D-> P.EquV#=Ev.EquV# and E.equ#=P.EquL#</div>
+            <div onclick="checkAnswer(this, false, 'q4')">A-> E.nombre
+B-> ALL
+C-> EXISTS
+D-> P.EquV#=Ev.EquV# and E.equ#=P.EquL#</div>
+            <div onclick="checkAnswer(this, false, 'q4')">A-> E.nombre
+B-> EXISTS
+C-> EXISTS
+D-> P.EquV#=Ev.EquV# and E.equ#=P.EquL#</div>
+            <div onclick="checkAnswer(this, true, 'q4')">A-> count(*)
+B-> HAVING count(*) >1000
+C-> (EquL#,Fecha)
+D-> EquL#,Fecha,count(*)</div></div></div>
+</div>
+<script>
+function checkAnswer(element, isCorrect, groupId) {
+    const parent = document.getElementById(groupId);
+    const options = parent.querySelectorAll('.options div');
+    options.forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+    });
+    if (isCorrect) {
+        element.classList.add('correct');
+    } else {
+        element.classList.add('incorrect');
+    }
+}
+</script>
+</body>
+</html>

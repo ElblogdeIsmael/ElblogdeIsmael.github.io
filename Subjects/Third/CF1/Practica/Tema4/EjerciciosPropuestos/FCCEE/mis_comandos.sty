@@ -1,0 +1,29 @@
+% Archivo: mis_comandos.sty
+\ProvidesPackage{mis_comandos} % Nombre del paquete
+
+% Carga de paquetes necesarios
+\RequirePackage{xparse} % Por ejemplo, para comandos avanzados
+\RequirePackage{amsmath} % Si usas funciones matemáticas avanzadas
+\RequirePackage{graphicx} % Para gráficos (si necesitas)
+
+% Comandos personalizados
+\NewDocumentCommand{\asientos}{>{\SplitList{,}}m}{%
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Cuenta} & \textbf{Debe} & \textbf{Haber} \\ \hline
+        \ProcessList{#1}{\procesarFila} % Procesar cada grupo de 3 argumentos
+    \end{tabular}
+}
+\newcommand{\procesarFila}[1]{%
+    % Aquí podrías ajustar los argumentos según necesidad
+    \StrBefore{#1}{;}[\Cuenta]%
+    \StrBetween{#1}{;}{;}[\Debe]%
+    \StrBehind{#1}{;}[\Haber]%
+    \Cuenta & \Debe & \Haber \\ \hline
+}
+
+% Otros comandos personalizados
+\newcommand{\miTitulo}[1]{\section*{#1}} % Ejemplo de comando adicional
+
+% Fin del archivo
+\endinput

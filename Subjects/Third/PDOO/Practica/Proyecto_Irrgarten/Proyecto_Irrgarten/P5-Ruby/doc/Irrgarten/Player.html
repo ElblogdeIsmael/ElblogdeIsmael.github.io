@@ -1,0 +1,2776 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Irrgarten::Player
+  
+    &mdash; Documentation by YARD 0.9.36
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Irrgarten::Player";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Irrgarten.html" title="Irrgarten (module)">Irrgarten</a></span></span>
+     &raquo; 
+    <span class="title">Player</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Irrgarten::Player
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="LabyrinthCharacter.html" title="Irrgarten::LabyrinthCharacter (class)">LabyrinthCharacter</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="LabyrinthCharacter.html" title="Irrgarten::LabyrinthCharacter (class)">LabyrinthCharacter</a></span></li>
+          
+            <li class="next">Irrgarten::Player</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/irrgarten/player.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Representa un jugador en el juego con atributos de salud, posición, fuerza, y defensas.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="FuzzyPlayer.html" title="Irrgarten::FuzzyPlayer (class)">FuzzyPlayer</a></span></p>
+</div>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="MAX_WEAPONS-constant" class="">MAX_WEAPONS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Número máximo de armas que un jugador puede llevar.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="MAX_SHIELDS-constant" class="">MAX_SHIELDS =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Número máximo de escudos que un jugador puede llevar.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+      
+        <dt id="INITIAL_HEALTH-constant" class="">INITIAL_HEALTH =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Salud inicial con la que un jugador comienza o es resucitado.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span></pre></dd>
+      
+        <dt id="HITS2LOSE-constant" class="">HITS2LOSE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Cantidad de golpes consecutivos necesarios para perder la partida.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#col-instance_method" title="#col (instance method)">#<strong>col</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute col.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#consecutiveHits-instance_method" title="#consecutiveHits (instance method)">#<strong>consecutiveHits</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute consecutiveHits.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#number-instance_method" title="#number (instance method)">#<strong>number</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute number.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#row-instance_method" title="#row (instance method)">#<strong>row</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute row.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shields-instance_method" title="#shields (instance method)">#<strong>shields</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute shields.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#weapons-instance_method" title="#weapons (instance method)">#<strong>weapons</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute weapons.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#addShield-instance_method" title="#addShield (instance method)">#<strong>addShield</strong>(shield)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>añade un nuevo escudo.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#addWeapon-instance_method" title="#addWeapon (instance method)">#<strong>addWeapon</strong>(weapon)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>añade una nueva arma.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#attack-instance_method" title="#attack (instance method)">#<strong>attack</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Realiza un ataque utilizando la fuerza del jugador y el poder de sus armas.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy-instance_method" title="#copy (instance method)">#<strong>copy</strong>(other)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Constructor de copia.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dead-instance_method" title="#dead (instance method)">#<strong>dead</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Verifica si el jugador está muerto (salud &lt;= 0).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#defend-instance_method" title="#defend (instance method)">#<strong>defend</strong>(receivedAttack)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gestiona la defensa del jugador contra un ataque recibido.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#defensiveEnergy-instance_method" title="#defensiveEnergy (instance method)">#<strong>defensiveEnergy</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calcula la energía defensiva total del jugador sumando el poder de todos sus escudos.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gotWounded-instance_method" title="#gotWounded (instance method)">#<strong>gotWounded</strong>  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reduce la salud del jugador en 1 punto, indicando que ha sido herido.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#incConsecutiveHits-instance_method" title="#incConsecutiveHits (instance method)">#<strong>incConsecutiveHits</strong>  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Incrementa el contador de golpes consecutivos del jugador en 1.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(number, intelligence, strength)  &#x21d2; Player </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Inicializa un nuevo jugador con los atributos básicos de nombre, número, inteligencia y fuerza.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#manageHits-instance_method" title="#manageHits (instance method)">#<strong>manageHits</strong>(receivedAttack)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gestiona los golpes recibidos por el jugador y determina si pierde la partida.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#move-instance_method" title="#move (instance method)">#<strong>move</strong>(direction, validMoves)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Mueve al jugador en una dirección específica si es válida.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#newShield-instance_method" title="#newShield (instance method)">#<strong>newShield</strong>  &#x21d2; Shield </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Crea un nuevo escudo con poder defensivo aleatorio.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#newWeapon-instance_method" title="#newWeapon (instance method)">#<strong>newWeapon</strong>  &#x21d2; Weapon </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Crea una nueva arma con poder y usos restantes aleatorios.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#receiveReward-instance_method" title="#receiveReward (instance method)">#<strong>receiveReward</strong>  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Recibe recompensas para el jugador, que pueden incluir armas, escudos y salud extra.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#receiveShield-instance_method" title="#receiveShield (instance method)">#<strong>receiveShield</strong>(s)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Recibe un nuevo escudo para el jugador, descartando los escudos usados si es necesario.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#receiveWeapon-instance_method" title="#receiveWeapon (instance method)">#<strong>receiveWeapon</strong>(w)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Recibe una nueva arma para el jugador, descartando las armas usadas si es necesario.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resetHits-instance_method" title="#resetHits (instance method)">#<strong>resetHits</strong>  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reinicia el contador de golpes consecutivos del jugador.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resurrect-instance_method" title="#resurrect (instance method)">#<strong>resurrect</strong>  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Resucita al jugador, restaurando su salud inicial y reiniciando sus armas y escudos.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#setPos-instance_method" title="#setPos (instance method)">#<strong>setPos</strong>(row, col)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Establece la posición del jugador en una fila y columna específicas.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sumShields-instance_method" title="#sumShields (instance method)">#<strong>sumShields</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Suma la energía defensiva de todos los escudos del jugador.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sumWeapons-instance_method" title="#sumWeapons (instance method)">#<strong>sumWeapons</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Suma el poder de ataque de todas las armas del jugador.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_s-instance_method" title="#to_s (instance method)">#<strong>to_s</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Convierte el estado del jugador en un string para representación.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="LabyrinthCharacter.html" title="Irrgarten::LabyrinthCharacter (class)">LabyrinthCharacter</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="LabyrinthCharacter.html#get_col-instance_method" title="Irrgarten::LabyrinthCharacter#get_col (method)">#get_col</a></span>, <span class='object_link'><a href="LabyrinthCharacter.html#get_row-instance_method" title="Irrgarten::LabyrinthCharacter#get_row (method)">#get_row</a></span>, <span class='object_link'><a href="LabyrinthCharacter.html#pos-instance_method" title="Irrgarten::LabyrinthCharacter#pos (method)">#pos</a></span>, <span class='object_link'><a href="LabyrinthCharacter.html#set_pos-instance_method" title="Irrgarten::LabyrinthCharacter#set_pos (method)">#set_pos</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(number, intelligence, strength)  &#x21d2; <tt><span class='object_link'><a href="" title="Irrgarten::Player (class)">Player</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Inicializa un nuevo jugador con los atributos básicos de nombre, número, inteligencia y fuerza.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>number</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>El número de identificación del jugador.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31
+32
+33
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_number'>number</span><span class='comma'>,</span> <span class='id identifier rubyid_intelligence'>intelligence</span><span class='comma'>,</span> <span class='id identifier rubyid_strength'>strength</span><span class='rparen'>)</span>
+    <span class='kw'>super</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Player</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_number'>number</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_intelligence'>intelligence</span><span class='comma'>,</span> <span class='id identifier rubyid_strength'>strength</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#INITIAL_HEALTH-constant" title="Irrgarten::Player::INITIAL_HEALTH (constant)">INITIAL_HEALTH</a></span></span><span class='rparen'>)</span>
+    <span class='ivar'>@number</span> <span class='op'>=</span> <span class='id identifier rubyid_number'>number</span>
+    <span class='ivar'>@consecutiveHits</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='ivar'>@weapons</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+    <span class='ivar'>@shields</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="col=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="col-instance_method">
+  
+    #<strong>col</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute col.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_col'>col</span>
+  <span class='ivar'>@col</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="consecutiveHits=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="consecutiveHits-instance_method">
+  
+    #<strong>consecutiveHits</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute consecutiveHits.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_consecutiveHits'>consecutiveHits</span>
+  <span class='ivar'>@consecutiveHits</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="number=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="number-instance_method">
+  
+    #<strong>number</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute number.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_number'>number</span>
+  <span class='ivar'>@number</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="row=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="row-instance_method">
+  
+    #<strong>row</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute row.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_row'>row</span>
+  <span class='ivar'>@row</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="shields=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="shields-instance_method">
+  
+    #<strong>shields</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute shields.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_shields'>shields</span>
+  <span class='ivar'>@shields</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="weapons=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="weapons-instance_method">
+  
+    #<strong>weapons</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute weapons.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_weapons'>weapons</span>
+  <span class='ivar'>@weapons</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="addShield-instance_method">
+  
+    #<strong>addShield</strong>(shield)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>añade un nuevo escudo</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>shield</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Shield.html" title="Irrgarten::Shield (class)">Shield</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>El nuevo escudo a añadir.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+286
+287
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 286</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_addShield'>addShield</span><span class='lparen'>(</span><span class='id identifier rubyid_shield'>shield</span><span class='rparen'>)</span>
+    <span class='ivar'>@shields</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_shield'>shield</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="addWeapon-instance_method">
+  
+    #<strong>addWeapon</strong>(weapon)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>añade una nueva arma</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>weapon</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Weapon.html" title="Irrgarten::Weapon (class)">Weapon</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La nueva arma a añadir.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+279
+280
+281</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 279</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_addWeapon'>addWeapon</span><span class='lparen'>(</span><span class='id identifier rubyid_weapon'>weapon</span><span class='rparen'>)</span>
+    <span class='ivar'>@weapons</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_weapon'>weapon</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="attack-instance_method">
+  
+    #<strong>attack</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Realiza un ataque utilizando la fuerza del jugador y el poder de sus armas.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La intensidad del ataque.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 84</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_attack'>attack</span>
+    <span class='kw'>return</span> <span class='ivar'>@strength</span> <span class='op'>+</span> <span class='id identifier rubyid_sumWeapons'>sumWeapons</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="copy-instance_method">
+  
+    #<strong>copy</strong>(other)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Constructor de copia</p>
+
+<p>Copia los atributos básicos del jugador original y los agrega al nuevo jugador.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>other</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Irrgarten::Player (class)">Player</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>El jugador original del que se creará una copia.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+46
+47
+48
+49
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 46</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_copy'>copy</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
+    <span class='kw'>super</span>
+    <span class='ivar'>@number</span> <span class='op'>=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_number'>number</span>
+    <span class='ivar'>@consecutiveHits</span> <span class='op'>=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_consecutiveHits'>consecutiveHits</span>
+    <span class='ivar'>@weapons</span> <span class='op'>=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_weapons'>weapons</span>
+    <span class='ivar'>@shields</span> <span class='op'>=</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_shields'>shields</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="dead-instance_method">
+  
+    #<strong>dead</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Verifica si el jugador está muerto (salud &lt;= 0).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>‘true` si la salud es 0 o menor, `false` en caso contrario.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 77</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_dead'>dead</span> 
+    <span class='kw'>return</span> <span class='ivar'>@health</span> <span class='op'>&lt;=</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="defend-instance_method">
+  
+    #<strong>defend</strong>(receivedAttack)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gestiona la defensa del jugador contra un ataque recibido.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>receivedAttack</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>El valor del ataque recibido.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>El resultado de la gestión del ataque.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+92
+93
+94</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 92</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_defend'>defend</span><span class='lparen'>(</span><span class='id identifier rubyid_receivedAttack'>receivedAttack</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_manageHits'>manageHits</span><span class='lparen'>(</span><span class='id identifier rubyid_receivedAttack'>receivedAttack</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="defensiveEnergy-instance_method">
+  
+    #<strong>defensiveEnergy</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calcula la energía defensiva total del jugador sumando el poder de todos sus escudos.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La energía defensiva total.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+132
+133
+134</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 132</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_defensiveEnergy'>defensiveEnergy</span>
+    <span class='kw'>return</span> <span class='ivar'>@intelligence</span> <span class='op'>+</span> <span class='id identifier rubyid_sumShields'>sumShields</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gotWounded-instance_method">
+  
+    #<strong>gotWounded</strong>  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Reduce la salud del jugador en 1 punto, indicando que ha sido herido.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+146
+147
+148</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 146</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_gotWounded'>gotWounded</span>
+    <span class='ivar'>@health</span> <span class='op'>=</span> <span class='ivar'>@health</span> <span class='op'>-</span> <span class='int'>1</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="incConsecutiveHits-instance_method">
+  
+    #<strong>incConsecutiveHits</strong>  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Incrementa el contador de golpes consecutivos del jugador en 1.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153
+154
+155</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 153</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_incConsecutiveHits'>incConsecutiveHits</span>
+    <span class='ivar'>@consecutiveHits</span> <span class='op'>+=</span> <span class='int'>1</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="manageHits-instance_method">
+  
+    #<strong>manageHits</strong>(receivedAttack)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Gestiona los golpes recibidos por el jugador y determina si pierde la partida.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>receivedAttack</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>El valor del ataque recibido.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>‘true` si el jugador pierde la partida, `false` en caso contrario.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 256</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_manageHits'>manageHits</span><span class='lparen'>(</span><span class='id identifier rubyid_receivedAttack'>receivedAttack</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_lose'>lose</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='id identifier rubyid_defense'>defense</span> <span class='op'>=</span> <span class='id identifier rubyid_defensiveEnergy'>defensiveEnergy</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_defense'>defense</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_receivedAttack'>receivedAttack</span>
+        <span class='id identifier rubyid_gotWounded'>gotWounded</span>
+        <span class='id identifier rubyid_incConsecutiveHits'>incConsecutiveHits</span>
+    <span class='kw'>else</span>
+        <span class='id identifier rubyid_resetHits'>resetHits</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_consecutiveHits'>consecutiveHits</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="#HITS2LOSE-constant" title="Irrgarten::Player::HITS2LOSE (constant)">HITS2LOSE</a></span></span> <span class='op'>||</span> <span class='id identifier rubyid_dead'>dead</span> 
+        <span class='id identifier rubyid_resetHits'>resetHits</span>
+        <span class='id identifier rubyid_lose'>lose</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='kw'>else</span>
+        <span class='id identifier rubyid_lose'>lose</span> <span class='op'>=</span> <span class='kw'>false</span>
+    <span class='kw'>end</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_lose'>lose</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="move-instance_method">
+  
+    #<strong>move</strong>(direction, validMoves)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Mueve al jugador en una dirección específica si es válida.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>direction</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La dirección en la que se desea mover.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>validMoves</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Las direcciones válidas en las que el jugador puede moverse.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La dirección en la que el jugador se moverá.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 184</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_move'>move</span><span class='lparen'>(</span><span class='id identifier rubyid_direction'>direction</span><span class='comma'>,</span> <span class='id identifier rubyid_validMoves'>validMoves</span><span class='rparen'>)</span> 
+    <span class='id identifier rubyid_size'>size</span> <span class='op'>=</span> <span class='id identifier rubyid_validMoves'>validMoves</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
+    <span class='id identifier rubyid_contained'>contained</span> <span class='op'>=</span> <span class='kw'>false</span>
+    <span class='id identifier rubyid_firstElement'>firstElement</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Directions.html" title="Irrgarten::Directions (class)">Directions</a></span></span>
+    
+    <span class='id identifier rubyid_validMoves'>validMoves</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span>
+        <span class='kw'>if</span> <span class='id identifier rubyid_d'>d</span><span class='op'>==</span><span class='id identifier rubyid_direction'>direction</span> 
+            <span class='id identifier rubyid_contained'>contained</span><span class='op'>=</span><span class='kw'>true</span>
+        <span class='kw'>end</span>
+        <span class='kw'>if</span> <span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>0</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_contained'>contained</span>
+            <span class='id identifier rubyid_firstElement'>firstElement</span> <span class='op'>=</span> <span class='id identifier rubyid_validMoves'>validMoves</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+        <span class='kw'>else</span>    
+            <span class='id identifier rubyid_firstElement'>firstElement</span> <span class='op'>=</span> <span class='id identifier rubyid_direction'>direction</span>
+        <span class='kw'>end</span>
+        
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_firstElement'>firstElement</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="newShield-instance_method">
+  
+    #<strong>newShield</strong>  &#x21d2; <tt><span class='object_link'><a href="Shield.html" title="Irrgarten::Shield (class)">Shield</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Crea un nuevo escudo con poder defensivo aleatorio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Shield.html" title="Irrgarten::Shield (class)">Shield</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>El nuevo escudo generado.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+124
+125
+126
+127</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 124</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_newShield'>newShield</span>
+    <span class='id identifier rubyid_s'>s</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Shield.html" title="Irrgarten::Shield (class)">Shield</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="CombatElement.html#initialize-instance_method" title="Irrgarten::CombatElement#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Dice.html" title="Irrgarten::Dice (class)">Dice</a></span></span><span class='period'>.</span><span class='id identifier rubyid_shieldPower'><span class='object_link'><a href="Dice.html#shieldPower-class_method" title="Irrgarten::Dice.shieldPower (method)">shieldPower</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Dice.html" title="Irrgarten::Dice (class)">Dice</a></span></span><span class='period'>.</span><span class='id identifier rubyid_usesLeft'><span class='object_link'><a href="Dice.html#usesLeft-class_method" title="Irrgarten::Dice.usesLeft (method)">usesLeft</a></span></span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_s'>s</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="newWeapon-instance_method">
+  
+    #<strong>newWeapon</strong>  &#x21d2; <tt><span class='object_link'><a href="Weapon.html" title="Irrgarten::Weapon (class)">Weapon</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Crea una nueva arma con poder y usos restantes aleatorios.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Weapon.html" title="Irrgarten::Weapon (class)">Weapon</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La nueva arma generada.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+116
+117
+118
+119</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 116</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_newWeapon'>newWeapon</span>
+    <span class='id identifier rubyid_w'>w</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Weapon.html" title="Irrgarten::Weapon (class)">Weapon</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="CombatElement.html#initialize-instance_method" title="Irrgarten::CombatElement#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Dice.html" title="Irrgarten::Dice (class)">Dice</a></span></span><span class='period'>.</span><span class='id identifier rubyid_weaponPower'><span class='object_link'><a href="Dice.html#weaponPower-class_method" title="Irrgarten::Dice.weaponPower (method)">weaponPower</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Dice.html" title="Irrgarten::Dice (class)">Dice</a></span></span><span class='period'>.</span><span class='id identifier rubyid_usesLeft'><span class='object_link'><a href="Dice.html#usesLeft-class_method" title="Irrgarten::Dice.usesLeft (method)">usesLeft</a></span></span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_w'>w</span> 
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="receiveReward-instance_method">
+  
+    #<strong>receiveReward</strong>  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Recibe recompensas para el jugador, que pueden incluir armas, escudos y salud extra. El número de armas y escudos recibidos se determina lanzando dados. La salud extra también se determina lanzando un dado.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 208</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_receiveReward'>receiveReward</span>
+    <span class='id identifier rubyid_wReward'>wReward</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Dice.html" title="Irrgarten::Dice (class)">Dice</a></span></span><span class='period'>.</span><span class='id identifier rubyid_weaponReward'><span class='object_link'><a href="Dice.html#weaponReward-class_method" title="Irrgarten::Dice.weaponReward (method)">weaponReward</a></span></span>
+    <span class='id identifier rubyid_sReward'>sReward</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Dice.html" title="Irrgarten::Dice (class)">Dice</a></span></span><span class='period'>.</span><span class='id identifier rubyid_shieldReward'><span class='object_link'><a href="Dice.html#shieldReward-class_method" title="Irrgarten::Dice.shieldReward (method)">shieldReward</a></span></span>
+
+    <span class='kw'>for</span> <span class='id identifier rubyid_i'>i</span> <span class='kw'>in</span> <span class='int'>0</span><span class='op'>...</span><span class='id identifier rubyid_wReward'>wReward</span>
+        <span class='id identifier rubyid_wnew'>wnew</span> <span class='op'>=</span> <span class='id identifier rubyid_newWeapon'>newWeapon</span>
+        <span class='id identifier rubyid_receiveWeapon'>receiveWeapon</span><span class='lparen'>(</span><span class='id identifier rubyid_wnew'>wnew</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='kw'>for</span> <span class='id identifier rubyid_i'>i</span> <span class='kw'>in</span> <span class='int'>0</span><span class='op'>...</span><span class='id identifier rubyid_sReward'>sReward</span>
+        <span class='id identifier rubyid_snew'>snew</span> <span class='op'>=</span> <span class='id identifier rubyid_newShield'>newShield</span>
+        <span class='id identifier rubyid_receiveShield'>receiveShield</span><span class='lparen'>(</span><span class='id identifier rubyid_snew'>snew</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_extraHealth'>extraHealth</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Dice.html" title="Irrgarten::Dice (class)">Dice</a></span></span><span class='period'>.</span><span class='id identifier rubyid_healthReward'><span class='object_link'><a href="Dice.html#healthReward-class_method" title="Irrgarten::Dice.healthReward (method)">healthReward</a></span></span>
+    <span class='ivar'>@health</span> <span class='op'>=</span> <span class='ivar'>@health</span> <span class='op'>+</span> <span class='id identifier rubyid_extraHealth'>extraHealth</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="receiveShield-instance_method">
+  
+    #<strong>receiveShield</strong>(s)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Recibe un nuevo escudo para el jugador, descartando los escudos usados si es necesario.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>s</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Shield.html" title="Irrgarten::Shield (class)">Shield</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>El nuevo escudo a recibir.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+242
+243
+244
+245
+246
+247
+248
+249
+250</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 242</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_receiveShield'>receiveShield</span><span class='lparen'>(</span><span class='id identifier rubyid_s'>s</span><span class='rparen'>)</span>
+    <span class='ivar'>@shields</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_si'>si</span><span class='op'>|</span>
+        <span class='id identifier rubyid_si'>si</span><span class='period'>.</span><span class='id identifier rubyid_discard'>discard</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@shields</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="#MAX_SHIELDS-constant" title="Irrgarten::Player::MAX_SHIELDS (constant)">MAX_SHIELDS</a></span></span><span class='rparen'>)</span>
+        <span class='ivar'>@shields</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_s'>s</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="receiveWeapon-instance_method">
+  
+    #<strong>receiveWeapon</strong>(w)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Recibe una nueva arma para el jugador, descartando las armas usadas si es necesario.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>w</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Weapon.html" title="Irrgarten::Weapon (class)">Weapon</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La nueva arma a recibir.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+228
+229
+230
+231
+232
+233
+234
+235
+236</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 228</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_receiveWeapon'>receiveWeapon</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='rparen'>)</span>
+    <span class='ivar'>@weapons</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_wi'>wi</span><span class='op'>|</span>
+        <span class='id identifier rubyid_wi'>wi</span><span class='period'>.</span><span class='id identifier rubyid_discard'>discard</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@weapons</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="#MAX_WEAPONS-constant" title="Irrgarten::Player::MAX_WEAPONS (constant)">MAX_WEAPONS</a></span></span><span class='rparen'>)</span>
+        <span class='ivar'>@weapons</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resetHits-instance_method">
+  
+    #<strong>resetHits</strong>  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Reinicia el contador de golpes consecutivos del jugador.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+139
+140
+141</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 139</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_resetHits'>resetHits</span>
+    <span class='ivar'>@consecutiveHits</span> <span class='op'>=</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="resurrect-instance_method">
+  
+    #<strong>resurrect</strong>  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Resucita al jugador, restaurando su salud inicial y reiniciando sus armas y escudos.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_resurrect'>resurrect</span> 
+    <span class='ivar'>@health</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#INITIAL_HEALTH-constant" title="Irrgarten::Player::INITIAL_HEALTH (constant)">INITIAL_HEALTH</a></span></span>
+    <span class='ivar'>@consecutiveHits</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='ivar'>@weapons</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+    <span class='ivar'>@shields</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="setPos-instance_method">
+  
+    #<strong>setPos</strong>(row, col)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p>
+<p>Establece la posición del jugador en una fila y columna específicas.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>row</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La fila de la posición.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>col</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La columna de la posición.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 69</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_setPos'>setPos</span><span class='lparen'>(</span><span class='id identifier rubyid_row'>row</span><span class='comma'>,</span> <span class='id identifier rubyid_col'>col</span><span class='rparen'>)</span>
+    <span class='ivar'>@row</span> <span class='op'>=</span> <span class='id identifier rubyid_row'>row</span>
+    <span class='ivar'>@col</span> <span class='op'>=</span> <span class='id identifier rubyid_col'>col</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sumShields-instance_method">
+  
+    #<strong>sumShields</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Suma la energía defensiva de todos los escudos del jugador.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La suma de la energía defensiva de todos los escudos.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+171
+172
+173
+174
+175
+176
+177</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 171</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sumShields'>sumShields</span> 
+    <span class='id identifier rubyid_sum'>sum</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='ivar'>@shields</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+        <span class='id identifier rubyid_sum'>sum</span> <span class='op'>+=</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_protect'>protect</span>
+    <span class='kw'>end</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_sum'>sum</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sumWeapons-instance_method">
+  
+    #<strong>sumWeapons</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Suma el poder de ataque de todas las armas del jugador.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La suma del poder de todas las armas.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+160
+161
+162
+163
+164
+165
+166</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 160</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sumWeapons'>sumWeapons</span> 
+    <span class='id identifier rubyid_sum'>sum</span> <span class='op'>=</span> <span class='int'>0</span>
+    <span class='ivar'>@weapons</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_w'>w</span><span class='op'>|</span>
+        <span class='id identifier rubyid_sum'>sum</span> <span class='op'>+=</span> <span class='id identifier rubyid_w'>w</span><span class='period'>.</span><span class='id identifier rubyid_attack'>attack</span>
+    <span class='kw'>end</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_sum'>sum</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_s-instance_method">
+  
+    #<strong>to_s</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Convierte el estado del jugador en un string para representación.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>La representación del jugador en formato ‘P[nombre, inteligencia, fuerza, salud, fila, columna]`.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/irrgarten/player.rb', line 99</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
+    <span class='id identifier rubyid_output'>output</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_output'>output</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Player[name: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@name</span><span class='embexpr_end'>}</span><span class='tstring_content'>, intelligence: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@intelligence</span><span class='embexpr_end'>}</span><span class='tstring_content'>, strength: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@strength</span><span class='embexpr_end'>}</span><span class='tstring_content'>, health: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@health</span><span class='embexpr_end'>}</span><span class='tstring_content'>, row: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@row</span><span class='embexpr_end'>}</span><span class='tstring_content'>, col: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@col</span><span class='embexpr_end'>}</span><span class='tstring_content'>]</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_output'>output</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\nWeapons:</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_weapons'>weapons</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_w'>w</span><span class='op'>|</span>
+        <span class='id identifier rubyid_output'>output</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_w'>w</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_output'>output</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\nShields:</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_shields'>shields</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+        <span class='id identifier rubyid_output'>output</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_s'>s</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_output'>output</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.36 (ruby-3.2.3).
+</div>
+
+    </div>
+  </body>
+</html>

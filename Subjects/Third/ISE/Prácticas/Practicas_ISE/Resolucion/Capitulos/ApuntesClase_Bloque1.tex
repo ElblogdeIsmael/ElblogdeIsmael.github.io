@@ -1,0 +1,460 @@
+\section{Ping y SSH}
+
+Sobre esta parte no decidí tomar apuntes en clase debido a que son conceptos vistos en la Asignatura de Fundamentos de Redes, por lo que consideré que no era necesario. De todas formas en la parte de Prácticas (Resolución) se comenta paso a paso lo que se hizo en esta parte.
+\newpage
+\section{LVM y RAID}
+
+\subsection{LVM (Logical Volume Manager)}
+
+\begin{itemize}
+    \item \textbf{Discos y particiones}:
+    \begin{itemize}
+        \item \micode{sda}: Primer disco del sistema.
+        \item Luego pueden existir \micode{sdb}, \micode{sdc}, etc.
+    \end{itemize}
+    \item Consideraciones importantes:
+    \begin{itemize}
+        \item Si el directorio \micode{/boot} se llena, el sistema podría fallar al arrancar debido a la falta de espacio disponible.
+        \item Se recomienda evitar el uso de \micode{swap} en sistemas virtualizados, ya que reduce el rendimiento.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Directorios base en Linux}
+\begin{itemize}
+    \item \textbf{/boot}: Contiene los archivos de arranque del sistema.
+    \item \textbf{/etc}: Almacena los archivos de configuración del sistema operativo.
+    \item \textbf{/dev}: Contiene archivos especiales que representan dispositivos del sistema.
+    \item \textbf{/mnt}: Punto de montaje temporal para sistemas de archivos.
+    \item \textbf{/var}: Contiene datos variables del sistema, como logs y archivos temporales. Puede crecer mucho, por lo que se recomienda monitorearlo.
+\end{itemize}
+
+\subsection{RAID (Redundant Array of Independent Disks)}
+
+RAID es una tecnología que permite combinar múltiples discos para mejorar la redundancia y/o el rendimiento del sistema de almacenamiento.
+
+\subsection{Ventajas}
+\begin{itemize}
+    \item Permite unir volúmenes de almacenamiento.
+    \item Mejora el rendimiento si los discos están en buses distintos, ya que permite acceso en paralelo.
+\end{itemize}
+
+\subsection{Niveles de RAID}
+\begin{itemize}
+    \item \textbf{RAID 0 (Striping)}:
+    \begin{itemize}
+        \item Divide los datos en bloques y los distribuye entre varios discos.
+        \item \textbf{Problema}: Si un disco falla, se pierde toda la información.
+        \item Se usa poco en la práctica debido a su baja robustez.
+    \end{itemize}
+    
+    \item \textbf{RAID 1 (Mirroring)}:
+    \begin{itemize}
+        \item Duplica los datos en dos o más discos.
+        \item Si un disco falla, el otro sigue funcionando con los mismos datos.
+        \item Aporta robustez al sistema.
+        \item \textbf{Problema}: Se paga el doble en almacenamiento.
+        \item Se usa frecuentemente en \micode{/boot} para garantizar que el sistema pueda arrancar en caso de fallo de un disco.
+    \end{itemize}
+    
+    \item \textbf{RAID 5 (Paridad distribuida)}:
+    \begin{itemize}
+        \item Se distribuyen los datos y la paridad entre todos los discos.
+        \item Si un disco falla, se pueden recuperar los datos utilizando la paridad.
+        \item \textbf{Problema}: Puede reducir el rendimiento debido al tiempo necesario para calcular la paridad.
+        \item \textbf{Ventaja}: Equilibra costos, robustez y capacidad de recuperación.
+        \item Se puede usar un disco de repuesto que entra en acción si uno falla.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Tipos de RAID}
+\begin{itemize}
+    \item \textbf{RAID por Hardware}: 
+    \begin{itemize}
+        \item Utiliza un controlador RAID físico.
+        \item Es más eficiente y transparente para el sistema operativo.
+    \end{itemize}
+    
+    \item \textbf{RAID por Software}: 
+    \begin{itemize}
+        \item Administrado por el sistema operativo.
+        \item Puede ser modificado por el administrador, lo que representa un riesgo.
+        \item Requiere más recursos del sistema.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ejercicio Opcional: Configuración de RAID1 para /var}
+
+\subsection{Objetivo}
+El objetivo es proporcionar a \micode{/var} un respaldo frente a fallos mediante la creación de un RAID1. Para ello, debemos montar un RAID1 y mover \micode{/var} dentro de este.
+
+\subsection{Pasos a seguir}
+\begin{enumerate}
+    \item \textbf{Creación de discos virtuales en la máquina virtual (MV)}
+    \begin{itemize}
+        \item Se crean dos discos: \micode{raid1} y \micode{raid2}.
+        \item Usamos \micode{lsblk} para verificar la existencia de \micode{sdb} y \micode{sdc}.
+    \end{itemize}
+
+    \item \textbf{Instalación de \micode{mdadm}}
+    \begin{itemize}
+        \item \micode{sudo dnf provides mdadm} (para verificar qué paquete lo proporciona).
+        \item \micode{sudo dnf install mdadm} (para instalarlo).
+    \end{itemize}
+
+    \item \textbf{Creación del RAID1}
+    \begin{itemize}
+        \item \micode{sudo mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sdb /dev/sdc}
+        \item Aparecerá un \textit{warning} sobre la creación de metadatos, confirmamos con "sí".
+        \item Para monitorear la sincronización del RAID:  
+              \micode{watch -n 1 more /proc/mdstat}
+        \item Luego, verificamos con \micode{lsblk}.
+    \end{itemize}
+
+    \item \textbf{Prueba de fallo de disco}
+    \begin{itemize}
+        \item Podemos simular la falla de un disco con:  
+              \micode{echo 1 > /dev/sdb}
+        \item Se observa que \micode{md0} sigue funcionando al ser un \textit{mirror}.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{LVM (Logical Volume Manager)}
+
+\subsection{Conceptos Clave}
+\begin{itemize}
+    \item \textbf{LV (Logical Volume)}
+    \item \textbf{VG (Volume Group)}
+    \item \textbf{PV (Physical Volume)}
+\end{itemize}
+
+La estructura básica de LVM es la siguiente:
+
+\begin{verbatim}
+    LV         LV   
+    '           '
+   Volumen Group  
+       '
+   '     '     '
+  pv    pv    pv  
+\end{verbatim}
+
+Un \textbf{Logical Volume (LV)} puede expandirse tomando espacio libre de otros discos o estructuras.
+
+\subsection{Visualización de LVM}
+\begin{itemize}
+    \item Para ver los discos que son de tipo LVM, usamos \micode{lsblk} en la columna de \textit{type}.
+    \item Para ver opciones de \micode{pv}, \micode{vg} y \micode{lv}, usamos \micode{tab-completion}.
+\end{itemize}
+
+\subsection{Consideraciones sobre Volumen Groups}
+Si un \textbf{Volume Group} contiene un disco magnético, un SSD y un RAID, el acceso a los datos puede no ser homogéneo. Por ello, el volumen lógico debe montarse sobre el RAID.
+
+\subsection{Creación del LVM sobre el RAID}
+\begin{enumerate}
+    \item Convertir el RAID en un Physical Volume:
+          \micode{pvcreate /dev/md0}
+    \item Crear un Volume Group llamado \micode{raid1}:
+          \micode{vgcreate raid1 /dev/md0}
+    \item Crear un Logical Volume de 10GB dentro del Volume Group:
+          \micode{lvcreate -L 10G -n rvar raid1}
+\end{enumerate}
+
+\subsection{Movimiento de /var al RAID}
+Después de crear el volumen lógico, debemos mover \micode{/var} dentro del RAID:
+
+\begin{itemize}
+    \item El nombre del volumen dentro del RAID es \micode{/dev/raid1/rvar}.
+    \item También puede aparecer como \micode{/dev/mapper/raid1-rvar}, ya que son sinónimos creados mediante enlaces simbólicos.
+\end{itemize}
+
+\subsection{Resolución de Problemas}
+
+\subsection{Problema 1: Configurar el sistema de archivos en \micode{rvar}}
+
+Actualmente, el volumen lógico \micode{rvar} está vacío y sin un sistema de archivos. Para solucionarlo, seguimos estos pasos:
+
+\begin{enumerate}
+    \item \textbf{Seleccionar un sistema de archivos:}  
+    Los sistemas de archivos recomendados son \textbf{ext4} y \textbf{xfs}, ya que son transaccionales y previenen la corrupción de datos en caso de fallos.  
+    \item \textbf{Verificar los sistemas de archivos soportados:}  
+    Ejecutamos el siguiente comando para listar los sistemas disponibles en el kernel:
+    \begin{verbatim}
+    ls /lib/modules/$(uname -r)/kernel/fs
+    \end{verbatim}
+    \item \textbf{Formatear el volumen lógico con \micode{ext4}:}
+    \begin{verbatim}
+    mkfs.ext4 /dev/mapper/raid1-rvar
+    \end{verbatim}
+\end{enumerate}
+
+\subsection{Problema 2: Montar y trasladar /var al nuevo volumen}
+
+El volumen lógico \micode{rvar} debe ser montado en el sistema y debemos trasladar \micode{/var} sin perder datos. Para ello:
+
+\begin{enumerate}
+    \item \textbf{Montar el volumen lógico:}  
+    Primero, montamos \micode{rvar} en un directorio temporal:
+    \begin{verbatim}
+    mount /dev/mapper/raid1-rvar /mnt/
+    \end{verbatim}
+    Podemos verificar con:
+    \begin{verbatim}
+    mount
+    \end{verbatim}
+    Al revisar \micode{/mnt/}, aparecerá el directorio \micode{lost+found}, indicando que el sistema de archivos está activo.
+
+    \item \textbf{Cambiar a modo mantenimiento:}  
+    Para evitar la pérdida de datos al copiar \micode{/var}, debemos entrar en el \textbf{runlevel1}, también conocido como \textbf{modo mantenimiento}. Esto se hace con:
+    \begin{verbatim}
+    systemctl isolate runlevel1.target
+    \end{verbatim}
+    Podemos confirmar el estado con:
+    \begin{verbatim}
+    systemctl status
+    \end{verbatim}
+
+    \item \textbf{Copiar los datos de /var a /mnt/}:  
+    Copiamos todo el contenido de \micode{/var} manteniendo atributos con:
+    \begin{verbatim}
+    cp -a /var/* /mnt/
+    \end{verbatim}
+
+    \item \textbf{Crear un respaldo de /var:}  
+    Antes de reemplazar \micode{/var}, hacemos una copia de seguridad por si algo falla:
+    \begin{verbatim}
+    mv /var /var_old
+    \end{verbatim}
+
+    \item \textbf{Desmontar /mnt y montar el nuevo /var:}  
+    \begin{verbatim}
+    umount /mnt
+    mkdir /var
+    mount /dev/mapper/raid1-rvar /var
+    \end{verbatim}
+    Podemos verificar con:
+    \begin{verbatim}
+    df -h
+    \end{verbatim}
+
+    \item \textbf{Hacer el montaje permanente en \micode{/etc/fstab}:}  
+    Si reiniciamos ahora, la configuración se perdería. Para evitarlo, editamos el archivo \micode{/etc/fstab} y agregamos la siguiente línea:
+    \begin{verbatim}
+    /dev/mapper/raid1-rvar      /var       ext4     defaults     0 0
+    \end{verbatim}
+    
+    \item \textbf{Probar la configuración antes de reiniciar:}  
+    \begin{verbatim}
+    mount -a
+    systemctl daemon-reload
+    mount
+    \end{verbatim}
+    Si todo está correcto, reiniciamos el sistema.
+\end{enumerate}
+
+\subsection{Interpretación de \micode{lsblk}}
+
+El comando \micode{lsblk} nos permite visualizar la estructura de almacenamiento del sistema. Es importante identificar:
+
+\begin{itemize}
+    \item \textbf{Discos físicos y particiones}: Aparecen como \micode{sda}, \micode{sdb}, \micode{sdc}, etc.
+    \item \textbf{Volúmenes lógicos}: Se muestran bajo \micode{/dev/mapper/}.
+    \item \textbf{SR0}: Indica la unidad de CD-ROM.
+\end{itemize}
+
+\newpage
+\section{Firewall + SSHD}
+
+Ya sabemos de otras Asignaturas que un \textbf{firewall} es un sistema que controla el tráfico de red, permitiendo o bloqueando ciertas conexiones. En Linux, el firewall más común es \textbf{iptables}.
+
+El comando que tenemos que aprender a gestionar es \micode{firewall-cmd}, tiene diversas opciones como status, state. Otra forma para ver si esta arrancado es \micode{systemctl status firewall}.
+
+Otras opciones: \micode{firewall-cmd --list-all}, en este comando debemos de ver los filtros que estan definidos, en services podemos ver los servicios que están habilitados.
+
+Con sudo firewall-cmd --add-service=http, cuando lo listo otra vez, se añade el puerto http en la opción services. Cuando se hace con firewall-cmd, se hace dinámica, por lo que si reiniciamos esto se pierde. Para que se quede debemos de ejecutar el comando \micode{sudo fire firewall-cmd --runtime-to-permanent}. De forma alternativa, podemos ejecuar primero la opción \micode{--permanent} y luego \micode{--add-port=443/http}, pero si lo listamos no lo lleva a memoria, no hay ninguna opción que lo deje permanente y que lo lleve a memoria. Tenemos dos opciones o trabajar con servicios o llevarlo a memoria.
+
+Si queremos conocer los servicios, podemos ejecutar \micode{firewall-cmd --get-services}.
+
+Los firewalls en Linux son muy eficientes debido a que en este SO se trabaja con servicios, por lo que se puede controlar el tráfico de forma muy precisa. Al implementarse a nivel de Kernel ayuda a que sea muy eficiente.
+\textit{No se va a preguntar nada sobre iptables}.
+
+Debemos de usar el programa \micode{nmap} ya que nos dice que puertos están abietos en un servidor. Para instalarlo, usamos \micode{sudo dnf install nmap}. En el guión debemos de mirar la referenia número 31.
+
+\subsection{Ejercicio Opcional}
+
+Debemos de instalar un servicio HTTP, se recomienda Apache. Podemos escanear los 100 puertos mas usados con el comando \micode{nmap -F localhost}. Para instalar Apache, usamos \micode{sudo dnf install httpd}. Para arrancar el servicio, usamos \micode{sudo systemctl start httpd}. Para comprobar que está arrancado, usamos \micode{sudo systemctl status httpd}. Para que arranque en el inicio, usamos \micode{sudo systemctl enable httpd}. Para comprobar que está escuchando en el puerto 80, usamos \micode{sudo ss -tulnp | grep 80}.
+
+Debemos de poder acceder desde el navegador de la máquina anfitrión.
+
+\subsection{SSH}
+
+Es un programa de terminal remoto, ya lo hemos usado en Asignaturas anteriormente. Antes se usaba Telnet, en este se especifica la dirección IP y el puerto, pero no era seguro, por lo que cualquier man in the middle podía interceptarlo y suplantar la identidad. Además, todas las respuestas que se producían eran en abierto, los \micode{cat},... En cambio, SSH es seguro, ya que se cifra la información. Este hace lo mismo que Telnet, pero de forma segura. Se recomienda hacerlo \micode{ssh usuario@ip}. O bien sustituir la IP por el nombre del dominio. Para cerrar la conexión, usamos \micode{exit}. 
+
+Ya hemos estudiado en otras Asignaturas el tema de criptografía en cuanto al cifrado simétrico y asimétrico. En especial, en Fundamentos de Redes. Por si acaso, vamos a hacer una pequeña introducción. Tenemos dos tipos de cifrado:
+\begin{itemize}
+    \item \textbf{Cifrado simétrico}: Se usa una clave para cifrar y descifrar. El problema es que si alguien intercepta la clave, puede descifrar todo. Por ello, se usa poco.
+    \item \textbf{Cifrado asimétrico}: Se usa una clave pública para cifrar y una privada para descifrar. La clave pública se puede compartir, pero la privada no. Se usa para firmar documentos, ya que si se cifra con la clave privada, solo se puede descifrar con la clave pública.
+\end{itemize}
+
+Debemos de destacar los conceptos de \textbf{autenticación} y \textbf{autorización}. La autenticación es el proceso de verificar la identidad de un usuario, mientras que la autorización es el proceso de verificar si un usuario tiene permiso para acceder a un recurso. Además, del uso de certificados digitales, que son un tipo de credencial que se usa para autenticar la identidad de un usuario o un servidor. Este se consigue a través de una entidad certificadora, usando una clave pública y privada (Big Brother).
+
+Algoritmos :
+\begin{itemize}
+    \item Llave simétrica: DES(tenemos dos llaves, una que es privada y otra que es pública, lo que se cifra con la privada solo se puede descifrar con la pública, por dentro se gestiona en base a números primos muy grandes).
+    \item Llave asimétrica: RSA (Se guarda la privada, mientras que la pública se comparte, estando incluso compartida en la propia web, de manera que la persona que quiera compartir contigo usa la pública para codificar el texto y te lo manda codificado, de esta manera si hay un man in the middle lo ve cifrado, solo la persona con la llave privada puede ver su contenido).
+\end{itemize}
+
+Otro uso de la llave privada es la \textit{firma}, de esta manera se garantiza la confidencialidad y la autenticación del mensaje debido a que es confidencial debido a que solo se puede descifrar con la llave pública, y autenticidad debido a que solo se puede cifrar con la llave privada, la cual solo conoce esa entidad.
+
+Firma Digital: Usando Hash SHA256, se cifra con la llave privada y se envía el mensaje cifrado y el mensaje en abierto. La persona que recibe el mensaje cifrado con la llave privada, lo descifra y lo compara con el mensaje en abierto, si son iguales, se garantiza la autenticidad del mensaje. Ejemplo de ello puede ser el minado de monedas como es el Bitcoin. Además, otro ejemplo de ello es cuando descargamos algo y podemos verificar que es el del propio distribuidor usando el Hash que me proporciona. \textit{Por ende, podemos cosiderar que un HASH + llave privada es el certificado digital}. Para asegurarnos de que la llave pública es de quien dice ser debemos de ver el certificado digital, como hemos mencionado anteriormente. Este proceso para cuando encontramos un certificado digital que es de confianza, ya que si no lo es, no podemos asegurar que la llave pública sea de quien dice ser. Para ver los certificados, vemos que en Firefox, accedemos a settings y buscamos \textit{certificados}, podemos ver las entidades que nuestro browser reconoce.
+
+\begin{tcolorbox}[colback=yellow!10!white, colframe=red!75!black, title=Advertencia]
+El tema de certificados y demás al ser materia de Fundamentos de Redes, no se va a preguntar en el examen.
+\end{tcolorbox}
+
+Nos conectamos a un ordenador remoto mediante ssh, de esta manera le decimos que nos queremos conectar, el te envía la llave pública, es decir, se va a su configuración, recupera la llave y te la envía. A continuación, le enviamos nuestras creedenciales cifradas con la llave pública, y cuando le llega, las descifra con la llave privada y comprueba si son correctas. Si lo son, nos deja entrar. Si no lo son, nos dice que no podemos entrar. Además, de esta manera se prevee que un \textit{man-in-the-middle} no pueda interceptar las credenciales.
+
+Podemos meterle una entrada en el fichero de host, de esta manera cuando nos conectamos a un servidor, nos conectamos a una IP, pero si le metemos una entrada en el fichero de host, le decimos que esa IP es un nombre, de esta manera cuando nos conectamos a ese nombre, nos conectamos a esa IP. Para ello, debemos de editar el fichero \micode{/etc/hosts} y añadir la IP y el nombre del servidor, así es más cómdo, para ello en Linux es \micode{ssh usuario@nombre}. 
+
+Cuando ejecutamos el comando para conectarnos, nos imprime un mensaje con el HASH, y nos pregunta que si nos lo creemos, si en vez de una llave pública esta reconocida en nuestras llaves y ve que tenemos el certificado no nos preguntaría. En todos lo equipos se crea el directorio ssh en home, dentro de este tenemos un archivo que se llama known\_hosts, el cual contiene las llaves públicas de los ordenadores que ya has confiado, de manera que no nos va a preguntar cuando nos conectemos de nuevo, si queremos que en la primera vez tampoco pregunta la copiamos y pegamos, entre otras opciones. \textit{Nota: Por defecto se crea ese directorio cuando se conetca por ssh.}
+
+Este proceso es muy costos en términos de cómputo, por lo que se usa lo más mínimo posible. Por esto se usa un proceso de handshaking, de esta manera el equipo le manda una propuesta de llave simétrica y de esta manera ya se usa en adelante, ya que el uso de clave privada y pública es muy costoso.
+
+¿Cómo puedo acceder sin contraseña? Para ello nos autenticamos con llave pública y llave privada. En el caso de que decidamos hacerlo asi cuando le mandamos que soy 'nombre', recupera la llave de el directorio .ssh y le manda un mensaje de firmame esto con la clave privada de dicho usuario, y de esta manera se asegura de que efectivamente es el usuario que dice ser. Además, en el directorio home solo puede escribir el usuario y el root.
+
+En la MV:
+
+\begin{itemize}
+    \item ssh-keygen: crea la llave privada dentro de home, luego nos pregunta si queremos protegerla con contraseña, si no queremos, le damos a enter, \textit{pero siempre debe de hacerse.} Luego si nos vamos al directorio vemos dos documentos la llave privada y la pública. Si queremos que no nos pregunte siempre la contraseña, usamos el comando \micode{ssh-agent}, de esta manera el la escribe por ti, hasta que usamos el comando \micode{exit}, en este caso se olvida.
+\end{itemize}
+
+Para usar la pública:
+\begin{itemize}
+    \item Accedemos al directorio /home/.ssh 
+    \item usamos el comando ssh-copy-id usuario@{ip/hostname} (copia mi identidad, se puede hacer con ctrl+c/v), y luego nos hace una prueba para que le demostremos que de verdad somos el usuario al que nos queremos conectar, para ello le mandamos la contraseña.
+    \item Luego comprobamos que podemos entrar sin contraseña.
+    \item En la máquina donde nos hemos conectado, vemos un fichero llamado \textit{id\_rsa.pub}, y si lo listamos debe de ser el mismo que la clave pública de la máquina inicial, desde la que nos conectamos a esta.
+\end{itemize}
+
+\textit{Nota: El directorio .ssh se crea en el home cuando es el cliente, mientras que en el servidor se crea en el /etc/ssh, también podemos crearlo nosotros a priori.}
+
+Ahora podemos ejecuar un comando remoto, por ejemplo: \micode{ssh usuario@ip comando}, de esta manera se ejecuta el comando en la máquina remota. En este punto comienza la automatización de configuración remota. \textit{Ansible son scripts pero ejecutados de manera remota.} Además, podemos copiar archivos usando el comando scp (secure copy), de esta manera se copia el archivo de una máquina a otra. \textit{Nota: scp es un comando de ssh.} El comando es \micode{scp origen destino}, por ejemplo: \micode{scp /home/usuario/archivo usuario@ip:/home/usuario/}, de esta manera se copia el archivo de la máquina local a la remota. Si queremos copiar un directorio, usamos el comando \micode{scp -r origen destino}. Además podemos conectarnos mediante \textit{sftp} (secure file transfer protocol), de esta manera se conecta a la máquina remota y podemos copiar archivos de manera interactiva. \textit{Nota: sftp es un comando de ssh.} Para conectarnos, usamos el comando \micode{sftp usuario@ip}, y luego podemos usar los comandos \micode{put} y \micode{get} para copiar archivos de una máquina a otra.
+
+\subsection{Ejercicio Opcional}
+
+En el ejercicio debemos de dar acceso mediante ssh usando la llave pública y privada, debemos de modificar el puerto para conectarnos en vez del 22 para el ssh usar otro que sea mayor que el 1024, para ello podemos asegurarnos de que no estamos colisionando con un puerto conocido buscando en Innternet.
+
+\begin{enumerate}
+    \item Accedemos al contenido del demonio del ssh que se encuentra en /etc/ssh, una vez dentro nos pone el comando que debemos de ejecuar \micode{semanage...} (aparece en el fichero de ssh de la máquina Rocky), para que se apliquen los cambios debemos de reiniciar el servicio, para ello usamos el comando \micode{sudo systemctl restart sshd} o bien reiniciar la máquina.
+    \item Además debemos de modificar el firewall para permitir ese puerto, para ello usamos el comando \micode{sudo firewall-cmd --add-port=puerto/tcp --permanent}, y luego reiniciamos el servicio con \micode{sudo systemctl restart firewalld}.
+    \item Luego debemos de copiar la llave pública a la máquina remota, para ello usamos el comando \micode{ssh-copy-id usuario@ip}, y luego nos pide la contraseña, una vez introducida, ya podemos conectarnos sin contraseña.
+    \item Para comprobar que todo está correcto, usamos el comando \micode{ssh usuario@ip -p puerto}, de esta manera nos conectamos a la máquina remota.
+\end{enumerate}
+
+Con el parámetro -p le especificamos el puerto al que nos queremos conectar, de esta manera nos conectamos al puerto que hemos especificado, ya que de manera predeterminada se conecta al puerto 22.
+
+\section{Automatización con Ansible}
+
+Por defecto Ansible ya viene instalado en la mayoría de las distribuciones de Linux. Además, por defecto al instalar Ansible se instala Python y SSH. Para instalarlo debemos de usar el comando \micode{sudo dnf install ansible}. Para comprobar que está instalado, usamos el comando \micode{ansible --version}, o bien mediante el comando \micode{sudo dnf list installed | grep -i ansible}. Además, podemos ver la documentación de Ansible en la página oficial de Ansible. Su configuración se encuentra en /etc/ansible, \textit{este solo se instala en el controlador ya que es desde donde se maneja.}
+
+En la configuración de /etc/ansible, podemos cambiar varios parámetro, como es el caso del número de hebras que usa o número de procesos que se ejecutan de manera pararela, en este caso suele estar por defecto en 5 hebras.
+
+En nuestro directorio base\footnote{Accedemos con el comando \micode{cd}.}, tenemos el archivo \micode{.ansible.cfg}, el cual podemos editar siendo los cambios aplicados de la misma manera que si lo hiciéramos en el archivo de configuración de /etc/ansible. Por defecto viene vacío, pero tiene un comando para generar la configuración por defecto, el cual es \micode{ansible-config dump}. Además, podemos ver la configuración de Ansible con el comando \micode{ansible-config list}.
+
+En cuanto al formato que se usa en Ansible, cabe destacar que se establecen etiquetas, como puede ser \micode{web server}, de manera que cuando ejecutemos Ansible, podemos elegir esta etiqueta para que lo lance con lo que esté definido debajo de dicha etiqueta en el archivo de configuración.
+
+Entramos en ansible con \micode{cd .ansible}, y debemos de definir etiquetas para entrar a los hosts que se definen en este archivo de configuración. En este archivo se definen los hosts. 
+
+Una de las referencias importante es la guía sobre AD-HOC y la lista de todos los módulos que podemos ejecutar\footnote{Referencias 42 y 43 del guión.}. LOs módulos que vienen po defecto son los \textit{ansible.builtin}. El pinf de Ansible, actúa de manera distinta, lo que hace es que comprueba si se tiene acceso al servidor al que se hace el ping y comprueba si este tiene pyhton instalado. Solo se le pasa un parámetro.
+
+Para ejecutar un comando AD-HOC\footnote{Solo disponible en la controladora y no en las manejadas.} es con \micode{ansible ansi_control -m ping},este comando debe de darnos correcto si efectivamente puede ejecutar el comando de manera correcta. Cabe destacar que ansible\_control debe de estar en la configuración de ansible.
+Otro de los comandos a destacar es: \micode{ansible ansible_control -m ping -a 'data = "Hola Mundo"'}, de nuevo \textbf{cabe destacar que el comando ansi\_control esta definido en la configuración de ansible}.
+
+En clase estamos ejecutando comando con lo anteriormente mencionada, podemos destacar que si intentamos ejecutar comandos de sudo da error, para ello debemos de añadir \micode{--become}, pero nos pide la contraseña, esto no nos interesa ya que no queremos que nos pida la contraseña todas las máquinas.
+
+Para ello nos vamos al fichero /etc/ y ejecutamos \micode{more sudo}. en .ansible las frases con \% delante es un grupo, vemos una línea que nos lo permite para todos (todos los wheels), pero esto es \textit{una mala práctica.}
+
+Así que en vez de eso, añadimos la línea \micode{david  ALL=(ALL)  NOPASSWD:ALL}, debo de salir y volver a entrar, porque puede recordar sesiones anteriores de sudo. En este punto si nos deja entrar usando \micode{--become} sin poner la contraseña.
+
+Con el comando \micode{ansible ansible-inventory --graph} vemos las máquinas que tenemoso bien podemos ejecutar \micode{ansible ansible-inventory -i <ruta fichero > --graph}.
+
+Para más información sobre Ansible, podemos visitar la documentación oficial en \url{https://docs.ansible.com}. Aquí encontraremos guías, referencias y ejemplos que nos ayudarán a entender y utilizar Ansible de manera efectiva.
+
+O bien acceder a esta url: \url{https://docs.ansible.com/ansible/latest/index.html} y sobretodo a esta \url{https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html}.
+
+Para ejecutar un archivo .yaml es \micode{ansible -playbook -i <ruta fichero> <archivos extra>}.
+
+El fichero basics.yaml que se usa en clase como ejemplo es:
+\begin{lstlisting}[style=yamlstyle]
+servers:
+  hosts:
+    ansi_control:
+      ansible_host: 192.168.56.101
+      ansible_user: david
+      ansible_port: 22232
+    ansi01:
+      ansible_host: 192.168.56.111
+      ansible_user: admin
+    ansi02:
+      ansible_host: 192.168.56.112
+      ansible_user: admin
+  vars:
+    ansible_port: 22
+
+unlagged:
+  hosts:
+    ansi01:
+    ansi02:
+\end{lstlisting}
+
+Debemos de consultar las claves especiales en la documentación. La forma de depurar es comentar todo e ir ejecutando líneas y descomentando.
+
+Cabe la posibilidad de hacer playbooks parametrizables.
+
+Uno parte de los playbooks que se usan en clase es:
+
+\begin{lstlisting}[style=yamlstyle]
+- name: Esta el usuario alguien ahí?
+  ansible.builtin.shell:
+    cmd: who
+  register: who_results (guarda el resultado del comando who en la variable who_results)
+
+- name: Print Connected
+  ansible.builtin.debug:
+    msg: "Connected list: {{ who_results.stdout }}"
+\end{lstlisting}
+
+Tenemos que entregar un directorio con los ficheros\footnote{Básicamente todos los que usemmos.}: \begin{itemize}
+    \item basics.yaml 
+    \item ejecutaPlaybook.sh
+    \item hosts.yaml
+    \item vars.yaml: variables.
+\end{itemize}
+
+
+\subsection{Ejercicio Obligatorio}
+
+En cuanto al ejercicio que debemos de \textbf{entregar}, el cambio que debemos de hacer es en /etc/sshd/.conf, ahí cambiamos la línea de AccessRoot y lo ponemos con el atributo \textit{yes}.
+
+Los pasos son\footnote{Todo es dentro del playbook.}:
+\begin{enumerate}
+    \item Crear un nuevo usuario llamado “admin” que pueda ejecutar comandos privilegiados sin contraseña. \textit{Añadir usuario en las tasks de ansible y lo añadimos a sudoers}.
+    \item Dar acceso por SSH al usuario “admin” con llave pública. \textit{Debemos de enviar la llave pública, buscando un módulo de ansible que lo hace.}
+    \item Crear el grupo “wheel” (si no existe) y permitir a sus miembros ejecutar sudo. \textit{Existe, porque usamos Rocky, ausumimos que no sabemos que máquina es.} Si ejecutamos el mismo comando varias veces con los mismos parámetros el resultado final siempre es el mismo.
+    \item Añadir una lista variable de usuarios (se proporcionará un ejemplo con al menos dos), añadiéndolos al grupo “wheel” y concediéndoles acceso por SSH con llave pública. La sacamos en el directorio .ssh y en el fichero id\_pub.
+    \item Deshabilitar el acceso por contraseña sobre SSH para el usuario root.
+\end{enumerate}
+
+Estos quedan con un usuario admin que puede ejecutar comandos privilegiados sin contraseña.
+
+Con esto podemos pasar el 2º playbook.
+
+Debemos de realizar el ejercicio correspondiente a la creación de la web e instalación del servidor web
+
+Un ejercicio interesante para comenzar es con \micode{ansible ansi_control -a "poweroff" --become}, ya que solo se apaga si esta todo correcto.
+
+Para depurarlo si lo rechaza, debemos de:
+\begin{enumerate}
+    \item Me conecto con ssh.
+    \item Probamos haciendo \micode{poweroff} con ssh, entre otras opciones.
+\end{enumerate}
+

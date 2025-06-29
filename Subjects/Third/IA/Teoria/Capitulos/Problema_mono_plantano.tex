@@ -1,0 +1,54 @@
+\section{Problema del mono y el plátano}
+
+\subsection*{Descripción del Problema}
+Un mono se encuentra en la puerta de una habitación. En el centro de la habitación hay un plátano colgado del techo, pero el mono no puede alcanzarlo desde el suelo. En la ventana de la habitación hay una caja que el mono puede mover y sobre la que puede subirse para alcanzar el plátano.
+
+\subsection*{Acciones Disponibles}
+El mono puede realizar las siguientes acciones:
+\begin{itemize}
+    \item Desplazarse entre la puerta, el centro y la ventana.
+    \item Empujar la caja mientras se mueve.
+    \item Subirse a la caja.
+    \item Coger el plátano.
+\end{itemize}
+
+\subsection*{Representación de Estados}
+El estado se representa mediante una tupla $(X, Y, W, Z)$ donde:
+\begin{itemize}
+    \item $X$: Posición del mono en la habitación (\texttt{puerta}, \texttt{centro}, \texttt{ventana}).
+    \item $Y$: Situación del mono respecto a la caja (\texttt{suelo}, \texttt{caja}).
+    \item $W$: Posición de la caja en la habitación (\texttt{puerta}, \texttt{centro}, \texttt{ventana}).
+    \item $Z$: Posesión del plátano (\texttt{tiene}, \texttt{no\_tiene}).
+\end{itemize}
+\newpage
+\subsection*{Solución}
+La secuencia de acciones para que el mono consiga el plátano es la siguiente:
+
+\begin{enumerate}
+    \item Estado inicial:
+    \begin{equation}
+    \text{estado}(\text{puerta}, \text{suelo}, \text{ventana}, \text{no\_tiene})
+    \end{equation}
+    
+    \item Andar a la ventana:
+    \begin{equation}
+    \text{estado}(\text{ventana}, \text{suelo}, \text{ventana}, \text{no\_tiene})
+    \end{equation}
+    
+    \item Empujar la caja al centro:
+    \begin{equation}
+    \text{estado}(\text{centro}, \text{suelo}, \text{centro}, \text{no\_tiene})
+    \end{equation}
+    
+    \item Subir a la caja:
+    \begin{equation}
+    \text{estado}(\text{centro}, \text{caja}, \text{centro}, \text{no\_tiene})
+    \end{equation}
+    
+    \item Coger el plátano:
+    \begin{equation}
+    \text{estado}(\text{centro}, \text{caja}, \text{centro}, \text{tiene})
+    \end{equation}
+\end{enumerate}
+
+Con esta secuencia de acciones, el mono logra su objetivo de obtener el plátano.

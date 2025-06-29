@@ -1,0 +1,122 @@
+% \section{Lenguajes de una BD}
+
+% Recomendación ANSI/SPARC. Se propone un lenguaje de base de datos. En este se debe de definir, controlar y manipular los datos. Se denomina sub-lenguaje de la base de datos al que esta implementado por el propio SGBD. Tenemos distintas partes:
+% \begin{itemize}
+%     \item DDL: definición de estructura de datos.
+%     \item DML: modificación, borrado y consulta de datos, además, se permite consultar los esquemas definidos de la Base de Datos.
+%     \item DCL: gestiona los requisitos de acceso a los datos y otro tipo de tareas de administración(creación de usuarios,...).
+% \end{itemize}
+
+% Este grupo propone que haya cada uno de los anteriores en cada uno de los niveles de la arquitectura. Esto no tiene mucho sentido. Esto se debe a que no tiene sentido tener alguno de los anteriores en determinados niveles. Si meto el DDL en el nivel interno, estoy dependiendo del nivel interno de la máquina.
+
+% En la realidad ha surgido la idea de que todo sea un estándar, pero cada fabricant lleva sus propias estrategias. Hay diferentes versiones de SQL y los SGBD han ido proporcionando soporte.
+
+% Acto seguido, nos centramos en el desarrollo de aplicaciones. Son de propósito general, ya que usan lenguajes como C++, Java,... Se usan diversas herramientas como es Oracle APEX, Sysbase PowerBuilder,... Con esto se proporciona un procesamiento avanzado de datos y una gestión eficaz de la interfaz del usuario.
+
+% Debemos de establecer un mecanismo que nos permite establecer una comunicación entre el lenguaje anfitrión y el de datos. Esto se conoce como \textit{acoplamiento}. Distinguimos dos categorías.
+% \begin{itemize}
+%     \item Débilmente acoplados. Lenguajes de propósito general y en este caso el programador puede distinguir entre sentencias del lenguaje anfitrión y las dispuestas por la propia BD.
+%     \item Fuertemente acoplados. Lenguajes y herramientas de propósito específico. Se parte del DSL como elemento central y se le van incorporando características para facilitar el desarrollo de apliaciones.
+% \end{itemize}
+
+% Hay varias alternativas para implementar el acoplamiento débil:
+
+% \begin{itemize}
+%     \item \textbf{Usar APIs de acceso a la BD}. Acceder a la BD desde el código fuente del lenguaje anfitrión.
+%     \item \textbf{DSL inmerso en el código fuente del lenguaje anfitrión.} Se escribe código híbrido.
+% \end{itemize}
+
+% Pasa lo mismo con el acoplamiento fuerte:
+
+% Las propuestas son ya propietarias, o bien la ejecución de Java sobre una máquina virtual que esta en el propio SGBD.
+
+% También han aparecido numerosos entornos de desarrollo que son específicos para las aplicaciones de gestión.
+
+
+\section{Relación de Ejercicios T2}
+
+\begin{enumerate}
+    \item Explicar la relación existente entre los niveles de una base de datos y el concepto de independencia.
+    
+
+    La relación entre los niveles de una base de datos y el concepto de independencia radica en la estructura de tres niveles propuesta por el modelo ANSI/SPARC, que busca separar la forma en que los datos se almacenan, representan y acceden. Estos niveles son:
+    \begin{itemize}
+        \item \textbf{Nivel interno (físico)}: Describe cómo se almacenan los datos físicamente en el sistema de almacenamiento.
+        \item \textbf{Nivel conceptual}: Proporciona una vista abstracta de la base de datos, definiendo la estructura de los datos y sus relaciones sin preocuparse por los detalles de almacenamiento.
+        \item \textbf{Nivel externo (vista de usuario)}: Presenta a los usuarios una versión personalizada de los datos, mostrando solo la información relevante para ellos.
+    \end{itemize}
+
+    \textbf{Independencia de los datos}
+
+    Este concepto se divide en dos tipos:
+    \begin{itemize}
+        \item \textbf{Independencia lógica de los datos}: Se refiere a la capacidad de modificar el esquema conceptual sin afectar los esquemas externos. Por ejemplo, se pueden agregar nuevas entidades o atributos sin necesidad de cambiar la forma en que los usuarios ven los datos.
+        \item \textbf{Independencia física de los datos}: Permite cambiar la forma en que los datos están almacenados (como cambiar de disco duro o modificar estructuras de almacenamiento) sin afectar la forma en que los datos son representados en los niveles superiores.
+    \end{itemize}
+
+    \textit{Podemos concluir con que la arquitectura de tres niveles facilita la independencia de datos, permitiendo modificar estructuras internas o lógicas sin afectar la interacción del usuario con la base de datos.}
+
+    \item Explicar la diferencia entre esquema externo y aplicaciones de usuario.
+    
+
+    La diferencia entre el esquema externo y las aplicaciones de usuario radica en su propósito y función dentro del sistema de bases de datos.
+
+    \subsubsection*{Esquema Externo}
+
+    El esquema externo representa la vista de los datos desde la perspectiva de los usuarios. Cada usuario o grupo de usuarios puede tener un esquema externo diferente, dependiendo de sus necesidades y permisos. Se define a partir del esquema conceptual y no afecta la estructura interna de la base de datos.
+
+    Por ejemplo, un \textit{cajero} en un banco solo puede ver los saldos y transacciones de clientes, mientras que un gerente puede acceder a reportes financieros más detallados.
+
+    \subsubsection*{Aplicaciones de Usuario}
+
+    Las aplicaciones de usuario son los programas o interfaces que interactúan con la base de datos para realizar operaciones como consultas, inserciones, modificaciones o eliminaciones de datos. Estas aplicaciones pueden utilizar SQL, interfaces gráficas o APIs para comunicarse con la base de datos y presentar los datos según el esquema externo definido para el usuario.
+
+    \subsubsection*{Diferencia Clave}
+
+    \begin{itemize}
+        \item El esquema externo es una estructura lógica que define qué datos puede ver un usuario y cómo están organizados.
+        \item Las aplicaciones de usuario son herramientas o programas que permiten interactuar con la base de datos utilizando el esquema externo para presentar la información.
+    \end{itemize}
+
+    \textit{El esquema externo define la visión restringida de los datos para cada usuario, mientras que las aplicaciones de usuario son los medios mediante los cuales se accede y manipulan esos datos.}
+
+    \item Explica el motivo por el que, a tu juicio, no se han desarrollado DDLs a nivel interno.
+    
+
+    No se han desarrollado DDLs a nivel interno porque la gestión del almacenamiento físico \textit{es responsabilidad del SGBD}. Esto garantiza eficiencia, independencia de datos, seguridad y portabilidad, evitando que los usuarios interfieran con la optimización del sistema.
+
+    \item Explica el motivo por el que, a tu juicio, no se han desarrollado DMLs a nivel externo.
+    
+    No se han desarrollado DDLs a nivel interno porque el SGBD gestiona automáticamente el almacenamiento físico para optimizar rendimiento, garantizar independencia de datos y evitar configuraciones ineficientes por parte del usuario.
+
+    \item Buscar tres ejemplos de lenguajes de cuarta generación. Indicar sus objetivos o funciones.
+    \item ¿Cuál es el enfoque actual del concepto de lenguaje anfitrión? Dar ejemplos de lenguajes anfitrión.
+    
+    El lenguaje anfitrión es un lenguaje de programación que integra comandos SQL para interactuar con una base de datos. Actualmente, el enfoque se centra en la integración fluida con los SGBD y la seguridad en la ejecución de consultas.
+
+    Ejemplos: Java (JDBC), Python (SQLAlchemy), PHP (PDO), C\# (Entity Framework).
+
+    \item ¿Qué elementos conciernen al nivel interno de una base de datos?
+    
+    Incluye estructuras físicas de almacenamiento, organización de archivos, índices, métodos de acceso y estrategias de optimización para el almacenamiento y recuperación de datos.
+
+    \item ¿Qué cuestiones debe cubrir a tu juicio una buena herramienta de gestión privilegios de usuarios?
+    
+    \begin{enumerate}[label=\alph*)]
+        \item Control de acceso (roles y permisos).
+        \item Control y registro de actividad.
+        \item Administración centralizada.
+        \item Compatibilidad con autenticación externa.
+        \item Facilidad de uso y escalabilidad.
+    \end{enumerate}
+
+    \item Explicar las ventajas de la arquitectura cliente/servidor a tres niveles.
+    
+    \begin{enumerate}[label=\alph*)]
+        \item Escalabilidad: Mejora el rendimiento al distribuir la carga.
+        \item Seguridad: Separa la lógica de negocio y el acceso a datos.
+        \item Mantenimiento fácil: Cambios en una capa no afectan las demás.
+        \item Optimización de recursos: Reduce la dependencia del cliente en el procesamiento.
+    \end{enumerate}
+
+\end{enumerate}

@@ -1,0 +1,454 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{tcolorbox}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{graphicx}
+
+
+
+% Márgenes
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+% Cabecera y pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Formulario de ISE}
+\lhead{Asignatura: Ingeniería de Servidores}
+\rfoot{\thepage}
+%\lfoot{Autor: Ismael Sallami Moreno}
+
+\title{\textbf{Formulario de ISE}} 
+\author{Ismael Sallami Moreno}
+\date{\small Universidad de Granada\\ Doble Grado en Ingeniería Informática y ADE}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\vspace{1cm}
+
+\section*{Introducción a la Ingeniería de Servidores}
+
+\textbf{Ganancia en velocidad de la máquina A respecto de B}
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+$$
+S_B(A) = \frac{v_A}{v_B} = \frac{t_B}{t_A} \quad \quad \triangle v_{A,B}(\%) = \frac{v_A-v_B}{v_B} \times 100 = (S_A(B) - 1) \times 100
+$$
+\end{tcolorbox}
+
+\textbf{Coste y relación prestaciones/coste}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    $$
+    \frac{\frac{Prestaciones_A}{Coste_A}}{\frac{Prestaciones_B}{Coste_B}} = \frac{\frac{v_A}{Coste_A}}{\frac{v_B}{coste_B}} \quad \text{con $v_a$ (análogo para $v_B$)} \rightarrow v_A = \frac{1}{t_A} \quad \text{``mayor = mejor''}
+    $$
+    \end{tcolorbox}
+
+
+\textbf{Ley de Amdahl}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        T_m = (1-f) \times T_0 + \frac{f\times T_0}{k} \\
+        S \equiv S_{original}(mejorado) = \frac{v_m}{v_0} = \frac{t_0}{t_m} = \frac{T_0}{(1-f) \times T_0 + \frac{f\times T_0}{k}} \\
+        \text{Ley de Amdahl} \rightarrow S = \frac{1}{1-f+\frac{f}{k}}
+    \end{align*}
+    \end{tcolorbox}
+    Siendo:
+\begin{itemize}
+    \item k: veces que se mejora.
+    \item f: fracción donde se aplica la mejora.
+\end{itemize}
+
+Puede darse el caso de que tengamos varias mejoras:
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    $$
+    S = \frac{1}{(1-\sum_{i=1}^n f_i)+ \sum_{i=1}^n \frac{f_i}{k_i}}
+    $$
+    \end{tcolorbox}
+
+
+
+\section*{Monitorización}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    $$
+    Sobrecarga_{Recurso}(\%) = \frac{\text{Uso del recurso por parte del monitor}}{\text{Capacidad total del recurso ó periodo de activación}} \times 100 
+    $$
+    \end{tcolorbox}
+
+
+\section*{Análisis Comparativo de Rendimiento}
+
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    $$
+    T_{ejec} = NI \times CPI \times T_{reloj} = \frac{NI \times CPI}{ f_{reloj}}
+    $$
+    \end{tcolorbox}
+
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    $$
+    MIPS = \frac{NI}{T_{ejec}\times 10^6} = \frac{f_{reloj}}{CPI \times 10^6}
+    $$
+    \end{tcolorbox}
+
+
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    $$
+    MFLOPS = \frac{\text{Operaciones en coma flotante realizadas}}{T_{ejec} \times 10^6}
+    $$
+    \end{tcolorbox}
+
+
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    $$
+    \text{índice SPEC} = \sqrt[n]{\frac{t_1^{REF}}{t_1}\times \frac{t_2^{REF}}{t_2}\times \ldots \times \frac{t_n^{REF}}{t_n}} = \sqrt[n]{\prod_{i=1}^n \frac{t_i^{REF}}{t_i}}
+    $$
+    \end{tcolorbox}
+    
+    \textbf{Media Aritmética}
+
+
+    
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    $$
+    \text{Media Aritmética} = \overline{t}= \frac{\sum_{i=1}^n x_i}{n} = \frac{x_1+x_2+\ldots+x_n}{n}
+    $$
+    \end{tcolorbox}
+
+    \textbf{Media Aritmética Ponderada}
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    $$
+    \overline{t_W} =  \sum_{k=1}^{n} w_K \times t_K \quad \text{donde} \quad \sum_{k=1}^{n} w_k = 1
+    $$
+    \end{tcolorbox}
+
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+        $$
+        w_K \equiv \frac{C}{t_K^{REF}} \Rightarrow C = \frac{1}{\sum_{k=1}^{n}\frac{1}{t_K^{REF}}} \quad \text{Siendo C una constante de normalización}
+        $$
+        \end{tcolorbox}
+
+    \textbf{Media Geométrica}
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    $$
+    \text{Media Geométrica} = \sqrt[n]{x_1 \times x_2 \times \ldots \times x_n} = \sqrt[n]{\prod_{i=1}^n x_i}
+    $$
+    \end{tcolorbox}
+
+    \textbf{Propiedad del índice SPEC y comparación entre máquinas}
+
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \textbf{Propiedad:} Cuando las medidas son ganancias en velocidad (\textit{speedups}) respecto a una máquina de referencia, el índice SPEC mantiene el mismo orden en las comparaciones independientemente de la máquina de referencia elegida (siempre que sea la misma en todos los casos).
+
+    \[
+    SPEC(M) = \sqrt[n]{\frac{t_1^{REF}}{t_1^M} \times \frac{t_2^{REF}}{t_2^M} \times \cdots \times \frac{t_n^{REF}}{t_n^M}} = \sqrt[n]{\frac{t_1^{REF} \times t_2^{REF} \times \cdots \times t_n^{REF}}{t_1^M \times t_2^M \times \cdots \times t_n^M}}
+    \]
+    \end{tcolorbox}
+
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \textbf{Comparación entre dos máquinas (MA y MB):}
+
+    \[
+    \frac{SPEC(MA)}{SPEC(MB)} = \sqrt[n]{\frac{t_1^{MB} \times t_2^{MB} \times \cdots \times t_n^{MB}}{t_1^{MA} \times t_2^{MA} \times \cdots \times t_n^{MA}}}
+    \]
+    \end{tcolorbox}
+
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \textbf{Orden de SPEC y medias geométricas:}
+
+    \begin{align*}
+        SPEC(MA) > SPEC(MB) \iff  \\ 
+        \sqrt[n]{t_1^{MA} \times t_2^{MA} \times \cdots \times t_n^{MA}} < \sqrt[n]{t_1^{MB} \times t_2^{MB} \times \cdots \times t_n^{MB}}
+    \end{align*}
+    
+    
+
+    \textit{Es decir, la máquina con mayor SPEC es la que tiene menor media geométrica de los tiempos de ejecución.}
+    \end{tcolorbox}
+
+
+    \textbf{Probabilidad: t Student}
+
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        t_{exp} = \frac{\overline{d}-\overline{d}_{real}}{s/\sqrt{n}} \quad \quad \overline{d} = \frac{\sum_{i=1}^{n}d_i}{n} \quad \quad s = \sqrt{\frac{\sum_{i=1}^{n}(d_i-\overline{d})^2}{n-1}} \\
+        \\
+        \text{Error estándar} = \frac{s}{\sqrt{n}} 
+    \end{align*}
+    \end{tcolorbox}
+
+    \textbf{P-value}
+
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        \text{Cuando el p-value} < \alpha \text{ (nivel de significación), se rechaza la hipótesis nula.} \\
+        \text{Cuando el p-value} > \alpha \text{ (nivel de significación), no se rechaza la hipótesis nula.} \\
+        \text{Donde la hipótesis nula es: } \\
+        H_0: \overline{d} = \overline{d}_{real} \quad \text{(no hay diferencia significativa entre las medias)} \\
+        \text{( A y B rendimientos equivalentes)}
+    \end{align*}
+    \end{tcolorbox}
+
+    \textbf{Intervalos de confianza}
+
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    Si nuestro intervalo no contiene el 0, rechazamos la hipótesis nula de que ambas máquinas tienen el mismo rendimiento al \% del intervalo de confianza.
+    \end{tcolorbox}
+    
+
+    
+
+
+\section*{Optimización del Rendimiento}
+
+\textit{Todas las variables operacionales deducidas que se usan en este apartado son valores medios.} Además, suponemos que se tiene K estaciones de servicio.
+
+\begin{itemize}
+    \item W: waiting time, tiempo de espera en la cola.
+    \item S: service time, tiempo de servicio.
+    \item R: response time, tiempo de respuesta.
+\end{itemize}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        R &= W + S \\
+    \end{align*}
+\end{tcolorbox}
+
+\textbf{Variables y leyes operacionales:}
+
+\begin{itemize}
+    \item $N_0$: número de trabajos en el servidor.
+    \item $N_z$: número de clientes en reflexión (esperando a que los clientes vuelvan a introducirlos en el servidor).
+    \item $T$: duración del periodo de media para el que se extrae el modelo.
+    \item $A_i$: número de trabajos solicitados a la estación (\textbf{arrivals}).
+    \item $B_i$: tiempo que el dispositivo ha estado en uso (\textbf{busy}).
+    \item $C_i$: número de trabajos completados en el periodo (\textbf{completed}).
+    \item $S_i$: tiempo medio de servicio (\textbf{service}). Se mide en $\frac{segundos}{trabajo}$ o bien en segundos.
+    \item $W_i$: tiempo medio de espera en la cola (\textbf{waiting}). Se mide en segundos [/trabajo].
+    \item $R_i$: tiempo medio de respuesta (\textbf{response}). Se mide en segundos [/trabajo].
+
+
+\end{itemize}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        S_i = \frac{B_i}{C_i} \quad \quad \quad \quad R_i = W_i + S_i
+    \end{align*}
+\end{tcolorbox}
+
+%\newpage
+\begin{itemize}
+    \item $\lambda_i$: tasa media de llegada (\textbf{arrival rate}). Unidades $\frac{trabajos}{segundos}$.
+    \item $X_i$: Productividad media (\textbf{throughput}). Unidades $\frac{trabajos}{segundos}$.
+    \item $U_i$: Utilización media (\textbf{utilization}). Unidades $\%$, pero no suele tener. $\text{Valor máx} = U_{i,max} = 1 \rightarrow 100 \%$
+\end{itemize}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        U_i = \frac{B_i}{T} \quad \quad \lambda_i = \frac{A_i}{T} \quad \quad S_i = \frac{B_i}{C_i} \quad \quad X_i = \frac{C_i}{T} \\
+    \end{align*}
+\end{tcolorbox}
+
+\textbf{Haciendo referencia al número de trabajos en la estación de servicio:}
+\begin{itemize}
+    \item $N_i$: Número de trabajos en la estación de servicio.
+    \item $Q_i$: Número medio de trabajos en la cola de espera.
+    \item $U_i$: Número medio de trabajos siendo servidos por el 
+    dispositivo.
+\end{itemize}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        U_i = N_i - Q_i \quad \quad \text{Coincide númericamente con la Utilización Media}\\
+    \end{align*}
+\end{tcolorbox}
+
+\textbf{Variables operacionales de un servidor:}
+
+
+\begin{itemize}
+    \item Básicas:
+    \begin{itemize}
+        \item $A_0$: número de trabajos solicitados al servidor.
+        \item $C_0$: número de trabajos completados en el servidor.
+    \end{itemize}
+    \item Deducidas:
+    \begin{itemize}
+        \item $\lambda_0$: tasa media de llegada al servidor.
+        \item $X_0$: Productividad media del servidor.
+        \item $N_0$: Número medio de trabajos en el servidor.
+        \item $R_0$: Tiempo medio de respuesta del servidor. 
+    \end{itemize}
+\end{itemize}
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        \lambda_0 = \frac{A_0}{T} \quad \quad X_i = \frac{C_0}{T} \\
+    \end{align*}
+\end{tcolorbox}
+
+%\newpage
+\textbf{Razón de visita y demanda de servicio:}
+
+\begin{itemize}
+    \item Razón media de visita al servidor: $V_i$ (\textbf{visit ratio}): Proporción entre el número de trabajos completados por el servidor y el número de trabajos completados por la estación de servicio i-ésima.
+    \item Demanda de servicio: $D_i$ (\textbf{service demand}): Cantidad de tiempo que, por término medio, el dispositivo de la estación de servicio i-ésima le ha dedicado a cada trabajo que abandona el servidor.
+\end{itemize}
+
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        V_i = \frac{C_i}{C_0} \quad \quad D_i = \frac{B_i}{C_0} = V_i \times S_i \\
+    \end{align*}
+\end{tcolorbox}
+
+\textbf{Ley de Utilización}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        \forall i = 1, \ldots, K \quad U_i = X_i \times S_i \overset{\text{equilibrio de flujo}}{=} \lambda_i \times S_i
+        \end{align*}
+    \end{tcolorbox}        
+
+\textbf{Ley del fujo forzado}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        \forall i = 1, \ldots, K \quad X_i = X_0 \times V_i \overset{\text{equilibrio de flujo}}{=} \lambda_0 \times V_i = \lambda_i \\  
+    \end{align*}
+\end{tcolorbox}
+
+\textbf{Relación Utilización-demanda de servicio}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        \forall i = 1, \ldots, K \quad U_i = X_0 \times D_i \overset{\text{equilibrio de flujo}}{=} \lambda_0 \times D_i \quad  \\
+    \end{align*}
+\end{tcolorbox}
+
+\textbf{Ley de Little}
+
+\begin{itemize}
+    \item Aplicada a un servidor:
+    
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+        \begin{align*}
+            N_0 = \lambda_0 \times R_0 = X_0 \times R_0 \\
+        \end{align*}
+    \end{tcolorbox}
+    \item Aplicada a toda una estación de servicio:
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+        \begin{align*}
+            N_i = \lambda_i \times R_i = X_i \times R_i \\
+        \end{align*}
+    \end{tcolorbox}
+    \item Aplicada a una cola de una estación de servicio:
+    \begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+        \begin{align*}
+            Q_i = \lambda_i \times W_i = X_i \times W_i \\
+        \end{align*}
+    \end{tcolorbox}
+    %\textbf{Nota:} En equilibrio de flujos $X_i = \lambda_i$ (lo mismo se aplica a $X_0 = \lambda_0$).
+\end{itemize}
+
+\textbf{Ley general del tiempo de respuesta}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        R_0 = \sum_{i=1}^{K} V_i \times R_i \\ 
+    \end{align*}
+\end{tcolorbox}
+
+
+\textbf{Ley del tiempo de respuesta interactivo}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        R_0 = \frac{N_T}{X_0} - Z \\
+    \end{align*}
+\end{tcolorbox}
+
+\begin{itemize}
+    \item $Z$: tiempo de reflexión, tiempo que requiere el cliente antes de volver a lanzar una petición al servidor tras la respuesta de este.
+\end{itemize}
+
+\textbf{Identificación del cuello de botella}
+
+\begin{itemize}
+    \item \textit{b (bottleneck): índice del dispositivo cuello de botella}
+\end{itemize}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        D_b = \max_{i=1, \ldots, K} D_i = V_b \times S_b \\ 
+        U_b = \max_{i=1, \ldots, K} U_i = X_0 \times D_b \\
+    \end{align*}
+\end{tcolorbox}
+
+\textbf{Saturación del servidor}
+
+\begin{itemize}
+    \item El saturación, el cuello de botella está al máximo de su productividad.
+\end{itemize}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        1 = U_b = X_b \times S_b \Rightarrow X_b = \frac{1}{S_b} \\
+    \end{align*}
+\end{tcolorbox}
+
+\textbf{Límites optimistas: redes abiertas}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        R_0 \underset{\text{optimista = min}}{\Rightarrow} R_0^{min} = \sum_{i=1}^{K} V_i \times S_i = \sum_{i=1}^{K} D_i \equiv D \\ \\
+        \text{Si } U_b = 1 \Rightarrow X_0^{max} = \frac{1}{D_b} \\ \\
+        \text{Cuando } \lambda_0 \leq X_0^{max} \text{ estamos en equilibrio de flujo }\\
+    \end{align*}
+\end{tcolorbox}
+
+\textbf{Límites optimistas: redes cerradas}
+\begin{itemize}
+    \item Valores de carga altos
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        \text{Cuando esta cerca de la saturación: } \text{Si } U_b = 1 \Rightarrow X_0^{max} = \frac{1}{D_b} \\ \\
+        \text{Valor optimista de respuesta medio: } 
+        R_0 = \left(\frac{N_T}{X_0^{max}}\right) - Z = D_b \times N_T - Z
+    \end{align*}
+\end{tcolorbox}
+% \begin{itemize}
+%     \item $N_Z$: número de clientes en reflexión (esperando a que los clientes vuelvan a introducirlos en el servidor).
+% \end{itemize}
+
+\item Valores de carga bajos
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        \text{Valor optimista de respuesta medio: } 
+        R_0^{min} = \sum_{i=1}^{K} V_i \times S_i = \sum_{i=1}^{K} D_i \equiv D
+        \\
+        \text{Valor optimista de productividad media: }
+        X_0 = \frac{N_T}{R_0^{min} + Z} = \frac{N_T}{D + Z} 
+    \end{align*}
+\end{tcolorbox}
+
+
+
+\end{itemize}
+
+\textbf{Punto teórico de saturación}
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black]
+    \begin{align*}
+        D = D_b \times N_T^* - Z \Rightarrow N_T^* = \frac{D + Z}{D_b}
+    \end{align*}
+\end{tcolorbox}
+
+
+\end{document}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Fundamentos de Redes - Práctica 3</title>
+    <style>
+        body {
+            font-family: 'Latin Modern Roman', 'Times New Roman', serif;
+            background-color: #ffffff;
+            color: #020b14;
+            line-height: 1.6;
+            padding: 20px;
+            font-size: 18px;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .details {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            background: #a0cbe8;
+            border: 1px solid #022548;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question.correct {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+        .question.incorrect {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+        .explanation {
+            background: #e2e3e5;
+            border: 1px solid #d6d8db;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .author {
+            margin-top: 20px;
+            font-style: italic;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Test de Práctica 3 - FUNDAMENTOS DE REDES </h1>
+    <div class="details">
+        <h2>Detalles del Examen</h2>
+        <p><strong>Titulación:</strong> Ingeniería en Informática + ADE</p>
+        <p><strong>Autor:</strong> Ismael Sallami Moreno</p>
+        <p><strong>Asignatura:</strong> Fundamentos de Redes</p>
+        <p><strong>Temario:</strong> Práctica 3 </p>
+    </div>
+
+    <div class="question" id="q1">
+        <p>1.¿Cómo es capaz el servidor HTTP Apache2 de discernir si una petición se dirige a un determinado sitio (virtual host) u otro, previamente configurados y con nombre de dominio diferentes?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q1" value="1"> A través de la cabecera HTTP <em>Accept</em> en la petición que hace el cliente HTTP.</label></li>
+            <li><label><input type="radio" name="q1" value="2"> A través de la cabecera HTTP <em>Connection</em> en la petición que hace el cliente HTTP.</label></li>
+            <li><label><input type="radio" name="q1" value="3"> A través de la cabecera HTTP <em>Host</em> en la petición que hace el cliente HTTP.</label></li>
+            <li><label><input type="radio" name="q1" value="4"> A través de la cabecera HTTP <em>Host</em> en la respuesta desde el servidor HTTP.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation1')">
+        <div id="explanation1" class="explanation" style="display: none;">
+            En este caso la respuesta correcta es la opción 3 debido a que es a través de la cabecera HTTP Host en la petición que hace el cliente HTTP como el servidor HTTP Apache2 es capaz de discernir si una petición se dirige a un determinado sitio (virtual host) u otro, previamente configurados y con nombre de dominio diferentes.
+        </div>
+    </div>
+    
+
+        
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Añadir las preguntas adicionales de la misma manera -->
+
+    <input type="button" value="¿Aprobarás?" onclick="checkAnswers()">
+</form>
+
+<div id="results" style="margin-top: 20px;"></div>
+
+<script>
+    function checkAnswers() {
+        let score = 0;
+        const totalQuestions = 32;
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
+
+        // Respuestas correctas
+        const answers = {
+            q1: { answer: 3 },
+            q2: { answer: 3 },
+            q3: { answer: 1 },
+            q4: { answer: 2 },
+            q5: { answer: 1 },
+            q6: { answer: 4 },
+            q7: { answer: 1 },
+            q8: { answer: 4 },
+            q9: { answer: 1 },
+            q10: { answer: 3 },
+            q11: { answer: 3 },
+            q12: { answer: 1 },
+            q13: { answer: 2 },
+            q14: { answer: 1 },
+            q15: { answer: 4 },
+            q16: { answer: 1 },
+            q17: { answer: 3 },
+            q18: { answer: 4 },
+            q19: { answer: 3 },
+            q20: { answer: 4 },
+            q21: { answer: 3 },
+            q22: { answer: 4 },
+            q23: { answer: 4 },
+            q24: { answer: 1 },
+            q25: { answer: 2 },
+            q26: { answer: 1 },
+            q27: { answer: 2 },
+            q28: { answer: 3 },
+            q29: { answer: 4 },
+            q30: { answer: 4 },
+            q31: { answer: 4 },
+            q32: { answer: 3 }
+        };
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            const question = document.querySelector(`input[name="q${i}"]:checked`);
+            if (question) {
+                const selectedValue = question.value;
+                const correctAnswer = answers[`q${i}`].answer;
+                const isCorrect = selectedValue == correctAnswer;
+                
+                if (isCorrect) {
+                    score++;
+                    document.getElementById(`q${i}`).classList.add('correct');
+                } else {
+                    document.getElementById(`q${i}`).classList.add('incorrect');
+                    // Mostrar la respuesta correcta y su justificación
+                    const explanation = answers[`q${i}`].explanation;
+                    const explanationDiv = document.createElement("div");
+                    explanationDiv.className = "explanation";
+                    explanationDiv.innerHTML = `<strong>Respuesta correcta:</strong> ${correctAnswer}<br><strong>Justificación:</strong> ${explanation}`;
+                    document.getElementById(`q${i}`).appendChild(explanationDiv);
+                }
+            }
+        }
+
+        // Cálculo de la nota sobre 10
+        const grade = (score / totalQuestions) * 10;
+        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
+        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
+    }
+</script>
+
+<script>
+    function toggleExplanation(id) {
+    const explanation = document.getElementById(id);
+    if (explanation.style.display === "none") {
+        explanation.style.display = "block";
+    } else {
+        explanation.style.display = "none";
+    }
+    }
+</script>
+
+</body>
+</html>

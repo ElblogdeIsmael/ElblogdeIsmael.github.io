@@ -1,0 +1,2954 @@
+%%
+% Copyright (c) 2017 - 2025, Pascal Wagler;
+% Copyright (c) 2014 - 2025, John MacFarlane
+%
+% All rights reserved.
+%
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions
+% are met:
+%
+% - Redistributions of source code must retain the above copyright
+% notice, this list of conditions and the following disclaimer.
+%
+% - Redistributions in binary form must reproduce the above copyright
+% notice, this list of conditions and the following disclaimer in the
+% documentation and/or other materials provided with the distribution.
+%
+% - Neither the name of John MacFarlane nor the names of other
+% contributors may be used to endorse or promote products derived
+% from this software without specific prior written permission.
+%
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+% "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+% FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+% COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+% INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+% BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+% CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+% LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+% ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+% POSSIBILITY OF SUCH DAMAGE.
+%%
+
+%%
+% This is the Eisvogel pandoc LaTeX template.
+%
+% For usage information and examples visit the official GitHub page:
+% https://github.com/Wandmalfarbe/pandoc-latex-template
+%%
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
+\documentclass[
+  paper=a4,
+  ,captions=tableheading
+]{scrbook}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+
+% add backlinks to footnote references, cf. https://tex.stackexchange.com/questions/302266/make-footnote-clickable-both-ways
+\usepackage{footnotebackref}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Latin Modern Roman}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+
+% Use setspace anyway because we change the default line spacing.
+% The spacing is changed early to affect the titlepage and the TOC.
+\usepackage{setspace}
+\setstretch{1.2}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\definecolor{default-linkcolor}{HTML}{A50000}
+\definecolor{default-filecolor}{HTML}{A50000}
+\definecolor{default-citecolor}{HTML}{4077C0}
+\definecolor{default-urlcolor}{HTML}{4077C0}
+
+\hypersetup{
+  pdftitle={Contabilidad Financiera II},
+  pdfauthor={Ismael Sallami Moreno},
+  pdflang={esge},
+  colorlinks=true,
+  linkcolor={008080},
+  filecolor={default-filecolor},
+  citecolor={default-citecolor},
+  urlcolor={default-urlcolor},
+  breaklinks=true,
+  pdfcreator={LaTeX via pandoc with the Eisvogel template}}
+
+\title{Contabilidad Financiera II}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Temario}
+\author{Ismael Sallami Moreno}
+\date{Mayo de 2025}
+
+
+%
+% for the background color of the title page
+%
+\usepackage{pagecolor}
+\usepackage{afterpage}
+
+%
+% break urls
+%
+\PassOptionsToPackage{hyphens}{url}
+
+%
+% When using babel or polyglossia with biblatex, loading csquotes is recommended
+% to ensure that quoted texts are typeset according to the rules of your main language.
+%
+\usepackage{csquotes}
+
+%
+% captions
+%
+\definecolor{caption-color}{HTML}{777777}
+\usepackage[font={stretch=1.2}, textfont={color=caption-color}, position=top, skip=4mm, labelfont=bf, singlelinecheck=false, justification=raggedright]{caption}
+\setcapindent{0em}
+
+%
+% blockquote
+%
+\definecolor{blockquote-border}{RGB}{221,221,221}
+\definecolor{blockquote-text}{RGB}{119,119,119}
+\usepackage{mdframed}
+\newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
+\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+
+%
+% Source Sans Pro as the default font family
+% Source Code Pro for monospace text
+%
+% 'default' option sets the default
+% font family to Source Sans Pro, not \sfdefault.
+%
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+    \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+  \else % if not pdftex
+    \fi
+
+%
+% heading color
+%
+\definecolor{heading-color}{RGB}{40,40,40}
+\addtokomafont{section}{\color{heading-color}}
+% When using the classes report, scrreprt, book,
+% scrbook or memoir, uncomment the following line.
+%\addtokomafont{chapter}{\color{heading-color}}
+
+%
+% variables for title, author and date
+%
+\usepackage{titling}
+\title{Contabilidad Financiera II}
+\author{Ismael Sallami Moreno}
+\date{Mayo de 2025}
+
+%
+% tables
+%
+
+\definecolor{table-row-color}{HTML}{F5F5F5}
+\definecolor{table-rule-color}{HTML}{999999}
+
+%\arrayrulecolor{black!40}
+\arrayrulecolor{table-rule-color}     % color of \toprule, \midrule, \bottomrule
+\setlength\heavyrulewidth{0.3ex}      % thickness of \toprule, \bottomrule
+\renewcommand{\arraystretch}{1.3}     % spacing (padding)
+
+
+%
+% remove paragraph indentation
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+%
+%
+% Listings
+%
+%
+
+
+%
+% header and footer
+%
+\usepackage[headsepline,footsepline]{scrlayer-scrpage}
+
+\newpairofpagestyles{eisvogel-header-footer}{
+  \clearpairofpagestyles
+  \ihead*{Contabilidad Financiera II}
+  \chead*{}
+  \ohead*{\small Ingeniería Informática + ADE}
+  \ifoot*{Ismael Sallami Moreno}
+  \cfoot*{}
+  \ofoot*{\thepage}
+  \addtokomafont{pageheadfoot}{\upshape}
+}
+\pagestyle{eisvogel-header-footer}
+
+\deftripstyle{ChapterStyle}{}{}{}{}{\pagemark}{}
+\renewcommand*{\chapterpagestyle}{ChapterStyle}
+
+
+%
+% Define watermark
+%
+
+\begin{document}
+
+\begin{titlepage}
+\newgeometry{left=6cm}
+\newcommand{\colorRule}[3][black]{\textcolor[HTML]{#1}{\rule{#2}{#3}}}
+\begin{flushleft}
+\noindent
+\\[-1em]
+\color[HTML]{333333}
+\makebox[0pt][l]{\colorRule[4682B4]{1.3\textwidth}{4pt}}
+\par
+\noindent
+
+{
+  \setstretch{1.4}
+  \vfill
+  \noindent {\huge \textbf{\textsf{Contabilidad Financiera II}}}
+    \vskip 1em
+  {\Large \textsf{Temario}}
+    \vskip 2em
+  \noindent {\Large \textsf{Ismael Sallami Moreno}}
+  \vfill
+}
+
+\noindent
+\includegraphics[width=35mm, left]{../../Practica/EjerciciosMD/images/logo-universidad.jpg}
+
+\textsf{Mayo de 2025}
+\end{flushleft}
+\end{titlepage}
+\restoregeometry
+\pagenumbering{arabic}
+
+\frontmatter
+% don't generate the default title
+% \maketitle
+
+
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\mainmatter
+\hypertarget{fondos-propios}{%
+\chapter{Fondos Propios}\label{fondos-propios}}
+
+\hypertarget{elementos-de-patrimonio-neto-concepto-y-caracteruxedsticas}{%
+\section{Elementos de Patrimonio Neto: Concepto y
+Características}\label{elementos-de-patrimonio-neto-concepto-y-caracteruxedsticas}}
+
+\begin{itemize}
+\item
+  \textbf{Perspectiva de las Normas Internacionales de Contabilidad
+  (IASB):} El Marco Conceptual del IASB (IASB, 2018) no define el
+  Patrimonio como tal, sino que lo delimita de forma indirecta,
+  indicando que ``Patrimonio es la parte residual de los activos de la
+  entidad, una vez deducidos todos sus pasivos''. A la hora de medirlo,
+  tampoco establece un criterio específico, sino que, conceptualmente,
+  ``es igual al total del importe en libros de todos los activos
+  reconocidos menos el total de los importes en libros de todos los
+  pasivos reconocidos''.
+\item
+  \textbf{Perspectiva del Plan General de Contabilidad (PGC):} El PGC
+  también asume que el Patrimonio Neto es la parte residual al deducir
+  el valor de los pasivos del valor de los activos. Sin embargo, el PGC
+  añade que el Patrimonio Neto ``incluye las aportaciones realizadas, ya
+  sea en el momento de su constitución o en otros posteriores, por sus
+  socios o propietarios, que no tengan la consideración de pasivos, así
+  como los resultados acumulados u otras variaciones que le afecten''.
+\item
+  \textbf{Componentes Clave destacados por el PGC:} La definición del
+  PGC, influenciada por la normativa mercantil española, introduce la
+  figura de socios y propietarios de esos derechos residuales sobre el
+  activo. Delimita el concepto de Capital (vinculado a las aportaciones
+  de socios) y el de Reservas (resultados acumulados que permanecen en
+  la empresa), que conforman dos de los principales bloques del
+  patrimonio, estructurados en los subgrupos 10 (Capital), 11 (Reservas)
+  y 12 (Resultados).
+\item
+  \textbf{Distinción entre Instrumento de Patrimonio y Pasivo
+  Financiero:} Para referirse al patrimonio, es necesario distinguir
+  correctamente un ``instrumento de patrimonio'' de un ``pasivo
+  financiero''. Se retoma la norma de registro y valoración (NRV) 9ª,
+  que establece que ``un instrumento financiero es un contrato que da
+  lugar a un activo financiero en una empresa y, simultáneamente, a un
+  pasivo financiero o a un instrumento de patrimonio en otra empresa''.
+  Un pasivo financiero supone una obligación de pago, una deuda futura
+  para la empresa, mientras que un instrumento de patrimonio representa
+  una participación en los activos de la empresa.
+\item
+  \textbf{Características de los Instrumentos de Patrimonio (NRV 9.4):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Son un negocio jurídico que evidencia/refleja la participación
+    residual en los activos, una vez deducidos los pasivos.
+  \item
+    Si son adquiridos por la propia empresa, nunca serán un activo, sino
+    que minorarán los Fondos Propios.
+  \item
+    Los gastos derivados de su emisión son parte del Patrimonio,
+    contabilizándose como reservas, salvo cuando se haya desistido de su
+    emisión, que se contabilizan en la cuenta de Pérdidas y Ganancias.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{capital-y-reservas}{%
+\section{Capital y Reservas}\label{capital-y-reservas}}
+
+Esta sección del capítulo se adentra en dos componentes fundamentales de
+los fondos propios: el capital y las reservas, recurriendo a una
+perspectiva tanto contable como jurídica.
+
+\hypertarget{capital-concepto-y-contabilizaciuxf3n}{%
+\subsection{Capital: Concepto y
+Contabilización}\label{capital-concepto-y-contabilizaciuxf3n}}
+
+El Marco Conceptual del PGC define el Capital como la financiación
+procedente de las aportaciones realizadas por los propietarios, ya sea
+en la constitución de la empresa o posteriormente. Desde una óptica
+jurídica, la cifra de capital es una garantía para los acreedores, ya
+que se espera que esté materializada en activos. La legislación
+mercantil busca mantener la integridad del capital, obligando, por
+ejemplo, a ``reservar'' parte del resultado.
+
+Las cuentas que conforman el subgrupo 10 «Capital» son:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{100. Capital social:} Para sociedades mercantiles (anónima,
+  limitada, comanditaria por acciones). Refleja el capital formalmente
+  escriturado.
+\item
+  \textbf{101. Fondo social:} Para entidades sin forma mercantil, como
+  cooperativas.
+\item
+  \textbf{102. Capital:} Para empresas individuales. Al final del
+  ejercicio, los resultados se integran directamente en esta cuenta. La
+  cuenta (550) «Titular de la explotación» recoge movimientos entre el
+  empresario y la empresa durante el ejercicio, trasladando su saldo a
+  la (102) al cierre.
+\item
+  \textbf{103. Socios por desembolsos no exigidos:} Deudas de socios por
+  la parte del capital suscrito pendiente de pago.
+\item
+  \textbf{104. Socios por aportaciones no dinerarias pendientes:}
+  Similar a la 103, pero para aportaciones en especie.
+\item
+  \textbf{108. Acciones o participaciones propias en situaciones
+  especiales.}
+\item
+  \textbf{109. Acciones o participaciones propias para reducción de
+  capital.}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Las cuentas 108 y 109 se refieren a situaciones especiales donde la
+    empresa adquiere sus propias acciones, minorando el Patrimonio Neto.
+  \end{itemize}
+\end{itemize}
+
+La contabilización del \textbf{Capital Social (cuenta 100)} en
+sociedades mercantiles se detalla a través del proceso de
+\textbf{constitución de la empresa}, centrándose en la \textbf{fundación
+simultánea} (creación en un único acto por acuerdo de los socios
+fundadores). Los pasos contables son:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Emisión de las acciones:} Se utiliza el subgrupo 19
+  «Situaciones transitorias de financiación» antes de la inscripción
+  registral.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Asiento: (190) Acciones emitidas a (194) Capital emitido pendiente
+    de inscripción. El importe incluye el nominal y, si la hay, la prima
+    de emisión.
+  \end{itemize}
+\item
+  \textbf{Suscripción de las acciones:} Implica un compromiso de
+  aportación de los socios.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Asiento: (1034) Socios por desembolsos no exigidos, capital
+    pendiente de inscripción y/o (1044) Socios por aportaciones no
+    dinerarias pendientes, capital pendiente de inscripción a (190)
+    Acciones emitidas.
+  \end{itemize}
+\item
+  \textbf{Desembolso de las acciones:} La ley exige un desembolso mínimo
+  (al menos el 25\% del valor nominal para S.A., y el 100\% de la prima
+  de emisión si existe).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Asiento: (57) Tesorería a (1034) Socios por desembolsos no exigidos,
+    capital pendiente de inscripción.
+  \item
+    Los desembolsos parciales posteriores se conocen como ``dividendo
+    pasivo''. Su exigencia se contabiliza: (558) Socios por desembolsos
+    exigidos a (103) Socios por desembolsos no exigidos.
+  \end{itemize}
+\item
+  \textbf{Inscripción de la sociedad en el Registro Mercantil:} La
+  empresa adquiere personalidad jurídica.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Asiento 1 (Capital): (194) Capital emitido pendiente de inscripción
+    a (100) Capital Social y, si procede, a (110) Prima de Emisión.
+  \item
+    Asiento 2 (Socios): (1030) Socios por desembolsos no exigidos y/o
+    (1040) Socios por aportaciones no dinerarias pendientes a (1034) y/o
+    (1044) por la parte del capital suscrito no desembolsado que ahora
+    corresponde a una sociedad inscrita.
+  \end{itemize}
+\item
+  \textbf{Gastos de constitución:} Se contabilizan directamente contra
+  el Patrimonio Neto, cargando una cuenta de reservas (generalmente
+  (113) Reservas voluntarias) con abono a tesorería o la deuda
+  correspondiente.
+\end{enumerate}
+
+El proceso es similar para las ampliaciones de capital.
+
+\hypertarget{reservas-concepto-y-tipologuxeda}{%
+\subsection{Reservas: Concepto y
+Tipología}\label{reservas-concepto-y-tipologuxeda}}
+
+Las Reservas son los beneficios obtenidos por la empresa que no han sido
+distribuidos entre sus propietarios. Se clasifican según su origen:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{De Autofinanciación (o autofinanciación de enriquecimiento):}
+  Derivadas del resultado positivo del ejercicio que los propietarios
+  deciden mantener en la empresa.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{(112) Reserva legal:} Obligatoria por ley (art. 274 RDL
+    1/2010). Se destina un 10\% del beneficio del ejercicio hasta que
+    esta reserva alcance el 20\% del capital social. Es, salvo casos
+    especiales, indisponible.
+  \item
+    \textbf{(1141) Reservas estatutarias:} Establecidas en los estatutos
+    de la empresa.
+  \item
+    \textbf{(113) Reservas voluntarias:} Constituidas libremente por la
+    empresa y de libre disposición. También recogen los gastos de
+    constitución o ajustes por cambios de criterio contable o errores.
+  \end{itemize}
+\item
+  \textbf{Procedentes de Ampliaciones de Capital:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{(110) Prima de emisión de acciones:} Es el sobreprecio
+    pagado por las acciones sobre su valor nominal. Se justifica por la
+    riqueza acumulada previamente por la empresa (reservas
+    preexistentes) o buenas expectativas futuras. La normativa española
+    prohíbe emisiones ``por debajo de la par''. La prima de emisión debe
+    desembolsarse en su totalidad en el momento inicial.
+  \item
+    \textbf{(111) Otros instrumentos de patrimonio neto.}
+  \end{itemize}
+\item
+  \textbf{Para el Mantenimiento Efectivo del Capital:} Cuentas de la
+  subdivisión (114) «Reservas especiales» que buscan asegurar que la
+  cifra de Capital sea representativa de una garantía frente a terceros
+  (ej. reservas por acciones propias, acciones de la sociedad dominante,
+  o por capital amortizado).
+\item
+  \textbf{Por Ajuste en el Capital:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{(119) Diferencias por ajustes del capital en euros:}
+    Derivada de los ajustes por redondeo en el traspaso de pesetas a
+    euros.
+  \end{itemize}
+\item
+  \textbf{Por la Compensación de Pérdidas:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{(118) Aportaciones de socios o propietarios:} Aportaciones
+    de socios diferentes a la suscripción de capital, habitualmente para
+    compensar pérdidas y que no aparezcan en el Balance.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{asientos-contables-relacionados}{%
+\subsection{Asientos Contables
+Relacionados}\label{asientos-contables-relacionados}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Emisión de acciones:}
+
+  \begin{longtable}[]{@{}
+    >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+    >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  \toprule\noalign{}
+  \begin{minipage}[b]{\linewidth}\raggedright
+  DEBE
+  \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+  HABER
+  \end{minipage} \\
+  \midrule\noalign{}
+  \endhead
+  \bottomrule\noalign{}
+  \endlastfoot
+  (190) Acciones emitidas & (194) Capital emitido pendiente de
+  inscripción \\
+  \end{longtable}
+\item
+  \textbf{Suscripción de acciones:}
+
+  \begin{longtable}[]{@{}
+    >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+    >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  \toprule\noalign{}
+  \begin{minipage}[b]{\linewidth}\raggedright
+  DEBE
+  \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+  HABER
+  \end{minipage} \\
+  \midrule\noalign{}
+  \endhead
+  \bottomrule\noalign{}
+  \endlastfoot
+  (1034) Socios por desembolsos no & (190) Acciones emitidas \\
+  exigidos, capital pendiente de & \\
+  inscripción & \\
+  (1044) Socios por aportaciones no & \\
+  dinerarias pendientes, capital & \\
+  pendiente de inscripción & \\
+  \end{longtable}
+\item
+  \textbf{Desembolso de acciones:}
+
+  \begin{longtable}[]{@{}
+    >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+    >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  \toprule\noalign{}
+  \begin{minipage}[b]{\linewidth}\raggedright
+  DEBE
+  \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+  HABER
+  \end{minipage} \\
+  \midrule\noalign{}
+  \endhead
+  \bottomrule\noalign{}
+  \endlastfoot
+  (57) Tesorería & (1034) Socios por desembolsos no exigidos,capital
+  pendiente de inscripción \\
+  \end{longtable}
+\item
+  \textbf{Exigencia de aportaciones pendientes:}
+
+  \begin{longtable}[]{@{}
+    >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+    >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  \toprule\noalign{}
+  \begin{minipage}[b]{\linewidth}\raggedright
+  DEBE
+  \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+  HABER
+  \end{minipage} \\
+  \midrule\noalign{}
+  \endhead
+  \bottomrule\noalign{}
+  \endlastfoot
+  (558) Socios por desembolsos exigidos & (103) Socios por desembolsos
+  no exigidos \\
+  \end{longtable}
+\item
+  \textbf{Inscripción en el Registro Mercantil:}
+
+  \begin{itemize}
+  \item
+    \textbf{Capital:}
+
+    \begin{longtable}[]{@{}
+      >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4722}}
+      >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5278}}@{}}
+    \toprule\noalign{}
+    \begin{minipage}[b]{\linewidth}\raggedright
+    DEBE
+    \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+    HABER
+    \end{minipage} \\
+    \midrule\noalign{}
+    \endhead
+    \bottomrule\noalign{}
+    \endlastfoot
+    (194) Capital emitido pendiente & (100) Capital Social \\
+    de inscripción & (110) Prima de Emisión \\
+    \end{longtable}
+  \item
+    \textbf{Socios:}
+
+    \begin{longtable}[]{@{}
+      >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4722}}
+      >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5278}}@{}}
+    \toprule\noalign{}
+    \begin{minipage}[b]{\linewidth}\raggedright
+    DEBE
+    \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+    HABER
+    \end{minipage} \\
+    \midrule\noalign{}
+    \endhead
+    \bottomrule\noalign{}
+    \endlastfoot
+    (1030) Socios por desembolsos no & (1034) Socios por desembolsos no
+    exigidos, \\
+    exigidos & capital pendiente de inscripción \\
+    (1040) Socios por aportaciones no & (1044) Socios por aportaciones
+    no dinerarias \\
+    dinerarias pendientes & pendientes, capital pendiente de
+    inscripción \\
+    \end{longtable}
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{otras-partidas-del-patrimonio-neto}{%
+\section{Otras Partidas del Patrimonio
+Neto}\label{otras-partidas-del-patrimonio-neto}}
+
+Esta sección se centra en cómo se gestionan y aplican los resultados
+económicos de la empresa, que son una parte crucial del patrimonio neto.
+La idea fundamental es que los incrementos (ingresos) y decrementos
+(gastos) del patrimonio se deben contabilizar para conocer la evolución
+periódica del mismo.
+
+\textbf{Resultados Pendientes de Aplicación (Subgrupo 12):}
+
+Este subgrupo recoge el resultado económico que no se imputa
+directamente al patrimonio y está pendiente de una decisión sobre su
+destino. Las cuentas principales son:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{129. «Resultados del ejercicio»:} Esta es la cuenta más
+  representativa. Al final del ejercicio, aglutina todos los ingresos
+  (grupo 7) y gastos (grupo 6) para determinar si ha habido beneficio
+  (saldo acreedor) o pérdida (saldo deudor). Su saldo es transitorio
+  hasta que la Junta General de Accionistas (o el órgano
+  correspondiente) decide qué hacer con él.
+\item
+  \textbf{121. «Resultados negativos de ejercicios anteriores»:} Si el
+  ejercicio arroja pérdidas, estas se traspasan de la cuenta (129) a la
+  (121). Esta cuenta siempre tendrá saldo deudor y minora los fondos
+  propios. Debe ser compensada con beneficios futuros.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{Asiento de traspaso de pérdidas:} (121) Resultados negativos
+    de ejercicios anteriores a (129) Resultado del ejercicio.
+  \end{itemize}
+\item
+  \textbf{120. «Remanente»:} Son beneficios no repartidos ni aplicados
+  específicamente a ninguna otra cuenta tras la aprobación de las
+  cuentas anuales y la distribución de resultados. Quedan a disposición
+  de los administradores para su uso futuro (convertirlos en reservas o
+  repartirlos).
+\end{itemize}
+
+\textbf{Aplicación del Resultado del Ejercicio (cuando hay beneficios):}
+
+Si la cuenta (129) presenta un beneficio, la empresa debe decidir su
+destino. Las opciones principales son:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Compensar pérdidas anteriores:} Si la cuenta (121) tiene
+  saldo, se utiliza parte del beneficio para reducirlo o eliminarlo.
+\item
+  \textbf{Dotar Reservas:} Se traspasa parte del beneficio a cuentas de
+  reservas (subgrupo 11), como:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Reserva Legal (obligatoria por ley).
+  \item
+    Reservas Estatutarias (si así lo establecen los estatutos).
+  \item
+    Reservas Voluntarias.
+  \end{itemize}
+\item
+  \textbf{Repartir Dividendos:} Se reconoce una deuda con los
+  accionistas.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    La cuenta \textbf{(526) «Dividendo activo a pagar»} recoge la
+    obligación de pago desde que se aprueba el dividendo hasta que se
+    paga.
+  \item
+    Si durante el ejercicio se han adelantado dividendos ``a cuenta''
+    del beneficio previsible, estos se habrán contabilizado en la cuenta
+    \textbf{(557) «Dividendo activo a cuenta»} (saldo deudor). Antes de
+    determinar el dividendo final a pagar, se debe saldar esta cuenta
+    (557).
+  \end{itemize}
+\item
+  \textbf{Destinar a Remanente:} La parte del beneficio que no se aplica
+  a los puntos anteriores puede quedar en la cuenta (120) «Remanente».
+\end{enumerate}
+
+El asiento contable para la aplicación del resultado del ejercicio
+(cuando hay beneficios) típicamente sería:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3908}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6092}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+DEBE
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+HABER
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+(129) Resultado del ejercicio & a (121) Rdos negativos de ejercicios
+anteriores (si hay) \\
+& a (11X) Reservas (Legal, Estatutaria, Voluntarias, etc.) \\
+& a (557) Dividendo activo a cuenta (para saldarlo) \\
+& a (526) Dividendo activo a pagar \\
+& a (120) Remanente \\
+\end{longtable}
+
+Todas estas cuentas del subgrupo 12 figuran en el patrimonio neto del
+Balance, con signo positivo o negativo según corresponda.
+
+\hypertarget{ajustes-por-cambio-de-valor}{%
+\section{Ajustes por Cambio de
+Valor}\label{ajustes-por-cambio-de-valor}}
+
+Esta sección explica que, aunque la mayoría de los ingresos y gastos del
+ejercicio se imputan a la cuenta de Pérdidas y Ganancias, algunos deben
+imputarse directamente al patrimonio neto. Esta distinción se realiza
+porque ciertas variaciones del patrimonio, aunque se registran
+contablemente cuando ocurren, no se consideran ``realizadas''.
+Imputarlas directamente a resultados podría llevar a una
+descapitalización si, por ejemplo, se repartieran dividendos basados en
+beneficios no consolidados. El objetivo final es evitar la
+descapitalización de la empresa.
+
+\textbf{Proceso Contable General:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Reconocimiento Inicial:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Los decrementos de valor (gastos) que no están ``consolidados'' se
+    contabilizan utilizando cuentas del \textbf{grupo 8} («Gastos
+    imputados al patrimonio neto»).
+  \item
+    Los incrementos de valor (ingresos) que no están ``consolidados'' se
+    contabilizan utilizando cuentas del \textbf{grupo 9} («Ingresos
+    imputados al patrimonio neto»).
+  \end{itemize}
+\item
+  \textbf{Regularización al Cierre del Ejercicio:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Al final del ejercicio, los saldos de las cuentas de los grupos 8 y
+    9 se agrupan y se trasladan a las cuentas correspondientes del
+    \textbf{subgrupo 13} («Subvenciones, donaciones y ajustes por
+    cambios de valor»). Estas cuentas del subgrupo 13 reflejarán el
+    efecto neto de estas variaciones en el Balance.
+  \end{itemize}
+\item
+  \textbf{Realización y Transferencia a Resultados:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Cuando las variaciones de patrimonio previamente imputadas
+    directamente al patrimonio neto se ``realizan'' (por ejemplo, a
+    través de una venta o transacción), se transfieren desde el subgrupo
+    13 a la cuenta de Pérdidas y Ganancias (cuenta 129 «Resultado del
+    ejercicio»).
+  \item
+    Este traspaso implica utilizar cuentas específicas de los grupos 6 o
+    7 para los gastos o ingresos realizados, y sus contrapartidas son
+    cuentas de los grupos 8 o 9 destinadas a la ``transferencia'' de
+    estas partidas desde el patrimonio.
+  \item
+    El efecto de este traspaso en el Patrimonio Neto es cualitativo
+    (cambia la composición dentro del patrimonio), pero no cuantitativo
+    (la cantidad total del patrimonio no varía por este traspaso en sí
+    mismo, ya que una partida disminuye en el subgrupo 13 y aumenta en
+    la cuenta de resultados).
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Ejemplo con Activos Financieros a Valor Razonable con Cambios en
+Patrimonio Neto:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Pérdida de valor no realizada:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Reconocimiento del gasto: (800) Pérdidas en activos financieros a VR
+    con cambios en PN a (250) Inversiones financieras l/p en
+    instrumentos de patrimonio.
+  \item
+    Regularización al cierre: (133) Ajustes por valoración en activos
+    financieros a VR con cambios en PN a (800).
+  \end{itemize}
+\item
+  \textbf{Ganancia de valor no realizada:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Reconocimiento del ingreso: (250) Inversiones financieras l/p en
+    instrumentos de patrimonio a (900) Beneficios en activos financieros
+    a VR con cambios en PN.
+  \item
+    Regularización al cierre: (900) a (133).
+  \end{itemize}
+\item
+  \textbf{Venta del activo (realización):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Si existía una pérdida acumulada en (133) (saldo deudor):
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Traspaso a resultados: (663) Pérdidas por valoración de
+      instrumentos financieros por su VR a (902) Transferencia de
+      pérdidas de activos financieros a VR con cambios en PN.
+    \item
+      Regularización en PN: (902) a (133) Ajustes por valoración en
+      activos financieros a VR con cambios en PN.
+    \end{itemize}
+  \item
+    Si existía un beneficio acumulado en (133) (saldo acreedor):
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Traspaso a resultados: (802) Transferencia de beneficios en
+      activos financieros a VR con cambios en PN a (763) Beneficios por
+      valoración de instrumentos financieros por su VR.
+    \item
+      Regularización en PN: (133) a (802).
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\textbf{Presentación en Cuentas Anuales:}
+
+\begin{itemize}
+\tightlist
+\item
+  Estas operaciones se reflejan detalladamente en el \textbf{Estado de
+  Cambios en el Patrimonio Neto (ECPN)}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    La primera parte del ECPN, el \textbf{Estado de Ingresos y Gastos
+    Reconocidos}, muestra:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Primero, las variaciones del patrimonio que han ido al resultado
+      del ejercicio (grupos 6 y 7).
+    \item
+      Luego, las variaciones imputadas directamente al patrimonio neto
+      (grupos 8 y 9, agregadas en el subgrupo 13).
+    \item
+      Finalmente, las transferencias realizadas desde el patrimonio neto
+      (subgrupo 13) hacia la cuenta de Resultados.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+El subgrupo 13 incluye cuentas como:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{130. Subvenciones oficiales de capital:} Subvenciones
+  otorgadas por organismos oficiales destinadas a financiar activos no
+  corrientes o inversiones a largo plazo.
+\item
+  \textbf{131. Donaciones y legados de capital:} Aportaciones gratuitas
+  de terceros, ya sean personas físicas o jurídicas, destinadas a
+  incrementar el patrimonio de la empresa.
+\item
+  \textbf{133. Ajustes por valoración en activos financieros a valor
+  razonable con cambios en el patrimonio neto:} Variaciones en el valor
+  razonable de activos financieros que se registran directamente en el
+  patrimonio neto, sin pasar por la cuenta de resultados.
+\item
+  \textbf{134. Operaciones de cobertura:} Ajustes relacionados con
+  instrumentos financieros utilizados para cubrir riesgos específicos,
+  como tipos de interés, tipos de cambio o precios de materias primas,
+  que afectan directamente al patrimonio neto.
+\item
+  \textbf{Otras:} Cualquier otra partida que, según la normativa
+  contable, deba imputarse directamente al patrimonio neto y no encaje
+  en las categorías anteriores.
+\end{itemize}
+
+\hypertarget{subvenciones-donaciones-y-legados}{%
+\section{Subvenciones, Donaciones y
+Legados}\label{subvenciones-donaciones-y-legados}}
+
+Esta sección trata la contabilidad de las aportaciones recibidas por la
+empresa que no provienen de sus socios como contraprestación por su
+participación en el capital.
+
+\textbf{Definiciones Clave:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Subvención:} Importe (en efectivo o en especie) otorgado por
+  un organismo (estatal u otro) a título gratuito, condicionado a que se
+  emplee en una actividad económica específica y se cumplan ciertos
+  requisitos.
+\item
+  \textbf{Donación:} Acto de liberalidad por el que un donante
+  transfiere un activo a un beneficiario sin recibir remuneración.
+\item
+  \textbf{Legado:} Patrimonio entregado a un tercero mediante
+  disposición testamentaria.
+\item
+  \textbf{Exclusión Importante:} Las aportaciones realizadas
+  incondicionalmente por los socios a la empresa (que no sean capital)
+  no se consideran subvenciones o donaciones a efectos contables, sino
+  que se registran como Fondos Propios en la cuenta (118) «Aportaciones
+  de socios o propietarios» (según la Norma de Registro y Valoración -
+  NRV 18.2).
+\end{itemize}
+
+\textbf{Valoración (NRV 18.1.2):}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Monetarias:} Se valoran por el importe recibido.
+\item
+  \textbf{No monetarias:} Se valoran por el valor razonable del bien en
+  el momento de su reconocimiento. Este criterio también aplica a las
+  aportaciones de socios mencionadas en la NRV 18.2.
+\end{itemize}
+
+\textbf{Reconocimiento y Contabilización (NRV 18.1.1):}
+
+La contabilización depende de si están sujetas a condiciones y si estas
+se han cumplido:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Subvenciones Reintegrables:} Si la recepción está supeditada a
+  condiciones y su cumplimiento no está garantizado, se contabilizan
+  como un pasivo. Se utilizan cuentas como la (172) «Deudas a largo
+  plazo transformables en subvenciones, donaciones y legados» o la (522)
+  si es a corto plazo.
+\item
+  \textbf{Subvenciones No Reintegrables:} Son cantidades recibidas
+  incondicionalmente o aquellas cuyas condiciones ya se han cumplido y
+  no hay dudas razonables sobre su recepción. Generalmente, se imputan
+  inicialmente al Patrimonio Neto, aunque en algunos casos específicos
+  van directamente a la Cuenta de Pérdidas y Ganancias.
+\end{itemize}
+
+\textbf{Criterios de Imputación para Subvenciones No Reintegrables (NRV
+18.1.3):}
+
+La imputación a resultados depende de la finalidad de la subvención:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Para asegurar rentabilidad mínima o compensar déficits de
+  explotación:} Se imputan como ingresos del ejercicio en que se
+  conceden (directamente a la cuenta 740).
+\item
+  \textbf{Para financiar gastos específicos:} Se imputan como ingresos
+  en el mismo ejercicio en que se devengan los gastos que financian
+  (inicialmente a patrimonio neto, luego a resultados).
+\item
+  \textbf{Para adquirir activos (inmovilizado intangible, material,
+  inversiones inmobiliarias):} Se imputan como ingresos del ejercicio en
+  proporción a la amortización de dichos activos, o cuando se enajenen,
+  corrijan valorativamente por deterioro o se den de baja (inicialmente
+  a patrimonio neto, luego a resultados).
+\item
+  \textbf{Para adquirir existencias o activos financieros:} Se imputan
+  como ingresos del ejercicio en que se produzca su enajenación,
+  corrección valorativa por deterioro o baja en balance (inicialmente a
+  patrimonio neto, luego a resultados).
+\item
+  \textbf{Para cancelación de deudas:} Se imputan como ingresos del
+  ejercicio en que se produzca la cancelación, salvo que se otorguen
+  para una financiación específica (en cuyo caso, la imputación sigue al
+  elemento financiado) (inicialmente a patrimonio neto, luego a
+  resultados).
+\item
+  \textbf{Importes monetarios sin asignación a una finalidad
+  específica:} Se imputan como ingresos del ejercicio en que se
+  reconozcan (directamente a la cuenta 740).
+\end{enumerate}
+
+\textbf{Proceso Contable Simplificado para Subvenciones No
+Reintegrables:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Imputación Directa a Resultados (Pérdidas y Ganancias):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Ocurre cuando la subvención financia la actividad general de la
+    empresa o no tiene una finalidad concreta (casos 1 y 6 de la NRV
+    18.1.3).
+  \item
+    Se utiliza la cuenta (740) «Subvenciones, donaciones y legados a la
+    explotación».
+  \end{itemize}
+\item
+  \textbf{Imputación Inicial a Patrimonio Neto y Posterior Transferencia
+  a Resultados:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Ocurre para las subvenciones con una finalidad concreta (casos 2, 3,
+    4, 5).
+  \item
+    \textbf{Paso 1 (Reconocimiento inicial):} Se contabiliza como un
+    ingreso directamente en el patrimonio neto, utilizando cuentas del
+    \textbf{subgrupo 94} («Ingresos por subvenciones, donaciones y
+    legados»). Por ejemplo, (940) para subvenciones oficiales de
+    capital, (941) para donaciones y legados de capital, o (942) para
+    otras.
+  \item
+    \textbf{Paso 2 (Regularización al cierre):} El saldo de estas
+    cuentas del subgrupo 94 se traspasa al final del ejercicio a la
+    cuenta correspondiente del \textbf{subgrupo 13} (por ejemplo, (130),
+    (131), (132)).
+  \item
+    \textbf{Paso 3 (Transferencia a Resultados):} La cantidad
+    subvencionada se va trasladando a la Cuenta de Pérdidas y Ganancias
+    de forma sistemática y correlacionada con los gastos que financia.
+    Para ello, se carga una cuenta del \textbf{subgrupo 84}
+    («Transferencias de subvenciones, donaciones y legados») y se abona
+    una cuenta del \textbf{subgrupo 74} (por ejemplo, (746) o (747)). El
+    saldo de la cuenta del subgrupo 84 también se imputa a la cuenta del
+    subgrupo 13, de modo que esta última quedará saldada cuando la
+    subvención haya sido completamente traspasada al resultado.
+  \end{itemize}
+\end{itemize}
+
+\textbf{Consideraciones Adicionales:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Deterioro de bienes financiados con subvenciones:} Si un
+  activo financiado con una subvención sufre un deterioro, una parte
+  proporcional de la subvención se transfiere a resultados. La NRV 18
+  establece que, para simplificar, las correcciones valorativas por
+  deterioro de la parte de los elementos financiada gratuitamente se
+  consideran irreversibles.
+\item
+  \textbf{Efecto impositivo:} La imputación a Patrimonio Neto de las
+  subvenciones debe realizarse neta del efecto impositivo. Esto implica
+  contabilizar diferencias temporarias (utilizando el subgrupo 83 y la
+  cuenta 479), un tema que se trata en otro capítulo del manual.
+\end{itemize}
+
+\hypertarget{provisiones-y-contingencias}{%
+\chapter{Provisiones y
+Contingencias}\label{provisiones-y-contingencias}}
+
+\hypertarget{definiciones-y-caracteruxedsticas}{%
+\section{Definiciones y
+características}\label{definiciones-y-caracteruxedsticas}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{Concepto\ de\ pasivo}: obligaciones actuales surgidas como
+  consecuencia de sucesos pasados, para cuya extinción la empresa espera
+  desprenderse de recursos que puedan producir beneficios o rendimientos
+  económicos futuros. A estos efectos se incluyen las
+  \texttt{provisiones}.
+\item
+  Se trata del grupo \textbf{14}.
+\item
+  En esta parte del PGC \textbf{las provisiones} se conocen como
+  obligaciones expresas o tácitas a largo plazo, claramente específicas
+  en cuanto a naturaleza, pero que en la fecha de cierre del ejercicio
+  son indeterminadas en cuanto a su importe exacto o a la fecha en que
+  se producirán.
+\item
+  Se reconocen como \texttt{provisiones} los pasivos que resulten
+  \texttt{indeterminados} respecto a su importe o a la fecha en la que
+  se cancelará.
+\end{itemize}
+
+\textbf{Provisiones:}
+
+\begin{itemize}
+\tightlist
+\item
+  Son \textbf{obligaciones actuales} de una empresa, surgidas de hechos
+  pasados.
+\item
+  Implican una \textbf{salida probable de recursos} para cancelarlas
+  (desprenderse de recursos).
+\item
+  Existe \textbf{incertidumbre sobre su importe exacto o la fecha} de
+  cancelación.
+\item
+  Deben poder \textbf{estimarse de forma fiable}.
+\item
+  Se reconocen en el balance como un pasivo.
+\end{itemize}
+
+\textbf{Contingencias (Pasivos Contingentes):}
+
+\begin{itemize}
+\tightlist
+\item
+  Pueden ser \textbf{obligaciones posibles}, cuya existencia se
+  confirmará por eventos futuros inciertos no controlados por la
+  empresa.
+\item
+  O pueden ser \textbf{obligaciones presentes} que no se reconocen
+  porque:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    No es probable que la empresa tenga que desprenderse de recursos
+    para cancelarla.
+  \item
+    El importe no puede valorarse con suficiente fiabilidad.
+  \end{itemize}
+\item
+  \textbf{No se reconocen en el balance}, pero se informan en la memoria
+  si no son remotas.
+\end{itemize}
+
+\textbf{Diferencia Clave:}
+
+\begin{itemize}
+\tightlist
+\item
+  Una \textbf{provisión} es una obligación presente, probable y medible
+  con fiabilidad (se contabiliza).
+\item
+  Una \textbf{contingencia} es una obligación posible, o una obligación
+  presente que no es probable o no se puede medir fiablemente (se revela
+  en notas, no se contabiliza en el balance).
+\end{itemize}
+
+\textbf{Activos Contingentes:}
+
+\begin{itemize}
+\tightlist
+\item
+  Son \textbf{derechos posibles} (no presentes) surgidos de sucesos
+  pasados, cuya existencia se confirmará por eventos futuros inciertos.
+\item
+  \textbf{No se reconocen en el balance} porque no cumplen la definición
+  de activo (no son presentes ni es seguro que generen beneficios). Se
+  informan en la memoria si es probable la entrada de beneficios.
+\end{itemize}
+
+\hypertarget{criterios-de-reconocimiento-y-valoraciuxf3n-de-las-provisiones}{%
+\section{Criterios de Reconocimiento y Valoración de las
+Provisiones}\label{criterios-de-reconocimiento-y-valoraciuxf3n-de-las-provisiones}}
+
+\hypertarget{reconocimiento-de-provisiones}{%
+\subsection{Reconocimiento de
+Provisiones}\label{reconocimiento-de-provisiones}}
+
+Según la NIC 37, se debe reconocer una provisión cuando se cumplen las
+siguientes condiciones:
+
+\begin{itemize}
+\tightlist
+\item
+  La entidad tiene una \textbf{obligación presente} (legal o implícita)
+  como resultado de un suceso pasado.
+\item
+  Es \textbf{probable} que la entidad tenga que desprenderse de recursos
+  que incorporen beneficios económicos para cancelar dicha obligación.
+\item
+  Puede hacerse una \textbf{estimación fiable} del importe de la
+  obligación.
+\end{itemize}
+
+Si no se cumplen estas tres condiciones, no se debe reconocer la
+provisión. Las contingencias se mencionan en la Memoria, mientras que
+las provisiones, además de otras menciones, implican un asiento
+contable. El Plan General de Contabilidad (PGC) establece el subgrupo 14
+para el registro de las provisiones a largo plazo.
+
+El PGC contempla diversas cuentas para provisiones, como (de la
+140-147):
+
+\begin{itemize}
+\tightlist
+\item
+  Provisión por retribuciones a largo plazo al personal.
+\item
+  Provisión para impuestos.
+\item
+  Provisión para otras responsabilidades.
+\item
+  Provisión por desmantelamiento, retiro o rehabilitación del
+  inmovilizado.
+\item
+  Provisión para actuaciones medioambientales.
+\item
+  Provisión para reestructuraciones.
+\item
+  Provisión por transacciones con pagos basados en instrumentos de
+  patrimonio.
+\end{itemize}
+
+Estas cuentas tienen su equivalente a corto plazo en las divisionarias
+de la cuenta (529) Provisiones a corto plazo.
+
+\hypertarget{valoraciuxf3n-de-las-provisiones}{%
+\subsection{Valoración de las
+Provisiones}\label{valoraciuxf3n-de-las-provisiones}}
+
+La NRV 15.2 establece que las provisiones se valorarán por:
+
+\begin{itemize}
+\tightlist
+\item
+  El \textbf{valor actual de la mejor estimación posible} del importe
+  necesario para cancelar o transferir a un tercero la obligación.
+\item
+  Los \textbf{ajustes por actualización} se registrarán como un gasto
+  financiero conforme se devenguen.
+\end{itemize}
+
+Esto implica que:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Imputación inicial}: Se cuantifica la provisión por el valor
+  actual de la mejor estimación de la deuda.
+\item
+  \textbf{Cierre de cada ejercicio}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Actualización financiera}: Se ajusta el valor por el paso
+    del tiempo, utilizando la cuenta (660) Gastos financieros por
+    actualización de provisiones. El tipo de interés debe considerar el
+    valor temporal del dinero y el riesgo específico del pasivo.
+  \item
+    \textbf{Ajuste de la estimación}: Se vuelve a estimar el valor
+    actual de la deuda con la mejor información disponible.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Si la provisión debe aumentarse, se carga a la misma cuenta de
+      gasto que la originó.
+    \item
+      Si debe disminuirse, se utiliza alguna de las divisionarias de la
+      cuenta (795) Exceso de provisiones.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Puntualizaciones importantes:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Provisión por desmantelamiento, retiro y rehabilitación
+  (cuenta 143)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Está relacionada con inmovilizados materiales y su valoración
+    inicial (NRV 2).
+  \item
+    Los cambios de valor derivados de la mejora en la estimación de esta
+    provisión repercuten sobre el valor del inmovilizado
+    correspondiente, incluso si ya está en funcionamiento.
+  \end{itemize}
+\item
+  \textbf{Provisiones a corto plazo (vencimiento \(leq\) 1 año)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Si el efecto financiero no es significativo, \textbf{no será
+    necesario llevar a cabo ningún tipo de descuento} (actualización
+    financiera). Se contabilizarán directamente en la cuenta 529.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{compensaciones-de-terceros}{%
+\subsection{Compensaciones de
+Terceros}\label{compensaciones-de-terceros}}
+
+Cuando se espere recibir una compensación de un tercero al liquidar la
+obligación (por ejemplo, de un seguro):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{No se minorará el importe de la deuda} (provisión).
+\item
+  Se reconocerá un \textbf{derecho de cobro en el activo} (por un
+  importe que no exceda el de la obligación) siempre que no existan
+  dudas de que dicho reembolso será percibido.
+\item
+  \textbf{Excepción}: Si existe un vínculo legal o contractual por el
+  que se haya exteriorizado parte del riesgo y la empresa no esté
+  obligada a responder por esa parte, la provisión se estimará por el
+  importe neto que asume la empresa.
+\end{itemize}
+
+Claro, aquí tienes el resumen de la sección ``Provisiones por
+operaciones comerciales'':
+
+\hypertarget{provisiones-por-operaciones-comerciales}{%
+\section{Provisiones por Operaciones
+Comerciales}\label{provisiones-por-operaciones-comerciales}}
+
+La actividad comercial de una empresa conlleva la asunción de
+obligaciones con los clientes, como garantías post-venta, reparaciones o
+la aceptación de devoluciones. Estas situaciones se ajustan a la
+definición de provisiones.
+
+\textbf{Reconocimiento y Valoración:}
+
+\begin{itemize}
+\tightlist
+\item
+  El Plan General de Contabilidad (PGC) incluye la cuenta \textbf{(499)
+  Provisiones por operaciones comerciales} dentro del subgrupo 49.
+\item
+  Específicamente, se utiliza la cuenta \textbf{(4999) Provisión para
+  otras operaciones comerciales} para estos fines.
+\item
+  \textbf{Procedimiento Contable Particular:}
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Al cierre del ejercicio:} Se dota la provisión por la
+    cuantía estimada de estas obligaciones futuras. Esto se hace
+    cargando la cuenta (6959) Dotación a la provisión para otras
+    operaciones comerciales y abonando la (4999) Provisión para otras
+    operaciones comerciales.
+  \item
+    \textbf{Al año siguiente:} Se anula la provisión dotada el año
+    anterior por el mismo importe. Esto se hace cargando la (4999) y
+    abonando la (79549) Exceso de provisión para otras operaciones
+    comerciales.
+  \item
+    Los gastos reales por devoluciones, reparaciones, etc., se
+    contabilizan en sus respectivas cuentas de gasto cuando ocurren
+    durante el ejercicio.
+  \end{enumerate}
+\item
+  Este método asegura una adecuada \textbf{correlación de ingresos y
+  gastos}: el gasto estimado por estas operaciones se reconoce en el
+  mismo año que la venta que las origina. Al anular la provisión al año
+  siguiente, en el resultado solo queda la diferencia entre lo estimado
+  y los gastos reales.
+\end{itemize}
+
+\textbf{Estimación de la Provisión:}
+
+\begin{itemize}
+\tightlist
+\item
+  Se debe considerar la \textbf{mejor estimación posible}.
+\item
+  Para valorar un conjunto importante de casos individuales (como el
+  total de ventas de un ejercicio), la NIC 37 sugiere utilizar el
+  \textbf{``valor esperado''}. Esto implica calcular un promedio de los
+  posibles desenlaces ponderado por sus probabilidades de ocurrencia.
+\end{itemize}
+
+\hypertarget{impuesto-sobre-beneficios}{%
+\chapter{Impuesto sobre beneficios}\label{impuesto-sobre-beneficios}}
+
+\hypertarget{definiciuxf3n-y-caracteruxedsticas}{%
+\section{Definición y
+características}\label{definiciuxf3n-y-caracteruxedsticas}}
+
+Son aquellos impuestos directos que se liquidan a partir de un resultado
+empresarial de acuerdo a las normas fiscales. Como características,
+podemos destacar:
+
+\begin{itemize}
+\tightlist
+\item
+  Impuesto directo, personal, hace referencia a una persona en concreto
+  (jurídica), proporcional y periódico.
+\item
+  El hecho imponible lo constituyen la obtención de la renta.
+\item
+  Se aplica un gravamen único.
+\item
+  Básicamente, es un gasto más del ejercicio.
+\end{itemize}
+
+Por otro lado, debemos de mencionar el
+\texttt{impuesto\ sobre\ sociedades}, cuya base imponible, se determina
+a partir del resultado contable.
+
+\hypertarget{el-resultado-contable-y-la-base-imponible}{%
+\section{El Resultado Contable y la Base
+Imponible}\label{el-resultado-contable-y-la-base-imponible}}
+
+Este apartado detalla el proceso para determinar la base imponible del
+Impuesto sobre Sociedades a partir del resultado contable de una
+empresa, así como los pasos subsecuentes para calcular la cuota final
+del impuesto.
+
+\textbf{Normativa y Punto de Partida:}
+
+\begin{itemize}
+\tightlist
+\item
+  Los contribuyentes están obligados a presentar la declaración del
+  Impuesto sobre Sociedades conforme a la Ley 27/2014, de 27 de
+  noviembre, del Impuesto sobre Sociedades, y el Real Decreto 634/2015,
+  de 10 de julio, que aprueba el Reglamento del Impuesto sobre
+  Sociedades.
+\item
+  El cálculo para determinar la cuota a pagar se inicia con el
+  \textbf{resultado contable} de la entidad.
+\end{itemize}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5053}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4947}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Análisis}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Resultado contable antes de Impuestos & \\
+(+/-) Ajustes & \\
+(=) Base imponible previa & \\
+(+/-) Bases imponibles negativas de ejercicios anteriores & \\
+(=) Base imponible & \\
+(x) Tipo de gravamen & \\
+(=) Cuota íntegra & \\
+(-) Deducciones y bonificaciones fiscales & \\
+(=) Cuota líquida & \\
+(-) Retenciones y pagos a cuenta & \\
+(=) Cuota diferencial & \\
+\end{longtable}
+
+\textbf{Proceso de Cálculo de la Base Imponible y Cuota:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Resultado Contable Antes de Impuestos (RCAI)}: Es el punto de
+  inicio.
+\item
+  \textbf{Ajustes al Resultado Contable}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Se realizan correcciones o ajustes al resultado contable debido a
+    diferencias entre los criterios de cálculo contables y los
+    permitidos por la Ley del Impuesto sobre Sociedades.
+  \item
+    Estos ajustes pueden ser positivos o negativos.
+  \item
+    Su origen puede estar en \textbf{diferencias de carácter temporal o
+    permanente}.
+  \end{itemize}
+\item
+  \textbf{Base Imponible Previa}: Resultado de aplicar los ajustes al
+  RCAI.
+\item
+  \textbf{Compensación de Bases Imponibles Negativas}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Se tienen en cuenta las bases imponibles negativas de ejercicios
+    anteriores (pérdidas fiscales).
+  \item
+    La normativa permite su compensación en el cálculo del impuesto.
+  \end{itemize}
+\item
+  \textbf{Base Imponible}: Resultado tras la posible compensación de
+  bases imponibles negativas.
+\item
+  \textbf{Aplicación del Tipo de Gravamen}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Al resultado obtenido (Base Imponible) se le aplica el tipo de
+    gravamen que corresponda.
+  \end{itemize}
+\item
+  \textbf{Cuota Íntegra}: Es el resultado de aplicar el tipo de gravamen
+  a la base imponible.
+\item
+  \textbf{Deducciones y Bonificaciones}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Se restan las deducciones o bonificaciones fiscales a las que la
+    empresa tenga derecho.
+  \item
+    El objetivo de estas deducciones es fomentar la realización de
+    ciertas actividades que benefician tanto a la entidad como a la
+    economía general.
+  \item
+    Ejemplos de estas actividades incluyen: investigación y desarrollo,
+    innovación tecnológica, creación de empleo, etc.
+  \end{itemize}
+\item
+  \textbf{Cuota Líquida}: Resulta tras restar las deducciones y
+  bonificaciones de la cuota íntegra.
+\item
+  \textbf{Retenciones y Pagos a Cuenta}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Finalmente, de la cuota líquida se deducen las cantidades que hayan
+    sido objeto de retención (cuando la empresa recibe ciertas rentas) y
+    los pagos que la empresa haya realizado a la Administración
+    Tributaria como pagos a cuenta del impuesto.
+  \end{itemize}
+\item
+  \textbf{Cuota Diferencial}: Es el importe final a ingresar o a
+  devolver por la Hacienda Pública.
+\end{enumerate}
+
+\hypertarget{el-impuesto-corriente}{%
+\section{El Impuesto Corriente}\label{el-impuesto-corriente}}
+
+Este apartado se enfoca en el concepto y registro contable del impuesto
+corriente.
+
+\textbf{Definición y Cálculo:}
+
+\begin{itemize}
+\tightlist
+\item
+  El \textbf{impuesto corriente} es la cantidad que una empresa debe
+  pagar (o puede recuperar) por el impuesto sobre beneficios devengado
+  en el ejercicio actual. Este monto se calcula aplicando las normas
+  fiscales correspondientes tras realizar los ajustes pertinentes al
+  resultado contable.
+\item
+  En esencia, el impuesto corriente como gasto se corresponde con la
+  \textbf{cuota líquida} que se obtiene después de aplicar el tipo
+  impositivo a la base imponible y restar las deducciones y
+  bonificaciones fiscales.
+\end{itemize}
+
+\textbf{Factores que Afectan el Cálculo:}
+
+\begin{itemize}
+\tightlist
+\item
+  El impuesto corriente (entendido como la cuota líquida o gasto por
+  impuesto) puede verse reducido por:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Deducciones y ventajas fiscales} aplicables sobre la cuota
+    íntegra.
+  \end{itemize}
+\item
+  Es importante distinguir que la \textbf{compensación de pérdidas de
+  ejercicios anteriores} reduce la base imponible sobre la cual se
+  calcula el impuesto, afectando así la cuota íntegra y, por ende, la
+  cuota líquida (impuesto corriente).
+\item
+  Por otro lado, hay elementos que \textbf{no modifican el importe del
+  impuesto corriente (gasto)}, pero sí afectan la cantidad final a pagar
+  o a devolver (cuota diferencial):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Retenciones} soportadas por la empresa.
+  \item
+    \textbf{Pagos a cuenta} realizados durante el ejercicio.
+  \end{itemize}
+\end{itemize}
+
+\textbf{Cuentas Contables Involucradas:}
+
+El registro contable del impuesto corriente utiliza principalmente las
+siguientes cuentas:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{(6300) Impuesto corriente}: Refleja el gasto por el impuesto
+  sobre beneficios devengado en el ejercicio. Corresponde a la cuota
+  líquida.
+\item
+  \textbf{(4752) Hacienda Pública acreedora por impuesto de sociedades}:
+  Es una cuenta de pasivo que representa la cantidad que la empresa debe
+  pagar a Hacienda por este impuesto, una vez descontadas todas las
+  deducciones, retenciones y pagos a cuenta.
+\item
+  \textbf{(473) Hacienda Pública retenciones y pagos a cuenta}: Cuenta
+  de activo que acumula las cantidades retenidas a la empresa y los
+  pagos fraccionados realizados a cuenta del impuesto del ejercicio. Se
+  regulariza al contabilizar el impuesto.
+\item
+  \textbf{(4709) Hacienda Pública deudora por devoluciones de
+  impuestos}: Cuenta de activo que surge cuando las retenciones y pagos
+  a cuenta superan la cuota líquida, reflejando el derecho de la empresa
+  a recibir una devolución.
+\end{itemize}
+
+\textbf{Ejemplificación:}
+
+Podemos ejemplificar dos casos en los que se contabiliza el impuesto
+corriente: 1. Cuando las retenciones y pagos a cuenta son inferiores a
+la cuota del impuesto, resultando en una cantidad a pagar. 2. Cuando las
+retenciones y pagos a cuenta son superiores a la cuota del impuesto,
+resultando en una cantidad a devolver por Hacienda.
+
+Finalmente, \textbf{si el resultado del ejercicio es de pérdida, surge
+una problemática que da lugar a un impuesto diferido}.
+
+\begin{itemize}
+\tightlist
+\item
+  Por impuesto diferido entendemos el efecto contable que surge de las
+  diferencias temporarias entre el resultado contable y la base
+  imponible fiscal. Estas diferencias generan activos o pasivos por
+  impuestos diferidos, que reflejan el impacto fiscal futuro derivado de
+  dichas discrepancias. El impuesto diferido se registra para garantizar
+  que los impuestos se imputen al ejercicio en el que realmente se
+  devengan, independientemente de cuándo se paguen o recuperen.
+\end{itemize}
+
+\hypertarget{diferencias-permanentes-y-temporarias}{%
+\section{Diferencias Permanentes y
+Temporarias}\label{diferencias-permanentes-y-temporarias}}
+
+Este apartado profundiza en los ajustes entre el resultado contable y la
+base imponible, centrándose en las diferencias temporarias y
+permanentes, y su relación con el impuesto diferido.
+
+\hypertarget{definiciuxf3n}{%
+\subsection{Definición}\label{definiciuxf3n}}
+
+Se retoma el concepto de los ajustes que surgen por la discrepancia
+entre los criterios contables y fiscales.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Diferencias Temporarias}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Son aquellas que se derivan de la diferente valoración contable y
+    fiscal atribuida a los activos, pasivos y determinados instrumentos
+    de patrimonio propio de la empresa.
+  \item
+    Estas diferencias tienen incidencia en la carga fiscal futura.
+  \item
+    Pueden originar dos situaciones:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{Diferencias Imponibles}: Darán lugar a mayores cantidades
+      a pagar (\textbf{en la práctica se restan}) o menores cantidades a
+      devolver por impuestos en ejercicios futuros, normalmente a medida
+      que se recuperen los activos o se liquiden los pasivos de los que
+      se derivan.
+    \item
+      \textbf{Diferencias Deducibles}: Darán lugar a menores cantidades
+      a pagar (\textbf{en la práctica se suman}) o a mayores cantidades
+      a devolver por impuestos en ejercicios futuros, a medida que se
+      recuperen los activos o se liquiden los pasivos de los que se
+      derivan.
+    \item
+      ``Imponible'' se refiere a aquello que está sujeto a impuesto, es
+      decir, la cantidad o valor sobre el cual se va a aplicar una tasa
+      impositiva para calcular el impuesto a pagar. Constituye la
+      materia prima del tributo. Podemos pensar que es toda renta, bien,
+      servicio o transacción, susceptible de ser gravada.
+    \item
+      Deducible'' se refiere a aquellos gastos, costes o minoraciones
+      que la ley permite restar de los ingresos brutos o de la base
+      imponible para determinar la base imponible neta o la cuota
+      tributaria. El objetivo de las deducciones es ajustar la capacidad
+      económica real del contribuyente.
+    \item
+      En relación: Primero se determinan los ingresos o valores
+      imponibles para obtener una base bruta. Luego, se restan los
+      gastos y otros conceptos deducibles permitidos por la ley para
+      llegar a una base neta o liquidable, sobre la cual se aplica el
+      porcentaje de impuesto correspondiente.
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Diferencias Permanentes}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Son aquellas diferencias entre las magnitudes contables y fiscales
+    que no se identifican como temporarias.
+  \item
+    No se registran contablemente como impuesto diferido, aunque sí
+    deben considerarse en el cálculo del impuesto corriente del
+    ejercicio.
+  \end{itemize}
+\item
+  \textbf{Ejemplos:}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Un beneficio por la cesión de una patente que está parcialmente
+    exento fiscalmente genera una \textbf{diferencia permanente
+    negativa} (menor base imponible que resultado contable).
+  \item
+    Una multa de tráfico no deducible fiscalmente es una
+    \textbf{diferencia permanente positiva} (mayor base imponible que
+    resultado contable).
+  \item
+    Un deterioro de valor de un cliente contabilizado como gasto, pero
+    que fiscalmente será deducible el próximo año, origina una
+    \textbf{diferencia temporaria deducible}.
+  \item
+    La amortización acelerada de un activo fiscalmente (libertad de
+    amortización) mientras contablemente se amortiza en más años, genera
+    una \textbf{diferencia temporaria imponible}.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{diferencias-temporarias-e-impuesto-diferido}{%
+\subsection{Diferencias Temporarias e Impuesto
+Diferido}\label{diferencias-temporarias-e-impuesto-diferido}}
+
+Las diferencias temporarias son la clave para entender el impuesto
+diferido.
+
+\begin{itemize}
+\tightlist
+\item
+  Se originan por la \textbf{diferente valoración contable y fiscal}
+  (diferencia entre la base fiscal y el valor contable) de activos,
+  pasivos e instrumentos de patrimonio, siempre que tengan incidencia en
+  la carga fiscal futura.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    La \textbf{base fiscal} es el importe atribuido a un elemento según
+    la legislación fiscal.
+  \end{itemize}
+\item
+  Normalmente, surgen de \textbf{diferencias temporales} en la
+  imputación de ingresos y gastos entre el resultado contable y la base
+  imponible, las cuales revierten en periodos siguientes.
+\item
+  Estas diferencias (imponibles o deducibles) se reflejan contablemente
+  mediante cuentas específicas, principalmente:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{(6301) Impuesto diferido}
+  \item
+    \textbf{(4740) Activos por diferencias temporarias deducibles}
+  \item
+    \textbf{(479) Pasivos por diferencias temporarias imponibles}
+  \end{itemize}
+\item
+  \textbf{Registro de Diferencias Temporarias Imponibles (originan un
+  pasivo por impuesto diferido)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Origen}: Se carga la cuenta (6301) Impuesto diferido y se
+    abona la (479) Pasivos por diferencias temporarias imponibles.
+    \texttt{XXX\ (6301)\ Impuesto\ diferido\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a\ (479)\ Pasivos\ por\ diferencias\ temporarias\ imponibles\ XXX}
+  \item
+    \textbf{Reversión}: Se carga la (479) Pasivos por diferencias
+    temporarias imponibles y se abona la (6301) Impuesto diferido.
+    \texttt{XXX\ (479)\ Pasivos\ por\ diferencias\ temporarias\ imponibles\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a\ (6301)\ Impuesto\ diferido\ XXX}
+  \end{itemize}
+\item
+  \textbf{Registro de Diferencias Temporarias Deducibles (originan un
+  activo por impuesto diferido)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Origen}: Se carga la cuenta (4740) Activos por diferencias
+    temporarias deducibles y se abona la (6301) Impuesto diferido.
+    \texttt{XXX\ (4740)\ Activos\ por\ diferencias\ temporarias\ deducibles\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a\ (6301)\ Impuesto\ diferido\ XXX}
+  \item
+    \textbf{Reversión}: Se carga la (6301) Impuesto diferido y se abona
+    la (4740) Activos por diferencias temporarias deducibles.
+    \texttt{XXX\ (6301)\ Impuesto\ diferido\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a\ (4740)\ Activos\ por\ diferencias\ temporarias\ deducibles\ XXX}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{explicaciuxf3n-extra}{%
+\section{Explicación Extra}\label{explicaciuxf3n-extra}}
+
+Ahora vamos a añadir una serie de ejemplos para que se entienda mejor en
+cuanto a las casuísticas que pueden surgir en la vida real, ya que puede
+ser un poco lioso, por ejemplo, el caso de que una multa de tráfico sea
+una diferencia permanente positiva: Cuando analizamos el Impuesto sobre
+Sociedades, uno de los conceptos que más dudas genera son las
+\textbf{diferencias permanentes}. En concreto, vamos a entender por qué
+una \textbf{multa de tráfico} se considera una \textbf{diferencia
+permanente positiva}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{la-multa-de-truxe1fico-un-gasto-contable-que-no-es-deducible-fiscalmente}{%
+\subsection{La Multa de Tráfico: Un Gasto Contable que No es Deducible
+Fiscalmente}\label{la-multa-de-truxe1fico-un-gasto-contable-que-no-es-deducible-fiscalmente}}
+
+Para entenderlo, debemos diferenciar dos perspectivas:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Perspectiva Contable:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Desde el punto de vista contable, una multa de tráfico es un
+    \textbf{gasto} para la empresa.
+  \item
+    Se registra en la contabilidad como tal (por ejemplo, en una cuenta
+    de gastos excepcionales o servicios exteriores).
+  \item
+    Al ser un gasto, \textbf{resta} al resultado contable de la empresa.
+    Es decir, reduce el beneficio que la empresa ha obtenido según sus
+    libros contables.
+  \end{itemize}
+\item
+  \textbf{Perspectiva Fiscal:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    La Ley del Impuesto sobre Sociedades establece claramente que las
+    \textbf{sanciones y multas (incluidas las de tráfico) no son gastos
+    fiscalmente deducibles}.
+  \item
+    Esto significa que, a ojos de Hacienda, la multa no puede ser
+    utilizada para reducir la base imponible sobre la que se calculará
+    el impuesto.
+  \end{itemize}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{por-quuxe9-se-produce-un-ajuste-positivo}{%
+\subsection{¿Por qué se produce un ``Ajuste
+Positivo''?}\label{por-quuxe9-se-produce-un-ajuste-positivo}}
+
+Aquí es donde entra en juego la necesidad de realizar un
+\textbf{ajuste}. Imagina el proceso de cálculo del impuesto:
+
+\begin{itemize}
+\tightlist
+\item
+  Se parte del \textbf{Resultado Contable Antes de Impuestos}. Este
+  resultado ya tiene la multa restada como gasto.
+\item
+  Sin embargo, la ley fiscal nos dice que esa multa no debe haber
+  restado. Para ``deshacer'' el efecto de esa resta contable, tenemos
+  que \textbf{sumar de nuevo} el importe de la multa al resultado
+  contable.
+\end{itemize}
+
+\textbf{Ejemplo numérico:}
+
+Imagina que tu empresa tiene:
+
+\begin{itemize}
+\tightlist
+\item
+  Un \textbf{Resultado Contable Antes de Impuestos de 50.000 €}.
+\item
+  Dentro de esos 50.000 €, ya se ha restado una \textbf{multa de 1.000
+  €}. (Es decir, si no hubiera habido multa, el resultado contable
+  habría sido 51.000 €).
+\end{itemize}
+
+Cuando calculas la \textbf{Base Imponible Fiscal}:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Partes de:} 50.000 € (Resultado Contable)
+\item
+  \textbf{Ajuste por multa:} Como fiscalmente esos 1.000 € no son
+  deducibles, los \textbf{sumas} para revertir la resta que se hizo
+  contablemente.
+\item
+  \textbf{Base Imponible Fiscal:} 50.000 € + 1.000 € = \textbf{51.000 €}
+\end{itemize}
+
+En este caso, la multa provoca que tu \textbf{base imponible fiscal
+(51.000 €) sea mayor que tu resultado contable (50.000 €)}. Por eso se
+le denomina \textbf{``positiva''}, porque incrementa la cantidad sobre
+la que pagarás impuestos.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{por-quuxe9-es-permanente}{%
+\subsection{¿Por qué es
+``Permanente''?}\label{por-quuxe9-es-permanente}}
+
+Se le llama \textbf{permanente} porque esta diferencia \textbf{nunca se
+va a revertir o compensar} en el futuro. La multa nunca será un gasto
+deducible fiscalmente, ni en el ejercicio actual ni en los siguientes.
+
+Esto la distingue de las ``diferencias temporarias'', que sí se
+compensan con el tiempo (por ejemplo, un gasto que es deducible ahora
+contablemente pero fiscalmente lo será en el futuro, o viceversa).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{en-resumen}{%
+\subsection{En Resumen:}\label{en-resumen}}
+
+Una multa de tráfico es una \textbf{diferencia permanente positiva}
+porque:
+
+\begin{itemize}
+\tightlist
+\item
+  Es un \textbf{gasto} que reduce tu resultado contable.
+\item
+  \textbf{Nunca será deducible fiscalmente}, lo que la convierte en
+  \textbf{permanente}.
+\item
+  Para calcular la base imponible fiscal, debes \textbf{sumarla de
+  nuevo} al resultado contable, lo que \textbf{incrementa} dicha base
+  imponible y, por lo tanto, es un ajuste \textbf{positivo}.
+\end{itemize}
+
+Esto asegura que, a efectos fiscales, la empresa no se beneficie de una
+reducción de su base imponible por un gasto que la ley no considera
+deducible.
+
+Creo que este ejemplo es bastante global y abarca todas las posibles
+dudas que el lector pueda tener.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{diferencias-temporarias-por-puxe9rdidas-a-compensar}{%
+\subsection{Diferencias Temporarias por Pérdidas a
+Compensar}\label{diferencias-temporarias-por-puxe9rdidas-a-compensar}}
+
+Este subapartado explica cómo se tratan las pérdidas fiscales de
+ejercicios anteriores que están pendientes de compensar con beneficios
+futuros.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Naturaleza}: Las pérdidas de ejercicios anteriores se
+  consideran un tipo de \textbf{diferencia temporaria}. Esto se debe a
+  que, cuando una empresa incurre en pérdidas fiscales, se genera un
+  derecho (un crédito fiscal) que solo podrá aplicarse (revertir) cuando
+  la empresa obtenga beneficios fiscales en el futuro.
+\item
+  \textbf{Cuenta Contable}: La cuenta principal para reflejar este
+  derecho es la \textbf{(4745) Crédito por pérdidas a compensar del
+  ejercicio}. Esta cuenta recoge el importe de la reducción del Impuesto
+  sobre Beneficios que se espera pagar en el futuro, gracias a la
+  compensación de estas bases imponibles negativas pendientes.
+\item
+  \textbf{Reconocimiento del Activo por Impuesto Diferido}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Siguiendo el \textbf{principio de prudencia}, un activo por impuesto
+    diferido derivado de estas pérdidas solo se reconocerá si es
+    \textbf{probable} que la empresa genere ganancias fiscales futuras
+    suficientes para poder aplicar estos créditos.
+  \item
+    Siempre que se cumpla la condición anterior, se reconocerá un activo
+    por: el derecho a compensar pérdidas fiscales en ejercicios
+    posteriores, por las diferencias temporarias deducibles, y por las
+    deducciones y otras ventajas fiscales no utilizadas que queden
+    pendientes de aplicar fiscalmente.
+  \item
+    Si existe un historial de pérdidas continuadas, se presume (salvo
+    prueba en contrario) que no es probable obtener dichas ganancias
+    futuras que permitan compensar las bases imponibles negativas en un
+    plazo no superior al previsto por la legislación tributaria, lo que
+    limitaría el reconocimiento de este activo.
+  \end{itemize}
+\item
+  \textbf{Registro Contable}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Origen del crédito fiscal (al surgir la pérdida compensable
+    y ser probable su aprovechamiento)}:
+    \texttt{XXX\ (4745)\ Crédito\ por\ pérdidas\ a\ compensar\ del\ ejercicio\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a\ (6301)\ Impuesto\ diferido\ XXX}
+  \item
+    \textbf{Reversión del crédito fiscal (al compensar las pérdidas con
+    beneficios futuros)}:
+    \texttt{XXX\ (6301)\ Impuesto\ diferido\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a\ (4745)\ Crédito\ por\ pérdidas\ a\ compensar\ del\ ejercicio\ XXX}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{estados-financieros}{%
+\chapter{Estados Financieros}\label{estados-financieros}}
+
+\hypertarget{los-estados-financieros-en-el-pgc}{%
+\section{Los estados financieros en el
+PGC}\label{los-estados-financieros-en-el-pgc}}
+
+\hypertarget{definiciuxf3n-objetivo-y-tipologuxeda}{%
+\subsection{Definición, objetivo y
+tipología}\label{definiciuxf3n-objetivo-y-tipologuxeda}}
+
+Los estados financieros constituyen una representación estructurada de
+la \textbf{situación financiera} y del \textbf{rendimiento financiero}
+de una entidad.
+
+EL objetivo es \textbf{proporcionar} a los distintos usuarios
+información sobre la situación financiera para que sea \emph{útil para
+la toma de decisiones}.
+
+Como venimos viendo en las asignaturas anteriores de Contabilidad, este
+tema se enfoca en la información útil para la toma de decisiones.
+
+La legislación mercantil obliga a las empresas a elaborar un conjunto de
+estados financieros denominados \textbf{cuentas anuales}. Sabemos que el
+\emph{Marco conceptula} posee los cinco documentos que las integran.
+
+\hypertarget{normas-para-la-elaboraciuxf3n-de-las-cuentas-anuales-y-formatos-de-presentaciuxf3n}{%
+\subsection{Normas para la elaboración de las cuentas anuales y formatos
+de
+presentación}\label{normas-para-la-elaboraciuxf3n-de-las-cuentas-anuales-y-formatos-de-presentaciuxf3n}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4359}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5641}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{NECA (PGC)}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{NECA (PGC Pymes)}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1. Documentos que integran las CCAA & 1. Documentos que integran las
+CCAA \\
+2. Formulación de las CCAA & 2. Formulación de las CCAA \\
+3. Estructura de las CCAA & 3. Estructura de las CCAA \\
+4. Cuentas anuales abreviadas & 4. Normas comunes al balance, la cuenta
+de pérdidas y ganancias y el estado de cambios en el patrimonio neto \\
+5. Normas comunes al balance, la cuenta de pérdidas y ganancias, el
+estado de cambios en el patrimonio neto y el estado de flujos de
+efectivo & 5. Balance \\
+6. Balance & 6. Cuenta de pérdidas y ganancias \\
+7. Cuentas de pérdidas y ganancias & 7. Estado de cambios en el
+patrimonio neto \\
+8. Estado de cambios en el patrimonio neto & 8. Memoria \\
+9. Estado de flujos de efectivo & 9. Número medio de trabajadores \\
+10. Memoria & 10. Empresas del grupo, multigrupo y asociadas \\
+11. Cifra anual de negocios & 11. Estados financieros intermedios \\
+12. Número medio de trabajadores & 12. Partes vinculadas \\
+13. Empresas del grupo, multigrupo y asociadas & \\
+14. Estados financieros intermedios & \\
+15. Partes vinculadas & \\
+\end{longtable}
+
+\hypertarget{diferencias-entre-el-pgc-ruxe9gimen-general-y-el-pgc-pymes}{%
+\subsection{Diferencias entre el PGC Régimen General y el PGC
+Pymes}\label{diferencias-entre-el-pgc-ruxe9gimen-general-y-el-pgc-pymes}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4014}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5986}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{NECA (PGC Régimen General)}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{NECA (PGC Pymes)}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Balance (normal y abreviado) & Balance \\
+Cuenta de pérdidas y ganancias (normal y abreviada) & Cuenta de pérdidas
+y ganancias \\
+Memoria (normal y abreviada) & Memoria \\
+Estado de Cambios en el Patrimonio Neto & Estado de Cambios en el
+Patrimonio Neto (optativo) \\
+Estado de Flujos de efectivo & El Estado de Flujos de efectivo es
+optativo, se seguirá, en su caso, el formato establecido en el PGC \\
+\end{longtable}
+
+Vemos que se hace distinción repecto de las Pymes. Esto se debe a que
+ciertas partes de su PGC varían y son optativas, como es el caso de
+\emph{formular el estado de flujos de efectivo}.
+
+\hypertarget{documentos-que-integran-las-cuentas-anuales}{%
+\subsection{Documentos que integran las cuentas
+anuales}\label{documentos-que-integran-las-cuentas-anuales}}
+
+Como hemos estudiado en asignaturas anteriores estas son: 1. Balance 2.
+Cuenta de Pérdidas y Ganancias. 3. Estado de cambios en el PN. 4. Estado
+de flujos de efectivo. 5. Memoria.
+
+Cada documento que conformas las cuentas anuales se ha de redactar de
+conformidad con lo previsto en la legislación mercantil.
+
+\hypertarget{formulaciuxf3n-de-las-cuentas-anuales}{%
+\subsection{Formulación de las cuentas
+anuales}\label{formulaciuxf3n-de-las-cuentas-anuales}}
+
+\begin{itemize}
+\tightlist
+\item
+  Periodicidad, responsabilidad,fecha y firma, identificabilidad y
+  valores.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Periodicidad: las cuentas anuales, por norma general, se han de
+    elaborar con una periodicidad de doce meses, salvo en determinados
+    casos.
+  \item
+    Responsabilidad: éstas deben de ser formuladas por el
+    \emph{empresario o administradores}, quienes \textbf{responderán de
+    su veracidad}.
+  \item
+    Fecha y firma: deben de ser firmadas por el empresario y en ellas
+    debe de aparecer la fecha.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{Plazos para la formulación, aprobación y depósito de las
+      cuentas anuales}:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \textbf{Formulación}: Las cuentas anuales deben ser formuladas
+        por los administradores de la empresa en un plazo máximo de tres
+        meses desde el cierre del ejercicio social.
+      \item
+        \textbf{Aprobación}: Una vez formuladas, las cuentas anuales
+        deben ser aprobadas por la junta general de socios o accionistas
+        en un plazo máximo de seis meses desde el cierre del ejercicio
+        social.
+      \item
+        \textbf{Depósito}: Tras su aprobación, las cuentas anuales deben
+        ser depositadas en el Registro Mercantil correspondiente en el
+        plazo de un mes desde la fecha de su aprobación.
+      \end{itemize}
+    \end{itemize}
+
+    Estos plazos son esenciales para garantizar el cumplimiento de las
+    obligaciones legales y la transparencia en la información financiera
+    de las empresas.
+  \item
+    Identificabilidad: todas las cuentas deben de estar identificadas de
+    forma \emph{clara} aportando la información necesaria en cada una.
+  \item
+    Valores: Se elaborarán siguiendo sus valores expresados en euros.
+  \end{itemize}
+\item
+  Obligación de auditar las cuentas anuales y excepción por razón de
+  tamaño. Las cuentas han de ser revisadas por un \textbf{auditor de
+  cuentas}.
+
+  \begin{itemize}
+  \item
+    Excepción por tamaño a la obligación de auditar las cuentas anuales
+
+    \begin{longtable}[]{@{}
+      >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6912}}
+      >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3088}}@{}}
+    \toprule\noalign{}
+    \begin{minipage}[b]{\linewidth}\raggedright
+    \textbf{Criterios para la excepción}
+    \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+    \textbf{Límite}
+    \end{minipage} \\
+    \midrule\noalign{}
+    \endhead
+    \bottomrule\noalign{}
+    \endlastfoot
+    Total Activos & \(\leq\) 2.850.000 € \\
+    Cifra de Negocios & \(\leq\) 5.700.000 € \\
+    Número medio de trabajadores & \(\leq\) 50 \\
+    \end{longtable}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{estructura-de-las-cuentas-anuales-y-formatos-para-su-presentaciuxf3n}{%
+\subsection{Estructura de las cuentas anuales y formatos para su
+presentación}\label{estructura-de-las-cuentas-anuales-y-formatos-para-su-presentaciuxf3n}}
+
+Se consideran dos formatos:
+
+\begin{itemize}
+\item
+  Régimen General del PGC
+\item
+  \textbf{Formato Normal:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Es el modelo general que deben utilizar las sociedades anónimas,
+    limitadas, en comandita por acciones, sociedades colectivas,
+    comanditarias simples y cooperativas.
+  \item
+    Las entidades de interés público siempre deben utilizar el formato
+    normal.
+  \item
+    Incluye modelos para el Balance, Cuenta de Pérdidas y Ganancias,
+    Memoria, Estado de Cambios en el Patrimonio Neto y Estado de Flujos
+    de Efectivo.
+  \end{itemize}
+\item
+  \textbf{Formato Abreviado:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Es la obligación mínima para empresarios individuales y empresas con
+    otras formas societarias no mencionadas para el formato normal.
+  \item
+    Una sociedad mercantil que generalmente usaría el formato normal
+    puede optar por el abreviado si durante dos ejercicios consecutivos
+    no supera dos de los siguientes límites:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{Para Balance y Memoria abreviados}:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Total de activo: 4.000.000 €.
+      \item
+        Importe neto de la cifra anual de negocio: 8.000.000 €.
+      \item
+        Número medio de trabajadores: 50.
+      \end{itemize}
+    \item
+      \textbf{Para Cuenta de Pérdidas y Ganancias abreviada}:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Total de activo: 11.400.000 €.
+      \item
+        Importe neto de la cifra anual de negocio: 22.800.000 €.
+      \item
+        Número medio de trabajadores: 250.
+      \end{itemize}
+    \end{itemize}
+  \item
+    En el primer ejercicio desde su constitución, transformación o
+    fusión, las sociedades pueden formular cuentas anuales abreviadas si
+    al cierre de ese primer ejercicio no superan dos de los límites
+    mencionados.
+  \item
+    Se pierde la posibilidad de usar formatos abreviados si durante dos
+    ejercicios consecutivos se superan dos de los límites.
+  \item
+    Si se puede formular balance y memoria abreviados, el Estado de
+    Cambios en el Patrimonio Neto y el Estado de Flujos de Efectivo no
+    son obligatorios.
+  \end{itemize}
+\item
+  PGC para PYMES
+\item
+  \textbf{Formato para PYMES:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Las PYMES pueden presentar las cuentas anuales siguiendo el formato
+    establecido en el PGC para PYMES, que es similar al modelo abreviado
+    del régimen general, con ciertas diferencias en criterios de
+    valoración y formulación.
+  \item
+    Una empresa puede acogerse al PGC para PYMES si durante dos
+    ejercicios consecutivos, a fecha de cierre de cada uno, no supera
+    dos de los tres límites siguientes:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Total de activo: 4.000.000 €.
+    \item
+      Importe neto de la cifra anual de negocios: 8.000.000 €.
+    \item
+      Número medio de trabajadores: 50.
+    \end{itemize}
+  \item
+    Se pierde la facultad de aplicar el PGC para PYMES si durante dos
+    ejercicios consecutivos se superan dos de los límites anteriores.
+  \item
+    El PGC para PYMES incluye un único formato para el Balance, la
+    Cuenta de Pérdidas y Ganancias, la Memoria y el Estado de Cambios en
+    el Patrimonio Neto (este último es optativo).
+  \item
+    El Estado de Flujos de Efectivo es optativo para las PYMES; si
+    deciden formularlo, deben usar el formato del PGC general.
+  \item
+    No pueden aplicar el PGC de PYMES:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Entidades de interés público.
+    \item
+      Empresas que forman parte de un grupo obligado a formular cuentas
+      anuales consolidadas.
+    \item
+      Empresas cuya moneda funcional sea distinta del euro.
+    \item
+      Entidades financieras que captan fondos del público y las que
+      asuman la gestión de las anteriores.
+    \end{itemize}
+  \item
+    Las PYMES que opten por aplicar la versión específica para PYMES
+    deben mantener esta opción de forma continuada al menos durante tres
+    años, salvo que superen los límites.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{normas-comunes-al-balance-cuenta-de-puxe9rdidas-y-ganancias-estado-de-cambios-en-el-patrimonio-neto-y-estado-de-flujos-de-efectivo}{%
+\subsection{Normas Comunes al Balance, Cuenta de Pérdidas y Ganancias,
+Estado de Cambios en el Patrimonio Neto y Estado de Flujos de
+Efectivo}\label{normas-comunes-al-balance-cuenta-de-puxe9rdidas-y-ganancias-estado-de-cambios-en-el-patrimonio-neto-y-estado-de-flujos-de-efectivo}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Comparabilidad de Cifras}: En cada partida deben figurar las
+  cifras del ejercicio actual (n) y las del ejercicio anterior (n-1). Si
+  no son comparables (por cambios en estructura, criterio contable o
+  corrección de error), se debe adaptar el ejercicio precedente y
+  explicarlo en la memoria.
+\item
+  \textbf{Partidas sin Importe}: No se incluirán partidas sin importe en
+  el ejercicio actual ni en el precedente.
+\item
+  \textbf{Uniformidad de Criterios}: Los criterios de contabilización no
+  deben modificarse de un ejercicio a otro, salvo casos excepcionales
+  que se justificarán en la memoria.
+\item
+  \textbf{Flexibilidad en Partidas}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Se pueden añadir nuevas partidas a las previstas.
+  \item
+    Se puede realizar una subdivisión más detallada de las partidas
+    existentes.
+  \item
+    Se pueden agrupar partidas (precedidas de números árabes en balance
+    y estado de cambios en el patrimonio neto, o letras en la cuenta de
+    pérdidas y ganancias y estado de flujos de efectivo) si su importe
+    es irrelevante para la imagen fiel o si favorece la claridad.
+  \end{itemize}
+\item
+  \textbf{Referencias Cruzadas}: Cada partida, cuando proceda, tendrá
+  una referencia cruzada a la información correspondiente en la memoria.
+\item
+  \textbf{Empresas del Grupo y Asociadas}: Los créditos, deudas,
+  ingresos y gastos con empresas del grupo y asociadas figurarán en las
+  partidas correspondientes, pero separadas del resto.
+\item
+  \textbf{Negocios Conjuntos sin Personalidad Jurídica}: Las empresas
+  que participen en negocios conjuntos (como UTEs, comunidades de
+  bienes, etc.) deben presentar esta información según la norma de
+  registro y valoración relativa a negocios conjuntos.
+\end{itemize}
+
+\hypertarget{balance-de-situaciuxf3n}{%
+\subsection{Balance de Situación}\label{balance-de-situaciuxf3n}}
+
+El Balance de Situación es el estado contable que refleja los recursos
+económicos (Activo) y financieros (Pasivo y Patrimonio Neto) de la
+empresa en un momento dado. Su objetivo es mostrar la situación
+financiera de la entidad.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estructura y Clasificación}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Las partidas se clasifican en \textbf{corrientes} (vinculadas al
+    ciclo normal de explotación, generalmente inferior a un año, o
+    mantenidas para negociar) y \textbf{no corrientes} (el resto, con
+    permanencia superior a un año). Esto aplica tanto al Activo como al
+    Pasivo.
+  \item
+    Los activos y pasivos financieros pueden presentarse por su importe
+    neto si existe el derecho exigible de compensarlos y la intención de
+    liquidarlos por el neto.
+  \item
+    Las correcciones valorativas por deterioro y las amortizaciones
+    acumuladas minoran la partida del activo correspondiente,
+    presentándose los activos por su valor neto contable.
+  \end{itemize}
+\item
+  \textbf{Partidas Específicas Destacadas}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Inversiones Inmobiliarias}: Terrenos o construcciones
+    destinados a obtener rentas o plusvalías fuera del curso ordinario
+    de las operaciones.
+  \item
+    \textbf{Capital Social y Prima de Emisión}: Deben figurar en el
+    patrimonio neto si la inscripción en el Registro Mercantil es
+    anterior a la formulación de las cuentas; de lo contrario, irán a
+    deudas a corto plazo.
+  \item
+    \textbf{Instrumentos de Patrimonio Propios}: Se registran en el
+    Patrimonio Neto, generalmente con signo negativo.
+  \item
+    \textbf{Subvenciones, Donaciones y Legados no Reintegrables}: Las
+    otorgadas por terceros distintos a socios forman parte del
+    patrimonio neto en una sub-agrupación específica; las otorgadas por
+    socios se incluyen en fondos propios.
+  \item
+    \textbf{Activos no Corrientes Mantenidos para la Venta y Pasivos
+    Vinculados}: Se presentan de forma separada en el activo y pasivo,
+    respectivamente, y no se compensan.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{cuenta-de-puxe9rdidas-y-ganancias}{%
+\subsection{Cuenta de Pérdidas y
+Ganancias}\label{cuenta-de-puxe9rdidas-y-ganancias}}
+
+La Cuenta de Pérdidas y Ganancias (o Cuenta de Resultados) muestra el
+total de ingresos y gastos reconocidos por la empresa durante un
+ejercicio económico, con el fin de determinar el resultado del periodo
+(beneficio o pérdida), excepto aquellos que se imputen directamente al
+patrimonio neto.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estructura por Resultados Parciales}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Resultado de Explotación}: Diferencia entre ingresos y
+    gastos de las actividades ordinarias y no financieras.
+  \item
+    \textbf{Resultado Financiero}: Diferencia entre ingresos y gastos
+    derivados de instrumentos financieros.
+  \item
+    \textbf{Resultado antes de Impuestos}: Suma de los dos anteriores.
+  \item
+    \textbf{Resultado del Ejercicio Procedente de Operaciones
+    Continuadas}: Resultado antes de impuestos menos el impuesto sobre
+    beneficios.
+  \item
+    \textbf{Resultado del Ejercicio Procedente de Operaciones
+    Interrumpidas}: Resultado (neto de impuestos) de componentes de la
+    empresa que se han enajenado o clasificado como mantenidos para la
+    venta y representan una línea de negocio o área geográfica
+    principal.
+  \item
+    \textbf{Resultado del Ejercicio}: Suma del resultado de operaciones
+    continuadas e interrumpidas; esta cifra se refleja en el patrimonio
+    neto.
+  \end{itemize}
+\item
+  \textbf{Principios de Formulación Clave}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Los ingresos y gastos se clasifican según su \textbf{naturaleza}.
+  \item
+    Ventas, prestaciones de servicios y otros ingresos de explotación se
+    reflejan por su \textbf{importe neto} de devoluciones y descuentos.
+  \item
+    Las \textbf{subvenciones} se imputan a resultados según su finalidad
+    (explotación, financiación de activos no financieros, o de carácter
+    financiero).
+  \item
+    Los \textbf{excesos de provisiones} (reversiones) se recogen en una
+    partida específica, con excepciones para las de personal y
+    operaciones comerciales.
+  \item
+    Ingresos o gastos de \textbf{carácter excepcional y cuantía
+    significativa} (ej. inundaciones, multas) se pueden agrupar en
+    ``Otros resultados'' dentro del resultado de explotación.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{la-memoria}{%
+\subsection{La Memoria}\label{la-memoria}}
+
+La Memoria es un documento que completa, amplía y comenta la información
+contenida en los otros estados financieros que integran las cuentas
+anuales. Su principal función es aportar información, en su mayoría
+cualitativa, para facilitar la comprensión de la situación patrimonial,
+financiera y los resultados de la empresa.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Objetivo}: Aclarar y detallar la información sintética de los
+  otros estados para que las cuentas anuales reflejen la imagen fiel de
+  la empresa.
+\item
+  \textbf{Contenido}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Incluye información mínima a cumplimentar; los apartados no
+    significativos pueden omitirse.
+  \item
+    Debe incluir cualquier otra información relevante no solicitada
+    explícitamente si es necesaria para la imagen fiel, incluyendo datos
+    cualitativos del ejercicio anterior si son significativos.
+  \item
+    Incorpora información que otras normativas exijan incluir.
+  \item
+    La información cuantitativa se refiere al ejercicio actual y al
+    anterior (comparativo), salvo que una norma contable indique lo
+    contrario.
+  \item
+    Un ejemplo de información específica es el período medio de pago a
+    proveedores para empresas que elaboren la memoria en modelo normal.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{estado-de-flujos-de-efectivo-efe}{%
+\section{Estado de Flujos de Efectivo
+(EFE)}\label{estado-de-flujos-de-efectivo-efe}}
+
+El Estado de Flujos de Efectivo informa sobre el origen y la utilización
+de los activos monetarios representativos de efectivo y otros activos
+líquidos equivalentes, clasificando los movimientos por actividades e
+indicando la variación neta de dicha magnitud en el ejercicio.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Concepto y Características}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Objetivo}: Mostrar los cobros y pagos realizados por la
+    empresa para explicar la variación de la tesorería.
+  \item
+    \textbf{Efectivo y equivalentes}: Incluye la tesorería en caja y
+    bancos a la vista, instrumentos financieros convertibles en efectivo
+    con vencimiento no superior a tres meses desde su adquisición (sin
+    riesgo significativo de cambio de valor y parte de la gestión normal
+    de tesorería), y en algunos casos, descubiertos bancarios
+    ocasionales.
+  \item
+    \textbf{Características}: Proporciona magnitudes objetivas (cobros y
+    pagos), informa sobre las causas de las variaciones de tesorería,
+    aumenta la transparencia para la toma de decisiones y es de fácil
+    comprensión.
+  \end{itemize}
+\item
+  \textbf{Clasificación de los Flujos de Efectivo}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Actividades de Explotación}: Principalmente los ocasionados
+    por las actividades que constituyen la principal fuente de ingresos
+    de la empresa y otras no calificables como inversión o financiación.
+    Incluye pagos de intereses, cobros de intereses y dividendos, y el
+    pago del impuesto de beneficios.
+  \item
+    \textbf{Actividades de Inversión}: Pagos por adquisición de activos
+    no corrientes (intangibles, materiales, inversiones inmobiliarias,
+    financieras) y otros activos no equivalentes, así como los cobros
+    por su enajenación o amortización.
+  \item
+    \textbf{Actividades de Financiación}: Cobros de la emisión de
+    títulos o recursos de terceros (préstamos) y los pagos por su
+    amortización o devolución. También incluye los pagos de dividendos a
+    los accionistas.
+  \end{itemize}
+\item
+  \textbf{Metodología de Cálculo}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Flujos de Explotación}: El PGC utiliza un método mixto.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Se parte del ``Resultado del ejercicio antes de impuestos''.
+    \item
+      Se realizan ``Ajustes del resultado'' para eliminar partidas que
+      no suponen movimiento de efectivo (ej. amortizaciones, deterioros,
+      resultados por bajas de inmovilizado, ingresos y gastos
+      financieros que se tratarán por separado) y partidas cuyos flujos
+      se clasifican como de inversión o financiación.
+    \item
+      Se consideran los ``Cambios en el capital corriente'' (variaciones
+      en existencias, deudores, acreedores, etc.).
+    \item
+      Finalmente, se incorporan de forma directa otros flujos como pagos
+      de intereses, cobros de dividendos e intereses, y cobros/pagos por
+      impuesto sobre beneficios.
+    \end{itemize}
+  \item
+    \textbf{Flujos de Inversión y Financiación}: Se utiliza el método
+    directo, presentando los cobros y pagos brutos asociados a estas
+    actividades.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{Inversión}: Pagos por adquisiciones y cobros por
+      desinversiones de activos no corrientes.
+    \item
+      \textbf{Financiación}: Cobros por emisión de instrumentos de
+      patrimonio o pasivo financiero, y pagos por su amortización o por
+      dividendos.
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Consideraciones Adicionales}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Los flujos de activos y pasivos financieros de alta rotación (plazo
+    entre adquisición y vencimiento no superior a seis meses) pueden
+    presentarse netos.
+  \item
+    Las transacciones en moneda extranjera se convierten al tipo de
+    cambio de la fecha del flujo o una media ponderada.
+  \item
+    Se debe informar sobre saldos significativos de efectivo no
+    disponibles para ser utilizados.
+  \end{itemize}
+\item
+  \textbf{Utilidad}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Evalúa la capacidad de la empresa para generar flujos de efectivo.
+  \item
+    Permite analizar la política de dividendos y la capacidad para
+    atender deudas.
+  \item
+    Ayuda a comprender la relación entre el resultado contable y los
+    movimientos reales de tesorería.
+  \item
+    Facilita la proyección de futuros flujos de efectivo.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{estado-de-cambios-en-el-patrimonio-neto-ecpn}{%
+\section{Estado de Cambios en el Patrimonio Neto
+(ECPN)}\label{estado-de-cambios-en-el-patrimonio-neto-ecpn}}
+
+El Estado de Cambios en el Patrimonio Neto tiene como objetivo mostrar
+las variaciones ocurridas en el patrimonio de la empresa durante el
+ejercicio. Es fundamental para que los accionistas y otros interesados
+puedan evaluar la evolución de la riqueza de la empresa.
+
+Este estado se compone de dos partes principales:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Estado de Ingresos y Gastos Reconocidos (EIGR)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Recoge los cambios en el patrimonio neto derivados de:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      El \textbf{resultado del ejercicio} obtenido de la Cuenta de
+      Pérdidas y Ganancias.
+    \item
+      Los \textbf{ingresos y gastos} que, según las normas de registro y
+      valoración, deben imputarse \textbf{directamente al patrimonio
+      neto} (por ejemplo, ciertas valoraciones de instrumentos
+      financieros, coberturas de flujos de efectivo, subvenciones de
+      capital recibidas, diferencias de conversión, y el efecto
+      impositivo de estas partidas).
+    \item
+      Las \textbf{transferencias realizadas a la Cuenta de Pérdidas y
+      Ganancias} de partidas que previamente se habían reconocido en el
+      patrimonio neto (por ejemplo, cuando se realiza un activo
+      financiero valorado con cambios en el patrimonio neto, o la
+      imputación de subvenciones).
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Estado Total de Cambios en el Patrimonio Neto (ETCPN)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Informa de \textbf{todos los cambios} habidos en el patrimonio neto,
+    detallando:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      El \textbf{saldo total de los ingresos y gastos reconocidos} (que
+      es el resultado final del EIGR).
+    \item
+      Las \textbf{variaciones originadas por operaciones con los socios
+      o propietarios} cuando actúen como tales (ej. ampliaciones o
+      reducciones de capital, distribución de dividendos, operaciones
+      con acciones propias).
+    \item
+      Las \textbf{restantes variaciones} que se produzcan en el
+      patrimonio neto (ej. traspaso del resultado del ejercicio a
+      reservas, aplicación de resultados de ejercicios anteriores).
+    \item
+      Los \textbf{ajustes al patrimonio neto debidos a cambios en
+      criterios contables y correcciones de errores} de ejercicios
+      anteriores. Estos ajustes se presentan modificando los saldos
+      iniciales del patrimonio del ejercicio más antiguo presentado a
+      efectos comparativos.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Funciones y Utilidad}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Permite a los accionistas conocer cómo ha variado su inversión y la
+    política de la empresa respecto a dividendos y autofinanciación.
+  \item
+    Informa sobre los efectos de cambios en políticas contables o
+    correcciones de errores.
+  \item
+    Detalla las modificaciones en el valor de activos que afectan
+    directamente al patrimonio.
+  \item
+    Muestra las pérdidas y beneficios no realizados (por ejemplo, por
+    ajustes a valor razonable de ciertos instrumentos financieros o por
+    operaciones de cobertura).
+  \item
+    Sirve de base para que otros interesados (acreedores, empleados,
+    Administración) evalúen la solvencia y garantía que ofrece el
+    patrimonio de la empresa.
+  \item
+    Ayuda a analizar el excedente generado por la empresa, distinguiendo
+    entre el realizado y el no realizado.
+  \end{itemize}
+\end{itemize}
+
+
+\backmatter
+\end{document}

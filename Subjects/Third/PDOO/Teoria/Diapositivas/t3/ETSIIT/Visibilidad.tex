@@ -1,0 +1,961 @@
+\documentclass[a4paper,12pt]{article}
+
+% Paquetes básicos
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{lipsum}
+\usepackage{geometry}
+\geometry{top=3cm, bottom=3cm, left=2.5cm, right=2.5cm}
+
+% Paquetes para diseño
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+% Paquetes para el entorno lstlisting
+\usepackage{listings}
+\usepackage{inconsolata}
+
+%encabezado y pie de página nivel profesional
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\rightmark}
+\fancyfoot[L]{\textbf{Ismael Sallami Moreno - GIIADE}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{\textbf{(UGR)} \today}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{15pt}
+\setlength{\headsep}{10pt}
+\setlength{\footskip}{20pt}
+\usepackage{truncate}
+\fancyhead[L]{\truncate{0.5\headwidth}{\leftmark}}
+\fancyhead[R]{\truncate{0.5\headwidth}{\rightmark}}
+\usepackage{mathpazo}
+\usepackage{tcolorbox}
+
+
+% Paquete para fondo
+\usepackage{background}
+\usepackage{float}
+
+% Configuración de lstlisting
+\lstset{
+    inputencoding=utf8,          % Permite UTF-8
+    extendedchars=true,          % Reconoce caracteres extendidos
+    literate=                    % Configuración manual para tildes y símbolos
+        {á}{{\'a}}1
+        {é}{{\'e}}1
+        {í}{{\'i}}1
+        {ó}{{\'o}}1
+        {ú}{{\'u}}1
+        {ñ}{{\~n}}1
+        {Á}{{\'A}}1
+        {É}{{\'E}}1
+        {Í}{{\'I}}1
+        {Ó}{{\'O}}1
+        {Ú}{{\'U}}1
+        {Ñ}{{\~N}}1
+        {¿}{{\textquestiondown}}1
+        {¡}{{\textexclamdown}}1,
+    basicstyle=\ttfamily,        % Fuente monoespaciada
+    breaklines=true,             % Habilita salto de línea automático
+    frame=single,                % Marco alrededor del código
+    backgroundcolor=\color{gray!10}, % Fondo gris claro
+    keywordstyle=\color{blue},   % Color para palabras clave
+    commentstyle=\color{green},  % Color para comentarios
+    stringstyle=\color{red}      % Color para strings
+}
+\lstdefinestyle{customcpp}{
+    language=C++,                % Lenguaje de programación
+    showspaces=false,            % No mostrar espacios
+    showtabs=false,              % No mostrar tabulaciones
+    tabsize=4,                   % Tamaño de tabulación
+    showstringspaces=false,      % No mostrar espacios en strings
+    numbers=left,                % Números de línea a la izquierda
+    numberstyle=\tiny\color{gray}, % Estilo de los números de línea
+    numbersep=5pt,               % Separación de los números de línea
+    stepnumber=1,                % Mostrar número en cada línea
+    basicstyle=\ttfamily\footnotesize, % Estilo básico del código
+    keywordstyle=\bfseries\color{blue}, % Estilo de las palabras clave
+    commentstyle=\itshape\color{green!50!black}, % Estilo de los comentarios
+    stringstyle=\color{red},     % Estilo de los strings
+    identifierstyle=\color{black}, % Estilo de los identificadores
+    % procnamekeys={def,class},    % Palabras clave para nombres de funciones
+    morekeywords={constexpr,nullptr,size_t}, % Más palabras clave
+    emph={int,char,double,float,unsigned}, % Palabras a enfatizar
+    emphstyle=\color{magenta},   % Estilo de las palabras enfatizadas
+    backgroundcolor=\color{gray!10}, % Color de fondo
+    frame=shadowbox,             % Marco con sombra
+    rulesepcolor=\color{gray},   % Color de la línea de separación
+    breakatwhitespace=false,     % No cortar en espacios en blanco
+    breaklines=true,             % Cortar líneas largas
+    captionpos=b,                % Posición del título (abajo)
+    escapeinside={(*@}{@*)},     % Delimitadores para escapar a LaTeX
+    morecomment=[l][\color{magenta}]{\#}, % Comentarios de una línea
+    morecomment=[s][\color{orange}]{/*}{*/}, % Comentarios multilínea
+    morestring=[b]",             % Strings entre comillas dobles
+    morestring=[b]'              % Strings entre comillas simples
+}
+%lstlistin personlizado para java y ruby
+\lstdefinestyle{customjava}{
+    language=Java,                % Lenguaje de programación
+    showspaces=false,            % No mostrar espacios
+    showtabs=false,              % No mostrar tabulaciones
+    tabsize=4,                   % Tamaño de tabulación
+    showstringspaces=false,      % No mostrar espacios en strings
+    numbers=left,                % Números de línea a la izquierda
+    numberstyle=\tiny\color{gray}, % Estilo de los números de línea
+    numbersep=5pt,               % Separación de los números de línea
+    stepnumber=1,                % Mostrar número en cada línea
+    basicstyle=\ttfamily\footnotesize, % Estilo básico del código
+    keywordstyle=\bfseries\color{blue}, % Estilo de las palabras clave
+    commentstyle=\itshape\color{green!50!black}, % Estilo de los comentarios
+    stringstyle=\color{red},     % Estilo de los strings
+    identifierstyle=\color{black}, % Estilo de los identificadores
+    % procnamekeys={def,class},    % Palabras clave para nombres de funciones
+    morekeywords={constexpr,nullptr,size_t}, % Más palabras clave
+    emph={int,char,double,float,unsigned}, % Palabras a enfatizar
+    emphstyle=\color{magenta},   % Estilo de las palabras enfatizadas
+    backgroundcolor=\color{gray!10}, % Color de fondo
+    frame=shadowbox,             % Marco con sombra
+    rulesepcolor=\color{gray},   % Color de la línea de separación
+    breakatwhitespace=false,     % No cortar en espacios en blanco
+    breaklines=true,             % Cortar líneas largas
+    captionpos=b,                % Posición del título (abajo)
+    escapeinside={(*@}{@*)},     % Delimitadores para escapar a LaTeX
+    morecomment=[l][\color{magenta}]{\#}, % Comentarios de una línea
+    morecomment=[s][\color{orange}]{/*}{*/}, % Comentarios multilínea
+    morestring=[b]",             % Strings entre comillas dobles
+    morestring=[b]'              % Strings entre comillas simples
+}
+\lstdefinestyle{customruby}{
+    language=Ruby,                % Lenguaje de programación
+    showspaces=false,            % No mostrar espacios
+    showtabs=false,              % No mostrar tabulaciones
+    tabsize=4,                   % Tamaño de tabulación
+    showstringspaces=false,      % No mostrar espacios en strings
+    numbers=left,                % Números de línea a la izquierda
+    numberstyle=\tiny\color{gray}, % Estilo de los números de línea
+    numbersep=5pt,               % Separación de los números de línea
+    stepnumber=1,                % Mostrar número en cada línea
+    basicstyle=\ttfamily\footnotesize, % Estilo básico del código
+    keywordstyle=\bfseries\color{blue}, % Estilo de las palabras clave
+    commentstyle=\itshape\color{green!50!black}, % Estilo de los comentarios
+    stringstyle=\color{red},     % Estilo de los strings
+    identifierstyle=\color{black}, % Estilo de los identificadores
+    % procnamekeys={def,class},    % Palabras clave para nombres de funciones
+    morekeywords={constexpr,nullptr,size_t}, % Más palabras clave
+    emph={int,char,double,float,unsigned}, % Palabras a enfatizar
+    emphstyle=\color{magenta},   % Estilo de las palabras enfatizadas
+    backgroundcolor=\color{gray!10}, % Color de fondo
+    frame=shadowbox,             % Marco con sombra
+    rulesepcolor=\color{gray},   % Color de la línea de separación
+    breakatwhitespace=false,     % No cortar en espacios en blanco
+    breaklines=true,             % Cortar líneas largas
+    captionpos=b,                % Posición del título (abajo)
+    escapeinside={(*@}{@*)},     % Delimitadores para escapar a LaTeX
+    morecomment=[l][\color{magenta}]{\#}, % Comentarios de una línea
+    morecomment=[s][\color{orange}]{=begin}{=end}, % Comentarios multilínea
+    morestring=[b]",             % Strings entre comillas dobles
+    morestring=[b]'              % Strings entre com
+}
+
+
+% Configuración de título
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+% Información del documento
+\title{
+    \vspace{-2cm}
+    \includegraphics[width=0.3\textwidth]{images/etsiit.png} \\ % Cambia el logo si es necesario
+    \LARGE Ingeniería Informática + ADE\\
+    \large Universidad de Granada (UGR)\\[1cm]
+}
+\author{\textbf{Autor:} Ismael Sallami Moreno}
+\date{\textbf{Asignatura:} Apuntes Visibilidad (PDOO)\\[1cm]}
+
+% Configuración del fondo
+\backgroundsetup{
+    scale=1,
+    color=black,
+    opacity=0.2,
+    angle=0,
+    position=current page.south,
+    vshift=0pt,
+    hshift=0pt,
+    contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{images/granada.jpg}}
+}
+
+%comandos
+\newcommand{\textorojo}[1]{\textbf{\textcolor{red}{#1}}}
+\newcommand{\textoverde}[1]{\textbf{\textcolor{green}{#1}}}
+
+% Inicio del documento
+\begin{document}
+
+% Portada
+\maketitle
+\thispagestyle{empty}
+
+\begin{center}
+    \includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{images/granada.jpg} \\ % Añade tu imagen de fondo
+    \vfill
+\end{center}
+
+\newpage
+
+% Índice (opcional)
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+\begin{itemize}
+    \item Privado: Solo accesible desde la propia clase.
+    \item Protegido: Solo accesible desde la propia clase y sus subclases.
+    \item Público: Accesible desde cualquier clase.
+\end{itemize}
+
+\section{Java}
+
+\subsection{Private}
+
+\begin{itemize}
+    \item Solo accesible desde la propia clase (Instancia y de clase).
+    \item Se puede acceder a elementos privados de otra instancia distinta si es de la misma clase.
+\end{itemize}
+
+\subsection{Paquete}
+
+\begin{itemize}
+    \item Si no se pone ningún especificador de Visibilidad, por defecto es de paquete.
+    \item son públicos dentro de paquete y privados fuera de él.
+\end{itemize}
+
+\subsection{Protected}
+\begin{itemize}
+    \item Públicos dentro del mismo paquete
+    \item Accesible desde subclases de otros paquetes, es decir, dentro de una instancia se puede acceder a los elementos protegidos de sus superclases, con independencia del paquete en el que se encuentren.
+    \item \textit{Si es de una instancia distinta}:
+    \begin{itemize}
+        \item Tienes que ser de la misma clase o una subclase.
+        \item Debe de ser visible por mi.
+    \end{itemize}
+\end{itemize}
+
+
+\section{Ruby}
+
+\begin{itemize}
+    \item Atributos siempre \textbf{privados}.
+    \item Métodos siempre \textbf{públicos} (se pueden cambiar usando modificadores de acceso).
+    \item Initialize es siempre \textbf{privado}.
+\end{itemize}
+
+\subsection{Private}
+\begin{itemize}
+    \item \textcolor{green}{Si se hereda se puede acceder a los métodos privados de la superclase (tanto en el ámbito de clase como de instancia).}
+    \item \textcolor{red}{No se puede acceder a método privados de clase desde el ámbito de instancia y viceversa.}
+\end{itemize}
+
+\subsection{Protected}
+\begin{itemize}
+    \item \textcolor{green}{Se puede acceder a los métodos protegidos de la superclase desde la subclase.}
+    \item \textcolor{red}{No existen métodos protegidos de clase.}
+\end{itemize}
+
+En ruby \textorojo{una clase y su instancia no son de la misma clase}. \\\\
+Los atributos @@ \textoverde{si pueden ser accedidos desde ámbito de instancia}.
+
+\section{Ejemplos en Java} 
+
+\textit{Se especifican las soluciones en forma de comentarios.
+}
+
+\subsection{Ejemplo 1}
+
+\begin{lstlisting}[style=customjava]
+    package unPaquete;
+    
+    public class Padre {
+        private int privado;        // Campo accesible solo dentro de esta clase.
+        protected int protegido;    // Campo accesible dentro del paquete y subclases.
+        int paquete;                // Campo accesible solo dentro del paquete.
+        public int publico;         // Campo accesible desde cualquier lugar.
+    
+        // Método de instancia que accede a elementos de otra instancia de la misma clase.
+        public void testInstanciaPadre(Padre o) {
+            System.out.println(o.privado);   // Acceso permitido: "privado" es visible en la misma clase.
+            System.out.println(o.protegido);// Acceso permitido: "protegido" es visible dentro de la clase.
+            System.out.println(o.paquete);  // Acceso permitido: "paquete" es visible dentro del paquete.
+            System.out.println(o.publico);  // Acceso permitido: "publico" es accesible desde cualquier lugar.
+        }
+    
+        // Método estático que intenta acceder a elementos de una instancia.
+        public static void testClasePadre(Padre o) {
+            System.out.println(o.privado);   // Acceso permitido: "privado" es visible dentro de la misma clase.
+            System.out.println(o.protegido);// Acceso permitido: "protegido" es visible dentro de la clase.
+            System.out.println(o.paquete);  // Acceso permitido: "paquete" es visible dentro del paquete.
+            System.out.println(o.publico);  // Acceso permitido: "publico" es accesible desde cualquier lugar.
+        }
+    }
+    \end{lstlisting}
+
+\subsection{Ejemplo 2}
+\begin{lstlisting}[style=customjava]
+    package unPaquete;
+    
+    public class HijaPaquete extends Padre {
+    
+        // Método de instancia que accede a elementos de la superclase y otra instancia.
+        public void testInstanciaHijaPaquete(Padre o) {
+            System.out.println(privado);      // Error: "privado" no es accesible fuera de su clase.
+            System.out.println(o.privado);   // Error: "privado" no es accesible fuera de su clase.
+    
+            System.out.println(protegido);   // Acceso permitido: "protegido" es visible en subclases.
+            System.out.println(o.protegido);// Acceso permitido: "protegido" es visible en el mismo paquete.
+    
+            System.out.println(o.paquete);   // Acceso permitido: "paquete" es visible dentro del paquete.
+            System.out.println(o.publico);   // Acceso permitido: "publico" es accesible desde cualquier lugar.
+        }
+    
+        // Método estático que accede a elementos de una instancia.
+        public static void testClaseHijaPaquete(Padre o) {
+            System.out.println(o.privado);   // Error: "privado" no es accesible fuera de su clase.
+            System.out.println(o.protegido);// Acceso permitido: "protegido" es visible en el mismo paquete.
+            System.out.println(o.paquete);  // Acceso permitido: "paquete" es visible dentro del paquete.
+            System.out.println(o.publico);  // Acceso permitido: "publico" es accesible desde cualquier lugar.
+        }
+    }
+    \end{lstlisting}
+
+\subsection{Ejemplo 3}
+
+\begin{lstlisting}[style=customjava]
+
+package otroPaquete;
+
+public class HijaOtroPaquete extends Padre {
+
+    public void testInstanciaHijaOtroPaquete(Padre o) {
+        // Acceso a elementos heredados
+        System.out.println(privado);    // (Línea 7) Error: "privado" no es accesible fuera de la clase.
+        System.out.println(paquete);   // (Línea 8) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(protegido); // (Línea 9) Acceso permitido: "protegido" es visible en subclases.
+
+        // Acceso a elementos de otra instancia
+        System.out.println(o.privado);   // (Línea 12) Error: "privado" no es accesible desde otra instancia.
+        System.out.println(o.protegido);// (Línea 13) Error: "protegido" no es accesible desde otra instancia en otro paquete.
+        System.out.println(o.paquete);  // (Línea 14) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 15) Acceso permitido: "publico" es accesible desde cualquier lugar.
+    }
+
+    public static void testClaseHijaOtroPaquete(Padre o) {
+        // Acceso a elementos de otra instancia
+        System.out.println(o.privado);   // (Línea 20) Error: "privado" no es accesible desde otra clase.
+        System.out.println(o.protegido);// (Línea 21) Error: "protegido" no es accesible desde otra instancia en otro paquete.
+        System.out.println(o.paquete);  // (Línea 22) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 23) Acceso permitido: "publico" es accesible desde cualquier lugar.
+    }
+}
+\end{lstlisting}
+
+\subsection{Ejemplo 4}
+\begin{lstlisting}[style=customjava]
+
+package otroPaquete;
+
+public class HijaOtroPaquete extends Padre {
+
+    public void testInstanciaHijaOtroPaquete(HijaOtroPaquete o) {
+        System.out.println(o.privado);   // (Línea 8) Error: "privado" no es accesible fuera de la clase.
+        System.out.println(o.protegido);// (Línea 9) Acceso permitido: "protegido" es visible en subclases.
+        System.out.println(o.paquete);  // (Línea 10) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 11) Acceso permitido: "publico" es accesible desde cualquier lugar.
+    }
+
+    public static void testClaseHijaOtroPaquete(HijaOtroPaquete o) {
+        System.out.println(o.privado);   // (Línea 15) Error: "privado" no es accesible desde otra clase.
+        System.out.println(o.protegido);// (Línea 16) Acceso permitido: "protegido" es visible en subclases.
+        System.out.println(o.paquete);  // (Línea 17) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 18) Acceso permitido: "publico" es accesible desde cualquier lugar.
+    }
+}
+\end{lstlisting}
+
+\subsection{Ejemplo 5}
+\begin{lstlisting}[style=customjava]
+
+package otroPaquete;
+
+public class HijaOtroPaquete extends Padre {
+
+    public void testInstanciaHijaOtroPaquete(NietaOtroPaquete o) {
+        System.out.println(o.privado);   // (Línea 8) Error: "privado" no es accesible fuera de la clase.
+        System.out.println(o.protegido);// (Línea 9) Error: "protegido" no es accesible en instancias externas.
+        System.out.println(o.paquete);  // (Línea 10) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 11) Acceso permitido: "publico" es accesible desde cualquier lugar.
+    }
+
+    public static void testClaseHijaOtroPaquete(NietaOtroPaquete o) {
+        System.out.println(o.privado);   // (Línea 15) Error: "privado" no es accesible desde otra clase.
+        System.out.println(o.protegido);// (Línea 16) Error: "protegido" no es accesible en instancias externas.
+        System.out.println(o.paquete);  // (Línea 17) Error: "paquete" no es accesible desde otro paquete.
+        System.out.println(o.publico);  // (Línea 18) Acceso permitido: "publico" es accesible desde cualquier lugar.
+    }
+}
+\end{lstlisting}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \subsection{Ejemplo 1}
+
+% \begin{lstlisting}[style=customjava]
+%     package unPaquete;
+    
+%     public class Padre {
+%         private int privado;
+%         protected int protegido;
+%         int paquete;
+%         public int publico;
+    
+%         public void testInstanciaPadre(Padre o) {
+%             // No se puede acceder a 'privado' de otra instancia
+%             // System.out.println(o.privado);
+%             System.out.println(o.protegido);
+%             System.out.println(o.paquete);
+%             System.out.println(o.publico);
+%         }
+    
+%         public static void testClasePadre(Padre o) {
+%             // No se puede acceder a 'privado' de otra instancia
+%             // System.out.println(o.privado);
+%             System.out.println(o.protegido);
+%             System.out.println(o.paquete);
+%             System.out.println(o.publico);
+%         }
+%     }
+% \end{lstlisting}
+
+% \subsection{Ejemplo 2}
+
+% \begin{lstlisting}[style=customjava]
+
+
+% package unPaquete;
+
+% public class HijaPaquete extends Padre {
+
+%     public void testInstanciaHijaPaquete(Padre o) {
+%         // No se puede acceder a 'privado' directamente ni a través de una instancia
+%         // System.out.println(privado);
+%         // System.out.println(o.privado);
+
+%         System.out.println(protegido); // Se puede acceder porque es protegido
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+
+%         System.out.println(o.paquete); // Se puede acceder porque está en el mismo paquete
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+
+%     public static void testClaseHijaPaquete(Padre o) {
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         System.out.println(o.paquete); // Se puede acceder porque está en el mismo paquete
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+% }
+% \end{lstlisting}
+
+% \subsection{Ejemplo 3}
+
+% \begin{lstlisting}[style=customjava]
+
+
+% package otroPaquete;
+
+% public class HijaOtroPaquete extends Padre {
+
+%     public void testInstanciaHijaOtroPaquete(Padre o) {
+%         // Acceso a elementos heredados
+%         // No se puede acceder a 'privado' directamente
+%         // System.out.println(privado);
+%         // No se puede acceder a 'paquete' porque no está en el mismo paquete
+%         // System.out.println(paquete);
+%         System.out.println(protegido); // Se puede acceder porque es protegido
+
+%         // Acceso a elementos de otra instancia
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+
+%     public static void testClaseHijaOtroPaquete(Padre o) {
+%         // Acceso a elementos de otra instancia
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+% }
+
+% \end{lstlisting}
+
+% \subsection{Ejemplo 4}
+
+% \begin{lstlisting}[style=customjava]
+
+% package otroPaquete;
+
+% public class HijaOtroPaquete extends Padre {
+
+%     // El mismo código cambiando solo el tipo del parámetro
+%     public void testInstanciaHijaOtroPaquete(HijaOtroPaquete o) {
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+
+%     public static void testClaseHijaOtroPaquete(HijaOtroPaquete o) {
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+% }
+
+% \end{lstlisting}
+
+% \subsection{Ejemplo 5}
+
+% \begin{lstlisting}[style=customjava]
+
+% package otroPaquete;
+
+% public class HijaOtroPaquete extends Padre {
+
+%     // El mismo código. El tipo del parámetro es subclase.
+%     public void testInstanciaHijaOtroPaquete(NietaOtroPaquete o) {
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+
+%     public static void testClaseHijaOtroPaquete(NietaOtroPaquete o) {
+%         // No se puede acceder a 'privado' de otra instancia
+%         // System.out.println(o.privado);
+%         System.out.println(o.protegido); // Se puede acceder porque es protegido
+%         // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+%         // System.out.println(o.paquete);
+%         System.out.println(o.publico); // Se puede acceder porque es público
+%     }
+% }
+
+% // NietaOtroPaquete deriva de HijaOtroPaquete (ambas están en otroPaquete)
+
+% \end{lstlisting}
+
+\subsection{Ejemplo 6}
+\begin{lstlisting}[style=customjava]
+    package otroPaquete;
+    
+    public class NietaOtroPaquete extends HijaOtroPaquete {
+    
+        // Ahora probamos con un parámetro de la superclase
+        public void testInstanciaNietaOtroPaquete(HijaOtroPaquete o) {
+            // No se puede acceder a 'privado' de otra instancia
+            // System.out.println(o.privado);
+            // No se puede acceder a 'protegido' de otra instancia en un paquete diferente
+            // System.out.println(o.protegido);
+            // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+            // System.out.println(o.paquete);
+            System.out.println(o.publico); // Se puede acceder porque es público
+        }
+    
+        public static void testClaseNietaOtroPaquete(HijaOtroPaquete o) {
+            // No se puede acceder a 'privado' de otra instancia
+            // System.out.println(o.privado);
+            // No se puede acceder a 'protegido' de otra instancia en un paquete diferente
+            // System.out.println(o.protegido);
+            // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+            // System.out.println(o.paquete);
+            System.out.println(o.publico); // Se puede acceder porque es público
+        }
+    }
+\end{lstlisting}
+
+\subsection{Ejemplo 7}
+
+\begin{lstlisting}[style=customjava]
+    package otroPaquete;
+    
+    public class NietaOtroPaquete extends HijaOtroPaquete {
+    
+        public void testInstanciaNietaOtroPaquete(NietaOtroPaquete o) {
+            // No se puede acceder a 'privado' de otra instancia
+            // System.out.println(o.privado);
+            System.out.println(o.protegido); // Se puede acceder porque es protegido
+            // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+            // System.out.println(o.paquete);
+            System.out.println(o.publico); // Se puede acceder porque es público
+        }
+    
+        public static void testClaseNietaOtroPaquete(NietaOtroPaquete o) {
+            // No se puede acceder a 'privado' de otra instancia
+            // System.out.println(o.privado);
+            System.out.println(o.protegido); // Se puede acceder porque es protegido
+            // No se puede acceder a 'paquete' de otra instancia porque no está en el mismo paquete
+            // System.out.println(o.paquete);
+            System.out.println(o.publico); // Se puede acceder porque es público
+        }
+    }
+    \end{lstlisting}
+
+\subsection{Ejemplo 8}
+
+\begin{lstlisting}[style=customjava]
+    // En el paquete base
+    package base;
+    
+    public class A {
+        protected int protegidoA = 0;
+    }
+    
+    // En el paquete base
+    public class B extends A {
+        protected int protegidoB = 1;
+    }
+    
+    // En el paquete base2
+    package base2;
+    import base.*;
+    
+    public class C extends B {
+        protected int protegidoC = 2;
+    
+        public void test() {
+            A a = new A();
+            // No se puede acceder a 'protegidoA' de una instancia de A en un paquete diferente
+            // a.protegidoA = 666;
+    
+            B b = new B();
+            // No se puede acceder a 'protegidoB' de una instancia de B en un paquete diferente
+            // b.protegidoB = 666;
+    
+            C c = new C();
+            c.protegidoA = 555; // Se puede acceder porque C hereda de A
+            c.protegidoB = 555; // Se puede acceder porque C hereda de B
+    
+            D d = new D();
+            d.protegidoA = 555; // Se puede acceder porque D hereda de A
+            d.protegidoB = 555; // Se puede acceder porque D hereda de B
+            d.protegidoD = 555; // Se puede acceder porque es miembro de D
+    
+            D d2 = new D();
+            d2.protegidoB = 555;
+            // No se puede acceder a 'protegidoD' de otra instancia en un paquete diferente
+            // d2.protegidoD = 555;
+    
+            this.protegidoA = 777; // Se puede acceder porque C hereda de A
+            this.protegidoB = 777; // Se puede acceder porque C hereda de B
+            this.protegidoC = 777; // Se puede acceder porque es miembro de C
+        }
+    }
+    
+    // En el paquete base2
+    package base2;
+    
+    public class D extends C {
+        protected int protegidoD = 3;
+    }
+\end{lstlisting}
+
+
+\section{Ejemplos en Ruby}
+
+\subsection{Ejemplo 1}
+\begin{lstlisting}[style=customruby]
+    class Padre
+      private
+      def privado
+      end
+    
+      protected
+      def protegido
+      end
+    
+      public
+      def publico
+      end
+    
+      def test(p)
+        privado
+        self.privado # Correcto solo a partir de Ruby 2.7
+        # p.privado # No se puede acceder a un método privado de otra instancia
+    
+        protegido
+        self.protegido
+        p.protegido # Se puede acceder a un método protegido de otra instancia
+      end
+    end
+    \end{lstlisting}
+
+\subsection{Ejemplo 2}
+\begin{lstlisting}[style=customruby]
+    # Fuera de cualquier clase
+    
+    Padre.new.test(Padre.new)
+    p = Padre.new
+    
+    # Acceso a métodos fuera de la clase o subclases
+    
+    # p.privado # No se puede acceder a un método privado fuera de la clase
+    # p.protegido # No se puede acceder a un método protegido fuera de la clase o subclases
+    p.publico # Se puede acceder a un método público
+    \end{lstlisting}
+
+\subsection{Ejemplo 3}
+
+\begin{lstlisting}[style=customruby]
+    class Hija < Padre
+      def test(p)
+        privado
+        self.privado # Correcto solo a partir de Ruby 2.7
+        # p.privado # No se puede acceder a un método privado de otra instancia
+    
+        protegido
+        self.protegido
+        p.protegido # Se puede acceder a un método protegido de otra instancia
+    
+        publico
+        self.publico
+        p.publico
+      end
+    end
+    
+    # Fuera de cualquier clase
+    
+    Hija.new.test(Hija.new)
+    Hija.new.test(Padre.new)
+    h = Hija.new
+    # h.privado # No se puede acceder a un método privado fuera de la clase
+    # h.protegido # No se puede acceder a un método protegido fuera de la clase o subclases
+    h.publico # Se puede acceder a un método público
+    \end{lstlisting}
+
+\subsection{Ejemplo 4}
+
+\begin{lstlisting}[style=customruby]
+    class Padre
+      private
+      def privado_instancia
+      end
+    
+      def self.privado_clase
+      end
+    
+      private_class_method :privado_clase
+    
+      public
+      def test
+        # No se puede acceder a un método privado de clase con un receptor explícito
+        # self.class.privado_clase
+      end
+    
+      def self.test(p)
+        # No se puede acceder a un método privado de instancia de otra instancia
+        # p.privado_instancia
+      end
+    end
+    
+    # Fuera de cualquier clase
+    
+    Padre.new.test
+    Padre.test(Padre.new)
+    \end{lstlisting}
+
+\subsection{Ejemplo 5}
+
+\begin{lstlisting}[style=customruby]
+    class Padre
+      @instanciaDeClase = 1
+      @duda = 2
+      @@deClase = 11
+      @@duda = 22
+    
+      def initialize
+        @deInstancia = 333
+        @duda = 444
+      end
+    
+      def self.salida
+        # puts @instanciaDeClase + 1
+        # No se puede acceder a la variable de instancia de la clase desde una subclase
+        # puts @duda + 1 unless @duda.nil? # desde Hija?
+        puts @@deClase + 1
+        puts @@duda + 1
+      end
+    
+      def salida
+        #puts @deInstancia + 1
+        #puts @duda + 1
+        # No se puede acceder porque en Ruby todos los atributos son privados
+        puts @@deClase + 1
+        puts @@duda + 1
+      end
+    end
+\end{lstlisting}
+
+\subsection{Ejemplo 6}
+
+\begin{lstlisting}[style=customruby]
+    class Hija < Padre
+      @instanciaDeClase = -1
+    
+      # Sobreescribimos el valor fijado anteriormente
+      # Este atributo es compartido
+      @@deClase = -11
+    
+      def modifica
+        # Acceso a los atributos definidos en Padre
+        # No se puede acceder a la variable de instancia de la clase desde una instancia
+        # @duda += 111
+      end #deberia de ser self.modifica
+    end
+    
+    # Fuera de cualquier clase
+    
+    Padre.salida
+    Hija.salida # Atención a lo que ocurre con la segunda línea
+    
+    p = Padre.new
+    p.salida
+    h = Hija.new
+    h.salida
+    
+    # h.modifica debería de ser self.modifica
+    h.salida
+\end{lstlisting}
+
+\subsection{Ejemplo 7}
+
+\begin{lstlisting}[style=customruby]
+    class A
+      protected
+      def protegidoA
+      end
+    end
+    
+    class B < A
+      protected
+      def protegidoB
+      end
+    end
+    
+    class C < B
+      protected
+      def protegidoC
+      end
+    
+      public
+      def test
+        A.new.protegidoA
+        B.new.protegidoA
+        B.new.protegidoB
+        C.new.protegidoA
+        C.new.protegidoB
+        C.new.protegidoC
+        D.new.protegidoA
+        # D.new.protegidoD
+        # No puedo debido a que estoy en C y es D la que hereda de C, puedo acceder de D a C, pero no de C a D
+      end
+    end
+    
+    class D < C
+      protected
+      def protegidoD
+      end
+    end
+    
+    C.new.test
+    # C.new.protegidoC
+    # No se puede acceder a un método protegido fuera de la clase o subclases
+\end{lstlisting}
+
+\subsection{Ejemplo 8}
+\begin{lstlisting}[style=customruby]
+    class FalsaSeguridad
+      # Un consultor puede ser muy peligroso
+      attr_reader :lista
+    
+      def initialize
+        @lista = [1, 2, 3, 4]
+      end
+    
+      def info
+        puts @lista.size
+      end
+    end
+    
+    # Fuera de cualquier clase
+    f = FalsaSeguridad.new
+    f.info # 4
+    
+    # Modificamos el estado interno
+    # Simplemente usando un consultor
+    # Aunque el atributo sea privado
+    # Cuidado con las referencias
+    f.lista.clear
+    
+    f.info # 0
+\end{lstlisting}
+
+\end{document}

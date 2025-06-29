@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Bloque 2: Monitorización, Carga y Contenedores</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+            margin: 20px;
+            background-color: #eef1f5; /* Un gris azulado claro para el fondo */
+            color: #333; /* Color de texto principal */
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 12px; /* Bordes más redondeados */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Sombra más pronunciada */
+            max-width: 800px; /* Limitar el ancho para mejor legibilidad */
+            margin: 30px auto; /* Centrar el contenedor */
+        }
+        .question-block {
+            margin-bottom: 30px; /* Más espacio entre preguntas */
+            padding: 20px;
+            border: 1px solid #d1d9e6; /* Borde sutil para el bloque */
+            border-radius: 8px; /* Bordes redondeados para el bloque */
+            background-color: #f8f9fa; /* Fondo ligeramente diferente para el bloque de pregunta */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Sombra interna sutil */
+        }
+        .question-block h3 {
+            margin-top: 0;
+            margin-bottom: 15px; /* Más espacio debajo del título de la pregunta */
+            color: #0056b3; /* Un azul oscuro para el título de la pregunta */
+            font-size: 1.25em; /* Un poco más grande */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 12px; /* Más espacio entre opciones */
+            padding: 12px 15px; /* Más padding interno */
+            border: 1px solid #ced4da; /* Borde estándar para opciones */
+            border-radius: 6px; /* Bordes redondeados para opciones */
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+            background-color: #fff; /* Fondo blanco para las opciones */
+        }
+        li:hover {
+            background-color: #e9ecef; /* Un gris más claro al pasar el ratón */
+            border-color: #adb5bd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.07); /* Sombra sutil al pasar el ratón */
+        }
+        li:active {
+            transform: translateY(1px); /* Efecto de presionar */
+        }
+        li.correct {
+            background-color: #28a745; /* Un verde más vibrante y moderno (Bootstrap success green) */
+            color: #ffffff; /* Texto blanco para mejor contraste con el verde */
+            border-color: #1e7e34; /* Un verde más oscuro para el borde */
+            font-weight: bold; /* Resaltar el texto de la opción correcta */
+        }
+        li.incorrect {
+            background-color: #dc3545; /* Un rojo estándar (Bootstrap danger red) */
+            color: #ffffff; /* Texto blanco para mejor contraste */
+            border-color: #c82333; /* Un rojo más oscuro para el borde */
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+            display: none;
+        }
+        label {
+            display: block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Interactivo: Bloque 2 - Monitorización, Carga y Contenedores</h1>
+
+        <div class="question-block">
+            <h3>Pregunta 1: ¿Cuál es la principal diferencia entre una máquina virtual (VM) y un contenedor Docker?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q1')"><input type="radio" name="q1" value="a"><label>Las VMs son más ligeras que los contenedores.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q1')"><input type="radio" name="q1" value="b"><label>Los contenedores virtualizan el hardware y las VMs el sistema operativo.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q1')"><input type="radio" name="q1" value="c"><label>Los contenedores comparten el kernel del SO anfitrión, mientras que cada VM tiene su propio SO guest completo.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q1')"><input type="radio" name="q1" value="d"><label>Docker no permite el aislamiento de procesos, las VMs sí.</label></li>
+            </ul>
+            <script>var answer_q1 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 2: ¿Qué herramienta se utiliza para definir y ejecutar aplicaciones Docker de múltiples contenedores mediante un archivo YAML?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q2')"><input type="radio" name="q2" value="a"><label>Dockerfile</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q2')"><input type="radio" name="q2" value="b"><label>Docker Swarm</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q2')"><input type="radio" name="q2" value="c"><label>Docker Compose</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q2')"><input type="radio" name="q2" value="d"><label>Kubernetes</label></li>
+            </ul>
+            <script>var answer_q2 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 3: ¿Cuál es el comando de Docker para ejecutar una imagen llamada "hello-world"?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q3')"><input type="radio" name="q3" value="a"><label>docker build hello-world</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q3')"><input type="radio" name="q3" value="b"><label>docker start hello-world</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q3')"><input type="radio" name="q3" value="c"><label>docker pull hello-world</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q3')"><input type="radio" name="q3" value="d"><label>docker run hello-world</label></li>
+            </ul>
+            <script>var answer_q3 = 'd';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 4: ¿Qué es un "benchmark" en el contexto de la ingeniería de servidores?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q4')"><input type="radio" name="q4" value="a"><label>Un tipo de sistema de ficheros optimizado para rendimiento.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q4')"><input type="radio" name="q4" value="b"><label>Una prueba diseñada para medir el rendimiento de un sistema, componente o servicio.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q4')"><input type="radio" name="q4" value="c"><label>Un protocolo de red para la transferencia rápida de datos.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q4')"><input type="radio" name="q4" value="d"><label>Una herramienta de monitorización en tiempo real.</label></li>
+            </ul>
+            <script>var answer_q4 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 5: ¿Para qué sirve la herramienta Apache Benchmark (`ab`)?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q5')"><input type="radio" name="q5" value="a"><label>Para realizar pruebas de carga y rendimiento sobre servidores DNS.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q5')"><input type="radio" name="q5" value="b"><label>Para monitorizar el uso de CPU y memoria de un servidor Apache.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q5')"><input type="radio" name="q5" value="c"><label>Para mostrar cuántas peticiones por segundo es capaz de servir un servidor HTTP.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q5')"><input type="radio" name="q5" value="d"><label>Para compilar y desplegar aplicaciones web en servidores Apache.</label></li>
+            </ul>
+            <script>var answer_q5 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 6: Apache JMeter es una aplicación diseñada principalmente para:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q6')"><input type="radio" name="q6" value="a"><label>Gestionar logs del sistema.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q6')"><input type="radio" name="q6" value="b"><label>Probar la carga funcional y medir el rendimiento de diversos servicios.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q6')"><input type="radio" name="q6" value="c"><label>Automatizar la configuración de servidores mediante playbooks.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q6')"><input type="radio" name="q6" value="d"><label>Visualizar métricas de sistemas en dashboards.</label></li>
+            </ul>
+            <script>var answer_q6 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 7: En Docker, ¿qué es un `Dockerfile`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q7')"><input type="radio" name="q7" value="a"><label>Un contenedor en ejecución.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q7')"><input type="radio" name="q7" value="b"><label>Un archivo de texto que contiene todos los comandos necesarios para construir una imagen de Docker.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q7')"><input type="radio" name="q7" value="c"><label>Un repositorio de imágenes Docker en la nube.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q7')"><input type="radio" name="q7" value="d"><label>La configuración de red para un grupo de contenedores.</label></li>
+            </ul>
+            <script>var answer_q7 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 8: ¿Qué herramienta de monitorización clásica en Linux presenta una interfaz de texto para ver procesos y uso de recursos en tiempo real?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q8')"><input type="radio" name="q8" value="a"><label>Grafana</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q8')"><input type="radio" name="q8" value="b"><label>Prometheus</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q8')"><input type="radio" name="q8" value="c"><label>top (o htop)</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q8')"><input type="radio" name="q8" value="d"><label>JMeter</label></li>
+            </ul>
+            <script>var answer_q8 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 9: ¿Para qué se utiliza `cron` en un sistema Linux?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q9')"><input type="radio" name="q9" value="a"><label>Para gestionar la memoria virtual del sistema.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q9')"><input type="radio" name="q9" value="b"><label>Para programar la ejecución de tareas periódicas de administración o mantenimiento.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q9')"><input type="radio" name="q9" value="c"><label>Para monitorizar el tráfico de red en tiempo real.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q9')"><input type="radio" name="q9" value="d"><label>Para compilar código fuente de aplicaciones.</label></li>
+            </ul>
+            <script>var answer_q9 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 10: ¿Cuál es la función principal de Prometheus en una pila de monitorización?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q10')"><input type="radio" name="q10" value="a"><label>Visualizar los datos de telemetría en dashboards interactivos.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q10')"><input type="radio" name="q10" value="b"><label>Extraer (scraping), almacenar y gestionar información de monitorización como series temporales.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q10')"><input type="radio" name="q10" value="c"><label>Generar carga de trabajo para pruebas de estrés.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q10')"><input type="radio" name="q10" value="d"><label>Gestionar la rotación de archivos de logs del sistema.</label></li>
+            </ul>
+            <script>var answer_q10 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 11: ¿Qué herramienta se utiliza comúnmente junto con Prometheus para la visualización de métricas y la creación de dashboards?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q11')"><input type="radio" name="q11" value="a"><label>JMeter</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q11')"><input type="radio" name="q11" value="b"><label>Docker Compose</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q11')"><input type="radio" name="q11" value="c"><label>Grafana</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q11')"><input type="radio" name="q11" value="d"><label>Nagios</label></li>
+            </ul>
+            <script>var answer_q11 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 12: En el contexto de Docker, ¿qué significa `EXPOSE 3000` en un Dockerfile?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q12')"><input type="radio" name="q12" value="a"><label>Mapea el puerto 3000 del contenedor al puerto 3000 del host.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q12')"><input type="radio" name="q12" value="b"><label>Instala una aplicación que escucha en el puerto 3000.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q12')"><input type="radio" name="q12" value="c"><label>Informa a Docker que el contenedor escucha en el puerto 3000, pero no lo publica automáticamente.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q12')"><input type="radio" name="q12" value="d"><label>Abre el puerto 3000 en el firewall del host.</label></li>
+            </ul>
+            <script>var answer_q12 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 13: ¿Qué es el "load average" que muestra el comando `top`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q13')"><input type="radio" name="q13" value="a"><label>La cantidad de memoria RAM utilizada por los procesos.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q13')"><input type="radio" name="q13" value="b"><label>El porcentaje de tiempo que la CPU está inactiva.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q13')"><input type="radio" name="q13" value="c"><label>Un promedio de la carga del sistema (procesos en ejecución o esperando CPU) en los últimos 1, 5 y 15 minutos.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q13')"><input type="radio" name="q13" value="d"><label>La velocidad de transferencia de datos de la red.</label></li>
+            </ul>
+            <script>var answer_q13 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 14: ¿Cuál es el propósito de `logrotate`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q14')"><input type="radio" name="q14" value="a"><label>Analizar el contenido de los archivos de log en busca de errores.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q14')"><input type="radio" name="q14" value="b"><label>Gestionar los archivos de log, rotándolos, comprimiéndolos y eliminando los antiguos para evitar que ocupen demasiado espacio.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q14')"><input type="radio" name="q14" value="c"><label>Enviar notificaciones por correo electrónico cuando se generan logs críticos.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q14')"><input type="radio" name="q14" value="d"><label>Escribir logs en un formato binario seguro.</label></li>
+            </ul>
+            <script>var answer_q14 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 15: ¿Qué comando se utiliza para consultar los logs del sistema gestionados por `systemd-journald`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q15')"><input type="radio" name="q15" value="a"><label>cat /var/log/messages</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q15')"><input type="radio" name="q15" value="b"><label>logread</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q15')"><input type="radio" name="q15" value="c"><label>journalctl</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q15')"><input type="radio" name="q15" value="d"><label>dmesg</label></li>
+            </ul>
+            <script>var answer_q15 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 16: En JMeter, ¿qué es un "Thread Group" (Grupo de Hilos)?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q16')"><input type="radio" name="q16" value="a"><label>Un conjunto de configuraciones por defecto para las peticiones HTTP.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q16')"><input type="radio" name="q16" value="b"><label>Un elemento que define el número de usuarios virtuales (hilos), el período de subida (ramp-up) y el número de iteraciones.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q16')"><input type="radio" name="q16" value="c"><label>Un componente para visualizar los resultados de las pruebas en forma de árbol.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q16')"><input type="radio" name="q16" value="d"><label>Un post-procesador para extraer datos de las respuestas.</label></li>
+            </ul>
+            <script>var answer_q16 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 17: ¿Qué es un "Exporter" en el contexto de Prometheus?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q17')"><input type="radio" name="q17" value="a"><label>Una consulta escrita en PromQL para obtener métricas.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q17')"><input type="radio" name="q17" value="b"><label>Un software que expone métricas de un sistema o aplicación en un formato que Prometheus puede recolectar (scrape).</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q17')"><input type="radio" name="q17" value="c"><label>Un tipo de dashboard predefinido en Grafana.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q17')"><input type="radio" name="q17" value="d"><label>La base de datos donde Prometheus almacena las series temporales.</label></li>
+            </ul>
+            <script>var answer_q17 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 18: La arquitectura de Microservicios implica:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q18')"><input type="radio" name="q18" value="a"><label>Una única aplicación monolítica desplegada en varios servidores.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q18')"><input type="radio" name="q18" value="b"><label>Descomponer una aplicación en un conjunto de pequeños servicios independientes que se comunican mediante APIs.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q18')"><input type="radio" name="q18" value="c"><label>Usar exclusivamente máquinas virtuales para cada componente de la aplicación.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q18')"><input type="radio" name="q18" value="d"><label>Escribir toda la aplicación en un único lenguaje de programación para mayor cohesión.</label></li>
+            </ul>
+            <script>var answer_q18 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 19: ¿Qué ventaja ofrece Podman sobre Docker según se menciona en el temario?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q19')"><input type="radio" name="q19" value="a"><label>Es más fácil de instalar en Windows.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q19')"><input type="radio" name="q19" value="b"><label>Permite ejecutar contenedores sin necesidad de un servicio demonio (daemonless) y con mejor soporte para rootless containers.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q19')"><input type="radio" name="q19" value="c"><label>Tiene una interfaz gráfica de usuario integrada más avanzada (Docker Desktop).</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q19')"><input type="radio" name="q19" value="d"><label>Es la única herramienta compatible con Docker Compose.</label></li>
+            </ul>
+            <script>var answer_q19 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 20: En Grafana, al configurar Prometheus como "Datasource", ¿qué URL se utiliza si Grafana y Prometheus corren como servicios en el mismo `docker-compose.yml`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q20')"><input type="radio" name="q20" value="a"><label>http://localhost:9090</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q20')"><input type="radio" name="q20" value="b"><label>La IP pública del servidor anfitrión seguida del puerto de Prometheus.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q20')"><input type="radio" name="q20" value="c"><label>http://prometheus:9090 (usando el nombre del servicio definido en docker-compose.yml).</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q20')"><input type="radio" name="q20" value="d"><label>Se debe usar la IP interna del contenedor de Prometheus.</label></li>
+            </ul>
+            <script>var answer_q20 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 21: ¿Qué comando se utiliza para listar todas las imágenes Docker descargadas localmente?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q21')"><input type="radio" name="q21" value="a"><label>docker ps -a</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q21')"><input type="radio" name="q21" value="b"><label>docker images</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q21')"><input type="radio" name="q21" value="c"><label>docker list images</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q21')"><input type="radio" name="q21" value="d"><label>docker search</label></li>
+            </ul>
+            <script>var answer_q21 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 22: En un `docker-compose.yml`, ¿qué especifica la sección `ports: - "8080:80"` para un servicio?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q22')"><input type="radio" name="q22" value="a"><label>Expone el puerto 8080 del contenedor al exterior.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q22')"><input type="radio" name="q22" value="b"><label>Mapea el puerto 80 del contenedor al puerto 8080 del host.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q22')"><input type="radio" name="q22" value="c"><label>Mapea el puerto 8080 del contenedor al puerto 80 del host.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q22')"><input type="radio" name="q22" value="d"><label>Indica que el servicio internamente usa los puertos 80 y 8080.</label></li>
+            </ul>
+            <script>var answer_q22 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 23: Phoronix Test Suite (PTS) es una plataforma para:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q23')"><input type="radio" name="q23" value="a"><label>Desarrollar aplicaciones web interactivas.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q23')"><input type="radio" name="q23" value="b"><label>Gestionar y ejecutar un conjunto de benchmarks de rendimiento.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q23')"><input type="radio" name="q23" value="c"><label>Monitorizar la seguridad de los contenedores Docker.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q23')"><input type="radio" name="q23" value="d"><label>Automatizar el despliegue de microservicios.</label></li>
+            </ul>
+            <script>var answer_q23 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 24: En JMeter, ¿qué elemento se utiliza para simular que un usuario realiza una petición HTTP a un servidor?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q24')"><input type="radio" name="q24" value="a"><label>Listener</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q24')"><input type="radio" name="q24" value="b"><label>Timer</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q24')"><input type="radio" name="q24" value="c"><label>HTTP Request Sampler</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q24')"><input type="radio" name="q24" value="d"><label>Assertion</label></li>
+            </ul>
+            <script>var answer_q24 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 25: ¿Qué tipo de información se encuentra típicamente en `/proc/meminfo` en un sistema Linux?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q25')"><input type="radio" name="q25" value="a"><label>Información detallada sobre los procesos en ejecución.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q25')"><input type="radio" name="q25" value="b"><label>Estadísticas sobre el uso de la memoria RAM y swap del sistema.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q25')"><input type="radio" name="q25" value="c"><label>Configuración de las interfaces de red.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q25')"><input type="radio" name="q25" value="d"><label>Logs de errores del kernel.</label></li>
+            </ul>
+            <script>var answer_q25 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 26: ¿Cuál es el propósito principal de Grafana en una pila de monitorización con Prometheus?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q26')"><input type="radio" name="q26" value="a"><label>Recolectar las métricas directamente de los servicios (scraping).</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q26')"><input type="radio" name="q26" value="b"><label>Almacenar a largo plazo las series temporales de métricas.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q26')"><input type="radio" name="q26" value="c"><label>Proporcionar servicios de visualización (dashboards, paneles) y alertas sobre los datos de telemetría recolectados por Prometheus.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q26')"><input type="radio" name="q26" value="d"><label>Definir los `exporters` para cada servicio a monitorizar.</label></li>
+            </ul>
+            <script>var answer_q26 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 27: En Prometheus, ¿qué es un `job_name` dentro de `scrape_configs` en el archivo `prometheus.yml`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q27')"><input type="radio" name="q27" value="a"><label>El nombre del dashboard de Grafana donde se mostrarán las métricas.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q27')"><input type="radio" name="q27" value="b"><label>Un identificador para un conjunto de `targets` (objetivos de scraping) que comparten una configuración común.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q27')"><input type="radio" name="q27" value="c"><label>El tipo de métrica que se va a recolectar (counter, gauge, histogram).</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q27')"><input type="radio" name="q27" value="d"><label>El comando para iniciar el servicio de Prometheus.</label></li>
+            </ul>
+            <script>var answer_q27 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 28: ¿Qué comando se utiliza para editar el archivo crontab del usuario actual?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q28')"><input type="radio" name="q28" value="a"><label>cron -e</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q28')"><input type="radio" name="q28" value="b"><label>crontab -l</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q28')"><input type="radio" name="q28" value="c"><label>crontab -e</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q28')"><input type="radio" name="q28" value="d"><label>editcron</label></li>
+            </ul>
+            <script>var answer_q28 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 29: ¿Cuál es una de las principales ventajas de `htop` sobre `top`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q29')"><input type="radio" name="q29" value="a"><label>Consume menos recursos del sistema.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q29')"><input type="radio" name="q29" value="b"><label>Ofrece una interfaz de texto más interactiva y visualmente mejorada, con scroll y selección de procesos más fácil.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q29')"><input type="radio" name="q29" value="c"><label>Solo muestra información de los procesos del usuario actual.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q29')"><input type="radio" name="q29" value="d"><label>No requiere privilegios de superusuario para ejecutarse.</label></li>
+            </ul>
+            <script>var answer_q29 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 30: ¿Qué tipo de métrica de Prometheus es `http_requests_total` típicamente?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q30')"><input type="radio" name="q30" value="a"><label>Gauge</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q30')"><input type="radio" name="q30" value="b"><label>Histogram</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q30')"><input type="radio" name="q30" value="c"><label>Summary</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q30')"><input type="radio" name="q30" value="d"><label>Counter</label></li>
+            </ul>
+            <script>var answer_q30 = 'd';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 31: En JMeter, si deseas extraer un valor de una respuesta JSON (por ejemplo, un token JWT), ¿qué tipo de Post-Procesador podrías usar?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q31')"><input type="radio" name="q31" value="a"><label>CSV Data Set Config</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q31')"><input type="radio" name="q31" value="b"><label>HTTP Header Manager</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q31')"><input type="radio" name="q31" value="c"><label>JSON Extractor o Regular Expression Extractor</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q31')"><input type="radio" name="q31" value="d"><label>Gaussian Random Timer</label></li>
+            </ul>
+            <script>var answer_q31 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 32: ¿Qué representa `scrape_interval: 5s` en la configuración global de `prometheus.yml`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q32')"><input type="radio" name="q32" value="a"><label>Prometheus almacena las métricas durante 5 segundos antes de descartarlas.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q32')"><input type="radio" name="q32" value="b"><label>Grafana actualiza sus dashboards cada 5 segundos.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q32')"><input type="radio" name="q32" value="c"><label>Prometheus recolectará métricas de sus `targets` cada 5 segundos por defecto.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q32')"><input type="radio" name="q32" value="d"><label>Las alertas de Prometheus se evaluarán cada 5 segundos.</label></li>
+            </ul>
+            <script>var answer_q32 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 33: ¿Cuál es una de las funciones de `docker compose up -d`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q33')"><input type="radio" name="q33" value="a"><label>Construye las imágenes pero no inicia los contenedores.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q33')"><input type="radio" name="q33" value="b"><label>Inicia los servicios definidos en `docker-compose.yml` en primer plano mostrando los logs.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q33')"><input type="radio" name="q33" value="c"><label>Inicia los servicios definidos en `docker-compose.yml` en segundo plano (detached mode).</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q33')"><input type="radio" name="q33" value="d"><label>Detiene y elimina los contenedores, redes y volúmenes.</label></li>
+            </ul>
+            <script>var answer_q33 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 34: ¿Qué información se espera encontrar en el directorio `/var/log` de un sistema Linux?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q34')"><input type="radio" name="q34" value="a"><label>Archivos de configuración del sistema.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q34')"><input type="radio" name="q34" value="b"><label>Archivos binarios de los programas instalados.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q34')"><input type="radio" name="q34" value="c"><label>Archivos de registro (logs) del sistema operativo y de las aplicaciones.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q34')"><input type="radio" name="q34" value="d"><label>Archivos temporales creados por los usuarios.</label></li>
+            </ul>
+            <script>var answer_q34 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 35: La función `rate(http_requests_total[5m])` en PromQL calcula:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q35')"><input type="radio" name="q35" value="a"><label>El número total de peticiones HTTP en los últimos 5 minutos.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q35')"><input type="radio" name="q35" value="b"><label>La tasa de cambio promedio por segundo de un contador de peticiones HTTP en los últimos 5 minutos.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q35')"><input type="radio" name="q35" value="c"><label>El tiempo promedio de respuesta de las peticiones HTTP en los últimos 5 minutos.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q35')"><input type="radio" name="q35" value="d"><label>El percentil 95 de la duración de las peticiones HTTP en los últimos 5 minutos.</label></li>
+            </ul>
+            <script>var answer_q35 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 36: En la imagen de JMeter proporcionada, bajo "Login Administradores", ¿qué parámetros se envían en la petición HTTP POST?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q36')"><input type="radio" name="q36" value="a"><label>token y jwt</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q36')"><input type="radio" name="q36" value="b"><label>username y token</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q36')"><input type="radio" name="q36" value="c"><label>login y password (con valores como ${login} y ${password})</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q36')"><input type="radio" name="q36" value="d"><label>auth_user y auth_pass</label></li>
+            </ul>
+            <script>var answer_q36 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 37: Para importar un dashboard predefinido en Grafana desde Grafana.com/dashboards, ¿qué se suele necesitar?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q37')"><input type="radio" name="q37" value="a"><label>La URL completa del dashboard.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q37')"><input type="radio" name="q37" value="b"><label>El ID del dashboard o el archivo JSON del mismo.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q37')"><input type="radio" name="q37" value="c"><label>Las credenciales del autor del dashboard.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q37')"><input type="radio" name="q37" value="d"><label>Una suscripción de pago a Grafana Cloud.</label></li>
+            </ul>
+            <script>var answer_q37 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 38: El "Node Exporter" de Prometheus se utiliza para:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q38')"><input type="radio" name="q38" value="a"><label>Exportar los dashboards de Grafana a formato JSON.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q38')"><input type="radio" name="q38" value="b"><label>Exponer métricas del hardware y del sistema operativo de un nodo Linux (CPU, memoria, disco, red).</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q38')"><input type="radio" name="q38" value="c"><label>Monitorizar aplicaciones específicas escritas en NodeJS.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q38')"><input type="radio" name="q38" value="d"><label>Gestionar los nodos en un clúster de Kubernetes.</label></li>
+            </ul>
+            <script>var answer_q38 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 39: En el `docker-compose.yml` para Grafana y Prometheus, `depends_on: - prometheus` en la definición del servicio Grafana significa:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q39')"><input type="radio" name="q39" value="a"><label>Que Grafana enviará sus métricas a Prometheus.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q39')"><input type="radio" name="q39" value="b"><label>Que Docker Compose iniciará el servicio Prometheus antes que el servicio Grafana.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q39')"><input type="radio" name="q39" value="c"><label>Que Grafana y Prometheus deben usar la misma imagen base de Docker.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q39')"><input type="radio" name="q39" value="d"><label>Que Prometheus depende de Grafana para su visualización.</label></li>
+            </ul>
+            <script>var answer_q39 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 40: ¿Qué es "stress" en el contexto de las pruebas de rendimiento en Linux?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q40')"><input type="radio" name="q40" value="a"><label>Un tipo de configuración de firewall para alta carga.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q40')"><input type="radio" name="q40" value="b"><label>Una herramienta para generar carga artificial en componentes del sistema como CPU, memoria o E/S.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q40')"><input type="radio" name="q40" value="c"><label>Un algoritmo de compresión de logs.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q40')"><input type="radio" name="q40" value="d"><label>Una métrica específica que Prometheus recolecta por defecto.</label></li>
+            </ul>
+            <script>var answer_q40 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 41: En un Dockerfile, ¿qué instrucción se utiliza para especificar la imagen base a partir de la cual se construirá la nueva imagen?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q41')"><input type="radio" name="q41" value="a"><label>COPY</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q41')"><input type="radio" name="q41" value="b"><label>RUN</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q41')"><input type="radio" name="q41" value="c"><label>FROM</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q41')"><input type="radio" name="q41" value="d"><label>CMD</label></li>
+            </ul>
+            <script>var answer_q41 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 42: ¿Cuál es el propósito de la directiva `volumes` en un archivo `docker-compose.yml` al definir un servicio como Prometheus o Grafana, según el ejemplo del temario?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q42')"><input type="radio" name="q42" value="a"><label>Especificar el tamaño máximo del disco que puede usar el contenedor.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q42')"><input type="radio" name="q42" value="b"><label>Mapear directorios o archivos del host a directorios dentro del contenedor para persistencia de datos o configuración.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q42')"><input type="radio" name="q42" value="c"><label>Definir las redes a las que se conectará el contenedor.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q42')"><input type="radio" name="q42" value="d"><label>Limitar el número de volúmenes que el contenedor puede crear.</label></li>
+            </ul>
+            <script>var answer_q42 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 43: ¿Qué herramienta se menciona en el temario para ejecutar benchmarks que está disponible como imagen Docker (phoronix/pts)?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q43')"><input type="radio" name="q43" value="a"><label>Apache JMeter</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q43')"><input type="radio" name="q43" value="b"><label>Apache Benchmark (ab)</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q43')"><input type="radio" name="q43" value="c"><label>Phoronix Test Suite</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q43')"><input type="radio" name="q43" value="d"><label>Sysbench</label></li>
+            </ul>
+            <script>var answer_q43 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 44: En JMeter, ¿para qué se utiliza un "CSV Data Set Config"?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q44')"><input type="radio" name="q44" value="a"><label>Para exportar los resultados de la prueba a un archivo CSV.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q44')"><input type="radio" name="q44" value="b"><label>Para leer datos de un archivo CSV y utilizarlos como variables en las peticiones (ej. credenciales de usuario).</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q44')"><input type="radio" name="q44" value="c"><label>Para configurar el formato de los logs de JMeter.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q44')"><input type="radio" name="q44" value="d"><label>Para generar gráficos a partir de datos CSV externos.</label></li>
+            </ul>
+            <script>var answer_q44 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 45: El comando `journalctl -f` en Linux se utiliza para:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q45')"><input type="radio" name="q45" value="a"><label>Formatear el journal de systemd.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q45')"><input type="radio" name="q45" value="b"><label>Mostrar las entradas del journal de systemd en tiempo real (seguir el log).</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q45')"><input type="radio" name="q45" value="c"><label>Filtrar el journal por un servicio específico.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q45')"><input type="radio" name="q45" value="d"><label>Exportar todo el journal a un archivo.</label></li>
+            </ul>
+            <script>var answer_q45 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 46: Al configurar Grafana con Prometheus, ¿qué se define como "Datasource"?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q46')"><input type="radio" name="q46" value="a"><label>El archivo de configuración de Grafana.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q46')"><input type="radio" name="q46" value="b"><label>Un panel específico dentro de un dashboard.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q46')"><input type="radio" name="q46" value="c"><label>La instancia de Prometheus de donde Grafana obtendrá los datos para visualizar.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q46')"><input type="radio" name="q46" value="d"><label>El tipo de alerta que se configurará.</label></li>
+            </ul>
+            <script>var answer_q46 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 47: ¿Qué es PromQL?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q47')"><input type="radio" name="q47" value="a"><label>Un lenguaje de scripting para automatizar tareas en Grafana.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q47')"><input type="radio" name="q47" value="b"><label>El lenguaje de consulta funcional de Prometheus utilizado para seleccionar y agregar datos de series temporales.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q47')"><input type="radio" name="q47" value="c"><label>Un formato de archivo para exportar dashboards de Grafana.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q47')"><input type="radio" name="q47" value="d"><label>Una biblioteca de Python para interactuar con la API de Prometheus.</label></li>
+            </ul>
+            <script>var answer_q47 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 48: En un archivo crontab, la expresión `*/5 * * * * /ruta/a/mi/script.sh` significa:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q48')"><input type="radio" name="q48" value="a"><label>Ejecutar el script a las 5 de la mañana todos los días.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q48')"><input type="radio" name="q48" value="b"><label>Ejecutar el script cada 5 minutos.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q48')"><input type="radio" name="q48" value="c"><label>Ejecutar el script el día 5 de cada mes.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q48')"><input type="radio" name="q48" value="d"><label>Ejecutar el script 5 veces cada hora.</label></li>
+            </ul>
+            <script>var answer_q48 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 49: ¿Qué información muestra la columna `%CPU` en la salida del comando `top`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q49')"><input type="radio" name="q49" value="a"><label>El porcentaje de memoria RAM utilizada por el proceso.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q49')"><input type="radio" name="q49" value="b"><label>La prioridad del proceso en la CPU.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q49')"><input type="radio" name="q49" value="c"><label>El porcentaje de tiempo de CPU utilizado por el proceso desde la última actualización.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q49')"><input type="radio" name="q49" value="d"><label>El tiempo total de CPU que el proceso ha consumido desde que inició.</label></li>
+            </ul>
+            <script>var answer_q49 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 50: Si Prometheus no puede acceder a un `target` para hacer `scraping`, ¿qué estado mostrará típicamente para ese `target` en su interfaz web?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q50')"><input type="radio" name="q50" value="a"><label>ACTIVE</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q50')"><input type="radio" name="q50" value="b"><label>UP</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q50')"><input type="radio" name="q50" value="c"><label>DOWN</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q50')"><input type="radio" name="q50" value="d"><label>PENDING</label></li>
+            </ul>
+            <script>var answer_q50 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 51: En la imagen de JMeter que has proporcionado, ¿qué elemento se utiliza para manejar las credenciales de autenticación básica HTTP de forma global en el plan de pruebas?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q51')"><input type="radio" name="q51" value="a"><label>Gaussian Random Timer</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q51')"><input type="radio" name="q51" value="b"><label>HTTP Request (dentro de Login Alumnos)</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q51')"><input type="radio" name="q51" value="c"><label>HTTP Basic Auth (probablemente un HTTP Authorization Manager)</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q51')"><input type="radio" name="q51" value="d"><label>View Results Tree</label></li>
+            </ul>
+            <script>var answer_q51 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 52: La persistencia de datos en Grafana (dashboards, configuraciones) cuando se ejecuta en Docker se logra típicamente mediante:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q52')"><input type="radio" name="q52" value="a"><label>La opción `SAVE_STATE=true` en el comando `docker run`.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q52')"><input type="radio" name="q52" value="b"><label>El uso de volúmenes Docker para mapear `/var/lib/grafana` del contenedor a un directorio en el host.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q52')"><input type="radio" name="q52" value="c"><label>La configuración de `scrape_interval` en Prometheus.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q52')"><input type="radio" name="q52" value="d"><label>Almacenando toda la configuración en el archivo `prometheus.yml`.</label></li>
+            </ul>
+            <script>var answer_q52 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 53: ¿Cuál es el propósito de un "Listener" como "View Results Tree" en JMeter?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q53')"><input type="radio" name="q53" value="a"><label>Generar la carga de peticiones HTTP.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q53')"><input type="radio" name="q53" value="b"><label>Mostrar los resultados de las peticiones ejecutadas, incluyendo detalles de la petición y la respuesta.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q53')"><input type="radio" name="q53" value="c"><label>Definir variables de usuario para el plan de pruebas.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q53')"><input type="radio" name="q53" value="d"><label>Pausar la ejecución entre peticiones para simular el pensamiento del usuario.</label></li>
+            </ul>
+            <script>var answer_q53 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 54: En el archivo `docker-compose.yml` de ejemplo para Prometheus y Grafana, ¿qué puerto del host se mapea al puerto 3000 del contenedor Grafana?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q54')"><input type="radio" name="q54" value="a"><label>9090</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q54')"><input type="radio" name="q54" value="b"><label>3000</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q54')"><input type="radio" name="q54" value="c"><label>4000</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q54')"><input type="radio" name="q54" value="d"><label>No se mapea, se accede directamente al 3000 del contenedor.</label></li>
+            </ul>
+            <script>var answer_q54 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 55: Al monitorizar un servidor Linux con Node Exporter y Prometheus, ¿qué tipo de información se puede visualizar en Grafana?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q55')"><input type="radio" name="q55" value="a"><label>Únicamente el estado de los servicios SSHD y Apache.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q55')"><input type="radio" name="q55" value="b"><label>Solo el contenido de los archivos de log del sistema.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q55')"><input type="radio" name="q55" value="c"><label>Métricas de uso de CPU, memoria, disco, red, carga del sistema y estado de servicios (si se configuran colectores adicionales).</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q55')"><input type="radio" name="q55" value="d"><label>La estructura de los playbooks de Ansible ejecutados en el servidor.</label></li>
+            </ul>
+            <script>var answer_q55 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 56: ¿Qué permite hacer la opción "Export for sharing externally" al compartir un dashboard en Grafana?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q56')"><input type="radio" name="q56" value="a"><label>Enviar el dashboard por correo electrónico directamente desde Grafana.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q56')"><input type="radio" name="q56" value="b"><label>Generar un archivo JSON que contiene la definición del dashboard para poder importarlo en otra instancia de Grafana.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q56')"><input type="radio" name="q56" value="c"><label>Publicar el dashboard en una URL pública accesible por cualquiera.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q56')"><input type="radio" name="q56" value="d"><label>Crear una copia de seguridad del dashboard en la base de datos de Prometheus.</label></li>
+            </ul>
+            <script>var answer_q56 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 57: Si en JMeter se utiliza un "HTTP Authorization Manager" para configurar la autenticación básica, ¿qué información se suele proporcionar?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q57')"><input type="radio" name="q57" value="a"><label>La URL base, un nombre de usuario y una contraseña.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q57')"><input type="radio" name="q57" value="b"><label>Solo un token JWT.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q57')"><input type="radio" name="q57" value="c"><label>El path al archivo CSV con las credenciales.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q57')"><input type="radio" name="q57" value="d"><label>Los certificados SSL del cliente y del servidor.</label></li>
+            </ul>
+            <script>var answer_q57 = 'a';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 58: ¿Cuál es una ventaja de ejecutar Phoronix Test Suite dentro de un contenedor Docker, según el temario?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q58')"><input type="radio" name="q58" value="a"><label>Permite modificar directamente el kernel del sistema anfitrión para optimizar los benchmarks.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q58')"><input type="radio" name="q58" value="b"><label>Garantiza que los benchmarks se ejecuten más rápido que en la máquina local.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q58')"><input type="radio" name="q58" value="c"><label>Proporciona un entorno limpio, preconfigurado y aislado, mitigando problemas de dependencias o configuraciones locales.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q58')"><input type="radio" name="q58" value="d"><label>No requiere conexión a internet para descargar los tests.</label></li>
+            </ul>
+            <script>var answer_q58 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 59: En el archivo `prometheus.yml`, la sección `static_configs` dentro de un `job_name` se utiliza para:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q59')"><input type="radio" name="q59" value="a"><label>Definir dinámicamente los targets usando descubrimiento de servicios.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q59')"><input type="radio" name="q59" value="b"><label>Listar manualmente las direcciones y puertos de los `targets` que Prometheus debe monitorear.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q59')"><input type="radio" name="q59" value="c"><label>Especificar las reglas de alerta para ese job.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q59')"><input type="radio" name="q59" value="d"><label>Indicar el intervalo de scraping específico para ese job.</label></li>
+            </ul>
+            <script>var answer_q59 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 60: Para monitorizar el estado de servicios como SSHD y Apache Httpd (Activo/Inactivo) en Grafana usando Node Exporter, ¿qué métrica de Node Exporter (con el colector systemd habilitado) podría ser útil?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q60')"><input type="radio" name="q60" value="a"><label>node_cpu_seconds_total</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q60')"><input type="radio" name="q60" value="b"><label>node_filesystem_avail_bytes</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q60')"><input type="radio" name="q60" value="c"><label>node_systemd_unit_state (con labels como `name` y `state`)</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q60')"><input type="radio" name="q60" value="d"><label>process_cpu_seconds_total</label></li>
+            </ul>
+            <script>var answer_q60 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 61: ¿Qué comando de Docker se utiliza para detener un contenedor en ejecución sin eliminarlo?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q61')"><input type="radio" name="q61" value="a"><label>docker rm [nombre_contenedor]</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q61')"><input type="radio" name="q61" value="b"><label>docker stop [nombre_contenedor]</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q61')"><input type="radio" name="q61" value="c"><label>docker pause [nombre_contenedor]</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q61')"><input type="radio" name="q61" value="d"><label>docker kill [nombre_contenedor]</label></li>
+            </ul>
+            <script>var answer_q61 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 62: En el contexto del `docker-compose.yml` para la aplicación de JMeter, la directiva `build: ./nodejs` para el servicio `nodejs` significa:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q62')"><input type="radio" name="q62" value="a"><label>Que se usará una imagen preexistente llamada `./nodejs` de Docker Hub.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q62')"><input type="radio" name="q62" value="b"><label>Que se debe construir una imagen para este servicio utilizando el Dockerfile que se encuentra en el directorio `./nodejs`.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q62')"><input type="radio" name="q62" value="c"><label>Que el código fuente de la aplicación Node.js se encuentra en el directorio `./nodejs` del host.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q62')"><input type="radio" name="q62" value="d"><label>Que se debe ejecutar el script `./nodejs` al iniciar el contenedor.</label></li>
+            </ul>
+            <script>var answer_q62 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 63: Según el temario, ¿cuál es una de las ventajas de la arquitectura de microservicios relacionada con la tecnología?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q63')"><input type="radio" name="q63" value="a"><label>Reduce la complejidad de la comunicación entre servicios.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q63')"><input type="radio" name="q63" value="b"><label>Obliga a usar el mismo lenguaje de programación para todos los servicios.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q63')"><input type="radio" name="q63" value="c"><label>Permite que cada servicio pueda utilizar su propio stack tecnológico, adaptándose mejor a sus necesidades específicas.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q63')"><input type="radio" name="q63" value="d"><label>Simplifica la gestión de bases de datos monolíticas.</label></li>
+            </ul>
+            <script>var answer_q63 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 64: En JMeter, ¿qué función cumple un "HTTP Cookie Manager"?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q64')"><input type="radio" name="q64" value="a"><label>Genera cookies aleatorias para cada petición.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q64')"><input type="radio" name="q64" value="b"><label>Almacena y envía cookies como lo haría un navegador web, permitiendo gestionar sesiones.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q64')"><input type="radio" name="q64" value="c"><label>Elimina todas las cookies de las respuestas del servidor.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q64')"><input type="radio" name="q64" value="d"><label>Valida que las cookies recibidas tengan el formato correcto.</label></li>
+            </ul>
+            <script>var answer_q64 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 65: ¿Qué indica el valor `wa` (I/O wait) en la línea de uso de CPU del comando `top`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q65')"><input type="radio" name="q65" value="a"><label>El porcentaje de CPU utilizado por procesos de usuario.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q65')"><input type="radio" name="q65" value="b"><label>El porcentaje de CPU inactiva.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q65')"><input type="radio" name="q65" value="c"><label>El porcentaje de tiempo que la CPU estuvo esperando a que se completaran operaciones de entrada/salida.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q65')"><input type="radio" name="q65" value="d"><label>El porcentaje de CPU consumido por procesos del kernel.</label></li>
+            </ul>
+            <script>var answer_q65 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 66: ¿Cuál es el puerto por defecto en el que Prometheus expone su propia interfaz web y métricas?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q66')"><input type="radio" name="q66" value="a"><label>3000</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q66')"><input type="radio" name="q66" value="b"><label>8080</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q66')"><input type="radio" name="q66" value="c"><label>9090</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q66')"><input type="radio" name="q66" value="d"><label>9100</label></li>
+            </ul>
+            <script>var answer_q66 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 67: Al importar un dashboard en Grafana usando un ID, ¿de dónde se obtiene típicamente ese dashboard?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q67')"><input type="radio" name="q67" value="a"><label>Del sistema de archivos local.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q67')"><input type="radio" name="q67" value="b"><label>Del repositorio oficial de Grafana (Grafana.com/dashboards).</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q67')"><input type="radio" name="q67" value="c"><label>De la configuración de Prometheus.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q67')"><input type="radio" name="q67" value="d"><label>Se genera automáticamente basado en los datasources.</label></li>
+            </ul>
+            <script>var answer_q67 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 68: ¿Qué utilidad tiene el comando `logger` en el contexto de un script de `cron`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q68')"><input type="radio" name="q68" value="a"><label>Rotar los archivos de log generados por cron.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q68')"><input type="radio" name="q68" value="b"><label>Enviar mensajes desde el script al log del sistema (syslog o journal).</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q68')"><input type="radio" name="q68" value="c"><label>Limpiar el contenido de los logs de cron.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q68')"><input type="radio" name="q68" value="d"><label>Mostrar en tiempo real los logs de las tareas cron.</label></li>
+            </ul>
+            <script>var answer_q68 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 69: El sistema de ficheros `/proc` en Linux es:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q69')"><input type="radio" name="q69" value="a"><label>Un directorio en disco que almacena permanentemente los procesos del sistema.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q69')"><input type="radio" name="q69" value="b"><label>Un sistema de ficheros virtual que proporciona información en tiempo real sobre el kernel y los procesos en ejecución.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q69')"><input type="radio" name="q69" value="c"><label>El directorio donde se guardan las configuraciones de los programas.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q69')"><input type="radio" name="q69" value="d"><label>Una partición de swap utilizada por el sistema.</label></li>
+            </ul>
+            <script>var answer_q69 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 70: ¿Qué tipo de métrica de Prometheus es adecuada para representar valores que pueden subir y bajar, como la temperatura actual o la memoria en uso?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q70')"><input type="radio" name="q70" value="a"><label>Counter</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q70')"><input type="radio" name="q70" value="b"><label>Gauge</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q70')"><input type="radio" name="q70" value="c"><label>Histogram</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q70')"><input type="radio" name="q70" value="d"><label>Summary</label></li>
+            </ul>
+            <script>var answer_q70 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 71: En JMeter, como se ve en la imagen, un "JWT Token" obtenido tras el login se utiliza probablemente en peticiones subsiguientes dentro de un:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q71')"><input type="radio" name="q71" value="a"><label>CSV Data Set Config.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q71')"><input type="radio" name="q71" value="b"><label>HTTP Header Manager (como cabecera `Authorization: Bearer ${TOKEN}`).</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q71')"><input type="radio" name="q71" value="c"><label>User Defined Variables, directamente en la URL.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q71')"><input type="radio" name="q71" value="d"><label>Response Assertion.</label></li>
+            </ul>
+            <script>var answer_q71 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 72: Al ejecutar `docker compose down`, ¿qué sucede con los contenedores definidos en el archivo `docker-compose.yml`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q72')"><input type="radio" name="q72" value="a"><label>Solo se pausan, manteniendo su estado.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q72')"><input type="radio" name="q72" value="b"><label>Se detienen y se eliminan, junto con las redes creadas por defecto (a menos que se especifique lo contrario con opciones).</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q72')"><input type="radio" name="q72" value="c"><label>Se reinician y se actualizan a la última imagen disponible.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q72')"><input type="radio" name="q72" value="d"><label>Se guardan como nuevas imágenes en el repositorio local.</label></li>
+            </ul>
+            <script>var answer_q72 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 73: ¿Cuál es el propósito principal de un "Panel" en un dashboard de Grafana?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q73')"><input type="radio" name="q73" value="a"><label>Definir la conexión a una fuente de datos como Prometheus.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q73')"><input type="radio" name="q73" value="b"><label>Agrupar varios dashboards relacionados.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q73')"><input type="radio" name="q73" value="c"><label>Visualizar una o más métricas específicas utilizando un tipo de gráfico (tabla, gráfica de líneas, gauge, etc.).</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q73')"><input type="radio" name="q73" value="d"><label>Configurar las reglas de alerta para todo el dashboard.</label></li>
+            </ul>
+            <script>var answer_q73 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 74: Si en el archivo `prometheus.yml` se define un `target` como `mi_servidor_rocky:9100`, ¿a qué puerto se conectará Prometheus en `mi_servidor_rocky` para obtener métricas del Node Exporter?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q74')"><input type="radio" name="q74" value="a"><label>9090</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q74')"><input type="radio" name="q74" value="b"><label>3000</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q74')"><input type="radio" name="q74" value="c"><label>80</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q74')"><input type="radio" name="q74" value="d"><label>9100</label></li>
+            </ul>
+            <script>var answer_q74 = 'd';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 75: Para ejecutar una prueba de JMeter sin la interfaz gráfica, desde la línea de comandos, ¿qué opción se suele usar?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q75')"><input type="radio" name="q75" value="a"><label>jmeter -g /ruta/al/plan.jmx</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q75')"><input type="radio" name="q75" value="b"><label>jmeter -n -t /ruta/al/plan.jmx -l /ruta/al/resultados.jtl</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q75')"><input type="radio" name="q75" value="c"><label>jmeter --nogui --plan /ruta/al/plan.jmx</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q75')"><input type="radio" name="q75" value="d"><label>jmeter -cmd /ruta/al/plan.jmx</label></li>
+            </ul>
+            <script>var answer_q75 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 76: ¿Qué representa la métrica `nodejs_heap_size_used_bytes` en la monitorización de una API Node.js con Prometheus?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q76')"><input type="radio" name="q76" value="a"><label>El tamaño total del heap de Node.js disponible en bytes.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q76')"><input type="radio" name="q76" value="b"><label>El número de objetos actualmente en el heap de Node.js.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q76')"><input type="radio" name="q76" value="c"><label>La cantidad de memoria del heap de Node.js que está siendo utilizada actualmente en bytes.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q76')"><input type="radio" name="q76" value="d"><label>El tiempo total de CPU consumido por el proceso Node.js.</label></li>
+            </ul>
+            <script>var answer_q76 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 77: ¿Cuál es uno de los objetivos de monitorizar los "Tiempos de respuesta de los endpoints de la API" (ej: `http_request_duration_seconds_bucket`)?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q77')"><input type="radio" name="q77" value="a"><label>Contar el número total de errores 404.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q77')"><input type="radio" name="q77" value="b"><label>Identificar cuellos de botella y medir la latencia experimentada por los usuarios de la API.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q77')"><input type="radio" name="q77" value="c"><label>Verificar la cantidad de datos transferidos por cada endpoint.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q77')"><input type="radio" name="q77" value="d"><label>Determinar el uso de CPU específico de cada endpoint.</label></li>
+            </ul>
+            <script>var answer_q77 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 78: ¿Qué tecnología subyacente del kernel de Linux utilizan los contenedores para aislar los sistemas de archivos y los procesos?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q78')"><input type="radio" name="q78" value="a"><label>Hipervisores de tipo 2.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q78')"><input type="radio" name="q78" value="b"><label>SELinux y AppArmor exclusivamente.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q78')"><input type="radio" name="q78" value="c"><label>Namespaces y Cgroups.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q78')"><input type="radio" name="q78" value="d"><label>Systemd timers y sockets.</label></li>
+            </ul>
+            <script>var answer_q78 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 79: Al configurar una alarma en Grafana para el uso de CPU, si la condición es "cuando la media del uso de CPU supere el 75% durante 5 minutos", ¿qué implica el "durante 5 minutos"?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q79')"><input type="radio" name="q79" value="a"><label>La alarma se silenciará durante 5 minutos después de dispararse.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q79')"><input type="radio" name="q79" value="b"><label>La condición debe cumplirse de forma sostenida durante un período de 5 minutos para que la alarma se active.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q79')"><input type="radio" name="q79" value="c"><label>Grafana solo evaluará esta regla de alerta cada 5 minutos.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q79')"><input type="radio" name="q79" value="d"><label>La gráfica mostrará los datos de los últimos 5 minutos únicamente cuando la alarma esté activa.</label></li>
+            </ul>
+            <script>var answer_q79 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 80: ¿Cuál de estas herramientas NO se menciona en el temario del Bloque 2 como una solución de monitorización o pruebas de carga?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q80')"><input type="radio" name="q80" value="a"><label>Munin</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q80')"><input type="radio" name="q80" value="b"><label>Nagios</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q80')"><input type="radio" name="q80" value="c"><label>Wireshark</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q80')"><input type="radio" name="q80" value="d"><label>Zabbix</label></li>
+            </ul>
+            <script>var answer_q80 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 81: ¿Qué información específica NO suele estar directamente en el archivo `/proc/cpuinfo`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q81')"><input type="radio" name="q81" value="a"><label>Modelo del procesador y velocidad de reloj.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q81')"><input type="radio" name="q81" value="b"><label>Número de núcleos y threads.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q81')"><input type="radio" name="q81" value="c"><label>Tamaño de las cachés L1, L2, L3.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q81')"><input type="radio" name="q81" value="d"><label>El uso actual de CPU de cada proceso.</label></li>
+            </ul>
+            <script>var answer_q81 = 'd';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 82: En el contexto de Docker, ¿qué es una "imagen"?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q82')"><input type="radio" name="q82" value="a"><label>Un contenedor en ejecución con una aplicación activa.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q82')"><input type="radio" name="q82" value="b"><label>Una plantilla de solo lectura con instrucciones para crear un contenedor Docker (incluye la aplicación y sus dependencias).</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q82')"><input type="radio" name="q82" value="c"><label>El archivo `docker-compose.yml`.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q82')"><input type="radio" name="q82" value="d"><label>Un volumen de datos persistente utilizado por un contenedor.</label></li>
+            </ul>
+            <script>var answer_q82 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 83: ¿Qué tipo de "Sampler" en JMeter se usaría para realizar una petición a una base de datos mediante JDBC?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q83')"><input type="radio" name="q83" value="a"><label>HTTP Request Sampler</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q83')"><input type="radio" name="q83" value="b"><label>FTP Request Sampler</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q83')"><input type="radio" name="q83" value="c"><label>JDBC Request Sampler</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q83')"><input type="radio" name="q83" value="d"><label>TCP Sampler</label></li>
+            </ul>
+            <script>var answer_q83 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 84: ¿Cuál de las siguientes es una característica de la pila ELK (Elasticsearch, Logstash, Kibana)?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q84')"><input type="radio" name="q84" value="a"><label>Está principalmente enfocada en la simulación de carga de trabajo.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q84')"><input type="radio" name="q84" value="b"><label>Es una solución para la gestión de contenedores alternativa a Docker.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q84')"><input type="radio" name="q84" value="c"><label>Permite recolectar, indexar, buscar y visualizar grandes volúmenes de logs y datos.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q84')"><input type="radio" name="q84" value="d"><label>Es un sistema de gestión de configuración como Ansible o Chef.</label></li>
+            </ul>
+            <script>var answer_q84 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 85: En el archivo `prometheus.yml`, ¿qué especifica la directiva `scrape_configs`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q85')"><input type="radio" name="q85" value="a"><label>La configuración de las alertas que enviará Prometheus.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q85')"><input type="radio" name="q85" value="b"><label>Los dashboards por defecto que se cargarán en Grafana.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q85')"><input type="radio" name="q85" value="c"><label>Define los `jobs` y `targets` de los cuales Prometheus recolectará (hará scraping) métricas.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q85')"><input type="radio" name="q85" value="d"><label>Las reglas de grabación para precalcular métricas complejas.</label></li>
+            </ul>
+            <script>var answer_q85 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 86: ¿Qué es un "Assertion" en JMeter?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q86')"><input type="radio" name="q86" value="a"><label>Un elemento para introducir pausas entre peticiones.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q86')"><input type="radio" name="q86" value="b"><label>Un componente que define el número de hilos para la prueba.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q86')"><input type="radio" name="q86" value="c"><label>Un criterio de validación que se aplica a la respuesta de un sampler para determinar si la petición fue exitosa.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q86')"><input type="radio" name="q86" value="d"><label>Un extractor de datos de las respuestas.</label></li>
+            </ul>
+            <script>var answer_q86 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 87: La utilidad `vmstat` en Linux proporciona información sobre:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q87')"><input type="radio" name="q87" value="a"><label>El estado detallado de las interfaces de red.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q87')"><input type="radio" name="q87" value="b"><label>Memoria virtual, procesos, E/S de bloques, interrupciones y actividad de la CPU.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q87')"><input type="radio" name="q87" value="c"><label>Los usuarios actualmente conectados y sus actividades.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q87')"><input type="radio" name="q87" value="d"><label>El espacio libre en los sistemas de archivos montados.</label></li>
+            </ul>
+            <script>var answer_q87 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 88: Al definir un servicio en `docker-compose.yml` con `image: mongo:6`, Docker Compose:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q88')"><input type="radio" name="q88" value="a"><label>Intentará construir una imagen desde un Dockerfile local llamado `mongo:6`.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q88')"><input type="radio" name="q88" value="b"><label>Buscará y descargará la imagen `mongo` con la etiqueta `6` desde Docker Hub (o el registro configurado) si no está localmente.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q88')"><input type="radio" name="q88" value="c"><label>Creará un volumen llamado `mongo` con un tamaño de 6GB.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q88')"><input type="radio" name="q88" value="d"><label>Ejecutará 6 instancias del contenedor mongo.</label></li>
+            </ul>
+            <script>var answer_q88 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 89: ¿Qué indica el estado "zombie" de un proceso en la salida de `top`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q89')"><input type="radio" name="q89" value="a"><label>Un proceso que está consumiendo el 100% de la CPU.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q89')"><input type="radio" name="q89" value="b"><label>Un proceso que ha sido detenido por el usuario.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q89')"><input type="radio" name="q89" value="c"><label>Un proceso que ha terminado su ejecución pero su entrada aún existe en la tabla de procesos, esperando a que el proceso padre recoja su estado de salida.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q89')"><input type="radio" name="q89" value="d"><label>Un proceso que está bloqueado esperando una operación de E/S.</label></li>
+            </ul>
+            <script>var answer_q89 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 90: El comando `docker exec -it [nombre_contenedor] sh` permite:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q90')"><input type="radio" name="q90" value="a"><label>Exportar la configuración del contenedor a un archivo `sh`.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q90')"><input type="radio" name="q90" value="b"><label>Ver los logs del contenedor en formato shell.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q90')"><input type="radio" name="q90" value="c"><label>Abrir una sesión de shell interactiva dentro de un contenedor que ya está en ejecución.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q90')"><input type="radio" name="q90" value="d"><label>Ejecutar un script `sh` que se encuentra en el host dentro del contenedor.</label></li>
+            </ul>
+            <script>var answer_q90 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 91: ¿Cuál es una de las principales ventajas de usar `docker-compose` para una aplicación con múltiples servicios (ej. app web + base de datos)?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q91')"><input type="radio" name="q91" value="a"><label>Reduce el tamaño de las imágenes Docker de cada servicio.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q91')"><input type="radio" name="q91" value="b"><label>Permite definir y gestionar la configuración, redes y dependencias entre múltiples contenedores con un solo archivo y comando.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q91')"><input type="radio" name="q91" value="c"><label>Elimina la necesidad de tener Docker Engine instalado.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q91')"><input type="radio" name="q91" value="d"><label>Ofrece una interfaz gráfica para monitorizar los servicios.</label></li>
+            </ul>
+            <script>var answer_q91 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 92: En el contexto de Grafana, ¿qué es un "dashboard"?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q92')"><input type="radio" name="q92" value="a"><label>Una única consulta PromQL.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q92')"><input type="radio" name="q92" value="b"><label>La configuración de una fuente de datos.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q92')"><input type="radio" name="q92" value="c"><label>Una colección de uno o más paneles organizados y mostrados juntos para visualizar datos.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q92')"><input type="radio" name="q92" value="d"><label>El servidor donde se almacenan las métricas de Prometheus.</label></li>
+            </ul>
+            <script>var answer_q92 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 93: Para que Prometheus pueda recolectar métricas de un servicio (ej. Node Exporter), el servicio debe:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q93')"><input type="radio" name="q93" value="a"><label>Estar escrito en el lenguaje Go.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q93')"><input type="radio" name="q93" value="b"><label>Exponer sus métricas en un endpoint HTTP en un formato compatible (generalmente texto plano).</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q93')"><input type="radio" name="q93" value="c"><label>Enviar sus métricas directamente a la base de datos de Prometheus mediante un push.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q93')"><input type="radio" name="q93" value="d"><label>Tener un agente de Grafana instalado.</label></li>
+            </ul>
+            <script>var answer_q93 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 94: Si un `docker-compose.yml` define dos servicios, `webapp` y `database`, y `webapp` tiene `links: - database`, esto permite que:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q94')"><input type="radio" name="q94" value="a"><label>El contenedor `webapp` pueda acceder al contenedor `database` usando el hostname `database`.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q94')"><input type="radio" name="q94" value="b"><label>Ambos contenedores compartan el mismo sistema de archivos.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q94')"><input type="radio" name="q94" value="c"><label>Se cree una copia del contenedor `database` dentro del contenedor `webapp`.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q94')"><input type="radio" name="q94" value="d"><label>El servicio `database` se inicie siempre después que `webapp`.</label></li>
+            </ul>
+            <script>var answer_q94 = 'a';</script> </div>
+
+        <div class="question-block">
+            <h3>Pregunta 95: ¿Qué representa la opción `-n` en el comando `ab -n 1000 -c 100 http://example.com/`?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q95')"><input type="radio" name="q95" value="a"><label>El número de segundos que durará la prueba.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q95')"><input type="radio" name="q95" value="b"><label>El número de conexiones concurrentes a realizar.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q95')"><input type="radio" name="q95" value="c"><label>El número total de peticiones a realizar durante la prueba.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q95')"><input type="radio" name="q95" value="d"><label>El tamaño del payload de cada petición en Kilobytes.</label></li>
+            </ul>
+            <script>var answer_q95 = 'c';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 96: El archivo `~/.ssh/known_hosts` en un cliente SSH se utiliza para:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q96')"><input type="radio" name="q96" value="a"><label>Almacenar la clave privada del cliente.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q96')"><input type="radio" name="q96" value="b"><label>Almacenar las claves públicas de los servidores a los que el cliente se ha conectado y ha confiado, para evitar advertencias de "man-in-the-middle".</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q96')"><input type="radio" name="q96" value="c"><label>Configurar opciones específicas para diferentes hosts SSH.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q96')"><input type="radio" name="q96" value="d"><label>Guardar las contraseñas de los servidores SSH.</label></li>
+            </ul>
+            <script>var answer_q96 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 97: ¿Qué es el "scraping" en el contexto de Prometheus?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q97')"><input type="radio" name="q97" value="a"><label>El proceso de eliminar métricas antiguas de la base de datos.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q97')"><input type="radio" name="q97" value="b"><label>La acción de Prometheus de solicitar y recolectar métricas desde los endpoints HTTP expuestos por los `targets`.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q97')"><input type="radio" name="q97" value="c"><label>La visualización de datos en Grafana.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q97')"><input type="radio" name="q97" value="d"><label>La generación de alertas basadas en umbrales.</label></li>
+            </ul>
+            <script>var answer_q97 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 98: En la imagen de JMeter proporcionada, elementos como "Login Alumnos", "Obtener JWT Token" y "Recuperar datos alumnos" están organizados bajo un elemento padre llamado "Alumnos". Este elemento "Alumnos" es probablemente un:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q98')"><input type="radio" name="q98" value="a"><label>HTTP Request Defaults</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q98')"><input type="radio" name="q98" value="b"><label>Thread Group</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q98')"><input type="radio" name="q98" value="c"><label>Logic Controller (como un Simple Controller)</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q98')"><input type="radio" name="q98" value="d"><label>Listener</label></li>
+            </ul>
+            <script>var answer_q98 = 'b';</script> </div>
+
+        <div class="question-block">
+            <h3>Pregunta 99: ¿Cuál es la función de la directiva `CMD ["npm", "start"]` en un Dockerfile para una aplicación Node.js?</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q99')"><input type="radio" name="q99" value="a"><label>Instala las dependencias del proyecto Node.js durante la construcción de la imagen.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q99')"><input type="radio" name="q99" value="b"><label>Especifica el comando por defecto que se ejecutará cuando se inicie un contenedor a partir de la imagen.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q99')"><input type="radio" name="q99" value="c"><label>Copia el código fuente de la aplicación Node.js a la imagen.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q99')"><input type="radio" name="q99" value="d"><label>Define variables de entorno para la aplicación Node.js.</label></li>
+            </ul>
+            <script>var answer_q99 = 'b';</script>
+        </div>
+
+        <div class="question-block">
+            <h3>Pregunta 100: Si en Grafana se observa que un panel que muestra métricas de Prometheus no actualiza datos o muestra "N/A", una posible causa NO sería:</h3>
+            <ul>
+                <li onclick="checkAnswer(this, 'a', 'q100')"><input type="radio" name="q100" value="a"><label>El servicio Prometheus está caído o inaccesible para Grafana.</label></li>
+                <li onclick="checkAnswer(this, 'b', 'q100')"><input type="radio" name="q100" value="b"><label>El `target` (exporter) del que Prometheus debería obtener las métricas está caído.</label></li>
+                <li onclick="checkAnswer(this, 'c', 'q100')"><input type="radio" name="q100" value="c"><label>La consulta PromQL en el panel de Grafana es incorrecta o no devuelve datos.</label></li>
+                <li onclick="checkAnswer(this, 'd', 'q100')"><input type="radio" name="q100" value="d"><label>El `scrape_interval` de Prometheus es demasiado corto (ej. 1s).</label></li>
+            </ul>
+            <script>var answer_q100 = 'd';</script>
+        </div>
+
+    </div>
+
+    <script>
+        function checkAnswer(selectedLi, selectedValue, questionName) {
+            const questionOptions = document.querySelectorAll('input[name="' + questionName + '"]');
+            questionOptions.forEach(optionInput => {
+                optionInput.parentElement.classList.remove('correct', 'incorrect');
+            });
+
+            const correctAnswer = window['answer_' + questionName];
+            if (selectedValue === correctAnswer) {
+                selectedLi.classList.add('correct');
+            } else {
+                selectedLi.classList.add('incorrect');
+            }
+            selectedLi.querySelector('input[type="radio"]').checked = true;
+        }
+    </script>
+</body>
+</html>

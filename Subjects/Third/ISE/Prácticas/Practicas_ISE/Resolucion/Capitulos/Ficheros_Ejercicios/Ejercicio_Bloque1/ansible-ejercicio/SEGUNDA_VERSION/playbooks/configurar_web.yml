@@ -1,0 +1,40 @@
+---
+- name: Configurar servidores web
+  hosts: webservers
+  become: true
+  vars_files:
+    - "../vars/{{ group_names[0] }}.yml"
+
+  tasks:
+
+    - name: Instalar paquete web
+      package:
+        name: "{{ web_package }}"
+        state: present
+
+    - name: Asegurar que el servicio está iniciado y habilitado
+      service:
+        name: "{{ web_service }}"
+        state: started
+        enabled: true
+
+    - name: Asegurar que el puerto está abierto (firewalld)
+      firewalld:
+        port: "{{ web_port }}/tcp"
+        permanent: yes
+        state: enabled
+        immediate: yes
+      when: ansible_facts['os_family'] == "RedHat"
+
+    - name: Crear una página de prueba para Apache
+      copy:
+        dest: "/var/www/html/index.html"
+        content: "Servidor Apache configurado con {{ web_service }} mediante Ansible"
+      when: web_package == "httpd"
+
+    - name: Crear una página de prueba para Nginx
+      copy:
+        dest: "/usr/share/nginx/html/index.html"
+        content: "Servidor Nginx configurado con {{ web_service }} mediante Ansible"
+      when: web_package == "nginx"
+

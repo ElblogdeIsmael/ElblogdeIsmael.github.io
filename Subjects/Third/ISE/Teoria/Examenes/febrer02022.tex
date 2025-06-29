@@ -1,0 +1,370 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{tcolorbox}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{hyperref}
+
+% Márgenes
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+% Cabecera y pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Examen de ISE Febrero 2022}
+%\lhead{Nombre: \underline{\hspace{6cm}}}
+\lhead{Universidad de Granada}
+\rfoot{\thepage}
+
+\title{\Huge Examen Febrero 2022\vspace{0.5cm} \\ \Large Ingeniería de Servidores}
+\author{Ismael Sallami Moreno}
+\date{\small Universidad de Granada\\ Doble Grado en Ingeniería Informática y ADE\\ \url{https://elblogdeismael.github.io}}
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\vspace{1cm}
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title=2.- (0.75 puntos)]
+Nuestro computador, que usa la GPU \textit{Nvidia RTX 3090}, tarda 50 segundos en ejecutar un programa monohilo que usa solamente CPU y GPU. Tras vender nuestro otro riñón para cambiar la GPU por la nueva \textit{RTX 3090 Ti} que acaban de anunciar, ahora el programa tarda la mitad del tiempo. Sabiendo que ahora la nueva GPU se usa la mitad del tiempo tras la mejora:
+
+\begin{enumerate}
+    \item[a)] ¿Cuántas veces es mejor esta GPU respecto a la original? (0,5 puntos)
+    \item[b)] ¿Cuál es la ganancia máxima que podríamos conseguir optimizando solo la GPU? (0,25 puntos)
+\end{enumerate}
+\end{tcolorbox}
+
+
+Vamos a resolver el ejercicio utilizando la ley de Amdahl.
+
+\begin{itemize}
+    \item[a)] Calculamos cuántas veces es mejor la nueva GPU respecto a la original:
+
+    \begin{itemize}
+        \item Tiempo original: $T_o = 50\,s$
+        \item Tiempo mejorado: $T_m = 25\,s$
+        \item Tras la mejora, la GPU se usa la mitad del tiempo: $T_{GPU,m} = T_m/2 = 12.5\,s$
+    \end{itemize}
+
+    Aplicando la ley de Amdahl:
+    \[
+    T_o = T_{CPU,o} + T_{GPU,o}
+    \]
+    \[
+    T_m = T_{CPU,o} + \frac{T_{GPU,o}}{k}
+    \]
+    Sabemos que tras la mejora:
+    \[
+    T_{GPU,m} = \frac{T_{GPU,o}}{k} = 12.5\,s \implies T_{GPU,o} = 12.5 \cdot k
+    \]
+    Sustituyendo:
+    \[
+    T_o = T_{CPU,o} + 12.5 \cdot k
+    \]
+    \[
+    T_m = T_{CPU,o} + 12.5
+    \]
+    De la segunda ecuación:
+    \[
+    T_{CPU,o} = 25 - 12.5 = 12.5
+    \]
+    Sustituyendo en la primera:
+    \[
+    50 = 12.5 + 12.5 \cdot k \implies 12.5 \cdot k = 37.5 \implies k = 3
+    \]
+    Por tanto, la nueva GPU es \textbf{3 veces más rápida} que la original.
+
+    \item[b)] Calculamos la ganancia máxima teórica optimizando solo la GPU:
+
+    La fracción del tiempo dedicada originalmente a la GPU es:
+    \[
+    f = \frac{T_{GPU,o}}{T_o} = \frac{37.5}{50} = 0.75
+    \]
+    Según la ley de Amdahl, la ganancia máxima es:
+    \[
+    S_{\text{máx}} = \frac{1}{1 - f} = \frac{1}{0.25} = 4
+    \]
+    Por tanto, la ganancia máxima teórica mejorando solo la GPU es \textbf{4 veces}.
+\end{itemize}
+
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title=3.- (0.75 puntos)]
+En un servidor con S.O. Linux se tiene instalado el monitor de actividad \texttt{sar}. Se sabe que cada activación del monitor implica la ejecución de un total de 1500 instrucciones máquina y almacena un total de 2048 bytes de información en el fichero \texttt{/var/log/sa/saDD} del día DD correspondiente. Si el procesador del equipo tiene una velocidad media de ejecución de 75 MIPS:
+
+\begin{enumerate}
+    \item[a)] ¿Qué valor debe tener el periodo de muestreo (en milisegundos) si se quiere una sobrecarga (overhead) del 1\%? (0,5 puntos)
+    \item[b)] Suponiendo ahora que el monitor se activa una vez cada 15 minutos, ¿cuál será el tamaño (en KiB) máximo de cada fichero del directorio \texttt{/var/log/sa}? (0,25 puntos)
+\end{enumerate}
+\end{tcolorbox}
+
+
+\begin{itemize}
+    \item [a)] De la definición de MIPS sabemos que:
+    $$
+    T_{\text{ejec}} = \frac{NI}{MIPS \times 10^{6}}  = \frac{1500}{75 \times 10^{6}} = 0,00002 \text{ segundos} = 0.02 \text{ milisegundos}
+    $$
+    De la definición de overhead:
+    $$
+    1 = \frac{0,00002}{\text{Período de muestreo}} \times 100 \Rightarrow \text{Período de muestreo} = 0,00002 \times 100 = 0,002 \text{ s} = 2 \text{ ms}
+    $$
+    \item [b)] Si se activa una vez cada 15 minutos, el número de activaciones por día es:
+    $$
+    \text{Activaciones por día} = \frac{24 \text{ horas} \times 60 \text{ minutos}}{15 \text{ minutos}} = 96
+    $$
+    El tamaño total de los ficheros generados en un día es:
+    $$
+    \text{Tamaño total} = 96 \times 2048 \text{ bytes} = 196608 \text{ bytes}
+    $$
+    Convertimos a KiB:
+    $$
+    \text{Tamaño total en KiB} = \frac{196608 \text{ bytes}}{1024} = 192 \text{ KiB}
+    $$
+    Por tanto, el tamaño máximo de cada fichero del directorio \texttt{/var/log/sa} es \textbf{192 KiB}.
+\end{itemize}
+
+
+% \begin{tcolorbox}[colback=gray!10, colframe=black, title=4.- (2 puntos)]
+% Durante las últimas 24 horas, se ha monitorizado un servidor de base de datos con el fin de obtener un modelo del mismo basado en redes de colas. Como resultado de dicha monitorización, se han obtenido las siguientes medidas (solo hay dos dispositivos en nuestro modelo: CPU y disco duro):
+
+% \begin{itemize}
+%     \item Se han contabilizado un total de 54000 consultas entrantes al servidor.
+%     \item La utilización media del disco duro es del 60\% y la de la CPU es del 70\%.
+%     \item Cada consulta al servidor requiere una media de 5 accesos al disco duro.
+% \end{itemize}
+
+% Nota: indique claramente las definiciones y/o leyes operacionales que ha necesitado utilizar y, en su caso, si se cumplen las condiciones para que pueda usar las leyes operacionales que use.
+
+% \begin{enumerate}
+%     \item[a)] ¿Está el servidor en equilibrio de flujo? Razone la respuesta. (0,4 puntos)
+%     \item[b)] Calcule la productividad media del disco duro. (0,4 puntos)
+%     \item[c)] Calcule cuánto tiempo, de media, le dedica el disco duro a cada petición de lectura/escritura que le llega. Exprese el resultado en ms. (0,4 puntos)
+%     \item[d)] Calcule la productividad media máxima del servidor. (0,4 puntos)
+%     \item[e)] En las mejores condiciones de carga, calcule cuánto tiempo, de media, tardaría el servidor en responder a una consulta. (0,4 puntos)
+% \end{enumerate}
+% \end{tcolorbox}
+
+
+% \begin{itemize}
+%     \item [a)] Sabemos que ninguno de los dispositivos que tenemos esta saturado, ya que la utilización de ambos es menor del 100\%. La CPU es el cuello de botella, ya que es el dispositivo con mayor utilización. \textbf{Si el servidor no está saturado, entonces está en equilibrio de flujo.} 
+    
+%     Otra de las formas de verlo es calcular $\lambda_0$ y comprobar que esta es menor que $X_0^{max}$.
+
+%     \item [b)] Aplicamos la ley del flujo forzado:
+%     $$
+%     X_i = X_0 \times V_i
+%     $$
+%     Como estamos en equilibrio de flujo, podemos usar la ley de Little:
+%     $$
+%     X_0 = \lambda_0 = \frac{A_0}{T} = \frac{54000}{24 \times 3600} = 0.625 \text{ consultas/segundo}
+%     $$  
+%     Nos queda que:
+%     $$
+%     X_{dd} = X_0 \times V_{dd} = 0.625 \times 5 = 3.125 \text{tr/s}
+%     $$
+
+%     \item [c)] Me pide el tiempo medio de servicio $S_i$
+%     Sabemos que la fórmula es:
+%     $$
+%     S_i = \frac{B_i}{C_i} = \boxed{\frac{U_i}{X_i} = \frac{0,6}{3.125} = 0.192 \text{ segundos} = 192 \text{ ms}}
+%     $$
+
+%     Esto podemos aplicarlo ya que en \textit{equilibrio de flujo} se cumple que $U_i = X_i \cdot S_i \Rightarrow S_i = U_i/X_i$.
+
+%     \item [d)] Sabiendo que el cuello de botella es la CPU, podemos calcular la productividad máxima del servidor como:
+%     $$
+%     X_0^{max} = \frac{1}{D_b = D_{cpu}} 
+%     $$
+
+%     Gracias al equilibrio de flujo y de manera análoga al apartado anterior, podemos calcular:
+%     $$
+%     D_{cpu} = \frac{B_{cpu}}{C_{cpu}} \overset{\text{equilibrio de flujo}}{=} \frac{U_{cpu}}{X_{cpu}} = \frac{0.7}{0.625} = 1.12 \text{ segundos}
+%     $$
+%     Por tanto, la productividad máxima del servidor es:
+%     $$
+%     X_0^{max} = \frac{1}{D_{cpu}} = \frac{1}{1.12} \approx 0.893 \text{ tr/segundo}
+%     $$
+
+%     \item [e)] Me están pidiendo $R_0^{min}$
+% \end{itemize}
+
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title=4.- (2 puntos)]
+    Durante las últimas 24 horas, se ha monitorizado un servidor de base de datos con el fin de obtener un modelo del mismo basado en redes de colas. Como resultado de dicha monitorización, se han obtenido las siguientes medidas (solo hay dos dispositivos en nuestro modelo: CPU y disco duro):
+    
+    \begin{itemize}
+        \item Se han contabilizado un total de 54000 consultas entrantes al servidor.
+        \item La utilización media del disco duro es del 60\% y la de la CPU es del 70\%.
+        \item Cada consulta al servidor requiere una media de 5 accesos al disco duro.
+    \end{itemize}
+    
+    Nota: indique claramente las definiciones y/o leyes operacionales que ha necesitado utilizar y, en su caso, si se cumplen las condiciones para que pueda usar las leyes operacionales que use.
+    
+    \begin{enumerate}
+        \item[a)] ¿Está el servidor en equilibrio de flujo? Razone la respuesta. (0,4 puntos)
+        \item[b)] Calcule la productividad media del disco duro. (0,4 puntos)
+        \item[c)] Calcule cuánto tiempo, de media, le dedica el disco duro a cada petición de lectura/escritura que le llega. Exprese el resultado en ms. (0,4 puntos)
+        \item[d)] Calcule la productividad media máxima del servidor. (0,4 puntos)
+        \item[e)] En las mejores condiciones de carga, calcule cuánto tiempo, de media, tardaría el servidor en responder a una consulta. (0,4 puntos)
+    \end{enumerate}
+    \end{tcolorbox}
+    
+    \begin{itemize}
+        \item [a)] \textbf{Ley aplicada: definición de equilibrio de flujo y ley de flujo forzado.}  
+        El servidor está en equilibrio de flujo si el número de trabajos completados por el servidor coincide con el número de trabajos solicitados, es decir, $C_0 \approx A_0$, y también si $X_0 \approx \lambda_0$.  
+        Además, no hay ningún dispositivo saturado ($U_i < 1$), por lo tanto se pueden aplicar las leyes operacionales, y asumimos que estamos en equilibrio de flujo.  
+        Alternativamente, se puede comprobar que $\lambda_0 < X_0^{\text{max}}$, como se hará en el apartado (d).  
+        
+        \item [b)] \textbf{Ley aplicada: Ley del flujo forzado.}  
+        $$ X_i = V_i \cdot X_0 $$
+        Donde:
+        \begin{itemize}
+            \item $X_0 = \lambda_0 = \frac{A_0}{T} = \frac{54000}{24 \times 3600} = 0.625\ \text{consultas/s}$  \hfill (Ley de Little)
+            \item $V_{dd} = 5$ (visitas al disco por consulta)
+        \end{itemize}
+        Por tanto:
+        $$
+        X_{dd} = V_{dd} \cdot X_0 = 5 \cdot 0.625 = \boxed{3.125\ \text{tr/s}}
+        $$
+    
+        \item [c)] \textbf{Ley aplicada: Ley de la utilización.}  
+        Esta ley afirma que en equilibrio de flujo se cumple:
+        $$ U_i = X_i \cdot S_i \quad \Rightarrow \quad S_i = \frac{U_i}{X_i} $$
+        Aplicándola al disco duro:
+        $$
+        S_{dd} = \frac{U_{dd}}{X_{dd}} = \frac{0.6}{3.125} = 0.192\ \text{s} = \boxed{192\ \text{ms}}
+        $$
+    
+        \item [d)] \textbf{Ley aplicada: Límite superior de productividad, definida por el cuello de botella.}  
+        En equilibrio de flujo, el dispositivo más lento limita el rendimiento, es decir:
+        $$
+        X_0^{\text{max}} = \frac{1}{D_b} = \frac{1}{D_{\text{CPU}}}
+        $$
+        Donde:
+        $$
+        D_{\text{CPU}} = \frac{U_{\text{CPU}}}{X_0} = \frac{0.7}{0.625} = 1.12\ \text{s}
+        $$
+        Por tanto:
+        $$
+        X_0^{\text{max}} = \frac{1}{1.12} = \boxed{0.893\ \text{consultas/s}}
+        $$
+    
+        \item [e)] \textbf{Ley aplicada: Ley de Little (a nivel de servidor).}  
+        En las mejores condiciones de carga, la tasa de llegada es igual a la máxima productividad, por tanto:
+        $$
+        R_0^{\text{min}} = \frac{N_0}{X_0^{\text{max}}}
+        $$
+        Como no se proporciona $N_0$, se puede aplicar directamente la relación:
+        $$
+        R_0^{\text{min}} = \sum D_i = D_{\text{CPU}} + D_{\text{DD}} = \frac{0.7}{0.625} + \frac{0.6}{3.125} = 1.12 + 0.192 = \boxed{1.312\ \text{segundos}}
+        $$
+        (ya que $D_i = \frac{U_i}{X_0}$ por definición de demanda de servicio).
+    \end{itemize}
+
+
+
+    \begin{tcolorbox}[colback=gray!10, colframe=black, title=5.- (1 punto)]
+    Demuestre que, para alta carga, el tiempo medio de respuesta de un servidor modelado mediante una red de colas cerrada interactiva tiende asintóticamente a la recta Db*NT-Z. Indique también el nombre (si lo tiene) y el significado de NT, Z y Db. Nota: indique claramente las definiciones y/o leyes operacionales que ha necesitado utilizar y, en su caso, si se cumplen las condiciones para que pueda usar las leyes operacionales que use.
+    \end{tcolorbox}
+
+
+        Queremos demostrar que, para carga alta ($N_T \to \infty$), el tiempo medio de respuesta del sistema cerrado tiende a:
+        $$
+        R_0(N_T) \to D_b \cdot N_T - Z
+        $$
+        
+        \textbf{Definiciones y significado de los términos:}
+        \begin{itemize}
+            \item $N_T$: Número total de trabajos (clientes) en la red cerrada.
+            \item $Z$: Tiempo de reflexión. Es el tiempo que pasa un cliente fuera del sistema antes de lanzar una nueva petición.
+            \item $D_b$: Demanda de servicio en el cuello de botella, es decir, el tiempo que el recurso más lento (bottleneck) dedica a cada trabajo.
+        \end{itemize}
+        
+        \textbf{Ley operacional utilizada: Ley de Little para redes cerradas:}
+        \[
+        N_T = X_0 \cdot (R_0 + Z)
+        \Rightarrow R_0 = \frac{N_T}{X_0} - Z
+        \]
+        
+        \textbf{Comportamiento en alta carga:}
+        
+        En condiciones de alta carga ($N_T \gg N_T^*$), el sistema entra en saturación. El throughput $X_0$ se estabiliza y no puede superar el máximo definido por el cuello de botella:
+        \[
+        X_0^{\text{máx}} = \frac{1}{D_b}
+        \]
+        
+        Sustituyendo en la ecuación de $R_0$:
+        \[
+        R_0(N_T) = \frac{N_T}{X_0^{\text{máx}}} - Z = N_T \cdot D_b - Z
+        \]
+        
+        \textbf{Por tanto, hemos demostrado que:}
+        \[
+        \lim_{N_T \to \infty} R_0(N_T) = D_b \cdot N_T - Z
+        \]
+        
+        Esta recta representa la \textbf{asíntota superior} del tiempo medio de respuesta en un sistema cerrado. Es una consecuencia directa del modelo de red cerrada interactiva, del cuello de botella y de la ley de Little. Un \textit{asíntota} es una línea que describe el comportamiento de una función a medida que se aproxima a un valor límite, en este caso, cuando el número de trabajos tiende a infinito.
+        
+        \begin{tcolorbox}[colback=gray!10, colframe=black, title=6.- (0.75 puntos)]
+        Responda brevemente a las siguientes cuestiones sobre el benchmark CPU 2017 que ha desarrollado el consorcio SPEC:
+
+        \begin{enumerate}
+            \item[a)] ¿Qué componentes del sistema informático evalúa? (0,25 puntos)
+            \item[b)] Indique cómo se calcula el índice CPU2017IntegerSpeed\_peak (tanto de palabra como poniendo la fórmula). El método de cálculo empleado, ¿satisface todas las exigencias de un buen índice de prestaciones? Razone la respuesta. (0,5 puntos)
+        \end{enumerate}
+        \end{tcolorbox}
+
+
+        \begin{enumerate}
+            \item[a)] El benchmark CPU 2017 desarrollado por el consorcio SPEC evalúa el rendimiento del subsistema procesador y memoria principal. Incluye dos tipos de pruebas: enteros (\texttt{Integer}) y en coma flotante (\texttt{Floating Point}), cada una en dos modalidades: \texttt{speed} (tiempo de ejecución de tareas individuales) y \texttt{rate} (rendimiento con múltiples tareas concurrentes).
+        
+            \item[b)] El índice \texttt{CPU2017IntegerSpeed\_peak} se calcula como la media geométrica de los ratios de rendimiento obtenidos en cada uno de los benchmarks individuales, usando las mejores optimizaciones posibles permitidas por SPEC:
+        
+            \[
+            \text{Índice} = \left( \prod_{i=1}^{n} \frac{\text{Tiempo de referencia}_i}{\text{Tiempo de ejecución}_i} \right)^{1/n}
+            \]
+        
+            Este método \textbf{satisface parcialmente} los criterios de un buen índice de prestaciones:
+            \begin{itemize}
+                \item Cumple con la necesidad de \textbf{agregación representativa}, al usar media geométrica.
+                \item Es \textbf{reproducible} (los resultados pueden ser verificados por terceros bajo las mismas condiciones) y está estandarizado por SPEC  (especifica reglas, condiciones de ejecución y conjuntos de pruebas uniformes definidos por SPEC).
+                \item Sin embargo, no refleja bien escenarios de uso mixtos o cargas específicas de usuario, por lo que \textbf{no garantiza representatividad general en todos los contextos}.
+            \end{itemize}
+        \end{enumerate}
+        
+        \begin{tcolorbox}[colback=gray!10, colframe=black, title=7.- (0.75 puntos)]
+        Cuestiones (0,25 puntos cada una).
+        \begin{enumerate}
+            \item[a)] ¿A qué nos referimos por ``LANE'' cuando hablamos de la interfaz PCIe?
+            \item[b)] ¿Para qué sirve el \texttt{system panel} en una placa base?
+            \item[c)] Indique las principales secciones de un pliego de prescripciones técnicas para licitar un contrato relacionado con una instalación de servidores junto con una frase explicativa del tipo de información que debe contener cada una de dichas secciones.
+        \end{enumerate}
+        \end{tcolorbox}
+
+        \begin{enumerate}
+            \item[a)] En la interfaz PCIe, un \textbf{LANE} es una vía de comunicación que consta de dos pares diferenciales: uno para transmisión (TX) y otro para recepción (RX). Cada LANE permite transmitir y recibir datos simultáneamente. Las interfaces PCIe pueden agrupar múltiples LANEs (por ejemplo, x1, x4, x8, x16) para aumentar el ancho de banda.
+        
+            \item[b)] El \texttt{system panel} en una placa base es un conjunto de pines que permite conectar los botones (encendido, reinicio) y los LEDs (actividad del disco, encendido) del chasis del ordenador a la placa base. Facilita el control físico del sistema.
+        
+            \item[c)] Un pliego de prescripciones técnicas para licitar un contrato relacionado con la instalación de servidores debe contener las siguientes secciones:
+            \begin{itemize}
+                \item \textbf{Objeto del contrato}: Describe el propósito general de la instalación (por ejemplo, despliegue de un nuevo CPD (Centro de Procesamiento de Datos)).
+                \item \textbf{Requisitos técnicos}: Especifica las características mínimas exigidas para el hardware, software y entorno físico.
+                \item \textbf{Criterios de aceptación}: Define las condiciones bajo las cuales la instalación se considerará satisfactoria (tests, certificaciones, validación).
+                \item \textbf{Condiciones de entrega y puesta en marcha}: Detalla los plazos, el lugar de instalación, y responsabilidades en la fase de despliegue.
+            \end{itemize}
+        \end{enumerate}
+        
+        
+        
+
+    
+    
+
+\end{document}

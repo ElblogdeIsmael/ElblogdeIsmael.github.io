@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuestionario DML</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+    body {
+        font-family: 'Lora', serif;
+        background-color: #f5f5f5;
+        color: #222;
+        padding: 30px;
+        margin: 0;
+    }
+    .quiz-container {
+        max-width: 850px;
+        margin: auto;
+        background: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+        font-family: 'Playfair Display', serif;
+        text-align: center;
+        font-size: 2.2em;
+        margin-bottom: 20px;
+    }
+    .author {
+        text-align: center;
+        font-size: 0.95em;
+        margin-bottom: 30px;
+        font-family: 'Lora', serif;
+        color: #555;
+    }
+    .author p {
+        margin: 4px 0;
+    }
+    .question-block {
+        margin-bottom: 30px;
+        padding: 20px;
+        border-left: 4px solid #3f51b5;
+        background-color: #fafafa;
+        border-radius: 8px;
+    }
+    .question-block p {
+        font-weight: 600;
+        font-size: 1.1em;
+    }
+    .options div {
+        background: #f0f0f0;
+        padding: 12px 15px;
+        margin: 8px 0;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-family: monospace;
+        white-space: pre-wrap;
+    }
+    .options div:hover {
+        background-color: #e0e0e0;
+    }
+    .options div.correct {
+        background-color: #c8e6c9 !important;
+        border-left: 5px solid #2e7d32;
+        color: #2e7d32;
+    }
+    .options div.incorrect {
+        background-color: #ffcdd2 !important;
+        border-left: 5px solid #c62828;
+        color: #c62828;
+    }
+    img {
+        max-width: 100%;
+        margin: 10px 0 15px;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+<div class="quiz-container">
+    <h1>Cuestionario DML</h1>
+    <div class="author">
+        <p><strong>Autor:</strong> Ismael Sallami Moreno</p>
+        <p><strong>Asignatura:</strong> Fundamentos Bases de Datos</p>
+        <p><strong>Titulación:</strong> Ingeniería Informática + ADE</p>
+    </div>
+
+    <div class="question-block" id="q1">
+        <p><strong>1.</strong> Título de la pregunta</p><div class="options">
+            <div onclick="checkAnswer(this, false, 'q1')">Podemos poner fórmulas $$1 + 5 \times 2$$</div>
+            <div onclick="checkAnswer(this, false, 'q1')">CREATE TABLE Partido (EquL# , Fecha Date, EquV# , Hora Date, PRIMARY KEY(EquL#,Fecha), UNIQUE(EquV#,Fecha), CHECK(EquL#<>EquV#), FOREIGN KEY (EquL#,EquV#) REFERENCES Equipos(Equ#,Equ#));</div>
+            <div onclick="checkAnswer(this, true, 'q1')">Correcta</div></div></div>
+    <div class="question-block" id="q2">
+        <p><strong>2.</strong> Pregunta 2</p><div class="options">
+            <div onclick="checkAnswer(this, false, 'q2')">Opción 1</div>
+            <div onclick="checkAnswer(this, true, 'q2')">Opción 2</div></div></div>
+</div>
+<script>
+function checkAnswer(element, isCorrect, groupId) {
+    const parent = document.getElementById(groupId);
+    const options = parent.querySelectorAll('.options div');
+    options.forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+    });
+    if (isCorrect) {
+        element.classList.add('correct');
+    } else {
+        element.classList.add('incorrect');
+    }
+}
+</script>
+</body>
+</html>

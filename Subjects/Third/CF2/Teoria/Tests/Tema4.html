@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuestionario Fondos Propios</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(to right, #fceabb, #f8b500);
+        color: #333;
+    }
+
+    .quiz-container {
+        max-width: 800px;
+        margin: auto;
+        background: #ffffff;
+        padding: 30px 25px;
+        border-radius: 16px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        font-size: 2.4em;
+        font-weight: 700;
+    }
+
+    .question-block {
+        margin-bottom: 30px;
+        padding: 20px;
+        border-left: 6px solid #f39c12;
+        border-radius: 12px;
+        background-color: #fef9f3;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease;
+    }
+
+    .question-block:hover {
+        transform: translateY(-2px);
+    }
+
+    .question-block p {
+        font-size: 1.25em;
+        font-weight: 600;
+        color: #34495e;
+        margin-bottom: 15px;
+    }
+
+    .options div {
+        background: #ecf0f1;
+        padding: 12px 18px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+        font-size: 1em;
+    }
+
+    .options div:hover {
+        background: #d0d7de;
+        transform: scale(1.02);
+    }
+
+    .options div.correct {
+        background-color: #27ae60 !important;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .options div.incorrect {
+        background-color: #e74c3c !important;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .question-number {
+        font-weight: bold;
+        margin-right: 8px;
+        color: #e67e22;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Cuestionario sobre Fondos Propios (Capítulo 4)</h1>
+
+    <div class="author" style="text-align: center; margin-bottom: 30px; font-size: 1.1em; color: #555;">
+        <p style="margin: 5px 0; font-weight: 600;">Autor: <span style="color: #e67e22;">Ismael Sallami Moreno</span></p>
+        <p style="margin: 5px 0;">Asignatura: <span style="color: #3498db;">Contabilidad Financiera II</span></p>
+        <p style="margin: 5px 0;">Titulación: <span style="color: #9b59b6;">Ingeniería Informática + ADE</span></p>
+    </div>
+
+    <div class="question-block" id="q1">
+        <p><span class="question-number">1.</span> Según el documento, el Patrimonio Neto está conformado principalmente por:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q1')">a) Financiación ajena a corto plazo y deudas con proveedores.</div>
+            <div onclick="checkAnswer(this, true, 'q1')">b) La financiación aportada por los socios (capital) y la generada por la empresa (reservas).</div>
+            <div onclick="checkAnswer(this, false, 'q1')">c) Activos fijos y existencias.</div>
+            <div onclick="checkAnswer(this, false, 'q1')">d) Subvenciones de explotación y préstamos bancarios.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q2">
+        <p><span class="question-number">2.</span> ¿Cómo define el Marco Conceptual del IASB el Patrimonio?</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, true, 'q2')">a) Como la parte residual de los activos de la entidad, una vez deducidos todos sus pasivos.</div>
+            <div onclick="checkAnswer(this, false, 'q2')">b) Como el total de los activos de la entidad.</div>
+            <div onclick="checkAnswer(this, false, 'q2')">c) Como las aportaciones de los socios más los beneficios del último año.</div>
+            <div onclick="checkAnswer(this, false, 'q2')">d) Como el capital social más las reservas legales únicamente.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q3">
+        <p><span class="question-number">3.</span> Si una empresa adquiere sus propias acciones, estas se consideran:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q3')">a) Un activo financiero para la empresa.</div>
+            <div onclick="checkAnswer(this, true, 'q3')">b) Una minoración de los Fondos Propios.</div>
+            <div onclick="checkAnswer(this, false, 'q3')">c) Un gasto del ejercicio.</div>
+            <div onclick="checkAnswer(this, false, 'q3')">d) Una inversión inmobiliaria.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q4">
+        <p><span class="question-number">4.</span> La cuenta (100) "Capital Social" se utiliza principalmente para:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, true, 'q4')">a) Sociedades mercantiles como S.A. o S.L.</div>
+            <div onclick="checkAnswer(this, false, 'q4')">b) Empresarios individuales.</div>
+            <div onclick="checkAnswer(this, false, 'q4')">c) Cooperativas.</div>
+            <div onclick="checkAnswer(this, false, 'q4')">d) Fundaciones sin ánimo de lucro.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q5">
+        <p><span class="question-number">5.</span> En el proceso de constitución de una sociedad, antes de la inscripción registral, el capital emitido pero aún no inscrito se puede contabilizar en la cuenta:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q5')">a) (100) Capital Social.</div>
+            <div onclick="checkAnswer(this, true, 'q5')">b) (194) Capital emitido pendiente de inscripción.</div>
+            <div onclick="checkAnswer(this, false, 'q5')">c) (110) Prima de Emisión.</div>
+            <div onclick="checkAnswer(this, false, 'q5')">d) (572) Bancos e instituciones de crédito.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q6">
+        <p><span class="question-number">6.</span> ¿Cuál es el desembolso mínimo legal exigido para las acciones de una Sociedad Anónima en su constitución, además del 100% de la prima de emisión si existiera?</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q6')">a) 10% del valor nominal.</div>
+            <div onclick="checkAnswer(this, true, 'q6')">b) 25% del valor nominal.</div>
+            <div onclick="checkAnswer(this, false, 'q6')">c) 50% del valor nominal.</div>
+            <div onclick="checkAnswer(this, false, 'q6')">d) 100% del valor nominal.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q7">
+        <p><span class="question-number">7.</span> Los gastos de constitución de una sociedad, como los honorarios de notarios y registradores, se contabilizan generalmente:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q7')">a) Como un gasto del ejercicio en la cuenta de Pérdidas y Ganancias.</div>
+            <div onclick="checkAnswer(this, true, 'q7')">b) Cargando directamente una cuenta de Reservas (Patrimonio Neto).</div>
+            <div onclick="checkAnswer(this, false, 'q7')">c) Como un activo intangible amortizable.</div>
+            <div onclick="checkAnswer(this, false, 'q7')">d) Como una disminución del capital social.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q8">
+        <p><span class="question-number">8.</span> La Reserva Legal en España debe dotarse con un 10% del beneficio del ejercicio hasta que esta alcance como mínimo el:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q8')">a) 10% del capital social.</div>
+            <div onclick="checkAnswer(this, true, 'q8')">b) 20% del capital social.</div>
+            <div onclick="checkAnswer(this, false, 'q8')">c) 25% del capital social.</div>
+            <div onclick="checkAnswer(this, false, 'q8')">d) 50% del capital social.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q9">
+        <p><span class="question-number">9.</span> ¿Qué significa emitir acciones "por encima de la par"?</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q9')">a) Que el precio de emisión es inferior al valor nominal.</div>
+            <div onclick="checkAnswer(this, true, 'q9')">b) Que el precio de emisión es superior al valor nominal, generando una Prima de Emisión.</div>
+            <div onclick="checkAnswer(this, false, 'q9')">c) Que las acciones no tienen valor nominal.</div>
+            <div onclick="checkAnswer(this, false, 'q9')">d) Que la emisión está prohibida por la ley.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q10">
+        <p><span class="question-number">10.</span> Según la normativa española citada en el documento, la emisión de acciones "por debajo de la par":</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q10')">a) Está permitida si lo aprueba la Junta General.</div>
+            <div onclick="checkAnswer(this, false, 'q10')">b) Solo está permitida para ampliar capital.</div>
+            <div onclick="checkAnswer(this, true, 'q10')">c) Está expresamente prohibida.</div>
+            <div onclick="checkAnswer(this, false, 'q10')">d) Es la forma habitual de financiar pérdidas.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q11">
+        <p><span class="question-number">11.</span> La cuenta (121) "Resultados negativos de ejercicios anteriores" figura en el balance:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q11')">a) Sumando en el activo.</div>
+            <div onclick="checkAnswer(this, true, 'q11')">b) Minorando los fondos propios en el Patrimonio Neto.</div>
+            <div onclick="checkAnswer(this, false, 'q11')">c) Como un pasivo a corto plazo.</div>
+            <div onclick="checkAnswer(this, false, 'q11')">d) Sumando en las reservas.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q12">
+        <p><span class="question-number">12.</span> Un "Dividendo activo a cuenta" (cuenta 557) representa:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, true, 'q12')">a) Un adelanto del dividendo previsible del ejercicio que la empresa paga a los accionistas.</div>
+            <div onclick="checkAnswer(this, false, 'q12')">b) La parte del capital que los socios aún no han desembolsado.</div>
+            <div onclick="checkAnswer(this, false, 'q12')">c) Un ingreso financiero para la empresa.</div>
+            <div onclick="checkAnswer(this, false, 'q12')">d) Una reserva especial indisponible.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q13">
+        <p><span class="question-number">13.</span> ¿Cuál es el objetivo principal de imputar ciertos cambios de valor directamente al Patrimonio Neto en lugar de a la cuenta de Pérdidas y Ganancias?</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q13')">a) Reducir la carga fiscal de la empresa.</div>
+            <div onclick="checkAnswer(this, true, 'q13')">b) Evitar la descapitalización por distribuir beneficios "no realizados".</div>
+            <div onclick="checkAnswer(this, false, 'q13')">c) Aumentar artificialmente el beneficio del ejercicio.</div>
+            <div onclick="checkAnswer(this, false, 'q13')">d) Simplificar la contabilidad de los instrumentos financieros.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q14">
+        <p><span class="question-number">14.</span> Las subvenciones, donaciones y legados recibidos por la empresa que están condicionados a la adquisición de un inmovilizado, generalmente se imputan a resultados:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q14')">a) Íntegramente en el momento de la concesión.</div>
+            <div onclick="checkAnswer(this, true, 'q14')">b) En proporción a la dotación a la amortización del inmovilizado.</div>
+            <div onclick="checkAnswer(this, false, 'q14')">c) Íntegramente cuando se adquiere el inmovilizado.</div>
+            <div onclick="checkAnswer(this, false, 'q14')">d) Nunca, ya que incrementan directamente las reservas.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q15">
+        <p><span class="question-number">15.</span> Si una empresa recibe una subvención para compensar un déficit de explotación, esta se contabilizará generalmente como:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q15')">a) Un ingreso imputado al Patrimonio Neto (subgrupo 13).</div>
+            <div onclick="checkAnswer(this, true, 'q15')">b) Un ingreso directamente en la cuenta de Pérdidas y Ganancias del ejercicio (ej. cuenta 740).</div>
+            <div onclick="checkAnswer(this, false, 'q15')">c) Una aportación de socios (cuenta 118).</div>
+            <div onclick="checkAnswer(this, false, 'q15')">d) Una reducción de los gastos de explotación.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q16">
+        <p><span class="question-number">16.</span> Las aportaciones realizadas por los socios a la empresa, que no corresponden a la suscripción de capital (ej. para compensar pérdidas), ¿cómo se consideran contablemente según la NRV 18.2?</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q16')">a) Como subvenciones o donaciones.</div>
+            <div onclick="checkAnswer(this, true, 'q16')">b) Como Fondos Propios en la cuenta (118) Aportaciones de socios o propietarios.</div>
+            <div onclick="checkAnswer(this, false, 'q16')">c) Como un pasivo a largo plazo.</div>
+            <div onclick="checkAnswer(this, false, 'q16')">d) Como un ingreso extraordinario del ejercicio.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q17">
+        <p><span class="question-number">17.</span> La cuenta (1034) "Socios por desembolsos no exigidos, capital pendiente de inscripción" se utiliza para reflejar:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, true, 'q17')">a) El capital suscrito por los socios, aún no desembolsado y cuyo capital todavía no está inscrito en el Registro.</div>
+            <div onclick="checkAnswer(this, false, 'q17')">b) El capital ya desembolsado e inscrito en el Registro Mercantil.</div>
+            <div onclick="checkAnswer(this, false, 'q17')">c) Los dividendos pasivos ya exigidos a los socios.</div>
+            <div onclick="checkAnswer(this, false, 'q17')">d) Las aportaciones no dinerarias pendientes de valoración por un experto independiente.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q18">
+        <p><span class="question-number">18.</span> En el Estado de Cambios en el Patrimonio Neto (ECPN), la primera parte se denomina:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q18')">a) Estado de Flujos de Efectivo Reconocidos.</div>
+            <div onclick="checkAnswer(this, true, 'q18')">b) Estado de Ingresos y Gastos Reconocidos.</div>
+            <div onclick="checkAnswer(this, false, 'q18')">c) Estado de Resultados Acumulados.</div>
+            <div onclick="checkAnswer(this, false, 'q18')">d) Balance de Situación Detallado.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q19">
+        <p><span class="question-number">19.</span> ¿En qué apartado del Balance de Situación se presentan las "Acciones y participaciones en patrimonio propias"?</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q19')">a) En el Activo no Corriente, como inversiones financieras.</div>
+            <div onclick="checkAnswer(this, true, 'q19')">b) En los Fondos Propios, restando.</div>
+            <div onclick="checkAnswer(this, false, 'q19')">c) En el Activo Corriente, como tesorería.</div>
+            <div onclick="checkAnswer(this, false, 'q19')">d) En el Pasivo no Corriente, como deudas a largo plazo.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q20">
+        <p><span class="question-number">20.</span> La cuenta (120) "Remanente" recoge:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, true, 'q20')">a) Beneficios no repartidos ni aplicados específicamente a ninguna otra cuenta, tras la aprobación de las cuentas anuales y de la distribución de resultados.</div>
+            <div onclick="checkAnswer(this, false, 'q20')">b) Las pérdidas acumuladas de ejercicios anteriores pendientes de compensar.</div>
+            <div onclick="checkAnswer(this, false, 'q20')">c) La reserva legal obligatoria.</div>
+            <div onclick="checkAnswer(this, false, 'q20')">d) Las subvenciones de capital pendientes de imputar a resultados.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q21">
+        <p><span class="question-number">21.</span> La financiación básica:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, true, 'q21')">a) Es el conjunto de recursos financieros que tienen carácter permanente, por lo que no están sometidos a una exigibilidad a corto plazo.</div>
+            <div onclick="checkAnswer(this, false, 'q21')">b) Es el conjunto de recursos financieros que tienen carácter permanente, por lo que no son exigibles.</div>
+            <div onclick="checkAnswer(this, false, 'q21')">c) Está recogida con cuentas del grupo 5 del Plan General de Contabilidad.</div>
+            <div onclick="checkAnswer(this, false, 'q21')">d) Está recogida con cuentas del grupo 2 del Plan General de Contabilidad.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q22">
+        <p><span class="question-number">22.</span> La financiación procedente de las aportaciones realizadas por los propietarios de la empresa, tanto en el momento en que ésta se formó como en fechas posteriores, se registrará en la cuenta: </p>
+        <div class="options">
+            <div onclick="checkAnswer(this, true, 'q22')">a) Capital.</div>
+            <div onclick="checkAnswer(this, false, 'q22')">b) Reservas.</div>
+            <div onclick="checkAnswer(this, false, 'q22')">c) Remanente.</div>
+            <div onclick="checkAnswer(this, false, 'q22')">d) Aportaciones de socios o propietarios.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q23">
+        <p><span class="question-number">23.</span> Cuando el valor de emisión de las acciones es mayor a su valor nominal, la diferencia entre ambos valores se recogerá en la cuenta de:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q23')">a) Reserva legal.</div>
+            <div onclick="checkAnswer(this, false, 'q23')">b) Reserva por ampliación de capital.</div>
+            <div onclick="checkAnswer(this, true, 'q23')">c) Prima de emisión o asunción.</div>
+            <div onclick="checkAnswer(this, false, 'q23')">d) No es posible que el valor de emisión sea mayor al valor nominal.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q24">
+        <p><span class="question-number">24.</span> Son reservas de Autofinanciación:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, true, 'q24')">a) La Reserva Legal, las Reservas Voluntarias y las Reservas Estatutarias.</div>
+            <div onclick="checkAnswer(this, false, 'q24')">b) La Prima de Emisión de acciones, cuando se produce como consecuencia de una ampliación de capital.</div>
+            <div onclick="checkAnswer(this, false, 'q24')">c) Todas las Reservas, excepto las Reservas Especiales.</div>
+            <div onclick="checkAnswer(this, false, 'q24')">d) Las reservas que surgen por ajustes en el Capital o por la Compensación de pérdidas.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q25">
+        <p><span class="question-number">25.</span> La cuenta Fondo Social (101):</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, true, 'q25')">a) Debe emplearse en personas jurídicas sin ánimo de lucro.</div>
+            <div onclick="checkAnswer(this, false, 'q25')">b) Refleja el valor de las aportaciones de los socios en cualquier sociedad.</div>
+            <div onclick="checkAnswer(this, false, 'q25')">c) Refleja el valor de las aportaciones de los socios que se dedica a fines sociales.</div>
+            <div onclick="checkAnswer(this, false, 'q25')">d) Refleja el valor de los dividendos activos desembolsados.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q26">
+        <p><span class="question-number">26.</span> Las subvenciones concedidas a una empresa por organismos públicos de contabilizarse:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q26')">a) Como ingreso del ejercicio.</div>
+            <div onclick="checkAnswer(this, false, 'q26')">b) Como ingreso del ejercicio si se destinan a financiar inversiones.</div>
+            <div onclick="checkAnswer(this, true, 'q26')">c) Como ingreso del ejercicio si se destinan a financiar gastos de explotación.</div>
+            <div onclick="checkAnswer(this, false, 'q26')">d) Como ingreso de patrimonio neto si se destinan a financiar gastos corrientes.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q27">
+        <p><span class="question-number">27.</span> El artículo 79 del Texto Refundido de la Ley de Sociedades de Capital 1/2010, establece que las acciones de una Sociedad Anónima:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q27')">a) Deberán estar suscritas por los socios, al menos el 25% del valor nominal de cada una de las acciones.</div>
+            <div onclick="checkAnswer(this, false, 'q27')">b) Deberán estar integramente suscritas por los socios, y desembolsadas, al menos, en un 50% el valor nominal de cada una de las acciones.</div>
+            <div onclick="checkAnswer(this, true, 'q27')">c) El capital social pendiente de desembolso, no puede ser superior al 75%.</div>
+            <div onclick="checkAnswer(this, false, 'q27')">d) Todas las respuestas anteriores son erróneas.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q28">
+        <p><span class="question-number">28.</span> La actividad de la empresa que origina variación de neto, ocasiona el nacimiento de un gasto o ingreso.</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q28')">a) Estos gastos o ingresos son resultados del ejercicio.</div>
+            <div onclick="checkAnswer(this, true, 'q28')">b) Estos gastos o ingresos, al final serán resultado de los ejercicios donde se realice imputación a resultados.</div>
+            <div onclick="checkAnswer(this, false, 'q28')">c) Estos gastos o ingresos, se imputan a resultados en el año en que se cobren.</div>
+            <div onclick="checkAnswer(this, false, 'q28')">d) Los incrementos de Neto, siempre son un ingreso.</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q29">
+        <p><span class="question-number">29.</span> Las subvenciones, donaciones y legados no reintegrables se contabilizarán inicialmente:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, true, 'q29')">a) Con carácter general, como ingresos directamente imputados al patrimonio neto.</div>
+            <div onclick="checkAnswer(this, false, 'q29')">b) Con carácter general, como ingresos directamente imputados al resultado del ejercicio.</div>
+            <div onclick="checkAnswer(this, false, 'q29')">c) Directamente en la cuenta 130. Subvenciones oficiales de capital.</div>
+            <div onclick="checkAnswer(this, false, 'q29')">d) Directamente en la cuenta 740. Subvenciones de explotación</div>
+        </div>
+    </div>
+
+    <div class="question-block" id="q30">
+        <p><span class="question-number">30.</span> Cuando los socios o propietarios realicen aportaciones en su condición de tales y aumente el patrimonio neto de la empresa:</p>
+        <div class="options">
+            <div onclick="checkAnswer(this, false, 'q30')">a) Se considerará como un ingreso si son aportaciones monetarias.</div>
+            <div onclick="checkAnswer(this, false, 'q30')">b) Se considerará como un ingreso si dan lugar a incrementos de activos o disminuciones de pasivos.</div>
+            <div onclick="checkAnswer(this, false, 'q30')">c) En ocasiones supondrá el reconocimiento de un gasto.</div>
+            <div onclick="checkAnswer(this, true, 'q30')">d) No se considerará un ingreso.</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function checkAnswer(selectedOption, isCorrect, questionId) {
+        // Primero, limpiar clases de otras opciones de la misma pregunta
+        const questionBlock = document.getElementById(questionId);
+        const options = questionBlock.querySelectorAll('.options div');
+        options.forEach(opt => {
+            opt.classList.remove('correct', 'incorrect');
+        });
+
+        // Luego, aplicar la clase a la opción seleccionada
+        if (isCorrect) {
+            selectedOption.classList.add('correct');
+        } else {
+            selectedOption.classList.add('incorrect');
+        }
+    }
+</script>
+
+</body>
+</html>

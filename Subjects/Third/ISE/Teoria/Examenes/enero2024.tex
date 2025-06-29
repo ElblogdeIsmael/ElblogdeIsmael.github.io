@@ -1,0 +1,347 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{tcolorbox}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{hyperref}
+
+% Márgenes
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+% Cabecera y pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Examen de ISE Enero 2024}
+%\lhead{Nombre: \underline{\hspace{6cm}}}
+\lhead{Universidad de Granada}
+\rfoot{\thepage}
+
+\title{\Huge Examen Enero 2024 \vspace{0.5cm} \\ \Large Ingeniería de Servidores}
+\author{Ismael Sallami Moreno}
+\date{\small Universidad de Granada\\ Doble Grado en Ingeniería Informática y ADE\\ \url{https://elblogdeismael.github.io}}
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\vspace{1cm}
+
+\underline{Nota}: En algunas partes se ha obviado las unidades, cosa que en  un examen real no se debería hacer. 
+
+\section*{1.- (1,0 punto)}
+Nos han regalado un servidor que ejecuta programas monohebra que solo requieren procesador y disco duro. El disco duro se usa un 25\% del tiempo, mientras que el procesador se usa el restante. Atendiéndonos a la relación ``prestaciones del servidor/coste de la mejora'', demuestre cuál de las siguientes mejoras resultaría más conveniente:
+\begin{enumerate}
+    \item[a)] Reemplazar el disco duro por otro 3 veces más rápido que cuesta 100\,€.
+    
+    
+
+    \item[b)] Reemplazar el procesador por otro el doble de rápido que cuesta 500\,€.
+\end{enumerate}
+
+    Podemos usar la ley de Amdahl.
+
+    Sabemos que si reemplazamos el disco duro por otro 3 veces más rápido tenemos que
+    $$
+    k=3 \qquad f=0,25
+    $$
+    
+    Aplicando la ley de Amdahl:
+    $$
+    S = \frac{1}{1-f+\frac{f}{k}} = \frac{1}{1-0,25 + \frac{0,25}{3}} = 1,2
+    $$
+
+    Con la opción b nos queda:
+
+    $$
+    S = \frac{1}{1-0,75+\frac{0,75}{2}} = 1,6
+    $$
+
+    Atendiendo a la relación prestaciones/coste:
+
+    $$
+    \frac{\dfrac{Prestaciones_{Mejora1}}{Coste_{Mejora1}}}{\dfrac{Prestaciones_{Mejora2}}{Coste_{Mejora2}}} = \frac{\dfrac{1{,}2}{100}}{\dfrac{1{,}6}{500}} = 3{,}75
+    $$ 
+
+    Al darnos un valor mayor que 1 siendo el numerador la primera opción, podemos decantarnos por esta que trata de mejorar el disco duro. Si lo hacemos de la manera inversa nos queda $0,26$ reafirmando que la opción A es la mejor.
+
+
+    \section*{2.- (2,0 puntos) Cuestiones (0,5 puntos cada pregunta).}
+\begin{enumerate}
+    \item[a)] \textbf{¿A qué nos referimos por Native Command Queueing (NCQ) cuando hablamos de SATA? ¿Qué tipo de unidades de almacenamiento cree que se verían favorecidas por usar NCQ?}
+
+    NCQ (Native Command Queueing) es una tecnología que permite a las unidades de almacenamiento SATA recibir múltiples peticiones de lectura/escritura y reordenarlas internamente para minimizar los tiempos de espera y los movimientos mecánicos del cabezal (en el caso de discos duros). Esta tecnología mejora el rendimiento global del sistema cuando se producen múltiples accesos simultáneos al disco. 
+    
+    Las unidades de almacenamiento que más se benefician de NCQ son los \textbf{discos duros mecánicos (HDD)}, especialmente en entornos multitarea o servidores con concurrencia alta. En el caso de los \textbf{SSD}, el impacto es menor debido a que no tienen partes móviles, pero también puede haber cierta mejora en escenarios de acceso intensivo.
+
+    \item[b)] \textbf{Explique cómo es capaz \texttt{gprof} de medir el tiempo de CPU de cada función de un programa escrito en C o en C++.}
+
+    \texttt{gprof} utiliza dos mecanismos principales:
+    \begin{itemize}
+        \item Instrumentación mediante llamadas a la función especial \texttt{mcount()}, que se inserta automáticamente por el compilador al inicio de cada función. Esto permite contar cuántas veces se llama cada función.
+        \item Muestreo del contador de programa (program counter) a intervalos regulares usando temporizadores del sistema. Este muestreo indica en qué parte del código se encuentra el programa en un instante dado, lo cual permite estimar cuánto tiempo se pasa en cada función.
+    \end{itemize}
+    Combinando ambas técnicas, \texttt{gprof} genera un perfil del programa que incluye el tiempo de CPU estimado dedicado a cada función, así como un grafo de llamadas entre funciones.
+
+    \boxed{\text{Otra explicación}}
+    \begin{itemize}
+        \item Al arrancar el programa, se genera una tabla con la dirección de cada función y se inicializan dos contadores por función: uno para contar llamadas (\texttt{c1}) y otro para estimar el tiempo de CPU (\texttt{c2}).
+        \item El sistema operativo programa un temporizador (típicamente 0,01\,s) que se decrementa durante la ejecución.
+        \item Cada vez que se entra en una función, se incrementa \texttt{c1} y se registra la relación de llamada (quién llama a quién).
+        \item Cuando el temporizador llega a cero, se interrumpe el programa y se incrementa \texttt{c2} de la función activa; el temporizador se reinicia.
+        \item Al finalizar, usando el tiempo total de CPU y los contadores, se estima el tiempo de CPU de cada función y se generan los perfiles plano y de llamadas.
+    \end{itemize}
+    \item[c)] \textbf{¿Qué es TPC-H y cómo nos puede servir para el diseño de un servidor?}
+
+    TPC-H es un \textbf{benchmark del tipo Decision Support (DS)} desarrollado por el Transaction Processing Performance Council (TPC). Simula una carga típica de consultas complejas sobre grandes volúmenes de datos, tal como ocurre en sistemas de ayuda a la decisión (Data Warehouses).
+
+    Nos sirve para el diseño de servidores porque permite:
+    \begin{itemize}
+        \item Evaluar el rendimiento de un sistema en escenarios con consultas complejas, muchas veces con operaciones JOIN y agregación.
+        \item Comparar configuraciones de hardware (memoria, discos, CPU) y software (motores de bases de datos, optimizadores de consultas) en condiciones reproducibles.
+        \item Identificar cuellos de botella bajo cargas analíticas intensas, ayudando a tomar decisiones de compra o mejora de componentes del servidor.
+    \end{itemize}
+
+    \item[d)] \textbf{¿Qué se entiende por cuello de botella de un servidor? Demuestre que el cuello de botella de un servidor es el dispositivo con mayor demanda de servicio. Indique claramente qué leyes (su nombre y su expresión) o qué definiciones ha utilizado en cada paso que realice.}
+
+    El \textbf{cuello de botella} de un servidor es el dispositivo que limita el rendimiento global del sistema, es decir, el que se satura antes cuando aumenta la carga. Se caracteriza por tener la \textbf{mayor demanda de servicio}.
+
+    \textbf{Definiciones y leyes utilizadas:}
+    \begin{itemize}
+        \item \textbf{Demanda de servicio:} $D_i = V_i \cdot S_i$, donde $V_i$ es la razón de visita y $S_i$ el tiempo de servicio del dispositivo $i$.
+        \item \textbf{Productividad máxima:} $X_0^{\text{max}} = \min_i \left( \frac{1}{D_i} \right)$. Esta expresión nos dice que la productividad máxima del servidor está limitada por el dispositivo con mayor $D_i$.
+    \end{itemize}
+
+    \textbf{Demostración:} El dispositivo con mayor demanda de servicio $D_{\text{máx}}$ será el primero en alcanzar utilización 100\% cuando $X_0$ aumente. Al llegar a ese punto, el sistema no puede aceptar más peticiones sin incrementar su tiempo de respuesta indefinidamente, por lo tanto, ese dispositivo actúa como cuello de botella.
+
+\end{enumerate}
+
+
+\section*{4.- (1,0 punto)}
+La tabla siguiente muestra los tiempos de ejecución de tres programas de un benchmark en tres máquinas diferentes: REF, A y B.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Programa & $t_{\text{REF}}$(s) & $t_{\text{A}}$(s) & $t_{\text{B}}$(s) \\
+\hline
+1 & 20 & 12 & 15 \\
+2 & 20 & 10 & 16 \\
+3 & 40 & 25 & 16 \\
+\hline
+\end{tabular}
+\end{center}
+
+Indique, \textbf{entre la máquina A y la máquina B}, cuál presenta \textbf{mejor rendimiento}, según los siguientes criterios:
+\begin{enumerate}
+    \item[a)] Media aritmética (0,1 puntos).
+    
+    Calculamos las medias aritméticas de los tiempos de ejecución de cada máquina:
+    \begin{align*}
+    \text{Media A} &= \frac{12 + 10 + 25}{3} = \frac{47}{3} \approx 15.67 \, \text{s} \\
+    \text{Media B} &= \frac{15 + 16 + 16}{3} = \frac{47}{3} \approx 15.67 \, \text{s}
+    \end{align*}
+
+    La media aritmética es la misma para ambas máquinas, por lo que no podemos decidir cuál es mejor basándonos solo en este criterio.
+
+
+    \item[b)] Media aritmética ponderada, donde los pesos se escogen de forma inversamente proporcional al tiempo de ejecución de la máquina de referencia REF. Muestre claramente todos los pasos que ha seguido, primero para calcular los pesos y finalmente para calcular el valor final. (0,5 puntos)
+    
+    Para calcular la media aritmética ponderada, primero necesitamos los pesos inversamente proporcionales al tiempo de ejecución de REF:
+    \begin{align*}
+        C = \frac{1}{\sum_{i=1}^{n} \frac{1}{t_{\text{REF}, i}}} = \frac{1}{\frac{1}{20} + \frac{1}{20} + \frac{1}{40}} = 8
+    \end{align*}
+
+    Pasamos a calcular los pesos:
+    \begin{align*}
+        w_{1} = \frac{8}{20} = 0.4, \quad
+        w_{2} = \frac{8}{20} = 0.4, \quad
+        w_{3} = \frac{8}{40} = 0.2
+    \end{align*}
+
+    Ahora calculamos la media aritmética ponderada para cada máquina:
+    \begin{align*}
+        \text{Media A} &= w_{1} \cdot t_{\text{A}, 1} + w_{2} \cdot t_{\text{A}, 2} + w_{3} \cdot t_{\text{A}, 3} \\
+        &= 0.4 \cdot 12 + 0.4 \cdot 10 + 0.2 \cdot 25 = 4.8 + 4 + 5 = 13.8 \, \text{s}
+    \end{align*}
+    \begin{align*}
+        \text{Media B} &= w_{1} \cdot t_{\text{B}, 1} + w_{2} \cdot t_{\text{B}, 2} + w_{3} \cdot t_{\text{B}, 3} \\
+        &= 0.4 \cdot 15 + 0.4 \cdot 16 + 0.2 \cdot 16 = 6 + 6.4 + 3.2 = 15.6 \, \text{s}
+    \end{align*}
+    Comparando las medias aritméticas ponderadas, la máquina A tiene un tiempo de ejecución promedio de 13.8 s, mientras que la máquina B tiene 15.6 s. Por lo tanto, la máquina A presenta mejor rendimiento según este criterio.
+
+
+
+
+    \item[c)] SPEC, usando nuevamente REF como máquina de referencia. Debe calcular el índice SPEC de cada máquina y luego razonar cuál de ellas es la que tiene mejor rendimiento según ese índice (0,4 puntos)
+    
+    El índice SPEC se calcula como:
+    \begin{align*}
+        \text{SPEC} = \sqrt{\prod_{i=1}^{n} \left( \frac{t_{\text{REF}, i}}{t_{\text{máquina}, i}}  \right) }
+        \end{align*} 
+    Para la máquina A:
+    \begin{align*}
+        \text{SPEC}_{A} &= \sqrt[3]{\left( \frac{20}{12} \right) \cdot \left( \frac{20}{10} \right) \cdot \left( \frac{40}{25} \right)} \\
+        &= \sqrt[3]{\left( 1.6667 \right) \cdot (2) \cdot (1.6)} = \sqrt[3]{5.3333} \approx 1.74
+    \end{align*}
+    Para la máquina B:  
+    \begin{align*}
+        \text{SPEC}_{B} &= \sqrt[3]{\left( \frac{20}{15} \right) \cdot \left( \frac{20}{16} \right) \cdot \left( \frac{40}{16} \right)} \\
+        &= \sqrt[3]{\left( 1.3333 \right) \cdot (1.25) \cdot (2.5)} \\
+        &= \sqrt[3]{4.1667} \approx 1.61
+    \end{align*}
+
+    Comparando los índices SPEC, la máquina A tiene un índice de 1.74, mientras que la máquina B tiene 1.61. Por lo tanto, según el índice SPEC, la máquina A presenta mejor rendimiento.
+
+\end{enumerate}
+
+\section*{5.- (0,5 puntos)}
+En Cívica Software están intentando mejorar el servidor web que alberga las páginas de la empresa. Para ello, han ejecutado un conocido benchmark de servidores web para 5 configuraciones distintas del S.O. actualmente en uso. Como la fuente de variabilidad es alta debido a que las pruebas han tenido que realizarlas en el equipo ya actualmente en uso, los experimentos se han realizado 50 veces. La tabla resultante de hacer un análisis ANOVA se presenta a continuación:
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+ & Sum of squares & df & Mean square & F & p \\
+\hline
+config\_SO & 0.317 & 4 & 0.079 & 0.026 & 0.98 \\
+Residuals & 733.845 & 245 & 2.995 & & \\
+\hline
+\end{tabular}
+\end{center}
+
+Para un 99\% de nivel de confianza, ¿qué conclusiones podemos obtener a partir de la información anterior? Razone la respuesta. Nota: En la respuesta indique claramente cuál es la hipótesis de partida del test ANOVA y qué valores concretos de la tabla ha utilizado en su razonamiento.
+
+
+La hipótesis nula del test ANOVA es que \textbf{no hay diferencias significativas entre las medias de los tiempos de respuesta de las distintas configuraciones del S.O.}, es decir, que todas las configuraciones tienen el mismo rendimiento. Es decir:
+\begin{align*}
+    H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5
+\end{align*}
+
+Mirando el p-valor de la tabla, vemos que es 0.98. Por otra parte, vemos que el nivel de significación es 0.01 (99\% de confianza). Como el p-valor (0.98) es mucho mayor que el nivel de significación (0.01), no podemos rechazar la hipótesis nula.
+Por lo tanto, concluimos que \textit{no hay evidencia suficiente para afirmar que las distintas configuraciones del S.O. tienen un rendimiento significativamente diferente}. 
+
+\section*{6.- (2,5 puntos)}
+Un ingeniero informático pretende optimizar el rendimiento del servidor de base de datos que está administrando. Para ello, ha monitorizado el servidor durante las 2 horas de mayor carga del día, obteniendo los siguientes resultados:
+\begin{itemize}
+    \item El servidor ha recibido un total de 1500 consultas.
+    \item La utilización media del procesador ha sido del 45\% y la del disco duro un 80\%.
+    \item Ningún otro dispositivo tiene una utilización media mayor que la del disco duro.
+    \item Cada consulta completada por el servidor ha necesitado una media de 50 peticiones de lectura-escritura al disco duro.
+    \item El tiempo de servicio medio del procesador es de 0,1\,s.
+\end{itemize}
+
+\textbf{Nota:} El estudiante debe indicar el razonamiento seguido, las definiciones o leyes que haya utilizado y si éstas se pueden aplicar o no a este problema concreto. No se considerará válido un resultado correcto sin justificar. \\
+
+Recopilando datos tenemos:
+\begin{itemize}
+    \item $T=2h = 7200s$
+    \item $A_0 = 1500tr$
+    \item  $U_p = 0,45$
+    \item  $U_{dd} = 0,8$
+    \item $V_{dd} = 50$
+    \item $S_p = 0,1s$
+\end{itemize}
+
+
+\begin{enumerate}
+
+    \item[a)] ¿Está el servidor en equilibrio de flujo? (0,4 puntos)
+
+    El enunciado me dice que no hay otro dispositivo con una utilización media mayor que la del disco duro, por ende, este es el cuello de botella del servidor. Sabemos que su utilidad es del 80\%, como es menor que 100\%, podemos afirmar que el servidor está en equilibrio de flujo (no está saturado).
+
+    \boxed{\text{Alternativa}}
+
+    Podemos calcular:
+    $$
+    \lambda_0 = \frac{A_0}{T} \leq X_0^{max} = \frac{1}{D_{p}}
+    $$
+    Usando la ley de la relación utilización-demanda:
+
+    $$
+    \lambda_0 = \frac{A_0}{T} = \frac{1500}{7200} \approx 0,2083
+    $$
+    $$
+    U_{dd} = X_0 \cdot D_{dd} \Rightarrow D_{dd} = \frac{U_{dd}} {X_0} \overset{\text{Equilibrio de flujo } \lambda_0 = X_0}{=} \frac{0,8}{0,2083} \approx 3,84
+    $$
+    $$
+    X_0^{max} = \frac{1}{D_{dd}} = \frac{1}{3,84} \approx 0,2604
+    $$
+
+    Y vemos que se cumple la condición de equilibrio de flujo, ya que $\lambda_0 < X_0^{max}$.
+
+    \item[b)] Calcule la razón de visita media del procesador. (0,4 puntos)
+    
+    Para ello vamos a usar las siguientes definiciones aplicadas al procesador:
+    \begin{align*}
+        \text{Ley de utilización:} \qquad U_p = X_p \cdot S_i \\
+        \text{Ley del flujo forzado:} \qquad U_p = X_0 \cdot V_p
+    \end{align*}
+
+    Vemos que lo que buscamos es la razón de visita del procesador, $V_p$. 
+
+    Entonces:
+
+    $$
+    0,45 = X_p \cdot 0,1 \Rightarrow X_p = \frac{0,45}{0,1} = 4,5
+    $$
+    Usamdo $\lambda_0$ calculado en el apartado anterior:
+    $$
+    4,5 = 0,2083 \cdot V_p \Rightarrow V_p = \frac{4,5}{0,2083} \approx 21,6
+    $$
+    Por lo tanto, la razón de visita media del procesador es aproximadamente 21,6.
+
+    \underline{Nota}: Podemos resolverlo de otra manera, teniendo en cuenta que $C_0 = A_0$ ya que en equilibrio de flujo se completa todo lo que llega.
+
+
+
+    \item[c)] ¿Cuánto tiempo de disco duro requiere, de media, cada consulta que se realiza al servidor? (0,4 puntos)
+    
+    En otras palabras, nos esta pidiendo el tiempo que se tarda en atender una petición de lectura-escritura, lo que corresponde con $D_{dd}$.
+
+    
+    \begin{align*}
+        &D_{dd} = \frac{B_{dd}}{C_0} \\
+        &\text{Obtenemos } B_{dd} = U_{dd} = \frac{B_{dd}}{T} \Rightarrow B_{dd} = U_{dd} \cdot T = 0,8 \cdot 7200 = 5760 \\
+        &\text{Por lo tanto, } D_{dd} = \frac{5760}{1500} = 3,84 \text{s}
+    \end{align*}
+    Recordamos que gracias al equilibrio de flujo, $C_0 = A_0 = 1500$.
+
+
+
+
+    \item[d)] El tanto por ciento de mejora en la productividad media máxima del servidor si reemplazamos el procesador por otro 2 veces más rápido. (0,4 puntos)
+    
+    Sabemos que el cuello de botella del servidor es el disco duro, por ende, si mejoramos el procesador, esto no afectará a la productividad máxima del servidor, ya que el cuello de botella seguirá siendo el disco duro. Podemos concluir que la mejora en la productividad máxima del servidor es 0\%.
+
+\end{enumerate}
+
+Partiendo de la hipótesis de que $W_i = N_i \times S_i$, donde $i$ recorre todos los dispositivos de este servidor:
+
+\begin{enumerate}
+    \item[e)] Encuentre una expresión lo más compacta posible que relacione el tiempo de respuesta del disco duro con su utilización y su tiempo de servicio. (0,4 puntos)
+    
+    Gracias a la ley de Little y al equilibrio de flujo, sabemos que:
+    $$
+    R_{dd} = \frac{S_i}{1- X_0 \times D_i}
+    $$
+
+    \item[f)] Calcule el número medio de peticiones de lectura-escritura en la cola de espera del disco duro. (0,5 puntos)
+
+    Me preguntan por $Q_{dd}$ que puede calcularse como:
+    \begin{align*}
+        Q_{dd} = N_{dd} - U_{dd} \overset{W_{dd} = N_{dd}\cdot S_{dd}}{=} \frac{W_{dd}}{S_{dd}} -U_{dd} \\
+        W_{dd} = R_{dd} - S_{dd} \\
+        R_{dd} = \frac{S_{dd}}{1-U_{dd}} = \frac{0,0768}{1-0,8} = 0,384 \text{s} \\
+        W_{dd} = R_{dd} - S_{dd} = 0,384 - 0,0768 = 0,3072 \text{s} \\
+        Q_{dd} = \frac{W_{dd}}{S_{dd}} - U_{dd} = \frac{0,3072}{0,0768} - 0,8 = 4 - 0,8 = 3,2 \text{ peticiones de lectura-escritura}
+    \end{align*}
+
+\end{enumerate}
+
+
+\end{document}

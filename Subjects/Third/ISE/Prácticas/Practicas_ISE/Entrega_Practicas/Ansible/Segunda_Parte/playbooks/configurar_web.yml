@@ -1,0 +1,71 @@
+---
+- name: Configurar servidores web
+  hosts: webservers
+  become: true
+  vars_files:
+    - "../vars/{{ group_names[0] }}.yml" # Asegúrate de que esto ahora apunta a los archivos de variables correctos para cada host según tu inventario
+
+  tasks:
+    - name: Instalar paquete web
+      package:
+        name: "{{ web_package }}"
+        state: present
+
+    # Tareas para detener el servicio web CONTRARIO
+    - name: Asegurar que Apache (httpd) está detenido y deshabilitado si este es un servidor Nginx
+      service:
+        name: httpd # Nombre del servicio Apache/httpd en tu sistema
+        state: stopped
+        enabled: false
+      when: web_package == "nginx" # Solo ejecutar en el host que será Nginx
+      ignore_errors: true # Para que no falle si httpd no estaba instalado
+
+    - name: Asegurar que Nginx está detenido y deshabilitado si este es un servidor Apache
+      service:
+        name: nginx # Nombre del servicio Nginx en tu sistema
+        state: stopped
+        enabled: false
+      when: web_package == "httpd" # Solo ejecutar en el host que será Apache
+      ignore_errors: true # Para que no falle si nginx no estaba instalado
+
+    - name: Asegurar que el servicio {{ web_service }} está iniciado y habilitado
+      service:
+        name: "{{ web_service }}"
+        state: started
+        enabled: true
+
+    - name: Asegurar que el puerto está abierto (firewalld)
+      firewalld:
+        port: "{{ web_port }}/tcp"
+        permanent: yes
+        state: enabled
+        immediate: yes # Aplica los cambios inmediatamente sin recargar firewalld completamente
+      when: ansible_facts['os_family'] == "RedHat"
+      # Considera notificar un reinicio de firewalld o usar 'immediate: yes' como está aquí.
+
+    - name: Crear una página de prueba para Apache
+      copy:
+        dest: "/var/www/html/index.html"
+        content: "Servidor Apache configurado con {{ web_service }} mediante Ansible en {{ ansible_hostname }}"
+      when: web_package == "httpd"
+      notify: Reiniciar Apache # Notifica al handler
+
+    - name: Crear una página de prueba para Nginx
+      copy:
+        dest: "/usr/share/nginx/html/index.html" # Ruta estándar para Nginx en muchos sistemas
+        content: "Servidor Nginx configurado con {{ web_service }} mediante Ansible en {{ ansible_hostname }}"
+      when: web_package == "nginx"
+      notify: Reiniciar Nginx # Notifica al handler
+
+  handlers:
+    - name: Reiniciar Apache
+      service:
+        name: httpd # Nombre del servicio Apache/httpd
+        state: restarted
+      when: web_package == "httpd" # Asegurarse de que solo se reinicie si es el paquete gestionado
+
+    - name: Reiniciar Nginx
+      service:
+        name: nginx # Nombre del servicio Nginx
+        state: restarted
+      when: web_package == "nginx" # Asegurarse de que solo se reinicie si es el paquete gestionado

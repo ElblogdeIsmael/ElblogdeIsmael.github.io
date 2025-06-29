@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 2 - Exclusión Mutua</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            font-size: 18px;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        .question {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .question.correct {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+        .question.incorrect {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+        .explanation {
+            background: #e7f3fe;
+            border: 1px solid #b2d4fe;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        .author {
+            margin-top: 20px;
+            font-style: italic;
+            text-align: center;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        input[type="button"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 4 - Sistemas de Tiempo Real </h1>
+    <!-- autor, titulación y asignatura -->
+    <ul class="author"></ul>
+        <li><strong>Autor:</strong> Ismael Sallami Moreno</li>
+        <li><strong>Titulación:</strong> Ingeniería Informática y ADE</li>
+        <li><strong>Asignatura:</strong> Sistemas Concurrentes y Distribuidos</li>
+    </ul>
+    <br>
+    
+    <div class="question" id="q1">
+        <p>1. Una tarea espaciada por "Jitter" o deriva tiene:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q1" value="0"> Activaciones a intervalos exactos</label></li>
+            <li><label><input type="radio" name="q1" value="0"> Holgura máxima constante</label></li>
+            <li><label><input type="radio" name="q1" value="0"> Prioridades dinámicas en cada activación</label></li>
+            <li><label><input type="radio" name="q1" value="1"> Variaciones en su tiempo de activación</label></li>
+            <li><label><input type="radio" name="q1" value="0"> Plazos de respuesta arbitrarios</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q2">
+        <p>2. ¿Qué propiedad define el determinismo en los STR?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q2" value="0"> Interrupciones rápidas y eficientes</label></li>
+            <li><label><input type="radio" name="q2" value="0"> Ejecutar tareas concurrentes</label></li>
+            <li><label><input type="radio" name="q2" value="0"> Acceso a recursos compartidos</label></li>
+            <li><label><input type="radio" name="q2" value="1"> Predecir con certeza los tiempos de respuesta</label></li>
+            <li><label><input type="radio" name="q2" value="0"> Asignación dinámica de prioridades</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q3">
+        <p>3. El modelo de tareas simples asume:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q3" value="0"> Dependencia entre todas las tareas</label></li>
+            <li><label><input type="radio" name="q3" value="0"> Exclusión mutua en tiempo real</label></li>
+            <li><label><input type="radio" name="q3" value="0"> Acceso concurrente a recursos compartidos</label></li>
+            <li><label><input type="radio" name="q3" value="1"> Tareas periódicas con plazos iguales a su periodo</label></li>
+            <li><label><input type="radio" name="q3" value="0"> Activaciones dinámicas no predecibles</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q4">
+        <p>4. ¿Qué factor reduce los bloqueos en sistemas STR?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q4" value="0"> Uso de algoritmos dinámicos</label></li>
+            <li><label><input type="radio" name="q4" value="0"> Planificación con servidores diferidos</label></li>
+            <li><label><input type="radio" name="q4" value="1"> Protocolos de techo de prioridad</label></li>
+            <li><label><input type="radio" name="q4" value="0"> Todas las anteriores</label></li>
+            <li><label><input type="radio" name="q4" value="0"> Exclusión mutua en todos los recursos</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q5">
+        <p>5. La prioridad relativa en un esquema RMS se basa en:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q5" value="0"> Número de recursos compartidos</label></li>
+            <li><label><input type="radio" name="q5" value="0"> Tiempo de respuesta más corto</label></li>
+            <li><label><input type="radio" name="q5" value="1"> Periodos más pequeños</label></li>
+            <li><label><input type="radio" name="q5" value="0"> Uso eficiente de CPU</label></li>
+            <li><label><input type="radio" name="q5" value="0"> Plazos de respuesta máximos</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q6">
+        <p>6. El bloqueo indirecto ocurre cuando:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q6" value="0"> Dos tareas tienen igual prioridad</label></li>
+            <li><label><input type="radio" name="q6" value="0"> Las tareas tienen restricciones temporales flexibles</label></li>
+            <li><label><input type="radio" name="q6" value="0"> Ninguna de las anteriores</label></li>
+            <li><label><input type="radio" name="q6" value="0"> Una tarea depende de múltiples recursos</label></li>
+            <li><label><input type="radio" name="q6" value="1"> Un recurso compartido interfiere en tareas no relacionadas</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q7">
+        <p>7. ¿Qué ocurre en un STR durante una sobrecarga transitoria?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q7" value="0"> La planificación dinámica falla</label></li>
+            <li><label><input type="radio" name="q7" value="0"> La prioridad máxima se asigna automáticamente</label></li>
+            <li><label><input type="radio" name="q7" value="1"> Los esquemas estáticos son más predecibles</label></li>
+            <li><label><input type="radio" name="q7" value="0"> Todas las tareas se reinician</label></li>
+            <li><label><input type="radio" name="q7" value="0"> Las tareas de menor prioridad se descartan</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q8">
+        <p>8. El análisis de planificabilidad con servidor diferido garantiza:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q8" value="0"> Mayor flexibilidad en tareas aperiódicas</label></li>
+            <li><label><input type="radio" name="q8" value="0"> Exclusión de tareas esporádicas</label></li>
+            <li><label><input type="radio" name="q8" value="0"> Uso máximo de CPU</label></li>
+            <li><label><input type="radio" name="q8" value="0"> Bloqueos mínimos en recursos compartidos</label></li>
+            <li><label><input type="radio" name="q8" value="1"> Plazos cumplidos para tareas periódicas</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q9">
+        <p>9. Un sistema operativo de tiempo real garantiza:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q9" value="0"> Multitarea ilimitada</label></li>
+            <li><label><input type="radio" name="q9" value="0"> Exclusión mutua en todos los recursos</label></li>
+            <li><label><input type="radio" name="q9" value="0"> Acceso prioritario a memoria</label></li>
+            <li><label><input type="radio" name="q9" value="0"> Máxima utilización de CPU</label></li>
+            <li><label><input type="radio" name="q9" value="1"> Respuesta dentro de un tiempo limitado predefinido</label></li>
+        </ol>
+    </div>
+
+    <div class="question" id="q10">
+        <p>10. ¿Qué significa STR de misión crítica?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q10" value="0"> Tareas con tiempo límite flexible</label></li>
+            <li><label><input type="radio" name="q10" value="1"> Tareas donde la falla puede tener consecuencias graves</label></li>
+            <li><label><input type="radio" name="q10" value="0"> Tareas con alta tolerancia a fallos</label></li>
+            <li><label><input type="radio" name="q10" value="0"> Planificación exclusivamente dinámica</label></li>
+            <li><label><input type="radio" name="q10" value="0"> Aplicaciones que solo usan recursos compartidos</label></li>
+        </ol>
+    </div>
+
+    <div class="question" id="q11">
+        <p>11. Un ejemplo de STR permisivo es:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q11" value="0"> Monitoreo de redes</label></li>
+            <li><label><input type="radio" name="q11" value="0"> Control de tráfico aéreo</label></li>
+            <li><label><input type="radio" name="q11" value="1"> Adquisición de datos meteorológicos</label></li>
+            <li><label><input type="radio" name="q11" value="0"> Reservas de vuelos</label></li>
+            <li><label><input type="radio" name="q11" value="0"> Planificación de producción</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q12">
+        <p>12. ¿Qué tipo de tiempo NO es usado en los STR?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q12" value="0"> Relativo</label></li>
+            <li><label><input type="radio" name="q12" value="1"> Incremental</label></li>
+            <li><label><input type="radio" name="q12" value="0"> Absoluto</label></li>
+            <li><label><input type="radio" name="q12" value="0"> GPS</label></li>
+            <li><label><input type="radio" name="q12" value="0"> Atómico</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q13">
+        <p>13. ¿Cuál es una característica clave de los relojes de tiempo real?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q13" value="0"> Sincronización con tiempo relativo</label></li>
+            <li><label><input type="radio" name="q13" value="0"> Deriva acumulativa constante</label></li>
+            <li><label><input type="radio" name="q13" value="1"> Tiempo de desbordamiento definido</label></li>
+            <li><label><input type="radio" name="q13" value="0"> Baja precisión</label></li>
+            <li><label><input type="radio" name="q13" value="0"> Granularidad variable</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q14">
+        <p>14. Un temporizador periódico se caracteriza por:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q14" value="0"> Activarse una vez y detenerse</label></li>
+            <li><label><input type="radio" name="q14" value="0"> Presentar una deriva acumulativa constante</label></li>
+            <li><label><input type="radio" name="q14" value="1"> Realizar activaciones repetitivas en intervalos definidos</label></li>
+            <li><label><input type="radio" name="q14" value="0"> Permitir modificaciones dinámicas de los intervalos</label></li>
+            <li><label><input type="radio" name="q14" value="0"> Interrumpir la planificación actual</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q15">
+        <p>15. ¿Qué atributo temporal tiene una tarea de tiempo real?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q15" value="0"> Periodo mínimo de activación</label></li>
+            <li><label><input type="radio" name="q15" value="0"> Prioridad dinámica asignada</label></li>
+            <li><label><input type="radio" name="q15" value="1"> Tiempo de cómputo máximo</label></li>
+            <li><label><input type="radio" name="q15" value="0"> Número máximo de interrupciones</label></li>
+            <li><label><input type="radio" name="q15" value="0"> Tiempo de respuesta variable</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q16">
+        <p>16. ¿Cuál es una característica clave de los STR?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q16" value="0"> Exclusión de tareas concurrentes</label></li>
+            <li><label><input type="radio" name="q16" value="0"> Uso de sistemas operativos generales</label></li>
+            <li><label><input type="radio" name="q16" value="0"> Uso exclusivo de tareas periódicas</label></li>
+            <li><label><input type="radio" name="q16" value="1"> Respuesta correcta dentro de un tiempo límite</label></li>
+            <li><label><input type="radio" name="q16" value="0"> Alta disponibilidad de memoria</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q17">
+        <p>17. ¿Qué tipo de tarea se activa en instantes arbitrarios?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q17" value="0"> Esporádica</label></li>
+            <li><label><input type="radio" name="q17" value="1"> Aperiódica</label></li>
+            <li><label><input type="radio" name="q17" value="0"> Periódica</label></li>
+            <li><label><input type="radio" name="q17" value="0"> Asíncrona</label></li>
+            <li><label><input type="radio" name="q17" value="0"> Sincrónica</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q18">
+        <p>18. La planificación cíclica usa:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q18" value="0"> Exclusión de tareas esporádicas</label></li>
+            <li><label><input type="radio" name="q18" value="0"> Prioridades dinámicas</label></li>
+            <li><label><input type="radio" name="q18" value="0"> Acceso a múltiples procesadores</label></li>
+            <li><label><input type="radio" name="q18" value="1"> Hiperperiodos basados en MCM</label></li>
+            <li><label><input type="radio" name="q18" value="0"> Algoritmos de análisis temporal</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q19">
+        <p>19. Un algoritmo dinámico como EDF asigna prioridad según:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q19" value="0"> Uso del procesador más bajo</label></li>
+            <li><label><input type="radio" name="q19" value="1"> Tiempo límite más próximo</label></li>
+            <li><label><input type="radio" name="q19" value="0"> Periodos más cortos</label></li>
+            <li><label><input type="radio" name="q19" value="0"> Requerimientos de memoria</label></li>
+            <li><label><input type="radio" name="q19" value="0"> Holgura más alta</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q20">
+        <p>20. ¿En qué consiste la inversión de prioridad?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q20" value="0"> Un error en el orden de asignación de prioridades</label></li>
+            <li><label><input type="radio" name="q20" value="1"> Una tarea prioritaria puede quedar bloqueada indefinidamente</label></li>
+            <li><label><input type="radio" name="q20" value="0"> La planificación cíclica falla en el análisis de Gantt</label></li>
+            <li><label><input type="radio" name="q20" value="0"> Ninguna de las anteriores</label></li>
+            <li><label><input type="radio" name="q20" value="0"> Las tareas menos críticas interrumpen las más importantes</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q21">
+        <p>21. El protocolo de herencia de prioridad:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q21" value="0"> Garantiza exclusión mutua completa</label></li>
+            <li><label><input type="radio" name="q21" value="0"> Desactiva tareas aperiódicas</label></li>
+            <li><label><input type="radio" name="q21" value="0"> Asigna prioridad máxima a todas las tareas</label></li>
+            <li><label><input type="radio" name="q21" value="0"> Reduce las prioridades de tareas esporádicas</label></li>
+            <li><label><input type="radio" name="q21" value="1"> Dinamiza prioridades según el bloqueo de recursos</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q22">
+        <p>22. ¿Qué es el "techo de prioridad" de un recurso?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q22" value="0"> Un atributo dinámico definido por EDF</label></li>
+            <li><label><input type="radio" name="q22" value="0"> La prioridad mínima que puede acceder al recurso</label></li>
+            <li><label><input type="radio" name="q22" value="0"> La prioridad asignada por el sistema operativo</label></li>
+            <li><label><input type="radio" name="q22" value="1"> La prioridad más alta que puede bloquear</label></li>
+            <li><label><input type="radio" name="q22" value="0"> La prioridad promedio de las tareas que lo usan</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q23">
+        <p>23. Un servidor diferido es útil para:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q23" value="0"> Sincronizar relojes del sistema</label></li>
+            <li><label><input type="radio" name="q23" value="1"> Gestionar peticiones aperiódicas</label></li>
+            <li><label><input type="radio" name="q23" value="0"> Sustituir el protocolo de herencia</label></li>
+            <li><label><input type="radio" name="q23" value="0"> Optimizar los tiempos de cómputo máximo</label></li>
+            <li><label><input type="radio" name="q23" value="0"> Tareas periódicas críticas</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q24">
+        <p>24. El test de Liu y Layland (RMS) es aplicable a:</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q24" value="0"> Sistemas distribuidos concurrentes</label></li>
+            <li><label><input type="radio" name="q24" value="0"> Tareas esporádicas con plazos variables</label></li>
+            <li><label><input type="radio" name="q24" value="1"> Tareas periódicas independientes</label></li>
+            <li><label><input type="radio" name="q24" value="0"> Procesos con múltiples recursos compartidos</label></li>
+            <li><label><input type="radio" name="q24" value="0"> Tareas aperiódicas con plazos fijos</label></li>
+        </ol>
+    </div>
+    
+    <div class="question" id="q25">
+        <p>25. ¿Cuál es el límite de utilización de CPU para N tareas según RMS?</p>
+        <ol type="a">
+            <li><label><input type="radio" name="q25" value="0"> U0 × N</label></li>
+            <li><label><input type="radio" name="q25" value="0"> N × 2^(1/N)</label></li>
+            <li><label><input type="radio" name="q25" value="0"> N(3^(1/N))</label></li>
+            <li><label><input type="radio" name="q25" value="0"> N^2 × T</label></li>
+            <li><label><input type="radio" name="q25" value="1"> N(2^(1/N) − 1)</label></li>
+        </ol>
+    </div>
+    
+    
+    
+    
+    
+    
+
+   
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Añadir las preguntas adicionales de la misma manera -->
+
+    <input type="button" value="¿Aprobarás?" onclick="checkAnswers()">
+</form>
+
+
+<div id="results" style="margin-top: 20px;"></div>
+
+<script>
+    function checkAnswers() {
+        let score = 0;
+        const totalQuestions = 25;
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
+
+        // Respuestas correctas
+        const answers = {
+            q1: { answer: "1", explanation: "Las tareas espaciadas por 'Jitter' tienen variaciones en su tiempo de activación." },
+            q2: { answer: "1", explanation: "El determinismo en los STR permite predecir con certeza los tiempos de respuesta." },
+            q3: { answer: "1", explanation: "El modelo de tareas simples asume tareas periódicas con plazos iguales a su periodo." },
+            q4: { answer: "1", explanation: "Los protocolos de techo de prioridad reducen los bloqueos en sistemas STR." },
+            q5: { answer: "1", explanation: "En un esquema RMS, la prioridad relativa se basa en periodos más pequeños." },
+            q6: { answer: "1", explanation: "El bloqueo indirecto ocurre cuando un recurso compartido interfiere en tareas no relacionadas." },
+            q7: { answer: "1", explanation: "Durante una sobrecarga transitoria, los esquemas estáticos son más predecibles." },
+            q8: { answer: "1", explanation: "El análisis de planificabilidad con servidor diferido garantiza plazos cumplidos para tareas periódicas." },
+            q9: { answer: "1", explanation: "Un sistema operativo de tiempo real garantiza respuesta dentro de un tiempo limitado predefinido." },
+            q10: { answer: "1", explanation: "STR de misión crítica significa tareas donde la falla puede tener consecuencias graves." },
+            q11: { answer: "1", explanation: "Un ejemplo de STR permisivo es la adquisición de datos meteorológicos." },
+            q12: { answer: "1", explanation: "El tiempo incremental no es usado en los STR." },
+            q13: { answer: "1", explanation: "Una característica clave de los relojes de tiempo real es el tiempo de desbordamiento definido." },
+            q14: { answer: "1", explanation: "Un temporizador periódico se caracteriza por realizar activaciones repetitivas en intervalos definidos." },
+            q15: { answer: "1", explanation: "Una tarea de tiempo real tiene como atributo temporal el tiempo de cómputo máximo." },
+            q16: { answer: "1", explanation: "Una característica clave de los STR es la respuesta correcta dentro de un tiempo límite." },
+            q17: { answer: "1", explanation: "Una tarea aperiódica se activa en instantes arbitrarios." },
+            q18: { answer: "1", explanation: "La planificación cíclica usa hiperperiodos basados en MCM." },
+            q19: { answer: "1", explanation: "Un algoritmo dinámico como EDF asigna prioridad según el tiempo límite más próximo." },
+            q20: { answer: "1", explanation: "La inversión de prioridad ocurre cuando una tarea prioritaria puede quedar bloqueada indefinidamente." },
+            q21: { answer: "1", explanation: "El protocolo de herencia de prioridad dinamiza prioridades según el bloqueo de recursos." },
+            q22: { answer: "1", explanation: "El 'techo de prioridad' de un recurso es la prioridad más alta que puede bloquear." },
+            q23: { answer: "1", explanation: "Un servidor diferido es útil para gestionar peticiones aperiódicas." },
+            q24: { answer: "1", explanation: "El test de Liu y Layland (RMS) es aplicable a tareas periódicas independientes." },
+            q25: { answer: "1", explanation: "El límite de utilización de CPU para N tareas según RMS es N(2^(1/N) − 1)." }
+        };
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            const question = document.querySelectorAll(`input[name="q${i}"]:checked`);
+            if (question.length > 0) {
+            const selectedValues = Array.from(question).map(q => q.value);
+            const correctAnswers = Array.isArray(answers[`q${i}`].answer) ? answers[`q${i}`].answer : [answers[`q${i}`].answer];
+            const isCorrect = selectedValues.length === correctAnswers.length && selectedValues.every(val => correctAnswers.includes(val));
+            
+            if (isCorrect) {
+                score++;
+                document.getElementById(`q${i}`).classList.add('correct');
+            } else {
+                document.getElementById(`q${i}`).classList.add('incorrect');
+                // Mostrar solo la justificación
+                const explanation = answers[`q${i}`].explanation;
+                const explanationDiv = document.createElement("div");
+                explanationDiv.className = "explanation";
+                explanationDiv.innerHTML = `<strong>Justificación:</strong> ${explanation}`;
+                document.getElementById(`q${i}`).appendChild(explanationDiv);
+            }
+            }
+        }
+
+        // Cálculo de la nota sobre 10
+        const grade = (score / totalQuestions) * 10;
+        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
+        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
+    }
+</script>
+
+</body>
+</html>

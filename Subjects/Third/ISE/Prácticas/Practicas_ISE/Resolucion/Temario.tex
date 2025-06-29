@@ -1,0 +1,306 @@
+\documentclass[a4paper,12pt]{book}
+
+% Paquetes necesarios
+\usepackage[utf8]{inputenc}   % Codificación de caracteres
+\usepackage[spanish]{babel}   % Idioma español
+\usepackage[T1]{fontenc}      % Codificación de fuentes
+\usepackage{amsmath, amssymb} % Símbolos matemáticos
+\usepackage{graphicx}         % Inclusión de gráficos
+\usepackage{cite}             % Gestión de citas
+\usepackage{hyperref}         % Enlaces y referencias
+\usepackage{geometry}         % Configuración de márgenes
+\usepackage{fancyhdr}         % Encabezados y pies de página
+\usepackage{titlesec}         % Formato de títulos
+\usepackage{booktabs}         % Tablas profesionales
+\usepackage{caption}          % Personalización de leyendas
+\usepackage{enumitem}         % Personalización de listas
+\usepackage{float}
+\usepackage{tcolorbox}
+\usepackage[table]{xcolor} % Paquete para colores en tablas
+\usepackage{colortbl}       % Complemento para colorear celdas específicas
+\usepackage{multirow}       % Combinar celdas en tablas
+\usepackage{makecell}       % Combinar celdas en tablas
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{eurosym}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{float}
+\usepackage{pdfpages}
+
+%\newcommand{\micode}[1]{\lstinline[basicstyle=\ttfamily, keywordstyle=\bfseries, breaklines=true]{#1}}      % Cargar el paquete listings
+\lstdefinelanguage{Dockerfile}{
+    morekeywords={FROM, RUN, CMD, LABEL, MAINTAINER, EXPOSE, ENV, ADD, COPY, ENTRYPOINT, VOLUME, USER, WORKDIR, ARG, ONBUILD, STOPSIGNAL, HEALTHCHECK, SHELL},
+    sensitive=true,
+    morecomment=[l]{\#},
+    morestring=[b]"
+}
+
+% Define YAML language for listings
+\lstdefinelanguage{yaml}{
+  keywords={true,false,null,y,n},
+  keywordstyle=\color{blue}\bfseries,
+  basicstyle=\ttfamily,
+  sensitive=false,
+  comment=[l]{\#},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{gray}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+% Configuración para que listings soporte UTF-8
+\lstset{
+    extendedchars=true,  % Permite caracteres extendidos (opcional en versiones recientes)
+    inputencoding=utf8,  % Asegura que listings entienda UTF-8
+    breaklines=true,
+    emphstyle=\itshape,
+    basicstyle=\ttfamily, keywordstyle=\bfseries,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{¿}}1 {¡}{{¡}}1
+}
+
+% Definir \micode con soporte para tildes
+\newcommand{\micode}[1]{\lstinline{#1}}
+
+%creacion de un lstlisting claro y bonito
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{white},   
+    commentstyle=\color{green},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstdefinestyle{yamlstyle}{
+    backgroundcolor=\color{yellow!10},   
+    commentstyle=\color{purple},
+    keywordstyle=\color{orange},
+    numberstyle=\tiny\color{blue},
+    stringstyle=\color{teal},
+    basicstyle=\ttfamily\footnotesize\bfseries,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    morekeywords={true,false,null,y,n}
+}
+
+\lstdefinestyle{directorystructure}{
+    backgroundcolor=\color{gray!10},   
+    commentstyle=\color{green!50!black},
+    keywordstyle=\color{blue!70},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{red!70!black},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=none,                    
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstnewenvironment{directorylisting}[1][]{
+    \lstset{
+        style=directorystructure,
+        caption={#1},
+        frame=single,
+        framerule=0.5pt,
+        rulecolor=\color{black!50},
+        xleftmargin=0.5cm,
+        xrightmargin=0.5cm
+    }
+}{}
+
+
+
+\setlength{\headheight}{14.5pt}
+
+% Configuración de márgenes
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% Configuración de encabezados y pies de página
+% \setlength{\headheight}{14.49998pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Universidad de Granada}
+\fancyhead[L]{\nouppercase{\leftmark}}
+
+% \fancyhead[C]{Escuela Técnica Superior de Ingenierías Informática}
+\fancyhead[R]{Ingeniería de Servidores}
+\fancyfoot[L]{\rule[0pt]{\textwidth}{0.2pt}\\Ismael Sallami Moreno}
+\fancyfoot[C]{\rule[0pt]{\textwidth}{0.2pt}\\\thepage}
+\fancyfoot[R]{\rule[0pt]{\textwidth}{0.2pt}\\\today}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}} % Configura \leftmark para que solo muestre la sección
+
+\lstdefinestyle{customstyle}{
+    backgroundcolor=\color{gray!10},   
+    commentstyle=\color{green!50!black}\itshape,
+    keywordstyle=\color{blue!70}\itshape,
+    numberstyle=\tiny\color{gray}\itshape,
+    stringstyle=\color{red!70!black}\itshape,
+    basicstyle=\ttfamily\footnotesize\itshape,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single,
+    framerule=0.5pt,
+    rulecolor=\color{black!50},
+    xleftmargin=0.5cm,
+    xrightmargin=0.5cm,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{¿}}1 {¡}{{¡}}1
+}
+
+\lstnewenvironment{customlisting}[1][]{
+    \lstset{
+        style=customstyle,
+        caption={#1}
+    }
+}{}
+
+
+% Formato de títulos
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+
+% Datos del documento
+\title{\textbf{Prácticas Ingeniería de Servidores}}
+\author{
+    Ismael Sallami Moreno \\
+    \texttt{ism350zsallami@correo.ugr.es}
+}
+\date{
+    \vspace{1cm}
+    \begin{tabular}{rl}
+        \textbf{Asignatura:} & Ingeniería de Servidores \\
+        \textbf{Tema:} & Prácticas \\
+        \textbf{Fecha:} & \today
+    \end{tabular}
+}
+
+\begin{document}
+
+% Portada
+\begin{titlepage}
+    \begin{center}
+        % \vspace*{1cm}
+        
+        % \Huge
+        % \textbf{Práctica Contabilidad Financiera II}
+        \Huge \textbf{Prácticas Ingeniería de Servidores} 
+        % \vspace{0.5cm}
+        % \LARGE
+        % \textbf{Ismael Sallami Moreno}\\
+        % \LARGE
+        % \texttt{ism350zsallami@correo.ugr.es}
+        % \LARGE
+        % \url{https://github.com/Ismael-Sallami}
+        
+        % \vfill
+        
+        % \Large
+        % \textbf{Universidad de Granada}
+        
+        \vspace{0.8cm}
+        
+        \begin{tikzpicture}[remember picture, overlay]
+            \node[opacity=0.2] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{portada.jpg}};
+            \node[align=center] at (current page.center) {
+                
+                \vspace{0.5cm}
+                \LARGE \textbf{Ismael Sallami Moreno} \\
+                \LARGE \texttt{ism350zsallami@correo.ugr.es} \\
+                \LARGE \url{https://ismael-sallami.github.io/} \\
+                \LARGE \url{https://elblogdeismael.github.io/} \\
+                \vspace{2cm}
+                \Large \textbf{Universidad de Granada} \\
+                \vspace{0.8cm}
+                % \Large \textbf{2025}
+            };
+        \end{tikzpicture}
+        \vfill
+        
+        \Large
+        \textbf{2025}
+        
+    \end{center}
+\end{titlepage}
+\newpage
+
+
+\includepdf[pages=-]{../../../../../../extraFiles/licencia.pdf}
+% Tabla de contenidos
+\tableofcontents
+\newpage
+
+\part{Apuntes de Clase}
+
+\chapter{Bloque 1}
+
+\input{Capitulos/ApuntesClase_Bloque1}
+
+\chapter{Bloque 2}
+
+\input{Capitulos/ApuntesClase_Bloque2}
+
+
+\newpage
+\part{Prácticas}
+\chapter{Bloque 1}
+
+\input{Capitulos/Bloque1}
+
+\chapter{Bloque 2}
+
+\input{Capitulos/Bloque2}
+
+% Referencias
+\begin{thebibliography}{99}
+\bibitem{Referencia1}
+Ismael Sallami Moreno, \textbf{Estudiante del Doble Grado en Ingeniería Informática + ADE}, Universidad de Granada, 2025.
+
+\bibitem{turn0search0} Introduction to ad hoc commands - Ansible Documentation. \url{https://docs.ansible.com/ansible/latest/command_guide/intro_adhoc.html}
+\bibitem{turn0search4} Index of all Modules — Ansible Community Documentation. \url{https://docs.ansible.com/ansible/latest/collections/index_module.html}
+\bibitem{turn0search2} Ansible playbooks — Ansible Community Documentation. \url{https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html}
+% \bibitem{Referencia2}
+% Autor(es), \emph{Título del libro}, Editorial, año.
+
+% \bibitem{Referencia3}
+% Autor(es), \emph{Título del documento}, Nombre de la Conferencia, páginas, año.
+\end{thebibliography}
+
+
+
+\end{document}
