@@ -1,5 +1,3 @@
----
-
 ## 🧠 ¿Qué es Ansible?
 
 Ansible es una herramienta que sirve para **automatizar tareas en servidores** (por ejemplo, instalar software, crear usuarios, configurar servicios…).
