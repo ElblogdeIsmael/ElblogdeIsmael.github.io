@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas de Desarrollo: Bloque 2 - Monitorización, Carga y Contenedores</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .dev-question {
+            margin-bottom: 30px;
+        }
+        .dev-question h3 {
+            color: #333;
+            border-bottom: 2px solid #28a745; /* Color verde para diferenciar del bloque 1 */
+            padding-bottom: 5px;
+        }
+        .dev-question .answer {
+            background-color: #e6ffed; /* Fondo verde claro */
+            padding: 15px;
+            border-left: 4px solid #28a745; /* Borde verde */
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        .dev-question .answer p,
+        .dev-question .answer ul,
+        .dev-question .answer ol {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .dev-question .answer ul,
+        .dev-question .answer ol {
+            padding-left: 20px;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre code {
+            display: block;
+            padding: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Preguntas de Desarrollo: Bloque 2 - Monitorización, Carga y Contenedores</h1>
+
+        <div class="dev-question">
+            <h3>Pregunta 1: Describe cómo configurarías un "Test Plan" básico en JMeter para simular la carga de múltiples usuarios que realizan un login y luego acceden a un recurso protegido por JWT. Menciona al menos cuatro elementos clave de JMeter que utilizarías y su función en este escenario, basándote en la estructura vista en la imagen de la interfaz de JMeter.</h3>
+            <div class="answer">
+                <p>Para configurar un "Test Plan" básico en JMeter que simule la carga de múltiples usuarios realizando un login para obtener un JWT y luego acceder a un recurso protegido, similar a la estructura de la imagen, seguiría estos pasos y utilizaría los siguientes elementos clave:</p>
+                <ol>
+                    <li>
+                        <strong>Test Plan (Elemento Raíz):</strong>
+                        <ul>
+                            <li><strong>User Defined Variables (Opcional pero recomendado):</strong> Aquí definiría variables globales como el hostname (<code>${HOST}</code>), puerto (<code>${PORT}</code>), y quizás rutas base de la API para facilitar la configuración y cambios.</li>
+                            <li><strong>HTTP Request Defaults (Config Element):</strong> Para establecer valores por defecto para todas las peticiones HTTP (como el servidor y puerto), evitando tener que repetirlos en cada Sampler.</li>
+                            <li><strong>HTTP Cookie Manager (Config Element):</strong> Para gestionar cookies automáticamente si la aplicación las utiliza para la sesión además del JWT.</li>
+                            <li><strong>HTTP Authorization Manager (Config Element):</strong> Si el endpoint de login está protegido por Autenticación Básica HTTP (como se indica en el `README.md` de `iseP4JMeter`), este elemento se configuraría aquí con las credenciales necesarias.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Thread Group (Grupo de Hilos - ej. "Alumnos" o "Administradores"):</strong>
+                        <ul>
+                            <li><strong>Función:</strong> Define el número de usuarios virtuales (hilos) que simularán las acciones, el período de subida (ramp-up time) para alcanzar ese número de usuarios, y el número de veces que cada usuario ejecutará el conjunto de acciones (loop count) o la duración de la prueba.</li>
+                            <li>Configuraría al menos un Thread Group para simular los "Alumnos".</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Dentro del Thread Group "Alumnos":</strong>
+                        <ul>
+                            <li>
+                                <strong>CSV Data Set Config (Config Element):</strong>
+                                <ul>
+                                    <li><strong>Función:</strong> Para leer datos de un archivo CSV (ej. `alumnos.csv` con `login,password`) y utilizar estos valores en las peticiones, permitiendo que cada hilo/usuario virtual utilice credenciales diferentes.</li>
+                                    <li>Configuraría el nombre del archivo, las variables (ej. `LOGIN_USER,PASSWORD_USER`) y el modo de compartición.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>HTTP Request Sampler (Sampler - para el Login):</strong>
+                                <ul>
+                                    <li><strong>Función:</strong> Envía la petición de login al servidor.</li>
+                                    <li>Configuraría el método (ej. POST), el path (ej. <code>/api/v1/auth/login</code>), y los parámetros del cuerpo de la petición utilizando las variables del CSV Data Set Config (ej. <code>${LOGIN_USER}</code>, <code>${PASSWORD_USER}</code>).</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>JSON Extractor o Regular Expression Extractor (Post Processor - para "Obtener JWT Token"):</strong>
+                                <ul>
+                                    <li><strong>Función:</strong> Se añade como hijo del Sampler de Login para extraer el token JWT de la respuesta del servidor (generalmente de un cuerpo JSON o una cabecera).</li>
+                                    <li>Configuraría la expresión (JSON Path o expresión regular) para capturar el token y lo almacenaría en una variable de JMeter (ej. <code>${JWT_TOKEN}</code>).</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>HTTP Header Manager (Config Element - para peticiones protegidas):</strong>
+                                <ul>
+                                    <li><strong>Función:</strong> Para añadir la cabecera `Authorization` con el token JWT a las peticiones subsiguientes que requieran autenticación.</li>
+                                    <li>Añadiría una cabecera con nombre `Authorization` y valor `Bearer ${JWT_TOKEN}`. Se puede colocar a nivel del Thread Group o específico para los samplers que lo necesiten.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>HTTP Request Sampler (Sampler - para "Recuperar datos alumnos"):</strong>
+                                <ul>
+                                    <li><strong>Función:</strong> Envía la petición al endpoint protegido para obtener los datos del alumno.</li>
+                                    <li>Configuraría el método (ej. GET), el path del recurso protegido. Esta petición utilizaría el `HTTP Header Manager` configurado anteriormente para enviar el JWT.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Gaussian Random Timer (Timer - opcional):</strong>
+                                <ul>
+                                    <li><strong>Función:</strong> Para introducir pausas aleatorias (siguiendo una distribución gaussiana) entre las peticiones de un mismo hilo, simulando de forma más realista el "tiempo de pensamiento" de un usuario.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Listeners (ej. "View Results Tree", "Summary Report", "Aggregate Report"):</strong>
+                        <ul>
+                            <li><strong>Función:</strong> Recopilan y muestran los resultados de la prueba de carga. "View Results Tree" es útil para depurar, mostrando detalles de cada petición y respuesta. "Summary Report" y "Aggregate Report" ofrecen estadísticas agregadas como el número de muestras, promedio, mediana, throughput, tasa de error, etc.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>Este diseño permitiría simular de forma efectiva el flujo de autenticación y acceso a recursos protegidos, proporcionando métricas valiosas sobre el rendimiento de la API bajo carga.</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 2: Explica el flujo de trabajo para monitorizar un servidor Linux (VM Rocky) utilizando Prometheus y Grafana. Detalla la función del Node Exporter, la configuración de scraping en Prometheus y cómo se visualizan las métricas en Grafana.</h3>
+            <div class="answer">
+                <p>El flujo de trabajo para monitorizar un servidor Linux (VM Rocky) con Prometheus y Grafana implica varios componentes y pasos:</p>
+                <ol>
+                    <li>
+                        <strong>Instalación y Configuración del Node Exporter en la VM Rocky:</strong>
+                        <ul>
+                            <li><strong>Función del Node Exporter:</strong> Es un software (un "exporter" de Prometheus) que se instala en el servidor Linux que se desea monitorizar. Su propósito es recolectar una amplia variedad de métricas del hardware y del kernel del sistema operativo (uso de CPU, memoria, disco, red, carga del sistema, etc.).</li>
+                            <li><strong>Proceso:</strong>
+                                <ol>
+                                    <li>Descargar el binario adecuado del Node Exporter para la arquitectura del servidor.</li>
+                                    <li>(Opcional pero recomendado) Crear un usuario y grupo dedicados para ejecutar el Node Exporter con privilegios limitados.</li>
+                                    <li>Mover el binario a una ubicación estándar (ej. <code>/usr/local/bin</code>).</li>
+                                    <li>Crear un archivo de servicio de `systemd` (ej. <code>/etc/systemd/system/node_exporter.service</code>) para gestionar el Node Exporter como un servicio (permitir inicio automático, reinicios, etc.). Este archivo define cómo se ejecuta el exporter. Se puede añadir la opción <code>--collector.systemd</code> si se quieren métricas de los servicios de systemd.</li>
+                                    <li>Recargar la configuración de systemd, habilitar e iniciar el servicio Node Exporter.</li>
+                                    <li>Verificar que el Node Exporter está corriendo y exponiendo métricas en su puerto por defecto (generalmente el 9100) accediendo a <code>http://IP_VM_ROCKY:9100/metrics</code> desde un navegador o con `curl`.</li>
+                                    <li>Asegurarse de que el firewall de la VM Rocky permite conexiones entrantes en el puerto del Node Exporter (ej. 9100).</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Configuración de Scraping en Prometheus:</strong>
+                        <ul>
+                            <li><strong>Función de Prometheus:</strong> Prometheus es el sistema de monitorización y alertas que recolecta (hace "scraping") las métricas expuestas por los exporters y las almacena en su base de datos de series temporales.</li>
+                            <li><strong>Proceso:</strong>
+                                <ol>
+                                    <li>Editar el archivo de configuración de Prometheus (<code>prometheus.yml</code>).</li>
+                                    <li>Dentro de la sección <code>scrape_configs</code>, añadir un nuevo <code>job_name</code> (ej. "rocky_linux_server" o "node").</li>
+                                    <li>Bajo este job, en <code>static_configs</code>, añadir un nuevo <code>target</code> con la dirección IP y el puerto del Node Exporter en la VM Rocky (ej. <code>targets: ['IP_VM_ROCKY:9100']</code>).</li>
+                                    <li>Reiniciar o recargar la configuración de Prometheus para que aplique los cambios.</li>
+                                    <li>Verificar en la interfaz web de Prometheus (en la sección "Status" -> "Targets") que el nuevo target aparece y su estado es "UP", indicando que Prometheus está recolectando métricas exitosamente.</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Visualización de Métricas en Grafana:</strong>
+                        <ul>
+                            <li><strong>Función de Grafana:</strong> Grafana es la plataforma de visualización que se conecta a Prometheus (como fuente de datos) para crear dashboards interactivos con gráficos, tablas y alertas basados en las métricas recolectadas.</li>
+                            <li><strong>Proceso:</strong>
+                                <ol>
+                                    <li>Acceder a la interfaz web de Grafana.</li>
+                                    <li>Asegurarse de que Prometheus está configurado como un "Data Source" en Grafana, apuntando a la URL de la instancia de Prometheus (ej. <code>http://prometheus:9090</code> si ambos corren en el mismo Docker Compose).</li>
+                                    <li>Crear un nuevo dashboard o importar uno existente. Para Node Exporter, existen muchos dashboards predefinidos disponibles en Grafana.com/dashboards (ej. ID 1860 "Node Exporter Full"). Se puede importar usando el ID o subiendo el archivo JSON del dashboard.</li>
+                                    <li>Dentro del dashboard, los paneles utilizan consultas PromQL (el lenguaje de consulta de Prometheus) para seleccionar y transformar las métricas del Node Exporter (ej. <code>rate(node_cpu_seconds_total{mode="idle"}[1m])</code> para el uso de CPU).</li>
+                                    <li>Personalizar los paneles, añadir nuevos para métricas específicas, o configurar alertas basadas en umbrales sobre estas métricas (ej. alerta si el uso de CPU supera el 75% durante 5 minutos).</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>Este flujo permite una monitorización continua y detallada del servidor Linux, facilitando la detección de problemas, el análisis de rendimiento y la planificación de capacidad.</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 3: ¿Qué es un Dockerfile y cuál es su propósito? Describe al menos cuatro instrucciones comunes que se utilizan en un Dockerfile y explica brevemente qué hace cada una (por ejemplo, las vistas en el Dockerfile de la aplicación Node.js del temario).</h3>
+            <div class="answer">
+                <p>Un <strong>Dockerfile</strong> es un archivo de texto que contiene una secuencia de instrucciones y comandos que Docker utiliza para construir automáticamente una imagen de contenedor. Actúa como un plano o receta para crear un entorno de software específico y reproducible.</p>
+                <p>El <strong>propósito principal</strong> de un Dockerfile es automatizar el proceso de creación de imágenes Docker, asegurando que la imagen sea consistente y se pueda reconstruir de la misma manera en cualquier momento y en cualquier máquina que tenga Docker. Esto promueve la portabilidad y las prácticas de Infraestructura como Código (IaC).</p>
+                <p>A continuación, se describen cuatro instrucciones comunes utilizadas en un Dockerfile, tomando como referencia el Dockerfile de la aplicación Node.js presentado en el temario (ISE-B2-MonitorizacionyCarga.pdf, pág. 10):</p>
+                <ol>
+                    <li>
+                        <strong><code>FROM node:16.13.0-stretch</code></strong>
+                        <ul>
+                            <li><strong>Instrucción:</strong> <code>FROM</code></li>
+                            <li><strong>Función:</strong> Especifica la imagen base a partir de la cual se construirá la nueva imagen. Toda Dockerfile debe comenzar con una instrucción <code>FROM</code> (a menos que sea una construcción multi-etapa que utilice <code>FROM scratch</code>).</li>
+                            <li><strong>En el ejemplo:</strong> Se utiliza la imagen oficial <code>node</code> con la etiqueta <code>16.13.0-stretch</code> como punto de partida. Esto significa que la imagen resultante heredará el entorno Node.js v16.13.0 preinstalado sobre una base de Debian Stretch.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong><code>COPY ./usr/src/app /usr/src/app</code> (Asumiendo que la intención es copiar el contenido de la app local al contenedor) o simplemente <code>COPY . /usr/src/app</code> si el contexto es el directorio de la app.</strong>
+                        <ul>
+                            <li><strong>Instrucción:</strong> <code>COPY</code></li>
+                            <li><strong>Función:</strong> Copia archivos o directorios desde el sistema de archivos del host (el contexto de construcción) a la imagen del contenedor.</li>
+                            <li><strong>En el ejemplo (interpretado como copiar el contenido de la app):</strong> Si los archivos de la aplicación Node.js están en el directorio <code>./usr/src/app</code> relativo al Dockerfile en el host (o más comúnmente, <code>COPY . /usr/src/app</code> para copiar todo desde el directorio actual del host), esta instrucción los copia al directorio <code>/usr/src/app</code> dentro de la imagen del contenedor.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong><code>RUN ["npm", "install"]</code></strong>
+                        <ul>
+                            <li><strong>Instrucción:</strong> <code>RUN</code></li>
+                            <li><strong>Función:</strong> Ejecuta cualquier comando en una nueva capa sobre la imagen actual y confirma los resultados. Se utiliza comúnmente para instalar paquetes de software, crear directorios, configurar el entorno, etc. Cada instrucción <code>RUN</code> crea una nueva capa en la imagen.</li>
+                            <li><strong>En el ejemplo:</strong> Este comando ejecuta <code>npm install</code> dentro del directorio de trabajo (establecido por <code>WORKDIR</code>). Esto instalará las dependencias del proyecto Node.js definidas en el archivo <code>package.json</code>. Se usa el formato JSON (exec form) que es preferido sobre el shell form (<code>RUN npm install</code>).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong><code>CMD ["npm", "start"]</code></strong>
+                        <ul>
+                            <li><strong>Instrución:</strong> <code>CMD</code></li>
+                            <li><strong>Función:</strong> Especifica el comando por defecto que se ejecutará cuando se inicie un contenedor a partir de esta imagen. Solo puede haber una instrucción <code>CMD</code> en un Dockerfile. Si hay varias, solo la última tendrá efecto. Los argumentos de <code>CMD</code> pueden ser sobrescritos al ejecutar el contenedor (<code>docker run <imagen> [nuevo_comando]</code>).</li>
+                            <li><strong>En el ejemplo:</strong> Cuando un contenedor se inicie a partir de la imagen construida, ejecutará <code>npm start</code>. Este comando típicamente inicia la aplicación Node.js según lo definido en el script "start" del archivo <code>package.json</code>.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>Otras instrucciones importantes vistas en el ejemplo son <code>WORKDIR /usr/src/app</code> (establece el directorio de trabajo para las instrucciones <code>RUN</code>, <code>CMD</code>, <code>ENTRYPOINT</code>, <code>COPY</code>, y <code>ADD</code> que le sigan) y <code>EXPOSE 3000</code> (documenta que el contenedor escuchará en el puerto 3000 en tiempo de ejecución, aunque no publica el puerto por sí mismo).</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 4: Describe el propósito de utilizar Prometheus junto con Grafana para la monitorización. ¿Qué tipo de información almacena Prometheus y cómo la presenta Grafana? Incluye un ejemplo de una métrica que podría ser recolectada por Node Exporter y cómo podría visualizarse en un panel de Grafana.</h3>
+            <div class="answer">
+                <p>Utilizar Prometheus junto con Grafana es una práctica muy extendida para la monitorización de sistemas y aplicaciones debido a que ambas herramientas se complementan y ofrecen una solución robusta y flexible.</p>
+                <p><strong>Propósito de la Combinación:</strong></p>
+                <ul>
+                    <li><strong>Prometheus:</strong> Su función principal es la <strong>recolección y almacenamiento de métricas</strong> en forma de series temporales. Realiza "scraping" de endpoints HTTP expuestos por los servicios o exporters, consultándolos periódicamente para obtener los valores actuales de las métricas. También cuenta con un potente lenguaje de consulta (PromQL) y un sistema de alertas. Aunque tiene una interfaz web básica para explorar métricas, no está optimizada para la visualización avanzada.</li>
+                    <li><strong>Grafana:</strong> Su función principal es la <strong>visualización de datos y la creación de dashboards interactivos</strong>. Se conecta a diversas fuentes de datos (Data Sources), siendo Prometheus una de las más populares. Grafana utiliza el lenguaje de consulta de la fuente de datos (PromQL en el caso de Prometheus) para obtener los datos y luego los presenta en forma de gráficos, tablas, gauges, mapas de calor, etc., dentro de paneles organizados en dashboards. También puede gestionar alertas basadas en las consultas.</li>
+                </ul>
+                <p>En conjunto, Prometheus se encarga del backend (recolección y almacenamiento eficiente de métricas), mientras que Grafana proporciona el frontend (visualización avanzada y alertas) para interpretar y actuar sobre esos datos.</p>
+
+                <p><strong>Tipo de Información Almacenada por Prometheus:</strong></p>
+                <p>Prometheus almacena datos como <strong>series temporales</strong>. Una serie temporal es una secuencia de puntos de datos indexados (o listados o graficados) en orden cronológico. Cada punto de datos consiste en:</p>
+                <ul>
+                    <li>Un valor flotante de 64 bits.</li>
+                    <li>Una marca de tiempo (timestamp) precisa en milisegundos.</li>
+                </ul>
+                <p>Cada serie temporal se identifica unívocamente por su <strong>nombre de métrica</strong> y un conjunto opcional de pares clave-valor llamados <strong>etiquetas (labels)</strong>. Por ejemplo, <code>http_requests_total{method="POST", handler="/api/users"}</code>.</p>
+
+                <p><strong>Presentación de la Información en Grafana:</strong></p>
+                <p>Grafana presenta la información obtenida de Prometheus de múltiples maneras dentro de los paneles de un dashboard:</p>
+                <ul>
+                    <li><strong>Gráficos de Líneas (Time series):</strong> Ideal para mostrar cómo las métricas cambian con el tiempo (ej. uso de CPU, memoria, número de peticiones por segundo).</li>
+                    <li><strong>Gauges (Medidores):</strong> Para mostrar el valor actual de una métrica en relación con umbrales (ej. porcentaje de uso de disco).</li>
+                    <li><strong>Tablas:</strong> Para mostrar datos tabulares, como una lista de los procesos que más CPU consumen.</li>
+                    <li><strong>Stat Panels:</strong> Para mostrar un valor único grande, a menudo con un umbral de color.</li>
+                    <li><strong>Heatmaps (Mapas de Calor):</strong> Para visualizar la distribución de valores a lo largo del tiempo.</li>
+                    <li><strong>Alertas:</strong> Grafana puede definir reglas de alerta sobre las consultas a Prometheus y notificar a través de varios canales (email, Slack, etc.) cuando se cumplen ciertas condiciones.</li>
+                </ul>
+
+                <p><strong>Ejemplo de Métrica del Node Exporter y Visualización:</strong></p>
+                <ul>
+                    <li>
+                        <strong>Métrica Recolectada por Node Exporter:</strong> <code>node_load1</code>
+                        <ul>
+                            <li><strong>Descripción:</strong> Esta métrica de tipo "gauge" expuesta por el Node Exporter representa el promedio de carga del sistema (load average) durante el último minuto. Indica cuántos procesos están en la cola de ejecución o esperando por E/S.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Visualización en un Panel de Grafana:</strong>
+                        <ul>
+                            <li>Se podría crear un panel de tipo "Time series" (Gráfico de Líneas).</li>
+                            <li>La consulta PromQL para este panel sería simplemente: <code>node_load1</code>. Si se tienen múltiples nodos exportando esta métrica, se podrían usar etiquetas para filtrar o agregar, por ejemplo: <code>node_load1{instance="servidor_vm_rocky:9100"}</code>.</li>
+                            <li>El panel mostraría una línea que fluctúa con el tiempo, representando la carga del sistema del servidor Rocky. Se podrían añadir umbrales visuales (por ejemplo, una línea horizontal que represente el número de CPUs) para interpretar fácilmente si la carga es alta.</li>
+                            <li>Alternativamente, se podría usar un panel de tipo "Gauge" para mostrar el valor actual de <code>node_load1</code> con colores que cambien según umbrales (verde para carga baja, amarillo para media, rojo para alta).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 5: Describe el proceso para realizar una prueba de carga con JMeter que involucre la lectura de datos de usuarios desde un archivo CSV y la extracción de un token JWT de una respuesta para usarlo en peticiones subsiguientes. ¿Qué elementos de JMeter son cruciales para estos dos pasos específicos (lectura de CSV y extracción/uso de JWT)?</h3>
+            <div class="answer">
+                <p>Realizar una prueba de carga con JMeter que lea datos de usuarios desde un CSV y maneje tokens JWT implica una secuencia lógica de configuración de elementos. Los pasos y elementos cruciales son:</p>
+
+                <p><strong>Paso 1: Configuración de la Lectura de Datos desde un Archivo CSV</strong></p>
+                <p>Este paso permite que cada usuario virtual (hilo) en JMeter utilice un conjunto único de datos (por ejemplo, credenciales de login) durante la prueba.</p>
+                <ul>
+                    <li>
+                        <strong>Elemento Crucial:</strong> <code>CSV Data Set Config</code> (Elemento de Configuración).
+                    </li>
+                    <li>
+                        <strong>Configuración:</strong>
+                        <ol>
+                            <li>Añadir un <code>CSV Data Set Config</code> al Thread Group (o al Test Plan si los datos son globales y compartidos de forma diferente).</li>
+                            <li><strong>Filename:</strong> Especificar la ruta al archivo CSV (ej. <code>usuarios.csv</code>). Es recomendable usar rutas relativas al archivo <code>.jmx</code> del plan de pruebas para portabilidad.</li>
+                            <li><strong>Variable Names (comma-delimited):</strong> Definir los nombres de las variables que JMeter usará para almacenar los valores de cada columna del CSV. Por ejemplo, si el CSV tiene columnas para usuario y contraseña, se podría poner: <code>LOGIN_USER,PASSWORD_USER</code>.</li>
+                            <li><strong>Delimiter:</strong> Especificar el delimitador usado en el archivo CSV (comúnmente una coma <code>,</code> o punto y coma <code>;</code>).</li>
+                            <li><strong>Recycle on EOF? (Reciclar al final del archivo):</strong> Decidir si JMeter debe volver al inicio del archivo CSV y reutilizar los datos una vez que todos los hilos han leído todas las líneas (<code>True</code>), o si debe detener el hilo cuando se acaben los datos (<code>False</code>).</li>
+                            <li><strong>Stop thread on EOF? (Detener hilo al final del archivo):</strong> Si se establece a <code>True</code> y "Recycle on EOF?" es <code>False</code>, el hilo se detendrá cuando no haya más datos en el CSV.</li>
+                            <li><strong>Sharing mode (Modo de compartición):</strong> Define cómo los hilos acceden a los datos del CSV (ej. "All threads" - todos los hilos comparten el mismo archivo secuencialmente, "Current thread group" - cada hilo del grupo obtiene datos secuencialmente del archivo, "Current thread" - cada hilo obtiene una línea única si es posible o se repite menos).</li>
+                        </ol>
+                    </li>
+                    <li><strong>Uso:</strong> Las variables definidas (ej. <code>${LOGIN_USER}</code>, <code>${PASSWORD_USER}</code>) pueden ser usadas en los Samplers (ej. en los parámetros de una petición HTTP POST de login).</li>
+                </ul>
+
+                <p><strong>Paso 2: Extracción de un Token JWT de una Respuesta y su Uso en Peticiones Subsiguientes</strong></p>
+                <p>Este paso es fundamental para interactuar con APIs que utilizan autenticación basada en tokens.</p>
+                <ul>
+                    <li>
+                        <strong>Elementos Cruciales:</strong>
+                        <ol>
+                            <li><code>HTTP Request Sampler</code> (para la petición de login que devuelve el JWT).</li>
+                            <li>Un <code>Post Processor</code> (como <code>JSON Extractor</code> o <code>Regular Expression Extractor</code>) para extraer el token.</li>
+                            <li><code>HTTP Header Manager</code> (Elemento de Configuración) para añadir el token a las cabeceras de peticiones subsiguientes.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>Configuración:</strong>
+                        <ol>
+                            <li><strong>Petición de Login (HTTP Request Sampler):</strong> Configurar la petición (ej. POST a <code>/auth/login</code>) que devuelve el token JWT en su respuesta (generalmente en el cuerpo JSON o a veces en una cabecera).</li>
+                            <li>
+                                <strong>Extracción del Token (JSON Extractor o Regular Expression Extractor):</strong>
+                                <ul>
+                                    <li>Añadir este Post Processor como hijo del Sampler de Login.</li>
+                                    <li><strong>JSON Extractor (si el token está en un cuerpo JSON):</strong>
+                                        <ul>
+                                            <li><strong>Names of created variables:</strong> Nombre de la variable donde se guardará el token (ej. <code>JWT_TOKEN</code>).</li>
+                                            <li><strong>JSONPath expressions:</strong> Expresión JSONPath para localizar el token en la respuesta (ej. <code>$.token</code> o <code>$.data.accessToken</code>).</li>
+                                            <li><strong>Match No. (0 for random):</strong> Generalmente <code>1</code> si solo hay un token.</li>
+                                            <li><strong>Default Values:</strong> Un valor por defecto si el token no se encuentra (ej. <code>TOKEN_NOT_FOUND</code>).</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Regular Expression Extractor (si el token está en un formato de texto más genérico o cabeceras):</strong>
+                                        <ul>
+                                            <li><strong>Names of created variables:</strong> Nombre de la variable (ej. <code>JWT_TOKEN</code>).</li>
+                                            <li><strong>Regular Expression:</strong> La expresión regular para capturar el token (ej. <code>"token":"(.*?)"</code>).</li>
+                                            <li><strong>Template:</strong> Generalmente <code>$1$</code> para capturar el primer grupo.</li>
+                                            <li><strong>Match No.:</strong> Generalmente <code>1</code>.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Uso del Token en Peticiones Subsiguientes (HTTP Header Manager):</strong>
+                                <ul>
+                                    <li>Añadir un <code>HTTP Header Manager</code> al mismo nivel o como hijo del Thread Group (para que aplique a todas las peticiones dentro de él que lo necesiten) o específico para los Samplers que requieran el token.</li>
+                                    <li>Dentro del Header Manager, añadir una nueva cabecera:
+                                        <ul>
+                                            <li><strong>Name:</strong> <code>Authorization</code></li>
+                                            <li><strong>Value:</strong> <code>Bearer ${JWT_TOKEN}</code> (utilizando la variable donde se guardó el token extraído).</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><strong>Peticiones Protegidas (HTTP Request Samplers):</strong> Cualquier Sampler subsiguiente que necesite el token JWT para autenticación ahora incluirá automáticamente la cabecera `Authorization` configurada por el `HTTP Header Manager`.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p>Combinando estos elementos, JMeter puede simular flujos de usuario complejos que involucran la obtención y el uso de tokens de autenticación, leyendo datos dinámicos de fuentes externas para una prueba de carga más realista y completa.</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 6: Al configurar un "job" en `prometheus.yml` para monitorizar un nuevo servicio que expone métricas en el path `/mis_metricas` en el puerto 8080, ¿qué parámetros clave necesitarías definir dentro de `scrape_configs` para ese job? Describe brevemente cada uno.</h3>
+            <div class="answer">
+                <p>Para configurar un nuevo "job" en <code>prometheus.yml</code> para monitorizar un servicio que expone métricas en un path y puerto específicos, necesitarías definir los siguientes parámetros clave dentro de una nueva entrada en la sección <code>scrape_configs</code>:</p>
+                <ul>
+                    <li>
+                        <strong><code>job_name</code>:</strong>
+                        <ul>
+                            <li><strong>Descripción:</strong> Es una etiqueta obligatoria que identifica el job. Este nombre se añadirá como una etiqueta (<code>job="&lt;job_name&gt;"</code>) a todas las series temporales recolectadas por este job, permitiendo filtrar y agregar métricas por job.</li>
+                            <li><strong>Ejemplo:</strong> <code>job_name: 'mi_nuevo_servicio'</code></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong><code>metrics_path</code> (Opcional si no es el default <code>/metrics</code>):</strong>
+                        <ul>
+                            <li><strong>Descripción:</strong> Especifica el path HTTP en el target donde Prometheus espera encontrar las métricas expuestas. El valor por defecto es <code>/metrics</code>.</li>
+                            <li><strong>Ejemplo:</strong> Si el servicio expone métricas en <code>/mis_metricas</code>, se añadiría: <code>metrics_path: /mis_metricas</code></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong><code>static_configs</code> (u otro mecanismo de descubrimiento de servicios):</strong>
+                        <ul>
+                            <li><strong>Descripción:</strong> Define la lista de targets de los cuales se recolectarán las métricas para este job. <code>static_configs</code> se usa para listar targets manualmente.</li>
+                            <li><strong>Dentro de <code>static_configs</code>, el parámetro clave es <code>targets</code>:</strong>
+                                <ul>
+                                    <li><strong><code>targets</code>:</strong> Es una lista de strings, donde cada string es la dirección <code>&lt;host&gt;:&lt;port&gt;</code> del endpoint del exporter del servicio.</li>
+                                    <li><strong>Ejemplo:</strong> Si el servicio corre en <code>servidor_app.example.com</code> en el puerto <code>8080</code>, se definiría:
+                                        <pre><code>static_configs:
+  - targets: ['servidor_app.example.com:8080']</code></pre>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong><code>scrape_interval</code> (Opcional, si se quiere sobrescribir el global):</strong>
+                        <ul>
+                            <li><strong>Descripción:</strong> Define con qué frecuencia Prometheus recolectará las métricas de los targets de este job específico. Si no se define a nivel de job, hereda el valor global.</li>
+                            <li><strong>Ejemplo:</strong> <code>scrape_interval: 15s</code></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong><code>scrape_timeout</code> (Opcional, si se quiere sobrescribir el global):</strong>
+                        <ul>
+                            <li><strong>Descripción:</strong> Define cuánto tiempo tiene Prometheus para completar una recolección antes de considerarla fallida.</li>
+                            <li><strong>Ejemplo:</strong> <code>scrape_timeout: 10s</code></li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Un ejemplo completo para el job podría ser:</p>
+                <pre><code>scrape_configs:
+  - job_name: 'mi_nuevo_servicio'
+    metrics_path: /mis_metricas
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['servidor_app.example.com:8080', 'otro_servidor_app:8080']</code></pre>
+                <p>Tras añadir esta configuración y recargar Prometheus, este comenzará a intentar recolectar métricas del path <code>/mis_metricas</code> en los targets especificados cada 10 segundos.</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 7: ¿Cómo se pueden usar las "User Defined Variables" y los "HTTP Request Defaults" en JMeter para mejorar la mantenibilidad y flexibilidad de un Test Plan? Proporciona un ejemplo de cada uno.</h3>
+            <div class="answer">
+                <p>Las "User Defined Variables" y los "HTTP Request Defaults" son elementos de configuración en JMeter que mejoran significativamente la mantenibilidad y flexibilidad de los planes de prueba.</p>
+
+                <p><strong>1. User Defined Variables (Variables Definidas por el Usuario):</strong></p>
+                <ul>
+                    <li><strong>Propósito:</strong> Permiten definir pares de nombre-valor que pueden ser referenciados en cualquier parte del Test Plan (o bajo su alcance si se definen en un nivel inferior). Son útiles para parametrizar valores que pueden cambiar entre entornos (desarrollo, pruebas, producción) o que se usan repetidamente.</li>
+                    <li><strong>Mejora de Mantenibilidad:</strong> Si un valor cambia (ej. el hostname del servidor), solo necesitas actualizarlo en un lugar (en la definición de la variable) en lugar de buscar y reemplazarlo en múltiples Samplers.</li>
+                    <li><strong>Mejora de Flexibilidad:</strong> Permiten ejecutar el mismo plan de pruebas contra diferentes entornos simplemente cambiando los valores de las variables (posiblemente pasándolos por línea de comandos al ejecutar JMeter en modo no-GUI).</li>
+                    <li><strong>Ejemplo:</strong>
+                        <ul>
+                            <li>Añadir un elemento "User Defined Variables" al Test Plan.</li>
+                            <li>Definir variables como:
+                                <ul>
+                                    <li><code>NAME: SERVER_HOSTNAME, VALUE: api.example.com</code></li>
+                                    <li><code>NAME: SERVER_PORT, VALUE: 8080</code></li>
+                                    <li><code>NAME: NUM_USERS, VALUE: 50</code></li>
+                                    <li><code>NAME: RAMP_UP_PERIOD, VALUE: 10</code></li>
+                                </ul>
+                            </li>
+                            <li><strong>Uso:</strong> En un HTTP Request Sampler, en el campo "Server Name or IP", se usaría <code>${SERVER_HOSTNAME}</code>. En el Thread Group, para "Number of Threads (users)", se usaría <code>${NUM_USERS}</code>.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p><strong>2. HTTP Request Defaults (Valores por Defecto para Petición HTTP):</strong></p>
+                <ul>
+                    <li><strong>Propósito:</strong> Permite establecer valores por defecto para los campos de los HTTP Request Samplers que estén bajo su alcance. Si un Sampler no tiene un valor específico para un campo, usará el valor definido en el HTTP Request Defaults.</li>
+                    <li><strong>Mejora de Mantenibilidad:</strong> Evita la repetición de información común en múltiples Samplers (ej. nombre del servidor, puerto, protocolo). Si el servidor cambia, solo se modifica en el HTTP Request Defaults.</li>
+                    <li><strong>Mejora de Flexibilidad:</strong> Facilita la creación de Samplers, ya que solo necesitas completar los campos que son diferentes del valor por defecto.</li>
+                    <li><strong>Ejemplo:</strong>
+                        <ul>
+                            <li>Añadir un elemento "HTTP Request Defaults" al Test Plan (o a un Thread Group específico).</li>
+                            <li>Configurar campos como:
+                                <ul>
+                                    <li><strong>Protocol [http]:</strong> <code>http</code> (o <code>https</code>)</li>
+                                    <li><strong>Server Name or IP:</strong> <code>${SERVER_HOSTNAME}</code> (usando la variable definida anteriormente)</li>
+                                    <li><strong>Port Number:</strong> <code>${SERVER_PORT}</code></li>
+                                    <li>También se pueden definir valores por defecto para "Path", "Method", "Content encoding", etc.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Uso:</strong> Cuando se añade un nuevo HTTP Request Sampler bajo el alcance de este elemento, si no se rellenan los campos "Server Name or IP" o "Port Number", JMeter usará automáticamente los valores de <code>${SERVER_HOSTNAME}</code> y <code>${SERVER_PORT}</code>. Solo se necesitaría especificar el "Path" y los parámetros específicos de esa petición.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Utilizar ambos elementos conjuntamente hace que los planes de prueba de JMeter sean mucho más organizados, fáciles de entender, modificar y adaptar a diferentes escenarios de prueba.</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 8: Describe el concepto de "alertas" en Grafana cuando se integra con Prometheus. ¿Cómo se define una regla de alerta y qué acciones se pueden tomar cuando una alerta se dispara (estado "FIRING")?</h3>
+            <div class="answer">
+                <p>Las alertas en Grafana, cuando se integra con Prometheus, permiten notificar a los administradores o equipos responsables cuando ciertas condiciones predefinidas sobre las métricas se cumplen, indicando posibles problemas o situaciones anómalas en los sistemas monitorizados.</p>
+
+                <p><strong>Concepto de Alertas en Grafana con Prometheus:</strong></p>
+                <p>Grafana no genera las alertas por sí mismo directamente desde cero, sino que aprovecha el sistema de evaluación de reglas de alerta de Prometheus o, más comúnmente con las versiones más recientes de Grafana, gestiona su propio sistema de alertas ("Grafana Alerting") que puede consultar cualquier fuente de datos, incluido Prometheus.</p>
+                <p>El flujo general es:</p>
+                <ol>
+                    <li>Prometheus recolecta métricas.</li>
+                    <li>Grafana (o Prometheus Alertmanager si se usa la vía tradicional) evalúa reglas de alerta definidas sobre estas métricas usando consultas PromQL.</li>
+                    <li>Si una condición de alerta se cumple durante un tiempo determinado, la alerta pasa a un estado "FIRING" (Disparada).</li>
+                    <li>Cuando una alerta está en estado "FIRING", se pueden tomar acciones, como enviar notificaciones.</li>
+                    <li>Si la condición deja de cumplirse, la alerta vuelve a un estado "NORMAL" (o "RESOLVED").</li>
+                </ol>
+
+                <p><strong>Definición de una Regla de Alerta en Grafana (usando Grafana Alerting):</strong></p>
+                <p>Las reglas de alerta en Grafana se definen típicamente asociadas a los paneles de un dashboard o de forma independiente en la sección de "Alerting". Los pasos y componentes clave son:</p>
+                <ol>
+                    <li>
+                        <strong>Consulta (Query):</strong> Se define una consulta (PromQL en el caso de Prometheus) que obtiene la métrica que se quiere evaluar. Por ejemplo, <code>avg_over_time(node_load1{instance="server1"}[5m])</code> para la carga promedio de un servidor en los últimos 5 minutos.
+                    </li>
+                    <li>
+                        <strong>Condición (Condition):</strong> Se especifica la condición que disparará la alerta. Esto implica:
+                        <ul>
+                            <li>Una función de reducción (ej. <code>LAST()</code>, <code>AVG()</code>, <code>MIN()</code>, <code>MAX()</code> sobre la serie temporal resultante de la consulta).</li>
+                            <li>Un operador de comparación (ej. <code>IS ABOVE</code>, <code>IS BELOW</code>, <code>IS OUTSIDE RANGE</code>).</li>
+                            <li>Un umbral (threshold) numérico.</li>
+                            <li>Ejemplo de condición: "Cuando el último valor (<code>LAST()</code>) de la consulta A (carga promedio) <code>IS ABOVE</code> <code>4</code>".</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Evaluación de la Condición (`For` duration):</strong> Se especifica durante cuánto tiempo debe cumplirse continuamente la condición antes de que la alerta pase al estado "FIRING". Esto ayuda a evitar falsos positivos por picos momentáneos. Por ejemplo, "For 5 minutes".
+                    </li>
+                    <li>
+                        <strong>Detalles de la Alerta:</strong>
+                        <ul>
+                            <li><strong>Nombre de la Regla:</strong> Un nombre descriptivo para la alerta.</li>
+                            <li><strong>Mensaje y Resumen:</strong> Información que se incluirá en las notificaciones. Se pueden usar variables de las etiquetas de las métricas para personalizar el mensaje.</li>
+                            <li><strong>Etiquetas (Labels):</strong> Se pueden añadir etiquetas personalizadas a la alerta para agrupar o enrutar notificaciones.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Canales de Notificación (Notification Policies / Contact Points):</strong> Grafana permite definir "Contact Points" (puntos de contacto, como email, Slack, PagerDuty, etc.) y "Notification Policies" (políticas de notificación) para determinar cómo y a quién se envían las notificaciones cuando una alerta se dispara. Las políticas pueden basarse en las etiquetas de la alerta.
+                    </li>
+                </ol>
+
+                <p><strong>Acciones cuando una Alerta se Dispara (Estado "FIRING"):</strong></p>
+                <p>Cuando una regla de alerta cumple su condición durante el tiempo especificado y pasa al estado "FIRING", se pueden tomar las siguientes acciones (dependiendo de la configuración):</p>
+                <ol>
+                    <li>
+                        <strong>Envío de Notificaciones:</strong> A través de los "Contact Points" configurados (ej. email a un grupo de administradores, mensaje a un canal de Slack, llamada a través de PagerDuty).
+                    </li>
+                    <li>
+                        <strong>Visualización en Grafana:</strong>
+                        <ul>
+                            <li>El panel asociado a la alerta (si lo hay) cambiará de color o mostrará un indicador de alerta (ej. un corazón rojo).</li>
+                            <li>En la sección "Alerting" de Grafana, la regla aparecerá en estado "Firing" o "Alerting".</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Silenciamiento (Silencing):</strong> Se pueden crear "silencios" para suprimir temporalmente las notificaciones de alertas específicas, por ejemplo, durante un mantenimiento programado.
+                    </li>
+                    <li>
+                        <strong>Integración con otras herramientas:</strong> Las notificaciones pueden ser consumidas por sistemas de ticketing, automatización de respuestas a incidentes, etc.
+                    </li>
+                </ol>
+                <p>El objetivo final es informar proactivamente sobre problemas para que puedan ser investigados y resueltos antes de que afecten gravemente a los usuarios o al servicio.</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 9: ¿Qué es la persistencia de datos en el contexto de contenedores Docker y por qué es importante para servicios como Prometheus o Grafana? Describe brevemente cómo se logra la persistencia usando volúmenes en Docker Compose.</h3>
+            <div class="answer">
+                <p><strong>Persistencia de Datos en Contenedores Docker:</strong></p>
+                <p>Por defecto, el sistema de archivos de un contenedor Docker es efímero. Esto significa que cualquier dato que una aplicación escriba dentro del contenedor (en su sistema de archivos interno) se perderá cuando el contenedor se detenga y se elimine. Si el contenedor se reinicia, generalmente comienza con un sistema de archivos limpio basado en su imagen original.</p>
+                <p>La <strong>persistencia de datos</strong> se refiere a la capacidad de almacenar datos de forma que sobrevivan al ciclo de vida del contenedor. Es decir, si un contenedor se detiene, se elimina y se vuelve a crear, los datos persistentes seguirán estando disponibles para la nueva instancia del contenedor.</p>
+
+                <p><strong>Importancia para Servicios como Prometheus o Grafana:</strong></p>
+                <p>La persistencia de datos es crucial para servicios como Prometheus y Grafana por las siguientes razones:</p>
+                <ul>
+                    <li>
+                        <strong>Prometheus:</strong>
+                        <ul>
+                            <li><strong>Almacenamiento de Métricas:</strong> Prometheus recolecta y almacena métricas de series temporales. Si estos datos se guardaran solo dentro del sistema de archivos efímero del contenedor, se perderían todas las métricas históricas cada vez que el contenedor Prometheus se reiniciara o actualizara. Esto haría inútil la monitorización a largo plazo y el análisis de tendencias.</li>
+                            <li><strong>Configuración de Alertas:</strong> Aunque la configuración principal está en <code>prometheus.yml</code>, estados de alerta o configuraciones dinámicas podrían perderse.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Grafana:</strong>
+                        <ul>
+                            <li><strong>Dashboards y Configuraciones de Usuario:</strong> Grafana almacena la configuración de los dashboards creados por los usuarios, las fuentes de datos (Data Sources), usuarios, organizaciones y otras configuraciones. Si estos datos no fueran persistentes, se perdería todo el trabajo de configuración de visualizaciones y personalizaciones cada vez que el contenedor Grafana se reiniciara.</li>
+                            <li><strong>Configuración de Alertas:</strong> Las reglas de alerta definidas en Grafana también necesitan ser persistentes.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Sin persistencia, estos servicios perderían su estado y datos cruciales, lo que los haría ineficaces para sus propósitos principales de monitorización y visualización histórica.</p>
+
+                <p><strong>Logro de la Persistencia usando Volúmenes en Docker Compose:</strong></p>
+                <p>Docker ofrece varias formas de lograr la persistencia, siendo los <strong>volúmenes</strong> la forma preferida y más robusta. En Docker Compose, los volúmenes se definen en el archivo <code>docker-compose.yml</code> dentro de la sección <code>volumes</code> de cada servicio.</p>
+                <p>Hay dos tipos principales de montajes de volúmenes que se pueden usar:</p>
+                <ol>
+                    <li>
+                        <strong>Volúmenes Nombrados (Named Volumes):</strong>
+                        <ul>
+                            <li>Docker gestiona el almacenamiento en una parte del sistema de archivos del host (generalmente dentro del directorio de Docker, ej. <code>/var/lib/docker/volumes/</code>). Se les da un nombre.</li>
+                            <li><strong>Configuración en <code>docker-compose.yml</code>:</strong>
+                                <pre><code>version: "3.8"
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - prometheus_data:/prometheus # Mapea el volumen nombrado "prometheus_data" a /prometheus en el contenedor
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml # Bind mount para el archivo de configuración
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - grafana_data:/var/lib/grafana # Mapea el volumen nombrado "grafana_data" a /var/lib/grafana
+
+volumes: # Definición de los volúmenes nombrados
+  prometheus_data:
+  grafana_data:</code></pre>
+                            </li>
+                            <li>En este ejemplo, <code>prometheus_data</code> y <code>grafana_data</code> son volúmenes nombrados. Docker se encarga de su creación y gestión. Los datos escritos por Prometheus en <code>/prometheus</code> y por Grafana en <code>/var/lib/grafana</code> dentro de sus respectivos contenedores se almacenarán en estos volúmenes en el host.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Montajes de Enlace (Bind Mounts):</strong>
+                        <ul>
+                            <li>Se mapea un archivo o directorio específico del sistema de archivos del host a un archivo o directorio dentro del contenedor. El usuario tiene control total sobre la ubicación en el host.</li>
+                            <li><strong>Configuración en <code>docker-compose.yml</code> (ejemplo para el archivo de configuración de Prometheus):</strong>
+                                <pre><code>services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus_config_host:/etc/prometheus # Mapea el directorio local ./prometheus_config_host a /etc/prometheus
+      - ./prometheus_data_host:/prometheus # Mapea el directorio local ./prometheus_data_host a /prometheus</code></pre>
+                            </li>
+                            <li>En este caso, el contenido de <code>./prometheus_config_host</code> en el host estaría disponible en <code>/etc/prometheus</code> dentro del contenedor. Es útil para archivos de configuración, pero para datos de aplicaciones como bases de datos, los volúmenes nombrados suelen ser preferibles porque son gestionados por Docker y más portables entre diferentes entornos de host. En el ejemplo del temario, se usa un bind mount para <code>prometheus.yml</code> y un volumen nombrado (o un bind mount a un directorio local) para los datos.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>Al usar volúmenes, si los contenedores de Prometheus o Grafana se detienen y se eliminan, los volúmenes (<code>prometheus_data</code>, <code>grafana_data</code> o los directorios del host en caso de bind mounts) permanecen. Cuando los contenedores se inician de nuevo (incluso si son nuevas instancias de la misma imagen o una imagen actualizada), se pueden volver a montar los mismos volúmenes, y los servicios encontrarán sus datos y configuraciones anteriores intactos.</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 10: Compara brevemente las herramientas de pruebas de carga Apache Benchmark (ab) y Apache JMeter en términos de complejidad de escenarios, protocolos soportados y capacidad de generación de informes. ¿En qué situaciones preferirías usar una sobre la otra?</h3>
+            <div class="answer">
+                <p>Apache Benchmark (<code>ab</code>) y Apache JMeter son herramientas populares para pruebas de carga, pero difieren significativamente en sus capacidades y casos de uso ideales.</p>
+
+                <p><strong>1. Complejidad de Escenarios:</strong></p>
+                <ul>
+                    <li>
+                        <strong>Apache Benchmark (<code>ab</code>):</strong>
+                        <ul>
+                            <li>Está diseñado para pruebas simples y directas. Principalmente envía un gran número de peticiones a una única URL.</li>
+                            <li>No soporta fácilmente escenarios complejos que involucren múltiples pasos, lógica condicional, manejo de sesiones de usuario (más allá de cookies básicas si el servidor las envía), o la parametrización de datos por usuario.</li>
+                            <li>Es una herramienta de línea de comandos.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Apache JMeter:</strong>
+                        <ul>
+                            <li>Es altamente flexible y capaz de simular escenarios de usuario muy complejos.</li>
+                            <li>Permite crear planes de prueba con múltiples pasos, lógica condicional (If Controllers, Loop Controllers), extracción de datos de respuestas para usarlos en peticiones posteriores (Post-Processors), lectura de datos de archivos externos (CSV Data Set Config), manejo de cookies y cabeceras (HTTP Cookie Manager, HTTP Header Manager), y aserciones para validar respuestas.</li>
+                            <li>Ofrece una interfaz gráfica (GUI) para diseñar los planes de prueba, aunque se recomienda ejecutar las pruebas en modo no-GUI (línea de comandos) para un rendimiento óptimo.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p><strong>2. Protocolos Soportados:</strong></p>
+                <ul>
+                    <li>
+                        <strong>Apache Benchmark (<code>ab</code>):</strong>
+                        <ul>
+                            <li>Principalmente enfocado en el protocolo <strong>HTTP/HTTPS</strong>. Algunas versiones pueden tener limitaciones con HTTPS o requerir compilaciones especiales.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Apache JMeter:</strong>
+                        <ul>
+                            <li>Soporta una amplia gama de protocolos, incluyendo:
+                                <ul>
+                                    <li><strong>HTTP/HTTPS</strong> (para aplicaciones web, APIs REST/SOAP)</li>
+                                    <li>FTP</li>
+                                    <li>JDBC (para pruebas de bases de datos)</li>
+                                    <li>LDAP</li>
+                                    <li>JMS (Java Message Service)</li>
+                                    <li>SMTP, POP3, IMAP (para servicios de correo)</li>
+                                    <li>TCP</li>
+                                    <li>Y otros a través de plugins.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p><strong>3. Capacidad de Generación de Informes:</strong></p>
+                <ul>
+                    <li>
+                        <strong>Apache Benchmark (<code>ab</code>):</strong>
+                        <ul>
+                            <li>Proporciona una salida de texto simple en la consola al finalizar la prueba.</li>
+                            <li>Incluye métricas clave como peticiones por segundo, tiempo por petición, tasa de transferencia, y un resumen de los tiempos de conexión y procesamiento.</li>
+                            <li>Se puede redirigir la salida a un archivo o usar la opción <code>-g</code> para generar datos para gnuplot. Los informes son básicos y no muy visuales por defecto.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Apache JMeter:</strong>
+                        <ul>
+                            <li>Ofrece capacidades de generación de informes mucho más ricas y flexibles.</li>
+                            <li>A través de "Listeners", se pueden visualizar resultados en tiempo real (en la GUI, aunque no recomendado para pruebas de alta carga) y guardar los resultados en varios formatos (CSV, XML, JTL).</li>
+                            <li>Después de ejecutar una prueba en modo no-GUI, JMeter puede generar un <strong>dashboard de informe HTML</strong> detallado y visualmente atractivo. Este informe incluye gráficos de tiempo de respuesta a lo largo del tiempo, throughput, errores, percentiles, y muchas otras métricas útiles.</li>
+                            <li>Permite la integración con herramientas de visualización externas o la personalización de informes.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p><strong>¿En qué situaciones preferirías usar una sobre la otra?</strong></p>
+                <ul>
+                    <li>
+                        <strong>Preferiría usar Apache Benchmark (<code>ab</code>) para:</strong>
+                        <ul>
+                            <li>Pruebas rápidas y sencillas de rendimiento de un único endpoint HTTP/HTTPS.</li>
+                            <li>Obtener una idea general de cuántas peticiones por segundo puede manejar un servidor web bajo una carga específica.</li>
+                            <li>Cuando la complejidad del escenario es mínima y no se requiere una lógica de usuario avanzada.</li>
+                            <li>Entornos donde la instalación de Java (requerido por JMeter) no es deseable o posible para una prueba rápida.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Preferiría usar Apache JMeter para:</strong>
+                        <ul>
+                            <li>Pruebas de carga y rendimiento de aplicaciones web completas con flujos de usuario complejos (login, navegación por múltiples páginas, envío de formularios, etc.).</li>
+                            <li>Pruebas de APIs que requieren manejo de autenticación (tokens, cookies), extracción de datos y lógica condicional.</li>
+                            <li>Pruebas de servicios que utilizan protocolos distintos a HTTP/HTTPS (ej. bases de datos, servicios de mensajería).</li>
+                            <li>Cuando se necesita simular el comportamiento de un gran número de usuarios con datos variados (usando CSV Data Set Config).</li>
+                            <li>Cuando se requieren informes detallados y visuales para el análisis de los resultados.</li>
+                            <li>Para pruebas de estrés, pruebas de resistencia (soak testing) y pruebas de picos (spike testing) más controladas.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>En resumen, <code>ab</code> es bueno para "disparar y olvidar" a una URL, mientras que JMeter es una herramienta mucho más completa y versátil para pruebas de rendimiento exhaustivas y escenarios realistas.</p>
+            </div>
+        </div>
+
+
+        </div>
+</body>
+</html>

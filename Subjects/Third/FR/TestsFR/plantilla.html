@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Prácticas de Fundamentos de Redes</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .question {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .question.correct {
+            border-color: #4CAF50;
+            background-color: #d4edda;
+        }
+        .question.incorrect {
+            border-color: #f44336;
+            background-color: #f8d7da;
+        }
+        .explanation {
+            background: #e7f3fe;
+            border: 1px solid #b2d4fe;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .author {
+            margin-top: 20px;
+            font-style: italic;
+            text-align: center;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Test de Prácticas de Fundamentos de Redes</h1>
+
+<form id="quizForm">
+    <!-- Aquí puedes agregar las preguntas y respuestas -->
+    <!-- Pregunta 1 -->
+    <div class="question" id="q1">
+        <p><strong>1. ¿Cuál es el propósito de un cortafuegos en una red?</strong></p>
+        <input type="radio" name="q1" value="a"> a. Proteger contra ataques físicos. <br>
+        <input type="radio" name="q1" value="b"> b. Filtrar y controlar el tráfico de red. <br>
+        <input type="radio" name="q1" value="c"> c. Aumentar la velocidad de la red. <br>
+        <input type="radio" name="q1" value="d"> d. Monitorear el uso de la electricidad. <br>
+    </div>
+
+    <!-- Añadir las preguntas adicionales de la misma manera -->
+
+    <input type="button" value="Enviar" onclick="checkAnswers()">
+</form>
+
+<div class="author">
+    <p>Autor: Ismael Sallami Moreno</p>
+</div>
+
+<div id="results" style="margin-top: 20px;"></div>
+
+<script>
+    function checkAnswers() {
+        let score = 0;
+        const totalQuestions = 15;
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
+
+        // Respuestas correctas
+        const answers = {
+            q1: { answer: 'b', explanation: 'Filtrar y controlar el tráfico de red es la función principal de un cortafuegos.' },
+            q2: { answer: 'b', explanation: 'RIP es un protocolo de enrutamiento que permite la administración dinámica de rutas.' },
+            q3: { answer: 'b', explanation: '192.168.X.Y es una dirección IP comúnmente utilizada para routers en redes privadas.' },
+            q4: { answer: 'c', explanation: 'La cadena INPUT se aplica a los paquetes que tienen como destino alguna IP del router.' },
+            q5: { answer: 'b', explanation: 'El comando route add default gw <IP> se utiliza para añadir una ruta por defecto.' },
+            q6: { answer: 'b', explanation: 'OSPF es un protocolo de encaminamiento dinámico utilizado en redes.' },
+            q7: { answer: 'c', explanation: 'Un cortafuegos de aplicación opera a nivel de aplicación y examina el contenido de los paquetes.' },
+            q8: { answer: 'a', explanation: 'El comando ifconfig se utiliza para ver las interfaces de red en sistemas Unix y Linux.' },
+            q9: { answer: 'd', explanation: 'El comando traceroute se utiliza para registrar la ruta que sigue un paquete ICMP.' },
+            q10: { answer: 'a', explanation: 'El comando route del <IP> se utiliza para eliminar una ruta específica.' },
+            q11: { answer: 'd', explanation: 'Winbox, WebFig y CLI son herramientas que se pueden utilizar para gestionar los cortafuegos en MikroTik.' },
+            q12: { answer: 'd', explanation: 'SSH, Telnet y Winbox son métodos para acceder a MikroTik a través de diferentes protocolos.' },
+            q13: { answer: 'c', explanation: 'Añadir reglas de tipo drop puede hacer que el router se vuelva inaccesible si no se gestionan adecuadamente.' },
+            q14: { answer: 'b', explanation: 'Un cortafuegos de filtrado de paquetes controla el tráfico basado en la dirección IP y el puerto.' },
+            q15: { answer: 'd', explanation: 'Winbox, CLI y WebFig son herramientas utilizadas para ver la tabla de enrutamiento en MikroTik.' }
+        };
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            const question = document.querySelector(`input[name="q${i}"]:checked`);
+            if (question) {
+                if (question.value === answers[`q${i}`].answer) {
+                    score++;
+                    document.getElementById(`q${i}`).classList.add('correct');
+                } else {
+                    document.getElementById(`q${i}`).classList.add('incorrect');
+                    // Mostrar la respuesta correcta y su justificación
+                    const correctAnswer = answers[`q${i}`].answer;
+                    const explanation = answers[`q${i}`].explanation;
+                    const explanationDiv = document.createElement("div");
+                    explanationDiv.className = "explanation";
+                    explanationDiv.innerHTML = `<strong>Respuesta correcta:</strong> ${correctAnswer}<br><strong>Justificación:</strong> ${explanation}`;
+                    document.getElementById(`q${i}`).appendChild(explanationDiv);
+                }
+            }
+        }
+
+        // Cálculo de la nota sobre 10
+        const grade = (score / totalQuestions) * 10;
+        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
+        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
+    }
+</script>
+
+</body>
+</html>

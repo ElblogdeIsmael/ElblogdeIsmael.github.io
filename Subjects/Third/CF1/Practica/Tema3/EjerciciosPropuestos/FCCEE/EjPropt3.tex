@@ -1,0 +1,308 @@
+% chktex-file 44
+\documentclass[a4paper,12pt]{article}
+
+% Paquetes básicos
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{lipsum}
+\usepackage{geometry}
+\usepackage{eurosym}
+\geometry{top=3cm, bottom=3cm, left=2.5cm, right=2.5cm}
+
+% Paquetes para diseño
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+% Paquetes para el entorno lstlisting
+\usepackage{listings}
+\usepackage{inconsolata}
+
+%encabezado y pie de página nivel profesional
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\rightmark}
+\fancyfoot[L]{\textbf{Ismael Sallami Moreno - GIIADE}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{\textbf{(UGR)} \today}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{15pt}
+\setlength{\headsep}{10pt}
+\setlength{\footskip}{20pt}
+\usepackage{truncate}
+\fancyhead[L]{\truncate{0.5\headwidth}{\leftmark}}
+\fancyhead[R]{\truncate{0.5\headwidth}{\rightmark}}
+\usepackage{mathpazo}
+\usepackage{tcolorbox}
+
+
+%comandos
+\newcommand{\fec}{31/12/}
+\newcommand{\AIM}{681 Amortización del inmovilizado material }
+\newcommand{\AAMAQ}{2813 Amortización acumulada de maquinaria }
+\newcommand{\valorrecuperable}{Valor recuperable = max\{valor neto realizable, valor en uso\} =}
+\newcommand{\PDI}{691 Pérdidas por deterioro de inmovilizado material}
+\newcommand{\DVM}{2913 Deterioro del valor de la maquinaria }
+\newcommand{\RDIM}{791 Reversión deterioro inmovilizado material}
+\newcommand{\VC}{Valor contable = }
+\newcommand{\PPIM}{671 Pérdidas procedentes del inmovilizado material}
+\newcommand{\bancos}{572 Bancos cuenta corriente}
+\newcommand{\cuotaamort}{Cuota de amortización = }
+\newcommand{\enajenacion}{543 Créditos a corto plazo por enajenación del inmovilizado}
+\newcommand{\benefIM}{771 Beneficios procedentes del inmovilizado material}
+\usepackage{amsmath}
+\newcommand{\myequation}[2]{\ensuremath{\frac{#1}{#2}}}
+\newcommand{\flechita}{$\rightarrow$}
+\newcommand{\deterioropatente}{2903 Deterioro de valor de la propiedad industrial}
+\newcommand{\perdidasdelintangible}{690 Pérdidas por inmovilizado intangible}
+\newcommand{\amortAcumPatente}{2803 Amortización acumulada de la propiedad industrial}
+\newcommand{\trabajosrealizadosII}{730 Trabajos realizados para el inmovilizado intangible}
+\newcommand{\cursiva}[1]{\textit{#1}}
+\newcommand{\negrita}[1]{\textbf{#1}}
+%comandos extra
+\newcommand{\cuenta}[1]{
+    \ifnum#1=2800 2800. Amortización acumulada de investigación\fi
+    \ifnum#1=2801 2801. Amortización acumulada de desarrollo\fi
+    \ifnum#1=2802 2802. Amortización acumulada de concesiones administrativas\fi
+    \ifnum#1=2803 2803. Amortización acumulada de propiedad industrial\fi
+    \ifnum#1=2804 2804. Amortización acumulada de fondo de comercio\fi
+    \ifnum#1=2805 2805. Amortización acumulada de derechos de traspaso\fi
+    \ifnum#1=2806 2806. Amortización acumulada de aplicaciones informáticas\fi
+    \ifnum#1=2811 2811. Amortización acumulada de construcciones\fi
+    \ifnum#1=2812 2812. Amortización acumulada de instalaciones técnicas\fi
+    \ifnum#1=2813 2813. Amortización acumulada de maquinaria\fi
+    \ifnum#1=2814 2814. Amortización acumulada de utillaje\fi
+    \ifnum#1=2815 2815. Amortización acumulada de otras instalaciones\fi
+    \ifnum#1=2816 2816. Amortización acumulada de mobiliario\fi
+    \ifnum#1=2817 2817. Amortización acumulada de equipos para procesos de información\fi
+    \ifnum#1=2818 2818. Amortización acumulada de elementos de transporte\fi
+    \ifnum#1=2819 2819. Amortización acumulada de otro inmovilizado material\fi
+    \ifnum#1=282 282. Amortización acumulada de las inversiones inmobiliarias\fi
+    \ifnum#1=280 280. Amortización acumulada del inmovilizado intagible\fi
+    \ifnum#1=281 281. Amortización acumulada del inmovilizado material\fi
+    \ifnum#1=600 600. Compra de Mercaderías\fi
+    \ifnum#1=700 700. Venta de Mercaderías\fi
+    \ifnum#1=472 472. Hacienda Pública, IVA soportado\fi
+    \ifnum#1=477 477. Hacienda Pública, IVA repercutido\fi
+    \ifnum#1=608 608. Devolución de Compras de Mercaderías\fi
+    \ifnum#1=708 708. Devolución de Ventas de Mercaderías\fi
+    \ifnum#1=610 610. Variación de Existencias\fi
+    \ifnum#1=300 300. Mercaderías\fi
+    \ifnum#1=390 390. Deterioro del valor de las mercaderías\fi
+    \ifnum#1=793 793. Reversión del deterioro de las mercaderías\fi
+}
+
+\newcommand{\ecuacion}[1]{$#1$}
+
+\newcommand{\compraMercaderias}{(600) Compra de Mercaderías}
+\newcommand{\ventaMercaderias}{(700) Venta de Mercaderías}
+\newcommand{\IVAs}{(472) Hacienda Pública, IVA soportado}
+\newcommand{\IVAr}{(477) Hacienda Pública, IVA repercutido}
+\newcommand{\devCompr}{(608) Devolución de Compras de Mercaderías}
+\newcommand{\devVent}{(708) Devolución de Ventas de Mercaderías}
+\newcommand{\varExist}{(610) Variación de Existencias}
+\newcommand{\mercaderias}{(300) Mercaderías}
+\newcommand{\deterioroMercaderias}{(390) Deterioro del valor de las mercaderías}
+\newcommand{\reversionDeterioroMercaderias}{(793) Reversión del deterioro de las mercaderías}
+
+
+
+
+% Paquete para fondo
+\usepackage{background}
+\usepackage{float}
+\usepackage{multirow}
+
+% Configuración de lstlisting
+\lstset{
+    inputencoding=utf8,          % Permite UTF-8
+    extendedchars=true,          % Reconoce caracteres extendidos
+    literate=                    % Configuración manual para tildes y símbolos
+        {á}{{\'a}}1
+        {é}{{\'e}}1
+        {í}{{\'i}}1
+        {ó}{{\'o}}1
+        {ú}{{\'u}}1
+        {ñ}{{\~n}}1
+        {Á}{{\'A}}1
+        {É}{{\'E}}1
+        {Í}{{\'I}}1
+        {Ó}{{\'O}}1
+        {Ú}{{\'U}}1
+        {Ñ}{{\~N}}1
+        {¿}{{\textquestiondown}}1
+        {¡}{{\textexclamdown}}1,
+    basicstyle=\ttfamily,        % Fuente monoespaciada
+    breaklines=true,             % Habilita salto de línea automático
+    frame=single,                % Marco alrededor del código
+    backgroundcolor=\color{gray!10}, % Fondo gris claro
+    keywordstyle=\color{blue},   % Color para palabras clave
+    commentstyle=\color{green},  % Color para comentarios
+    stringstyle=\color{red}      % Color para strings
+}
+\lstdefinestyle{customcpp}{
+    language=C++,                % Lenguaje de programación
+    showspaces=false,            % No mostrar espacios
+    showtabs=false,              % No mostrar tabulaciones
+    tabsize=4,                   % Tamaño de tabulación
+    showstringspaces=false,      % No mostrar espacios en strings
+    numbers=left,                % Números de línea a la izquierda
+    numberstyle=\tiny\color{gray}, % Estilo de los números de línea
+    numbersep=5pt,               % Separación de los números de línea
+    stepnumber=1,                % Mostrar número en cada línea
+    basicstyle=\ttfamily\footnotesize, % Estilo básico del código
+    keywordstyle=\bfseries\color{blue}, % Estilo de las palabras clave
+    commentstyle=\itshape\color{green!50!black}, % Estilo de los comentarios
+    stringstyle=\color{red},     % Estilo de los strings
+    identifierstyle=\color{black}, % Estilo de los identificadores
+    % procnamekeys={def,class},    % Palabras clave para nombres de funciones
+    morekeywords={constexpr,nullptr,size_t}, % Más palabras clave
+    emph={int,char,double,float,unsigned}, % Palabras a enfatizar
+    emphstyle=\color{magenta},   % Estilo de las palabras enfatizadas
+    backgroundcolor=\color{gray!10}, % Color de fondo
+    frame=shadowbox,             % Marco con sombra
+    rulesepcolor=\color{gray},   % Color de la línea de separación
+    breakatwhitespace=false,     % No cortar en espacios en blanco
+    breaklines=true,             % Cortar líneas largas
+    captionpos=b,                % Posición del título (abajo)
+    escapeinside={(*@}{@*)},     % Delimitadores para escapar a LaTeX
+    morecomment=[l][\color{magenta}]{\#}, % Comentarios de una línea
+    morecomment=[s][\color{orange}]{/*}{*/}, % Comentarios multilínea
+    morestring=[b]",             % Strings entre comillas dobles
+    morestring=[b]'              % Strings entre comillas simples
+}
+
+% Configuración de título
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+% Información del documento
+\title{
+    \vspace{-2cm}
+    \includegraphics[width=0.3\textwidth]{images/fccee.jpg} \\ % Cambia el logo si es necesario
+    \LARGE Ingeniería Informática + ADE\\
+    \large Universidad de Granada (UGR)\\[1cm]
+}
+\author{\textbf{Autor:} Ismael Sallami Moreno}
+\date{\textbf{Asignatura:} Relación de Ejercicios Propuestos T3: \textit{Deudores y Acreedores} (CF1)\\[1cm]}
+
+% Configuración del fondo
+\backgroundsetup{
+    scale=1,
+    color=black,
+    opacity=0.2,
+    angle=0,
+    position=current page.south,
+    vshift=0pt,
+    hshift=0pt,
+    contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{images/granada.jpg}}
+}
+
+% Inicio del documento
+\begin{document}
+
+% Portada
+\maketitle
+\thispagestyle{empty}
+
+\begin{center}
+    \includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{images/granada.jpg} \\ % Añade tu imagen de fondo
+    \vfill
+\end{center}
+
+\newpage
+
+% Índice
+\tableofcontents
+\thispagestyle{fancy}
+\newpage
+
+\textit{Nota: Los enunciados se encuentran en el libro.}
+
+\section{Ejercicio 4}
+
+\begin{itemize}
+    \item Podemos valorar la venta a valor nominal, debido a que se cumplen todos los requisitos para ello.
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Venta} & \textbf{HABER} \\
+    \hline
+    & 700 & 6180\\
+    \hline
+    & 472 & \ecuacion{6000 \times 0,21 = 1260}\\
+    \hline
+    7440 & 430 & \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Valoración posterior a \fec2021} & \textbf{HABER} \\
+    \hline
+    & NPAC, debido a que no hay intereses al evaluarse la venta a valor nominal, si optamos por la opción de valor neto realizable si tenemos que contabilizar los intereses& \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection*{Considerando que el interés efectivo trimestral es contractual}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Venta} & \textbf{HABER} \\
+    \hline
+    & 700 & 6000\\
+    \hline
+    & 472 & 1260\\
+    \hline
+    7260 & 430 & \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+    \hline
+    \textbf{DEBE} & \textbf{Valoración posterior a \fec2021} & \textbf{HABER} \\
+    \hline
+    \ecuacion{6000 \times 1,0099^2 - 6000 = 119,39}& 430 & \\
+    \hline
+    & 762 & 119,39\\
+    \hline  
+    \end{tabular}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Resto de ejercicios}
+
+Enlace a los ejericios hechos en otro formato: Pincha \href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Asignaturas/Tercer%20A%C3%B1o/CF1/Practica/Tema3/T3.pdf}
+{aquí}\footnote{Los que no están hechos de este documento o están en latex o no se han realizado por cuestiones de similitud a los realizados anteriormente}.
+
+
+\end{document}

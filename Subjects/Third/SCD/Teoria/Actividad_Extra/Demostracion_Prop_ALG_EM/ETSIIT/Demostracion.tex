@@ -1,0 +1,494 @@
+\documentclass[a4paper,12pt]{article}
+
+% Paquetes básicos
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{lipsum}
+\usepackage{geometry}
+\geometry{top=3cm, bottom=3cm, left=2.5cm, right=2.5cm}
+
+% Paquetes para diseño
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+% Paquetes para el entorno lstlisting
+\usepackage{listings}
+\usepackage{inconsolata}
+
+% Paquete para fondo
+\usepackage{background}
+
+% Configuración de lstlisting
+\lstset{
+    inputencoding=utf8,          % Permite UTF-8
+    extendedchars=true,          % Reconoce caracteres extendidos
+    literate=                    % Configuración manual para tildes y símbolos
+        {á}{{\'a}}1
+        {é}{{\'e}}1
+        {í}{{\'i}}1
+        {ó}{{\'o}}1
+        {ú}{{\'u}}1
+        {ñ}{{\~n}}1
+        {Á}{{\'A}}1
+        {É}{{\'E}}1
+        {Í}{{\'I}}1
+        {Ó}{{\'O}}1
+        {Ú}{{\'U}}1
+        {Ñ}{{\~N}}1
+        {¿}{{\textquestiondown}}1
+        {¡}{{\textexclamdown}}1,
+    basicstyle=\ttfamily,        % Fuente monoespaciada
+    breaklines=true,             % Habilita salto de línea automático
+    frame=single,                % Marco alrededor del código
+    backgroundcolor=\color{gray!10}, % Fondo gris claro
+    keywordstyle=\color{blue},   % Color para palabras clave
+    commentstyle=\color{green},  % Color para comentarios
+    stringstyle=\color{red}      % Color para strings
+}
+\lstdefinestyle{customcpp}{
+    language=C++,                % Lenguaje de programación
+    showspaces=false,            % No mostrar espacios
+    showtabs=false,              % No mostrar tabulaciones
+    tabsize=4,                   % Tamaño de tabulación
+    showstringspaces=false,      % No mostrar espacios en strings
+    numbers=left,                % Números de línea a la izquierda
+    numberstyle=\tiny\color{gray}, % Estilo de los números de línea
+    numbersep=5pt,               % Separación de los números de línea
+    stepnumber=1,                % Mostrar número en cada línea
+    basicstyle=\ttfamily\footnotesize, % Estilo básico del código
+    keywordstyle=\bfseries\color{blue}, % Estilo de las palabras clave
+    commentstyle=\itshape\color{green!50!black}, % Estilo de los comentarios
+    stringstyle=\color{red},     % Estilo de los strings
+    identifierstyle=\color{black}, % Estilo de los identificadores
+    % procnamekeys={def,class},    % Palabras clave para nombres de funciones
+    morekeywords={constexpr,nullptr,size_t}, % Más palabras clave
+    emph={int,char,double,float,unsigned}, % Palabras a enfatizar
+    emphstyle=\color{magenta},   % Estilo de las palabras enfatizadas
+    backgroundcolor=\color{gray!10}, % Color de fondo
+    frame=shadowbox,             % Marco con sombra
+    rulesepcolor=\color{gray},   % Color de la línea de separación
+    breakatwhitespace=false,     % No cortar en espacios en blanco
+    breaklines=true,             % Cortar líneas largas
+    captionpos=b,                % Posición del título (abajo)
+    escapeinside={(*@}{@*)},     % Delimitadores para escapar a LaTeX
+    morecomment=[l][\color{magenta}]{\#}, % Comentarios de una línea
+    morecomment=[s][\color{orange}]{/*}{*/}, % Comentarios multilínea
+    morestring=[b]",             % Strings entre comillas dobles
+    morestring=[b]'              % Strings entre comillas simples
+}
+
+% Configuración de título
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+% Información del documento
+\title{
+    \vspace{-2cm}
+    \includegraphics[width=0.2\textwidth]{images/etsiit.png} \\ % Cambia el logo si es necesario
+    \LARGE \textbf{Demostración de Propiedades de Algoritmo de Exclusión Mutua} \\[0.5cm]
+    \large \textbf{Sistemas Concurrentes y Distribuidos} \\[0.5cm]}
+\author{
+    \textbf{Ismael Sallami Moreno} \\
+    \textit{Ingenería Informática + ADE} \\
+    \textit{Universidad de Granada (UGR)} \\
+}
+\date{\today}
+
+% Configuración del fondo
+\backgroundsetup{
+    scale=1,
+    color=black,
+    opacity=0.2,
+    angle=0,
+    position=current page.south,
+    vshift=0pt,
+    hshift=0pt,
+    %contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{images/granada.jpg}}
+}
+
+% Inicio del documento
+\begin{document}
+
+% Portada
+\maketitle
+\thispagestyle{empty}
+
+% \begin{center}
+%     \includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{images/algEM.jpg} \\ % Añade tu imagen de fondo
+%     \vfill
+% \end{center}
+
+\newpage
+
+% Índice (opcional)
+\tableofcontents
+\newpage
+
+\section{Enunciado}
+
+Supongamos un conjunto de $n$ procesos distribuidos y conectados en anillo. El algoritmo de exclusión mutua se basa en las siguientes reglas:
+
+\begin{itemize}
+    \item Tenemos los procesos $0, \ldots, n-1$. Cada proceso $i$ tiene una variable $s[i]$, inicializada a 0, que puede tomar los valores $0$ o $1$.
+    \item Para que un proceso $i$ pueda entrar en la sección crítica (SC), deben cumplirse las siguientes condiciones:
+    \begin{enumerate}
+        \item Si $i > 0$: $s[i] \neq s[i-1]$.
+        \item Si $i = 0$: $s[0] = s[n-1]$.
+    \end{enumerate}
+    \item Al salir de la sección crítica, el proceso $i$ ejecuta:
+    \begin{enumerate}
+        \item Si $i > 0$: $s[i] := s[i-1]$, siempre que antes de la asignación $s[i] \neq s[i-1]$.
+        \item Si $i = 0$: $s[0] := (s[0] + 1) \mod 2$.
+    \end{enumerate}
+\end{itemize}
+
+Se pide:
+
+\begin{enumerate}
+    \item Demostrar que el algoritmo permite únicamente a un proceso acceder a la sección crítica en cualquier configuración.
+    \item Demostrar que cada proceso $p[i]$ conseguirá entrar en la sección crítica infinitamente a menudo.
+\end{enumerate}
+
+\section{Demostración}
+
+% \subsection{Parte I: Exclusión mutua}
+
+% \textbf{Condiciones de entrada a la SC:}
+% \begin{itemize}
+%     \item Para $i > 0$: $s[i] \neq s[i-1]$.
+%     \item Para $i = 0$: $s[0] = s[n-1]$.
+% \end{itemize}
+
+% \textbf{Condiciones al salir de la SC:}
+% \begin{itemize}
+%     \item Para $i > 0$: $s[i] := s[i-1]$, si $s[i] \neq s[i-1]$.
+%     \item Para $i = 0$: $s[0] := (s[0] + 1) \mod 2$.
+% \end{itemize}
+
+% \textbf{Demostración:}
+
+% \begin{enumerate}
+%     \item La entrada a la SC para un proceso $i$ depende únicamente de las variables $s[i]$ y $s[i-1]$:
+%     \begin{itemize}
+%         \item Si $i > 0$, la condición $s[i] \neq s[i-1]$ asegura que no puede haber dos procesos consecutivos en la SC, ya que los valores de $s$ no pueden cumplir las condiciones simultáneamente.
+%         \item Si $i = 0$, la condición $s[0] = s[n-1]$ asegura que el proceso 0 puede entrar solo si su estado está sincronizado con el del último proceso, evitando conflictos.
+%     \end{itemize}
+%     \item Al salir de la SC:
+%     \begin{itemize}
+%         \item Para $i > 0$, la operación $s[i] := s[i-1]$ iguala el estado del proceso $i$ al de su predecesor, modificando las condiciones para permitir que otro proceso entre en la SC.
+%         \item Para $i = 0$, $s[0] := (s[0] + 1) \mod 2$ altera cíclicamente el estado del proceso inicial, asegurando que las condiciones del anillo cambien continuamente.
+%     \end{itemize}
+% \end{enumerate}
+
+% Por lo tanto, el algoritmo garantiza \textbf{exclusión mutua}, ya que las condiciones de entrada aseguran que solo un proceso puede estar en la SC en cualquier momento.
+
+\subsection{Parte I: Demostrar que el algoritmo garantiza exclusión mutua}
+
+La exclusión mutua significa que, en cualquier configuración del sistema, como máximo un proceso puede estar en su sección crítica (SC) en un momento dado. A continuación, se analiza cómo las reglas del algoritmo garantizan esta propiedad.
+
+\subsubsection{Condiciones para entrar en la sección crítica}
+
+\begin{itemize}
+    \item Para $i > 0$: $s[i] \neq s[i-1]$.  
+    Esto implica que un proceso $i$ solo puede entrar a la SC si su variable $s[i]$ es distinta de la de su vecino inmediato anterior $s[i-1]$. Por lo tanto:
+    \begin{itemize}
+        \item Si un proceso $i$ está en la SC, esto obliga a que $s[i] \neq s[i-1]$.
+        \item Su vecino inmediato anterior $i-1$, que también depende de $s[i-1]$, no podrá entrar a la SC al mismo tiempo porque para $i-1$ entrar se requeriría $s[i-1] \neq s[i-2]$, lo que sería inconsistente con la condición de $i$.
+    \end{itemize}
+
+    \item Para $i = 0$: $s[0] = s[n-1]$.  
+    El proceso $0$ solo puede entrar si su variable $s[0]$ coincide con la del último proceso $s[n-1]$. Esto asegura la sincronización entre el principio y el final del anillo. Si $0$ está en la SC, ningún otro proceso puede cumplir las condiciones necesarias, porque las relaciones $s[i] \neq s[i-1]$ o $s[0] = s[n-1]$ no se mantendrían simultáneamente.
+\end{itemize}
+
+Por lo tanto, estas condiciones aseguran que, como máximo, un proceso puede satisfacer las reglas de entrada a la SC en cualquier momento.
+
+\subsubsection{Condiciones al salir de la sección crítica}
+
+Cuando un proceso $i$ termina de ejecutar su sección crítica, realiza las siguientes actualizaciones:
+
+\begin{itemize}
+    \item Para $i > 0$: $s[i] := s[i-1]$, solo si $s[i] \neq s[i-1]$.  
+    Al asignar $s[i]$ el valor de $s[i-1]$, el proceso $i$ ``cede el paso'' a su vecino. Esto significa que, después de que $i$ sale de la SC:
+    \begin{itemize}
+        \item Su estado $s[i]$ se iguala al de $s[i-1]$, deshabilitando inmediatamente su propia entrada a la SC.
+        \item Esto permite que otros procesos cumplan las condiciones necesarias para acceder a la SC.
+    \end{itemize}
+
+    \item Para $i = 0$: $s[0] := (s[0] + 1) \mod 2$.  
+    Al incrementar cíclicamente $s[0]$, el proceso $0$ cambia el estado global del anillo, lo que obliga a que las condiciones de entrada se actualicen para otros procesos.
+\end{itemize}
+
+Estas actualizaciones aseguran que:
+\begin{enumerate}
+    \item Un proceso no permanezca en la SC indefinidamente.
+    \item Los estados del sistema se actualicen de forma consistente para permitir que otros procesos entren en la SC.
+\end{enumerate}
+
+\subsubsection{Exclusión mutua en el anillo}
+
+Las condiciones de entrada y salida interactúan de la siguiente manera para garantizar exclusión mutua:
+
+\begin{enumerate}
+    \item \textbf{Vecinos no pueden entrar simultáneamente:}  
+    La condición $s[i] \neq s[i-1]$ asegura que dos procesos consecutivos en el anillo no pueden entrar a la SC al mismo tiempo.  
+    Por ejemplo, si el proceso $i$ entra en la SC, entonces $s[i] \neq s[i-1]$. Esto implica que el vecino $i-1$ no puede cumplir la condición para entrar en la SC al mismo tiempo.
+
+    \item \textbf{Inicio y fin del anillo sincronizados:}  
+    Para $i = 0$, la condición $s[0] = s[n-1]$ asegura que el proceso $0$ solo puede entrar en la SC cuando está sincronizado con el estado del último proceso $n-1$. Esto evita conflictos en los extremos del anillo.
+
+    \item \textbf{Imposibilidad de más de un acceso:}  
+    Supongamos que dos procesos distintos, $i$ y $j$, intentan entrar en la SC simultáneamente.
+    \begin{itemize}
+        \item Si $i > 0$ y $j > 0$, ambos procesos requerirían que $s[i] \neq s[i-1]$ y $s[j] \neq s[j-1]$, lo que es imposible porque sus estados están interdependientes y los valores $s[k]$ forman un único conjunto de valores en el anillo.
+        \item Si $i = 0$, entonces $s[0] = s[n-1]$ debe cumplirse, pero esto es inconsistente con las condiciones $s[1] \neq s[0]$ necesarias para que otros procesos entren simultáneamente.
+    \end{itemize}
+\end{enumerate}
+
+
+\subsubsection{El diseño del algoritmo asegura que:}
+
+\begin{itemize}
+    \item Cada proceso depende exclusivamente de su propio estado $s[i]$ y el de su vecino inmediato ($s[i-1]$ o $s[n-1]$ para $i = 0$).
+    \item Las condiciones de entrada y salida están sincronizadas para evitar conflictos.
+    \item En cualquier configuración, solo un proceso puede cumplir las condiciones de entrada, lo que garantiza \textbf{exclusión mutua}.
+\end{itemize}
+
+Por lo que queda demostrado que el algoritmo asegura la Exclusión Mutua.
+
+
+
+% \subsection{Parte II: Progreso y justicia}
+
+% \textbf{Progreso:} En cada iteración del protocolo, un proceso $i$ que cumple las condiciones puede entrar en la SC. Al salir de la SC, el proceso actual actualiza $s[i]$ para que otro proceso tenga la oportunidad de cumplir las condiciones.
+
+% \textbf{Justicia:} La configuración del anillo y las condiciones locales aseguran que cada proceso eventualmente podrá entrar en la SC:
+% \begin{itemize}
+%     \item Si un proceso $i$ no puede entrar en la SC porque $s[i] = s[i-1]$, entonces su vecino $i-1$ eventualmente entrará en la SC y actualizará su estado, lo que permitirá a $i$ cumplir las condiciones.
+%     \item Debido a la actualización cíclica de $s[0]$, las condiciones se modifican periódicamente, asegurando que todos los procesos tengan una oportunidad de entrar en la SC.
+% \end{itemize}
+
+% \textbf{Demostración:}
+% \begin{enumerate}
+%     \item Dado que las condiciones de entrada dependen únicamente de los estados locales $s[i]$ y $s[i-1]$, cada proceso está garantizado a tener la oportunidad de entrar en la SC en un número finito de pasos.
+%     \item El protocolo avanza en un anillo, y la actualización de estados asegura que ningún proceso quede bloqueado indefinidamente.
+% \end{enumerate}
+
+% Por lo tanto, el algoritmo asegura que cada proceso \textbf{entra en la SC infinitamente a menudo}.
+
+% \section{Conclusión}
+
+% El algoritmo cumple con las propiedades fundamentales de exclusión mutua, progreso y justicia:
+% \begin{enumerate}
+%     \item Garantiza que solo un proceso puede estar en la SC a la vez.
+%     \item Asegura que todos los procesos tengan oportunidades iguales y periódicas de entrar en la SC.
+% \end{enumerate}
+
+\subsection{Parte II: Demostrar que cada proceso entra a la sección crítica infinitamente a menudo}
+
+El objetivo es demostrar que el algoritmo garantiza que ningún proceso queda bloqueado indefinidamente y que cada proceso puede entrar en su sección crítica (SC) un número infinito de veces.
+
+\subsubsection{Progreso del sistema}
+
+El progreso significa que, en cualquier configuración válida, siempre habrá al menos un proceso que cumpla las condiciones necesarias para entrar en la SC. Esto se garantiza por las siguientes razones:
+
+\begin{enumerate}
+    \item \textbf{Dependencia local de las condiciones de entrada:}  
+    Cada proceso $i$ puede decidir entrar en la SC únicamente basándose en el valor de $s[i]$ y $s[i-1]$ (o $s[n-1]$ si $i = 0$). Por lo tanto:
+    \begin{itemize}
+        \item La decisión de un proceso $i$ no depende de los valores de procesos distantes, lo que permite que las decisiones se tomen de forma local y eficiente, es decir, depende de sus vecinos inmediatos.
+        \item Esto implica que el estado global del anillo no bloquea el progreso de ningún proceso en particular.
+    \end{itemize}
+
+    \item \textbf{Actualización consistente de los valores de $s[i]$:}  
+    Cuando un proceso $i$ sale de la SC, actualiza su variable $s[i]$ de acuerdo con el protocolo:
+    \begin{itemize}
+        \item Si $i > 0$: $s[i] := s[i-1]$, lo que sincroniza el estado del proceso con su vecino anterior y permite que $i+1$ cumpla las condiciones para entrar.
+        \item Si $i = 0$: $s[0] := (s[0] + 1) \mod 2$, lo que altera el estado global del anillo, asegurando que las condiciones para otros procesos cambien eventualmente.
+    \end{itemize}
+
+    Estas actualizaciones garantizan que los valores de $s[i]$ evolucionen de manera predecible, permitiendo que los procesos se turnen para entrar en la SC.
+
+    \item \textbf{Anillo cerrado y cíclico:}  
+    El diseño del anillo asegura que todos los procesos están conectados en una estructura cíclica.  
+    Si un proceso $i$ no puede entrar en la SC debido a su vecino, ese vecino eventualmente actualizará su estado y permitirá que $i$ entre.  
+    Por ejemplo, si $s[i] = s[i-1]$, el vecino $i-1$ debe entrar en la SC antes de que $s[i-1]$ cambie, lo que desbloqueará $i$.
+\end{enumerate}
+
+En conjunto, estas propiedades garantizan que siempre haya al menos un proceso con las condiciones necesarias para entrar en la SC, asegurando progreso continuo.
+
+\subsubsection{Acceso infinito a la sección crítica}
+
+Ningún proceso puede quedar bloqueado indefinidamente, y cada proceso $i$ podrá entrar en la SC un número infinito de veces.
+
+Esto podemos garantizarlo en base a las siguientes razones:
+
+\begin{enumerate}
+    \item \textbf{Evolución de las condiciones de entrada:}  
+    Las actualizaciones de $s[i]$ al salir de la SC aseguran que las condiciones necesarias para que otros procesos entren se modifiquen periódicamente.  
+    Por ejemplo:
+    \begin{itemize}
+        \item Cuando un proceso $i$ actualiza $s[i] := s[i-1]$, su vecino $i+1$ tiene una mayor probabilidad de cumplir $s[i+1] \neq s[i]$ en el futuro.
+        \item De manera similar, cuando $i = 0$, la actualización $s[0] := (s[0] + 1) \mod 2$ modifica cíclicamente las condiciones del anillo.
+    \end{itemize}
+    Estas modificaciones aseguran que las condiciones necesarias para entrar en la SC no permanezcan estáticas, permitiendo que todos los procesos tengan una oportunidad justa de acceder.
+
+    \item \textbf{Estructura cíclica del anillo:}  
+    En un sistema de $n$ procesos conectados en anillo:
+    \begin{itemize}
+        \item Si el proceso $i$ no puede entrar en la SC porque $s[i] = s[i-1]$, su vecino inmediato $i-1$ deberá entrar en la SC y actualizar $s[i-1]$ antes de que $i$ pueda intentarlo de nuevo.
+        \item Este comportamiento garantiza que todos los procesos sean atendidos eventualmente, ya que no hay dependencia circular que pueda bloquear un proceso de manera indefinida.
+    \end{itemize}
+
+    \item \textbf{Periodicidad garantizada:}  
+    Debido a que $s[0]$ se actualiza cíclicamente como $(s[0] + 1) \mod 2$, las configuraciones del anillo eventualmente regresan a un estado similar al inicial.  
+    En cada ciclo completo, todos los procesos tienen la oportunidad de cumplir las condiciones necesarias para entrar en la SC.  
+    Este comportamiento asegura que cada proceso tendrá acceso a la SC un número infinito de veces.
+\end{enumerate}
+
+\subsubsection{Análisis combinando Progreso y Acceso Infinito a la Sección Crítica}
+
+\begin{enumerate}
+    \item \textbf{Progreso garantiza que el sistema no se detiene:}  
+    Siempre hay al menos un proceso que puede entrar en la SC. Cuando un proceso sale, actualiza las condiciones para permitir que otros procesos avancen.
+
+    \item \textbf{Justicia garantiza que nadie queda excluido:}  
+    Gracias a la estructura cíclica y las actualizaciones periódicas de $s[i]$, todos los procesos eventualmente tendrán una oportunidad de cumplir las condiciones para entrar en la SC.
+
+    \item \textbf{Interacción entre progreso y justicia:}  
+    Si un proceso $i$ no puede entrar porque su vecino $i-1$ no ha actualizado $s[i-1]$, ese vecino eventualmente tendrá la oportunidad de entrar y actualizar $s[i-1]$. Esto evita bloqueos indefinidos y asegura que todos los procesos accedan a la SC un número infinito de veces.
+\end{enumerate}
+
+Por lo tanto, se cumplen las propiedades de \textbf{progreso} y \textbf{acceso infinito a la sección crítica}, asegurando que ningún proceso quede bloqueado indefinidamente y que todos los procesos puedan acceder a la SC un número infinito de veces, por lo que esta propiedad queda demostrada.
+
+\subsection{Relación con los axiomas de la programación concurrente}
+
+El algoritmo cumple con los cinco axiomas fundamentales de la programación concurrente. A continuación, se describe cómo se satisfacen:
+
+\subsubsection{Atomicidad e Intercalación de Instrucciones}
+
+Este axioma establece que cada instrucción del programa concurrente se ejecuta de forma atómica y el resultado depende del orden en que las instrucciones se intercalan. En el contexto del algoritmo:
+
+\begin{itemize}
+    \item \textbf{Atomicidad:}  
+    Las operaciones de lectura y escritura sobre las variables \( s[i] \) son atómicas. Por ejemplo, al verificar la condición \( s[i] \neq s[i-1] \) o al actualizar \( s[i] := s[i-1] \), se garantiza que la operación se completa antes de que otro proceso acceda a las mismas variables.
+    
+    \item \textbf{Intercalación:}  
+    Los procesos avanzan en su ejecución intercalando las instrucciones, asegurando que sólo un proceso a la vez pueda acceder a la sección crítica. Esto se deriva de las condiciones de entrada (\( s[i] \neq s[i-1] \) y \( s[0] = s[n-1] \)) y de las actualizaciones consistentes al salir de la sección crítica.
+\end{itemize}
+
+\subsubsection{Consistencia de datos después del acceso concurrente}
+
+Este axioma requiere que el estado del sistema sea consistente después de cualquier acceso concurrente. En el algoritmo:
+
+\begin{itemize}
+    \item La actualización de las variables \( s[i] \) tras salir de la sección crítica garantiza que el sistema mantenga un estado consistente:
+    \begin{itemize}
+        \item Para \( i > 0 \): \( s[i] := s[i-1] \) sincroniza el estado del proceso con su vecino anterior.
+        \item Para \( i = 0 \): \( s[0] := (s[0] + 1) \mod 2 \) asegura que el estado global del anillo avance de manera predecible.
+    \end{itemize}
+    \item Estas reglas evitan inconsistencias, como permitir que dos procesos cumplan simultáneamente las condiciones para entrar en la sección crítica.
+\end{itemize}
+
+\subsubsection{Irrepetibilidad de las secuencias de instrucciones}
+
+Este axioma implica que una misma secuencia de instrucciones puede producir diferentes resultados en ejecuciones distintas debido a la concurrencia. En el algoritmo:
+
+\begin{itemize}
+    \item Las decisiones para entrar en la sección crítica dependen del estado actual de las variables \( s[i] \), que varía dinámicamente durante la ejecución del sistema.
+    \item Por ejemplo, el proceso \( i \) puede cumplir \( s[i] \neq s[i-1] \) en una configuración específica, pero no en otra, dependiendo de cómo los procesos vecinos actualicen sus valores \( s[j] \).
+\end{itemize}
+
+Esta irrepetibilidad asegura que el comportamiento del sistema no sea rígido, adaptándose a las condiciones cambiantes del entorno concurrente.
+
+\subsubsection{Independencia de la velocidad de proceso}
+
+Este axioma establece que el sistema debe funcionar correctamente independientemente de las velocidades relativas de los procesos. En el algoritmo:
+
+\begin{itemize}
+    \item La independencia de la velocidad se garantiza porque las condiciones de entrada a la sección crítica dependen únicamente de los estados locales (\( s[i] \) y \( s[i-1] \)) y no de la velocidad con la que otros procesos se ejecutan.
+    \item Incluso si un proceso avanza más rápido que los demás, no puede bloquear indefinidamente a otros procesos, ya que:
+    \begin{itemize}
+        \item El diseño en anillo asegura que cada proceso eventualmente actualice su estado.
+        \item Las actualizaciones periódicas de \( s[0] \) mediante \( (s[0] + 1) \mod 2 \) permiten que las condiciones cambien para todos los procesos.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Hipótesis de progreso finito}
+
+Este axioma implica que cada proceso debe avanzar y alcanzar su objetivo (por ejemplo, entrar en la sección crítica) en un tiempo finito. En el algoritmo:
+
+\begin{itemize}
+    \item \textbf{Progreso finito} se garantiza porque:
+    \begin{itemize}
+        \item Las actualizaciones de \( s[i] \) al salir de la sección crítica permiten que los procesos desbloqueen a sus vecinos.
+        \item La estructura cíclica del anillo asegura que las condiciones necesarias para entrar en la sección crítica evolucionen periódicamente, evitando bloqueos indefinidos.
+    \end{itemize}
+    \item Cada proceso tiene garantizado el acceso infinito a la sección crítica gracias a la combinación de las propiedades de progreso (ningún proceso bloquea indefinidamente a otro) y justicia (todos los procesos tienen oportunidades equitativas de acceder a la sección crítica).
+\end{itemize}
+
+
+Podemos concluir con que el algoritmo cumple con los cinco axiomas de la programación concurrente.
+
+\subsection{Propiedades de vivacidad y seguridad}
+
+El algoritmo cumple con las dos propiedades fundamentales de los sistemas concurrentes: \textbf{vivacidad} y \textbf{seguridad}.
+
+\subsubsection{Vivacidad}
+
+La vivacidad asegura que el sistema no se bloquea indefinidamente y que cada proceso tiene garantizado el progreso. En este caso:
+
+\begin{itemize}
+    \item Se garantiza que siempre hay al menos un proceso que puede entrar en la sección crítica debido a las condiciones dinámicas de entrada:
+    \begin{itemize}
+        \item Para \( i > 0 \): \( s[i] \neq s[i-1] \) asegura que un proceso solo depende de su vecino inmediato.
+        \item Para \( i = 0 \): \( s[0] = s[n-1] \) garantiza que el anillo evoluciona cíclicamente.
+    \end{itemize}
+    \item Las actualizaciones de \( s[i] \) y la estructura en anillo aseguran que cada proceso tenga la oportunidad de entrar en la sección crítica después de que otros procesos completen la suya.
+    \item Por lo tanto, no hay bloqueos ni inanición, cumpliéndose la propiedad de vivacidad.
+\end{itemize}
+
+\subsubsection{Seguridad}
+
+La seguridad garantiza que nunca se violan las reglas del sistema, como permitir que más de un proceso acceda simultáneamente a la sección crítica. En este caso:
+
+\begin{itemize}
+    \item Las condiciones de entrada a la sección crítica (\( s[i] \neq s[i-1] \) para \( i > 0 \), y \( s[0] = s[n-1] \) para \( i = 0 \)) aseguran que solo un proceso pueda entrar en la sección crítica a la vez:
+    \begin{itemize}
+        \item Si dos procesos intentaran entrar simultáneamente, las condiciones de entrada impedirían que ambos lo hagan, ya que al menos uno de ellos no cumpliría \( s[i] \neq s[i-1] \).
+    \end{itemize}
+    \item Las actualizaciones consistentes de \( s[i] \) tras salir de la sección crítica evitan que otros procesos accedan simultáneamente, manteniendo la exclusión mutua.
+    \item Por lo tanto, se cumple la propiedad de seguridad, garantizando que el acceso a la sección crítica sea exclusivo.
+\end{itemize}
+
+Podemos concluir que el algoritmo cumple con las propiedades de vivacidad y de seguridad.
+
+\section{Bibliografía}
+
+\begin{thebibliography}{9}
+
+\bibitem{Diapositivas de clase}
+Diapositivas de la asignatura \textit{Sistemas Concurrentes y Distribuidos}, en la Universidad de Granada.
+
+
+\bibitem{lamport1978}
+L. Lamport, 
+\textit{Time, Clocks, and the Ordering of Events in a Distributed System}, 
+Communications of the ACM, vol. 21, no. 7, pp. 558-565, 1978.
+
+\bibitem{concurrencyaxioms}
+M. Ben-Ari, 
+\textit{Principles of Concurrent and Distributed Programming}, 
+2nd Edition, Addison-Wesley, 2006.
+
+\end{thebibliography}
+
+\section{Anotaciones}
+
+Cabe destacar que la extensión de esta práctica se debe a la intención de utilizar la mayor cantidad posible de conceptos del temario, así como de proporcionar una demostración y explicación detallada de las propiedades de un algoritmo de exclusión mutua.
+
+\end{document}

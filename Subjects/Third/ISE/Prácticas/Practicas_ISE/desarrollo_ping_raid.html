@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas de Desarrollo: Bloque 1</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .dev-question {
+            margin-bottom: 30px;
+        }
+        .dev-question h3 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        .dev-question .answer {
+            background-color: #e9f5ff;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        .dev-question .answer p {
+            margin-top: 0;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Preguntas de Desarrollo: Bloque 1 - SO y Servicios</h1>
+
+        <div class="dev-question">
+            <h3>Pregunta 1: Explica brevemente qué es LVM (Logical Volume Manager) y cuáles son sus tres componentes principales. [cite: 71, 72]</h3>
+            <div class="answer">
+                <p>LVM (Logical Volume Manager) es una tecnología que facilita la gestión de los volúmenes de almacenamiento en un sistema Linux, proporcionando una capa de abstracción entre los discos físicos y el sistema de ficheros. [cite: 71] Permite redimensionar volúmenes, añadir discos en caliente y organizar el almacenamiento de forma más flexible.</p>
+                <p>Sus tres componentes principales son: [cite: 72]</p>
+                <ul>
+                    <li><strong>Physical Volumes (PV - Volúmenes Físicos):</strong> Son los dispositivos de almacenamiento físicos (discos duros completos, particiones, o incluso dispositivos RAID) que LVM utiliza como bloques de construcción. [cite: 594]</li>
+                    <li><strong>Volume Groups (VG - Grupos de Volúmenes):</strong> Es una agrupación de uno o más PVs que forman un único "pool" o reserva de almacenamiento. [cite: 594] Desde este pool se asigna espacio para los Volúmenes Lógicos.</li>
+                    <li><strong>Logical Volumes (LV - Volúmenes Lógicos):</strong> Son equivalentes a las particiones en un esquema tradicional. [cite: 596] Se crean a partir del espacio disponible en un VG y es sobre ellos donde se crean los sistemas de ficheros (ej: ext4, XFS) que el sistema operativo utiliza. [cite: 596]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 2: Describe los niveles de RAID 0, RAID 1 y RAID 5, mencionando una ventaja y una desventaja principal de cada uno. [cite: 80, 190, 193, 197, 610, 613, 615, 618, 619, 622]</h3>
+            <div class="answer">
+                <p><strong>RAID 0 (Striping):</strong></p>
+                <ul>
+                    <li><strong>Descripción:</strong> Distribuye los datos en bloques equitativamente entre dos o más discos sin información de paridad ni redundancia. [cite: 190, 610]</li>
+                    <li><strong>Ventaja:</strong> Mayor rendimiento en lectura y escritura, ya que los datos se acceden desde múltiples discos simultáneamente. [cite: 190, 611]</li>
+                    <li><strong>Desventaja:</strong> No ofrece tolerancia a fallos. Si un solo disco falla, se pierde toda la información del array. [cite: 191, 613]</li>
+                </ul>
+                 <p><strong>RAID 1 (Mirroring):</strong></p>
+                <ul>
+                    <li><strong>Descripción:</strong> Duplica los datos completos en dos o más discos, creando copias idénticas (espejos). [cite: 193, 615]</li>
+                    <li><strong>Ventaja:</strong> Alta redundancia y tolerancia a fallos. Si un disco falla, los datos siguen accesibles desde el otro disco. [cite: 195, 616]</li>
+                    <li><strong>Desventaja:</strong> El coste de almacenamiento se duplica, ya que la capacidad útil es la del disco más pequeño del conjunto (o la mitad de la capacidad total si los discos son iguales). [cite: 195, 618]</li>
+                </ul>
+                 <p><strong>RAID 5 (Paridad Distribuida):</strong></p>
+                <ul>
+                    <li><strong>Descripción:</strong> Distribuye tanto los datos como la información de paridad entre tres o más discos. [cite: 197, 619]</li>
+                    <li><strong>Ventaja:</strong> Ofrece un buen equilibrio entre rendimiento, capacidad de almacenamiento y tolerancia a fallos (puede sobrevivir al fallo de un disco sin pérdida de datos). [cite: 200, 620]</li>
+                    <li><strong>Desventaja:</strong> El rendimiento en escritura puede ser más lento debido al cálculo de la paridad. [cite: 199, 622] La reconstrucción del array tras un fallo de disco puede ser un proceso largo e intensivo. [cite: 623]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 3: ¿Cuál es el propósito de un firewall en un servidor y qué tipo de acciones básicas puedes realizar con `firewall-cmd` en Rocky Linux? [cite: 90, 235, 237, 238]</h3>
+            <div class="answer">
+                <p>El propósito principal de un firewall en un servidor es controlar el tráfico de red entrante y saliente, actuando como una barrera de seguridad entre la red interna del servidor y las redes externas (como Internet). [cite: 234] Su objetivo es permitir el tráfico legítimo y bloquear el tráfico no autorizado o potencialmente malicioso, basándose en un conjunto de reglas predefinidas.</p>
+                <p>Con <code>firewall-cmd</code> en Rocky Linux, puedes realizar varias acciones básicas para gestionar el firewall, tales como: [cite: 235, 237, 238]</p>
+                <ul>
+                    <li><strong>Ver el estado del firewall:</strong> Comprobar si está activo (<code>firewall-cmd --state</code>). [cite: 236]</li>
+                    <li><strong>Listar todas las configuraciones activas:</strong> Incluyendo zonas, servicios permitidos, puertos abiertos (<code>firewall-cmd --list-all</code>). [cite: 237]</li>
+                    <li><strong>Añadir o eliminar servicios:</strong> Permitir o bloquear el tráfico para servicios estándar como HTTP, SSH (<code>sudo firewall-cmd --add-service=http</code>, <code>sudo firewall-cmd --remove-service=http</code>). [cite: 238]</li>
+                    <li><strong>Añadir o eliminar puertos:</strong> Abrir o cerrar puertos específicos para protocolos TCP o UDP (<code>sudo firewall-cmd --add-port=8080/tcp</code>).</li>
+                    <li><strong>Hacer los cambios permanentes:</strong> Para que las reglas persistan tras un reinicio (<code>sudo firewall-cmd --permanent --add-service=http</code> seguido de <code>sudo firewall-cmd --reload</code>). [cite: 240]</li>
+                    <li><strong>Recargar la configuración del firewall:</strong> Aplicar cambios permanentes sin interrumpir las conexiones existentes (<code>sudo firewall-cmd --reload</code>).</li>
+                    <li><strong>Consultar los servicios disponibles:</strong> Listar los nombres de servicios predefinidos que se pueden usar en las reglas (<code>firewall-cmd --get-services</code>). [cite: 243]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 4: Explica el proceso general para configurar el acceso a un servidor SSH utilizando autenticación basada en claves pública/privada en lugar de contraseñas. [cite: 105, 294, 297, 301]</h3>
+            <div class="answer">
+                <p>La autenticación basada en claves pública/privada para SSH es un método más seguro y conveniente que el uso de contraseñas. El proceso general es el siguiente: [cite: 105, 294]</p>
+                <ol>
+                    <li><strong>Generación del par de claves en la máquina cliente:</strong>
+                        <ul>
+                            <li>El usuario, en su máquina local (cliente), genera un par de claves: una clave privada y una clave pública. Esto se hace comúnmente con el comando <code>ssh-keygen</code>. [cite: 297]</li>
+                            <li>La clave privada debe mantenerse secreta y segura en la máquina cliente. Opcionalmente, se puede proteger con una frase de contraseña. [cite: 297]</li>
+                            <li>La clave pública está diseñada para ser compartida. [cite: 298]</li>
+                        </ul>
+                    </li>
+                    <li><strong>Copia de la clave pública al servidor:</strong>
+                        <ul>
+                            <li>La clave pública generada en el cliente debe ser transferida y añadida al archivo <code>~/.ssh/authorized_keys</code> en el directorio home del usuario en el servidor al que se desea acceder. [cite: 300]</li>
+                            <li>Esto se puede hacer manualmente o, de forma más sencilla y segura, con el comando <code>ssh-copy-id usuario@servidor</code>. [cite: 301] Este comando copia la clave pública y la añade al archivo <code>authorized_keys</code> del servidor remoto, estableciendo los permisos correctos.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Proceso de autenticación:</strong>
+                        <ul>
+                            <li>Cuando el cliente intenta conectarse al servidor SSH, el servidor le envía un desafío (un mensaje aleatorio).</li>
+                            <li>El cliente firma este desafío utilizando su clave privada y devuelve la firma al servidor.</li>
+                            <li>El servidor, que tiene la clave pública del cliente en su archivo <code>authorized_keys</code>, utiliza esta clave pública para verificar la firma.</li>
+                            <li>Si la firma es válida (es decir, fue creada con la clave privada correspondiente a la clave pública almacenada), el servidor autentica al usuario y permite el acceso sin solicitar contraseña. [cite: 295]</li>
+                        </ul>
+                    </li>
+                    <li><strong>(Opcional pero recomendado) Deshabilitar la autenticación por contraseña en el servidor:</strong>
+                        <ul>
+                            <li>Para mayor seguridad, una vez que la autenticación por clave funciona correctamente, se debe editar el archivo de configuración del demonio SSH en el servidor (<code>/etc/ssh/sshd_config</code>) y establecer <code>PasswordAuthentication no</code>. Luego, reiniciar el servicio SSHD. Esto evita ataques de fuerza bruta contra las contraseñas.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 5: Al configurar una máquina virtual Rocky Linux para prácticas, se indica que debe tener dos tarjetas de red: una NAT y una Host-Only con IP estática. Explica el propósito de cada una de estas configuraciones de red en este contexto. [cite: 51, 52]</h3>
+            <div class="answer">
+                <p>En el contexto de configurar una máquina virtual (MV) Rocky Linux para prácticas, tener dos tarjetas de red con configuraciones específicas (NAT y Host-Only) cumple propósitos distintos y complementarios: [cite: 51]</p>
+                <p><strong>1. Tarjeta de Red en modo NAT (Network Address Translation):</strong></p>
+                <ul>
+                    <li><strong>Propósito principal:</strong> Proporcionar a la máquina virtual acceso a redes externas, típicamente Internet. [cite: 51]</li>
+                    <li><strong>Funcionamiento:</strong> La MV comparte la dirección IP de la máquina anfitriona (host) para comunicarse con el exterior. El software de virtualización (como VirtualBox) actúa como un router NAT, traduciendo las direcciones de red.</li>
+                    <li><strong>Ventajas en prácticas:</strong> Permite a la MV descargar paquetes, actualizar software, acceder a repositorios y, en general, interactuar con recursos en Internet sin necesidad de configuraciones de red complejas en la red física del anfitrión. Es útil para la instalación inicial de software y dependencias. [cite: 63]</li>
+                    <li><strong>Limitación:</strong> Por defecto, las máquinas en la red externa (incluyendo el host) no pueden iniciar conexiones directamente hacia la MV a través de la interfaz NAT (aunque se pueden configurar redirecciones de puertos si es necesario).</li>
+                </ul>
+                <p><strong>2. Tarjeta de Red en modo Host-Only (Solo-Anfitrión) con IP Estática:</strong></p>
+                <ul>
+                    <li><strong>Propósito principal:</strong> Crear una red privada y aislada entre la máquina virtual y la máquina anfitriona (host), y potencialmente otras MVs que estén en la misma red Host-Only. [cite: 52]</li>
+                    <li><strong>Funcionamiento:</strong> Se crea una interfaz de red virtual en el host que se conecta a esta red. La MV obtiene una dirección IP en este segmento de red privado. Asignarle una IP estática a la MV en esta red asegura que su dirección no cambie, facilitando la comunicación predecible. [cite: 52]</li>
+                    <li><strong>Ventajas en prácticas:</strong>
+                        <ul>
+                            <li>Permite la comunicación directa y estable entre el host y la MV (y entre MVs). Esto es crucial para tareas como conectar por SSH desde el host a la MV[cite: 64], transferir archivos, o probar servicios que la MV expone sin exponerlos a la red externa.</li>
+                            <li>La IP estática evita tener que descubrir la IP de la MV cada vez que se reinicia, simplificando scripts y configuraciones de acceso.</li>
+                            <li>Proporciona un entorno de red controlado para probar configuraciones de servidor y cliente sin interferencias externas.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>En resumen, la tarjeta NAT da a la MV "salida al mundo" para obtener recursos, mientras que la tarjeta Host-Only con IP estática proporciona un canal de comunicación estable y privado con el anfitrión para administración y pruebas. [cite: 51, 52]</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 6: Describe el proceso y los comandos principales involucrados en la creación de un array RAID 1 por software en Linux utilizando `mdadm` con dos discos (por ejemplo, `/dev/sdb` y `/dev/sdc`) y cómo verificarías su estado.</h3>
+            <div class="answer">
+                <p>Crear un array RAID 1 (mirroring) por software con `mdadm` implica los siguientes pasos generales:</p>
+                <ol>
+                    <li>
+                        <strong>Preparación de los discos (opcional pero recomendado):</strong> Asegurarse de que los discos `/dev/sdb` y `/dev/sdc` no contengan datos importantes o particionarlos adecuadamente si se van a usar particiones en lugar de discos enteros. Se puede usar `fdisk` o `parted` para esto. Por ejemplo, crear una partición de tipo "Linux raid autodetect" en cada disco.
+                    </li>
+                    <li>
+                        <strong>Instalación de `mdadm` (si no está presente):</strong>
+                        <p><code>sudo dnf install mdadm</code> (en sistemas como Rocky Linux/CentOS) o <code>sudo apt install mdadm</code> (en Debian/Ubuntu).</p>
+                    </li>
+                    <li>
+                        <strong>Creación del array RAID 1:</strong>
+                        <p>El comando principal es `mdadm --create`. Para un RAID 1 con `/dev/sdb1` y `/dev/sdc1` (asumiendo que usamos la primera partición de cada disco, adaptado a los discos enteros `/dev/sdb` y `/dev/sdc` si se usan directamente):</p>
+                        <p><code>sudo mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sdb /dev/sdc</code></p>
+                        <ul>
+                            <li><code>/dev/md0</code>: Es el nombre del dispositivo RAID que se creará.</li>
+                            <li><code>--level=1</code>: Especifica que se creará un array RAID de nivel 1.</li>
+                            <li><code>--raid-devices=2</code>: Indica el número de dispositivos activos en el array.</li>
+                            <li><code>/dev/sdb /dev/sdc</code>: Son los dispositivos que formarán parte del array.</li>
+                            <li>Se te preguntará si deseas continuar; debes confirmar.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Verificación de la creación y sincronización del array:</strong>
+                        <p>Inmediatamente después de la creación, el array comenzará a sincronizarse. Puedes monitorizar este proceso con:</p>
+                        <p><code>watch -n 1 cat /proc/mdstat</code></p>
+                        <p>Este comando muestra el estado de los arrays RAID en el sistema. Verás el progreso de la sincronización (rebuild). Es importante esperar a que la sincronización complete antes de usar intensivamente el array.</p>
+                        <p>Una vez sincronizado, `cat /proc/mdstat` mostrará algo similar a:</p>
+                        <p><code>md0 : active raid1 sdc[1] sdb[0]<br>
+                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XXXXXX blocks super 1.2 [2/2] [UU]</code></p>
+                        <p>Donde `[UU]` indica que ambos dispositivos están activos y sincronizados ("Up").</p>
+                        <p>También puedes obtener detalles del array con:</p>
+                        <p><code>sudo mdadm --detail /dev/md0</code></p>
+                    </li>
+                    <li>
+                        <strong>Creación de un sistema de archivos (opcional en este paso, pero necesario para usarlo):</strong>
+                        <p>Una vez el array está listo, puedes crear un sistema de archivos sobre él:</p>
+                        <p><code>sudo mkfs.ext4 /dev/md0</code> (o el sistema de archivos de tu elección).</p>
+                    </li>
+                    <li>
+                        <strong>Montaje del sistema de archivos (opcional en este paso):</strong>
+                        <p><code>sudo mkdir /mnt/raid1_mount</code></p>
+                        <p><code>sudo mount /dev/md0 /mnt/raid1_mount</code></p>
+                    </li>
+                     <li>
+                        <strong>Guardar la configuración del RAID (importante para la persistencia):</strong>
+                        <p>Para que el sistema reconozca el array RAID en cada arranque, es crucial guardar la configuración. En sistemas basados en Debian/Ubuntu, esto suele hacerse con:</p>
+                        <p><code>sudo mdadm --detail --scan >> /etc/mdadm/mdadm.conf</code></p>
+                        <p>Y luego actualizar el initramfs:</p>
+                        <p><code>sudo update-initramfs -u</code></p>
+                        <p>En sistemas como Rocky Linux, el proceso puede ser ligeramente diferente o gestionado automáticamente por dracut si la configuración está en `/etc/mdadm.conf`.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 7: Explica la diferencia entre virtualización y contenedores, destacando al menos dos ventajas de los contenedores sobre la virtualización tradicional.</h3>
+            <div class="answer">
+                <p>Tanto la virtualización tradicional (máquinas virtuales - VMs) como los contenedores buscan aislar aplicaciones y sus dependencias, pero lo hacen de maneras fundamentalmente diferentes:</p>
+                <p><strong>Virtualización (Máquinas Virtuales):</strong></p>
+                <ul>
+                    <li><strong>Abstracción de Hardware:</strong> Un hipervisor (como VirtualBox, VMware, KVM) crea y gestiona máquinas virtuales. Cada VM emula un conjunto completo de hardware (CPU, RAM, disco, red). [cite: 1]</li>
+                    <li><strong>Sistema Operativo Completo:</strong> Cada VM ejecuta su propio sistema operativo completo (OS guest), independiente del sistema operativo del anfitrión (OS host). [cite: 1] Esto significa que cada VM tiene su propio kernel, librerías, binarios, etc.</li>
+                </ul>
+                <p><strong>Contenedores:</strong></p>
+                <ul>
+                    <li><strong>Abstracción de Sistema Operativo:</strong> Los contenedores se ejecutan sobre el kernel del sistema operativo anfitrión. Comparten el mismo kernel, pero aíslan los procesos, el sistema de archivos, la red y otros recursos a nivel de sistema operativo. [cite: 1]</li>
+                    <li><strong>No hay OS Guest Completo:</strong> Un contenedor solo empaqueta la aplicación y sus dependencias directas (librerías, binarios necesarios), pero no un sistema operativo completo ni un kernel propio. [cite: 1]</li>
+                </ul>
+
+                <p><strong>Ventajas de los Contenedores sobre la Virtualización Tradicional:</strong></p>
+                <ol>
+                    <li>
+                        <strong>Menor Overhead y Mayor Eficiencia/Densidad:</strong>
+                        <ul>
+                            <li>Como los contenedores no necesitan emular hardware ni ejecutar un OS guest completo, son mucho más ligeros que las VMs. [cite: 1] Esto se traduce en un arranque casi instantáneo (segundos o milisegundos vs. minutos para VMs) y un consumo de recursos (CPU, RAM, disco) significativamente menor.</li>
+                            <li>Debido a este menor overhead, se pueden ejecutar muchos más contenedores en un mismo servidor físico en comparación con las VMs, lo que lleva a una mayor densidad y mejor utilización de los recursos del hardware.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Portabilidad y Consistencia Mejoradas:</strong>
+                        <ul>
+                            <li>Las imágenes de contenedor empaquetan la aplicación y todas sus dependencias. Esto asegura que la aplicación se ejecute de la misma manera en cualquier entorno que soporte contenedores (desarrollo, pruebas, producción, diferentes máquinas o nubes), eliminando el problema de "funciona en mi máquina pero no en producción".</li>
+                            <li>La portabilidad es más ágil, ya que mover un contenedor es más rápido y sencillo que mover una VM completa con su OS guest. Esto facilita los ciclos de desarrollo (DevOps) y la implementación de arquitecturas de microservicios.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>Otras ventajas incluyen un despliegue más rápido y una gestión simplificada para arquitecturas de microservicios.</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 8: Describe los pasos principales para configurar un servidor HTTP básico (por ejemplo, Apache) en Rocky Linux, permitir el acceso a través del firewall y verificar su funcionamiento.</h3>
+            <div class="answer">
+                <p>Configurar un servidor HTTP básico en Rocky Linux (usando Apache como ejemplo) y permitir su acceso implica los siguientes pasos:</p>
+                <ol>
+                    <li>
+                        <strong>Instalación del paquete del servidor web (Apache - httpd):</strong>
+                        <p>Se utiliza el gestor de paquetes `dnf` para instalar Apache:</p>
+                        <p><code>sudo dnf install httpd -y</code></p>
+                    </li>
+                    <li>
+                        <strong>Iniciar y Habilitar el servicio Apache:</strong>
+                        <p>Una vez instalado, el servicio `httpd` debe iniciarse y habilitarse para que se ejecute automáticamente en cada arranque del sistema:</p>
+                        <p><code>sudo systemctl start httpd</code> (Para iniciar el servicio inmediatamente)</p>
+                        <p><code>sudo systemctl enable httpd</code> (Para que el servicio se inicie en los próximos arranques)</p>
+                        <p>Se puede verificar el estado del servicio con:</p>
+                        <p><code>sudo systemctl status httpd</code></p>
+                        <p>Debería mostrar "active (running)".</p>
+                    </li>
+                    <li>
+                        <strong>Configurar el Firewall para permitir el tráfico HTTP:</strong>
+                        <p>Por defecto, el firewall de Rocky Linux (`firewalld`) bloqueará las conexiones entrantes al puerto 80 (HTTP). Se debe añadir una regla para permitir este servicio:</p>
+                        <p><code>sudo firewall-cmd --permanent --add-service=http</code></p>
+                        <p>Después de añadir la regla permanente, se debe recargar la configuración del firewall para que los cambios surtan efecto:</p>
+                        <p><code>sudo firewall-cmd --reload</code></p>
+                        <p>Se puede verificar que el servicio http está añadido con:</p>
+                        <p><code>sudo firewall-cmd --list-services</code></p>
+                    </li>
+                    <li>
+                        <strong>Crear o Modificar la página de inicio (opcional para prueba básica):</strong>
+                        <p>Apache sirve archivos desde el directorio `/var/www/html/` por defecto. Para una prueba básica, se puede crear o modificar el archivo `index.html` en esa ubicación:</p>
+                        <p><code>echo "Bienvenidos a mi servidor Apache en Rocky Linux" | sudo tee /var/www/html/index.html</code></p>
+                        <p>En el ejercicio opcional de la práctica se pide un mensaje específico: "Bienvenidos a la web de &lt;Nombre y Apellidos del alumno/a&gt; en Prácticas ISE". [cite: 94, 95]</p>
+                    </li>
+                    <li>
+                        <strong>Verificar el Funcionamiento:</strong>
+                        <ul>
+                            <li><strong>Desde la propia máquina virtual:</strong> Puedes usar `curl` o un navegador de texto como `elinks` o `lynx` (si están instalados):<br>
+                            <code>curl http://localhost</code> o <code>curl http://127.0.0.1</code></li>
+                            <li><strong>Desde la máquina anfitriona u otra máquina en la red (si la red lo permite, por ejemplo, red Host-Only o Bridge):</strong> Abre un navegador web y navega a la dirección IP de la máquina virtual Rocky Linux (ej: `http://<IP_DE_LA_MV>`). Deberías ver la página de bienvenida de Apache o el contenido del `index.html` que creaste.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Verificar puertos abiertos (opcional):</strong>
+                        <p>Desde la máquina anfitriona, se puede usar `nmap` para escanear los puertos abiertos en la MV y confirmar que el puerto 80 está escuchando y es accesible. También se pide que solo los puertos web y ssh estén accesibles. [cite: 92, 93, 96, 97]</p>
+                        <p><code>nmap <IP_DE_LA_MV></code></p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 9: Explica qué es el "inventario" en Ansible y cómo se pueden definir grupos de hosts. Proporciona un ejemplo simple de un archivo de inventario.</h3>
+            <div class="answer">
+                <p>El **inventario** en Ansible es un archivo (o un conjunto de archivos o scripts dinámicos) que define la lista de hosts o nodos remotos que Ansible gestionará. Es la fuente fundamental de información para Ansible sobre a qué máquinas aplicar las configuraciones o ejecutar comandos. [cite: 117, 130, 132, 156]</p>
+                <p>Características clave del inventario:</p>
+                <ul>
+                    <li>Puede ser un archivo simple en formato INI o YAML.</li>
+                    <li>Puede ser dinámico, generado por un script que consulta fuentes externas (como proveedores de cloud, CMDBs, etc.).</li>
+                    <li>Define no solo los hosts individuales, sino también cómo se agrupan.</li>
+                </ul>
+                <p><strong>Definición de Grupos de Hosts:</strong></p>
+                <p>Los grupos permiten organizar los hosts en categorías lógicas, lo que facilita la aplicación de tareas o variables a subconjuntos específicos de la infraestructura. Un host puede pertenecer a múltiples grupos.</p>
+                <p>En formato INI, los grupos se definen utilizando corchetes `[]` con el nombre del grupo, seguido de la lista de hosts que pertenecen a ese grupo. Los hosts pueden listarse por su nombre DNS o dirección IP.</p>
+
+                <p><strong>Ejemplo Simple de un Archivo de Inventario (formato INI):</strong></p>
+                <pre><code>
+# inventory.ini
+
+# Servidores web
+[webservers]
+web01.example.com ansible_host=192.168.1.10
+web02.example.com ansible_host=192.168.1.11
+
+# Servidores de base de datos
+[dbservers]
+db01 ansible_host=192.168.1.20
+db02 ansible_host=192.168.1.21
+
+# Todos los servidores en la región de europa (un grupo de grupos)
+[europa:children]
+webservers
+dbservers
+
+# Variables específicas para un grupo
+[webservers:vars]
+http_port=80
+nginx_version=1.20
+
+# Variables para todos los hosts
+[all:vars]
+ansible_user=admin_ansible
+ansible_ssh_private_key_file=~/.ssh/ansible_key
+                </code></pre>
+                <p>En este ejemplo:</p>
+                <ul>
+                    <li><code>webservers</code> y <code>dbservers</code> son grupos de hosts.</li>
+                    <li><code>web01.example.com</code> y <code>db01</code> son nombres de hosts que Ansible usará para referirse a ellos. <code>ansible_host</code> es una variable de conexión que especifica la IP a la que conectarse.</li>
+                    <li><code>europa</code> es un metagrupo que incluye a los miembros de <code>webservers</code> y <code>dbservers</code> (usando la directiva <code>:children</code>).</li>
+                    <li><code>[webservers:vars]</code> define variables que se aplican solo a los hosts del grupo <code>webservers</code>.</li>
+                    <li><code>[all:vars]</code> define variables que se aplican a todos los hosts en el inventario.</li>
+                </ul>
+                <p>Este sistema de inventario y agrupación es fundamental para la flexibilidad y potencia de Ansible, permitiendo gestionar infraestructuras complejas de manera organizada. [cite: 117, 130, 132]</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 10: Al instalar un sistema operativo como Rocky Linux, ¿por qué es una buena práctica crear un usuario no root con privilegios de administración (sudo) en lugar de operar directamente como root?</h3>
+            <div class="answer">
+                <p>Operar directamente como usuario `root` en un sistema Linux es generalmente desaconsejado por varias razones de seguridad y operativas. Crear un usuario no `root` con privilegios de administración (a través de `sudo`) es una práctica estándar y recomendada por los siguientes motivos:</p>
+                <ol>
+                    <li>
+                        <strong>Principio de Menor Privilegio:</strong>
+                        <ul>
+                            <li>Este principio de seguridad establece que un usuario o proceso solo debe tener los permisos estrictamente necesarios para realizar sus tareas. Al operar como un usuario normal la mayor parte del tiempo, se limita el daño potencial que podría causarse por error o si la cuenta se viera comprometida.</li>
+                            <li>Solo se elevan los privilegios a `root` (usando `sudo`) para comandos específicos que realmente lo requieren.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Reducción del Riesgo de Errores Catastróficos:</strong>
+                        <ul>
+                            <li>El usuario `root` tiene el poder de hacer cualquier cosa en el sistema, incluyendo borrar archivos críticos o modificar configuraciones vitales sin advertencia. Un simple error tipográfico como `root` puede tener consecuencias desastrosas.</li>
+                            <li>Al usar `sudo`, se requiere introducir la contraseña del usuario (o ninguna si está configurado así para tareas específicas), lo que introduce un momento de pausa y reflexión antes de ejecutar un comando con privilegios elevados.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Auditoría y Responsabilidad:</strong>
+                        <ul>
+                            <li>Cuando se utiliza `sudo`, los comandos ejecutados con privilegios elevados suelen registrarse en los logs del sistema (como `/var/log/secure` o usando `journalctl`). Esto proporciona un rastro de auditoría que indica qué usuario ejecutó qué comando y cuándo.</li>
+                            <li>Si varias personas administran un servidor y todas usan `root`, es difícil rastrear quién hizo qué cambio. Con usuarios individuales y `sudo`, la responsabilidad es más clara.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Seguridad contra Ataques:</strong>
+                        <ul>
+                            <li>La cuenta `root` es un objetivo conocido y principal para los atacantes. Deshabilitar el inicio de sesión directo como `root` (especialmente por SSH [cite: 102, 123, 353]) y forzar el uso de `sudo` desde una cuenta no privilegiada añade una capa de seguridad. Un atacante necesitaría comprometer primero una cuenta de usuario y luego encontrar una manera de escalar privilegios.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Entorno de Usuario Personalizado y Seguro:</strong>
+                        <ul>
+                            <li>Cada usuario tiene su propio directorio home, historial de comandos y configuraciones de shell, lo que puede hacer el trabajo más cómodo y personalizado sin afectar el entorno `root`.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>En el contexto de las prácticas de ISE, se indica explícitamente que, si no se hizo durante la instalación, se debe asegurar de disponer de una cuenta de usuario (distinta de `root`) con privilegios de administración. [cite: 47, 48]</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 11: Analizando el script `iniciarNodosManejados.sh`, describe qué acciones realiza y cómo se relaciona con los conceptos de virtualización y gestión de configuración con Ansible vistos en el Bloque 1.</h3>
+            <div class="answer">
+                <p>El script `iniciarNodosManejados.sh` realiza las siguientes acciones secuenciales:</p>
+                <ol>
+                    <li>
+                        <strong>Muestra un mensaje informativo:</strong> Comienza con <code>echo "Iniciando máquinas virtuales..."</code>, informando al usuario sobre la acción que se va a realizar.
+                    </li>
+                    <li>
+                        <strong>Inicia dos máquinas virtuales:</strong> Utiliza el comando <code>VBoxManage startvm srv1 --type headless</code> y <code>VBoxManage startvm srv2 --type headless</code>.
+                        <ul>
+                            <li><code>VBoxManage</code>: Es la herramienta de línea de comandos para controlar Oracle VM VirtualBox.</li>
+                            <li><code>startvm srv1</code>: Indica la acción de iniciar la máquina virtual llamada "srv1" (y similarmente "srv2").</li>
+                            <li><code>--type headless</code>: Especifica que las máquinas virtuales se iniciarán sin una interfaz gráfica visible, ejecutándose en segundo plano. Esto es común para servidores.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Introduce una pausa:</strong> Con <code>echo "Esperando 10 segundos para asegurar arranque..."</code> seguido de <code>sleep 10</code>, el script espera 10 segundos. Esta pausa es una práctica común para dar tiempo a que las máquinas virtuales completen su proceso de arranque antes de intentar interactuar con ellas.
+                    </li>
+                    <li>
+                        <strong>Comprueba la conectividad con Ansible:</strong> Finalmente, ejecuta <code>echo "Comprobando conectividad con Ansible..."</code> y luego <code>ansible all -i inventory/hosts.ini -m ping</code>.
+                        <ul>
+                            <li><code>ansible all</code>: Indica que el comando de Ansible se aplicará a todos los hosts definidos en el inventario.</li>
+                            <li><code>-i inventory/hosts.ini</code>: Especifica la ruta al archivo de inventario de Ansible que contiene la definición de "srv1" y "srv2".</li>
+                            <li><code>-m ping</code>: Utiliza el módulo `ping` de Ansible. Este módulo no es el ping ICMP tradicional, sino que establece una conexión SSH al nodo manejado, ejecuta un pequeño script Python y verifica si el nodo es accesible y si tiene Python instalado, devolviendo "pong" si tiene éxito.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p><strong>Relación con los conceptos del Bloque 1:</strong></p>
+                <ul>
+                    <li>
+                        <strong>Virtualización:</strong> El script utiliza directamente VirtualBox (<code>VBoxManage</code>) para iniciar máquinas virtuales. Esto se alinea con el concepto de virtualización de servidores para crear entornos de prueba y desarrollo aislados, como se discute en el temario (por ejemplo, en "ISE-B1-OSyServicios.pdf", sección 1.1). El uso de `--type headless` es típico para simular servidores que no requieren una GUI.
+                    </li>
+                    <li>
+                        <strong>Gestión de Configuración con Ansible:</strong> La última parte del script verifica la capacidad de Ansible para conectarse y comunicarse con los nodos recién iniciados. Esto es un paso preliminar fundamental antes de poder aplicar configuraciones más complejas mediante playbooks (como podría hacer el script `configurarWebServers.sh`). Se relaciona con la sección de "Automatización de la configuración con Ansible" ("ISE-B1-OSyServicios.pdf", sección 5; "Temario.pdf", Apuntes de Clase 1.4 y Prácticas 3.5). El módulo `ping` de Ansible comprueba la conectividad SSH y la disponibilidad de Python, requisitos básicos para que Ansible funcione.
+                    </li>
+                    <li>
+                        <strong>Infraestructura como Código (IaC) / Automatización de Tareas:</strong> Aunque simple, el script es un ejemplo de automatización de tareas repetitivas (iniciar VMs y verificar conectividad), un pilar de las prácticas DevOps y la administración moderna de sistemas.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 12: El script `configurarWebServers.sh` ejecuta un playbook de Ansible. Considerando los temas del Bloque 1 (Apache, Nginx, firewall), ¿qué tipo de tareas comunes esperarías encontrar dentro del playbook `playbooks/configurar_web.yml` que menciona el script?</h3>
+            <div class="answer">
+                <p>Considerando los temas del Bloque 1, el playbook `playbooks/configurar_web.yml` mencionado en `configurarWebServers.sh` probablemente realizaría tareas para configurar servidores web (Apache o Nginx) en los nodos gestionados. Algunas tareas comunes que se esperarían encontrar son:</p>
+                <ol>
+                    <li>
+                        <strong>Instalación del software del servidor web:</strong>
+                        <ul>
+                            <li>Uso del módulo `package` (o `dnf`/`yum` para Rocky Linux) para asegurar que el paquete del servidor web elegido (por ejemplo, `httpd` para Apache o `nginx` para Nginx) esté instalado en los hosts destino.</li>
+                            <li>Ejemplo: <code>package: name={{ item }} state=present</code>, donde `item` podría ser `httpd` o `nginx` dependiendo de variables o la configuración del host.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Gestión del servicio del servidor web:</strong>
+                        <ul>
+                            <li>Uso del módulo `service` (o `systemd`) para asegurar que el servicio del servidor web esté iniciado y habilitado para arrancar automáticamente con el sistema.</li>
+                            <li>Ejemplo: <code>service: name=httpd state=started enabled=yes</code>.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Configuración del Firewall:</strong>
+                        <ul>
+                            <li>Uso del módulo `firewalld` para permitir el tráfico entrante en los puertos estándar del servidor web (puerto 80 para HTTP, puerto 443 para HTTPS).</li>
+                            <li>Ejemplo: <code>firewalld: service=http permanent=true state=enabled immediate=yes</code>.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Despliegue de contenido web básico:</strong>
+                        <ul>
+                            <li>Uso de módulos como `copy` o `template` para desplegar una página de inicio simple (como el `index.html` mencionado en los ejercicios opcionales, por ejemplo, en ISE-B1-OSyServicios.pdf, sección 4.1.1) en el directorio raíz del servidor web (<code>/var/www/html</code> para Apache, <code>/usr/share/nginx/html</code> para Nginx).</li>
+                            <li>Ejemplo: <code>copy: src=files/index.html dest=/var/www/html/index.html</code>.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Gestión de archivos de configuración (potencialmente):</strong>
+                        <ul>
+                            <li>Aunque para una configuración básica podría no ser necesario, playbooks más avanzados podrían usar el módulo `template` o `lineinfile` para personalizar archivos de configuración del servidor web (ej: <code>httpd.conf</code>, <code>nginx.conf</code>, o archivos de virtual hosts).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Manejo de Handlers (Notificaciones):</strong>
+                        <ul>
+                            <li>Podría incluir `handlers` para reiniciar el servicio del servidor web o el firewall solo si se realizan cambios en sus archivos de configuración o reglas, asegurando la idempotencia y eficiencia.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Uso de Variables y Condicionales:</strong>
+                        <ul>
+                            <li>El playbook podría usar variables (definidas en el inventario, `group_vars`, `host_vars`, o pasadas por línea de comandos) para, por ejemplo, determinar si se instala Apache o Nginx en un host particular, o qué contenido desplegar. Esto permitiría que el mismo playbook `configurar_web.yml` se adapte a diferentes escenarios según el inventario (como se sugiere en el ejercicio obligatorio de Ansible en ISE-B1-OSyServicios.pdf, sección 5.1, punto 2 de la segunda parte).</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>En esencia, el playbook automatizaría todos los pasos necesarios para tener un servidor web funcional y accesible en los nodos especificados en el inventario `inventory/hosts.ini`.</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 13: Al trabajar con LVM y RAID para alojar un directorio como `/var`, que se espera que crezca y cuyo contenido es crítico, ¿cómo contribuye cada una de estas tecnologías (LVM sobre RAID) a cumplir los requisitos de flexibilidad y respaldo?</h3>
+            <div class="answer">
+                <p>Combinar LVM sobre un array RAID es una estrategia común para gestionar el almacenamiento en servidores, especialmente para directorios como `/var` que tienen requisitos de crecimiento y criticidad. Cada tecnología aporta beneficios específicos:</p>
+
+                <p><strong>Contribución de RAID (Redundant Array of Independent Disks):</strong></p>
+                <ul>
+                    <li>
+                        <strong>Respaldo y Tolerancia a Fallos:</strong> Esta es la principal contribución de RAID en este escenario. Al utilizar un nivel de RAID que ofrezca redundancia (como RAID 1, RAID 5, RAID 6 o RAID 10), se protege la integridad de los datos de `/var` contra el fallo de uno o más discos (dependiendo del nivel de RAID).
+                        <ul>
+                            <li>Para `/var`, donde el contenido es crítico, un RAID 1 (mirroring) proporciona una copia exacta de los datos en otro disco. Si un disco falla, el sistema puede seguir funcionando con el disco espejo, evitando la pérdida de datos y minimizando el tiempo de inactividad.</li>
+                            <li>RAID 5 o RAID 6 podrían usarse si se necesita un balance entre capacidad y redundancia con más discos, aunque la reconstrucción puede ser más intensiva.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Mejora del Rendimiento (dependiendo del nivel):</strong> Algunos niveles de RAID, como RAID 0 (aunque no ofrece redundancia) o RAID 10, pueden mejorar el rendimiento de lectura/escritura, lo cual podría ser beneficioso para un directorio `/var` con mucha actividad de E/S (por ejemplo, logs frecuentes, bases de datos pequeñas). Para RAID 1, el rendimiento de lectura puede mejorar.
+                    </li>
+                </ul>
+                <p>El array RAID se presenta al sistema operativo como un único dispositivo de bloque (ej: `/dev/md0`).</p>
+
+                <p><strong>Contribución de LVM (Logical Volume Manager) sobre el RAID:</strong></p>
+                <p>Una vez que el array RAID (`/dev/md0`) está creado y es estable, se utiliza como un Physical Volume (PV) para LVM. LVM entonces aporta:</p>
+                <ul>
+                    <li>
+                        <strong>Flexibilidad en la Gestión del Espacio:</strong>
+                        <ul>
+                            <li><strong>Redimensionamiento Dinámico:</strong> El espacio de almacenamiento de `/var` (que residirá en un Logical Volume - LV) puede ser redimensionado fácilmente sin necesidad de reiniciar el sistema o desmontar el sistema de ficheros (para algunos sistemas de ficheros como ext4 o XFS con las herramientas adecuadas). Si `/var` comienza a llenarse, se puede extender el LV si hay espacio libre en el Volume Group (VG) que contiene el array RAID.</li>
+                            <li><strong>Gestión de Múltiples Volúmenes:</strong> Sobre el mismo array RAID (que forma parte de un VG), se podrían crear otros LVs para otros directorios o propósitos, gestionando el espacio del RAID de forma más granular.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Abstracción del Almacenamiento:</strong> LVM oculta la complejidad del dispositivo RAID subyacente. El sistema operativo y las aplicaciones solo ven el Logical Volume.
+                    </li>
+                    <li>
+                        <strong>Snapshots (Instantáneas):</strong> LVM permite tomar snapshots de los Logical Volumes. Esto podría ser útil para `/var` antes de realizar actualizaciones o cambios importantes, permitiendo una reversión rápida al estado anterior si algo sale mal, complementando la redundancia del RAID.
+                    </li>
+                    <li>
+                        <strong>Migración de Datos (Avanzado):</strong> LVM facilita la migración de datos entre diferentes dispositivos de almacenamiento físico si fuera necesario en el futuro, aunque en este caso, el PV es el array RAID.
+                    </li>
+                </ul>
+                <p><strong>En conjunto (LVM sobre RAID):</strong></p>
+                <p>Se obtiene un sistema de almacenamiento que es tanto **robusto y tolerante a fallos** (gracias a RAID) como **flexible y fácil de gestionar en términos de espacio** (gracias a LVM). Para un directorio crítico y con crecimiento esperado como `/var`, esta combinación es ideal: RAID asegura que los datos no se pierdan por un fallo de disco, y LVM permite adaptar el tamaño del almacenamiento asignado a `/var` según las necesidades sin grandes interrupciones.</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 14: ¿Cuál es la importancia de la configuración del `prompt` de la shell en las máquinas virtuales de prácticas, tal como se detalla en "ISE-B1-OSyServicios.pdf" (usuario, hostname, hora, directorio actual)? ¿Qué problemas podrían surgir si no se sigue esta recomendación en la entrega de capturas de pantalla?</h3>
+            <div class="answer">
+                <p>La configuración específica del `prompt` de la shell en las máquinas virtuales de prácticas (mostrando usuario, hostname, hora y directorio actual) es una directriz importante por varias razones fundamentales relacionadas con la evaluación y la validación del trabajo realizado por el alumno:</p>
+                <p><strong>Importancia de la Configuración del Prompt:</strong></p>
+                <ol>
+                    <li>
+                        <strong>Identificación y Autenticidad:</strong>
+                        <ul>
+                            <li><strong>Usuario:</strong> Confirma que los comandos fueron ejecutados por la cuenta de usuario correcta (por ejemplo, el usuario personal del alumno y no `root` a menos que sea necesario y se muestre el cambio o el uso de `sudo`).</li>
+                            <li><strong>Hostname:</strong> Permite verificar que las operaciones se realizaron en la máquina virtual correcta (ej: `dpsMV01`), especialmente si se manejan múltiples MVs o si las capturas provienen de diferentes alumnos. El hostname suele incluir iniciales del alumno.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Contexto Temporal y Espacial:</strong>
+                        <ul>
+                            <li><strong>Hora:</strong> Proporciona una marca de tiempo aproximada de cuándo se realizó la acción, lo que puede ser útil para seguir la secuencia de pasos o para correlacionar con otros eventos o logs.</li>
+                            <li><strong>Directorio Actual:</strong> Indica la ubicación en el sistema de ficheros desde donde se ejecutó el comando. Esto es crucial para entender el contexto de comandos relativos a rutas o para verificar que se está trabajando en el lugar correcto (ej: editando un archivo de configuración en `/etc/` o trabajando en el home del usuario).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Validación del Entorno de Práctica:</strong>
+                        <ul>
+                            <li>Asegura que el alumno ha configurado el entorno de la MV según las especificaciones de la práctica, lo cual es en sí mismo parte de los objetivos de aprendizaje (manejo básico del sistema).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Facilidad de Corrección y Depuración para el Evaluador:</strong>
+                        <ul>
+                            <li>Un prompt estandarizado y completo ayuda al profesor o evaluador a entender rápidamente el contexto de cada captura de pantalla, haciendo el proceso de corrección más eficiente y menos propenso a malentendidos.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p><strong>Problemas si no se sigue la Recomendación en las Entregas:</strong></p>
+                <p>El documento "ISE-B1-OSyServicios.pdf" es explícito al respecto: <em>"Este prompt debe estar visible en toda captura de pantalla que el alumno/a entregue como parte de la evaluación. Las capturas que no lo contengan o no sigan este diseño de prompt se considerarán inválidas."</em></p>
+                <p>Los problemas que podrían surgir incluyen:</p>
+                <ul>
+                    <li><strong>Invalidación de la Entrega:</strong> Como se indica, la captura o la sección correspondiente podría ser considerada inválida, afectando la calificación.</li>
+                    <li><strong>Dificultad para Verificar la Autoría:</strong> Sin el usuario y el hostname personalizado, sería más difícil para el evaluador confirmar que el trabajo es original del alumno.</li>
+                    <li><strong>Ambigüedad en la Ejecución:</strong> Sin la ruta completa o la hora, puede ser difícil determinar si un comando tuvo el efecto esperado o si se ejecutó en la secuencia correcta.</li>
+                    <li><strong>Pérdida de Contexto:</strong> El evaluador podría no tener suficiente información para entender completamente la acción mostrada en la captura, llevando a posibles malinterpretaciones del trabajo del alumno.</li>
+                    <li><strong>Sospecha de Fraude:</strong> La falta de un prompt identificable podría levantar sospechas sobre la originalidad de las capturas.</li>
+                </ul>
+                <p>Por lo tanto, seguir la directriz de configuración del prompt no es solo una formalidad, sino un requisito esencial para la correcta evaluación y validación del trabajo práctico en la asignatura.</p>
+            </div>
+        </div>
+
+        <div class="dev-question">
+            <h3>Pregunta 15: Explica el concepto de "Cloud Computing" y describe brevemente los tres tipos principales de nubes (Pública, Privada, Híbrida) mencionados en las transparencias (transparenciasB1L1L2.pdf), dando un ejemplo de proveedor o tecnología para cada una donde sea aplicable.</h3>
+            <div class="answer">
+                <p><strong>Concepto de Cloud Computing:</strong></p>
+                <p>Cloud Computing (Computación en la Nube) es un modelo que permite el acceso bajo demanda a través de la red a un conjunto compartido de recursos informáticos configurables (como redes, servidores, almacenamiento, aplicaciones y servicios). Estos recursos pueden ser rápidamente aprovisionados y liberados con un mínimo esfuerzo de gestión o interacción con el proveedor del servicio. En esencia, permite utilizar recursos de TI como una utilidad, pagando solo por lo que se consume, y accediendo a ellos desde cualquier lugar con conexión a Internet.</p>
+
+                <p><strong>Tipos Principales de Nubes:</strong></p>
+                <ol>
+                    <li>
+                        <strong>Nube Pública:</strong>
+                        <ul>
+                            <li><strong>Descripción:</strong> La infraestructura y los servicios de la nube son propiedad de un proveedor externo y se ofrecen al público general o a un amplio grupo de la industria. Los recursos (como servidores y almacenamiento) son compartidos por múltiples organizaciones (inquilinos) aunque lógicamente aislados. El cliente no gestiona la infraestructura física subyacente.</li>
+                            <li><strong>Características:</strong> Escalabilidad masiva, modelo de pago por uso, accesibilidad global, amplia gama de servicios.</li>
+                            <li><strong>Ejemplos de Proveedores (según transparencias):</strong>
+                                <ul>
+                                    <li>Amazon Web Services (AWS)</li>
+                                    <li>Microsoft Azure</li>
+                                    <li>Google Cloud Platform (GCP)</li>
+                                    <li>VMware (ofrece soluciones para nubes públicas y privadas)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Nube Privada:</strong>
+                        <ul>
+                            <li><strong>Descripción:</strong> La infraestructura de la nube se opera exclusivamente para una única organización. Puede ser gestionada por la propia organización o por un tercero, y puede estar ubicada en las instalaciones de la organización (on-premise) o externamente. Ofrece mayor control y personalización.</li>
+                            <li><strong>Características:</strong> Mayor control sobre la seguridad y los datos, personalización según las necesidades de la organización, cumplimiento normativo específico.</li>
+                            <li><strong>Ejemplos de Tecnologías/Proveedores (según transparencias):</strong>
+                                <ul>
+                                    <li>Proxmox (software de virtualización que puede usarse para construir nubes privadas)</li>
+                                    <li>OpenStack (plataforma de software de código abierto para crear nubes privadas y públicas)</li>
+                                    <li>Oracle Cloud (aunque es un proveedor público, también ofrece soluciones para nubes privadas y dedicadas)</li>
+                                    <li>VMware (con su stack de virtualización como vSphere, NSX, etc.)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Nube Híbrida:</strong>
+                        <ul>
+                            <li><strong>Descripción:</strong> Es una composición de dos o más infraestructuras de nube distintas (privada, comunitaria o pública) que permanecen como entidades únicas pero están unidas por tecnología estandarizada o propietaria que permite la portabilidad de datos y aplicaciones (por ejemplo, "cloud bursting" para picos de carga o balanceo de cargas de trabajo).</li>
+                            <li><strong>Características:</strong> Flexibilidad para aprovechar los beneficios de diferentes modelos de nube, capacidad de mantener datos sensibles en una nube privada mientras se utilizan recursos de la nube pública para cargas de trabajo menos críticas o con picos de demanda, optimización de costes.</li>
+                            <li><strong>Ejemplo:</strong> Una organización podría usar su nube privada para operaciones diarias y datos sensibles, y recurrir a una nube pública (como AWS o Azure) para capacidad adicional durante picos de demanda o para servicios específicos que no desea construir internamente.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+
+        </div>
+</body>
+</html>

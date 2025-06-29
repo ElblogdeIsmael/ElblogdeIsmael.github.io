@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Fundamentos de Redes - Práctica 3</title>
+    <style>
+        body {
+            font-family: 'Latin Modern Roman', 'Times New Roman', serif;
+            background-color: #ffffff;
+            color: #020b14;
+            line-height: 1.6;
+            padding: 20px;
+            font-size: 18px;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .details {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            background: #a0cbe8;
+            border: 1px solid #022548;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question.correct {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+        .question.incorrect {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+        .explanation {
+            background: #e2e3e5;
+            border: 1px solid #d6d8db;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .author {
+            margin-top: 20px;
+            font-style: italic;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Test de Práctica 3 - FUNDAMENTOS DE REDES </h1>
+    <div class="details">
+        <h2>Detalles del Examen</h2>
+        <p><strong>Titulación:</strong> Ingeniería en Informática + ADE</p>
+        <p><strong>Autor:</strong> Ismael Sallami Moreno</p>
+        <p><strong>Asignatura:</strong> Fundamentos de Redes</p>
+        <p><strong>Temario:</strong> Práctica 3 </p>
+    </div>
+
+    <div class="question" id="q1">
+        <p>1.¿Cómo es capaz el servidor HTTP Apache2 de discernir si una petición se dirige a un determinado sitio (virtual host) u otro, previamente configurados y con nombre de dominio diferentes?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q1" value="1"> A través de la cabecera HTTP <em>Accept</em> en la petición que hace el cliente HTTP.</label></li>
+            <li><label><input type="radio" name="q1" value="2"> A través de la cabecera HTTP <em>Connection</em> en la petición que hace el cliente HTTP.</label></li>
+            <li><label><input type="radio" name="q1" value="3"> A través de la cabecera HTTP <em>Host</em> en la petición que hace el cliente HTTP.</label></li>
+            <li><label><input type="radio" name="q1" value="4"> A través de la cabecera HTTP <em>Host</em> en la respuesta desde el servidor HTTP.</label></li>
+        </ul>
+
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation1')">
+        <div id="explanation1" class="explanation" style="display: none;">
+            En este caso la respuesta correcta es la opción 3 debido a que es a través de la cabecera HTTP Host en la petición que hace el cliente HTTP como el servidor HTTP Apache2 es capaz de discernir si una petición se dirige a un determinado sitio (virtual host) u otro, previamente configurados y con nombre de dominio diferentes.
+        </div>
+    </div>
+    
+    <div class="question" id="q2">
+        <p>2.¿Cuál es la carpeta en la que se almacenan los hosts virtuales de un sitio web gestionado mediante Apache2?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q2" value="1"> <code>/apache2/etc/sites-enabled</code></label></li>
+            <li><label><input type="radio" name="q2" value="2"> <code>/user/apache2/sites-enabled</code></label></li>
+            <li><label><input type="radio" name="q2" value="3"> <code>/etc/apache2/sites-enabled</code></label></li>
+            <li><label><input type="radio" name="q2" value="4"> <code>/etc/www/sites-enabled</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation2')">
+        <div id="explanation2" class="explanation" style="display: none;">
+            La ubicación correcta es la opción 3, es decir, <code>/etc/apache2/sites-enabled</code>.
+        </div>
+    </div>
+    
+    <div class="question" id="q3">
+        <p>3.Considerando la siguiente traza, ¿cuál de las siguientes afirmaciones referentes al archivo de configuración, localizado en el directorio <code>/etc/apache2/sites-available/</code>, del correspondiente virtual host es correcta?</p>
+        <!-- añadir imagen aqui -->
+        <img src="imagenesP3/imagen1.png" alt="Imagen1">
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q3" value="1"> <code>&lt;Virtual *:8080&gt;</code> y <code>&lt;/VirtualHost&gt;</code> encerrarán el grupo de directivas que se aplicarán al correspondiente virtual host.</label></li>
+            <li><label><input type="radio" name="q3" value="2"> <code>&lt;Virtual *:80&gt;</code> y <code>&lt;/VirtualHost&gt;</code> encerrarán el grupo de directivas que se aplicarán al correspondiente virtual host.</label></li>
+            <li><label><input type="radio" name="q3" value="3"> Debe contener una directiva <code>ServerName</code> o <code>ServerAlias</code> con argumento <code>www.dominio2.com</code>.</label></li>
+            <li><label><input type="radio" name="q3" value="4"> Debe contener una directiva <code>ServerName</code> o <code>ServerAlias</code> con argumento <code>http://dominio2.com:8080</code>.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation3')">
+        <div id="explanation3" class="explanation" style="display: none;">
+            En este caso la respuesta correcta es la opción 1 debido a que concuerda con el rando de directivas que se aplicarán al correspondiente virtual host en html.
+        </div>
+    </div>
+    
+    <div class="question" id="q4">
+        <p>4.Se ha implementado el acceso autorizado de un sitio web en Apache2 usando una metodología de autenticación básica con el siguiente fichero <code>.htaccess</code>, ¿qué comando usaría para crear el correspondiente fichero de contraseñas?<br><code>AuthType Basic<br>AuthName "Directorio con control de acceso"<br>AuthUserFile "/usr/local/apache/passwords"<br>Require user mew</code><br></p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q4" value="1"> <code>sudo htuser -c /usr/local/apache/passwords mew</code></label></li>
+            <li><label><input type="radio" name="q4" value="2"> <code>sudo htpasswd -c /usr/local/apache/passwords mew</code></label></li>
+            <li><label><input type="radio" name="q4" value="3"> <code>sudo htpasswd -c /usr/local/passwords.pd mew</code></label></li>
+            <li><label><input type="radio" name="q4" value="4"> <code>sudo htuser -c /usr/local/passwords.pd mew</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation4')">
+        <div id="explanation4" class="explanation" style="display: none;">
+            La respuesta correcta es la opción 2, es decir, <code>sudo htpasswd -c /usr/local/apache/passwords mew</code> debido a que debebemos de usar el comando htpasswd en apache/passwords para crear el fichero de contraseñas con la opción de contraseña mew.
+        </div>
+    </div>
+    
+    <div class="question" id="q5">
+        <p>5.Suponga que queremos crear la clave privada y el certificado electrónico autofirmado de un sitio web en el directorio <code>/home/administrador/Descargas</code> utilizando openssl. El certificado debe tener una validez de 30 días y la clave privada debe tener una longitud de 1024 bits. ¿Qué comando usaría?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q5" value="1"> <code>sudo openssl req -x509 -nodes -days 30 -newkey rsa:1024 -keyout /home/administrador/Descargas/clave.key -out /home/administrador/Descargas/certificado.crt</code></label></li>
+            <li><label><input type="radio" name="q5" value="2"> <code>sudo openssl req -x509 -nodes -days 30 -newkey rsa:1024 -out /home/administrador/Descargas/apache-selfsigned.key -key /home/administrador/Descargas/apache-selfsigned.crt</code></label></li>
+            <li><label><input type="radio" name="q5" value="3"> <code>sudo openssl req -x509 -nodes -days 30 rsa:1024 -out /home/administrador/Descargas/clave.key -keyout /home/administrador/Descargas/certificado.crt</code></label></li>
+            <li><label><input type="radio" name="q5" value="4"> <code>sudo openssl req -x509 -days 30 -newkey rsa:1024 -keyout /home/administrador/Descargas/apache-selfsigned.key -out /home/administrador/Descargas/apache-selfsigned.crt</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation5')">
+        <div id="explanation5" class="explanation" style="display: none;">
+            En este caso la opción correcta es la opción 1 debido a que es la única que concuerda con los formatos de los comandos, es decir, usa un fichero key con la opcioón keyout y un fichero crt con la opción out. (Los demás en esto no concuerdan).
+        </div>
+    </div>
+    
+    <div class="question" id="q6">
+        <p>6.¿Cuál de los siguientes comandos usaría para crear un enlace simbólico del archivo de configuración <code>fr.com.conf</code> en el directorio <code>/etc/apache2/sites-enabled/</code>?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q6" value="1"> <code>sudo a2enmod fr.com</code></label></li>
+            <li><label><input type="radio" name="q6" value="2"> <code>sudo a2dissite fr.com</code></label></li>
+            <li><label><input type="radio" name="q6" value="3"> <code>sudo a2dismod fr.com</code></label></li>
+            <li><label><input type="radio" name="q6" value="4"> <code>ln -s /etc/apache2/sites-available/fr.com.conf /etc/apache2/sites-enabled/fr.com.conf</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation6')">
+        <div id="explanation6" class="explanation" style="display: none;">
+            Opcioón correcta es la opción 4, es decir, <code>ln -s /etc/apache2/sites-available/fr.com.conf /etc/apache2/sites-enabled/fr.com.conf</code> debido a que es el comando que se usa para crear un enlace simbólico del archivo de configuración fr.com.conf en el directorio /etc/apache2/sites-enabled/.
+        </div>
+    </div>
+    
+    <div class="question" id="q7">
+        <p>7.Considerando la siguiente traza capturada con Wireshark, ¿cuál de las siguientes afirmaciones es correcta?</p>
+        <img src="imagenesP3/imagen2.png" alt="Imagen3">
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q7" value="1"> El navegador puede aceptar contenido comprimido Gzip.</label></li>
+            <li><label><input type="radio" name="q7" value="2"> Se está usando un servidor web NGINX.</label></li>
+            <li><label><input type="radio" name="q7" value="3"> Se está usando el protocolo HTTP/2.</label></li>
+            <li><label><input type="radio" name="q7" value="4"> El dominio del sitio web accedido por el cliente es <code>/download.html</code>.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation7')">
+        <div id="explanation7" class="explanation" style="display: none;">
+            En este caso es correcta la opción 1 debido a que el navegador puede aceptar contenido comprimido Gzip, y el dominio y el servidor web NGINX no son los indicados, y no se usa el protocolo HTTP/2, sino que se usa el protocolo HTTP/1.1.
+        </div>
+    </div>
+    
+    <div class="question" id="q8">
+        <p>8.Dada la siguiente captura de tráfico, ¿qué puede decir de ella?</p>
+        <img src="imagenesP3/imagen3.png" alt="Imagen3">
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q8" value="1"> No se pueden dar muchos detalles con solo la información aportada.</label></li>
+            <li><label><input type="radio" name="q8" value="2"> Se trata de una interacción HTTPS entre cliente y servidor y ya se ha establecido el canal seguro de comunicaciones con TLSv1.2.</label></li>
+            <li><label><input type="radio" name="q8" value="3"> Se trata de una interacción HTTP entre cliente y servidor.</label></li>
+            <li><label><input type="radio" name="q8" value="4"> Se trata de una interacción HTTPS entre cliente y servidor. Ambos están en la fase <em>handshake</em> en dónde establecerán un canal seguro de comunicaciones con <code>TLSv1.2</code>.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation8')">
+        <div id="explanation8" class="explanation" style="display: none;">
+            Podemos afirmar que se trata de una interacción HTTPS entre cliente y servidor. Ambos están en la fase handshake en dónde establecerán un canal seguro de comunicaciones con TLSv1.2.
+        </div>
+    </div>
+    
+    <div class="question" id="q9">
+        <p>9.Si quisiéramos restringir el acceso a una carpeta llamada <code>zonaprivada</code> dentro de un dominio llamado <code>nuevodominio</code> gestionado por Apache2, ¿qué deberíamos hacer de entre estas opciones?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q9" value="1"> Ubicar un fichero <code>.htaccess</code> en la carpeta <code>/var/www/nuevodominio/zonaprivada</code></label></li>
+            <li><label><input type="radio" name="q9" value="2"> Ubicar un fichero <code>.private</code> en la carpeta <code>/etc/apache2/nuevodominio/zonaprivada</code></label></li>
+            <li><label><input type="radio" name="q9" value="3"> Ubicar un fichero <code>.private</code> en la carpeta <code>/var/www/nuevodominio/zonaprivada</code></label></li>
+            <li><label><input type="radio" name="q9" value="4"> Ubicar un fichero <code>.htaccess</code> en la carpeta <code>/etc/apache2/nuevodominio/zonaprivada</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation9')">
+        <div id="explanation9" class="explanation" style="display: none;">
+            La opción correcta es la opción 1, es decir, ubicar un fichero .htaccess en la carpeta /var/www/nuevodominio/zonaprivada debido a que es la ubicación correcta para restringir el acceso a una carpeta llamada zonaprivada dentro de un dominio llamado nuevodominio gestionado por Apache2.
+        </div>
+    </div>
+    
+    <div class="question" id="q10">
+        <p>10.Suponga que se usa la utilidad <code>openssl</code> como sigue para generar el certificado electrónico de un sitio web, ¿cuál de las siguientes afirmaciones referentes al archivo de configuración, localizado en el directorio <code>/etc/apache2/sites-available/</code>, del correspondiente virtual host es correcta?<br><code>sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /usr/fr.key -out /usr/fr.crt</code></p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q10" value="1"> Debe contener una directiva <code>SSLCertificateKeyFile</code> con argumento <code>/usr/fr.key</code></label></li>
+            <li><label><input type="radio" name="q10" value="2"> Debe contener una directiva <code>SSLEngine</code> con argumento <code>on</code>.</label></li>
+            <li><label><input type="radio" name="q10" value="3"> Todas las afirmaciones son correctas.</label></li>
+            <li><label><input type="radio" name="q10" value="4"> Debe contener una directiva <code>SSLCertificateFile</code> con argumento <code>/usr/fr.crt</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation10')">
+        <div id="explanation10" class="explanation" style="display: none;">
+            En este caso la respuesta correcta es la 3, es decir, todas las afirmaciones son correctas debido a que todas las directivas son necesarias para el archivo de configuración del correspondiente virtual host.
+        </div>
+    </div>
+    
+    <div class="question" id="q11">
+        <p>11.Dada la siguiente directiva de un servidor Apache ubicada en su fichero de configuración <code>apache.conf</code>,<br><code><directory var="" www=""><br>Options Indexes FollowSymLinks<br>AllowOverride None<br>Require all granted<br></directory></code><br>¿cómo la modificaría para permitir interpretar ficheros de autorización <code>.htaccess</code> únicamente en el directorio <code>/var/www/ejemplo/</code>?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q11" value="1"> <code>AllowOverride All</code></label></li>
+            <li><label><input type="radio" name="q11" value="2"> <code>AllowOverride All</code> y <code>Directory /var/www/misitio/</code></label></li>
+            <li><label><input type="radio" name="q11" value="3"> <code>AllowOverride All</code> y <code>Directory /var/www/ejemplo/</code></label></li>
+            <li><label><input type="radio" name="q11" value="4"> <code>Directory /var/www/ejemplo/</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation11')">
+        <div id="explanation11" class="explanation" style="display: none;">
+            En este caso la respuesta correcta es la opción 3, es decir, <code>AllowOverride All</code> y <code>Directory /var/www/ejemplo/</code> debido a que es la forma correcta de modificar la directiva para permitir interpretar ficheros de autorización .htaccess únicamente en el directorio /var/www/ejemplo/. El server name debe de coincidir con el nombre del host.
+        </div>
+    </div>
+    
+    <div class="question" id="q12">
+        <p>12.Un servidor HTTP Apache2 tiene configurado el siguiente sitio (virtual host) tal que,<br><code>ServerName ejemplo.com<br>ServerAlias www.ejemplo.com<br>ServerAdmin webmaster@ejemplo.com<br>DocumentRoot /var/www/ejemplo.com/<br><directory var="" www="" ejemplo.com=""><br>Options -Indexes +FollowSymLinks<br>AllowOverride All<br></directory><br>ErrorLog ${APACHE_LOG_DIR}/ejemplo.com-error.log<br>CustomLog ${APACHE_LOG_DIR}/ejemplo.com-access.log combined</code><br>¿Qué cabecera HTTP tendría que enviar el cliente al servidor y con qué valor para que ser pueda servir la página de inicio del sitio?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q12" value="1"> <code>Host: ejemplo.com</code></label></li>
+            <li><label><input type="radio" name="q12" value="2"> <code>Host: midominio1.com</code></label></li>
+            <li><label><input type="radio" name="q12" value="3"> <code>Accept: www.ejemplo.com</code></label></li>
+            <li><label><input type="radio" name="q12" value="4"> <code>Server: ejemplo.com</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation12')">
+        <div id="explanation12" class="explanation" style="display: none;">
+            En este caso es la opción 1, es decir, <code>Host: ejemplo.com</code> debido a que es la cabecera HTTP que tendría que enviar el cliente al servidor y con qué valor para que ser pueda servir la página de inicio del sitio.
+        </div>
+    </div>
+    
+    <div class="question" id="q13">
+        <p>13.Un servidor Apache2 escucha peticiones HTTP en la IP <code>192.168.1.5</code> perteneciente a la red de gestión del laboratorio 3.7 y tiene alojado y configurado el sitio web <code>www.ejemplo.com</code> ¿es necesaria una configuración adicional para servir la página web por defecto de dicho sitio web? Si es así, ¿qué es lo que hay que configurar?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q13" value="1"> Sí, hay que introdudir la siguiente línea en el fichero <code>/etc/hosts</code> del cliente: <code>33.1.1.3 www.ejemplo.com</code></label></li>
+            <li><label><input type="radio" name="q13" value="2"> Sí, hay que introdudir la siguiente línea en el fichero <code>/etc/hosts</code> del cliente: <code>192.168.1.5 www.ejemplo.com</code></label></li>
+            <li><label><input type="radio" name="q13" value="3"> Sí, hay que introdudir la siguiente línea en el fichero <code>/etc/hosts</code> del servidor: <code>33.1.1.3 www.ejemplo.com</code></label></li>
+            <li><label><input type="radio" name="q13" value="4"> Sí, hay que introdudir la siguiente línea en el fichero <code>/etc/hosts</code> del servidor: <code>192.168.1.5 www.ejemplo.com</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation13')">
+        <div id="explanation13" class="explanation" style="display: none;">
+            La opción correcta es la opción 2, es decir, Sí, hay que introdudir la siguiente línea en el fichero /etc/hosts del cliente: <code>192.168.1.5 www.ejemplo.com</code> debido a que es la configuración adicional necesaria para servir la página web por defecto de dicho sitio web.
+        </div>
+    </div>
+    
+    <div class="question" id="q14">
+        <p>14.¿Cómo se autentica el servidor HTTPS ante el cliente para formar un canal seguro de comunicaciones?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q14" value="1"> Mediante su certificado digital.</label></li>
+            <li><label><input type="radio" name="q14" value="2"> No es necesario que el servidor de autentique ante el cliente.</label></li>
+            <li><label><input type="radio" name="q14" value="3"> Mediante su usuario y contraseña.</label></li>
+            <li><label><input type="radio" name="q14" value="4"> Mediante el certificado digital del cliente.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation14')">
+        <div id="explanation14" class="explanation" style="display: none;">
+            Es la opción 1, es decir, mediante su certificado digital debido a que es la forma en la que se autentica el servidor HTTPS ante el cliente para formar un canal seguro de comunicaciones.
+        </div>
+    </div>
+    
+    <div class="question" id="q15">
+        <p>15.Suponga que se usa la utilidad <code>openssl</code> como sigue para generar el certificado electrónico de un sitio web, ¿cuál de las siguientes afirmaciones referentes al archivo de configuración, localizado en el directorio <code>/etc/apache2/sites-available/</code>, del correspondiente virtual host es correcta?<br><code>sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /usr/fr.key -out /usr/fr.crt</code></p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q15" value="1"> Debe contener una directiva <code>SSLCertificateKeyFile</code> con argumento <code>/usr/fr.crt</code></label></li>
+            <li><label><input type="radio" name="q15" value="2"> Debe contener una directiva <code>SSLCertificate</code> con argumento <code>/usr/fr.crt</code></label></li>
+            <li><label><input type="radio" name="q15" value="3"> Debe contener una directiva <code>SSLCertificateFile</code> con argumento <code>/usr/fr.key</code></label></li>
+            <li><label><input type="radio" name="q15" value="4"> Debe contener una directiva <code>SSLCertificateKeyFile</code> con argumento <code>/usr/fr.key</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation15')">
+        <div id="explanation15" class="explanation" style="display: none;">
+            La opción correcta es la opción 4, es decir, Debe contener una directiva SSLCertificateKeyFile con argumento /usr/fr.key debido a que es la directiva que se utiliza para especificar el archivo del certificado privado.
+        </div>
+    </div>
+    
+    <div class="question" id="q16">
+        <p>16.Considerando la siguiente traza capturada con Wireshark, ¿cuál de las siguientes afirmaciones es correcta?</p>
+        <img src="imagenesP3/imagen4.png" alt="Imagen3">
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q16" value="1"> El recurso <code>http://www.ethereal.com/download.html</code> tiene un tamaño de 18070 bytes y es servido por un servidor HTTP Apache escuchando en el puerto 80.</label></li>
+            <li><label><input type="radio" name="q16" value="2"> El recurso <code>http://www.ethereal.com/download.html</code> tiene un tamaño de 18070 bytes y es servido por un cliente Mozilla-Firefox.</label></li>
+            <li><label><input type="radio" name="q16" value="3"> El recurso <code>https://www.ethereal.com/download.html</code> tiene un tamaño de 18070 bytes y es servido por un servidor HTTPS Apache escuchando en el puerto 443.</label></li>
+            <li><label><input type="radio" name="q16" value="4"> El recurso <code>http://www.ethereal.com/download.html</code> no ha podido ser servido por el servidor Apache.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation16')">
+        <div id="explanation16" class="explanation" style="display: none;">
+            En este caso la respuesta correcta es la opción 1 debido a que el recurso http://www.ethereal.com/download.html tiene un tamaño de 18070 bytes y es servido por un servidor HTTP Apache escuchando en el puerto 80. (HTTP escucha en el puerto 80 y HTTPS en el 443).
+        </div>
+    </div>
+    
+    <div class="question" id="q17">
+        <p>17.Un sitio web alojado en un servidor HTTP tiene configurada una zona restringida. Para que se pueda acceder a la zona restringida, es necesario introducir las credenciales del usuario en concreto, previamente configurado. Si un atacante pudiera interceptar las comunicaciones entre el cliente y el servidor, ¿podría ser capaz de obtener dichas credenciales y utilizarlas para suplantar la identidad de dicho usuario?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q17" value="1"> Sí, porque están cifradas.</label></li>
+            <li><label><input type="radio" name="q17" value="2"> No</label></li>
+            <li><label><input type="radio" name="q17" value="3"> Sí</label></li>
+            <li><label><input type="radio" name="q17" value="4"> No, porque están cifradas</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation17')">
+        <div id="explanation17" class="explanation" style="display: none;">
+            La respuesta correcta es la opción 3, es decir, Sí debido a que si un atacante pudiera interceptar las comunicaciones entre el cliente y el servidor, podría ser capaz de obtener dichas credenciales y utilizarlas para suplantar la identidad de dicho usuario.
+        </div>
+    </div>
+    
+    <div class="question" id="q18">
+        <p>18.¿Qué comando usaría para habilitar el módulo <code>mod_ssl</code> de Apache2?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q18" value="1"> <code>sudo a2ensite ssl</code></label></li>
+            <li><label><input type="radio" name="q18" value="2"> <code>sudo a2enmod mod_ssl</code></label></li>
+            <li><label><input type="radio" name="q18" value="3"> <code>sudo a2ensite mod_ssl</code></label></li>
+            <li><label><input type="radio" name="q18" value="4"> <code>sudo a2enmod ssl</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation18')">
+        <div id="explanation18" class="explanation" style="display: none;">
+            La respuesta correcta es la opción 4, es decir, <code>sudo a2enmod ssl</code>. Este comando activa el módulo mod_ssl de Apache2, debido a que es el comando que se usa para habilitar el módulo mod_ssl de Apache2.
+        </div>
+    </div>
+    
+    <div class="question" id="q19">
+        <p>19.¿Qué protocolo se utiliza para resolver un nombre de dominio en concreto?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q19" value="1"> HTTP (Hyper Text Transfer Protocol)</label></li>
+            <li><label><input type="radio" name="q19" value="2"> SSH (Secure SHell)</label></li>
+            <li><label><input type="radio" name="q19" value="3"> DNS (Domain Name System)</label></li>
+            <li><label><input type="radio" name="q19" value="4"> TLS (Transport Layer Security)</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation19')">
+        <div id="explanation19" class="explanation" style="display: none;">
+            La respuesta correcta es la opción 3, es decir, DNS. Este protocolo se utiliza para resolver un nombre de dominio en concreto, y es el que se utiliza para obtener la dirección IP de un dominio.
+        </div>
+    </div>
+    
+    <div class="question" id="q20">
+        <p>20.¿Qué servicios de seguridad garantiza el protocolo TLS?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q20" value="1"> TLS no garantiza ningún servicio de seguridad a diferencia de HTTP que sí lo hace.</label></li>
+            <li><label><input type="radio" name="q20" value="2"> Confidencialidad, integridad y disponibilidad.</label></li>
+            <li><label><input type="radio" name="q20" value="3"> Confidencialidad e integridad, pero no es capaz de autenticar a las partes implicadas en la comunicación.</label></li>
+            <li><label><input type="radio" name="q20" value="4"> Confidencialidad, integridad y autenticación.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation20')">
+        <div id="explanation20" class="explanation" style="display: none;">
+            La respuesta correcta es la opción 4, es decir, Confidencialidad, integridad y autenticación. El protocolo TLS garantiza estos servicios de seguridad.
+        </div>
+    </div>
+
+    <div class="question" id="q21">
+        <p>21.Considerando la siguiente traza capturada con Wireshark, ¿cuál de las siguientes afirmaciones es correcta</p>
+        <img src="imagenesP3/imagen5.png" alt="Imagen4">
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q21" value="1"> El navegador puede aceptar contenido comprimido Brotli.</label></li>
+            <li><label><input type="radio" name="q21" value="2"> El recurso <code>www.ethereal.com</code> tiene un tamaño de 478 bytes.</label></li>
+            <li><label><input type="radio" name="q21" value="3"> Se está usando el protocolo HTTP/1.1.</label></li>
+            <li><label><input type="radio" name="q21" value="4"> El servidor web Apache está escuchando en el puerto 3372.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation21')">
+        <div id="explanation21" class="explanation" style="display: none;">
+            La respuesta correcta es la opción 3, es decir, Se está usando el protocolo HTTP/1.1. En la traza se puede ver que se está usando el protocolo HTTP/1.1.
+        </div>
+    </div>
+    
+    <div class="question" id="q22">
+        <p>22.Si quisiéramos configurar un host virtual llamado <code>nuevodominio.es</code>, ¿en qué fichero incluiríamos su configuración?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q22" value="1"> <code>/var/apache2/sites-enable/nuevodominio.es.conf</code></label></li>
+            <li><label><input type="radio" name="q22" value="2"> <code>/etc/apache2/sites-available/virtualhost.conf</code></label></li>
+            <li><label><input type="radio" name="q22" value="3"> <code>/etc/apache2/sites-available/nuevodominio.es</code></label></li>
+            <li><label><input type="radio" name="q22" value="4"> <code>/etc/apache2/sites-available/nuevodominio.es.conf</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation22')">
+        <div id="explanation22" class="explanation" style="display: none;">
+            La opción correcta es la opción 4, es decir, <code>/etc/apache2/sites-available/nuevodominio.es.conf</code> debido a que es el fichero en el que se incluiría la configuración de un host virtual llamado nuevodominio.es.
+        </div>
+    </div>
+    
+    <div class="question" id="q23">
+        <p>23.Considerando la siguiente traza capturada con Wireshark, ¿cuál de las siguientes afirmaciones es correcta?</p>
+        <img src="imagenesP3/imagen6.png" alt="Imagen5">
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q23" value="1"> Un cliente con IP pública 65.208.228.223 accede mediante el navegador Mozilla Firefox al recurso <code>www.ethereal.com</code>.</label></li>
+            <li><label><input type="radio" name="q23" value="2"> El dominio del sitio web accedido por el cliente es <code>www.ethereal.com/download.html</code>.</label></li>
+            <li><label><input type="radio" name="q23" value="3"> Un cliente con IP pública 145.254.160.237 accede al recurso <code>http://www.ethereal.com/download.html</code> servido por un servidor HTTP Apache escuchando en el puerto 3372.</label></li>
+            <li><label><input type="radio" name="q23" value="4"> El recurso <code>http://www.ethereal.com/download.html</code> tiene un tamaño de 18070 bytes y es servido por un servidor HTTP Apache escuchando en el puerto 80.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation23')">
+        <div id="explanation23" class="explanation" style="display: none;">
+            La respuesta correcta es la opción 4, es decir, El recurso http://www.ethereal.com/download.html tiene un tamaño de 18070 bytes y es servido por un servidor HTTP Apache escuchando en el puerto 80. En la traza se puede ver que el recurso http://www.ethereal.com/download.html tiene un tamaño de 18070 bytes y es servido por un servidor HTTP Apache escuchando en el puerto 80, debido a que HTTP escucha en el puerto 80 y HTTPS en el 443 y el tamaño del recurso es de 18070 bytes según la traza.
+            ¿Donde se ve en la traza y como se calculan los 18070 bytes? 
+            En la traza de Wireshark, los 18070 bytes se pueden ver en el campo "Content-Length" de la respuesta HTTP. Este campo indica el tamaño del cuerpo del mensaje HTTP en bytes. Para calcular los 18070 bytes, Wireshark suma el tamaño de todos los datos del cuerpo del mensaje HTTP que se están transfiriendo desde el servidor al cliente.
+            ¿Porque es falsa la opción 3?
+            La opción 3 es incorrecta debido a que un servidor HTTP Apache, por defecto, escucha en el puerto 80 para HTTP y en el puerto 443 para HTTPS. En este caso, el servidor está configurado para escuchar en el puerto 3372, lo cual no es una configuración estándar y podría causar problemas de acceso si el cliente no especifica el puerto correcto en la URL. Por lo tanto, la configuración del puerto no es la habitual y puede llevar a errores de conexión. 
+        </div>
+    </div>
+    
+    <div class="question" id="q24">
+        <p>24.Cuál de las siguientes afirmaciones es cierta cuando creamos un certificado con <code>openssl</code> para un sitio web servido con Apache2?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q24" value="1"> Todas las afirmaciones son correctas.</label></li>
+            <li><label><input type="radio" name="q24" value="2"> El certificado debe ubicarse en el mismo directorio que el indicado en la directiva <code>SSLCertificateFile</code> del fichero de configuración del sitio web.</label></li>
+            <li><label><input type="radio" name="q24" value="3"> El valor del parámetro Common Name debe coincidir con el dominio del host virtual.</label></li>
+            <li><label><input type="radio" name="q24" value="4"> A la hora de crear el certificado debemos usar la opción <code>-nodes</code> para que Apache2 pueda usarlo autónomamente (sin intervención humana).</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation24')">
+        <div id="explanation24" class="explanation" style="display: none;">
+            La respuesta correcta es la opción 1, es decir, que todas las opciones son correctas. Todas las afirmaciones son correctas cuando creamos un certificado con openssl para un sitio web servido con Apache2.
+        </div>
+    </div>
+    
+    <div class="question" id="q25">
+        <p>25.¿Cuál es la carpeta en la que se almacena por defecto el contenido de un sitio web gestionado mediante Apache2?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q25" value="1"> <code>/etc/www/html</code></label></li>
+            <li><label><input type="radio" name="q25" value="2"> <code>/var/www/html</code></label></li>
+            <li><label><input type="radio" name="q25" value="3"> <code>/apache2/www/html</code></label></li>
+            <li><label><input type="radio" name="q25" value="4"> <code>/user/www/html</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation25')">
+        <div id="explanation25" class="explanation" style="display: none;">
+            La opción correcta es la opción 2, es decir, <code>/var/www/html</code> debido a que es la carpeta por defecto en la que se almacena el contenido de un sitio web gestionado mediante Apache2.
+        </div>
+    </div>
+    
+    <div class="question" id="q26">
+        <p>26.Considerando la siguiente traza capturada con Wireshark, ¿cuál de las siguientes afirmaciones es correcta?</p>
+        <img src="imagenesP3/imagen7.png" alt="Imagen6" style="width: 80%; height: auto;">
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q26" value="1"> El navegador web puede manejar conjuntos de caracteres ISO-8859-1 (también conocido como Latin-1).</label></li>
+            <li><label><input type="radio" name="q26" value="2"> El servidor puede aceptar contenido comprimido DEFLATE.</label></li>
+            <li><label><input type="radio" name="q26" value="3"> Se está usando el protocolo HTTP/2.0.</label></li>
+            <li><label><input type="radio" name="q26" value="4"> El dominio del sitio web accedido por el cliente es <code>/Websidan/index.html</code>.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation26')">
+        <div id="explanation26" class="explanation" style="display: none;">
+           La opción correcta es la opción 1, es decir, El navegador web puede manejar conjuntos de caracteres ISO-8859-1 (también conocido como Latin-1). En la traza se puede ver que el navegador web envía una cabecera HTTP "Accept-Charset: ISO-8859-1" que indica que puede manejar conjuntos de caracteres ISO-8859-1.
+        </div>
+    </div>
+    
+    <div class="question" id="q27">
+        <p>27.Considerando la siguiente traza capturada con Wireshark, ¿cómo se configuró el fichero <code>.htaccess</code> del sitio web?</p>
+        <img src="imagenesP3/imagen8.png" alt="Imagen7" style="width: 80%; height: auto;">
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q27" value="1"> <code>AuthType Basic<br>AuthName "Directorio con control de acceso"<br>AuthUserFile "/usr/local/passwords.pd"<br>Require user 1234</code></label></li>
+            <li><label><input type="radio" name="q27" value="2"> <code>AuthType Basic<br>AuthName "Directorio con control de acceso"<br>AuthUserFile "/usr/local/apache/passwd/passwords"<br>Require user miusuario</code></label></li>
+            <li><label><input type="radio" name="q27" value="3"> <code>AuthType Digest<br>AuthName "Directorio con control de acceso"<br>AuthUserFile "/usr/local/passwords.pd"<br>Require user miusuario</code></label></li>
+            <li><label><input type="radio" name="q27" value="4"> <code>AuthType Digest<br>AuthName "Directorio con control de acceso"<br>AuthUserFile "/usr/local/passwords.pd"<br>Require user 1234</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation27')">
+        <div id="explanation27" class="explanation" style="display: none;">
+            La opción correcta es la opción 2, es decir, <code>AuthType Basic<br>AuthName "Directorio con control de acceso"<br>AuthUserFile "/usr/local/apache/passwd/passwords"<br>Require user miusuario</code>. En este caso, se está utilizando el tipo de autenticación "Basic" y se está configurando el archivo de contraseñas en el directorio <code>/usr/local/apache/passwd</code> para permitir acceso solo a usuarios con nombre "miusuario". 
+            La opción 1 y 3 son incorrectas, ya que no se está utilizando el tipo de autenticación "Digest", y la opción 4 también no contiene la directiva <code>Require user</code> como se indica en la traza.
+        </div>
+    </div>
+    
+    <div class="question" id="q28">
+        <p>28.Suponga que se usa la utilidad <code>openssl</code> como sigue para generar el certificado electrónico de un sitio web, ¿cuál de las siguientes afirmaciones referentes al archivo de configuración, localizado en el directorio <code>/etc/apache2/sites-available/</code>, del correspondiente virtual host es correcta?<br><code>sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /usr/fr.key -out /usr/fr.crt</code></p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q28" value="1"> Debe contener una directiva <code>ServerName</code> o <code>ServerAlias</code> con argumento <code>/usr/fr.com</code>.</label></li>
+            <li><label><input type="radio" name="q28" value="2"> Debe contener una directiva <code>SSLCertificateKeyFile</code> con argumento <code>/usr/fr.crt</code></label></li>
+            <li><label><input type="radio" name="q28" value="3"> Debe contener una directiva <code>SSLCertificateFile</code> con argumento <code>/usr/fr.crt</code></label></li>
+            <li><label><input type="radio" name="q28" value="4"> Debe contener una directiva <code>SSLEngine</code> con argumento <code>off</code>.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation28')">
+        <div id="explanation28" class="explanation" style="display: none;">
+            La respuesta correcta es la opción 3, es decir, Debe contener una directiva SSLCertificateFile con argumento /usr/fr.crt debido a que es la directiva que se utiliza para especificar el archivo del certificado público.
+        </div>
+    </div>
+    
+    <div class="question" id="q29">
+        <p>29.¿Cuál es el archivo de principal en el que se configuran los puertos en los que atenderá solicitudes Apache2?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q29" value="1"> <code>/user/apache2/ports.conf</code></label></li>
+            <li><label><input type="radio" name="q29" value="2"> <code>/var/apache2/ports.conf</code></label></li>
+            <li><label><input type="radio" name="q29" value="3"> <code>/user/apache2/ports.config</code></label></li>
+            <li><label><input type="radio" name="q29" value="4"> <code>/etc/apache2/ports.conf</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation29')">
+        <div id="explanation29" class="explanation" style="display: none;">
+            La opción correcta es la opción 4.El archivo principal en el que se configuran los puertos en los que atenderá solicitudes Apache2 es <code>/etc/apache2/ports.conf</code>.
+        </div>
+    </div>
+    
+    <div class="question" id="q30">
+        <p>30.¿Cuál de los siguientes comandos usaría para crear un enlace simbólico del archivo de configuración <code>fr.com.conf</code> en el directorio <code>/etc/apache2/sites-enabled/</code>?</p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q30" value="1"> <code>sudo a2enmod fr.com</code></label></li>
+            <li><label><input type="radio" name="q30" value="2"> <code>sudo a2dissite fr.com</code></label></li>
+            <li><label><input type="radio" name="q30" value="3"> <code>sudo a2dismod fr.com</code></label></li>
+            <li><label><input type="radio" name="q30" value="4"> <code>sudo a2ensite fr.com</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation30')">
+        <div id="explanation30" class="explanation" style="display: none;">
+            La respuesta correcta es la opción 4,es decir, sudo a2ensite fr.com. Este comando crea un enlace simbólico del archivo de configuración fr.com.conf en el directorio /etc/apache2/sites-enabled/.
+        </div>
+    </div>
+    
+    <div class="question" id="q31">
+        <p>31.Considerando la siguiente traza capturada con Wireshark, ¿cuál de las siguientes afirmaciones es correcta?</p>
+        <img src="imagenesP3/imagen9.png" alt="Imagen8" style="width: 80%; height: auto;">
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q31" value="1"> Un cliente con IP pública 65.208.228.223 accede mediante el navegador Mozilla Firefox al recurso <code>www.ethereal.com</code>.</label></li>
+            <li><label><input type="radio" name="q31" value="2"> El dominio del sitio web accedido por el cliente es <code>ethereal.com</code>.</label></li>
+            <li><label><input type="radio" name="q31" value="3"> Un cliente con IP pública 145.254.160.237 accede al recurso <code>http://www.ethereal.com/download.html</code> servido por un servidor HTTP Apache escuchando en el puerto 3372.</label></li>
+            <li><label><input type="radio" name="q31" value="4"> El recurso <code>http://www.ethereal.com/download.html</code> tiene un tamaño de 18070 bytes y es servido por un servidor HTTP Apache escuchando en el puerto 3372.</label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation31')">
+        <div id="explanation31" class="explanation" style="display: none;">
+            <!-- añadir justificación -->
+            Respuesta correcta:
+            "El recurso http://www.ethereal.com/download.html tiene un tamaño de 18070 bytes y es servido por un servidor HTTP Apache escuchando en el puerto 3372."
+            Justificación:
+            <ul>
+                <li>Tamaño correcto del recurso: Aunque el encabezado Content-Length muestra 18364 bytes, el campo File Data indica que el tamaño real del recurso es 18070 bytes. Este último valor representa los datos reales del archivo, que es lo que cuenta.</li>
+                <li>Servidor HTTP: El encabezado confirma que el servidor es Apache.</li>
+                <li>Puerto del servidor: El análisis del paquete muestra que el servidor está en el puerto 3372 (Dst Port: 3372).</li>
+                <li>Recurso solicitado: La solicitud se dirige al recurso http://www.ethereal.com/download.html, como lo muestra la línea Request URI.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="question" id="q32">
+        <p>32.Suponga que se usa la utilidad <code>openssl</code> como sigue para generar el certificado electrónico de un sitio web, ¿cuál de las siguientes afirmaciones referentes al archivo de configuración, localizado en el directorio <code>/etc/apache2/sites-available/</code>, del correspondiente virtual host es correcta?<br><code>sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /usr/fr.key -out /usr/fr.crt</code></p>
+        <ul class="radio-list">
+            <li><label><input type="radio" name="q32" value="1"> Debe contener una directiva <code>SSLCertificateKeyFile</code> con argumento <code>/usr/fr.key</code></label></li>
+            <li><label><input type="radio" name="q32" value="2"> Debe contener una directiva <code>SSLProtocol</code> con opción <code>-all</code> y argumento <code>+TLSv1.2</code></label></li>
+            <li><label><input type="radio" name="q32" value="3"> Debe contener una directiva <code>SSLCertificateKeyFile</code> con argumento <code>/usr/fr.key</code></label></li>
+            <li><label><input type="radio" name="q32" value="4"> Debe contener una directiva <code>SSLCertificateKeyFile</code> con argumento <code>/usr/fr.crt</code></label></li>
+        </ul>
+        <input type="button" value="Mostrar Explicación" onclick="toggleExplanation('explanation32')">
+        <div id="explanation32" class="explanation" style="display: none;">
+            La respuesta correcta es la opción 3, esto es, debe contener una directiva SSLCertificateKeyFile con argumento /usr/fr.key. Esta directiva se utiliza para especificar la ubicación del archivo de clave privada del certificado.
+        </div>
+    </div>
+
+        
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Añadir las preguntas adicionales de la misma manera -->
+
+    <input type="button" value="Comprobar Resultados" onclick="checkAnswers()">
+</form>
+
+<div id="results" style="margin-top: 20px;"></div>
+
+<script>
+    function checkAnswers() {
+        let score = 0;
+        const totalQuestions = 32;
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
+
+        // Respuestas correctas
+        const answers = {
+            q1: { answer: 3 },
+            q2: { answer: 3 },
+            q3: { answer: 1 },
+            q4: { answer: 2 },
+            q5: { answer: 1 },
+            q6: { answer: 4 },
+            q7: { answer: 1 },
+            q8: { answer: 4 },
+            q9: { answer: 1 },
+            q10: { answer: 3 },
+            q11: { answer: 3 },
+            q12: { answer: 1 },
+            q13: { answer: 2 },
+            q14: { answer: 1 },
+            q15: { answer: 4 },
+            q16: { answer: 1 },
+            q17: { answer: 3 },
+            q18: { answer: 4 },
+            q19: { answer: 3 },
+            q20: { answer: 4 },
+            q21: { answer: 3 },
+            q22: { answer: 4 },
+            q23: { answer: 4 },
+            q24: { answer: 1 },
+            q25: { answer: 2 },
+            q26: { answer: 1 },
+            q27: { answer: 2 },
+            q28: { answer: 3 },
+            q29: { answer: 4 },
+            q30: { answer: 4 },
+            q31: { answer: 4 },
+            q32: { answer: 3 }
+        };
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            const question = document.querySelector(`input[name="q${i}"]:checked`);
+            if (question) {
+                const selectedValue = question.value;
+                const correctAnswer = answers[`q${i}`].answer;
+                const isCorrect = selectedValue == correctAnswer;
+                
+                if (isCorrect) {
+                    score++;
+                    document.getElementById(`q${i}`).classList.add('correct');
+                } else {
+                    document.getElementById(`q${i}`).classList.add('incorrect');
+                    // Mostrar la respuesta correcta y su justificación
+                    const explanation = answers[`q${i}`].explanation;
+                    const explanationDiv = document.createElement("div");
+                    explanationDiv.className = "explanation";
+                    explanationDiv.innerHTML = `<strong>Respuesta correcta:</strong> ${correctAnswer}<br><strong>Justificación:</strong> ${explanation}`;
+                    document.getElementById(`q${i}`).appendChild(explanationDiv);
+                }
+            }
+        }
+
+        // Cálculo de la nota sobre 10
+        const grade = (score / totalQuestions) * 10;
+        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
+        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
+    }
+</script>
+
+<script>
+    function toggleExplanation(id) {
+    const explanation = document.getElementById(id);
+    if (explanation.style.display === "none") {
+        explanation.style.display = "block";
+    } else {
+        explanation.style.display = "none";
+    }
+    }
+</script>
+
+</body>
+</html>

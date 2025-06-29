@@ -1,0 +1,92 @@
+----------------------------------------------------------------
+-                IDEAS GENERALES                               -
+----------------------------------------------------------------
+
+
+
+
+
+
+---------------------RUBY--------------------------
+
+# Suponiendo que tienes una clase Labyrinth con un método para verificar si una posición es válida y está libre
+class Labyrinth
+  def valid_and_free?(row, col)
+    # Implementa la lógica para verificar si la posición está dentro de los límites y está libre
+  end
+end
+
+# Suponiendo que tienes una clase Monster con atributos row y col
+class Monster
+  attr_accessor :row, :col
+end
+
+# Suponiendo que tienes una clase Player con atributos row y col
+class Player
+  attr_accessor :row, :col
+end
+
+# Método para posicionar al jugador a la izquierda del monstruo
+def position_player_left_of_monster(player, monster, labyrinth)
+  target_row = monster.row
+  target_col = monster.col - 1
+
+  if labyrinth.valid_and_free?(target_row, target_col)
+    player.row = target_row
+    player.col = target_col
+    puts "Jugador posicionado en la izquierda del monstruo en (#{player.row}, #{player.col})"
+  else
+    puts "No se puede posicionar al jugador a la izquierda del monstruo. Posición inválida o ocupada."
+  end
+end
+
+
+
+
+
+----------------JAVA------------------------------------------------
+
+class Monster {
+    private int row;
+    private int col;
+
+    public Monster(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+}
+
+class Player {
+    private int row;
+    private int col;
+
+    public void setPosition(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
+
+    @Override
+    public String toString() {
+        return "Player is at (" + row + ", " + col + ")";
+    }
+}
+
+class Maze {
+    private int[][] grid; // Representación del laberinto: 0 = libre, 1 = obstáculo.
+
+    public Maze(int[][] grid) {
+        this.grid = grid;
+    }
+
+    public boolean isValidAndFree(int row, int col) {
+        return row >= 0 && row < grid.length && col >= 0 && col < grid[0].length && grid[row][col] == 0;
+    }
+}

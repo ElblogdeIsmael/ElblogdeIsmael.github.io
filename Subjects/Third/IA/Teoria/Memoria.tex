@@ -1,0 +1,158 @@
+\documentclass[a4paper,12pt,openany]{book}
+
+% Paquetes básicos
+\usepackage[utf8]{inputenc}   % Codificación de caracteres
+\usepackage[T1]{fontenc}      % Codificación de fuentes
+\usepackage[spanish]{babel}   % Idioma español
+
+% Paquetes matemáticos
+\usepackage{amsmath, amssymb} % Símbolos matemáticos
+
+% Paquetes gráficos y tablas
+\usepackage{graphicx}         % Inclusión de gráficos
+\usepackage{booktabs}         % Tablas profesionales
+\usepackage{multirow}         % Combinar celdas en tablas
+\usepackage{makecell}         % Celdas personalizadas
+\usepackage{colortbl}         % Colorear celdas específicas
+\usepackage[table]{xcolor}    % Colores en tablas
+
+% Paquetes para estilo y personalización
+\usepackage{geometry}         % Configuración de márgenes
+\usepackage{fancyhdr}         % Encabezados y pies de página
+\usepackage{titlesec}         % Formato de títulos
+\usepackage{caption}          % Personalización de leyendas
+\usepackage{enumitem}         % Personalización de listas
+\usepackage{tcolorbox}        % Cajas de color
+\usepackage{float}            % Control de posición de figuras/tablas
+
+% Paquetes de código y diagramas
+\usepackage{tikz}             % Dibujos vectoriales
+\usepackage{listings}         % Código fuente
+\usepackage{color}            % Colores en código
+
+% Paquetes adicionales
+\usepackage{hyperref}         % Enlaces y referencias
+\usepackage{eurosym}          % Símbolo del euro
+\usepackage{pdfpages}         % Incluir PDFs
+\usepackage{tocloft}          % Personalización de índice (TOC)
+
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single
+}
+
+
+% Configuración de márgenes
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% Configuración de encabezados y pies de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\nouppercase{Memoria Parcheckers}}
+\fancyhead[R]{Inteligencia Artificial}
+\fancyfoot[L]{\rule[0pt]{\textwidth}{0.2pt}\\}
+\fancyfoot[C]{\rule[0pt]{\textwidth}{0.2pt}\\\thepage}
+\fancyfoot[R]{\rule[0pt]{\textwidth}{0.2pt}\\}
+
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}} % Sección solo en encabezado izquierdo
+
+% Formato de títulos
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+
+% Personalización de índice (TOC)
+\renewcommand{\cftchapfont}{\bfseries\large}
+\renewcommand{\cftsecfont}{\mdseries}
+\renewcommand{\cftsubsecfont}{\mdseries}
+\renewcommand{\cftchappagefont}{\bfseries}
+\renewcommand{\cfttoctitlefont}{\Huge\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill} % Centra el título del índice
+\setlength{\cftbeforechapskip}{1em}     % Espacio antes de capítulos
+\setlength{\cftbeforesecskip}{0.3em}    % Espacio antes de secciones
+\setlength{\cftbeforetoctitleskip}{1em} % Espacio antes del título del TOC
+\setlength{\cftchapnumwidth}{3em}       % Ancho de números de capítulo
+\setlength{\cftsecnumwidth}{4em}        % Ancho de números de sección
+
+% Datos del documento
+\title{\textbf{Memoria de Inteligencia Artificial Práctica 3 Parcheckers}}
+\author{Ismael Sallami Moreno\\ \texttt{}}
+\date{
+  \vspace{1cm}
+  \begin{tabular}{rl}
+    \textbf{Asignatura:} & Inteligencia Artificial \\
+    \textbf{Tema:} & Temario \\
+    \textbf{Fecha:} & \today
+  \end{tabular}
+}
+
+\begin{document}
+
+% Portada
+\begin{titlepage}
+  \begin{center}
+    \Huge \textbf{Memoria de Inteligencia Artificial Práctica 3: Parcheckers}
+    \vspace{0.8cm}
+
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[opacity=0.2] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{portada_parchis.png}};
+      \node[align=center] at (current page.center) {
+        \vspace{0.5cm}
+        \LARGE \textbf{Ismael Sallami Moreno} \\
+        \LARGE \texttt{} \\
+        \LARGE \url{} \\
+        \LARGE \url{} \\
+        \vspace{2cm}
+        \Large \textbf{Universidad de Granada}
+      };
+    \end{tikzpicture}
+    \vfill
+    \Large \textbf{2025}
+  \end{center}
+\end{titlepage}
+
+\newpage
+
+% Incluir licencia
+%\includepdf[pages=-]{../../../../licencia.pdf}
+
+% Índice de contenidos
+\renewcommand{\contentsname}{\centering Índice General}
+\tableofcontents
+\newpage
+
+\chapter*{Introducción}
+\addcontentsline{toc}{chapter}{Introducción}
+\input{Capitulos/introduccion_memoria.tex}
+\input{Capitulos/Cuerpo_memoria.tex}
+\input{Capitulos/Conclusion_memoria.tex}
+% \input{Capitulos/memoria2.tex}
+
+% Ejemplo de capítulos y secciones
+% \chapter{Introducción}
+% \section{Apuntes de clase}
+% \input{Capitulos/Tema1.tex}
+
+% \chapter{Agentes}
+% \input{Capitulos/Tema2.tex}
+
+% \chapter{Búsqueda en espacios de estados}
+% \input{Capitulos/Tema3.tex}
+
+% Referencias
+\newpage
+% \begin{thebibliography}{99}
+%   \bibitem{Referencia1} Ismael Sallami Moreno, \textbf{Estudiante del Doble Grado en Ingeniería Informática + ADE}, Universidad de Granada, 2025.
+%   % \bibitem{Referencia2} Autor(es), \emph{Título del libro}, Editorial, año.
+%   % \bibitem{Referencia3} Autor(es), \emph{Título del documento}, Nombre de la Conferencia, páginas, año.
+% \end{thebibliography}
+
+\begin{thebibliography}{99}
+    \bibitem{russell} Stuart Russell y Peter Norvig, \textit{Artificial Intelligence: A Modern Approach}, 3rd Edition, Pearson, 2010.
+    \bibitem{knuth} Donald E. Knuth y Ronald W. Moore, ``An Analysis of Alpha-Beta Pruning'', \textit{Artificial Intelligence}, 6(4), pp. 293–326, 1975.
+    \bibitem{nash} Simon D. Nash, \textit{AI Game Programming Wisdom}, Charles River Media, 2002.
+    \end{thebibliography}
+    
+
+\end{document}

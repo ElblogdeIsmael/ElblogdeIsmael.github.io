@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test CF2</title>
+<style>
+body { font-family: 'Palatino Linotype', serif; background-color: #f0f2f5; color: #333; line-height: 1.6; padding: 20px; font-size: 18px; }
+h1 { text-align: center; color: #007bff; margin-bottom: 10px; }
+.author { text-align: center; margin-bottom: 20px; font-size: 16px; font-style: italic; }
+.question { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.question:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+.correct { border-color: #28a745; background-color: #d4edda; }
+.partial { border-color: #ffc107; background-color: #fff3cd; }
+.incorrect { border-color: #dc3545; background-color: #f8d7da; }
+input[type="checkbox"] { margin-right: 10px; transform: scale(1.2); }
+button { margin: 10px; padding: 10px 20px; font-size: 16px; border-radius: 8px; cursor: pointer; }
+.info-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+<body>
+<h1>Test Contabilidad Financiera II</h1>
+<div class="author">Autor: Ismael Sallami Moreno | Titulación: Ingeniería Informática + ADE</div>
+
+<div class="info-box">
+<ul>
+  <li>Estos tests están diseñados para ayudar a repasar y autoevaluar los conocimientos adquiridos en la asignatura.</li>
+  <li>Permiten identificar áreas de mejora antes de los exámenes oficiales.</li>
+  <li>Facilitan la práctica activa y la comprobación inmediata de respuestas correctas.</li>
+  <li>Proceden de diversas fuentes, por lo que pueden ser candidatas a errores, por lo que si se detecta alguno, se agradecerá su notificación.</li>
+  <li>El test se puede desordenar y mostrar las respuestas correctas.</li>
+  <li> Puede haber preguntas con más de una respuesta correcta, son aquellas en las cuales al seleccionar una de las correctas se colorea de color amarillo (parcialmente correcta). </li>
+</ul>
+<button id="more-options-btn">Más opciones</button>
+<div id="extra-buttons" style="display:none;">
+  <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+  <button onclick="showCorrectAnswers()">Mostrar todas las correctas</button>
+</div>
+</div>
+
+<div id="questions-container">
+<div class="question" id="q1" data-correct="0">
+<p>1. La financiación básica:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q1" value="0"> Es el conjunto de recursos financieros que tienen carácter permanente, por lo que no están sometidos a una exigibilidad a corto plazo.</label></li>
+<li><label><input type="checkbox" name="q1" value="1"> Es el conjunto de recursos financieros que tienen carácter permanente, por lo que no son exigibles.</label></li>
+<li><label><input type="checkbox" name="q1" value="2"> Está recogida con cuentas del grupo 5 del Plan General de Contabilidad.</label></li>
+<li><label><input type="checkbox" name="q1" value="3"> Está recogida con cuentas del grupo 2 del Plan General de Contabilidad.</label></li>
+</ol>
+</div>
+<div class="question" id="q2" data-correct="1">
+<p>2. ¿Cuál es el desembolso mínimo legal exigido para las acciones de una Sociedad Anónima en su constitución, además del 100% de la prima de emisión si existiera?</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q2" value="0"> 10% del valor nominal.</label></li>
+<li><label><input type="checkbox" name="q2" value="1"> 25% del valor nominal.</label></li>
+<li><label><input type="checkbox" name="q2" value="2"> 50% del valor nominal.</label></li>
+<li><label><input type="checkbox" name="q2" value="3"> 100% del valor nominal.</label></li>
+</ol>
+</div>
+<div class="question" id="q3" data-correct="1">
+<p>3. Si una empresa adquiere sus propias acciones, estas se consideran:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q3" value="0"> Un activo financiero para la empresa.</label></li>
+<li><label><input type="checkbox" name="q3" value="1"> Un activo minoración de los Fondos Propios.</label></li>
+<li><label><input type="checkbox" name="q3" value="2"> Un gasto del ejercicio.</label></li>
+<li><label><input type="checkbox" name="q3" value="3"> Una inversión inmobiliaria.</label></li>
+</ol>
+</div>
+<div class="question" id="q4" data-correct="1">
+<p>4. ¿En qué apartado del Balance de Situación se presentan las "Acciones y participaciones en patrimonio propias"?</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q4" value="0"> En el Activo no Corriente, como inversiones financieras.</label></li>
+<li><label><input type="checkbox" name="q4" value="1"> En los Fondos Propios, restando.</label></li>
+<li><label><input type="checkbox" name="q4" value="2"> En el Activo Corriente, como tesorería.</label></li>
+<li><label><input type="checkbox" name="q4" value="3"> En el Pasivo no Corriente, como deudas a largo plazo.</label></li>
+</ol>
+</div>
+<div class="question" id="q5" data-correct="1">
+<p>5. El Patrimonio Neto está conformado principalmente por:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q5" value="0"> Financiación ajena a corto plazo y deudas con proveedores.</label></li>
+<li><label><input type="checkbox" name="q5" value="1"> La financiación aportada por los socios (capital) y la generada por la empresa (reservas).</label></li>
+<li><label><input type="checkbox" name="q5" value="2"> Activos fijos y existencias.</label></li>
+<li><label><input type="checkbox" name="q5" value="3"> Subvenciones de explotación y préstamos bancarios.</label></li>
+</ol>
+</div>
+<div class="question" id="q6" data-correct="1">
+<p>6. La Reserva Legal en España debe dotarse con un 10% del beneficio del ejercicio hasta que esta alcance como mínimo el:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q6" value="0"> 10% del capital social.</label></li>
+<li><label><input type="checkbox" name="q6" value="1"> 20% del capital social.</label></li>
+<li><label><input type="checkbox" name="q6" value="2"> 25% del capital social.</label></li>
+<li><label><input type="checkbox" name="q6" value="3"> 50% del capital social.</label></li>
+</ol>
+</div>
+<div class="question" id="q7" data-correct="3">
+<p>7. El número de la cuenta de Socios por desembolsos no exigidos, capital pendiente de inscripción es:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q7" value="0"> 1030</label></li>
+<li><label><input type="checkbox" name="q7" value="1"> 1031</label></li>
+<li><label><input type="checkbox" name="q7" value="2"> 1033</label></li>
+<li><label><input type="checkbox" name="q7" value="3"> 1034</label></li>
+<li><label><input type="checkbox" name="q7" value="4"> 1035</label></li>
+</ol>
+</div>
+<div class="question" id="q8" data-correct="2">
+<p>8. El artículo 79 del Texto Refundido de la Ley de Sociedades de Capital 1/2010, establece que las acciones de una Sociedad Anónima:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q8" value="0"> Deberán estar suscritas por los socios, al menos el 25% del valor nominal de cada una de las acciones.</label></li>
+<li><label><input type="checkbox" name="q8" value="1"> Deberán estar integramente suscritas por los socios, y desembolsadas, al menos, en un 50% el valor nominal de cada una de las acciones.</label></li>
+<li><label><input type="checkbox" name="q8" value="2"> El capital social pendiente de desembolso, no puede ser superior al 75%.</label></li>
+<li><label><input type="checkbox" name="q8" value="3"> Todas las respuestas anteriores son erróneas.</label></li>
+</ol>
+</div>
+<div class="question" id="q9" data-correct="0">
+<p>9. Cuando se conceden subvenciones para asegurar una rentabilidad mínima o compensar los déficits de explotación, ¿cómo se imputan?</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q9" value="0"> Como ingresos de dicho ejercicio</label></li>
+<li><label><input type="checkbox" name="q9" value="1"> Como ingresos diferidos</label></li>
+<li><label><input type="checkbox" name="q9" value="2"> Como ingresos del ejercicio siguiente</label></li>
+<li><label><input type="checkbox" name="q9" value="3"> Ninguna es correcta</label></li>
+</ol>
+</div>
+<div class="question" id="q10" data-correct="1">
+<p>10. Otros instrumentos de patrimonio neto son</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q10" value="0"> Autofinanciación</label></li>
+<li><label><input type="checkbox" name="q10" value="1"> Procedentes de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q10" value="2"> Para el mantenimiento de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q10" value="3"> Por ajustes de capital</label></li>
+<li><label><input type="checkbox" name="q10" value="4"> Por la compensación de pérdidas</label></li>
+</ol>
+</div>
+<div class="question" id="q11" data-correct="0">
+<p>11. Las subvenciones para adquirir activos del inmovilizado intangible, material e inversiones inmobiliarias se imputan:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q11" value="0"> Como ingresos del ejercicio en proporción a la amortización o, en su caso, cuando se produzca su enajenación, corrección valorativa por deterioro o baja en balance</label></li>
+<li><label><input type="checkbox" name="q11" value="1"> Como ingresos del ejercicio siguiente</label></li>
+<li><label><input type="checkbox" name="q11" value="2"> Como ingresos diferidos</label></li>
+<li><label><input type="checkbox" name="q11" value="3"> Ninguna es correcta</label></li>
+</ol>
+</div>
+<div class="question" id="q12" data-correct="1">
+<p>12. La actividad de la empresa que origina variación de neto, ocasiona el nacimiento de un gasto o ingreso.</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q12" value="0"> Estos gastos o ingresos son resultados del ejercicio.</label></li>
+<li><label><input type="checkbox" name="q12" value="1"> Estos gastos o ingresos, al final serán resultado de los ejercicios donde se realice imputación a resultados.</label></li>
+<li><label><input type="checkbox" name="q12" value="2"> Estos gastos o ingresos, se imputan a resultados en el año en que se cobren.</label></li>
+<li><label><input type="checkbox" name="q12" value="3"> Los incrementos de Neto, siempre son un ingreso.</label></li>
+</ol>
+</div>
+<div class="question" id="q13" data-correct="3">
+<p>13. Las diferencias por ajustes de capital</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q13" value="0"> Autofinanciación</label></li>
+<li><label><input type="checkbox" name="q13" value="1"> Procedentes de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q13" value="2"> Para el mantenimiento de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q13" value="3"> Por ajustes de capital</label></li>
+<li><label><input type="checkbox" name="q13" value="4"> Por la compensación de pérdidas</label></li>
+</ol>
+</div>
+<div class="question" id="q14" data-correct="0">
+<p>14. ¿Cómo se imputan las subvenciones concedidas para financiar gastos específicos?</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q14" value="0"> Como ingresos en el mismo ejercicio en el que se devenguen los gastos financiados</label></li>
+<li><label><input type="checkbox" name="q14" value="1"> Como ingresos del ejercicio siguiente</label></li>
+<li><label><input type="checkbox" name="q14" value="2"> Como ingresos diferidos</label></li>
+<li><label><input type="checkbox" name="q14" value="3"> Ninguna es correcta</label></li>
+</ol>
+</div>
+<div class="question" id="q15" data-correct="0">
+<p>15. La cuenta (120) "Remanente" recoge:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q15" value="0"> Beneficios no repartidos ni aplicados específicamente a ninguna otra cuenta, tras la aprobación de las cuentas anuales y de la distribución de resultados.</label></li>
+<li><label><input type="checkbox" name="q15" value="1"> Las pérdidas acumuladas de ejercicios anteriores pendientes de compensar.</label></li>
+<li><label><input type="checkbox" name="q15" value="2"> La reserva legal obligatoria.</label></li>
+<li><label><input type="checkbox" name="q15" value="3"> Las subvenciones de capital pendientes de imputar a resultados.</label></li>
+</ol>
+</div>
+<div class="question" id="q16" data-correct="1">
+<p>16. En el proceso de constitución de una sociedad, antes de la inscripción registral, el capital emitido pero aún no inscrito se puede contabilizar en la cuenta:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q16" value="0"> (100) Capital Social.</label></li>
+<li><label><input type="checkbox" name="q16" value="1"> (194) Capital emitido pendiente de inscripción.</label></li>
+<li><label><input type="checkbox" name="q16" value="2"> (110) Prima de Emisión.</label></li>
+<li><label><input type="checkbox" name="q16" value="3"> (572) Bancos e instituciones de crédito.</label></li>
+</ol>
+</div>
+<div class="question" id="q17" data-correct="0">
+<p>17. Los importes monetarios recibidos sin asignación a una finalidad específica se imputan:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q17" value="0"> Como ingresos del ejercicio en que se reconozcan</label></li>
+<li><label><input type="checkbox" name="q17" value="1"> Como ingresos diferidos</label></li>
+<li><label><input type="checkbox" name="q17" value="2"> Como ingresos del ejercicio siguiente, o como diferidos</label></li>
+<li><label><input type="checkbox" name="q17" value="3"> Ninguna es correcta</label></li>
+</ol>
+</div>
+<div class="question" id="q18" data-correct="4">
+<p>18. Las correcciones valorativas son</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q18" value="0"> irreversibles en todo contexto</label></li>
+<li><label><input type="checkbox" name="q18" value="1"> reversibles en todo contexto</label></li>
+<li><label><input type="checkbox" name="q18" value="2"> irreversibles en ningún contexto</label></li>
+<li><label><input type="checkbox" name="q18" value="3"> reversibles en ningún contexto</label></li>
+<li><label><input type="checkbox" name="q18" value="4"> irreversibles en este contexto</label></li>
+<li><label><input type="checkbox" name="q18" value="5"> reversibles en este contexto</label></li>
+</ol>
+</div>
+<div class="question" id="q19" data-correct="2">
+<p>19. Las subvenciones concedidas a una empresa por organismos públicos deben contabilizarse:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q19" value="0"> Como ingreso del ejercicio.</label></li>
+<li><label><input type="checkbox" name="q19" value="1"> Como ingreso del ejercicio si se destinan a financiar inversiones.</label></li>
+<li><label><input type="checkbox" name="q19" value="2"> Como ingreso del ejercicio si se destinan a financiar gastos de explotación.</label></li>
+<li><label><input type="checkbox" name="q19" value="3"> Como ingreso de patrimonio neto si se destinan a financiar gastos corrientes.</label></li>
+</ol>
+</div>
+<div class="question" id="q20" data-correct="1,4">
+<p>20. Una subvención reintegrable es aquella que:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q20" value="0"> No debe devolverse bajo ninguna circunstancia</label></li>
+<li><label><input type="checkbox" name="q20" value="1"> Puede tener que devolverse si se incumplen ciertas condiciones</label></li>
+<li><label><input type="checkbox" name="q20" value="2"> Siempre se concede a fondo perdido</label></li>
+<li><label><input type="checkbox" name="q20" value="3"> Solo se otorga a entidades públicas</label></li>
+<li><label><input type="checkbox" name="q20" value="4"> Puede pasar de deuda a subvención si se dan ciertas condiciones</label></li>
+<li><label><input type="checkbox" name="q20" value="5"> Todas son falsas</label></li>
+</ol>
+</div>
+<div class="question" id="q21" data-correct="2">
+<p>21. Cuando el valor de emisión de las acciones es mayor a su valor nominal, la diferencia entre ambos valores se recogerá en la cuenta de:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q21" value="0"> Reserva legal.</label></li>
+<li><label><input type="checkbox" name="q21" value="1"> Reserva por ampliación de capital.</label></li>
+<li><label><input type="checkbox" name="q21" value="2"> Prima de emisión o asunción.</label></li>
+<li><label><input type="checkbox" name="q21" value="3"> No es posible que el valor de emisión sea mayor al valor nominal.</label></li>
+</ol>
+</div>
+<div class="question" id="q22" data-correct="0">
+<p>22. El patrimonio es igual al importe en X de todos los activos reconocidos menos el total de los importes en X de todos los pasivos reconocidos. X es:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q22" value="0"> Libros</label></li>
+<li><label><input type="checkbox" name="q22" value="1"> Contable</label></li>
+<li><label><input type="checkbox" name="q22" value="2"> Valor Razonable</label></li>
+<li><label><input type="checkbox" name="q22" value="3"> Todas son correctas</label></li>
+</ol>
+</div>
+<div class="question" id="q23" data-correct="3">
+<p>23. La fundación simultánea considera:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q23" value="0"> Acuerdo de los socios fundadores</label></li>
+<li><label><input type="checkbox" name="q23" value="1"> Realizarla en un solo acto</label></li>
+<li><label><input type="checkbox" name="q23" value="2"> Ninguna es correcta</label></li>
+<li><label><input type="checkbox" name="q23" value="3"> a y b son correctas.</label></li>
+</ol>
+</div>
+<div class="question" id="q24" data-correct="1">
+<p>24. ¿Cuál es el objetivo principal de imputar ciertos cambios de valor directamente al Patrimonio Neto en lugar de a la cuenta de Pérdidas y Ganancias?</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q24" value="0"> Reducir la carga fiscal de la empresa.</label></li>
+<li><label><input type="checkbox" name="q24" value="1"> Evitar la descapitalización por distribuir beneficios "no realizados".</label></li>
+<li><label><input type="checkbox" name="q24" value="2"> Aumentar artificialmente el beneficio del ejercicio.</label></li>
+<li><label><input type="checkbox" name="q24" value="3"> Simplificar la contabilidad de los instrumentos financieros.</label></li>
+</ol>
+</div>
+<div class="question" id="q25" data-correct="0">
+<p>25. Las subvenciones, donaciones y legados no reintegrables se contabilizarán inicialmente:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q25" value="0"> Con carácter general, como ingresos directamente imputados al patrimonio neto.</label></li>
+<li><label><input type="checkbox" name="q25" value="1"> Con carácter general, como ingresos directamente imputados al resultado del ejercicio.</label></li>
+<li><label><input type="checkbox" name="q25" value="2"> Directamente en la cuenta 130. Subvenciones oficiales de capital.</label></li>
+<li><label><input type="checkbox" name="q25" value="3"> Directamente en la cuenta 740. Subvenciones de explotación</label></li>
+</ol>
+</div>
+<div class="question" id="q26" data-correct="1">
+<p>26. En el Estado de Cambios en el Patrimonio Neto (ECPN), la primera parte se denomina:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q26" value="0"> Estado de Flujos de Efectivo Reconocidos.</label></li>
+<li><label><input type="checkbox" name="q26" value="1"> Estado de Ingresos y Gastos Reconocidos.</label></li>
+<li><label><input type="checkbox" name="q26" value="2"> Estado de Resultados Acumulados.</label></li>
+<li><label><input type="checkbox" name="q26" value="3"> Balance de Situación Detallado.</label></li>
+</ol>
+</div>
+<div class="question" id="q27" data-correct="0,1,2">
+<p>27. Los gastos puede llevar aparejados la constitución de la empresa son ...</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q27" value="0"> Notarios</label></li>
+<li><label><input type="checkbox" name="q27" value="1"> Gastos publicitarios</label></li>
+<li><label><input type="checkbox" name="q27" value="2"> Gastos extraordinarios</label></li>
+</ol>
+</div>
+<div class="question" id="q28" data-correct="0">
+<p>28. ¿Cómo define el Marco Conceptual del IASB el Patrimonio?</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q28" value="0"> Como la parte residual de los activos de la entidad, una vez deducidos todos sus pasivos.</label></li>
+<li><label><input type="checkbox" name="q28" value="1"> Como el total de los activos de la entidad.</label></li>
+<li><label><input type="checkbox" name="q28" value="2"> Como las aportaciones de los socios más los beneficios del último año.</label></li>
+<li><label><input type="checkbox" name="q28" value="3"> Como el capital social más las reservas legales únicamente.</label></li>
+</ol>
+</div>
+<div class="question" id="q29" data-correct="0">
+<p>29. La reservas estatutarias son</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q29" value="0"> Autofinanciación</label></li>
+<li><label><input type="checkbox" name="q29" value="1"> Procedentes de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q29" value="2"> Para el mantenimiento de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q29" value="3"> Por ajustes de capital</label></li>
+<li><label><input type="checkbox" name="q29" value="4"> Por la compensación de pérdidas</label></li>
+</ol>
+</div>
+<div class="question" id="q30" data-correct="4">
+<p>30. Las aportaciones de socios o propietarios</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q30" value="0"> Autofinanciación</label></li>
+<li><label><input type="checkbox" name="q30" value="1"> Procedentes de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q30" value="2"> Para el mantenimiento de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q30" value="3"> Por ajustes de capital</label></li>
+<li><label><input type="checkbox" name="q30" value="4"> Por la compensación de pérdidas</label></li>
+</ol>
+</div>
+<div class="question" id="q31" data-correct="0">
+<p>31. La reserva legal es</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q31" value="0"> Autofinanciación</label></li>
+<li><label><input type="checkbox" name="q31" value="1"> Procedentes de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q31" value="2"> Para el mantenimiento de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q31" value="3"> Por ajustes de capital</label></li>
+<li><label><input type="checkbox" name="q31" value="4"> Por la compensación de pérdidas</label></li>
+</ol>
+</div>
+<div class="question" id="q32" data-correct="2">
+<p>32. Las reservas por capital amortizado</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q32" value="0"> Autofinanciación</label></li>
+<li><label><input type="checkbox" name="q32" value="1"> Procedentes de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q32" value="2"> Para el mantenimiento de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q32" value="3"> Por ajustes de capital</label></li>
+<li><label><input type="checkbox" name="q32" value="4"> Por la compensación de pérdidas</label></li>
+</ol>
+</div>
+<div class="question" id="q33" data-correct="3">
+<p>33. Cuando los socios o propietarios realicen aportaciones en su condición de tales y aumente el patrimonio neto de la empresa:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q33" value="0"> Se considerará como un ingreso si son aportaciones monetarias.</label></li>
+<li><label><input type="checkbox" name="q33" value="1"> Se considerará como un ingreso si dan lugar a incrementos de activos o disminuciones de pasivos.</label></li>
+<li><label><input type="checkbox" name="q33" value="2"> En ocasiones supondrá el reconocimiento de un gasto.</label></li>
+<li><label><input type="checkbox" name="q33" value="3"> No se considerará un ingreso.</label></li>
+</ol>
+</div>
+<div class="question" id="q34" data-correct="1">
+<p>34. Las aportaciones realizadas por los socios a la empresa, que no corresponden a la suscripción de capital (ej. para compensar pérdidas), ¿cómo se consideran contablemente según la NRV 18.2?</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q34" value="0"> Como subvenciones o donaciones.</label></li>
+<li><label><input type="checkbox" name="q34" value="1"> Como Fondos Propios en la cuenta (118) Aportaciones de socios o propietarios.</label></li>
+<li><label><input type="checkbox" name="q34" value="2"> Como un pasivo a largo plazo.</label></li>
+<li><label><input type="checkbox" name="q34" value="3"> Como un ingreso extraordinario del ejercicio.</label></li>
+</ol>
+</div>
+<div class="question" id="q35" data-correct="0">
+<p>35. La reservas volunarias son</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q35" value="0"> Autofinanciación</label></li>
+<li><label><input type="checkbox" name="q35" value="1"> Procedentes de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q35" value="2"> Para el mantenimiento de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q35" value="3"> Por ajustes de capital</label></li>
+<li><label><input type="checkbox" name="q35" value="4"> Por la compensación de pérdidas</label></li>
+</ol>
+</div>
+<div class="question" id="q36" data-correct="0">
+<p>36. La cuenta Fondo Social (101):</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q36" value="0"> Debe emplearse en personas jurídicas sin ánimo de lucro.</label></li>
+<li><label><input type="checkbox" name="q36" value="1"> Refleja el valor de las aportaciones de los socios en cualquier sociedad.</label></li>
+<li><label><input type="checkbox" name="q36" value="2"> Refleja el valor de las aportaciones de los socios que se dedica a fines sociales.</label></li>
+<li><label><input type="checkbox" name="q36" value="3"> Refleja el valor de los dividendos activos desembolsados.</label></li>
+</ol>
+</div>
+<div class="question" id="q37" data-correct="0">
+<p>37. Un "Dividendo activo a cuenta" (cuenta 557) representa:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q37" value="0"> Un adelanto del dividendo previsible del ejercicio que la empresa paga a los accionistas.</label></li>
+<li><label><input type="checkbox" name="q37" value="1"> La parte del capital que los socios aún no han desembolsado.</label></li>
+<li><label><input type="checkbox" name="q37" value="2"> Un ingreso financiero para la empresa.</label></li>
+<li><label><input type="checkbox" name="q37" value="3"> Una reserva especial indisponible.</label></li>
+</ol>
+</div>
+<div class="question" id="q38" data-correct="1">
+<p>38. La cuenta (121) "Resultados negativos de ejercicios anteriores" figura en el balance:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q38" value="0"> Sumando en el activo.</label></li>
+<li><label><input type="checkbox" name="q38" value="1"> Minorando los fondos propios en el Patrimonio Neto.</label></li>
+<li><label><input type="checkbox" name="q38" value="2"> Como un pasivo a corto plazo.</label></li>
+<li><label><input type="checkbox" name="q38" value="3"> Sumando en las reservas.</label></li>
+</ol>
+</div>
+<div class="question" id="q39" data-correct="1">
+<p>39. Los gastos de constitución de una sociedad, como los honorarios de notarios y registradores, se contabilizan generalmente:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q39" value="0"> Como un gasto del ejercicio en la cuenta de Pérdidas y Ganancias.</label></li>
+<li><label><input type="checkbox" name="q39" value="1"> Cargando directamente una cuenta de Reservas (Patrimonio Neto).</label></li>
+<li><label><input type="checkbox" name="q39" value="2"> Como un activo intangible amortizable.</label></li>
+<li><label><input type="checkbox" name="q39" value="3"> Como una disminución del capital social.</label></li>
+</ol>
+</div>
+<div class="question" id="q40" data-correct="2">
+<p>40. El capital representa la financiación procedente de las aportaciones realizada por agentes externos a la empresa</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q40" value="0"> Verdadera</label></li>
+<li><label><input type="checkbox" name="q40" value="1"> Falsa, pueden ser externos o internos</label></li>
+<li><label><input type="checkbox" name="q40" value="2"> Falsa, es de los propietarios de la empresa</label></li>
+<li><label><input type="checkbox" name="q40" value="3"> Falsa, depende de la casuística que se esté valorando, así como del origen de la empresa</label></li>
+</ol>
+</div>
+<div class="question" id="q41" data-correct="6">
+<p>41. Si un instrumento de patrimonio lo adquiere la propia empresa:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q41" value="0"> Se contabiliza como gasto</label></li>
+<li><label><input type="checkbox" name="q41" value="1"> Minora los fondos propios</label></li>
+<li><label><input type="checkbox" name="q41" value="2"> Se contabiliza como Capital Social</label></li>
+<li><label><input type="checkbox" name="q41" value="3"> Será un activo</label></li>
+<li><label><input type="checkbox" name="q41" value="4"> Nunca será un activo</label></li>
+<li><label><input type="checkbox" name="q41" value="5"> Ninguna es correcta</label></li>
+<li><label><input type="checkbox" name="q41" value="6"> b y e son correctas</label></li>
+</ol>
+</div>
+<div class="question" id="q42" data-correct="0">
+<p>42. La cuantía del capital se hallará materializada como:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q42" value="0"> Activos</label></li>
+<li><label><input type="checkbox" name="q42" value="1"> Pasivos</label></li>
+<li><label><input type="checkbox" name="q42" value="2"> Patrimonio Neto</label></li>
+<li><label><input type="checkbox" name="q42" value="3"> Ninguna es correcta</label></li>
+</ol>
+</div>
+<div class="question" id="q43" data-correct="1">
+<p>43. Si una empresa recibe una subvención para compensar un déficit de explotación, esta se contabilizará generalmente como:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q43" value="0"> Un ingreso imputado al Patrimonio Neto (subgrupo 13).</label></li>
+<li><label><input type="checkbox" name="q43" value="1"> Un ingreso directamente en la cuenta de Pérdidas y Ganancias del ejercicio (ej. cuenta 740).</label></li>
+<li><label><input type="checkbox" name="q43" value="2"> Una aportación de socios (cuenta 118).</label></li>
+<li><label><input type="checkbox" name="q43" value="3"> Una reducción de los gastos de explotación.</label></li>
+</ol>
+</div>
+<div class="question" id="q44" data-correct="0">
+<p>44. Son reservas de Autofinanciación:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q44" value="0"> La Reserva Legal, las Reservas Voluntarias y las Reservas Estatutarias.</label></li>
+<li><label><input type="checkbox" name="q44" value="1"> La Prima de Emisión de acciones, cuando se produce como consecuencia de una ampliación de capital.</label></li>
+<li><label><input type="checkbox" name="q44" value="2"> Todas las Reservas, excepto las Reservas Especiales.</label></li>
+<li><label><input type="checkbox" name="q44" value="3"> Las reservas que surgen por ajustes en el Capital o por la Compensación de pérdidas.</label></li>
+</ol>
+</div>
+<div class="question" id="q45" data-correct="0">
+<p>45. La financiación procedente de las aportaciones realizadas por los propietarios de la empresa, tanto en el momento en que ésta se formó como en fechas posteriores, se registrará en la cuenta:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q45" value="0"> Capital.</label></li>
+<li><label><input type="checkbox" name="q45" value="1"> Reservas.</label></li>
+<li><label><input type="checkbox" name="q45" value="2"> Remanente.</label></li>
+<li><label><input type="checkbox" name="q45" value="3"> Aportaciones de socios o propietarios.</label></li>
+</ol>
+</div>
+<div class="question" id="q46" data-correct="1">
+<p>46. ¿Qué significa emitir acciones "por encima de la par"?</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q46" value="0"> Que el precio de emisión es inferior al valor nominal.</label></li>
+<li><label><input type="checkbox" name="q46" value="1"> Que el precio de emisión es superior al valor nominal, generando una Prima de Emisión.</label></li>
+<li><label><input type="checkbox" name="q46" value="2"> Que las acciones no tienen valor nominal.</label></li>
+<li><label><input type="checkbox" name="q46" value="3"> Que la emisión está prohibida por la ley.</label></li>
+</ol>
+</div>
+<div class="question" id="q47" data-correct="0">
+<p>47. La cuenta (100) "Capital Social" se utiliza principalmente para:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q47" value="0"> Sociedades mercantiles como S.A. o S.L.</label></li>
+<li><label><input type="checkbox" name="q47" value="1"> Empresarios individuales.</label></li>
+<li><label><input type="checkbox" name="q47" value="2"> Cooperativas.</label></li>
+<li><label><input type="checkbox" name="q47" value="3"> Fundaciones sin ánimo de lucro.</label></li>
+</ol>
+</div>
+<div class="question" id="q48" data-correct="1,2">
+<p>48. Si se producen beneficios estos se pueden:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q48" value="0"> Repartir entre amigos</label></li>
+<li><label><input type="checkbox" name="q48" value="1"> Repartir como dividendos</label></li>
+<li><label><input type="checkbox" name="q48" value="2"> Pasar a las reservas</label></li>
+<li><label><input type="checkbox" name="q48" value="3"> Gastar en fondos monetarios indexados para obtener una mayor rentabilidad</label></li>
+</ol>
+</div>
+<div class="question" id="q49" data-correct="0">
+<p>49. La cuenta (1034) "Socios por desembolsos no exigidos, capital pendiente de inscripción" se utiliza para reflejar:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q49" value="0"> El capital suscrito por los socios, aún no desembolsado y cuyo capital todavía no está inscrito en el Registro.</label></li>
+<li><label><input type="checkbox" name="q49" value="1"> El capital ya desembolsado e inscrito en el Registro Mercantil.</label></li>
+<li><label><input type="checkbox" name="q49" value="2"> Los dividendos pasivos ya exigidos a los socios.</label></li>
+<li><label><input type="checkbox" name="q49" value="3"> Las aportaciones no dinerarias pendientes de valoración por un experto independiente.</label></li>
+</ol>
+</div>
+<div class="question" id="q50" data-correct="0,1,2,4">
+<p>50. La suscripción y desembolso de las acciones:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q50" value="0"> Puede realizarse en momentos cercanos en la escala temporal</label></li>
+<li><label><input type="checkbox" name="q50" value="1"> Pueden ser a la misma vez</label></li>
+<li><label><input type="checkbox" name="q50" value="2"> Se puede hacer en el mismo asiento</label></li>
+<li><label><input type="checkbox" name="q50" value="3"> Deben de ser distintos obligatoriamente en la escala temporal</label></li>
+<li><label><input type="checkbox" name="q50" value="4"> Si surgen gastos en este proceso se deben de cargar en la cuenta 113</label></li>
+<li><label><input type="checkbox" name="q50" value="5"> La cuenta 113 es "Reservas involuntarias"</label></li>
+</ol>
+</div>
+<div class="question" id="q51" data-correct="2">
+<p>51. Según la normativa española , la emisión de acciones "por debajo de la par":</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q51" value="0"> Está permitida si lo aprueba la Junta General.</label></li>
+<li><label><input type="checkbox" name="q51" value="1"> Solo está permitida para ampliar capital.</label></li>
+<li><label><input type="checkbox" name="q51" value="2"> Está expresamente prohibida.</label></li>
+<li><label><input type="checkbox" name="q51" value="3"> Es la forma habitual de financiar pérdidas.</label></li>
+</ol>
+</div>
+<div class="question" id="q52" data-correct="0">
+<p>52. El patrimonio es la parte residual de los activos de una entidad, una vez deducidos todos sus pasivos</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q52" value="0"> Verdadero</label></li>
+<li><label><input type="checkbox" name="q52" value="1"> Falso</label></li>
+</ol>
+</div>
+<div class="question" id="q53" data-correct="0">
+<p>53. Una subvención no reintegrable es:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q53" value="0"> Aquella que no debe devolverse si se cumplen los requisitos</label></li>
+<li><label><input type="checkbox" name="q53" value="1"> Aquella que siempre debe devolverse</label></li>
+<li><label><input type="checkbox" name="q53" value="2"> Aquella que se concede solo a empresas privadas</label></li>
+<li><label><input type="checkbox" name="q53" value="3"> Ninguna es correcta</label></li>
+</ol>
+</div>
+<div class="question" id="q54" data-correct="1">
+<p>54. Las subvenciones, donaciones y legados recibidos por la empresa que están condicionados a la adquisición de un inmovilizado, generalmente se imputan a resultados:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q54" value="0"> Íntegramente en el momento de la concesión.</label></li>
+<li><label><input type="checkbox" name="q54" value="1"> En proporción a la dotación a la amortización del inmovilizado.</label></li>
+<li><label><input type="checkbox" name="q54" value="2"> Íntegramente cuando se adquiere el inmovilizado.</label></li>
+<li><label><input type="checkbox" name="q54" value="3"> Nunca, ya que incrementan directamente las reservas.</label></li>
+</ol>
+</div>
+<div class="question" id="q55" data-correct="3">
+<p>55. El asiento que se debe de hacer para los resultados negativos que se tienen es:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q55" value="0"> Abonar la 121 Rdos negativos de ejercicios anteriores y cargar la 129 Rdo del ejercicio.</label></li>
+<li><label><input type="checkbox" name="q55" value="1"> Abonar la 121 Rdos negativos de ejercicios anteriores y abonar la 129 Rdo del ejercicio.</label></li>
+<li><label><input type="checkbox" name="q55" value="2"> Abonar la 121 Rdos negativos de ejercicios anteriores y cargar la 129 Rdo del ejercicio.</label></li>
+<li><label><input type="checkbox" name="q55" value="3"> Cargar la 121 Rdos negativos de ejercicios anteriores y Abonar la 129 Rdo del ejercicio.</label></li>
+</ol>
+</div>
+<div class="question" id="q56" data-correct="0">
+<p>56. Es obligatorio constituir la reserva lega.</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q56" value="0"> Verdadero.</label></li>
+<li><label><input type="checkbox" name="q56" value="1"> Falso.</label></li>
+</ol>
+</div>
+<div class="question" id="q57" data-correct="2">
+<p>57. Las reservas por acciones propias aceptadas en garantía</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q57" value="0"> Autofinanciación</label></li>
+<li><label><input type="checkbox" name="q57" value="1"> Procedentes de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q57" value="2"> Para el mantenimiento de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q57" value="3"> Por ajustes de capital</label></li>
+<li><label><input type="checkbox" name="q57" value="4"> Por la compensación de pérdidas</label></li>
+</ol>
+</div>
+<div class="question" id="q58" data-correct="3">
+<p>58. Las subvenciones para cancelación de deudas se imputan:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q58" value="0"> Como ingresos del ejercicio en el que no se produzca dicha cancelación, salvo que estén relacionadas con una financiación específica</label></li>
+<li><label><input type="checkbox" name="q58" value="1"> Como ingresos diferidos</label></li>
+<li><label><input type="checkbox" name="q58" value="2"> Como ingresos del ejercicio siguiente</label></li>
+<li><label><input type="checkbox" name="q58" value="3"> Como ingresos del ejercicio en que se produzca dicha cancelación, salvo que estén relacionadas con una financiación específica</label></li>
+<li><label><input type="checkbox" name="q58" value="4"> Ninguna es correcta</label></li>
+</ol>
+</div>
+<div class="question" id="q59" data-correct="1">
+<p>59. La prima de emisión de acciones es</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q59" value="0"> Autofinanciación</label></li>
+<li><label><input type="checkbox" name="q59" value="1"> Procedentes de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q59" value="2"> Para el mantenimiento de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q59" value="3"> Por ajustes de capital</label></li>
+<li><label><input type="checkbox" name="q59" value="4"> Por la compensación de pérdidas</label></li>
+</ol>
+</div>
+<div class="question" id="q60" data-correct="0">
+<p>60. ¿Cómo se imputan las subvenciones para adquirir existencias o activos financieros?</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q60" value="0"> Como ingresos del ejercicio en que se produzca su enajenación, corrección valorativa por deterioro o baja en balance</label></li>
+<li><label><input type="checkbox" name="q60" value="1"> Como ingresos del ejercicio siguiente</label></li>
+<li><label><input type="checkbox" name="q60" value="2"> Como ingresos diferidos</label></li>
+<li><label><input type="checkbox" name="q60" value="3"> Ninguna es correcta</label></li>
+</ol>
+</div>
+<div class="question" id="q61" data-correct="2">
+<p>61. Las reservas para acciones o participaciones de la sociedad dominante</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q61" value="0"> Autofinanciación</label></li>
+<li><label><input type="checkbox" name="q61" value="1"> Procedentes de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q61" value="2"> Para el mantenimiento de ampliaciones de capital</label></li>
+<li><label><input type="checkbox" name="q61" value="3"> Por ajustes de capital</label></li>
+<li><label><input type="checkbox" name="q61" value="4"> Por la compensación de pérdidas</label></li>
+</ol>
+</div>
+<div class="question" id="q62" data-correct="0">
+<p>62. Las subvenciones pueden clasificarse en:</p>
+<ol type="a">
+<li><label><input type="checkbox" name="q62" value="0"> Reintegrables y no reintegrables</label></li>
+<li><label><input type="checkbox" name="q62" value="1"> Corrientes y de capital</label></li>
+<li><label><input type="checkbox" name="q62" value="2"> Públicas y privadas</label></li>
+<li><label><input type="checkbox" name="q62" value="3"> Ninguna es correcta</label></li>
+</ol>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.question').forEach(q => {
+  const correct = q.dataset.correct.split(',').map(Number);
+  const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const checked = Array.from(checkboxes).map((c, i) => c.checked ? i : null).filter(i => i !== null);
+      q.classList.remove('correct', 'partial', 'incorrect');
+      const allCorrect = correct.every(i => checked.includes(i));
+      const onlyCorrect = checked.every(i => correct.includes(i));
+      if (checked.length === 0) {
+        // Ninguna opción marcada: estado neutral
+        q.classList.remove('correct', 'partial', 'incorrect');
+        } else if (allCorrect && onlyCorrect) {
+        q.classList.add('correct');
+        } else if (checked.some(i => correct.includes(i)) && onlyCorrect === true) {
+        q.classList.add('partial');
+        } else {
+        q.classList.add('incorrect');
+        }
+    });
+  });
+});
+
+document.getElementById('more-options-btn').addEventListener('click', function() {
+  document.getElementById('extra-buttons').style.display = 'block';
+  this.style.display = 'none';
+});
+
+function shuffleQuestions() {
+  const container = document.getElementById('questions-container');
+  const questions = Array.from(container.children);
+  for (let i = questions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    container.appendChild(questions[j]);
+  }
+  renumberQuestions();
+}
+
+function renumberQuestions() {
+  const questions = document.querySelectorAll('.question');
+  questions.forEach((q, idx) => {
+    const p = q.querySelector('p');
+    p.innerHTML = p.innerHTML.replace(/^\d+\./, (idx + 1) + '.');
+    const inputs = q.querySelectorAll('input');
+    inputs.forEach(inp => {
+      inp.name = 'q' + (idx + 1);
+    });
+  });
+}
+
+function showCorrectAnswers() {
+  document.querySelectorAll('.question').forEach(q => {
+    const correct = q.dataset.correct.split(',').map(Number);
+    const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((cb, i) => {
+      cb.checked = correct.includes(i);
+    });
+    q.classList.remove('correct', 'partial', 'incorrect');
+    q.classList.add('correct');
+  });
+}
+</script>
+</body>
+</html>

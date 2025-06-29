@@ -1,0 +1,2721 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test FIS</title>
+<style>
+body { font-family: 'Palatino Linotype', serif; background-color: #f0f2f5; color: #333; line-height: 1.6; padding: 20px; font-size: 18px; }
+h1 { text-align: center; color: #007bff; margin-bottom: 10px; }
+.author { text-align: center; margin-bottom: 20px; font-size: 16px; font-style: italic; }
+.question { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.question:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+.correct { border-color: #28a745; background-color: #d4edda; }
+.incorrect { border-color: #dc3545; background-color: #f8d7da; }
+input[type="radio"] { margin-right: 10px; transform: scale(1.2); }
+button { margin: 10px; padding: 10px 20px; font-size: 16px; border-radius: 8px; cursor: pointer; }
+.info-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+<body>
+<h1>Test Fundamentos de Ingeniería del Software</h1>
+<div class="author">Autor: Ismael Sallami Moreno | Titulación: Ingeniería Informática + ADE</div>
+
+<div class="info-box">
+<ul>
+  <li>Estos tests están diseñados para ayudar a repasar y autoevaluar los conocimientos adquiridos en la asignatura.</li>
+  <li>Permiten identificar áreas de mejora antes de los exámenes oficiales.</li>
+  <li>Facilitan la práctica activa y la comprobación inmediata de respuestas correctas.</li>
+  <li>Proceden de diversas fuentes, por lo que pueden ser candidatas a errores, por lo que si se detecta alguno, se agradecerá su notificación.</li>
+  <li>El test se puede desordenar y mostrar las respuestas correctas.</li>
+</ul>
+<button id="more-options-btn">Más opciones</button>
+<div id="extra-buttons" style="display:none;">
+  <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+  <button onclick="showCorrectAnswers()">Mostrar todas las correctas</button>
+</div>
+</div>
+
+<div id="questions-container">
+
+<div class="question" data-correct="1">
+  <p>1. La validación de requisitos consiste en comprobar que el software cumple con las expectativas del cliente.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q1" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q1" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>2. Las clases que forman parte de un Diagrama de Clases del Diseño (DCD) se identifican exclusivamente a partir del Modelo Conceptual.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q2" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q2" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>3. En el DSS tratamos el sistema como si fuera una caja negra.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q3" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q3" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>4. El Contrato de una operación debe indicar qué hace una operación sin decir cómo lo hace.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q4" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q4" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>5. El uso de los diagramas de comunicación o de secuencia UML para representar el modelo de interacción de objetos nos va a proporcionar distintos resultados de diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q5" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q5" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>6. Según el patrón "Creador", si una clase B registra objetos de la clase A, esto justifica que B tenga la responsabilidad de crear instancias de A.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q6" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q6" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>7. Si una función del sistema no cambia nada de lo especificado en el modelo conceptual su contrato no tendrá poscondiciones.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q7" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q7" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>8. Los diagramas de despliegue muestran la distribución lógica de las clases.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q8" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q8" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>9. Los diagramas de actividad permiten representar el flujo de acciones dentro de los casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q9" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q9" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>10. En la gestión de proyectos, el camino crítico es el conjunto de actividades con la mayor holgura dentro del cronograma.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q10" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q10" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>11. Las clases del diagrama de clases del diseño toman todos sus atributos de los diagramas de conceptos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q11" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q11" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>12. Los diagramas de actividad de UML es una herramienta muy adecuada para el diseño del flujo de control.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q12" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q12" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>13. La generalización permite crear jerarquías de clases.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q13" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q13" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>14. El mantenimiento no debe actualizar la documentación del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q14" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q14" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>15. Según los estereotipos de visibilidad en los Diagramas de Comunicación, &lt;&lt;parameter&gt;&gt; indica que un objeto tiene vía de comunicación con otro porque este último es una variable definida dentro de un método.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q15" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q15" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>16. Los diagramas de paquetes son útiles para organizar los diagramas de casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q16" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q16" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>17. El mayor esfuerzo realizado durante el mantenimiento de un software es para adaptar el software o nuevos requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q17" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q17" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>18. La especificación de requisitos debe ser completa, verificable, consistente y modificable.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q18" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q18" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>19. Un cambio de estado que se describe en las poscondiciones de un contrato es la creación de un atributo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q19" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q19" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>20. El resultado del diseño de la arquitectura del software es un conjunto de subsistemas y las relaciones entre ellos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q20" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q20" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>21. En un diagrama de secuencia del sistema pueden aparecer tantos objetos como se necesiten para modelar la interacción entre ellos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q21" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q21" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>22. El Paso A.3 en la elaboración del modelo de interacción, que trata sobre la asignación de responsabilidades a objetos, se apoya fundamentalmente en los patrones de diseño de Craig Larman, especialmente Experto en Información y Creador.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q22" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q22" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>23. El análisis orientado a objetos no contempla la posibilidad de herencia múltiple.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q23" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q23" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>24. Los requisitos no funcionales no tienen relación con la calidad del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q24" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q24" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>25. El diagrama de secuencia del sistema puede contener tantos objetos como sean necesarios para llevar a cabo una operación del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q25" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q25" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>26. Los proyectos software reales raramente se adaptan a un modelo de ciclo de vida clásico o en cascada.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q26" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q26" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>27. El modelo de casos de uso es la base para obtener información necesaria para el modelo conceptual.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q27" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q27" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>28. El ocultamiento de información limita impacto global de las decisiones de diseño locales.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q28" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q28" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>29. Todos los sustantivos que se identifiquen en los casos de uso se representan como conceptos en el diagrama conceptual.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q29" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q29" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>30. El diagrama de clases de diseño se deduce de los diagramas de comunicación. Se elaboran los diagramas de comunicación y después el diagrama de clases del diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q30" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q30" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>31. Los requisitos de un proyecto software pueden cambiar continuamente, pero esto no es un problema ya que los sistemas software son flexibles (se adaptan a los cambios).</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q31" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q31" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>32. En la gestión de proyectos, un hito es un punto de control que representa el inicio de un nuevo ciclo de desarrollo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q32" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q32" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>33. El principio de modularidad es básico, sin él no tienen sentido los demás principios.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q33" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q33" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>34. Los actores en un modelo de casos de uso pueden representar sistemas externos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q34" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q34" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>35. Las técnicas de estimación permiten calcular costos y tiempos del proyecto.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q35" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q35" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>36. En la arquitectura MVC (Model View Controller) para cambiar la interfaz de usuario es
+necesario cambiar el subsistema del modelo ya que este incluye la lógica de funcionamiento del
+programa.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q36" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q36" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>37. Los costes de mantenimiento incluyen tanto recursos directos como indirectos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q37" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q37" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>38. Todos los enlaces estereotipados con &lt;&lt;L&gt;&gt;, &lt;&lt;P&gt;&gt; o &lt;&lt;G&gt;&gt; estarán en el diagrama de clases del diseño como una asociación.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q38" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q38" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>39. El principio de diseño de “Bajo Acoplamiento” busca minimizar las dependencias entre clases.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q39" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q39" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>40. Un objeto pedido puede incluir más de una pizza. <br><img src="images/diagramaConceptos.jpeg" alt="Modelo Conceptual" width="400"></p>
+  <ol type="a">
+    <li><label><input type="radio" name="q40" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q40" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>41. La planificación de proyectos solo se realiza al inicio y no requiere seguimiento.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q41" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q41" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>42. Un requisito de rendimiento es un ejemplo de requisito no funcional que puede tener implicaciones en la selección de la arquitectura.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q42" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q42" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>43. Lo siguiente es una poscondición correcta: "se creó una lista en la que se incluye el nombre del cliente, dirección y teléfono, que se proporciona como salida de la operación".</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q43" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q43" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>44. Los escenarios y casos de uso son técnicas orientadas a obtener requisitos funcionales y no funcionales.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q44" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q44" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>45. El análisis de riesgos es exclusivo de las fases finales de un proyecto.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q45" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q45" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>46. La gestión de recursos humanos no se considera en la planificación de proyectos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q46" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q46" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>47. El mayor esfuerzo durante el proceso de producción del software se realiza en la etapa de desarrollo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q47" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q47" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>48. El mantenimiento correctivo ocurre exclusivamente después de la entrega del producto final.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q48" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q48" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>49. El análisis orientado a objetos facilita la transición entre el análisis y el diseño del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q49" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q49" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>50. Los modelos del análisis pueden contener tantas inconsistencias como consideremos oportunas, puesto que no son la solución del problema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q50" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q50" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>51. Con el análisis orientado a objetos sólo se modelan las propiedades estáticas del ámbito del problema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q51" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q51" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>52. Los requisitos no funcionales suelen describir cualidades o restricciones del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q52" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q52" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>53. La especificación de requisitos debe evitar la ambigüedad para facilitar el desarrollo posterior.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q53" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q53" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>54. El mantenimiento correctivo incluye la adición de nuevas funcionalidades.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q54" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q54" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>55. Lo siguiente es un recurso funcional "las reservas de préstamos de libros caducan a los 10 días a partir del momento que el libro esté a disposición del usuario".</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q55" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q55" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>56. La validación verifica que el software cumpla con las necesidades del usuario.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q56" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q56" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>57. Las técnicas de prueba estáticas permiten detectar errores sin ejecutar el código.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q57" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q57" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>58. La obtención de requisitos debe evitar la participación de los usuarios para no generar conflictos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q58" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q58" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>59. Las dependencias entre clases se modelan mediante asociaciones en UML.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q59" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q59" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>60. Los actores representan roles que son interpretados por personas, dispositivos, otros sistemas... cuando el sistema está en uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q60" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q60" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>61. En el diagrama de clases del diseño, los métodos:</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q61" value="1"> Se obtienen del MC.</label></li>
+    <li><label><input type="radio" name="q61" value="2"> Se obtienen de los DC.</label></li>
+    <li><label><input type="radio" name="q61" value="3"> No se especifican.</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>62. El numero de iteraciones en las fases de elaboración y construcción del proceso unificado
+deben ser las mismas.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q62" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q62" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>63. La documentación de requisitos es opcional en proyectos de ciclo de vida ágil.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q63" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q63" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>64. En los diagramas de clases de diseño pueden aparecer relaciones de dependencia.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q64" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q64" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>65. Los modelos de AER son: Modelo conceptual, diagramas de casos de uso y los contratos de las operaciones principales.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q65" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q65" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>66. En el MC (modelo conceptual) se deben incluir las relaciones de generalización entre conceptos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q66" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q66" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>67. Los casos de uso siempre terminan dando un resultado al actor que los inició.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q67" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q67" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>68. ¿Cuál de los siguientes modelos es más importante para realizar el diagrama de clases de diseño?</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q68" value="1"> Diagramas de interacción del diseño.</label></li>
+    <li><label><input type="radio" name="q68" value="2"> Todas son correctas.</label></li>
+    <li><label><input type="radio" name="q68" value="3"> El modelo conceptual</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>69. El modelo de casos de uso se usa exclusivamente para la obtención de requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q69" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q69" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>70. Las relaciones de inclusión permiten reutilizar fragmentos de comportamiento en varios casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q70" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q70" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>71. Los diagramas de casos de uso permiten representar la interacción entre los actores y el sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q71" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q71" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>72. Es posible que en un caso de uso no tenga que intervenir el sistema software a modelar.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q72" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q72" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>73. Cuando se construye un modelo conceptual es mejor añadir el mayor número posible de asociaciones entre conceptos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q73" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q73" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>74. El caso de uso describe sólo las acciones del sistema, no las de los actores.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q74" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q74" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>75. Los diagramas de despliegue muestran la distribución física de los componentes del software sobre el hardware.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q75" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q75" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="3">
+  <p>76. Las relaciones de generalización en el diagrama de clases del diseño son:</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q76" value="1"> Las que había en el MC.</label></li>
+    <li><label><input type="radio" name="q76" value="2"> Las identificadas con &lt;&lt;G&gt;&gt; en los diagramas de interacción.</label></li>
+    <li><label><input type="radio" name="q76" value="3"> Las que se pueden extraer al encontrar atributos y/o métodos comunes a varias clases.</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>77. Un modelo de casos de uso se centra en las necesidades que el usuario espera lograr al utilizar el sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q77" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q77" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>78. En un contrato si está relleno el apartado de las excepciones, el apartado de las precondiciones debe estar vacío.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q78" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q78" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>79. Un actor puede desempeñar varios roles a lo largo del tiempo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q79" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q79" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>80. A la hora de elaborar el diagrama de comunicación de una operación son esenciales los siguientes apartados del contrato correspondiente: excepciones, precondiciones y poscondiciones.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q80" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q80" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>81. El mantenimiento adaptativo consiste únicamente en corregir defectos que surgen tras la entrega del producto.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q81" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q81" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>82. El diseño es una tarea clave para la calidad del producto software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q82" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q82" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>83. Las relaciones de extensión son necesarias para todos los casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q83" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q83" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>84. En el diagrama de clases del diseño, la multiplicidad se obtiene de la existencia o no de multiobjetos en los diagrama de comunicación.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q84" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q84" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>85. Los requisitos no funcionales no tienen ninguna relación con los funcionales.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q85" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q85" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>86. Los casos de uso permiten describir el punto de vista de los usuarios del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q86" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q86" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>87. Durante la etapa de definición hay que conseguir encontrar la solución software al sistema analizado.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q87" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q87" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>88. La restricción {transient} aplicada a una instancia o enlace en un Diagrama de Comunicación significa que la instancia o enlace se destruye durante la interacción.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q88" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q88" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>89. El diagrama de secuencia es una herramienta para describir el comportamiento dinámico del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q89" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q89" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>90. El diseño de la estructura de objetos no se relaciona con los patrones de diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q90" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q90" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>91. En la validación de software, las pruebas de caja negra se enfocan en el diseño interno del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q91" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q91" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>92. Los diagramas de Gantt ayudan a visualizar las actividades y los hitos del proyecto.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q92" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q92" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>93. El análisis de requisitos consiste en examinar, delimitar y definir los requisitos del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q93" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q93" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>94. Las asociaciones de navegación se obtienen a partir de las asociaciones del modelo conceptual.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q94" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q94" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>95. Las dependencias representan vínculos temporales entre clases.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q95" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q95" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>96. El uso de métodos de desarrollo ágiles rompen con la filosofía de equipos de trabajo organizados de forma jerárquica.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q96" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q96" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>97. Los casos de uso “esenciales” son los procedimientos comunes más importantes del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q97" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q97" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>98. La arquitectura cliente-servidor favorece la escalabilidad de los sistemas software, porque permite la reconfiguración añadiendo clientes y servidores extra.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q98" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q98" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>99. El uso de mecanismos de abstracción en el diseño permiten obtener la modularidad adecuada de un sistema software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q99" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q99" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>100. La definición de un actor en un modelo de casos de uso puede coincidir con el concepto de clase en el análisis orientado a objetos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q100" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q100" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>101. El patrón de diseño “Experto en Información” sugiere asignar la responsabilidad a la clase que tenga la información necesaria para llevarla a cabo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q101" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q101" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>102. Un diagrama de conceptos sin operaciones es incorrecto.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q102" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q102" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>103. Los actores pueden ser personas u otros sistemas externos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q103" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q103" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>104. La especificación de requisitos debe ser verificable y modificable según el estándar IEEE 830-1998.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q104" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q104" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>105. Las entrevistas solo deben realizarse con los usuarios finales.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q105" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q105" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>106. El número de operaciones principales de un sistema es el mismo que el número de casos de usos que tengamos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q106" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q106" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>107. El principio de diseño "Bajo Acoplamiento" busca aumentar la interdependencia entre módulos para facilitar la comunicación.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q107" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q107" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>108. El objetivo de la validación y verificación es establecer confianza en la calidad del software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q108" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q108" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>109. La Especificación de Requisitos es un documento en el que se dice qué debe hacer el
+sistema software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q109" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q109" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>110. Los requisitos se consideran completos cuando representan exactamente lo que el cliente necesita.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q110" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q110" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>111. La planificación del proyecto incluye actividades como la estimación de costos y la definición de entregables.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q111" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q111" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>112. La abstracción de control se refiere al mecanismo que permite abstraer sobre el flujo de control de cualquier proceso, como reemplazar una estructura goto por un bucle while.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q112" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q112" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>113. La agregación y la composición son tipos de relaciones entre clases.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q113" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q113" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>114. Las relaciones de extensión permiten describir variantes de un escenario básico.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q114" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q114" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>115. El diagrama de clases es una herramienta para representar el modelo estático del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q115" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q115" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>116. Los prototipos siempre se transforman hasta convertirse en el programa que se entrega al cliente.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q116" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q116" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>117. Los casos de uso pueden ser iniciados por un actor principal o secundario.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q117" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q117" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>118. Uno de los objetivos de la fase de inicio del proceso unificado es el estudio de viabilidad del sistema a desarrollar.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q118" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q118" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>119. La diferencia entre una precondición y una excepción es que la precondición no tiene que comprobarse en la operación que se está definiendo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q119" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q119" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>120. El nodo 5 es un nodo join. <br><img src="images/diagramaActividad.jpeg" alt="Diagrama Actividad" width="400"></p>
+  <ol type="a">
+    <li><label><input type="radio" name="q120" value="1"> Sí</label></li>
+    <li><label><input type="radio" name="q120" value="2"> No</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>121. La validación del software asegura que el producto cumple con las expectativas y necesidades del usuario.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q121" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q121" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>122. Los diagramas de casos de uso representan la arquitectura física del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q122" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q122" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>123. El mantenimiento incluye adaptaciones para entornos cambiantes.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q123" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q123" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>124. El mantenimiento de software implica corregir errores y mejorar el rendimiento.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q124" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q124" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>125. El usuario es una pieza importante en el proceso de validación de las especificaciones del software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q125" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q125" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>126. La relación de inclusión se usa para reutilizar comportamientos en varios casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q126" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q126" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>127. Cuando comienza la actividad "Carrera de F1" se activan las calles "Dirección de carrera" y SI
+"Dirección de equipo". <br><img src="images/diagramaActividad.jpeg" alt="Diagrama Actividad" width="400"></p>
+  <ol type="a">
+    <li><label><input type="radio" name="q127" value="1"> Sí</label></li>
+    <li><label><input type="radio" name="q127" value="2"> No</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>128. El proceso de obtención de requisitos no incluye la descripción de implicados o actores relevantes.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q128" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q128" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>129. Un sistema informático externo a la aplicación con el que ésta debe interaccionar puede
+definirse como actor.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q129" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q129" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>130. Los diagramas de casos de uso son parte del modelo de análisis del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q130" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q130" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>131. Un requisito funcional describe cómo debe comportarse el sistema y cómo reacciona ante ciertos estímulos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q131" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q131" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>132. Los paquetes durante el diseño arquitectónico son una representación física de los
+subsistemas.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q132" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q132" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>133. El patrón experto en información nos dice que el objeto responsable de hacer las cosas es el que tiene el control.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q133" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q133" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>134. El modelo conceptual se representa usando un diagrama de clases que contiene las clases con sus atributos, métodos y asociaciones.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q134" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q134" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>135. La validación es independiente de las expectativas del usuario.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q135" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q135" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>136. La herramienta para representar el modelo de diseño de la interacción de objetos son los diagramas de clases UML.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q136" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q136" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>137. Un caso de uso produce algo de valor para un actor.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q137" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q137" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>138. El Paso C en la elaboración del modelo de interacción consiste en identificar los objetos que se han usado pero nunca se han creado para luego elaborar sus contratos de inicialización.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q138" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q138" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>139. En el modelo conceptual hay que definir los atributos y los métodos de todas las clases.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q139" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q139" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>140. Un caso de uso puede tener varios actores principales.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q140" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q140" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>141. Las relaciones de dependencia en el diagrama de clases del diseño se obtienen de las asociaciones de tipo agregación fuerte.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q141" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q141" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="3">
+  <p>142. ¿Cuál de las siguientes acciones empeoran el ocultamiento de información?</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q142" value="1"> Declarar atributos con visibilidad pública.</label></li>
+    <li><label><input type="radio" name="q142" value="2"> Utilizar variables globales.</label></li>
+    <li><label><input type="radio" name="q142" value="3"> Todas son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>143. No se deben usar atributos de un concepto como clave de acceso desde otro concepto.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q143" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q143" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>144. El modelo conceptual no debe incluir los nombres de rol de las asociaciones.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q144" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q144" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>145. El nombre que le demos al sistema en el DSS se va a corresponder con el nombre de una clase que va a formar parte de nuestra solución.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q145" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q145" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>146. La verificación dinámica de requisitos incluye técnicas de revisión estática.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q146" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q146" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>147. Un caso de uso esencial describe qué hace el sistema como respuesta a una petición de algún actor, pero no cómo lo hace.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q147" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q147" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>148. Los diagramas de colaboración son equivalentes a los diagramas de secuencia pero con un enfoque diferente.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q148" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q148" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>149. Un ingrediente puede tener un precio diferente dependiendo de la pizza en la que esté. <br><img src="images/diagramaConceptos.jpeg" alt="Modelo Conceptual" width="400"></p>
+  <ol type="a">
+    <li><label><input type="radio" name="q149" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q149" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>150. El patrón "Controlador" (o fachada) recomienda que la lógica de la aplicación se maneje en la interfaz de usuario para asegurar una buena reutilización.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q150" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q150" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>151. La semántica de la composición no permite que las partes existan independientemente del
+compuesto</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q151" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q151" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>152. Las clases del diagrama de clases del diseño toman sus atributos de los diagramas de comunicación.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q152" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q152" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>153. Las tareas principales de la ingeniería de requisitos son detección, análisis, especificación, revisión y reacción de requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q153" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q153" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>154. La especificación de requisitos solo debe ser utilizada durante el desarrollo inicial del software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q154" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q154" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>155. La verificación de requisitos consiste en comprobar que los requisitos documentados representen correctamente el problema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q155" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q155" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>156. Las pruebas de aceptación son realizadas únicamente por el equipo de desarrollo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q156" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q156" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>157. EL acoplamiento es un indicador de la dependencia entre módulos, cuanto más alto sea este valor mejor será el diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q157" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q157" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>158. Los diagramas de clases permiten representar la estructura estática de un sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q158" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q158" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>159. Una de las principales tareas del diseño de la arquitectura es refinar la descomposición del sistema en subsistemas.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q159" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q159" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>160. La gestión de proyectos consiste en coordinar recursos, tiempo y actividades para cumplir los objetivos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q160" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q160" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>161. Las pruebas de integración se centran en cómo interactúan los componentes.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q161" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q161" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>162. Un caso de uso sólo puede tener un actor principal que coincide con el que inicia el caso de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q162" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q162" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>163. La relación de inclusión entre casos de uso se utiliza para modelar la herencia de comportamiento entre actores.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q163" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q163" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>164. Los tipos de requisitos son funcionales, no funcionales y FURPS+.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q164" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q164" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>165. El incumplimiento de la planificación lleva de forma inmediata al aumento de personal en el equipo de desarrollo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q165" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q165" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>166. Los diagramas de casos de uso no incluyen relaciones entre los actores.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q166" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q166" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="3">
+  <p>167. En el proceso de diseño, a mayor refinamiento...</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q167" value="1"> el nivel de abstracción es independiente del nivel de refinamiento.</label></li>
+    <li><label><input type="radio" name="q167" value="2"> el nivel de abstracción es más alto.</label></li>
+    <li><label><input type="radio" name="q167" value="3"> el nivel de abstracción es más bajo.</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>168. La primera tarea del diseño es encontrar el diseño de la arquitectura del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q168" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q168" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>169. En el diagrama de clases del diseño pueden aparecer clases que no estaban en el diagrama de conceptos construido en el modelo de análisis.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q169" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q169" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>170. Nivel de acoplamiento nulo de un módulo nos garantiza un diseño de calidad.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q170" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q170" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>171. Los actores de un modelo de casos de uso son siempre humanos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q171" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q171" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>172. En los diagramas de clases de diseño no se deben representar las relaciones de dependencia entre clases, solo se deben representar las de asociación y de generalización.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q172" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q172" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>173. La forma más directa de identificar casos de uso es identificando los objetivos y necesidades de los actores del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q173" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q173" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>174. Para elaborar el modelo de análisis es fundamental el modelo de casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q174" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q174" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>175. El análisis de riesgo incluye identificar y planificar medidas para evitar o minimizar los riesgos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q175" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q175" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>176. La verificación estática incluye pruebas dinámicas realizadas por el equipo de desarrollo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q176" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q176" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>177. La planificación de proyectos incluye la estimación de costes, recursos y tiempo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q177" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q177" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>178. En un Diagrama de Comunicación, el símbolo * antes de un número de secuencia se utiliza para representar el comportamiento condicional de un mensaje.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q178" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q178" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>179. El modelo estructural del análisis está representado por el/los diagramas de secuencia del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q179" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q179" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>180. Las relaciones entre actores y casos de uso son la asociación y la dependencia.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q180" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q180" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>181. La descripción de casos de uso puede incluir escenarios alternativos y de error.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q181" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q181" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>182. En la arquitectura multicapa las capas deben estar lo más acopladas posible.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q182" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q182" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>183. El modelo conceptual no puede contener las navegabilidades de las asociaciones.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q183" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q183" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>184. Los requisitos no funcionales determinan los objetivos del diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q184" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q184" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>185. Un patrón de diseño es la descripción del problema con su solución en un determinado contexto.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q185" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q185" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>186. Uno de los problemas más importantes en el proceso de desarrollo del software es el incumplimiento de la planificación.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q186" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q186" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>187. Los requisitos implícitos son aquellos que no se documentan pero que se espera que se cumplan.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q187" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q187" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>188. La descripción del entorno técnico no forma parte de la obtención de requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q188" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q188" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>189. Las técnicas de entrevistas estructuradas no están recomendadas para obtener requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q189" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q189" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>190. Los actores tienen que ser necesariamente los identificados como usuarios del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q190" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q190" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>191. La generalización y la herencia en el análisis orientado a objetos son equivalentes en todos los contextos de modelado.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q191" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q191" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>192. Lo siguiente es un requisito NO funcional de facilidad de uso "el entorno debe avisar al usuario mediante email tras días antes de que finalice el plazo del préstamo".</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q192" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q192" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>193. El diseño de casos de uso consiste en detallar las interacciones entre los actores y el sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q193" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q193" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>194. Cuando un objeto se pasa como parámetro, en el diagrama de comunicación de la operación los enlaces con ese objeto tendrán una visibilidad del tipo &lt;&lt;A&gt;&gt;.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q194" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q194" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>195. Según los patrones de diseño de Craig Larman (GRASP), el patrón "Experto en Información" sugiere asignar una responsabilidad a la clase que contiene la información necesaria para llevarla a cabo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q195" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q195" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>196. Las operaciones de las clases en un Diagrama de Clases del Diseño (DCD) se identifican principalmente a partir de los atributos definidos en el Modelo Conceptual.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q196" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q196" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>197. Las relaciones entre los casos de uso pueden ser asociación, generalización y dependencia.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q197" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q197" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>198. El diagrama de comunicación forma parte del diseño de la estructura de objetos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q198" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q198" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>199. Las clases que aparezcan en el modelo de dominio son las únicas que tendrán el diagrama de clases del diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q199" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q199" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>200. El modelo de comportamiento se obtiene a partir del modelo conceptual.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q200" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q200" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>201. La verificación asegura que el software cumpla con las especificaciones técnicas.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q201" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q201" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>202. Un alto nivel de "Alta Cohesión" para una clase implica que modela un solo concepto abstracto con un pequeño conjunto de responsabilidades íntimamente relacionadas.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q202" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q202" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>203. Un caso de uso puede ser iniciado por un actor o por un usuario.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q203" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q203" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>204. Es mejor que las actividades de verificación las lleve a cabo el mismo equipo que haya
+hecho el desarrollo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q204" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q204" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>205. Un componente en la arquitectura de software debe tener una interfaz que exponga todos sus métodos internos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q205" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q205" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>206. Los diagramas de secuencia no pueden representar flujos alternativos de un caso de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q206" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q206" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>207. El proceso de análisis de requisitos ayuda a refinar, estructurar y describir los requisitos del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q207" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q207" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>208. Las pruebas dinámicas y estáticas forman parte de la verificación.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q208" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q208" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>209. Los patrones de diseño para la asignación de responsabilidades a objetas ayudan a obtener el diagrama de clases del diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q209" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q209" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>210. Los requisitos no funcionales definen los criterios de calidad del sistema software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q210" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q210" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>211. Cada caso de uso debe tener un nombre descriptivo y claro.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q211" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q211" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>212. El diseño es el proceso de refinamiento, en el que partiendo de modelos del análisis vamos añadiendo información hasta completar el diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q212" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q212" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>213. El acoplamiento indica dependencia entre módulos. Cuanto más alto mejor es el diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q213" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q213" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>214. Las pruebas de validación confirman que el sistema cumple los requisitos del usuario.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q214" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q214" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>215. Los requisitos no funcionales suponen limitaciones para el diseño de un sistema software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q215" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q215" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>216. En un diagrama de secuencia del sistema pueden aparecer tantos objetos como necesitemos para modelar la interacción entre ellos y con los actores.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q216" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q216" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>217. Para obtener un buen diseño, cada módulo debe presentar un bajo nivel de cohesión.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q217" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q217" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>218. La Etnografía es una técnica de obtención de requisitos que consiste en preguntar a los trabajadores de un negocio sobre la forma en que realizan sus tareas.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q218" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q218" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>219. Los actores en un modelo de casos de uso pueden ser internos o externos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q219" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q219" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>220. La fase de mantenimiento del software puede implicar cambios en la arquitectura de alto nivel del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q220" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q220" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>221. Las relaciones de generalización son la única forma de representar relaciones entre casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q221" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q221" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>222. La herencia simple y múltiple son formas de generalización.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q222" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q222" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>223. Un enlace entre objetos en un diagrama de colaboración especifica un camino a lo largo del cual un objeto puede enviar mensajes a otro o a sí mismo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q223" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q223" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>224. Un concepto no debe incluir los atributos de otros conceptos que indiquen las relaciones entre ellos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q224" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q224" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>225. Una característica de los métodos ágiles es las entregas frecuentes.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q225" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q225" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>226. El modelo de casos de uso puede ser usado como guía para el diseño de la interfaz de
+usuario y para facilitar la construcción de prototipos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q226" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q226" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>227. La priorización de requisitos es innecesaria cuando todos los requisitos tienen la misma importancia.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q227" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q227" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>228. Las vías de comunicación o enlaces entre objetos en un diagrama de colaboración son bidireccionales.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q228" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q228" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>229. El patrón experto en información propone asignar una responsabilidad a la clase que conoce la información necesaria para llevarla a cabo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q229" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q229" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>230. La detección de conflictos entre los requisitos es una de las principales actividades del análisis de requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q230" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q230" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>231. La gestión de proyectos no se basa en estándares internacionales.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q231" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q231" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>232. El diseño de casos de uso es independiente de los requisitos del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q232" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q232" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>233. La facilidad de mantenimiento es una característica deseable en el software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q233" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q233" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>234. La definición de clases y sus atributos no se considera en el diseño de la estructura de objetos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q234" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q234" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>235. Contra del patrón experto en información: va en contra de principios de acoplamiento y cohesión.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q235" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q235" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>236. El análisis de la productividad permite realizar una buena gestión de proyectos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q236" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q236" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>237. Un enlace entre objetos estereotipado como local &lt;&lt;L&gt;&gt; nos está indicando que esa vía de comunicación queda establecida para cualquier otra colaboración entre esos objetos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q237" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q237" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>238. La validación de la especificación no forma parte de la Ingeniería de requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q238" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q238" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>239. La especificación de requisitos representa los requisitos de manera informal y no debe ser completa.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q239" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q239" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>240. Cuando se alcanza el nodo 6 termina la actividad "Carrera de F1". <br><img src="images/diagramaActividad.jpeg" alt="Diagrama Actividad" width="400"></p>
+  <ol type="a">
+    <li><label><input type="radio" name="q240" value="1"> Sí</label></li>
+    <li><label><input type="radio" name="q240" value="2"> No</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>241. El análisis orientado a objetos solo considera los aspectos estáticos del dominio.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q241" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q241" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>242. El patrón experto en información nos ayuda a conocer qué clases son las encargadas de crear y destruir objetos en un DC (diagrama de comunicación).</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q242" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q242" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>243. Ejemplo de requisito funcional: La aplicación debe ser fácil de utilizar, e incluir ayudas en
+línea fáciles de entender.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q243" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q243" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>244. Los diagramas de paquetes pueden servir para organizar tanto clases como casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q244" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q244" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>245. La clasificación de los requisitos según su ámbito distingue entre requisitos funcionales, no
+funcionales y de información.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q245" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q245" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>246. El modelo conceptual o modelo de dominio es básico para especifiar las postcondiciones de un contrato.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q246" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q246" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>247. El uso del patrón controlador en la elaboración del modelo de diseño se hace para reducir el nivel de acoplamiento entre los elementos de la interfaz de usuario y los que modelan la solución.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q247" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q247" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>248. La planificación incremental de un proyecto implica la definición de requisitos únicamente al inicio del ciclo de vida.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q248" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q248" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>249. El modelo de prototipos es un buen método para validar los requisitos de los usuarios en cualquier proyecto de desarrollo de software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q249" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q249" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>250. Una mala solución para remediar el retraso en la entrega de un proyecto software es la llamada "horda mongoliana".</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q250" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q250" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>251. Un requisito no funcional puede influir en la estructura de datos de un sistema pero no en su arquitectura de componentes.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q251" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q251" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>252. El número de secuencia de un mensaje en un Diagrama de Comunicación se construye como una concatenación de números que indican la prioridad del mensaje en la secuencia general.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q252" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q252" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>253. Un diagrama de secuencia del sistema es un diagrama de secuencia de UML en el que se muestran los eventos generados por los actores.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q253" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q253" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>254. En el Diagrama de Clases del Diseño (DCD), los enlaces estereotipados con &lt;&lt;local&gt;&gt;, &lt;&lt;parameter&gt;&gt; o &lt;&lt;global&gt;&gt; en los Diagramas de Comunicación se representan como una asociación entre clases.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q254" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q254" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>255. Uno de los objetivos del análisis es conseguir los requisitos del software a partir de los requisitos de usuario mediante un proceso de refinamiento.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q255" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q255" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>256. La arquitectura de un sistema software facilita la comprensión de la estructura global del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q256" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q256" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>257. El mantenimiento es la etapa que menos recursos consume en el ciclo de vida del software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q257" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q257" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>258. La navegabilidad de las asociaciones en el diagrama de clases del diseño se obtiene teniendo en cuenta la dirección en los envíos de mensaje en los diagramas de comunicación.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q258" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q258" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>259. Uno de los pasos a realizar en la elaboración del modelo de interacción de objetos es la incorporación de las asociaciones entre las clases de objetos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q259" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q259" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>260. Al elaborar el DC de una operación son esenciales los siguientes apartados del contrato: excepciones, precondiciones y poscondiciones.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q260" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q260" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>261. Un participante en un diagrama de secuencia puede ser un objeto individual o un multiobjeto.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q261" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q261" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>262. La gestión de proyectos considera factores humanos como habilidades y experiencia.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q262" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q262" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>263. Las relaciones de asociación entre clases deben ser bidireccionales para asegurar la consistencia del modelo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q263" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q263" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>264. La satisfacción del cliente puede verse afectada por retrasos en el mantenimiento.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q264" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q264" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>265. Un modelo de casos de uso lo componen los diagramas de casos de uso y la especificación de actores y casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q265" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q265" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>266. El diagrama de clases de análisis no puede ser refinado durante la etapa de diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q266" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q266" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>267. Hacer diagramas de comunicación es sitemático, no interviene la creatividad del diseñador.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q267" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q267" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>268. En el diagrama de conceptos no deben aparecer atributos no primitivos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q268" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q268" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>269. Las relaciones de composición en UML son menos restrictivas que las relaciones de agregación.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q269" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q269" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>270. En el diagrama de clases del diseño:</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q270" value="1"> Las clases se obtienen del MC y los atributos del DC.</label></li>
+    <li><label><input type="radio" name="q270" value="2"> Las clases y atributos se obtienen de DC.</label></li>
+    <li><label><input type="radio" name="q270" value="3"> Clases se obtienen de DC y atributos de MC.</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>271. Una de las ventajas al incluir las relaciones entre los casos de uso es que se reduce el texto generado en la descripción de los casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q271" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q271" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>272. El diagrama de componentes especifica el hardware físico sobre el que se ejecutará el sistema software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q272" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q272" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>273. Las tareas del diseño de software, según la estructura temática, incluyen el diseño de los casos de uso, pero este se realiza después de haber completado el diseño de la estructura de objetos (Diagrama de Clases del Diseño).</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q273" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q273" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>274. La especificación de requisitos nunca debe incluir restricciones tecnológicas.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q274" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q274" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>275. Las actividades del análisis incluyen la priorización y la verificación de requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q275" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q275" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>276. El mantenimiento perfectivo busca optimizar el rendimiento y la eficiencia del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q276" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q276" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>277. El análisis orientado a objetos facilita la evolución del sistema durante su mantenimiento.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q277" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q277" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>278. Las asociaciones representan las relaciones permanentes entre objetos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q278" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q278" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>279. Los problemas de la ingeniería de requisitos suelen incluir dificultades de comunicación entre el cliente y los desarrolladores.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q279" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q279" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>280. La validación de software puede realizarse antes de la verificación para asegurar la coherencia interna del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q280" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q280" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>281. El modelo conceptual debe representar cualquier tipo de relación que se dé entre los conceptos que forman parte de él.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q281" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q281" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>282. Una consecuencia buena del patrón "Experto en Información" es que en ocasiones va en contra de los principios de acoplamiento o de cohesión.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q282" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q282" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>283. En la validación de requisitos, la inspección formal busca identificar ambigüedades y omisiones.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q283" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q283" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>284. El proceso de obtención de requisitos comienza con la identificación de las necesidades y características del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q284" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q284" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>285. Una asociación es una conexión significativa y relevante entre conceptos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q285" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q285" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>286. El análisis orientado a objetos representa los requisitos desde la perspectiva de los procesos de negocio.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q286" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q286" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>287. Durante el análisis se crea un modelo conceptual que representa los principales conceptos del dominio del problema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q287" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q287" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>288. ¿Qué principio del diseño facilita el trabajo independiente y concurrente de un equipo software?</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q288" value="1"> Abstracción</label></li>
+    <li><label><input type="radio" name="q288" value="2"> Modularidad</label></li>
+    <li><label><input type="radio" name="q288" value="3"> Alta cohesión</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>289. La evolución del software es una parte esencial del mantenimiento.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q289" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q289" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>290. Los casos de uso ayudan a comprender el alcance y los límites del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q290" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q290" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>291. Una de las funciones de la relación de inclusión en los casos de uso es descomponer un caso de uso complejo y largo en varios, para facilitar su comprensión.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q291" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q291" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>292. El uso del patrón controlador aumenta el número de conexiones entre las capas de interfaz de dominio. Esto implica que aumenta su acoplamiento.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q292" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q292" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>293. Los patrones de diseño se consideran herramientas exclusivamente para el diseño de la arquitectura y no para la especificación de requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q293" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q293" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>294. La ingeniería de requisitos se ocupa de identificar y documentar las necesidades del cliente para construir un software que las satisfaga.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q294" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q294" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>295. El análisis de requisitos permite descubrir los conflictos existentes entre los requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q295" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q295" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>296. Los diagramas de paquetes se usan para representar la estructura de los diagramas de casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q296" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q296" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>297. El tipo de relación entre actor y CU es de asociación.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q297" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q297" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>298. Durante la obtención de requisitos se debe identificar tanto los requisitos funcionales como los no funcionales.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q298" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q298" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>299. Un caso de uso puede generar más de una operación en el diagrama de secuencia del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q299" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q299" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>300. Durante la obtención de requisitos, es importante elaborar una lista de participantes.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q300" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q300" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>301. Los patrones de diseño pueden facilitar la extensibilidad y la reutilización del software.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q301" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q301" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>302. Los diagramas de actividad ayudan a representar los flujos de acciones en los casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q302" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q302" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>303. Una de las actividades principales de la obtención de requisitos es identificar y describir a los implicados o stakeholders.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q303" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q303" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>304. Los diagramas de clases no forman parte de este diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q304" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q304" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>305. Un requisito no funcional puede, en ocasiones, convertirse en un requisito funcional durante la evolución del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q305" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q305" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>306. En los diagramas de clases no pueden aparecer relaciones de generalización.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q306" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q306" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>307. El diagrama de casos de uso representa la vista interna del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q307" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q307" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>308. Las pruebas unitarias validan los requisitos globales del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q308" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q308" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>309. Con la abstracción de datos se abstraen sobre el funcionamiento para conseguir una estructura modular basada en procedimientos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q309" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q309" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>310. Un requisito funcional describe el comportamiento del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q310" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q310" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>311. ¿Cuando el diseño de la arquitectura no es conveniente?</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q311" value="1"> Subsistemas están muy acoplados.</label></li>
+    <li><label><input type="radio" name="q311" value="2"> Ninguna es verdad.</label></li>
+    <li><label><input type="radio" name="q311" value="3"> Subsistemas tienen alta cohesión.</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>312. El diseño arquitectónico establece la estructura global del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q312" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q312" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>313. La identificación de los implicados facilita la obtención de requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q313" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q313" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>314. Diseño es el proceso de aplicar distintos métodos, herramientas y principios con el propósito de definir un dispositivo, proceso o sistema con el suficiente detalle como para permitir su realización física.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q314" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q314" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>315. El modelo de casos de uso representa las interacciones entre actores y sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q315" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q315" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>316. El mantenimiento adaptativo consiste en corregir errores del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q316" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q316" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>317. Los diagramas de paquetes pueden ayudar a organizar los casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q317" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q317" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>318. Durante el análisis no se estudia la solución que se va a proponer al problema planteado, eso se deja a la fase de diseño.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q318" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q318" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>319. El diseño de software es principalmente el proceso de verificar y validar que el software construido cumple con los requisitos del análisis.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q319" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q319" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>320. Los contratos de las operaciones son elementos del modelo dinámico.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q320" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q320" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>321. Cuando establecemos una relación de generalización entre clases todas las subclases deben cumplir con la regla “es-un”.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q321" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q321" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>322. El modelo conceptual en el análisis de requisitos debe ser completamente independiente de cualquier restricción técnica o de implementación.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q322" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q322" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>323. En el diagrama de clases del diseño pueden aparecer nuevas clases, es decir, que no estén en el modelo conceptual.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q323" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q323" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>324. El camino crítico se determina considerando la holgura de cada actividad.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q324" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q324" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>325. Las relaciones que se dan entre casos de uso es la dependencia y la generalización.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q325" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q325" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>326. El modelado de casos de uso solo puede ser usado en la etapa de detección de requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q326" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q326" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>327. El rendimiento es uno de los problemas importantes del diseño arquitectónico usando
+multicapas.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q327" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q327" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>328. La descripción de un caso de uso incluye actores, precondición y poscondición.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q328" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q328" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>329. La restricción de UML `{new}` se usa en los DC (diagramas de comunicación) para representar la creación de un objeto o la creación de un enlace entre 2 objetos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q329" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q329" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>330. Los estereotipos de visibilidad representan tipo de acceso que se da entre objetos en los DC.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q330" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q330" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>331. Un nivel de acoplamiento alto y de cohesión bajo en un módulo garantiza un diseño de calidad.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q331" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q331" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>332. La entrevista es una técnica encaminada a obtener información sobre el sistema mediante el
+diálogo con los expertos en el dominio del problema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q332" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q332" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>333. El diseño de la estructura de objetos incluye la definición de operaciones y atributos, pero no de restricciones de visibilidad.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q333" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q333" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>334. Antes de definir una subclase en un modelo conceptual se debe comprobar que cumple las reglas del 100% y del “es-un”.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q334" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q334" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>335. Un escenario de un caso de uso puede tener múltiples flujos de eventos, incluyendo errores y excepciones.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q335" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q335" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>336. El modelo del diseño se considera una elaboración o refinamiento del modelo del análisis, incorporando detalles técnicos para la implementación.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q336" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q336" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>337. La planificación de proyectos no contempla los recursos necesarios.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q337" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q337" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>338. Un concepto debe incluir los atributos que indique las asociaciones que tienen otros conceptos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q338" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q338" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>339. El proceso unificado es un modelo de proceso dirigido por casos de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q339" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q339" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>340. El número de módulos de un sistema software debe ser cuantos más mejor, pues así garantizamos la independencia modular de cada uno de ellos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q340" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q340" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>341. La descripción extendida de un caso de uso complementa a la básica con mayor nivel de detalle.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q341" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q341" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>342. Un caso de uso esencial describe una actividad que es imprescindible para el
+funcionamiento del sistema que modela.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q342" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q342" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>343. Las actividades de planificación deben ser revisadas y actualizadas regularmente.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q343" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q343" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>344. Los actores siempre son usuarios finales del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q344" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q344" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>345. La verificación dinámica de requisitos es innecesaria cuando se han realizado inspecciones estáticas exhaustivas.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q345" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q345" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>346. Los diagramas de actividad se usan como complemento a la descripción de un caso de uso complejo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q346" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q346" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>347. El modelo de comportamiento estático representa la interacción entre objetos en tiempo de ejecución.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q347" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q347" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>348. El diseño de la estructura de objetos permite definir cómo se comunican los objetos del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q348" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q348" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>349. Los requisitos funcionales son independientes de los requisitos no funcionales.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q349" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q349" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="3">
+  <p>350. El diagrama de clases del diseño describe la estructura:</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q350" value="1"> Del modelo de análisis.</label></li>
+    <li><label><input type="radio" name="q350" value="2"> En el dominio del problema.</label></li>
+    <li><label><input type="radio" name="q350" value="3"> En el dominio de la solución.</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>351. Respecto a la independencia modular, rasgos en diseño de un módulo:</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q351" value="1"> Alta cohesión y bajo acoplamiento.</label></li>
+    <li><label><input type="radio" name="q351" value="2"> Alta cohesión y alto acoplamiento.</label></li>
+    <li><label><input type="radio" name="q351" value="3"> Baja cohesión y bajo acoplamiento.</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>352. Las técnicas etnográficas permiten comprender mejor el contexto de uso real del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q352" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q352" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>353. El mantenimiento del software nunca introduce nuevos errores en el sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q353" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q353" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>354. El mantenimiento perfecto se centra en corregir errores sin introducir nuevas características.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q354" value="1"> Falso</label></li>
+    <li><label><input type="radio" name="q354" value="2"> Verdadero</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>355. El modelo de casos de uso permite determinar con facilidad los requisitos no funcionales del sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q355" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q355" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>356. Para incorporar generalizaciones es necesario encontrar clases conceptuales con elementos comunes.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q356" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q356" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>357. Las pruebas de regresión son importantes durante el mantenimiento.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q357" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q357" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>358. Los diagramas de interacción y los diagramas de actividad UML son herramientas de diseño que permiten representar lo mismo, son equivalentes.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q358" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q358" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>359. El mantenimiento adaptativo busca que el software se adapte a nuevos entornos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q359" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q359" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>360. La especificación de requisitos puede ser complementada con modelos matemáticos y simulaciones.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q360" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q360" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>361. El análisis orientado a objetos representa los requisitos desde la perspectiva de los objetos del dominio del problema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q361" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q361" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>362. Los Diagramas de Secuencia y los Diagramas de Comunicación de UML son semánticamente equivalentes, aunque destacan aspectos diferentes de la interacción.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q362" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q362" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="2">
+  <p>363. Este modelo conceptual está mal, faltaría incluir la navegabilidad que hay entre Pizza y
+Masa, pues una pizza es la que está formada por la masa, igualmente ocurre entre Pizza e Ingrediente. <br><img src="images/diagramaConceptos.jpeg" alt="Modelo Conceptual" width="400"></p>
+  <ol type="a">
+    <li><label><input type="radio" name="q363" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q363" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>364. Un caso de uso puede describir explícitamente un requisito no funcional mediante relaciones de extensión.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q364" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q364" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>365. Las bases principales para obtener los diagramas de comunicación son los contratos y el modelo conceptual.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q365" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q365" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>366. Un Diagrama de Secuencia del Sistema se puede corresponder con un caso de uso, con un diagrama de casos de uso o con todo el sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q366" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q366" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>367. Una de las actividades del análisis de requisitos es detectar conflictos entre los requisitos.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q367" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q367" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>368. Las inspecciones de software permiten detectar defectos sin ejecutar el sistema.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q368" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q368" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>369. La cohesión es indicador de la unión formal de los elementos que forman un módulo.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q369" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q369" value="2"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" data-correct="1">
+  <p>370. El modelado de casos de uso ayuda a delimitar el sistema y el contexto de uso.</p>
+  <ol type="a">
+    <li><label><input type="radio" name="q370" value="1"> Verdadero</label></li>
+    <li><label><input type="radio" name="q370" value="2"> Falso</label></li>
+  </ol>
+</div>
+</div>
+
+<script>
+document.querySelectorAll('.question').forEach(function(q) {
+  q.addEventListener('change', function() {
+    const radios = q.querySelectorAll('input[type="radio"]');
+    const correct = q.dataset.correct;
+    q.classList.remove('correct', 'incorrect');
+    radios.forEach(r => {
+      if (r.checked) {
+        if (r.value == correct) {
+          q.classList.add('correct');
+        } else {
+          q.classList.add('incorrect');
+        }
+      }
+    });
+  });
+});
+
+document.getElementById('more-options-btn').addEventListener('click', function() {
+  document.getElementById('extra-buttons').style.display = 'block';
+  this.style.display = 'none';
+});
+
+function shuffleQuestions() {
+  const container = document.getElementById('questions-container');
+  const questions = Array.from(container.children);
+  for (let i = questions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    container.appendChild(questions[j]);
+  }
+  renumberQuestions();
+}
+
+function renumberQuestions() {
+  const questions = document.querySelectorAll('.question');
+  questions.forEach((q, idx) => {
+    const p = q.querySelector('p');
+    p.innerHTML = p.innerHTML.replace(/^\d+\./, (idx + 1) + '.');
+    const radios = q.querySelectorAll('input[type="radio"]');
+    radios.forEach(r => {
+      r.name = 'q' + (idx + 1);
+    });
+  });
+}
+
+function showCorrectAnswers() {
+  document.querySelectorAll('.question').forEach(q => {
+    const correct = q.dataset.correct;
+    q.classList.add('correct');
+    const correctRadio = q.querySelector(`input[value="${correct}"]`);
+    correctRadio.checked = true;
+  });
+}
+</script>
+</body>
+</html>

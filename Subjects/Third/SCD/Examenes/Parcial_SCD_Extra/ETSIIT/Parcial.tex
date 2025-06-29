@@ -1,0 +1,240 @@
+
+\documentclass[a4paper,12pt]{article}
+
+% Paquetes básicos
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{lipsum}
+\usepackage{geometry}
+\geometry{top=3cm, bottom=3cm, left=2.5cm, right=2.5cm}
+
+% Paquetes para diseño
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+% Paquetes para el entorno lstlisting
+\usepackage{listings}
+\usepackage{inconsolata}
+
+% Paquete para fondo
+\usepackage{background}
+
+% Configuración de lstlisting
+
+% Configuración de lstlisting
+\lstset{
+    inputencoding=utf8,          % Permite UTF-8
+    extendedchars=true,          % Reconoce caracteres extendidos
+    literate=                    % Configuración manual para tildes y símbolos
+        {á}{{\'a}}1
+        {é}{{\'e}}1
+        {í}{{\'i}}1
+        {ó}{{\'o}}1
+        {ú}{{\'u}}1
+        {ñ}{{\~n}}1
+        {Á}{{\'A}}1
+        {É}{{\'E}}1
+        {Í}{{\'I}}1
+        {Ó}{{\'O}}1
+        {Ú}{{\'U}}1
+        {Ñ}{{\~N}}1
+        {¿}{{\textquestiondown}}1
+        {¡}{{\textexclamdown}}1,
+    basicstyle=\ttfamily,        % Fuente monoespaciada
+    breaklines=true,             % Habilita salto de línea automático
+    frame=single,                % Marco alrededor del código
+    backgroundcolor=\color{gray!10}, % Fondo gris claro
+    keywordstyle=\color{blue},   % Color para palabras clave
+    commentstyle=\color{green},  % Color para comentarios
+    stringstyle=\color{red}      % Color para strings
+}
+\lstdefinestyle{customcpp}{
+    language=C++,                % Lenguaje de programación
+    showspaces=false,            % No mostrar espacios
+    showtabs=false,              % No mostrar tabulaciones
+    tabsize=4,                   % Tamaño de tabulación
+    showstringspaces=false,      % No mostrar espacios en strings
+    numbers=left,                % Números de línea a la izquierda
+    numberstyle=\tiny\color{gray}, % Estilo de los números de línea
+    numbersep=5pt,               % Separación de los números de línea
+    stepnumber=1,                % Mostrar número en cada línea
+    basicstyle=\ttfamily\footnotesize, % Estilo básico del código
+    keywordstyle=\bfseries\color{blue}, % Estilo de las palabras clave
+    commentstyle=\itshape\color{green!50!black}, % Estilo de los comentarios
+    stringstyle=\color{red},     % Estilo de los strings
+    identifierstyle=\color{black}, % Estilo de los identificadores
+    % procnamekeys={def,class},    % Palabras clave para nombres de funciones
+    morekeywords={constexpr,nullptr,size_t}, % Más palabras clave
+    emph={int,char,double,float,unsigned}, % Palabras a enfatizar
+    emphstyle=\color{magenta},   % Estilo de las palabras enfatizadas
+    backgroundcolor=\color{gray!10}, % Color de fondo
+    frame=shadowbox,             % Marco con sombra
+    rulesepcolor=\color{gray},   % Color de la línea de separación
+    breakatwhitespace=false,     % No cortar en espacios en blanco
+    breaklines=true,             % Cortar líneas largas
+    captionpos=b,                % Posición del título (abajo)
+    escapeinside={(*@}{@*)},     % Delimitadores para escapar a LaTeX
+    morecomment=[l][\color{magenta}]{\#}, % Comentarios de una línea
+    morecomment=[s][\color{orange}]{/*}{*/}, % Comentarios multilínea
+    morestring=[b]",             % Strings entre comillas dobles
+    morestring=[b]'              % Strings entre comillas simples
+}
+
+
+\lstset{style=customcpp}
+
+% Configuración de título
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+% Información del documento
+\title{
+    \vspace{-2cm}
+    \includegraphics[width=0.3\textwidth]{images/etsiit.png} \\ % Cambia el logo si es necesario
+    \LARGE Ingeniería Informática + ADE\\
+    \large Universidad de Granada (UGR)\\[1cm]
+}
+\author{\textbf{Autor:} Ismael Sallami Moreno}
+\date{\textbf{Asignatura:} Sistemas Concurrentes y Distribuidos}
+
+% Configuración del fondo
+\backgroundsetup{
+    scale=1,
+    color=black,
+    opacity=0.2,
+    angle=0,
+    position=current page.south,
+    vshift=0pt,
+    hshift=0pt,
+    contents={\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{images/MARIO.jpeg}}
+}
+
+% Inicio del documento
+\begin{document}
+
+% Portada
+\maketitle
+\thispagestyle{empty}
+
+\begin{center}
+    \includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{images/MARIO.jpeg} \\ % Añade tu imagen de fondo
+    \vfill
+\end{center}
+
+\newpage
+
+% Índice (opcional)
+\tableofcontents
+\newpage
+
+\section{Enunciado}
+En este examen, se debe implementar una solución para un minijuego de Mario Party. El juego debe permitir entre 2 y 8 jugadores. A continuación, se describen las reglas y la lógica del juego:
+
+\begin{itemize}
+    \item \textbf{Número de jugadores:} El juego debe permitir entre 2 y 8 jugadores. Cada jugador tendrá un turno para participar en el juego.
+    \item \textbf{Objetivo del juego:} Los jugadores deben pulsar una dirección (arriba, abajo, izquierda, derecha). Si la dirección pulsada coincide con la dirección aleatoria en la que se ha colocado el corazón, el jugador que primero llegue al corazón obtiene 5 puntos, el segundo 3 puntos y los demás 2 puntos. En este caso la dirección del jugador se debe de generar de manera aleatoria.
+    \item \textbf{Dirección aleatoria:} Al inicio de cada ronda, se generará una dirección aleatoria en la que se colocará el corazón. Esta dirección puede ser una de las siguientes: arriba, abajo, izquierda o derecha.
+    \item \textbf{Turnos de los jugadores:} Cada jugador tendrá un turno para pulsar una dirección. El orden de los turnos puede ser determinado aleatoriamente o en un orden predefinido.
+    \item \textbf{Puntuación:} 
+        \begin{itemize}
+            \item El primer jugador que pulse la dirección correcta obtiene 5 puntos.
+            \item El segundo jugador que pulse la dirección correcta obtiene 3 puntos.
+            \item Los demás jugadores que pulsen la dirección correcta obtienen 2 puntos.
+        \end{itemize}
+    \item Se deben de entregar tres ficheros:
+        \begin{itemize}
+            \item sol\_tusapellidoynombre\_P1yP2.cpp: código de la solución.
+            \item sol\_tusapellidoynombre\_P1yP2.txt: instrucción de compilación.
+            \item sol\_tusapellidoynombre\_P1yP2.pdf: fichero en que se incluye capturas del código y la explicación detallada del mismo.
+        \end{itemize}
+\end{itemize}
+
+
+\section{Código}
+%input de un lstlisting de un .cpp
+\lstinputlisting{../sol_SallamiMorenoIsmael_SCD_P1yP2.cpp}
+
+\section{Explicación detallada del Código}
+
+\subsection{Introducción}
+En este documento se presenta la implementación de una solución para un minijuego de Mario Party. En este juego, los jugadores deben pulsar una dirección y, si coincide con la dirección aleatoria en la que se ha colocado el corazón, el primer jugador que llegue al corazón obtiene 5 puntos, el segundo 3 puntos y los demás 2 puntos. A continuación, se detalla la lógica y las estructuras utilizadas para implementar esta solución.
+
+\subsection{Estructuras Utilizadas}
+Para la implementación se han utilizado las siguientes estructuras abstractas de semáforos de la clase \texttt{scd.cpp}:
+\begin{itemize}
+    \item \textbf{corazón\_disponible}: Indica cuándo el corazón está disponible.
+    \item \textbf{puede\_generar}: Indica cuándo se puede generar un nuevo corazón.
+    \item \textbf{fin\_ronda}: Asegura que las impresiones de mensajes y operaciones no se vean afectadas por condiciones de carrera.
+\end{itemize}
+
+\subsection{Uso de Mutex}
+Se han utilizado numerosos candados/mutex para asegurar la exclusión mutua en las operaciones críticas. Aunque se han usado más de los necesarios, se ha hecho con el propósito de dejar claro que cada operación utiliza un mutex distinto.
+
+\subsection{Variable de Fin del Juego}
+Se ha utilizado una variable booleana \texttt{fin} para indicar el fin del juego. En este caso, se realizan las operaciones correspondientes como la espera de los jugadores y otras acciones necesarias.
+
+\subsection{Hebra Jugador}
+La hebra del jugador sigue la siguiente lógica:
+\begin{enumerate}
+    \item Espera a que el corazón esté disponible mediante el semáforo \texttt{corazon\_disponible}.
+    \item Comprueba si el juego no ha terminado.
+    \item Calcula una dirección aleatoria hacia donde mira el jugador.
+    \item Si la dirección coincide, se le suman los puntos correspondientes según su llegada (5 puntos al primero, 3 al segundo y 2 a los demás).
+    \item Realiza el \texttt{signal} de \texttt{fin\_ronda} si es el último jugador de la ronda.
+\end{enumerate}
+
+\subsection{Hebra NPC}
+La hebra NPC se encarga de:
+\begin{enumerate}
+    \item Recorrer las rondas, reasignando el valor 0 al inicio de cada ronda a las variables \texttt{jugadores\_actuales} y \texttt{puestoJugador}.
+    \item Realizar el \texttt{signal} a todos los jugadores cada vez que se genera un corazón.
+    \item Esperar al semáforo de \texttt{fin\_ronda}.
+    \item Indicar a cada jugador que el juego ha terminado cuando la variable booleana \texttt{fin} sea verdadera.
+\end{enumerate}
+
+\subsection{Asignación de Puntos}
+Para la asignación de puntos, se ha establecido un array con los valores 5, 3 y 2. La variable \texttt{puestoJugador} determina el puesto del jugador y se le asignan los puntos correspondientes:
+\begin{itemize}
+    \item Si \texttt{puestoJugador} es 0, se asignan 5 puntos.
+    \item Si \texttt{puestoJugador} es 1, se asignan 3 puntos.
+    \item En otros casos, se asignan 2 puntos.
+\end{itemize}
+
+\subsection{Conclusión}
+El código está detallado línea por línea y se han implementado funciones auxiliares para mejorar la coherencia y complejidad del mismo. A continuación, se presentan capturas de la ejecución del código compilado mediante la instrucción proporcionada en el fichero \texttt{sol\_SallamiMorenoIsmael\_SCD\_P1yP2.txt}.
+
+\section{Ejemplo de salida}
+
+%input de un txt
+\lstinputlisting{../salida.txt}
+
+\section{Comando de compilación}
+\lstinputlisting{../sol_SallamiMorenoIsmael_SCD_P1yP2.txt}
+
+\section{Material}
+\href{https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/Asignaturas/Tercer\%20A\%C3\%B1o/SCD/Examenes/Parcial_SCD_Extra}{Material}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

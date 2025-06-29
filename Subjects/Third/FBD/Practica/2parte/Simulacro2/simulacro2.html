@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuestionario DML</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Merriweather', serif;
+        background-color: #f5f5f5;
+        color: #222;
+        padding: 30px;
+        margin: 0;
+    }
+    .quiz-container {
+        max-width: 850px;
+        margin: auto;
+        background: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+        text-align: center;
+        font-size: 2.2em;
+        margin-bottom: 20px;
+    }
+    .author {
+        text-align: center;
+        font-size: 0.95em;
+        margin-bottom: 30px;
+        font-family: 'Roboto', sans-serif;
+        color: #555;
+    }
+    .author p {
+        margin: 4px 0;
+    }
+    .question-block {
+        margin-bottom: 30px;
+        padding: 20px;
+        border-left: 4px solid #3f51b5;
+        background-color: #fafafa;
+        border-radius: 8px;
+    }
+    .question-block p {
+        font-weight: 600;
+        font-size: 1.1em;
+    }
+    .options div {
+        background: #f0f0f0;
+        padding: 12px 15px;
+        margin: 8px 0;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-family: monospace;
+        white-space: pre-wrap;
+    }
+    .options div:hover {
+        background-color: #e0e0e0;
+    }
+    .options div.correct {
+        background-color: #c8e6c9 !important;
+        border-left: 5px solid #2e7d32;
+        color: #2e7d32;
+    }
+    .options div.incorrect {
+        background-color: #ffcdd2 !important;
+        border-left: 5px solid #c62828;
+        color: #c62828;
+    }
+    img {
+        max-width: 100%;
+        margin: 10px 0 15px;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+<div class="quiz-container">
+    <h1>Cuestionario DML</h1>
+    <div class="author">
+        <p><strong>Autor:</strong> Ismael Sallami Moreno</p>
+        <p><strong>Asignatura:</strong> Fundamentos Bases de Datos</p>
+        <p><strong>Titulación:</strong> Ingeniería Informática + ADE</p>
+    </div>
+
+    <div class="question-block" id="q1">
+        <p><strong>1.</strong> Pregunta 1</p><img src="images/ej1.png" alt="Pregunta 1"><div class="options">
+            <div onclick="checkAnswer(this, false, 'q1')">CREATE TABLE Asiento (Zona# REFERENCES Zona(Zona#) PRIMARY KEY, Fila varchar2(1) PRIMARY KEY, Asiento# NUMBER(3) PRIMARY KEY CHECK(Asiento# >=0));</div>
+            <div onclick="checkAnswer(this, true, 'q1')">CREATE TABLE Asiento (Zona# REFERENCES Zona(Zona#), Fila varchar2(1), Asiento# NUMBER(3) CHECK(Asiento# >=0), PRIMARY KEY(Zona#,Fila,Asiento#));</div>
+            <div onclick="checkAnswer(this, false, 'q1')">CREATE TABLE Asiento (Zona# REFERENCES Zona(Zona#), Fila varchar2(1), Asiento# NUMBER(3), PRIMARY KEY(Zona#,Fila,Asiento#),FOREIGN KEY (Zona#) REFERENCES Zona(Zona#), CHECK(Asiento# >=0));</div></div></div>
+    <div class="question-block" id="q2">
+        <p><strong>2.</strong> Pregunta 2</p><img src="images/ej2.png" alt="Pregunta 2"><div class="options">
+            <div onclick="checkAnswer(this, false, 'q2')">CREATE TABLE Entrada( Zona#, Fila, Asiento#, EquL# REFERENCES Partido(EquL#), Fecha REFERENCES Partido(Fecha), Vendida VARCHAR2(1) DEFAULT 'N' CHECK(Vendida IN ('S','N')), PRIMARY KEY(Zona#,Fila,Asiento#,EquL#,Fecha), FOREIGN KEY (Zona#,Fila,Asiento#) REFERENCES Asiento(Zona#,Fila,Asiento#) );</div>
+            <div onclick="checkAnswer(this, false, 'q2')">CREATE TABLE Entrada( Zona#, Fila, Asiento#, EquL#, Fecha, Vendida VARCHAR2(1) DEFAULT 'N' CHECK(Vendida IN ('S','N')), PRIMARY KEY(Zona#,Fila,Asiento#,EquL#,Fecha), FOREIGN KEY (EquL#,Fecha) REFERENCES Partido(EquL#,Fecha), FOREIGN KEY (Zona#,Fila,Asiento#) REFERENCES Asiento(Zona#,Fila,Asiento#) );</div>
+            <div onclick="checkAnswer(this, true, 'q2')">CREATE TABLE Entrada( Zona# VARCHAR2(10), Fila VARCHAR2(1), Asiento# NUMBER, EquL#, Fecha, Vendida VARCHAR2(1) DEFAULT 'N' CHECK(Vendida IN ('S','N')), PRIMARY KEY(Zona#,Fila,Asiento#,EquL#,Fecha), FOREIGN KEY (EquL#,Fecha) REFERENCES Partido(EquL#,Fecha), FOREIGN KEY (Zona#,Fila,Asiento#) REFERENCES Asiento(Zona#,Fila,Asiento#) );</div>
+            <div onclick="checkAnswer(this, false, 'q2')">CREATE TABLE Entrada( Zona# VARCHAR2(10), Fila VARCHAR2(1), Asiento# NUMBER, EquL# VARCHAR2(10), Fecha DATE, Vendida VARCHAR2(2), PRIMARY KEY(Zona#,Fila,Asiento#,EquL#,Fecha), FOREIGN KEY (EquL#) REFERENCES Equipos(Equ#), FOREIGN KEY (Fecha) REFERENCES Partido(Fecha), FOREIGN KEY (Zona#,Fila,Asiento#) REFERENCES asiento(Zona#,Fila,Asiento#) );</div></div></div>
+    <div class="question-block" id="q3">
+        <p><strong>3.</strong> Pregunta 3</p><img src="images/ej3.png" alt="Pregunta 3"><div class="options">
+            <div onclick="checkAnswer(this, false, 'q3')">CREATE TABLE Equipos (Equ# varchar2(10), Nombre varchar2(15));</div>
+            <div onclick="checkAnswer(this, false, 'q3')">CREATE TABLE Equipos (Equ# varchar2(10) PRIMARY KEY, Nombre varchar2(15));</div>
+            <div onclick="checkAnswer(this, true, 'q3')">CREATE TABLE Equipos (Equ# varchar2(10), Nombre varchar2(15), PRIMARY KEY(Equ#));</div></div></div>
+    <div class="question-block" id="q4">
+        <p><strong>4.</strong> Ejercicio 4</p><img src="images/ej4.png" alt="Pregunta 4"><div class="options"></div></div>
+    <div class="question-block" id="q5">
+        <p><strong>5.</strong> Ejercicio 5</p><img src="images/ej5.png" alt="Pregunta 5"><div class="options"></div></div>
+    <div class="question-block" id="q6">
+        <p><strong>6.</strong> Ejercicio 6</p><img src="images/ej6.png" alt="Pregunta 6"><div class="options">
+            <div onclick="checkAnswer(this, false, 'q6')">CREATE TABLE Partido (EquL# , Fecha Date, EquV# , Hora Date, PRIMARY KEY(EquL#,Fecha), UNIQUE(EquV#,Fecha), CHECK(EquL#<>EquV#), FOREIGN KEY (EquL#,EquV#) REFERENCES Equipos(Equ#,Equ#));</div>
+            <div onclick="checkAnswer(this, true, 'q6')">CREATE TABLE Partido (EquL# REFERENCES Equipos(Equ#), Fecha Date, EquV# REFERENCES Equipos(Equ#), Hora Date, PRIMARY KEY(EquL#,Fecha), UNIQUE(EquV#,Fecha), CHECK(EquL#<>EquV#));</div>
+            <div onclick="checkAnswer(this, false, 'q6')">CREATE TABLE Partido (EquL# REFERENCES Equipos(Equ#), Fecha Date, EquV# REFERENCES Equipos(Equ#) CHECK(EquL#<>EquV#), Hora Date, PRIMARY KEY(EquL#,Fecha), UNIQUE(EquV#,Fecha));</div>
+            <div onclick="checkAnswer(this, false, 'q6')">CREATE TABLE Partido (EquL# varchar2(10) PRIMARY KEY REFERENCES Equipos(Equ#), Fecha Date PRIMARY KEY UNIQUE, EquV# REFERENCES Equipos(Equ#), Hora Date UNIQUE, PRIMARY KEY(EquL#,Fecha), CHECK(EquL#<>EquV#));</div></div></div>
+    <div class="question-block" id="q7">
+        <p><strong>7.</strong> Ejercicio 7</p><img src="images/ej7.png" alt="Pregunta 7"><div class="options">
+            <div onclick="checkAnswer(this, false, 'q7')">CREATE TABLE Zona (Zona# varchar2(10) PRIMARY KEY, Precio NUMBER CHECK(Precio BETWEEN 0 AND 300));</div>
+            <div onclick="checkAnswer(this, false, 'q7')">CREATE TABLE Zona (Zona# varchar2(10), Precio NUMBER);</div>
+            <div onclick="checkAnswer(this, true, 'q7')">CREATE TABLE Zona (Zona# varchar2(10) PRIMARY KEY, Precio NUMBER(3) CHECK(Precio >0 AND Precio <=300));</div></div></div>
+</div>
+<script>
+function checkAnswer(element, isCorrect, groupId) {
+    const parent = document.getElementById(groupId);
+    const options = parent.querySelectorAll('.options div');
+    options.forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+    });
+    if (isCorrect) {
+        element.classList.add('correct');
+    } else {
+        element.classList.add('incorrect');
+    }
+}
+</script>
+</body>
+</html>

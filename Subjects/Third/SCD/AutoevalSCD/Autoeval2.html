@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 2 - Exclusión Mutua</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            font-size: 18px;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        .question {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .question.correct {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+        .question.incorrect {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+        .explanation {
+            background: #e7f3fe;
+            border: 1px solid #b2d4fe;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        .author {
+            margin-top: 20px;
+            font-style: italic;
+            text-align: center;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        input[type="button"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 2 - Monitores </h1>
+    <ul class="author"></ul>
+        <li><strong>Autor:</strong> Ismael Sallami Moreno</li>
+        <li><strong>Titulación:</strong> Ingeniería Informática y ADE</li>
+        <li><strong>Asignatura:</strong> Sistemas Concurrentes y Distribuidos</li>
+    </ul>
+    <br>
+    <form id="quizForm">
+        <div id="q1" class="question">
+            <p>¿Cuál es la principal limitación de los semáforos en sistemas concurrentes?</p>
+            <input type="radio" name="q1" value="a"> Solo funcionan con variables estáticas.<br>
+            <input type="radio" name="q1" value="b"> Dependen de variables locales.<br>
+            <input type="radio" name="q1" value="c"> Requieren mucho espacio de memoria.<br>
+            <input type="radio" name="q1" value="d"> Son difíciles de implementar en hardware.<br>
+            <input type="radio" name="q1" value="e"> No permiten encapsulación de la sincronización.<br>
+        </div>
+        <div id="q2" class="question">
+            <p>¿Qué es un monitor en programación concurrente?</p>
+            <input type="radio" name="q2" value="a"> Un dispositivo de entrada de datos.<br>
+            <input type="radio" name="q2" value="b"> Un controlador de semáforos.<br>
+            <input type="radio" name="q2" value="c"> Un mecanismo de programación que permite sincronización de procesos.<br>
+            <input type="radio" name="q2" value="d"> Un programa antivirus.<br>
+            <input type="radio" name="q2" value="e"> Una interfaz gráfica de usuario.<br>
+        </div>
+        <div id="q3" class="question">
+            <p>¿Quién introdujo el concepto de monitor y en qué año?</p>
+            <input type="radio" name="q3" value="a"> C.A.R. Hoare, en 1974.<br>
+            <input type="radio" name="q3" value="b"> Donald Knuth, en 1975.<br>
+            <input type="radio" name="q3" value="c"> Edsger Dijkstra, en 1972.<br>
+            <input type="radio" name="q3" value="d"> John von Neumann, en 1965.<br>
+            <input type="radio" name="q3" value="e"> Alan Turing, en 1970.<br>
+        </div>
+        <div id="q4" class="question">
+            <p>¿Qué es una variable permanente en un monitor?</p>
+            <input type="radio" name="q4" value="a"> Una variable que cambia continuamente.<br>
+            <input type="radio" name="q4" value="b"> Una variable local a cada procedimiento del monitor.<br>
+            <input type="radio" name="q4" value="c"> Una variable de solo lectura.<br>
+            <input type="radio" name="q4" value="d"> Una variable utilizada solo para imprimir.<br>
+            <input type="radio" name="q4" value="e"> La variable que guarda el estado interno del monitor.<br>
+        </div>
+        <div id="q5" class="question">
+            <p>¿Qué garantiza la exclusión mutua en los monitores?</p>
+            <input type="radio" name="q5" value="a"> Las interrupciones de hardware.<br>
+            <input type="radio" name="q5" value="b"> Los procedimientos dentro del monitor.<br>
+            <input type="radio" name="q5" value="c"> Los semáforos externos que se usan para implementar los monitores.<br>
+            <input type="radio" name="q5" value="d"> El sistema operativo.<br>
+            <input type="radio" name="q5" value="e"> Las condiciones de sincronización.<br>
+        </div>
+        <div id="q6" class="question">
+            <p>¿Cuál de los siguientes NO es un componente de los monitores?</p>
+            <input type="radio" name="q6" value="a"> Variables permanentes.<br>
+            <input type="radio" name="q6" value="b"> Variables temporales.<br>
+            <input type="radio" name="q6" value="c"> Condiciones de sincronización.<br>
+            <input type="radio" name="q6" value="d"> Procedimientos.<br>
+            <input type="radio" name="q6" value="e"> Código de inicialización.<br>
+        </div>
+        <div id="q7" class="question">
+            <p>¿Qué función cumple la operación c.wait() en un monitor?</p>
+            <input type="radio" name="q7" value="a"> Bloquear al proceso que llama al procedimiento que la ejecuta hasta que se cumpla una condición.<br>
+            <input type="radio" name="q7" value="b"> Liberar todos los procesos en la cola.<br>
+            <input type="radio" name="q7" value="c"> Permitir la sincronización sin bloquear.<br>
+            <input type="radio" name="q7" value="d"> Bloquear el monitor hasta que se libere.<br>
+            <input type="radio" name="q7" value="e"> Incrementar el valor de una variable.<br>
+        </div>
+        <div id="q8" class="question">
+            <p>¿Qué sucede cuando se ejecuta c.signal() y la cola está vacía?</p>
+            <input type="radio" name="q8" value="a"> Se libera un recurso de memoria.<br>
+            <input type="radio" name="q8" value="b"> La operación se descarta sin efecto.<br>
+            <input type="radio" name="q8" value="c"> Se bloquea el monitor.<br>
+            <input type="radio" name="q8" value="d"> Se activa el primer proceso de la cola.<br>
+            <input type="radio" name="q8" value="e"> Cambia el valor de la variable de condición.<br>
+        </div>
+        <div id="q9" class="question">
+            <p>¿Qué asegura el "invariante del monitor" en un sistema concurrente?</p>
+            <input type="radio" name="q9" value="a"> Que el monitor mantenga una propiedad específica siempre que no esté en uso.<br>
+            <input type="radio" name="q9" value="b"> La reusabilidad de las variables.<br>
+            <input type="radio" name="q9" value="c"> La verificación de sincronización.<br>
+            <input type="radio" name="q9" value="d"> La exclusión mutua de procesos.<br>
+            <input type="radio" name="q9" value="e"> El acceso constante a las variables.<br>
+        </div>
+        <div id="q10" class="question">
+            <p>¿Cuál de las siguientes es una característica de la "señal automática" (SA)?</p>
+            <input type="radio" name="q10" value="a"> Se ejecuta una señal implícita sin desplazamiento.<br>
+            <input type="radio" name="q10" value="b"> Los procesos señaladores esperan en la cola.<br>
+            <input type="radio" name="q10" value="c"> El monitor entra en espera forzada.<br>
+            <input type="radio" name="q10" value="d"> Se reinicia el monitor automáticamente.<br>
+            <input type="radio" name="q10" value="e"> El proceso señalador continúa su ejecución tras signal.<br>
+        </div>
+        <div id="q11" class="question">
+            <p>¿Qué significa la semántica de "Señalar y Continuar" (SC)?</p>
+            <input type="radio" name="q11" value="a"> Todos los procesos en la cola se desbloquean.<br>
+            <input type="radio" name="q11" value="b"> El proceso señalador continúa su ejecución después de signal.<br>
+            <input type="radio" name="q11" value="c"> La operación signal se omite.<br>
+            <input type="radio" name="q11" value="d"> El proceso señalador espera en la cola.<br>
+            <input type="radio" name="q11" value="e"> El monitor se reinicia.<br>
+        </div>
+        <div id="q12" class="question">
+            <p>¿Qué significa la semántica de "Señalar y Esperar" (SE)?</p>
+            <input type="radio" name="q12" value="a"> No se permite el acceso a la exclusión mutua del monitor.<br>
+            <input type="radio" name="q12" value="b"> El proceso señalado abandona el monitor.<br>
+            <input type="radio" name="q12" value="c"> El proceso señalador se bloquea después de signal.<br>
+            <input type="radio" name="q12" value="d"> Los procesos en cola no se despiertan.<br>
+            <input type="radio" name="q12" value="e"> El proceso señalador sigue ejecutando código del monitor.<br>
+        </div>
+        <div id="q13" class="question">
+            <p>¿Para qué tipo de problemas es útil el patrón de Exclusión Mutua (EM)?</p>
+            <input type="radio" name="q13" value="a"> Para asignación de memoria dinámica.<br>
+            <input type="radio" name="q13" value="b"> Para acceso exclusivo a una sección crítica.<br>
+            <input type="radio" name="q13" value="c"> Para sincronización de semáforos.<br>
+            <input type="radio" name="q13" value="d"> Para desbloquear colas de procesos.<br>
+            <input type="radio" name="q13" value="e"> Para almacenamiento de variables compartidas.<br>
+        </div>
+        <div id="q14" class="question">
+            <p>¿Cuál es el invariante del monitor de exclusión mutua?</p>
+            <input type="radio" name="q14" value="a"> num_sc >= 2.<br>
+            <input type="radio" name="q14" value="b"> libre + num_sc == 2.<br>
+            <input type="radio" name="q14" value="c"> ocupada == false.<br>
+            <input type="radio" name="q14" value="d"> num_sc > 1.<br>
+            <input type="radio" name="q14" value="e"> ocupada == true cuando hay un proceso en SC.<br>
+        </div>
+        <div id="q15" class="question">
+            <p>¿Qué define la operación escribir en un monitor Productor-Consumidor?</p>
+            <input type="radio" name="q15" value="a"> Borra el valor compartido.<br>
+            <input type="radio" name="q15" value="b"> Inicia una señal de bloqueo.<br>
+            <input type="radio" name="q15" value="c"> Desbloquea el monitor.<br>
+            <input type="radio" name="q15" value="d"> Escribe el valor en una variable compartida.<br>
+            <input type="radio" name="q15" value="e"> Lee el valor de la variable compartida.<br>
+        </div>
+        <div id="q16" class="question">
+            <p>¿Qué hace la operación leer() en el monitor de Productor-Consumidor?</p>
+            <input type="radio" name="q16" value="a"> Limpia la cola de procesos.<br>
+            <input type="radio" name="q16" value="b"> Elimina el valor de la variable.<br>
+            <input type="radio" name="q16" value="c"> Activa al proceso productor.<br>
+            <input type="radio" name="q16" value="d"> Lee el valor compartido y lo devuelve.<br>
+            <input type="radio" name="q16" value="e"> Bloquea al proceso productor.<br>
+        </div>
+        <div id="q17" class="question">
+            <p>¿Cuál es el propósito de la variable pendiente en el monitor Productor-Consumidor?</p>
+            <input type="radio" name="q17" value="a"> Indicar que el valor ha sido leído y no escrito.<br>
+            <input type="radio" name="q17" value="b"> Indicar si hay procesos señaladores.<br>
+            <input type="radio" name="q17" value="c"> Guardar el número de procesos en cola.<br>
+            <input type="radio" name="q17" value="d"> Mostrar si el monitor está activo.<br>
+            <input type="radio" name="q17" value="e"> Controlar el estado de las operaciones de lectura y escritura.<br>
+        </div>
+        <div id="q18" class="question">
+            <p>¿Qué es una cola de prioridad en monitores?</p>
+            <input type="radio" name="q18" value="a"> Una lista de operaciones de señal.<br>
+            <input type="radio" name="q18" value="b"> Un grupo de semáforos.<br>
+            <input type="radio" name="q18" value="c"> Un tipo de variable temporal.<br>
+            <input type="radio" name="q18" value="d"> Una cola que permite ordenar procesos según prioridad.<br>
+            <input type="radio" name="q18" value="e"> Una cola para ejecutar en último lugar.<br>
+        </div>
+        <div id="q19" class="question">
+            <p>¿Qué es el Patrón de Espera Única (EU) en programación concurrente?</p>
+            <input type="radio" name="q19" value="a"> Un proceso bloquea a otro.<br>
+            <input type="radio" name="q19" value="b"> Un proceso finaliza antes de que inicie otro.<br>
+            <input type="radio" name="q19" value="c"> Un proceso espera indefinidamente en una cola.<br>
+            <input type="radio" name="q19" value="d"> Un proceso espera que otro finalice antes de iniciar una acción.<br>
+            <input type="radio" name="q19" value="e"> Un proceso se elimina automáticamente.<br>
+        </div>
+        <div id="q20" class="question">
+            <p>¿Cuál de las siguientes NO es una operación de sincronización en monitores?</p>
+            <input type="radio" name="q20" value="a"> signal_all().<br>
+            <input type="radio" name="q20" value="b"> wait().<br>
+            <input type="radio" name="q20" value="c"> signal().<br>
+            <input type="radio" name="q20" value="d"> queue().<br>
+            <input type="radio" name="q20" value="e"> init().<br>
+        </div>
+        <div id="q21" class="question">
+            <p>¿Qué sucede en la semántica de Señalar y Salir (SS)?</p>
+            <input type="radio" name="q21" value="a"> El proceso señalador sale del monitor después de signal.<br>
+            <input type="radio" name="q21" value="b"> El proceso señalado queda en espera.<br>
+            <input type="radio" name="q21" value="c"> El proceso señalador continúa ejecutando.<br>
+            <input type="radio" name="q21" value="d"> Todos los procesos son liberados.<br>
+            <input type="radio" name="q21" value="e"> Se detiene la ejecución del monitor.<br>
+        </div>
+        <div id="q22" class="question">
+            <p>¿Cuál es el propósito de c.signal_all() en un monitor?</p>
+            <input type="radio" name="q22" value="a"> Liberar todos los procesos en la cola de condición.<br>
+            <input type="radio" name="q22" value="b"> Reiniciar el monitor.<br>
+            <input type="radio" name="q22" value="c"> Bloquear todos los procesos.<br>
+            <input type="radio" name="q22" value="d"> Cambiar el valor de las variables permanentes.<br>
+            <input type="radio" name="q22" value="e"> Liberar sólo el primer proceso en cola.<br>
+        </div>
+        <div id="q23" class="question">
+            <p>¿Qué es un Monitor de Barrera Parcial?</p>
+            <input type="radio" name="q23" value="a"> Un monitor que bloquea procesos hasta que un grupo alcanza un estado.<br>
+            <input type="radio" name="q23" value="b"> Un monitor que reduce el tiempo de espera.<br>
+            <input type="radio" name="q23" value="c"> Un monitor que libera procesos en intervalos.<br>
+            <input type="radio" name="q23" value="d"> Un monitor que libera a todos los procesos al mismo tiempo.<br>
+            <input type="radio" name="q23" value="e"> Un monitor que detiene todos los procesos.<br>
+        </div>
+        <div id="q24" class="question">
+            <p>¿Cuál es la semántica ideal para el monitor de barrera parcial?</p>
+            <input type="radio" name="q24" value="a"> SU.<br>
+            <input type="radio" name="q24" value="b"> SA.<br>
+            <input type="radio" name="q24" value="c"> SE.<br>
+            <input type="radio" name="q24" value="d"> SS.<br>
+            <input type="radio" name="q24" value="e"> SC.<br>
+        </div>
+        <div id="q25" class="question">
+            <p>¿Qué sucede con un proceso en cola cuando se usa signal en una semántica SC?</p>
+            <input type="radio" name="q25" value="a"> Se ejecuta automáticamente.<br>
+            <input type="radio" name="q25" value="b"> Permanece bloqueado indefinidamente.<br>
+            <input type="radio" name="q25" value="c"> Se despierta y sale inmediatamente.<br>
+            <input type="radio" name="q25" value="d"> Ignora la operación signal.<br>
+            <input type="radio" name="q25" value="e"> Se mueve a la cola de entrada del monitor.<br>
+        </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Añadi</div>r las preguntas adicionales de la misma manera -->
+
+    <input type="button" value="¿Aprobarás?" onclick="checkAnswers()">
+</form>
+
+<div class="author">
+    <p>Autor: Ismael Sallami Moreno</p>
+</div>
+
+<div id="results" style="margin-top: 20px;"></div>
+
+<script>
+    function checkAnswers() {
+        let score = 0;
+        const totalQuestions = 25;
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
+
+        // Respuestas correctas
+        const answers = {
+            q1: { answer: "e", explanation: "Los semáforos no permiten encapsulación de la sincronización, lo que puede llevar a errores difíciles de detectar." },
+            q2: { answer: "c", explanation: "Un monitor es un mecanismo de programación que permite la sincronización de procesos en sistemas concurrentes." },
+            q3: { answer: "a", explanation: "C.A.R. Hoare introdujo el concepto de monitor en 1974." },
+            q4: { answer: "e", explanation: "Una variable permanente en un monitor guarda el estado interno del monitor." },
+            q5: { answer: "b", explanation: "Los procedimientos dentro del monitor garantizan la exclusión mutua." },
+            q6: { answer: "b", explanation: "Las variables temporales no son un componente de los monitores." },
+            q7: { answer: "a", explanation: "La operación c.wait() bloquea al proceso que llama al procedimiento hasta que se cumpla una condición." },
+            q8: { answer: "b", explanation: "Si la cola está vacía, la operación c.signal() se descarta sin efecto." },
+            q9: { answer: "a", explanation: "El invariante del monitor asegura que el monitor mantenga una propiedad específica siempre que no esté en uso." },
+            q10: { answer: "a", explanation: "Sin desplazamiento." },
+            q11: { answer: "b", explanation: "En la semántica de Señalar y Continuar (SC), el proceso señalador continúa su ejecución después de signal." },
+            q12: { answer: "c", explanation: "En la semántica de Señalar y Esperar (SE), el proceso señalador se bloquea después de signal." },
+            q13: { answer: "b", explanation: "El patrón de Exclusión Mutua (EM) es útil para acceso exclusivo a una sección crítica." },
+            q14: { answer: "e", explanation: "El invariante del monitor de exclusión mutua es que ocupada == true cuando hay un proceso en SC." },
+            q15: { answer: "d", explanation: "La operación escribir en un monitor Productor-Consumidor escribe el valor en una variable compartida." },
+            q16: { answer: "d", explanation: "La operación leer() en el monitor de Productor-Consumidor lee el valor compartido y lo devuelve." },
+            q17: { answer: "e", explanation: "La variable pendiente en el monitor Productor-Consumidor controla el estado de las operaciones de lectura y escritura." },
+            q18: { answer: "d", explanation: "Una cola de prioridad en monitores permite ordenar procesos según prioridad." },
+            q19: { answer: "d", explanation: "El Patrón de Espera Única (EU) es cuando un proceso espera que otro finalice antes de iniciar una acción." },
+            q20: { answer: "e", explanation: "init()." },
+            q21: { answer: "a", explanation: "En la semántica de Señalar y Salir (SS), el proceso señalador sale del monitor después de signal." },
+            q22: { answer: "a", explanation: "El propósito de c.signal_all() en un monitor es liberar todos los procesos en la cola de condición." },
+            q23: { answer: "a", explanation: "Un Monitor de Barrera Parcial bloquea procesos hasta que un grupo alcanza un estado." },
+            q24: { answer: "a", explanation: "La semántica ideal para el monitor de barrera parcial es SU." },
+            q25: { answer: "e", explanation: "Se mueve a la cola de entrada del monitor." }
+        };
+            
+        
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            const question = document.querySelector(`input[name="q${i}"]:checked`);
+            if (question) {
+                if (question.value === answers[`q${i}`].answer) {
+                    score++;
+                    document.getElementById(`q${i}`).classList.add('correct');
+                } else {
+                    document.getElementById(`q${i}`).classList.add('incorrect');
+                    // Mostrar la respuesta correcta y su justificación
+                    const correctAnswer = answers[`q${i}`].answer;
+                    const explanation = answers[`q${i}`].explanation;
+                    const explanationDiv = document.createElement("div");
+                    explanationDiv.className = "explanation";
+                    explanationDiv.innerHTML = `<strong>Respuesta correcta:</strong> ${correctAnswer}<br><strong>Justificación:</strong> ${explanation}`;
+                    document.getElementById(`q${i}`).appendChild(explanationDiv);
+                }
+            }
+        }
+
+        // Cálculo de la nota sobre 10
+        const grade = (score / totalQuestions) * 10;
+        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
+        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
+    }
+</script>
+
+</body>
+</html>

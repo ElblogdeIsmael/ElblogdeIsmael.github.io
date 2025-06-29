@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 1</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            font-size: 18px;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        .question {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .question.correct {
+            border-color: #28a745;
+            background-color: #d4edda;
+        }
+        .question.incorrect {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+        .explanation {
+            background: #e7f3fe;
+            border: 1px solid #b2d4fe;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        .author {
+            margin-top: 20px;
+            font-style: italic;
+            text-align: center;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        input[type="button"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+<h1>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 1</h1>
+<ul class="author"></ul>
+        <li><strong>Autor:</strong> Ismael Sallami Moreno</li>
+        <li><strong>Titulación:</strong> Ingeniería Informática y ADE</li>
+        <li><strong>Asignatura:</strong> Sistemas Concurrentes y Distribuidos</li>
+    </ul>
+    <br>
+
+<form id="quizForm">
+    <!-- Aquí puedes agregar las preguntas y respuestas -->
+    <!-- Pregunta 1 -->
+    <div class="question" id="q1">
+        <p><strong>1. ¿Qué significa «irrepetibilidad de las secuencias de instrucciones» en la programación concurrente?</strong></p>
+        <input type="radio" name="q1" value="a"> a. Los programas concurrentes nunca tienen errores. <br>
+        <input type="radio" name="q1" value="b"> b. La velocidad de ejecución determina la secuencia de instrucciones. <br>
+        <input type="radio" name="q1" value="c"> c. Los programas concurrentes generan muchas intercalaciones de instrucciones posibles, por lo que es poco probable que se repitan caminos. <br>
+        <input type="radio" name="q1" value="d"> d. Los procesos siguen siempre la misma secuencia de ejecución. <br>
+        <input type="radio" name="q1" value="e"> e. Dos ejecuciones seguirán probablemente el mismo camino. <br>
+    </div>
+        <!-- Pregunta 2 -->
+    <div class="question" id="q2">
+        <p><strong>2. ¿Qué reto presentan las trazas de ejecución de los programas concurrentes?</strong></p>
+        <input type="radio" name="q2" value="a"> a. Siempre conducen a un punto muerto. <br>
+        <input type="radio" name="q2" value="b"> b. Las trazas garantizan que se producirán errores. <br>
+        <input type="radio" name="q2" value="c"> c. Generan numerosas secuencias de intercalación posibles, lo que complica la predicción. <br>
+        <input type="radio" name="q2" value="d"> d. Las trazas no pueden utilizarse con fines de depuración. <br>
+        <input type="radio" name="q2" value="e"> e. Siguen un patrón predecible y repetible. <br>
+    </div>
+    
+    <!-- Pregunta 3 -->
+    <div class="question" id="q3">
+        <p><strong>3. ¿Qué son los «errores transitorios» en el contexto de los programas concurrentes?</strong></p>
+        <input type="radio" name="q3" value="a"> a. Errores que son fáciles de detectar y solucionar. <br>
+        <input type="radio" name="q3" value="b"> b. Errores que se producen aleatoriamente y no tienen solución. <br>
+        <input type="radio" name="q3" value="c"> c. Errores que nunca se producen en los programas concurrentes. <br>
+        <input type="radio" name="q3" value="d"> d. Errores que aparecen siempre en la misma ejecución. <br>
+        <input type="radio" name="q3" value="e"> e. Errores que aparecen en algunas ejecuciones pero no en otras, lo que dificulta su detección. <br>
+    </div>
+
+    <!-- Pregunta 4 -->
+    <div class="question" id="q4">
+        <p><strong>4. ¿Por qué es difícil depurar programas concurrentes?</strong></p>
+        <input type="radio" name="q4" value="a"> a. Debido a la previsibilidad de las secuencias de ejecución.<br>
+        <input type="radio" name="q4" value="b"> b. Porque los errores transitorios aparecen en cada traza.<br>
+        <input type="radio" name="q4" value="c"> c. La depuración de programas concurrentes no difiere de la de los secuenciales.<br>
+        <input type="radio" name="q4" value="d"> d. Debido a la imprevisibilidad de las secuencias de ejecución y a la posibilidad de que haya trazas diferentes en cada ejecución.<br>
+        <input type="radio" name="q4" value="e"> e. Porque los programas concurrentes siempre se ejecutan sin errores.<br>
+    </div>
+
+    <!-- Pregunta 5 -->
+    <div class="question" id="q5">
+        <p><strong>5. ¿Cuál de las siguientes es una solución para garantizar la corrección de los programas concurrentes?</strong></p>
+        <input type="radio" name="q5" value="a"> a. Confiar sólo en la comprobación manual de errores.<br>
+        <input type="radio" name="q5" value="b"> b. Utilizar métodos formales basados en la lógica matemática para verificar la corrección.<br>
+        <input type="radio" name="q5" value="c"> c. Ignorar los errores transitorios porque ocurren raramente.<br>
+        <input type="radio" name="q5" value="d"> d. Se puede garantizar la corrección sin ningún método formal.<br>
+        <input type="radio" name="q5" value="e"> e. Utilizar la fuerza bruta para reejecutar el programa varias veces.<br>
+    </div>
+
+    <!-- Pregunta 6 -->
+<div class="question" id="q6">
+    <p><strong>6. ¿Qué es una traza en el contexto de la programación concurrente?</strong></p>
+    <input type="radio" name="q6" value="a"> a. Una secuencia de estados del programa producidos por un intercalado específico de instrucciones.<br>
+    <input type="radio" name="q6" value="b"> b. El historial de cómo se modifican las variables durante la compilación.<br>
+    <input type="radio" name="q6" value="c"> c. Un registro de todos los errores en la ejecución de un programa.<br>
+    <input type="radio" name="q6" value="d"> d. La ejecución de un único proceso de forma aislada.<br>
+    <input type="radio" name="q6" value="e"> e. Una secuencia de operaciones atómicas de un único proceso.<br>
+</div>
+
+<!-- Pregunta 7 -->
+<div class="question" id="q7">
+    <p><strong>7. ¿Por qué es peligroso hacer suposiciones sobre la velocidad de ejecución de los procesos en los programas concurrentes?</strong></p>
+    <input type="radio" name="q7" value="a"> a. Siempre conduce a un mejor rendimiento en todas las plataformas.<br>
+    <input type="radio" name="q7" value="b"> b. Los procesos más rápidos siempre garantizan mejores resultados del programa.<br>
+    <input type="radio" name="q7" value="c"> c. Las suposiciones de velocidad siempre aumentan la eficacia del programa.<br>
+    <input type="radio" name="q7" value="d"> d. Los procesos pueden no funcionar correctamente en diferentes plataformas si se hacen suposiciones sobre la velocidad de ejecución.<br>
+    <input type="radio" name="q7" value="e"> e. La velocidad de ejecución es irrelevante para la programación concurrente.<br>
+</div>
+
+<!-- Pregunta 8 -->
+<div class="question" id="q8">
+    <p><strong>8. ¿Qué es una «condición de carrera» en los programas concurrentes?</strong></p>
+    <input type="radio" name="q8" value="a"> a. Una situación en la que dos procesos nunca interactúan con recursos compartidos.<br>
+    <input type="radio" name="q8" value="b"> b. Una situación en la que el orden de ejecución de los procesos no afecta a la salida final del programa.<br>
+    <input type="radio" name="q8" value="c"> c. Un escenario en el que la velocidad de ejecución es siempre constante.<br>
+    <input type="radio" name="q8" value="d"> d. Cuando dos procesos se ejecutan siempre en un orden fijo y predecible.<br>
+    <input type="radio" name="q8" value="e"> e. Cuando dos procesos acceden a variables compartidas en un orden impredecible en función de la velocidad de ejecución.<br>
+</div>
+
+<!-- Pregunta 9 -->
+<div class="question" id="q9">
+    <p><strong>9. ¿Qué efecto pueden tener las condiciones de carrera en los programas concurrentes?</strong></p>
+    <input type="radio" name="q9" value="a"> a. Reducen el riesgo de errores en el programa.<br>
+    <input type="radio" name="q9" value="b"> b. Producen resultados impredecibles o incorrectos según el orden de ejecución de los procesos.<br>
+    <input type="radio" name="q9" value="c"> c. Producen resultados predecibles y correctos.<br>
+    <input type="radio" name="q9" value="d"> d. Facilitan la depuración debido a su comportamiento coherente.<br>
+    <input type="radio" name="q9" value="e"> e. Garantizan que todos los procesos se ejecuten de forma predecible.<br>
+</div>
+
+<!-- Pregunta 10 -->
+<div class="question" id="q10">
+    <p><strong>10. ¿En qué tipo de sistema es crítica la velocidad y el orden de ejecución de los procesos?</strong></p>
+    <input type="radio" name="q10" value="a"> a. En cualquier sistema con procesos concurrentes.<br>
+    <input type="radio" name="q10" value="b"> b. En los sistemas en tiempo real, donde la velocidad y el orden de ejecución son críticos.<br>
+    <input type="radio" name="q10" value="c"> c. Sistemas operativos de propósito general.<br>
+    <input type="radio" name="q10" value="d"> d. Sólo sistemas distribuidos.<br>
+    <input type="radio" name="q10" value="e"> e. Sólo en sistemas "multicore".<br>
+</div>
+
+<!-- Pregunta 11 -->
+<div class="question" id="q11">
+    <p><strong>11. ¿Qué implica la «independencia de la velocidad del proceso» en la programación concurrente?</strong></p>
+    <input type="radio" name="q11" value="a"> a. Los procesos más lentos garantizan una mayor estabilidad del programa.<br>
+    <input type="radio" name="q11" value="b"> b. La velocidad de ejecución siempre determina la corrección del programa.<br>
+    <input type="radio" name="q11" value="c"> c. La corrección del proceso debe depender de la velocidad relativa de los procesos.<br>
+    <input type="radio" name="q11" value="d"> d. La corrección del proceso debe ser independiente de la velocidad de ejecución, evitando las condiciones de carrera.<br>
+    <input type="radio" name="q11" value="e"> e. Los procesos deben ejecutarse siempre lo más rápido posible.<br>
+</div>
+
+<!-- Pregunta 12 -->
+<div class="question" id="q12">
+    <p><strong>12. ¿Qué importancia tiene la «hipótesis de progreso finito» en los programas concurrentes?</strong></p>
+    <input type="radio" name="q12" value="a"> a. Sólo es aplicable a los programas secuenciales.<br>
+    <input type="radio" name="q12" value="b"> b. Garantiza que los procesos se completen siempre a la misma velocidad.<br>
+    <input type="radio" name="q12" value="c"> c. Garantiza que todos los procesos completen la ejecución y progresen, evitando el bloqueo.<br>
+    <input type="radio" name="q12" value="d"> d. Permite que algunos procesos no terminen nunca sus tareas.<br>
+    <input type="radio" name="q12" value="e"> e. Permite que los procesos se detengan indefinidamente sin afectar a la corrección del programa.<br>
+</div>
+
+<!-- Pregunta 13 -->
+<div class="question" id="q13">
+    <p><strong>13. ¿Qué es el «progreso global» en el contexto de la ejecución concurrente?</strong></p>
+    <input type="radio" name="q13" value="a"> a. Requiere que todos los procesos se ejecuten al mismo tiempo.<br>
+    <input type="radio" name="q13" value="b"> b. Garantiza que todos los procesos terminen la ejecución inmediatamente.<br>
+    <input type="radio" name="q13" value="c"> c. Es específico sólo de los sistemas en tiempo real.<br>
+    <input type="radio" name="q13" value="d"> d. Garantiza que al menos un proceso listo para ejecutarse llegue a ejecutarse, evitando el bloqueo.<br>
+    <input type="radio" name="q13" value="e"> e. Garantiza que ningún proceso pueda bloquear la ejecución de otro.<br>
+</div>
+
+<!-- Pregunta 14 -->
+<div class="question" id="q14">
+    <p><strong>14. ¿Qué significa «progreso local» en la programación concurrente?</strong></p>
+    <input type="radio" name="q14" value="a"> a. Un proceso puede detenerse a mitad de ejecución y reanudarse más tarde sin completar la sección actual.<br>
+    <input type="radio" name="q14" value="b"> b. Un proceso debe completar siempre todo el programa sin pausa.<br>
+    <input type="radio" name="q14" value="c"> c. Los procesos deben comunicarse con otros procesos para continuar la ejecución.<br>
+    <input type="radio" name="q14" value="d"> d. Una vez que un proceso comienza a ejecutarse, debe terminar todo el programa.<br>
+    <input type="radio" name="q14" value="e"> e. Una vez que un proceso empieza a ejecutar una sección de código, debe completarla sin interrupción.<br>
+</div>
+
+<!-- Pregunta 15 -->
+<div class="question" id="q15">
+    <p><strong>15. ¿Cómo evita la hipótesis del progreso finito el bloqueo en los programas concurrentes?</strong></p>
+    <input type="radio" name="q15" value="a"> a. Poniendo en pausa algunos procesos para permitir que otros terminen primero.<br>
+    <input type="radio" name="q15" value="b"> b. Imponiendo límites temporales estrictos a la ejecución de los procesos.<br>
+    <input type="radio" name="q15" value="c"> c. Limitando el número de procesos que pueden ejecutarse simultáneamente.<br>
+    <input type="radio" name="q15" value="d"> d. Garantizando que los procesos puedan detenerse en cualquier momento.<br>
+    <input type="radio" name="q15" value="e"> e. Garantizando que todos los procesos acaben progresando, evitando que se atasquen.<br>
+</div>
+
+<!-- Pregunta 16 -->
+<div class="question" id="q16">
+    <p><strong>16. ¿Cuál es la definición de «propiedad de vivacidad»?</strong></p>
+    <input type="radio" name="q16" value="a"> a. Una condición que sólo se aplica a los programas secuenciales.<br>
+    <input type="radio" name="q16" value="b"> b. Una condición que establece que algo bueno debe suceder eventualmente en el futuro.<br>
+    <input type="radio" name="q16" value="c"> c. Una condición que debe cumplirse en cada instante de la ejecución del programa.<br>
+    <input type="radio" name="q16" value="d"> d. Una propiedad que define cuántos procesos pueden ejecutarse simultáneamente.<br>
+    <input type="radio" name="q16" value="e"> e. Una propiedad que garantiza que los procesos pueden pausarse indefinidamente.<br>
+</div>
+
+<!-- Pregunta 17 -->
+<div class="question" id="q17">
+    <p><strong>17. ¿Qué significa el triple {P}C {Q} en el contexto de la lógica de Hoare?</strong></p>
+    <input type="radio" name="q17" value="a"> a. Si el programa C comienza en un estado en el que P es verdadero, entonces Q será verdadero después de que C termine de ejecutarse.<br>
+    <input type="radio" name="q17" value="b"> b. Garantiza que en la ejecución de varios procesos contenidos C no existen interferencias.<br>
+    <input type="radio" name="q17" value="c"> c. P y Q son variables que representan el tiempo de ejecución de C.<br>
+    <input type="radio" name="q17" value="d"> d. Si el programa C se ejecuta, siempre terminará.<br>
+    <input type="radio" name="q17" value="e"> e. Si el programa C se ejecuta con la máxima velocidad, P siempre será igual a Q.<br>
+</div>
+
+<!-- Pregunta 18 -->
+<div class="question" id="q18">
+    <p><strong>18. ¿Cuál es el principal reto de aplicar la lógica de Hoare a los programas concurrentes?</strong></p>
+    <input type="radio" name="q18" value="a"> a. Es difícil definir precondiciones y postcondiciones para cada proceso.<br>
+    <input type="radio" name="q18" value="b"> b. No puede manejar programas sin memoria compartida.<br>
+    <input type="radio" name="q18" value="c"> c. La interferencia entre procesos de ejecución concurrente complica el razonamiento.<br>
+    <input type="radio" name="q18" value="d"> d. La lógica de Hoare requiere un número infinito de trazas de ejecución para verificar la corrección.<br>
+    <input type="radio" name="q18" value="e"> e. La lógica de Hoare sólo es aplicable a los programas secuenciales, no a los concurrentes.<br>
+</div>
+
+<!-- Pregunta 19 -->
+<div class="question" id="q19">
+    <p><strong>19. ¿Cuál es la principal característica de la regla de no interferencia de la lógica de Hoare para programas concurrentes?</strong></p>
+    <input type="radio" name="q19" value="a"> a. Sólo se aplica a los programas secuenciales, no a los concurrentes.<br>
+    <input type="radio" name="q19" value="b"> b. Garantiza que cada proceso termina de ejecutarse antes de que comience el siguiente.<br>
+    <input type="radio" name="q19" value="c"> c. Garantiza que dos procesos no interfieran entre sí en sus precondiciones y postcondiciones cuando se ejecutan simultáneamente.<br>
+    <input type="radio" name="q19" value="d"> d. Garantiza que todos los procesos accedan a los recursos compartidos al mismo tiempo.<br>
+    <input type="radio" name="q19" value="e"> e. Permite que los procesos se ejecuten sin sincronización y sigue garantizando la corrección.<br>
+</div>
+
+<!-- Pregunta 20 -->
+<div class="question" id="q20">
+    <p><strong>20. En la lógica de Hoare, ¿qué se necesita para verificar la corrección de una composición concurrente de procesos?</strong></p>
+    <input type="radio" name="q20" value="a"> a. Las precondiciones y postcondiciones de los procesos deben combinarse, y ningún proceso debe invalidar las afirmaciones de los demás.<br>
+    <input type="radio" name="q20" value="b"> b. El sistema debe probarse con todas las configuraciones de hardware posibles para garantizar su corrección.<br>
+    <input type="radio" name="q20" value="c"> c. La composición sólo debe implicar a un único proceso a la vez.<br>
+    <input type="radio" name="q20" value="d"> d. Los procesos deben ejecutarse secuencialmente, sin solapar instrucciones.<br>
+    <input type="radio" name="q20" value="e"> e. Cada proceso debe tener su propio espacio de memoria independiente.<br>
+</div>
+
+
+
+
+    <!-- Añadir las preguntas adicionales de la misma manera -->
+
+    <input type="button" value="¿Aprobarás?" onclick="checkAnswers()">
+</form>
+
+<div class="author">
+    <p>Autor: Ismael Sallami Moreno</p>
+</div>
+
+<div id="results" style="margin-top: 20px;"></div>
+
+<script>
+    function checkAnswers() {
+        let score = 0;
+        const totalQuestions = 20;
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
+
+        // Respuestas correctas
+        const answers = {
+            q1: { answer: 'c', explanation: 'Los programas concurrentes generan muchas intercalaciones de instrucciones posibles, por lo que es poco probable que se repitan caminos.' },
+            q2: { answer: 'd', explanation: 'Las trazas no pueden utilizarse con fines de depuración.' },
+            q3: { answer: 'e', explanation: 'Errores que aparecen en algunas ejecuciones pero no en otras, lo que dificulta su detección.' },
+            q4: { answer: 'd', explanation: 'Debido a la imprevisibilidad de las secuencias de ejecución y a la posibilidad de que haya trazas diferentes en cada ejecución.' },
+            q5: { answer: 'b', explanation: 'Utilizar métodos formales basados en la lógica matemática para verificar la corrección.' },
+            q6: { answer: 'a', explanation: 'Una secuencia de estados del programa producidos por un intercalado específico de instrucciones.' },
+            q7: { answer: 'd', explanation: 'Los procesos pueden no funcionar correctamente en diferentes plataformas si se hacen suposiciones sobre la velocidad de ejecución.' },
+            q8: { answer: 'e', explanation: 'Cuando dos procesos acceden a variables compartidas en un orden impredecible en función de la velocidad de ejecución.' },
+            q9: { answer: 'b', explanation: 'Producen resultados impredecibles o incorrectos según el orden de ejecución de los procesos.' },
+            q10: { answer: 'b', explanation: 'En los sistemas en tiempo real, donde la velocidad y el orden de ejecución son críticos.' },
+            q11: { answer: 'd', explanation: 'La corrección del proceso debe ser independiente de la velocidad de ejecución, evitando las condiciones de carrera.' },
+            q12: { answer: 'c', explanation: 'Garantiza que todos los procesos completen la ejecución y progresen, evitando el bloqueo.' },
+            q13: { answer: 'd', explanation: 'Garantiza que al menos un proceso listo para ejecutarse llegue a ejecutarse, evitando el bloqueo.' },
+            q14: { answer: 'a', explanation: 'Un proceso puede detenerse a mitad de ejecución y reanudarse más tarde sin completar la sección actual.' },
+            q15: { answer: 'e', explanation: 'Garantizando que todos los procesos acaben progresando, evitando que se atasquen.' },
+            q16: { answer: 'b', explanation: 'Una condición que establece que algo bueno debe suceder eventualmente en el futuro.' },
+            q17: { answer: 'a', explanation: 'Si el programa C comienza en un estado en el que P es verdadero, entonces Q será verdadero después de que C termine de ejecutarse.' },
+            q18: { answer: 'c', explanation: 'La interferencia entre procesos de ejecución concurrente complica el razonamiento.' },
+            q19: { answer: 'c', explanation: 'Garantiza que dos procesos no interfieran entre sí en sus precondiciones y postcondiciones cuando se ejecutan simultáneamente.' },
+            q20: { answer: 'a', explanation: 'Las precondiciones y postcondiciones de los procesos deben combinarse, y ningún proceso debe invalidar las afirmaciones de los demás.' }
+        };
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            const question = document.querySelector(`input[name="q${i}"]:checked`);
+            if (question) {
+                if (question.value === answers[`q${i}`].answer) {
+                    score++;
+                    document.getElementById(`q${i}`).classList.add('correct');
+                } else {
+                    document.getElementById(`q${i}`).classList.add('incorrect');
+                    // Mostrar la respuesta correcta y su justificación
+                    const correctAnswer = answers[`q${i}`].answer;
+                    const explanation = answers[`q${i}`].explanation;
+                    const explanationDiv = document.createElement("div");
+                    explanationDiv.className = "explanation";
+                    explanationDiv.innerHTML = `<strong>Respuesta correcta:</strong> ${correctAnswer}<br><strong>Justificación:</strong> ${explanation}`;
+                    document.getElementById(`q${i}`).appendChild(explanationDiv);
+                }
+            }
+        }
+
+        // Cálculo de la nota sobre 10
+        const grade = (score / totalQuestions) * 10;
+        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
+        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
+    }
+</script>
+
+</body>
+</html>

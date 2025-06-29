@@ -1,0 +1,13 @@
+- name: Crear usuario {{ item.nombre }}
+  user:
+    name: "{{ item.nombre }}"
+    groups: wheel
+    append: yes
+    shell: /bin/bash
+    state: present
+
+- name: Añadir clave SSH a {{ item.nombre }}
+  authorized_key:
+    user: "{{ item.nombre }}"
+    key: "{{ item.llave }}"
+

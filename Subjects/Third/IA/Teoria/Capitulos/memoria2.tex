@@ -1,0 +1,56 @@
+\chapter*{Memoria de Prácticas}
+\addcontentsline{toc}{chapter}{Memoria de Prácticas}
+
+\section*{1. Mejoras de la Poda Alfa-Beta}
+A lo largo del desarrollo de la práctica se han implementado varias versiones del algoritmo de poda Alfa-Beta, buscando mejorar la eficiencia y precisión de la búsqueda. Las principales mejoras son:
+
+\begin{itemize}
+    \item \textbf{Poda Alfa-Beta Clásica:} La versión básica del algoritmo, que utiliza los límites $\alpha$ y $\beta$ para descartar ramas que no afectan la decisión final.
+    \item \textbf{Poda Alfa-Beta Ordenada:} Añade un paso previo de ordenación de los hijos según la heurística. Así, los mejores nodos se exploran primero, incrementando las podas y reduciendo el número de nodos visitados.
+    \item \textbf{Poda Alfa-Beta Probabilística:} Incorpora un parámetro $\epsilon$ que permite cortar ramas con diferencias mínimas entre $\alpha$ y $\beta$, priorizando la velocidad a costa de una ligera pérdida de precisión.
+    \item \textbf{Profundidad Dinámica:} Ajusta la profundidad de búsqueda según la ramificación. Con menor ramificación, se profundiza más; con mayor ramificación, se limita para no exceder el número máximo de nodos.
+    \item \textbf{Búsqueda de Quietud:} Extiende la exploración en situaciones tácticas inestables (capturas, barreras) para evitar evaluaciones engañosas en estados “no quietos”.
+\end{itemize}
+
+La combinación de estas mejoras permite un equilibrio entre calidad de las decisiones y tiempo de respuesta.
+
+\section*{2. Heurísticas Propuestas}
+Se han diseñado varias heurísticas para evaluar la calidad de los estados de juego, destacando:
+
+\begin{itemize}
+    \item \textbf{Heur1 y Heur2:} Primeras versiones, basadas en la distancia a la meta y la seguridad de las casillas.
+    \item \textbf{HeuristicaNueva:} Añade ponderaciones diferenciadas para las distancias y la seguridad de las fichas.
+    \item \textbf{Heurística Mejorada:} Combina los elementos anteriores y añade lógica para ponderar la vulnerabilidad de las fichas propias y la amenaza de las del oponente.
+\end{itemize}
+
+\section*{3. Tabla Comparativa}
+A continuación, se incluye una tabla comparativa de las heurísticas implementadas, sus puntuaciones y el algoritmo de poda utilizado:
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|p{3.5cm}|p{1.5cm}|p{4cm}|p{6cm}|}
+    \hline
+    \textbf{Heurística} & \textbf{Puntuación} & \textbf{Algoritmo} & \textbf{Explicación} \\
+    \hline
+    Heuristica Mejorada & 1/6 & Poda Alfa Beta, Probabilística, Ordenada, Dinámica y usando Quietud & La carga del algoritmo es demasiado alta, lo que aumenta el tiempo de respuesta. El resultado es bajo porque la heurística no encaja del todo. \\
+    \hline
+    PruebaH & 3/6 & Poda Alfa Beta & Algoritmo simple con heurística simple que vence a más ninjas que la heurística mejorada. \\
+    \hline
+    Heurística Mejorada & 4/6 & Poda Alfa Beta, Probabilística y Quietud & Es el mejor resultado. Con un $\epsilon$ bajo se evitan caminos poco prometedores y la heurística funciona mejor. \\
+    \hline
+    \end{tabular}
+    }
+    \caption{Comparativa de heurísticas implementadas.}
+    \label{tab:heuristicas_comparativa}
+\end{table}
+
+\section*{4. Análisis de los Resultados}
+Las diferentes versiones de la poda han permitido mejorar progresivamente la eficiencia y la precisión de la IA. Las primeras versiones ofrecían resultados limitados, mientras que la combinación de poda probabilística y búsqueda de quietud ha demostrado un equilibrio óptimo entre calidad y velocidad de respuesta.
+
+Aunque la versión más completa (ordenada, probabilística y dinámica) parecía teóricamente la más sólida, en las pruebas reales no ofreció mejoras claras frente a la versión probabilística con quietud y un $\epsilon$ bajo.
+
+\section*{5. Reflexión Personal}
+Durante el desarrollo, se enfrentaron dificultades para equilibrar la calidad de la heurística con el tiempo de respuesta del algoritmo, especialmente en las versiones más avanzadas con ramificación dinámica. Fue especialmente interesante observar cómo pequeños cambios en la heurística podían tener un gran impacto en el rendimiento global del agente, obligando a realizar numerosas pruebas y ajustes para lograr la mejor configuración.
+
