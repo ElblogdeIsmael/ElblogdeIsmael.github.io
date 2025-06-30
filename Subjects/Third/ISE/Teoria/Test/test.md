@@ -190,3 +190,132 @@
 - (x) Todos los sistemas escalables son extensibles, pero no a la inversa.
 - ( ) Ningún sistema escalable es extensible.
 - ( ) Escalabilidad y extensibilidad son sinónimos.
+
+1. ¿Que es la figura de la imagen? 
+
+![fig1](images/placa.png)
+
+- ( ) Tarjeta gráfica
+- ( ) Fuente de alimentación
+- (x) Placa Base
+- ( ) Memoria RAM
+
+1. ¿Que es la figura de la imagen? 
+
+![fig1](images/regulador_voltaje.png)
+
+- ( ) Tarjeta gráfica
+- (x) Regulador de voltaje
+- ( ) Placa Base
+- ( ) Memoria RAM
+
+1. ¿De que tipo es el zócalo de la imagen? 
+
+![zoc](images/pga.png)
+
+- (x) PGA
+- ( ) LGA
+- ( ) FGA
+- ( ) HGA
+
+1. ¿De que tipo es el zócalo de la imagen? 
+
+![zoc](images/lga.png)
+
+- ( ) PGA
+- (x) LGA
+- ( ) FGA
+- ( ) HGA
+
+1. Señala las respuestas que son correctas.
+- (x) La familia de procesadores de AMD para servidores fue inicialmente Opteron.
+- ( ) El primer Opteron tenia instrucciones x64. 
+- (x) El primer Opteron tenia instrucciones x86-64.
+- (x) Recientemente, AMD ha modificado el nombre de sus procesadores para servidores, denominándolos EPYC.
+- ( ) Recientemente, AMD ha modificado el nombre de sus procesadores para servidores, denominándolos EYC.
+- (x) En 2004, los Opteron fueron los primeros procesadores x86 con 2 núcleos.
+
+1. Señala las respuestas que son correctas.
+- ( ) En 2004, los Opteron fueron los primeros procesadores x86 con 6 núcleos.
+- (x) Cada CCD tiene hasta 8 cores Zen x86-64 más memorias caché.
+- ( ) Cada CCD tiene hasta 12 cores Zen x86-64 más memorias caché.
+- ( ) Cada CCD tiene hasta 6 cores Zen x86-64 más memorias caché.
+- (x) CCD es Core Chiplet Die.
+- ( ) CCD es Core Chipet Die.
+- ( ) CCD es Core Chiple Die.
+
+1. ¿Que significa las siglas POWER?
+- ( ) Perforance Optimization With Enhanced RISC
+- ( ) Performance Optimiation With Enhanced RISC
+- (x) Performance Optimization With Enhanced RISC
+- ( ) Performance Optimization Without Enhanced RISC
+- ( ) Performance Oracle With Enhanced RISC
+
+1. Señala las correctas
+- ( ) SIP: Single In-line Pin Package
+- (x) SIMM: Single In-line Memory Module
+- ( ) DIM: Dual In-line Memory Module
+- ( ) SIPP: Sing In-line Pin Package
+- ( ) SIMM: Sing In-line Memory Module
+- ( ) DIMM: Duality In-line Memory Module
+- (x) SIPP: Single In-line Pin Package
+- ( ) SIM: Single In-line Memory Module
+- (x) DIMM: Dual In-line Memory Module
+- ( ) SI: Single In-line Pin Package
+- ( ) SIMM: In-line Memory Module
+- ( ) DIMM: Dual Inline Memory Module
+
+1. ¿Qué tipo de módulo de memoria es más común en PC y portátiles?
+- (x) DIMM o U-DIMM (Unbuffered DIMM)
+- ( ) R-DIMM
+- ( ) LR-DIMM
+- ( ) EU-DIMM
+
+1. ¿Cuál es la principal característica de los módulos SO-DIMM?
+- ( ) Mayor tamaño y más contactos.
+- (x) Tamaño más reducido y menos contactos, usados en portátiles.
+- ( ) Incluyen ECC obligatoriamente.
+- ( ) Solo se usan en servidores.
+
+1. ¿Qué diferencia principal existe entre U-DIMM y EU-DIMM?
+- ( ) EU-DIMM es más pequeño.
+- (x) EU-DIMM incluye ECC para mayor fiabilidad.
+- ( ) U-DIMM tiene mayor latencia.
+- ( ) U-DIMM solo se usa en servidores.
+
+1. ¿Qué característica distingue a los módulos R-DIMM respecto a EU-DIMM?
+- ( ) Menor latencia y sin ECC.
+- (x) Incluyen un registro para señales de control, mayor latencia, permiten módulos de mayor tamaño y tienen ECC.
+- ( ) Solo se usan en portátiles.
+- ( ) No permiten ECC.
+
+1. ¿Cuál es la principal ventaja de los módulos LR-DIMM frente a los R-DIMM?
+- ( ) Menor latencia y menor capacidad.
+- ( ) No incluyen ECC.
+- (x) Permiten módulos de mayor tamaño gracias a un buffer que almacena señales de control y datos, aunque tienen mayor latencia.
+- ( ) Solo se usan en PC de sobremesa.
+
+1. ¿Qué módulos de memoria suelen incluir ECC?
+- ( ) Solo SO-DIMM.
+- (x) EU-DIMM, R-DIMM y LR-DIMM.
+- ( ) U-DIMM y SO-DIMM.
+- ( ) Ninguno.
+
+1. ¿Para qué tipo de equipos están pensados los módulos LR-DIMM?
+- ( ) Portátiles.
+- ( ) PC de sobremesa.
+- (x) Servidores que requieren módulos de gran capacidad.
+- ( ) Dispositivos móviles.
+
+1. Señala la opción correcta o las opciones correctas:
+- ( ) Un microprocesador puede acceder simultáneamente a dos módulos del mismo banco de memoria ya que usan el mismo canal de memoria para comunicarse con él.
+- ( ) Un microprocesador no puede acceder simultáneamente a dos módulos del distinto banco de memoria ya que usan el mismo canal de memoria para comunicarse con él.
+- (x) Un microprocesador no puede acceder simultáneamente a dos módulos del mismo banco de memoria ya que usan el mismo canal de memoria para comunicarse con él.
+- (x) Un microprocesador  puede acceder simultáneamente a dos módulos del distinto banco de memoria ya que usan el mismo canal de memoria para comunicarse con él.
+
+1. Señale las opciones correctas:
+- (x) Cada módulo de memoria puede estar, a su vez, distribuido en rangos de memoria que no son más que agrupaciones de chips que proporcionan la palabra completa de 64 bits (72 bits en caso de memorias DDR2, DDR3 o DDR4 con ECC, 80 bits si DDR5 con ECC).
+- ( ) Cada módulo de memoria puede estar, a su vez, distribuido en rangos de memoria que no son más que agrupaciones de chips que proporcionan la palabra completa de 72 bits (64 bits en caso de memorias DDR2, DDR3 o DDR4 con ECC, 80 bits si DDR5 con ECC).
+- ( ) Cada módulo de memoria puede estar, a su vez, distribuido en rangos de memoria que no son más que agrupaciones de chips que proporcionan la palabra completa de 64 bits (72 bits en caso de memorias DDR2, DDR3 o DDR4 con ECC, 86 bits si DDR5 con ECC).
+- (x) Si es un módulo de un solo rango, todos se asocian para obtener la palabra completa.
+- (x) La notación *1Rx8* es Módulo de 1 rango con chips de 8 bits.
