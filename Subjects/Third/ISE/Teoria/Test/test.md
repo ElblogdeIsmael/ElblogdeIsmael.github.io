@@ -973,3 +973,73 @@
 - ( ) Hay 4 disipadores pequeños distribuidos por la placa.
 - ( ) No hay disipadores visibles en esta placa.
 
+<!-- Tema de monitorización -->
+
+1. ¿Cuál es la fórmula correcta de la sobrecarga?
+- ( ) $$\text{Sobrecarga}_{\text{Recurso}}(\%)=\frac{\text{Uso del recurso por parte del monitor}}{\text{Capacidad media del recurso}}\times 1$$
+- (x) $$\text{Sobrecarga}_{\text{Recurso}}(\%)=\frac{\text{Uso del recurso por parte del monitor}}{\text{Capacidad total del recurso}}\times 100$$
+- ( ) $$\text{Sobrecarga}_{\text{Monitor}}(\%)=\frac{\text{Uso del recurso por parte del monitor}}{\text{Capacidad total del recurso}}\times 100$$
+- ( ) $$\text{Sobrecarga}_{\text{Recurso}}(\%)=\frac{\text{Uso del recurso por parte del monitor}}{\text{Tiempo de uso del recurso}}\times 100$$
+
+1. ¿Qué muestra el comando `vmstat` principalmente? ![vmstat](images/vmstat.png)
+- (x) Estadísticas de memoria, CPU e interrupciones.
+- ( ) Servicios en red y conexiones activas.
+- ( ) Procesos en ejecución en segundo plano.
+- ( ) Espacio en disco y sistemas de archivos.
+
+2. ¿Para qué sirve el campo `r` en la salida de `vmstat`? ![vmstat](images/vmstat.png)
+- (x) Número de procesos listos o ejecutándose.
+- ( ) Cantidad de páginas activas en memoria RAM.
+- ( ) Porcentaje de CPU dedicado a cada tarea.
+- ( ) Tiempos de espera de entrada y salida.
+
+3. ¿Qué representan los campos `si` y `so`? ![vmstat](images/vmstat.png)
+- (x) Datos intercambiados con la partición swap.
+- ( ) Transferencias de bloques entre discos.
+- ( ) Cambios de contexto del sistema operativo.
+- ( ) Procesos suspendidos por falta de CPU.
+
+4. ¿Qué significan `bi` y `bo` en `vmstat`? ![vmstat](images/vmstat.png)
+- (x) Bloques que entran y salen por segundo.
+- ( ) Bytes libres en memoria virtual.
+- ( ) Procesos bloqueados por I/O.
+- ( ) Núcleos disponibles para el sistema.
+
+5. ¿Qué muestra el campo `cs`? ![vmstat](images/vmstat.png)
+- ( ) Cantidad de procesos bloqueados.
+- (x) Cambios de contexto por segundo.
+- ( ) Memoria usada por el kernel.
+- ( ) Transferencias entre discos duros.
+
+1. ¿Qué representa el campo `in`? ![vmstat](images/vmstat.png)
+- ( ) Instrucciones ejecutadas por segundo.
+- ( ) Velocidad de escritura a disco.
+- (x) Interrupciones por segundo del sistema.
+- ( ) Uso total de CPU y memoria.
+
+1. ¿Qué indica la primera línea de la salida de `vmstat`? ![vmstat](images/vmstat.png)
+- (x) Información desde que se inició el sistema.
+- ( ) Cambios del último minuto.
+- ( ) Resultados en tiempo real del kernel.
+- ( ) Solo encabezados de columnas visibles.
+
+1. ¿Qué significan las siglas **vmstat**?
+- ( ) Virtual Machine Status.
+- ( ) Virtual Monitor State.
+- (x) Virtual Memory Statistics.
+- ( ) Variable Memory Status.
+
+1. ¿Qué significan las siglas **sar**?
+- ( ) System Analysis Report.
+- (x) System Activity Reporter.
+- ( ) Storage Activity Recorder.
+- ( ) System Administration Resource.
+
+1. ¿Qué significan las siglas **sadc**?
+- ( ) System Activity Data Controller.
+- ( ) Storage Analysis Data Collector.
+- ( ) System Administration Data Collector.
+- (x) System Accounting Data Collector.
+
+
+
