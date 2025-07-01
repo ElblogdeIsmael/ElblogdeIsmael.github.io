@@ -841,7 +841,7 @@
 - ( ) No permite recarga de dispositivos.
 - ( ) Solo funciona con discos ópticos.
 
-1. ¿Qué se ve en la imagen? [rom](images/rom.png)
+1. ¿Qué se ve en la imagen? ![rom](images/rom.png)
 
 - ( ) RAM
 - ( ) Disipador de calor
@@ -972,3 +972,4 @@
 - ( ) Solo hay un disipador central sin aletas visibles.
 - ( ) Hay 4 disipadores pequeños distribuidos por la placa.
 - ( ) No hay disipadores visibles en esta placa.
+
