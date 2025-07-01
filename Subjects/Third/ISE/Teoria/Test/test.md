@@ -595,7 +595,7 @@
 - ( ) Serial-ata
 - ( ) Placa Base
 - ( ) Fuente de alimencación
-- (X) P-ata 
+- (x) P-ata 
 
 <!-- s-ata -->
 
@@ -714,3 +714,261 @@
 - (x) Utiliza una conexión serie punto a punto y es compatible con discos SATA.
 - ( ) No permite hot-plug en ningún caso.
 - ( ) Tiene una velocidad máxima de 320 MBps.
+
+1. Selecciona las opciones correctas en base a los conectores *mini-SAS*.
+- ( ) Permiten hasta 6 conectores SAS o SATA usando un 1-to-6 splitter cable.
+- (x) Permiten hasta 4 conectores SAS o SATA usando un 1-to-4 splitter cable.
+- ( ) Permiten hasta 8 conectores SAS o SATA usando un 1-to-8 splitter cable.
+- ( ) Solo permiten conectar discos ópticos mediante adaptadores especiales.
+
+1. ¿Cuál es la función principal de un SAS Expander?
+- ( ) Aumentar la velocidad de transferencia de un solo disco SAS.
+- (x) Permitir la conexión de múltiples unidades SAS a través de un único puerto o controlador, facilitando así la expansión del sistema de almacenamiento sin necesidad de añadir más controladoras físicas y optimizando el uso de los recursos disponibles.
+- ( ) Convertir señales SAS en señales SATA para que los dispositivos SATA puedan comunicarse con controladores SAS, permitiendo así la compatibilidad entre diferentes tipos de discos y ampliando las posibilidades de configuración del sistema de almacenamiento.
+- ( ) Mejorar la eficiencia energética de los discos duros mediante la gestión avanzada del consumo eléctrico y la optimización de los ciclos de encendido y apagado de las unidades conectadas, contribuyendo a reducir el gasto energético global del sistema.
+
+2. ¿Qué ventaja ofrecen los SAS Expanders en sistemas de almacenamiento?
+- (x) Escalabilidad, permitiendo conectar más discos SAS sin requerir más puertos físicos en el controlador.
+- ( ) Reducción de la capacidad total del sistema.
+- ( ) Limitación del número de discos conectados a uno por puerto.
+- ( ) Solo permiten la conexión de discos SATA.
+
+<!-- NVMe -->
+
+1. ¿Qué significa la sigla NVMe?
+- (x) Non-Volatile Memory Express.
+- ( ) Non-Volatile Memory Expansion.
+- ( ) Non-Volatile Memory Extension.
+- ( ) Non-Volatile Memory Execution.
+
+2. ¿Qué tipo de conexión utiliza **NVMe para acceder a las SSD**?
+- ( ) SATA.
+- (x) PCIe.
+- ( ) SCSI.
+- ( ) SAS.
+
+3. ¿Cuántas colas de peticiones de E/S permite NVMe en paralelo?
+- ( ) 32 colas con 32k peticiones cada una.
+- (x) 64 colas con 64k peticiones cada una.
+- ( ) 128 colas con 128k peticiones cada una.
+- ( ) 16 colas con 16k peticiones cada una.
+
+4. ¿Qué tipo de conector utiliza NVMe en formato tarjeta?
+- (x) PCIe x4.
+- ( ) SATA III.
+- ( ) SAS.
+- ( ) USB 3.0.
+
+5. ¿Qué tipo de conector utiliza NVMe en formato M.2?
+- ( ) PCIe x2.
+- (x) PCIe x4.
+- ( ) SATA.
+- ( ) SAS.
+
+6. ¿Qué tipo de conector utiliza NVMe en formato U.2?
+- (x) PCIe x4.
+- ( ) PCIe x2.
+- ( ) SATA III.
+- ( ) SAS.
+
+7. ¿Cuál es una ventaja principal de NVMe frente a SATA?
+- (x) Permite acceso en paralelo con múltiples colas de peticiones.
+- ( ) Utiliza cables más largos para mayor flexibilidad.
+- ( ) Es compatible con discos ópticos y utiliza cables más cortos para mayor flexibilidad.
+- ( ) Tiene menor velocidad de transferencia.
+
+8. ¿Qué característica distingue a NVMe respecto a otros protocolos de almacenamiento?
+- ( ) Solo funciona con discos magnéticos.
+- ( ) Utiliza conexiones inalámbricas.
+- (x) Está diseñado específicamente para aprovechar la velocidad de las SSD.
+- ( ) Está diseñado específicamente para aprovechar la velocidad de las HDD.
+- ( ) No permite acceso en paralelo.
+
+<!-- USB -->
+
+1. ¿Qué significa la sigla USB?
+- (x) Universal Serial Bus.
+- ( ) Universal System Bus.
+- ( ) Unified Serial Bus.
+- ( ) Universal Storage Bus.
+
+2. ¿Qué tipo de conexión utiliza USB?
+- ( ) Paralela.
+- (x) Serie, con reloj embebido en los datos.
+- ( ) Óptica, sin reloj embebido en los datos.
+- ( ) Serie, sin reloj embebido en los datos.
+- ( ) Magnética.
+
+1. ¿Qué característica tiene USB 2.0?
+- (x) Ancho de banda de hasta 60 MBps, **Half-duplex**, intensidad de recarga de dispositivos de 500 mA.
+- ( ) Ancho de banda de hasta 500 MBps, **Full-duplex**, intensidad de recarga de dispositivos de 900 mA.
+- ( ) Ancho de banda de hasta 1200 MBps, **Full-duplex**, intensidad de recarga de dispositivos de 1500 mA.
+- ( ) Ancho de banda de hasta 2400 MBps, **Full-duplex**, intensidad de recarga de dispositivos de 1500 mA.
+
+1. ¿Qué característica tiene USB 3.0?
+- ( ) Ancho de banda de hasta 60 MBps, Half-duplex, intensidad de recarga de dispositivos de 500 mA.
+- (x) Ancho de banda de hasta 500 MBps, Full-duplex, intensidad de recarga de dispositivos de 900 mA.
+- ( ) Ancho de banda de hasta 1200 MBps, Full-duplex, intensidad de recarga de dispositivos de 1500 mA.
+- ( ) Ancho de banda de hasta 2400 MBps, Full-duplex, intensidad de recarga de dispositivos de 1500 mA.
+
+1. ¿Qué característica tiene USB 3.1 y USB 3.2?
+- ( ) Ancho de banda de hasta 60 MBps, Half-duplex, intensidad de recarga de dispositivos de 500 mA.
+- ( ) Ancho de banda de hasta 500 MBps, Full-duplex, intensidad de recarga de dispositivos de 900 mA.
+- (x) Ancho de banda de hasta 1200 MBps (2400 MBps para USB 3.2), Full-duplex, intensidad de recarga de dispositivos de 1500 mA.
+- ( ) Ancho de banda de hasta 2400 MBps, Half-duplex, intensidad de recarga de dispositivos de 1500 mA.
+
+1. ¿Qué tipo de comunicación utiliza USB 2.0?
+- (x) Half-duplex.
+- ( ) Full-duplex.
+- ( ) Comunicación inalámbrica.
+- ( ) Comunicación asíncrona.
+
+1. ¿Qué tipo de comunicación utiliza USB 3.0 y USB 3.1/3.2?
+- ( ) Half-duplex.
+- (x) Full-duplex.
+- ( ) Comunicación inalámbrica.
+- ( ) Comunicación asíncrona.
+
+1. ¿Cuál es la intensidad de recarga de dispositivos en USB 3.1 y USB 3.2?
+- ( ) 500 mA.
+- ( ) 900 mA.
+- (x) 1500 mA.
+- ( ) 2000 mA.
+
+1. ¿Qué característica distingue a USB respecto a otros estándares de conexión?
+- (x) Hot plug, permitiendo conectar y desconectar dispositivos sin necesidad de apagar el sistema.
+- ( ) Solo permite conexiones paralelas.
+- ( ) No permite recarga de dispositivos.
+- ( ) Solo funciona con discos ópticos.
+
+1. ¿Qué se ve en la imagen? [rom](images/rom.png)
+
+- ( ) RAM
+- ( ) Disipador de calor
+- ( ) Pila
+- (x) ROM
+- ( ) Regulador de voltaje
+
+<!-- ROM -->
+
+1. ¿Qué función principal tiene la ROM/Flash BIOS?
+- ( ) Almacenar datos temporales para el sistema operativo.
+- ( ) Ejecutar aplicaciones de usuario directamente.
+- (x) Almacenar el programa de arranque del computador.
+- ( ) Almacenar archivos multimedia.
+
+1. ¿Qué tareas realiza el programa almacenado en la ROM/Flash BIOS?
+- (x) Identificar los dispositivos instalados, instalar drivers básicos y realizar el Power-on self-test (POST).
+- ( ) Ejecutar el sistema operativo tras finalizar el POST e instalar drivers básicos.
+- ( ) Almacenar configuraciones de hardware y parámetros de arranque.
+- ( ) Realizar comprobaciones de integridad y preparar el sistema para el arranque.
+
+1. ¿Dónde se almacenan los parámetros de configuración de la placa?
+- ( ) En el disco duro del sistema o en la memoria ROM del sistema.
+- ( ) En la memoria principal del sistema operativo.
+- (x) En una memoria RAM alimentada por una pila o en una memoria flash.
+- ( ) En un dispositivo externo conectado por USB.
+
+1. ¿Qué función tiene la pila en la placa base?
+- ( ) Proveer energía al procesador.
+- ( ) Almacenar datos del sistema operativo.
+- (x) Alimentar la memoria RAM para el reloj en tiempo real.
+- ( ) Ejecutar el programa de arranque.
+
+1. ¿Cómo se configuran la mayoría de los parámetros de la placa base?
+- ( ) Mediante aplicaciones del sistema operativo y otras operaciones.
+- (x) A través de un programa especial que se ejecuta antes de arrancar el sistema operativo.
+- ( ) Por medio de comandos en el terminal.
+- ( ) Utilizando un dispositivo externo.
+
+1. ¿Qué son los *jumpers* en la placa base?
+- ( ) Conectores para dispositivos externos.
+- (x) Elementos que permiten seleccionar algunos parámetros de configuración directamente en la placa.
+- ( ) Chips de memoria para almacenar datos, solamente aquellos datos que puede reconocer o intentar procesar.
+- ( ) Componentes para aumentar la velocidad del procesador.
+
+1. ¿Qué es un *chipset* en la placa base?
+- (x) Circuitos que permiten la comunicación entre los componentes internos.
+- ( ) Memoria integrada para almacenar instrucciones básicas del sistema.
+- ( ) Ventiladores que enfrían el procesador y los módulos de memoria.
+- ( ) Controladores que sincronizan los periféricos con la fuente de energía.
+
+2. ¿Para qué tipo de microprocesadores se diseña un chipset?
+- ( ) Para todos los procesadores existentes, sin importar el fabricante.
+- (x) Para una familia concreta de procesadores compatibles con la placa.
+- ( ) Para modelos diseñados con arquitectura híbrida y personalizada.
+- ( ) Para equipos que necesitan múltiples sistemas de procesamiento.
+
+3. ¿Qué función tiene el puente norte (*north bridge*) del chipset?
+- ( ) Controlar los puertos USB y las conexiones de red cableada.
+- (x) Conectar el procesador con la memoria, la gráfica y el sur.
+- ( ) Activar el sistema de arranque y cargar los programas básicos.
+- ( ) Estabilizar la energía de entrada en todos los componentes clave.
+
+4. ¿Para qué sirve el puente sur (*south bridge*) del chipset?
+- ( ) Interconectar la tarjeta gráfica con el sistema de refrigeración.
+- ( ) Proteger al sistema frente a sobrecargas de los periféricos.
+- ( ) Encargarse del suministro eléctrico a todos los buses de datos.
+- (x) Gestionar las conexiones lentas entre el sur y otros dispositivos.
+
+<!-- Placa base 1 -->
+
+1. ¿Cuántas ranuras para memoria RAM DDR tiene esta placa base? [placa1](images/placa1.png)
+- ( ) Tiene 4 ranuras DIMM distribuidas en dos bloques iguales.
+- (x) Dispone de 8 ranuras DIMM colocadas junto a los dos sockets de CPU.
+- ( ) Cuenta con 6 ranuras en total, divididas en pares asimétricos.
+- ( ) Tiene solo 2 ranuras de RAM debido a su diseño compacto.
+
+2. ¿Qué característica principal se puede observar sobre los sockets de CPU? [placa1](images/placa1.png)
+- (x) Tiene dos sockets físicos para procesadores, uno junto al otro.
+- ( ) Tiene un solo socket central con disipador integrado.
+- ( ) Está limitado a procesadores tipo móvil sin refrigeración activa.
+- ( ) Tiene un socket principal y uno secundario oculto bajo los puertos.
+
+3. ¿Qué tipo de conectores de expansión se observan en la placa? [placa1](images/placa1.png)
+- ( ) Solo cuenta con puertos SATA y USB, sin ranuras de expansión.
+- ( ) Tiene dos ranuras M.2 para almacenamiento rápido.
+- (x) Incluye ranuras PCIe de diferentes tamaños para tarjetas de expansión.
+- ( ) Dispone de conectores ISA y AGP para compatibilidad retroactiva.
+
+1. ¿Qué función cumplen los disipadores de aluminio negro sobre la placa? [placa1](images/placa1.png)
+- ( ) Son decorativos y no influyen en el rendimiento térmico.
+- ( ) Aumentan la velocidad de los ventiladores mediante sensores internos.
+- (x) Disipan el calor de los componentes críticos como el chipset o VRM.
+- ( ) Conectan eléctricamente los dos sockets para trabajar en paralelo.
+
+1. ¿Cuántas ranuras de memoria RAM DDR3/DDR4 se observan en la placa? [placa1](images/placa1.png)
+- ( ) La placa cuenta con 4 ranuras de RAM colocadas en paralelo.
+- (x) Tiene 8 ranuras RAM organizadas en dos grupos de cuatro.
+- ( ) Dispone de 6 ranuras DIMM junto a un solo socket.
+- ( ) Solo hay 2 ranuras de RAM para sistemas compactos.
+
+2. ¿Cuántos zócalos para CPU (sockets) se pueden ver? [placa1](images/placa1.png)
+- ( ) Tiene un único socket para procesadores Xeon.
+- ( ) No tiene sockets visibles, solo el chipset integrado.
+- (x) Se observan 2 sockets físicos para CPU simétricos.
+- ( ) Tiene 3 sockets: dos principales y uno auxiliar.
+
+3. ¿Cuántos conectores SATA para discos duros/SSD se identifican? [placa1](images/placa1.png)
+- (x) La placa incluye 4 conectores SATA dispuestos en línea.
+- ( ) Tiene 2 conectores SATA y un conector IDE adicional.
+- ( ) Dispone de 6 puertos SATA divididos en dos grupos.
+- ( ) No incluye conectores SATA, solo ranuras NVMe.
+
+4. ¿Cuántas ranuras PCI Express aparecen en la imagen? [placa1](images/placa1.png)
+- ( ) Hay una única ranura PCIe de tamaño completo.
+- (x) Se observan 2 ranuras PCI Express, una larga y una corta.
+- ( ) Cuenta con 3 ranuras PCIe para tarjetas gráficas en paralelo.
+- ( ) No tiene PCIe, solo conectores antiguos como AGP.
+
+5. ¿Cuántos puertos Ethernet se ven en el panel trasero? [placa1](images/placa1.png)
+- ( ) Solo dispone de un puerto Ethernet en la parte superior.
+- ( ) Tiene 3 puertos Ethernet apilados verticalmente.
+- ( ) No incluye ningún conector RJ-45 visible.
+- (x) Se pueden ver claramente 2 puertos Ethernet juntos.
+
+6. ¿Cuántos bancos de VRM/disipadores principales hay en la placa? [placa1](images/placa1.png)
+- (x) Se observan 2 disipadores grandes de aluminio negro.
+- ( ) Solo hay un disipador central sin aletas visibles.
+- ( ) Hay 4 disipadores pequeños distribuidos por la placa.
+- ( ) No hay disipadores visibles en esta placa.
