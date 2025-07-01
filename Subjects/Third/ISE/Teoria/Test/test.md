@@ -913,61 +913,61 @@
 
 <!-- Placa base 1 -->
 
-1. ¿Cuántas ranuras para memoria RAM DDR tiene esta placa base? [placa1](images/placa1.png)
+1. ¿Cuántas ranuras para memoria RAM DDR tiene esta placa base? ![placa1](images/placa1.png)
 - ( ) Tiene 4 ranuras DIMM distribuidas en dos bloques iguales.
 - (x) Dispone de 8 ranuras DIMM colocadas junto a los dos sockets de CPU.
 - ( ) Cuenta con 6 ranuras en total, divididas en pares asimétricos.
 - ( ) Tiene solo 2 ranuras de RAM debido a su diseño compacto.
 
-2. ¿Qué característica principal se puede observar sobre los sockets de CPU? [placa1](images/placa1.png)
+2. ¿Qué característica principal se puede observar sobre los sockets de CPU? ![placa1](images/placa1.png)
 - (x) Tiene dos sockets físicos para procesadores, uno junto al otro.
 - ( ) Tiene un solo socket central con disipador integrado.
 - ( ) Está limitado a procesadores tipo móvil sin refrigeración activa.
 - ( ) Tiene un socket principal y uno secundario oculto bajo los puertos.
 
-3. ¿Qué tipo de conectores de expansión se observan en la placa? [placa1](images/placa1.png)
+3. ¿Qué tipo de conectores de expansión se observan en la placa? ![placa1](images/placa1.png)
 - ( ) Solo cuenta con puertos SATA y USB, sin ranuras de expansión.
 - ( ) Tiene dos ranuras M.2 para almacenamiento rápido.
 - (x) Incluye ranuras PCIe de diferentes tamaños para tarjetas de expansión.
 - ( ) Dispone de conectores ISA y AGP para compatibilidad retroactiva.
 
-1. ¿Qué función cumplen los disipadores de aluminio negro sobre la placa? [placa1](images/placa1.png)
+1. ¿Qué función cumplen los disipadores de aluminio negro sobre la placa? ![placa1](images/placa1.png)
 - ( ) Son decorativos y no influyen en el rendimiento térmico.
 - ( ) Aumentan la velocidad de los ventiladores mediante sensores internos.
 - (x) Disipan el calor de los componentes críticos como el chipset o VRM.
 - ( ) Conectan eléctricamente los dos sockets para trabajar en paralelo.
 
-1. ¿Cuántas ranuras de memoria RAM DDR3/DDR4 se observan en la placa? [placa1](images/placa1.png)
+1. ¿Cuántas ranuras de memoria RAM DDR3/DDR4 se observan en la placa? ![placa1](images/placa1.png)
 - ( ) La placa cuenta con 4 ranuras de RAM colocadas en paralelo.
 - (x) Tiene 8 ranuras RAM organizadas en dos grupos de cuatro.
 - ( ) Dispone de 6 ranuras DIMM junto a un solo socket.
 - ( ) Solo hay 2 ranuras de RAM para sistemas compactos.
 
-2. ¿Cuántos zócalos para CPU (sockets) se pueden ver? [placa1](images/placa1.png)
+2. ¿Cuántos zócalos para CPU (sockets) se pueden ver? ![placa1](images/placa1.png)
 - ( ) Tiene un único socket para procesadores Xeon.
 - ( ) No tiene sockets visibles, solo el chipset integrado.
 - (x) Se observan 2 sockets físicos para CPU simétricos.
 - ( ) Tiene 3 sockets: dos principales y uno auxiliar.
 
-3. ¿Cuántos conectores SATA para discos duros/SSD se identifican? [placa1](images/placa1.png)
+3. ¿Cuántos conectores SATA para discos duros/SSD se identifican? ![placa1](images/placa1.png)
 - (x) La placa incluye 4 conectores SATA dispuestos en línea.
 - ( ) Tiene 2 conectores SATA y un conector IDE adicional.
 - ( ) Dispone de 6 puertos SATA divididos en dos grupos.
 - ( ) No incluye conectores SATA, solo ranuras NVMe.
 
-4. ¿Cuántas ranuras PCI Express aparecen en la imagen? [placa1](images/placa1.png)
+4. ¿Cuántas ranuras PCI Express aparecen en la imagen? ![placa1](images/placa1.png)
 - ( ) Hay una única ranura PCIe de tamaño completo.
 - (x) Se observan 2 ranuras PCI Express, una larga y una corta.
 - ( ) Cuenta con 3 ranuras PCIe para tarjetas gráficas en paralelo.
 - ( ) No tiene PCIe, solo conectores antiguos como AGP.
 
-5. ¿Cuántos puertos Ethernet se ven en el panel trasero? [placa1](images/placa1.png)
+5. ¿Cuántos puertos Ethernet se ven en el panel trasero? ![placa1](images/placa1.png)
 - ( ) Solo dispone de un puerto Ethernet en la parte superior.
 - ( ) Tiene 3 puertos Ethernet apilados verticalmente.
 - ( ) No incluye ningún conector RJ-45 visible.
 - (x) Se pueden ver claramente 2 puertos Ethernet juntos.
 
-6. ¿Cuántos bancos de VRM/disipadores principales hay en la placa? [placa1](images/placa1.png)
+6. ¿Cuántos bancos de VRM/disipadores principales hay en la placa? ![placa1](images/placa1.png)
 - (x) Se observan 2 disipadores grandes de aluminio negro.
 - ( ) Solo hay un disipador central sin aletas visibles.
 - ( ) Hay 4 disipadores pequeños distribuidos por la placa.
