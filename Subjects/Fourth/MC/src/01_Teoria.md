@@ -57,8 +57,10 @@ Este programa lleva a una contradicción, ya que si termina no termina y si term
 
 \begin{definicion}
 \textbf{Longitud de una Palabra}: Si $u \in A^*$, la longitud de la palabra $u$ es el número de símbolos de $A$ que contiene.  
-- Notación: $\lvert u \rvert$  
-- Si $u = a_1 a_2 \ldots a_n$, entonces $\lvert u \rvert = n$.  
+\begin{itemize}
+    \item Notación: $\lvert u \rvert$  
+    \item Si $u = a_1 a_2 \ldots a_n$, entonces $\lvert u \rvert = n$.  
+\end{itemize}
 \end{definicion}
 
 \begin{definicion}
@@ -83,18 +85,21 @@ Si $u = 011$, $v = 1010$, entonces $uv = 0111010$.
 \end{ejemplo}
 
 **Propiedades**  
+
 1. $\lvert u.v \rvert = \lvert u \rvert + \lvert v \rvert$, $\forall u, v \in A^*$  
 2. **Asociativa**: $u.(v.w) = (u.v).w$, $\forall u, v, w \in A^*$  
 3. **Elemento Neutro**: $u.\varepsilon = \varepsilon.u = u$, $\forall u \in A^*$  
 
+\begin{definicion}
+\textbf{Monoide}: Un monoide es una estructura algebraica $(M, \cdot, e)$ que consta de un conjunto $M$, una operación binaria asociativa $\cdot : M \times M \to M$, y un elemento neutro $e \in M$ tal que:  
+1. Asociatividad: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$, $\forall a, b, c \in M$.  
+2. Elemento Neutro: $a \cdot e = e \cdot a = a$, $\forall a \in M$.  
+\end{definicion}
+
 **Estructura de monoide**  
 La concatenación de palabras sobre un alfabeto $A$ junto con la palabra vacía $\varepsilon$ forma un monoide.
 
-\begin{definicion}
-\textbf{Monoide}: Un monoide es una estructura algebraica $(M, \cdot, e)$ que consta de un conjunto $M$, una operación binaria asociativa $\cdot : M \times M \to M$, y un elemento neutro $e \in M$ tal que:  
-1. **Asociatividad**: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$, $\forall a, b, c \in M$.  
-2. **Elemento Neutro**: $a \cdot e = e \cdot a = a$, $\forall a \in M$.  
-\end{definicion}
+
 
 ## Prefijos, Sufijos y subcadenas
 
@@ -144,7 +149,9 @@ La palabra vacía siempre pertenece a un lenguaje.
 \end{definicion}
 
 **Notación**  
-- Lenguajes: $L, M, N, \ldots$
+\begin{itemize}
+    \item Lenguajes: $L, M, N, \ldots$
+\end{itemize}
 
 \begin{ejemplo}
     \begin{enumerate}
@@ -166,12 +173,11 @@ La palabra vacía siempre pertenece a un lenguaje.
 ### Conjuntos Numerables  
 
 Un conjunto se dice numerable si existe una aplicación inyectiva (corresponde cada elemento con su imagen) de este conjunto en el conjunto de los números naturales, o lo que es lo mismo, se le puede asignar un número natural a cada elemento del conjunto de tal manera que dos elementos distintos tengan números distintos.
-
-**Ejemplos**
  
 \begin{ejemplo}
 $A^*$ es siempre numerable. Si $A = \{a_1, \ldots, a_n\}$, entonces puedo asignar un número binario distinto de 0 y de la misma longitud a cada $a_i$ de tal manera que símbolos distintos reciben números distintos, y a cada palabra $b_1 \ldots b_k$ se le asigna el número cuya representación en binario es el que se obtiene sustituyendo cada $b_i$ por su número binario.  
-    - **Ejemplo**: Si $A = \{a, b\}$, podemos asignar $a = 01$, $b = 10$. Entonces, para la palabra $ab$, su representación binaria sería $0110$.  
+
+\textit{Ejemplo}: Si $A = \{a, b\}$, podemos asignar $a = 01$, $b = 10$. Entonces, para la palabra $ab$, su representación binaria sería $0110$.  
 \end{ejemplo}
 
 \begin{ejemplo}
@@ -187,20 +193,28 @@ El conjunto de lenguajes sobre $A^*$ (si $A$ no es vacío) nunca es numerable.
 \end{ejemplo}
 
 Haremos la demostración por reducción al absurdo.  
+\begin{demostracion}
 Si lo fuese, se podría asignar un número natural distinto $f(L)$ a cada lenguaje $L$.  
 
 Sea $a \in A$.  
 Definamos el lenguaje $L$ formado por palabras de la forma $a^i$ de acuerdo a lo siguiente: para cada $i$ número natural:  
-- Si este número no es de un lenguaje, entonces $a^i \in L$.  
-- Si este número es del lenguaje $M$ ($i = f(M)$):  
-    - Si $a^i \notin M$, entonces $a^i \in L$.  
-    - Si $a^i \in M$, entonces $a^i \notin L$.  
+\begin{itemize}
+    \item Si este número no es de un lenguaje, entonces $a^i \in L$.  
+    \item Si este número es del lenguaje $M$ ($i = f(M)$):  
+        \begin{itemize}
+            \item Si $a^i \notin M$, entonces $a^i \in L$.  
+            \item Si $a^i \in M$, entonces $a^i \notin L$.  
+        \end{itemize}
+\end{itemize}
 
 $L$ no puede tener ningún número asociado. Si fuese $j = f(L)$, entonces la pertenencia de $a^j$ a $L$ es contradictoria:  
-- Si $a^j \in L$ como $j = f(L)$, entonces $a^j \notin L$.  
-- Si $a^j \notin L$ y $j = f(L)$, entonces $a^j \in L$.  
+\begin{itemize}
+    \item Si $a^j \in L$ como $j = f(L)$, entonces $a^j \notin L$.  
+    \item Si $a^j \notin L$ y $j = f(L)$, entonces $a^j \in L$.  
+\end{itemize}
 
 Por lo tanto, el conjunto de lenguajes sobre $A^*$ no es numerable.  
+\end{demostracion}
 
 ## Operaciones con Lenguajes: Concatenación
 
@@ -233,10 +247,12 @@ $$
 ## Iteración de Lenguajes y Clausura de Kleene
 
 La iteración de lenguajes se define de forma recursiva:  
+
 - $L^0 = \{\varepsilon\}$  
 - $L^{i+1} = L^iL$, $\forall i \geq 0$  
 
 Si $L$ es un lenguaje sobre el alfabeto $A$, se definen las siguientes clausuras:  
+
 - **Clausura de Kleene**:  
     $$
     L^* = \bigcup_{i \geq 0} L^i
@@ -288,6 +304,7 @@ L^{-1} = \{110, 101\}
 $$
 
 **Propiedades**  
+
 1. $(L^{-1})^{-1} = L$  
 2. $(L_1 \cup L_2)^{-1} = L_1^{-1} \cup L_2^{-1}$  
 3. $(L_1L_2)^{-1} = L_2^{-1}L_1^{-1}$  
@@ -332,18 +349,24 @@ $$
     h(u) = h(a_1)h(a_2) \ldots h(a_n)
     $$
 
-### Ejemplo de Homomorfismo
+\begin{ejemplo}
+    \textbf{Ejemplo de Homomorfismo}
 
-Sea $A_1 = \{a, b\}$ y $A_2 = \{0, 1\}$. Definimos $h : A_1^* \to A_2^*$ como:
+    Sea $A_1 = \{a, b\}$ y $A_2 = \{0, 1\}$. Definimos $h : A_1^* \to A_2^*$ como:
 
-- $h(a) = 01$
-- $h(b) = 10$
+    \begin{itemize}
+        \item $h(a) = 01$
+        \item $h(b) = 10$
+    \end{itemize}
 
-Entonces:
+    Entonces:
 
-- $h(\varepsilon) = \varepsilon$
-- $h(ab) = h(a)h(b) = 0110$
-- $h(aba) = h(a)h(b)h(a) = 010110$
+    \begin{itemize}
+        \item $h(\varepsilon) = \varepsilon$
+        \item $h(ab) = h(a)h(b) = 0110$
+        \item $h(aba) = h(a)h(b)h(a) = 010110$
+    \end{itemize}
+\end{ejemplo}
 
 ### Propiedades de Homomorfismos
 
@@ -361,17 +384,24 @@ Entonces:
 3. **Composición de Homomorfismos**  
     Si $h_1 : A_1^* \to A_2^*$ y $h_2 : A_2^* \to A_3^*$ son homomorfismos, entonces su composición $h_2 \circ h_1 : A_1^* \to A_3^*$ también es un homomorfismo.
 
-**Ejemplo de Composición**  
-Sea $h_1 : A_1^* \to A_2^*$ y $h_2 : A_2^* \to A_3^*$ definidos como:
+\begin{ejemplo}
+    \textbf{Ejemplo de Composición}  
+    Sea $h_1 : A_1^* \to A_2^*$ y $h_2 : A_2^* \to A_3^*$ definidos como:
 
-- $h_1(a) = 01$, $h_1(b) = 10$
-- $h_2(0) = x$, $h_2(1) = y$
+    \begin{itemize}
+        \item $h_1(a) = 01$
+        \item $h_1(b) = 10$
+        \item $h_2(0) = x$
+        \item $h_2(1) = y$
+    \end{itemize}
 
-Entonces, para $u = ab \in A_1^*$:
+    Entonces, para $u = ab \in A_1^*$:
 
-- $h_1(u) = 0110$
-- $h_2(h_1(u)) = h_2(0110) = xyxy$
-
+    \begin{itemize}
+        \item $h_1(u) = 0110$
+        \item $h_2(h_1(u)) = h_2(0110) = xyxy$
+    \end{itemize}
+\end{ejemplo}
 
 
 ## Gramática Generativa
@@ -408,24 +438,26 @@ Esta gramática genera el lenguaje $L = \{ab\}$.
 
 Una gramática sirve para determinar un lenguaje. Las palabras generadas pertenecen al conjunto de símbolos terminales $T^*$ y se obtienen a partir del símbolo inicial efectuando pasos de derivación. Cada paso consiste en elegir una parte de la palabra que coincide con la parte izquierda de una producción y sustituir esa parte por la derecha de la misma producción.
 
-### Ejemplo
+\begin{ejemplo}
+    Dada la gramática:
 
-Dada la gramática:
+    \begin{itemize}
+        \item $E \to E + E$
+        \item $E \to E * E$
+        \item $E \to (E)$
+        \item $E \to a$
+        \item $E \to b$
+        \item $E \to c$
+    \end{itemize}
 
-- $E \to E + E$
-- $E \to E * E$
-- $E \to (E)$
-- $E \to a$
-- $E \to b$
-- $E \to c$
+    Derivación de una palabra:
 
-Derivación de una palabra:
+    $$
+    E \Rightarrow E * E \Rightarrow (E) * E \Rightarrow (E + E) * E \Rightarrow (a + E) * E \Rightarrow (a + b) * E \Rightarrow (a + b) * b
+    $$
 
-$$
-E \Rightarrow E * E \Rightarrow (E) * E \Rightarrow (E + E) * E \Rightarrow (a + E) * E \Rightarrow (a + b) * E \Rightarrow (a + b) * b
-$$
-
-**Palabra Generada**: $(a + b) * b$
+    \textbf{Palabra Generada}: $(a + b) * b$
+\end{ejemplo}
 
 ## Derivación y Lenguaje Generado
 
@@ -482,12 +514,16 @@ donde $N_a(u)$ y $N_b(u)$ son el número de apariciones de los símbolos $a$ y $
 
 ### Demostración de la Primera Propiedad
 
+\begin{demostracion}
 Consideremos $N_{a,A}(\alpha)$ (número de $a$ más número de $A$) y $N_{b,B}(\alpha)$ (número de $b$ más número de $B$). Para una derivación $S \overset{*}{\Rightarrow} u$, tenemos:  
 
-- Al inicio: $N_{a,A}(S) = N_{b,B}(S) = 0$.  
-- Al aplicar cualquier regla $\alpha_1 \to \alpha_2$, si $N_{a,A}(\alpha_1) = N_{b,B}(\alpha_1)$, entonces $N_{a,A}(\alpha_2) = N_{b,B}(\alpha_2)$.  
+\begin{itemize}
+    \item Al inicio: $N_{a,A}(S) = N_{b,B}(S) = 0$.  
+    \item Al aplicar cualquier regla $\alpha_1 \to \alpha_2$, si $N_{a,A}(\alpha_1) = N_{b,B}(\alpha_1)$, entonces $N_{a,A}(\alpha_2) = N_{b,B}(\alpha_2)$.  
+\end{itemize}
 
 Por lo tanto, al final de la derivación, $N_{a,A}(u) = N_{b,B}(u)$. Como $u$ no contiene variables, $N_a(u) = N_b(u)$, lo que demuestra la propiedad.
+\end{demostracion}
 
 ### Algoritmo de Generación
 
