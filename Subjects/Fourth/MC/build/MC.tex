@@ -51,7 +51,8 @@ Computacionales} % pie de página izquierdo en cursiva
     
     % Fondo con transparencia
     \begin{tikzpicture}[remember picture,overlay]
-        \node[opacity=0.15,inner sep=0pt] at (current page.center)
+        % \node[opacity=0.15,inner sep=0pt] at (current page.center)
+        \node[inner sep=0pt] at (current page.center)
             {\includegraphics[width=\paperwidth,height=\paperheight]{../../../extraFiles/img/fondo_info.jpg}};
     \end{tikzpicture}
 
@@ -63,7 +64,8 @@ Computacionales} % pie de página izquierdo en cursiva
         \vspace{0.5cm}
         {\Large \itshape Modelos Computacionales \par}
         \vspace{0.5cm}
-        {\Large \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
+        {\small \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
+        {\small \itshape \href{https://elblogdeismael.github.io}{https://elblogdeismael.github.io} \par}
 
 
         \vfill
@@ -183,8 +185,10 @@ a pasar STOP ya que si eso pasa el programa nunca arrancaría.
 
 \begin{definicion}
 \textbf{Longitud de una Palabra}: Si $u \in A^*$, la longitud de la palabra $u$ es el número de símbolos de $A$ que contiene.  
-- Notación: $\lvert u \rvert$  
-- Si $u = a_1 a_2 \ldots a_n$, entonces $\lvert u \rvert = n$.  
+\begin{itemize}
+    \item Notación: $\lvert u \rvert$  
+    \item Si $u = a_1 a_2 \ldots a_n$, entonces $\lvert u \rvert = n$.  
+\end{itemize}
 \end{definicion}
 
 \begin{definicion}
@@ -210,23 +214,31 @@ Concatenación}\label{operaciones-concatenaciuxf3n}}
 Si $u = 011$, $v = 1010$, entonces $uv = 0111010$.
 \end{ejemplo}
 
-\textbf{Propiedades}\\
-1. \(\lvert u.v \rvert = \lvert u \rvert + \lvert v \rvert\),
-\(\forall u, v \in A^*\)\\
-2. \textbf{Asociativa}: \(u.(v.w) = (u.v).w\),
-\(\forall u, v, w \in A^*\)\\
-3. \textbf{Elemento Neutro}: \(u.\varepsilon = \varepsilon.u = u\),
-\(\forall u \in A^*\)
+\textbf{Propiedades}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(\lvert u.v \rvert = \lvert u \rvert + \lvert v \rvert\),
+  \(\forall u, v \in A^*\)\\
+\item
+  \textbf{Asociativa}: \(u.(v.w) = (u.v).w\),
+  \(\forall u, v, w \in A^*\)\\
+\item
+  \textbf{Elemento Neutro}: \(u.\varepsilon = \varepsilon.u = u\),
+  \(\forall u \in A^*\)
+\end{enumerate}
+
+\begin{definicion}
+\textbf{Monoide}: Un monoide es una estructura algebraica $(M, \cdot, e)$ que consta de un conjunto $M$, una operación binaria asociativa $\cdot : M \times M \to M$, y un elemento neutro $e \in M$ tal que:  
+1. Asociatividad: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$, $\forall a, b, c \in M$.  
+2. Elemento Neutro: $a \cdot e = e \cdot a = a$, $\forall a \in M$.  
+\end{definicion}
 
 \textbf{Estructura de monoide}\\
 La concatenación de palabras sobre un alfabeto \(A\) junto con la
 palabra vacía \(\varepsilon\) forma un monoide.
-
-\begin{definicion}
-\textbf{Monoide}: Un monoide es una estructura algebraica $(M, \cdot, e)$ que consta de un conjunto $M$, una operación binaria asociativa $\cdot : M \times M \to M$, y un elemento neutro $e \in M$ tal que:  
-1. **Asociatividad**: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$, $\forall a, b, c \in M$.  
-2. **Elemento Neutro**: $a \cdot e = e \cdot a = a$, $\forall a \in M$.  
-\end{definicion}
 
 \hypertarget{prefijos-sufijos-y-subcadenas}{%
 \section{Prefijos, Sufijos y
@@ -281,7 +293,10 @@ La palabra vacía siempre pertenece a un lenguaje.
 \end{definicion}
 
 \textbf{Notación}\\
-- Lenguajes: \(L, M, N, \ldots\)
+
+\begin{itemize}
+    \item Lenguajes: $L, M, N, \ldots$
+\end{itemize}
 
 \begin{ejemplo}
     \begin{enumerate}
@@ -325,11 +340,10 @@ conjunto de los números naturales, o lo que es lo mismo, se le puede
 asignar un número natural a cada elemento del conjunto de tal manera que
 dos elementos distintos tengan números distintos.
 
-\textbf{Ejemplos}
-
 \begin{ejemplo}
 $A^*$ es siempre numerable. Si $A = \{a_1, \ldots, a_n\}$, entonces puedo asignar un número binario distinto de 0 y de la misma longitud a cada $a_i$ de tal manera que símbolos distintos reciben números distintos, y a cada palabra $b_1 \ldots b_k$ se le asigna el número cuya representación en binario es el que se obtiene sustituyendo cada $b_i$ por su número binario.  
-    - **Ejemplo**: Si $A = \{a, b\}$, podemos asignar $a = 01$, $b = 10$. Entonces, para la palabra $ab$, su representación binaria sería $0110$.  
+
+\textit{Ejemplo}: Si $A = \{a, b\}$, podemos asignar $a = 01$, $b = 10$. Entonces, para la palabra $ab$, su representación binaria sería $0110$.  
 \end{ejemplo}
 
 \begin{ejemplo}
@@ -350,23 +364,29 @@ El conjunto de lenguajes sobre $A^*$ (si $A$ no es vacío) nunca es numerable.
 \end{ejemplo}
 
 Haremos la demostración por reducción al absurdo.\\
-Si lo fuese, se podría asignar un número natural distinto \(f(L)\) a
-cada lenguaje \(L\).
 
-Sea \(a \in A\).\\
-Definamos el lenguaje \(L\) formado por palabras de la forma \(a^i\) de
-acuerdo a lo siguiente: para cada \(i\) número natural:\\
-- Si este número no es de un lenguaje, entonces \(a^i \in L\).\\
-- Si este número es del lenguaje \(M\) (\(i = f(M)\)):\\
-- Si \(a^i \notin M\), entonces \(a^i \in L\).\\
-- Si \(a^i \in M\), entonces \(a^i \notin L\).
+\begin{demostracion}
+Si lo fuese, se podría asignar un número natural distinto $f(L)$ a cada lenguaje $L$.  
 
-\(L\) no puede tener ningún número asociado. Si fuese \(j = f(L)\),
-entonces la pertenencia de \(a^j\) a \(L\) es contradictoria:\\
-- Si \(a^j \in L\) como \(j = f(L)\), entonces \(a^j \notin L\).\\
-- Si \(a^j \notin L\) y \(j = f(L)\), entonces \(a^j \in L\).
+Sea $a \in A$.  
+Definamos el lenguaje $L$ formado por palabras de la forma $a^i$ de acuerdo a lo siguiente: para cada $i$ número natural:  
+\begin{itemize}
+    \item Si este número no es de un lenguaje, entonces $a^i \in L$.  
+    \item Si este número es del lenguaje $M$ ($i = f(M)$):  
+        \begin{itemize}
+            \item Si $a^i \notin M$, entonces $a^i \in L$.  
+            \item Si $a^i \in M$, entonces $a^i \notin L$.  
+        \end{itemize}
+\end{itemize}
 
-Por lo tanto, el conjunto de lenguajes sobre \(A^*\) no es numerable.
+$L$ no puede tener ningún número asociado. Si fuese $j = f(L)$, entonces la pertenencia de $a^j$ a $L$ es contradictoria:  
+\begin{itemize}
+    \item Si $a^j \in L$ como $j = f(L)$, entonces $a^j \notin L$.  
+    \item Si $a^j \notin L$ y $j = f(L)$, entonces $a^j \in L$.  
+\end{itemize}
+
+Por lo tanto, el conjunto de lenguajes sobre $A^*$ no es numerable.  
+\end{demostracion}
 
 \hypertarget{operaciones-con-lenguajes-concatenaciuxf3n}{%
 \section{Operaciones con Lenguajes:
@@ -412,19 +432,25 @@ Lenguajes}\label{propiedades-de-la-concatenaciuxf3n-de-lenguajes}}
 \section{Iteración de Lenguajes y Clausura de
 Kleene}\label{iteraciuxf3n-de-lenguajes-y-clausura-de-kleene}}
 
-La iteración de lenguajes se define de forma recursiva:\\
-- \(L^0 = \{\varepsilon\}\)\\
-- \(L^{i+1} = L^iL\), \(\forall i \geq 0\)
-
-Si \(L\) es un lenguaje sobre el alfabeto \(A\), se definen las
-siguientes clausuras:\\
-- \textbf{Clausura de Kleene}:\\
-\[
-    L^* = \bigcup_{i \geq 0} L^i
-    \]
+La iteración de lenguajes se define de forma recursiva:
 
 \begin{itemize}
 \tightlist
+\item
+  \(L^0 = \{\varepsilon\}\)\\
+\item
+  \(L^{i+1} = L^iL\), \(\forall i \geq 0\)
+\end{itemize}
+
+Si \(L\) es un lenguaje sobre el alfabeto \(A\), se definen las
+siguientes clausuras:
+
+\begin{itemize}
+\item
+  \textbf{Clausura de Kleene}:\\
+  \[
+    L^* = \bigcup_{i \geq 0} L^i
+    \]
 \item
   \textbf{Clausura Positiva}:\\
   \[
@@ -486,11 +512,20 @@ Si \(L = \{011, 101\}\), entonces:
 L^{-1} = \{110, 101\}
 \]
 
-\textbf{Propiedades}\\
-1. \((L^{-1})^{-1} = L\)\\
-2. \((L_1 \cup L_2)^{-1} = L_1^{-1} \cup L_2^{-1}\)\\
-3. \((L_1L_2)^{-1} = L_2^{-1}L_1^{-1}\)\\
-4. \((L^*)^{-1} = (L^{-1})^*\)
+\textbf{Propiedades}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \((L^{-1})^{-1} = L\)\\
+\item
+  \((L_1 \cup L_2)^{-1} = L_1^{-1} \cup L_2^{-1}\)\\
+\item
+  \((L_1L_2)^{-1} = L_2^{-1}L_1^{-1}\)\\
+\item
+  \((L^*)^{-1} = (L^{-1})^*\)
+\end{enumerate}
 
 \hypertarget{cabecera-de-un-lenguaje}{%
 \section{Cabecera de un Lenguaje}\label{cabecera-de-un-lenguaje}}
@@ -540,31 +575,24 @@ Definición}\label{consecuencias-de-la-definiciuxf3n}}
    \]
 \end{enumerate}
 
-\hypertarget{ejemplo-de-homomorfismo}{%
-\subsection{Ejemplo de Homomorfismo}\label{ejemplo-de-homomorfismo}}
+\begin{ejemplo}
+    \textbf{Ejemplo de Homomorfismo}
 
-Sea \(A_1 = \{a, b\}\) y \(A_2 = \{0, 1\}\). Definimos
-\(h : A_1^* \to A_2^*\) como:
+    Sea $A_1 = \{a, b\}$ y $A_2 = \{0, 1\}$. Definimos $h : A_1^* \to A_2^*$ como:
 
-\begin{itemize}
-\tightlist
-\item
-  \(h(a) = 01\)
-\item
-  \(h(b) = 10\)
-\end{itemize}
+    \begin{itemize}
+        \item $h(a) = 01$
+        \item $h(b) = 10$
+    \end{itemize}
 
-Entonces:
+    Entonces:
 
-\begin{itemize}
-\tightlist
-\item
-  \(h(\varepsilon) = \varepsilon\)
-\item
-  \(h(ab) = h(a)h(b) = 0110\)
-\item
-  \(h(aba) = h(a)h(b)h(a) = 010110\)
-\end{itemize}
+    \begin{itemize}
+        \item $h(\varepsilon) = \varepsilon$
+        \item $h(ab) = h(a)h(b) = 0110$
+        \item $h(aba) = h(a)h(b)h(a) = 010110$
+    \end{itemize}
+\end{ejemplo}
 
 \hypertarget{propiedades-de-homomorfismos}{%
 \subsection{Propiedades de
@@ -589,27 +617,24 @@ Homomorfismos}\label{propiedades-de-homomorfismos}}
   \(h_2 \circ h_1 : A_1^* \to A_3^*\) también es un homomorfismo.
 \end{enumerate}
 
-\textbf{Ejemplo de Composición}\\
-Sea \(h_1 : A_1^* \to A_2^*\) y \(h_2 : A_2^* \to A_3^*\) definidos
-como:
+\begin{ejemplo}
+    \textbf{Ejemplo de Composición}  
+    Sea $h_1 : A_1^* \to A_2^*$ y $h_2 : A_2^* \to A_3^*$ definidos como:
 
-\begin{itemize}
-\tightlist
-\item
-  \(h_1(a) = 01\), \(h_1(b) = 10\)
-\item
-  \(h_2(0) = x\), \(h_2(1) = y\)
-\end{itemize}
+    \begin{itemize}
+        \item $h_1(a) = 01$
+        \item $h_1(b) = 10$
+        \item $h_2(0) = x$
+        \item $h_2(1) = y$
+    \end{itemize}
 
-Entonces, para \(u = ab \in A_1^*\):
+    Entonces, para $u = ab \in A_1^*$:
 
-\begin{itemize}
-\tightlist
-\item
-  \(h_1(u) = 0110\)
-\item
-  \(h_2(h_1(u)) = h_2(0110) = xyxy\)
-\end{itemize}
+    \begin{itemize}
+        \item $h_1(u) = 0110$
+        \item $h_2(h_1(u)) = h_2(0110) = xyxy$
+    \end{itemize}
+\end{ejemplo}
 
 \hypertarget{gramuxe1tica-generativa}{%
 \section{Gramática Generativa}\label{gramuxe1tica-generativa}}
@@ -654,34 +679,26 @@ consiste en elegir una parte de la palabra que coincide con la parte
 izquierda de una producción y sustituir esa parte por la derecha de la
 misma producción.
 
-\hypertarget{ejemplo}{%
-\subsection{Ejemplo}\label{ejemplo}}
+\begin{ejemplo}
+    Dada la gramática:
 
-Dada la gramática:
+    \begin{itemize}
+        \item $E \to E + E$
+        \item $E \to E * E$
+        \item $E \to (E)$
+        \item $E \to a$
+        \item $E \to b$
+        \item $E \to c$
+    \end{itemize}
 
-\begin{itemize}
-\tightlist
-\item
-  \(E \to E + E\)
-\item
-  \(E \to E * E\)
-\item
-  \(E \to (E)\)
-\item
-  \(E \to a\)
-\item
-  \(E \to b\)
-\item
-  \(E \to c\)
-\end{itemize}
+    Derivación de una palabra:
 
-Derivación de una palabra:
+    $$
+    E \Rightarrow E * E \Rightarrow (E) * E \Rightarrow (E + E) * E \Rightarrow (a + E) * E \Rightarrow (a + b) * E \Rightarrow (a + b) * b
+    $$
 
-\[
-E \Rightarrow E * E \Rightarrow (E) * E \Rightarrow (E + E) * E \Rightarrow (a + E) * E \Rightarrow (a + b) * E \Rightarrow (a + b) * b
-\]
-
-\textbf{Palabra Generada}: \((a + b) * b\)
+    \textbf{Palabra Generada}: $(a + b) * b$
+\end{ejemplo}
 
 \hypertarget{derivaciuxf3n-y-lenguaje-generado}{%
 \section{Derivación y Lenguaje
@@ -780,23 +797,16 @@ Generado}\label{propiedades-del-lenguaje-generado}}
 \subsection{Demostración de la Primera
 Propiedad}\label{demostraciuxf3n-de-la-primera-propiedad}}
 
-Consideremos \(N_{a,A}(\alpha)\) (número de \(a\) más número de \(A\)) y
-\(N_{b,B}(\alpha)\) (número de \(b\) más número de \(B\)). Para una
-derivación \(S \overset{*}{\Rightarrow} u\), tenemos:
+\begin{demostracion}
+Consideremos $N_{a,A}(\alpha)$ (número de $a$ más número de $A$) y $N_{b,B}(\alpha)$ (número de $b$ más número de $B$). Para una derivación $S \overset{*}{\Rightarrow} u$, tenemos:  
 
 \begin{itemize}
-\tightlist
-\item
-  Al inicio: \(N_{a,A}(S) = N_{b,B}(S) = 0\).\\
-\item
-  Al aplicar cualquier regla \(\alpha_1 \to \alpha_2\), si
-  \(N_{a,A}(\alpha_1) = N_{b,B}(\alpha_1)\), entonces
-  \(N_{a,A}(\alpha_2) = N_{b,B}(\alpha_2)\).
+    \item Al inicio: $N_{a,A}(S) = N_{b,B}(S) = 0$.  
+    \item Al aplicar cualquier regla $\alpha_1 \to \alpha_2$, si $N_{a,A}(\alpha_1) = N_{b,B}(\alpha_1)$, entonces $N_{a,A}(\alpha_2) = N_{b,B}(\alpha_2)$.  
 \end{itemize}
 
-Por lo tanto, al final de la derivación, \(N_{a,A}(u) = N_{b,B}(u)\).
-Como \(u\) no contiene variables, \(N_a(u) = N_b(u)\), lo que demuestra
-la propiedad.
+Por lo tanto, al final de la derivación, $N_{a,A}(u) = N_{b,B}(u)$. Como $u$ no contiene variables, $N_a(u) = N_b(u)$, lo que demuestra la propiedad.
+\end{demostracion}
 
 \hypertarget{algoritmo-de-generaciuxf3n}{%
 \subsection{Algoritmo de Generación}\label{algoritmo-de-generaciuxf3n}}
