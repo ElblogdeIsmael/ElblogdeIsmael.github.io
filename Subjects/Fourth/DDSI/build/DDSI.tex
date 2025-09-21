@@ -1,0 +1,125 @@
+% ========================
+% estilo.latex mínimo funcional
+% ========================
+
+\documentclass[12pt]{report} % report para capítulos
+
+% ========================
+% Paquetes y comandos extra
+% ========================
+\input{../../../extraFiles/preambulos_oficiales/paquetes.tex}  % si tienes paquetes personalizados
+\input{../../../extraFiles/preambulos_oficiales/comandos.tex}  % comandos LaTeX propios
+\input{../../../extraFiles/preambulos_oficiales/estilos.tex}   % estilos de secciones, etc.
+
+% ========================
+% Configuración índice y listas
+% ========================
+\setlength{\cftbeforesecskip}{5pt}
+\setlength{\headheight}{14pt}  % un poco más que 13.6pt
+
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+
+% Fix para listas de Pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+%=======================
+% fancy with parameters
+%=======================
+%\fancyfoot[L]{\scriptsize\itshape Diseño y Desarrollo de SI}
+\fancyfoot[L]{\scriptsize\itshape Diseño y Desarrollo de
+SI} % pie de página izquierdo en cursiva
+
+
+
+% ========================
+% Inicio del documento
+% ========================
+\begin{document}
+
+%\input{portada}
+
+
+%==========================
+% PORTADA: ENTRADA MANUAL
+%==========================
+
+% portada.tex
+\begin{titlepage}
+    \newgeometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm} % márgenes personalizados
+    
+    % Fondo con transparencia
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[opacity=0.15,inner sep=0pt] at (current page.center)
+            {\includegraphics[width=\paperwidth,height=\paperheight]{../../../extraFiles/img/fondo_info.jpg}};
+    \end{tikzpicture}
+
+    % Contenido de la portada
+    \begin{center}
+        \vspace*{2cm}
+        
+        {\Huge \bfseries\scshape Teoría y Práctica \par}
+        \vspace{0.5cm}
+        {\Large \itshape Diseño y Desarrollo de SI \par}
+        \vspace{0.5cm}
+        {\Large \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
+
+
+        \vfill
+        
+        {\LARGE Autor: \textbf{Ismael Sallami Moreno} \par}
+        \vspace{0.3cm}
+        % {\Large Universidad de Granada \par}
+        
+        \vspace{1cm}
+        \includegraphics[width=0.25\textwidth]{../../../extraFiles/img/ugr.png} % opcional: logo
+        \vspace{1cm}
+        
+        {\large \today}
+    \end{center}
+    
+    \restoregeometry
+\end{titlepage}
+
+
+\input{../../../extraFiles/preambulos_oficiales/licencia.tex}  % licencia
+\thispagestyle{empty} % quitar número de página en la portada
+\clearpage
+
+% --- Índice ---
+\tableofcontents
+\thispagestyle{empty} % quitar número de página en la portada
+\clearpage
+
+% --- Contenido Markdown generado por Pandoc ---
+\hypertarget{introducciuxf3n}{%
+\chapter{Introducción}\label{introducciuxf3n}}
+
+Datos del profesor:
+
+\begin{itemize}
+\tightlist
+\item
+  daniels@ugr.es\\
+\item
+  tutorías: X,J: 9:30-12:30, puede ser otro día y otra hora, mandando
+  previamente un correo
+\end{itemize}
+
+\begin{center}
+\textbf{Enlace a la guía docente:} \href{https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/diseno-desarrollo-sistemas-informacion/guia-docente}{https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/diseno-desarrollo-sistemas-informacion/guia-docente}
+\end{center}
+
+\textbf{Definición de sistema de información}: entendemos por SI a aquel
+que mediante una aplicación podemos acceder a ciertos datos tratando
+variables como volumen de datos, restricciones y demás. En el contexto
+de la asignatura, estos son aquellos que utilizan los SGBD (Sistemas
+Gestores de Bases de Datos), este es parte del SI, no es un SI como tal.
+Un SI puede usar varios o bien manejar bases de datos distribuidas.
+Diversas SI pueden usar una misma DB. Ejemplo de un SI es el sistema de
+actas de la UGR.
+
+\input{../../../extraFiles/preambulos_oficiales/referencias.tex}
+
+\end{document}

@@ -1,0 +1,1446 @@
+% ========================
+% estilo.latex mínimo funcional
+% ========================
+
+\documentclass[12pt]{report} % report para capítulos
+
+% ========================
+% Paquetes y comandos extra
+% ========================
+\input{../../../extraFiles/preambulos_oficiales/paquetes.tex}  % si tienes paquetes personalizados
+\input{../../../extraFiles/preambulos_oficiales/comandos.tex}  % comandos LaTeX propios
+\input{../../../extraFiles/preambulos_oficiales/estilos.tex}   % estilos de secciones, etc.
+
+% ========================
+% Configuración índice y listas
+% ========================
+\setlength{\cftbeforesecskip}{5pt}
+\setlength{\headheight}{14pt}  % un poco más que 13.6pt
+
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+
+% Fix para listas de Pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+%=======================
+% fancy with parameters
+%=======================
+%\fancyfoot[L]{\scriptsize\itshape Modelos Computacionales}
+\fancyfoot[L]{\scriptsize\itshape Modelos
+Computacionales} % pie de página izquierdo en cursiva
+
+
+
+% ========================
+% Inicio del documento
+% ========================
+\begin{document}
+
+%\input{portada}
+
+
+%==========================
+% PORTADA: ENTRADA MANUAL
+%==========================
+
+% portada.tex
+\begin{titlepage}
+    \newgeometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm} % márgenes personalizados
+    
+    % Fondo con transparencia
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[opacity=0.15,inner sep=0pt] at (current page.center)
+            {\includegraphics[width=\paperwidth,height=\paperheight]{../../../extraFiles/img/fondo_info.jpg}};
+    \end{tikzpicture}
+
+    % Contenido de la portada
+    \begin{center}
+        \vspace*{2cm}
+        
+        {\Huge \bfseries\scshape Teoría y Práctica \par}
+        \vspace{0.5cm}
+        {\Large \itshape Modelos Computacionales \par}
+        \vspace{0.5cm}
+        {\Large \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
+
+
+        \vfill
+        
+        {\LARGE Autor: \textbf{Ismael Sallami Moreno} \par}
+        \vspace{0.3cm}
+        % {\Large Universidad de Granada \par}
+        
+        \vspace{1cm}
+        \includegraphics[width=0.25\textwidth]{../../../extraFiles/img/ugr.png} % opcional: logo
+        \vspace{1cm}
+        
+        {\large \today}
+    \end{center}
+    
+    \restoregeometry
+\end{titlepage}
+
+
+\input{../../../extraFiles/preambulos_oficiales/licencia.tex}  % licencia
+\thispagestyle{empty} % quitar número de página en la portada
+\clearpage
+
+% --- Índice ---
+\tableofcontents
+\thispagestyle{empty} % quitar número de página en la portada
+\clearpage
+
+% --- Contenido Markdown generado por Pandoc ---
+\part{Teoría}
+
+\hypertarget{introducciuxf3n}{%
+\chapter{Introducción}\label{introducciuxf3n}}
+
+\begin{itemize}
+\tightlist
+\item
+  Profesor: Serafín Moral\\
+\item
+  Correo: smc@decsai.ugr.es\\
+\item
+  El profesor recomienda ir a las tutorías y avisarle antes.\\
+\item
+  J.E. Hopcroft, J.D. Ullman, Introduction to Automata Theory, Languages
+  and Computation. Addison-Wesley (1979): un libro básico, se requiere
+  ciertos conocimientos matemáticos para leerlo.\\
+\item
+  M. Alfonseca, J. Sancho. M. Martínez, Teoría de Autómatas y Lenguajes
+  Formales. Publicaciones R.A.E.C., Textos Cátedra (1997): básico y
+  fácil de entender, está en la biblioteca en español.\\
+\item
+  Los demás son una buena opción también.
+\end{itemize}
+
+La asignatura de Modelos de Computación se centra en el estudio de los
+fundamentos teóricos de la informática, explorando conceptos como
+autómatas, lenguajes formales, gramáticas y máquinas de Turing. Estos
+temas proporcionan las bases para comprender las capacidades y
+limitaciones de los sistemas computacionales, así como para analizar la
+complejidad de los problemas y los algoritmos que los resuelven. Es una
+materia esencial para quienes deseen profundizar en la teoría de la
+computación y su aplicación en el diseño de sistemas eficientes y
+correctos.
+
+\hypertarget{introducciuxf3n-a-la-computaciuxf3n}{%
+\chapter{Introducción a la
+Computación}\label{introducciuxf3n-a-la-computaciuxf3n}}
+
+En el pasado, había teoremas que eran verdad, pero las matemáticas no
+eran capaces de demostrarlo. Turing puso solución a esto exponiendo que
+esta incompletitud de las matemáticas se corregía diciendo que este tipo
+de problemas eran indecidibles. En cuanto a la complejidad de los
+algoritmos, como vimos en algorítmica, podemos distinguir entre p
+(polinómico) y np (polinómico no determinista). Dentro de np,
+encontramos los np completos y los np difíciles (problemas que no puede
+resolver un ordenador convencional). Hoy día lo más importante es la
+complejidad algorítmica. Nadie ha demostrado que p sea distinto de np.
+
+\hypertarget{problema-de-la-parada}{%
+\section{Problema de la parada}\label{problema-de-la-parada}}
+
+Trata el tema de la existencia de que un programa que lea otro programa
+y unos datos y nos diga si este termina o cicla indefinidamente. Un
+programa es lo mismo que los datos, según Turing. En este caso, se pone
+como datos del programa el mismo programa.
+
+\begin{lstlisting}[language=Python]
+If Stops(P, P) GOTO L
+\end{lstlisting}
+
+Este programa lleva a una contradicción, ya que si termina no termina y
+si termina termina, cosa que no es coherente. Por ende, podemos concluir
+que si un programa se llama así mismo, en este caso, llegamos a una
+contradicción. Turing, con esto, llegó a la conclusión de que las
+matemáticas eran incompletas, ya que este programa no existe. La
+explicación es sencilla, basta con decir que es como un espejo, nunca va
+a pasar STOP ya que si eso pasa el programa nunca arrancaría.
+
+\hypertarget{definiciones}{%
+\section{Definiciones}\label{definiciones}}
+
+\begin{definicion}
+\textbf{Alfabeto}: Un alfabeto es un conjunto finito cuyos elementos se denominan símbolos o letras. Si los símbolos tienen varios elementos, se representan entre $\langle \rangle$.  
+\end{definicion}
+
+\begin{definicion}
+\textbf{Palabra}: Una palabra es una sucesión finita de elementos de un alfabeto $A$. Formalmente, $u = a_1 a_2 \ldots a_n$, donde $a_i \in A$ para todo $i = 1, \ldots, n$.  
+\end{definicion}
+
+\begin{definicion}
+\textbf{Conjunto de Palabras}: El conjunto de todas las palabras que se pueden formar sobre un alfabeto $A$ se denota como $A^*$.  
+\end{definicion}
+
+\begin{definicion}
+\textbf{Notación de Palabras}: Las palabras se denotan comúnmente como $u, v, x, y, z, \ldots$.  
+\end{definicion}
+
+\begin{definicion}
+\textbf{Longitud de una Palabra}: Si $u \in A^*$, la longitud de la palabra $u$ es el número de símbolos de $A$ que contiene.  
+- Notación: $\lvert u \rvert$  
+- Si $u = a_1 a_2 \ldots a_n$, entonces $\lvert u \rvert = n$.  
+\end{definicion}
+
+\begin{definicion}
+\textbf{Palabra Vacía}: La palabra vacía es la palabra de longitud cero.  
+\begin{itemize}
+    \item Notación: $\varepsilon$  
+\end{itemize}
+\end{definicion}
+
+\begin{definicion}
+\textbf{Conjunto de Palabras no Vacías}: El conjunto de cadenas sobre un alfabeto $A$ excluyendo la palabra vacía se denota como $A^+$.  
+\end{definicion}
+
+\hypertarget{operaciones-concatenaciuxf3n}{%
+\section{Operaciones:
+Concatenación}\label{operaciones-concatenaciuxf3n}}
+
+\begin{definicion}
+\textbf{Concatenación de Palabras}: Si $u, v \in A^*$, $u = a_1 \ldots a_n$, $v = b_1 \ldots b_m$, se llama concatenación de $u$ y $v$ a la cadena $u.v$ (o simplemente $uv$) dada por $a_1 \ldots a_n b_1 \ldots b_m$.
+\end{definicion}
+
+\begin{ejemplo}
+Si $u = 011$, $v = 1010$, entonces $uv = 0111010$.
+\end{ejemplo}
+
+\textbf{Propiedades}\\
+1. \(\lvert u.v \rvert = \lvert u \rvert + \lvert v \rvert\),
+\(\forall u, v \in A^*\)\\
+2. \textbf{Asociativa}: \(u.(v.w) = (u.v).w\),
+\(\forall u, v, w \in A^*\)\\
+3. \textbf{Elemento Neutro}: \(u.\varepsilon = \varepsilon.u = u\),
+\(\forall u \in A^*\)
+
+\textbf{Estructura de monoide}\\
+La concatenación de palabras sobre un alfabeto \(A\) junto con la
+palabra vacía \(\varepsilon\) forma un monoide.
+
+\begin{definicion}
+\textbf{Monoide}: Un monoide es una estructura algebraica $(M, \cdot, e)$ que consta de un conjunto $M$, una operación binaria asociativa $\cdot : M \times M \to M$, y un elemento neutro $e \in M$ tal que:  
+1. **Asociatividad**: $(a \cdot b) \cdot c = a \cdot (b \cdot c)$, $\forall a, b, c \in M$.  
+2. **Elemento Neutro**: $a \cdot e = e \cdot a = a$, $\forall a \in M$.  
+\end{definicion}
+
+\hypertarget{prefijos-sufijos-y-subcadenas}{%
+\section{Prefijos, Sufijos y
+subcadenas}\label{prefijos-sufijos-y-subcadenas}}
+
+\begin{definicion}
+\textbf{Prefijo}: Si $u \in A^*$, entonces $v$ es un prefijo de $u$ si $\exists z \in A^*$ tal que $vz = u$.  
+Un prefijo $v$ de $u$ se dice propio si $v \neq \varepsilon$ y $v \neq u$.  
+\end{definicion}
+
+\begin{definicion}
+\textbf{Sufijo}: Si $u \in A^*$, entonces $v$ es un sufijo de $u$ si $\exists z \in A^*$ tal que $zv = u$.  
+Un sufijo $v$ de $u$ se dice propio si $v \neq \varepsilon$ y $v \neq u$.  
+\end{definicion}
+
+\begin{definicion}
+\textbf{Subcadena}: Si $u \in A^*$, entonces $v$ es una subcadena de $u$ si $\exists z_1, z_2 \in A^*$ tal que $z_1vz_2 = u$.  
+Una subcadena $v$ de $u$ se dice propia si $v \neq \varepsilon$ y $v \neq u$.  
+\end{definicion}
+
+\hypertarget{iteraciuxf3n-y-palabra-inversa}{%
+\section{Iteración y Palabra
+Inversa}\label{iteraciuxf3n-y-palabra-inversa}}
+
+\begin{definicion}
+\textbf{Iteración de una Cadena}: La iteración n-ésima de una cadena ($u^n$) se define como la concatenación de la cadena consigo misma $n$ veces.  
+Si $u \in A^*$, entonces:  
+\begin{itemize}
+    \item $u^0 = \varepsilon$  
+    \item $u^{i+1} = u^i.u$, $\forall i \geq 0$  
+\end{itemize}
+\end{definicion}
+
+\begin{ejemplo}
+Si $u = 010$, entonces $u^3 = 010010010$.
+\end{ejemplo}
+
+\begin{definicion}
+\textbf{Palabra Inversa}: Si $u = a_1 \ldots a_n \in A^*$, entonces la palabra inversa de $u$ es la cadena $u^{-1} = a_n \ldots a_1 \in A^*$.  
+\end{definicion}
+
+\begin{ejemplo}
+Si $u = 011$, entonces la palabra inversa de $u$ es $u^{-1} = 110$.
+\end{ejemplo}
+
+\hypertarget{lenguajes}{%
+\section{Lenguajes}\label{lenguajes}}
+
+\begin{definicion}
+\textbf{Lenguaje}: Un lenguaje sobre un alfabeto $A$ es un subconjunto del conjunto de las cadenas sobre $A$, es decir, $L \subseteq A^*$.  
+La palabra vacía siempre pertenece a un lenguaje.
+\end{definicion}
+
+\textbf{Notación}\\
+- Lenguajes: \(L, M, N, \ldots\)
+
+\begin{ejemplo}
+    \begin{enumerate}
+        \item $L_1 = \{a, b, \varepsilon\}$  
+        \item $L_2 = \{a^i b^i \mid i = 0, 1, 2, \ldots\}$  
+        \item $L_3 = \{u u^{-1} \mid u \in A^*\}$  
+        \item $L_4 = \{a^{n^2} \mid n = 1, 2, 3, \ldots\}$  
+    \end{enumerate}
+\end{ejemplo}
+
+\hypertarget{ejemplos-adicionales-de-lenguajes}{%
+\subsection{Ejemplos Adicionales de
+Lenguajes}\label{ejemplos-adicionales-de-lenguajes}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(L_5 = \{a^n b^m c^k \mid n, m, k \geq 0\}\): Palabras con cualquier
+  número de \(a\), \(b\), y \(c\) en ese orden.\\
+\item
+  \(L_6 = \{w \in \{0, 1\}^* \mid w \text{ tiene un número par de } 1\}\):
+  Palabras binarias con un número par de unos.\\
+\item
+  \(L_7 = \{a^n b^n c^n \mid n \geq 0\}\): Palabras con el mismo número
+  de \(a\), \(b\), y \(c\) en ese orden.\\
+\item
+  \(L_8 = \{w \in \{0, 1\}^* \mid w \text{ es un palíndromo}\}\):
+  Palabras binarias que son palíndromos.\\
+\item
+  \(L_9 = \{a^{2^n} \mid n \geq 0\}\): Sucesiones de \(a\) cuya longitud
+  es una potencia de dos.
+\end{enumerate}
+
+\hypertarget{conjuntos-numerables}{%
+\subsection{Conjuntos Numerables}\label{conjuntos-numerables}}
+
+Un conjunto se dice numerable si existe una aplicación inyectiva
+(corresponde cada elemento con su imagen) de este conjunto en el
+conjunto de los números naturales, o lo que es lo mismo, se le puede
+asignar un número natural a cada elemento del conjunto de tal manera que
+dos elementos distintos tengan números distintos.
+
+\textbf{Ejemplos}
+
+\begin{ejemplo}
+$A^*$ es siempre numerable. Si $A = \{a_1, \ldots, a_n\}$, entonces puedo asignar un número binario distinto de 0 y de la misma longitud a cada $a_i$ de tal manera que símbolos distintos reciben números distintos, y a cada palabra $b_1 \ldots b_k$ se le asigna el número cuya representación en binario es el que se obtiene sustituyendo cada $b_i$ por su número binario.  
+    - **Ejemplo**: Si $A = \{a, b\}$, podemos asignar $a = 01$, $b = 10$. Entonces, para la palabra $ab$, su representación binaria sería $0110$.  
+\end{ejemplo}
+
+\begin{ejemplo}
+El conjunto de programas bien escritos en C es numerable. Esto se debe a que los programas son cadenas finitas de un alfabeto finito, y por lo tanto, se pueden enumerar de manera similar a las palabras en $A^*$.  
+\end{ejemplo}
+
+El hecho de que en el ordenador se trabaje con float, double, \ldots{}
+es porque como los números reales son conjuntos no numerables, un solo
+número real acabaría con toda la memoria del ordenador. Lo mismo pasa en
+los lenguajes, debemos de restringirnos a los lenguajes con los que
+podamos trabajar. Solo existe un conjunto numerable de programas.
+
+\hypertarget{un-conjunto-no-numerable}{%
+\section{Un Conjunto No Numerable}\label{un-conjunto-no-numerable}}
+
+\begin{ejemplo}
+El conjunto de lenguajes sobre $A^*$ (si $A$ no es vacío) nunca es numerable.  
+\end{ejemplo}
+
+Haremos la demostración por reducción al absurdo.\\
+Si lo fuese, se podría asignar un número natural distinto \(f(L)\) a
+cada lenguaje \(L\).
+
+Sea \(a \in A\).\\
+Definamos el lenguaje \(L\) formado por palabras de la forma \(a^i\) de
+acuerdo a lo siguiente: para cada \(i\) número natural:\\
+- Si este número no es de un lenguaje, entonces \(a^i \in L\).\\
+- Si este número es del lenguaje \(M\) (\(i = f(M)\)):\\
+- Si \(a^i \notin M\), entonces \(a^i \in L\).\\
+- Si \(a^i \in M\), entonces \(a^i \notin L\).
+
+\(L\) no puede tener ningún número asociado. Si fuese \(j = f(L)\),
+entonces la pertenencia de \(a^j\) a \(L\) es contradictoria:\\
+- Si \(a^j \in L\) como \(j = f(L)\), entonces \(a^j \notin L\).\\
+- Si \(a^j \notin L\) y \(j = f(L)\), entonces \(a^j \in L\).
+
+Por lo tanto, el conjunto de lenguajes sobre \(A^*\) no es numerable.
+
+\hypertarget{operaciones-con-lenguajes-concatenaciuxf3n}{%
+\section{Operaciones con Lenguajes:
+Concatenación}\label{operaciones-con-lenguajes-concatenaciuxf3n}}
+
+Dada su condición de conjuntos, además de las operaciones de unión,
+intersección y complementario, los lenguajes también admiten la
+operación de concatenación.
+
+Si \(L_1, L_2\) son dos lenguajes sobre el alfabeto \(A\), la
+concatenación de estos dos lenguajes se define como:
+
+\[
+L_1L_2 = \{u_1u_2 \mid u_1 \in L_1, u_2 \in L_2\}
+\]
+
+\textbf{Ejemplo}\\
+Si \(L_1 = \{0^i1^i \mid i \geq 0\}\) y
+\(L_2 = \{1^j0^j \mid j \geq 0\}\), entonces:
+
+\[
+L_1L_2 = \{0^i1^i1^j0^j \mid i, j \geq 0\}
+\]
+
+\hypertarget{propiedades-de-la-concatenaciuxf3n-de-lenguajes}{%
+\section{Propiedades de la Concatenación de
+Lenguajes}\label{propiedades-de-la-concatenaciuxf3n-de-lenguajes}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Propiedad de Aniquilación}\\
+  \[L \emptyset = \emptyset L = \emptyset\]
+\item
+  \textbf{Elemento Neutro}\\
+  \[\{\varepsilon\}L = L\{\varepsilon\} = L\]
+\item
+  \textbf{Asociatividad}\\
+  \[L_1(L_2L_3) = (L_1L_2)L_3\]
+\end{enumerate}
+
+\hypertarget{iteraciuxf3n-de-lenguajes-y-clausura-de-kleene}{%
+\section{Iteración de Lenguajes y Clausura de
+Kleene}\label{iteraciuxf3n-de-lenguajes-y-clausura-de-kleene}}
+
+La iteración de lenguajes se define de forma recursiva:\\
+- \(L^0 = \{\varepsilon\}\)\\
+- \(L^{i+1} = L^iL\), \(\forall i \geq 0\)
+
+Si \(L\) es un lenguaje sobre el alfabeto \(A\), se definen las
+siguientes clausuras:\\
+- \textbf{Clausura de Kleene}:\\
+\[
+    L^* = \bigcup_{i \geq 0} L^i
+    \]
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Clausura Positiva}:\\
+  \[
+    L^+ = \bigcup_{i \geq 1} L^i
+    \]
+\end{itemize}
+
+\textbf{Ejemplo}\\
+Si \(L = \{a, b\}\):\\
+- \(L^0 = \{\varepsilon\}\)\\
+- \(L^1 = \{a, b\}\)\\
+- \(L^2 = \{aa, ab, ba, bb\}\)\\
+- \(L^* = \{\varepsilon, a, b, aa, ab, ba, bb, \ldots\}\)\\
+- \(L^+ = \{a, b, aa, ab, ba, bb, \ldots\}\)
+
+\hypertarget{operaciones-con-lenguajes-propiedades-de-clausuras}{%
+\section{Operaciones con Lenguajes: Propiedades de
+Clausuras}\label{operaciones-con-lenguajes-propiedades-de-clausuras}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Relación entre Clausura de Kleene y Clausura Positiva}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Si \(\varepsilon \in L\), entonces \(L^+ = L^*\).\\
+  \item
+    Si \(\varepsilon \notin L\), entonces
+    \(L^+ = L^* \setminus \{\varepsilon\}\).
+  \end{itemize}
+\end{enumerate}
+
+\begin{ejemplo}
+Si $L = \{0, 01\}$:  
+    \begin{itemize}
+        \item $L^* =$ Conjunto de palabras sobre $\{0, 1\}$ en las que un $1$ siempre va precedido de un $0$.  
+        \item $L^+ =$ Conjunto de palabras sobre $\{0, 1\}$ en las que un $1$ siempre va precedido de un $0$ y distintas de la palabra vacía.  
+    \end{itemize}
+\end{ejemplo}
+
+\hypertarget{lenguaje-inverso}{%
+\section{Lenguaje Inverso}\label{lenguaje-inverso}}
+
+\begin{definicion}
+\textbf{Lenguaje Inverso}: El lenguaje inverso de un lenguaje $L$ sobre un alfabeto $A$ se define como:
+
+$$
+L^{-1} = \{u \mid u^{-1} \in L\}
+$$
+\end{definicion}
+
+\textbf{Ejemplo}\\
+Si \(L = \{011, 101\}\), entonces:
+
+\[
+L^{-1} = \{110, 101\}
+\]
+
+\textbf{Propiedades}\\
+1. \((L^{-1})^{-1} = L\)\\
+2. \((L_1 \cup L_2)^{-1} = L_1^{-1} \cup L_2^{-1}\)\\
+3. \((L_1L_2)^{-1} = L_2^{-1}L_1^{-1}\)\\
+4. \((L^*)^{-1} = (L^{-1})^*\)
+
+\hypertarget{cabecera-de-un-lenguaje}{%
+\section{Cabecera de un Lenguaje}\label{cabecera-de-un-lenguaje}}
+
+\begin{definicion}
+\textbf{Cabecera de un Lenguaje}: La cabecera de un lenguaje $L$ sobre un alfabeto $A$ se define como:
+
+$$
+\text{CAB}(L) = \{u \mid u \in A^* \text{ y } \exists v \in A^* \text{ tal que } uv \in L\}
+$$
+\end{definicion}
+
+\textbf{Ejemplo}\\
+Si \(L = \{0^i1^i \mid i \geq 0\}\), entonces:
+
+\[
+\text{CAB}(L) = \{0^i1^j \mid i \geq j \geq 0\}
+\]
+
+\hypertarget{homomorfismos-entre-alfabetos}{%
+\section{Homomorfismos entre
+Alfabetos}\label{homomorfismos-entre-alfabetos}}
+
+\begin{definicion}
+Si $A_1$ y $A_2$ son dos alfabetos, una aplicación $h : A_1^* \to A_2^*$ se dice que es un \textbf{homomorfismo} si y solo si:
+
+$$
+h(uv) = h(u)h(v), \quad \forall u, v \in A_1^*
+$$
+\end{definicion}
+
+\hypertarget{consecuencias-de-la-definiciuxf3n}{%
+\subsection{Consecuencias de la
+Definición}\label{consecuencias-de-la-definiciuxf3n}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Imagen de la palabra vacía}\\
+  \[
+   h(\varepsilon) = \varepsilon
+   \]
+\item
+  \textbf{Imagen de una palabra}\\
+  Si \(u = a_1a_2 \ldots a_n \in A_1^*\), entonces: \[
+   h(u) = h(a_1)h(a_2) \ldots h(a_n)
+   \]
+\end{enumerate}
+
+\hypertarget{ejemplo-de-homomorfismo}{%
+\subsection{Ejemplo de Homomorfismo}\label{ejemplo-de-homomorfismo}}
+
+Sea \(A_1 = \{a, b\}\) y \(A_2 = \{0, 1\}\). Definimos
+\(h : A_1^* \to A_2^*\) como:
+
+\begin{itemize}
+\tightlist
+\item
+  \(h(a) = 01\)
+\item
+  \(h(b) = 10\)
+\end{itemize}
+
+Entonces:
+
+\begin{itemize}
+\tightlist
+\item
+  \(h(\varepsilon) = \varepsilon\)
+\item
+  \(h(ab) = h(a)h(b) = 0110\)
+\item
+  \(h(aba) = h(a)h(b)h(a) = 010110\)
+\end{itemize}
+
+\hypertarget{propiedades-de-homomorfismos}{%
+\subsection{Propiedades de
+Homomorfismos}\label{propiedades-de-homomorfismos}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Preservación de la Concatenación}\\
+  \[
+   h(u.v) = h(u)h(v), \quad \forall u, v \in A_1^*
+   \]
+\item
+  \textbf{Homomorfismo Inverso}\\
+  Si \(h : A_1^* \to A_2^*\) es un homomorfismo, entonces: \[
+   h(u^{-1}) = h(u)^{-1}, \quad \forall u \in A_1^*
+   \]
+\item
+  \textbf{Composición de Homomorfismos}\\
+  Si \(h_1 : A_1^* \to A_2^*\) y \(h_2 : A_2^* \to A_3^*\) son
+  homomorfismos, entonces su composición
+  \(h_2 \circ h_1 : A_1^* \to A_3^*\) también es un homomorfismo.
+\end{enumerate}
+
+\textbf{Ejemplo de Composición}\\
+Sea \(h_1 : A_1^* \to A_2^*\) y \(h_2 : A_2^* \to A_3^*\) definidos
+como:
+
+\begin{itemize}
+\tightlist
+\item
+  \(h_1(a) = 01\), \(h_1(b) = 10\)
+\item
+  \(h_2(0) = x\), \(h_2(1) = y\)
+\end{itemize}
+
+Entonces, para \(u = ab \in A_1^*\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(h_1(u) = 0110\)
+\item
+  \(h_2(h_1(u)) = h_2(0110) = xyxy\)
+\end{itemize}
+
+\hypertarget{gramuxe1tica-generativa}{%
+\section{Gramática Generativa}\label{gramuxe1tica-generativa}}
+
+\begin{definicion}
+Una gramática generativa es una cuádrupla $(V, T, P, S)$ donde:
+
+\begin{itemize}
+    \item \textbf{$V$}: Es un alfabeto llamado de variables o símbolos no terminales. Sus elementos se suelen representar con letras mayúsculas.
+    \item \textbf{$T$}: Es un alfabeto llamado de símbolos terminales. Sus elementos se suelen representar con letras minúsculas.
+    \item \textbf{$P$}: Es un conjunto finito de pares $(\alpha, \beta)$, llamados reglas de producción, donde $\alpha, \beta \in (V \cup T)^*$ y $\alpha$ contiene al menos un símbolo de $V$.
+        \begin{itemize}
+            \item El par $(\alpha, \beta)$ se suele representar como $\alpha \to \beta$.
+        \end{itemize}
+    \item \textbf{$S$}: Es un elemento de $V$, llamado símbolo de partida.
+\end{itemize}
+\end{definicion}
+
+Tiene la misma potencia que un lenguaje, por ende, podemos pensar que es
+similar a un lenguaje de programación aunque pensemos que no.
+
+\begin{ejemplo}
+Sea la gramática $G = (V, T, P, S)$ definida como:  
+    \begin{itemize}
+        \item $V = \{S, A\}$  
+        \item $T = \{a, b\}$  
+        \item $P = \{S \to aA, A \to b\}$  
+        \item $S = S$  
+    \end{itemize}
+\end{ejemplo}
+
+Esta gramática genera el lenguaje \(L = \{ab\}\).
+
+\hypertarget{lenguaje-generado-idea-intuitiva}{%
+\section{Lenguaje Generado: Idea
+Intuitiva}\label{lenguaje-generado-idea-intuitiva}}
+
+Una gramática sirve para determinar un lenguaje. Las palabras generadas
+pertenecen al conjunto de símbolos terminales \(T^*\) y se obtienen a
+partir del símbolo inicial efectuando pasos de derivación. Cada paso
+consiste en elegir una parte de la palabra que coincide con la parte
+izquierda de una producción y sustituir esa parte por la derecha de la
+misma producción.
+
+\hypertarget{ejemplo}{%
+\subsection{Ejemplo}\label{ejemplo}}
+
+Dada la gramática:
+
+\begin{itemize}
+\tightlist
+\item
+  \(E \to E + E\)
+\item
+  \(E \to E * E\)
+\item
+  \(E \to (E)\)
+\item
+  \(E \to a\)
+\item
+  \(E \to b\)
+\item
+  \(E \to c\)
+\end{itemize}
+
+Derivación de una palabra:
+
+\[
+E \Rightarrow E * E \Rightarrow (E) * E \Rightarrow (E + E) * E \Rightarrow (a + E) * E \Rightarrow (a + b) * E \Rightarrow (a + b) * b
+\]
+
+\textbf{Palabra Generada}: \((a + b) * b\)
+
+\hypertarget{derivaciuxf3n-y-lenguaje-generado}{%
+\section{Derivación y Lenguaje
+Generado}\label{derivaciuxf3n-y-lenguaje-generado}}
+
+\hypertarget{derivaciuxf3n-en-un-paso}{%
+\subsection{Derivación en un Paso}\label{derivaciuxf3n-en-un-paso}}
+
+Dada una gramática \(G = (V, T, P, S)\) y dos palabras
+\(\alpha, \beta \in (V \cup T)^*\), se dice que \(\beta\) es derivable a
+partir de \(\alpha\) en un paso (\(\alpha \Rightarrow \beta\)) si y solo
+si existe una producción \(\gamma \to \phi\) tal que \(\alpha\) contiene
+a \(\gamma\) como subcadena y \(\beta\) se obtiene sustituyendo
+\(\gamma\) por \(\phi\) en \(\alpha\).
+
+\hypertarget{secuencia-de-derivaciuxf3n}{%
+\subsection{Secuencia de Derivación}\label{secuencia-de-derivaciuxf3n}}
+
+Se dice que \(\beta\) es derivable de \(\alpha\)
+(\(\alpha \overset{*}{\Rightarrow} \beta\)) si y solo si existe una
+sucesión de palabras \(\gamma_1, \ldots, \gamma_n\) (\(n \geq 1\)) tales
+que:
+
+\[
+\alpha = \gamma_1 \Rightarrow \gamma_2 \Rightarrow \ldots \Rightarrow \gamma_n = \beta
+\]
+
+\hypertarget{lenguaje-generado-por-una-gramuxe1tica}{%
+\subsection{Lenguaje Generado por una
+Gramática}\label{lenguaje-generado-por-una-gramuxe1tica}}
+
+El lenguaje generado por una gramática \(G = (V, T, P, S)\) es el
+conjunto de cadenas formadas por símbolos terminales que son derivables
+a partir del símbolo de partida \(S\). Formalmente:
+
+\[
+L(G) = \{u \in T^* \mid S \overset{*}{\Rightarrow} u\}
+\]
+
+\hypertarget{gramuxe1tica-generativa-ejemplo-y-propiedades}{%
+\section{Gramática Generativa: Ejemplo y
+Propiedades}\label{gramuxe1tica-generativa-ejemplo-y-propiedades}}
+
+\hypertarget{gramuxe1tica-definida}{%
+\subsection{Gramática Definida}\label{gramuxe1tica-definida}}
+
+Sea la gramática \(G = (V, T, P, S)\) definida como:\\
+- \(V = \{S, A, B\}\)\\
+- \(T = \{a, b\}\)\\
+-
+\(P = \{S \to aB, S \to bA, A \to a, A \to aS, A \to bAA, B \to b, B \to bS, B \to aBB\}\)\\
+- \(S = S\)
+
+\hypertarget{lenguaje-generado}{%
+\subsection{Lenguaje Generado}\label{lenguaje-generado}}
+
+Esta gramática genera el lenguaje:
+
+\[
+L(G) = \{u \mid u \in \{a, b\}^+ \text{ y } N_a(u) = N_b(u)\}
+\]
+
+donde \(N_a(u)\) y \(N_b(u)\) son el número de apariciones de los
+símbolos \(a\) y \(b\) en \(u\), respectivamente.
+
+\hypertarget{interpretaciuxf3n-de-las-variables}{%
+\subsection{Interpretación de las
+Variables}\label{interpretaciuxf3n-de-las-variables}}
+
+\begin{itemize}
+\tightlist
+\item
+  \(A\): Representa palabras con una \(a\) de más.\\
+\item
+  \(B\): Representa palabras con una \(b\) de más.\\
+\item
+  \(S\): Representa palabras con igual número de \(a\) que de \(b\).
+\end{itemize}
+
+\hypertarget{propiedades-del-lenguaje-generado}{%
+\subsection{Propiedades del Lenguaje
+Generado}\label{propiedades-del-lenguaje-generado}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Todas las palabras generadas tienen el mismo número de \(a\)
+  que de \(b\).}\\
+\item
+  \textbf{Cualquier palabra con el mismo número de \(a\) que de \(b\)
+  puede ser generada.}
+\end{enumerate}
+
+\hypertarget{demostraciuxf3n-de-la-primera-propiedad}{%
+\subsection{Demostración de la Primera
+Propiedad}\label{demostraciuxf3n-de-la-primera-propiedad}}
+
+Consideremos \(N_{a,A}(\alpha)\) (número de \(a\) más número de \(A\)) y
+\(N_{b,B}(\alpha)\) (número de \(b\) más número de \(B\)). Para una
+derivación \(S \overset{*}{\Rightarrow} u\), tenemos:
+
+\begin{itemize}
+\tightlist
+\item
+  Al inicio: \(N_{a,A}(S) = N_{b,B}(S) = 0\).\\
+\item
+  Al aplicar cualquier regla \(\alpha_1 \to \alpha_2\), si
+  \(N_{a,A}(\alpha_1) = N_{b,B}(\alpha_1)\), entonces
+  \(N_{a,A}(\alpha_2) = N_{b,B}(\alpha_2)\).
+\end{itemize}
+
+Por lo tanto, al final de la derivación, \(N_{a,A}(u) = N_{b,B}(u)\).
+Como \(u\) no contiene variables, \(N_a(u) = N_b(u)\), lo que demuestra
+la propiedad.
+
+\hypertarget{algoritmo-de-generaciuxf3n}{%
+\subsection{Algoritmo de Generación}\label{algoritmo-de-generaciuxf3n}}
+
+La generación de palabras se realiza por la izquierda, un símbolo a la
+vez:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Para generar una \(a\):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Si \(a\) es el último símbolo, aplicar \(A \to a\).\\
+  \item
+    Si no es el último símbolo:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Si la primera variable es \(S\), aplicar \(S \to aB\).\\
+    \item
+      Si la primera variable es \(B\), aplicar \(B \to aBB\).\\
+    \item
+      Si la primera variable es \(A\):
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Si hay más variables, aplicar \(A \to a\).\\
+      \item
+        Si no hay más, aplicar \(A \to aS\).
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Para generar una \(b\):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Si \(b\) es el último símbolo, aplicar \(B \to b\).\\
+  \item
+    Si no es el último símbolo:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Si la primera variable es \(S\), aplicar \(S \to bA\).\\
+    \item
+      Si la primera variable es \(A\), aplicar \(A \to bAA\).\\
+    \item
+      Si la primera variable es \(B\):
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Si hay más variables, aplicar \(B \to b\).\\
+      \item
+        Si no hay más, aplicar \(B \to bS\).
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{condiciones-de-garantuxeda}{%
+\subsection{Condiciones de Garantía}\label{condiciones-de-garantuxeda}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Las palabras generadas tienen primero símbolos terminales y después
+  variables.\\
+\item
+  Se genera un símbolo de la palabra en cada paso de derivación.\\
+\item
+  Las variables que aparecen en la palabra pueden ser:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Una cadena de \(A\) (si se han generado más \(b\) que \(a\)).\\
+  \item
+    Una cadena de \(B\) (si se han generado más \(a\) que \(b\)).\\
+  \item
+    Una \(S\) (si se han generado el mismo número de \(a\) y \(b\)).
+  \end{itemize}
+\end{enumerate}
+
+Antes de generar el último símbolo, las variables serán:\\
+- Una \(A\) si se necesita generar una \(a\).\\
+- Una \(B\) si se necesita generar una \(b\).
+
+En este caso, se aplica la primera opción para generar los símbolos, y
+la palabra queda generada.
+
+\hypertarget{gramuxe1tica-alternativa-para-el-mismo-lenguaje}{%
+\section{Gramática Alternativa para el Mismo
+Lenguaje}\label{gramuxe1tica-alternativa-para-el-mismo-lenguaje}}
+
+\hypertarget{gramuxe1tica-que-incluye-la-palabra-vacuxeda}{%
+\subsection{Gramática que Incluye la Palabra
+Vacía}\label{gramuxe1tica-que-incluye-la-palabra-vacuxeda}}
+
+Esta gramática genera todas las palabras con el mismo número de símbolos
+\(a\) que \(b\), incluyendo la palabra vacía:
+
+\begin{itemize}
+\tightlist
+\item
+  \(S \to aSbS\)
+\item
+  \(S \to bSaS\)
+\item
+  \(S \to \varepsilon\)
+\end{itemize}
+
+\hypertarget{gramuxe1tica-que-excluye-la-palabra-vacuxeda}{%
+\subsection{Gramática que Excluye la Palabra
+Vacía}\label{gramuxe1tica-que-excluye-la-palabra-vacuxeda}}
+
+Si no se desea incluir la palabra vacía, se puede usar la siguiente
+gramática:
+
+\begin{itemize}
+\tightlist
+\item
+  \(S \to SS\)
+\item
+  \(S \to ab\)
+\item
+  \(S \to ba\)
+\item
+  \(S \to aSb\)
+\item
+  \(S \to bSa\)
+\end{itemize}
+
+\hypertarget{gramuxe1tica-generativa-ejemplo-adicional}{%
+\section{Gramática Generativa: Ejemplo
+Adicional}\label{gramuxe1tica-generativa-ejemplo-adicional}}
+
+\hypertarget{gramuxe1tica-definida-1}{%
+\subsection{Gramática Definida}\label{gramuxe1tica-definida-1}}
+
+Sea la gramática \(G = (V, T, P, S)\) definida como:\\
+- \(V = \{S, X, Y\}\)\\
+- \(T = \{a, b, c\}\)\\
+-
+\(P = \{  S \to abc,  S \to aXbc,  Xb \to bX,  Xc \to Ybcc,  bY \to Yb,  aY \to aaX,  aY \to aa \}\)\\
+- \(S = S\)
+
+\hypertarget{lenguaje-generado-1}{%
+\subsection{Lenguaje Generado}\label{lenguaje-generado-1}}
+
+Esta gramática genera el lenguaje:
+
+\[
+L(G) = \{a^n b^n c^n \mid n \geq 1\}
+\]
+
+\hypertarget{proceso-de-derivaciuxf3n}{%
+\subsection{Proceso de Derivación}\label{proceso-de-derivaciuxf3n}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Caso Base}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(S \to abc\): Genera la palabra \(abc\) para \(n = 1\).
+  \end{itemize}
+\item
+  \textbf{Caso General}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(S \to aXbc\): Introduce la variable \(X\) para generar palabras de
+    mayor longitud.
+  \end{itemize}
+
+  A partir de \(aXbc\), el proceso es el siguiente:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(aXbc \Rightarrow abXc \Rightarrow abYbcc \Rightarrow aYbbcc\)
+  \end{itemize}
+
+  En este punto, se tienen dos opciones:
+
+  \begin{itemize}
+  \item
+    Aplicar \(aY \to aa\):\\
+    \[
+    aYbbcc \Rightarrow aabbcc
+    \] Genera la palabra \(a^2b^2c^2\).
+  \item
+    Aplicar \(aY \to aaX\):\\
+    \[
+    aYbbcc \Rightarrow aaXbbcc
+    \] Introduce nuevamente la variable \(X\), permitiendo repetir el
+    proceso para generar palabras más largas.
+  \end{itemize}
+\item
+  \textbf{Iteración del Proceso}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    En cada iteración, la variable \(X\) se mueve hacia la frontera
+    \(b-c\), donde se añade una \(b\) y una \(c\), y \(X\) se transforma
+    en \(Y\).\\
+  \item
+    La variable \(Y\) se mueve hacia la frontera \(a-b\), donde se elige
+    entre añadir una \(a\) o una \(aX\), permitiendo continuar el
+    proceso.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{ejemplo-de-derivaciuxf3n-para-n-3}{%
+\subsection{\texorpdfstring{Ejemplo de Derivación para
+\(n = 3\)}{Ejemplo de Derivación para n = 3}}\label{ejemplo-de-derivaciuxf3n-para-n-3}}
+
+\[
+S \Rightarrow aXbc \Rightarrow abXc \Rightarrow abYbcc \Rightarrow aYbbcc \Rightarrow aaXbbcc \Rightarrow aabXbcc 
+\] \[
+\Rightarrow aabYbbccc \Rightarrow aaYbbbccc \Rightarrow aaaXbbbccc \Rightarrow aaabbbbccc
+\]
+
+\hypertarget{propiedades-del-lenguaje-generado-1}{%
+\subsection{Propiedades del Lenguaje
+Generado}\label{propiedades-del-lenguaje-generado-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Todas las palabras generadas tienen la forma
+  \(a^n b^n c^n\).}\\
+\item
+  \textbf{El proceso de derivación asegura que el número de \(a\),
+  \(b\), y \(c\) es siempre igual.}\\
+\item
+  \textbf{El lenguaje generado es un subconjunto de \(\{a, b, c\}^*\)
+  con la restricción de igualdad en las cantidades de \(a\), \(b\), y
+  \(c\).}
+\end{enumerate}
+
+\chapter{Relaciones de Ejercicios}
+
+\hypertarget{relaciuxf3n-tema-1-modelos-de-computaciuxf3n}{%
+\section{Relación Tema 1: Modelos de
+Computación}\label{relaciuxf3n-tema-1-modelos-de-computaciuxf3n}}
+
+\begin{ejercicio}
+Descripción de lenguajes generados por gramáticas.
+\end{ejercicio}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Describir el lenguaje generado por la siguiente gramática: \[
+   S \to XYX \\
+   \] \[
+   X \to aX \ | \ bX \ | \ \epsilon \\
+   \] \[
+   Y \to bbb
+   \]
+
+  \begin{solucion}[Ejercicio 1.a]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen la forma:
+
+   \begin{enumerate}
+       \item Una secuencia de cero o más a o b (generada por X).
+       \item Seguido por bbb (generado por Y).
+       \item Seguido nuevamente por una secuencia de cero o más a o b (generada por X).
+   \end{enumerate}
+
+   Por lo tanto, el lenguaje generado es:
+
+   $$
+   L = \{ w_1 \ bbb \ w_2 \ | \ w_1, w_2 \in \{a, b\}^* \}
+   $$
+
+   Donde $w_1$ y $w_2$ son cadenas arbitrarias (incluyendo la cadena vacía) formadas por los símbolos a y b. Otra forma es demostrándolo mediante doble inclusión (manera más matemática).
+
+   \end{solucion}
+\item
+  Describir el lenguaje generado por la siguiente gramática: \[
+   S \to aX 
+   \] \[
+   X \to aX \ | \ bX \ | \ \epsilon
+   \]
+
+  \begin{solucion}[Ejercicio 1.b]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen la forma:
+
+   \begin{enumerate}
+       \item Una a inicial (generada por $S$).
+       \item Seguido por una secuencia de cero o más $a$ o $b$ (generada por $X$).
+   \end{enumerate}
+
+   Por lo tanto, el lenguaje generado es:
+
+   $$
+   L = \{ a \ w \ | \ w \in \{a, b\}^* \}
+   $$
+
+   Donde $w$ es una cadena arbitraria (incluyendo la cadena vacía) formada por los símbolos a y b. Otra forma de demostrarlo es mediante doble inclusión.
+
+   \end{solucion}
+\item
+  Describir el lenguaje generado por la siguiente gramática: \[
+   S \to XaXaX \\
+   \] \[
+   X \to aX \ | \ bX \ | \ \epsilon
+   \]
+
+  \begin{solucion}[Ejercicio 1.c]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen la forma:
+
+   \begin{enumerate}
+       \item Una secuencia de cero o más $a$ o $b$ (generada por $X$).
+       \item Seguido por una $a$.
+       \item Seguido nuevamente por una secuencia de cero o más $a$ o $b$ (generada por $X$).
+       \item Seguido por otra $a$.
+       \item Seguido nuevamente por una secuencia de cero o más $a$ o $b$ (generada por $X$).
+   \end{enumerate}
+
+   Por lo tanto, el lenguaje generado es:
+
+   $$
+   L = \{ w_1 \ a \ w_2 \ a \ w_3  \ | \ w_1, w_2, w_3 \in \{a, b\}^* \}
+   $$
+
+   Donde $w_1$, $w_2$ y $w_3$ son cadenas arbitrarias (incluyendo la cadena vacía) formadas por los símbolos a y b. Otra forma de demostrarlo es mediante doble inclusión.
+
+   \end{solucion}
+\item
+  Describir el lenguaje generado por la siguiente gramática: \[
+   S \to SS \ | \ XaXaX \ | \ \epsilon \\
+   \] \[
+   X \to bX \ | \ \epsilon
+   \]
+
+  \begin{solucion}[Ejercicio 1.d]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen las siguientes características:
+
+   \begin{enumerate}
+       \item La gramática permite generar la cadena vacía ($\epsilon$).
+       \item También permite generar cadenas de la forma $w_1 \ a \ w_2 \ a \ w_3 $, donde $w_1$, $w_2$, y $w_3$ son cadenas formadas únicamente por el símbolo $b$ (generadas por $X$).
+       \item Además, permite concatenar arbitrariamente las cadenas generadas en los puntos anteriores debido a la regla $S \to SS$.
+   \end{enumerate}
+
+   Por lo tanto, el lenguaje generado es:
+
+   $$
+   L = \{ \epsilon \} \cup \{ w_1 \ a \ w_2 \ a \ w_3  \ | \ w_1, w_2, w_3 \in \{b\}^* \} \cup \{ uv \ | \ u, v \in L \}
+   $$
+
+   Donde $w_1$, $w_2$, y $w_3$ son cadenas arbitrarias (incluyendo la cadena vacía) formadas por el símbolo $b$, y $u, v$ son cadenas generadas por la gramática. Otra forma de demostrarlo es mediante doble inclusión.
+
+   \textbf{Demostración por doble inclusión:}
+
+   \begin{itemize}
+       \item \textbf{Primera inclusión ($L \subseteq R$):}
+
+           Sea $w \in L$. Según las reglas de la gramática, $w$ puede ser:
+           \begin{itemize}
+               \item La cadena vacía ($\epsilon$), que claramente pertenece a $R$.
+               \item Una cadena de la forma $w_1 \ a \ w_2 \ a \ w_3 \ a$, donde $w_1, w_2, w_3 \in \{b\}^*$. Estas cadenas también pertenecen a $R$ por definición.
+               \item Una concatenación de cadenas en $L$ (por la regla $S \to SS$). Si $u, v \in L$, entonces $uv \in R$ porque $R$ es cerrado bajo concatenación.
+           \end{itemize}
+
+           Por lo tanto, $w \in R$, y se cumple que $L \subseteq R$.
+
+       \item \textbf{Segunda inclusión ($R \subseteq L$):}
+
+           Sea $w \in R$. Según la definición de $R$, $w$ puede ser:
+           \begin{itemize}
+               \item La cadena vacía ($\epsilon$), que claramente puede ser generada por la gramática.
+               \item Una cadena de la forma $w_1 \ a \ w_2 \ a \ w_3 \ a$, donde $w_1, w_2, w_3 \in \{b\}^*$. Estas cadenas pueden ser generadas por la regla $S \to XaXaX$ y $X \to bX \ | \ \epsilon$.
+               \item Una concatenación de cadenas en $R$. Si $u, v \in R$, entonces $uv \in L$ porque la regla $S \to SS$ permite concatenar cadenas generadas por la gramática.
+           \end{itemize}
+
+           Por lo tanto, $w \in L$, y se cumple que $R \subseteq L$.
+   \end{itemize}
+
+   Dado que $L \subseteq R$ y $R \subseteq L$, se concluye que $L = R$.
+
+   \end{solucion}
+\end{enumerate}
+
+\begin{ejercicio}
+Determinar lenguajes.
+\end{ejercicio}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Dada la gramática \(G = (\{S, A\}, \{a, b\}, P, S)\) donde:\\
+  \[P = \{S \to abAS, \ abA \to baab, \ S \to a, \ A \to b\}\]
+  Determinar el lenguaje que genera.
+
+  \begin{solucion}[Ejercicio 2.a]
+
+       Cada vez que aplicamos $S \to abAS$ generamos un bloque $abA$ adicional y dejamos un $S$ al final para poder repetir la expansión. Tras $m$ aplicaciones de $S \to abAS$ obtenemos la forma $(abA)^mS$.
+
+       Cada bloque $abA$ puede convertirse o bien en $baab$ aplicando la regla $abA \to baab$, o bien en $abb$ aplicando primero $A \to b$ (porque $abA \Rightarrow abb$). Finalmente $S \to a$. Por tanto, cada bloque se convierte en $baab$ o en $abb$ y al final queda una $a$.
+
+       De aquí se deduce la forma general de las cadenas generadas:
+
+       $$
+       L(G) = \{ xa \ | \ x \in \{baab, abb\}^* \},
+       $$
+
+       es decir, en notación de expresiones regulares:
+
+       $$
+       L(G) = (baab \ | \ abb)^* a.
+       $$
+
+       \textbf{Prueba formal (dos sentidos)}
+
+       \begin{enumerate}
+           \item $L(G) \subseteq (baab \ | \ abb)^* a$
+
+               Tras $m$ aplicaciones de $S \to abAS$ se tiene $(abA)^mS$ (prueba por inducción sobre $m$: base $m=0$ trivial; paso: si $S \Rightarrow (abA)^kS$ entonces aplicando $S \to abAS$ al $S$ final obtenemos $(abA)^{k+1}S$).
+
+               Para cada uno de los $m$ factores $abA$ podemos aplicar $abA \to baab$ (obteniendo $baab$) o bien aplicar $A \to b$ (obteniendo $abb$). Por tanto, la parte antes de la última $S$ es una concatenación de $baab$ y $abb$.
+
+               Finalmente $S \to a$. Por tanto, toda cadena derivable tiene la forma (bloques $baab$ o $abb$) seguida de $a$.
+
+           \item $(baab \ | \ abb)^* a \subseteq L(G)$
+
+               Sea $w = b_1b_2\cdots b_ma$ con cada $b_i \in \{baab, abb\}$.
+
+               Expandimos $S$ $m$ veces con $S \to abAS$ para obtener $(abA)^mS$.
+
+               Para cada $i$: si $b_i = baab$ aplicamos la regla $abA \to baab$ sobre el $i$-ésimo factor; si $b_i = abb$ aplicamos $A \to b$ en ese factor (convirtiendo $abA$ en $abb$).
+
+               Finalmente aplicamos $S \to a$. Eso produce exactamente $w$. Por tanto, cualquier cadena del lado derecho puede derivarse.
+       \end{enumerate}
+
+   \end{solucion}
+\item
+  Sea la gramática \(G = (V, T, P, S)\) donde:\\
+  \begin{align*}
+   V &= \{\langle numero \rangle, \langle digito \rangle\} \\
+   T &= \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\} \\
+   S &= \langle numero \rangle \\
+   \end{align*}
+
+  \begin{itemize}
+       \item $\langle numero \rangle \to \langle numero \rangle \langle digito \rangle$
+       \item $\langle numero \rangle \to \langle digito \rangle$
+       \item $\langle digito \rangle \to 0 \ | \ 1 \ | \ 2 \ | \ 3 \ | \ 4 \ | \ 5 \ | \ 6 \ | \ 7 \ | \ 8 \ | \ 9$
+   \end{itemize}
+
+  Determinar el lenguaje que genera.
+
+  \begin{solucion}[Ejercicio 2.b]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen las siguientes características:
+
+   \begin{enumerate}
+       \item La gramática permite generar cadenas formadas por uno o más dígitos, ya que:
+           \begin{itemize}
+               \item $\langle numero \rangle \to \langle numero \rangle \langle digito \rangle$ permite construir cadenas de longitud arbitraria añadiendo dígitos.
+               \item $\langle numero \rangle \to \langle digito \rangle$ permite terminar la construcción con un único dígito.
+           \end{itemize}
+       \item Cada dígito es uno de los símbolos terminales $\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}$, según la regla $\langle digito \rangle \to 0 \ | \ 1 \ | \ \dots \ | \ 9$.
+   \end{enumerate}
+
+   Por lo tanto, el lenguaje generado es el conjunto de todas las cadenas no vacías de dígitos, es decir:
+
+   $$
+   L = \{ w \ | \ w \in \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}^+ \}.
+   $$
+
+   En notación de expresiones regulares, el lenguaje puede escribirse como:
+
+   $$
+   L = [0-9]^+.
+   $$
+
+   \end{solucion}
+\item
+  Sea la gramática \(G = (\{A, S\}, \{a, b\}, S, P)\) donde las reglas
+  de producción son:\\
+
+  \begin{itemize}
+       \item $S \to aS$
+       \item $S \to aA$
+       \item $A \to bA$
+       \item $A \to b$
+   \end{itemize}
+
+  Determinar el lenguaje generado por la gramática.
+
+  \begin{solucion}[Ejercicio 2.c]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen las siguientes características:
+
+   \begin{enumerate}
+       \item La gramática permite generar cadenas que comienzan con uno o más símbolos $a$, ya que:
+           \begin{itemize}
+               \item $S \to aS$ permite añadir un número arbitrario de $a$ al principio.
+               \item $S \to aA$ permite terminar la secuencia de $a$ y pasar a generar $b$.
+           \end{itemize}
+       \item Después de la secuencia de $a$, la gramática genera uno o más símbolos $b$, ya que:
+           \begin{itemize}
+               \item $A \to bA$ permite añadir un número arbitrario de $b$.
+               \item $A \to b$ permite terminar la secuencia de $b$.
+           \end{itemize}
+   \end{enumerate}
+
+   Por lo tanto, el lenguaje generado es el conjunto de todas las cadenas que consisten en una secuencia no vacía de $a$ seguida de una secuencia no vacía de $b$, es decir:
+
+   $$
+   L = \{ a^n b^m \ | \ n \geq 1, m \geq 1 \}.
+   $$
+
+   En notación de expresiones regulares, el lenguaje puede escribirse como:
+
+   $$
+   L = a^+b^+.
+   $$
+
+   \end{solucion}
+\end{enumerate}
+
+\begin{ejercicio}
+Gramáticas de tipo 2 y tipo 3. 
+
+\begin{enumerate}[label=\alph*)]
+    \item Encontrar una gramática de tipo 2 para el lenguaje de palabras en las que el número de $b$ no es tres.  
+    Determinar si el lenguaje generado es de tipo 3.
+
+    \item Encontrar una gramática de tipo 2 para el lenguaje de palabras que tienen 2 ó 3 $b$.  
+    Determinar si el lenguaje generado es de tipo 3.
+\end{enumerate}
+
+\end{ejercicio}
+
+\begin{ejercicio}
+Gramáticas para lenguajes específicos.
+
+\begin{enumerate}[label=\alph*)]
+    \item Encontrar una gramática de tipo 2 para el lenguaje de palabras que no contienen la subcadena $ab$.  
+    Determinar si el lenguaje generado es de tipo 3.
+
+    \item Encontrar una gramática de tipo 2 para el lenguaje de palabras que no contienen la subcadena $baa$.  
+    Determinar si el lenguaje generado es de tipo 3.
+\end{enumerate}
+
+\end{ejercicio}
+
+\begin{ejercicio}
+Lenguaje con más $a$ que $b$. Encontrar una gramática libre de contexto que genere el lenguaje sobre el alfabeto $\{a, b\}$ de las palabras que tienen más $a$ que $b$ (al menos una más).
+\end{ejercicio}
+
+\begin{ejercicio}
+Gramáticas regulares o libres de contexto.
+
+\begin{enumerate}[label=\alph*)]
+    \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ no contiene dos símbolos $b$ consecutivos.
+
+    \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ contiene dos símbolos $b$ consecutivos.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+Propiedades de lenguajes.
+
+\begin{enumerate}[label=\alph*)]
+    \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ contiene un número impar de símbolos $a$.
+
+    \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ no contiene el mismo número de símbolos $a$ que de símbolos $b$.
+\end{enumerate}
+
+\end{ejercicio}
+
+\begin{ejercicio}
+Gramáticas para palabras con restricciones.
+
+\begin{enumerate}[label=\alph*)]
+    \item Dado el alfabeto $A = \{a, b\}$, determinar si es posible encontrar una gramática libre de contexto que genere las palabras de longitud impar, y mayor o igual que 3, tales que la primera letra coincida con la letra central de la palabra.
+
+    \item Dado el alfabeto $A = \{a, b\}$, determinar si es posible encontrar una gramática libre de contexto que genere las palabras de longitud par, y mayor o igual que 2, tales que las dos letras centrales coincidan.
+\end{enumerate}
+
+\end{ejercicio}
+
+\begin{ejercicio}
+Regularidad de un lenguaje.
+Determinar si el lenguaje generado por la gramática  
+$S \to SS$  
+$S \to XXX$  
+$X \to aX \ | \ Xa \ | \ b$  
+es regular. Justificar la respuesta.
+\end{ejercicio}
+
+\begin{ejercicio}
+Numerabilidad de un lenguaje.
+Dado un lenguaje $L$ sobre un alfabeto $A$, ¿es $L^*$ siempre numerable? ¿nunca lo es? ¿o puede serlo unas veces sí y otras, no? Proporcionar ejemplos en este último caso.
+\end{ejercicio}
+
+\begin{ejercicio}
+Propiedades de $L^*$. Dado un lenguaje $L$ sobre un alfabeto $A$, caracterizar cuándo $L^* = L$. Es decir, dar un conjunto de propiedades sobre $L$ de manera que $L$ cumpla esas propiedades si y sólo si $L^* = L$.
+\end{ejercicio}
+
+\begin{ejercicio}
+Igualdad de homomorfismos. Dados dos homomorfismos $f : A^* \to B^*$, $g : A^* \to B^*$, se dice que son iguales si $f(x) = g(x)$, $\forall x \in A^*$. ¿Existe un procedimiento algorítmico para comprobar si dos homomorfismos son iguales?
+\end{ejercicio}
+
+\begin{ejercicio}
+Lenguajes $S_i$ y $C_i$. 
+Sea $L \subseteq A^*$ un lenguaje arbitrario. Sea $C_0 = L$ y definamos los lenguajes $S_i$ y $C_i$, para todo $i \geq 1$, por $S_i = C_{i-1}^+$ y $C_i = S_i^*$. 
+
+\begin{enumerate}[label=\alph*)]
+    \item ¿Es $S_1$ siempre, nunca o a veces igual a $C_2$? Justificar la respuesta.  
+
+    \item Demostrar que $S_2 = C_3$, cualquiera que sea $L$. (Pista: Demostrar que $C_2$ es cerrado para la concatenación).
+\end{enumerate}
+
+\end{ejercicio}
+
+\begin{ejercicio}
+Numerabilidad de lenguajes finitos. Demostrar que, para todo alfabeto $A$, el conjunto de los lenguajes finitos sobre dicho alfabeto es numerable.
+\end{ejercicio}
+
+\input{../../../extraFiles/preambulos_oficiales/referencias.tex}
+
+\end{document}
