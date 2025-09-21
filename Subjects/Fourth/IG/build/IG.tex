@@ -1,0 +1,433 @@
+% ========================
+% estilo.latex mínimo funcional
+% ========================
+
+\documentclass[12pt]{report} % report para capítulos
+
+% ========================
+% Paquetes y comandos extra
+% ========================
+\input{../../../extraFiles/preambulos_oficiales/paquetes.tex}  % si tienes paquetes personalizados
+\input{../../../extraFiles/preambulos_oficiales/comandos.tex}  % comandos LaTeX propios
+\input{../../../extraFiles/preambulos_oficiales/estilos.tex}   % estilos de secciones, etc.
+
+% ========================
+% Configuración índice y listas
+% ========================
+\setlength{\cftbeforesecskip}{5pt}
+\setlength{\headheight}{14pt}  % un poco más que 13.6pt
+
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+
+% Fix para listas de Pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+%=======================
+% fancy with parameters
+%=======================
+%\fancyfoot[L]{\scriptsize\itshape Informática Gráfica}
+\fancyfoot[L]{\scriptsize\itshape Informática
+Gráfica} % pie de página izquierdo en cursiva
+
+
+
+% ========================
+% Inicio del documento
+% ========================
+\begin{document}
+
+%\input{portada}
+
+
+%==========================
+% PORTADA: ENTRADA MANUAL
+%==========================
+
+% portada.tex
+\begin{titlepage}
+    \newgeometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm} % márgenes personalizados
+    
+    % Fondo con transparencia
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[opacity=0.15,inner sep=0pt] at (current page.center)
+            {\includegraphics[width=\paperwidth,height=\paperheight]{../../../extraFiles/img/fondo_info.jpg}};
+    \end{tikzpicture}
+
+    % Contenido de la portada
+    \begin{center}
+        \vspace*{2cm}
+        
+        {\Huge \bfseries\scshape Teoría y Práctica \par}
+        \vspace{0.5cm}
+        {\Large \itshape Informática Gráfica \par}
+        \vspace{0.5cm}
+        {\Large \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
+
+
+        \vfill
+        
+        {\LARGE Autor: \textbf{Ismael Sallami Moreno} \par}
+        \vspace{0.3cm}
+        % {\Large Universidad de Granada \par}
+        
+        \vspace{1cm}
+        \includegraphics[width=0.25\textwidth]{../../../extraFiles/img/ugr.png} % opcional: logo
+        \vspace{1cm}
+        
+        {\large \today}
+    \end{center}
+    
+    \restoregeometry
+\end{titlepage}
+
+
+\input{../../../extraFiles/preambulos_oficiales/licencia.tex}  % licencia
+\thispagestyle{empty} % quitar número de página en la portada
+\clearpage
+
+% --- Índice ---
+\tableofcontents
+\thispagestyle{empty} % quitar número de página en la portada
+\clearpage
+
+% --- Contenido Markdown generado por Pandoc ---
+\part{Teoría}
+
+\hypertarget{introducciuxf3n}{%
+\chapter{Introducción}\label{introducciuxf3n}}
+
+Para acceder a los materiales debemos de entrar con la cuenta go.
+
+La asignatura de Informática Gráfica tiene como objetivo principal
+proporcionar los fundamentos teóricos y prácticos necesarios para el
+desarrollo de aplicaciones gráficas interactivas. A lo largo del curso,
+se estudian conceptos clave como la representación y modelado de
+escenas, técnicas de visualización 2D y 3D, y el uso de APIs gráficas
+modernas. Además, se exploran algoritmos esenciales como la
+rasterización y el ray-tracing, así como su aplicación en contextos como
+videojuegos, simuladores y producción de efectos visuales.
+
+\hypertarget{aplicaciones-gruxe1ficas-interactivas-y-visualizaciuxf3n}{%
+\chapter{Aplicaciones gráficas interactivas y
+visualización}\label{aplicaciones-gruxe1ficas-interactivas-y-visualizaciuxf3n}}
+
+\hypertarget{aplicaciones-gruxe1ficas-interactivas-y-proceso-de-visualizaciuxf3n-2d-y-3d}{%
+\section{Aplicaciones gráficas interactivas y proceso de visualización
+2D y
+3D}\label{aplicaciones-gruxe1ficas-interactivas-y-proceso-de-visualizaciuxf3n-2d-y-3d}}
+
+Un programa gráfico se define como un programa que constituye un sistema
+computacional. Pueden ser interactivos o no interactivos. Los elementos
+esenciales de una AG son los modelos digitales y las imágenes o vídeos
+digitales que se usan.\\
+Destacamos los eventos de entrada que son las acciones del usuario
+mediante las cuales se envía información a la aplicación. Las
+aplicaciones gráficas siempre se estructuran como un bucle de gestión de
+eventos, podemos mencionar los siguientes pasos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Esperar al evento y recuperar datos.\\
+\item
+  Procesar el evento actualizando el modelo y los parámetros de
+  visualización.\\
+\item
+  Visualizar el modelo actualizado con los nuevos parámetros.
+\end{enumerate}
+
+Las aplicaciones gráficas pueden dividirse en dos tipos:
+
+\begin{itemize}
+\tightlist
+\item
+  2D: los objetos se definen en planos, pueden incluir algunos 3D
+  (sombras). Ejemplos de ello puede ser un diagramas de barras,
+  videojuegos 2D. En este proceso de visualización se produce una imagen
+  a partir de un modelo y parámetros como entradas.\\
+\item
+  3D: se sitúan en un espacio tridimensional, incluyendo texturas,
+  materiales, fuentes de luz,\ldots{} A la vez, pueden incluir figuras
+  2D. Ejemplos: videojuegos, simuladores,\ldots{} En este proceso de
+  visualización se usa como entrada el modelo de escena y unos
+  parámetros.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    En el modelo de escena distinguimos dos partes:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Modelo geométrico: conjunto de primitivas (polígonos, planos) que
+      definen los objetos a visualizar.\\
+    \item
+      Modelo de aspecto: parámetros que definen el aspecto de los
+      objetos.\\
+    \end{itemize}
+  \item
+    En los parámetros de visualización encontramos:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Cámara virtual\\
+    \item
+      Viewport
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{rasterizaciuxf3n-versus-ray-tracing}{%
+\section{Rasterización versus
+ray-tracing}\label{rasterizaciuxf3n-versus-ray-tracing}}
+
+En este apartado vamos a ver algoritmos de rasterización.
+
+\begin{lstlisting}
+1: Inicializar el color de todos los pixels al color de fondo.
+2: for cada primitiva P del conjunto E do
+3:     S ← conjunto de pixels de la imagen I cubiertos por P
+4:     for cada pixel q de S do
+5:         c ← color de la primitiva P en el pixel q
+6:         Asignar el color c al pixel q en I
+7:     end
+8: end
+\end{lstlisting}
+
+Este pseudocódigo describe el proceso básico de rasterización, que es
+una técnica utilizada para convertir primitivas geométricas (como
+polígonos) en una imagen pixelada. El algoritmo recorre cada primitiva
+del conjunto de entrada, determina qué píxeles de la imagen están
+cubiertos por ella, calcula el color correspondiente para cada píxel y
+lo asigna a la imagen final. Es un enfoque eficiente para generar
+imágenes en aplicaciones gráficas interactivas.
+
+\begin{lstlisting}
+1: Inicializar el color de todos los pixels
+2: for cada pixel q de la imagen I a producir do
+3:     T ← subconjunto de primitivas de E que cubren q
+4:     for cada primitiva P del conjunto T do
+5:         c ← color de la primitiva P en el pixel q
+6:         Asignar color c al pixel q en I
+7:     end
+8: end
+\end{lstlisting}
+
+Este pseudocódigo describe el proceso básico del algoritmo de
+Ray-tracing. A diferencia de la rasterización, aquí se invierte el orden
+de los bucles: se recorre cada píxel de la imagen y se determina qué
+primitivas geométricas lo afectan. Luego, se calcula el color del píxel
+en función de las primitivas que lo cubren. Este enfoque permite generar
+imágenes con mayor realismo, aunque suele ser más costoso
+computacionalmente.
+
+En el algoritmo de Ray-tracing podemos optimizarlo de manera que la
+eficiencia sea O(log n) mediante la indexación espacial.
+
+\hypertarget{rasterizaciuxf3n}{%
+\subsection{Rasterización}\label{rasterizaciuxf3n}}
+
+Se lleva a cabo en GPUs. Es preferible para aplicaciones interactivas y
+para la simulación de videojuegos, realidad virtual.
+
+\hypertarget{ray-tracing}{%
+\subsection{Ray-tracing}\label{ray-tracing}}
+
+Respecto a la técnica de Ray-tracing:
+
+\begin{itemize}
+\tightlist
+\item
+  Suele ser más lento, pero consigue resultados más realistas.\\
+\item
+  Preferibles para elementos no interactivos. En la actualidad se usa
+  para la producción de animaciones y efectos especiales.\\
+\item
+  Se ha usado en algunos videojuegos, pero requiere elementos
+  computacionales de alto rendimiento.
+\end{itemize}
+
+\hypertarget{el-cauce-gruxe1fico-en-rasterizaciuxf3n}{%
+\subsection{El cauce gráfico en
+rasterización}\label{el-cauce-gruxe1fico-en-rasterizaciuxf3n}}
+
+Cauce gráfico se define como el conjunto de etapas de cálculo para la
+generación de imágenes. Las entradas se definen como primitivas. Un
+vértice es un punto 2D o 3D. EL cauce escribe en el framebuffer.
+
+Hay dos pasos importantes:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Transformación: partiendo de las coordenadas se calculan las
+  coordenadas de proyección.\\
+\item
+  Sombreado: cálculo del color de un pixel.\\
+\item
+  Hay otras como recortado de polígonos.
+\end{enumerate}
+
+Cada primitiva se sitúa en un plano imaginario (plano de visión) situado
+entre el observador y la escena. La proyección puede ser perspectiva o
+paralela. En la rasterización, para cada primitiva se calcula que
+píxeles tienen su centro cubierto por ella. En el sombreado se usan los
+atributos de la primitiva para asignar color al píxel.
+
+\hypertarget{etapas-del-cauce-gruxe1fico}{%
+\subsubsection{Etapas del cauce
+gráfico}\label{etapas-del-cauce-gruxe1fico}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Procesado de vértices
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Transformación: los vértices de cada primitiva se transforman para
+    encontrar su proyección en el plano.\\
+  \item
+    Teselación y nivel de detalle: transformaciones avanzadas.\\
+  \end{enumerate}
+\item
+  Post-procesado de vértices y montaje de primitivas\\
+\item
+  Rasterización\\
+\item
+  Sombreado
+\end{enumerate}
+
+\incluirimagen[scale=0.7]{media/cauce1.png}{Esquema del cauce}
+
+\hypertarget{apis-y-motores-gruxe1ficos}{%
+\section{APIs y motores gráficos}\label{apis-y-motores-gruxe1ficos}}
+
+\hypertarget{apis-para-rasterizaciuxf3n-ray-tracing-y-gpgpu}{%
+\subsection{APIs para Rasterización, Ray-tracing y
+GPGPU}\label{apis-para-rasterizaciuxf3n-ray-tracing-y-gpgpu}}
+
+APIs de rasterización: conjunto de funciones para visualización 2D/3D,
+clases, interfaces. Son definidas sin ánimo de lucro, se puede dejar
+compilado en código intermedio.
+
+APIs gráficas: estas proporcionan portabilidad y acceso simultáneo. La
+escritura en el framebuffer sigue siendo lenta, esto se soluciona usando
+GPU y enviando información de alto nivel a través del bus del sistema.
+
+Como ejemplos podemos mencionar OpenGL, Vulkan, Metal, \ldots{}
+
+Las APIs modernas son más eficientes aunque tienen ciertas desventajas
+como más complejidad y menos portabilidad.
+
+\part{Prácticas}
+
+\hypertarget{introducciuxf3n-1}{%
+\chapter{Introducción}\label{introducciuxf3n-1}}
+
+Las prácticas de la asignatura se llevaran acabo con \emph{Godot}.
+
+Un motor de juego es una herramienta compleja y difícil de presentar en
+pocas palabras. Aquí hay una rápida sinopsis, que eres libre de
+reutilizar si necesitas una breve reseña sobre Godot Engine:
+
+Godot Engine es un motor de videojuegos repleto de características,
+multiplataforma para crear juegos 2D y 3D por medio de una interfaz
+unificada. Provee un conjunto exhaustivo de herramientas comunes, para
+que los usuarios puedan enfocarse en crear juegos sin tener que
+reinventar la rueda. Los juegos pueden exportarse en un sólo clic a
+numerosas plataformas, incluyendo las principales plataformas de
+escritorio (Linux, macOS, Windows), plataformas móviles (Android, iOS),
+así como plataformas y consolas basadas en la web.
+
+Godot es completamente gratis y de código abierto bajo la permisiva
+licencia MIT (Licencia del Instituto Tecnológico de Massachusetts). Sin
+condiciones, sin regalías, nada. Los juegos de los usuarios son suyos,
+hasta la última línea de código del motor. El desarrollo de Godot es
+totalmente independiente y dirigido por la comunidad, lo que permite a
+los usuarios ayudar a dar forma a su motor para que coincida con sus
+expectativas. Está respaldado por la Godot Foundation (Fundación Godot)
+sin fines de lucro.\footnote{\url{https://docs.godotengine.org/es/4.x/}}
+
+Para la \emph{descarga} de Godot debemos de hacerlo mediante el enlace
+de la web oficial \footnote{\url{https://godotengine.org/es/}}.
+
+\nota{Nota}{El equipo de Godot no puede proporcionar una exportación de consola de código abierto debido a los términos de licencia impuestos por los fabricantes de consolas. Independientemente del motor que use, lanzar juegos en consolas siempre es mucho trabajo. Puedes leer más sobre eso en el Soporte de consolas en Godot.}
+
+Se recomienda encarecidamente leer el \emph{started} de Godot
+\footnote{\url{https://docs.godotengine.org/es/4.x/getting_started}}.
+
+\hypertarget{aprendiendo-a-programar-con-godot}{%
+\section{Aprendiendo a programar con
+Godot}\label{aprendiendo-a-programar-con-godot}}
+
+En Godot, es posible escribir código utilizando los lenguajes de
+programación GDScript y C\#. Para aprender los lenguajes relacionados,
+podemos realizar el curso de manera interactiva que nos
+ofrecen.\footnote{\url{https://gdquest.github.io/learn-gdscript}}
+
+Ejemplo de GDScript comparando con otros lenguajes que ya conocemos
+
+\begin{lstlisting}
+# GDScript
+func take_damage(amount):
+    health -= amount
+    if health < 0:
+        die()
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+# Python
+def take_damage(amount):
+    health -= amount
+    if health < 0:
+        die()
+\end{lstlisting}
+
+\begin{lstlisting}
+# Javascript
+function takeDamage(amount) {
+    health -= amount;
+    if (health < 0) {
+        die();
+    }
+}
+\end{lstlisting}
+
+Además, en el curso se nos ofrece la posibilidad de ir practicando como
+vemos en la figura \ref{fig:media/course1.png}.
+
+\incluirimagen{media/course1.png}{Imagen de práctica}
+
+\hypertarget{conceptos-clave-de-godot}{%
+\section{Conceptos clave de Godot}\label{conceptos-clave-de-godot}}
+
+Todos los motores de videojuegos giran alrededor de abstracciones que
+usas para crear tus aplicaciones. En Godot, un juego es un árbol de
+nodos agrupados en escenas. Los nodos pueden comunicarse entre sí
+mediante señales.
+
+\begin{itemize}
+    \item \textbf{Escenas:} En Godot, puedes dividir tu juego en escenas reutilizables, como personajes, niveles o menús. Estas escenas pueden combinarse y anidarse para formar estructuras más complejas.
+
+    \item \textbf{Nodos:} Las escenas están compuestas por nodos, que son los bloques de construcción básicos de tu juego. Godot ofrece una amplia biblioteca de nodos base que puedes combinar y extender.
+
+    \item \textbf{El árbol de escenas:} El árbol de escenas organiza todas las escenas y nodos de tu juego. Representa la jerarquía y estructura general de tu proyecto.
+
+    \item \textbf{Señales:} Los nodos emiten señales para comunicar eventos, como colisiones o interacciones. Esto permite una comunicación flexible entre nodos sin acoplamiento directo.
+
+    \item \textbf{Sumario:} Los nodos, escenas, el árbol de escenas y las señales son los conceptos fundamentales de Godot. Estos elementos te permitirán estructurar y desarrollar tus juegos de manera eficiente.
+\end{itemize}
+
+\input{../../../extraFiles/preambulos_oficiales/referencias.tex}
+
+\end{document}
