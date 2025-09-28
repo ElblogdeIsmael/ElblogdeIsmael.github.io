@@ -226,12 +226,14 @@ $$
 L_1L_2 = \{u_1u_2 \mid u_1 \in L_1, u_2 \in L_2\}
 $$
 
-**Ejemplo**  
+\begin{ejemplo}
 Si $L_1 = \{0^i1^i \mid i \geq 0\}$ y $L_2 = \{1^j0^j \mid j \geq 0\}$, entonces:
 
 $$
 L_1L_2 = \{0^i1^i1^j0^j \mid i, j \geq 0\}
 $$
+\end{ejemplo}
+
 
 ## Propiedades de la Concatenación de Lenguajes
 
@@ -263,13 +265,16 @@ Si $L$ es un lenguaje sobre el alfabeto $A$, se definen las siguientes clausuras
     L^+ = \bigcup_{i \geq 1} L^i
     $$
 
-**Ejemplo**  
+\begin{ejemplo}
 Si $L = \{a, b\}$:  
-- $L^0 = \{\varepsilon\}$  
-- $L^1 = \{a, b\}$  
-- $L^2 = \{aa, ab, ba, bb\}$  
-- $L^* = \{\varepsilon, a, b, aa, ab, ba, bb, \ldots\}$  
-- $L^+ = \{a, b, aa, ab, ba, bb, \ldots\}$  
+\begin{itemize}
+    \item $L^0 = \{\varepsilon\}$  
+    \item $L^1 = \{a, b\}$  
+    \item $L^2 = \{aa, ab, ba, bb\}$  
+    \item $L^* = \{\varepsilon, a, b, aa, ab, ba, bb, \ldots\}$  
+    \item $L^+ = \{a, b, aa, ab, ba, bb, \ldots\}$  
+\end{itemize}
+\end{ejemplo}
 
 ## Operaciones con Lenguajes: Propiedades de Clausuras
 
@@ -296,12 +301,13 @@ L^{-1} = \{u \mid u^{-1} \in L\}
 $$
 \end{definicion}
 
-**Ejemplo**  
+\begin{ejemplo}
 Si $L = \{011, 101\}$, entonces:
 
 $$
 L^{-1} = \{110, 101\}
 $$
+\end{ejemplo}
 
 **Propiedades**  
 
@@ -319,12 +325,15 @@ $$
 $$
 \end{definicion}
 
-**Ejemplo**  
+
+\begin{ejemplo}
 Si $L = \{0^i1^i \mid i \geq 0\}$, entonces:
 
 $$
 \text{CAB}(L) = \{0^i1^j \mid i \geq j \geq 0\}
 $$
+\end{ejemplo}
+
 
 ## Homomorfismos entre Alfabetos
 
@@ -334,6 +343,8 @@ Si $A_1$ y $A_2$ son dos alfabetos, una aplicación $h : A_1^* \to A_2^*$ se dic
 $$
 h(uv) = h(u)h(v), \quad \forall u, v \in A_1^*
 $$
+
+La transformación de uv debe de ser igual a la concatenación de la transformación de u y la transformación de v.
 \end{definicion}
 
 ### Consecuencias de la Definición
@@ -637,7 +648,7 @@ $$
    - En cada iteración, la variable $X$ se mueve hacia la frontera $b-c$, donde se añade una $b$ y una $c$, y $X$ se transforma en $Y$.  
    - La variable $Y$ se mueve hacia la frontera $a-b$, donde se elige entre añadir una $a$ o una $aX$, permitiendo continuar el proceso.  
 
-### Ejemplo de Derivación para $n = 3$
+\underline{Ejemplo de Derivación para $n = 3$}
 
 $$
 S \Rightarrow aXbc \Rightarrow abXc \Rightarrow abYbcc \Rightarrow aYbbcc \Rightarrow aaXbbcc \Rightarrow aabXbcc 
@@ -646,8 +657,300 @@ $$
 \Rightarrow aabYbbccc \Rightarrow aaYbbbccc \Rightarrow aaaXbbbccc \Rightarrow aaabbbbccc
 $$
 
-### Propiedades del Lenguaje Generado
+\underline{Propiedades del Lenguaje Generado}
 
 1. **Todas las palabras generadas tienen la forma $a^n b^n c^n$.**  
 2. **El proceso de derivación asegura que el número de $a$, $b$, y $c$ es siempre igual.**  
 3. **El lenguaje generado es un subconjunto de $\{a, b, c\}^*$ con la restricción de igualdad en las cantidades de $a$, $b$, y $c$.**
+
+<!-- Podemos encontrar gramáticas independientes del lenguaje y dependientes del lenguaje.
+
+\begin{definicion}[Gramáticas Dependientes del Lenguaje]
+Son aquellas gramáticas que están diseñadas específicamente para generar un lenguaje particular. Estas gramáticas no pueden ser reutilizadas para otros lenguajes sin modificaciones significativas.
+\end{definicion}
+
+\begin{definicion}[Gramáticas Independientes del Lenguaje]
+Son aquellas gramáticas que pueden ser utilizadas para generar múltiples lenguajes con estructuras similares. Estas gramáticas suelen ser más generales y flexibles, permitiendo adaptaciones para diferentes lenguajes con cambios mínimos.
+\end{definicion} -->
+
+Podemos encontrar gramáticas independientes del contexto y dependientes del contexto.
+
+\begin{definicion}[Gramática Independiente del Contexto]
+Una gramática es independiente del contexto si todas sus reglas de producción tienen la forma $\alpha \to \beta$, donde $\alpha \in V$ y $\beta \in (V \cup T)^*$. Es decir, el lado izquierdo de cada regla de producción está compuesto por un único símbolo no terminal.
+\end{definicion}
+
+\begin{definicion}[Gramática Dependiente del Contexto]
+Una gramática es dependiente del contexto si sus reglas de producción tienen la forma $\gamma \to \beta$, donde $\gamma, \beta \in (V \cup T)^*$ y $\gamma$ contiene al menos un símbolo no terminal. En este caso, $\gamma$ puede depender del contexto en el que aparece para ser sustituido por $\beta$.
+\end{definicion}
+
+
+Cuando se inventa un lenguaje, se está inventando un lenguaje independiente del contexto, es lo más lógico naturalmente.
+
+<!-- Chomsky diapo 67 -->
+
+### Jerarquía de Chomsky
+
+- Tipo 0: Cualquier gramática, sin restricciones. *Lenguajes recursivamente enumerables*.
+
+- Tipo 1: Si todas las producciones tienen la forma 
+
+    $$
+    \alpha_1A\alpha_2 \rightarrow \alpha_1\beta\alpha_2\
+    $$
+
+    donde $\alpha_1, \alpha_2, \beta \in (V \cup T)^*,\; A \in V \;\; \text{y} \;\; \beta \neq \varepsilon$, en cuyo caso S no aparece a la derecha de las reglas. Es lo que se conoce como lenguaje dependientes del contexto.
+
+    Ejemplo es esta regla de producción: 
+    $$
+    Xc \rightarrow Ybcc 
+    $$
+
+    Donde se ve que para que se de esta regla de producción debe de haber un c antes y después, se puede pensar que es como un invariante.
+
+- Tipo 2: Si cualquier producción tiene la forma  
+
+    $$
+    A \to \alpha
+    $$  
+
+    donde $A \in V$, $\alpha \in (V \cup T)^*$.  
+
+    *Lenguajes Independientes del Contexto*  
+
+- Tipo 3: Si toda regla tiene la forma  
+
+    $$
+    A \to uB \quad \text{o} \quad A \to u
+    $$  
+
+    donde $u \in T^*$ y $A, B \in V$.  
+
+    *Conjuntos Regulares*  
+
+\begin{center}
+\begin{tikzpicture}
+    % Draw the ellipses
+    \draw[fill=magenta!50] (0,0) ellipse (4cm and 2.5cm);
+    \draw[fill=yellow!50] (0,0) ellipse (3cm and 2cm);
+    \draw[fill=red!50] (0,0) ellipse (2cm and 1.5cm);
+    \draw[fill=green!50] (0,0) ellipse (1cm and 1cm);
+
+    % Add labels inside the ellipses
+    \node at (0,0) {\(\mathcal{L}_3\)};
+    \node at (0.7,0.5) {\(\mathcal{L}_2\)};
+    \node at (1.5,1) {\(\mathcal{L}_1\)};
+    \node at (2.5,1.5) {\(\mathcal{L}_0\)};
+
+    % Add the inclusion relation above the ellipses
+    \node[above] at (0,2.8) {\(\mathcal{L}_3 \subseteq \mathcal{L}_2 \subseteq \mathcal{L}_1 \subseteq \mathcal{L}_0\)};
+\end{tikzpicture}
+\end{center}
+
+Como podemos observar la familia $\mathcal{L}_0$ es la más amplia, destacando que la $\mathcal{L}_2$ es la de independientes y la de $\mathcal{L}_3$ de los regulares.
+
+\begin{ejercicioresuelto}
+Demostrar que la gramática \( G = (\{S\}, \{a, b\}, \{S \to \varepsilon, S \to aSb\}, S) \) genera el lenguaje \( L = \{a^i b^i \mid i = 0, 1, 2, \ldots\} \).
+
+\begin{demostracion}
+La gramática \( G \) tiene dos reglas de producción: \( S \to \varepsilon \) y \( S \to aSb \). Procedemos a demostrar que genera el lenguaje \( L \) siguiendo los pasos de derivación.
+
+\begin{itemize}
+    \item \textbf{Caso Base:}  
+    Si aplicamos la regla \( S \to \varepsilon \), obtenemos la palabra vacía \( \varepsilon \), que pertenece al lenguaje \( L \) para \( i = 0 \).
+
+    \item \textbf{Caso General:}  
+    Si aplicamos la regla \( S \to aSb \), obtenemos una palabra de la forma \( aSb \). Si continuamos aplicando esta regla, podemos generar palabras de la forma:
+    \[
+    S \Rightarrow aSb \Rightarrow aaSbb \Rightarrow aaaSbbb \Rightarrow \ldots
+    \]
+    Finalmente, al aplicar \( S \to \varepsilon \), obtenemos:
+    \[
+    S \Rightarrow aSb \Rightarrow aaSbb \Rightarrow aaaSbbb \Rightarrow \ldots \Rightarrow a^i b^i
+    \]
+    donde \( i \geq 0 \). Por lo tanto, todas las palabras de la forma \( a^i b^i \) pertenecen al lenguaje \( L \).
+
+    \item \textbf{Unicidad:}  
+    Observemos que cada vez que aplicamos la regla \( S \to aSb \), se añade exactamente un símbolo \( a \) al principio y un símbolo \( b \) al final de la palabra. Esto asegura que el número de \( a \)'s y \( b \)'s siempre sea igual. Además, la única forma de terminar la derivación es aplicando \( S \to \varepsilon \), lo que garantiza que no se generen palabras adicionales. Por lo tanto, las únicas palabras generadas por \( G \) son las de la forma \( a^i b^i \), con \( i \geq 0 \).
+\end{itemize}
+
+\textbf{Conclusión:} La gramática \( G \) genera exactamente el lenguaje \( L = \{a^i b^i \mid i = 0, 1, 2, \ldots\} \).
+\end{demostracion}
+\end{ejercicioresuelto}
+
+\begin{ejercicioresuelto}
+Encontrar el lenguaje generado por la gramática \( G = (\{S, A, B\}, \{a, b\}, P, S) \), donde \( P \) contiene las siguientes producciones:
+
+\[
+\begin{aligned}
+    S &\to aAB \\
+    B &\to a \\
+    Ab &\to SBb \\
+    Aa &\to SaB \\
+    B &\to SA \\
+    B &\to ab
+\end{aligned}
+\]
+
+\textbf{Resultado:} El lenguaje generado por esta gramática es el \textbf{lenguaje vacío}. Esto se debe a que nunca se puede llegar a generar una palabra compuesta únicamente por símbolos terminales. 
+
+\begin{demostracion}
+Analicemos las producciones de la gramática:
+
+
+\begin{itemize}
+    \item La producción inicial \( S \to aAB \) introduce las variables \( A \) y \( B \).
+    \item Cada vez que se sustituye \( A \), aparece \( S \) nuevamente, como se observa en las producciones \( Ab \to SBb \) y \( Aa \to SaB \).
+    \item De manera similar, cada vez que se sustituye \( S \), aparece \( A \), como se observa en la producción inicial \( S \to aAB \).
+    \item Por lo tanto, las variables \( S \) y \( A \) se refieren mutuamente de forma cíclica, sin posibilidad de reducirse a símbolos terminales.
+    \item Aunque \( B \) tiene producciones que incluyen símbolos terminales (\( B \to a \) y \( B \to ab \)), estas producciones no pueden ser utilizadas sin que \( S \) o \( A \) aparezcan nuevamente en la derivación.
+\end{itemize}
+
+Por lo tanto, no es posible generar ninguna palabra que consista únicamente en símbolos terminales, lo que implica que el lenguaje generado por la gramática es el lenguaje vacío (\( \emptyset \)).
+\end{demostracion}
+\end{ejercicioresuelto}
+
+\begin{ejercicioresuelto}
+Encontrar una gramática independiente del contexto para generar cada uno de los siguientes lenguajes:
+
+\begin{enumerate}
+    \item \( L = \{a^i b^j \mid i, j \in \mathbb{N}, i \leq j\} \)
+
+    \begin{solucion}
+    La gramática es:
+    \[
+    G = (\{S\}, \{a, b\}, P, S)
+    \]
+    donde \( P \) contiene las siguientes producciones:
+    \[
+    \begin{aligned}
+        S &\to Sb \mid aSb \mid \varepsilon
+    \end{aligned}
+    \]
+    \end{solucion}
+
+    \item \( L = \{a^i b^j a^j b^i \mid i, j \in \mathbb{N}\} \)
+
+    \begin{solucion}
+    La gramática es:
+    \[
+    G = (\{S\}, \{a, b\}, P, S)
+    \]
+    donde \( P \) contiene las siguientes producciones:
+    \[
+    \begin{aligned}
+        S &\to aSb \mid T \\
+        T &\to bTa \mid \varepsilon
+    \end{aligned}
+    \]
+    \end{solucion}
+
+    \item \( L = \{a^i b^i a^j b^j \mid i, j \in \mathbb{N}\} \)
+
+    \begin{solucion}
+    La gramática es:
+    \[
+    G = (\{S_1\}, \{a, b\}, P, S)
+    \]
+    donde \( P \) contiene las siguientes producciones:
+    \[
+    \begin{aligned}
+        S_1 &\to aS_1b \\
+        S_1 &\to \varepsilon
+    \end{aligned}
+    \]
+    El lenguaje $L$ se puede generar añadiendo $S \rightarrow S_1S_1$
+    \end{solucion}
+
+    \item \( L = \{a^i b^j a^i b^j \mid i, j \in \mathbb{N}\} \)
+
+    \begin{solucion}
+    No es posible construir una gramática independiente del contexto para este lenguaje, ya que requiere contar dos cantidades \( i \) y \( j \) de forma independiente y luego repetirlas en el mismo orden, lo cual excede las capacidades de las gramáticas independientes del contexto.
+    \end{solucion}
+
+    \item \( L = \{a^i b^i \mid i \in \mathbb{N}\} \cup \{b^i a^i \mid i \in \mathbb{N}\} \)
+
+    \begin{solucion}
+    Para no repetir la definición de gramática, se va a obviar.
+
+    Las reglas de producción serían:
+    \begin{align*}
+    S_1 \rightarrow aS_1b \\
+    S_1 \rightarrow \varepsilon
+    \end{align*}
+
+    \end{solucion}
+
+    \item \( L = \{uu^{-1} \mid u \in \{a, b\}^*\} \)
+
+    \begin{solucion}
+    La gramática es:
+    \[
+    G = (\{S\}, \{a, b\}, P, S)
+    \]
+    donde \( P \) contiene las siguientes producciones:
+    \[
+    \begin{aligned}
+        S &\to aSa \mid bSb \mid \varepsilon
+    \end{aligned}
+    \]
+    \end{solucion}
+
+    \item \( L = \{a^i b^j c^{i+j} \mid i, j \in \mathbb{N}\} \)
+
+    \begin{solucion}
+    La gramática es:
+    \[
+    G = (\{S\}, \{a, b, c\}, P, S)
+    \]
+    donde \( P \) contiene las siguientes producciones:
+    \[
+    \begin{aligned}
+        S &\to aSc \mid bSc \mid \varepsilon
+    \end{aligned}
+    \]
+    \end{solucion}
+\end{enumerate}
+\end{ejercicioresuelto}
+
+\begin{ejercicioresuelto}
+Determinar si la gramática \( G = (\{S, A, B\}, \{a, b, c, d\}, P, S) \), donde \( P \) es el conjunto de reglas de producción:
+
+\[
+\begin{aligned}
+    S &\to AB \\
+    A &\to Ab \\
+    A &\to a \\
+    B &\to cB \\
+    B &\to d
+\end{aligned}
+\]
+
+genera un lenguaje de tipo 3.
+
+\textbf{Solución:} Esta gramática genera el lenguaje:
+
+\[
+L = \{ab^i c^j d \mid i, j \in \mathbb{N}\}
+\]
+
+Este lenguaje se puede generar mediante la siguiente gramática:
+
+\[
+\begin{aligned}
+    S &\to aB \\
+    B &\to bB \mid C \\
+    C &\to cC \mid d
+\end{aligned}
+\]
+
+Como esta gramática cumple las restricciones de las gramáticas de tipo 3 (producciones de la forma \( A \to uB \) o \( A \to u \), donde \( u \in T^* \) y \( A, B \in V \)), el lenguaje generado es de tipo 3.
+\end{ejercicioresuelto}
+
+
+
+
+
+
+
+
+
