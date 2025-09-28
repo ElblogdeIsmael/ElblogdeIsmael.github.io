@@ -69,3 +69,8 @@ Todos los motores de videojuegos giran alrededor de abstracciones que usas para 
     \item \textbf{Sumario:} Los nodos, escenas, el árbol de escenas y las señales son los conceptos fundamentales de Godot. Estos elementos te permitirán estructurar y desarrollar tus juegos de manera eficiente.
 \end{itemize}
 
+# Práctica 1
+
+\dosimagenes{media/p1-diferentes-tonalidades.png}{Diferentes tonalidades}{media/p1-piramide.png}{Pirámide}{tonalidades}{piramide}
+
+\incluirimagen{media/p1-final.png}{Resultado final}
