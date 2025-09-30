@@ -40,12 +40,11 @@ $(TEX): $(SRC) $(MEDIA) $(TEX_TEMPLATE) $(METADATA)
 
 clean:
 	@echo "Borrando lo generado en build/ y demás archivos temporales..."
-	rm -f build/*.aux build/*.log build/*.out build/*.toc
-	rm -f build/*.run.xml build/*.bcf build/*.blg build/*.bbl
-	rm -f build/*.fdb_latexmk build/*.fls build/*.synctex.gz
-	rm -f _minted.*
-	rm -f build/*.lot build/*.lof build/*.bcf*
+	find build -type f ! -name '*.pdf' ! -name '*.tex' -exec rm -f {} +
+	find . -maxdepth 1 -type f ! -name 'Makefile' ! -name '*.pdf' ! -name '*.tex' -exec rm -f {} +
+	rm -rf _minted*
 
-clean-all: clean
-	@echo "Borrando TODO"
-	rm -f $(PDF) $(TEX)
+
+# clean-all: clean
+# 	@echo "Borrando TODO"
+# 	rm -f $(PDF) $(TEX)
