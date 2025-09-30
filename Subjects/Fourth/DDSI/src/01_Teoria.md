@@ -9,7 +9,7 @@ Datos del profesor:
 \textbf{Enlace a la guía docente:} \href{https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/diseno-desarrollo-sistemas-informacion/guia-docente}{https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/diseno-desarrollo-sistemas-informacion/guia-docente}
 \end{center}
 
-# Tema 1: Introducción a los Sistemas de Información
+# Introducción a los Sistemas de Información
 
 \begin{definicion}[Definición de sistema de información]
 Entendemos por SI a aquel que mediante una aplicación podemos acceder a ciertos datos tratando variables como volumen de datos, restricciones y demás. En el contexto de la asignatura, estos son aquellos que utilizan los SGBD (Sistemas Gestores de Bases de Datos), este es parte del SI, no es un SI como tal. Un SI puede usar varios o bien manejar bases de datos distribuidas. Diversas SI pueden usar una misma DB. Ejemplo de un SI es el sistema de actas de la UGR.
@@ -145,3 +145,32 @@ Sistema integrado de gestión que permite integrar los distintos flujos de infor
 \item Cuando los requisitos van más allá de retocar algún parámetro, se pueden escribir nuevas funcionalidades usando el lenguaje ABAP® (Advanced Business Application Programming).
 \end{itemize}
 \end{definicion}
+
+# Desarrollo de Sistemas de Información
+
+Las tareas a realizar son las mismas que para otro Sistema Informático: Planificacion, Análisis, Diseño, Implementación, Pruebas, Instalación, Mantenimiento. Se usan, asimismo, las mismas herramientas UML que en cualquier otro proceso de software a las que se van a añadir otras.
+
+\subsubsection*{Componentes de SI}
+
+- Agentes externos: son elementos externos al sistema y que interactúan con el mismo. Pueden ser personas o sistemas informáticos, incluyendo otros SI. La interacción con el sistema de estos agentes consiste en enviar y recibir datos y eventos indicativos de acciones a realizar por el SI (o bien que informan de un estado). En la fase de análisis se identifica a a los agentes externos y sus roles de interacción. 
+- Datos: componen un papel central en SI. Encontramos:
+  - Aspectos Estructurales.
+  - Restricciones que nos indican configuraciones de los datos almacenados.
+Ambos aspectos pueden recogerse en la fase de Análisis, gracias al Análisis Conjunto guiado por las funciones. 
+- Software.
+- Hardware.
+
+
+En la fase de diseño se usan los modelos de datos conceptuales y lógicos adecuados al SI para tratar las estructuras y las restricciones.
+
+En la fase de Análisis se sirve de los flujos de datos para describir el sistema desde el punto de vista de almacenamiento, procesamientos, adquisición y publicación de datos.
+
+Se usan diagramas de flujos de datos (DFD) o el equivalente a diagrama de actividades de UML\footnote{Más rico semánticamente y que permite integrar flujos de datos y de control.}.
+
+Se deben de tener en cuenta ciertos aspectos relacionados con el ciclo de vida en el desarrollo SI:
+
+- Adquisición de datos: fuente de datos y métodos de adquisición.
+- Uso de datos en el SI: flujos de datos, transformación y almacenado a través del SI e interacción con el exterior.
+- Archivado de datos: cuando y como eliminar datos del sistema.
+
+diapo 8 acabar hemos dado hasta la 11

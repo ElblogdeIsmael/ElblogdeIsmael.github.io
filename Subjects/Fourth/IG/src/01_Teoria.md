@@ -386,6 +386,7 @@ $$
 I_{21} = \{0, 2, 1, 1, 2, 3, 1, 3, 4, 2, 5, 3, 3, 5, 6, 3, 6, 7, 3, 7, 4\}
 $$
 
+\nota{Nota}{Debemos de tener en cuenta que en la primera tabla se referencia una sola vez, mientras que en la tabla de triángulos se referencia dos veces.}
 
 ### Atributos de vértices
 
@@ -507,3 +508,5 @@ Coords. textura           & PackedVector2Array          & Vector2             \\
 \includecode[gdstyle]{code/sesion2/mallas3D/materialconcoloresdevertices.gd}{Material con colores de vértices en 3D}
 \includecode[gdstyle]{code/sesion2/mallas3D/materialconcolordeplano.gd}{Material con color de plano en 3D}
 \includecode[gdstyle]{code/sesion2/mallas3D/tablas.gd}{Tablas en mallas 3D}
+
+

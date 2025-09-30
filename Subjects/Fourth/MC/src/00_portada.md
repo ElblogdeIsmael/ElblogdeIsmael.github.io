@@ -1,4 +1,4 @@
 ---
-subject: "Modelos Computacionales"
+subject: "Modelos de Computación"
 type: info
 ---

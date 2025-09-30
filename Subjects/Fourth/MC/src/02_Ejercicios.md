@@ -297,15 +297,44 @@ Gramáticas de tipo 2 y tipo 3.
 
 \begin{enumerate}[label=\alph*)]
     \item Encontrar una gramática de tipo 2 para el lenguaje de palabras en las que el número de $b$ no es tres.  
-    Determinar si el lenguaje generado es de tipo 3.
+        Determinar si el lenguaje generado es de tipo 3.
+
+        \begin{solucion}[a]
+
+        Para ello nos sirve esta gramática:
+        \begin{align*}
+        S &\to aS \mid bS \mid \varepsilon \mid bbbT \\
+        T &\to aT \mid bT \mid \varepsilon
+        \end{align*}
+
+        Se puede afirmar que, como el lenguaje es regular, también es de tipo 3.
+
+        \end{solucion}
 
     \item Encontrar una gramática de tipo 2 para el lenguaje de palabras que tienen 2 ó 3 $b$.  
-    Determinar si el lenguaje generado es de tipo 3.
+        Determinar si el lenguaje generado es de tipo 3.
+
+        \begin{solucion}[b]
+
+        En este caso se puede usar la gramática:
+        \begin{align*}
+        S_0 &\to aS_0 \mid bS_1 \\
+        S_1 &\to aS_1 \mid bS_2 \\
+        S_2 &\to aS_2 \mid bS_3 \mid \varepsilon \\
+        S_3 &\to aS_3 \mid \varepsilon \mid bD \\
+        D &\to aD \mid a \mid \varepsilon
+        \end{align*}
+
+        Y se puede afirmar que es de tipo 3 debido a que el lenguaje $L = a^{*}b a^{*}b a^{*} \cup a^{*}b a^{*}b a^{*}b a^{*}$ es regular. \textit{Todas las de tipo 3 son de tipo 2.}
+
+        \end{solucion}
+
+
 \end{enumerate}
 
 \end{ejercicio}
 
-    
+
 
 \begin{ejercicio}
 Gramáticas para lenguajes específicos.
@@ -314,8 +343,29 @@ Gramáticas para lenguajes específicos.
     \item Encontrar una gramática de tipo 2 para el lenguaje de palabras que no contienen la subcadena $ab$.  
     Determinar si el lenguaje generado es de tipo 3.
 
+    \begin{solucion}[a]
+
+    \begin{align*}
+    S_0  \rightarrow aS_0  \mid bS_1 \\
+    S_1  \rightarrow aS_1 \mid a \mid \varepsilon \\
+    \end{align*}
+
+    \end{solucion}
+
     \item Encontrar una gramática de tipo 2 para el lenguaje de palabras que no contienen la subcadena $baa$.  
     Determinar si el lenguaje generado es de tipo 3.
+
+    \begin{solucion}[b]
+    \begin{align*}
+    S_0  \rightarrow aS_0  \mid bS_1 \\
+    S_1  \rightarrow aS_2 \mid bS_1 \\
+    S_2  \rightarrow bS_2 \mid b  \mid \epsilon
+    \end{align*}
+
+    De manera análoga a los demás ejercicios al ser lenguajes regulares, podemos afirmar que es de tipo 3 y todas las de tipo 3 están incluidas en las de tipo 2.
+
+    \end{solucion}
+
 \end{enumerate}
 
 \end{ejercicio}
@@ -324,7 +374,22 @@ Gramáticas para lenguajes específicos.
 Lenguaje con más $a$ que $b$. Encontrar una gramática libre de contexto que genere el lenguaje sobre el alfabeto $\{a, b\}$ de las palabras que tienen más $a$ que $b$ (al menos una más).
 \end{ejercicio}
 
-    
+
+\begin{solucion}
+
+Para generar el lenguaje de palabras sobre el alfabeto $\{a, b\}$ que tienen más $a$ que $b$ (al menos una más), podemos usar la siguiente gramática libre de contexto:
+
+\begin{align*}
+S &\to XaX \\
+X &\to aXb \mid bXa \mid XX \mid \varepsilon
+\end{align*}
+
+De esta manera garantizamos que desde el inicio hay al menos una a extra.
+
+
+\end{solucion}
+
+
 
 \begin{ejercicio}
 Gramáticas regulares o libres de contexto.
@@ -332,7 +397,26 @@ Gramáticas regulares o libres de contexto.
 \begin{enumerate}[label=\alph*)]
     \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ no contiene dos símbolos $b$ consecutivos.
 
+    \begin{solucion}[a)]
+    Una gramática válida sería:
+
+    \begin{align*}
+        S &\to aS \mid bB \mid \varepsilon \\
+        B &\to aS \mid \varepsilon
+    \end{align*}
+    \end{solucion}
+
     \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ contiene dos símbolos $b$ consecutivos.
+
+    \begin{solucion}[b)]
+    Una gramática válida sería:
+
+    \begin{align*}
+        S &\to aS \mid bT \\
+        T &\to bU \mid aS \\
+        T &\to aU \mid bU \mid \varepsilon \\
+    \end{align*}
+    \end{solucion}
 \end{enumerate}
 \end{ejercicio}
 
@@ -342,7 +426,24 @@ Propiedades de lenguajes.
 \begin{enumerate}[label=\alph*)]
     \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ contiene un número impar de símbolos $a$.
 
+    \begin{solucion}[a)]
+    Podemos pensar esta solucion como un bucle, de esta manera esta gramática cumple con el enunciado:
+    \begin{align*}
+        S \rightarrow bS \mid aX \mid \varepsilon \\
+        X \rightarrow bX \mid aS 
+    \end{align*}
+    \end{solucion}
+
     \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ no contiene el mismo número de símbolos $a$ que de símbolos $b$.
+
+    \begin{solucion}[b)]
+    \begin{align*}
+        S \rightarrow bS \mid aaX \mid \varepsilon \\
+        X \rightarrow bbS \mid aS  
+    \end{align*}
+    \end{solucion}
+
+
 \end{enumerate}
 
 \end{ejercicio}
@@ -353,7 +454,98 @@ Gramáticas para palabras con restricciones.
 \begin{enumerate}[label=\alph*)]
     \item Dado el alfabeto $A = \{a, b\}$, determinar si es posible encontrar una gramática libre de contexto que genere las palabras de longitud impar, y mayor o igual que 3, tales que la primera letra coincida con la letra central de la palabra.
 
+    \begin{solucion}[a)]
+    Sí, es posible construir una gramática libre de contexto (Tipo 2) para el lenguaje \( L \) sobre el alfabeto \( A = \{a, b\} \), que genera palabras \( w \) de longitud impar (\( \geq 3 \)) donde la primera letra coincide con la central. La gramática es \( G = (V, T, P, S) \), con:
+
+    \begin{itemize}
+        \item \( V = \{S, A, B, X\} \), \( T = \{a, b\} \), \( S \) inicial.
+        \item \( P \):
+        \begin{enumerate}
+            \item \( S \to aAa \mid bBb \)
+            \item \( A \to XAX \mid a \)
+            \item \( B \to XBX \mid b \)
+            \item \( X \to a \mid b \)
+        \end{enumerate}
+    \end{itemize}
+
+    Ejemplo: Para \( w = ababa \) (longitud 5, primera y central \( a \)):
+    \[
+    S \Rightarrow aAa \Rightarrow aXAXa \Rightarrow abAXa \Rightarrow abaXa \Rightarrow ababa.
+    \]
+    \end{solucion}
+
     \item Dado el alfabeto $A = \{a, b\}$, determinar si es posible encontrar una gramática libre de contexto que genere las palabras de longitud par, y mayor o igual que 2, tales que las dos letras centrales coincidan.
+
+    \begin{solucion}
+    Sí, es posible encontrar una \textbf{gramática libre de contexto} (Tipo 2) que genere el lenguaje descrito.
+
+    El lenguaje \( L \) sobre el alfabeto \( A = \{a, b\} \) debe generar palabras \( w \) que cumplan con tres condiciones simultáneamente:
+    \begin{enumerate}
+        \item La longitud de la palabra \( w \) es par.
+        \item La longitud de \( w \) es mayor o igual que 2.
+        \item Las dos letras centrales de \( w \) coinciden.
+    \end{enumerate}
+
+    \underline{Análisis y Construcción de la Gramática}
+
+    Una palabra \( w \) con longitud par (\( 2n, \, n \geq 1 \)) tiene dos letras centrales en las posiciones \( n \) y \( n+1 \). La principal restricción es que estas dos letras deben ser iguales. Esto nos lleva a dos casos fundamentales:
+
+    \begin{itemize}
+        \item \textbf{Caso 1: Las dos letras centrales son aa.}
+        \begin{itemize}
+            \item La palabra tendrá la forma \( x(aa)y \), donde \( x \) e \( y \) son cadenas de símbolos de \( A = \{a, b\} \).
+            \item Para que aa sean las letras centrales, la longitud de \( x \) debe ser igual a la longitud de \( y \).
+            \item La longitud mínima de la palabra es 2, que corresponde al caso \( aa \) (donde \( x \) e \( y \) son la palabra vacía, \( \varepsilon \)).
+            \item Para longitudes mayores, se añaden símbolos de forma simétrica a ambos lados. Por ejemplo, \( a(aa)a \), \( b(aa)b \), \( a(aa)b \), etc.
+        \end{itemize}
+        \item \textbf{Caso 2: Las dos letras centrales son bb.}
+        \begin{itemize}
+            \item De forma análoga, la palabra tendrá la forma \( x(bb)y \), donde la longitud de \( x \) es igual a la de \( y \).
+            \item La palabra de longitud mínima en este caso es \( bb \).
+        \end{itemize}
+    \end{itemize}
+
+    Basado en este razonamiento, podemos proponer una gramática generativa \( G = (V, T, P, S) \). Una gramática se define como \textbf{independiente del contexto} (o de Tipo 2) si todas sus reglas de producción son de la forma \( A \to \alpha \), donde \( A \) es una única variable y \( \alpha \) es una cadena de variables y/o terminales.
+
+    La gramática propuesta es:
+    \begin{itemize}
+        \item \textbf{V (Variables):} \( \{S, X\} \)
+        \item \textbf{T (Terminales):} \( \{a, b\} \)
+        \item \textbf{S (Símbolo inicial):} \( S \)
+        \item \textbf{P (Reglas de producción):}
+        \begin{enumerate}
+            \item \( S \to aSa \, | \, bSb \, | \, X \)
+            \item \( X \to aa \, | \, bb \)
+        \end{enumerate}
+    \end{itemize}
+
+    \underline{¿Por qué esta gramática es libre de contexto?}
+
+    Todas las reglas propuestas (\( S \to aSa \), \( S \to bSb \), \( S \to X \), \( X \to aa \), \( X \to bb \)) cumplen con la definición de una gramática libre de contexto, ya que el lado izquierdo de cada producción (\( S \) o \( X \)) es siempre un único símbolo no terminal (una variable).
+
+    \underline{Ejemplo de Derivación}
+
+    Generemos la palabra \( abbbba \), que tiene longitud 6 (par \( \geq 2 \)) y sus dos letras centrales (la tercera y la cuarta) son bb.
+
+    \[
+    S \Rightarrow aSa \quad (\text{Usando } S \to aSa)
+    \]
+    \[
+    \Rightarrow abSba \quad (\text{Usando } S \to bSb)
+    \]
+    \[
+    \Rightarrow abXba \quad (\text{Usando } S \to X)
+    \]
+    \[
+    \Rightarrow abbbba \quad (\text{Usando } X \to bb)
+    \]
+
+    La gramática propuesta genera correctamente el lenguaje solicitado y, por su estructura, es una gramática libre de contexto.
+
+    \textit{Este caso se ha hecho más completo para asi mejorar el entendimiento por parte del lector.}
+    \end{solucion}
+
+
 \end{enumerate}
 
 \end{ejercicio}
@@ -363,11 +555,43 @@ Gramáticas para palabras con restricciones.
 \begin{ejercicio}
 Regularidad de un lenguaje.
 Determinar si el lenguaje generado por la gramática  
-$S \to SS$  
-$S \to XXX$  
-$X \to aX \ | \ Xa \ | \ b$  
+\begin{align*}
+S &\to SS \\
+S &\to XXX \\
+X &\to aX \mid Xa \mid b
+\end{align*}
 es regular. Justificar la respuesta.
 \end{ejercicio}
+
+\begin{solucion}
+
+    El lenguaje generado por la gramática \textbf{sí es regular}.
+
+    La justificación se basa en los siguientes puntos clave:
+
+    \begin{enumerate}
+        \item \textbf{Análisis del lenguaje de \( X \):} La variable \( X \) genera todas las palabras que tienen \textbf{exactamente una b} y cualquier cantidad de 'a's (\( a^*ba^* \)). Este es un lenguaje regular.
+
+        \item \textbf{Análisis del lenguaje de \( S \):}
+        \begin{enumerate}
+            \item La regla \( S \to XXX \) concatena tres palabras de \( X \). Como cada una tiene una b, el resultado son palabras con \textbf{exactamente tres b}.
+            \item La regla \( S \to SS \) permite concatenar estas palabras entre sí, lo que resulta en palabras cuyo número de b es siempre un \textbf{múltiplo positivo de 3} (3, 6, 9, etc.).
+        \end{enumerate}
+
+        \item \textbf{Conclusión sobre la regularidad:} El lenguaje \( L(G) \) es regular porque:
+        \begin{enumerate}
+            \item Se puede construir a partir de un lenguaje regular (\( a^*ba^* \)) usando operaciones de concatenación y clausura, que conservan la regularidad.
+            \item Se puede diseñar un \textbf{autómata finito} con tres estados que lo reconozca, contando el número de b módulo 3. Esto se verá más en detalle a lo largo del curso.
+        \end{enumerate}
+    \end{enumerate}
+
+    Aunque la gramática en sí no es de Tipo 3 (regular), el lenguaje que genera sí lo es.
+
+\end{solucion}
+
+
+
+
 
 
 
@@ -376,11 +600,72 @@ Numerabilidad de un lenguaje.
 Dado un lenguaje $L$ sobre un alfabeto $A$, ¿es $L^*$ siempre numerable? ¿nunca lo es? ¿o puede serlo unas veces sí y otras, no? Proporcionar ejemplos en este último caso.
 \end{ejercicio}
 
+\begin{solucion}
+Un lenguaje \(L\) es un subconjunto del conjunto de todas las palabras que se pueden formar sobre un alfabeto \(A\), denotado como \(A^*\). La clausura de Kleene de un lenguaje \(L\), denotada como \(L^*\), es la unión de todas las iteraciones de \(L\):
+\[ L^* = \bigcup_{i \geq 0} L^i, \]
+donde \(L^0 = \{\varepsilon\}\) y \(L^{i+1} = L^iL\).
 
+La respuesta a la pregunta es que \textbf{\(L^*\) es siempre numerable}.
+
+\underline{Justificación}
+
+\begin{enumerate}
+    \item \textbf{El Alfabeto \(A\) es finito:} Por definición, un alfabeto es un conjunto finito de símbolos.
+
+    \item \textbf{El conjunto de todas las palabras \(A^*\) es numerable:} Dado que \(A\) es un alfabeto finito, el conjunto de todas las palabras finitas que se pueden formar con sus símbolos, \(A^*\), es un conjunto numerable. Esto se debe a que se puede establecer una correspondencia uno a uno (una aplicación inyectiva) entre cada palabra de \(A^*\) y los números naturales. Un método para demostrar esto es asignar un código binario único a cada símbolo del alfabeto y luego interpretar la secuencia de códigos binarios de una palabra como la representación de un número natural. Por ejemplo, para \(A = \{a, b\}\), se puede asignar \(a=01\) y \(b=10\), y la palabra \(ab\) correspondería al número binario \(0110\).
+
+    \item \textbf{\(L^*\) es un subconjunto de \(A^*\):} Un lenguaje \(L\) es, por definición, un subconjunto de \(A^*\) (\(L \subseteq A^*\)). La clausura de Kleene, \(L^*\), se forma mediante la concatenación de palabras de \(L\). Como cada palabra en \(L\) está compuesta por símbolos de \(A\), cualquier palabra en \(L^*\) también estará compuesta por símbolos de \(A\). Por lo tanto, \(L^*\) también es un subconjunto de \(A^*\). Formalmente, si \(L \subseteq A^*\), entonces \(L^* \subseteq A^*\).
+
+    \item \textbf{Todo subconjunto de un conjunto numerable es numerable:} Una propiedad fundamental de los conjuntos es que si un conjunto es numerable, entonces cualquiera de sus subconjuntos es también numerable (o finito, que es un caso particular de numerable).
+\end{enumerate}
+
+\underline{Conclusión}
+
+Dado que \(A^*\) es siempre numerable para cualquier alfabeto finito \(A\), y \(L^*\) es siempre un subconjunto de \(A^*\), se concluye que \textbf{\(L^*\) es siempre un conjunto numerable}.
+
+Es importante no confundir la numerabilidad de \(L^*\) con la no numerabilidad del conjunto de \textbf{todos los lenguajes posibles} sobre \(A^*\). Mientras que \(A^*\) y cualquier lenguaje individual (y su clausura de Kleene) son numerables, el conjunto de todos los subconjuntos de \(A^*\) (es decir, el conjunto potencia \(\mathcal{P}(A^*)\)), que representa el conjunto de todos los lenguajes posibles, \textbf{no es numerable}.
+
+\end{solucion}
 
 \begin{ejercicio}
 Propiedades de $L^*$. Dado un lenguaje $L$ sobre un alfabeto $A$, caracterizar cuándo $L^* = L$. Es decir, dar un conjunto de propiedades sobre $L$ de manera que $L$ cumpla esas propiedades si y sólo si $L^* = L$.
 \end{ejercicio}
+
+
+\begin{solucion}
+
+Para que \( L^* = L \), el lenguaje \( L \) debe cumplir las siguientes propiedades:
+
+\begin{enumerate}
+    \item \( L \) debe contener la cadena vacía (\( \varepsilon \)). Esto asegura que \( L^0 = \{\varepsilon\} \subseteq L \).
+    \item \( L \) debe ser cerrado bajo concatenación, es decir, para cualquier \( u, v \in L \), se cumple que \( uv \in L \). Esto asegura que \( L^n \subseteq L \) para todo \( n \geq 1 \).
+\end{enumerate}
+
+\textbf{Demostración:}
+
+\begin{itemize}
+    \item \textbf{Si \( L^* = L \), entonces \( L \) cumple las propiedades:}
+        \begin{enumerate}
+            \item Como \( L^* \) siempre contiene \( \varepsilon \), si \( L^* = L \), entonces \( \varepsilon \in L \).
+            \item Dado que \( L^* \) es cerrado bajo concatenación, si \( L^* = L \), entonces \( L \) también debe ser cerrado bajo concatenación.
+        \end{enumerate}
+
+    \item \textbf{Si \( L \) cumple las propiedades, entonces \( L^* = L \):}
+        \begin{enumerate}
+            \item Por definición, \( L^* \) es la unión de \( L^0, L^1, L^2, \dots \). Si \( \varepsilon \in L \), entonces \( L^0 = \{\varepsilon\} \subseteq L \).
+            \item Si \( L \) es cerrado bajo concatenación, entonces \( L^n \subseteq L \) para todo \( n \geq 1 \). Por lo tanto, \( L^* = \bigcup_{n \geq 0} L^n \subseteq L \).
+            \item Como \( L \subseteq L^* \) por definición, se concluye que \( L^* = L \).
+        \end{enumerate}
+\end{itemize}
+
+\textbf{Ejemplo:}
+\begin{itemize}
+    \item Si \( L = \{\varepsilon, a, aa, aaa, \dots\} = \{a^n \mid n \geq 0\} \), entonces \( L^* = L \) porque \( L \) contiene \( \varepsilon \) y es cerrado bajo concatenación.
+    \item Si \( L = \{a, b\} \), entonces \( L^* \neq L \) porque \( L \) no contiene \( \varepsilon \) ni es cerrado bajo concatenación (por ejemplo, \( ab \notin L \)).
+\end{itemize}
+
+\end{solucion}
+
 
 
 
@@ -388,9 +673,32 @@ Propiedades de $L^*$. Dado un lenguaje $L$ sobre un alfabeto $A$, caracterizar c
 Igualdad de homomorfismos. Dados dos homomorfismos $f : A^* \to B^*$, $g : A^* \to B^*$, se dice que son iguales si $f(x) = g(x)$, $\forall x \in A^*$. ¿Existe un procedimiento algorítmico para comprobar si dos homomorfismos son iguales?
 \end{ejercicio}
 
+
+\begin{solucion}
+
+Sí, \textbf{existe un procedimiento algorítmico} para comprobar si dos homomorfismos son iguales.
+
+Un homomorfismo \( h: A^* \to B^* \) queda completamente determinado por las imágenes de los símbolos del alfabeto \( A \). Es decir, para cualquier palabra \( u = a_1a_2\ldots a_n \), su imagen es \( h(u) = h(a_1)h(a_2)\ldots h(a_n) \).
+
+Por lo tanto, para determinar si dos homomorfismos \( f \) y \( g \) son iguales, basta con comprobar si sus imágenes coinciden para cada uno de los símbolos del alfabeto \( A \). Dado que el alfabeto \( A \) es un conjunto finito por definición, este procedimiento consiste en un número finito de comparaciones y, por lo tanto, es algorítmico.
+
+El algoritmo es el siguiente:
+\begin{itemize}
+    \item Para cada símbolo \( a \) en el alfabeto \( A \):
+    \begin{enumerate}
+        \item Calcular \( f(a) \) y \( g(a) \).
+        \item Comparar si \( f(a) = g(a) \).
+        \item Si para algún \( a \) se encuentra que \( f(a) \neq g(a) \), los homomorfismos son diferentes.
+        \item Si se comprueba que \( f(a) = g(a) \) para todos los símbolos \( a \in A \), entonces los homomorfismos son iguales.
+    \end{enumerate}
+\end{itemize}
+
+\end{solucion}
+
+
 \begin{ejercicio}
 Lenguajes $S_i$ y $C_i$. 
-Sea $L \subseteq A^*$ un lenguaje arbitrario. Sea $C_0 = L$ y definamos los lenguajes $S_i$ y $C_i$, para todo $i \geq 1$, por $S_i = C_{i-1}^+$ y $C_i = S_i^*$. 
+Sea $L \subseteq A^*$ un lenguaje arbitrario. Sea $C_0 = L$ y definamos los lenguajes $S_i$ y $C_i$, para todo $i \geq 1$, por $S_i = C_{i-1}^+$ y $C_i = \overline{S_i}$. 
 
 \begin{enumerate}[label=\alph*)]
     \item ¿Es $S_1$ siempre, nunca o a veces igual a $C_2$? Justificar la respuesta.  
@@ -405,6 +713,26 @@ Sea $L \subseteq A^*$ un lenguaje arbitrario. Sea $C_0 = L$ y definamos los leng
 \begin{ejercicio}
 Numerabilidad de lenguajes finitos. Demostrar que, para todo alfabeto $A$, el conjunto de los lenguajes finitos sobre dicho alfabeto es numerable.
 \end{ejercicio}
+
+
+\begin{solucion}
+
+Para demostrar que el conjunto de los lenguajes finitos sobre un alfabeto \(A\) es numerable, podemos establecer una correspondencia entre cada lenguaje finito y los números naturales.
+
+\begin{enumerate}
+    \item \textbf{El conjunto de todas las palabras \(A^*\) es numerable:} Dado que un alfabeto \(A\) es finito, el conjunto de todas las palabras finitas que se pueden formar con sus símbolos, \(A^*\), es numerable. Esto significa que podemos enumerar todas las palabras posibles: \(w_0, w_1, w_2, \dots\).
+
+    \item \textbf{Representación de lenguajes finitos:} Un lenguaje finito es un subconjunto finito de \(A^*\). Por lo tanto, cualquier lenguaje finito \(L\) puede representarse como un conjunto de palabras de esa enumeración, por ejemplo, \(\{w_{i_1}, w_{i_2}, \dots, w_{i_k}\}\).
+
+    \item \textbf{Construcción de una aplicación inyectiva:} Podemos asignar un número natural único a cada lenguaje finito. Una manera de hacerlo es asociar a cada lenguaje finito \(L = \{w_{i_1}, w_{i_2}, \dots, w_{i_k}\}\) el número natural \(n = 2^{i_1} + 2^{i_2} + \dots + 2^{i_k}\).
+    \begin{itemize}
+        \item Por las propiedades de la representación binaria, cada número natural \(n\) corresponde a un único conjunto de exponentes, y por lo tanto, a un único lenguaje finito.
+    \end{itemize}
+
+    \item \textbf{Conclusión de numerabilidad:} Al existir una aplicación inyectiva del conjunto de los lenguajes finitos en el conjunto de los números naturales, se demuestra que el conjunto de todos los lenguajes finitos sobre \(A\) es \textbf{numerable}.
+\end{enumerate}
+
+\end{solucion}
 
 \newpage
 ## Relación de problemas 1 bis

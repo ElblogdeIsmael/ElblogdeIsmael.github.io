@@ -28,8 +28,8 @@ clean-%:
 	@echo "=== Limpiando $* ==="
 	@$(MAKE) -C $* clean
 
-clean-all:
-	@echo "=== Limpiando todo ==="
-	@for subj in $(SUBJECTS); do \
-		$(MAKE) -C $$subj clean-all; \
-	done
+# clean-all:
+# 	@echo "=== Limpiando todo ==="
+# 	@for subj in $(SUBJECTS); do \
+# 		$(MAKE) -C $$subj clean-all; \
+# 	done
