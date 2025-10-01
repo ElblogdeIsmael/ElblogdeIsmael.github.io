@@ -60,25 +60,30 @@ SI} % pie de página izquierdo en cursiva
     \begin{center}
         \vspace*{2cm}
         
-        {\Huge \bfseries\scshape Teoría y Práctica \par}
+        {\Huge \bfseries\scshape Diseño y Desarrollo de SI \par}
         \vspace{0.5cm}
-        {\Large \itshape Diseño y Desarrollo de SI \par}
+        {\Large \itshape Temario \par}
         \vspace{0.5cm}
-        {\small \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
-        {\small \itshape \href{https://elblogdeismael.github.io}{https://elblogdeismael.github.io} \par}
+        % {\small \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
+        % {\small \itshape \href{https://elblogdeismael.github.io}{https://elblogdeismael.github.io} \par}
 
 
         \vfill
         
-        {\LARGE Autor: \textbf{Ismael Sallami Moreno} \par}
+        % {\LARGE Ismael Sallami Moreno \par}
+
+        \begin{flushright}
+            {Ismael Sallami Moreno \par}
+            {\small \itshape \href{https://elblogdeismael.github.io}{Recursos Ingeniería Informática y Ade} \par}
+        \end{flushright}
         \vspace{0.3cm}
         % {\Large Universidad de Granada \par}
         
-        \vspace{1cm}
-        \includegraphics[width=0.25\textwidth]{../../../extraFiles/img/ugr.png} % opcional: logo
-        \vspace{1cm}
+        % \vspace{1cm}
+        % \includegraphics[width=0.25\textwidth]{../../../extraFiles/img/ugr.png} % opcional: logo
+        % \vspace{1cm}
         
-        {\large \today}
+        % {\large \today}
     \end{center}
     
     \restoregeometry
@@ -91,42 +96,26 @@ SI} % pie de página izquierdo en cursiva
 
 % --- Índice ---
 \tableofcontents
-\listoffigures
+% \listoffigures
 \clearpage
 
-\listoftables
-\clearpage
-\thispagestyle{empty} % quitar número de página en la portada
-\clearpage
-
+%\listoftables
+%\clearpage
+%\thispagestyle{empty} % quitar número de página en la portada
+%\clearpage
+%
 % Índice de código
-\renewcommand{\lstlistlistingname}{Índice de Código}
-\lstlistoflistings
-\clearpage
-
+%\renewcommand{\lstlistlistingname}{Índice de Código}
+%\lstlistoflistings
+%\clearpage
+%
 % Índice de ecuaciones
-\renewcommand{\listtheoremname}{Índice de Ecuaciones}
-\listoftheorems[ignoreall,show={equation}]
-\clearpage
+%\renewcommand{\listtheoremname}{Índice de Ecuaciones}
+%\listoftheorems[ignoreall,show={equation}]
+%\clearpage
 
 % --- Contenido Markdown generado por Pandoc ---
-\hypertarget{introducciuxf3n}{%
-\chapter{Introducción}\label{introducciuxf3n}}
-
-Datos del profesor:
-
-\begin{itemize}
-\tightlist
-\item
-  daniels@ugr.es\\
-\item
-  tutorías: X,J: 9:30-12:30, puede ser otro día y otra hora, mandando
-  previamente un correo
-\end{itemize}
-
-\begin{center}
-\textbf{Enlace a la guía docente:} \href{https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/diseno-desarrollo-sistemas-informacion/guia-docente}{https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/diseno-desarrollo-sistemas-informacion/guia-docente}
-\end{center}
+\part{Teoría}
 
 \hypertarget{introducciuxf3n-a-los-sistemas-de-informaciuxf3n}{%
 \chapter{Introducción a los Sistemas de
@@ -398,75 +387,6 @@ de vida en el desarrollo SI:
 \end{itemize}
 
 diapo 8 acabar hemos dado hasta la 11
-
-\part{Prácticas}
-
-\hypertarget{pruxe1ctica-1}{%
-\chapter{Práctica 1}\label{pruxe1ctica-1}}
-
-Antes de comenzar, se recomienda tener claro que funciones va a tener el
-sistema de gestión de base de datos. A continuación, se procede con el
-desarrollo de la base de datos. Como primer paso, realizaremos un
-proceso de análisis que nos dará una lista de requisitos funcionales, de
-datos y restricciones semánticas
-\footnote{Se asume que ya están hechas las tareas vistas en FIS}. Cada
-subsistema debe de tener como mínimo 5 requisitos funcionales.
-
-Realizando la práctica, cuando mencionamos un subsistema debemos de
-escribir el nombre completo del subsistema.
-
-\begin{definicion}[Requisito funcional]
-
-    Una funcionalidad concreta del sistema que requiere acceso a la base de datos, para lo cual necesita:
-
-    \begin{itemize}
-
-    \item Una acción de algún agente externo al SI que activa la funcionalidad y manda los datos de entrada.
-    \item Datos de la DB, que hay que consultar, insertar, modificar, borrar (lectura, R y escritura, W).
-    \item Unas acciones de salida que pueden incluir datos de salida (opcionalmente) que se transmiten a algún agente externo.
-    \item Los datos de entrada, de la DB y de salida se especifican medianet \textit{requisitos de datos}, conteniendo nombre y tipo de datos.
-
-    \end{itemize}
-
-\end{definicion}
-
-\begin{ejemplo}
-Deseamos crear un sistema de información para un único usuario que registre los contactos de una agenda. De cada contacto, almacenaremos su nombre (en una serie de hasta 20 caracteres), su apellido (en una serie de hasta 40 caracteres) y un número de teléfono (en una serie de hasta 20 caracteres que pueden ser todos numéricos menos el primero que puede ser numérico o un signo +). 
-
-Para dar de alta un nuevo contacto, el usuario deberá proporcionar el nombre del mismo, su apellido y su número de teléfono, datos que el sistema almacenará, confirmando la inserción o dando un error. Un número de teléfono sólo puede pertenecer a un contacto. 
-
-Para dar de baja un contacto, el usuario deberá proporcionar el número de teléfono, confirmando el borrado o dando un error. 
-
-El sistema también permitirá mostrar un listado de contactos con todos sus datos a petición del usuario.
-\end{ejemplo}
-
-\begin{itemize}
-\tightlist
-\item
-  RDE: Requisito de datos de entrada.
-\item
-  RDW: Requisito de datos de escritura.
-\item
-  RDR: Requisito de datos de lectura.
-\item
-  RDS: Requisito de datos de salida.
-\end{itemize}
-
-Cuando se especifica los RDE es debido a que es una necesidad. No es un
-tipo de registro. Lo que se necesita cuando se especifican, es que
-cuando la base de datos se diseñe, deben de estar presentes.
-
-\textbf{Ejemplo de Requisitos funcionales}
-
-\dosimagenes{media/rf1.png}{Primer ejemplo}{media/rf2.png}{Segundo ejemplo}{rf1}{rf2}
-
-Una restricción semántica esta asociada a un requisito funcional y uno o
-varios de datos. Este describe cambios en el comportamiento del
-requisito funcional cuando se da una configuración específica en los
-requisitos de datos.
-
-Si se es capaz de identificar los requisitos funcionales y de datos,
-podemos afirmar que es una restrición semántica.
 
 \input{../../../extraFiles/preambulos_oficiales/referencias.tex}
 
