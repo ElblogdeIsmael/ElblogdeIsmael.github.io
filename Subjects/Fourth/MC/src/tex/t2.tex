@@ -1,0 +1,562 @@
+\chapter{Autómatas Finitos y Lenguajes Regulares}
+
+\section{Fundamentos y Aplicaciones de los Autómatas Finitos}
+
+\subsection{Contexto y Relevancia}
+
+\subsubsection{Importancia de los Autómatas Finitos (AF) en la computación}
+
+Los Autómatas Finitos (AF) constituyen modelos matemáticos esenciales que residen en el núcleo teórico de la Ciencia de la Computación. El estudio de los autómatas es fundamental para investigar qué puede resolverse de forma automática y qué estructuras, basadas en palabras y símbolos, pueden procesarse eficientemente en un ordenador. El concepto de autómata surge en diversos problemas asociados con la informática, los sistemas de redes y la teoría de control. La estructura matemática de los autómatas se basa en argumentos intuitivos que reflejan la entidad de los autómatas reales (no necesariamente físicos).
+
+\begin{itemize}
+    \item \text{Aplicaciones en análisis léxico (compiladores):}
+    Una aplicación práctica crucial de los AF se encuentra en la \text{construcción de analizadores léxicos} (lexers) dentro de los compiladores. Un analizador léxico tiene la función de reconocer secuencias de caracteres que forman \textit{tokens} (como palabras clave o identificadores), un problema que se mapea directamente al reconocimiento de \text{lenguajes regulares}.
+
+    \item \text{Verificación de circuitos digitales:}
+    Los AF son ampliamente utilizados en el desarrollo de software destinado al \text{diseño y la verificación de circuitos digitales}. Esto es pertinente porque los autómatas modelan sistemas que operan en un número finito de estados diferentes.
+
+    \item \text{Análisis de patrones de texto (ej. correos electrónicos):}
+    Los autómatas finitos se emplean extensamente en software para \text{analizar grandes volúmenes de texto} en busca de patrones específicos, tales como palabras, estructuras o formatos predefinidos (por ejemplo, en páginas web o para encontrar direcciones de correo electrónico). También son útiles para comprobar la corrección de cualquier sistema que posea un número finito de estados distintos, como los protocolos de comunicación.
+\end{itemize}
+
+\begin{anotacion}{El Marco Algebraico de los Autómatas.}
+La investigación de las \text{estructuras algebraicas} sugeridas por el concepto de autómata permite desarrollar una teoría profunda. Estos modelos, incluidos los autómatas y las bases de datos, se manifiestan como \text{estructuras algebraicas de múltiples tipos} (\textit{many-sorted algebraic structures}). El tratamiento de estas estructuras permite estudiar el comportamiento y la estructura de los autómatas reales.
+\end{anotacion}
+
+\subsection{Nociones Preliminares}
+
+Para comprender un autómata, se requiere un entendimiento previo de los lenguajes formales. Un \text{lenguaje} $L$ sobre un alfabeto $A$ se define formalmente como un \text{subconjunto} del conjunto de todas las cadenas posibles sobre $A$, denotado como $A^*$. El autómata tiene la función de aceptar las palabras $u \in A^*$ que pertenecen a $L$.
+
+\subsubsection{Ejemplo introductorio mediante un diagrama de transición}
+
+Un Autómata Finito Determinista (AFD) $M = (Q, A, \delta, q_0, F)$ se define a través de un conjunto de estados ($Q$), un alfabeto de entrada ($A$), una función de transición ($\delta$), un estado inicial ($q_0$) y un conjunto de estados finales ($F$). Un \text{diagrama de transición} proporciona una representación visual e intuitiva de esta estructura.
+
+Consideremos un AFD $M$ sobre el alfabeto $A=\{0, 1\}$ cuyo lenguaje aceptado, $L(M)$, consiste en todas las palabras que \text{contienen la subcadena $\mathbf{00}$}.
+
+\begin{ejemplo}[AFD: Reconocimiento de Subcadena 00]
+El autómata se construye con tres estados: $q_0$ (inicial), $q_1$ (se leyó un '0'), y $q_2$ (se leyó '00' y es final). 
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>={Stealth[round]}, node distance=2.5cm, auto, shorten >=1pt] % Configuración basada en
+
+        % Estados
+        \node[state, initial] (q0) {$q_0$}; % Estado inicial
+        \node[state, right of=q0] (q1) {$q_1$};
+        \node[state, accepting, right of=q1] (q2) {$q_2$};
+        
+        % Transiciones
+        % q0: No ha leído un '0' o ha leído '1'
+        \draw[->] (q0) edge[loop above] node {1} (q0);
+        \draw[->] (q0) -- (q1) node[midway, above] {0};
+        
+        % q1: Acaba de leer '0'. Espera otro '0'
+        \draw[->] (q1) edge[bend left] node {1} (q0);
+        \draw[->] (q1) -- (q2) node[midway, above] {0};
+        
+        % q2: Ha leído '00'. Estado final (sumidero de aceptación)
+        \draw[->] (q2) edge[loop above] node {0, 1} (q2);
+        
+    \end{tikzpicture}
+    \captionof{figure}{Autómata Finito Determinista que acepta el lenguaje de palabras que contienen la subcadena 00.}
+    \label{fig:afd_00}
+\end{figure}
+
+\text{Proceso de Cálculo:} La aceptación de una palabra $u$ se define a través de una \text{relación de cálculo} $(C_i \vdash C_{i+1})$, donde $C_i = (q, v)$ es una configuración (estado $q$, cadena restante $v$).
+
+\begin{itemize}
+    \item \text{Aceptación de \codeinline{100}:} El autómata comienza en $(q_0, 100)$ y termina en un estado final $q_2$ con la cadena vacía $\varepsilon$:
+    \[ (q_0, 100) \vdash (q_0, 00) \vdash (q_1, 0) \vdash (q_2, \varepsilon) \]
+    Dado que $q_2$ es un estado final, \codeinline{100} es aceptada.
+
+    \item \text{Rechazo de \codeinline{101}:} El proceso termina en $q_0$, que no es un estado final, resultando en el rechazo:
+    \[ (q_0, 101) \vdash (q_0, 01) \vdash (q_1, 1) \vdash (q_0, \varepsilon) \]
+\end{itemize}
+
+El lenguaje aceptado $L(M)$ es el conjunto de todas las palabras $u \in A^*$ tales que, partiendo del estado inicial $q_0$ y consumiendo $u$, el autómata finaliza en algún estado $q \in F$. Para este ejemplo, $L(M) = \{u_1 00 u_2 \in \{0, 1\}^* \mid u_1, u_2 \in \{0, 1\}^*\}$.
+\end{ejemplo}
+
+
+
+
+
+
+
+\section{Autómata Finito Determinista (AFD)} % Corresponde a Índice 2.
+
+\subsection{Definición Formal} % Corresponde a Índice 2.1.
+El Autómata Finito Determinista (AFD) sirve como el modelo fundamental más sencillo para estudiar la computabilidad y los lenguajes regulares. Su naturaleza determinista radica en que, dado un estado y un símbolo de entrada, el estado siguiente está unívocamente definido.
+
+\subsubsection{La quíntupla $M=(Q,A,\delta,q_0,F)$}
+Un AFD se define formalmente como una quíntupla:
+\[ M = (Q, A, \delta, q_0, F) \]
+donde cada componente juega un papel crucial en la definición de la máquina de estados:
+\begin{itemize}
+    \item $Q$: Es el \text{conjunto finito} de estados del autómata.
+    \item $A$: Es el \text{alfabeto} o conjunto de entrada, que debe ser un conjunto finito de símbolos o letras.
+    \item $\delta$: Es la \text{función de transición}. Para un AFD, esta es una aplicación $\delta : Q \times A \to Q$. La función $\delta$ especifica la transición de un estado a otro de manera única para cada par (estado, símbolo).
+    \item $q_0$: Es el \text{estado inicial}, un elemento distinguido $q_0 \in Q$.
+    \item $F$: Es el \text{conjunto de estados finales} o de aceptación, siendo un subconjunto de $Q$, $F \subseteq Q$.
+\end{itemize}
+
+\subsection{Representación} % Corresponde a Índice 2.2.
+
+Los AFD pueden representarse de diferentes maneras, lo que facilita su análisis y comprensión, incluyendo la forma analítica, las tablas o los gráficos (\textit{plots}).
+
+\subsubsection{Diagramas de Transición}
+Los diagramas de transición (o gráficos de estados) son la forma más intuitiva de representar un autómata. En esta representación, los estados se dibujan como círculos, las transiciones $\delta(q, a) = p$ como flechas dirigidas desde $q$ a $p$ etiquetadas con $a$, el estado inicial se marca con una flecha entrante no etiquetada, y los estados finales se denotan con un doble círculo.
+
+\begin{ejemplo}[Diagrama de Transición (AFD para subcadena 00)]
+Utilizamos la representación de AFD para el lenguaje $L$ de palabras que contienen la subcadena $00$.
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>={Stealth[round]}, node distance=2.5cm, auto, shorten >=1pt]
+        \node[state, initial] (q0) {$q_0$};
+        \node[state, right of=q0] (q1) {$q_1$};
+        \node[state, accepting, right of=q1] (q2) {$q_2$};
+        \draw[->] (q0) edge[loop above] node {1} (q0);
+        \draw[->] (q0) -- (q1) node[midway, above] {0};
+        \draw[->] (q1) edge[bend left] node {1} (q0);
+        \draw[->] (q1) -- (q2) node[midway, above] {0};
+        \draw[->] (q2) edge[loop above] node {0, 1} (q2);
+    \end{tikzpicture}
+    \captionof{figure}{Diagrama de Transición para el AFD que acepta $00$.}
+    \label{fig:afd_diagrama_ch2}
+\end{figure}
+\end{ejemplo}
+\subsubsection{Tablas de Transición}
+Las tablas de transición son una representación tabular y analítica de la función $\delta$, especialmente útil para la implementación algorítmica y la conversión entre tipos de autómatas.
+\begin{ejemplo}[Tabla de Transición]
+La tabla para el AFD de la Figura \ref{fig:afd_diagrama_ch2} es:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\toprule
+\text{Estado} & \text{0} & \text{1} \\
+\midrule
+$\to q_0$ & $q_1$ & $q_0$ \\
+$q_1$ & $q_2$ & $q_0$ \\
+$\star q_2$ & $q_2$ & $q_2$ \\
+\bottomrule
+\end{tabular}
+\caption{Tabla de transición del AFD para el lenguaje que contiene $00$.}
+\end{table}
+\end{ejemplo}
+
+\subsection{Proceso de Cálculo} % Corresponde a Índice 2.3.
+
+El \text{proceso de cálculo} de un AFD describe cómo evoluciona la máquina al procesar una palabra de entrada.
+
+\subsubsection{Configuración o Descripción Instantánea} % Corresponde a Índice 2.3.1.
+Una \text{configuración} o \text{descripción instantánea} se define como un par $(q, u) \in Q \times A^*$. Representa el estado actual del cómputo, donde $q$ es el estado en el que se encuentra el autómata y $u$ es la porción restante de la palabra de entrada. La configuración inicial para una palabra $u$ es siempre $(q_0, u)$.
+
+\subsubsection{Relación de un paso de cálculo ($\vdash$) y de cálculo extendida ($\vdash^*$)} % Corresponde a Índice 2.3.2.
+La \text{relación de un paso de cálculo} ($\vdash$) describe una única transición en el autómata:
+\[ (q, au) \vdash (p, u) \iff \delta(q, a) = p \]
+donde $q, p \in Q$, $a \in A$ (símbolo leído), y $u \in A^*$ (cadena restante). Dado que el AFD es determinista, de una configuración se puede pasar a un máximo de una configuración en un solo paso de cálculo.
+
+La \text{relación de cálculo extendida} ($\vdash^*$) denota una secuencia finita de cero o más pasos de cálculo. La existencia de una sucesión de configuraciones $C_0, \dots, C_n$ tal que $C_0 \vdash C_1 \vdash \dots \vdash C_n$ se denota como $(q, u) \vdash^* (p, v)$.
+
+\subsubsection{Función de Transición Extendida ($\delta^*$)} % Corresponde a Índice 2.3.3.
+Para simplificar la notación de trayectorias, se define la \text{función de transición extendida} $\delta^*: Q \times A^* \to Q$. Esta función devuelve el estado final al que se llega después de leer una palabra completa $u$, partiendo de un estado $q$.
+
+\begin{definicion}[Función de Transición Extendida $\delta^*$]
+La función $\delta^*$ se define recursivamente como:
+\begin{enumerate}
+    \item \text{Base:} $\delta^*(q, \varepsilon) = q$, para $q \in Q$.
+    \item \text{Recursión:} $\delta^*(q, au) = \delta^*(\delta(q, a), u)$, para $q \in Q$, $a \in A$, $u \in A^*$.
+\end{enumerate}
+\end{definicion}
+
+\subsection{Aceptación de Palabras} % Corresponde a Índice 2.4.
+
+La capacidad de un AFD de reconocer un patrón o estructura se define mediante el lenguaje que acepta.
+
+\subsubsection{Definición de Lenguaje Aceptado $L(M)$ por un AFD}
+Una palabra $u \in A^*$ es \text{aceptada} si el autómata, comenzando en el estado inicial $q_0$ y consumiendo toda la palabra, finaliza en un estado de aceptación $q \in F$. El conjunto de todas estas palabras aceptadas constituye el lenguaje $L(M)$.
+
+El lenguaje $L(M)$ puede expresarse formalmente de dos formas equivalentes:
+
+\begin{enumerate}
+    \item \text{Usando la relación de cálculo extendida:}
+    \[ L(M) = \{u \in A^* \mid \exists q \in F \text{ tal que } (q_0, u) \vdash^* (q, \varepsilon)\} \]
+    \item \text{Usando la función de transición extendida:}
+    \[ L(M) = \{u \in A^* \mid \delta^*(q_0, u) \in F\} \]
+    Esta segunda expresión es inmediata y se utiliza frecuentemente en la teoría.
+\end{enumerate}
+
+\begin{ejemplo}[Aplicación de $\delta^*$]
+Si consideramos el AFD del ejemplo anterior (AFD para subcadena $00$), el cálculo de $\delta^*$ para la palabra \codeinline{modern}{100} es:
+\[ \delta^*(q_0, 100) = \delta^*(\delta(q_0, 1), 00) = \delta^*(q_0, 00) = \delta^*(\delta(q_0, 0), 0) = \delta^*(q_1, 0) = q_2 \]
+Como $\delta^*(q_0, 100) = q_2$ y $q_2 \in F$, la palabra es aceptada.
+\end{ejemplo}
+
+\begin{anotacion}{Propiedad de Clausura.}
+Todos los lenguajes que son aceptados por un AFD son también aceptados por un Autómata Finito No Determinista (AFND), ya que todo AFD se considera un caso especial de AFND.
+\end{anotacion}
+
+
+
+\section{Tipos de Autómatas Finitos y Equivalencias} % Corresponde a Índice 3.
+
+El estudio de los Autómatas Finitos (AF) requiere examinar extensiones del modelo determinista que facilitan la modelización y la composición. Los AFND y los AFN-$\epsilon$ son formalmente más potentes en su expresividad, aunque se demuestra que no reconocen una clase de lenguajes mayor que los AFD.
+
+\subsection{Autómata Finito No Determinista (AFND)} % Corresponde a Índice 3.1.
+
+Mientras que un Autómata Finito Determinista (AFD) tiene una única transición definida para cada par (estado, símbolo), el Autómata Finito No Determinista (AFND) introduce la posibilidad de que, dada una entrada, la máquina pueda evolucionar a múltiples estados siguientes o a ninguno.
+
+\subsubsection{Definición formal con función de transición a conjuntos de estados: $\delta: Q \times A \to \mathcal{P}(Q)$}
+
+Un AFND se define formalmente como una quíntupla $M = (Q, A, \delta, q_0, F)$, similar al AFD, pero con una diferencia crítica en su función de transición.
+
+\begin{definicion}[Autómata Finito No Determinista (AFND)]
+Un AFND es una quíntupla $M = (Q, A, \delta, q_0, F)$, donde:
+\begin{itemize}
+    \item $Q$ es el conjunto finito de estados.
+    \item $A$ es el alfabeto de entrada.
+    \item $\delta$ es la \text{función de transición} que mapea un par (estado, símbolo) a un \text{conjunto de estados}:
+    \[ \delta : Q \times A \to \mathcal{P}(Q) \]
+    donde $\mathcal{P}(Q)$ es el conjunto potencia de $Q$ (todos los subconjuntos de $Q$).
+    \item $q_0 \in Q$ es el estado inicial.
+    \item $F \subseteq Q$ es el conjunto de estados finales.
+\end{itemize}
+\end{definicion}
+
+El no determinismo implica que la \text{relación de cálculo} $((q, au) \vdash (p, u))$ se cumple si $p \in \delta(q, a)$, permitiendo que haya múltiples caminos de cómputo para una misma palabra de entrada, o incluso ninguno. Una palabra es aceptada si \text{existe al menos un camino de cálculo} que consume toda la palabra y termina en un estado de aceptación.
+
+\begin{ejemplo}[AFND con Múltiples Transiciones]
+Sea un AFND $M$ sobre $A=\{0, 1\}$ que acepta palabras que contienen la subcadena \codeinline{001}. Observamos que desde $q_0$, al leer \codeinline{0}, la transición no es única:
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>={Stealth[round]}, node distance=2.5cm, auto, shorten >=1pt]
+        % Estados
+        \node[state, initial] (q0) {$q_0$};
+        \node[state, right of=q0] (q1) {$q_1$};
+        \node[state, right of=q1] (q2) {$q_2$};
+        \node[state, accepting, right of=q2] (q3) {$q_3$};
+        
+        % Transiciones
+        % Bucle para 0, 1 en q0 (permitiendo comenzar 001 en cualquier momento)
+        \draw[->] (q0) edge[loop above] node {0, 1} (q0);
+        
+        % Transición no determinista que inicia la subcadena
+        \draw[->] (q0) edge[bend left] node {0} (q1);
+        
+        % Camino de aceptación 001
+        \draw[->] (q1) -- (q2) node[midway, above] {0};
+        \draw[->] (q2) -- (q3) node[midway, above] {1};
+        
+        % Bucle para 0, 1 en q3
+        \draw[->] (q3) edge[loop above] node {0, 1} (q3);
+        
+    \end{tikzpicture}
+    \captionof{figure}{AFND para el lenguaje que contiene la subcadena 001. Desde $q_0$ con el símbolo 0 se puede ir a $q_0$ o a $q_1$, ilustrando la no determinismo.}
+\end{figure}
+\end{ejemplo}
+
+\subsection{AFND con Transiciones Nulas (AFN-$\epsilon$)} % Corresponde a Índice 3.2.
+
+Los AFND se extienden aún más al permitir movimientos entre estados que no consumen ningún símbolo de la cadena de entrada. Estos son los AFND con transiciones nulas o \textit{épsilon} (AFN-$\epsilon$).
+
+\subsubsection{Inclusión del símbolo de palabra vacía ($\epsilon$) en el alfabeto para las transiciones}
+
+Un AFN-$\epsilon$ es una quíntupla $M = (Q, A, \delta, q_0, F)$ donde la función de transición $\delta$ incluye la palabra vacía $\epsilon$ en su dominio:
+\[ \delta : Q \times (A \cup \{\epsilon\}) \to \mathcal{P}(Q) \]
+
+Las transiciones $\epsilon$ permiten que la descripción instantánea cambie de estado sin avanzar la posición de lectura en la cadena de entrada. Esto resulta extremadamente útil para construir autómatas que simulan operaciones de lenguajes formales, como la unión ($r_1 + r_2$) o la clausura de Kleene ($r_1^*$), ya que se pueden conectar sub-autómatas utilizando estas transiciones sin afectar la semántica del lenguaje reconocido.
+
+\begin{ejemplo}[Utilidad de $\epsilon$ en la Unión]
+Para modelar la unión de dos lenguajes, $L_1$ y $L_2$, se puede crear un nuevo estado inicial $q_0$ y añadir transiciones $\epsilon$ a los estados iniciales de los autómatas de $L_1$ y $L_2$.
+\end{ejemplo}
+
+\subsection{Conversión AFND $\to$ AFD} % Corresponde a Índice 3.3.
+
+A pesar de la mayor complejidad operativa de los AFND, la clase de lenguajes que aceptan es exactamente la misma que la de los AFD. Esta equivalencia se establece mediante un algoritmo constructivo.
+
+\subsubsection{Presentación del Método de los Subconjuntos como algoritmo de equivalencia}
+
+El algoritmo para convertir un AFND $M$ en un AFD equivalente $M'$ se basa en la idea de que cada \text{estado} en el AFD $M'$ representa un \text{conjunto de posibles estados} en los que el AFND $M$ podría encontrarse después de leer un prefijo de la entrada. Este procedimiento se conoce como el \text{Método de los Subconjuntos}.
+
+Si $M = (Q, A, \delta_N, q_0, F_N)$ es el AFND, el AFD equivalente resultante es $M' = (Q', A, \delta_D, q'_0, F_D)$, donde:
+\begin{itemize}
+    \item $Q'$ es un subconjunto de $\mathcal{P}(Q)$. Los estados de $M'$ son subconjuntos de estados de $M$.
+    \item El estado inicial $q'_0 = \{q_0\}$ (o $\text{Cl}(q_0)$ si hubiera $\epsilon$-transiciones).
+    \item Un estado $P \in Q'$ es final en $M'$ ($P \in F_D$) si y solo si contiene al menos un estado final del AFND, es decir, $P \cap F_N \neq \emptyset$.
+    \item La función de transición determinista $\delta_D$ se define de la siguiente manera, para un estado $P \subseteq Q$ y un símbolo $a \in A$:
+    \[ \delta_D(P, a) = \bigcup_{q \in P} \delta_N(q, a) \]
+\end{itemize}
+El AFD $M'$ se construye explorando progresivamente los nuevos conjuntos de estados alcanzables a partir de $q'_0$.
+
+\subsection{Conversión AFN-$\epsilon$ $\to$ AFND} % Corresponde a Índice 3.4.
+
+La eliminación de las transiciones $\epsilon$ es un paso crucial en la práctica, ya que simplifica el autómata y permite, en última instancia, la conversión al modelo AFD (a menudo, la conversión de AFN-$\epsilon$ a AFD se realiza en un solo paso, combinando este proceso con el método de los subconjuntos).
+
+\subsubsection{Cálculo de la $\epsilon$-Clausura para la eliminación de transiciones nulas}
+
+Para eliminar las transiciones $\epsilon$, se debe definir la \text{$\epsilon$-Clausura} ($\text{Cl}$), que captura todos los estados alcanzables desde un estado dado utilizando únicamente transiciones nulas.
+
+\begin{definicion}[$\epsilon$-Clausura]
+Dado un AFN-$\epsilon$ $M = (Q, A, \delta, q_0, F)$:
+\begin{itemize}
+    \item La \text{$\epsilon$-Clausura de un estado $q$}, denotada $\text{Cl}(q)$, es el conjunto de todos los estados $p$ tales que existe un camino de cero o más pasos de $\epsilon$-transición desde $q$ hasta $p$.
+    \item La \text{$\epsilon$-Clausura de un conjunto de estados $P \subseteq Q$}, denotada $\text{Cl}(P)$, es la unión de las $\epsilon$-Clausuras de todos los estados en $P$:
+    \[ \text{Cl}(P) = \bigcup_{q \in P} \text{Cl}(q) \]
+\end{itemize}
+\end{definicion}
+
+La $\epsilon$-Clausura es esencial para definir la función de transición del autómata resultante $M'$ (que será un AFND sin $\epsilon$-transiciones o un AFD). La nueva función de transición, $\delta'$, se calcula utilizando la $\epsilon$-Clausura en cada paso de lectura, asegurando que se contabilicen todos los movimientos nulos previos y posteriores a la lectura del símbolo.
+
+Formalmente, si $P$ es un conjunto de estados del AFN-$\epsilon$, la transición a partir de un símbolo $a$ en el autómata equivalente se calcula mediante la función $\delta^*$ extendida:
+\[ \delta^*(P, a) = \text{Cl}\left( \bigcup_{q \in P} \delta(q, a) \right) \]
+Esta $\delta^*$ (aplicada al AFN-$\epsilon$) proporciona directamente el conjunto de estados en el AFD equivalente $M'$.
+
+\begin{anotacion}{Teorema de Equivalencia.}
+La existencia de conversiones algorítmicas entre los tres modelos (AFD $\leftrightarrow$ AFND $\leftrightarrow$ AFN-$\epsilon$) demuestra que \text{todos aceptan exactamente la misma clase de lenguajes}, conocida como la clase de \text{Lenguajes Regulares}. Esto es un resultado fundamental en la teoría de la computación.
+\end{anotacion}
+
+
+\section{Expresiones Regulares (ER) y El Teorema de Kleene} % Corresponde a Índice 4.
+
+La clase de los lenguajes aceptados por Autómatas Finitos (AFD, AFND, AFN-$\epsilon$) se denomina Lenguajes Regulares ($\mathcal{L}_3$). Una caracterización fundamental de esta clase es su representación mediante Expresiones Regulares (ER). La equivalencia entre estas dos notaciones constituye el célebre \text{Teorema de Kleene}.
+
+\subsection{Concepto y Operadores} % Corresponde a Índice 4.1.
+
+\subsubsection{Definición de Expresión Regular}
+
+Una Expresión Regular sobre un alfabeto $A$ es una cadena de caracteres que describe un conjunto (lenguaje) de palabras mediante una definición recursiva.
+
+\begin{definicion}[Expresión Regular (ER)]
+Sea $A$ un alfabeto. Una Expresión Regular $r$ sobre $A$ es definida recursivamente como:
+\begin{enumerate}
+    \item La expresión $\mathbf{\emptyset}$ (o $\mathbf{/0}$) es una ER que denota el lenguaje vacío, $L(\mathbf{\emptyset}) = \emptyset$.
+    \item La expresión $\mathbf{\epsilon}$ es una ER que denota el lenguaje que contiene únicamente la palabra vacía, $L(\mathbf{\epsilon}) = \{\varepsilon\}$.
+    \item Para cada símbolo $a \in A$, la expresión $\mathbf{a}$ es una ER que denota el lenguaje que contiene únicamente la palabra $a$, $L(\mathbf{a}) = \{a\}$.
+    \item Si $r_1$ y $r_2$ son ERs, entonces la \text{Unión} $(r_1 + r_2)$, la \text{Concatenación} $(r_1 r_2)$ y la \text{Clausura de Kleene} $(r_1^*)$ son también ERs.
+\end{enumerate}
+\end{definicion}
+
+\subsubsection{Operaciones fundamentales}
+
+Los operadores de las ERs corresponden directamente a operaciones sobre los lenguajes formales:
+
+\begin{itemize}
+    \item \text{Unión (o suma) ($+$):}
+    Si $L_1 = L(r_1)$ y $L_2 = L(r_2)$, la unión de $r_1$ y $r_2$, denotada $r_1 + r_2$, representa la unión de los lenguajes: $L(r_1 + r_2) = L_1 \cup L_2$. Es conmutativa y asociativa.
+
+    \item \text{Concatenación (yuxtaposición):}
+    La concatenación $r_1 r_2$ denota el conjunto de palabras formadas al concatenar cualquier palabra de $L_1$ con cualquier palabra de $L_2$: $L(r_1 r_2) = \{uv \mid u \in L_1, v \in L_2\}$. La concatenación es asociativa y $\epsilon$ es su elemento neutro ($r\epsilon = r$).
+
+    \item \text{Clausura de Kleene ($\mathbf{*}$):}
+    La clausura de Kleene de una expresión $r$, denotada $r^*$, representa la \text{iteración} del lenguaje asociado $L(r)$.
+    \[ L(r)^* = \bigcup_{i \geq 0} L(r)^i \]
+    donde $L(r)^0 = \{\varepsilon\}$. Esta operación garantiza la aceptación de cero o más repeticiones de patrones definidos por $r$.
+\end{itemize}
+
+\begin{ejemplo}[Expresiones Regulares]
+Sea $A=\{0, 1\}$.
+\begin{enumerate}
+    \item La expresión \codeinline{(0+1)*} denota todas las palabras posibles sobre $A$, $A^*$.
+    \item La expresión \codeinline{1*(01*01*)*1*} denota el lenguaje de palabras donde el número de ceros es par, incluyendo la palabra vacía y palabras compuestas únicamente de unos. (Nota: La versión simplificada en la fuente es \codeinline{1*(01*01*)*}, que acepta palabras que inician con 1s y tienen un número par de 0s, con 1s intercalados, y debe cerrarse con $1^*$ o ser ajustada para la definición completa del lenguaje).
+    \item La expresión \codeinline{(0+1)*0110(0+1)*} denota el lenguaje de palabras que contienen la subcadena \codeinline{0110}.
+\end{enumerate}
+\end{ejemplo}
+
+\subsection{Conversión Autómata Finito $\to$ Expresión Regular (Teorema de Kleene, Parte I)} % Corresponde a Índice 4.2.
+
+La primera parte del Teorema de Kleene afirma que, si un lenguaje $L$ es aceptado por un Autómata Finito Determinista (AFD), entonces $L$ puede ser expresado mediante una Expresión Regular. El método constructivo para obtener la ER asociada a un AFD $M=(Q, A, \delta, q_1, F)$ se basa en la \text{eliminación de estados} de forma recursiva.
+
+Asumimos que los estados de $M$ están numerados $Q = \{q_1, q_2, \ldots, q_n\}$.
+
+\subsubsection{Definición del conjunto $R_{ij}^k$} % Corresponde a Índice 4.2.1.
+
+El cálculo se articula alrededor de la definición de los conjuntos $R_{ij}^k$, donde $k$ representa un límite superior para los índices de los estados intermedios permitidos en un camino.
+
+\begin{definicion}[Conjunto de Palabras $R_{ij}^k$]
+$R_{ij}^k$ es el conjunto de todas las palabras $u \in A^*$ tales que, si el autómata comienza en el estado $q_i$ y finaliza en el estado $q_j$ después de leer $u$, todos los estados intermedios por los que pasa el autómata (al leer cualquier prefijo propio de $u$) tienen un índice (numeración) \text{menor o igual a $k$}.
+\end{definicion}
+
+El valor de $k$ varía desde $0$ hasta $n$, donde $n = |Q|$.
+
+\subsubsection{Algoritmo recursivo y fórmula de cálculo} % Corresponde a Índice 4.2.2.
+
+Para calcular $R_{ij}^k$, se divide el conjunto de caminos de $q_i$ a $q_j$ (con estados intermedios $\le k$) en dos categorías:
+
+\begin{enumerate}
+    \item Caminos que \text{no pasan} por el estado $q_k$. Estos caminos ya estaban incluidos en $R_{ij}^{k-1}$.
+    \item Caminos que pasan por $q_k$ \text{una o más veces}.
+\end{enumerate}
+
+Los caminos del tipo 2 se descomponen en cuatro partes, usando el estado $q_k$ como punto de bifurcación:
+\begin{enumerate}
+    \item Un camino de $q_i$ a $q_k$ que solo usa estados intermedios $\le k-1$ ($R_{ik}^{k-1}$).
+    \item Cero o más bucles en $q_k$ (de $q_k$ a $q_k$) que solo usan estados intermedios $\le k-1$ ($R_{kk}^{k-1})^*$.
+    \item Un camino final de $q_k$ a $q_j$ que solo usa estados intermedios $\le k-1$ ($R_{kj}^{k-1}$).
+\end{enumerate}
+
+La fórmula de recurrencia para el conjunto $R_{ij}^k$ es:
+\[ R_{ij}^k = R_{ij}^{k-1} \cup R_{ik}^{k-1} (R_{kk}^{k-1})^* R_{kj}^{k-1} \]
+De esta definición se deriva directamente la fórmula para las expresiones regulares asociadas $r_{ij}^k$:
+
+\begin{equation}
+r_{ij}^k = r_{ij}^{k-1} + r_{ik}^{k-1}(r_{kk}^{k-1})^*r_{kj}^{k-1}
+\end{equation}
+La \text{base} de la recursión, $r_{ij}^0$, se calcula directamente a partir de las transiciones directas entre $q_i$ y $q_j$: $r_{ij}^0 = \sum \{a \in A \mid \delta(q_i, a) = q_j\}$. Si $i=j$, se incluye $\epsilon$ en la suma.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=Stealth, node distance=2.5cm, auto]
+        \node[state] (qi) {$q_i$};
+        \node[state, above right=1.5cm and 3.5cm of qi] (qj) {$q_j$};
+        \node[state, below right=1.5cm and 2.5cm of qi] (qk) {$q_k$};
+
+        \path[->] (qi) edge[bend left=40] node[above] {$r_{ij}^{k-1}$} (qj); % Camino 1
+        
+        \path[->] (qi) edge node[left] {$r_{ik}^{k-1}$} (qk);
+        \path[->] (qk) edge[loop below] node {$r_{kk}^{k-1}{}^*$} (qk);
+        \path[->] (qk) edge node[right] {$r_{kj}^{k-1}$} (qj);
+
+    \end{tikzpicture}
+    \captionof{figure}{Representación esquemática de la fórmula de recurrencia $r_{ij}^k$.}
+    \label{fig:kleene_formula}
+\end{figure}
+
+\subsubsection{Obtención de la Expresión Regular final para $L(M)$} % Corresponde a Índice 4.2.3.
+
+Una vez que la recursión alcanza $k=n$ (donde $n$ es el número total de estados), $R_{1j}^n$ (asumiendo que $q_1$ es el estado inicial) representa el conjunto de todas las palabras que llevan de $q_1$ a $q_j$ sin restricciones en los estados intermedios.
+
+El lenguaje $L(M)$ es la unión de todos los lenguajes $R_{1j}^n$ para cada estado final $q_j \in F$.
+
+Si $F = \{q_{j_1}, q_{j_2}, \ldots, q_{j_m}\}$, la expresión regular final $r_{L(M)}$ es:
+\[ r_{L(M)} = r_{1j_1}^n + r_{1j_2}^n + \cdots + r_{1j_m}^n \]
+
+\begin{anotacion}{Lema de Arden.}
+Un método alternativo, a menudo más práctico para AFD pequeños, es el uso del Lema de Arden, que resuelve sistemas de ecuaciones lineales de expresiones regulares de la forma $q_i = \sum_{j} a_j q_j + \epsilon$. La solución para una ecuación de la forma $R = RQ + P$ (donde $R, Q, P$ son ERs y $\epsilon \notin L(Q)$) es $R = PQ^*$.
+\end{anotacion}
+
+\subsection{Conversión Expresión Regular $\to$ Autómata Finito (Teorema de Kleene, Parte II)} % Corresponde a Índice 4.3.
+
+La segunda parte del Teorema de Kleene establece que, dado cualquier lenguaje definido por una Expresión Regular $r$, existe un Autómata Finito que lo acepta. Esta transformación es esencial, ya que permite que los lenguajes, a menudo especificados inicialmente por su patrón (ER), sean implementados y reconocidos por un algoritmo (Autómata Finito).
+
+La demostración de esta parte se realiza mediante una construcción recursiva que genera un Autómata Finito No Determinista con Transiciones Nulas (AFN-$\epsilon$) para cada operador.
+
+\subsubsection{Breve mención a la Construcción de Thompson}
+
+El algoritmo constructivo más conocido para esta conversión es la \text{Construcción de Thompson}. Este método establece reglas para construir un AFN-$\epsilon$ con un único estado inicial y un único estado final para cada caso base (símbolo $a$, $\epsilon$, $\emptyset$) y para cada operación fundamental (unión, concatenación, clausura de Kleene).
+
+Por ejemplo, la construcción para la unión de dos expresiones $r_1$ y $r_2$ (representadas por autómatas $M_1$ y $M_2$) se logra introduciendo un nuevo estado inicial, $q_0$, y añadiendo transiciones $\epsilon$ desde $q_0$ a los estados iniciales de $M_1$ y $M_2$, resultando en un autómata compuesto que acepta la unión $L(r_1) \cup L(r_2)$.
+
+La existencia de esta construcción recursiva es suficiente para demostrar la potencia equivalente de los tres modelos (AFD, AFND, ER) en la aceptación de la clase de Lenguajes Regulares.
+
+
+\section{Gramáticas Regulares (GR)} % Corresponde a Índice 5.
+
+Las Gramáticas Regulares (GR), también conocidas como gramáticas de Tipo 3, representan la clase de generadores de lenguajes más restringida en la \text{Jerarquía de Chomsky}. Su importancia radica en que definen formalmente la clase de los \text{Lenguajes Regulares}, estableciendo la equivalencia generativa con los Autómatas Finitos.
+
+\subsection{Definición} % Corresponde a Índice 5.1.
+
+Una Gramática Generativa se define formalmente como una cuádrupla $G = (V, T, P, S)$, donde $V$ son las variables (símbolos no terminales), $T$ son los símbolos terminales, $P$ es el conjunto finito de reglas de producción, y $S$ es el símbolo de partida.
+
+Las Gramáticas Regulares imponen estrictas restricciones en la forma de las reglas de producción $P$.
+
+\begin{definicion}[Gramática de Tipo 3 o Regular]
+Una Gramática $G = (V, T, P, S)$ es de \text{Tipo 3} (o Regular) si todas sus reglas de producción cumplen la forma \text{Lineal por la Derecha} o la forma \text{Lineal por la Izquierda}.
+\end{definicion}
+
+\subsubsection{Gramáticas Lineales por la Derecha}
+
+En una Gramática Lineal por la Derecha (GLD), el símbolo no terminal (variable) aparece únicamente como el último símbolo en la parte derecha de la producción, si es que aparece.
+
+\begin{definicion}[Gramática Lineal por la Derecha (GLD)]
+Todas las reglas de producción $P$ deben tener una de las siguientes dos formas:
+\begin{enumerate}
+    \item $A \to uB$
+    \item $A \to u$
+\end{enumerate}
+donde $A, B \in V$ (variables) y $u \in T^*$ (una cadena de cero o más símbolos terminales).
+\end{definicion}
+
+\begin{ejemplo}[GLD]
+La gramática $G$ con reglas $S \to 0A$, $A \to 10A$, $A \to \varepsilon$ es una GLD.
+\begin{itemize}
+    \item $S \to 0A$: $u=0$, $B=A$.
+    \item $A \to 10A$: $u=10$, $B=A$.
+    \item $A \to \varepsilon$: $u=\varepsilon$ (la palabra vacía).
+\end{itemize}
+Esta gramática genera el lenguaje $L = \{0(10)^*\}$.
+\end{ejemplo}
+
+\subsubsection{Gramáticas Lineales por la Izquierda}
+
+En una Gramática Lineal por la Izquierda (GLI), el símbolo no terminal (variable) aparece únicamente como el primer símbolo en la parte derecha de la producción, si es que aparece.
+
+\begin{definicion}[Gramática Lineal por la Izquierda (GLI)]
+Todas las reglas de producción $P$ deben tener una de las siguientes dos formas:
+\begin{enumerate}
+    \item $A \to Bu$
+    \item $A \to u$
+\end{enumerate}
+donde $A, B \in V$ (variables) y $u \in T^*$ (una cadena de cero o más símbolos terminales).
+\end{definicion}
+
+\begin{ejemplo}[GLI]
+La gramática $G$ con reglas $S \to S10$ y $S \to 0$ es una GLI.
+\begin{itemize}
+    \item $S \to S10$: $B=S$, $u=10$.
+    \item $S \to 0$: $u=0$.
+\end{itemize}
+Esta gramática genera el lenguaje $L = \{0(10)^*\}$, el mismo lenguaje que el ejemplo de la GLD.
+\end{ejemplo}
+
+\begin{anotacion}{Restricción Crucial.}
+Una gramática que contiene una mezcla de reglas lineales por la derecha y reglas lineales por la izquierda (por ejemplo, $A \to aB$ y $C \to DC$) \text{no} es una gramática regular, a menos que el lenguaje generado sea trivial.
+\end{anotacion}
+
+\subsection{Equivalencia} % Corresponde a Índice 5.2.
+
+\subsubsection{Relación entre Autómatas Finitos y Gramáticas Regulares}
+
+La relación entre los Autómatas Finitos (AF) y las Gramáticas Regulares (GR) es de \text{equivalencia total}: cualquier lenguaje reconocido por un AF puede ser generado por una GR, y viceversa.
+
+\begin{teorema}[Equivalencia AF $\leftrightarrow$ GR]
+Un lenguaje $L$ es aceptado por un Autómata Finito Determinista (AFD) si y solo si $L$ es generado por una Gramática Regular.
+\end{teorema}
+
+Las construcciones algorítmicas que prueban esta equivalencia son directas y sistemáticas:
+
+\begin{enumerate}
+    \item \text{AFD $\to$ GR (Lineal por la Derecha):} Dada la definición de un AFD $M=(Q, A, \delta, q_0, F)$, se construye una GLD $G=(Q, A, P, q_0)$ donde los estados $Q$ actúan como variables.
+    \begin{itemize}
+        \item Por cada transición $\delta(p, a) = q$ en $M$, se crea la producción $p \to aq$ en $G$.
+        \item Por cada estado final $p \in F$, se añade la producción $p \to \varepsilon$.
+    \end{itemize}
+    \item \text{GR (Lineal por la Derecha) $\to$ AFND:} Dada una GLD $G$, se puede construir directamente un Autómata Finito No Determinista (AFND) o un AFND con $\epsilon$-transiciones que acepte exactamente el mismo lenguaje. Los estados del autómata se basan en las variables y los prefijos de la parte derecha de las reglas.
+    \item \text{GLD $\leftrightarrow$ GLI:} Se demuestra que los lenguajes generados por GLD y GLI son idénticos. La conversión se realiza mediante la inversión de los autómatas asociados. Un lenguaje $L$ generado por una GLI se relaciona con el AFD que acepta $L^{-1}$ (el lenguaje inverso).
+\end{enumerate}
+
+\subsection{Conclusión} % Corresponde a Índice 5.3.
+
+\subsubsection{El Teorema de Kleene como la unión de modelos equivalentes}
+
+El Teorema de Kleene, junto con la demostración de la equivalencia con las Gramáticas Regulares, establece un pilar fundamental en la Teoría de la Computación, unificando cuatro formalismos distintos capaces de describir la misma clase de lenguajes.
+
+El conjunto de modelos equivalentes que definen esta clase es:
+$$ \text{AFD} \leftrightarrow \text{AFND} \leftrightarrow \text{ER} \leftrightarrow \text{GR} $$
+
+Cualquier problema que pueda resolverse mediante uno de estos modelos tiene una solución equivalente en los otros tres. Por ejemplo, si se puede especificar un patrón de texto con una Expresión Regular ($\text{ER}$), se puede construir un AFD que lo reconozca y una Gramática Regular que lo genere.
+
+\subsubsection{Definición de la clase de los Lenguajes Regulares}
+
+La clase de los \text{Lenguajes Regulares}, denotada como $\mathcal{L}_3$ (Lenguajes de Tipo 3 en la Jerarquía de Chomsky), se define como el conjunto de todos los lenguajes que pueden ser descritos por cualquiera de los formalismos equivalentes discutidos.
+
+\begin{definicion}[Clase de los Lenguajes Regulares ($\mathcal{L}_3$)]
+La clase $\mathcal{L}_3$ es el conjunto de lenguajes que cumplen cualquiera de las siguientes condiciones equivalentes:
+\begin{itemize}
+    \item Son aceptados por un Autómata Finito Determinista (AFD).
+    \item Son aceptados por un Autómata Finito No Determinista (AFND o AFN-$\epsilon$).
+    \item Son descritos por una Expresión Regular (ER).
+    \item Son generados por una Gramática Regular (GLD o GLI).
+\end{itemize}
+\end{definicion}
+
+La clase $\mathcal{L}_3$ está contenida estrictamente en la clase de los Lenguajes Independientes del Contexto ($\mathcal{L}_2$), es decir, $\mathcal{L}_3 \subseteq \mathcal{L}_2$. Un lenguaje no puede ser regular si, por ejemplo, requiere contar dos cantidades no adyacentes de forma independiente (como $L = \{a^n b^n \mid n \geq 0\}$), ya que esto excede la capacidad de memoria finita de un autómata regular. Aunque esto se haya visto en la unidad anterior, es importante reiterarlo aquí.
+

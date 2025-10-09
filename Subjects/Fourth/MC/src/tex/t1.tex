@@ -1,0 +1,175 @@
+\chapter{Introducción a la Computación}
+
+\section{Fundamentos y Orígenes}
+
+\subsection{Preguntas Clave: Definición, problemas resolubles, y Modelos de Computación}
+
+La Ciencia de la Computación se fundamenta en la búsqueda de respuestas a preguntas trascendentales sobre los límites de la resolución automática de problemas. Entre las cuestiones centrales se encuentran:
+\begin{itemize}
+    \item \textbf{¿Qué puede ser resuelto de forma automática?} Esta pregunta indaga sobre la existencia de algoritmos para problemas dados, es decir, procedimientos mecánicos sistemáticos que garantizan una terminación para cualquier entrada válida.
+    \item \textbf{¿Qué puede ser resuelto de forma eficiente?} Más allá de la mera resolubilidad, este interrogante aborda la viabilidad práctica de los algoritmos en términos de recursos computacionales como tiempo y espacio.
+    \item \textbf{¿Qué estructuras son comunes en la computación con símbolos y cómo pueden ser procesadas?} Esta línea de investigación se enfoca en el estudio de patrones en conjuntos de cadenas y en los mecanismos formales para su manipulación.
+\end{itemize}
+Para abordar estas preguntas, se desarrollan \textbf{Modelos de Computación}. Estos modelos son abstracciones matemáticas de un dispositivo de cómputo, que permiten analizar sus capacidades y limitaciones de manera formal. Un concepto clave en este ámbito es el de \textbf{autómata}, concebido como un sistema algebraico que procesa información. Un autómata, en su forma más general, se define por sus conjuntos de estados, señales de entrada y señales de salida, junto con las operaciones que gobiernan sus transiciones y respuestas. El estudio de estos modelos, como las Máquinas de Turing y sus simplificaciones (autómatas finitos, autómatas con pila), constituye la base de la Teoría de la Computabilidad y de Lenguajes Formales.
+
+\subsection{Breve Historia: Desde precursores hasta Autómatas y el Problema de la Parada}
+
+Los fundamentos de la computación se remontan a los trabajos de lógicos y matemáticos como Russell, Hilbert y Boole, quienes sentaron las bases del formalismo matemático moderno. En las décadas de 1930 y 1940, figuras como Alan Turing y Alonzo Church formalizaron la noción de "computabilidad". Turing, en particular, propuso un modelo teórico, la \textbf{Máquina de Turing}, que se considera la definición de un dispositivo de cómputo universal.
+
+En su búsqueda por resolver los 23 problemas propuestos por David Hilbert, la comunidad científica demostró que ciertos problemas son \textbf{indecidibles}, es decir, no admiten una solución algorítmica general. El ejemplo canónico es el \textbf{Problema de la Parada (Halting Problem)}.
+
+\begin{definicion}[Problema de la Parada]
+    No existe un programa de ordenador universal, llamémoslo \texttt{Stops(P, x)}, que pueda tomar como entrada cualquier otro programa \texttt{P} y unos datos \texttt{x} y determinar, en un tiempo finito, si \texttt{P} terminará su ejecución con la entrada \texttt{x} o si entrará en un bucle infinito.
+\end{definicion}
+
+La imposibilidad de resolver este problema fue un resultado trascendental que estableció los límites fundamentales de lo que puede ser computado.
+
+Paralelamente, el desarrollo de los primeros lenguajes de programación como FORTRAN, COBOL y LISP en los años 50 impulsó el estudio de la sintaxis. En esta década, Noam Chomsky, junto con Michael Rabin y Dana Scott, formalizó la teoría de los \textbf{Autómatas y Lenguajes Formales}, estableciendo una jerarquía de gramáticas y máquinas que reconocen distintas clases de patrones.
+
+\section{Elementos Básicos: Lenguajes Formales}
+
+\subsection{Alfabetos}
+
+La teoría de lenguajes formales se construye a partir de conceptos básicos. El más fundamental es el de alfabeto.
+
+\begin{definicion}[Alfabeto]
+Un \textbf{alfabeto} es un conjunto \textbf{finito} y no vacío de elementos denominados \textbf{símbolos} o \textbf{letras}.
+\end{definicion}
+
+\begin{anotacion}
+Se denotan los alfabetos con letras mayúsculas como $\Sigma$, $A$, $B$, etc., y sus símbolos con letras minúsculas como $a, b, c$ o números.
+\end{anotacion}
+
+\begin{ejemplo}
+Algunos alfabetos comunes son:
+\begin{itemize}
+    \item El alfabeto binario: $\Sigma = \{0, 1\}$.
+    \item El alfabeto de letras minúsculas: $\Sigma = \{a, b, c, \dots, z\}$.
+    \item Un alfabeto de vectores: $B = \{\langle 0,0 \rangle, \langle 0,1 \rangle, \langle 1,0 \rangle, \langle 1,1 \rangle\}$.
+\end{itemize}
+\end{ejemplo}
+
+\subsection{Palabras}
+
+\begin{definicion}[Palabra]
+Una \textbf{palabra} (también llamada \textbf{cadena} o \textbf{string}) sobre un alfabeto $A$ es una sucesión finita de símbolos de $A$. La \textbf{longitud} de una palabra $u$, denotada por $|u|$, es el número de símbolos que la componen.
+\end{definicion}
+
+\begin{anotacion}
+Las palabras se denotan con letras minúsculas como $u, v, w, x, y, z$. El conjunto de todas las palabras posibles sobre un alfabeto $A$ se denota como $A^*$.
+\end{anotacion}
+
+\begin{definicion}[Palabra Vacía]
+La \textbf{palabra vacía}, denotada por $\epsilon$ (o a veces $\lambda$), es la única palabra de longitud cero, $| \epsilon | = 0$. Es un elemento de $A^*$ para cualquier alfabeto $A$.
+\end{definicion}
+
+\begin{anotacion}
+El conjunto de todas las palabras no vacías sobre un alfabeto $A$ se denota como $A^+$. Por lo tanto, $A^+ = A^* \setminus \{\epsilon\}$.
+\end{anotacion}
+
+El conjunto de palabras $A^*$ con la operación de concatenación forma una estructura algebraica conocida como monoide, donde la palabra vacía $\epsilon$ es el elemento neutro.
+
+\subsection{Lenguajes}
+
+\begin{definicion}[Lenguaje]
+Un \textbf{lenguaje} $L$ sobre un alfabeto $A$ es cualquier subconjunto de $A^*$, es decir, $L \subseteq A^*$. Las palabras que pertenecen al lenguaje se denominan a menudo "cadenas del lenguaje" o "frases".
+\end{definicion}
+
+\begin{ejemplo}
+    Dado el alfabeto $A = \{a, b\}$:
+    \begin{itemize}
+        \item $L_1 = \{a, b, \epsilon\}$ es un lenguaje finito con tres palabras.
+        \item $L_2 = \{a^ib^i \mid i \geq 0\}$ es un lenguaje infinito que contiene palabras con igual número de a's seguidas de b's.
+        \item $L_3 = \{uu^{-1} \mid u \in \{a, b\}^*\}$ es el lenguaje de los palíndromos de longitud par.
+        \item $L_4 = \{a^{n^2} \mid n \geq 1\}$ es el lenguaje de cadenas de a's cuya longitud es un cuadrado perfecto.
+    \end{itemize}
+\end{ejemplo}
+
+Una propiedad fundamental del conjunto de todos los lenguajes sobre un alfabeto no vacío es su \textbf{no numerabilidad}. Mientras que el conjunto de todas las palabras $A^*$ es numerable, el conjunto de todos sus subconjuntos (es decir, el conjunto de todos los lenguajes, $\mathcal{P}(A^*)$) es no numerable. Esto tiene una profunda implicación: existen más lenguajes que programas para describirlos o reconocerlos, lo que demuestra que debe haber problemas (lenguajes) que no son computacionalmente resolubles.
+
+\section{Operaciones Esenciales}
+
+\subsection{Sobre Palabras}
+
+Existen varias operaciones fundamentales que se pueden aplicar a las palabras.
+
+\begin{definicion}[Concatenación]
+Dados $u = a_1 \dots a_n$ y $v = b_1 \dots b_m$ dos palabras sobre un alfabeto $A$, su \textbf{concatenación}, denotada $uv$, es la palabra $a_1 \dots a_n b_1 \dots b_m$.
+\end{definicion}
+La concatenación es asociativa y tiene a $\epsilon$ como elemento neutro ($u\epsilon = \epsilon u = u$).
+
+\begin{definicion}[Iteración]
+La \textbf{iteración n-ésima} de una palabra $u$, denotada $u^n$, es la concatenación de $u$ consigo misma $n$ veces. Se define formalmente como $u^0 = \epsilon$ y $u^{i+1} = u^i u$ para $i \geq 0$.
+\end{definicion}
+
+\begin{definicion}[Palabra Inversa]
+La \textbf{palabra inversa} de $u = a_1 \dots a_n$, denotada $u^{-1}$, es la palabra $a_n \dots a_1$.
+\end{definicion}
+
+\begin{anotacion}
+La operación de inversión no es un homomorfismo. Por ejemplo, si $f(u) = u^{-1}$, entonces $f(uv) = (uv)^{-1} = v^{-1}u^{-1}$, que en general es distinto de $f(u)f(v) = u^{-1}v^{-1}$.
+\end{anotacion}
+
+\subsection{Sobre Lenguajes}
+
+Al ser los lenguajes conjuntos de palabras, heredan las operaciones de conjuntos como la \textbf{unión} ($L_1 \cup L_2$), \textbf{intersección} ($L_1 \cap L_2$) y \textbf{complementario} ($\bar{L} = A^* \setminus L$). Adicionalmente, se definen operaciones específicas.
+
+\begin{definicion}[Concatenación de Lenguajes]
+La \textbf{concatenación} de dos lenguajes $L_1$ y $L_2$ es el lenguaje $L_1 L_2 = \{uv \mid u \in L_1, v \in L_2\}$.
+\end{definicion}
+Esta operación es asociativa y tiene como elemento neutro el lenguaje $\{\epsilon\}$.
+
+\begin{definicion}[Clausura de Kleene y Clausura Positiva]
+Dado un lenguaje $L$, su \textbf{clausura de Kleene} (o estrella), denotada $L^*$, es la unión de todas sus potencias:
+\[ L^* = \bigcup_{i \geq 0} L^i = L^0 \cup L^1 \cup L^2 \cup \dots \]
+La \textbf{clausura positiva}, denotada $L^+$, se define de manera similar pero excluyendo la potencia cero:
+\[ L^+ = \bigcup_{i \geq 1} L^i = L^1 \cup L^2 \cup \dots \]
+donde $L^0 = \{\epsilon\}$ y $L^{i+1} = L L^i$.
+\end{definicion}
+Se cumple que $L^+ = L^*$ si y solo si $\epsilon \in L$. Si $\epsilon \notin L$, entonces $L^* = L^+ \cup \{\epsilon\}$. Si $L$ es un lenguaje no vacío, $L^*$ siempre es infinito.
+
+\section{Generación de Lenguajes}
+
+\subsection{Gramáticas: Definición y Lenguaje Generado}
+Los lenguajes, especialmente los infinitos, requieren un mecanismo finito para su descripción. Las gramáticas generativas, introducidas por Noam Chomsky, son uno de dichos mecanismos.
+
+\begin{definicion}[Gramática Generativa]
+Una \textbf{gramática generativa} es una tupla $G = (V, T, P, S)$, donde:
+\begin{itemize}
+    \item $V$ es un alfabeto finito de \textbf{variables} o símbolos no terminales.
+    \item $T$ es un alfabeto finito de \textbf{símbolos terminales}, disjunto de $V$.
+    \item $P$ es un conjunto finito de \textbf{reglas de producción} de la forma $\alpha \rightarrow \beta$, donde $\alpha, \beta \in (V \cup T)^*$ y $\alpha$ contiene al menos una variable.
+    \item $S \in V$ es el \textbf{símbolo inicial} o axioma.
+\end{itemize}
+\end{definicion}
+
+Una palabra $\beta$ se \textbf{deriva} de $\alpha$ en un paso ($\alpha \Rightarrow \beta$) si existe una regla $\gamma \rightarrow \phi \in P$ y $\alpha$ puede escribirse como $\alpha_1\gamma\alpha_2$, de tal forma que $\beta = \alpha_1\phi\alpha_2$. La relación de derivación en múltiples pasos se denota por $\Rightarrow^*$.
+
+\begin{definicion}[Lenguaje Generado]
+El \textbf{lenguaje generado} por una gramática $G$, denotado $L(G)$, es el conjunto de todas las palabras compuestas exclusivamente por símbolos terminales que pueden derivarse a partir del símbolo inicial $S$:
+\[ L(G) = \{ u \in T^* \mid S \Rightarrow^* u \} \].
+\end{definicion}
+
+\begin{ejemplo}
+Sea la gramática $G = (\{S\}, \{a, b\}, \{S \rightarrow aSb, S \rightarrow \epsilon\}, S)$.
+Esta gramática genera el lenguaje $L(G) = \{a^i b^i \mid i \geq 0\}$. Por ejemplo, para generar $aabb$:
+$S \Rightarrow aSb \Rightarrow aaSbb \Rightarrow aab\epsilon b = aabb$.
+\end{ejemplo}
+
+\subsection{Jerarquía de Chomsky}
+
+Noam Chomsky clasificó las gramáticas en cuatro tipos, estableciendo una jerarquía basada en las restricciones impuestas sobre sus reglas de producción.
+
+\begin{definicion}[Jerarquía de Chomsky]
+La jerarquía de Chomsky se define de la siguiente manera:
+\begin{itemize}
+    \item \textbf{Tipo 0 (Sin restricciones):} Corresponde a cualquier gramática generativa. Estas gramáticas generan los lenguajes \textbf{recursivamente enumerables}, que son aquellos reconocibles por una Máquina de Turing.
+    \item \textbf{Tipo 1 (Dependientes del contexto):} Todas las producciones son de la forma $\alpha_1 A \alpha_2 \rightarrow \alpha_1 \beta \alpha_2$, con $A \in V$, $\alpha_1, \alpha_2, \beta \in (V \cup T)^*$ y $\beta \neq \epsilon$. Se permite la regla $S \rightarrow \epsilon$ si $S$ no aparece en la parte derecha de ninguna regla. Generan los lenguajes \textbf{dependientes del contexto}. Un ejemplo es el lenguaje $\{a^n b^n c^n \mid n \geq 1\}$.
+    \item \textbf{Tipo 2 (Independientes del contexto):} Todas las producciones son de la forma $A \rightarrow \alpha$, con $A \in V$ y $\alpha \in (V \cup T)^*$. Generan los lenguajes \textbf{independientes del contexto}.
+    \item \textbf{Tipo 3 (Regulares):} Todas las producciones son de la forma $A \rightarrow uB$ o $A \rightarrow u$, donde $A, B \in V$ y $u \in T^*$. Generan los \textbf{lenguajes regulares}.
+\end{itemize}
+\end{definicion}
+
+Esta jerarquía establece una relación de inclusión estricta entre las familias de lenguajes generados, denotadas por $\mathcal{L}_i$ para el tipo $i$:
+\[ \mathcal{L}_3 \subset \mathcal{L}_2 \subset \mathcal{L}_1 \subset \mathcal{L}_0 \].
+Por ejemplo, todo lenguaje regular es también independiente del contexto, pero no a la inversa.
