@@ -1,0 +1,1312 @@
+% ========================
+% estilo.latex mínimo funcional
+% ========================
+
+\documentclass[12pt]{book} % report para capítulos
+
+% ========================
+% Paquetes y comandos extra
+% ========================
+\input{../../../../extraFiles/preambulos_oficiales/paquetes.tex}  % si tienes paquetes personalizados
+\input{../../../../extraFiles/preambulos_oficiales/comandos.tex}  % comandos LaTeX propios
+\input{../../../../extraFiles/preambulos_oficiales/estilos.tex}   % estilos de secciones, etc.
+
+% ========================
+% Configuración índice y listas
+% ========================
+\setlength{\cftbeforesecskip}{5pt}
+\setlength{\headheight}{14pt}  % un poco más que 13.6pt
+
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+
+% Fix para listas de Pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+%===============
+% ESPACIOS
+%===============
+
+% --- Compactar secciones ---
+\titlespacing*{\section}{0pt}{1.2ex plus 0.5ex minus 0.2ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{1ex plus 0.3ex minus 0.2ex}{0.5ex}
+
+% --- Compactar flotantes (figuras/tablas) ---
+\setlength{\textfloatsep}{8pt}
+\setlength{\intextsep}{6pt}
+\setlength{\floatsep}{6pt}
+
+% --- Compactar listas ---
+\setlist{nosep}
+
+% --- Espacio entre párrafos ---
+\setlength{\parskip}{4pt}
+
+
+
+%=======================
+% fancy with parameters
+%=======================
+%\fancyfoot[L]{\scriptsize\itshape Modelos de Computación}
+\fancyfoot[L]{\normalsize Modelos de
+Computación} % pie de página izquierdo con tamaño normal
+
+\setcounter{tocdepth}{1} % Muestra solo hasta subsecciones en el índice
+
+%=======================
+% reset chapter 0 with one more \part
+%=======================
+
+\makeatletter
+\@addtoreset{chapter}{part}
+\makeatother
+
+
+% ========================
+% Inicio del documento
+% ========================
+\begin{document}
+
+% Cambiar puntos suspensivos en el índice
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% Ajustar formato de secciones y subsecciones en el índice
+\renewcommand{\cftsecfont}{\bfseries} % Secciones en negrita
+\renewcommand{\cftsecpagefont}{\bfseries} % Números de página en negrita para secciones
+\renewcommand{\cftsubsecfont}{\normalfont} % Subsecciones en formato normal
+\renewcommand{\cftsubsecpagefont}{\normalfont} % Números de página en formato normal para subsecciones
+
+% Espaciado entre entradas del índice
+\setlength{\cftbeforesecskip}{8pt} % Espaciado antes de secciones
+\setlength{\cftbeforesubsecskip}{4pt} % Espaciado antes de subsecciones
+
+
+
+%\input{portada}
+
+
+%==========================
+% PORTADA: ENTRADA MANUAL
+%==========================
+
+% portada.tex
+\begin{titlepage}
+    \newgeometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm} % márgenes personalizados
+    
+    % Fondo con transparencia
+    \begin{tikzpicture}[remember picture,overlay]
+        % \node[opacity=0.15,inner sep=0pt] at (current page.center)
+        \node[inner sep=0pt] at (current page.center)
+            {\includegraphics[width=\paperwidth,height=\paperheight]{../../../../extraFiles/img/fondo_info.jpg}};
+    \end{tikzpicture}
+
+    % Contenido de la portada
+    \begin{center}
+        \vspace*{2cm}
+        
+        \vspace{5cm} % Añadir más espacio antes del contenido
+        {\Huge \bfseries\scshape\textcolor{white}{Modelos de
+Computación} \par}
+        \vspace{0.5cm}
+        {\Large \itshape\textcolor{white}{Temario} \par}
+        \vspace{0.5cm}
+        % {\small \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
+        % {\small \itshape \href{https://elblogdeismael.github.io}{https://elblogdeismael.github.io} \par}
+
+
+        \vfill
+        
+        % {\LARGE Ismael Sallami Moreno \par}
+
+        \begin{flushright}
+            {Ismael Sallami Moreno \par}
+            {\small \itshape \href{https://elblogdeismael.github.io}{Recursos Ingeniería Informática y Ade} \par}
+        \end{flushright}
+        \vspace{0.3cm}
+        % {\Large Universidad de Granada \par}
+        
+        % \vspace{1cm}
+        % \includegraphics[width=0.25\textwidth]{../../../../extraFiles/img/ugr.png} % opcional: logo
+        % \vspace{1cm}
+        
+        % {\large \today}
+    \end{center}
+    
+    \restoregeometry
+\end{titlepage}
+
+
+%==========================
+% LICENCIA
+%==========================
+
+\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=south west, xshift=1cm, yshift=1cm] at (current page.south west) {
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft}
+\section*{Licencia}
+
+Este trabajo está bajo una 
+\href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Licencia Creative Commons BY-NC-ND 4.0}.
+
+\bigskip
+
+Permisos: Se permite compartir, copiar y redistribuir el material en cualquier medio o formato.
+
+\bigskip
+
+Condiciones: Es necesario dar crédito adecuado, proporcionar un enlace a la licencia e indicar si se han realizado cambios. No se permite usar el material con fines comerciales ni distribuir material modificado.
+
+\bigskip
+
+\begin{center}
+  \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[width=0.35\textwidth]{../../../../extraFiles/img/by-nc-nd.png}}
+\end{center}
+\end{flushleft}
+\end{minipage}
+};
+\end{tikzpicture}
+
+\thispagestyle{empty}
+\clearpage
+
+%==========================
+% AUTOR
+%==========================
+
+% Página del autor
+\begin{center}
+    \vspace*{3cm} % Añadir más espacio en la parte superior
+    {\Huge Modelos de
+Computación}\\[2cm] % Incrementar el espacio entre líneas
+    {\Large Ismael Sallami Moreno}\\[1cm] % Incrementar el espacio entre líneas
+    % \includegraphics[width=0.3\textwidth]{autor.jpg} % opcional foto
+    \vfill % Añadir espacio flexible para centrar verticalmente
+\end{center}
+\thispagestyle{empty}
+
+% Página en blanco sin estilo
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+% Otra página en blanco sin estilo
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+
+%==========================
+% BIOGRAFÍA
+%==========================
+
+% Breve descripción del autor
+% \chapter*{Biografía}
+% \addcontentsline{toc}{chapter}{Biografía} % aparece en índice
+% Aquí escribes una breve descripción sobre ti, tu formación, experiencia, etc.
+% \cleardoublepage
+
+
+% \input{../../../../extraFiles/preambulos_oficiales/licencia.tex}  % licencia
+% \thispagestyle{empty} % quitar número de página en la portada
+% \clearpage
+
+% --- Índice ---
+\tableofcontents
+% \listoffigures
+\clearpage
+\thispagestyle{empty} % quitar estilo de la página en blanco
+
+%\listoftables
+%\clearpage
+%\thispagestyle{empty} % quitar número de página en la portada
+%\clearpage
+%
+% Índice de código
+%\renewcommand{\lstlistlistingname}{Índice de Código}
+%\lstlistoflistings
+%\clearpage
+%
+% Índice de ecuaciones
+%\renewcommand{\listtheoremname}{Índice de Ecuaciones}
+%\listoftheorems[ignoreall,show={equation}]
+%\clearpage
+
+% --- Contenido Markdown generado por Pandoc ---
+\part{Teoría}
+\input{../src/tex/t1}
+\input{../src/tex/t2}
+
+\chapter{Relaciones de Ejercicios}
+
+\hypertarget{relaciuxf3n-tema-1-modelos-de-computaciuxf3n}{%
+\section{Relación Tema 1: Modelos de
+Computación}\label{relaciuxf3n-tema-1-modelos-de-computaciuxf3n}}
+
+\begin{ejercicio}
+Descripción de lenguajes generados por gramáticas.
+\end{ejercicio}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Describir el lenguaje generado por la siguiente gramática: \[
+   S \to XYX \\
+   \] \[
+   X \to aX \ | \ bX \ | \ \epsilon \\
+   \] \[
+   Y \to bbb
+   \]
+
+  \begin{solucion}[Ejercicio 1.a]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen la forma:
+
+   \begin{enumerate}
+       \item Una secuencia de cero o más a o b (generada por X).
+       \item Seguido por bbb (generado por Y).
+       \item Seguido nuevamente por una secuencia de cero o más a o b (generada por X).
+   \end{enumerate}
+
+   Por lo tanto, el lenguaje generado es:
+
+   $$
+   L = \{ w_1 \ bbb \ w_2 \ | \ w_1, w_2 \in \{a, b\}^* \}
+   $$
+
+   Donde $w_1$ y $w_2$ son cadenas arbitrarias (incluyendo la cadena vacía) formadas por los símbolos a y b. Otra forma es demostrándolo mediante doble inclusión (manera más matemática).
+
+   \end{solucion}
+\item
+  Describir el lenguaje generado por la siguiente gramática: \[
+   S \to aX 
+   \] \[
+   X \to aX \ | \ bX \ | \ \epsilon
+   \]
+
+  \begin{solucion}[Ejercicio 1.b]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen la forma:
+
+   \begin{enumerate}
+       \item Una a inicial (generada por $S$).
+       \item Seguido por una secuencia de cero o más $a$ o $b$ (generada por $X$).
+   \end{enumerate}
+
+   Por lo tanto, el lenguaje generado es:
+
+   $$
+   L = \{ a \ w \ | \ w \in \{a, b\}^* \} \text{ ó } L = \{v \in \{a,b\}^* : bbb \in v\}
+   $$
+
+   Donde $w$ es una cadena arbitraria (incluyendo la cadena vacía) formada por los símbolos a y b. Otra forma de demostrarlo es mediante doble inclusión.
+
+   \end{solucion}
+\item
+  Describir el lenguaje generado por la siguiente gramática: \[
+   S \to XaXaX \\
+   \] \[
+   X \to aX \ | \ bX \ | \ \epsilon
+   \]
+
+  \begin{solucion}[Ejercicio 1.c]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen la forma:
+
+   \begin{enumerate}
+       \item Una secuencia de cero o más $a$ o $b$ (generada por $X$).
+       \item Seguido por una $a$.
+       \item Seguido nuevamente por una secuencia de cero o más $a$ o $b$ (generada por $X$).
+       \item Seguido por otra $a$.
+       \item Seguido nuevamente por una secuencia de cero o más $a$ o $b$ (generada por $X$).
+   \end{enumerate}
+
+   Por lo tanto, el lenguaje generado es:
+
+   $$
+   L = \{ w_1 \ a \ w_2 \ a \ w_3  \ | \ w_1, w_2, w_3 \in \{a, b\}^* \}
+   $$
+
+   Donde $w_1$, $w_2$ y $w_3$ son cadenas arbitrarias (incluyendo la cadena vacía) formadas por los símbolos a y b. Otra forma de demostrarlo es mediante doble inclusión.
+
+   \end{solucion}
+\item
+  Describir el lenguaje generado por la siguiente gramática: \[
+   S \to SS \ | \ XaXaX \ | \ \epsilon \\
+   \] \[
+   X \to bX \ | \ \epsilon
+   \]
+
+  \begin{solucion}[Ejercicio 1.d]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen las siguientes características:
+
+   \begin{enumerate}
+       \item La gramática permite generar la cadena vacía ($\epsilon$).
+       \item También permite generar cadenas de la forma $w_1 \ a \ w_2 \ a \ w_3 $, donde $w_1$, $w_2$, y $w_3$ son cadenas formadas únicamente por el símbolo $b$ (generadas por $X$).
+       \item Además, permite concatenar arbitrariamente las cadenas generadas en los puntos anteriores debido a la regla $S \to SS$.
+   \end{enumerate}
+
+   Encontramos que el númeri de a es par.
+
+   Por lo tanto, el lenguaje generado es:
+
+   $$
+   L = \{ \epsilon \} \cup \{ w_1 \ a \ w_2 \ a \ w_3  \ | \ w_1, w_2, w_3 \in \{b\}^* \} \cup \{ uv \ | \ u, v \in L \}
+   $$
+
+   Donde $w_1$, $w_2$, y $w_3$ son cadenas arbitrarias (incluyendo la cadena vacía) formadas por el símbolo $b$, y $u, v$ son cadenas generadas por la gramática. Otra forma de demostrarlo es mediante doble inclusión.
+
+   Otra forma vista en clase es:
+
+   $$
+   L_{aux} = \{vawax \mid v,w,x \in \{b^i \mid i \in \mathbb{N} \} \} \cup \{\varepsilon\}
+   $$
+
+   \text{Demostración por doble inclusión:}
+
+   \begin{itemize}
+       \item \text{Primera inclusión ($L \subseteq R$):}
+
+           Sea $w \in L$. Según las reglas de la gramática, $w$ puede ser:
+           \begin{itemize}
+               \item La cadena vacía ($\epsilon$), que claramente pertenece a $R$.
+               \item Una cadena de la forma $w_1 \ a \ w_2 \ a \ w_3 \ a$, donde $w_1, w_2, w_3 \in \{b\}^*$. Estas cadenas también pertenecen a $R$ por definición.
+               \item Una concatenación de cadenas en $L$ (por la regla $S \to SS$). Si $u, v \in L$, entonces $uv \in R$ porque $R$ es cerrado bajo concatenación.
+           \end{itemize}
+
+           Por lo tanto, $w \in R$, y se cumple que $L \subseteq R$.
+
+       \item \text{Segunda inclusión ($R \subseteq L$):}
+
+           Sea $w \in R$. Según la definición de $R$, $w$ puede ser:
+           \begin{itemize}
+               \item La cadena vacía ($\epsilon$), que claramente puede ser generada por la gramática.
+               \item Una cadena de la forma $w_1 \ a \ w_2 \ a \ w_3 \ a$, donde $w_1, w_2, w_3 \in \{b\}^*$. Estas cadenas pueden ser generadas por la regla $S \to XaXaX$ y $X \to bX \ | \ \epsilon$.
+               \item Una concatenación de cadenas en $R$. Si $u, v \in R$, entonces $uv \in L$ porque la regla $S \to SS$ permite concatenar cadenas generadas por la gramática.
+           \end{itemize}
+
+           Por lo tanto, $w \in L$, y se cumple que $R \subseteq L$.
+   \end{itemize}
+
+   Dado que $L \subseteq R$ y $R \subseteq L$, se concluye que $L = R$.
+
+   \end{solucion}
+\end{enumerate}
+
+\begin{ejercicio}
+Determinar lenguajes.
+\end{ejercicio}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Dada la gramática \(G = (\{S, A\}, \{a, b\}, P, S)\) donde:\\
+  \[P = \{S \to abAS, \ abA \to baab, \ S \to a, \ A \to b\}\]
+  Determinar el lenguaje que genera.
+
+  \begin{solucion}[Ejercicio 2.a]
+
+       Cada vez que aplicamos $S \to abAS$ generamos un bloque $abA$ adicional y dejamos un $S$ al final para poder repetir la expansión. Tras $m$ aplicaciones de $S \to abAS$ obtenemos la forma $(abA)^mS$.
+
+       Cada bloque $abA$ puede convertirse o bien en $baab$ aplicando la regla $abA \to baab$, o bien en $abb$ aplicando primero $A \to b$ (porque $abA \Rightarrow abb$). Finalmente $S \to a$. Por tanto, cada bloque se convierte en $baab$ o en $abb$ y al final queda una $a$.
+
+       De aquí se deduce la forma general de las cadenas generadas:
+
+       $$
+       L(G) = \{ xa \ | \ x \in \{baab, abb\}^* \},
+       $$
+
+       es decir, en notación de expresiones regulares:
+
+       $$
+       L(G) = (baab \ | \ abb)^* a.
+       $$
+
+       \text{Prueba formal (dos sentidos)}
+
+       \begin{enumerate}
+           \item $L(G) \subseteq (baab \ | \ abb)^* a$
+
+               Tras $m$ aplicaciones de $S \to abAS$ se tiene $(abA)^mS$ (prueba por inducción sobre $m$: base $m=0$ trivial; paso: si $S \Rightarrow (abA)^kS$ entonces aplicando $S \to abAS$ al $S$ final obtenemos $(abA)^{k+1}S$).
+
+               Para cada uno de los $m$ factores $abA$ podemos aplicar $abA \to baab$ (obteniendo $baab$) o bien aplicar $A \to b$ (obteniendo $abb$). Por tanto, la parte antes de la última $S$ es una concatenación de $baab$ y $abb$.
+
+               Finalmente $S \to a$. Por tanto, toda cadena derivable tiene la forma (bloques $baab$ o $abb$) seguida de $a$.
+
+           \item $(baab \ | \ abb)^* a \subseteq L(G)$
+
+               Sea $w = b_1b_2\cdots b_ma$ con cada $b_i \in \{baab, abb\}$.
+
+               Expandimos $S$ $m$ veces con $S \to abAS$ para obtener $(abA)^mS$.
+
+               Para cada $i$: si $b_i = baab$ aplicamos la regla $abA \to baab$ sobre el $i$-ésimo factor; si $b_i = abb$ aplicamos $A \to b$ en ese factor (convirtiendo $abA$ en $abb$).
+
+               Finalmente aplicamos $S \to a$. Eso produce exactamente $w$. Por tanto, cualquier cadena del lado derecho puede derivarse.
+       \end{enumerate}
+
+   \end{solucion}
+\item
+  Sea la gramática \(G = (V, T, P, S)\) donde:\\
+  \begin{align*}
+   V &= \{\langle numero \rangle, \langle digito \rangle\} \\
+   T &= \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\} \\
+   S &= \langle numero \rangle \\
+   \end{align*}
+
+  \begin{itemize}
+       \item $\langle numero \rangle \to \langle numero \rangle \langle digito \rangle$
+       \item $\langle numero \rangle \to \langle digito \rangle$
+       \item $\langle digito \rangle \to 0 \ | \ 1 \ | \ 2 \ | \ 3 \ | \ 4 \ | \ 5 \ | \ 6 \ | \ 7 \ | \ 8 \ | \ 9$
+   \end{itemize}
+
+  Determinar el lenguaje que genera.
+
+  \begin{solucion}[Ejercicio 2.b]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen las siguientes características:
+
+   \begin{enumerate}
+       \item La gramática permite generar cadenas formadas por uno o más dígitos, ya que:
+           \begin{itemize}
+               \item $\langle numero \rangle \to \langle numero \rangle \langle digito \rangle$ permite construir cadenas de longitud arbitraria añadiendo dígitos.
+               \item $\langle numero \rangle \to \langle digito \rangle$ permite terminar la construcción con un único dígito.
+           \end{itemize}
+       \item Cada dígito es uno de los símbolos terminales $\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}$, según la regla $\langle digito \rangle \to 0 \ | \ 1 \ | \ \dots \ | \ 9$.
+   \end{enumerate}
+
+   Por lo tanto, el lenguaje generado es el conjunto de todas las cadenas no vacías de dígitos, es decir:
+
+   $$
+   L = \{ w \ | \ w \in \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}^+ \}.
+   $$
+
+   En notación de expresiones regulares, el lenguaje puede escribirse como:
+
+   $$
+   L = [0-9]^+.
+   $$
+
+   Otra forma que quedaría mejor vista en clase es:
+
+   $$
+   L = \{0^in \mid i \in \mathbb{N} \cup \{0\} , n \in \mathbb{N} \cup \{0\}  \} \text{ ó } L = \{au : u \in \mathbb{N} \mid a \in \{0^*\}  \}
+   $$
+
+   \end{solucion}
+\item
+  Sea la gramática \(G = (\{A, S\}, \{a, b\}, S, P)\) donde las reglas
+  de producción son:\\
+
+  \begin{itemize}
+       \item $S \to aS$
+       \item $S \to aA$
+       \item $A \to bA$
+       \item $A \to b$
+   \end{itemize}
+
+  Determinar el lenguaje generado por la gramática.
+
+  \begin{solucion}[Ejercicio 2.c]
+
+   El lenguaje generado por la gramática está compuesto por cadenas que tienen las siguientes características:
+
+   \begin{enumerate}
+       \item La gramática permite generar cadenas que comienzan con uno o más símbolos $a$, ya que:
+           \begin{itemize}
+               \item $S \to aS$ permite añadir un número arbitrario de $a$ al principio.
+               \item $S \to aA$ permite terminar la secuencia de $a$ y pasar a generar $b$.
+           \end{itemize}
+       \item Después de la secuencia de $a$, la gramática genera uno o más símbolos $b$, ya que:
+           \begin{itemize}
+               \item $A \to bA$ permite añadir un número arbitrario de $b$.
+               \item $A \to b$ permite terminar la secuencia de $b$.
+           \end{itemize}
+   \end{enumerate}
+
+   Por lo tanto, el lenguaje generado es el conjunto de todas las cadenas que consisten en una secuencia no vacía de $a$ seguida de una secuencia no vacía de $b$, es decir:
+
+   $$
+   L = \{ a^n b^m \ | \ n \geq 1, m \geq 1 \}.
+   $$
+
+   En notación de expresiones regulares, el lenguaje puede escribirse como:
+
+   $$
+   L = a^+b^+.
+   $$
+
+   \end{solucion}
+\end{enumerate}
+
+\begin{ejercicio}
+Gramáticas de tipo 2 y tipo 3. 
+
+\begin{enumerate}[label=\alph*)]
+    \item Encontrar una gramática de tipo 2 para el lenguaje de palabras en las que el número de $b$ no es tres.  
+        Determinar si el lenguaje generado es de tipo 3.
+
+        \begin{solucion}[a]
+
+        Para ello nos sirve esta gramática:
+        \begin{align*}
+        S \rightarrow aS \mid bT \mid \varepsilon \\
+        T \rightarrow aT \mid bX \mid \varepsilon \\
+        X \rightarrow aX \mid bY \\
+        Y \rightarrow aY \mid bZ \\
+        Z \rightarrow abz \mid \varepsilon 
+        \end{align*}
+
+        Se puede afirmar que, como el lenguaje es regular, también es de tipo 3.
+
+        \end{solucion}
+
+    \item Encontrar una gramática de tipo 2 para el lenguaje de palabras que tienen 2 ó 3 $b$.  
+        Determinar si el lenguaje generado es de tipo 3.
+
+        \begin{solucion}[b]
+
+        En este caso se puede usar la gramática:
+        \begin{align*}
+        S \rightarrow aS \mid bX \\
+        X \rightarrow aX \mid bY \\
+        Y \rightarrow aY \mid bZ \mid \varepsilon \\
+        Z \rightarrow aZ \mid \varepsilon 
+        \end{align*}
+
+        \textit{Todas las de tipo 3 son de tipo 2.}
+
+        \end{solucion}
+
+
+\end{enumerate}
+
+\end{ejercicio}
+
+\begin{ejercicio}
+Gramáticas para lenguajes específicos.
+
+\begin{enumerate}[label=\alph*)]
+    \item Encontrar una gramática de tipo 2 para el lenguaje de palabras que no contienen la subcadena $ab$.  
+    Determinar si el lenguaje generado es de tipo 3.
+
+    \begin{solucion}[a]
+
+    \begin{align*}
+    S \rightarrow aA \mid bS \mid \varepsilon \\
+    A \rightarrow aA \mid \varepsilon
+    \end{align*}
+
+    \end{solucion}
+
+    \item Encontrar una gramática de tipo 2 para el lenguaje de palabras que no contienen la subcadena $baa$.  
+    Determinar si el lenguaje generado es de tipo 3.
+
+    \begin{solucion}[b]
+    \begin{align*}
+    S \rightarrow aS \mid bB \varepsilon \\
+    B \rightarrow bB \mid abB \mid a \mid \varepsilon
+    \end{align*}
+
+    De manera análoga a los demás ejercicios al ser lenguajes regulares, podemos afirmar que es de tipo 3 y todas las de tipo 3 están incluidas en las de tipo 2.
+
+    \end{solucion}
+
+\end{enumerate}
+
+\end{ejercicio}
+
+\begin{ejercicio}
+Lenguaje con más $a$ que $b$. Encontrar una gramática libre de contexto que genere el lenguaje sobre el alfabeto $\{a, b\}$ de las palabras que tienen más $a$ que $b$ (al menos una más).
+\end{ejercicio}
+
+\begin{solucion}
+
+Para generar el lenguaje de palabras sobre el alfabeto $\{a, b\}$ que tienen más $a$ que $b$ (al menos una más), podemos usar la siguiente gramática libre de contexto:
+
+\begin{align*}
+S &\to XaX \\
+X &\to aXb \mid bXa \mid XX \mid aX \mid \varepsilon
+\end{align*}
+
+De esta manera garantizamos que desde el inicio hay al menos una a extra.
+
+
+\end{solucion}
+
+\begin{ejercicio}
+Gramáticas regulares o libres de contexto.
+
+\begin{enumerate}[label=\alph*)]
+    \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ no contiene dos símbolos $b$ consecutivos.
+
+    \begin{solucion}[a)]
+    Una gramática válida sería:
+
+    \begin{align*}
+        S &\to aS \mid bB \mid \varepsilon \\
+        B &\to aS \mid \varepsilon
+    \end{align*}
+    \end{solucion}
+
+    \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ contiene dos símbolos $b$ consecutivos.
+
+    \begin{solucion}[b)]
+    Una gramática válida sería:
+
+    \begin{align*}
+        S \rightarrow aS \mid bS \mid bbX \\
+        X \rightarrow aX \mid bX \mid \varepsilon
+    \end{align*}
+    \end{solucion}
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+Propiedades de lenguajes.
+
+\begin{enumerate}[label=\alph*)]
+    \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ contiene un número impar de símbolos $a$.
+
+    \begin{solucion}[a)]
+    Una solución de tipo 3 sería:
+    \begin{align*}
+        S \rightarrow aX \mid bY \\
+        X \rightarrow B_1 \mid aY \mid \varepsilon \\
+        B_1 \rightarrow bB_1 \mid X \\
+        Y \rightarrow B_2 \mid aX \\
+        B_2 \rightarrow bBa \mid Y 
+    \end{align*}
+    \end{solucion}
+
+    \item Encontrar, si es posible, una gramática regular (o, si no es posible, una gramática libre de contexto) que genere el lenguaje $L$ sobre el alfabeto $\{a, b\}$ tal que $u \in L$ si, y solamente si, $u$ no contiene el mismo número de símbolos $a$ que de símbolos $b$.
+
+    \begin{solucion}[b)]
+    No se puede hacer de tipo 3, ya que hay que tener en cuenta números de a y b que no son finitos.
+    \begin{align*}
+        S \rightarrow AaA \mid BbB \\
+        A \rightarrow AaA \mid X \\
+        B \rightarrow BbB \mid X \\
+        X \rightarrow aXbX \mid bXaX \mid \varepsilon 
+    \end{align*}
+    \end{solucion}
+
+
+\end{enumerate}
+
+\end{ejercicio}
+
+\begin{ejercicio}
+Gramáticas para palabras con restricciones.
+
+\begin{enumerate}[label=\alph*)]
+    \item Dado el alfabeto $A = \{a, b\}$, determinar si es posible encontrar una gramática libre de contexto que genere las palabras de longitud impar, y mayor o igual que 3, tales que la primera letra coincida con la letra central de la palabra.
+
+    \begin{solucion}[a)]
+    Sí, es posible construir una gramática libre de contexto (Tipo 2) para el lenguaje \( L \) sobre el alfabeto \( A = \{a, b\} \), que genera palabras \( w \) de longitud impar (\( \geq 3 \)) donde la primera letra coincide con la central. 
+
+    \begin{align*}
+    S \rightarrow aAb \mid bBa \mid aAa \mid bBb \\
+    A \rightarrow a \mid aAb \mid bAa \mid aAa \mid bAb \\
+    B \rightarrow b \mid aBb \mid bBa \mid aBa \mid bBb
+    \end{align*}
+
+
+    \end{solucion}
+
+    \item Dado el alfabeto $A = \{a, b\}$, determinar si es posible encontrar una gramática libre de contexto que genere las palabras de longitud par, y mayor o igual que 2, tales que las dos letras centrales coincidan.
+
+    \begin{solucion}[b)]
+    Sí, es posible encontrar una \text{gramática libre de contexto} (Tipo 2) que genere el lenguaje descrito.
+
+    \begin{align*}
+    S  \rightarrow ASA \mid B \\
+    A \rightarrow a\mid b \\
+    B \rightarrow bb \mid aa \\
+    \end{align*}
+
+
+    \end{solucion}
+
+
+\end{enumerate}
+
+\end{ejercicio}
+
+\begin{ejercicio}
+Regularidad de un lenguaje.
+Determinar si el lenguaje generado por la gramática  
+\begin{align*}
+S &\to SS \\
+S &\to XXX \\
+X &\to aX \mid Xa \mid b
+\end{align*}
+es regular. Justificar la respuesta.
+\end{ejercicio}
+
+\begin{solucion}
+
+Para justificalo vamos a servirnos de la siguiente gramática, definiendo el lenguaje:
+
+\begin{align*}
+    S \rightarrow aS \mid bS_1 \\
+    S_1 \rightarrow aS_1 \mid bS_2 \\
+    S_2 \rightarrow aS_2 \mid bS_3 \\
+    S_3 \rightarrow aS_3 \mid bS_1 \mid \varepsilon
+\end{align*}
+
+Siendo el lenguaje que genera:
+\begin{align*}
+    L(G) = \{u  \mid u \in \{a,b\}^* \mid Nb(u) = 3m, m \in \mathbb{N}^*  \}
+\end{align*}
+
+\end{solucion}
+
+\begin{ejercicio}
+Numerabilidad de un lenguaje.
+Dado un lenguaje $L$ sobre un alfabeto $A$, ¿es $L^*$ siempre numerable? ¿nunca lo es? ¿o puede serlo unas veces sí y otras, no? Proporcionar ejemplos en este último caso.
+\end{ejercicio}
+
+\begin{solucion}
+Para resolver esta cuestión, primero debemos recordar la definición de lenguaje y de conjunto numerable.
+
+Un \text{lenguaje} $L$ sobre un alfabeto $A$ es, por definición, un subconjunto del conjunto de todas las palabras que se pueden formar sobre $A$, denotado como $A^*$. Es decir, $L \subseteq A^*$.
+
+Un conjunto se considera \text{numerable} si existe una aplicación inyectiva de dicho conjunto en el conjunto de los números naturales.
+
+Para cualquier alfabeto finito $A$, el conjunto $A^*$ (el conjunto de todas las palabras posibles sobre $A$) es \text{siempre numerable}. Esto se puede demostrar asignando un número único a cada palabra.
+
+Ahora, analicemos $L^*$. La clausura de Kleene de un lenguaje $L$, denotada como $L^*$, se define como la unión de todas las potencias de $L$:
+\[ L^* = \bigcup_{i \geq 0} L^i = L^0 \cup L^1 \cup L^2 \cup \dots \]
+donde $L^0 = \{\epsilon\}$ y $L^{i+1} = L^iL$.
+
+Dado que $L$ es un lenguaje sobre el alfabeto $A$, todas las palabras en $L$ están compuestas por símbolos de $A$. Por lo tanto, cualquier palabra formada por la concatenación de palabras de $L$ (que es lo que constituye $L^*$) también será una palabra sobre el alfabeto $A$. Esto significa que $L^*$ es también un lenguaje sobre $A$ y, por definición, es un subconjunto de $A^*$.
+
+\[ L \subseteq A^* \implies L^* \subseteq (A^*)^* = A^* \]
+
+Como hemos establecido que $A^*$ es siempre numerable, y cualquier subconjunto de un conjunto numerable es también numerable, podemos concluir que $L^*$ \text{es siempre numerable}.
+
+Por lo tanto, la respuesta a la pregunta es que \text{$L^*$ es siempre numerable}.
+\end{solucion}
+
+\begin{ejercicio}
+Propiedades de $L^*$. Dado un lenguaje $L$ sobre un alfabeto $A$, caracterizar cuándo $L^* = L$. Es decir, dar un conjunto de propiedades sobre $L$ de manera que $L$ cumpla esas propiedades si y sólo si $L^* = L$.
+\end{ejercicio}
+
+\begin{solucion}
+Un lenguaje $L$ sobre un alfabeto $A$ es igual a su clausura de Kleene, $L^*$, si y solo si cumple las dos propiedades siguientes:
+
+\begin{enumerate}
+    \item \text{La palabra vacía debe pertenecer al lenguaje}: $\epsilon \in L$.
+    \item \text{El lenguaje debe ser cerrado bajo la operación de concatenación}: Para cualesquiera dos palabras $u, v \in L$, su concatenación $uv$ también debe pertenecer a $L$.
+\end{enumerate}
+
+Formalmente, la caracterización es:
+\[ L = L^* \iff (\epsilon \in L) \land (\forall u, v \in L \implies uv \in L) \]
+
+\underline{Demostración}
+
+Demostraremos la equivalencia en ambas direcciones.
+
+\paragraph{($\Rightarrow$) Si $L = L^*$, entonces $L$ cumple las dos propiedades.}
+Suponemos que $L = L^*$. Debemos probar que $\epsilon \in L$ y que $L$ es cerrado para la concatenación.
+\begin{enumerate}
+    \item Por la definición de la clausura de Kleene, $L^* = \bigcup_{i \ge 0} L^i = L^0 \cup L^1 \cup L^2 \cup \dots$. El término $L^0$ se define como el conjunto que contiene únicamente la palabra vacía, es decir, $L^0 = \{\epsilon\}$. Como $\epsilon \in L^0$ y $L^0 \subseteq L^*$, se tiene que $\epsilon \in L^*$. Dado que hemos supuesto $L=L^*$, se concluye que \text{$\epsilon \in L$}.
+
+    \item Sean $u, v$ dos palabras cualesquiera en $L$. Como $L = L^*$, entonces también se cumple que $u, v \in L^*$. Por definición de concatenación de lenguajes, la palabra $uv$ pertenece al lenguaje $L \cdot L = L^2$. A su vez, $L^2$ es un subconjunto de $L^*$. Por lo tanto, $uv \in L^*$. Y como $L=L^*$, concluimos que \text{$uv \in L$}.
+\end{enumerate}
+Esto demuestra que si $L = L^*$, el lenguaje $L$ contiene la palabra vacía y es cerrado bajo concatenación.
+
+\paragraph{($\Leftarrow$) Si $L$ contiene la palabra vacía y es cerrado bajo concatenación, entonces $L = L^*$.}
+Ahora suponemos que $\epsilon \in L$ y que para todo $u, v \in L$, se cumple que $uv \in L$. Debemos demostrar que $L = L^*$ mediante una doble inclusión.
+
+\begin{enumerate}
+    \item \text{Demostración de $L \subseteq L^*$}: Esta inclusión es siempre cierta por la propia definición de la clausura de Kleene, ya que $L = L^1$ y $L^1 \subseteq \bigcup_{i \ge 0} L^i = L^*$.
+
+    \item \text{Demostración de $L^* \subseteq L$}: Tomemos una palabra cualquiera $w \in L^*$.
+    \begin{itemize}
+        \item Si $w = \epsilon$, entonces por la primera hipótesis ($\epsilon \in L$), tenemos que $w \in L$.
+        \item Si $w \neq \epsilon$, por la definición de $L^*$, existe un número natural $n \geq 1$ tal que $w \in L^n$. Esto significa que $w$ se puede escribir como la concatenación de $n$ palabras de $L$: $w = a_1 a_2 \dots a_n$, donde $a_i \in L$ para todo $i = 1, \dots, n$.
+    \end{itemize}
+    Como $L$ es cerrado bajo concatenación (segunda hipótesis), la concatenación de dos de sus elementos vuelve a estar en $L$. Aplicando esta propiedad de forma repetida, tenemos que $a_1 a_2 \in L$, luego $(a_1 a_2) a_3 \in L$, y así sucesivamente hasta concluir que $a_1 a_2 \dots a_n = w \in L$.
+\end{enumerate}
+Como hemos demostrado ambas inclusiones ($L \subseteq L^*$ y $L^* \subseteq L$), se concluye que si $L$ contiene a $\epsilon$ y es cerrado bajo concatenación, entonces $L^* = L$.
+
+\end{solucion}
+
+\begin{ejercicio}
+Igualdad de homomorfismos. Dados dos homomorfismos $f : A^* \to B^*$, $g : A^* \to B^*$, se dice que son iguales si $f(x) = g(x)$, $\forall x \in A^*$. ¿Existe un procedimiento algorítmico para comprobar si dos homomorfismos son iguales?
+\end{ejercicio}
+
+\begin{solucion}
+
+Sí, \text{existe un procedimiento algorítmico} para comprobar si dos homomorfismos son iguales.
+
+Un homomorfismo \( h: A^* \to B^* \) queda completamente determinado por las imágenes de los símbolos del alfabeto \( A \). Es decir, para cualquier palabra \( u = a_1a_2\ldots a_n \), su imagen es \( h(u) = h(a_1)h(a_2)\ldots h(a_n) \).
+
+Por lo tanto, para determinar si dos homomorfismos \( f \) y \( g \) son iguales, basta con comprobar si sus imágenes coinciden para cada uno de los símbolos del alfabeto \( A \). Dado que el alfabeto \( A \) es un conjunto finito por definición, este procedimiento consiste en un número finito de comparaciones y, por lo tanto, es algorítmico.
+
+El algoritmo es el siguiente:
+\begin{itemize}
+    \item Para cada símbolo \( a \) en el alfabeto \( A \):
+    \begin{enumerate}
+        \item Calcular \( f(a) \) y \( g(a) \).
+        \item Comparar si \( f(a) = g(a) \).
+        \item Si para algún \( a \) se encuentra que \( f(a) \neq g(a) \), los homomorfismos son diferentes.
+        \item Si se comprueba que \( f(a) = g(a) \) para todos los símbolos \( a \in A \), entonces los homomorfismos son iguales.
+    \end{enumerate}
+\end{itemize}
+
+\end{solucion}
+
+\begin{ejercicio}
+Lenguajes $S_i$ y $C_i$. 
+Sea $L \subseteq A^*$ un lenguaje arbitrario. Sea $C_0 = L$ y definamos los lenguajes $S_i$ y $C_i$, para todo $i \geq 1$, por $S_i = C_{i-1}^+$ y $C_i = \overline{S_i}$. 
+
+\begin{enumerate}[label=\alph*)]
+    \item ¿Es $S_1$ siempre, nunca o a veces igual a $C_2$? Justificar la respuesta.  
+
+    \item Demostrar que $S_2 = C_3$, cualquiera que sea $L$. (Pista: Demostrar que $C_2$ es cerrado para la concatenación).
+\end{enumerate}
+
+\end{ejercicio}
+
+\begin{solucion}
+
+Este ejercicio requiere la aplicación de las operaciones de clausura positiva ($L^+$) y complemento ($\overline{L}$) a lenguajes.
+
+Las definiciones dadas son: Sea $L \subseteq A^*$ un lenguaje arbitrario.
+\begin{enumerate}
+    \item $C_0 = L$
+    \item $S_i = C_{i-1}^+$ para $i \geq 1$ .
+    \item $C_i = \overline{S_i}$ para $i \geq 1$ .
+\end{enumerate}
+
+Recordamos que la clausura positiva $L^+$ es la unión de todas las potencias de $L$ con exponente mayor o igual a 1 ($L^+ = \bigcup_{i \geq 1} L^i$), y que $L^+$ es el conjunto de concatenaciones finitas de palabras en $L$ excluyendo la palabra vacía $\epsilon$. Si $\epsilon \in L$, entonces $L^+ = L^*$.
+
+
+
+\begin{enumerate}[label=\alph*)]
+    \item ¿Es $S_1$ siempre, nunca o a veces igual a $C_2$?
+
+    Para resolver esto, primero definimos $S_1$ y $C_2$:
+    \begin{enumerate}
+        \item Cálculo de $S_1$: $S_1 = C_0^+ = L^+$.
+        \item Cálculo de $C_2$: 
+        \begin{align*}
+        C_1 &= \overline{S_1} = \overline{L^+}, \\
+        S_2 &= C_1^+ = (\overline{L^+})^+, \\
+        C_2 &= \overline{S_2} = \overline{(\overline{L^+})^+}.
+        \end{align*}
+    \end{enumerate}
+
+    Comparamos $S_1 = L^+$ y $C_2 = \overline{(\overline{L^+})^+}$. La igualdad se cumplirá a veces, dependiendo de si el lenguaje $P = \overline{L^+}$ genera el universo de palabras $A^*$ o solo el lenguaje vacío bajo la operación de clausura positiva.
+
+    \text{Casos de Ejemplo:}
+    \begin{itemize}
+        \item \text{Caso 1: $S_1 = C_2$ (A veces)}  
+        Sea $A = \{a\}$ y sea $L = \{a\}$.
+        \begin{enumerate}
+            \item $S_1 = L^+ = \{a\}^+ = \{a^i \mid i \geq 1\}$.
+            \item $C_1 = \overline{S_1} = A^* \setminus \{a\}^+$. Dado que $A^* = \{a\}^* = \{\epsilon\} \cup \{a\}^+$, tenemos $C_1 = \{\epsilon\}$.
+            \item $S_2 = C_1^+ = \{\epsilon\}^+$. Como $\epsilon \in \{\epsilon\}$, la clausura positiva es igual a la clausura de Kleene: $S_2 = \{\epsilon\}^* = \{\epsilon\}$.
+            \item $C_2 = \overline{S_2} = \overline{\{\epsilon\}} = A^* \setminus \{\epsilon\} = \{a\}^+$.
+        \end{enumerate}
+        En este caso, $\mathbf{S_1 = C_2}$, ya que ambos son iguales a $\{a\}^+$.
+
+        \item \text{Caso 2: $S_1 \neq C_2$ (A veces)}  
+        Sea $A = \{a, b\}$ y sea $L = \{ab\}$.
+        \begin{enumerate}
+            \item $S_1 = L^+ = \{(ab)^i \mid i \geq 1\}$.
+            \item $C_1 = \overline{L^+} = A^* \setminus L^+$. Dado que $A$ no está vacío, $C_1$ contiene $a$, $b$, $\epsilon$, $aa$, $bb$, etc. Puesto que $a \in C_1$ y $b \in C_1$, la clausura de Kleene de $C_1$ genera todo $A^*$. Como $\epsilon \in C_1$, se cumple que $C_1^+ = C_1^*$. Por lo tanto, $S_2 = C_1^+ = A^*$.
+            \item $C_2 = \overline{S_2} = \overline{A^*} = \emptyset$ (el lenguaje vacío).
+        \end{enumerate}
+        En este caso, $\mathbf{S_1 \neq C_2}$, ya que $S_1 = \{(ab)^i \mid i \geq 1\} \neq \emptyset = C_2$.
+    \end{itemize}
+
+    \text{Conclusión:} $S_1$ es a veces igual a $C_2$.
+
+    \item \text{Demostrar que $S_2 = C_3$, cualquiera que sea $L$.}
+
+    \underline{Demostración:}
+
+    Para demostrar que $S_2 = C_3$, seguimos los siguientes pasos:
+
+    1. Definimos $C_3$:
+        \[
+        C_3 = \overline{S_3}, \quad S_3 = C_2^+ \implies C_3 = \overline{C_2^+}.
+        \]
+
+    2. Dado que $C_2 = \overline{S_2}$, si demostramos que $C_2 = C_2^+$, se sigue inmediatamente que:
+        \[
+        C_3 = \overline{C_2^+} = \overline{C_2} = S_2.
+        \]
+
+    3. Para que un lenguaje $X$ sea igual a su clausura positiva ($X = X^+$), se requiere que:
+        \begin{itemize}
+             \item $X$ sea cerrado bajo concatenación ($XX \subseteq X$).
+             \item $X$ no contenga la palabra vacía $\epsilon$ ($\epsilon \notin X$).
+        \end{itemize}
+
+    \underline{Paso I: Demostrar que $C_2$ es cerrado bajo concatenación.}
+
+    Definimos $P = \overline{L^+}$ y $C_2 = \overline{P^+}$. Demostrar que $C_2$ es cerrado bajo concatenación significa que si $u \in C_2$ y $v \in C_2$, entonces $uv \in C_2$. Esto es equivalente a demostrar que si $u \notin P^+$ y $v \notin P^+$, entonces $uv \notin P^+$.
+
+    Por definición, $C_2$ es el conjunto de todas las palabras en $A^*$ que no pueden ser generadas mediante la concatenación de una o más palabras del lenguaje $P$. Supongamos, por contradicción, que $C_2$ no es cerrado bajo concatenación. Entonces, existen $u, v \in C_2$ tales que $uv \notin C_2$. Si $uv \notin C_2$, entonces $uv \in \overline{C_2} = S_2 = P^+$. Esto implica que $uv$ se puede descomponer como una concatenación de una o más palabras de $P$: $uv = p_1 p_2 \dots p_k$, donde $p_i \in P$ y $k \geq 1$.
+
+    Dado que $u \in C_2$, $u$ no puede ser formado completamente por una subcadena inicial de $p_1 p_2 \dots p_k$. Esto contradice la hipótesis de que $u \in C_2$. Por lo tanto, $C_2$ es cerrado bajo concatenación.
+
+    \underline{Paso II: Verificar que $\epsilon \notin C_2$.}
+
+    Necesitamos determinar si $\epsilon \in C_2 = \overline{S_2}$, lo que es equivalente a determinar si $\epsilon \notin S_2$. Dado que $S_2 = P^+$ y $P = \overline{L^+}$, $\epsilon \in P^+$ si y solo si $\epsilon \in P$. Esto implica:
+    \[
+    \epsilon \in P \iff \epsilon \in \overline{L^+} \iff \epsilon \notin L^+.
+    \]
+
+    \begin{itemize}
+         \item Si $\epsilon \notin L$, entonces $\epsilon \notin L^+$, lo que implica $\epsilon \in P$. Por lo tanto, $\epsilon \in S_2$, y $\epsilon \notin C_2$.
+         \item Si $\epsilon \in L$, entonces $\epsilon \in L^+$, lo que implica $\epsilon \notin P$. Por lo tanto, $\epsilon \notin S_2$, y $\epsilon \in C_2$.
+    \end{itemize}
+
+    \underline{Conclusión:}
+
+    Dado que $C_2$ es cerrado bajo concatenación y cumple las condiciones necesarias, se sigue que $C_2 = C_2^+$. Por lo tanto:
+    \[
+    S_2 = \overline{C_2} = \overline{C_2^+} = C_3.
+    \]
+    Esto demuestra que $S_2 = C_3$, cualquiera que sea $L$.
+\end{enumerate}
+
+
+
+\end{solucion}
+
+\begin{ejercicio}
+Numerabilidad de lenguajes finitos. Demostrar que, para todo alfabeto $A$, el conjunto de los lenguajes finitos sobre dicho alfabeto es numerable.
+\end{ejercicio}
+
+\begin{solucion}
+
+Para demostrar que el conjunto de los lenguajes finitos sobre un alfabeto \(A\) es numerable, podemos establecer una correspondencia entre cada lenguaje finito y los números naturales.
+
+\begin{enumerate}
+    \item \text{El conjunto de todas las palabras \(A^*\) es numerable:} Dado que un alfabeto \(A\) es finito, el conjunto de todas las palabras finitas que se pueden formar con sus símbolos, \(A^*\), es numerable. Esto significa que podemos enumerar todas las palabras posibles: \(w_0, w_1, w_2, \dots\).
+
+    \item \text{Representación de lenguajes finitos:} Un lenguaje finito es un subconjunto finito de \(A^*\). Por lo tanto, cualquier lenguaje finito \(L\) puede representarse como un conjunto de palabras de esa enumeración, por ejemplo, \(\{w_{i_1}, w_{i_2}, \dots, w_{i_k}\}\).
+
+    \item \text{Construcción de una aplicación inyectiva:} Podemos asignar un número natural único a cada lenguaje finito. Una manera de hacerlo es asociar a cada lenguaje finito \(L = \{w_{i_1}, w_{i_2}, \dots, w_{i_k}\}\) el número natural \(n = 2^{i_1} + 2^{i_2} + \dots + 2^{i_k}\).
+    \begin{itemize}
+        \item Por las propiedades de la representación binaria, cada número natural \(n\) corresponde a un único conjunto de exponentes, y por lo tanto, a un único lenguaje finito.
+    \end{itemize}
+
+    \item \text{Conclusión de numerabilidad:} Al existir una aplicación inyectiva del conjunto de los lenguajes finitos en el conjunto de los números naturales, se demuestra que el conjunto de todos los lenguajes finitos sobre \(A\) es \text{numerable}.
+\end{enumerate}
+
+\end{solucion}
+
+\newpage
+
+\hypertarget{relaciuxf3n-de-problemas-1-bis}{%
+\section{Relación de problemas 1
+bis}\label{relaciuxf3n-de-problemas-1-bis}}
+
+\begin{ejercicio}
+Calcula, de forma razonada, gramáticas que generen cada uno de los siguientes lenguajes:
+
+\begin{itemize}
+    \item \text{SENCILLOS}
+    \begin{itemize}
+        \item[a)] $\{u \in \{0, 1\}^* \text{ tales que } |u| \leq 4\}$
+        \item[b)] Palabras con 0’s y 1’s que no contengan dos 1’s consecutivos y que empiecen por un 1 y terminen por dos 0’s.
+        \item[c)] El conjunto vacío.
+        \item[d)] El lenguaje formado por los números naturales.
+        \item[e)] $\{a^n \in \{a, b\}^* \text{ con } n \geq 0\} \cup \{a^n b^n \in \{a, b\}^* \text{ con } n \geq 0\}$
+        \item[f)] $\{a^n b^{2n} c^m \in \{a, b, c\}^* \text{ con } n, m > 0\}$
+        \item[g)] $\{a^n b^m a^n \in \{a, b\}^* \text{ con } m, n \geq 0\}$
+        \item[h)] Palabras con 0’s y 1’s que contengan la subcadena 00 y 11.
+        \item[i)] Palíndromos formados con las letras a y b.
+    \end{itemize}
+
+    \item \text{DIFICULTAD MEDIA}
+    \begin{itemize}
+        \item[a)] $\{uv \in \{0, 1\}^* \text{ tales que } u^{-1} \text{ es un prefijo de } v\}$
+        \begin{solucion}[media.a]
+
+        \begin{align*}
+        S &\rightarrow XY \\
+        X &\rightarrow 0X0 \mid 1X1 \mid \varepsilon \\
+        Y &\rightarrow 1Y \mid 0Y \mid \varepsilon 
+        \end{align*}
+
+        Esta gramática no es de tipo 3, ya que las reglas de producción no cumplen con las restricciones de las gramáticas regulares, por ende, es de tipo 2.
+
+        \end{solucion}
+
+        \item[b)] $\{ucv \in \{a, b, c\}^* \text{ tales que } u \text{ y } v \text{ tienen la misma longitud}\}$
+        
+        \begin{solucion}[media.b]
+
+        \begin{align*}
+        S \rightarrow c \\
+        S \rightarrow  aSa \mid aSb \mid aSc \mid bSa \mid bSb \mid bSc \mid cSa \mid cSb \mid cSc
+        \end{align*}
+
+
+        \end{solucion}
+
+        \item[c)] $\{u1^n \in \{0, 1\}^* \text{ donde } |u| = n\}$
+        
+
+        \begin{solucion}[media.c]
+
+        \begin{align*}
+        S &\rightarrow 1S1 \mid 0S0 \mid \varepsilon
+        \end{align*}
+
+        Esta gramática genera cadenas de la forma $u1^n$, donde $|u| = n$, ya que cada vez que se añade un $1$ a la derecha, se añade un símbolo correspondiente a $u$ a la izquierda. La gramática no es de tipo 3, ya que las reglas de producción no cumplen con las restricciones de las gramáticas regulares, por lo que es de tipo 2.
+
+        \end{solucion}
+
+        
+        \item[d)] $\{a^n b^n a^{n+1} \in \{a, b\}^* \text{ con } n \geq 0\}$
+
+
+        \begin{solucion}[media.d]
+
+        \begin{align*}
+        S &\rightarrow aSb \\
+        S &\rightarrow aA \\
+        A &\rightarrow aA \\
+        A &\rightarrow a
+        \end{align*}
+
+        Esta gramática genera cadenas de la forma $a^n b^n a^{n+1}$, donde $n \geq 0$. La primera regla $S \rightarrow aSb$ asegura que el número de $a$ y $b$ en las primeras dos partes de la cadena sea igual. La regla $S \rightarrow aA$ transfiere el control a $A$, que genera la parte final $a^{n+1}$. La gramática no es de tipo 3, ya que las reglas de producción no cumplen con las restricciones de las gramáticas regulares, por lo que es de tipo 2.
+
+        \end{solucion}
+
+
+    \end{itemize}
+
+    \item \text{DIFÍCILES}
+    \begin{itemize}
+        \item[a)] $\{a^n b^m c^k \text{ tales que } k = m + n\}$
+
+
+        \begin{solucion}[difícil.a]
+
+        \begin{align*}
+        S &\rightarrow aSbC \mid \varepsilon \\
+        C &\rightarrow aC \mid bC \mid \varepsilon
+        \end{align*}
+
+        Esta gramática genera cadenas de la forma $a^n b^m c^k$ tales que $k = m + n$. La regla $S \rightarrow aSbC$ asegura que por cada $a$ y $b$ generados, se genera un símbolo adicional en $C$. La regla $C \rightarrow aC \mid bC \mid \varepsilon$ permite completar la parte final de la cadena con cualquier combinación de $a$ y $b$.
+
+        La gramática no es de tipo 3, ya que las reglas de producción no cumplen con las restricciones de las gramáticas regulares, por lo que es de tipo 2.
+
+        \end{solucion}
+
+
+
+        \item[b)] Palabras que son múltiplos de 7 en binario.
+
+
+        \begin{solucion}[difícil.b]
+
+        Para generar palabras que son múltiplos de 7 en binario, podemos construir una gramática que simule un autómata finito determinista (AFD) con 7 estados, donde cada estado representa el residuo de la división del número binario leído hasta el momento entre 7. El estado inicial es el residuo 0, y el estado final también es el residuo 0. Como residuo entendemos el resultado de realizar la operación del módulo 7.
+
+        \begin{itemize}
+            \item $S$: residuo 0 (inicio y final)
+            \item $A$: residuo 1
+            \item $B$: residuo 2
+            \item $C$: residuo 3
+            \item $D$: residuo 4
+            \item $E$: residuo 5
+            \item $F$: residuo 6
+        \end{itemize}
+
+        \begin{align*}
+        S &\rightarrow 0S \mid 1A \mid \varepsilon \\
+        A &\rightarrow 0B \mid 1C \\
+        B &\rightarrow 0D \mid 1E \\
+        C &\rightarrow 0F \mid 1S \\
+        D &\rightarrow 0A \mid 1B \\
+        E &\rightarrow 0C \mid 1D \\
+        F &\rightarrow 0E \mid 1F
+        \end{align*}
+
+        En esta gramática: 
+        
+        \begin{itemize}
+            \item $S$ es el estado inicial (residuo 0).
+            \item $A, B, C, D, E, F, G$ representan los estados correspondientes a los residuos 1, 2, 3, 4, 5, y 6, respectivamente.
+            \item Las reglas de producción simulan las transiciones del AFD según el residuo actual y el siguiente bit leído.
+        \end{itemize}
+
+        Esta gramática no es de tipo 3, ya que las reglas de producción no cumplen con las restricciones de las gramáticas regulares, por lo que es de tipo 2.
+
+        Para entenderlo mejor debemos de tener en cuenta cual es la ecuación que genera el siguiente estado:
+
+
+        Si el número actual (en decimal) es $n$, al leer un bit $b \in \{0, 1\}$ el nuevo número es:
+
+        $$
+        n' = 2n + b.
+        $$
+
+        Por tanto, el nuevo residuo es:
+
+        $$
+        r' = (2 \cdot r + b) \mod 7,
+        $$
+
+        donde $r$ es el residuo actual ($r = n \mod 7$).
+
+
+        \[
+        \resizebox{\textwidth}{!}{
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        \text{Estado} & \text{Residuo } r & \text{Ejemplo (binario) } n & \text{al leer 0: } $2n \to \text{residuo}$ & \text{nueva letra} & \text{al leer 1: } $2n+1 \to \text{residuo}$ & \text{nueva letra} \\
+        \hline
+        S & 0 & $\varepsilon$ (vacía) & $2 \cdot 0 = 0 \mod 7 = 0$ & S & $2 \cdot 0 + 1 = 1 \mod 7 = 1$ & A \\
+        \hline
+        A & 1 & 1 & $2 \cdot 1 = 2 \mod 7 = 2$ & B & $2 \cdot 1 + 1 = 3 \mod 7 = 3$ & C \\
+        \hline
+        B & 2 & 10 & $2 \cdot 2 = 4 \mod 7 = 4$ & D & $2 \cdot 2 + 1 = 5 \mod 7 = 5$ & E \\
+        \hline
+        C & 3 & 11 & $2 \cdot 3 = 6 \mod 7 = 6$ & F & $2 \cdot 3 + 1 = 7 \mod 7 = 0$ & S \\
+        \hline
+        D & 4 & 100 & $2 \cdot 4 = 8 \mod 7 = 1$ & A & $2 \cdot 4 + 1 = 9 \mod 7 = 2$ & B \\
+        \hline
+        E & 5 & 101 & $2 \cdot 5 = 10 \mod 7 = 3$ & C & $2 \cdot 5 + 1 = 11 \mod 7 = 4$ & D \\
+        \hline
+        F & 6 & 110 & $2 \cdot 6 = 12 \mod 7 = 5$ & E & $2 \cdot 6 + 1 = 13 \mod 7 = 6$ & F \\
+        \hline
+        \end{tabular}
+        }
+        \]
+            
+ 
+
+
+        \end{solucion}
+
+
+    \end{itemize}
+
+    \item \text{EXTREMADAMENTE DIFÍCILES (no son libres de contexto)}
+    \begin{itemize}
+        \item[a)] $\{ww \text{ con } w \in \{0, 1\}^*\}$
+
+
+        \begin{solucion}[extremadamente difícil.a]
+
+        El lenguaje $\{ww \ | \ w \in \{0, 1\}^*\}$ no es libre de contexto, ya que requiere comparar dos partes arbitrariamente largas de una cadena para verificar que son iguales. Esto se puede demostrar utilizando el lema de bombeo para lenguajes libres de contexto.
+
+        Sin embargo, podemos describir una gramática de tipo 0 (gramática general) que genera este lenguaje. Una posible gramática es:
+
+        \begin{align*}
+        S &\to X \# X \\
+        X &\to 0X0 \mid 1X1 \mid \epsilon
+        \end{align*}
+
+        En esta gramática:
+        \begin{itemize}
+            \item $S \to X \# X$ asegura que la cadena generada tiene la forma $w \# w$, donde $w$ es una cadena de ceros y unos.
+            \item $X \to 0X0$ y $X \to 1X1$ generan cadenas de ceros y unos de forma recursiva, asegurando que las dos partes de la cadena son idénticas.
+            \item $X \to \epsilon$ permite terminar la generación de la cadena.
+        \end{itemize}
+
+        El símbolo $\#$ es un marcador que separa las dos partes de la cadena. Este lenguaje no es regular ni libre de contexto, pero puede ser generado por una gramática de tipo 0.
+
+        \end{solucion}
+
+        
+
+        
+
+        
+
+
+
+        \item[b)] $\{a^{n^2} \in \{a\}^* \text{ con } n \geq 0\}$
+
+        \begin{solucion}[extremadamente difícil.b]
+
+        El lenguaje $\{a^{n^2} \ | \ n \geq 0\}$ no es libre de contexto, ya que requiere contar el número de símbolos $a$ y verificar que este número es un cuadrado perfecto. Esto no puede lograrse con una gramática libre de contexto.
+
+        Sin embargo, podemos describir una gramática de tipo 0 (gramática general) que genera este lenguaje. Una posible gramática es:
+
+        \begin{align*}
+        S &\to A \# A \\
+        A &\to aA \mid \epsilon
+        \end{align*}
+
+        Esta gramática utiliza un marcador $\#$ para separar las partes de la cadena y asegura que el número total de $a$ generados corresponde a un cuadrado perfecto. La gramática no es regular ni libre de contexto, pero puede ser generada por una gramática de tipo 0.
+
+        \end{solucion}
+
+
+
+        \item[c)] $\{a^p \in \{a\}^* \text{ con } p \text{ primo}\}$
+
+        \begin{solucion}[extremadamente difícil.c]
+
+        El lenguaje $\{a^p \ | \ p \text{ es primo}\}$ no es libre de contexto ni regular, ya que requiere verificar que el número de símbolos $a$ es un número primo, lo cual no puede lograrse con una gramática libre de contexto.
+
+        Sin embargo, podemos describir una gramática de tipo 0 (gramática general) que genera este lenguaje. Una posible gramática es:
+
+        \begin{align*}
+        S &\to aS \mid P \\
+        P &\to a^2 \mid a^3 \mid a^5 \mid a^7 \mid \dots
+        \end{align*}
+
+        En esta gramática:
+        \begin{itemize}
+            \item $S$ genera cadenas de longitud arbitraria.
+            \item $P$ genera cadenas cuya longitud corresponde a un número primo.
+        \end{itemize}
+
+        La gramática no es regular ni libre de contexto, pero puede ser generada por una gramática de tipo 0. Podemos ver que es infinita, \underline{por ende podemos concluir} con que aunque el lenguaje $\{a^p \ | \ p \text{ primo}\}$ no es regular y por tanto no es libre de contexto, es decidible\footnote{Un lenguaje es decidible si existe un algoritmo que, dado cualquier elemento del alfabeto, puede determinar en un tiempo finito si pertenece o no al lenguaje.}, por lo que pertenece a la clase recursiva; existe por tanto alguna gramática tipo-0 o máquina de Turing\footnote{Una máquina de Turing es un modelo computacional abstracto que consiste en una cinta infinita dividida en celdas, un cabezal de lectura/escritura que se mueve sobre la cinta, y un conjunto de estados que determinan las transiciones basadas en el símbolo leído. Es capaz de simular cualquier algoritmo y se utiliza para definir formalmente la computabilidad.} que lo reconozca, pero no hay una gramática regular ni libre de contexto que lo genere.
+
+        \end{solucion}
+
+
+
+
+        \item[d)] $\{a^n b^m \in \{a, b\}^* \text{ con } n \leq m^2\}$
+
+
+        \begin{solucion}[extremadamente difícil.d]
+
+        El lenguaje $\{a^n b^m \ | \ n \leq m^2\}$ no es libre de contexto, ya que requiere comparar dos partes de una cadena y verificar que una es menor o igual al cuadrado de la otra. Esto no puede lograrse con una gramática libre de contexto.
+
+        Sin embargo, podemos describir una gramática de tipo 0 (gramática general) que genera este lenguaje. Una posible gramática es:
+
+        \begin{align*}
+        S &\to aSbb \mid \epsilon
+        \end{align*}
+
+        En esta gramática:
+        \begin{itemize}
+            \item $S \to aSbb$ asegura que por cada símbolo $a$ generado, se generan dos símbolos $b$, lo que garantiza que $n \leq m^2$.
+            \item $S \to \epsilon$ permite terminar la generación de la cadena.
+        \end{itemize}
+
+        La gramática no es regular ni libre de contexto, pero puede ser generada por una gramática de tipo 0.
+
+        \end{solucion}
+
+    \end{itemize}
+\end{itemize}
+
+\end{ejercicio}
+
+\newpage
+\input{../src/tex/rel2}
+
+\input{../../../../extraFiles/preambulos_oficiales/referencias.tex}
+
+\end{document}
