@@ -439,11 +439,6 @@
 - ( ) Paralelo a la Financiación y la Desinversión.
 - ( ) Dentro del ámbito exclusivamente externo de la circulación de valores.
 
-***
-
-**Metáfora de cierre para el concepto de Contabilidad de Gestión:**
-
-Piense en la Contabilidad Financiera como un **telescopio**: ofrece una visión panorámica y certificada (objetiva) de toda la galaxia (la empresa) para el mundo exterior. En contraste, la Contabilidad de Gestión es un **microscopio**: proporciona una visión detallada y desagregada (flexible y relevante) de las células y los procesos internos, permitiendo al cirujano (la dirección) tomar decisiones precisas y controlar la eficiencia en el quirófano productivo.
 
 
 
