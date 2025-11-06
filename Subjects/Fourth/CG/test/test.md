@@ -955,3 +955,830 @@ Piense en la Contabilidad Financiera como un **telescopio**: ofrece una visión 
 - ( ) La repercusión del coste variable en el coste unitario.
 - ( ) La improcedencia de inventariar costes de comercialización.
 - ( ) Ninguna de las respuestas anteriores es correcta.
+
+<!-- test wuolah -->
+
+1. En un determinado periodo que se inicia sin existencias de materiales, una empresa ha adquirido 5 mil kilos de materiales a 4 euros el kilo. Si el stock final asciende a 2 mil kilos, podrá afirmarse que:
+- ( ) El coste ascendió a 12 mil euros.
+- (x) El consumo ascendió a 12 mil euros.
+- ( ) La compra ascendió a 20 mil euros, debería ser gasto.
+
+2. El coste y el gasto, al ser magnitudes de flujo o corrientes, solo pueden ser cuantificados con referencia a:
+- ( ) Un momento específico.
+- (x) Un periodo de tiempo.
+- ( ) Resulta indiferente momento específico o periodo de tiempo.
+
+3. Señale la afirmación correcta:
+- (x) Por la naturaleza de la información en la contabilidad financiera prima la objetividad y la fiabilidad.
+- ( ) La información aportada por la contabilidad de gestión tiene un carácter desagregado y global.
+- ( ) Los usuarios de la contabilidad de gestión son internos y externos.
+
+4. No se contempla como un fin de la contabilidad de gestión:
+- ( ) Suministro de la información relevante necesaria para apoyar la toma de decisiones.
+- ( ) Captación, medida, valoración y representación de la problemática económico-técnica de la empresa.
+- (x) Suministro de la información relevante para los accionistas de la empresa.
+
+1. ¿Qué magnitudes pertenecen a la corriente real?  
+- ( ) Gasto e ingreso  
+- ( ) Pago y cobro  
+- (x) Compra y venta  
+- ( ) Gasto y compra  
+
+2. El equivalente monetario de la compra es:  
+- ( ) Ingreso  
+- (x) Pago  
+- ( ) Gasto  
+- ( ) Cobro  
+
+3. ¿En qué subsistema la empresa NO se relaciona con el exterior?  
+- ( ) Financiación  
+- ( ) Inversión  
+- (x) Producción  
+- ( ) Desinversión  
+
+4. La corriente financiera incluye:  
+- ( ) Compras y ventas  
+- ( ) Producción y consumo  
+- (x) Gasto, ingreso, pago y cobro  
+- ( ) Producción en curso y terminada  
+
+5. El coste es:  
+- ( ) El consumo medido en unidades físicas  
+- (x) El equivalente monetario del consumo  
+- ( ) El valor monetario de las compras  
+- ( ) El precio de venta de las existencias  
+
+6. La producción semiterminada se caracteriza por:  
+- ( ) No poder inventariarse  
+- ( ) Ser la producción completamente terminada  
+- (x) Haber pasado alguna fase del proceso  
+- ( ) Estar en curso  
+
+7. ¿Qué magnitud mide las unidades de producción terminadas cedidas al exterior?  
+- (x) Producción colocada  
+- ( ) Producción terminada  
+- ( ) Producción en curso  
+- ( ) Coste de ventas  
+
+8. ¿Qué contabilidad estudia la problemática económica y técnica del proceso productivo?  
+- ( ) Contabilidad financiera  
+- ( ) Contabilidad fiscal  
+- (x) Contabilidad de gestión  
+- ( ) Contabilidad bancaria  
+
+9. Una magnitud flujo se caracteriza por:  
+- ( ) Referirse a un instante del tiempo  
+- ( ) Ser una foto fija  
+- (x) Medir un valor en un período de tiempo  
+- ( ) Ser igual a una magnitud fondo  
+
+10. El objetivo principal de la contabilidad de gestión es:  
+- ( ) Elaborar los estados financieros  
+- ( ) Controlar los flujos de caja  
+- (x) Medir la eficiencia técnico-productiva  
+- ( ) Calcular impuestos empresariales  
+
+11. El coste se define como:  
+- ( ) Valor en dinero de las ventas  
+- (x) Consumo valorado en dinero de bienes y servicios para producir  
+- ( ) Pago realizado por compras  
+- ( ) Suma de gastos financieros  
+
+12. Según su relación con el objeto de coste, el coste de amortización del edificio es:  
+- ( ) Directo  
+- (x) Indirecto  
+- ( ) Variable  
+- ( ) Relevante  
+
+13. Los costes de producto se incorporan al resultado:  
+- ( ) En el periodo en que se producen  
+- (x) En el periodo en que se venden los productos  
+- ( ) En el siguiente ejercicio  
+- ( ) Al cierre contable  
+
+14. Los costes del periodo se incorporan al resultado:  
+- ( ) En el momento de la venta  
+- ( ) Cuando se pagan  
+- (x) En el periodo en que se han producido  
+- ( ) Cuando se cobren  
+
+15. Los costes fijos son:  
+- ( ) Los que varían con el volumen de producción  
+- (x) Los que no varían dentro de ciertos límites de capacidad  
+- ( ) Los que dependen directamente de las ventas  
+- ( ) Los que fluctúan con la actividad comercial  
+
+16. El coste de calefacción por persona en un teatro es un ejemplo de:  
+- ( ) Coste progresivo  
+- (x) Coste regresivo  
+- ( ) Coste semifijo  
+- ( ) Coste semivariable  
+
+17. Un coste semifijo se caracteriza por:  
+- ( ) Permanecer constante siempre  
+- ( ) Variar proporcionalmente con la producción  
+- (x) Cambiar a saltos entre intervalos de actividad  
+- ( ) Ser completamente variable  
+
+18. Los costes de la subactividad son:  
+- ( ) Costes variables innecesarios  
+- (x) Costes fijos ligados al exceso de capacidad no utilizada  
+- ( ) Costes financieros  
+- ( ) Costes del periodo histórico  
+
+
+1.  En un sistema orgánico, el coste de producción se forma por:
+- ( ) Coste de materia prima + coste directo
+- (x) Coste de materia prima + coste de centros de producción
+- ( ) Solo costes indirectos
+- ( ) Coste de ventas + coste de administración
+
+1.  En un sistema inorgánico, los costes indirectos se imputan:
+- ( ) Directamente al producto
+- ( ) En función de las clases de coste
+- ( ) A partir de los centros principales
+- (x) En base al coste directo o base
+
+1.  ¿Qué enfoque de asignación de costes considera todos los costes como del producto?
+- (x) Full Cost Radical (FCR)
+- ( ) Full Cost Atenuado (FCA)
+- ( ) Direct Costing (DCS)
+- ( ) Imputación racional
+
+1.  ¿Qué enfoque incluye solo los costes del ciclo de producción (intrínsecos)?
+- ( ) FCR
+- (x) FCA
+- ( ) DCS
+- ( ) Fijo-variable
+
+1.  ¿Qué enfoque solo incluye los costes variables intrínsecos en la valoración?
+- ( ) FCR
+- ( ) FCA
+- (x) DCS
+- ( ) Imputación racional
+
+1.  En el método de imputación racional, el nivel de actividad normal sirve para:
+- ( ) Calcular el coste variable
+- (x) Determinar los costes de subactividad
+- ( ) Ajustar el precio de venta
+- ( ) Estimar la producción semiterminada
+
+1.  ¿Qué método valora más las existencias finales?
+- ( ) DCS
+- ( ) FCA
+- (x) FCR
+- ( ) Ninguno
+
+
+1. Cuando se afirma que “compra y gasto” o “venta e ingreso” se producen necesariamente de forma simultánea, se está considerando:
+- ( ) La vertiente financiera
+- (x) La vertiente económica
+- ( ) La corriente real
+- ( ) La contabilidad interna
+
+1. En el modelo básico de circulación de valores, ¿cuál de las siguientes magnitudes pertenece simultáneamente a la corriente real y al ámbito interno?
+- ( ) Compra
+- (x) Consumo
+- ( ) Gasto
+- ( ) Pago
+
+1. La producción colocada:
+- ( ) Coincide necesariamente con la producción vendida
+- ( ) Incluye todas las unidades producidas durante el ejercicio
+- (x) Puede no coincidir temporalmente con la venta
+- ( ) Se mide en unidades monetarias
+
+1. Señala la afirmación incorrecta respecto a los subsistemas de la empresa:
+- ( ) La financiación y la inversión pertenecen al ámbito externo
+- ( ) La producción pertenece al ámbito interno
+- (x) La desinversión pertenece al ámbito interno
+- ( ) La contabilidad financiera analiza los tres subsistemas externos
+
+1. En la contabilidad de gestión, una magnitud fondo es:
+- ( ) Un valor acumulado durante un periodo
+- (x) Un valor referido a un instante concreto
+- ( ) Un valor que siempre se mide en unidades físicas
+- ( ) Una magnitud perteneciente exclusivamente al ámbito externo
+
+1. Una empresa fabrica pantalones mediante tres fases productivas sucesivas: Cortado, cosido, y planchado. En este ejemplo, el error más habitual en el cálculo del coste de la producción terminada consiste en:
+- ( ) Sumar los costes de la última fase únicamente
+- (x) No incorporar los costes acumulados de fases previas
+- ( ) Incluir los costes de venta
+- ( ) Aplicar solo los costes variables
+
+1. ¿Cuál de las siguientes afirmaciones sobre los costes del periodo es correcta?
+- ( ) Se incorporan al resultado cuando se venden los productos
+- ( ) Son siempre costes fijos
+- (x) Se incorporan al resultado en el periodo en que se producen, independientemente de las ventas
+- ( ) No influyen en el resultado del ejercicio
+
+1. Un coste fijo puede comportarse como variable:
+- (x) Cuando cambia la base temporal de medición
+- ( ) Nunca; su naturaleza es inmutable
+- ( ) Solo en periodos en los que varíe el consumo de materiales
+- ( ) Si se reclasifica como coste del periodo
+
+1. El fenómeno de histéresis de los costes se produce cuando:
+- ( ) Los costes variables se convierten en progresivos
+- (x) Un coste semifijo reversible pasa a ser irreversible
+- ( ) Un coste fijo cambia a variable de forma temporal
+- ( ) Se reduce la capacidad productiva sin cambiar los costes totales
+
+1.  En el método de imputación racional, el coeficiente de actividad real/normal:
+- ( ) Ajusta los costes variables
+- (x) Determina la parte de costes fijos que se incorpora al coste del producto
+- ( ) Afecta por igual a todos los costes
+- ( ) Se aplica únicamente en sistemas inorgánicos
+
+1.  En un sistema orgánico, el coste de producción se obtiene:
+- (x) Sumando el coste de materia prima y los costes de centros de producción
+- ( ) Sumando únicamente los costes directos
+- ( ) Restando los costes variables del periodo
+- ( ) Aplicando un porcentaje sobre las ventas
+
+1.  En el sistema inorgánico, los costes indirectos de fabricación se imputan al producto:
+- ( ) En función de los centros auxiliares
+- ( ) A partir de los factores de producción tangibles
+- (x) Utilizando una base del coste directo, como la mano de obra o la materia prima
+- ( ) Según su variabilidad respecto a la producción
+
+1.  El modelo Full Cost Radical (FCR) puede sobrevalorar las existencias finales porque:
+- ( ) Excluye los costes fijos
+- (x) Imputa todos los costes fijos al producto, incluidos los no necesarios
+- ( ) No incorpora los costes de ventas
+- ( ) Aplica un criterio FIFO en todos los casos
+
+1.  En el modelo Full Cost Atenuado (FCA), la diferencia principal respecto al Full Cost Radical (FCR) en la valoración de existencias radica en:
+- ( ) La exclusión de los costes intrínsecos
+- (x) La exclusión de los costes a reintegrar (venta y administración)
+- ( ) La inclusión de los costes financieros
+- ( ) La imputación de los costes del periodo
+
+1.  Ordena de mayor a menor la valoración de las existencias finales según el enfoque de costes:
+- ( ) FCA > FCR > DCS
+- (x) FCR > FCA > DCS
+- ( ) DCS > FCA > FCR
+- ( ) FCR > DCS > FCA
+
+<!-- EXTRA -->
+
+1. COMPRA (CONSUMO) Y VENTA, INGRESOS Y GASTOS (COSTE), PAGO Y COBRO:  Marque la respuesta correcta:  
+- ( ) Siempre que tiene lugar una compra tiene lugar un gasto.  
+- ( ) Siempre que tiene lugar una venta tiene lugar un ingreso. compra, gasto y venta, ingreso se producen simultáneamente  
+- (x) A y B son correctas. pago y cobro van por separado  
+
+1. El coste y el ingreso siempre coinciden en el tiempo, respectivamente, con:  
+- ( ) La compra y la colocación.  
+- ( ) El pago y el cobro.  
+- (x) El consumo y la venta. compra y venta  
+
+1. Toda cesión de productos:  
+- ( ) Constituye una venta e implica un ingreso.  
+- (x) Constituye una venta, implica un ingreso y da derecho a un cobro.  
+- ( ) Constituye una venta, implica un ingreso y obliga a un pago. derecho de cobro, no pago  
+
+1. La vinculación temporal de gasto, compra y pago en relación al bonobús para viajes futuros es:  
+- ( ) Primero pago y después gasto y compra. gasto y compra se registran a medida que se consumen los viajes  
+- (x) Gasto y compra al mismo tiempo pago.  
+- ( ) Primero gasto y compra y después pago.  
+
+1. ¿A qué nos referimos cuando utilizamos la palabra <cobro>?  
+- ( ) A las cantidades de bienes o servicios que pasan de la empresa al mundo exterior. venta  
+- ( ) Al equivalente de lo vendido por la empresa expresado en unidades monetarias. ingreso  
+- (x) A la entrada de dinero real en la empresa.  
+
+1. Un gasto es:  
+- (x) Cuando se produce la transferencia monetaria.  
+- ( ) El equivalente monetario de la compra.  
+- ( ) La adquisición de bienes o servicios. compra  
+
+1. El cobro se da cuando...  
+- (x) Se produce la transferencia monetaria del ingreso.  
+- ( ) Se realiza la cesión de bienes y servicios de la empresa al mundo externo.  
+- ( ) Se adquieren bienes o servicios, se haya o no realizado la ocupación material de los mismos.  
+
+1. CONTABILIDAD INTERNA (COSTES) Y EXTERNA:  
+Los recursos financieros:  
+- ( ) No constituye un factor de coste para la empresa.  
+- (x) Se entiende su coste como el sacrificio que supone renunciar a invertidos y darles un rendimiento. se relaciona con la oportunidad perdida de inversión  
+- ( ) Las respuestas A y B son incorrectas.  
+
+1. Interna, de costes o de gestión:  
+Dentro del ámbito interno:  
+- (x) Consumo y gasto suponen magnitudes corrientes.  
+- ( ) Producción y valor de la producción de un periodo suponen magnitudes corrientes.  
+- ( ) Producción en stock y valor de la producción en stock suponen magnitudes corrientes.  
+
+1. Seleccione cuál de estas afirmaciones es verdadera:  
+- (x) La contabilidad interna nos permite en todo momento el conocimiento cualitativo y cuantitativo de la de la realidad económico-técnica con el fin específico de permitir el control de la producción y los costes de dicha unidad.  
+- ( ) La contabilidad interna nos permite en todo momento el conocimiento cualitativo y cuantitativo de la realidad económico-financiera con el fin específico de permitir el control de la producción y los costes de dicha unidad. económico-técnica  
+- ( ) Ninguna de las anteriores es correcta.  
+
+1. El subsistema de producción de la empresa pertenece a:  
+- (x) La corriente económica del ámbito interno de la empresa.  
+- ( ) La circulación financiera del ámbito interno de la empresa. económica  
+- ( ) Al ámbito externo de la empresa.  
+
+1. La Contabilidad Interna o de costes:  
+- ( ) Se ocupa del estudio del movimiento interno de valores de la transformación productiva operada por la empresa, para conocer las magnitudes técnicas y económicas que lo configuran. económico-técnica y llevar a cabo la medida de la eficiencia  
+- ( ) Lleva a cabo el análisis, evaluación y control de las actividades productivas.  
+- (x) Las dos respuestas son correctas.  
+
+1. La contabilidad externa pertenece a la microcontabilidad pública y a su vez a la contabilidad general. Son entre otros fines de la contabilidad de gestión:  
+- ( ) Estudio de las transacciones referentes a las inversiones que debe realizar la empresa.  
+- ( ) La determinación del resultado externo de la empresa. interno  
+- (x) El suministro de la información relevante necesaria para apoyar la toma de decisiones de los órganos de gestión.  
+- ( ) Ambas respuestas son correctas.  
+
+1. Señale cuál de las siguientes afirmaciones es errónea en relación a los objetivos de la contabilidad interna o de costes: proporcionar información relevante para la gestión interna  
+- ( ) Suministro de la información relevante necesaria para apoyar la toma de decisiones de los órganos de gestión. proporcionar información relevante para la gestión interna de la empresa  
+- ( ) Análisis, evaluación y control de las actividades productivas. dentro de la empresa  
+- (x) Determinar información a agentes externos de la empresa en base a la legislación contable vigente, cuyo principal exponente son las cuentas anuales. a agentes externos no  
+
+1. Señale la opción incorrecta. Son objetivos de la contabilidad interna o de costes:  
+- ( ) Descomposición del resultado interno en forma tal que permita conocer la contribución a su generación.  
+- ( ) Suministro de la información relevante necesaria para apoyar la toma de decisiones de los órganos de gestión.  
+- (x) Suministro de la información relevante necesaria a todos los posibles grupos interesados (stakeholders) conforme al PCG. ámbito externo  
+
+1. Señale cuál de estos pertenece a los fines de la contabilidad interna o de costes:  
+- ( ) Captación, medida, valoración y representación de la problemática económico-técnica de la empresa.  
+- ( ) Análisis, evaluación y control de las actividades productivas.  
+- (x) Las dos respuestas anteriores son correctas.  
+
+1. En el ámbito interno de la empresa:  
+- ( ) Se produce la circulación económica y financiera.  
+- (x) Se produce circulación económica. flujo de recursos y transacciones relacionadas con la producción, el consumo, la inversión y otros aspectos económicos internos de la empresa  
+- ( ) Se producirá una u otra dependiendo de la actividad a que se dedique la empresa.  
+
+1. Respecto al ámbito interno y externo de la circulación de valores en la empresa decimos que:  
+- (x) Existe tanto corriente financiera como económica en el ámbito interno de la circulación económica  
+- ( ) En el ámbito externo solo hay corriente financiera y en el interno, económica.  
+- ( ) Solo tenemos circulación financiera en el ámbito interno. solo económica  
+
+1. Señale la respuesta correcta:  
+- (x) La contabilidad interna pertenece a la microcontabilidad privada y a su vez a la contabilidad aplicada.  
+- ( ) La contabilidad externa pertenece a la macrocontabilidad y a su vez a la contabilidad aplicada. no pertenece a la macrocontabilidad (crecimiento económico, la inflación, el desempleo)  
+
+1. ¿Cuál es una diferencia esencial en el tratamiento contable de las transacciones de los ámbitos interno y externo?  
+- ( ) Similares objetivos y destinatarios de la información elaborada. destinatarios exteriores (inversores, reguladores y el público en general) / interiores (gerentes y ejecutivos)  
+- (x) Libertad de interpretación frente al cumplimiento de la norma. regulaciones estrictas / flexibilidad  
+- ( ) A y B son correctas  
+
+1. Cuál de las siguientes opciones no es una de las diferencias esenciales en el tratamiento contable de los ámbitos interno y externo:  
+- ( ) Diferente naturaleza de las transacciones abarcadas. info externa / gestión y operaciones internas  
+- ( ) Diferente periodicidad en el tiempo.  
+- (x) Libertad de interpretación frente al incumplimiento de la norma. regulaciones estrictas / flexibles  
+
+1. MAGNITUDES DE FLUJO Y DE FONDO:  
+Magnitudes flujo:  
+Marque la verdadera:  
+- (x) Son magnitudes flujo el ámbito interno: Los consumos y costes, producción y valor de la producción y colocación y valor de la colocación. flujo interno  
+- ( ) Son magnitudes fondo del ámbito interno: Dinero en existencia y débitos o derechos de cobro a favor de la empresa. fondo externo  
+- ( ) Son magnitudes flujo del ámbito interno: Comprar y gastos, ventas e ingresos, pagos y cobros, inversiones financieras, en la empresa y de la empresa (en sentido dinámico). flujo externo  
+
+1. El cobro y el pago son dos magnitudes flujo:  
+- (x) Inherentes al ámbito externo de la empresa.  
+- ( ) Inherentes al ámbito interno de la empresa.  
+- ( ) Coinciden en el tiempo con los gastos e ingresos.  
+
+1. Las magnitudes de flujo dentro del ámbito externo son: (dinámico y dinero)  
+- ( ) Inversiones financieras de la empresa (en sentido estático), débitos o derechos de cobro a favor de la empresa y créditos y obligaciones de pago a cargo de la empresa. fondo externo (derechos y créditos / estático)  
+- (x) Comprar y gastos; ventas e ingresos; pagos y cobros; inversiones financieras de la empresa (dinámicas). flujo externo (compra, gasto y pago / dinámico)  
+- ( ) Dinero en existencia; inversiones económicas positivas y negativas; resultados.  
+
+1. Son dos magnitudes de flujo del ámbito interno:  
+- ( ) El stock de bienes y servicios en un momento determinado. fondo interno  
+- (x) El traspaso de bienes y servicios en un momento de tiempo entre dos agentes económicos o partes de una empresa. producción / dinámico  
+- ( ) Ninguna de las afirmaciones anteriores es correcta  
+
+1. Señale cuál de las siguientes no es una magnitud del ámbito externo:  
+- ( ) Ventas e ingresos.  
+- ( ) Pagos y cobros.  
+- (x) Consumos y costes. flujo interno  
+
+1. Magnitudes fondo:  
+Las magnitudes de fondo fundamentales en el ámbito interno son: (productos y estático)  
+- ( ) Comprar y ventas; gastos e ingresos; pagos y cobros; inversiones financieras de la empresa (dinámicas). flujo externo (compra, gasto y pago / dinámico)  
+- (x) Producción o trabajos en curso; producción en stock. fondo interno (inventario y estático)  
+- ( ) Consumos y costes; producción y valor de la producción; colocación y valor de la colocación. flujo interno (consumo, colocación y producción / dinámico)  
+
+1. Las magnitudes de fondo en el ámbito interno:  
+- ( ) Visión dinámica: van a la cuenta de PyG o flujos de caja. ámbito externo  
+- (x) Visión estática: van al balance de situación.  
+- ( ) Incluyen inversiones financieras de la empresa.  
+
+1. Señale aquella magnitud que no pertenezca a las magnitudes de fondo en el ámbito interno:  
+- ( ) Producción en curso de fabricación.  
+- ( ) Producción en stock.  
+- (x) Resultados
+
+<!-- Extra 2 -->
+
+
+1. Señale la respuesta correcta:
+- (x) La unidad de trabajo es la célula básica de actividad, integrada generalmente por uno o más medios estructurales y su correspondiente dotación de personal.
+- ( ) La productividad es la medida del grado de aprovechamiento del potencial productivo de los factores.
+- ( ) La producción alternativa es aquella en la que no hay interferencias entre las distintas ramas de producción.
+
+1. La productividad es:
+- (x) La medida o grado de aprovechamiento del potencial productivo de los factores.
+- ( ) Cada uno de los recursos económicos o medios de producción, utilizados en la función de transformación económica.
+- ( ) Capacidad o aptitud que poseen los factores para la obtención de uno o más bienes.
+
+1. La producción dentro de una fase en estado de transformación:
+- ( ) Producción a medias
+- (x) Producción en curso
+- ( ) Producción semiacabada
+
+1. En la producción paralela:
+- (x) Técnicamente cada rama puede desenvolverse, pero se llega a la conclusión de que los distintos medios pueden llegar a productos diferentes en la misma planta de producción.
+- ( ) Cada rama de producción da lugar a un producto y los medios que intervienen no afectan al resto.
+- ( ) Es acumulativa, ocurre con subproductos.
+
+1. El orden de las fases en los subsistemas de una unidad económica de producción es:
+- ( ) Financiación, producción, inversión, desinversión
+- (x) Financiación, inversión, producción, desinversión
+- ( ) Inversión, financiación, producción, desinversión
+
+1. Señale la respuesta incorrecta:
+- ( ) Un proceso productivo puede caracterizarse como una transformación, según una determinada técnica de factores productivos en producto
+- ( ) Los factores productivos son cada uno de los recursos económicos o medios de producción naturales o previamente elaborados, que son utilizados en la función de transformación económica.
+- (x) Los costes fijos son aquellos que fluctúan frente a una variación en el volumen de producción, dentro de los límites definidos por la capacidad productiva disponible, a lo largo del periodo de estudio.
+
+1. Los factores de producción clasificados según el modo de participación en el proceso productivo son:
+- ( ) Factores estructurales, colaboradores y sustitutivos
+- (x) Factores sustitutivos y limitativos
+- ( ) Factores estructurales, para el perfeccionamiento y colaboradores.
+
+1. La expresión monetaria del consumo es:
+- ( ) Gastos.
+- ( ) Pagos.
+- (x) Costes.
+
+1. Se entiende por coste:
+- ( ) Siempre que hablamos de coste existe un sacrificio de factores.
+- ( ) Necesariamente tenemos que valorar monetariamente.
+- (x) Ambas respuestas son correctas.
+
+1. El coste es una magnitud esencialmente relativa, debido a:
+- ( ) La indeterminación a menudo asociada a la medida y valoración de los consumos.
+- ( ) La indeterminación inherente a la asignación del coste incurrido a los centros de actividad y a los productos.
+- (x) Las dos anteriores son correctas.
+
+1. Señale la opción correcta en relación al coste real:
+- ( ) Son cantidades de factores consumidos en la producción, valorados.
+- ( ) Depende del consumo.
+- (x) Depende del consumo y de los precios.
+
+1. La corriente en términos reales:
+- (x) Conlleva la compra de factores productivos y la venta de productos.
+- ( ) Conlleva unos pagos y expectativas de pagos y unos cobros y expectativas de cobros.
+- ( ) Es aquella en la que se produce la circulación monetaria.
+
+1. El coste monetario es:
+- ( ) La cantidad de factores consumidos o sacrificados en la producción.
+- (x) La valoración de la cantidad de factores consumidos en la producción. Depende del consumo y de los precios.
+- ( ) Las respuestas A y B son falsas.
+
+1. Un coste caracterizado como fijo a nivel global de la empresa puede...
+- (x) Que lo sea como variable al nivel de un centro de actividad particular.
+- ( ) No puede ser variable dentro del centro de actividad particular.
+- ( ) Ha de ser variable al nivel de un centro de actividad.
+
+1. Los costes fijos son...
+- (x) Aquellos que no fluctúan frente a una variación en el volumen de producción, dentro de los límites definidos por la capacidad productiva disponible, a lo largo del periodo de estudio.
+- ( ) Aquellos que fluctúan frente a una variación en el volumen de producción, dentro de los límites definidos por la capacidad productiva disponible, a lo largo del periodo de estudio.
+- ( ) Aquellos que no fluctúan frente a una variación en el volumen de producción, sin límites definidos por la capacidad productiva disponible, a lo largo del periodo de estudio.
+
+1. Son costes fijos:
+- (x) Costes de estructura.
+- ( ) Costes proporcionales.
+- ( ) Costes reversibles.
+
+1. La caracterización de un coste como fijo:
+- ( ) Si es a nivel global de la empresa implica que también lo es a nivel de un centro de actividad particular.
+- (x) No presupone que su importe se mantenga constante en sucesivos períodos.
+- ( ) Es independiente de las decisiones adoptadas en la empresa.
+
+1. En los costes de estructura o en estado parado:
+- (x) Aunque no se produzca nada, se incurre en determinados costes (caso de inactividad total).
+- ( ) Se activan los costes fijos desde que se produzca una unidad.
+- ( ) Dependen del volumen de producción.
+
+1. Señale la opción correcta en torno a la precisión de la fijeza o variabilidad de los costes:
+- ( ) Un coste caracterizado como fijo a nivel global de la empresa también lo será a nivel de un centro de actividad particular.
+- ( ) La fijeza de un coste implica necesariamente que se mantenga constante en sucesivos periodos.
+- (x) Conviene precisar la variable independiente en base a la cual se establece la relación funcional: alternativas y dificultades en su elección.
+
+1. Son costes variables:
+- ( ) Costes irreversibles.
+- (x) Costes de puesta en marcha.
+- ( ) Costes de estructura.
+
+1. El coste semifijo:
+- ( ) Es el que una empresa soporta en caso de inactividad total.
+- ( ) Es el incremento del valor entre el coste total de un volumen de producción a otro mayor.
+- (x) Inalterado durante un tiempo hasta que sufre un brusco cambio (variable a saltos).
+
+1. Hablamos de costes semifijos reversibles:
+- ( ) Al referirnos a los costes no necesarios o de subactividad.
+- (x) Cuando podemos volver a la situación anterior.
+- ( ) Cuando nos referimos a aquellos costes que la empresa debe soportar aun en el caso de inactividad total.
+
+1. Son costes semifijos:
+- (x) Costes de estructura o en estado parado.
+- ( ) Costes reversibles.
+- ( ) Costes degresivos.
+
+1. Los costes semivariables son aquellos que:
+- (x) Están formados por una parte fija y otra variable.
+- ( ) Crecen de forma variable a saltos, comportándose de forma fija por intervalos.
+- ( ) Crecen y decrecen a saltos, comportándose de forma fija por intervalos.
+
+1. Marque la opción correcta:
+- ( ) La empresa incurre en costes de estructura cuando lleva a cabo una actividad.
+- (x) Los costes semifijos o variables a saltos se caracterizan por ser inalterables durante un ejercicio.
+- ( ) Los costes no necesarios son los que soporta la empresa y tienen que ser identificables para saber los excesos que tiene en un periodo determinado.
+
+1. Respecto a los costes no necesarios, de la subjetividad o costes por exceso de capacidad:
+- ( ) Su existencia se basa en las decisiones adoptadas en el pasado que reducen el campo de actuación del empresario en el presente.
+- ( ) Son costes asociados a la mano de obra y al equipo productivo existentes al comienzo de un periodo y deben permanecer durante el mismo en la empresa.
+- (x) Las dos respuestas anteriores son correctas.
+
+1. Los costes de subactividad forman parte del coste del producto:
+- (x) En los sistemas de costes completos.
+- ( ) En los sistemas de costes parciales.
+- ( ) Los costes de subactividad no se asignan al producto.
+
+1. Cuál está considerada como coste variable:
+- (x) Coste progresivo.
+- ( ) Coste reversible
+- ( ) Coste en estado parado.
+
+1. Los costes regresivos son aquellos que:
+- ( ) Decrecen de forma variable a saltos.
+- (x) Decrecen al aumentar la producción.
+- ( ) Decrecen al disminuir la producción.
+
+1. El coste intermedio de un lugar es...
+- ( ) La suma de su coste primario y el coste secundario de otros lugares auxiliares con los que se mantienen relaciones recíprocas.
+- (x) La suma de su coste primario y la parte del coste secundario correspondiente a la valoración de las prestaciones recibidas de otros lugares auxiliares con los que se mantienen relaciones recíprocas.
+- ( ) La suma de su coste primario y la parte del coste secundario correspondiente a la valoración de las prestaciones recibidas de otros lugares auxiliares con los que no se mantienen relaciones recíprocas.
+
+1. El coste diferencial:
+- (x) Equivale, en cierto modo, al coste marginal de la Teoría Económica.
+- ( ) Es conocido también como coste suplementario marginal.
+- ( ) Resulta del cociente entre el incremento del coste medio y el incremento de la producción que lo haya originado.
+
+1. Dentro del doble enfoque del coste encontramos:
+- (x) Coste Directo e Indirecto
+- ( ) Coste Real y Monetario
+- ( ) Costes intrínsecos y extrínsecos
+
+1. Los costes Directos:
+- ( ) No deben atribuirse de forma inequívoca a los productos, asíque no resulta factible hacer un seguimiento pormenorizado de ellos.
+- ( ) No contribuyen directamente a la transformación del producto, sino que son facilitadas por un centro de apoyo.
+- (x) Se les atribuye una materia prima de manera inequívoca para un producto.
+
+1. ¿Qué relación hay entre el CF-CV y CD – CI?
+- (x) Los costes variables vienen determinados por costes directos
+- ( ) No se puede hacer una relación de correspondencia entre ambos
+- ( ) A y B son incorrectas
+
+1. El coeficiente de actividad:
+- ( ) Actividad/Tiempo
+- (x) Actividad real/ Actividad normal
+- ( ) Actividad con mayor coste/ Actividad con menos coste
+
+1. Señale cuál de estos requisitos no es necesario de la unidad de medida de la actividad:
+- ( ) Ser representativa de las condiciones tecnológicas imperantes en el centro.
+- ( ) Facilitar la imputación al coste total del centro a los receptores de sus prestaciones.
+- (x) Que exista un reparto equitativo entre todos los receptores.
+
+1. El tiempo material es la suma de:
+- (x) Tiempo de transporte más Tiempo de estacionamiento más Tiempo de inspección
+- ( ) El tiempo de elaboración más el Tiempo sin valor añadido
+- ( ) El Tiempo sin valor añadido menos el tiempo de elaboración
+
+1. Alguna de esta magnitud no es considerada para calcular el rendimiento de una unidad de trabajo, ¿de cuál estaríamos hablando?
+- (x) Consumo real
+- ( ) Tiempo programado
+- ( ) Tiempo empleado
+
+1. En el marco del análisis de un proceso de producción:
+- ( ) El tiempo de sucesión es la suma del tiempo principal y del tiempo complementario
+- ( ) El tiempo de sucesión es la suma del tiempo activo y del tiempo inactivo
+- (x) El tiempo de sucesión es la suma del tiempo de preparación y del tiempo de transformación
+
+1. Respecto a los portadores de coste cabe afirmar que:
+- ( ) A cada manifestación de la producción corresponde un portador de coste.
+- ( ) Cumplen la función acumulativa del valor de la totalidad del consumo de factores productivos.
+- (x) A y B son correctas
+
+1. Portadores de coste ligados a la colocación:
+- ( ) En el enfoque del full costing radical serían, por ejemplo, los costes a reintegrar.
+- (x) En el enfoque del direct costing simple serían, por ejemplo, el coste de trabajos realizados por la propia empresa para su inmovilizado.
+- ( ) En el enfoque del full costing atenuado serían, por ejemplo, los costes comerciales directos.
+
+1. Los portadores de coste:
+- (x) Son elementos conceptuales de la fase de imputación.
+- ( ) Siempre integran costes que valoran la producción.
+- ( ) Son exclusivamente los productos de la empresa.
+
+1. Las claves de distribución son...
+- (x) Claves primarias y secundarias de distribución.
+- ( ) Claves objetivas y subjetivas de distribución.
+- ( ) Claves fijas y variables de distribución.
+
+1. La fase de localización del proceso de formación y asignación de costes consiste en la:
+- ( ) Afectación del coste directo e imputación de los restantes costes acumulados en los centros principales.
+- (x) Distribución del coste de los factores entre los centros de redistribución del coste y los centros auxiliares.
+- ( ) Medición y valoración del consumo de los factores productivos.
+
+1. La operación de afectación consiste en:
+- ( ) Los costes indirectos con los portadores.
+- (x) Los costes directos con los portadores.
+- ( ) Los costes directos con los indirectos.
+
+1. Se relacionan los costes de las secciones a los portadores:
+- (x) Afectación.
+- ( ) Producción.
+- ( ) Imputación.
+
+1. Señale la respuesta correcta:
+- ( ) El coste básico se forma por el coste de materia prima y el coste de la mano de obra indirecta.
+- (x) Bajo el modelo inorgánico se prescinde de la fase de localización en el cálculo del coste del portador.
+- ( ) Ninguna de las respuestas anteriores es correcta.
+
+1. La operación de redistribución:
+- ( ) Traslada los costes de los centros principales al producto.
+- ( ) Se realiza para los costes directos.
+- (x) La llevan a cabo los lugares auxiliares en la fase de localización.
+
+1. En el método de imputación racional:
+- ( ) Se opera con un coste fijo unitario variable con el nivel de actividad alcanzado en el periodo.
+- (x) Si la actividad real es inferior a la normal, una parte de los costes fijos no será absorbida por la producción.
+- ( ) Si la actividad real es inferior a la normal, todos los costes fijos del periodo serán absorbidos por la producción.
+
+1. El comportamiento de una empresa ante hipotéticas variaciones en su volumen de producción dependerá del horizonte temporal considerado, realizando una adaptación parcial a corto plazo o una adaptación total a largo plazo. Señale la opción correcta:
+- (x) La adaptación parcial incidirá solamente sobre los costes variables.
+- ( ) La adaptación total incidirá solamente sobre los costes variables.
+- ( ) La aportación total incidirá solamente sobre los costes fijos.
+
+1. Dentro de la estructura del proceso de cálculo de costes, la clasificación:
+- (x) Se basa en medir y valorar el consumo de los factores productivos.
+- ( ) Consiste en afectar el coste directo e imputación de los restantes costes acumulados en los centros principales.
+- ( ) No se encuentra dentro del proceso de cálculo de coste
+
+1. En el proceso de cálculo:
+- (x) La fase de clasificación tiene por objeto la identificación, delimitación y cálculo del valor de los factores adquiridos en un periodo.
+- ( ) En la fase de localización tiene lugar la distribución entre los centros de coste de los factores adquiridos en el periodo.
+- ( ) La fase de imputación consiste en el reparto de los costes incurridos en el periodo entre los portadores finales.
+
+1. En relación a los principios aplicables en el proceso de cálculo de costes:
+- ( ) El principio de proporcionalidad no tiene aplicabilidad en los sistemas inorgánicos de Contabilidad de gestión.
+- (x) Todo método de cálculo se apoya en una hipótesis de proporcionalidad.
+- ( ) El principio de proporcionalidad sólo resulta aplicable en la fase de imputación.
+
+1. ¿Afectan las distintas corrientes de asignación en la partida de ingresos?
+- ( ) Si
+- (x) No
+
+1. El fenómeno de la histéresis de los costes consiste en que:
+- (x) Al descender el volumen de producción, los costes totales son mayores que los correspondientes a esos mismos niveles cuando la producción era creciente.
+- ( ) Los costes de la mano de obra y el equipo productivo no existirán al comienzo del periodo
+- ( ) El coste asociado a un volumen concreto no depende de cómo se alcanza.
+
+1. El fenómeno de histéresis de costes tiene su causa en la existencia de:
+- ( ) Costes regresivos
+- (x) Costes semifijos irreversibles
+- ( ) Costes degresivos
+
+1. Los costes fijos: no se asignan al producto
+- ( ) Son calificados de costes del producto, son costes que se asignan a la producción.
+- (x) En ningún caso intervienen en el valor de la producción; son costes del periodo.
+- ( ) Influyen en el cálculo del coste variable de fabricación unitario.
+
+1. ¿Con qué se identifican los costes del periodo?
+- (x) Con los costes fijos.
+- ( ) Con los costes variables.
+- ( ) Ninguna de las anteriores.
+
+1. ¿Cuál de las opciones siguientes será contabilizada dentro del periodo, en direct cost desarrollado?
+- ( ) Costes Variables de Fabricación.
+- ( ) Costes Fijos Comunes.
+- (x) Costes Fijos Propios.
+
+1. De acuerdo con los defensores del enfoque del direct costing, los costes fijos derivan de la creación y mantenimiento de una determinada capacidad productiva, por lo que:
+- (x) Su montante (de los costes fijos) se ve afectado por el grado de aprovechamiento de dicha capacidad.
+- ( ) Su montante (de los costes fijos) es independiente del grado de aprovechamiento de dicha capacidad.
+- ( ) Puesto que la posibilidad de utilizar dicha capacidad expira con el periodo, los costes fijos incurridos en cada periodo deben cargarse a la producción obtenida a lo largo del mismo.
+
+1. Marque la respuesta incorrecta:
+- ( ) Los costes indirectos quedan acumulados en los centros principales que mantienen relaciones directas con el producto.
+- ( ) En el full cost radical el coste unitario fluctúa ya que depende del nivel del producción que tiene la empresa
+- (x) En el direct cost simple los CF de fabricación van a parar a la producción.
+
+1. El método Direct Costing Desarrollado:
+- (x) Distingue entre Costes fijos comunes aquellos otros que puedan asignarse a un elemento concreto, de manera que si se eliminase de la producción se evitaría ese coste
+- ( ) Es igual que el direct costing simple.
+- ( ) Las dos respuestas son falsas.
+
+1. En el direct costing desarrollado:
+- (x) Los costes son reclasificados en costes fijos comunes y costes fijos propios específicos
+- ( ) El margen semibruto se calcula restando a los ingresos por ventas los costes variables de producción y comercialización
+- ( ) Se distingue entre costes intrínsecos y costes a reintegrar
+
+1. En el tratamiento de los costes en el full cost atenuado:
+- (x) Son costes del producto aquellos del ciclo de producción; entre los que se encuentran compras y transformación.
+- ( ) Son costes del periodo aquellos del ciclo de producción (compras y transformación).
+- ( ) Son costes del producto aquellos del ciclo de comercialización (ventas y administración).
+
+1. Señale la opción correcta:
+- (x) El full cost valora por un importe mayor las existencias finales de productos acabados que el direct cost.
+- ( ) El full cost valora por un importe inferior las existencias finales de productos acabados que el direct cost.
+- ( ) Tanto el enfoque del full cost como el direct cost valoran las existencias finales de productos acabados por el mismo importe.
+
+1. ¿Cuál de las siguientes opciones está encuadrada dentro de los costes intrínsecos?
+- ( ) Costes Comerciales.
+- ( ) Costes de Administración.
+- (x) Costes de Transformación.
+
+1. En cuanto al tratamiento de los distintos costes en el full costing atenuado:
+- ( ) Los costes intrínsecos y costes a reintegrar ambos pertenecen al ciclo de producción.
+- ( ) Los costes a reintegrar no pertenecen al full costing atenuado sino al direct cost desarrollado.
+- (x) Los costes intrínsecos pertenecen al ciclo de producción antes de su colocación en la empresa y los costes a reintegrar son costes del periodo.
+
+1. El full costing atenuado:
+- ( ) Implica que tanto costes fijos como variables se imputan a la producción, la cuál va directamente a la colocación.
+- (x) Distingue el ciclo productivo (compras y la transformación) y el ciclo de la comercialización (ventas y la administración).
+- ( ) Supone que los costes variables se dividan en costes variables de comercialización y costes variables de fabricación, los cuales se dirigen a colocación, mientras que los costes fijos van directamente al periodo.
+
+1. En la presentación de resultados del full cost atenuado, al margen le debemos restar:
+- ( ) No debemos restarle nada.
+- ( ) Los costes intrínsecos de colocación.
+- (x) Los costes a reintegrar del periodo.
+
+1. ¿Cuál enfoque de asignación de costes arrojará un resultado más favorable para la empresa?
+- (x) El full costing atenuado pues carga menos costes al resultado que los demás enfoques.
+- ( ) El direct costing simple pues carga más costes al resultado que los demás enfoques.
+- ( ) El full costing radical pues carga menos costes al resultado que los demás enfoques
+
+1. En el método del full cost radical:
+- ( ) Se centra en la exclusión de los costes fijos, sólo los costes variables deben reintegrarse en el coste del producto.
+- (x) Persigue la incorporación al producto de la totalidad de los costes, tanto fijos como variables, sin discriminación.
+- ( ) El tratamiento de las distintas clases de costes debe ser distinto según el ciclo donde incida
+
+1. Respecto al método full costing radical:
+- (x) Asigna todos los costes a la producción
+- ( ) No tiene en cuenta los costes de administración
+- ( ) Las dos respuestas son correctas
+
+1. Una de las críticas al full cost radical:
+- ( ) Arbitrariedad en la atribución de los costes variables a nivel unitario
+- (x) Dependencia del coste unitario respecto de las fluctuaciones del nivel de actividad
+- ( ) Excesiva importancia de la inventariación de los costes fijos
+
+1. En el enfoque del full cost radical en comparación con el direct cost simple:
+- (x) Valora las existencias finales de productos acabados por un importe mayor
+- ( ) Valora las existencias finales de productos acabados por un importe menor
+
+1. En el enfoque de full costing radical:
+- (x) Los costes de distribución son auténticos costes del producto y, por lo tanto, se incluyen en el valor de la producción obtenida en el periodo
+- ( ) Los costes intrínsecos fijos constituyen desinversiones de la empresa y, en consecuencia, no son inventariables
+- ( ) Ninguna de las dos respuestas anteriores es correcta
+
+1. Diferencia entre full cost y direct cost:
+- (x) El segundo tiene en cuenta la estructura organizativa de la empresa mientras que el primero no
+- ( ) El segundo no tiene en cuenta la estructura organizativa de la empresa mientras que el primero sí.
+- ( ) No hay ninguna diferencia, en la relación a la estructura organizativa entre ambos enfoques.
+
+1. Entre el full cost radical y el direct cost simple:
+- ( ) El full cost radical lleva menos costes al stock final.
+- (x) El direct cost simple dentro del Estado de Pérdidas y Ganancias posee un margen bruto y semi bruto.
+- ( ) Ninguna de las anteriores es correcta.
+
+1. El análisis de los enfoques de asignación de costes pone de manifiesto que:
+- (x) Tanto en el direct costing simple como en el full costing atenuado, la totalidad de los costes comerciales incurridos en el periodo inciden en el resultado del ejercicio.
+- ( ) El direct costing simple valora la producción del periodo por un importe inferior que el direct costing desarrollado.
+- ( ) En el direct costing desarrollado los costes del periodo son inferiores a los computados como tales por el direct costing simple.
+
+1. Es un método para analizar el comportamiento de los costes:
+- (x) FIFO.
+- ( ) Precio medio ponderado.
+- ( ) Mínimo cuadrados.
+
+1. Si la tendencia que siguen los precios de adquisición es bajista, el resultado del periodo será más favorable aplicando:
+- (x) El criterio FIFO que el criterio NIFO.
+- ( ) El criterio LIFO que el criterio FIFO.
+- ( ) El criterio FIFO que el criterio del precio medio del periodo.
+
+1. El criterio FIFO modalidad estricta:
+- ( ) Es un criterio político de valoración de los consumos que valora las existencias en almacén a los precios más recientes.
+- (x) Es un criterio real de valoración de los consumos que valora las existencias en almacén a los precios más recientes.
+- ( ) Es un criterio real de valoración de los consumos que valora las existencias en almacén a los precios más desfasados.
+
+1. En el criterio del precio medio del periodo:
+- (x) Puedo determinar simultáneamente el valor del consumo de materiales y el valor de las existencias que quedan en el almacén.
+- ( ) No puedo determinar el valor del consumo hasta que finalice el periodo.
+- ( ) Las dos anteriores son falsas.
