@@ -9,8 +9,8 @@
 
 1. El coste es una magnitud  
 - ( ) Arbitraria, en función de los criterios aplicados.  
-- ( ) Relativa, en función de los criterios aplicados.  
-- (x) Exacta, como valoración de factores productivos.  
+- (x) Relativa, en función de los criterios aplicados.  
+- ( ) Exacta, como valoración de factores productivos.  
 - ( ) Ninguna de las respuestas anteriores es correcta.  
 
 1. Los costes fijos son independientes del volumen de actividad, por lo que,  
@@ -55,7 +55,7 @@
 - (x) Producción  
 - ( ) Desinversión  
 
-<!-- Comparativa contabilidad financiera vs contabilidad de gestión -->
+<!-- Comparativa contabilidad financiera vs contabilidad de gestión --> 
 
 1. ¿Quiénes son los principales usuarios de la contabilidad financiera?
 - (x) Externos e internos  
@@ -1237,7 +1237,7 @@
 - (x) Gasto y compra al mismo tiempo pago.  
 - ( ) Primero gasto y compra y después pago.  
 
-1. ¿A qué nos referimos cuando utilizamos la palabra <cobro>?  
+1. ¿A qué nos referimos cuando utilizamos la palabra *cobro*?  
 - ( ) A las cantidades de bienes o servicios que pasan de la empresa al mundo exterior. venta  
 - ( ) Al equivalente de lo vendido por la empresa expresado en unidades monetarias. ingreso  
 - (x) A la entrada de dinero real en la empresa.  
@@ -1665,8 +1665,8 @@ Las magnitudes de fondo fundamentales en el ámbito interno son: (productos y es
 - (x) Costes Fijos Propios.
 
 1. De acuerdo con los defensores del enfoque del direct costing, los costes fijos derivan de la creación y mantenimiento de una determinada capacidad productiva, por lo que:
-- (x) Su montante (de los costes fijos) se ve afectado por el grado de aprovechamiento de dicha capacidad.
-- ( ) Su montante (de los costes fijos) es independiente del grado de aprovechamiento de dicha capacidad.
+- ( ) Su montante (de los costes fijos) se ve afectado por el grado de aprovechamiento de dicha capacidad.
+- (x) Su montante (de los costes fijos) es independiente del grado de aprovechamiento de dicha capacidad.
 - ( ) Puesto que la posibilidad de utilizar dicha capacidad expira con el periodo, los costes fijos incurridos en cada periodo deben cargarse a la producción obtenida a lo largo del mismo.
 
 1. Marque la respuesta incorrecta:
