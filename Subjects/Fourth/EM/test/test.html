@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Test Economía Mundial</title>
+    <style>
+      body {
+        font-family: "Palatino Linotype", serif;
+        background-color: #f0f2f5;
+        color: #333;
+        line-height: 1.6;
+        padding: 20px;
+        font-size: 18px;
+      }
+      h1 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 10px;
+      }
+      .author {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-style: italic;
+      }
+      .question {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .question {
+        overflow-x: auto; /* permite scroll si algo se sale horizontalmente */
+        word-wrap: break-word; /* rompe palabras largas */
+        overflow-wrap: break-word; /* rompe palabras largas en navegadores modernos */
+        max-width: 100%; /* asegura que no se extienda más allá de su contenedor */
+        box-sizing: border-box; /* evita que el padding expanda el tamaño */
+      }
+      
+      .question:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .correct {
+        border-color: #28a745;
+        background-color: #d4edda;
+      }
+      .partial {
+        border-color: #ffc107;
+        background-color: #fff3cd;
+      }
+      .incorrect {
+        border-color: #dc3545;
+        background-color: #f8d7da;
+      }
+      input[type="checkbox"] {
+        margin-right: 10px;
+        transform: scale(1.2);
+      }
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .info-box {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .dark-mode {
+        background-color: #121212;
+        color: #f0f0f0;
+      }
+      .dark-mode .question {
+        background-color: #1e1e1e;
+        border-color: #444;
+      }
+
+      .info-box {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 30px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+      }
+      
+      .dark-mode .correct {
+        background-color: #14532d !important; /* verde oscuro */
+        border-color: #22c55e;
+        color: #d1fae5;
+      }
+      
+      .dark-mode .partial {
+        background-color: #78350f !important; /* marrón/ámbar oscuro */
+        border-color: #facc15;
+        color: #fef3c7;
+      }
+      
+      .dark-mode .incorrect {
+        background-color: #7f1d1d !important; /* rojo oscuro */
+        border-color: #f87171;
+        color: #fee2e2;
+      }
+
+      .dark-mode button {
+        background-color: #1f2937;
+        color: #f9fafb;
+        border: 1px solid #374151;
+      }
+      .dark-mode button:hover {
+        background-color: #374151;
+      }
+      
+
+      .dark-mode {
+        background-color: #121212;
+        color: #f0f0f0;
+      }
+      
+      .dark-mode .info-box {
+        background-color: #1e1e1e;
+        color: #e0e0e0;
+        border-color: #333;
+      }
+      
+      .dark-mode .info-box ul li {
+        color: #ccc;
+      }
+      
+      .dark-mode h1,
+      .dark-mode .author {
+        color: #00bfff;
+      }
+
+      @media print {
+        body {
+          background-color: white !important;
+          color: black !important;
+        }
+      
+        button, #extra-buttons, #more-options-btn {
+          display: none !important;
+        }
+      
+        .question {
+          page-break-inside: avoid;
+        }
+      
+        input[type="checkbox"] {
+          transform: scale(1);
+        }
+      }
+
+      .extra-buttons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 10px;
+        margin-top: 15px;
+      }
+      
+      .extra-buttons-grid button {
+        padding: 10px;
+        font-size: 14px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      
+      .extra-buttons-grid button:hover {
+        background-color: #0056b3;
+      }
+      
+      .opcion-linea {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      
+      .opcion-bloque {
+        display: block;
+        margin-top: 5px;
+        margin-left: 24px;
+      }
+      
+      .question {
+        margin-bottom: 25px;
+      }
+
+      .opcion-bloque {
+        margin: 12px 0;
+      }
+      
+      .opcion-bloque table {
+        border-collapse: collapse;
+        margin-top: 8px;
+        width: auto;
+      }
+      
+      .opcion-bloque th, .opcion-bloque td {
+        border: 1px solid #ccc;
+        padding: 6px 10px;
+        text-align: left;
+      }
+
+      .opcion-bloque table {
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      .dark-mode .opcion-bloque table {
+        background-color: #1e1e1e;
+        color: #ddd;
+        border-color: #444;
+      }
+      
+      .dark-mode .opcion-bloque th,
+      .dark-mode .opcion-bloque td {
+        border-color: #555;
+      }
+
+      
+      pre code {
+        background-color: #f5f5f5;
+        border-left: 4px solid #007acc;
+        padding: 10px;
+        display: block;
+        border-radius: 5px;
+        font-family: 'Courier New', Courier, monospace;
+        white-space: pre-wrap;
+      }
+
+      .enunciado {
+        display: block;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      
+      .enunciado-bloque {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 12px;
+        align-items: start;
+        margin-bottom: 8px;
+      }
+      
+      .enunciado-bloque .num {
+        font-weight: bold;
+        margin-top: 4px;
+      }
+      
+      .enunciado-bloque .texto pre {
+        margin-top: 6px;
+      }
+
+      .enunciado img,
+      .enunciado-bloque img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 1em auto;
+      }
+
+      .enunciado table,
+      .enunciado-bloque table {
+        width: 100%;
+        max-width: 100%;
+        border-collapse: collapse;
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
+
+      .enunciado table th,
+      .enunciado table td,
+      .enunciado-bloque table th,
+      .enunciado-bloque table td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+      }
+
+      .enunciado table th {
+        background-color: #f2f2f2;
+      }
+
+      .enunciado, .enunciado-bloque {
+        overflow-x: auto;
+      }
+
+      
+      
+      
+      
+
+      
+      
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  </head>
+  <body>
+    <h1>Test Economía Mundial</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Titulación: Doble Grado en Ingeniería Informática y ADE</div>
+
+    <div class="info-box">
+      <p>Recopilación de tipo tests del tema 1 y 2 para el parcial de Economía Mundial.</p>
+      <ul>
+<li>Estos tests están diseñados para repasar y autoevaluar los conocimientos adquiridos en la asignatura.</li>
+<li>Ayudan a identificar áreas de mejora antes de los exámenes oficiales.</li>
+<li>Fomentan la práctica activa y permiten comprobar de forma inmediata las respuestas correctas.</li>
+<li>Proceden de diversas fuentes, por lo que podrían contener errores. Si detectas alguno, se agradecerá su notificación a través de <a href="https://elblogdeismael.github.io/#contact">este enlace</a>.</li>
+<li>El test puede desordenarse, mostrar respuestas correctas y ofrece otras funciones útiles que se recomienda explorar.</li>
+<li>Algunas preguntas pueden tener más de una respuesta correcta, marcadas en amarillo (parcialmente correctas).</li>
+<li>No hay un número fijo de respuestas correctas por pregunta; esto obliga al usuario a conocer cuántas son realmente válidas.</li>
+<li>Han sido generados con la herramienta <a href="https://github.com/Ismael-Sallami/md2html">md2html-testGenerator</a>, desarrollada por <a href="https://ismael-sallami.github.io/">Ismael Sallami</a>.</li>
+<li>Se recomienda acceder en modo escritorio para una mejor experiencia. En móviles, la interfaz se adapta mostrando las respuestas debajo de cada casilla para facilitar su uso. Si no se ve de manera correcta en teléfono móvil se recomienda actualizar la página.</li>
+<li>La intención de estas preguntas es repasar la teoría, por lo que algunas preguntas pueden parecer triviales.</li>
+</ul>
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú</button>
+      <div id="extra-buttons" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Mostrar todas las correctas</button>
+        <button onclick="resetAnswers()">Reiniciar respuestas</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <!-- <button onclick="mostrarSoloIncorrectas()">Mostrar solo incorrectas</button> -->
+        <button id="toggleIncorrectasBtn" onclick="toggleMostrarIncorrectas()">Mostrar solo incorrectas</button>
+        <button onclick="mostrarResumen()">Mostrar resumen</button>
+        <!-- <button onclick="mostrarEstadisticas()">Estadísticas</button> -->
+        <button onclick="activarModoExamen()">Activar modo examen</button>
+        <!-- <button onclick="descargarPDF()">Descargar en PDF</button> -->
+        <button onclick="window.print()">Imprimir o guardar como PDF</button>
+        <button onclick="imprimirSoloIncorrectas()">Imprimir solo incorrectas</button>
+
+
+
+
+      </div>
+    </div>
+
+    <div id="questions-container"><div class="question" id="q1" data-correct="2">
+<div class="enunciado"><strong>1.</strong> En el contexto del modelo de Heckscher-Ohlin, la 'paradoja de Leontief' se refirió al hallazgo de que las exportaciones de Estados Unidos en 1947 eran...</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> <p>igualmente intensivas en capital y trabajo, contradiciendo la especialización.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> <p>principalmente materias primas en lugar de bienes manufacturados.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> <p>menos intensivas en capital y más intensivas en trabajo de lo que se esperaba.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> <p>más intensivas en capital y menos intensivas en trabajo de lo que se esperaba.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q2" data-correct="3">
+<div class="enunciado"><strong>2.</strong> El fenómeno de la 'job polarization' (polarización del empleo) descrito en los textos se refiere a:</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> <p>Una creciente brecha salarial entre los trabajadores del sector público y privado.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> <p>La sustitución completa de trabajadores humanos por robots en el sector manufacturero.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> <p>La concentración geográfica del empleo en unas pocas ciudades de alta tecnología.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> <p>Un aumento del empleo en ocupaciones con salarios altos y bajos, y una disminución en las de salarios medios.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q3" data-correct="2">
+<div class="enunciado"><strong>3.</strong> En el debate sobre "offshoring" (contratación externa), si una empresa de un país desarrollado traslada sus actividades de producción menos cualificadas a un país en desarrollo, ¿qué predice el modelo sobre el salario relativo de los trabajadores cualificados en AMBOS países?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> <p>Aumentará en el país desarrollado y disminuirá en el país en desarrollo.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> <p>Disminuirá en ambos países.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> <p>Aumentará en ambos países.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> <p>Disminuirá en el país desarrollado y aumentará en el país en desarrollo.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q4" data-correct="0">
+<div class="enunciado"><strong>4.</strong> ¿Cuál es una diferencia clave entre el efecto de una cuota de importación y un arancel en un mercado con un monopolio nacional?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> <p>La cuota permite al monopolista nacional ejercer más poder de mercado y fijar un precio más alto que un arancel equivalente.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> <p>Un arancel siempre reduce el bienestar nacional en mayor medida que una cuota equivalente.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> <p>El arancel no genera ingresos para el gobierno, mientras que la cuota sí lo hace.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> <p>Ambos instrumentos tienen exactamente el mismo efecto sobre el precio y la producción en un mercado monopolístico.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q5" data-correct="1">
+<div class="enunciado"><strong>5.</strong> En un modelo de competencia monopolística, ¿cuál es uno de los principales beneficios del comercio internacional para los consumidores, incluso entre países con tecnología y dotaciones de factores similares?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> <p>La especialización completa de cada país en un único bien, según la ventaja comparativa ricardiana.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> <p>Un aumento en la variedad de productos disponibles y una reducción de los precios debido a las economías de escala.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> <p>La eliminación total de las empresas menos eficientes en todos los países comerciantes.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> <p>La igualación completa de los salarios entre los países comerciantes, como predice el modelo H-O.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q6" data-correct="2">
+<div class="enunciado"><strong>6.</strong> De acuerdo con la evidencia presentada, el aumento de la desigualdad salarial en China, donde los trabajadores cualificados ganan más que los poco cualificados, contradice la predicción simple del modelo Heckscher-Ohlin. ¿Por qué?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> <p>Porque H-O asume que los trabajadores cualificados y no cualificados son factores de producción idénticos.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> <p>Porque H-O predice que el comercio igualará los precios de los productos, pero no los salarios.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> <p>Porque H-O predice que el comercio aumentará la desigualdad en países abundantes en capital (como EE.UU.), no en países abundantes en trabajo (como China).</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> <p>Porque H-O solo es aplicable a países desarrollados y no a economías en desarrollo como la de China.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q7" data-correct="0">
+<div class="enunciado"><strong>7.</strong> Una devaluación de la moneda de un país bajo un sistema de tipos de cambio fijos tiene como efecto a corto plazo:</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> <p>Un aumento de la producción, un aumento de las reservas oficiales y una expansión de la oferta monetaria.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> <p>Una disminución de la producción y una contracción de la oferta monetaria.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> <p>No tiene efecto en la producción, solo en el nivel de precios a largo plazo.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> <p>Un aumento de las tasas de interés para atraer capital y defender el nuevo tipo de cambio.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q8" data-correct="0">
+<div class="enunciado"><strong>8.</strong> En el contexto de la política comercial estratégica, ¿en qué situación un subsidio a la exportación para una empresa nacional (por ejemplo, Airbus) podría ser teóricamente beneficioso para el bienestar nacional, según el análisis de Brander-Spencer?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> <p>Si el subsidio disuade a la empresa extranjera (Boeing) de entrar en un mercado de duopolio, permitiendo a la empresa nacional capturar todas las rentas del monopolio.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> <p>Si el subsidio provoca una guerra de precios que reduce los precios para los consumidores de todo el mundo.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> <p>Si el mercado es de competencia perfecta, ya que el subsidio aumenta el excedente del productor.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> <p>Si el costo del subsidio para el gobierno es exactamente igual al aumento de los beneficios de la empresa.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q9" data-correct="2">
+<div class="enunciado"><strong>9.</strong> En el contexto del modelo de competencia monopolística, el comercio intraindustrial se refiere a:</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> <p>La exportación de bienes de una industria a cambio de la importación de bienes de una industria completamente diferente.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> <p>El comercio de bienes intermedios dentro de las diferentes filiales de una empresa multinacional.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> <p>La exportación e importación de productos dentro de la misma categoría o industria, como automóviles o productos farmacéuticos.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> <p>El intercambio de capital por trabajo entre dos países.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q10" data-correct="0">
+<div class="enunciado"><strong>10.</strong> Según el modelo de factores específicos, ¿cuál es el efecto a corto plazo de un aumento en el precio relativo de las manufacturas sobre los ingresos de los factores de producción?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> <p>Los propietarios del capital en el sector manufacturero ganan, los terratenientes pierden y el efecto sobre los trabajadores es ambiguo.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> <p>Todos los factores de producción (trabajo, capital y tierra) experimentan un aumento en sus ingresos reales.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> <p>Los propietarios de capital y los terratenientes ganan, mientras que los trabajadores pierden.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> <p>Los trabajadores ganan, mientras que los propietarios de capital y los terratenientes pierden.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q11" data-correct="0">
+<div class="enunciado"><strong>11.</strong> Un país 'grande' puede mejorar su bienestar nacional imponiendo un arancel si...</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> <p>la ganancia por la mejora en sus términos de intercambio es mayor que la pérdida de eficiencia (pérdida irrecuperable).</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> <p>el arancel es lo suficientemente alto como para eliminar todas las importaciones.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q11" value="2"> <p>los productores nacionales aumentan su excedente más de lo que disminuye el excedente del consumidor.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q11" value="3"> <p>los ingresos del gobierno por el arancel superan la pérdida de eficiencia.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q12" data-correct="3">
+<div class="enunciado"><strong>12.</strong> En el contexto de la economía política del comercio, ¿por qué los grupos que pierden con el comercio (como los productores de industrias que compiten con importaciones) suelen tener más influencia política que los grupos que ganan (como los consumidores)?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q12" value="0"> <p>Porque las leyes internacionales de comercio favorecen la protección de las industrias nacionales sobre el libre comercio.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q12" value="1"> <p>Porque los gobiernos priorizan el empleo en el sector manufacturero sobre los precios bajos para los consumidores.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q12" value="2"> <p>Porque los consumidores generalmente se benefician más del comercio que lo que pierden los productores.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q12" value="3"> <p>Porque las pérdidas para los productores están concentradas en un grupo pequeño y organizado, mientras que las ganancias para los consumidores están dispersas entre muchos individuos.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q13" data-correct="2">
+<div class="enunciado"><strong>13.</strong> Las estimaciones sobre el impacto de la inmigración en la economía de EE.UU. sugieren que, en general, hay ganancias netas para el país receptor. ¿Cuál es una de las principales razones económicas para esta ganancia?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q13" value="0"> <p>La inmigración reduce la necesidad de comerciar con otros países, haciendo la economía más autosuficiente.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q13" value="1"> <p>La inmigración aumenta la oferta de trabajo, lo que reduce los salarios para todos los trabajadores nativos y aumenta los beneficios de las empresas.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q13" value="2"> <p>Los inmigrantes complementan la fuerza laboral nativa y aumentan la productividad y la innovación, generando un excedente económico.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q13" value="3"> <p>Los inmigrantes pagan más impuestos de lo que reciben en servicios públicos desde el momento en que llegan.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q14" data-correct="3">
+<div class="enunciado"><strong>14.</strong> ¿Cuál es la principal conclusión del "paradigma de Leontief" al contrastar empíricamente el modelo Heckscher-Ohlin con datos de Estados Unidos de 1947?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q14" value="0"> <p>No había una diferencia significativa en la intensidad de factores entre las exportaciones e importaciones de EE. UU.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q14" value="1"> <p>Las exportaciones de EE. UU. eran más intensivas en capital que sus importaciones, confirmando plenamente el modelo H-O.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q14" value="2"> <p>El modelo H-O solo se cumplía para el comercio de EE. UU. con países en desarrollo, pero no con países industrializados.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q14" value="3"> <p>Las exportaciones de EE. UU. eran menos intensivas en capital y más intensivas en trabajo que sus importaciones, contradiciendo la teoría.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q15" data-correct="2">
+<div class="enunciado"><strong>15.</strong> Si un país grande impone un arancel a las importaciones, ¿qué efecto único puede ocurrir que no es posible para un país pequeño, y que podría potencialmente generar una ganancia neta de bienestar para el país importador?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q15" value="0"> <p>La eliminación completa de las pérdidas de eficiencia (peso muerto) en la producción y el consumo.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q15" value="1"> <p>Un aumento en los ingresos del gobierno que siempre es mayor que la pérdida de excedente del consumidor.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q15" value="2"> <p>Una mejora en sus términos de intercambio debido a la caída del precio mundial del bien importado.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q15" value="3"> <p>La capacidad de subsidiar a sus exportadores con los ingresos recaudados por el arancel.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q16" data-correct="0">
+<div class="enunciado"><strong>16.</strong> El 'trilema' de la macroeconomía internacional postula que un país no puede tener simultáneamente:</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q16" value="0"> <p>Un tipo de cambio fijo, libre movilidad de capitales y una política monetaria autónoma.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q16" value="1"> <p>Superávit comercial, bajo desempleo y baja inflación.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q16" value="2"> <p>Libre comercio, protección de la industria naciente y altos ingresos fiscales.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q16" value="3"> <p>Crecimiento económico, distribución equitativa del ingreso y estabilidad de precios.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q17" data-correct="3">
+<div class="enunciado"><strong>17.</strong> Según la teoría de la Paridad del Poder Adquisitivo (PPA) absoluta, si una cesta de bienes cuesta 120 dólares en EE.UU. y 100 euros en la zona euro, el tipo de cambio nominal (E$/€) debería ser:</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q17" value="0"> <p>$0.83 por euro.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q17" value="1"> <p>Imposible de determinar sin el tipo de interés.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q17" value="2"> <p>$1.00 por euro.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q17" value="3"> <p>$1.20 por euro.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q18" data-correct="0">
+<div class="enunciado"><strong>18.</strong> En el modelo de factores específicos, si aumenta el precio relativo de las manufacturas (sector que utiliza capital y trabajo), ¿cuál es el efecto sobre el bienestar de los propietarios del capital, los terratenientes (sector agrícola) y los trabajadores?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q18" value="0"> <p>Los trabajadores tienen un efecto ambiguo, los capitalistas mejoran y los terratenientes empeoran.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q18" value="1"> <p>Los capitalistas empeoran debido a los mayores salarios, mientras que los terratenientes y los trabajadores mejoran.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q18" value="2"> <p>Todos los grupos mejoran su bienestar debido al aumento del precio de un bien nacional.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q18" value="3"> <p>Los capitalistas y los trabajadores mejoran, mientras que los terratenientes empeoran.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q19" data-correct="2">
+<div class="enunciado"><strong>19.</strong> En el contexto del modelo Heckscher-Ohlin (H-O), si un país es abundante en capital y abre al comercio internacional, ¿cuál es la predicción del teorema de Stolper-Samuelson sobre las remuneraciones reales de los factores a largo plazo?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q19" value="0"> <p>La remuneración real del trabajo aumentará, mientras que la del capital se mantendrá constante.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q19" value="1"> <p>Las remuneraciones reales de ambos factores, capital y trabajo, aumentarán debido a las ganancias generales del comercio.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q19" value="2"> <p>La remuneración real del capital aumentará y la remuneración real del trabajo disminuirá.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q19" value="3"> <p>El efecto sobre las remuneraciones reales de ambos factores será ambiguo y dependerá de los patrones de consumo.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q20" data-correct="3">
+<div class="enunciado"><strong>20.</strong> El modelo de "dumping" como una forma de discriminación de precios por parte de un monopolista sugiere que una empresa venderá un producto a un precio más bajo en el mercado de exportación que en su mercado nacional si...</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q20" value="0"> <p>Los costos de transporte al mercado de exportación son significativamente altos.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q20" value="1"> <p>La empresa tiene un exceso de inventario que necesita vender rápidamente.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q20" value="2"> <p>El gobierno del país exportador ofrece un subsidio a la exportación.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q20" value="3"> <p>La demanda en el mercado de exportación es más elástica que la demanda en el mercado nacional.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q21" data-correct="3">
+<div class="enunciado"><strong>21.</strong> En el modelo Ricardiano, ¿qué determina la ventaja comparativa de un país en la producción de un bien?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q21" value="0"> <p>Su productividad laboral absoluta en ese bien en comparación con otros países.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q21" value="1"> <p>Su dotación de capital y tierra.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q21" value="2"> <p>El tamaño de su mercado interno y las economías de escala.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q21" value="3"> <p>El costo de oportunidad de producir ese bien, en términos de otros bienes, en comparación con el costo de oportunidad en otros países.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q22" data-correct="0">
+<div class="enunciado"><strong>22.</strong> Cuando se compara un arancel con una cuota de importación que restringe las importaciones a la misma cantidad en un mercado con un monopolista nacional, ¿por qué la cuota suele ser más perjudicial para el bienestar del país importador?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q22" value="0"> <p>La cuota otorga al monopolista nacional más poder de mercado para fijar un precio más alto que con un arancel.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q22" value="1"> <p>El gobierno no recauda ingresos con una cuota, a diferencia de un arancel.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q22" value="2"> <p>Las cuotas siempre provocan represalias comerciales, mientras que los aranceles no.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q22" value="3"> <p>Las cuotas son administrativamente más difíciles de implementar que los aranceles.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q23" data-correct="1">
+<div class="enunciado"><strong>23.</strong> El análisis del caso de Singapur sobre la Inversión Extranjera Directa (IED) masiva entre 1970 y 1990 mostró que, en el corto plazo, la renta del capital (Rk) disminuyó mientras que el salario real (W) aumentó. ¿Qué modelo y mecanismo explican mejor este resultado?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q23" value="0"> <p>Modelo Ricardiano; el aumento de la productividad laboral absoluta elevó los salarios.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q23" value="1"> <p>Modelo de factores específicos; un aumento de K/L eleva la productividad marginal del trabajo y reduce la del capital por rendimientos decrecientes.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q23" value="2"> <p>Modelo de Heckscher-Ohlin; el aumento del stock de capital cambió la ventaja comparativa del país.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q23" value="3"> <p>Modelo de gravedad; la IED aumentó el 'tamaño' económico de Singapur, atrayendo más comercio y salarios más altos.</p></label></li>
+</ol>
+</div>
+<div class="question" id="q24" data-correct="3">
+<div class="enunciado"><strong>24.</strong> Según el teorema de Rybczynski, en un modelo H-O con dos bienes (zapatos, intensivo en trabajo; y ordenadores, intensivo en capital), un aumento en la dotación de trabajo de un país (por ejemplo, debido a la inmigración), manteniendo constantes los precios de los bienes, ¿qué efecto tendrá sobre la producción?</div>
+<ol type="a">
+<li><label class="opcion-linea"><input type="checkbox" name="q24" value="0"> <p>La frontera de posibilidades de producción se expandirá uniformemente, aumentando la capacidad de producir ambos bienes por igual.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q24" value="1"> <p>La producción de zapatos aumentará, mientras que la de ordenadores se mantendrá constante.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q24" value="2"> <p>La producción de ambos bienes aumentará, pero la de zapatos lo hará en mayor proporción.</p></label></li>
+<li><label class="opcion-linea"><input type="checkbox" name="q24" value="3"> <p>La producción de zapatos aumentará y la producción de ordenadores disminuirá.</p></label></li>
+</ol>
+</div>
+</div>
+
+    <script>
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            const checked = Array.from(checkboxes)
+              .map((c, i) => (c.checked ? i : null))
+              .filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+            if (checked.length === 0) {
+              q.classList.remove("correct", "partial", "incorrect");
+            } else if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (
+              checked.some((i) => correct.includes(i)) &&
+              onlyCorrect === true
+            ) {
+              q.classList.add("partial");
+            } else {
+              q.classList.add("incorrect");
+            }
+          });
+        });
+      });
+
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+        renumberQuestions();
+      }
+
+      function renumberQuestions() {
+        const questions = document.querySelectorAll(".question");
+        questions.forEach((q, idx) => {
+          const p = q.querySelector("p");
+          p.innerHTML = p.innerHTML.replace(/^\\d+\\./, idx + 1 + ".");
+          const inputs = q.querySelectorAll("input");
+          inputs.forEach((inp) => {
+            inp.name = "q" + (idx + 1);
+          });
+        });
+      }
+
+      function showCorrectAnswers() {
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("correct", "partial", "incorrect");
+          q.classList.add("correct");
+        });
+      }
+
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+      }
+
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+      
+        if (menu.style.display === "none" || menu.style.display === "") {
+          menu.style.display = "grid"; // Si usas extra-buttons-grid
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú";
+        }
+      }
+      
+
+      function toggleModo() {
+        const body = document.body;
+        const btn = document.getElementById("modoBtn");
+      
+        body.classList.toggle("dark-mode");
+      
+        if (body.classList.contains("dark-mode")) {
+          btn.textContent = "Modo claro";
+        } else {
+          btn.textContent = "Modo oscuro";
+        }
+      }
+      
+
+      let mostrandoSoloIncorrectas = false;
+
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+
+        // Comprobar si alguna ha sido corregida
+        const algunaCorregida = Array.from(preguntas).some(q =>
+          q.classList.contains('correct') ||
+          q.classList.contains('incorrect') ||
+          q.classList.contains('partial')
+        );
+
+        if (!algunaCorregida) {
+          alert("Primero debes corregir el test para mostrar solo las incorrectas.");
+          return;
+        }
+
+        if (!mostrandoSoloIncorrectas) {
+          // Oculta todas excepto incorrectas y parciales
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          // Muestra todas
+          preguntas.forEach(q => {
+            q.style.display = 'block';
+          });
+          btn.textContent = 'Mostrar solo incorrectas';
+        }
+
+        mostrandoSoloIncorrectas = !mostrandoSoloIncorrectas;
+      }
+
+
+      
+      function mostrarResumen() {
+        const preguntas = document.querySelectorAll('.question');
+        let correctas = 0, parciales = 0, incorrectas = 0;
+      
+        preguntas.forEach(q => {
+          if (q.classList.contains('correct')) correctas++;
+          else if (q.classList.contains('partial')) parciales++;
+          else if (q.classList.contains('incorrect')) incorrectas++;
+        });
+      
+        alert(`Total de preguntas: ${preguntas.length}
+      ✔️ Correctas: ${correctas}
+      🟡 Parcialmente correctas: ${parciales}
+      ❌ Incorrectas: ${incorrectas}`);
+      }
+      
+      function mostrarEstadisticas() {
+        const total = document.querySelectorAll('.question').length;
+        const correctas = document.querySelectorAll('.question.correct').length;
+        const parciales = document.querySelectorAll('.question.partial').length;
+        const incorrectas = document.querySelectorAll('.question.incorrect').length;
+      
+        const percent = v => ((v / total) * 100).toFixed(1);
+      
+        const statsHTML = `
+          <div style="margin-top:10px;">
+            <strong>Total: ${total}</strong><br>
+            <div style="background:#ddd; height:20px; width:100%; border-radius:5px; overflow:hidden; margin-bottom:10px;">
+              <div style="background:#28a745; width:${percent(correctas)}%; height:100%; float:left;"></div>
+              <div style="background:#ffc107; width:${percent(parciales)}%; height:100%; float:left;"></div>
+              <div style="background:#dc3545; width:${percent(incorrectas)}%; height:100%; float:left;"></div>
+            </div>
+            <small>✔️ ${percent(correctas)}% | 🟡 ${percent(parciales)}% | ❌ ${percent(incorrectas)}%</small>
+          </div>
+        `;
+      
+        const container = document.createElement('div');
+        container.innerHTML = statsHTML;
+        document.body.appendChild(container);
+
+        alert("Estadíaticas mostradas al final del fichero html.");
+
+      }
+
+      function activarModoExamen() {
+        // 1. Desactiva autocorrección
+        document.querySelectorAll('.question').forEach(q => {
+          const nuevo = q.cloneNode(true);
+          q.parentNode.replaceChild(nuevo, q);
+        });
+      
+        // 2. Elimina colores previos
+        document.querySelectorAll('.question').forEach(q => {
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+      
+        // 3. Oculta botones relacionados
+        const btnCorrectas = document.querySelector('button[onclick="showCorrectAnswers()"]');
+        if (btnCorrectas) btnCorrectas.style.display = 'none';
+      
+        // 4. Añade botón "Corregir examen" al final
+        const corregirBtn = document.createElement('button');
+        corregirBtn.textContent = 'Corregir examen';
+        corregirBtn.onclick = corregirExamen;
+        corregirBtn.style.marginTop = '30px';
+        corregirBtn.style.display = 'block';
+        corregirBtn.style.fontWeight = 'bold';
+      
+        document.getElementById('questions-container').after(corregirBtn);
+      
+        alert("Modo examen activado. Haz el test y pulsa 'Corregir examen' cuando termines. El botón y los resultados salen al final del fichero html.");
+      }
+
+      function corregirExamen() {
+        let total = 0, contestadas = 0, correctas = 0, parciales = 0, incorrectas = 0;
+      
+        document.querySelectorAll('.question').forEach((q, idx) => {
+          total++;
+          const correct = q.dataset.correct.split(',').map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+      
+          const marcadas = Array.from(checkboxes).map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+      
+          q.classList.remove('correct', 'partial', 'incorrect');
+      
+          if (marcadas.length === 0) {
+            // No contestada
+          } else {
+            contestadas++;
+            const allCorrect = correct.every(i => marcadas.includes(i));
+            const onlyCorrect = marcadas.every(i => correct.includes(i));
+      
+            if (allCorrect && onlyCorrect) {
+              q.classList.add('correct');
+              correctas++;
+            } else if (marcadas.some(i => correct.includes(i)) && onlyCorrect) {
+              q.classList.add('partial');
+              parciales++;
+            } else {
+              q.classList.add('incorrect');
+              incorrectas++;
+            }
+          }
+        });
+      
+        const noContestadas = total - contestadas;
+      
+        const resumen = `
+          📋 <strong>Resumen del examen:</strong><br>
+          Total de preguntas: ${total}<br>
+          Contestadas: ${contestadas}<br>
+          No contestadas: ${noContestadas}<br><br>
+          ✔️ Correctas: ${correctas}<br>
+          🟡 Parcialmente correctas: ${parciales}<br>
+          ❌ Incorrectas: ${incorrectas}
+        `;
+      
+        const divResumen = document.createElement('div');
+        divResumen.className = 'info-box';
+        divResumen.innerHTML = resumen;
+      
+        document.body.appendChild(divResumen);
+      }
+      
+      
+      function descargarPDF() {
+        // 1. Clonamos solo la parte visible que nos interesa (puedes ajustar a tu estructura)
+        const original = document.querySelector('body'); // o #main, .contenido, etc.
+        const clone = original.cloneNode(true);
+      
+        // 2. Quitamos los botones del clon
+        clone.querySelectorAll('button').forEach(btn => btn.remove());
+      
+        // 3. Aseguramos que modo oscuro se mantenga si está activo
+        if (document.body.classList.contains('dark-mode')) {
+          clone.classList.add('dark-mode');
+        }
+      
+        // 4. Creamos un contenedor oculto temporal
+        const tempContainer = document.createElement('div');
+        tempContainer.style.position = 'fixed';
+        tempContainer.style.left = '-9999px';
+        tempContainer.style.top = '0';
+        tempContainer.appendChild(clone);
+        document.body.appendChild(tempContainer);
+      
+        // 5. Configuración de html2pdf
+        const opt = {
+          margin: 0.5,
+          filename: 'test_resuelto.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+      
+        // 6. Generar y limpiar
+        html2pdf()
+          .set(opt)
+          .from(clone)
+          .save()
+          .then(() => {
+            tempContainer.remove();
+          })
+          .catch(err => {
+            alert("Error al generar el PDF: " + err.message);
+            tempContainer.remove();
+          });
+      }
+
+      function imprimirSoloIncorrectas() {
+        const preguntas = document.querySelectorAll('.question');
+        const incorrectas = Array.from(preguntas).filter(q => q.classList.contains('incorrect'));
+      
+        if (incorrectas.length === 0) {
+          alert('No hay preguntas incorrectas para imprimir.');
+          return;
+        }
+      
+        // Ocultar todas excepto las incorrectas
+        preguntas.forEach(q => {
+          if (!q.classList.contains('incorrect')) {
+            q.style.display = 'none';
+          }
+        });
+      
+        // Espera 100ms y lanza print (asegura render en navegadores)
+        setTimeout(() => {
+          window.print();
+      
+          // Restaurar visibilidad
+          preguntas.forEach(q => {
+            q.style.display = 'block';
+          });
+        }, 100);
+      }
+      
+      
+      
+      
+
+    </script>
+  </body>
+</html>
