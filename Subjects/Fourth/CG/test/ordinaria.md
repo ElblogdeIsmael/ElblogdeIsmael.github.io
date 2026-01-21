@@ -20,35 +20,19 @@
 - (x) Todas las respuestas anteriores son ciertas.
 - ( ) Ninguna de las respuestas anteriores es cierta. -->
 
-80. ¿Qué elementos componen el coste de personal?
 
-- ( ) El salario base, los complementos salariales, y las aportaciones de la empresa y del trabajador a la Seguridad Social.
-- ( ) El salario base, los complementos salariales y las aportaciones de la empresa a la Seguridad Social.
-- (x) El salario base, las gratificaciones o pagas extraordinarias, los complementos salariales y las aportaciones de la empresa a la Seguridad Social.
-
-81. La regla general respecto de los materiales establece que…
+1.  La regla general respecto de los materiales establece que…
 
 - (x) Las materias primas se consideran costes directos y el resto de materiales se consideran costes indirectos.
 - ( ) Las materias primas se consideran costes indirectos y el resto de materiales se consideran costes directos.
 - ( ) Todos los materiales se consideran costes directos por depender de la producción de la empresa.
 
-82. ¿Cómo se realizan las remuneraciones en el sistema de retribución jornal?
 
-- ( ) Se remunera al trabajador según el tiempo trabajado eficientemente y la cantidad producida en dicho tiempo.
-- ( ) Se remunera a los trabajadores según el precio establecido a la unidad de producto terminado, teniendo en cuenta el tiempo empleado.
-- (x) Solo se remunera el tiempo empleado sin tender a la calidad o cantidad de la prestación realizada.
-
-83. ¿Cómo se definen las percepciones económicas extrasalariales?
-
-- ( ) Son todos aquellos complementos salariales del trabajador vinculados a su persona o al trabajo.
-- (x) Aquellas cuyo origen no se encuentra en el trabajo, sino que obedece a circunstancias extraordinarias o gastos que el trabajador ha soportado como consecuencia de su actividad laboral.
-- ( ) Ninguna de las definiciones se corresponde con las percepciones económicas extrasalariales.
-
-84. ¿Qué tipo de material se consideraría el haba que viene escondida en el interior del Roscón de Reyes, a efectos de la contabilidad de una pastelería dedicada a su producción?
+1.  ¿Qué tipo de material se consideraría el haba que viene escondida en el interior del Roscón de Reyes, a efectos de la contabilidad de una pastelería dedicada a su producción?
 
 - ( ) Materia Prima.
-- (x) Material Auxiliar.
-- ( ) Material Incorporable.
+- ( ) Material Auxiliar.
+- (x) Material Incorporable.
 
 85. Señale cuál supone un ejemplo de Sistema de Retribución del Trabajo Humano en función de la cantidad:
 
@@ -99,13 +83,7 @@
 - ( ) El salario base, los complementos salariales y las aportaciones de la empresa a la Seguridad Social.
 - (x) El salario base, las gratificaciones o pagas extraordinarias, los complementos salariales y las aportaciones de la empresa a la Seguridad Social.
 
-81. La regla general respecto de los materiales establece que…
-
-- (x) Las materias primas se consideran costes directos y el resto de materiales se consideran costes indirectos.
-- ( ) Las materias primas se consideran costes indirectos y el resto de materiales se consideran costes directos.
-- ( ) Todos los materiales se consideran costes directos por depender de la producción de la empresa.
-
-82. ¿Cómo se realizan las remuneraciones en el sistema de retribución jornal?
+1.  ¿Cómo se realizan las remuneraciones en el sistema de retribución jornal?
 
 - ( ) Se remunera al trabajador según el tiempo trabajado eficientemente y la cantidad producida en dicho tiempo.
 - ( ) Se remunera a los trabajadores según el precio establecido a la unidad de producto terminado, teniendo en cuenta el tiempo empleado.
@@ -117,25 +95,7 @@
 - (x) Aquellas cuyo origen no se encuentra en el trabajo, sino que obedece a circunstancias extraordinarias o gastos que el trabajador ha soportado como consecuencia de su actividad laboral.
 - ( ) Ninguna de las definiciones se corresponde con las percepciones económicas extrasalariales.
 
-84. ¿Qué tipo de material se consideraría el haba que viene escondida en el interior del Roscón de Reyes, a efectos de la contabilidad de una pastelería dedicada a su producción?
-
-- ( ) Materia Prima.
-- (x) Material Auxiliar.
-- ( ) Material Incorporable.
-
-85. Señale cuál supone un ejemplo de Sistema de Retribución del Trabajo Humano en función de la cantidad:
-
-- (x) Sistema de Tarifa Diferencial de Taylor.
-- ( ) Sistema de Primas Emerson.
-- ( ) Sistema de Retribución a Jornal.
-
-86. ¿Cuál de estos tres sistemas emplea un coeficiente de participación del operado en el valor de la economía variable?
-
-- ( ) Sistema de Halsey.
-- (x) Sistema de Rowan.
-- ( ) Sistema de Taylor.
-
-87. Señale cuál de las siguientes opciones no supone un servicio exterior ocasional:
+1.  Señale cuál de las siguientes opciones no supone un servicio exterior ocasional:
 
 - ( ) Reparaciones.
 - ( ) Servicios de Profesionales Independientes.
@@ -249,67 +209,62 @@
 - (x) Su consumo no requiere de una red de distribución interior en la empresa.
 - ( ) Existe una coincidencia temporal entre las magnitudes compra y consumo.
 
-106. Señale la opción correcta en relación al sistema de primas Rowan:
-- ( ) Es un sistema de retribución del trabajo humano en función de la cantidad.
-- ( ) Es un sistema de retribución del trabajo humano en función del tiempo.
-- (x) Es un sistema de retribución del trabajo humano mixto individual.
-
-107. En los criterios reales de valoración aplicables a los consumos de materiales:
+1.   En los criterios reales de valoración aplicables a los consumos de materiales:
 - (x) Su valor inicial más el valor de las compras menos el valor de los consumos es igual al valor del stock final.
 - ( ) Su valor inicial más el valor de las compras menos el valor de los consumos es distinto al valor del stock final.
 - ( ) Los criterios reales no son criterios de valoración aplicables a los consumos de materiales.
 
-108. Precio de última compra, precio de reposición, precio NIFO y precio LIFO:
+1.   Precio de última compra, precio de reposición, precio NIFO y precio LIFO:
 - ( ) Están dentro de los criterios reales de valoración.
 - ( ) Están dentro de los criterios políticos convenidos.
 - (x) Ninguna de las respuestas anteriores es correcta.
 
-109. El sistema de retribución del trabajo humano de las primas de Halsey:
+1.   El sistema de retribución del trabajo humano de las primas de Halsey:
 - ( ) Es un sistema de retribución en función de la cantidad.
 - (x) Es un sistema de retribución mixto.
 - ( ) Es un sistema de retribución en función del tiempo.
 
-110. Los criterios de amortización en función del uso pueden ser:
+1.   Los criterios de amortización en función del uso pueden ser:
 - ( ) Constantes y variables.
 - ( ) Constantes y simples.
 - (x) Simples y tecnificados.
 
-111. La depreciación ordinaria o económica:
+1.   La depreciación ordinaria o económica:
 - ( ) Es la pérdida de valor por la evolución técnica o del comportamiento.
 - (x) Es la pérdida de valor por el mero transcurso del tiempo o por su uso.
 - ( ) Ambas respuestas son correctas.
 
-112. Hablamos de materiales incorporables cuando nos referimos a:
+1.   Hablamos de materiales incorporables cuando nos referimos a:
 - ( ) Materiales que son centro de la actividad productiva.
 - (x) Materiales que no constituyendo la base de la actividad productiva aparecen en el producto al final de su transformación.
 - ( ) Materiales que no aparecen en la configuración final del producto pero que su consumo está relacionado con la actividad de la empresa.
 
-113. Un rasgo no característico de los suministros es:
+1.   Un rasgo no característico de los suministros es:
 - (x) Son bienes adquiridos por la empresa al mundo externo, susceptibles de almacenamiento.
 - ( ) Se consideran costes indirectos.
 - ( ) Pueden ser tangibles o intangibles.
 
-114. La “ineficiencia norma” que pueden sufrir los materiales durante su aplicación al proceso productivo:
+1.   La “ineficiencia norma” que pueden sufrir los materiales durante su aplicación al proceso productivo:
 - ( ) Por tratarse de una ineficiencia normal se trasladan directamente al resultado periódico.
 - ( ) Si es de carácter regular debe repercutirse de forma homogénea entre los diferentes órdenes de fabricación a través de un coeficiente corrector que se aplicará a cada orden de fabricación en función de su respectiva producción.
 - (x) Si es de carácter irregular debe repercutirse de forma homogénea entre los diferentes órdenes de fabricación a través de un coeficiente corrector que se aplicará a cada orden de fabricación en función de su respectiva producción.
 
-115. En relación al coste de personal:
+1.   En relación al coste de personal:
 - ( ) Se considera siempre como gasto de personal.
 - (x) No se puede tomar el coste de personal como gasto de personal.
 - ( ) El coste de personal nunca se considera como un gasto.
 
-116. ¿Cuál es el significado de la amortización técnica de un inmovilizado?
+1.   ¿Cuál es el significado de la amortización técnica de un inmovilizado?
 - (x) La estimación de la depreciación del inmovilizado.
 - ( ) La estimación del tiempo que durará su actividad en la empresa.
 - ( ) La devolución del dinero que nos han prestado para comprar el inmovilizado.
 
-117. Para la valoración del consumo de materiales:
+1.   Para la valoración del consumo de materiales:
 - (x) Existen dos criterios, reales y políticos o convenidos.
 - ( ) El precio de la última compra es una opción dentro del criterio real.
 - ( ) Ninguna respuesta.
 
-118. Respecto a los suministros de la empresa:
+1.   Respecto a los suministros de la empresa:
 - ( ) Son bienes almacenables.
 - ( ) Para su consumo no es necesario la instalación de una red de distribución en la empresa.
 - (x) Se produce, temporalmente, una coincidencia entre las magnitudes compra y consumo.
