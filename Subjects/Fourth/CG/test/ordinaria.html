@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ordinaria Contabilidad de Gestión</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+      :root {
+        --bg-color: #f0f2f5;
+        --text-color: #333;
+        --card-bg: #fff;
+        --border-color: #ddd;
+        --primary-color: #007bff;
+        --hover-color: #0056b3;
+      }
+
+      body {
+        font-family: "Segoe UI", "Palatino Linotype", serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        padding: 20px;
+        font-size: 18px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+
+      .author {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-style: italic;
+        color: #666;
+      }
+      
+      /* --- CAJAS DE PREGUNTAS --- */
+      .question {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+        overflow-wrap: break-word; /* Evita desbordamiento horizontal */
+      }
+      .question:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Estados de corrección */
+      .correct { border-color: #28a745; background-color: #d4edda; }
+      .partial { border-color: #ffc107; background-color: #fff3cd; }
+      .incorrect { border-color: #dc3545; background-color: #f8d7da; }
+
+      /* Enunciados */
+      .enunciado { margin-bottom: 15px; }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+      
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+      
+      /* --- SOLUCIÓN DE MAQUETACIÓN PARA MATHJAX --- */
+      /* Usamos display: block con padding en lugar de flexbox para evitar
+         que las fórmulas matemáticas se separen del texto */
+      
+      .opcion-linea, .opcion-bloque {
+        display: block;      /* Importante: NO usar flex */
+        padding-left: 35px;  /* Espacio para el checkbox */
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;    /* Altura mínima visual */
+      }
+
+      /* Checkbox posicionado absolutamente a la izquierda */
+      .opcion-linea input[type="checkbox"], 
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 2px;  /* Ajuste fino para alinear con la primera línea de texto */
+        transform: scale(1.3);
+        margin: 0;
+        cursor: pointer;
+      }
+
+      /* Asegura que el texto y las fórmulas fluyan juntos */
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline; /* Hace que el texto fluya naturalmente */
+      }
+
+      /* Ajustes específicos para MathJax dentro de opciones */
+      mjx-container {
+        font-size: 110% !important; /* Ligeramente más grande para legibilidad */
+      }
+      
+      /* Imágenes y Tablas responsive */
+      img { max-width: 100%; height: auto; border-radius: 4px; }
+      table { border-collapse: collapse; width: 100%; margin: 10px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+      th { background-color: #f8f9fa; }
+
+      /* Botones y Panel Info */
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      /* --- MODO OSCURO --- */
+      body.dark-mode {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --card-bg: #1e1e1e;
+        --border-color: #444;
+        --primary-color: #374151;
+        --hover-color: #4b5563;
+      }
+      .dark-mode .author { color: #aaa; }
+      .dark-mode th { background-color: #333; }
+      
+      .dark-mode .correct { background-color: #064e3b !important; border-color: #059669; }
+      .dark-mode .partial { background-color: #451a03 !important; border-color: #d97706; }
+      .dark-mode .incorrect { background-color: #450a0a !important; border-color: #dc2626; }
+
+      /* Impresión */
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; }
+        .question { page-break-inside: avoid; border: none; box-shadow: none; padding: 0; margin-bottom: 20px; }
+        .info-box, button, #extra-buttons { display: none !important; }
+        .opcion-linea, .opcion-bloque { page-break-inside: avoid; }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ordinaria Contabilidad de Gestión</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
+
+    <div class="info-box">
+      <p>Contabilidad de Gestión Temas 4,5,6.</p>
+      <ul>
+<li>Estos tests están diseñados para repasar y autoevaluar los conocimientos adquiridos en la asignatura.</li>
+<li>Ayudan a identificar áreas de mejora antes de los exámenes oficiales.</li>
+<li>Fomentan la práctica activa y permiten comprobar de forma inmediata las respuestas correctas.</li>
+<li>Proceden de diversas fuentes, por lo que podrían contener errores. Si detectas alguno, se agradecerá su notificación a través de <a href="https://elblogdeismael.github.io/#contact">este enlace</a>.</li>
+<li>El test puede desordenarse, mostrar respuestas correctas y ofrece otras funciones útiles que se recomienda explorar.</li>
+<li>Algunas preguntas pueden tener más de una respuesta correcta, marcadas en amarillo (parcialmente correctas).</li>
+<li>No hay un número fijo de respuestas correctas por pregunta; esto obliga al usuario a conocer cuántas son realmente válidas.</li>
+<li>Han sido generados con la herramienta <a href="https://github.com/Ismael-Sallami/md2html">md2html-testGenerator</a>, desarrollada por <a href="https://ismael-sallami.github.io/">Ismael Sallami</a>.</li>
+<li>Se recomienda acceder en modo escritorio para una mejor experiencia. En móviles, la interfaz se adapta mostrando las respuestas debajo de cada casilla para facilitar su uso. Si no se ve de manera correcta en teléfono móvil se recomienda actualizar la página.</li>
+<li>La intención de estas preguntas es repasar la teoría, por lo que algunas preguntas pueden parecer triviales.</li>
+</ul>
+      
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+      
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">🔀 Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">👁️ Ver soluciones</button>
+        <button onclick="resetAnswers()">🔄 Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">🌙 Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">❌ Mostrar fallos</button>
+        <button onclick="activarModoExamen()">📝 Modo Examen</button>
+        <button onclick="window.print()">🖨️ Imprimir / PDF</button>
+      </div>
+    </div>
+
+    <div id="questions-container">
+      <div class="question" id="q1" data-correct="2">
+  <div class="enunciado"><strong>1.</strong> ¿Qué elementos componen el coste de personal?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> El salario base, los complementos salariales, y las aportaciones de la empresa y del trabajador a la Seguridad Social.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> El salario base, los complementos salariales y las aportaciones de la empresa a la Seguridad Social.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> El salario base, las gratificaciones o pagas extraordinarias, los complementos salariales y las aportaciones de la empresa a la Seguridad Social.</label></li>
+  </ol>
+</div>
+<div class="question" id="q2" data-correct="0">
+  <div class="enunciado"><strong>2.</strong> La regla general respecto de los materiales establece que…</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Las materias primas se consideran costes directos y el resto de materiales se consideran costes indirectos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Las materias primas se consideran costes indirectos y el resto de materiales se consideran costes directos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> Todos los materiales se consideran costes directos por depender de la producción de la empresa.</label></li>
+  </ol>
+</div>
+<div class="question" id="q3" data-correct="2">
+  <div class="enunciado"><strong>3.</strong> ¿Cómo se realizan las remuneraciones en el sistema de retribución jornal?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> Se remunera al trabajador según el tiempo trabajado eficientemente y la cantidad producida en dicho tiempo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> Se remunera a los trabajadores según el precio establecido a la unidad de producto terminado, teniendo en cuenta el tiempo empleado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> Solo se remunera el tiempo empleado sin tender a la calidad o cantidad de la prestación realizada.</label></li>
+  </ol>
+</div>
+<div class="question" id="q4" data-correct="1">
+  <div class="enunciado"><strong>4.</strong> ¿Cómo se definen las percepciones económicas extrasalariales?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Son todos aquellos complementos salariales del trabajador vinculados a su persona o al trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> Aquellas cuyo origen no se encuentra en el trabajo, sino que obedece a circunstancias extraordinarias o gastos que el trabajador ha soportado como consecuencia de su actividad laboral.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> Ninguna de las definiciones se corresponde con las percepciones económicas extrasalariales.</label></li>
+  </ol>
+</div>
+<div class="question" id="q5" data-correct="1">
+  <div class="enunciado"><strong>5.</strong> ¿Qué tipo de material se consideraría el haba que viene escondida en el interior del Roscón de Reyes, a efectos de la contabilidad de una pastelería dedicada a su producción?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> Materia Prima.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> Material Auxiliar.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> Material Incorporable.</label></li>
+  </ol>
+</div>
+<div class="question" id="q6" data-correct="0">
+  <div class="enunciado"><strong>6.</strong> Señale cuál supone un ejemplo de Sistema de Retribución del Trabajo Humano en función de la cantidad:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> Sistema de Tarifa Diferencial de Taylor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> Sistema de Primas Emerson.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> Sistema de Retribución a Jornal.</label></li>
+  </ol>
+</div>
+<div class="question" id="q7" data-correct="1">
+  <div class="enunciado"><strong>7.</strong> ¿Cuál de estos tres sistemas emplea un coeficiente de participación del operado en el valor de la economía variable?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> Sistema de Halsey.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> Sistema de Rowan.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> Sistema de Taylor.</label></li>
+  </ol>
+</div>
+<div class="question" id="q8" data-correct="2">
+  <div class="enunciado"><strong>8.</strong> El proceso mediante el cual se relacionan los costes de las secciones a los portadores se denomina:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Afectación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> Producción.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> Imputación.</label></li>
+  </ol>
+</div>
+<div class="question" id="q9" data-correct="2">
+  <div class="enunciado"><strong>9.</strong> Respecto a los portadores de coste cabe afirmar que:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> A cada manifestación de la producción corresponderá un portador de coste.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> Cumplen la función acumulativa del valor de la totalidad del consumo de factores productivos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> A y B son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q10" data-correct="1">
+  <div class="enunciado"><strong>10.</strong> La operación de afectación consiste en relacionar:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> Los costes indirectos con los portadores.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> Los costes directos con los portadores.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> Los costes directos con los indirectos.</label></li>
+  </ol>
+</div>
+<div class="question" id="q11" data-correct="2">
+  <div class="enunciado"><strong>11.</strong> El proceso mediante el cual se relacionan los costes de las secciones a los portadores se denomina:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> Afectación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> Producción.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="2"> Imputación.</label></li>
+  </ol>
+</div>
+<div class="question" id="q12" data-correct="1">
+  <div class="enunciado"><strong>12.</strong> Los elementos, tangibles e intangibles, que la empresa adquiere del exterior con el fin de utilizarlos en el proceso productivo, bien para la obtención de productos o bien para el mantenimiento de los equipos productivos son:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="0"> Suministros.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="1"> Materiales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="2"> Materias primas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q13" data-correct="1">
+  <div class="enunciado"><strong>13.</strong> El coste de la mano de obra, cuando la empresa emplea un sistema de retribución a destajo es siempre tratado como:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="0"> Un coste indirecto.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="1"> Un coste directo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="2"> Un coste directo o indirecto.</label></li>
+  </ol>
+</div>
+<div class="question" id="q14" data-correct="2">
+  <div class="enunciado"><strong>14.</strong> ¿Qué elementos componen el coste de personal?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="0"> El salario base, los complementos salariales, y las aportaciones de la empresa y del trabajador a la Seguridad Social.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="1"> El salario base, los complementos salariales y las aportaciones de la empresa a la Seguridad Social.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="2"> El salario base, las gratificaciones o pagas extraordinarias, los complementos salariales y las aportaciones de la empresa a la Seguridad Social.</label></li>
+  </ol>
+</div>
+<div class="question" id="q15" data-correct="0">
+  <div class="enunciado"><strong>15.</strong> La regla general respecto de los materiales establece que…</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="0"> Las materias primas se consideran costes directos y el resto de materiales se consideran costes indirectos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="1"> Las materias primas se consideran costes indirectos y el resto de materiales se consideran costes directos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="2"> Todos los materiales se consideran costes directos por depender de la producción de la empresa.</label></li>
+  </ol>
+</div>
+<div class="question" id="q16" data-correct="2">
+  <div class="enunciado"><strong>16.</strong> ¿Cómo se realizan las remuneraciones en el sistema de retribución jornal?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="0"> Se remunera al trabajador según el tiempo trabajado eficientemente y la cantidad producida en dicho tiempo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="1"> Se remunera a los trabajadores según el precio establecido a la unidad de producto terminado, teniendo en cuenta el tiempo empleado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="2"> Solo se remunera el tiempo empleado sin tender a la calidad o cantidad de la prestación realizada.</label></li>
+  </ol>
+</div>
+<div class="question" id="q17" data-correct="1">
+  <div class="enunciado"><strong>17.</strong> ¿Cómo se definen las percepciones económicas extrasalariales?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="0"> Son todos aquellos complementos salariales del trabajador vinculados a su persona o al trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="1"> Aquellas cuyo origen no se encuentra en el trabajo, sino que obedece a circunstancias extraordinarias o gastos que el trabajador ha soportado como consecuencia de su actividad laboral.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="2"> Ninguna de las definiciones se corresponde con las percepciones económicas extrasalariales.</label></li>
+  </ol>
+</div>
+<div class="question" id="q18" data-correct="1">
+  <div class="enunciado"><strong>18.</strong> ¿Qué tipo de material se consideraría el haba que viene escondida en el interior del Roscón de Reyes, a efectos de la contabilidad de una pastelería dedicada a su producción?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="0"> Materia Prima.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="1"> Material Auxiliar.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="2"> Material Incorporable.</label></li>
+  </ol>
+</div>
+<div class="question" id="q19" data-correct="0">
+  <div class="enunciado"><strong>19.</strong> Señale cuál supone un ejemplo de Sistema de Retribución del Trabajo Humano en función de la cantidad:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="0"> Sistema de Tarifa Diferencial de Taylor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="1"> Sistema de Primas Emerson.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="2"> Sistema de Retribución a Jornal.</label></li>
+  </ol>
+</div>
+<div class="question" id="q20" data-correct="1">
+  <div class="enunciado"><strong>20.</strong> ¿Cuál de estos tres sistemas emplea un coeficiente de participación del operado en el valor de la economía variable?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="0"> Sistema de Halsey.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="1"> Sistema de Rowan.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="2"> Sistema de Taylor.</label></li>
+  </ol>
+</div>
+<div class="question" id="q21" data-correct="2">
+  <div class="enunciado"><strong>21.</strong> Señale cuál de las siguientes opciones no supone un servicio exterior ocasional:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="0"> Reparaciones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="1"> Servicios de Profesionales Independientes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="2"> Arrendamientos.</label></li>
+  </ol>
+</div>
+<div class="question" id="q22" data-correct="1">
+  <div class="enunciado"><strong>22.</strong> La depreciación por “evolución técnica o del comportamiento” recibe el nombre de:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="0"> Funcional.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="1"> Económica.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="2"> Física.</label></li>
+  </ol>
+</div>
+<div class="question" id="q23" data-correct="0">
+  <div class="enunciado"><strong>23.</strong> En el criterio de valoración de Precio Última Compra:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="0"> No existe homogeneidad en los criterios de valoración, por eso, el saldo se dice que no es representativo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="1"> Es el criterio de valoración más optativo que existe.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="2"> A y B son incorrectas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q24" data-correct="1">
+  <div class="enunciado"><strong>24.</strong> Marca la opción incorrecta sobre los rasgos característicos de los suministros:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="0"> Su conexión se efectúa habitualmente mediante la conexión de una red de distribución.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="1"> Son bienes almacenables.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="2"> Las magnitudes compra y consumo coinciden en el tiempo.</label></li>
+  </ol>
+</div>
+<div class="question" id="q25" data-correct="2">
+  <div class="enunciado"><strong>25.</strong> El sistema de tarifa diferencial de Taylor:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="0"> Perjudica al mal trabajador.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="1"> Incentiva al buen trabajador.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="2"> A y B son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q26" data-correct="1">
+  <div class="enunciado"><strong>26.</strong> El coste de amortización:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="0"> El propio uso es el único factor que afecta al coste de amortización.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="1"> Es una magnitud relativa ya que da la posibilidad de elegir el criterio de amortización.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="2"> A y B son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q27" data-correct="0">
+  <div class="enunciado"><strong>27.</strong> El criterio simple de amortización se caracteriza por:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="0"> No poder ser usado para un grado de rendimiento diferente durante la vida del bien.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="1"> Si puede ser utilizado para un grado de ocupación diferente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="2"> Si puede ser utilizado para un grado de ocupación diferente.</label></li>
+  </ol>
+</div>
+<div class="question" id="q28" data-correct="0">
+  <div class="enunciado"><strong>28.</strong> Criterio tecnificado de amortización:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="0"> Tiene un tiempo base homogéneo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="1"> No puede ser utilizado para un grado de ocupación diferente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="2"> A y B son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q29" data-correct="2">
+  <div class="enunciado"><strong>29.</strong> Se entiende por coste:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="0"> Siempre que hablamos de coste existe un sacrificio de factores.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="1"> Necesariamente tenemos que valorarlo monetariamente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="2"> Ambas respuestas son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q30" data-correct="2">
+  <div class="enunciado"><strong>30.</strong> En cuanto a la conceptualización del coste:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="0"> El coste real depende del consumo y de los precios.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="1"> El coste real depende del consumo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="2"> El coste real expresa las cantidades de factores consumidos en la producción y valorados.</label></li>
+  </ol>
+</div>
+<div class="question" id="q31" data-correct="0">
+  <div class="enunciado"><strong>31.</strong> Señale cuál de estas afirmaciones es correcta:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="0"> Un coste caracterizado como fijo a nivel global de la empresa puede que lo sea como variable al nivel de un centro de actividad particular.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="1"> La fijeza de un coste implica que necesariamente se mantenga constante en sucesivos periodos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="2"> Ambas respuestas son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q32" data-correct="2">
+  <div class="enunciado"><strong>32.</strong> Señale cuál de estos requisitos no es necesario de la unidad de medida de la actividad:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="0"> Ser representativa de las condiciones tecnológicas imperantes en el centro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="1"> Facilitar la imputación al coste total del centro a los receptores de sus prestaciones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="2"> Que exista un reparto equitativo entre todos los receptores.</label></li>
+  </ol>
+</div>
+<div class="question" id="q33" data-correct="0">
+  <div class="enunciado"><strong>33.</strong> Señale cuál de estos costes se asigna a los centros mediante claves de distribución:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="0"> Servicios de limpieza.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="1"> Mano de obra.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="2"> Amortización del equipo productivo.</label></li>
+  </ol>
+</div>
+<div class="question" id="q34" data-correct="0">
+  <div class="enunciado"><strong>34.</strong> En los sistemas de retribución del trabajo humano, la prima:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="0"> Se recibe cuando el ejercicio del trabajo excede del volumen de producción programado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="1"> Es un porcentaje variable del valor de la economía de tiempo logra en función de la antigüedad del operario en la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="2"> Consiste en la remuneración mínima garantizada en función del tiempo trabajado.</label></li>
+  </ol>
+</div>
+<div class="question" id="q35" data-correct="1">
+  <div class="enunciado"><strong>35.</strong> Inciden en el coste horario:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="0"> El tiempo en estado parado y el tiempo inactivo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="1"> El tiempo inhábil y el tiempo no aplicado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="2"> El tiempo complementario y el tiempo de preparación.</label></li>
+  </ol>
+</div>
+<div class="question" id="q36" data-correct="2">
+  <div class="enunciado"><strong>36.</strong> Para el criterio tecnificado de amortización en función del uso:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="0"> El coste estimado de la unidad genérica del servicio es la relación entre el valor amortizable y la vida útil estimada en unidades de servicio.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="1"> No se utilizan coeficientes correctores expresivos del grado de ocupación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="2"> Hay que determinar el tiempo homogéneo correspondiente al periodo.</label></li>
+  </ol>
+</div>
+<div class="question" id="q37" data-correct="1">
+  <div class="enunciado"><strong>37.</strong> Los recursos financieros:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="0"> No constituye un factor de coste para la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="1"> Se entiende su coste como el sacrificio que supone renunciar a invertidos y darles un rendimiento.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="2"> Las respuestas A y B son incorrectas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q38" data-correct="2">
+  <div class="enunciado"><strong>38.</strong> Señale la opción correcta en relación a los criterios políticos o convenidos:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="0"> Precio medio continuo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="1"> Precio FIFO, modalidad estricta.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="2"> Precio del día actual o de reposición.</label></li>
+  </ol>
+</div>
+<div class="question" id="q39" data-correct="1">
+  <div class="enunciado"><strong>39.</strong> Señale cuál de estas opciones es falsa en relación a los suministros:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="0"> Bienes no almacenables, tangibles o intangibles.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="1"> Su consumo no requiere de una red de distribución interior en la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="2"> Existe una coincidencia temporal entre las magnitudes compra y consumo.</label></li>
+  </ol>
+</div>
+<div class="question" id="q40" data-correct="2">
+  <div class="enunciado"><strong>40.</strong> Señale la opción correcta en relación al sistema de primas Rowan:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="0"> Es un sistema de retribución del trabajo humano en función de la cantidad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="1"> Es un sistema de retribución del trabajo humano en función del tiempo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="2"> Es un sistema de retribución del trabajo humano mixto individual.</label></li>
+  </ol>
+</div>
+<div class="question" id="q41" data-correct="0">
+  <div class="enunciado"><strong>41.</strong> En los criterios reales de valoración aplicables a los consumos de materiales:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q41" value="0"> Su valor inicial más el valor de las compras menos el valor de los consumos es igual al valor del stock final.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q41" value="1"> Su valor inicial más el valor de las compras menos el valor de los consumos es distinto al valor del stock final.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q41" value="2"> Los criterios reales no son criterios de valoración aplicables a los consumos de materiales.</label></li>
+  </ol>
+</div>
+<div class="question" id="q42" data-correct="2">
+  <div class="enunciado"><strong>42.</strong> Precio de última compra, precio de reposición, precio NIFO y precio LIFO:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q42" value="0"> Están dentro de los criterios reales de valoración.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q42" value="1"> Están dentro de los criterios políticos convenidos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q42" value="2"> Ninguna de las respuestas anteriores es correcta.</label></li>
+  </ol>
+</div>
+<div class="question" id="q43" data-correct="1">
+  <div class="enunciado"><strong>43.</strong> El sistema de retribución del trabajo humano de las primas de Halsey:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q43" value="0"> Es un sistema de retribución en función de la cantidad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q43" value="1"> Es un sistema de retribución mixto.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q43" value="2"> Es un sistema de retribución en función del tiempo.</label></li>
+  </ol>
+</div>
+<div class="question" id="q44" data-correct="2">
+  <div class="enunciado"><strong>44.</strong> Los criterios de amortización en función del uso pueden ser:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q44" value="0"> Constantes y variables.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q44" value="1"> Constantes y simples.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q44" value="2"> Simples y tecnificados.</label></li>
+  </ol>
+</div>
+<div class="question" id="q45" data-correct="1">
+  <div class="enunciado"><strong>45.</strong> La depreciación ordinaria o económica:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q45" value="0"> Es la pérdida de valor por la evolución técnica o del comportamiento.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q45" value="1"> Es la pérdida de valor por el mero transcurso del tiempo o por su uso.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q45" value="2"> Ambas respuestas son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q46" data-correct="1">
+  <div class="enunciado"><strong>46.</strong> Hablamos de materiales incorporables cuando nos referimos a:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q46" value="0"> Materiales que son centro de la actividad productiva.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q46" value="1"> Materiales que no constituyendo la base de la actividad productiva aparecen en el producto al final de su transformación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q46" value="2"> Materiales que no aparecen en la configuración final del producto pero que su consumo está relacionado con la actividad de la empresa.</label></li>
+  </ol>
+</div>
+<div class="question" id="q47" data-correct="0">
+  <div class="enunciado"><strong>47.</strong> Un rasgo no característico de los suministros es:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q47" value="0"> Son bienes adquiridos por la empresa al mundo externo, susceptibles de almacenamiento.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q47" value="1"> Se consideran costes indirectos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q47" value="2"> Pueden ser tangibles o intangibles.</label></li>
+  </ol>
+</div>
+<div class="question" id="q48" data-correct="2">
+  <div class="enunciado"><strong>48.</strong> La “ineficiencia norma” que pueden sufrir los materiales durante su aplicación al proceso productivo:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q48" value="0"> Por tratarse de una ineficiencia normal se trasladan directamente al resultado periódico.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q48" value="1"> Si es de carácter regular debe repercutirse de forma homogénea entre los diferentes órdenes de fabricación a través de un coeficiente corrector que se aplicará a cada orden de fabricación en función de su respectiva producción.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q48" value="2"> Si es de carácter irregular debe repercutirse de forma homogénea entre los diferentes órdenes de fabricación a través de un coeficiente corrector que se aplicará a cada orden de fabricación en función de su respectiva producción.</label></li>
+  </ol>
+</div>
+<div class="question" id="q49" data-correct="1">
+  <div class="enunciado"><strong>49.</strong> En relación al coste de personal:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q49" value="0"> Se considera siempre como gasto de personal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q49" value="1"> No se puede tomar el coste de personal como gasto de personal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q49" value="2"> El coste de personal nunca se considera como un gasto.</label></li>
+  </ol>
+</div>
+<div class="question" id="q50" data-correct="0">
+  <div class="enunciado"><strong>50.</strong> ¿Cuál es el significado de la amortización técnica de un inmovilizado?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q50" value="0"> La estimación de la depreciación del inmovilizado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q50" value="1"> La estimación del tiempo que durará su actividad en la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q50" value="2"> La devolución del dinero que nos han prestado para comprar el inmovilizado.</label></li>
+  </ol>
+</div>
+<div class="question" id="q51" data-correct="0">
+  <div class="enunciado"><strong>51.</strong> Para la valoración del consumo de materiales:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q51" value="0"> Existen dos criterios, reales y políticos o convenidos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q51" value="1"> El precio de la última compra es una opción dentro del criterio real.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q51" value="2"> Ninguna respuesta.</label></li>
+  </ol>
+</div>
+<div class="question" id="q52" data-correct="2">
+  <div class="enunciado"><strong>52.</strong> Respecto a los suministros de la empresa:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q52" value="0"> Son bienes almacenables.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q52" value="1"> Para su consumo no es necesario la instalación de una red de distribución en la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q52" value="2"> Se produce, temporalmente, una coincidencia entre las magnitudes compra y consumo.</label></li>
+  </ol>
+</div>
+<div class="question" id="q53" data-correct="2">
+  <div class="enunciado"><strong>53.</strong> Forman parte de los componentes del coste de personal:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q53" value="0"> Salario base, gratificaciones o pagas extraordinarias, aportaciones de la empresa a la Seguridad Social.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q53" value="1"> Componentes salariales: complementos vinculados a la persona, al trabajo realizado y a la situación y resultados de la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q53" value="2"> Las dos anteriores son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q54" data-correct="0">
+  <div class="enunciado"><strong>54.</strong> ¿Cómo se calcula el coste horario de personal?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q54" value="0"> Coste estimado anual / Tiempo estimado de prestación real.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q54" value="1"> Tiempo estimado de prestación real / Coste estimado anual.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q54" value="2"> Ninguna de las anteriores es correcta.</label></li>
+  </ol>
+</div>
+<div class="question" id="q55" data-correct="0">
+  <div class="enunciado"><strong>55.</strong> El valor a amortizar es:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q55" value="0"> La diferencia entre el valor inicial y el valor residual (Vo - Vr).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q55" value="1"> La diferencia entre el valor residual y el calor inicial (Vr - Vo).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q55" value="2"> Es la vida útil del equipo (n).</label></li>
+  </ol>
+</div>
+<div class="question" id="q56" data-correct="2">
+  <div class="enunciado"><strong>56.</strong> Para determinar el valor de adquisición de materiales de la empresa:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q56" value="0"> Al importe bruto convenido con el proveedor se le descontarán además de los gastos adicionales los descuentos y bonificaciones comerciales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q56" value="1"> En el valor de la compra no se tienen en cuenta los impuestos no recuperables.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q56" value="2"> Al importe bruto convenido con el proveedor hay que añadirle los distintos gastos adicionales entre ellos los gastos en seguro y acarreos.</label></li>
+  </ol>
+</div>
+<div class="question" id="q57" data-correct="1">
+  <div class="enunciado"><strong>57.</strong> En relación con los criterios de valoración del consumo de materiales:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q57" value="0"> Distinguiremos entre un criterio convenido y un criterio real en tanto para que el primero (valor del stock inicial más las compras menos el valor de consumo equivale al valor del stock final y para el segundo no.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q57" value="1"> Hay que tener en cuenta que estamos hablando de unidades monetarias, ya que la igualdad en términos de unidades físicas siempre se cumpliría.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q57" value="2"> En el criterio político podemos encontrarnos con los criterios de agotamiento de existencias.</label></li>
+  </ol>
+</div>
+<div class="question" id="q58" data-correct="0">
+  <div class="enunciado"><strong>58.</strong> ¿Forma parte la Seguridad Social a cargo de la empresa también del coste de personal?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q58" value="0"> Sí, lo que no se incluye es el coste de la Seguridad Social a cargo del trabajador.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q58" value="1"> Sí, lo que no se incluye es el complemento vinculado a la situación de la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q58" value="2"> No, siempre será considerado como coste a cargo del trabajador.</label></li>
+  </ol>
+</div>
+<div class="question" id="q59" data-correct="1">
+  <div class="enunciado"><strong>59.</strong> El coste de amortización se caracteriza:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q59" value="0"> Por aplicarse al proceso de producción de factores estructurales con una vida útil ilimitada.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q59" value="1"> Su criterio tecnificado persigue el mismo coste de amortización a un objeto de coste con independencia del momento de su vida útil.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q59" value="2"> Dentro de los criterios de amortización destacan los criterios de amortización en función del uso: simple, tecnificado, ambos tienen carácter financiero.</label></li>
+  </ol>
+</div>
+<div class="question" id="q60" data-correct="2">
+  <div class="enunciado"><strong>60.</strong> El coste intermedio de un lugar es…</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q60" value="0"> La suma de su coste primario y el coste secundario de otros lugares auxiliares con los que se mantienen relaciones recíprocas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q60" value="1"> La suma de su coste primario y la parte del coste secundario correspondiente a la valoración de las prestaciones recibidas de otros lugares auxiliares con los que se mantienen relaciones recíprocas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q60" value="2"> La suma de su coste primario y la parte del coste secundario correspondiente a la valoración de las prestaciones recibidas de otros lugares auxiliares con los que no se mantienen relaciones recíprocas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q61" data-correct="1">
+  <div class="enunciado"><strong>61.</strong> ¿Cuáles son los factores subjetivos condicionantes del proceso de segmentación?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q61" value="0"> El tipo de actividad desarrollada, la dimensión de la empresa, las peculiaridades organizativas y el nivel tecnológico.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q61" value="1"> La finalidad perseguida con la implantación de un sistema informativo para el ámbito interno y la experiencia y competencia del personal técnico.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q61" value="2"> La experiencia y competencia del personal técnico y las peculiaridades organizativas de la producción.</label></li>
+  </ol>
+</div>
+<div class="question" id="q62" data-correct="0">
+  <div class="enunciado"><strong>62.</strong> Son costes fijos:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q62" value="0"> Costes de estructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q62" value="1"> Costes proporcionales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q62" value="2"> Costes reversibles.</label></li>
+  </ol>
+</div>
+<div class="question" id="q63" data-correct="2">
+  <div class="enunciado"><strong>63.</strong> Los requisitos de la unidad de medida de la actividad:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q63" value="0"> Representar cualitativamente las prestaciones realizadas por el centro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q63" value="1"> Tener en cuenta los cambios en la estructura de la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q63" value="2"> Ser apta para formular el coste total del centro como una función del número de unidades de actividad.</label></li>
+  </ol>
+</div>
+<div class="question" id="q64" data-correct="2">
+  <div class="enunciado"><strong>64.</strong> Son costes que se asignan a los centros mediante claves de distribución:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q64" value="0"> La mano de obra a través de la estadística.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q64" value="1"> Los materiales de conservación a través de la estadística de consumos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q64" value="2"> El servicio de limpieza a través de una superficie ocupada (m^2).</label></li>
+  </ol>
+</div>
+<div class="question" id="q65" data-correct="2">
+  <div class="enunciado"><strong>65.</strong> La operación de redistribución:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q65" value="0"> Traslada los costes de los centros principales al producto.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q65" value="1"> Se realiza para los costes directos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q65" value="2"> La llevan a cabo los lugares auxiliares en la fase de localización.</label></li>
+  </ol>
+</div>
+<div class="question" id="q66" data-correct="1">
+  <div class="enunciado"><strong>66.</strong> Los coeficientes de participación:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q66" value="0"> Son lo mismo que las unidades de actividad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q66" value="1"> Sobre su base se pueden liquidar las prestaciones internas a costes retrospectivos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q66" value="2"> Las respuestas A y B son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q67" data-correct="2">
+  <div class="enunciado"><strong>67.</strong> El coste real:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q67" value="0"> Se refiere a las cantidades de factores consumidos o sacrificados en la producción.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q67" value="1"> Depende del consumo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q67" value="2"> A y B son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q68" data-correct="0">
+  <div class="enunciado"><strong>68.</strong> Señale la respuesta correcta:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q68" value="0"> La unidad de trabajo es la célula básica de actividad, integrada generalmente por uno o más medios estructurales y su correspondiente dotación de personal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q68" value="1"> La productividad es la medida del grado de aprovechamiento del potencial productivo de los factores.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q68" value="2"> La producción alternativa es aquella en la que no hay interferencias entre las distintas ramas de producción.</label></li>
+  </ol>
+</div>
+<div class="question" id="q69" data-correct="2">
+  <div class="enunciado"><strong>69.</strong> Entre los costes que se asignan directamente a los centros en función del consumo registrado en cada uno de los mismos nos encontramos:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q69" value="0"> Materiales de conservación, servicios de limpieza y energía eléctrica.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q69" value="1"> Energía eléctrica, seguros y servicios de limpieza.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q69" value="2"> Materiales de conservación, mano de obra y amortización del equipo productivo.</label></li>
+  </ol>
+</div>
+<div class="question" id="q70" data-correct="1">
+  <div class="enunciado"><strong>70.</strong> El coste intermedio:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q70" value="0"> Es el coste que tenemos de un lugar antes de sumarle sus costes auxiliares.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q70" value="1"> Es la suma del coste primario de un lugar y la parte del coste secundario correspondiente a la valoración de las prestaciones recibidas de otros lugares auxiliares con los que no mantienen relaciones recíprocas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q70" value="2"> Es la suma del coste primario y de los costes secundarios recibidos de otros lugares auxiliares con los que se mantienen relaciones recíprocas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q71" data-correct="2">
+  <div class="enunciado"><strong>71.</strong> El coste de centros auxiliares:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q71" value="0"> Es un coste indirecto que se imputa directamente al coste del producto a través de la distribución.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q71" value="1"> Es un coste directo que se afecta directamente al coste de los productos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q71" value="2"> Es un coste indirecto que se redistribuye al coste de los centros principales para ser imputados entonces al coste de los productos.</label></li>
+  </ol>
+</div>
+<div class="question" id="q72" data-correct="1">
+  <div class="enunciado"><strong>72.</strong> A la hora de liquidar los costes de los centros auxiliares:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q72" value="0"> Es indiferente siempre el orden en que se lleve a cabo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q72" value="1"> Cuando existen lugares recíprocos, la liquidación se realiza en paralelo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q72" value="2"> Las dos respuestas anteriores son incorrectas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q73" data-correct="2">
+  <div class="enunciado"><strong>73.</strong> En relación con el tiempo operario, la suma del tiempo preparación y del tiempo transformación recibe el nombre de:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q73" value="0"> Tiempo activo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q73" value="1"> Tiempo hábil.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q73" value="2"> Tiempo principal.</label></li>
+  </ol>
+</div>
+<div class="question" id="q74" data-correct="0">
+  <div class="enunciado"><strong>74.</strong> El sistema de retribución sobre la base de primas individuales con mínimo garantizado en el cual el coeficiente de participación del operario en la economía del tiempo es proporcional al tiempo real e inversamente proporcional al tiempo previsto se denomina:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q74" value="0"> Sistema de Rowan.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q74" value="1"> Sistema de Halsey.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q74" value="2"> Las dos respuestas anteriores son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q75" data-correct="1">
+  <div class="enunciado"><strong>75.</strong> En relación a los principios aplicables en el proceso de cálculo de costes:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q75" value="0"> El principio de proporcionalidad no tiene aplicabilidad en los sistemas inorgánicos de Contabilidad de gestión.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q75" value="1"> Todo método de cálculo se apoya en una hipótesis de proporcionalidad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q75" value="2"> El principio de proporcionalidad sólo resulta aplicable en la fase de imputación.</label></li>
+  </ol>
+</div>
+<div class="question" id="q76" data-correct="1">
+  <div class="enunciado"><strong>76.</strong> El método de cálculo de división por equivalencias:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q76" value="0"> Por sus propias características, presenta como limitación que si aplicación en la empresa no permite un cálculo diferenciado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q76" value="1"> Es un método idóneo para empresas que operan en régimen de producción simple con presencia de producción intermedia.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q76" value="2"> Resulta incompatible con los sistemas orgánicos, dada su inevitable aplicación en forma globalizada.</label></li>
+  </ol>
+</div>
+<div class="question" id="q77" data-correct="1">
+  <div class="enunciado"><strong>77.</strong> El criterio FIFO modalidad estricta:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q77" value="0"> Es un criterio político de valoración de los consumos que valora las existencias en almacén a los precios más recientes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q77" value="1"> Es un criterio real de valoración de los consumos que valora las existencias en almacén a los precios más recientes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q77" value="2"> Es un criterio real de valoración de los consumos que valora las existencias en almacén a los precios más desfasados.</label></li>
+  </ol>
+</div>
+<div class="question" id="q78" data-correct="0">
+  <div class="enunciado"><strong>78.</strong> El criterio tecnificado de amortización en función del uso es aplicable cuando:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q78" value="0"> Existe una disminución del rendimiento del bien hasta su retirada o fin de su vida útil.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q78" value="1"> Durante la vida útil del bien la productividad de la maquinaria sea constante.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q78" value="2"> Ninguna de las dos respuestas anteriores es correcta.</label></li>
+  </ol>
+</div>
+<div class="question" id="q79" data-correct="0">
+  <div class="enunciado"><strong>79.</strong> En la clasificación de los centros de coste en función de su nivel de agregación:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q79" value="0"> Las unidades de coste siempre coinciden con sus homólogas unidades de trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q79" value="1"> Los lugares de coste siempre coinciden con sus homólogos lugares de trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q79" value="2"> Las secciones de coste siempre coinciden con sus homólogas secciones de trabajo.</label></li>
+  </ol>
+</div>
+<div class="question" id="q80" data-correct="0">
+  <div class="enunciado"><strong>80.</strong> En una estadística de costes:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q80" value="0"> Cuando se opera sobre la base de costes retrospectivo, incluso en el caso de existencia de autoconsumo la totalidad de los costes de los centros auxiliares revierte sobre los principales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q80" value="1"> Los costes secundarios representan los costes soportados por los centros en la operación de imputación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q80" value="2"> Los costes primarios derivan de las prestaciones internas realizadas por los centros auxiliares.</label></li>
+  </ol>
+</div>
+<div class="question" id="q81" data-correct="0">
+  <div class="enunciado"><strong>81.</strong> En la liquidación de una estadística de costes:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q81" value="0"> Caso de existencia exclusivamente de centros auxiliares de los principales, el orden de liquidación resulta indiferente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q81" value="1"> Caso de existencia tanto de centros auxiliares de los principales como de centros auxiliares propiamente dichos, deben ser liquidados en primer término los primeros.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q81" value="2"> Caso de existencia tanto de centros auxiliares de los principales como de centros auxiliares propiamente dichos, el orden de liquidación resulta indiferente.</label></li>
+  </ol>
+</div>
+<div class="question" id="q82" data-correct="2">
+  <div class="enunciado"><strong>82.</strong> Cuando una empresa utiliza el criterio de amortización basado en el tiempo, el coste horario de amortización de un equipo productivo:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q82" value="0"> Variará en función de la productividad del tramo de la vida útil considerado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q82" value="1"> Dependerá en cada periodo del nivel de utilización de su capacidad productiva.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q82" value="2"> No se verá afectado ni por la productividad ni por el nivel de utilización de su capacidad productiva.</label></li>
+  </ol>
+</div>
+<div class="question" id="q83" data-correct="1">
+  <div class="enunciado"><strong>83.</strong> El coste de amortización presenta entre otras las siguientes características:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q83" value="0"> Procede de la aplicación al proceso de producción de los factores estructurales con una vida útil ilimitada.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q83" value="1"> Deriva del carácter pluri-periódico del consumo del equipo productivo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q83" value="2"> Representa la cuantificación del valor sacrificado por su utilización improductiva.</label></li>
+  </ol>
+</div>
+<div class="question" id="q84" data-correct="2">
+  <div class="enunciado"><strong>84.</strong> El método de división por equivalencias:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q84" value="0"> Tiene una relación proporcional variable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q84" value="1"> Se fundamenta en la relación empírica de las relaciones económicas existentes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q84" value="2"> Pretende homogenizar los productos al establecer las cifras de equivalencia.</label></li>
+  </ol>
+</div>
+<div class="question" id="q85" data-correct="2">
+  <div class="enunciado"><strong>85.</strong> En relación con los centros de costes ficticios o virtuales, escoja la incorrecta:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q85" value="0"> Carecen de vinculación con la realidad organizativa de la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q85" value="1"> Agrupan costes de la empresa que nos interesa repartir para distribuir entre los centros de coste.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q85" value="2"> Son centros auxiliares de los principales.</label></li>
+  </ol>
+</div>
+<div class="question" id="q86" data-correct="2">
+  <div class="enunciado"><strong>86.</strong> En la estadística de costes se cumple que:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q86" value="0"> La suma de los costes primarios de los centros principales coincide con la suma de los costes totales de los centros auxiliares.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q86" value="1"> La suma de costes indirectos coincide con la suma de los costes primarios asignados a los centros principales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q86" value="2"> La suma de los costes primarios de todos los centros coincide con la suma de los costes totales de los centros principales.</label></li>
+  </ol>
+</div>
+<div class="question" id="q87" data-correct="1">
+  <div class="enunciado"><strong>87.</strong> El método de cálculo de suplementos electivos:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q87" value="0"> Se aplica tanto a empresas con un modelo orgánico de costes como a aquellas que usan un modelo inorgánico de costes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q87" value="1"> Imputa los costes indirectos eligiendo una base de reparto adecuada acudiendo normalmente para su elección a un análisis de regresión.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q87" value="2"> Ninguna de las dos anteriores es correcta.</label></li>
+  </ol>
+</div>
+<div class="question" id="q88" data-correct="1">
+  <div class="enunciado"><strong>88.</strong> En el criterio del precio medio del periodo:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q88" value="0"> Puedo determinar simultáneamente el valor del consumo de materiales y el valor de las existencias que quedan en el almacén.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q88" value="1"> No puedo determinar el valor del consumo hasta que finalice el periodo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q88" value="2"> Las dos anteriores son falsas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q89" data-correct="0">
+  <div class="enunciado"><strong>89.</strong> En un determinado periodo una empresa ha adquirido 5000 kg de materiales a 4 €/kg, quedando pendiente de pago la cuarta parte al finalizar el periodo. Si el stock final asciende a 2000 kg, puede afirmarse respecto a los materiales y el periodo considerado que:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q89" value="0"> El coste ascendió a 12000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q89" value="1"> El consumo ascendió a 12000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q89" value="2"> La compra ascendió a 20000 €.</label></li>
+  </ol>
+</div>
+<div class="question" id="q90" data-correct="2">
+  <div class="enunciado"><strong>90.</strong> Los centros de coste recíprocos son centros:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q90" value="0"> Cuya actividad revierte directamente en centros principales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q90" value="1"> Cuya actividad revierte directamente en la producción.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q90" value="2"> Que se encuentran dentro de la categoría de auxiliares comunes.</label></li>
+  </ol>
+</div>
+<div class="question" id="q91" data-correct="0">
+  <div class="enunciado"><strong>91.</strong> Los materiales auxiliares son materiales:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q91" value="0"> Que no se encuentran presentes en el producto final y cuyo coste guarda relación con el volumen de producción.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q91" value="1"> Presentes en el producto final y cuyo coste no guarda relación con el volumen de producción.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q91" value="2"> Presentes en el producto final y cuyo coste guarda relación con el volumen de producción.</label></li>
+  </ol>
+</div>
+<div class="question" id="q92" data-correct="1">
+  <div class="enunciado"><strong>92.</strong> Cuando se utiliza un sistema de destajo puro, el coste de retribución del personal se comporta como:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q92" value="0"> Coste fijo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q92" value="1"> Coste variable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q92" value="2"> Coste semivariable.</label></li>
+  </ol>
+</div>
+<div class="question" id="q93" data-correct="0">
+  <div class="enunciado"><strong>93.</strong> ¿Cuándo coinciden el criterio de precio medio del periodo con el criterio FIFO modalidad mixta?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q93" value="0"> Cuando no hay existencias iniciales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q93" value="1"> Cuando existen existencias iniciales valoradas a distinto precio.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q93" value="2"> Cuando el precio de compra es constante durante el periodo.</label></li>
+  </ol>
+</div>
+
+    </div>
+
+    <script>
+      // === LOGICA JAVASCRIPT ===
+
+      // Menú desplegable
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
+
+      // Modo Oscuro
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "☀️ Modo claro" : "🌙 Modo oscuro";
+      }
+
+      // Lógica de corrección en tiempo real
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+        
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
+
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checked.length === 0) return;
+
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
+            } else {
+              q.classList.add("incorrect");
+            }
+          });
+        });
+      });
+
+      // Utilidades
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+        // Renumerar visualmente
+        questions.forEach((q, idx) => {
+            const num = q.querySelector(".num") || q.querySelector("strong");
+            if(num) num.textContent = (idx + 1) + ".";
+        });
+      }
+
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+        
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = '❌ Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      // --- MODO EXAMEN ---
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+        
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+        
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+            
+            q.classList.remove("correct", "partial", "incorrect");
+            
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+        
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del Examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>✅ Correctas: ${correctas}</li>
+                    <li>⚠️ Parciales: ${parciales}</li>
+                    <li>❌ Incorrectas: ${incorrectas}</li>
+                    <li>⚪ Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+        
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+        
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
+</html>
