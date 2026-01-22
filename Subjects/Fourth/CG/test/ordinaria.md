@@ -310,37 +310,27 @@
 - ( ) La suma de su coste primario y la parte del coste secundario correspondiente a la valoración de las prestaciones recibidas de otros lugares auxiliares con los que se mantienen relaciones recíprocas.
 - (x) La suma de su coste primario y la parte del coste secundario correspondiente a la valoración de las prestaciones recibidas de otros lugares auxiliares con los que no se mantienen relaciones recíprocas.
 
-146. ¿Cuáles son los factores subjetivos condicionantes del proceso de segmentación?
-- ( ) El tipo de actividad desarrollada, la dimensión de la empresa, las peculiaridades organizativas y el nivel tecnológico.
-- (x) La finalidad perseguida con la implantación de un sistema informativo para el ámbito interno y la experiencia y competencia del personal técnico.
-- ( ) La experiencia y competencia del personal técnico y las peculiaridades organizativas de la producción.
-
-147. Son costes fijos:
-- (x) Costes de estructura.
-- ( ) Costes proporcionales.
-- ( ) Costes reversibles.
-
-155. Los requisitos de la unidad de medida de la actividad:
+1.   Los requisitos de la unidad de medida de la actividad:
 - ( ) Representar cualitativamente las prestaciones realizadas por el centro.
 - ( ) Tener en cuenta los cambios en la estructura de la empresa.
 - (x) Ser apta para formular el coste total del centro como una función del número de unidades de actividad.
 
-156. Son costes que se asignan a los centros mediante claves de distribución:
+1.   Son costes que se asignan a los centros mediante claves de distribución:
 - ( ) La mano de obra a través de la estadística.
 - ( ) Los materiales de conservación a través de la estadística de consumos.
 - (x) El servicio de limpieza a través de una superficie ocupada (m^2).
 
-160. La operación de redistribución:
+1.   La operación de redistribución:
 - ( ) Traslada los costes de los centros principales al producto.
 - ( ) Se realiza para los costes directos.
 - (x) La llevan a cabo los lugares auxiliares en la fase de localización.
 
-161. Los coeficientes de participación:
+1.   Los coeficientes de participación:
 - ( ) Son lo mismo que las unidades de actividad.
 - (x) Sobre su base se pueden liquidar las prestaciones internas a costes retrospectivos.
 - ( ) Las respuestas A y B son correctas.
 
-162. El coste real:
+1.   El coste real:
 - ( ) Se refiere a las cantidades de factores consumidos o sacrificados en la producción.
 - ( ) Depende del consumo.
 - (x) A y B son correctas.
@@ -356,117 +346,112 @@
 - ( ) Energía eléctrica, seguros y servicios de limpieza.
 - (x) Materiales de conservación, mano de obra y amortización del equipo productivo.
 
-166. El coste intermedio:
-- ( ) Es el coste que tenemos de un lugar antes de sumarle sus costes auxiliares.
-- (x) Es la suma del coste primario de un lugar y la parte del coste secundario correspondiente a la valoración de las prestaciones recibidas de otros lugares auxiliares con los que no mantienen relaciones recíprocas.
-- ( ) Es la suma del coste primario y de los costes secundarios recibidos de otros lugares auxiliares con los que se mantienen relaciones recíprocas.
-
-176. El coste de centros auxiliares:
+1.   El coste de centros auxiliares:
 - ( ) Es un coste indirecto que se imputa directamente al coste del producto a través de la distribución.
 - ( ) Es un coste directo que se afecta directamente al coste de los productos.
 - (x) Es un coste indirecto que se redistribuye al coste de los centros principales para ser imputados entonces al coste de los productos.
 
-180. A la hora de liquidar los costes de los centros auxiliares:
+1.   A la hora de liquidar los costes de los centros auxiliares:
 - ( ) Es indiferente siempre el orden en que se lleve a cabo.
 - (x) Cuando existen lugares recíprocos, la liquidación se realiza en paralelo.
 - ( ) Las dos respuestas anteriores son incorrectas.
 
-213. En relación con el tiempo operario, la suma del tiempo preparación y del tiempo transformación recibe el nombre de:
+1.   En relación con el tiempo operario, la suma del tiempo preparación y del tiempo transformación recibe el nombre de:
 - ( ) Tiempo activo.
 - ( ) Tiempo hábil.
 - (x) Tiempo principal.
 
-214. El sistema de retribución sobre la base de primas individuales con mínimo garantizado en el cual el coeficiente de participación del operario en la economía del tiempo es proporcional al tiempo real e inversamente proporcional al tiempo previsto se denomina:
+1.   El sistema de retribución sobre la base de primas individuales con mínimo garantizado en el cual el coeficiente de participación del operario en la economía del tiempo es proporcional al tiempo real e inversamente proporcional al tiempo previsto se denomina:
 - (x) Sistema de Rowan.
 - ( ) Sistema de Halsey.
 - ( ) Las dos respuestas anteriores son correctas.
 
-215. En relación a los principios aplicables en el proceso de cálculo de costes:
+1.   En relación a los principios aplicables en el proceso de cálculo de costes:
 - ( ) El principio de proporcionalidad no tiene aplicabilidad en los sistemas inorgánicos de Contabilidad de gestión.
 - (x) Todo método de cálculo se apoya en una hipótesis de proporcionalidad.
 - ( ) El principio de proporcionalidad sólo resulta aplicable en la fase de imputación.
 
-216. El método de cálculo de división por equivalencias:
+1.   El método de cálculo de división por equivalencias:
 - ( ) Por sus propias características, presenta como limitación que si aplicación en la empresa no permite un cálculo diferenciado.
 - (x) Es un método idóneo para empresas que operan en régimen de producción simple con presencia de producción intermedia.
 - ( ) Resulta incompatible con los sistemas orgánicos, dada su inevitable aplicación en forma globalizada.
 
-229. El criterio FIFO modalidad estricta:
+1.   El criterio FIFO modalidad estricta:
 - ( ) Es un criterio político de valoración de los consumos que valora las existencias en almacén a los precios más recientes.
 - (x) Es un criterio real de valoración de los consumos que valora las existencias en almacén a los precios más recientes.
 - ( ) Es un criterio real de valoración de los consumos que valora las existencias en almacén a los precios más desfasados.
 
-232. El criterio tecnificado de amortización en función del uso es aplicable cuando:
+1.   El criterio tecnificado de amortización en función del uso es aplicable cuando:
 - (x) Existe una disminución del rendimiento del bien hasta su retirada o fin de su vida útil.
 - ( ) Durante la vida útil del bien la productividad de la maquinaria sea constante.
 - ( ) Ninguna de las dos respuestas anteriores es correcta.
 
-234. En la clasificación de los centros de coste en función de su nivel de agregación:
+1.   En la clasificación de los centros de coste en función de su nivel de agregación:
 - (x) Las unidades de coste siempre coinciden con sus homólogas unidades de trabajo.
 - ( ) Los lugares de coste siempre coinciden con sus homólogos lugares de trabajo.
 - ( ) Las secciones de coste siempre coinciden con sus homólogas secciones de trabajo.
 
-235. En una estadística de costes:
+1.   En una estadística de costes:
 - (x) Cuando se opera sobre la base de costes retrospectivo, incluso en el caso de existencia de autoconsumo la totalidad de los costes de los centros auxiliares revierte sobre los principales.
 - ( ) Los costes secundarios representan los costes soportados por los centros en la operación de imputación.
 - ( ) Los costes primarios derivan de las prestaciones internas realizadas por los centros auxiliares.
 
-236. En la liquidación de una estadística de costes:
+1.   En la liquidación de una estadística de costes:
 - (x) Caso de existencia exclusivamente de centros auxiliares de los principales, el orden de liquidación resulta indiferente.
 - ( ) Caso de existencia tanto de centros auxiliares de los principales como de centros auxiliares propiamente dichos, deben ser liquidados en primer término los primeros.
 - ( ) Caso de existencia tanto de centros auxiliares de los principales como de centros auxiliares propiamente dichos, el orden de liquidación resulta indiferente.
 
-249. Cuando una empresa utiliza el criterio de amortización basado en el tiempo, el coste horario de amortización de un equipo productivo:
+1.   Cuando una empresa utiliza el criterio de amortización basado en el tiempo, el coste horario de amortización de un equipo productivo:
 - ( ) Variará en función de la productividad del tramo de la vida útil considerado.
 - ( ) Dependerá en cada periodo del nivel de utilización de su capacidad productiva.
 - (x) No se verá afectado ni por la productividad ni por el nivel de utilización de su capacidad productiva.
 
-250. El coste de amortización presenta entre otras las siguientes características:
+1.   El coste de amortización presenta entre otras las siguientes características:
 - ( ) Procede de la aplicación al proceso de producción de los factores estructurales con una vida útil ilimitada.
 - (x) Deriva del carácter pluri-periódico del consumo del equipo productivo.
 - ( ) Representa la cuantificación del valor sacrificado por su utilización improductiva.
 
-251. El método de división por equivalencias:
+1.   El método de división por equivalencias:
 - ( ) Tiene una relación proporcional variable.
 - ( ) Se fundamenta en la relación empírica de las relaciones económicas existentes.
 - (x) Pretende homogenizar los productos al establecer las cifras de equivalencia.
 
-252. En relación con los centros de costes ficticios o virtuales, escoja la incorrecta:
+1.   En relación con los centros de costes ficticios o virtuales, escoja la incorrecta:
 - ( ) Carecen de vinculación con la realidad organizativa de la empresa.
 - ( ) Agrupan costes de la empresa que nos interesa repartir para distribuir entre los centros de coste.
 - (x) Son centros auxiliares de los principales.
 
-253. En la estadística de costes se cumple que:
+1.   En la estadística de costes se cumple que:
 - ( ) La suma de los costes primarios de los centros principales coincide con la suma de los costes totales de los centros auxiliares.
 - ( ) La suma de costes indirectos coincide con la suma de los costes primarios asignados a los centros principales.
 - (x) La suma de los costes primarios de todos los centros coincide con la suma de los costes totales de los centros principales.
 
-254. El método de cálculo de suplementos electivos:
+1.   El método de cálculo de suplementos electivos:
 - ( ) Se aplica tanto a empresas con un modelo orgánico de costes como a aquellas que usan un modelo inorgánico de costes.
 - (x) Imputa los costes indirectos eligiendo una base de reparto adecuada acudiendo normalmente para su elección a un análisis de regresión.
 - ( ) Ninguna de las dos anteriores es correcta.
 
-255. En el criterio del precio medio del periodo:
+1.   En el criterio del precio medio del periodo:
 - ( ) Puedo determinar simultáneamente el valor del consumo de materiales y el valor de las existencias que quedan en el almacén.
 - (x) No puedo determinar el valor del consumo hasta que finalice el periodo.
 - ( ) Las dos anteriores son falsas.
 
-240. En un determinado periodo una empresa ha adquirido 5000 kg de materiales a 4 €/kg, quedando pendiente de pago la cuarta parte al finalizar el periodo. Si el stock final asciende a 2000 kg, puede afirmarse respecto a los materiales y el periodo considerado que:
+1.   En un determinado periodo una empresa ha adquirido 5000 kg de materiales a 4 €/kg, quedando pendiente de pago la cuarta parte al finalizar el periodo. Si el stock final asciende a 2000 kg, puede afirmarse respecto a los materiales y el periodo considerado que:
 - (x) El coste ascendió a 12000 €.
 - ( ) El consumo ascendió a 12000 €.
 - ( ) La compra ascendió a 20000 €.
 
-261. Los centros de coste recíprocos son centros:
+1.   Los centros de coste recíprocos son centros:
 - ( ) Cuya actividad revierte directamente en centros principales.
 - ( ) Cuya actividad revierte directamente en la producción.
 - (x) Que se encuentran dentro de la categoría de auxiliares comunes.
 
-262. Los materiales auxiliares son materiales:
+1.   Los materiales auxiliares son materiales:
 - (x) Que no se encuentran presentes en el producto final y cuyo coste guarda relación con el volumen de producción.
 - ( ) Presentes en el producto final y cuyo coste no guarda relación con el volumen de producción.
 - ( ) Presentes en el producto final y cuyo coste guarda relación con el volumen de producción.
 
-268. Cuando se utiliza un sistema de destajo puro, el coste de retribución del personal se comporta como:
+1.   Cuando se utiliza un sistema de destajo puro, el coste de retribución del personal se comporta como:
 - ( ) Coste fijo.
 - (x) Coste variable.
 - ( ) Coste semivariable.
