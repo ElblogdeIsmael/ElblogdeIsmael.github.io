@@ -5,7 +5,8 @@ Repositorio con el código fuente del sitio web personal de Ismael Sallami: art�
 ## Contenido
 - `index.html` — Página principal.
 - `assets/` — Imágenes, CSS y otros recursos.
-- `courses/` — Material de asignaturas.
+- `Subjects/` — Material de asignaturas.
+- `courses/` — htmls de cada curso
 - `extraFiles/Proyectos_Extra/MD_TO_HTML` — Utilidades para convertir Markdown a HTML.
 - Otros ficheros y carpetas relacionadas con proyectos y material académico.
 
