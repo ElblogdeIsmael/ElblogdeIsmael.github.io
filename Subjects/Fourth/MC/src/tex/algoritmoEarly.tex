@@ -1,0 +1,143 @@
+\section{Explicación del Algoritmo de Earley con el ejemplo de la palabra \texttt{baa}}
+
+\subsection{Preparación del Escenario}
+
+Antes de empezar a calcular, definamos nuestras herramientas.
+
+\begin{itemize}
+    \item \textbf{La Gramática ($G$):} Según la diapositiva, tenemos las siguientes reglas de producción:
+    \begin{itemize}
+        \item $S \rightarrow AB$
+        \item $S \rightarrow BC$
+        \item $A \rightarrow b$
+        \item $B \rightarrow C$
+        \item $C \rightarrow a$
+    \end{itemize}
+    \item \textbf{La Entrada ($w$):} La palabra a analizar es \texttt{baa}.
+    \begin{itemize}
+        \item Longitud $n = 3$.
+        \item Posiciones: 0 (antes de la b), 1 (entre b y a), 2 (entre a y a), 3 (al final).
+    \end{itemize}
+    \item \textbf{La Estructura de Datos (El Registro):} El documento utiliza la notación $[X \rightarrow \alpha \cdot \beta, i, j]$. Esto equivale a la notación clásica del ``punto'' (dot notation):
+    \begin{itemize}
+        \item \textbf{Significado:} Estamos intentando construir $X \rightarrow \alpha \beta$. Ya hemos encontrado $\alpha$ (que empezó en la posición $i$ y terminó en $j$), y ahora esperamos encontrar $\beta$.
+        \item Si $\beta$ es $\varepsilon$ (vacío), hemos completado el análisis de esa regla.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ejecución Paso a Paso}
+
+El algoritmo construye conjuntos de estados ($REGISTROS[k]$) para cada posición de la palabra.
+
+\subsubsection*{Paso 0: Inicialización y Clausura ($REGISTROS[0]$)}
+
+Estamos al inicio de la palabra (posición 0). No hemos leído nada aún.
+
+\begin{enumerate}
+    \item \textbf{Inicialización:} Empezamos con el axioma inicial $S$. Añadimos las reglas de $S$ esperando ver sus componentes desde el inicio.
+    \begin{itemize}
+        \item $[S \rightarrow \cdot AB, 0, 0]$
+        \item $[S \rightarrow \cdot BC, 0, 0]$
+    \end{itemize}
+    \item \textbf{Clausura (Closure):} Como esperamos $A$ y $B$ (los símbolos justo después del ``punto''), debemos añadir todas las reglas que generen $A$ y $B$.
+    \begin{itemize}
+        \item Añadimos reglas de $A$: $[A \rightarrow \cdot b, 0, 0]$
+        \item Añadimos reglas de $B$: $[B \rightarrow \cdot C, 0, 0]$
+        \item Al añadir $B$, esperamos $C$, así que añadimos reglas de $C$: $[C \rightarrow \cdot a, 0, 0]$
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Estado de $REGISTROS[0]$:} Listo. Contiene todas las posibilidades de lo que podría empezar en la posición 0.
+
+\subsubsection*{Paso 1: Procesando el primer carácter 'b' ($REGISTROS[1]$)}
+
+Ahora intentamos ``consumir'' el primer carácter de la entrada: \texttt{b}.
+
+\begin{enumerate}
+    \item \textbf{Avance (Scanner):} Miramos en $REGISTROS[0]$ quién estaba esperando una 'b' explícita.
+    \begin{itemize}
+        \item Encontramos $[A \rightarrow \cdot b, 0, 0]$.
+        \item Avanzamos el punto sobre la 'b': $[A \rightarrow b \cdot, 0, 1]$.
+        \item Interpretación: Hemos encontrado una $A$ completa que va de 0 a 1.
+    \end{itemize}
+    \item \textbf{Terminación (Completion):} Acabamos de completar una $A$. El algoritmo busca en el conjunto donde empezó esta $A$ (posición 0) y avanza a todos los que estaban esperando una $A$.
+    \begin{itemize}
+        \item En $REGISTROS[0]$, $[S \rightarrow \cdot AB, 0, 0]$ avanza a $[S \rightarrow A \cdot B, 0, 1]$.
+        \item $[S \rightarrow \cdot BC, 0, 0]$ avanza a $[S \rightarrow B \cdot C, 0, 1]$.
+        \item $[B \rightarrow \cdot C, 0, 0]$ no avanza porque espera $C$, no $A$.
+    \end{itemize}
+    \item \textbf{Clausura (Closure) para $REGISTROS[1]$:} Ahora, en los nuevos registros, el punto está antes de $B$ (en $[S \rightarrow A \cdot B, 0, 1]$) y antes de $C$ (en $[S \rightarrow B \cdot C, 0, 1]$). Debemos añadir sus producciones empezando ahora en la posición 1.
+    \begin{itemize}
+        \item Añadimos reglas de $B$: $[B \rightarrow \cdot C, 1, 1]$
+        \item Añadimos reglas de $C$: $[C \rightarrow \cdot a, 1, 1]$
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Paso 2: Procesando el segundo carácter 'a' ($REGISTROS[2]$)}
+
+Leemos la \texttt{a}. Buscamos en $REGISTROS[1]$ quién espera una 'a'.
+
+\begin{enumerate}
+    \item \textbf{Avance:}
+    \begin{itemize}
+        \item $[C \rightarrow \cdot a, 1, 1]$ espera 'a'. Crea $[C \rightarrow a \cdot, 1, 2]$.
+        \item $[C \rightarrow \cdot a, 0, 0]$ espera 'a'. Crea $[C \rightarrow a \cdot, 0, 1]$.
+        \item Interpretación: Hemos encontrado una $C$ completa que va de 1 a 2 y otra de 0 a 1.
+    \end{itemize}
+    \item \textbf{Terminación:}
+    \begin{itemize}
+        \item Tenemos una $C$ completa desde 1 ($[C \rightarrow a \cdot, 1, 2]$). Buscamos en $REGISTROS[1]$ quién esperaba $C$.
+        \item $[B \rightarrow \cdot C, 1, 1]$ avanza a $[B \rightarrow C \cdot, 1, 2]$.
+        \item $[S \rightarrow B \cdot C, 0, 1]$ avanza a $[S \rightarrow B C \cdot, 0, 2]$.
+    \end{itemize}
+    \item \textbf{Clausura:}
+    \begin{itemize}
+        \item Vemos puntos antes de $A$ y $B$ en los nuevos registros.
+        \item Añadimos producciones para $A$ y $B$ iniciadas en 2: $[A \rightarrow \cdot b, 2, 2]$, $[B \rightarrow \cdot C, 2, 2]$, etc.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Paso 3: Procesando el tercer carácter 'a' ($REGISTROS[3]$)}
+
+Leemos la última \texttt{a}. Buscamos en $REGISTROS[2]$ quién espera 'a'.
+
+\begin{enumerate}
+    \item \textbf{Avance:}
+    \begin{itemize}
+        \item De la clausura anterior, tenemos $[C \rightarrow \cdot a, 2, 2]$.
+        \item Generamos $[C \rightarrow a \cdot, 2, 3]$.
+    \end{itemize}
+    \item \textbf{Terminación:}
+    \begin{itemize}
+        \item Tenemos $C$ completa de 2 a 3. ¿Quién esperaba $C$ en $REGISTROS[2]$?
+        \item $[B \rightarrow \cdot C, 2, 2]$ avanza a $[B \rightarrow C \cdot, 2, 3]$.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{El Veredicto}
+
+El algoritmo termina cuando hemos procesado toda la entrada. Para saber si la palabra es aceptada, miramos $REGISTROS[3]$ (donde $n = 3$).
+
+\textbf{Condición de éxito:} Debemos encontrar un registro de la forma:
+\[
+[S \rightarrow \alpha \cdot, 0, n]
+\]
+Es decir: Un axioma $S$, que empezó en 0, terminó en 3, y está completo ($\cdot$ al final).
+
+\textbf{Resultado del Ejemplo:} Mirando la diapositiva y:
+
+\begin{quote}
+Como $[S \rightarrow \alpha \cdot, 0, 3]$ no está en $REGISTROS[3]$, la palabra \texttt{baa} no es generada.
+\end{quote}
+
+A pesar de que en el paso 2 tuvimos una $S$ completa $[S \rightarrow B C \cdot, 0, 2]$, esta terminaba en la posición 2 (subcadena \texttt{ba}), no en la 3. Al intentar extenderla con la última 'a', la gramática no ofreció un camino válido para conectar todo bajo una sola $S$.
+
+\subsection{Resumen para tu entendimiento}
+
+El Algoritmo de Earley es persistente:
+
+\begin{enumerate}
+    \item \textbf{Predice} lo que podría venir (Clausura).
+    \item \textbf{Verifica} contra la realidad de la entrada (Avance).
+    \item \textbf{Confirma} y construye estructuras mayores cuando se completan las pequeñas (Terminación).
+\end{enumerate}

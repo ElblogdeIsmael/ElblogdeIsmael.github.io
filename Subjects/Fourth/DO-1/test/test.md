@@ -9,7 +9,7 @@
 
 
 1. Adidas expone en su página web corporativa la siguiente declaración: “Ser la mejor marca deportiva del mundo”, lo cual se corresponde con la **misión** de la empresa.
-- ( ) Falso  
+- (x) Falso  
 - ( ) Verdadero  
 
 1. Un servicio como el de "Room Mate Hotels", que permite reservar en hoteles con ubicación privilegiada a precio económico, presenta la **característica de tangibilidad**, ya que la habitación de un hotel se puede tocar y percibir de manera clara y precisa por los usuarios.

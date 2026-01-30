@@ -1,0 +1,1058 @@
+\chapter{Tipo Test}
+
+\textit{Observación.} \underline{Se han eliminado los tipo test repetidos.}
+
+\section{Tema 1}
+
+\begin{enumerate}
+    \setlength{\itemsep}{1em}
+
+    \item Si un lenguaje es generado por una gramática dependiente del contexto, entonces dicho lenguaje no es independiente del contexto.
+
+    \textbf{Falso}. \textit{La jerarquía de Chomsky establece una relación de inclusión estricta donde los lenguajes regulares $\subset$ lenguajes independientes del contexto $\subset$ lenguajes dependientes del contexto $\subset$ lenguajes recursivamente enumerables. Por tanto, todo lenguaje independiente del contexto es, por definición, también dependiente del contexto. Que un lenguaje sea generado por una gramática dependiente del contexto no excluye la posibilidad de que exista una gramática independiente del contexto (más restrictiva) que también lo genere.}
+
+    \item Los alfabetos tienen siempre un número finito de elementos, pero los lenguajes, incluso si el alfabeto tiene sólo un símbolo, tienen infinitas palabras.
+
+    \textbf{Falso}. \textit{Si bien es cierto que un alfabeto $\Sigma$ es un conjunto finito y no vacío de símbolos, la segunda parte de la afirmación es incorrecta. Un lenguaje $L$ se define como un subconjunto de $\Sigma^*$. Aunque el universo de todas las palabras posibles $\Sigma^*$ sea infinito (salvo que $\Sigma = \emptyset$, lo cual no es estándar), un lenguaje específico $L$ puede ser finito. Ejemplo: Si $\Sigma = \{a\}$, el lenguaje $L = \{aa, aaa\}$ es finito.}
+
+    \item Si $L$ es un lenguaje no vacío, entonces $L^{*}$ es infinito.
+
+    \textbf{Verdadera}. \textit{ En base a la definición, se sabe que si es no vacío existe un $u \in L$, pero existe un caso excepcional. Si el lenguaje $L$ contiene únicamente la palabra vacía, es decir, $L = \{\epsilon\}$, entonces su cierre de Kleene es $L^* = \{\epsilon\}^* = \{\epsilon\}$. En este caso, $L$ no es vacío (tiene un elemento) y $L^*$ es finito (cardinalidad 1).}
+
+    \item Todo lenguaje con un número finito de palabras es regular e independiente del contexto.
+
+    \textbf{Verdadero}. \textit{Los lenguajes finitos son un subconjunto de los lenguajes regulares. Dado que todo lenguaje finito puede expresarse como la unión finita de sus cadenas constituyentes (y la unión es una operación cerrada en los lenguajes regulares), es regular. Además, como los lenguajes regulares son un subconjunto propio de los independientes del contexto, cualquier lenguaje finito es también independiente del contexto.}
+
+    \item Si $L$ es un lenguaje, entonces siempre $L^{*}$ es distinto de $L^{+}$.
+
+    \textbf{Falso}. \textit{Las definiciones son $L^* = \bigcup_{i \geq 0} L^i$ y $L^+ = \bigcup_{i \geq 1} L^i$. La diferencia entre ambos conjuntos es la palabra vacía $\epsilon$ correspondiente a $L^0$. Sin embargo, si el lenguaje original $L$ ya contiene a $\epsilon$, entonces $\epsilon \in L \subseteq L^+$. En consecuencia, $L^* = L^+ \cup \{\epsilon\} = L^+$. Por tanto, si $\epsilon \in L$, $L^* = L^+$.}
+
+    \item $L \cdot \emptyset = L$
+
+    \textbf{Falso}. \textit{La concatenación de un lenguaje $L$ con el conjunto vacío se define como $L \cdot \emptyset = \{xy \mid x \in L, y \in \emptyset\}$. Dado que no existe ningún elemento $y$ en el conjunto vacío, no es posible formar ninguna pareja para la concatenación. El resultado es el conjunto vacío: $L \cdot \emptyset = \emptyset$. El elemento neutro de la concatenación es $\{\epsilon\}$, no $\emptyset$.}
+
+    \item Si $A$ es un alfabeto, la aplicación que transforma cada palabra $u \in A^{*}$ en su inversa es un homomorfismo de $A^{*}$ en $A^{*}$.
+
+    \textbf{Falso}. \textit{Para que una aplicación $h$ sea un homomorfismo, debe cumplir que $h(xy) = h(x)h(y)$. La operación de inversa cumple $(xy)^R = y^R x^R$. En general, salvo que el alfabeto tenga un solo símbolo (conmutativo), $y^R x^R \neq x^R y^R$. Por tanto, la inversión no conserva la estructura de la concatenación en el orden original.}
+
+    \item Si $\epsilon \in L$, entonces $L^{+} = L^{*}$.
+
+    \textbf{Verdadero}. \textit{Por definición, $L^* = L^+ \cup \{\epsilon\}$. Si la palabra vacía $\epsilon$ ya pertenece a $L$, entonces cualquier concatenación de elementos de $L$ que defina $L^+$ incluirá el caso de una sola repetición de $\epsilon$, o simplemente por inclusión de conjuntos $\epsilon \in L \implies \epsilon \in L^+$. Al estar $\epsilon$ presente en $L^+$, la unión con $\{\epsilon\}$ no añade elementos nuevos, resultando en la igualdad de los conjuntos.}
+
+    \item La transformación que a cada palabra sobre $\{0,1\}^*$ le añade 00 al principio y 11 al final es un homomorfismo.
+
+    \textbf{Falso}. \textit{Definamos la transformación como $f(w) = 00w11$. Para ser homomorfismo, debería cumplir $f(uv) = f(u)f(v)$. Calculando ambos lados: $f(uv) = 00uv11$, mientras que $f(u)f(v) = (00u11)(00v11) = 00u1100v11$. Evidentemente, $00uv11 \neq 00u1100v11$ para palabras genéricas, por lo que no preserva la operación de concatenación.}
+
+    \item Se puede construir un programa que tenga como entrada un programa y unos datos y que siempre nos diga si el programa leído termina para esos datos.
+
+    \textbf{Falso}. \textit{Esto describe el Problema de la Parada (Halting Problem). Alan Turing demostró que este problema es indecidible. No existe un algoritmo general (Máquina de Turing) que pueda determinar correctamente para cualquier par programa-entrada si la ejecución terminará o entrará en un bucle infinito.}
+
+    \item La cabecera (prefijos) del lenguaje $L$ siempre incluye a $L$.
+
+    \textbf{Verdadero}. \textit{Se define el conjunto de prefijos de un lenguaje $L$ como $Pref(L) = \{u \mid \exists v \in \Sigma^*, uv \in L\}$. Para cualquier palabra $w \in L$, podemos elegir $v = \epsilon$ (la palabra vacía). Como $w\epsilon = w$ y $w \in L$, se cumple la condición. Por tanto, toda palabra de $L$ es prefijo de sí misma y $L \subseteq Pref(L)$.}
+
+    \item Un lenguaje nunca puede ser igual a su inverso.
+
+    \textbf{Falso}. \textit{Existen lenguajes que son idénticos a su inverso, concretamente aquellos formados por palíndromos o lenguajes donde por cada palabra $w$, su inversa $w^R$ también está en el lenguaje. Un ejemplo trivial es el lenguaje $L = \{0, 1, 00, 11\}$, donde $L = L^R$. Otro ejemplo es $\Sigma^*$, que es igual a su inverso.}
+
+    \item La aplicación que transforma cada palabra $u$ sobre el alfabeto $\{0, 1\}$ en $w^{3}$ (interpretado como $u^3$) es un homomorfismo.
+
+    \textbf{Falso}. \textit{Asumiendo que la transformación es $f(u) = uuu$. Para ser homomorfismo debe cumplir $f(uv) = f(u)f(v)$. Tenemos $f(uv) = uvuvuv$. Por otro lado, $f(u)f(v) = uuuvvv$. En general, $uvuvuv \neq uuuvvv$ (a menos que $u$ y $v$ conmuten, lo cual no es cierto para todo el alfabeto $\{0,1\}$).}
+
+    \item El lenguaje que contiene sólo la palabra vacía es el elemento neutro para la concatenación de lenguajes.
+
+    \textbf{Verdadero}. \textit{Sea $L$ un lenguaje cualquiera. La concatenación $L \cdot \{\epsilon\} = \{ w \cdot \epsilon \mid w \in L \} = \{ w \mid w \in L \} = L$. De igual forma $\{\epsilon\} \cdot L = L$. Por tanto, el lenguaje $\{\epsilon\}$ actúa como la identidad o elemento neutro en la estructura monoide de los lenguajes con la operación concatenación.}
+
+    \item Hay lenguajes con un número infinito de palabras que no son regulares.
+
+    \textbf{Verdadero}. \textit{La regularidad no depende de la finitud. Existen lenguajes infinitos que requieren memoria ilimitada o estructuras tipo pila para ser reconocidos, escapando de la capacidad de los Autómatas Finitos. El ejemplo clásico es $L = \{0^n 1^n \mid n \ge 0\}$, que es infinito y es Independiente del Contexto, pero no Regular (demostrable por el Lema de Bombeo).}
+
+    \item Si un lenguaje tiene un conjunto infinito de palabras sabemos que no es regular.
+
+    \textbf{Falso}. \textit{La infinitud no implica no regularidad. El lenguaje universal $\Sigma^*$ sobre un alfabeto no vacío es infinito y es trivialmente regular (reconocido por un autómata de un solo estado de aceptación con transiciones a sí mismo). Otro ejemplo es $L = \{a^n \mid n \ge 0\}$.}
+
+    \item Si $L$ es un lenguaje finito, entonces su cabecera $(CAB(L))$ también será finita.
+
+    \textbf{Verdadero}. \textit{Un lenguaje finito tiene un número finito de palabras, y cada palabra tiene una longitud finita. El número de prefijos (cabecera) de una palabra de longitud $n$ es $n+1$. La unión de un número finito de conjuntos finitos (los prefijos de cada palabra de $L$) resulta necesariamente en un conjunto finito.}
+
+    \item El conjunto de palabras sobre un alfabeto dado con la operación de concatenación tiene una estructura de monoide.
+
+    \textbf{Verdadero}. \textit{Un monoide es una estructura algebraica con una operación asociativa y un elemento neutro. En $\Sigma^*$: 1) La concatenación es cerrada (el resultado es una palabra de $\Sigma^*$). 2) Es asociativa: $(uv)w = u(vw)$. 3) Existe elemento neutro: la palabra vacía $\epsilon$, tal que $w\epsilon = \epsilon w = w$.}
+
+    \item La transformación entre el conjunto de palabras del alfabeto $\{0, 1\}$ que duplica cada símbolo (la palabra 011 se transforma en 001111) es un homomorfismo.
+
+    \textbf{Verdadero}. \textit{Definamos el homomorfismo $h$ mediante las imágenes de los símbolos del alfabeto: $h(0) = 00$ y $h(1) = 11$. La extensión de $h$ a palabras cumple $h(a_1 a_2 \dots a_n) = h(a_1)h(a_2)\dots h(a_n)$. Si tomamos $u$ y $v$, la imagen de su concatenación $h(uv)$ será la secuencia de símbolos duplicados de $u$ seguida de los de $v$, lo cual es exactamente $h(u)h(v)$.}
+
+    \item Si $f$ es un homomorfismo entre palabras del alfabeto $A_{1}$ en palabras del alfabeto de $A_{2}$, entonces si conocemos $f(a)$ para cada $a \in A_{1}$ se puede calcular $f(u)$ para cada palabra $u \in A_{1}^{*}$.
+
+    \textbf{Verdadero}. \textit{Esta es una propiedad fundamental de los homomorfismos en monoides libres. Un homomorfismo queda unívocamente determinado por su actuación sobre los generadores del monoide (los símbolos del alfabeto). Para cualquier palabra $u = x_1 x_2 \dots x_k$, se tiene $f(u) = f(x_1)f(x_2)\dots f(x_k)$.}
+
+    \item Si $f$ es un homomorfismo, entonces necesariamente se verifica $f(\epsilon) = \epsilon$.
+
+    \textbf{Verdadero}. \textit{En cualquier homomorfismo de monoides, la identidad debe mapearse a la identidad. Formalmente: $f(w) = f(w\epsilon) = f(w)f(\epsilon)$. Si asumimos que estamos en un monoide libre con la propiedad de cancelación (o simplemente por longitud de palabras $|f(w)| = |f(w)| + |f(\epsilon)|$), se deduce que $f(\epsilon)$ debe ser la palabra vacía $\epsilon$.}
+
+    \item Si $A$ es un alfabeto, entonces $A^{+}$ no incluye nunca la palabra vacía.
+
+    \textbf{Verdadero}. \textit{Un alfabeto $A$ se define como un conjunto de símbolos. Formalmente, los símbolos tienen longitud 1. $A^+$ se define como la unión de $A^1 \cup A^2 \cup \dots$. Dado que la concatenación de símbolos de longitud $\ge 1$ siempre produce cadenas de longitud $\ge 1$, ninguna combinación en $A^+$ puede tener longitud 0. Por tanto, $\epsilon \notin A^+$.}
+
+    \item Es posible diseñar un algoritmo que lea un lenguaje cualquiera sobre el alfabeto $\{0,1\}$ y nos diga si es regular o no.
+
+    \textbf{Falso}. \textit{Esta afirmación es falsa por varias razones fundamentales en Teoría de la Computación. Primero, ''un lenguaje cualquiera'' puede no ser finitamente descriptible. Segundo, si restringimos la entrada a lenguajes definidos por Gramáticas o Máquinas de Turing, el Teorema de Rice establece que cualquier propiedad no trivial de los lenguajes recursivamente enumerables (como ''ser regular'') es indecidible.}
+
+\end{enumerate}
+
+\section{Tema 2}
+\begin{enumerate}
+
+    \item Si $r$ y $s$ son expresiones regulares, tenemos que siempre se verifica que $(rs)^{*}=r^{*}s^{*}$
+
+    \textbf{Falso}. \textit{El lenguaje $(rs)^*$ genera repeticiones de la concatenación $rs$ (ej. $\epsilon, rs, rsrs, \dots$), mientras que $r^*s^*$ genera cualquier número de $r$'s seguido de cualquier número de $s$'s. Por ejemplo, la cadena $r$ pertenece a $r^*s^*$ pero no a $(rs)^*$, a menos que $s=\epsilon$.}
+
+    \vspace{0.3cm}
+
+    \item Si $r$ y $s$ son expresiones regulares, tenemos que siempre se verifica que $(r+s)^{*}=r^{*}+s^{*}$
+
+    \textbf{Falso}. \textit{El lenguaje $(r+s)^*$ permite mezclar símbolos de $r$ y $s$ en cualquier orden (ej. $rs, sr, rrs$), mientras que $r^*+s^*$ representa la unión de cadenas formadas solo por $r$ o solo por $s$. La cadena $rs$ no pertenece a $r^*+s^*$.}
+
+    \vspace{0.3cm}
+
+    \item Si $r_{1}$ y $r_{2}$ son expresiones regulares, tales que su lenguaje asociado contiene la palabra vacía, entonces $(r_{1}r_{2})^{*}=(r_{2}r_{1})^{*}$
+
+    \textbf{Verdadero}. \textit{Si $\epsilon \in L(r_1)$ y $\epsilon \in L(r_2)$, entonces $r_1 \subseteq r_1r_2$ y $r_2 \subseteq r_1r_2$, lo que implica que $r_1+r_2 \subseteq r_1r_2$. Esto lleva a que $(r_1r_2)^*$ cubra todas las combinaciones posibles de $r_1$ y $r_2$, siendo equivalente a $(r_1+r_2)^*$. Por simetría, $(r_2r_1)^*$ también equivale a $(r_1+r_2)^*$, haciendo la igualdad cierta.}
+
+    \vspace{0.3cm}
+
+    \item Si $r$ y $s$ son expresiones regulares, tenemos que siempre se verifica que $(r+\epsilon)^{+}=r^{*}$
+
+    \textbf{Verdadero}. \textit{La operación clausura positiva $(L)^+$ es $LL^*$. Dado que la expresión contiene $\epsilon$, $(r+\epsilon)$ incluye la cadena vacía. La repetición una o más veces de un conjunto que contiene $\epsilon$ y $r$ es equivalente a repetir $r$ cero o más veces, es decir, $r^*$.}
+
+    \vspace{0.3cm}
+
+    \item Si $r$ y $s$ son expresiones regulares, tenemos que siempre se verifica que $r(r+s)^{*}=(r+s)^{*}r$
+
+    \textbf{Falso}. \textit{La expresión de la izquierda genera cadenas que obligatoriamente comienzan por $r$, mientras que la de la derecha genera cadenas que obligatoriamente terminan por $r$. Por ejemplo, la cadena $rs$ pertenece al lado izquierdo pero no al derecho.}
+
+    \vspace{0.3cm}
+
+    \item Si $r_{1}$ y $r_{2}$ son expresiones regulares, entonces $r_{1}^{*}r_{2}^{*}\subseteq(r_{1}r_{2})^{*}$ en el sentido de que los lenguajes asociados están incluidos.
+
+    \textbf{Falso}. \textit{El lado izquierdo permite cadenas como $rr$ (dos $r_1$ sin $r_2$). El lado derecho $(r_1r_2)^*$ obliga a que cada aparición de $r_1$ sea seguida inmediatamente por $r_2$. Por tanto, $rr \notin (r_1r_2)^*$.}
+
+    \vspace{0.3cm}
+
+    \item Si $r_{1}$, $r_{2}$ y $r_{3}$ son expresiones regulares, entonces $(r_{1}+r_{2})^{*}r_{3}=r_{1}^{*}r_{3}+r_{2}^{*}r_{3}$
+
+    \textbf{Falso}. \textit{El lado izquierdo permite intercalar $r_1$ y $r_2$ antes de $r_3$ (ej. $r_1 r_2 r_3$). El lado derecho obliga a elegir o bien una secuencia exclusiva de $r_1$ o bien una de $r_2$ antes de $r_3$. La distributividad no aplica sobre la clausura de Kleene de una suma.}
+
+    \vspace{0.3cm}
+
+    \item Si $r_{1}$ y $r_{2}$ son expresiones regulares entonces: $({r_{1}}^{*}{r_{2}}^{*})^{*}=(r_{1}+r_{2})^{*}$
+
+    \textbf{Verdadero}. \textit{Esta es una identidad fundamental. $(r_1^*r_2^*)^*$ permite concatenar bloques de $r_1^*$ y $r_2^*$ indefinidamente, lo cual es suficiente para generar cualquier secuencia mezclada de $r_1$ y $r_2$, cubriendo exactamente el mismo lenguaje que $(r_1+r_2)^*$.}
+
+    \vspace{0.3cm}
+
+    \item Si $r$ es una expresión regular, entonces $r^{*}r^{*}=r^{*}$.
+
+    \textbf{Verdadero}. \textit{Concatenar dos clausuras de Kleene idénticas equivale a una sola clausura, ya que $L^* L^* = L^*$. Cualquier cadena formada por la concatenación de dos cadenas de $r^*$ sigue siendo una secuencia de elementos de $r$, por lo tanto, pertenece a $r^*$.}
+
+    \vspace{0.3cm}
+
+    \item Si $r$ es una expresión regular, entonces $r\emptyset=r+\emptyset$
+
+    \textbf{Falso}. \textit{La concatenación con el conjunto vacío es el conjunto vacío ($r\emptyset = \emptyset$), ya que no es posible formar una cadena si una de las partes no contiene elementos. La unión con el vacío es el elemento neutro ($r+\emptyset = r$). Por tanto, $\emptyset \neq r$ (salvo si $r=\emptyset$).}
+
+    \vspace{0.3cm}
+
+    \item Si $r$ es una expresión regular, entonces se verifica que $r^{*}\epsilon=r^{+}\epsilon$
+
+    \textbf{Falso}. \textit{La concatenación con $\epsilon$ es la identidad. La expresión se reduce a $r^* = r^+$. Esto es falso porque $r^*$ siempre contiene la palabra vacía $\epsilon$, mientras que $r^+$ no necesariamente la contiene (solo si $\epsilon \in r$).}
+
+    \vspace{0.3cm}
+
+    \item Si $r_{1}$ y $r_{2}$ son expresiones regulares, entonces siempre $r_{1}(r_{2}r_{1})^{*}=(r_{1}r_{2})^{*}r_{1}$
+
+    \textbf{Verdadero}. \textit{Esta es la identidad de desplazamiento de la clausura de Kleene. Ambas expresiones describen secuencias que comienzan con $r_1$, alternan entre $r_2$ y $r_1$, y terminan con $r_1$ (ej. $r_1 r_2 r_1 r_2 r_1$).}
+
+    \vspace{0.3cm}
+
+    \item Si $r$ es una expresión regular, entonces $(rr)^{*}\subseteq r^{*}$.
+
+    \textbf{Verdadero}. \textit{$(rr)^*$ genera un número par de concatenaciones de $r$ ($r^0, r^2, r^4 \dots$), mientras que $r^*$ genera cualquier número ($r^0, r^1, r^2 \dots$). El conjunto de cadenas con repeticiones pares es un subconjunto del total de repeticiones.}
+
+    \vspace{0.3cm}
+
+    \item Si $r_{1}$ y $r_{2}$ son expresiones regulares, tales que su lenguaje asociado contiene la palabra vacía, entonces $(r_{1}r_{2})^{*}=(r_{1}+r_{2})^{*}$.
+
+    \textbf{Verdadero}. \textit{Bajo la condición de que $\epsilon \in L(r_1)$ y $\epsilon \in L(r_2)$, la concatenación $r_1 r_2$ incluye a $r_1$ (pues $r_1 \cdot \epsilon$) y a $r_2$ (pues $\epsilon \cdot r_2$). Al aplicar la clausura, se pueden generar todas las combinaciones de la unión.}
+
+    \vspace{0.3cm}
+
+    \item Si $r_{1}$, $r_{2}$, $r_{3}$ son expresiones regulares, entonces $r_{1}(r_{2}^{*}+r_{3}^{*})=r_{1}r_{2}^{*}+r_{1}r_{3}^{*}$.
+
+    \textbf{Verdadero}. \textit{La concatenación es distributiva respecto a la unión (suma) en las expresiones regulares. $A(B+C) = AB + AC$.}
+
+    \vspace{0.3cm}
+
+    \item La demostración de que la clase de lenguajes aceptados por los autómatas no deterministas es la misma que la aceptada por los autómatas determistas, se basa en dado un autómata no determinista construir uno determinista que, ante una palabra de entrada, explore todas las posibles opciones que puede seguir el no determinista.
+
+    \textbf{Verdadero}. \textit{Se refiere al algoritmo de construcción de subconjuntos. El AFD resultante simula en paralelo todos los caminos posibles del AFND, manteniendo en cada paso el conjunto de estados en los que podría estar el autómata no determinista.}
+
+    \vspace{0.3cm}
+
+    \item Un autómata finito puede ser determinista y no-determinista a la vez.
+
+    \textbf{Verdadero}. \textit{Formalmente, la definición de AFD es un caso particular de la definición de AFND. Todo autómata determinista es, por definición, también un autómata no determinista que casualmente no tiene transiciones $\epsilon$ ni múltiples transiciones para un mismo símbolo.}
+
+    \vspace{0.3cm}
+
+    \item Para transformar un autómata que acepta el lenguaje L en uno que acepte $L^*$, basta unir los estados finales con el inicial mediante transiciones nulas.
+
+    \textbf{Falso}. \textit{No basta con unir los finales al inicial. Primero, el lenguaje $L^*$ debe aceptar $\epsilon$, por lo que el estado inicial debe ser final o se debe crear uno nuevo. Segundo, si el estado inicial original tenía transiciones entrantes, hacer este bucle puede aceptar cadenas que no están en $L^*$ (se crean caminos indeseados). La construcción correcta implica un nuevo estado inicial $q_0'$ final y transiciones $\epsilon$ adecuadas.}
+
+    \vspace{0.3cm}
+
+    \item Para pasar de un autómata que acepte el lenguaje asociado a $r$ a uno que acepte $r^*$ basta con unir con transiciones nulas sus estados finales con el estado inicial.
+
+    \textbf{Falso}. \textit{Misma justificación que la pregunta 21. Es necesario introducir un nuevo estado inicial para asegurar la aceptación de la palabra vacía sin alterar el flujo interno del autómata original y evitar bucles erróneos.}
+
+    \vspace{0.3cm}
+
+    \item Existe un lenguaje reconocido por un AFD y no generado por una gramática independiente del contexto.
+
+    \textbf{Falso}. \textit{Los lenguajes regulares (reconocidos por AFD) son un subconjunto estricto de los lenguajes libres de contexto (generados por GIC). Todo lenguaje regular puede ser generado por una GIC.}
+
+    \vspace{0.3cm}
+
+    \item Existen lenguajes aceptados por AFD que no pueden ser aceptados por AF no determinísticos.
+
+    \textbf{Falso}. \textit{Los AFD y los AFND tienen exactamente el mismo poder expresivo. Ambos reconocen la clase de los lenguajes regulares.}
+
+    \vspace{0.3cm}
+
+    \item La clausura de un lenguaje aceptado por un AFD puede ser representado con una expresión regular.
+
+    \textbf{Verdadero}. \textit{La clase de los lenguajes regulares es cerrada bajo la operación estrella de Kleene. Si $L$ es regular, $L^*$ es regular y, por el Teorema de Kleene, todo lenguaje regular puede representarse mediante una expresión regular.}
+
+    \vspace{0.3cm}
+
+    \item Un lenguaje representado por una expresión regular siempre puede ser reconocido por un AF no determinista.
+
+    \textbf{Verdadero}. \textit{Es parte fundamental del Teorema de Kleene. Existen algoritmos estándar (como la construcción de Thompson) para convertir cualquier expresión regular en un AFND-$\epsilon$ equivalente.}
+
+    \vspace{0.3cm}
+
+    \item Todo lenguaje regular puede ser generado por una gramática libre de contexto.
+
+    \textbf{Verdadero}. \textit{Como los lenguajes regulares son un subconjunto de los libres de contexto, siempre existe una gramática regular (que es un tipo de GIC) que genera dicho lenguaje.}
+
+    \vspace{0.3cm}
+
+    \item Un lenguaje con un número finito de palabras siempre puede ser reconocido por un AF no determinista.
+
+    \textbf{Verdadero}. \textit{Todo lenguaje finito es un lenguaje regular. Se puede construir trivialmente un autómata (incluso un AFD tipo ''trie'') que acepte exactamente esas palabras y ninguna más.}
+
+    \vspace{0.3cm}
+
+    \item Todo autómata finito determinista de $n$ estados, cuyo alfabeto A contiene $m$ símbolos debe tener $m*n$ transiciones.
+
+    \textbf{Verdadero}. \textit{Por definición formal de AFD, la función de transición $\delta: Q \times \Sigma \to Q$ es una función total. Debe haber exactamente una transición definida para cada par (estado, símbolo), resultando en $m \times n$ transiciones.}
+
+    \vspace{0.3cm}
+
+    \item Para que un autómata con pila sea determinista es necesario que no tenga transiciones nulas.
+
+    \textbf{Falso}. \textit{Un autómata con pila determinista (APD) puede tener transiciones nulas ($\epsilon$-transiciones), siempre que no exista ambigüedad. Es decir, si un estado tiene una transición $\epsilon$, no puede tener ninguna otra transición con un símbolo de entrada para esa misma configuración de pila.}
+
+    \vspace{0.3cm}
+
+    \item Si $r_1$ y $r_2$ son expresiones regulares, entonces siempre se tiene que $(r_{1}+r_{2})^{*}=(r_{1}^{*}r_{2})^{*}r_{1}^{*}.$
+
+    \textbf{Verdadero}. \textit{Esta es una identidad conocida. El lado derecho describe cualquier secuencia de bloques donde cada bloque termina en $r_2$ (precedido por cualquier cantidad de $r_1$), finalizando la cadena global con cualquier cantidad de $r_1$. Esto cubre todas las posibles mezclas de $r_1$ y $r_2$, igual que $(r_1+r_2)^*$.}
+
+    \vspace{0.3cm}
+
+    \item Si un lenguaje es infinito no se puede encontrar una expresión regular que lo represente.
+
+    \textbf{Falso}. \textit{La mayoría de las expresiones regulares de interés representan lenguajes infinitos (gracias al operador estrella de Kleene). Por ejemplo, $a^*$ representa un lenguaje infinito y es una expresión regular válida.}
+
+    \vspace{0.3cm}
+
+    \item Si $r_{1}$ y $r_{2}$ son expresiones regulares, entonces se verifica que $(r_{1}+\epsilon)^{+}r_{2}^{+}=r_{1}^{+}(r_{2}+\epsilon)^{+}$.
+
+    \textbf{Falso}. \textit{Analicemos los lenguajes: $(r_1+\epsilon)^+$ equivale a $r_1^*$. Así, el lado izquierdo es $r_1^* r_2^+$ (cadenas de $r_1$ seguidas de al menos una $r_2$). El lado derecho es $r_1^+ r_2^*$ (al menos una $r_1$ seguida de cadenas de $r_2$). Son conjuntos diferentes (ej. $r_2$ está en el izquierdo pero no en el derecho).}
+
+    \vspace{0.3cm}
+
+    \item El conjunto de palabras sobre el alfabeto $\{0,1\}$ tales que eliminando los tres últimos símbolos, en la palabra resultante no aparece el patrón 0011 es un lenguaje regular.
+
+    \textbf{Verdadero}. \textit{Los lenguajes regulares son cerrados bajo la operación de cociente (eliminación de sufijos finitos) y diferencia. El lenguaje de palabras que contienen ''0011'' es regular. Su complemento (no contienen ''0011'') es regular. Concatenar con $\Sigma\Sigma\Sigma$ (los tres últimos) mantiene la regularidad.}
+
+    \vspace{0.3cm}
+
+    \item El lenguaje formado por las cadenas sobre $\{0,1\}$ que tienen un número impar de 0 y un número par de 1 no es regular.
+
+    \textbf{Falso}. \textit{Este lenguaje es regular. Se puede construir un AFD simple con 4 estados que controlan la paridad de los ceros y unos (Par-Par, Par-Impar, Impar-Par, Impar-Impar) para reconocerlo.}
+
+\end{enumerate}
+
+
+\section{Tema 3}
+
+\begin{enumerate}
+\setlength{\itemsep}{0.3cm}
+\item El lema de bombeo puede usarse para demostrar que un lenguaje determinado es regular.
+
+\textbf{Falso}. \textit{El lema de bombeo es una condición necesaria pero no suficiente para la regularidad. Se utiliza mediante demostración por reducción al absurdo para probar que un lenguaje NO es regular, pero el cumplimiento de la condición no garantiza que el lenguaje sea regular.}
+
+\item Todo lenguaje con un número finito de palabras es regular.
+
+\textbf{Verdadero}. \textit{Un lenguaje finito es la unión finita de lenguajes unitarios (que contienen una sola palabra), los cuales son regulares. Dado que los lenguajes regulares son cerrados bajo la unión, cualquier lenguaje finito es regular.}
+
+\item La intersección de lenguajes regulares es siempre regular.
+
+\textbf{Verdadero}. \textit{La clase de los lenguajes regulares es cerrada bajo la operación de intersección. Esto se puede demostrar constructivamente mediante el autómata producto de los dos autómatas finitos deterministas correspondientes.}
+
+\item La demostración del lema de bombeo se basa en que si leemos una palabra de longitud mayor o igual al número de estados del autómata, entonces en el camino que se recorre en el diagrama de transición se produce un ciclo.
+
+\textbf{Verdadero}. \textit{Se fundamenta en el principio del palomar: si una cadena tiene una longitud $n$ mayor o igual al número de estados $|Q|$, el camino debe visitar $n+1$ estados, forzando la repetición de al menos un estado y formando un ciclo que puede ser bombeado.}
+
+\item Es más fácil determinar si una palabra pertenece a un lenguaje regular cuando éste viene dado por una expresión regular que cuando viene dado por un autómata finito determinista.
+
+\textbf{Falso}. \textit{El mecanismo computacional más eficiente y directo para verificar la pertenencia de una palabra es el Autómata Finito Determinista (AFD), que lo hace en tiempo lineal $O(n)$. Las expresiones regulares suelen requerir una conversión previa a autómata o algoritmos de backtracking menos eficientes.}
+
+\item En la demostración de que todo autómata finito tiene una expresión regular que representa el mismo lenguaje, el conjunto $R_{ij}^{k}$ se define como el lenguaje de todas las palabras que llevan al autómata del estado $q_{i}$ al estado $q_{j}$ pasando por el estado número k, $q_{k}$.
+
+\textbf{Falso}. \textit{Se trata del conjunto de todas las palabras que llevan al autómata del estado $q_i$ al estado $q_j$ con numeración menor o igual a $k$. No es obligatorio que pasen por el estado $q_k$, sino que pueden pasar por cualquier estado con índice hasta $k$.}
+
+\item El conjunto de todas las expresiones regulares es un lenguaje regular.
+
+\textbf{Falso}. \textit{El conjunto de cadenas que conforman las expresiones regulares válidas requiere el balanceo de paréntesis (estructura anidada), lo cual es una característica de los lenguajes independientes del contexto (Tipo 2), no de los regulares (Tipo 3).}
+
+\item A partir de la demostración de que si R es regular y L un lenguaje cualquiera, entonces $R/L$ es regular, se puede obtener un algoritmo para construir el autómata asociado a $R/L$.
+
+\textbf{Verdadero}. \textit{El cociente de un lenguaje regular por cualquier lenguaje es regular. El autómata se construye identificando qué estados del AFD original pueden llegar a un estado final consumiendo alguna cadena de $L$ y marcándolos como finales en el nuevo autómata.}
+
+\item En un autómata finito no-determinista, si intercambio entre sí los estados finales y no finales obtengo un autómata que acepta el lenguaje complementario.
+
+\textbf{Falso}. \textit{El intercambio de estados finales y no finales solo genera el lenguaje complementario en Autómatas Finitos Deterministas (AFD). En el caso no determinista (AFND), es necesario determinizar el autómata antes de realizar la inversión de estados.}
+
+\item Si en un autómata finito no hay estados distinguibles de nivel 2, ya no puede haber estados distinguibles de nivel 4.
+
+\textbf{Falso}. \textit{La indistinguibilidad a nivel $k$ no implica indistinguibilidad a nivel $k+n$. Es posible que dos estados se comporten igual para todas las cadenas de longitud 2, pero que diverjan para cadenas de longitud mayor (por ejemplo, longitud 4), revelando su distinguibilidad en etapas posteriores.}
+
+\item Todo lenguaje generado por una gramática lineal por la derecha es también generado por una gramática lineal por la izquierda.
+
+\textbf{Verdadero}. \textit{Las gramáticas lineales por la derecha y las lineales por la izquierda generan exactamente la misma clase de lenguajes: los lenguajes regulares. Por tanto, siempre existe una gramática equivalente del otro tipo.}
+
+\item Un autómata finito determinista sin estados inaccesibles ni indistinguibles es minimal.
+
+\textbf{Verdadero}. \textit{Un AFD es mínimo (tiene el menor número de estados posible para su lenguaje) si y solo si no contiene estados inaccesibles (inalcanzables desde el inicio) y no existen pares de estados equivalentes (indistinguibles).}
+
+\item Si L es una lenguaje sobre el alfabeto A, entonces $CAB(L)$ es siempre igual al cociente $L/A^{*}$.
+
+\textbf{Verdadero}. \textit{$CAB(L)$ denota el conjunto de prefijos de $L$. El cociente por la derecha $L/A^*$ se define como $\{x \mid \exists y \in A^*, xy \in L\}$, lo cual corresponde exactamente a la definición de los prefijos de las palabras de $L$.}
+
+\item El lenguaje de las palabras sobre \{0,1\} en las que la diferencia entre el número de ceros y unos es impar es regular.
+
+\textbf{Verdadero}. \textit{Este lenguaje puede ser reconocido por un autómata finito que controle la paridad de la diferencia (módulo 2). Los estados representarían si la diferencia actual es par o impar, lo cual requiere memoria finita.}
+
+\item En un autómata finito cualquiera, si las transiciones dan lugar a un ciclo, entonces el lenguaje aceptado es infinito.
+
+\textbf{Falso}. \textit{La existencia de un ciclo es condición necesaria pero no suficiente para la infinitud. El ciclo debe ser accesible desde el estado inicial y, además, debe existir un camino desde el ciclo hacia un estado final. Si el ciclo está en una parte ''muerta'' o no conduce a aceptación, el lenguaje puede ser finito.}
+
+\item La expresión recursiva que se emplea para obtener la expresión regular asociada a un autómata finito determinista es: $r_{ij}^{k}=r_{ij}^{k-1}+r_{i(k-1)}^{k-1}(r_{(k-1)(k-1)}^{k-1})^{*}r_{(k-1)_{j}^{k-1}}$.
+
+\textbf{Falso}. \textit{La fórmula correcta del algoritmo de Kleene utiliza el estado $k$ como pivote en la iteración $k$, no el estado $k-1$. La expresión correcta es $r_{ij}^{k}=r_{ij}^{k-1}+r_{ik}^{k-1}(r_{kk}^{k-1})^{*}r_{kj}^{k-1}$. La fórmula presentada en el enunciado tiene los índices desplazados incorrectamente.}
+
+\item Cuando se construye la expresión regular asociada a un autómata finito determinista, $r_{ii}^{0}$ no puede ser nunca vacío.
+
+\textbf{Verdadero}. \textit{El término $r_{ii}^0$ representa los caminos de longitud 0 o 1 de $i$ a $i$ sin estados intermedios. Como siempre es posible ir de un estado a sí mismo con la cadena vacía $\epsilon$, el lenguaje $r_{ii}^0$ contiene al menos a $\epsilon$ y nunca es el conjunto vacío.}
+
+\item El conjunto de las palabras $\{u0011v^{-1}: u, v\in\{0,1\}^{*}\}$ es regular.
+
+\textbf{Verdadero}. \textit{Asumiendo que la notación denota el cociente por la derecha o una operación relacionada con prefijos/sufijos sobre un lenguaje regular (definido por el patrón 0011), las propiedades de clausura (cociente, concatenación) aseguran que el resultado sea regular.}
+
+\item Si L es un lenguaje finito, entonces su complementario es siempre regular.
+
+\textbf{Verdadero}. \textit{Si $L$ es finito, es regular. La clase de lenguajes regulares es cerrada bajo la complementación. Por tanto, el complemento de un lenguaje finito es regular (y co-finito).}
+
+\item En un autómata finito determinista la relación de indistinguibilidad es una relación de equivalencia.
+
+\textbf{Verdadero}. \textit{La relación de indistinguibilidad (o equivalencia de Myhill-Nerode) cumple las propiedades reflexiva, simétrica y transitiva, particionando el conjunto de estados en clases de equivalencia.}
+
+\item En un autómata finito determinista siempre debe de existir, al menos, un estado de error.
+
+\textbf{Falso}. \textit{No es obligatorio. Un estado de error (pozo) solo es necesario si la función de transición debe ser total y existen transiciones que llevan al rechazo permanente. Si el lenguaje es $\Sigma^*$ o el autómata está definido parcialmente (aunque formalmente un AFD es total), no ''debe'' existir siempre explícitamente un estado de error específico si la lógica no lo requiere.}
+
+\item El conjunto de los números en binario que son múltiplos de 7 es regular.
+
+\textbf{Verdadero}. \textit{La divisibilidad por un número entero constante $k$ en cualquier base es una propiedad regular. Se puede construir un AFD donde los estados representan el resto de la división por 7 (estados $0$ a $6$).}
+
+\item Hay situaciones en las que los estados inaccesibles de un AFD cumplen una función específica.
+
+\textbf{Falso}. \textit{Los estados inaccesibles no pueden ser alcanzados por ninguna cadena de entrada desde el estado inicial, por lo que no afectan en absoluto al lenguaje aceptado por el autómata y son irrelevantes para la función de reconocimiento.}
+
+\item Si R es un lenguaje regular y L un lenguaje independiente del contexto, entonces $R/L$ es regular.
+
+\textbf{Verdadero}. \textit{Esta es una propiedad fuerte de los lenguajes regulares: el cociente de un lenguaje regular por \textbf{cualquier} lenguaje (sea regular, libre de contexto o arbitrario) resulta siempre en un lenguaje regular.}
+
+\item Si en un autómata dos estados son distinguibles de nivel n, entonces serán distinguibles de nivel m para todo $m \ge n$.
+
+\textbf{Verdadero}. \textit{Ser distinguible de nivel $n$ significa que existe una palabra de longitud $\le n$ (o exactamente $n$, según definición, pero implica existencia en el conjunto de palabras) que los distingue. Si tal palabra existe, sigue existiendo y siendo válida para distinguir a un ''nivel'' superior que abarca longitudes mayores.}
+
+\item Si h es un homomorfismo y $h(L)$ no es regular, podemos concluir que L no es regular.
+
+\textbf{Falso}. \textit{Los lenguajes regulares son cerrados bajo homomorfismos, por lo que si $L$ fuera regular, $h(L)$ tendría que ser regular. Por contraposición, si $h(L)$ NO es regular, entonces $L$ NO puede ser regular. (Nota: El enunciado dice ''podemos concluir que L no es regular'', lo cual es lógicamente \textbf{Verdadero} por contraposición: $Reg(L) \implies Reg(h(L))$ equivale a $\neg Reg(h(L)) \implies \neg Reg(L)$). \textit{Corrección interpretativa: A veces se confunde con la inversa. Si $h(L)$ es regular, no implica nada sobre $L$. Pero si el resultado NO es regular, la fuente no podía serlo.}}
+
+\item El lenguaje de todas las palabras en las que los tres primeros símbolos son iguales a los tres últimos es regular.
+
+\textbf{Verdadero}. \textit{Es un lenguaje que impone condiciones finitas sobre prefijos y sufijos de longitud fija. Puede ser reconocido por un AFD que recuerde los tres primeros símbolos y verifique los tres últimos mediante el estado actual. Una explicación más formal sería construyendo una aplicación biyectiva $f: \{1,2, \ldots, n^3\} \to A \times A \times A$, ya que suponemos que tenemos una posibilidad finita de combinaciones.}
+
+\item Si un lenguaje verifica la condición que aparece en el lema de bombeo para lenguajes regulares, ya no hay forma de demostrar que no es regular.
+
+\textbf{Falso}. \textit{El cumplimiento del lema de bombeo no garantiza regularidad. Existen lenguajes no regulares que satisfacen el lema. Aún se podría demostrar que no es regular utilizando el teorema de Myhill-Nerode o propiedades de clausura.}
+
+\item Si f es un homomorfismo entre alfabetos $f:A_{1}^{*}\rightarrow A_{2}^{*}$ y $L\subseteq A_{1}^{*}$ no es regular, podemos concluir que $f(L)$ tampoco es regular.
+
+\textbf{Falso}. \textit{Un lenguaje no regular puede transformarse en regular mediante un homomorfismo. Por ejemplo, un homomorfismo que mapee todos los símbolos a una constante o a la cadena vacía puede convertir un lenguaje complejo en uno regular trivial.}
+
+\item Todo lenguaje que cumple la condición del lema de bombeo para lenguajes regulares puede ser aceptado por un autómata finito no determinista.
+
+\textbf{Falso}. \textit{Los autómatas finitos (deterministas o no) solo aceptan lenguajes regulares. Dado que existen lenguajes no regulares que cumplen el lema de bombeo, estos no pueden ser aceptados por ningún autómata finito.}
+
+\item No existe algoritmo para saber si el lenguaje generado por una gramática regular es finito.
+
+\textbf{Falso}. \textit{Sí existe. Dado que una gramática regular equivale a un autómata finito, se puede verificar la finitud comprobando si existen ciclos en el grafo del autómata que sean alcanzables desde el inicio y que puedan alcanzar un estado final.}
+
+\item Dos autómatas finitos deterministas con diferente número de estados y que aceptan el lenguaje vacío tienen el mismo número de estados finales.
+
+\textbf{Falso}. \textit{Un autómata que acepta el vacío puede tener 0 estados finales, o puede tener estados finales que sean inaccesibles. Por tanto, el número de estados finales no tiene por qué ser igual (aunque usualmente es 0 en la versión mínima, versiones no mínimas pueden diferir).}
+
+\item Si A es un alfabeto y L un lenguaje cualquiera distinto del vacío, entonces se verifica que $A^{*}/L=A^{*}$.
+
+\textbf{Verdadero}. \textit{El cociente $A^*/L$ contiene todas las cadenas $x$ tales que $xy \in A^*$ para algún $y \in L$. Como la concatenación de cualquier palabra con otra siempre está en $A^*$, solo necesitamos que exista al menos una $y \in L$. Si $L \neq \emptyset$, entonces para todo $x \in A^*$, existe tal $y$, por lo que el resultado es todo $A^*$.}
+
+\item Si $R_{ij}^{k}$ son los lenguajes que se usan en la construcción de una expresión regular a partir de una autómata finito, siempre se verifica que $R_{ij}^{j-1}R_{jk}^{j-1}\subseteq R_{ik}^{j}$.
+
+\textbf{Verdadero}. \textit{El término $R_{ik}^j$ incluye todos los caminos de $i$ a $k$ pasando por nodos intermedios $\{1..j\}$. La concatenación $R_{ij}^{j-1}R_{jk}^{j-1}$ representa un camino que va de $i$ a $j$ (sin pasar por $j$ antes) y luego de $j$ a $k$ (sin pasar por $j$ después). Este es un camino válido específico dentro del conjunto más general $R_{ik}^j$.}
+
+\item El lema de bombeo es útil para demostrar que la intersección de dos lenguajes regulares no es regular.
+
+\textbf{Falso}. \textit{La premisa es incorrecta: la intersección de dos lenguajes regulares ES siempre regular, por lo que el lema de bombeo nunca podría demostrar lo contrario.}
+
+\item Existe un algoritmo para determinar si el lenguaje generado por una gramática regular es infinito.
+
+\textbf{Verdadero}. \textit{Se puede convertir la gramática a un AFD y comprobar la existencia de ciclos útiles (accesibles y co-accesibles a estados finales).}
+
+\item Existe un algoritmo para determinar si el lenguaje generado por una gramática regular es finito o infinito.
+
+\textbf{Verdadero}. \textit{Es el mismo procedimiento mencionado anteriormente (detección de ciclos en el autómata asociado).}
+
+\item La intersección de dos lenguajes regulares da lugar a un lenguaje independiente del contexto.
+
+\textbf{Verdadero}. \textit{La intersección de dos regulares es un lenguaje regular. Dado que la clase de lenguajes regulares es un subconjunto propio de los lenguajes independientes del contexto, el resultado es, por definición, también un lenguaje independiente del contexto.}
+
+\item Si un lenguaje es infinito no se puede encontrar una expresión regular que lo represente.
+
+\textbf{Falso}. \textit{Muchos lenguajes infinitos son regulares (por ejemplo, $a^*$) y tienen representaciones mediante expresiones regulares.}
+
+\item En un autómata finito determinista sin estados inaccesibles la relación de indistiguibilidad entre los estados es una relación de equivalencia.
+
+\textbf{Verdadero}. \textit{Independientemente de la accesibilidad, la relación de Myhill-Nerode es siempre de equivalencia. La condición de ''sin estados inaccesibles'' es relevante para la minimización, pero no altera la naturaleza algebraica de la relación.}
+
+\item En un autómata finito determinista, si no hay dos estados que sean indistinguibles entre sí, entonces el autómata es minimal.
+
+\textbf{Falso}. \textit{Para ser minimal, además de no tener estados indistinguibles, el autómata no debe tener estados inaccesibles. Se puede tener un autómata sin indistinguibles pero con estados inalcanzables que sobran.}
+
+\item Dada una gramática lineal por la derecha, siempre existe otra gramática lineal por la izquierda que acepte el mismo lenguaje.
+
+\textbf{Verdadero}. \textit{Ambos formalismos generan exactamente la clase de los lenguajes regulares, por lo que son equivalentes en poder expresivo.}
+
+\item Si R es un lenguaje regular y L un lenguaje cualquiera, entonces $R/L$ es siempre un lenguaje regular.
+
+\textbf{Verdadero}. \textit{Como se mencionó anteriormente, la clase regular es cerrada bajo el cociente con cualquier lenguaje arbitrario.}
+
+\item Si un lenguaje cumple la condición del lema de bombeo para conjuntos regulares no nos asegura que sea un lenguaje regular.
+
+\textbf{Verdadero}. \textit{El lema de bombeo no es una condición suficiente. Existen lenguajes no regulares que satisfacen la propiedad de bombeo.}
+
+\item Existe un algoritmo para determinar si los lenguajes generados por dos gramáticas regulares son iguales o no.
+
+\textbf{Verdadero}. \textit{Se pueden convertir ambas gramáticas a AFDs, minimizarlos y comprobar si son isomorfos. La equivalencia de lenguajes regulares es decidible.}
+
+\item El conjunto de cadenas aceptado por un autómata finito no determinista con transiciones nulas no puede ser generado por una gramática independiente del contexto.
+
+\textbf{Falso}. \textit{Un AFND con transiciones nulas acepta un lenguaje regular. Todo lenguaje regular es independiente del contexto, por lo que ciertamente puede ser generado por una gramática independiente del contexto.}
+
+\item El lenguaje resultado de la unión de dos lenguajes regulares con un número infinito de palabras puede ser representado mediante una expresión regular.
+
+\textbf{Verdadero}. \textit{La unión de dos lenguajes regulares es regular, independientemente de si son finitos o infinitos. Todo lenguaje regular puede representarse mediante una expresión regular.}
+
+\item Una expresión regular siempre representa a un lenguaje que puede ser generado por una gramática independiente del contexto.
+
+\textbf{Verdadero}. \textit{Las expresiones regulares denotan lenguajes regulares, los cuales son un subconjunto de los lenguajes independientes del contexto.}
+
+\item Existe un algoritmo para comprobar si son iguales los lenguajes aceptados por dos autómatas finitos diferentes.
+
+\textbf{Verdadero}. \textit{Es un problema decidible. Se puede verificar si la diferencia simétrica de los lenguajes $(L(A_1) \cap \overline{L(A_2)}) \cup (\overline{L(A_1)} \cap L(A_2))$ es vacía.}
+
+\item Si en un autómata finito no determinista intercambio entre sí los estados finales y no finales obtengo un autómata que acepta el lenguaje complementario del aceptado por el autómata original.
+
+\textbf{Falso}. \textit{Esta propiedad solo es válida para Autómatas Finitos Deterministas. En un AFND, el intercambio de estados no garantiza la complementación correcta debido a la naturaleza de los caminos múltiples.}
+
+\item Si L es un lenguaje regular, entonces el lenguaje $LL^{-1}$ es también regular.
+
+\textbf{Verdadero}. \textit{Esta expresión denota el cociente $L/L$. Dado que los regulares son cerrados bajo cociente con cualquier lenguaje (incluso consigo mismos), el resultado es regular.}
+
+\item El lema de bombeo para lenguajes regulares es útil para demostrar que un lenguaje determinado no es regular.
+
+\textbf{Verdadero}. \textit{Es su aplicación principal: demostrar la no regularidad mediante contradicción.}
+
+\item Si un lenguaje tiene un conjunto infinito de palabras sabemos que no es regular.
+
+\textbf{Falso}. \textit{La infinitud no implica no regularidad. El lenguaje de todas las cadenas $\Sigma^*$ es infinito y es regular.}
+
+\item Un autómata finito determinista sin estados inaccesibles ni indistinguibles es minimal.
+
+\textbf{Verdadero}. \textit{Cumple las dos condiciones necesarias y suficientes para la minimalidad: todos los estados son útiles (accesibles) y todos son necesarios (distinguibles).}
+
+\item El conjunto de las palabras $\{u0011v^{-1}: u, v\in\{0,1\}^{*}\}$ es regular.
+
+\textbf{Verdadero}. \textit{Interpretando la operación como un cociente o manipulación de prefijos sobre un patrón regular, las propiedades de clausura mantienen la regularidad.}
+
+\item Existe un algoritmo para determinar si el lenguaje generado por una gramática regular es infinito.
+
+\textbf{Verdadero}. \textit{Verificación de ciclos en el autómata correspondiente.}
+
+\item Para cada autómata finito no determinista M existe una gramática independiente de contexto G tal que $L(M)=L(G)$.
+
+\textbf{Verdadero}. \textit{El lenguaje $L(M)$ es regular. Todo lenguaje regular es libre de contexto, por lo que existe una gramática $G$ (que puede ser regular o lineal) que lo genera.}
+
+\item El lenguaje formado por las cadenas sobre \{0,1\} que tienen un número impar de 0 y un número par de 1 no es regular.
+
+\textbf{Falso}. \textit{Es regular. Se puede construir un AFD con 4 estados representando las combinaciones de paridad (par/par, par/impar, impar/par, impar/impar) para reconocerlo.}
+
+\item Si L es un lenguaje regular, entonces la cabecera de L $(CAB(L))$ es siempre regular.
+
+\textbf{Verdadero}. \textit{$CAB(L)$ o el conjunto de prefijos de un lenguaje regular es siempre regular. Se obtiene haciendo finales todos los estados desde los que se puede alcanzar un estado final original en el AFD.}
+
+\item En un autómata finito determinista, si no hay dos estados que sean indistinguibles entre si, entonces el autómata es minimal.
+
+\textbf{Falso}. \textit{Falta la condición de no tener estados inaccesibles. Un autómata puede tener estados todos distinguibles entre sí, pero si alguno es inalcanzable desde el inicio, no es minimal.}
+
+\item La intersección de dos lenguajes regulares da lugar a un lenguaje independiente del contexto.
+
+\textbf{Verdadero}. \textit{Da lugar a un lenguaje regular, y todo regular es independiente del contexto.}
+
+\item Si un lenguaje es infinito no se puede encontrar una expresión regular que lo represente.
+
+\textbf{Falso}. \textit{Las expresiones regulares con el operador estrella de Kleene ($*$) representan precisamente lenguajes infinitos (e.g., $a^*$ representa un conjunto infinito de 'a's).}
+
+
+\end{enumerate}
+
+\section{Tema 4}
+\begin{enumerate}
+
+
+
+\item Si un lenguaje de tipo 2 viene generado por una gramática ambigua, siempre puedo encontrar una gramática no ambigua que genere el mismo lenguaje.
+
+\textbf{Falso}\textit{. Existen los denominados lenguajes inherentemente ambiguos. Para estos lenguajes, todas las gramáticas independientes del contexto posibles que los generan son ambiguas, por lo que es teóricamente imposible hallar una gramática no ambigua para ellos.}
+
+\vspace{0.3cm}
+
+\item En una gramática de tipo 2 ambigua no puede existir una palabra generada con un único árbol de derivación.
+
+\textbf{Falso}\textit{. La definición de ambigüedad en una gramática exige únicamente la existencia de al menos una palabra con más de un árbol de derivación distinto. Esto no excluye la posibilidad de que existan otras palabras dentro del mismo lenguaje que posean un único árbol de derivación.}
+
+\vspace{0.3cm}
+
+\item Dada una gramática independiente del contexto, siempre se puede construir una gramática sin transiciones nulas ni unitarias que genere exactamente el mismo lenguaje que la gramática original.
+
+\textbf{Falso}\textit{. Si el lenguaje original $L$ contiene la cadena vacía ($\epsilon$), la eliminación estándar de producciones nulas genera una gramática para $L \setminus \{\epsilon\}$. Para generar exactamente $L$ (incluyendo $\epsilon$), es imprescindible mantener al menos una producción nula asociada al símbolo inicial ($S \rightarrow \epsilon$), por lo que no es posible eliminar absolutamente todas las transiciones nulas sin alterar el lenguaje.}
+
+\vspace{0.3cm}
+
+\item Una gramática independiente del contexto es ambigua si existe una palabra que puede ser generada con dos cadenas de derivación distintas.
+
+\textbf{Falso}\textit{. La existencia de dos cadenas de derivación distintas no implica ambigüedad si estas corresponden al mismo árbol de derivación (por ejemplo, una derivación por la izquierda y otra por la derecha). La condición necesaria para la ambigüedad es la existencia de dos árboles de sintaxis distintos o, equivalentemente, dos derivaciones por la izquierda distintas para la misma palabra.}
+
+\vspace{0.3cm}
+
+\item Un lenguaje inherentemente ambiguo puede ser generado por una gramática ambigua.
+
+\textbf{Verdadero}\textit{. Por definición, un lenguaje es inherentemente ambiguo si todas las gramáticas que lo generan son ambiguas. Por tanto, necesariamente existe una gramática ambigua que lo genera.}
+
+\vspace{0.3cm}
+
+\item El lenguaje de las palabras sobre $\{0, 1\}$ con un número impar de ceros es independiente del contexto.
+
+\textbf{Verdadero}\textit{. Este lenguaje es regular (reconocible por un autómata finito de dos estados). Dado que el conjunto de los lenguajes regulares es un subconjunto propio de los lenguajes independientes del contexto ($\mathcal{L}_{3} \subset \mathcal{L}_{2}$), el lenguaje es también independiente del contexto.}
+
+\vspace{0.3cm}
+
+\item Si en una producción de una gramática independiente del contexto, uno de los símbolos que contiene es útil, entonces la producción es útil.
+
+\textbf{Falso}\textit{. La utilidad de una producción es una propiedad integral. Para que una producción sea útil, debe ser alcanzable desde el símbolo inicial y todos sus símbolos deben ser capaces de derivar terminales. La utilidad de un símbolo aislado no garantiza que la producción en su conjunto cumpla estas condiciones (por ejemplo, podría contener otro símbolo no generativo).}
+
+\vspace{0.3cm}
+
+\item Todo árbol de derivación de una palabra en una gramática independiente del contexto está asociado a una única derivación por la izquierda.
+
+\textbf{Verdadero}\textit{. Existe un isomorfismo (una correspondencia biunívoca) entre el conjunto de árboles de derivación y el conjunto de derivaciones por la izquierda. Un árbol de derivación determina unívocamente el orden de expansión de las variables en una derivación ''left-most''.}
+
+\vspace{0.3cm}
+
+\item Para poder aplicar el algoritmo que hemos visto para transformar una gramática a forma normal de Greibach, la gramática tiene que estar en forma normal de Chomsky necesariamente.
+
+\textbf{Falso}\textit{. Si está en forma normal de Chomsky (FNC), es más sencillo aplicar el algoritmo para convertirla a forma normal de Greibach (FNG), pero no es un requisito indispensable. Basta con tener una gramática sin producciones nulas ni unitarias, y aplicar lo siguiente:
+Para toda producción $A \rightarrow \alpha $, cambiar todo símbolo terminal a que aparezca en $\alpha$ a partir del segundo símbolo por $C_a$ (Si a aparece al principio de $\alpha$ este símbolo terminal no se cambia)}.
+\vspace{0.3cm}
+
+\item Sólo hay una derivación por la derecha asociada a un árbol de derivación.
+
+\textbf{Verdadero}\textit{. Al igual que con las derivaciones por la izquierda, existe una correspondencia uno a uno entre un árbol de derivación y su derivación canónica por la derecha (right-most derivation).}
+
+\vspace{0.3cm}
+
+\item Si una gramática independiente del contexto no tiene producciones nulas ni unitarias, entonces si u es una palabra de longitud n generada por la gramática, su derivación se obtiene en un número de pasos no superior a $2n-1$.
+
+\textbf{Verdadero}\textit{. En el ''peor caso'' de expansión (Forma Normal de Chomsky), cada paso añade un terminal o divide una variable en dos, requiriendo exactamente $2n-1$ pasos. Otras producciones que generen múltiples terminales o variables en un solo paso reducirán este número, por lo que $2n-1$ actúa como una cota superior estricta.}
+
+\vspace{0.3cm}
+
+\item Existe un lenguaje con un número finito de palabras que no puede ser generado por una gramática libre de contexto.
+
+\textbf{Falso}\textit{. Todo lenguaje finito es un lenguaje regular (puede construirse un autómata finito que reconozca exactamente esas palabras). Dado que todos los lenguajes regulares son libres de contexto, no existe ningún lenguaje finito que escape a la capacidad generativa de una gramática libre de contexto.}
+
+\vspace{0.3cm}
+
+\item La gramática compuesta por las reglas de producción $S\rightarrow AA$, $A\rightarrow aSa$, $A\rightarrow a$ no es ambigua.
+
+\textbf{Falso}\textit{. La gramática es ambigua. Consideremos la cadena $aaaa$. Puede generarse mediante $S \rightarrow AA \rightarrow aA \rightarrow a(aSa) \dots$ o mediante $S \rightarrow AA \rightarrow (aSa)A \dots$. Estas derivaciones dan lugar a árboles de estructura distinta, probando la ambigüedad.}
+
+\vspace{0.3cm}
+
+
+\item Un lenguaje libre de contexto es inherentemente ambiguo si existe una gramática ambigua que lo genera.
+
+\textbf{Falso}\textit{. La existencia de una gramática ambigua no implica la ambigüedad inherente del lenguaje. Un lenguaje es inherentemente ambiguo solo si \textbf{todas} las gramáticas que lo generan son ambiguas. A menudo es posible sanear una gramática ambigua para obtener una no ambigua para el mismo lenguaje.}
+
+\vspace{0.3cm}
+
+\item La gramática compuesta por las reglas de producción $S\rightarrow A$, $A\rightarrow aSa$, $A\rightarrow a$ es ambigua.
+
+\textbf{Falso}\textit{. Esta gramática genera el lenguaje $\{a^{2n+1} : n \ge 0\}$. La estructura es lineal y determinista: para generar una cadena de longitud específica, existe una única secuencia de aplicaciones de reglas. Al haber un único árbol para cada palabra, la gramática no es ambigua.}
+
+\vspace{0.3cm}
+
+\item Para generar una palabra de longitud n en una gramática en forma normal de Chomsky hacen falta exactamente $2n-1$ pasos de derivación.
+
+\textbf{Verdadero}\textit{. En FNC, las producciones son de la forma $A \rightarrow BC$ (aumentan la longitud de la forma sentencial en 1 variable) o $A \rightarrow a$ (convierten variable en terminal). Para una cadena de $n$ terminales, se requieren $n-1$ aplicaciones de reglas tipo $A \rightarrow BC$ para crear $n$ variables, y $n$ aplicaciones de $A \rightarrow a$ para terminarlas. Total: $(n-1) + n = 2n-1$.}
+
+\vspace{0.3cm}
+
+\item Es imposible que una gramática esté en forma normal de Chomsky y Greibach al mismo tiempo.
+
+\textbf{Falso}\textit{. Es posible en casos triviales o específicos. Por ejemplo, una gramática con solo reglas de la forma $S \rightarrow a$ cumple la definición de FNC ($A \rightarrow a$) y también la de FNG ($A \rightarrow a\alpha$, donde $\alpha = \epsilon$).}
+
+\vspace{0.3cm}
+
+\item En una gramática independiente del contexto, si una palabra de longitud n es generada, entonces el número de pasos de derivación que se emplean debe de ser menor o igual a $2n-1$.
+
+\textbf{Falso}\textit{. Esta cota solo es válida para gramáticas simplificadas (sin producciones unitarias ni nulas) o en formas normales. En una gramática general con ciclos unitarios (e.g., $A \rightarrow B, B \rightarrow A$) o producciones nulas, la derivación puede tener una longitud arbitraria o incluso infinita para la misma palabra.}
+
+\vspace{0.3cm}
+
+\item El algoritmo que pasa una gramática a forma normal de Greibach produce siempre el mismo resultado con independencia de cómo se numeren las variables.
+
+\textbf{Falso}\textit{. El algoritmo se basa en un ordenamiento arbitrario de las variables no terminales ($A_1, < A_2 < \dots < A_m$) para eliminar la recursividad por la izquierda. Cambiar este orden altera las sustituciones realizadas y, por tanto, modifica el conjunto final de reglas de producción, aunque el lenguaje generado sea el mismo.}
+
+\vspace{0.3cm}
+
+\item La gramática compuesta por la siguientes reglas de producción $\{S\rightarrow A|BA|SS, B\rightarrow a|b, A\rightarrow a\}$ es ambigua.
+
+\textbf{Verdadero}\textit{. La cadena $aa$ puede generarse mediante $S \rightarrow SS \rightarrow AA \rightarrow aa$ o mediante $S \rightarrow BA \rightarrow aA \rightarrow aa$ (dado que $B \rightarrow a$). Al existir dos árboles de derivación distintos para $aa$, es ambigua.}
+
+\vspace{0.3cm}
+
+\item Si una palabra de longitud n es generada por una gramática en forma normal de Greibach, entonces lo es con n pasos de derivación exactamente.
+
+\textbf{Verdadero}\textit{. En FNG, toda producción es de la forma $A \rightarrow a\alpha$, donde $a$ es un terminal. Cada paso de derivación introduce exactamente un símbolo terminal en la cadena. Por consiguiente, para generar una cadena de $n$ terminales, se requieren exactamente $n$ pasos.}
+
+\vspace{0.3cm}
+
+\item En una gramática independiente del contexto puede existir una palabra que es generada con dos derivaciones por la izquierda distintas que tienen el mismo árbol de derivación.
+
+\textbf{Falso}\textit{. Por la propiedad de biyección entre árboles y derivaciones izquierdas, es imposible tener dos derivaciones por la izquierda distintas que correspondan al mismo árbol. Si las derivaciones izquierdas difieren, los árboles asociados necesariamente difieren.}
+
+\vspace{0.3cm}
+
+\item Una gramática independiente del contexto genera un lenguaje que puede ser representado por una expresión regular.
+
+\textbf{Falso}\textit{. Las gramáticas independientes del contexto tienen una capacidad generativa superior a las expresiones regulares. Existen lenguajes libres de contexto (como $\{a^n b^n\}$) que no son regulares y, por tanto, no pueden ser representados mediante expresiones regulares.}
+
+\vspace{0.3cm}
+
+\item Para cada autómata finito no determinista M existe una gramática independiente de contexto G tal que $L(M)=L(G)$.
+
+\textbf{Verdadero}\textit{. Un autómata finito reconoce un lenguaje regular. Todo lenguaje regular es también independiente del contexto. Específicamente, se puede construir una gramática regular (lineal por la derecha) que simule las transiciones del autómata.}
+
+\vspace{0.3cm}
+
+\item Para que un autómata con pila sea determinista es necesario que no tenga transiciones nulas.
+
+\textbf{Falso}\textit{. Un autómata con pila determinista (DPDA) permite transiciones nulas ($\lambda$-transiciones), siempre que se cumpla la condición de determinismo: si en una configuración dada es posible una transición nula, no debe ser posible ninguna otra transición (por lectura de entrada) desde esa misma configuración.}
+
+\vspace{0.3cm}
+
+% \item El algoritmo que pasa una gramatica a forma normal de Greibach produce siempre el mismo resultado con independencia de cómo se numeren las variables.
+
+% \textbf{Falso}\textit{. (Repetición de la cuestión 21). El conjunto de producciones resultante es dependiente del orden $A_1, \dots, A_m$ elegido para las variables.}
+
+% \vspace{0.3cm}
+
+\item El conjunto de cadenas generado por una gramática independiente del contexto en forma normal de Greibach puede ser reconocido por un autómata finito no determinista con transiciones nulas.
+
+\textbf{Falso}\textit{. Estar en Forma Normal de Greibach no reduce la capacidad generativa de la gramática; sigue generando un lenguaje independiente del contexto (posiblemente no regular). Los autómatas finitos (incluso AFND-$\epsilon$) solo pueden reconocer lenguajes regulares.}
+
+\vspace{0.3cm}
+
+\item La intersección de dos lenguajes regulares da lugar a un lenguaje independiente del contexto.
+
+\textbf{Verdadero}\textit{. La clase de los lenguajes regulares es cerrada bajo la intersección ($Reg \cap Reg = Reg$). Dado que todo lenguaje regular es independiente del contexto, el resultado pertenece a esta clase.}
+
+\vspace{0.3cm}
+
+\item Si $L_{1}y~L_{2}$ son independientes del contexto, no podemos asegurar que $L_{1}\cap L_{2}$ también lo sea.
+
+\textbf{Verdadero}\textit{. La clase de lenguajes independientes del contexto no es cerrada bajo la intersección. La intersección de dos lenguajes libres de contexto puede dar lugar a un lenguaje sensible al contexto que no sea libre de contexto (ejemplo clásico: $\{a^n b^n c^n\}$).}
+
+
+\end{enumerate}
+
+
+\section{Tema 5}
+
+\begin{enumerate}
+    \item La clase de los lenguajes aceptados por los autómatas con pila deterministas es igual a la clase de los lenguajes generados por las gramáticas de tipo 2.
+    
+    \textbf{Falso}. \textit{Las gramáticas de tipo 2 generan la clase completa de los Lenguajes Independientes del Contexto (LIC). Los Autómatas con Pila Deterministas (APD) reconocen únicamente un subconjunto propio de estos, conocidos como Lenguajes Independientes del Contexto Deterministas (LICD). Para reconocer la clase completa de los LIC (Tipo 2) es necesario un Autómata con Pila No Determinista (APND).}
+    
+    \vspace{0.3cm}
+    
+    \item Una palabra es aceptada por un autómata con pila por el criterio de pila vacía si en algún momento, cuando leemos esta palabra, la pila se queda sin ningún símbolo, con independencia de la cantidad de símbolos que hayamos leído de la palabra de entrada.
+    
+    \textbf{Falso}. \textit{El criterio de aceptación por pila vacía exige que la pila se vacíe únicamente después de haber consumido la totalidad de la cadena de entrada. Si la pila se vacía antes de terminar de leer la entrada, el autómata se bloquea y la cadena no es aceptada (salvo que pueda realizar transiciones nulas para consumirla, pero la condición de vaciado es al final del procesamiento).}
+    
+    \vspace{0.3cm}
+    
+    \item Un autómata con pila siempre acepta el mismo lenguaje por los criterios de pila vacía y de estados finales.
+    
+    \textbf{Falso}. \textit{Aunque los dos criterios de aceptación son equivalentes en cuanto a su capacidad expresiva (la clase de lenguajes que pueden definir es la misma), un autómata con pila $M$ específico generalmente acepta lenguajes distintos bajo cada criterio ($L(M) \neq N(M)$) a menos que haya sido diseñado explícitamente para que coincidan.}
+    
+    \vspace{0.3cm}
+    
+    \item Todo lenguaje aceptado por un autómata con pila determinista por el criterio de estados finales es también aceptado por una autómata con pila determinista por el criterio de pila vacía.
+    
+    \textbf{Falso}. \textit{Para que un lenguaje aceptado por un APD por estados finales (un LICD estándar) pueda ser aceptado por un APD por pila vacía, el lenguaje debe cumplir necesariamente la \textbf{propiedad prefijo}. Si no la cumple, no existe un APD que lo reconozca por vaciado de pila.}
+    
+    \vspace{0.3cm}
+    
+    \item Para que un autómata con pila sea determinista es suficiente que desde cada configuración se pueda obtener, a lo más, otra configuración en un paso de cálculo.
+    
+    \textbf{Verdadero}. \textit{Esta es una definición dinámica equivalente de determinismo. Implica que para cualquier par estado-símbolo en la cima de la pila, no existe ambigüedad entre realizar una transición consumiendo una entrada o una transición nula ($\epsilon$), y que cada transición tiene un único destino definido.}
+    
+    \vspace{0.3cm}
+    
+    \item Si un lenguaje de tipo 2 verifica la propiedad prefijo y es aceptado por un autómata con pila determinista por el criterio de estados finales, entonces también es aceptado por un autómata con pila determinista por el criterio de pila vacía.
+    
+    \textbf{Verdadero}. \textit{Existe un teorema que establece que un lenguaje puede ser aceptado por un APD por pila vacía si y solo si es un lenguaje determinista (aceptado por APD por estados finales) y además posee la propiedad prefijo.}
+    
+    \vspace{0.3cm}
+    
+    \item Para todo autómata con pila existe otro autómata con pila que acepta el mismo lenguaje y tiene un solo estado.
+    
+    \textbf{Verdadero}. \textit{Es posible convertir cualquier autómata con pila en una gramática libre de contexto equivalente, y posteriormente construir un autómata con pila a partir de dicha gramática utilizando el método estándar que emplea un único estado (donde la lógica reside enteramente en la pila).}
+    
+    \vspace{0.3cm}
+    
+    
+    \item En un autómata con pila determinista no puede haber transiciones nulas.
+    
+    \textbf{Falso}. \textit{Un APD puede tener transiciones nulas ($\epsilon$-transiciones) siempre y cuando no generen no determinismo. Esto significa que si existe una transición $\delta(q, \epsilon, X)$, no puede existir ninguna transición $\delta(q, a, X)$ para ningún símbolo de entrada $a \in \Sigma$.}
+    
+    \vspace{0.3cm}
+    
+    \item Si $L$ es independiente del contexto determinista y $\$\notin L$ entonces $L.\{\$\}$ es aceptado por un autómata con pila determinista por el criterio de pila vacía.
+    
+    \textbf{Verdadero}. \textit{Añadir un símbolo de fin de cadena único (end-marker) garantiza que el lenguaje resultante cumpla la propiedad prefijo, permitiendo así que un autómata determinista vacíe su pila al detectar dicho símbolo.}
+    
+    \vspace{0.3cm}
+    
+    \item El conjunto de las palabras $\{u0011u^{-1}:u\in\{0,1\}^{*}\}$ es libre del contexto determinista.
+    
+    \textbf{Falso}. \textit{Este lenguaje representa palíndromos con un marcador central ''0011''. Sin embargo, dado que $u$ está formado por $\{0,1\}$, el marcador ''0011'' podría aparecer dentro de la propia $u$, introduciendo ambigüedad sobre dónde está el centro de la cadena. El autómata no puede determinar deterministamente cuándo empezar a verificar la segunda mitad $u^{-1}$.}
+    
+    \vspace{0.3cm}
+    
+    \item En la construcción de una gramática independiente del contexto a partir de un autómata con pila, la variable $[p, X, q]$ genera todas las palabras que llevan al autómata desde el estado $p$ al estado $q$ sustituyendo $X$ por el símbolo inicial de la pila.
+    
+    \textbf{Falso}. \textit{La variable $[p, X, q]$ genera las cadenas que permiten transitar del estado $p$ al estado $q$ con el efecto neto de \textbf{eliminar} (desapilar) el símbolo $X$ de la pila, no de sustituirlo por el símbolo inicial.}
+    
+    
+    \vspace{0.3cm}
+    
+    \item Todo autómata con pila determinista que acepta un lenguaje por pila vacía se puede transformar en otro autómata determinista que acepte el mismo lenguaje por el criterio de estados finales.
+    
+    \textbf{Verdadero}. \textit{La clase de lenguajes aceptados por APD por pila vacía es un subconjunto estricto de los aceptados por estados finales (aquellos con propiedad prefijo). Siempre podemos convertir el primero en el segundo añadiendo un estado final específico al que se transita cuando la pila detecta un fondo de pila nuevo.}
+    
+    \vspace{0.3cm}
+    
+    \item Para que un lenguaje independiente del contexto sea determinista ha de verificar la propiedad prefijo.
+    
+    \textbf{Falso}. \textit{La definición estándar de Lenguaje Independiente del Contexto Determinista es aquel aceptado por un APD por \textbf{estados finales}. Esta definición no requiere la propiedad prefijo. La propiedad prefijo solo es necesaria para la aceptación por pila vacía.}
+    
+    \vspace{0.3cm}
+    
+    \item El lenguaje compuesto por las instrucciones completas del lenguaje SQL cumplen la propiedad prefijo.
+    
+    \textbf{Falso}. \textit{La propiedad prefijo implica que ningún prefijo propio de una palabra del lenguaje pertenece al lenguaje. En SQL, una instrucción válida (ej. `SELECT * FROM T`) puede ser prefijo de otra instrucción válida más compleja (ej. `SELECT * FROM T WHERE id=1`), violando así esta propiedad (asumiendo que no se considera el delimitador de fin de instrucción `;' como parte estricta de la sintaxis interna que se evalúa o si se permiten instrucciones anidadas).}
+    
+    \vspace{0.3cm}
+    
+    \item En el algoritmo para pasar un autómata con pila a gramática que hemos visto, si el autómata tiene 3 estados, entonces la transición $(p,XYZU)\in\delta(q,\epsilon,H)$ da lugar a $4^{3}$ producciones.
+    
+    \textbf{Falso}. \textit{El número de producciones generadas es $|Q|^m$, donde $|Q|$ es el número de estados y $m$ es el número de símbolos apilados. En este caso, $|Q|=3$ y se apilan 4 símbolos (X, Y, Z, U). Por tanto, se generan $3^4 = 81$ producciones, no $4^3 = 64$.}
+    
+    \vspace{0.3cm}
+    
+    \item El lenguaje $\{0^{i}1^{k}2^{i}:i,k\ge0\}$ es independiente del contexto determinista.
+    
+    \textbf{Verdadero}. \textit{Un APD puede reconocer este lenguaje: apila símbolos para los $0$, cambia de estado al ver $1$ (consumiéndolos sin modificar la pila o ignorándolos mediante cambios de estado), y finalmente desapila los símbolos almacenados al leer los $2$. El determinismo se mantiene porque los símbolos de entrada son distintos y ordenados.}
+    
+    \vspace{0.3cm}
+    
+    \item Si tenemos un lenguaje L aceptado por un Autómata con Pila por el criterio de estados finales, podemos encontrar otro AP que reconozca L por el criterio de pila vacía.
+    
+    \textbf{Verdadero}. \textit{Para autómatas con pila no deterministas (el caso general), los criterios de aceptación por pila vacía y por estados finales son equivalentes. Existe un algoritmo constructivo para transformar uno en otro.}
+    
+    \vspace{0.3cm}
+    
+    \item La propiedad prefijo no tiene ninguna relación con el hecho de que un lenguaje sea aceptado por un autómata con pila determinista por estados finales.
+    
+    \textbf{Verdadero}. \textit{Un lenguaje puede ser LIC determinista (aceptado por estados finales) independientemente de si cumple o no la propiedad prefijo. La propiedad prefijo es relevante solo para la aceptación determinista por pila vacía.}
+    
+    \vspace{0.3cm}
+    
+    \item Para toda gramática libre de contexto G siempre se puede encontrar un autómata con pila que acepte el lenguaje generado por G.
+    
+    \textbf{Verdadero}. \textit{Es un resultado fundamental de la teoría de autómatas: la clase de lenguajes generados por Gramáticas Libres de Contexto es exactamente la misma que la clase de lenguajes aceptados por Autómatas con Pila.}
+    
+    \vspace{0.3cm}
+    
+    \item Si un lenguaje independiente del contexto cumple la propiedad prefijo, entonces puede ser aceptado por un autómata con pila determinista por el criterio de pila vacía.
+    
+    \textbf{Falso}. \textit{El hecho de cumplir la propiedad prefijo no convierte a un lenguaje en determinista. Existen lenguajes inherentemente ambiguos (no deterministas) que tienen la propiedad prefijo. La afirmación correcta es: ''Si un lenguaje es \textbf{determinista} y cumple la propiedad prefijo, entonces es aceptado por un APD por pila vacía''.}
+    
+    \vspace{0.3cm}
+    
+    \item La descripción instantánea de un autómata con pila nos permite saber el estado activo, lo que queda por leer de la cadena de entrada, lo que se ha consumido de la cadena de entrada y lo que nos queda en la pila.
+    
+    \textbf{Falso}. \textit{La descripción instantánea se define formalmente como la tripla $(q, w, \alpha)$, donde $q$ es el estado actual, $w$ es la cadena de entrada \textbf{restante} y $\alpha$ es el contenido de la pila. No contiene explícitamente la información de la parte de la cadena que ya ha sido consumida.}
+    
+    \vspace{0.3cm}
+    
+    \item Un autómata finito determinista se puede convertir en un autómata con pila que acepta el mismo lenguaje por el criterio de pila vacía.
+    
+    \textbf{Verdadero}. \textit{Los lenguajes regulares (reconocidos por AFD) son un subconjunto de los lenguajes libres de contexto. Un autómata con pila puede simular un AFD ignorando la pila y, mediante no determinismo, vaciar la pila al final de la cadena para aceptar (o deterministamente si el lenguaje regular tiene propiedad prefijo).}
+    
+    \vspace{0.3cm}
+    
+    \item El conjunto de cadenas generado por una gramática libre de contexto en forma normal de Greibach puede ser reconocido por un autómata finito no determinista con transiciones nulas.
+    
+    \textbf{Falso}. \textit{La Forma Normal de Greibach genera Lenguajes Independientes del Contexto, los cuales son una superclase estricta de los lenguajes regulares. Un autómata finito (incluso no determinista) solo puede reconocer lenguajes regulares, por lo que no puede reconocer todos los lenguajes generados por gramáticas en FNG.}
+    
+    \vspace{0.3cm}
+    
+    
+    \item Puede existir un lenguaje con pila determinista que no sea aceptado por un autómata con pila determinista por el criterio de estados finales.
+    
+    \textbf{Falso}. \textit{Por definición, la clase de los Lenguajes Independientes del Contexto Deterministas está formada por aquellos lenguajes que son aceptados por algún Autómata con Pila Determinista bajo el criterio de estados finales.}
+    
+    \vspace{0.3cm}
+    
+    \item Existe un algoritmo para transformar una gramática regular G en un autómata con pila que acepte las cadenas del lenguaje generado por G por el criterio de pila vacía.
+    
+    \textbf{Verdadero}. \textit{Dado que una gramática regular genera un lenguaje regular, y los lenguajes regulares son un subconjunto de los libres de contexto, existe un autómata con pila que lo acepta. Específicamente, se puede convertir a un AP que acepta por pila vacía.}
+    
+    \vspace{0.3cm}
+    
+    
+    \item Para que un lenguaje sea aceptado por una autómata con pila determinista por el criterio de pila vacía tiene que verificar la propiedad prefijo.
+    
+    \textbf{Verdadero}. \textit{Esta es una condición necesaria y suficiente (junto con ser determinista) establecida en la teoría de APDs. Si un lenguaje tiene una palabra que es prefijo de otra, un APD vaciaría la pila con el prefijo y no podría continuar procesando la palabra más larga, ya que se habría bloqueado.}
+    
+    \vspace{0.3cm}
+    
+    
+    \item Si tenemos un autómata con pila en el que $(p,\epsilon)\in\delta(q,a,C)$, entonces para construir una gramática independiente del contexto que genere el mismo lenguaje que acepta el autómata, debemos de añadir la producción $[p,C,q]\rightarrow a$ (según el procedimiento visto en clase).
+    
+    \textbf{Falso}. \textit{En el algoritmo estándar de conversión, si la transición va de $q$ a $p$ leyendo $a$ y desapilando $C$ (transición a $\epsilon$ en pila), la producción generada debe ser $[q, C, p] \to a$. El enunciado invierte los estados en la variable de la gramática ($[p, C, q]$ en lugar de $[q, C, p]$).}
+    
+    \vspace{0.3cm}
+    
+    
+    \item El lenguaje $L=\{u\in\{0,1\}^{*}:u=u^{-1}\}$ es independiente del contexto, pero no determinista.
+    
+    \textbf{Verdadero}. \textit{El lenguaje corresponde a los palíndromos sobre el alfabeto $\{0,1\}$. Es un ejemplo clásico de lenguaje libre de contexto que es inherentemente no determinista, ya que el autómata no puede saber deterministamente cuándo ha alcanzado la mitad de la cadena para comenzar a verificar la coincidencia con la pila.}
+\end{enumerate}
+
+\section{Tema 6}
+\begin{enumerate}
+    \setlength{\itemsep}{0.3cm}
+    \item La intersección de lenguajes libres de contexto es siempre libre de contexto.
+    
+    \textbf{Falso}. \textit{Los lenguajes libres de contexto (LLC) no son cerrados bajo la intersección. Un contraejemplo clásico es la intersección de $L_1 = \{a^n b^n c^m \mid n,m \ge 0\}$ y $L_2 = \{a^m b^n c^n \mid n,m \ge 0\}$. Ambos son LLC, pero su intersección es $L = \{a^n b^n c^n \mid n \ge 0\}$, el cual es un lenguaje dependiente del contexto.}
+
+    \item Existe un algoritmo para determinar si una palabra es generada por una gramática independiente del contexto.
+    
+    \textbf{Verdadero}. \textit{Este es el problema de la pertenencia (membership problem). Existen algoritmos eficientes para decidir esto, siendo el más destacado el algoritmo CYK (Cocke-Younger-Kasami), que opera en tiempo $O(n^3)$, o el algoritmo de Earley.}
+
+    \item El lenguaje $\{a^{i}b^{j}c^{i}d^{i}:i,j\ge0\}$ es independiente del contexto.
+    
+    \textbf{Falso}. \textit{Este lenguaje presenta una dependencia triple entre los símbolos a, c y d ($i$ aparece tres veces). Un autómata con pila no puede verificar tres conteos simultáneos que dependen de la misma variable si están separados (la pila solo permite acceso LIFO). Al aplicar el lema de bombeo, si intentamos bombear la sección de $a^i$, necesariamente desajustamos la cantidad de $c^i$ o $d^i$ de manera que no se puede compensar con solo dos segmentos bombeables $v$ y $x$.}
+
+    \item Existe un algoritmo para determinar si una gramática independiente del contexto es ambigua.
+    
+    \textbf{Falso}. \textit{El problema de la ambigüedad para Gramáticas Independientes del Contexto (GIC) es indecidible. No existe (ni puede existir) un algoritmo general que determine si una GIC arbitraria es ambigua.}
+
+    \item Existe un algoritmo para comprobar cuando dos gramáticas libres de contexto generan el mismo lenguaje.
+    
+    \textbf{Falso}. \textit{El problema de la equivalencia entre dos GIC ($L(G_1) = L(G_2)$) es un problema indecidible. No se puede determinar algorítmicamente si dos gramáticas distintas generan el mismo conjunto de cadenas.}
+
+    \item El lenguaje $L=\{0^{i}1^{j}2^{k}:1\le i\le j\le k\}$ es independiente del contexto.
+    
+    \textbf{Falso}. \textit{Las restricciones $i \le j$ y $j \le k$ encadenadas requieren comparar tres cantidades secuenciales. Un autómata con pila tendría que apilar las 0s para compararlas con las 1s, pero al desapilar para verificar $i \le j$, pierde la información de la cantidad de 1s necesaria para verificar $j \le k$.}
+
+    \item Si el lenguaje L es independiente del contexto, entonces $L^{-1}$ es independiente del contexto.
+    
+    \textbf{Verdadero}. \textit{Los lenguajes independientes del contexto son cerrados bajo la operación de reverso (o imagen especular). Si existe una GIC que genera $L$, se puede construir una GIC para $L^R$ simplemente invirtiendo el lado derecho de todas las producciones ($A \to \alpha$ pasa a ser $A \to \alpha^R$).}
+
+    \item Existe un algoritmo que permite determinar si una gramática independiente del contexto genera un lenguaje finito o infinito.
+    
+    \textbf{Verdadero}. \textit{Es decidible. Se puede verificar construyendo el grafo de dependencias de las variables (eliminando previamente producciones inútiles). Si el grafo contiene algún ciclo desde el cual se puedan generar terminales, el lenguaje es infinito; de lo contrario, es finito.}
+
+
+    \item En el algoritmo de Earley, la presencia del registro (2,5, A, CD, adS) implica que a partir de CD se puede generar la subcadena de la palabra de entrada que va del carácter 3 al 5.
+    
+    \textbf{Verdadero}. \textit{Asumiendo la notación estándar de elementos de Earley o la implícita en la asignatura donde los índices marcan los límites entre caracteres: un ítem con intervalo $(2,5)$ indica que la parte de la producción ya analizada (o la que se está intentando casar, en este caso derivada de CD) abarca desde la posición inmediatamente posterior al índice 2 (carácter 3) hasta el índice 5 (carácter 5).}
+
+    \item Existe un algoritmo para comprobar si el lenguaje generado por una gramática libre de contexto es regular.
+    
+    \textbf{Falso}. \textit{Determinar si un Lenguaje Independiente del Contexto es en realidad un Lenguaje Regular es un problema indecidible. No existe un algoritmo general para verificar si $L(G)$ puede ser generado por un autómata finito.}
+
+    \item El algoritmo de Earley se puede aplicar a cualquier gramática independiente del contexto (sin producciones nulas ni unitarias).
+    
+    \textbf{Verdadero}. \textit{El algoritmo de Earley es un analizador universal capaz de trabajar con cualquier GIC. Aunque la eliminación de producciones nulas y unitarias puede simplificar o mejorar la eficiencia de ciertas implementaciones, el algoritmo en su forma general soporta cualquier GIC, incluyendo gramáticas ambiguas.}
+
+    \item El conjunto de palabras $\{a^{n}b^{n}c^{i}:i\le n\}$ es independiente del contexto.
+    
+    \textbf{Falso}. \textit{Para verificar que el número de $a$'s es igual al de $b$'s ($n=n$), necesitamos usar la pila. Una vez procesadas las $b$'s, la pila estaría vacía. No tendríamos forma de recordar el valor de $n$ para verificar posteriormente que $i \le n$ con un autómata con pila estándar (sin contadores adicionales).}
+
+    \item Si $L_{1}$ y $L_{2}$ son independientes del contexto, entonces $L_{1}-L_{2}$ es siempre independiente del contexto.
+    
+    \textbf{Falso}. \textit{La resta de conjuntos se define como $L_1 \cap L_2^c$. Los LLC no son cerrados bajo complementación ni bajo intersección. Por tanto, la diferencia no asegura la preservación de la propiedad de independencia del contexto.}
+
+    \item Hay lenguajes que no son independientes del contexto y si verifican la condición que aparece en el lema de bombeo para lenguajes independientes del contexto.
+    
+    \textbf{Verdadero}. \textit{El lema de bombeo es una condición necesaria pero no suficiente. Existen lenguajes complejos (no libres de contexto) que, casualmente, cumplen la estructura de bombeo $uv^iwx^iy$ sin ser generables por una GIC.}
+
+    \item El conjunto de palabras $\{u011u: u\in\{0,1\}^{*}\}$ es independiente del contexto.
+    
+    \textbf{Falso}. \textit{Este lenguaje tiene la estructura de copia $ww$ (con un separador fijo). Un autómata con pila no puede reconocer cadenas de la forma $uu$ (o $u...u$) de manera general, ya que lo primero que entra en la pila es lo último en salir, lo que facilita reconocer reversos $u u^R$, pero no copias directas.}
+
+    \item El conjunto de palabras que contienen la subcadena 011 es independiente del contexto.
+    
+    \textbf{Verdadero}. \textit{Este es un lenguaje regular (se puede construir una expresión regular o un autómata finito para ''cadenas que contienen 011''). Dado que el conjunto de los lenguajes regulares es un subconjunto propio de los lenguajes independientes del contexto, la afirmación es cierta.}
+
+    \item En el algoritmo de Cocke-Younger-Kasami calculamos los conjuntos $V_{ij}$ que son las variables que generan la subcadena de la palabra de entrada que va desde el símbolo en la posición i al símbolo en la posición j.
+    
+    \textbf{Verdadero}. \textit{Esta es la definición fundamental de la tabla dinámica en CYK. La celda $V_{ij}$ (o $X_{ij}$, dependiendo de la notación: inicio-fin o inicio-longitud) almacena el conjunto de variables no terminales $A$ tales que $A \Rightarrow^* w_{i \dots j}$.}
+
+    \item Un lenguaje puede cumplir la negación de la condición que aparece en el lema de bombeo para lenguajes independientes del contexto y ser regular.
+    
+    \textbf{Falso}. \textit{Si un lenguaje es regular, es automáticamente independiente del contexto. Por lo tanto, debe cumplir el lema de bombeo para lenguajes independientes del contexto. No puede cumplir su negación.}
+
+
+    \item Si $L_{1}$ y $L_{2}$ son lenguajes independientes de contexto, entonces $(L_{1}L_{2}\cup L_1)^{*}$ es independiente de contexto.
+    
+    \textbf{Verdadero}. \textit{Los lenguajes independientes del contexto son cerrados bajo las operaciones de unión ($\cup$), concatenación ($L_1 L_2$) y clausura de Kleene ($*$). Como la expresión está formada únicamente por estas operaciones sobre LLCs, el resultado es un LLC.}
+
+    \item Existe un algoritmo para determinar si una palabra u tiene más de un árbol de derivación en una gramática independiente del contexto G.
+    
+    \textbf{Verdadero}. \textit{Aunque la ambigüedad de la gramática en general es indecidible, verificar si una palabra \textbf{específica} $u$ tiene más de un árbol es decidible. Se puede realizar ejecutando un parser (como Earley o CYK) y contando las trazas válidas de derivación para esa cadena.}
+
+    \item La intersección de dos lenguajes independientes de contexto con un número finito de palabras produce siempre un lenguaje regular.
+    
+    \textbf{Verdadero}. \textit{Un lenguaje con un número finito de palabras es, por definición, un lenguaje regular. La intersección de dos lenguajes finitos da como resultado otro lenguaje finito, el cual sigue siendo regular (y por ende, libre de contexto).}
+
+    \item El complementario de un lenguaje con un número finitos de palabras es siempre libre de contexto.
+    
+    \textbf{Verdadero}. \textit{Un lenguaje finito es regular. El complementario de un lenguaje regular es siempre regular. Dado que todo lenguaje regular es libre de contexto, su complementario es libre de contexto.}
+
+    \item Todo lenguaje aceptado por un autómata con pila por el criterio de estados finales cumple la condición que aparece en el lema de bombeo para lenguajes libres de contexto.
+    
+    \textbf{Verdadero}. \textit{Un lenguaje aceptado por un autómata con pila (ya sea por vaciado de pila o por estado final) es un Lenguaje Independiente del Contexto. Por teorema, todo LLC debe satisfacer las condiciones necesarias del Lema de Bombeo para LLC.}
+
+
+    \item Existe un algoritmo para determinar si un autómata con pila es determinista.
+    
+    \textbf{Verdadero}. \textit{Determinar si un autómata dado es determinista es una comprobación sintáctica sobre su función de transición $\delta$: verificar que para cada par (estado, símbolo de entrada/$\epsilon$, símbolo de pila) exista a lo sumo una transición posible. (Nota: Esto es distinto a decidir si un lenguaje es determinista, lo cual es más complejo).}
+
+    \item La demostración del lema de bombeo para lenguajes independientes del contexto se basa en que si las palabras superan una longitud determinada, entonces en el árbol de derivación debe de aparecer una variable como descendiente de ella misma.
+    
+    \textbf{Verdadero}. \textit{La prueba utiliza el principio del palomar aplicado a la altura del árbol de derivación. Si la cadena es suficientemente larga, la altura del árbol excede el número de variables no terminales $|V|$, forzando la repetición de al menos una variable en un camino desde la raíz a una hoja, lo que permite el ''bombeo''.}
+
+    \item La unión de dos lenguajes independientes contexto puede ser siempre aceptada por un autómata con pila.
+    
+    \textbf{Verdadero}. \textit{Los LLC son cerrados bajo la unión. La unión de dos LLC es un LLC, y por definición, todo LLC es aceptado por algún autómata con pila.}
+
+    \item El complementario de un lenguaje libre de contexto con una cantidad finita de palabras no tiene porque producir otro lenguaje libre de contexto.
+    
+    \textbf{Falso}. \textit{Un lenguaje finito es regular. Su complemento es regular. Todo regular es libre de contexto. Por tanto, el complemento de un lenguaje finito \textbf{siempre} es libre de contexto.}
+
+    \item El lema de bombeo para lenguajes libres de contexto es útil para demostrar que un lenguaje determinado no es libre de contexto.
+    
+    \textbf{Verdadero}. \textit{Es su uso principal. Se utiliza mediante demostración por contradicción (reducción al absurdo) para probar que un lenguaje no es LLC al mostrar que no cumple la condición necesaria de bombeo.}
+
+    \item La intersección de dos lenguajes independientes del contexto da lugar a un lenguaje aceptado por un autómata con pila determinista.
+    
+    \textbf{Falso}. \textit{La intersección de dos LLC ni siquiera garantiza ser un LLC, mucho menos un Lenguaje Independiente del Contexto Determinista.}
+
+
+    \item En el algoritmo de Cocke-Younger-Kasami si $A\in V_{1,2}$ y $B\in V_{3,2}$ y $C\rightarrow AB,$ podemos deducir que $C\in V_{1,4}$.
+    
+    \textbf{Verdadero}. \textit{Interpretando la notación $V_{i,l}$ donde $i$ es el índice de inicio y $l$ es la longitud: $A$ cubre desde 1 con longitud 2 (posiciones 1,2). $B$ cubre desde 3 con longitud 2 (posiciones 3,4). La concatenación $AB$ cubre desde 1 con longitud $2+2=4$. Por tanto, $C$ que genera $AB$ debe estar en la celda $V_{1,4}$.}
+
+
+    \item No existe un algoritmo que nos diga si son iguales los lenguajes generados por dos gramáticas independientes del contexto $G_{1}$ y $G_{2}$.
+    
+    \textbf{Verdadero}. \textit{El problema de la equivalencia de gramáticas libres de contexto es indecidible.}
+
+    \item La intersección de dos lenguajes infinitos da lugar a un lenguaje independiente del contexto.
+    
+    \textbf{Falso}. \textit{El hecho de que sean infinitos no cambia la propiedad de clausura. La intersección de LLCs (finitos o infinitos) no es cerrada. Ejemplo: intersección de $\{a^n b^n c^*\}$ y $\{a^* b^n c^n\}$ es $\{a^n b^n c^n\}$, que no es LLC.}
+
+
+    \item Si $L_{1}$ y $L_{2}$ son independientes del contexto, no podemos asegurar que $L_{1}\cap L_{2}$ también lo sea.
+    
+    \textbf{Verdadero}. \textit{Correcto. Al no ser una operación cerrada, la intersección podría resultar en un LLC o en un lenguaje que no lo es. No se puede ''asegurar'' que el resultado sea LLC en todos los casos.}
+
+    \item Si un lenguaje satisface la condición necesaria del lema de bombeo para lenguajes regulares, entonces también tiene que satisfacer la condición necesaria del lema de bombeo para lenguajes independientes del contexto.
+    
+    \textbf{Verdadero}. \textit{El bombeo regular es un caso particular del bombeo libre de contexto (donde una de las dos partes bombeables es vacía, o visto de otro modo, la estructura lineal es un caso simple de estructura de árbol). Si $w=xyz$ se puede bombear como $xy^iz$, esto se ajusta a la forma $uv^iwx^iy$ (por ejemplo, haciendo $u=x, v=y, w=z$ y $x,y$ vacíos en la notación de LLC, respetando las longitudes). Formalmente, la clase de lenguajes ''bombeables linealmente'' está contenida en la clase de lenguajes ''bombeables estructuralmente''.}
+
+\end{enumerate}

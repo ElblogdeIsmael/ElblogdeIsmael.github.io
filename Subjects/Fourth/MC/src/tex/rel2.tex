@@ -1,4 +1,4 @@
-\section{Relación de Problemas 2: Autómatas Finitos}
+\section{Autómatas Finitos}
 
 \begin{ejercicio}
 Considera el siguiente Autómata Finito Determinista (AFD) $M = (Q,A, \delta, q_0, F )$, donde:
@@ -20,9 +20,11 @@ Describir informalmente el lenguaje aceptado.
 El lenguaje aceptado por el Autómata Finito Determinista (AFD) $M$ es el conjunto de todas las palabras sobre el alfabeto $A = \{0, 1\}$ que contienen la subcadena $\mathbf{00}$.
 Este lenguaje se describe formalmente como $L = \{u_1 00 u_2 \mid u_1, u_2 \in \{0, 1\}^{*}\}$.
 
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
     \item \text{Ruta de Aceptación:}
-    \begin{enumerate}
+    \begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
         \item El estado $q_0$ es el estado inicial, y representa no haber encontrado aún la subcadena, o que el último símbolo leído no forma parte de una ''0'' potencial.
         \item Al leer '0' desde $q_0$, se alcanza $q_1$, lo que significa que se ha leído el primer '0' de la secuencia buscada ($\delta(q_0, 0) = q_1$).
         \item Al leer otro '0' desde $q_1$, se alcanza el estado final $q_2$, confirmando la aparición de la subcadena ''00'' ($\delta(q_1, 0) = q_2$).
@@ -99,7 +101,8 @@ El autómata utiliza $q_0$ para contar 0 'a's, $q_1$ para contar un número impa
 
 \begin{ejercicio}
 Dibujar AFDs que acepten los siguientes lenguajes con alfabeto $\{0, 1\}$:
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
     \item El lenguaje vacío, $\emptyset$.
     \item El lenguaje formado por la palabra vacía, o sea, $\{\varepsilon\}$.
     \item El lenguaje formado por la palabra $01$, o sea, $\{01\}$.
@@ -112,7 +115,8 @@ Dibujar AFDs que acepten los siguientes lenguajes con alfabeto $\{0, 1\}$:
 \begin{solucion}
 A continuación, se dibujan los Autómatas Finitos Deterministas (AFD) que aceptan cada uno de los lenguajes dados sobre el alfabeto $\Sigma = \{0, 1\}$.
 
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \item \text{El lenguaje vacío, $\emptyset$.}
 
@@ -237,7 +241,8 @@ Obtener a partir de la gramática regular $G = (\{S,B\}, \{1, 0\}, P, S)$, con $
 
 \begin{solucion}
 Para la resolución de este ejercicio, seguiremos los pasos necesarios para construir un Autómata Finito No Determinista (AFND) a partir de la gramática regular dada. \\
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
     \item \text{Definición del Lenguaje Generado ($L(G)$):}
     \begin{itemize}
         \item La variable $B$ tiene las producciones $B \to 1B$ y $B \to 0B$, que permiten generar cualquier secuencia finita de $1$'s y $0$'s, y $B \to \varepsilon$, que permite terminar la derivación. Por lo tanto, el lenguaje generado por $B$ es $L(B) = \{1, 0\}^* = \Sigma^*$.
@@ -246,7 +251,8 @@ Para la resolución de este ejercicio, seguiremos los pasos necesarios para cons
     \end{itemize}
 
     \item \text{Especificación del AFND:}
-    \begin{enumerate}
+    \begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
         \item \text{Alfabeto ($\Sigma$):} $\Sigma = \{1, 0\}$, tomado de la gramática $G$.
         \item \text{Conjunto de Estados ($Q$):}
         \begin{itemize}
@@ -324,7 +330,8 @@ Dada la gramática regular $G = (\{S\}, \{1, 0\}, P, S)$, con $P = \{S \to S10, 
 \begin{solucion}
 Para la resolución de este ejercicio se sguirán lo siguientes pasos:
 
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
     \item \text{Identificación y Análisis de la Gramática}
 
     La gramática $G = (\{S\}, \{1, 0\}, P, S)$ es una \text{Gramática Lineal por la Izquierda}, ya que todas las producciones son de la forma $A \to Bw$ o $A \to w$, donde $w \in T^*$ y $B \in V$ (en este caso, $S \to S10$ y $S \to 0$).
@@ -339,7 +346,8 @@ Para la resolución de este ejercicio se sguirán lo siguientes pasos:
     \item \text{Método de Conversión: Inversión de Lenguajes}
 
     Dado que la gramática es lineal por la izquierda, el método algorítmico más riguroso implica tres pasos:
-    \begin{enumerate}
+    \begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
         \item Invertir las producciones para obtener una gramática lineal por la derecha ($G'$).
         \item Construir un AFND $M'$ para $L(G')$.
         \item Invertir $M'$ para obtener un AFND que reconozca $L(G)$. Finalmente, se determiniza y se completa para obtener el AFD.
@@ -347,7 +355,8 @@ Para la resolución de este ejercicio se sguirán lo siguientes pasos:
 
     Por ello nos queda:
 
-    \begin{enumerate}
+    \begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
         \item \text{Inversión de la Gramática ($G'$)}
 
         Invertimos las cadenas terminales ($\alpha$) en el lado derecho de las producciones $A \to \alpha$ para obtener una gramática lineal por la derecha $G'$:
@@ -453,15 +462,77 @@ Para la resolución de este ejercicio se sguirán lo siguientes pasos:
 Construir un Autómata Finito No Determinista (AFND) que acepte las cadenas $u \in \{0, 1\}^*$ que contengan la subcadena $010$. Construir un Autómata Finito No Determinista que acepte las cadenas $u \in \{0, 1\}^*$ que contengan la subcadena $110$. Obtener un AFD que acepte las cadenas $u \in \{0, 1\}^*$ que contengan simultáneamente las subcadenas $010$ y $110$.
 \end{ejercicio}
 
+
+
 \begin{solucion}
-El ejercicio requiere tres partes:
-\begin{enumerate}
+    Partiendo de los AFNDs para las subcadenas $010$ y $110$ vamos a unirlos rellenando las transiciones que faltan para que sean AFDs. La resolución del grafo se encuentra en la figura \ref{fig:ej6c2}. Se debe de rellenar las transiciones faltantes para que sea un AFD.
+
+    \begin{figure}[H]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tikzpicture}
+
+        %nodos
+        \node[state, initial] (q0) at (-2, 0) {$q_0$};
+        \node[state] (q1) at (1, 0.7) {$q_1$};
+        \node[state] (q1') at (1, -2.1) {$q_1'$};
+        \node[state] (q2) at (4, 0.7) {$q_2$};
+        \node[state] (q2') at (4, -2.1) {$q_2'$};
+        \node[state] (q3) at (7, 0.7) {$q_3$};
+        \node[state] (q3') at (7, -2.1) {$q_3'$};
+        \node[state] (q4) at (10, 0.7) {$q_4$};
+        \node[state] (q4') at (10, -2.1) {$q_4'$};
+        \node[state] (q5) at (13, 0.7) {$q_5$};
+        % \node[state] (q5') at (13, -2.1) {$q_5'$};
+        \node[state, accepting] (qf) at (16, -0.7) {$q_f$};
+
+
+        %conexiones
+        \draw[->] (q0) -- (q1) node[midway, above] {0};
+        \draw[->] (q1) edge[loop above] node {0} (q1);
+        \draw[->] (q0) -- (q1') node[midway, right] {1};
+        \draw[->] (q1') -- (q1) node[midway, right] {0};
+        \draw[->] (q1) -- (q2) node[midway, above] {1};
+        \draw[->] (q1') -- (q2') node[midway, above] {1};
+        \draw[->] (q2) -- (q3) node[midway, above] {0};
+        \draw[->] (q2') -- (q3') node[midway, below] {0};
+        \draw[->] (q2) -- (q2') node[midway, right] {1};
+        \draw[->] (q3) -- (q4) node[midway, above] {1};
+        \draw[->] (q4) -- (q5) node[midway, above] {1};
+        \draw[->] (q5) -- (qf) node[midway, above] {0};
+        \draw[->] (q3') -- (q4') node[midway, above] {1};
+        \draw[->] (q4') -- (qf) node[midway, above] {0};
+        \draw[->] (q3) edge[loop above] node {0} (q3);
+        \draw[->] (q4) to[bend left] node[midway, below] {0} (q3);
+        \draw[->] (q5) edge[loop above] node {1} (q5);
+        \draw[->] (qf) edge[loop right] node {0, 1} (qf);
+        \draw[->] (q2') edge[loop below] node {1} (q2');
+        \draw[->] (q3') edge[loop below] node {0} (q3');
+        \draw[->] (q4') to[bend right] node[midway, above] {0} (q2');
+
+
+
+        
+        \end{tikzpicture}
+    }
+    \caption{Diagrama del AFD para el lenguaje que contiene simultáneamente las subcadenas $010$ y $110$.}
+    \label{fig:ej6c2}
+\end{figure}
+
+
+\end{solucion}
+
+\begin{solucion}
+Otra resolución, pero más compleja y extensa, siendo a la vez más metódica es aplicar el producto cartesiano de autómatas.
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
     \item Construir $AFND_1$ para $L_1 = \{u \in \{0, 1\}^* \mid u \text{ contiene } 010\}$.
     \item Construir $AFND_2$ para $L_2 = \{u \in \{0, 1\}^* \mid u \text{ contiene } 110\}$.
     \item Obtener $AFD$ para $L = L_1 \cap L_2$.
 \end{enumerate}
 
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
 
 \item Construcción del AFND para $L_1$ (subcadena $010$)
 
@@ -542,7 +613,8 @@ La función de transición $\delta_2$ se centra en el camino $r_0 \xrightarrow{1
 
 El lenguaje $L = L_1 \cap L_2$ (cadenas que contienen simultáneamente $010$ y $110$) es regular, ya que la familia de lenguajes regulares es cerrada bajo la operación de intersección. Para construir un AFD que acepte $L$, utilizamos el método del autómata producto sobre las versiones deterministas (o la lógica determinista) de $AFND_1$ y $AFND_2$.
 
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
 
 \item Determinización de $AFND_1$ y $AFND_2$
 
@@ -576,41 +648,36 @@ El autómata producto es $M = (Q, \Sigma, \delta, s_{00}, F)$, donde:
 
 Realizamos la exploración de estados accesibles y transiciones. Notaremos el estado $(q_i, r_j)$ como $S_{ij}$.
 
-\begin{center}
-\text{Tabla de Transiciones del AFD Producto $M$}
-\end{center}
 
-\begin{tabular}{|c|c|c|c|}
+\begin{center}
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|l|c|c|}
 \hline
-\text{Estado $S_{ij} = (q_i, r_j)$} & \text{Estatus} & \text{Transición con 0} & \text{Transición con 1} \\
+\textbf{Estado $S_{ij} = (q_i, r_j)$} & \textbf{Descripción} & \textbf{0} & \textbf{1} \\
 \hline
 $S_{00}=(q_0, r_0)$ & Inicial & $S_{10}$ & $S_{01}$ \\
-\hline
 $S_{10}=(q_1, r_0)$ & Visto $0$ & $S_{10}$ & $S_{21}$ \\
-\hline
 $S_{01}=(q_0, r_1)$ & Visto $1$ & $S_{10}$ & $S_{02}$ \\
-\hline
-$S_{21}=(q_2, r_1)$ & Visto $01/1$ & $S_{30}$ & $S_{02}$ \\
-\hline
+$S_{21}=(q_2, r_1)$ & Visto $01$/1 & $S_{30}$ & $S_{02}$ \\
 $S_{02}=(q_0, r_2)$ & Visto $11$ & $S_{10}$ & $S_{02}$ \\
 \hline
-\multicolumn{4}{|c|}{\textit{Exploración profunda de estados}} \\
+\multicolumn{4}{|c|}{\textit{Estados avanzados}} \\
 \hline
-$S_{30}=(q_3, r_0)$ & L1 Completo & $S_{30}$ & $S_{31}$ \\
+$S_{30}=(q_3, r_0)$ & L1 completo & $S_{30}$ & $S_{31}$ \\
+$S_{31}=(q_3, r_1)$ & L1 completo & $S_{30}$ & $S_{32}$ \\
+$S_{32}=(q_3, r_2)$ & L1 completo, visto $11$ & $\mathbf{S_{33}}$ & $S_{32}$ \\
+$S_{22}=(q_2, r_2)$ & Visto $01$/11 & $\mathbf{S_{33}}$ & $S_{02}$ \\
+$S_{11}=(q_1, r_1)$ & Visto $0$/1 & $S_{10}$ & $S_{22}$ \\
+$S_{12}=(q_1, r_2)$ & Visto $0$/11 & $S_{10}$ & $S_{22}$ \\
 \hline
-$S_{31}=(q_3, r_1)$ & L1 Completo & $S_{30}$ & $S_{32}$ \\
-\hline
-$S_{32}=(q_3, r_2)$ & L1 Completo \& Visto $11$ & $\mathbf{S_{33}}$ & $S_{32}$ \\
-\hline
-$S_{22}=(q_2, r_2)$ & Visto $01/11$ & $\mathbf{S_{33}}$ & $S_{02}$ \\
-\hline
-$S_{11}=(q_1, r_1)$ & Visto $0/1$ & $S_{10}$ & $S_{22}$ \\
-\hline
-$S_{12}=(q_1, r_2)$ & Visto $0/11$ & $S_{10}$ & $S_{22}$ \\
-\hline
-$\mathbf{S_{33}=(q_3, r_3)}$ & \text{L1 \& L2 Completos} & $\mathbf{S_{33}}$ & $\mathbf{S_{33}}$ \\
+$\mathbf{S_{33}=(q_3, r_3)}$ & \textbf{L1 y L2 completos} & $\mathbf{S_{33}}$ & $\mathbf{S_{33}}$ \\
 \hline
 \end{tabular}
+\caption{Tabla de transiciones del AFD producto para el lenguaje que contiene simultáneamente las subcadenas $010$ y $110$.}
+\end{table}
+\end{center}
 
 Observamos que los estados $S_{11}=(q_1, r_1)$ y $S_{12}=(q_1, r_2)$ se comportan de manera idéntica al transicionar (ambos van a $S_{10}$ con $0$ y a $S_{22}$ con $1$). Para obtener un AFD resultante más conciso, los fusionamos en un único estado $S_{1*}$, resultando en 11 estados distinguibles. 
 
@@ -723,68 +790,8 @@ El AFD obtenido es un modelo riguroso y completo para el lenguaje $L_1 \cap L_2$
 %     \label{fig:ej6c}
 % \end{figure}
 
+Acto seguido se debe de representar el AFD obtenido, en este caso se establece que la solución es la misma que la otra solución (Ver figura \ref{fig:ej6c2})\footnote{El autómata es diferente.}. 
 
-
-
-\end{solucion}
-
-\begin{solucion}
-    Otra solucion es la que se va a describir en esta parte.
-
-
-    Partiendo de los AFNDs para las subcadenas $010$ y $110$ vamos a unirlos rellenando las transiciones que faltan para que sean AFDs. La resolución del grafo se encuentra en la figura \ref{fig:ej6c2}.
-
-    \begin{figure}
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tikzpicture}[>={Stealth[round]}, node distance=3cm, auto, shorten >=1pt]
-
-        %nodos
-        \node[state, initial] (q0) at (-3, 0) {$q_0$};
-        \node[state] (q1) at (1, 1) {$q_1$};
-        \node[state] (q1') at (1, -3) {$q_1'$};
-        \node[state] (q2) at (5, 1) {$q_2$};
-        \node[state] (q2') at (5, -3) {$q_2'$};
-        \node[state] (q3) at (9, 1) {$q_3$};
-        \node[state] (q3') at (9, -3) {$q_3'$};
-        \node[state] (q4) at (13, 1) {$q_4$};
-        \node[state] (q4') at (13, -3) {$q_4'$};
-        \node[state] (q5) at (17, 1) {$q_5$};
-        % \node[state] (q5') at (17, -3) {$q_5'$};
-        \node[state, accepting] (qf) at (21, 0) {$q_f$};
-
-
-        %conexiones
-        \draw[->] (q0) -- (q1) node[midway, above] {0};
-        \draw[->] (q1) edge[loop above] node {0} (q1);
-        \draw[->] (q0) -- (q1') node[midway, right] {1};
-        \draw[->] (q1') -- (q1) node[midway, right] {0};
-        \draw[->] (q1) -- (q2) node[midway, above] {1};
-        \draw[->] (q1') -- (q2') node[midway, above] {1};
-        \draw[->] (q2) -- (q3) node[midway, above] {0};
-        \draw[->] (q2') -- (q3') node[midway, below] {0};
-        \draw[->] (q2) -- (q2') node[midway, right] {1};
-        \draw[->] (q3) -- (q4) node[midway, above] {1};
-        \draw[->] (q4) -- (q5) node[midway, above] {1};
-        \draw[->] (q5) -- (qf) node[midway, above] {0};
-        \draw[->] (q3') -- (q4') node[midway, above] {1};
-        \draw[->] (q4') -- (qf) node[midway, above] {0};
-        \draw[->] (q3) edge[loop above] node {0} (q3);
-        \draw[->] (q4) to[bend left] node[midway, below] {0} (q3);
-        \draw[->] (q5) edge[loop above] node {1} (q5);
-        \draw[->] (qf) edge[loop right] node {0, 1} (qf);
-        \draw[->] (q2') edge[loop below] node {1} (q2');
-        \draw[->] (q3') edge[loop below] node {0} (q3');
-        \draw[->] (q4') to[bend right] node[midway, above] {0} (q2');
-
-
-
-        
-        \end{tikzpicture}
-    }
-    \caption{Diagrama del AFD para el lenguaje que contiene simultáneamente las subcadenas $010$ y $110$.}
-    \label{fig:ej6c2}
-\end{figure}
 
 
 \end{solucion}
@@ -800,17 +807,220 @@ B &\to b
 \end{align*}
 \end{ejercicio}
 
+\begin{solucion}
+La solucion es el AFD de la figura \ref{fig:ej7}.
+
+\begin{figure}[H]
+    \centering
+    %\resizebox{\textwidth}{!}{
+        \begin{tikzpicture}
+
+        \node[state, initial] (q0) at (0, 0) {$q_0$};
+        \loopa{q0}{a}{};
+        \nodo[state]{q1}{2,0}{q_1};
+        \curva[left]{q0}{q1}{c}{above};
+        \nodo[state,accepting]{q2}{4,0}{q_2};
+        \curva[left]{q1}{q2}{b}{above};
+        \curva[left]{q2}{q1}{b}{above};
+        \nodo[error]{error}{2,-2}{E};
+        \flechaderecha[]{q0}{error}{b};
+        \flechaderecha[]{q1}{error}{a,c};
+        \flechaderecha[]{q2}{error}{a,c};
+        \loopb{error}{a,b,c}{};
+
+
+        \end{tikzpicture}
+    %}
+    \caption{Diagrama del AFD resultante del ejercicio 7.}
+    \label{fig:ej7}
+\end{figure}
+
+
+
+
+
+\end{solucion}
+
+
+
 \begin{ejercicio}
 Construir un AFD que acepte el lenguaje $L \subseteq \{a, b, c\} ^*$ de todas las palabras con un número impar de ocurrencias de la subcadena $abc$.
 \end{ejercicio}
+
+\begin{solucion}
+El autómata resultante es el de la figura \ref{fig:ej8}.
+
+\begin{itemize}
+    \item $q_0$: Estado inicial. No se ha encontrado la subcadena $abc$ (0 ocurrencias, par), o bien se ha encontrado un número par de veces.
+    \item $q_1$: Se ha encontrado una 'a', esperando 'b'.
+    \item $q_2$: Se ha encontrado 'ab', esperando 'c'.
+    \item $q_3$: Estado de aceptación. Se ha encontrado la subcadena 'abc' un número impar de veces.
+    \item $q_4$: Estado de aceptación. Se puede tener una de las otras repetidas.
+    \item $q_5$: Estado de aceptación. Se puede tener una de las otras repetidas, pero si recibe una 'c' vuelve a $q_0$.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    %\resizebox{\textwidth}{!}{
+        \begin{tikzpicture}
+
+        \node[state, initial] (q0) at (0, 0) {$q_0$};
+        \loopa{q0}{b,c};
+        \nodo[state]{q1}{2,0}{q_1};
+        \curva[left]{q0}{q1}{a}{above};
+        \loopa{q1}{a};
+        \curva[left]{q1}{q0}{c}{below};
+        \nodo[state]{q2}{4,0}{q_2};
+        \curva[left]{q1}{q2}{b}{above};
+        \nodo[state, accepting]{q3}{4,-2}{q_3};
+        \flechaderecha[]{q2}{q3}{c};
+        \loopr{q3}{b,c};
+        \nodo[state,accepting]{q4}{2,-2}{q_4};
+        \nodo[state,accepting]{q5}{0,-2}{q_5};
+        \curva[right]{q3}{q4}{a}{above};
+        \curva[right]{q4}{q5}{b}{above};
+        \flechaiquierda[]{q5}{q0}{c};
+        \loopb{q4}{a}{};
+        \curva[right]{q4}{q3}{c}{below};
+        \loopb{q5}{a,b}{};
+        \loopa{q2}{a,b}{};
+
+
+
+
+        
+
+        
+
+
+        
+        \end{tikzpicture}
+    %}
+    \caption{Diagrama del AFD resultante del ejercicio 8.}
+    \label{fig:ej8}
+\end{figure}
+\end{solucion}
 
 \begin{ejercicio}
 Sea $L$ el lenguaje de todas las palabras sobre el alfabeto $\{0, 1\}$ que no contienen dos $1$s que estén separados por un número impar de símbolos. Describir un AFD que acepte este lenguaje.
 \end{ejercicio}
 
+\begin{solucion}
+El autómata resultante es el de la figura \ref{fig:ej9}.
+
+
+\begin{figure}[H]
+    \centering
+    %\resizebox{\textwidth}{!}{
+        \begin{tikzpicture}
+
+        \nodo[initial, accepting]{q0}{0,0}{q_0};
+        \loopa{q0}{0}{};
+        \nodo[state, accepting]{q1}{2,0}{q_1};
+        \curva[left]{q0}{q1}{1}{above};
+        \nodo[state,accepting]{q2}{4,0}{q_2};
+        \curva[left]{q1}{q2}{0}{above};
+        \curva[left]{q2}{q1}{0}{above};
+        \nodo[error]{error}{4,-2}{E};
+        \flechaderecha[]{q2}{error}{1};
+        \nodo[state, accepting]{q3}{2,-2}{q_3};
+        \loopr{error}{0,1}{};
+        \flechaderecha[]{q1}{q3}{1};
+        \loopl{q3}{0}{};
+        \flechaabajo[]{q3}{error}{1};
+
+        \end{tikzpicture}
+    %}
+    \caption{Diagrama del AFD resultante del ejercicio 9.}
+    \label{fig:ej9}
+\end{figure}
+
+
+\end{solucion}
+
 \begin{ejercicio}
 Dada la expresión regular $(a + \varepsilon)b^*$, encontrar un AFND asociado y, a partir de este, calcular un AFD que acepte el lenguaje.
 \end{ejercicio}
+
+\begin{solucion}
+El autómata DFND resultante es el de la figura \ref{fig:ej10-1}. El cual podemos simplificar consiguiendo el AFND de la figura \ref{fig:ej10-2}. A partir de este AFND podemos obtener el AFD de la figura \ref{fig:ej10}.
+\begin{figure}[H]
+    \centering
+    %\resizebox{\textwidth}{!}{
+        \begin{tikzpicture}
+
+        \nodo[initial]{q0}{0,0}{q_0};
+        \nodo[state]{q1}{2,2}{q_1};
+        \nodo[state]{q2}{2,-2}{q_2};
+        \flechaiquierda[]{q0}{q1}{$\varepsilon$};
+        \flechaiquierda[]{q0}{q2}{$\varepsilon$};
+        \nodo[state]{q3}{4,2}{q_3};
+        \nodo[state]{q4}{4,-2}{q_4};
+        \flechaarriba[]{q1}{q3}{$\varepsilon$};
+        \flechaarriba[]{q2}{q4}{a};
+        \nodo[state, accepting]{q5}{4,0}{q_5};
+        \flechaderecha[]{q4}{q5}{$\varepsilon$};
+        \flechaderecha[]{q3}{q5}{$\varepsilon$};
+        \nodo[state]{q6}{6,0}{q_6};
+        \nodo[state, accepting]{q7}{8,0}{q_7};
+        \flechaarriba[]{q5}{q6}{$\varepsilon$};
+        \flechaarriba[]{q6}{q7}{$\varepsilon$};
+        \curva[left]{q7}{q6}{b}{below};
+
+        \end{tikzpicture}
+    %}
+    \caption{Diagrama del AFND resultante del ejercicio 10.}
+    \label{fig:ej10-1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    %\resizebox{\textwidth}{!}{
+        \begin{tikzpicture}
+
+        \nodo[initial]{q0}{0,0}{q_0};
+        \nodo[state, accepting]{q1}{2,0}{q_1};
+        \flechaarriba[]{q0}{q1}{$\varepsilon$,a};
+        \loopa{q1}{b}{};
+
+
+        \end{tikzpicture}
+    %}
+    \caption{Diagrama del AFND resultante del ejercicio 10 simplificado.}
+    \label{fig:ej10-2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    %\resizebox{\textwidth}{!}{
+        \begin{tikzpicture}
+        
+        \nodo[initial]{q0}{0,0}{q_0};
+        \nodo[state]{q1}{2,0}{q_1};
+        \nodo[state, accepting]{q2}{4,0}{q_2};
+        \flechaarriba[]{q0}{q1}{a,$\varepsilon$};
+        \nodo[error]{error}{2,-2}{E};
+        \flechaderecha[]{q0}{error}{b};
+        \flechaarriba[]{q1}{q2}{b};
+        \loopa{q2}{b}{};
+        \flechaderecha[]{q1}{error}{a,$\varepsilon$};
+        \flechaderecha[]{q2}{error}{a,$\varepsilon$};
+
+
+        \end{tikzpicture}
+    %}
+    \caption{Diagrama del AFD resultante del ejercicio 10.}
+    \label{fig:ej10}
+\end{figure}
+
+
+
+
+
+\end{solucion}
+
+
+
 
 \begin{ejercicio}
 Obtener una expresión regular para el lenguaje complementario al aceptado por la gramática
@@ -818,12 +1028,106 @@ $$S \to abA \mid B \mid baB \mid \varepsilon, \quad A \to bS \mid b, \quad B \to
 \textit{Pista.} Construir un AFD asociado.
 \end{ejercicio}
 
+\begin{solucion}
+
+
+\end{solucion}
+
+
+
 \begin{ejercicio}
 Dar expresiones regulares para los lenguajes sobre el alfabeto $\{a, b\}$ dados por las siguientes condiciones:
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
     \item Palabras que no contienen la subcadena $a$.
+    \begin{solucion}[1)]
+    La expresión regular es $b^*$.
+    \end{solucion}
     \item Palabras que no contienen la subcadena $ab$.
+    \begin{solucion}[2)]
+    La expresión regular es $b^*a^*$.
+    \end{solucion}
     \item Palabras que no contienen la subcadena $aba$.
+    \begin{solucion}[3)]
+    % La expresión regular es $b^*(ab?b^*)^*$.
+
+
+    Para determinar la expresión regular vamos a seguir el proceso de representar el lenguaje mediante un AFD y luego aplicar el método de eliminación de estados para obtener la expresión regular, usando para ello el Lema de Arden si es necesario. Vemos que el AFD resultante es el de la figura \ref{fig:ej12}.
+
+    \begin{figure}[H]
+    \centering
+    %\resizebox{\textwidth}{!}{
+        \begin{tikzpicture}
+        \nodo[initial, accepting]{q0}{0,0}{q_0};
+        \loopa{q0}{b}{};
+        \nodo[state, accepting]{q1}{2,0}{q_1};
+        \curva[left]{q0}{q1}{a}{above};
+        \nodo[state,accepting]{q2}{4,0}{q_2};
+        \curva[left]{q1}{q2}{b}{above};
+        \nodo[error]{error}{4,-2}{E};
+        \flechaderecha[]{q2}{error}{a};
+        \loopr{error}{a,b}{};
+        \curva[left]{q2}{q0}{b}{below};
+        \loopa{q1}{a}{};
+
+
+
+        \end{tikzpicture}
+    %}
+    \caption{Diagrama del AFD resultante del ejercicio 12.}
+    \label{fig:ej12}
+    \end{figure}
+
+    A continuación, aplicamos el método del sistema.
+
+    $$
+    \begin{cases}
+        q_0 = bq_0 + aq_1 + \varepsilon \\
+        q_1 = aq_1 + bq_2 + \varepsilon \\
+        q_2 = bq_0 + aE + \varepsilon \\
+        E = aE + bE + \varepsilon = (a+b)\varepsilon + \emptyset
+    \end{cases}
+    $$
+
+    Aplicano el lema de Arden obtenemos que:
+    \begin{equation*}
+        E = \emptyset(a+b)^* = \emptyset
+    \end{equation*}
+
+    Sustituyendo en las ecuaciones anteriores obtenemos:
+
+    $$\begin{cases}
+    q_0 = bq_0 + aq_1 + \varepsilon \\
+    q_1 = aq_1 + bq_2 + \varepsilon \\
+    q_2 = bq_0 + \varepsilon
+    \end{cases}$$
+
+    Sustituimos q2 y nos queda:
+
+    $$\begin{cases}
+    q_0 = bq_0 + aq_1 + \varepsilon \\
+    q_1 = aq_1 + b(bq_0 + \varepsilon) + \varepsilon
+    \end{cases}$$
+
+    Aplicando el Lema de Arden quedaría:
+
+    \begin{equation*}
+        q_1 = a^*(b(bq_0 + \varepsilon) + \varepsilon)
+    \end{equation*}
+
+    Sustituimos $q_1$ en la primera ecuación y nos queda:
+
+    \begin{align*}
+        q_0 = bq_0 + aa^*(b(bq_0 + \varepsilon) + \varepsilon) + \varepsilon = \\
+        \text{Aplicamos que } aa^* = a^+ \\
+        q_0 = bq_0 + a^+(bbq_0 + b\varepsilon + \varepsilon) + \varepsilon = \\
+        q_0 = [b+a^+bb]q_0 + a^+[b+\varepsilon] + \varepsilon \overset{\text{Arden}}{=} \\
+        q_0 = [b+a^+bb]^* + [a^+[b+\varepsilon] + \varepsilon]
+    \end{align*}
+
+    Por ende, podemos concluir que la expresión regular asociada al autómata de la figura \ref{fig:ej12} es $[b+a^+bb]^* + [a^+[b+\varepsilon] + \varepsilon]$.
+
+    \end{solucion}
 \end{enumerate}
 \end{ejercicio}
 
@@ -833,10 +1137,34 @@ $$S \to AabB, \quad A \to aA, A \to bA, A \to \varepsilon, \quad B \to Bab, B \t
 En caso de que lo sea, encontrar una expresión regular asociada.
 \end{ejercicio}
 
+\begin{solucion}
+    Podemos extraer la expresión regular:
+    \begin{equation*}
+        (a+b)^*ab(ab+b)^+
+    \end{equation*}
+\end{solucion}
+
 \begin{ejercicio}
 Sobre el alfabeto $A = \{0, 1\}$ realizar las siguientes tareas:
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
     \item Describir un autómata finito determinista que acepte todas las palabras que contengan a $011$ o a $010$ (o las dos) como subcadenas.
+
+    \begin{solucion}[1)] La solución es el AFD de la figura \ref{fig:ej14a}.
+        \begin{figure}[H]
+            \centering
+            %\resizebox{\textwidth}{!}{
+                \begin{tikzpicture}
+                \nodo[initial]{q0}{0,0}{q_0};
+
+
+                \end{tikzpicture}
+            %}
+            \caption{Diagrama del AFD resultante del ejercicio 14a.}
+            \label{fig:ej14a}
+        \end{figure}
+    \end{solucion}
+
     \item Describir un autómata finito determinista que acepte todas las palabras que empiecen por $01$ y terminen por $01$.
     \item Dar una expresión regular para el conjunto de las palabras en las que hay dos ceros separados por un número de símbolos que es múltiplo de $4$ (los símbolos que separan los ceros pueden ser ceros y puede haber otros símbolos delante o detrás de estos dos ceros).
     \item Dar una expresión regular para las palabras en las que el número de ceros es divisible por $4$.
@@ -885,6 +1213,69 @@ $$L = \{u110 \mid u \in \{1, 0\}^*\}$$
 encontrar la expresión regular, la gramática lineal por la derecha, la gramática lineal por la izquierda y el AFD asociado.
 \end{ejercicio}
 
+
+\begin{solucion}
+    La expresión regular asociada es la siguiente:
+
+    \begin{equation*}
+        (0+1)^*110
+    \end{equation*}
+
+    La gramática lineal por la derecha es $G = (\{S,A\},\{0,1\},P,S)$ donde el conjunto de producciones P son:
+    \begin{align*}
+        S \rightarrow 0S \mid 1S \mid A \\
+        A \rightarrow 110
+    \end{align*}
+
+    La gramática lineal por la izquierda es $G = (\{S,B\},\{0,1\},P',S)$, donde el conjunto de producciones P' son: 
+
+    \begin{align*}
+        S \rightarrow B110 \\
+        B \rightarrow B0 \mid B1 \mid \varepsilon 
+    \end{align*}
+
+    Y el AFD asociado es el de la figura \ref{fig:ej19}.
+
+    \begin{figure}
+    \centering
+    %\resizebox{\textwidth}{!}{
+        \begin{tikzpicture}
+
+        \nodo[initial]{q0}{0,0}{q_0};
+        \loopa{q0}{0}{};
+        \nodo[state]{q1}{2,0}{q_1};
+        \nodo[state]{q2}{4,0}{q_2};
+        \nodo[state, accepting]{q3}{6,0}{q_3};
+        \flechaderecha[]{q0}{q1}{1};
+        \flechaarriba[]{q1}{q2}{1};
+        \flechaarriba[]{q2}{q3}{0};
+        \curva[right]{q1}{q0}{0}{above};
+        \loopa{q2}{1}{};
+        \curva[left]{q3}{q1}{1}{below};
+        \curva[left]{q3}{q0}{0}{below};
+
+
+        \end{tikzpicture}
+    %}
+    \caption{Diagrama del AFD resultante del ejercicio 19.}
+    \label{fig:ej19}
+    \end{figure}
+
+    Donde los estados son:
+    \begin{itemize}
+        \item $q_0$: Estado inicial. No se ha leído ningún símbolo o se han leído símbolos que no forman parte de la subcadena ''110''.
+        \item $q_1$: Se ha leído un '1', esperando '1'.
+        \item $q_2$: Se han leído ''11'', esperando '0'.
+        \item $q_3$: Estado de aceptación. Se ha leído la subcadena ''110''. Puede volver a $q_1$ o $q_0$ para buscar más ocurrencias.
+    \end{itemize}
+
+\end{solucion}
+
+
+
+
+
+
 \begin{ejercicio}
 Dado un AFD, determinar el proceso que habría que seguir para construir una Gramática lineal por la izquierda capaz de generar el Lenguaje aceptado por dicho autómata.
 \end{ejercicio}
@@ -898,8 +1289,21 @@ Sea $B_n = \{a^k \mid k \text{ es múltiplo de } n\}$. Demostrar que $B_n$ es re
 \end{ejercicio}
 
 \begin{ejercicio}
+Sea $L \subseteq A^*$ y define la relación $\equiv$ en $A^*$ como sigue: para $u, v \in A^*$, se tiene $u \equiv v$ si y sólo si para toda $z \in A^*$, $(uz \in L \Leftrightarrow vz \in L)$.
+
+\begin{enumerate}[label=\textbf{\alph*}), leftmargin=*, align=left]
+    \item Demostrar que $\equiv$ es una relación de equivalencia.
+    \item Calcular las clases de equivalencia de $L = \{a^i b^i \mid i \geq 0\}$.
+    \item Calcular las clases de equivalencia de $L = \{a^i b^j \mid i, j \geq 0\}$.
+    \item Demostrar que $L$ es aceptado por un autómata finito determinista si y sólo si el número de clases de equivalencia es finito.
+    \item ¿Qué relación existe entre el número de clases de equivalencia y el autómata finito minimal que acepta $L$?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
 Decimos que $u$ es un prefijo de $v$ si existe $w$ tal que $uw = v$. Decimos que $u$ es un prefijo propio de $v$ si además $u \neq v$ y $u \neq \varepsilon$. Demostrar que si $L$ es regular, también lo son los lenguajes
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
     \item $\text{NOPREFIJO}(L) = \{u \in L \mid \text{ningún prefijo propio de } u \text{ pertenece a } L\}$
     \item $\text{NOEXTENSION}(L) = \{u \in L \mid u \text{ no es un prefijo propio de ninguna palabra de } L\}$
 \end{enumerate}
@@ -909,7 +1313,8 @@ Decimos que $u$ es un prefijo de $v$ si existe $w$ tal que $uw = v$. Decimos que
 Dada una palabra $u = a_1 \ldots a_n \in A^*$, se llama $\text{Per}(u)$ al conjunto
 $$\text{Per}(u) = \{a_{\sigma(1)}, \ldots, a_{\sigma(n)} \mid \sigma \text{ es una permutación de } \{1, \ldots, n\}\}$$
 Dado un lenguaje $L$, se llama $\text{Per}(L) = \bigcup_{u \in L} \text{Per}(u)$. Dar expresiones regulares y autómatas minimales para $\text{Per}(L)$ en los siguientes casos:
-\begin{enumerate}
+\begin{enumerate}[label=\textbf{\arabic*}), leftmargin=*, align=left]
+
     \item $L = (00 + 1)^*$
     \item $L = (0 + 1)^*0$
     \item $L = (01)^*$

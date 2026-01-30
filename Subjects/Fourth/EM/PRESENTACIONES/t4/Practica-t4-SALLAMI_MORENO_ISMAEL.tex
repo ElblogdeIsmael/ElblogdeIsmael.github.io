@@ -1,0 +1,151 @@
+% ENUMERO DE PRÁCTICA: T4:Demuestre gráficamente que cuanto más elásticas son DN y SN, 
+% mayor será el efecto creación comercio y, por tanto, mayor será la 
+% ganancia de bienestar
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PREÁMBULO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\documentclass{beamer}
+
+% --- Paquetes Esenciales ---
+\usepackage[utf8]{inputenc} % Acentos y caracteres en español
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel} % Configuración para el idioma español
+\usepackage{graphicx} % Para incluir imágenes
+\usepackage{amsmath} % Para fórmulas económicas
+\usepackage{amssymb} % Para símbolos matemáticos
+\usepackage{tikz} % Para gráficos con TikZ
+
+% --- Configuración del Tema de Beamer ---
+\usetheme{Madrid} % Un tema popular y limpio.
+\usecolortheme{default} % Esquema de color
+
+% --- Metadatos de la Presentación (para la portada) ---
+
+\title{Elasticidad, Creación de Comercio y Bienestar}
+\subtitle{Demostración Gráfica de los Efectos de la Elasticidad}
+
+\author{Ismael Sallami Moreno}
+\institute{UGR}
+
+\date{\today}
+
+% Fuente de letra pequeña
+\setbeamerfont{footnote}{size=\tiny}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% --- Diapositiva 1: Portada ---
+\begin{frame}
+\titlepage 
+\end{frame}
+
+% --- Diapositiva 2: Marco Teórico y Conceptos Clave ---
+\begin{frame}
+\frametitle{Marco Conceptual: Creación de Comercio}
+\begin{block}{\textbf{Modelo de País Pequeño y Ganancias}}
+\begin{itemize}
+    \item \textbf{País Pequeño}: El precio mundial ($P^W$) es inalterable por las decisiones domésticas.
+    \item \textbf{Ganancia de Bienestar}: Se mide por la variación del excedente (Consumidor y Productor) tras la apertura comercial.
+    \item \alert{Creación de Comercio}: Es el cambio neto positivo en el excedente social ($EC+EP$) que resulta de la especialización eficiente.
+    \begin{itemize}
+        \item Gráficamente, corresponde a los \textbf{triángulos de eficiencia} (antiguamente la \textit{pérdida de peso muerto}, $b+d$) que se generan o se evitan al comerciar.
+    \end{itemize}
+\end{itemize}
+\end{block}
+\end{frame}
+
+% --- Diapositiva 3: Demostración Gráfica de la Elasticidad ---
+\begin{frame}
+\frametitle{Demostración: Elasticidad y la Magnitud de la Ganancia}
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[scale=1.0]
+
+        % Eje Y (Precio)
+        \draw[->] (0,0) -- (0,7) node[above] {$P$};
+        % Eje X (Cantidad)
+        \draw[->] (0,0) -- (10,0) node[right] {$Q$};
+        
+        % Precio Mundial (P_W) - Bajo
+        \draw[dashed, blue] (0, 2) -- (9, 2) node[right, blue] {$P^W$};
+        
+        % Precio Arancelario (P_T) - Alto
+        \draw[dashed, red] (0, 5) -- (9, 5) node[right, red] {$P^T$};
+        
+        % Curva Oferta Inelástica (S_I)
+        \draw[thick, orange] (1, 1) -- (4, 6) node[right, orange] {$S_I$};
+        % Curva Demanda Inelástica (D_I)
+        \draw[thick, orange] (8, 6) -- (5, 1) node[left, orange] {$D_I$};
+        
+        % Curva Oferta Elástica (S_E)
+        \draw[thick, green] (0.5, 3) -- (9, 4) node[right, green!80!black] {$S_E$};
+        % Curva Demanda Elástica (D_E)
+        \draw[thick, green] (9, 4.5) -- (1, 3.5) node[left, green!80!black] {$D_E$};
+        
+        % Puntos para Curvas Inelásticas (I)
+        \coordinate (SI_T) at (2.5, 5);
+        \coordinate (SI_W) at (1.7, 2);
+        \coordinate (DI_T) at (6.5, 5);
+        \coordinate (DI_W) at (7.3, 2);
+
+        % Puntos para Curvas Elásticas (E)
+        \coordinate (SE_T) at (7.5, 5);
+        \coordinate (SE_W) at (4.5, 2);
+        \coordinate (DE_T) at (2.5, 5);
+        \coordinate (DE_W) at (8.5, 2);
+
+        % Triángulos (solo para el caso elástico - mayor área)
+        \fill[red!30, opacity=0.7] (SE_W) -- (SE_T) -- (4.5, 5); % Triángulo b (Producción)
+        \fill[blue!30, opacity=0.7] (DE_T) -- (DE_W) -- (2.5, 2); % Triángulo d (Consumo)
+        
+        % Leyenda de áreas (simplificada)
+        \node at (6.5, 6.5) {\small Ganancia (b+d) $\propto \Delta Q$};
+        \node[green!80!black] at (8.5, 6.2) {\small Curvas Elásticas (Mayor $\Delta Q$)};
+        \node[orange!80!black] at (8.5, 0.7) {\small Curvas Inelásticas (Menor $\Delta Q$)};
+
+        % Etiquetas de triángulos
+        \node[red!80!black] at (6.2, 3.2) {\small $b$};
+        \node[blue!80!black] at (5.2, 3.2) {\small $d$};
+
+    \end{tikzpicture}
+\end{figure}
+
+
+\end{frame}
+
+\begin{frame}
+    \begin{block}{\textbf{Elasticidad y Cantidad Demandada/Ofrecida ($\Delta Q$)}}
+    \begin{itemize}
+        \item Curvas \textbf{más elásticas} (más planas) implican una \textbf{mayor} respuesta en $Q$ ante el cambio de precio ($P^T \to P^W$).
+        \item Ganancia de Bienestar es proporcional a $1/2 \cdot \Delta P \cdot \Delta Q$.
+        \item Mayor $\Delta Q$ genera \textbf{mayor área} en los triángulos de eficiencia.
+    \end{itemize}
+    \end{block}
+\end{frame}
+
+% --- Diapositiva 4: Conclusión e Implicaciones ---
+\begin{frame}
+\frametitle{Conclusión: Ajuste de Mercado y Bienestar}
+\begin{block}{\textbf{El Rol de la Flexibilidad en las Ganancias}}
+\begin{itemize}
+    \item \textbf{Si $D_N$ es elástica}: Los consumidores se ajustan fácilmente, sustituyendo importaciones, lo que maximiza la ganancia por eficiencia de consumo (triángulo $d$).
+    \item \textbf{Si $S_N$ es elástica}: Los productores se especializan rápidamente, liberando recursos para otros usos, maximizando la ganancia por eficiencia de producción (triángulo $b$).
+    \item \alert{Ajuste del Mercado}: La ganancia social es mayor si los agentes económicos pueden modificar sus decisiones de consumo y producción con facilidad.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\end{document}
