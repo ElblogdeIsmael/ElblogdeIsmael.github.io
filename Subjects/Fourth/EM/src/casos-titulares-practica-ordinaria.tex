@@ -1,0 +1,293 @@
+\documentclass[a4paper,12pt]{report}
+
+% ==========================================
+% PREÁMBULO Y PAQUETES (Basado en tu archivo de estilos)
+% ==========================================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows.meta, shapes}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{colortbl}
+
+% --- Configuración de Fuentes (Ajustable según disponibilidad) ---
+% \usepackage{mathpazo} % Palatino (opcional si tienes el paquete)
+\usepackage[T1]{fontenc}
+
+% --- Colores Personalizados ---
+\definecolor{corporateblue}{rgb}{0.07,0.29,0.49}
+\definecolor{corporatebg}{rgb}{0.98,0.98,0.98}
+
+% --- Comandos Personalizados Definidos por ti ---
+
+% Comando para incluir imágenes
+\newcommand{\incluirimagen}[3][]{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth,#1]{#2} % Ajustado width por defecto
+        \caption{#3}
+        \label{fig:#2}
+    \end{figure}
+}
+
+% Estilo para ejercicios con fondo
+\newtheoremstyle{ejerciciostyle}
+    {10pt}{10pt} % Espacio arriba/abajo
+    {} % Cuerpo
+    {} % Sangría
+    {\bfseries} % Encabezado
+    {} % Puntuación
+    {\newline} % Espacio tras encabezado (ajustado para que el texto baje)
+    {\thmname{#1} \thmnumber{#2}. \thmnote{#3}}
+
+\theoremstyle{ejerciciostyle}
+\newtheorem{ejercicio}{Ejercicio}[chapter]
+
+% Comando para Notas/Titulares
+\newcommand{\nota}[2]{
+    \begin{tcolorbox}[colframe=corporateblue, colback=corporatebg, title=\textbf{#1}]
+        #2
+    \end{tcolorbox}
+}
+
+% Configuración de página y encabezados
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\scshape\nouppercase{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\fancyfoot[C]{\scriptsize\itshape Economía Mundial - Material de Estudio}
+\renewcommand{\headrulewidth}{0.5pt}
+
+% Diseño general
+\setstretch{1.15}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+% ==========================================
+% DOCUMENTO PRINCIPAL
+% ==========================================
+\begin{document}
+
+\title{\textbf{Compendio de Economía Mundial}\\Temas 5, 6 y 7}
+\author{Recopilación de Casos, Prácticas y Teoría}
+\date{\today}
+\maketitle
+
+\tableofcontents
+\newpage
+
+% ==========================================
+% TEMA 5
+% ==========================================
+\chapter{Tema 5: Los Tipos de Cambio y la Integración Financiera Internacional}
+
+\section{Casos y Titulares Relevantes}
+
+A continuación se desarrollan los casos y titulares clave del Tema 5, basados en la evidencia empírica y los modelos teóricos (Enfoque Monetario y de Activos).
+
+\subsection{Caso 5.11 y 5.12: El Auge y la Caída del Dólar (1999-2004)}
+\nota{Análisis de Política Monetaria}{
+Este caso analiza cómo las variaciones en los tipos de interés ($i$) afectan al tipo de cambio ($E$) a corto plazo.
+
+\textbf{Fase 1: Apreciación (1999-2001)}
+\begin{itemize}
+    \item \textbf{Contexto:} Contracción monetaria en EE. UU.
+    \item \textbf{Acción de la Fed:} Subida agresiva de tasas para evitar el "sobrecalentamiento".
+    \item \textbf{Respuesta del BCE:} Incrementos más lentos y moderados.
+    \item \textbf{Resultado Teórico:} Una contracción monetaria local (tasas más altas) conduce a una apreciación de la moneda. El dólar se apreció frente al euro.
+\end{itemize}
+
+\textbf{Fase 2: Depreciación (2001-2004)}
+\begin{itemize}
+    \item \textbf{Contexto:} Desaceleración post-auge y ataques del 11-S.
+    \item \textbf{Acción de la Fed:} Recortes drásticos de tasas (llegando al 1\%).
+    \item \textbf{Resultado:} El diferencial de tipos se invirtió (tasa BCE > tasa Fed), provocando la depreciación del dólar.
+\end{itemize}
+}
+
+\subsection{Caso 5.2: Experiencias Recientes de Tipos de Cambio}
+\textbf{Países Desarrollados vs. Emergentes:}
+\begin{itemize}
+    \item \textbf{Flotación Libre (Desarrollados):} Monedas como USD, JPY o GBP fluctúan libremente según oferta y demanda. Alta volatilidad diaria pero rangos históricos estables.
+    \item \textbf{Excepción (Dinamarca):} Mantiene un régimen de tipo fijo en banda respecto al Euro (peg), renunciando a autonomía monetaria por estabilidad.
+    \item \textbf{Mercados Emergentes:} Muestran volatilidad extrema, crisis cambiarias frecuentes (ej. Baht tailandés 1997, Peso argentino 2001) y fenómenos como la dolarización (Ecuador 2000).
+\end{itemize}
+
+\subsection{Titular 5.3: El Índice Big Mac}
+\nota{Paridad del Poder Adquisitivo (PPA)}{
+El índice Big Mac de \textit{The Economist} es una prueba informal de la PPA.
+\begin{itemize}
+    \item \textbf{Premisa:} A largo plazo, el tipo de cambio debería ajustarse para que una cesta de bienes idéntica (un Big Mac) cueste lo mismo en todas partes.
+    \item \textbf{Lectura:} Si el precio en dólares en un país es mayor que en EE. UU., la moneda está \textbf{sobrevaluada}. Si es menor, está \textbf{infravalorada}.
+    \item \textbf{Ejemplo:} Noruega suele aparecer sobrevaluada, mientras que monedas de emergentes suelen aparecer infravaloradas.
+\end{itemize}
+}
+
+\subsection{Titular 5.6: Overshooting (Sobrerreacción del Tipo de Cambio)}
+\textbf{Definición:} Respuesta inmediata y desproporcionada del tipo de cambio ante un shock monetario.
+\begin{itemize}
+    \item \textbf{Causa:} Rigidez de precios de bienes a corto plazo vs. flexibilidad total de los tipos de cambio.
+    \item \textbf{Mecanismo:} Ante un aumento de la oferta monetaria, el tipo de cambio se deprecia más en el corto plazo de lo que lo hará en el largo plazo para generar expectativas de apreciación futura (necesarias para cumplir la UIP dada la bajada de tipos de interés).
+\end{itemize}
+
+\subsection{Titular 5.8: El Impuesto Inflacionario}
+La inflación actúa como un impuesto sobre los saldos reales de dinero.
+\begin{itemize}
+    \item \textbf{Señoreaje:} Ingreso real que obtiene el gobierno al imprimir dinero. $Se\tilde{n}oreaje = (\Delta M/M) \times (M/P)$.
+    \item \textbf{Límite:} Si la inflación es excesiva, la base impositiva (demanda de dinero) se reduce drásticamente, pudiendo llevar a la hiperinflación.
+\end{itemize}
+
+\section{Práctica Tema 5}
+
+\begin{ejercicio}[La prima de riesgo y la intervención en la UE]
+A lo largo del año 2011, el BCE compró parte de las emisiones de bonos de deuda pública emitidos por los gobiernos de los países de la UE (Grecia, Irlanda, Portugal) cuya prima de riesgo era muy elevada. Estos países fueron intervenidos cuando su prima alcanzó niveles insostenibles.
+
+\textbf{Se pide:} Analice, analítica y gráficamente, el problema y sus consecuencias, basándose en la teoría de los mercados de activos y el tipo de cambio.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Análisis:}
+El aumento de la prima de riesgo de impago ($\rho$) en un país de la Eurozona incrementa la rentabilidad exigida por los inversores para mantener bonos de ese país.
+Según la paridad de intereses con riesgo:
+\[ r_{\euro} = r_{\$} + \frac{\Delta E^e}{E} + \rho \]
+Si $\rho$ se dispara, los inversores venden bonos nacionales (caída de precio, subida de $r$). Para evitar el colapso del mercado de bonos y el contagio, el BCE interviene comprando bonos ($B_d$), aumentando la demanda artificialmente para reducir la rentabilidad y la prima.
+\end{solucion}
+
+\newpage
+
+% ==========================================
+% TEMA 6
+% ==========================================
+\chapter{Tema 6: Sistema Monetario Internacional e Integración Monetaria}
+
+\section{Casos y Titulares Relevantes}
+
+\subsection{Caso 6.1: La Economía Política de las Crisis}
+Este caso examina cómo los colapsos cambiarios afectan a la supervivencia política de los gobiernos.
+\begin{itemize}
+    \item \textbf{Países Emergentes:} Los líderes suelen caer debido al \textbf{costo económico} directo (pobreza, inflación) que trae la devaluación.
+    \item \textbf{Países Avanzados:} Los gobiernos caen debido al \textbf{costo de reputación}. Aunque la economía mejore post-devaluación (como en Reino Unido tras 1992), el gobierno pierde la imagen de competencia económica.
+\end{itemize}
+
+\subsection{Titular: Áreas Monetarias Óptimas (AMO)}
+Análisis de la Eurozona bajo los criterios de Mundell:
+\begin{enumerate}
+    \item \textbf{Integración comercial:} Alta, favorecida por el Euro.
+    \item \textbf{Movilidad laboral:} Baja en comparación con EE. UU. (barreras lingüísticas y culturales).
+    \item \textbf{Federalismo fiscal:} Limitado. No existe un mecanismo central potente para transferencias automáticas ante shocks asimétricos.
+\end{enumerate}
+\textbf{Conclusión:} La Eurozona es una AMO incompleta, lo que genera tensiones en tiempos de crisis.
+
+\section{Práctica Tema 6}
+
+\begin{ejercicio}[Crisis del SME 1992]
+En la crisis cambiaria de otoño de 1992, países como Reino Unido, Italia y España se vieron obligados a intervenir para defender sus monedas dentro del Sistema Monetario Europeo (SME). Finalmente, las bandas de fluctuación se ampliaron hasta el +/- 15\%.
+
+\textbf{Se pide:}
+\begin{enumerate}[label=\Alph*-]
+    \item Represente el mercado de divisas de la peseta previo a la ampliación de bandas (+/- 2.25\%).
+    \item Represente la desinversión de empresas extranjeras en España hasta llegar al límite máximo del tipo de cambio.
+    \item Analice el papel de las intervenciones intramarginales del Bundesbank.
+    \item ¿Podrían agotarse las reservas de marcos en el Banco de España si tuviera que ofertarlos ilimitadamente?
+    \item ¿Un sistema flotante habría evitado la "sangría" de divisas?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\begin{enumerate}[label=\Alph*-]
+    \item Se debe dibujar un gráfico de oferta y demanda de divisas donde el tipo de cambio de equilibrio está dentro de las bandas superior e inferior fijadas por el SME.
+    \item La desinversión implica una salida de capitales: venta de pesetas y compra de marcos. Esto desplaza la demanda de marcos hacia la derecha (o oferta de pesetas), presionando el tipo de cambio hacia el límite de depreciación permitido.
+    \item Las intervenciones intramarginales buscaban corregir desequilibrios antes de tocar los límites obligatorios, compartiendo la carga de la intervención y dando señal de fortaleza al mercado.
+    \item Sí. Un banco central tiene una capacidad limitada para defender una moneda sobrevaluada porque sus reservas de divisas extranjeras (marcos) son finitas.
+    \item Un sistema flotante habría permitido que la peseta se depreciara inmediatamente hasta su valor de equilibrio de mercado, evitando que el Banco de España gastara sus reservas defendiendo una paridad insostenible.
+\end{enumerate}
+\end{solucion}
+
+\newpage
+
+% ==========================================
+% TEMA 7
+% ==========================================
+\chapter{Tema 7: La Primera Crisis en la Economía Global}
+
+\nota{Introducción}{
+Este tema aborda las consecuencias de la crisis financiera de 2008, la reforma del sistema bancario, el papel de los bancos centrales y la crisis fiscal del Estado.
+}
+
+\section{7.4. La reforma del sistema bancario y los bancos centrales}
+
+\subsection{7.4.A. La reforma del sistema bancario}
+
+\textbf{1. El Informe Turner (2009) y Basilea III}
+La crisis reveló la necesidad de una regulación más estricta. El Informe Turner y el posterior acuerdo de \textbf{Basilea III (2010)} propusieron:
+\begin{itemize}
+    \item \textbf{Más Capital:} Aumento de la cantidad y calidad del capital exigido (Tier 1). Se establecieron colchones de conservación de capital y colchones contracíclicos.
+    \item \textbf{Ratio de Apalancamiento:} Introducción de un ratio máximo para evitar el crecimiento excesivo del crédito sin respaldo de capital.
+    \item \textbf{Liquidez:} Nuevos estándares para garantizar que los bancos puedan soportar periodos de estrés de liquidez.
+    \item \textbf{Remuneraciones:} Regulación de los bonus para evitar incentivos perversos hacia el riesgo a corto plazo.
+\end{itemize}
+
+\textbf{2. El Caso de España: El FROB}
+En España, la reestructuración se centró en las \textbf{Cajas de Ahorro}, afectadas por la exposición inmobiliaria y la politización.
+\begin{itemize}
+    \item Se creó el \textbf{FROB} (Fondo de Reestructuración Ordenada Bancaria) para gestionar fusiones y recapitalizaciones.
+    \item Se impulsó la "bancarización" de las cajas (transformación en fundaciones bancarias).
+    \item Problemas identificados: Dimensión excesiva de oficinas, dependencia de financiación mayorista y deterioro de activos inmobiliarios.
+\end{itemize}
+
+\subsection{7.4.B. El papel de los Bancos Centrales en la crisis}
+
+\textbf{1. Quantitative Easing (QE)}
+Ante el agotamiento de la política monetaria convencional (tipos cercanos a cero), la Fed y posteriormente el BCE recurrieron a medidas no convencionales:
+\begin{itemize}
+    \item Compra masiva de deuda pública y activos privados.
+    \item \textbf{Objetivo:} Bajar los tipos de interés a largo plazo y proveer liquidez ilimitada al sistema.
+    \item \textbf{Efectos:} Reducción de primas de riesgo, aumento de precios de activos (bolsa, bonos), pero riesgo de burbujas futuras.
+\end{itemize}
+
+\textbf{2. El BCE y la Crisis del Euro}
+El BCE pasó de ser un guardián de la inflación a garante de la estabilidad del Euro (famoso "Whatever it takes" de Draghi en 2012).
+\begin{itemize}
+    \item Implementó programas como el SMP (Securities Markets Programme) para comprar deuda de países periféricos.
+    \item Flexibilizó los colaterales aceptados para prestar dinero a los bancos.
+\end{itemize}
+
+\subsection{7.4.C. La financiación estructurada y la titulización}
+La crisis "secó" el mercado de titulizaciones (convertir préstamos en bonos negociables).
+\begin{itemize}
+    \item \textbf{España:} El mercado se mantuvo gracias a las \textbf{Cédulas Hipotecarias} y al uso de titulizaciones como garantía ante el BCE, más que para venta a inversores finales.
+    \item \textbf{Diferencia Europa vs. EEUU:} En Europa, las tasas de impago de productos estructurados fueron mucho menores (0.39\%) que en EEUU, donde el modelo "originar para distribuir" (subprime) causó estragos masivos.
+\end{itemize}
+
+\section{7.5. La nueva crisis del Estado Fiscal}
+
+\subsection{7.5.A. Crisis Fiscal Estructural}
+La crisis económica provocó un doble shock en las cuentas públicas:
+\begin{enumerate}
+    \item \textbf{Caída de Ingresos:} Menor actividad económica redujo la recaudación tributaria.
+    \item \textbf{Aumento de Gastos:} Estabilizadores automáticos (desempleo) y rescates bancarios.
+\end{enumerate}
+Esto llevó a déficits y deudas públicas récord, cuestionando la sostenibilidad del Estado del Bienestar actual.
+
+\subsection{7.5.D. El futuro del Estado del Bienestar en economías abiertas}
+En una economía globalizada, los Estados enfrentan el dilema de mantener altos niveles de protección social sin perder competitividad ni provocar fuga de capitales (base imponible móvil).
+\begin{itemize}
+    \item La solución simplista de "subir impuestos a los ricos" se enfrenta a la movilidad del capital.
+    \item Se requiere una reforma fiscal integral y una mejora en la eficiencia del gasto público.
+\end{itemize}
+
+\section{Perspectivas de las Empresas Multinacionales}
+La crisis de 2008 provocó una fuerte caída de la Inversión Extranjera Directa (IED), especialmente en países desarrollados. Las multinacionales reestructuraron sus operaciones, reduciendo costes y buscando mercados emergentes que resistieron mejor el shock inicial.
+
+\end{document}

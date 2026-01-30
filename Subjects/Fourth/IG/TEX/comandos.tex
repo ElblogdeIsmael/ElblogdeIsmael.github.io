@@ -1,0 +1,231 @@
+% =========================================================
+% PAQUETES NECESARIOS
+% =========================================================
+\usepackage{xcolor}    % Para el color del recuadro
+\usepackage{tikz}      % Para los diagramas
+\usepackage{graphicx}  % Para imágenes
+\usepackage{float}     % Para posicionamiento H
+\usepackage{listings}  % Para código
+\usepackage{etoolbox}  % Utilidades varias
+
+% =========================================================
+% LIMPIEZA PREVIA (Evita errores si ya existía el entorno)
+% =========================================================
+\let\ejercicio\relax
+\let\endejercicio\relax
+\let\ejerciciostyle\relax
+
+% =========================================================
+% COMANDOS DE IMÁGENES
+% =========================================================
+
+% Comando para incluir imágenes
+\newcommand{\incluirimagen}[3][]{%
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth,#1]{#2}
+    \caption{#3}
+    \label{fig:#2}
+\end{figure}
+}
+
+% Comando para dos imágenes en paralelo
+\newcommand{\dosimagenes}[6]{%
+    \begin{figure}[h!]
+        \centering
+        \begin{minipage}{0.48\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{#1}
+            \caption{#2}
+            \label{#5}
+        \end{minipage}\hfill
+        \begin{minipage}{0.48\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{#3}
+            \caption{#4}
+            \label{#6}
+        \end{minipage}
+    \end{figure}
+}
+
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\newcommand{\portadaimg}{\VAR{portadaimg}}
+
+
+
+
+
+% % =========================================================
+% % NUEVA DEFINICIÓN DE EJERCICIO (CON CUADRO AZUL)
+% % =========================================================
+
+% % Definimos el estilo con fcolorbox en el encabezado
+% \newtheoremstyle{ejerciciostyle}
+%   {5pt}   % Espacio arriba
+%   {5pt}   % Espacio abajo
+%   {}       % Fuente del cuerpo (vacío = normal/recta, usa \itshape si quieres cursiva)
+%   {}       % Sangría
+%   {\bfseries} % Fuente del encabezado base
+%   {}      % Puntuación tras encabezado (vacía, la gestionamos dentro)
+%   {5pt}   % Espacio tras encabezado
+%   {%
+%     % Configuración de la caja
+%     \setlength{\fboxsep}{3pt}% Espacio interno (padding)
+%     \setlength{\fboxrule}{0.8pt}% Grosor del borde
+%     % La caja: Borde Azul, Fondo Azul Claro
+%     \fcolorbox{blue}{blue!10}{%
+%         \color{black}\thmname{#1} \thmnumber{#2}%
+%     }%
+%     % Si hay nota (título), va fuera de la caja
+%     \thmnote{ \textbf{(#3)}}%
+%   }
+
+% % Aplicamos el estilo y creamos el entorno
+% \theoremstyle{ejerciciostyle}
+% \newtheorem{ejercicio}{Ejercicio}[section]
+
+% % Formato de numeración: Cap.Sec.Ejer
+% \renewcommand{\theejercicio}{\thechapter.\arabic{section}.\arabic{ejercicio}}
+
+% =========================================================
+% NUEVA DEFINICIÓN DE EJERCICIO (CON CUADRO AZUL COMPLETO)
+% =========================================================
+
+% Contador para ejercicios
+\newcounter{ejercicio}[section]
+\renewcommand{\theejercicio}{\thechapter.\arabic{section}.\arabic{ejercicio}}
+
+% Definimos el entorno con tcolorbox
+\newenvironment{ejercicio}{%
+    \refstepcounter{ejercicio}%
+    \begin{tcolorbox}[
+        colback=gray!5,         % Fondo gris muy claro (profesional)
+        colframe=gray!60!black, % Borde gris oscuro
+        boxrule=0.8pt,          % Grosor del borde
+        arc=2pt,                % Redondeo de esquinas (opcional)
+        left=5pt,               % Margen izquierdo interno   right=5pt,              % Margen derecho interno
+        top=5pt,                % Margen superior interno
+        bottom=5pt,             % Margen inferior interno
+        before skip=10pt,       % Espacio antes del cuadro
+        after skip=10pt,        % Espacio después del cuadro
+        title={\textbf{Ejercicio \theejercicio}}
+    ]%
+}{%
+    \end{tcolorbox}%
+}
+
+
+
+
+
+% =========================================================
+% SOLUCIONES
+% =========================================================
+\theoremstyle{remark}
+\newtheorem{solucion}{Solución}[ejercicio]
+\renewcommand{\thesolucion}{\thechapter.\arabic{section}.\arabic{ejercicio}}
+
+
+% =========================================================
+% NOTAS
+% =========================================================
+\newtheorem{nota}{Nota}[chapter]
+
+
+% =========================================================
+% CÓDIGOS (LISTINGS)
+% =========================================================
+
+% Comando para poner dos códigos en paralelo
+\newcommand{\doscodigos}[4]{%
+  \noindent
+  \begin{minipage}{0.48\linewidth}
+    \lstset{language=#1}
+    \lstinputlisting{#2}
+  \end{minipage}\hfill
+  \begin{minipage}{0.48\linewidth}
+    \lstset{language=#3}
+    \lstinputlisting{#4}
+  \end{minipage}
+}
+
+% Comando para poner un solo código
+\newcommand{\uncodigo}[2]{%
+  \begin{lstlisting}[language=#1]
+#2
+  \end{lstlisting}
+}
+
+% \lstset{
+%     basicstyle=\ttfamily\small, % O el estilo que uses
+%     aboveskip=10pt,  % Espacio antes del código
+%     belowskip=0pt    % Espacio después (0pt porque la sección siguiente ya pone espacio)
+% }
+
+\lstset{
+    basicstyle=\ttfamily\footnotesize, % Un poco más pequeño que \small
+  }
+
+\raggedbottom % Evita espacios verticales grandes en páginas con poco contenido
+
+
+% =========================================================
+% EJERCICIOS RESUELTOS (Estilo antiguo sin caja)
+% =========================================================
+\newtheoremstyle{ejercicioresueltostyle}
+    {10pt}   % Espacio arriba
+    {10pt}   % Espacio abajo
+    {\itshape} % Fuente del cuerpo
+    {}       % Sangría
+    {\bfseries} % Fuente del encabezado
+    {}      % Puntuación tras encabezado
+    { }      % Espacio tras encabezado
+    {\thmname{#1} \thmnumber{#2}. \thmnote{#3}}
+
+\theoremstyle{ejercicioresueltostyle}
+\newtheorem{ejercicioresuelto}{Ejercicio Resuelto}[section]
+\renewcommand{\theejercicioresuelto}{\thechapter.\arabic{section}.\arabic{ejercicioresuelto}}
+
+
+% ========================================================= 
+% PRÁCTICAS Y TIKZ (DIAGRAMAS)
+% =========================================================
+
+% Comando para definir un tema
+\newcommand{\tema}[1]{%
+  \section{#1}
+  \addcontentsline{toc}{section}{#1}
+}
+
+% Estilos TikZ para Autómatas
+\tikzset{
+    error/.style={state, fill=red!20, draw=red!80!black},
+    final/.style={state, accepting, fill=green!15!white, draw=green!60!black}
+}
+
+% Macros para nodos
+\newcommand{\nodo}[4][]{\node[state, #1] (#2) at (#3) {$#4$};}
+
+% Macros para flechas
+\newcommand{\flecha}[4][]{\draw[->, #1] (#2) -- (#3) node[midway, above] {#4};}
+\newcommand{\flechaabajo}[4][]{\draw[->, #1] (#2) -- (#3) node[midway, below, yshift=-6pt] {#4};}
+\newcommand{\flechaarriba}[4][]{\draw[->, #1] (#2) -- (#3) node[midway, above, yshift=6pt] {#4};}
+\newcommand{\flechaderecha}[4][]{\draw[->, #1] (#2) -- (#3) node[midway, right] {#4};}
+\newcommand{\flechaiquierda}[4][]{\draw[->, #1] (#2) -- (#3) node[midway, left] {#4};}
+
+% Macro para curvas
+\newcommand{\curva}[5][]{\draw[->, bend #1] (#2) to node[midway, #5] {#4} (#3);}
+
+% Macros para loops (bucles)
+\newcommand{\loopa}[3]{\draw[->] (#1) edge[loop above] node {#2} (#1);}
+\newcommand{\loopb}[3]{\draw[->] (#1) edge[loop below] node {#2} (#1);}
+\newcommand{\loopr}[3]{\draw[->] (#1) edge[loop right] node {#2} (#1);}
+\newcommand{\loopl}[3]{\draw[->] (#1) edge[loop left] node {#2} (#1);}
+
+% Constantes de ejemplo
+\newcommand{\pa}{1}
+\newcommand{\pUno}{2}
+\newcommand{\pDos}{3}

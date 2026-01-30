@@ -1,0 +1,596 @@
+% ===========================
+% Diseño general
+% ===========================
+\setstretch{1.15} % interlineado
+\setlength{\parskip}{0.5em} % espacio entre párrafos
+\setlength{\parindent}{0pt} % sin sangría
+
+% ===========================
+% Estilo de capítulos y secciones (titlesec)
+% ===========================
+\titleformat{\chapter}[display]
+  {\bfseries\Huge}
+  {\filleft\Large\scshape Capítulo \thechapter}
+  {1ex}
+  {\titlerule[1pt]\vspace{1ex}\filright}
+  [\vspace{1ex}\titlerule]
+
+\titlespacing*{\chapter}{0pt}{0pt}{2em}
+
+\titleformat{\section}
+  {\Large\bfseries}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\large\bfseries}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\itshape}
+  {\thesubsubsection}{1em}{}
+
+% ===========================
+% Encabezados y pies de página (fancyhdr)
+% ===========================
+\pagestyle{fancy}
+\fancyhf{} % limpia
+\fancyhead[L]{\small\scshape\nouppercase{\leftmark}} % sección/capítulo en mayúsculas pequeñas
+\fancyhead[R]{\small\thepage}                        % número de página
+%\fancyfoot[C]{\scriptsize\itshape Apuntes de la carrera} % texto fijo abajo en cursiva
+% Encabezados y pies de página personalizados
+% \fancyfoot[L]{\scriptsize\itshape Nombre de la asignatura} % pie de página izquierdo en cursiva
+\fancyfoot[R]{\normalsize Ismael Sallami Moreno}        % pie de página derecho con el nombre del autor
+
+% Línea bajo el encabezado
+\renewcommand{\headrulewidth}{0.5pt} % línea más gruesa en el encabezado
+% Línea en el pie
+\renewcommand{\footrulewidth}{0.4pt} % línea fina en el pie
+\renewcommand{\sectionmark}[1]{%
+  \markboth{\thesection\quad #1}{}%
+}
+
+% ===========================
+% Numeración de elementos
+% ===========================
+\numberwithin{equation}{chapter} % ecuaciones numeradas por capítulo
+\numberwithin{figure}{chapter}   % figuras numeradas por capítulo
+\numberwithin{table}{chapter}    % tablas numeradas por capítulo
+
+% ===========================
+% Listas y enumeraciones
+% ===========================
+\setlist[itemize]{label=--, left=1.5em}
+\setlist[enumerate]{label=\arabic*), left=1.5em}
+
+% ===========================
+% Estilo de citas y bibliografía
+% ===========================
+\DefineBibliographyStrings{spanish}{%
+  references = {Bibliografía},
+}
+
+% ===========================
+% Entornos personalizados
+% ===========================
+\newtheoremstyle{cajita} % nombre del estilo
+  {1em}   % espacio arriba
+  {1em}   % espacio abajo
+  {}      % fuente del cuerpo
+  {}      % indentación
+  {\bfseries} % fuente del título
+  {.}     % puntuación tras título
+  {0.5em} % espacio tras título
+  {\thmname{#1}\thmnumber{ #2} \thmnote{(#3)}} % formato
+
+
+\theoremstyle{cajita}
+\newtheorem{teorema}{Teorema}[chapter]
+\newtheorem{definicion}{Definición}[chapter]
+\newtheorem{ejemplo}{Ejemplo}[chapter]
+\newtheorem{proposicion}{Proposición}[chapter]
+\newtheorem{demostracion}{Demostración}[chapter]
+\newtheorem{corolario}{Corolario}[chapter]
+\newtheorem{propuesta}{Propuesta}[chapter]
+
+
+\newtheoremstyle{anotacionstyle} % nombre del estilo
+  {1em}   % espacio arriba
+  {1em}   % espacio abajo
+  {}      % fuente del cuerpo (sin cursiva)
+  {}      % indentación
+  {\itshape} % fuente del título (Nota en cursiva)
+  {.}     % puntuación tras título
+  {0.5em} % espacio tras título
+  {\thmname{\itshape#1}\thmnumber{ #2} \thmnote{(#3)}} % formato (solo Nota en cursiva)
+
+\theoremstyle{anotacionstyle}
+\newtheorem{anotacion}{Nota}[chapter]
+
+% ===========================
+% Configuración de lstlisting
+% ===========================
+
+% ===============================================
+% ESTILO 1: MODERNO Y MINIMALISTA
+% ===============================================
+
+% Definir colores personalizados
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{framecolor}{rgb}{0.8,0.8,0.8}
+
+\lstset{
+  backgroundcolor=\color{backcolour},   
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2,
+  frame=shadowbox,
+  frameround=tttt,
+  rulecolor=\color{framecolor},
+  rulesepcolor=\color{framecolor},
+  xleftmargin=20pt,
+  xrightmargin=20pt,
+  aboveskip=20pt,
+  belowskip=20pt,
+  inputencoding=utf8,
+  extendedchars=true,
+  literate=
+    {←}{{$\leftarrow$}}1
+    {→}{{$\rightarrow$}}1
+    {↑}{{$\uparrow$}}1
+    {↓}{{$\downarrow$}}1
+    {↔}{{$\leftrightarrow$}}1
+    {⇒}{{$\Rightarrow$}}1
+    {⇐}{{$\Leftarrow$}}1
+    {⇔}{{$\Leftrightarrow$}}1
+    {α}{{$\alpha$}}1
+    {β}{{$\beta$}}1
+    {γ}{{$\gamma$}}1
+    {δ}{{$\delta$}}1
+    {ε}{{$\epsilon$}}1
+    {θ}{{$\theta$}}1
+    {λ}{{$\lambda$}}1
+    {μ}{{$\mu$}}1
+    {π}{{$\pi$}}1
+    {σ}{{$\sigma$}}1
+    {φ}{{$\phi$}}1
+    {ψ}{{$\psi$}}1
+    {ω}{{$\omega$}}1
+    {Δ}{{$\Delta$}}1
+    {Θ}{{$\Theta$}}1
+    {Λ}{{$\Lambda$}}1
+    {Π}{{$\Pi$}}1
+    {Σ}{{$\Sigma$}}1
+    {Φ}{{$\Phi$}}1
+    {Ψ}{{$\Psi$}}1
+    {Ω}{{$\Omega$}}1
+    {á}{{\'a}}1
+    {é}{{\'e}}1
+    {í}{{\'i}}1
+    {ó}{{\'o}}1
+    {ú}{{\'u}}1
+    {Á}{{\'A}}1
+    {É}{{\'E}}1
+    {Í}{{\'I}}1
+    {Ó}{{\'O}}1
+    {Ú}{{\'U}}1
+    {ä}{{\"a}}1
+    {ë}{{\"e}}1
+    {ï}{{\"i}}1
+    {ö}{{\"o}}1
+    {ü}{{\"u}}1
+    {Ä}{{\"A}}1
+    {Ë}{{\"E}}1
+    {Ï}{{\"I}}1
+    {Ö}{{\"O}}1
+    {Ü}{{\"U}}1
+    {ñ}{{\~n}}1
+    {Ñ}{{\~N}}1
+    {ç}{{\c{c}}}1
+    {Ç}{{\c{C}}}1
+    {¿}{{?`}}1
+    {¡}{{!`}}1
+    {à}{{\`a}}1
+    {è}{{\`e}}1
+    {ì}{{\`i}}1
+    {ò}{{\`o}}1
+    {ù}{{\`u}}1
+    {À}{{\`A}}1
+    {È}{{\`E}}1
+    {Ì}{{\`I}}1
+    {Ò}{{\`O}}1
+    {Ù}{{\`U}}1
+    {-}{{-}}1
+    {=}{{=\allowbreak}}1  % <--- ESTA LÍNEA ES EL TRUCO PARA CORTAR LOS '===='
+    % {#}{{\#}}1 
+}
+
+
+% ===============================================
+% ESTILO 2: ELEGANTE CON BORDES REDONDEADOS
+% ===============================================
+
+% Colores para estilo elegante
+\definecolor{lightblue}{rgb}{0.93,0.95,1}
+\definecolor{darkblue}{rgb}{0.1,0.2,0.5}
+\definecolor{mediumblue}{rgb}{0.2,0.4,0.8}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{darkred}{rgb}{0.6,0,0}
+
+\lstdefinestyle{elegant}{
+    backgroundcolor=\color{lightblue},
+    commentstyle=\color{darkgreen}\itshape,
+    keywordstyle=\color{darkblue}\bfseries,
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{darkred},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=t,
+    keepspaces=true,
+    numbers=left,
+    numbersep=8pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=single,
+    frameround=tttt,
+    framesep=10pt,
+    xleftmargin=15pt,
+    xrightmargin=15pt,
+    aboveskip=15pt,
+    belowskip=15pt,
+    columns=flexible
+}
+
+% ===============================================
+% ESTILO 3: PROFESIONAL CORPORATIVO
+% ===============================================
+
+% Colores corporativos
+\definecolor{corporatebg}{rgb}{0.98,0.98,0.98}
+\definecolor{corporateblue}{rgb}{0.07,0.29,0.49}
+\definecolor{corporategray}{rgb}{0.4,0.4,0.4}
+\definecolor{corporategreen}{rgb}{0.13,0.55,0.13}
+\definecolor{corporatered}{rgb}{0.8,0.2,0.2}
+
+\lstdefinestyle{corporate}{
+    backgroundcolor=\color{corporatebg},
+    commentstyle=\color{corporategreen}\slshape,
+    keywordstyle=\color{corporateblue}\bfseries,
+    numberstyle=\scriptsize\color{corporategray},
+    stringstyle=\color{corporatered},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=12pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=3,
+    frame=leftline,
+    framerule=3pt,
+    rulecolor=\color{corporateblue},
+    xleftmargin=25pt,
+    aboveskip=20pt,
+    belowskip=20pt,
+    lineskip=1pt
+}
+
+% ===============================================
+% ESTILO 4: MODERNO CON SOMBRAS
+% ===============================================
+
+% Colores modernos
+\definecolor{modernbg}{rgb}{0.97,0.97,0.97}
+\definecolor{moderngray}{rgb}{0.3,0.3,0.3}
+\definecolor{modernpurple}{rgb}{0.5,0.2,0.8}
+\definecolor{modernteal}{rgb}{0,0.5,0.5}
+\definecolor{modernorange}{rgb}{0.8,0.4,0}
+
+\lstdefinestyle{modern}{
+    backgroundcolor=\color{modernbg},
+    commentstyle=\color{modernteal}\itshape,
+    keywordstyle=\color{modernpurple}\bfseries,
+    numberstyle=\tiny\color{moderngray},
+    stringstyle=\color{modernorange},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=t,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=tb,
+    framerule=2pt,
+    rulecolor=\color{modernpurple},
+    xleftmargin=20pt,
+    xrightmargin=20pt,
+    aboveskip=25pt,
+    belowskip=25pt
+}
+
+% ===============================================
+% CONFIGURACIÓN PARA DIFERENTES LENGUAJES
+% ===============================================
+
+% Python
+\lstdefinestyle{python}{
+    language=Python,
+    style=elegant,
+    morekeywords={True,False,None,self,cls,def,class,import,from,as,with,yield,async,await},
+    morecomment=[l]{\#},
+    morestring=[b]',
+    morestring=[b]"
+}
+
+% Java
+\lstdefinestyle{java}{
+    language=Java,
+    style=corporate,
+    morekeywords={var,record,sealed,permits,non-sealed}
+}
+
+% C++
+\lstdefinestyle{cpp}{
+    language=C++,
+    style=modern,
+    morekeywords={constexpr,nullptr,auto,decltype,override,final}
+}
+
+% JavaScript
+\lstdefinestyle{javascript}{
+    language=Java,
+    style=elegant,
+    morekeywords={let,const,var,function,class,extends,import,export,default,async,await,yield},
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]',
+    morestring=[b]",
+    morestring=[b]`
+}
+
+% ===============================================
+% EJEMPLOS DE USO
+% ===============================================
+
+% Para usar el estilo por defecto:
+% \begin{lstlisting}
+% código aquí
+% \end{lstlisting}
+
+% Para usar un estilo específico:
+% \begin{lstlisting}[style=elegant]
+% código aquí
+% \end{lstlisting}
+
+% Para incluir un archivo con estilo específico:
+% \lstinputlisting[style=python]{archivo.py}
+
+% Para código inline:
+% \lstinline[style=modern]{código inline}
+
+% ===============================================
+% CONFIGURACIÓN ADICIONAL PARA TÍTULOS Y CARACTERES
+% ===============================================
+
+% Personalizar el formato de los títulos de los listados
+\renewcommand\lstlistingname{Código}
+\renewcommand\lstlistlistingname{Lista de Códigos}
+
+% Configurar el formato del título con soporte para tildes
+\lstset{
+    %title=\lstname,
+    captionpos=t,
+    abovecaptionskip=10pt,
+    belowcaptionskip=5pt,
+    % Configuración global para caracteres especiales
+    inputencoding=utf8,
+    extendedchars=true
+}
+
+% ===============================================
+% COMANDOS PERSONALIZADOS ÚTILES
+% ===============================================
+
+% Comando para código inline con soporte automático de tildes
+\newcommand{\codeinline}[2][modern]{\lstinline[style=#1,inputencoding=utf8,extendedchars=true]{#2}}
+
+% Comando para bloques de código con título personalizado
+\newcommand{\codeblock}[3][elegant]{%
+    \begin{lstlisting}[style=#1,caption={#2},label={lst:#2},inputencoding=utf8,extendedchars=true]
+    #3
+    \end{lstlisting}
+}
+
+% Comando para incluir archivos con configuración automática
+\newcommand{\includecode}[3][python]{%
+    \lstinputlisting[style=#1,caption={#3},label={lst:#3},inputencoding=utf8,extendedchars=true]{#2}
+}
+
+% ===============================================
+% CONFIGURACIONES ESPECIALES PARA IDIOMAS
+% ===============================================
+
+% Configuración específica para código en español
+\lstdefinestyle{español}{
+    style=elegant,
+    inputencoding=utf8,
+    extendedchars=true,
+    % Palabras clave en español para pseudocódigo
+    morekeywords={función,procedimiento,inicio,fin,si,entonces,sino,mientras,para,hasta,hacer,repetir,caso,segun,verdadero,falso,entero,real,caracter,cadena,booleano,leer,escribir,imprimir}
+}
+
+% Configuración para comentarios multilíngües
+\lstset{
+    morecomment=[l]{//\ },
+    morecomment=[l]{\#\ },
+    morecomment=[s]{/*}{*/},
+    morecomment=[s]{}
+}
+
+% ===============================================
+% CONFIGURACIÓN PARA DIFERENTES LENGUAJES
+% ===============================================
+
+% Python
+\lstdefinestyle{style1}{
+    language=Python,
+    style=elegant,
+    morekeywords={True,False,None,self,cls,def,class,import,from,as,with,yield,async,await},
+    morecomment=[l]{\#},
+    morestring=[b]',
+    morestring=[b]",
+    % Soporte para caracteres especiales
+    inputencoding=utf8,
+    extendedchars=true
+}
+
+% Java
+\lstdefinestyle{style2}{
+    language=Java,
+    style=corporate,
+    morekeywords={var,record,sealed,permits,non-sealed},
+    % Soporte para caracteres especiales
+    inputencoding=utf8,
+    extendedchars=true
+}
+
+% C++
+\lstdefinestyle{style3}{
+    language=C++,
+    style=modern,
+    morekeywords={constexpr,nullptr,auto,decltype,override,final},
+    % Soporte para caracteres especiales
+    inputencoding=utf8,
+    extendedchars=true
+}
+
+\lstdefinelanguage{GDScript}{
+  keywords={func, var, extends, class_name, if, else, for, while, return, match, in, and, or, not, break, continue, pass},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]',
+}
+
+\lstdefinestyle{gdstyle}{
+  language=GDScript,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{gray},
+  stringstyle=\color{red!60!black},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  breaklines=true,
+  frame=single,
+  tabsize=2,
+}
+
+
+% ===========================
+% Estilo global de tablas
+% ===========================
+
+\usepackage{booktabs}   % reglas profesionales
+\usepackage{colortbl}   % color en filas
+\usepackage{xcolor}     % colores
+\usepackage{float}      % [H]
+
+% Color de filas alternadas
+% \rowcolors{2}{gray!10}{white}
+
+% % Espacio vertical entre filas
+% \renewcommand{\arraystretch}{1.2}
+
+% % Cambiar el tamaño de columna por defecto
+% \setlength{\tabcolsep}{8pt}
+
+% % Redefinir tabla para que todas las tablas tengan el estilo
+% \let\oldtabular\tabular
+% \let\endoldtabular\endtabular
+% \renewenvironment{tabular}[1]{%
+%   \oldtabular{#1}%
+% }{%
+%   \endoldtabular
+% }
+
+% \usepackage{longtable,booktabs,xcolor}
+% \rowcolors{2}{gray!10}{white}   % filas alternadas
+% \renewcommand{\arraystretch}{1.2} % espacio vertical entre filas
+
+% % Mostrar siempre el número de la tabla
+% \usepackage{caption}
+% \captionsetup[table]{labelformat=default, labelsep=colon, textfont=bf}
+
+
+% ===========================
+% Estilos para tikz y figures
+% ===========================
+
+\usepackage{caption}
+\captionsetup{
+    font={it},       % fuente en cursiva
+    labelfont={},  % etiqueta ("Figura 1") en negrita
+    textfont={it},   % texto del caption en cursiva
+    justification=centering,  % centra el texto (opcional)
+    font={small},    % tamaño de fuente pequeño
+}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\tikzset{
+  state/.style={
+    draw,
+    circle,
+    minimum size=1cm,
+    thick,
+    fill=yellow!20
+  },
+  block/.style={
+    rectangle,
+    draw,
+    fill=blue!10,
+    rounded corners,
+    text centered,
+    minimum height=1cm,
+    minimum width=2cm,
+    thick
+  },
+  none/.style={
+    draw=none,
+    fill=none,
+    text centered
+  },
+  error/.style={
+    draw,
+    circle,
+    minimum size=1cm,
+    thick,
+    fill=red!30
+  },
+  initial text={}
+}

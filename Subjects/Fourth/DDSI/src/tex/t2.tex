@@ -1,0 +1,178 @@
+\chapter{Análisis y Especificación de Requisitos}
+
+\section{Introducción al Análisis de Requisitos}
+La fase de análisis y especificación de requisitos constituye una etapa fundamental en el ciclo de vida del desarrollo de sistemas de información (SI). Su objetivo primordial es \textbf{determinar el conjunto de datos y las restricciones sobre los mismos que son necesarios para el correcto funcionamiento del sistema}. Este proceso, que se ubica tempranamente en el ciclo de desarrollo, es crítico, ya que una identificación incompleta o incorrecta de los requisitos puede llevar a fallos significativos en el diseño y, consecuentemente, a un sistema que no satisface las necesidades del usuario o de la empresa.
+
+Dentro de la metodología de \textit{“Análisis conjunto de datos y funciones guiado por las funciones”}, esta fase culmina con la generación de tres artefactos clave: un listado de requisitos funcionales (RF), un listado de requisitos de datos (RD) y un listado de restricciones semánticas (RS).
+
+\subsection{Conceptos Clave: RF, RD y RS}
+Los tres pilares del análisis de requisitos en el contexto del Diseño y Desarrollo de Sistemas de Información (DDSI) son los Requisitos Funcionales, los Requisitos de Datos y las Restricciones Semánticas.
+\begin{itemize}
+    \item \textbf{Requisitos Funcionales (RF)}: Describen las funcionalidades concretas del sistema que requieren acceso a la base de datos para realizar operaciones de consulta (lectura) o manipulación (inserción, modificación o borrado).
+    \item \textbf{Requisitos de Datos (RD)}: Especifican los datos que son manejados por los requisitos funcionales. Se clasifican según su procedencia y destino: datos de entrada (RDE), de lectura de la base de datos (RDR), de escritura en la base de datos (RDW) y de salida (RDS). Cada requisito de datos debe definir el nombre y tipo de los datos.
+    \item \textbf{Restricciones Semánticas (RS)}: Detallan reglas de negocio o condiciones específicas que alteran el comportamiento de un requisito funcional en función de una configuración particular de los datos. Son cruciales para garantizar la integridad y coherencia de la información en el sistema.
+\end{itemize}
+
+\begin{tcolorbox}[colframe=blue!75!black, colback=blue!5!white, title=\textbf{Nota Aclaratoria}]
+    En el marco de la asignatura de DDSI, si bien se reconocen otras tareas propias de la Ingeniería del Software como los casos de uso, los requisitos no funcionales (RNF) o los bocetos de interfaces, se asumen como realizadas y el enfoque se centra exclusivamente en la especificación de RF, RD y RS que interactúan directamente con la base de datos.
+\end{tcolorbox}
+
+\section{Requisitos Funcionales (RF)}
+\subsection{Definición y Especificación de Requisitos Funcionales}
+Un \textbf{Requisito Funcional (RF)} se define como una funcionalidad específica del sistema de información que precisa interactuar con la base de datos. Esta interacción implica una secuencia de acciones y un flujo de datos que deben ser especificados con claridad y en lenguaje natural.
+
+\subsubsection{Estructura de un Requisito Funcional}
+La especificación de cada RF debe detallar tres componentes fundamentales: la Entrada, la interacción con la Base de Datos (BD) y la Salida.
+\begin{enumerate}
+    \item \textbf{Entrada (E)}: Describe el origen de la activación de la funcionalidad. Requiere la identificación de:
+    \begin{itemize}
+        \item \textit{Agente externo}: La persona o sistema que inicia la acción.
+        \item \textit{Acción}: La operación concreta que el agente externo solicita.
+        \item \textit{Requisitos de Datos de Entrada (RDE)}: Los datos, si los hubiera, que el agente externo proporciona al sistema para ejecutar la función. Estos se definen formalmente en un requisito de datos asociado, por ejemplo, RDE1.1.
+    \end{itemize}
+
+    \item \textbf{Base de Datos (BD)}: Detalla las operaciones de lectura y/o escritura sobre la base de datos. Se debe especificar, como mínimo, uno de los siguientes:
+    \begin{itemize}
+        \item \textit{Requisitos de Datos de Lectura (RDR)}: Datos que se consultan en la base de datos.
+        \item \textit{Requisitos de Datos de Escritura (RDW)}: Datos que se insertan, modifican o eliminan en la base de datos. Un mismo dato puede aparecer tanto en RDR como en RDW.
+    \end{itemize}
+
+    \item \textbf{Salida (S)}: Describe el resultado que el sistema comunica de vuelta al exterior. Incluye:
+    \begin{itemize}
+        \item \textit{Agente externo}: El destinatario del resultado de la operación.
+        \item \textit{Acción}: La confirmación del resultado o la presentación de la información solicitada.
+        \item \textit{Requisitos de Datos de Salida (RDS)}: Los datos, si los hubiera, que el sistema devuelve al agente externo. Se definen formalmente en un requisito de datos asociado, por ejemplo, RDS1.1.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Ejemplos de Requisitos Funcionales}
+Para ilustrar la especificación de requisitos, se utiliza un sistema de agenda de contactos simple. La descripción del sistema es la siguiente: \textit{“Deseamos crear un sistema de información para un único usuario que registre los contactos de una agenda. De cada contacto, almacenaremos su nombre (hasta 20 caracteres), su apellido (hasta 40 caracteres) y un número de teléfono (hasta 20 caracteres). Para dar de alta un nuevo contacto, el usuario deberá proporcionar nombre, apellido y teléfono, que el sistema almacenará, confirmando la inserción. Para dar de baja un contacto, el usuario proporcionará el número de teléfono. El sistema también permitirá mostrar un listado de contactos con todos sus datos”}.
+
+\begin{ejemplo}[Alta de contacto]
+\textbf{RF1: Dar de alta contacto.}
+\begin{itemize}
+    \item \textbf{Entrada}:
+    \begin{itemize}
+        \item \textit{Agente externo}: usuario.
+        \item \textit{Acción}: solicitar inserción.
+        \item \textit{Requisito de datos de entrada}: RDE1.
+    \end{itemize}
+    \item \textbf{BD}:
+    \begin{itemize}
+        \item \textit{Requisito de datos de escritura}: RDW1.
+    \end{itemize}
+    \item \textbf{Salida}:
+    \begin{itemize}
+        \item \textit{Agente externo}: usuario.
+        \item \textit{Acción}: confirmación resultado.
+        \item \textit{Requisito de datos de salida}: ninguno.
+    \end{itemize}
+\end{itemize}
+\textbf{RDE1}: Datos de entrada de alta de contacto.
+\begin{itemize}
+    \item Nombre: Cadena de caracteres (20).
+    \item Apellidos: Cadena de caracteres (40).
+    \item Teléfono: Cadena de caracteres (20).
+\end{itemize}
+\textbf{RDW1}: Datos almacenados de contacto. Coincide con RDE1.
+\end{ejemplo}
+
+\begin{ejemplo}[Baja de contacto]
+\textbf{RF2: Dar de baja contacto.}
+\begin{itemize}
+    \item \textbf{Entrada}:
+    \begin{itemize}
+        \item \textit{Agente externo}: usuario.
+        \item \textit{Acción}: solicitar borrado.
+        \item \textit{Requisito de datos de entrada}: RDE2.
+    \end{itemize}
+    \item \textbf{BD}:
+    \begin{itemize}
+        \item \textit{Requisito de datos de escritura}: RDW2.
+    \end{itemize}
+    \item \textbf{Salida}:
+    \begin{itemize}
+        \item \textit{Agente externo}: usuario.
+        \item \textit{Acción}: confirmación resultado.
+        \item \textit{Requisito de datos de salida}: ninguno.
+    \end{itemize}
+\end{itemize}
+\textbf{RDE2}: Datos de entrada de baja de contacto.
+\begin{itemize}
+    \item Teléfono: Cadena de caracteres (20).
+\end{itemize}
+\textbf{RDW2}: Datos almacenados de contacto. Coincide con RDW1.
+\end{ejemplo}
+
+\begin{ejemplo}[Listado de contactos]
+\textbf{RF3: Mostrar listado de contactos.}
+\begin{itemize}
+    \item \textbf{Entrada}:
+    \begin{itemize}
+        \item \textit{Agente externo}: usuario.
+        \item \textit{Acción}: solicitar listado.
+        \item \textit{Requisito de datos de entrada}: ninguno.
+    \end{itemize}
+    \item \textbf{BD}:
+    \begin{itemize}
+        \item \textit{Requisito de datos de lectura}: RDR3.
+    \end{itemize}
+    \item \textbf{Salida}:
+    \begin{itemize}
+        \item \textit{Agente externo}: usuario.
+        \item \textit{Acción}: mostrar listado.
+        \item \textit{Requisito de datos de salida}: RDS3.
+    \end{itemize}
+\end{itemize}
+\textbf{RDR3}: Datos de contacto almacenado. Coincide con RDW1. \\
+\textbf{RDS3}: Listado de registros, cada uno con los mismos datos de RDR3.
+\end{ejemplo}
+
+\section{Restricciones Semánticas (RS)}
+\subsection{Definición y Especificación de Restricciones Semánticas}
+Una \textbf{Restricción Semántica (RS)} es una regla que altera la ejecución de un Requisito Funcional (RF) cuando se presenta una configuración específica en los Requisitos de Datos (RD). En esencia, una RS describe cambios en el comportamiento del sistema basados en el estado de los datos, garantizando así la coherencia e integridad de la información.
+
+\subsubsection{Estructura de una Restricción Semántica}
+La especificación formal de una RS debe incluir:
+\begin{itemize}
+    \item \textbf{RF}: El Requisito Funcional al que afecta la restricción.
+    \item \textbf{RD(s)}: El o los Requisitos de Datos involucrados en la condición.
+    \item \textbf{Descripción}: Una explicación en lenguaje natural que detalla las condiciones sobre los datos y los cambios correspondientes en la acción del sistema.
+\end{itemize}
+
+\subsubsection{Ejemplos de Restricciones Semánticas}
+A continuación, se presentan ejemplos ilustrativos que clarifican el concepto de restricción semántica.
+\begin{itemize}
+    \item \textit{“Un usuario no puede tener prestados más de dos libros en la biblioteca”}. Esta RS está asociada al RF de "solicitar préstamo". Los RD implicados serían los datos de entrada (identificador del usuario) y los datos de lectura de la base de datos (número de préstamos activos). La descripción sería: \textit{“Si ya hay dos libros prestados al usuario en la BD, no se realiza la inserción y se devuelve un aviso”}.
+    \item En el sistema de agenda, una restricción es: \textit{“Un número de teléfono sólo puede pertenecer a un contacto”}.
+\end{itemize}
+
+\begin{ejemplo}[Teléfono único por contacto]
+\textbf{RS1: Un teléfono corresponde a un único contacto.}
+\begin{itemize}
+    \item \textbf{RF}: RF1 (Dar de alta contacto).
+    \item \textbf{RD(s)}: RDW1 (Si la comprobación se delega en el SGBD) o RDE1 + RDR1 (si la aplicación necesita consultar la BD para verificarlo).
+    \item \textbf{Descripción}: \textit{“Si ya había un contacto con el mismo teléfono, no se inserta el nuevo contacto y se devuelve un error”}.
+\end{itemize}
+\end{ejemplo}
+
+\section{Conexión con el Diseño Conceptual}
+El resultado de la fase de análisis de requisitos —es decir, el listado exhaustivo de Requisitos de Datos de lectura y escritura (RDR y RDW) y las Restricciones Semánticas (RS) que les afectan— constituye la \textbf{base fundamental para la fase de diseño conceptual} de la base de datos. Esta metodología de análisis conjunto asegura que el modelo de datos resultante contendrá todos los datos necesarios para satisfacer las funcionalidades requeridas del sistema de información, ni más ni menos.
+
+\subsection{Proyección hacia el Diagrama Entidad-Relación (E/R)}
+La transición del análisis al diseño se proyecta de la siguiente manera:
+\begin{itemize}
+    \item Los \textbf{Requisitos de Datos (RD)} de la base de datos se transformarán en las entidades, atributos y relaciones del diagrama E/R. Por ejemplo, el RD `RDW1: Datos almacenados de contacto` podría dar lugar a una entidad `Contacto` con atributos como `nombre`, `apellidos` y `teléfono`.
+    \item Las \textbf{Restricciones Semánticas (RS)} se traducirán en las restricciones del modelo E/R, como la cardinalidad de las relaciones, la definición de claves (primarias, foráneas, únicas) y otras reglas de integridad. Por ejemplo, la `RS1: Un teléfono corresponde a un único contacto` sugiere que el atributo `teléfono` de la entidad `Contacto` debe ser una clave candidata o, al menos, tener una restricción de unicidad.
+\end{itemize}
+
+\begin{tcolorbox}[colframe=darkgreen!75!black, colback=darkgreen!5!white, title=\textbf{Ampliaciones Sugeridas: Requisitos No Funcionales (RNF)}]
+Aunque en la metodología de DDSI se asumen como hechos, es importante mencionar la existencia de \textbf{Requisitos No Funcionales (RNF)}. Estos no describen qué hace el sistema, sino cómo lo hace. Incluyen aspectos críticos como:
+    \begin{itemize}
+        \item \textbf{Rendimiento}: Tiempos de respuesta, capacidad de procesamiento de transacciones por segundo.
+        \item \textbf{Seguridad}: Niveles de acceso, autenticación de usuarios, cifrado de datos.
+        \item \textbf{Disponibilidad}: Tiempo de actividad del sistema, tolerancia a fallos.
+        \item \textbf{Usabilidad}: Facilidad de uso de la interfaz de usuario.
+    \end{itemize}
+    Estos requisitos, aunque no se modelan directamente en el diagrama E/R, son determinantes en las fases de diseño físico y de aplicación.
+\end{tcolorbox}

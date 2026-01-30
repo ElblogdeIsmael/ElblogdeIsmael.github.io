@@ -1,0 +1,111 @@
+\chapter{Preguntas Tipo}
+\section*{I. Teoría de Lenguajes y Gramáticas (Tema 1)}
+
+Aquí el foco está en la inducción matemática y la cardinalidad de conjuntos.
+
+\subsection*{1. Demostración de corrección de una Gramática}
+Esta es una pregunta clásica y fundamental. No basta con diseñar la gramática, debes probar que $G$ genera exactamente $L$.
+
+\begin{itemize}
+    \item \textbf{Pregunta tipo:} Dado el lenguaje $L$ y una gramática $G$, demuestra formalmente que $G$ genera exactamente $L$.
+    \item \textbf{Lo que espero:} Tienes que demostrar la doble inclusión:
+    \begin{enumerate}
+        \item $L(G) \subseteq L$: ``Toda palabra generada por $G$ tiene igual número de a's y b's'' (usando inducción sobre el número de pasos de derivación).
+        \item $L \subseteq L(G)$: ``Toda palabra con igual número de a's y b's puede ser generada por $G$'' (usando inducción sobre la longitud de la palabra).
+    \end{enumerate}
+\end{itemize}
+
+\subsection*{2. Cardinalidad y Conjuntos No Numerables}
+
+\begin{itemize}
+    \item \textbf{Pregunta tipo:} Demuestre formalmente que el conjunto de todos los lenguajes sobre un alfabeto no vacío $\Sigma$ es \textbf{no numerable}.
+    \item \textbf{Lo que espero:} Debes usar el argumento de la \textbf{diagonalización de Cantor} (reducción al absurdo).
+    \item Debes suponer que existe una biyección $f$ entre los lenguajes y los números naturales.
+    \item Construir un lenguaje ``trampa'' $L^*$ que difiera de cada lenguaje $L_i$ en al menos una palabra (la $i$-ésima palabra).
+    \item Llegar a la contradicción de que $L^*$ no puede tener ningún número asociado.
+\end{itemize}
+
+\subsection*{3. Inducción sobre operaciones de cadenas}
+
+\begin{itemize}
+    \item \textbf{Pregunta tipo:} Demuestre por inducción que para cualquier palabra $w$, se cumple que $(w^R)^R = w$ (donde $w^R$ es la inversa) o propiedades similares de la concatenación.
+\end{itemize}
+
+\bigskip
+\hrule
+\bigskip
+
+\section*{II. Autómatas Finitos: Equivalencias y Construcciones (Tema 2)}
+
+En este bloque, las preguntas de ``demostración'' suelen ser constructivas: ``Demuestra que existe...'' se traduce en ``Construye el algoritmo que lo transforma''.
+
+\subsection*{4. Equivalencia AFND $\to$ AFD (Construcción de Subconjuntos)}
+
+\begin{itemize}
+    \item \textbf{Pregunta tipo:} Demuestre que todo lenguaje aceptado por un Autómata Finito No Determinista (AFND) es aceptado también por un Autómata Finito Determinista (AFD).
+    \item \textbf{Lo que espero:} No quiero solo el dibujo. Quiero la definición formal de la quíntupla del AFD equivalente $M'$ donde:
+    \begin{itemize}
+        \item Los estados $Q'$ son el conjunto potencia de los estados originales ($Q'$ = $\mathcal{P}(Q)$).
+        \item Defines la transición $\delta'$ como la unión de las transiciones originales para todo $q \in Q$.
+    \end{itemize}
+\end{itemize}
+
+\subsection*{5. Equivalencia Expresiones Regulares $\leftrightarrow$ Autómatas}
+
+Aquí hay dos vías de demostración que suelen caer como ejercicios prácticos largos:
+
+\begin{itemize}
+    \item \textbf{Vía A (Análisis): De Autómata a Expresión Regular (Método $R_{i,j}^{(k)}$).}
+    \begin{itemize}
+        \item \textbf{Pregunta:} Dado un AFD, calcule la expresión regular del lenguaje aceptado utilizando la definición recursiva de los conjuntos $R_{i,j}^{(k)}$.
+        \item \textbf{Clave:} Debes entender que $R_{i,j}^{(k)}$ son las palabras que van del estado $i$ al $j$ pasando solo por estados intermedios con índice $\leq k$. Tienes que aplicar la fórmula recursiva: 
+        \[
+            R_{i,j}^{(k)} = R_{i,j}^{(k-1)} \cup R_{i,k}^{(k-1)} (R_{k,k}^{(k-1)})^* R_{k,j}^{(k-1)}
+        \]
+    \end{itemize}
+    \item \textbf{Vía B (Síntesis): De Expresión Regular a Autómata.}
+    \begin{itemize}
+        \item \textbf{Pregunta:} Demuestre constructivamente que para cualquier expresión regular existe un AFND-$\epsilon$ que la reconoce.
+        \item \textbf{Clave:} Debes dibujar o definir los ``bloques constructivos'' (plantillas) para la unión, concatenación y clausura de Kleene (Estrella).
+    \end{itemize}
+\end{itemize}
+
+\subsection*{6. Lema de Arden (Resolución de Ecuaciones)}
+
+\begin{itemize}
+    \item \textbf{Pregunta tipo:} Dado el siguiente sistema de ecuaciones de expresiones regulares derivado de un autómata, resuélvalo para encontrar la expresión del estado inicial.
+    \item \textbf{Lo que espero:} Que sepas aplicar que la solución es $X = Q^*P$ (siempre que $\epsilon \notin Q$) y sepas sustituir paso a paso hasta despejar la variable del estado inicial.
+\end{itemize}
+
+\bigskip
+\hrule
+\bigskip
+
+\section*{III. Gramáticas Regulares y Autómatas (Tema 2)}
+
+\subsection*{7. Gramáticas Lineales por la Izquierda vs. Derecha}
+
+\begin{itemize}
+    \item \textbf{Pregunta tipo:} Dado un autómata finito, construya la \textbf{Gramática Lineal por la Izquierda} que genera el mismo lenguaje.
+    \item \textbf{La trampa:} Es fácil sacar la lineal por la \emph{derecha} directamente del autómata ($q \to a p$). Para la lineal por la \emph{izquierda}, el proceso riguroso es:
+    \begin{enumerate}
+        \item Invertir el autómata (finales se vuelven iniciales, flechas al revés).
+        \item Sacar la gramática lineal por la derecha de ese autómata invertido.
+        \item Invertir las producciones de dicha gramática.
+    \end{enumerate}
+\end{itemize}
+
+\bigskip
+\hrule
+\bigskip
+
+\section*{Resumen para tu sesión de estudio}
+
+Si quieres sacar nota de honor, asegúrate de dominar estas tres cosas ``difíciles'':
+
+\begin{enumerate}
+    \item \textbf{La inducción} para probar que $L(G) = L$.
+    \item \textbf{El método recursivo $R_{i,j}^{(k)}$} (es tedioso, pero demuestra que entiendes la estructura interna de los caminos en un grafo).
+    \item \textbf{La formalización de tuplas:} Cuando te pidan convertir un AFND a AFD, escribe explícitamente $M' = (Q', \Sigma, \delta', q_0', F')$. No hagas solo el dibujo de las bolitas.
+\end{enumerate}
+

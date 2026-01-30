@@ -1,0 +1,1248 @@
+
+\section{Árboles de decisión}
+\begin{ejercicio}
+Silicon Inc., un fabricante de semiconductores, está investigando la posibilidad de
+fabricar y comercializar un procesador. Este proyecto requerirá la compra de un
+sofisticado sistema de CAD, o la contratación y la formación de varios ingenieros más. El
+mercado para el producto puede ser favorable o desfavorable. Silicon Inc., por supuesto,
+tiene la opción de no desarrollar el producto.
+Con una acogida favorable del mercado, las ventas serían de 25.000 procesadores
+vendidos a 100 dólares la unidad, y si la acogida del mercado no fuese favorable, las
+ventas serían de tan sólo 8.000 procesadores vendidos a 100 dólares cada uno. El coste
+del equipo CAD es de 500.000 dólares, pero el de contratar y preparar a tres nuevos
+ingenieros es de tan sólo 375.000 dólares. Sin embargo, el coste de fabricación iría desde
+los 50 dólares la unidad (cuando se fabrica sin el CAD) a 40 dólares (cuando se fabrica
+con el CAD). La probabilidad de una acogida favorable del nuevo microprocesador es del
+40\%, mientras que la probabilidad de una acogida mala es del 60\%.
+Aplicando la técnica del árbol de decisión, ¿qué alternativa elegiría en base al
+beneficio y cuáles serían los resultados?
+\end{ejercicio}
+
+\begin{solucion} Nos quedaría el siguiente grafo de decisiones de la figura \ref{fig:rel2_ej1}.
+
+\begin{figure}
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tikzpicture}[
+        >={Stealth[round]},
+        node distance=3cm,
+        auto,
+        shorten >=1pt,
+        font=\sffamily\small
+    ]
+
+    % Estilos
+    % \tikzstyle{state} = [draw, circle, minimum size=1.5cm, thick, fill=yellow!20]
+    % \tikzstyle{block} = [rectangle, draw, fill=blue!10, rounded corners, text centered, minimum height=1cm, minimum width=2cm, thick]
+    % \tikzstyle{none} = [draw=none, fill=none, text centered]
+
+    % Nodos principales
+    \node[block] (1) at (-5,0) {1};
+    \node[block] (2) at (0,3) {2};
+    \node[none] (3) at (0,-3) {$\triangle_5$};
+
+    % Nodos intermedios
+    \node[state, above right=2.2cm and 2.5cm of 2] (4) {3};
+    \node[state, below right=2.2cm and 2.5cm of 2] (5) {4};
+
+    % Nodos finales (triángulos)
+    \node[none, above right=1.8cm and 2.5cm of 4] (4a) {$\triangle_1$};
+    \node[none, below right=1.8cm and 2.5cm of 4] (5a) {$\triangle_2$};
+    \node[none, above right=1.8cm and 2.5cm of 5] (4b) {$\triangle_3$};
+    \node[none, below right=1.8cm and 2.5cm of 5] (5b) {$\triangle_4$};
+
+    % Relaciones principales
+    \draw[->, thick] (1) -- node[above, yshift=4pt] {Fabricar} (2);
+    \draw[->, thick] (1) -- node[below, yshift=-4pt] {No fabricar} (3);
+
+    % Relaciones secundarias (curvas suaves)
+    \draw[->, thick, bend left=10] (2) to node[above,yshift=4pt] {CAA} (4);
+    \draw[->, thick, bend right=10] (2) to node[below, yshift=-4pt] {Formación} (5);
+
+    % Conexiones hacia triángulos
+    \draw[->,dashed, thick, bend left=8] (4) to (4a);
+    \draw[->,dashed, thick, bend right=8] (4) to (5a);
+    \draw[->,dashed, thick, bend left=8] (5) to (4b);
+    \draw[->,dashed, thick, bend right=8] (5) to (5b);
+
+    \end{tikzpicture}
+    }
+    \captionof{figure}{Diagrama de Transición del AFD del Ejercicio 1.}
+    \label{fig:rel2_ej1}
+\end{figure}
+
+\begin{align*}
+    \triangle_1 &= 25000 \cdot (100 - 40) - 500000 = 1000000 \\
+    \triangle_2 &= 8000 \cdot (100 - 40) - 500000 = -25000 \\
+    \triangle_3 &= 25000 \cdot (100 - 50) - 375000 = 875000 \\
+    \triangle_4 &= 8000 \cdot (100 - 50) - 375000 = 25000 \\
+    \triangle_5 &= 0 \\
+\end{align*}
+
+Cálculo de los valores monetarios esperados de derecha a izquierda:
+\begin{align*}
+    VME_3 = & 0.4 \cdot 1000000 - 20000 \cdot 0.6  = 3880000 \\
+    VME_4 = 365000 \\
+    VME_2 = 388000 \\
+    VME_1 = 388000 \\
+\end{align*}
+
+Podemos concluir con que la mejor solución es comprar el CADA y el VME sería de 388000 dólares.
+
+
+
+\end{solucion}
+
+
+\begin{ejercicio}
+Una determinada empresa se ve en la necesidad de decidir lo antes posible, sin ninguna
+otra alternativa posible, el lanzamiento al mercado de tres posibles productos a los que
+ha denominado A, B y C. Los resultados que caben esperar están asociados a distintos
+estados de la naturaleza, así como a la toma de otra serie de decisiones.
+
+Si decidimos lanzar el producto A, el beneficio previsto es de 9.500 euros en el supuesto
+que sea objeto de una buena aceptación, lo que se espera que ocurra con una
+probabilidad del 60\%. Si el nivel de aceptación es bajo, el beneficio ascenderá tan solo a
+4.500 euros.
+
+El lanzamiento del producto B plantea mayores dificultades. Por una parte, la viabilidad
+del proyecto depende de que se produzca o no un cambio legislativo en los próximos
+meses que considere saludable el material utilizado en su fabricación. Existe una
+probabilidad del 70\% de que este cambio tenga lugar, en cuyo caso, se haría una
+campaña publicitaria que, de tener éxito, permitiría obtener un beneficio de 16.000
+euros. Si la campaña resultara un fracaso, el beneficio ascendería a la mitad del caso
+anterior. Si no se produce el cambio legislativo esperado entonces la empresa debe
+decidir si abandonar el proyecto, modificar rápidamente la composición de materiales
+(con lo que se encarecería el coste de producción), o continuar vendiendo su producto
+actual. Si se abandona el proyecto los resultados van de un beneficio de 6.000 euros si
+no se tiene que devolver la subvención recibida, lo que puede ocurrir con una
+probabilidad del 30\%, o a unas pérdidas de 800 euros si se tiene que devolver la
+subvención. El cambio de materiales, a pesar de encarecer el producto, nos llevaría a
+unos beneficios de 2.538,46 euros si la competencia no consigue lanzar al mercado su
+nuevo producto, lo que se espera que ocurra con una probabilidad del 65\%. Si la
+competencia lanza su producto, el beneficio solo alcanzaría la cifra de 1.000 euros. Si la
+empresa decide seguir con su producto actual, el beneficio esperado será de 1.900
+euros, siempre que no aparezca en el mercado ninguna versión mejorada, lo que se cree
+que ocurrirá con una probabilidad del 80\%. Si apareciera la versión mejorada, los
+beneficios se situarían en 750 euros.
+
+Por último, si se opta por fabricar el producto C, su éxito solo depende de la liberación
+del mercado de este producto, es decir, la desaparición de aranceles a la importación de
+productos sustitutivos. Si esto ocurre, el beneficio será de 6.000 euros, mientras que si
+no ocurre será de 10.000 euros.
+
+A la vista de esta información, ¿qué decisión o secuencia de decisiones debe tomar la
+empresa en función del criterio del beneficio esperado aplicando la técnica de los
+árboles de decisión?
+\end{ejercicio}
+
+\begin{solucion} Debemos de tener en cuenta que en los nodos cuadrados se coge el mayor valor monetario esperado y en los nodos circulares se hace la media ponderada por las probabilidades. Los nodos circulares representan aquellas situaciones en las que se debe de elegir entre varias opciones y los nodos cuadrados representan aquellas situaciones en las que no se puede elegir.
+
+Nos quedaría el siguiente grafo de decisiones de la figura \ref{fig:rel2_ej2}.
+
+
+\begin{figure}
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tikzpicture}[
+        >={Stealth[round]},
+        node distance=3.5cm,
+        auto,
+        shorten >=1pt,
+        font=\sffamily\small
+    ]
+
+    % --- Nodos principales ---
+    \node[block] (1) {(1)};
+    \node[state, above right=7cm and 7cm of 1] (2) {(2)};
+    \node[state, right=7cm of 1] (3) {(3)};
+    \node[state, below right=7cm and 7cm of 1] (4) {(4)};
+
+    % --- Relaciones principales ---
+    \draw[->, thick, bend left=10] (1) to node[above] {Fabricar A(2)} (2);
+    \draw[->, thick] (1) -- node[above] {Fabricar B(3)} (3);
+    \draw[->, thick, bend right=10] (1) to node[below] {Fabricar C(4)} (4);
+
+    % --- Nodos secundarios para A (más separados vertical y horizontalmente) ---
+    \node[none, above right=2cm and 2cm of 2] (2a) { $\triangle_1 = 9500$};
+    \node[none, below right=2cm and 2cm of 2] (2b) { $\triangle_2 = 4500$};
+
+    % --- Relaciones secundarias para A ---
+    \draw[->, dashed, bend left=5] (2) to node[above] {60\% Alta aceptación} (2a);
+    \draw[->, dashed, bend right=5] (2) to node[below] {Baja aceptación 40\%} (2b);
+
+    % --- Nodos secundarios para B (más separados vertical y horizontalmente) ---
+    \node[block, above right=2cm and 2cm of 3] (3a) {(5)};
+    \node[block, below right=2cm and 5cm of 3] (3b) {(6)};
+
+    % --- Relaciones secundarias para B ---
+    \draw[->, dashed, bend left=5] (3) to node[above] {Cambio legislativo 70\%} (3a);
+    \draw[->, dashed, bend right=5] (3) to node[below] {No cambio legislativo 30\%} (3b);
+
+    % --- Nodos terciarios para 3a ---
+    \node[none, above right=2cm and 2cm of 3a] (3a1) {$\triangle_3 = 16000$};
+    \node[none, below right=2cm and 2cm of 3a] (3a2) {$\triangle_4 = 8000$};
+
+    % --- Relaciones terciarias para 3a ---
+    \draw[->, dashed, bend left=5] (3a) to node[above] {Éxito 50\%} (3a1);
+    \draw[->, dashed, bend right=5] (3a) to node[below] {Fracaso 50\%} (3a2);
+
+    % --- Nodos terciarios para 3b ---
+    \node[state, above right=7cm and 7cm of 3b] (3b1) {(7)};
+    \node[state, right=8cm of 3b] (3b2) {(8)};
+    \node[state, below right=7cm and 7cm of 3b] (3b3) {(9)};
+
+    % --- Relaciones terciarias para 3b ---
+    \draw[->, dashed, bend left=5] (3b) to node[above] {Abandona 33\%} (3b1);
+    \draw[->, dashed] (3b) -- node[above] {Modifica 33\%} (3b2);
+    \draw[->, dashed, bend right=5] (3b) to node[below] {Continúa 33\%} (3b3);
+
+    % --- Nodos cuaternarios para 3b1 (Abandona) ---
+    \node[none, above right=2cm and 2cm of 3b1] (3b1a) {$\triangle_5 = 6000$};
+    \node[none, below right=2cm and 2cm of 3b1] (3b1b) {$\triangle_6 = -800$};
+
+    % --- Relaciones cuaternarias para 3b1 ---
+    \draw[->, dashed, bend left=5] (3b1) to node[above] {No devolver 30\%} (3b1a);
+    \draw[->, dashed, bend right=5] (3b1) to node[below] {Devolver 70\%} (3b1b);
+
+    % --- Nodos cuaternarios para 3b2 (Modifica) ---
+    \node[none, above right=2cm and 2cm of 3b2] (3b2a) {$\triangle_7 = 2538.46$};
+    \node[none, below right=2cm and 2cm of 3b2] (3b2b) {$\triangle_8 = 1000$};
+
+    % --- Relaciones cuaternarias para 3b2 ---
+    \draw[->, dashed, bend left=5] (3b2) to node[above] {No competencia 65\%} (3b2a);
+    \draw[->, dashed, bend right=5] (3b2) to node[below] {Competencia  35\%} (3b2b);
+
+    % --- Nodos cuaternarios para 3b3 (Continúa) ---
+    \node[none, above right=2cm and 2cm of 3b3] (3b3a) {$\triangle_9 = 1900$};
+    \node[none, below right=2cm and 2cm of 3b3] (3b3b) {$\triangle_{10} = 1000$};
+
+    % --- Relaciones cuaternarias para 3b3 ---
+    \draw[->, dashed, bend left=5] (3b3) to node[above] {No versión mejorada  80\%} (3b3a);
+    \draw[->, dashed, bend right=5] (3b3) to node[below] {Versión mejorada 20\%} (3b3b);
+
+    % --- Nodos secundarios para C ---
+    \node[none, above right=2cm and 2cm of 4] (4a) {$\triangle_{11} = 6000$};
+    \node[none, below right=2cm and 2cm of 4] (4b) {$\triangle_{12} = 10000$};
+
+    % --- Relaciones secundarias para C ---
+    \draw[->, dashed, bend left=5] (4) to node[above] {Liberar aranceles 50\%} (4a);
+    \draw[->, dashed, bend right=5] (4) to node[below] {No liberar aranceles 50\%} (4b);
+
+
+
+    \end{tikzpicture}
+    }
+    \caption{Diagrama de Transición del AFD del Ejercicio 2.}
+    \label{fig:rel2_ej2}
+\end{figure}
+
+Los valores monetarios esperados de los nodos terminales son:
+\begin{align*}
+    VME_2 = & 0.6 \cdot 9500 + 0.4 \cdot 4500 = 9000  \\
+    % VME_3 = & 9000 \\
+    % VME_4 = & 8000 \\
+    VME_7 = & 0.3 \cdot 6000 + 0.7 \cdot (-800) = 1240 \\ 
+    VME_8 = & 0.65 \cdot 2538.46 + 0.35 \cdot 1000 = 1999.99 \approx 2000 \\
+    VME_6 = & 2000 (\text{ Cogemos el de mayor valor}) \\
+    \cdots \\
+\end{align*}
+
+No se ha calculado todos los valores monetarios esperados de los nodos debido a que se presupone que con estos ejemplos, los demás son triviales. 
+Por ende, podemos concluir que la solución es que la mejor opción es fabricar el producto B, puede que haya cambio o no, la campaña puede tener éxito o no, ...
+Podemos concluir que la mejor opción es fabricar el producto B y el VME sería de 9000 euros.
+
+\end{solucion}
+
+
+\begin{ejercicio}
+Inverter, S.L. es una empresa dedicada a la fabricación de material eléctrico y de
+domótica. Actualmente cuenta con dos plantas de producción con una superficie
+construida superior a los 12.000 m2, dotadas de las más modernas tecnologías. El año
+pasado, gracias al repunte de las ventas, consiguieron un beneficio extraordinario de 1
+millón de euros que quieren destinar a una inversión en un incremento de la capacidad
+instalada, con el objetivo de diversificar su oferta y dar servicio a una mayor cuota de
+mercado.
+
+Después de analizar las distintas alternativas, se plantean dos posibilidades. En primer
+lugar, la dirección de Inverter estima que es factible abrir una nueva planta para la
+producción de nuevos productos de domótica. Si se destina a sistemas de alarmas, existe
+un 30\% de probabilidad que se revalorice ese mercado, y así las ventas permitirían
+obtener un resultado igual al capital invertido más un 40\%. No obstante, si no se
+revaloriza el mercado, el resultado supondría una disminución del 40\% sobre el
+montante invertido. Asimismo, podría optar por sistemas de hilo musical. En este caso,
+si la demanda es alta (30\% de probabilidad), el resultado obtenido permitiría recuperar
+la inversión y obtener unos beneficios del 20\%. Pero si ésta es baja, el resultado se
+reduciría a recuperar un 80\% de la inversión.
+
+Por otro lado, la nueva capacidad podría destinarse a la producción de nuevos productos
+de material eléctrico, aunque en este caso deberán realizar la inversión en colaboración
+con otra empresa para minimizar los riesgos. La dirección ha estado informándose sobre
+distintas empresas candidatas y, finalmente, deberá decidir entre hacer una alianza
+estratégica con un socio extranjero, o bien subcontratar a una empresa nacional. Si opta
+por la alianza, el resultado podría suponer un 20\% adicional a lo invertido si la demanda
+se mantiene (lo cual ocurriría con un 80\% de probabilidad), mientras que, en caso
+contrario, el resultado obtenido llevaría a recuperar sólo el 70\% de lo invertido. En el
+caso de la unión con la empresa nacional, si la demanda se mantiene (80\% de
+probabilidad), los resultados podrían suponer una revalorización del 30\% sobre la
+inversión inicial, asumiendo un menor resultado (recuperar el 60\% de lo invertido) en el
+caso contrario.
+
+Represente y resuelva el problema planteado mediante un árbol de decisión,
+indicando la decisión o secuencia de decisiones a tomar por Inverter, S.L.
+\end{ejercicio}
+\begin{solucion} El grafo de decisiones corresponde con el de la figura \ref{fig:rel2_ej3}.
+
+\begin{figure}
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tikzpicture}[
+        >={Stealth[round]},
+        node distance=3.5cm,
+        auto,
+        shorten >=1pt,
+        font=\sffamily\small
+    ]
+
+    % --- Nodos principales ---
+    \node[block] (1) {(1)};
+
+    % --- Nodos secundarios ---
+    \node[block, above right=7cm and 7cm of 1] (2) {(2) };
+    \node[block, below right=7cm and 7cm of 1] (3) {(3) };
+
+    % --- Relaciones principales ---
+    \draw[->, thick, bend left=10] (1) to node[above] {Productos Domésticos} (2);
+    \draw[->, thick, bend right=10] (1) to node[below] {Productos Eléctricos} (3);
+
+    % --- Nodos terciarios para Productos Domésticos ---
+    \node[state, above right=3cm and 3cm of 2] (2a) {(4)   };
+    \node[state, below right=3cm and 3cm of 2] (2b) {(5)  };
+
+    % --- Relaciones terciarias para Productos Domésticos ---
+    \draw[->, thick, bend left=10] (2) to node[above] {Sistemas de Alarmas} (2a);
+    \draw[->, thick, bend right=10] (2) to node[below] {Hilo Musical} (2b);
+
+    % --- Nodos cuaternarios para Sistemas de Alarmas ---
+    \node[none, above right=2cm and 2cm of 2a] (2a1) {$\triangle_1 = 1.4 \cdot \text{Inversión}$};
+    \node[none, below right=2cm and 2cm of 2a] (2a2) {$\triangle_2 = 0.6 \cdot \text{Inversión}$};
+
+    % --- Relaciones cuaternarias para Sistemas de Alarmas ---
+    \draw[->, dashed, bend left=5] (2a) to node[above] {Revaloriza 30\%} (2a1);
+    \draw[->, dashed, bend right=5] (2a) to node[below] {No revaloriza 70\%} (2a2);
+
+    % --- Nodos cuaternarios para Hilo Musical ---
+    \node[none, above right=2cm and 2cm of 2b] (2b1) {$\triangle_3 = 1.2 \cdot \text{Inversión}$};
+    \node[none, below right=2cm and 2cm of 2b] (2b2) {$\triangle_4 = 0.8 \cdot \text{Inversión}$};
+
+    % --- Relaciones cuaternarias para Hilo Musical ---
+    \draw[->, dashed, bend left=5] (2b) to node[above] {Demanda alta 30\%} (2b1);
+    \draw[->, dashed, bend right=5] (2b) to node[below] {Demanda baja 70\%} (2b2);
+
+    % --- Nodos terciarios para Productos Eléctricos ---
+    \node[state, above right=3cm and 3cm of 3] (3a) {(6)};
+    \node[state, below right=3cm and 3cm of 3] (3b) {(7)};
+
+    % --- Relaciones terciarias para Productos Eléctricos ---
+    \draw[->, thick, bend left=10] (3) to node[above] {Extranjero} (3a);
+    \draw[->, thick, bend right=10] (3) to node[below] {Nacional} (3b);
+
+    % --- Nodos cuaternarios para Extranjero ---
+    \node[none, above right=2cm and 2cm of 3a] (3a1) {$\triangle_5 = 1.2 \cdot \text{Inversión}$};
+    \node[none, below right=2cm and 2cm of 3a] (3a2) {$\triangle_6 = 0.7 \cdot \text{Inversión}$};
+
+    % --- Relaciones cuaternarias para Extranjero ---
+    \draw[->, dashed, bend left=5] (3a) to node[above] {Demanda alta 80\%} (3a1);
+    \draw[->, dashed, bend right=5] (3a) to node[below] {Demanda baja 20\%} (3a2);
+
+    % --- Nodos cuaternarios para Nacional ---
+    \node[none, above right=2cm and 2cm of 3b] (3b1) {$\triangle_7 = 1.3 \cdot \text{Inversión}$};
+    \node[none, below right=2cm and 2cm of 3b] (3b2) {$\triangle_8 = 0.6 \cdot \text{Inversión}$};
+
+    % --- Relaciones cuaternarias para Nacional ---
+    \draw[->, dashed, bend left=5] (3b) to node[above] {Demanda alta 80\%} (3b1);
+    \draw[->, dashed, bend right=5] (3b) to node[below] {Demanda baja 20\%} (3b2);
+
+
+    \end{tikzpicture}
+    }
+    \caption{Diagrama de Transición del AFD del Ejercicio 3.}
+    \label{fig:rel2_ej3}
+\end{figure}
+
+
+\begin{align*}
+    VME_4 = & 0.3 \cdot 1.4 \cdot \text{Inversión} + 0.7 \cdot 0.6 \cdot \text{Inversión} \\
+    VME_5 = & 0.3 \cdot 1.2 \cdot \text{Inversión} + 0.7 \cdot 0.8 \cdot \text{Inversión} \\
+    VME_2 = & \max(VME_4, VME_5) \\
+    VME_6 = & 0.8 \cdot 1.2 \cdot \text{Inversión} + 0.2 \cdot 0.7 \cdot \text{Inversión} \\
+    VME_7 = & 0.8 \cdot 1.3 \cdot \text{Inversión} + 0.2 \cdot 0.6 \cdot \text{Inversión} \\
+    VME_3 = & \max(VME_6, VME_7) \\
+    VME_1 = & \max(VME_2, VME_3) \\
+\end{align*}
+Tomamos el valor de inversión como 1.000.000 euros, de manera que los valores numéricos serían:
+\begin{align*}
+    VME_4 &= 840,000 \,€ \\
+    VME_5 &= 920,000 \,€ \\
+    VME_2 &= 920,000 \,€ \\
+    VME_6 &= 1,100,000 \,€ \\
+    VME_7 &= 1,160,000 \,€ \\
+    VME_3 &= 1,160,000 \,€ \\
+    VME_1 &= 1,160,000 \,€ \\
+\end{align*}
+
+Por lo tanto, la mejor opción es invertir en productos eléctricos con una VME de 1.160.000 euros.
+
+\end{solucion}
+
+
+
+
+
+\begin{ejercicio}
+A pesar de unos excelentes beneficios de 3.900 euros, la empresa PROVASA debe elegir
+su estrategia de productos para el siguiente periodo de planificación dado el dinamismo
+con el que se mueve el entorno. En este sentido, cuatro son las estrategias que se están
+planteando. Puede realizar internamente el diseño de un nuevo producto, o bien
+asociarse con otras empresas que ya tienen desarrollados los productos que son de
+interés. También cabe la posibilidad de seguir como hasta ahora, o lanzar al mercado
+uno de los productos que la empresa ya diseñó hace tiempo pero que nunca ofertó al
+mercado.
+
+Si se procede al diseño interno del producto los resultados van a depender, en una
+primera instancia de la decisión que se tome en cuanto a dirigirse a un mercado de alta
+gama o de baja gama. En el caso de un mercado de gama alta, esto permitiría a PROVASA
+obtener un beneficio de 5.000 euros si la demanda es alta y de 2.000 euros si es baja. En
+el caso de dirigirse a un mercado de baja gama los beneficios esperados serían de 4.000
+euros en el escenario de alta demanda, y de 2.500 euros si la demanda es baja. PROVASA
+no tiene experiencia en mercados de gama baja, por tanto, desconoce el
+comportamiento de la demanda. Sin embargo, estima que en el mercado de gama alta
+la probabilidad de que la demanda sea elevada es del 70\%.
+
+En el caso de asociación los resultados dependerán de que las otras empresas acepten
+o no dicha colaboración. Se estima en un 60\% la probabilidad de que las otras empresas
+acepten la fórmula de la asociación. Si las otras empresas aceptan, PROVASA podría
+inclinarse por una joint-venture, controlando el capital en un 60\% que le permitiría
+definir la estrategia a seguir y le reportaría un beneficio de 5.500 euros. En cambio, si se
+decantan por una simple asociación de colaboración, la falta de claridad en las relaciones
+entre las empresas haría que los resultados esperados fueran más inciertos. Por ello, al
+no tener el control de la estrategia, el beneficio que se espera obtener es de 4.500 euros
+si la competencia no reacciona y de 2.500 euros si se produce una reacción fuerte de la
+competencia.
+
+En el caso que las otras empresas no acepten la asociación, solo cabría la posibilidad de
+seguir como hasta ahora, con un beneficio de 3.000 euros, o bien crear un equipo de
+trabajo con personal de la empresa para proceder al diseño de un nuevo producto con
+nuestros propios medios. En este último caso, todo depende de que el tiempo disponible
+sea suficiente para que el equipo de trabajo cumpla con su objetivo a un nivel
+satisfactorio. Si el tiempo disponible es suficiente, el beneficio sería de 4.250 euros,
+mientras que, si el tiempo no es suficiente, las pérdidas serían de 1.500 euros.
+
+Esta complejidad en la decisión contrasta con la “simpleza” de seguir como hasta ahora,
+en cuyo caso por la falta de adaptación al mercado, el beneficio sería solo de 3.000
+euros.
+
+Inclinarse por la opción de lanzar al mercado el producto que en su día ya diseñó la
+empresa supone unos beneficios de 3.750 euros en el caso de que la demanda de este
+tipo de producto sea alta, o de 1.800 euros si resultara que la demanda es baja, siendo
+la probabilidad de esta última circunstancia del 20\%.
+
+Utilizando la técnica de los árboles de decisión, ¿qué decisión o secuencia de
+decisiones deben tomar los directivos de PROVASA?
+\end{ejercicio}
+
+
+\begin{solucion} El grafo de decisiones corresponde con el de la figura \ref{fig:rel2_ej4}.
+
+
+\begin{figure}
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tikzpicture}[
+        >={Stealth[round]},
+        node distance=3.5cm,
+        auto,
+        shorten >=1pt,
+        font=\sffamily\small
+    ]
+
+    % --- Nodos principales ---
+    \node[block] (1) {(1)};
+
+    % --- Nodos secundarios ---
+    \node[state, above right=7cm and 7cm of 1] (2) {(2))};
+    \node[state, right=15cm of 1] (3) {(3)};
+    \node[state, below right=7cm and 7cm of 1] (4) {(4)};
+    \node[state, below right=14cm and 7cm of 1] (5) {(5)};
+
+    % --- Relaciones principales ---
+    \draw[->, thick, bend left=10] (1) to node[above] {Diseño Interno} (2);
+    \draw[->, thick] (1) -- node[above] {Asociarse} (3);
+    \draw[->, thick, bend right=10] (1) to node[below] {Seguir Así} (4);
+    \draw[->, thick, bend right=20] (1) to node[below] {Lanzar Producto} (5);
+
+    % --- Nodos terciarios para Diseño Interno ---
+    \node[state, above right=3cm and 3cm of 2] (2a) {(6)};
+    \node[state, below right=1cm and 5cm of 2] (2b) {(7)};
+
+    % --- Relaciones terciarias para Diseño Interno ---
+    \draw[->, thick, bend left=10] (2) to node[above] {Alta Gama} (2a);
+    \draw[->, thick, bend right=10] (2) to node[below] {Baja Gama} (2b);
+
+    % --- Nodos cuaternarios para Alta Gama ---
+    \node[none, above right=2cm and 2cm of 2a] (2a1) {$\triangle_1 = 5000$};
+    \node[none, below right=2cm and 2cm of 2a] (2a2) {$\triangle_2 = 2000$};
+
+    % --- Relaciones cuaternarias para Alta Gama ---
+    \draw[->, dashed, bend left=5] (2a) to node[above] {Alta Demanda 70\%} (2a1);
+    \draw[->, dashed, bend right=5] (2a) to node[below] {Baja Demanda 30\%} (2a2);
+
+    % --- Nodos cuaternarios para Baja Gama ---
+    \node[none, above right=2cm and 2cm of 2b] (2b1) {$\triangle_3 = ?$};
+    \node[none, below right=2cm and 2cm of 2b] (2b2) {$\triangle_4 = ?$};
+
+    % --- Relaciones cuaternarias para Baja Gama ---
+    \draw[->, dashed, bend left=5] (2b) to node[above] {Incierto 1} (2b1);
+    \draw[->, dashed, bend right=5] (2b) to node[below] {Incierto 2} (2b2);
+
+    % --- Nodos terciarios para Asociarse ---
+    \node[block, above right=3cm and 3cm of 3] (3a) {(8)};
+    \node[block, below right=3cm and 3cm of 3] (3b) {(9)};
+
+    % --- Relaciones terciarias para Asociarse ---
+    \draw[->, thick, bend left=10] (3) to node[above] {Aceptan 60\%} (3a);
+    \draw[->, thick, bend right=10] (3) to node[below] {No Aceptan 40\%} (3b);
+
+    % --- Nodos cuaternarios para Aceptan ---
+    \node[none, above right=2cm and 2cm of 3a] (3a1) {$\triangle_5=5500$};
+    \node[state, below right=2cm and 2cm of 3a] (3a2) {(10)};
+
+    % --- Relaciones cuaternarias para Aceptan ---
+    \draw[->, thick, bend left=5] (3a) to node[above] {Joint-Venture 60\%} (3a1);
+    \draw[->, thick, bend right=5] (3a) to node[below] {Simple Asociación 40\%} (3a2);
+
+    % --- Nodos quíntuples para Competencia ---
+    \node[none, above right=2cm and 2cm of 3a2] (3a2a) {$\triangle_6 = 4500$};
+    \node[none, below right=2cm and 2cm of 3a2] (3a2b) {$\triangle_7 = 2500$};
+
+    % --- Relaciones quíntuples para Competencia ---
+    \draw[->, dashed, bend left=5] (3a2) to node[above] {No reacciona 50\%} (3a2a);
+    \draw[->, dashed, bend right=5] (3a2) to node[below] {Reacciona 50\%} (3a2b);
+
+    % --- Nodos quíntuples para No Aceptan ---
+    \node[none, above right=2cm and 2cm of 3b] (3b1) {$\triangle_8 = 3000$};
+    \node[state, below right=2cm and 2cm of 3b] (3b2) {(11)};
+
+    % --- Relaciones quíntuples para No Aceptan ---
+    \draw[->, thick, bend left=5] (3b) to node[above] {Seguir 50\%} (3b1);
+    \draw[->, thick, bend right=5] (3b) to node[below] {Crear Equipo 50\%} (3b2);
+
+    % --- Nodos séxtuples para Crear Equipo ---
+    \node[none, above right=2cm and 2cm of 3b2] (3b2a) {$\triangle_9 = 4250$};
+    \node[none, below right=2cm and 2cm of 3b2] (3b2b) {$\triangle_{10} = -1500$};
+
+    % --- Relaciones séxtuples para Crear Equipo ---
+    \draw[->, dashed, bend left=5] (3b2) to node[above] {Tiempo suficiente 50\%} (3b2a);
+    \draw[->, dashed, bend right=5] (3b2) to node[below] {Tiempo insuficiente 50\%} (3b2b);
+
+    \node[none, below right=2cm and 2cm of 4] (4c) {$\triangle_{13} = 3000$};
+    \draw[->, dashed, bend right=5] (4) to node[below] {} (4c);
+
+    % --- Nodos terciarios para Lanzar Producto ---
+    \node[none, above right=2cm and 2cm of 5] (5a) {$\triangle_{11} = 3750$};
+    \node[none, below right=2cm and 2cm of 5] (5b) {$\triangle_{12} = 1800$};
+
+    % --- Relaciones terciarias para Lanzar Producto ---
+    \draw[->, dashed, bend left=5] (5) to node[above] {Demanda alta 80\%} (5a);
+    \draw[->, dashed, bend right=5] (5) to node[below] {Demanda baja 20\%} (5b);
+
+
+
+    \end{tikzpicture}
+    }
+    \caption{Diagrama de Transición del AFD del Ejercicio 3.}
+    \label{fig:rel2_ej4}
+\end{figure}
+
+\begin{align*}
+    VME_6 = & 0.7 \cdot 5000 + 0.3 \cdot 2000 = 4100 \\
+    VME_7 = & 0.5 \cdot ? + 0.5 \cdot ? = ? \\
+    VME_2 = & \max(4100, ?) = 4100 \\
+    VME_{10} = & 0.6 \cdot 5500 + 0.4 \cdot (0.5 \cdot 4500 + 0.5 \cdot 2500) = 4400 \\
+    VME_{11} = & 0.5 \cdot 3000 + 0.5 \cdot (0.5 \cdot 4250 + 0.5 \cdot -1500) = 2125 \\
+    VME_3 = & \max(4400, 2125) = 4400 \\
+    VME_4 = & 3000 \\
+    VME_5 = & 0.8 \cdot 3750 + 0.2 \cdot 1800 = 3150 \\
+    VME_1 = & \max(4100, 4400, 3000, 3150) = 4400 \\
+\end{align*}
+
+Por lo tanto, la mejor opción es asociarse mediante una joint-venture con una VME de 4400 euros.
+
+\end{solucion}
+
+
+
+
+
+
+
+
+
+\begin{ejercicio}
+La empresa Bergé es uno de los grupos líderes españoles y europeos en transporte,
+logística y distribución de automóviles. El grupo, que tiene su origen en Bilbao en el siglo
+XIX, ha crecido hasta consolidarse como empresa de exportación e importación de
+vehículos en 11 países y distribuidora de automóviles de 29 marcas en 15 mercados de
+Europa y Sudamérica. La empresa, dada su posición de liderazgo, debe seguir
+satisfaciendo a sus accionistas, por lo que se plantea tres estrategias alternativas de
+acción para mejorar su cartera de servicios, entre las que debe decidir una.
+
+En primer lugar, la empresa plantea mejorar sus operaciones portuarias. Con base en
+los estudios de mercado y datos históricos recabados, la demanda de este modo de
+transporte marítimo para 2026 podría incrementarse, decrecer o estancarse. En caso de
+que la demanda del transporte marítimo se incremente (la probabilidad estimada es del
+55\%), el director comercial ha recibido información sobre el posible encarecimiento de
+los gastos aduaneros. Si los gastos aduaneros no suben (con una probabilidad del 40\%),
+las estimaciones basadas en el incremento de la demanda apuntan a un beneficio
+esperado de 100 millones de euros. En caso de que finalmente los gastos aduaneros
+aumenten, los resultados se verían mermados, por lo que el beneficio estimado se
+situaría en los 75 millones de euros. Si la demanda del transporte marítimo decrece en
+2026, lo cual puede ocurrir con un 25\% de probabilidad, la empresa tendrá que estimular
+las ventas, presentándose entonces dos acciones alternativas entre las que elegir:
+mejorar la gestión del almacenamiento en los puertos, en cuyo caso el beneficio se
+situaría en 60 millones de euros, o invertir en una campaña de marketing, lo que llevaría
+a obtener un beneficio estimado de 50 millones de euros. Si la demanda de transporte
+marítimo se estanca, el equipo directivo de la empresa no tiene previstas acciones
+posibles y asume un beneficio estimado de 65 millones de euros.
+
+En segundo lugar, Bergé se plantea la opción de invertir en logística de valor añadido,
+esto es, aprovechar sus operaciones de logística para que las empresas clientes mejoren
+la eficiencia de sus procesos, lo que llevaría a obtener un beneficio esperado de 56
+millones de euros.
+
+Finalmente, Bergé considera una tercera opción estratégica, consistente en ampliar su
+presencia internacional. Uno de los mercados en los que podría entrar es en Finlandia,
+a través de la distribución de vehículos de la marca Mitsubishi. El beneficio esperado es
+de 60 millones de euros, si la marca de vehículos tiene buena aceptación en el mercado.
+En caso contrario, con una probabilidad de ocurrencia del 35\%, el beneficio esperado es
+de 47 millones de euros. Por otra parte, Bergé plantea su introducción en México de la
+mano de Audi. En esta opción, se encargaría desde la entrada de contenedores
+marítimos y trailers en la planta, hasta la distribución final de los vehículos a la red de
+concesionarios. El beneficio esperado es de 95 millones de euros, si se mantiene la 
+estabilidad en las condiciones de suministro, con una probabilidad de ocurrencia del
+45\%. En caso contrario, si las condiciones de suministro no son estables, el beneficio
+esperado sería menor, concretamente de 70 millones de euros. Considerando la
+información descrita, se pide:
+
+\begin{enumerate}
+    \item Represente y resuelva el problema planteado mediante un árbol de decisión.
+    \item ¿Qué decisión debería tomar Bergé si atendemos al criterio del beneficio esperado?
+\end{enumerate}
+
+esperado? Exprese la solución por escrito indicando la decisión o secuencia de
+decisiones a tomar.
+\end{ejercicio}
+
+
+\begin{solucion}
+El grafo de decisiones corresponde con el de la figura \ref{fig:rel2_ej5}. Las cantidades están el millones de euros.
+
+\begin{figure}
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tikzpicture}[
+        >={Stealth[round]},
+        node distance=3cm,
+        auto,
+        shorten >=1pt,
+        font=\sffamily\small
+    ]
+
+    % Nodo inicial
+    \node[block] (0) {(1)};
+
+    % Relación desde el nodo inicial al primer nodo principal
+    % \draw[->, thick] (0) -- node[above] {Decisión inicial} (1);
+
+    % Nodo principal
+    \node[state, above right=7cm and 7cm of 0] (1) {(2)};
+    \node[state, right=7cm of 0] (2) {(3)};
+    \node[block, below right=7cm and 7cm of 0] (3) {(4)};
+
+    % Relación desde el nodo inicial al nodo principal
+    \draw[->, thick] (0) -- node[above] {Operaciones Portuarias} (1);
+    \draw[->, thick, right=7cm of 0] (0) -- node[above] {Logística Valor Añadido} (2);
+    \draw[->, thick, below right=7cm and 7cm of 0] (0) -- node[below] {Ampliar Presencia Internacional} (3);
+
+    % Nodos secundarios para la demanda
+    \node[state, above right=3cm and 3cm of 1] (2a) {(5)};
+    \node[state, right=7cm of 1] (2b) {(6)};
+    \node[block, below right=3cm and 3cm of 1] (2c) {(7)};
+
+    % Relaciones desde el nodo 2 a los nodos secundarios
+    \draw[->, thick, bend left=10] (1) to node[above] {Demanda Incrementa 55\%} (2a);
+    \draw[->, thick] (1) -- node[above] {Demanda Estanca 20\%} (2b);
+    \draw[->, thick, bend right=10] (1) to node[below] {Demanda Decrece 25\%} (2c);
+
+
+    % Nodos terciarios para Incremento de Demanda
+    \node[none, above right=2cm and 2cm of 2a] (2a1) {$\triangle_1 = 100$};
+    \node[none, below right=2cm and 2cm of 2a] (2a2) {$\triangle_2 = 75$};
+
+    % Relaciones terciarias para Incremento de Demanda
+    \draw[->, dashed, bend left=5] (2a) to node[above] {No suben gastos 40\%} (2a1);
+    \draw[->, dashed, bend right=5] (2a) to node[below] {Suben gastos 60\%} (2a2);
+
+    % Nodos terciarios para Demanda Decrece
+    \node[none, above right=2cm and 2cm of 2c] (2c1) {$\triangle_3 = 60$};
+    \node[none, below right=2cm and 2cm of 2c] (2c2) {$\triangle_4 = 50$};
+
+    % Relaciones terciarias para Demanda Decrece
+    \draw[->, dashed, bend left=5] (2c) to node[above] {Mejorar Almacenamiento} (2c1);
+    \draw[->, dashed, bend right=5] (2c) to node[below] {Invertir en Marketing} (2c2);
+
+    % Nodo terciario para Demanda Estanca
+    \node[none, right=2cm of 2b] (2b1) {$\triangle_5 = 65$};
+
+    % Relación terciaria para Demanda Estanca
+    \draw[->, dashed] (2b) -- (2b1);
+
+    % Nodo hijo del nodo 3 (logística valor añadido)
+    \node[none, right=3cm of 2] (2_1) {$\triangle_{6} = 56$};
+    
+    % Relación hacia el triángulo 56
+    \draw[->, dashed] (2) -- (2_1);
+
+    % Nodos secundarios para la demanda
+    \node[state, above right=3cm and 3cm of 3] (3a) {(8)};
+    \node[state, below right=3cm and 3cm of 3] (3b) {(9)};
+
+    % Relaciones desde el nodo 3 a los nodos secundarios
+    \draw[->, thick, bend left=10] (3) to node[above] {Finlandia } (3a);
+    \draw[->, thick, bend right=10] (3) to node[below] {México } (3b);
+
+    % Nodos terciarios para Finlandia buena aceptación o mala 
+    \node[none, above right=2cm and 2cm of 3a] (3a1) {$\triangle_7 = 60$};
+    \node[none, below right=2cm and 2cm of 3a] (3a2) {$\triangle_8 = 47$};
+
+    % Relaciones terciarias para Finlandia
+    \draw[->, dashed, bend left=5] (3a) to node[above] {Buena Aceptación 65\%} (3a1);
+    \draw[->, dashed, bend right=5] (3a) to node[below] {Mala Aceptación 35\%} (3a2);
+
+    % Nodos terciarios para México condiciones estables o inestables
+    \node[none, above right=2cm and 2cm of 3b] (3b1) {$\triangle_9 = 95$};
+    \node[none, below right=2cm and 2cm of 3b] (3b2) {$\triangle_{10} = 70$};
+
+    % Relaciones terciarias para México
+    \draw[->, dashed, bend left=5] (3b) to node[above] {Condiciones Estables 45\%} (3b1);
+    \draw[->, dashed, bend right=5] (3b) to node[below] {Condiciones Inestables 55\%} (3b2);    
+
+    \end{tikzpicture}
+    }
+    \captionof{figure}{Diagrama de Transición del AFD del Ejercicio 5.}
+    \label{fig:rel2_ej5}
+\end{figure}
+
+
+\begin{align*}
+    VME_{5} = & 0.4 \cdot 100 + 0.6 \cdot 75 = 85 \\
+    VME_{6} = & 65 \\
+    VME_{7} = & 0.5 \cdot 60 + 0.5 \cdot 50 = 55 \\
+    VME_{2} = & 0.55 \cdot 85 + 0.2 \cdot 65 + 0.25 \cdot 55 = 73.5 \\
+    VME_{3} = & 56 \\
+    VME_{8} = & 0.65 \cdot 60 + 0.35 \cdot 47 = 55.95 \\
+    VME_{9} = & 0.45 \cdot 95 + 0.55 \cdot 70 = 80.75 \\
+    VME_{4} = & \max(55.95, 80.75) = 80.75 \\
+    VME_{1} = & \max(73.5, 56, 80.75) = 80.75 \\
+\end{align*}
+
+Por lo tanto, la mejor opción es ampliar la presencia internacional con una VME de 80.75 millones de euros.
+
+
+
+
+\end{solucion}
+
+
+
+
+
+
+\begin{ejercicio}
+Lesla Inc. es una empresa estadounidense que diseña, fabrica y vende automóviles
+eléctricos. Con el fin de aumentar su capacidad productiva a gran escala y satisfacer la
+demanda de vehículos prevista, su CEO, Nelson Dusk, está barajando dos alternativas de
+construcción de gigafactorías. Deberá elegir entre dos opciones: Giga Berlín y Giga
+Texas, teniendo también la opción de no construir ninguna (lo que conllevaría obtener
+un beneficio nulo).
+Después de analizar las alternativas correspondientes a la construcción de una nueva
+gigafactoría, los resultados que cabe esperar están asociados a distintos estados de la
+naturaleza, así como a la toma de otra serie de decisiones.
+En primer lugar, Giga Berlín contaría con un área de 3 km2, lo que permitiría a Lesla
+producir hasta 10.000 unidades semanales de su vehículo estrella, Lesla Model Y. La
+demanda puede alcanzar ese nivel con un 70\% de probabilidad, lo que llevaría a obtener
+un beneficio anual de 1,2 millones de dólares. Sin embargo, la demanda puede ser
+menor, lo cual supondría menos ingresos y la asunción de costes por capacidad ociosa,
+dando lugar a un menor beneficio, estimado en 600.000 dólares anuales.
+En segundo lugar, Giga Texas, con 8,5 km2, contaría con una capacidad de producción
+bastante superior a la de Giga Berlín: cerca de 22.000 unidades de vehículos a la semana.
+Sin embargo, dadas sus elevadas dimensiones, su apertura podría retrasarse para el
+próximo año con una probabilidad del 25\%, lo que le llevaría a incurrir en unas pérdidas
+de 500.000 dólares. Si no hay retrasos y logra abrir la gigafactoría de Texas a tiempo, el
+señor Dusk deberá elegir entre dos alternativas: producir solamente el Lesla Model Y o
+desarrollar, además de este modelo, un nuevo producto, una camioneta eléctrica
+denominada Lesla Cybertruck. 
+En caso de desarrollar únicamente el Model Y, Lesla obtendría unos beneficios de 2,5
+millones si la demanda es favorable, mientras que dichos beneficios se reducirían en 1
+millón si la demanda resulta desfavorable. En caso de desarrollar también la camioneta,
+Lesla debería repartir la capacidad de producción disponible entre ambos vehículos. Los
+resultados estimados de esta estrategia, que se basa en economías de alcance para
+producir ambos vehículos, dependerán de la demanda del modelo existente, Lesla
+Model Y, y de la acogida en el mercado del nuevo modelo, Lesla Cybertruck. Así, si la
+demanda de ambos modelos es favorable, algo que se estima que ocurra con un 35\% de
+probabilidad, el beneficio estimado sería de 3 millones de dólares anuales. Sin embargo,
+si la demanda del Model Y es favorable pero el Lesla Cybertruck tiene una mala acogida
+en el mercado (circunstancias que se estima que ocurran con un 45\% de probabilidad),
+el beneficio estimado sería de 1,3 millones de dólares, mientras que, si el Lesla
+Cybertruck cuenta con una buena acogida en el mercado, pero la demanda del Model Y
+no resulta favorable (circunstancias que se estiman con una probabilidad del 15\%), los
+beneficios serían de 800.000 dólares únicamente. En el peor de los escenarios (ningún
+modelo cuenta con demanda favorable y/o aceptación en el mercado), las pérdidas
+ascenderían a 600.000 dólares.
+Considerando la información descrita, ¿qué decisión o secuencia de decisiones debería
+tomar Lesla si atendemos al criterio del beneficio esperado? Represente y resuelva el
+problema planteado mediante un árbol de decisión, expresando la solución por
+escrito.
+\end{ejercicio}
+
+\begin{solucion}
+El grafo de decisiones corresponde con el de la figura \ref{fig:rel2_ej6}. Las cantidades están el millones de euros.
+
+\begin{figure}
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tikzpicture}[
+        >={Stealth[round]},
+        node distance=3cm,
+        auto,
+        shorten >=1pt,
+        font=\sffamily\small
+    ]
+
+    % Nodo inicial
+    \node[block] (0) {(1)};
+
+    \node[block, above right=7cm and 7cm of 0] (1) {(2)};
+    \node[none, below right=7cm and 7cm of 0] (2) {($\triangle_{10} = 0$)};
+
+    % Relación entre el nodo 1 y el nodo 2 (Producir Factorías)
+    \draw[->, thick, bend left=10] (0) to node[above] {Producir Factorías} (1);
+
+    % Relación entre el nodo 1 y el nodo 3 (No Producir Factorías)
+    \draw[->, thick, bend right=10] (0) to node[below] {No Producir Factorías} (2);
+
+    % Nodos secundarios para Giga Berlín y Giga Texas
+    \node[state, above right=3cm and 3cm of 1] (1a) {(3)};
+    \node[state, below right=3cm and 3cm of 1] (1b) {(4)};
+
+    % Relaciones desde el nodo 2 a los nodos secundarios
+    \draw[->, thick, bend left=10] (1) to node[above] {Giga Berlín} (1a);
+    \draw[->, thick, bend right=10] (1) to node[below] {Giga Texas} (1b);
+
+    % Nodos terciarios para Giga Berlín
+    \node[none, above right=2cm and 2cm of 1a] (1a1) {$\triangle_1 = 1.2 M$};
+    \node[none, below right=2cm and 2cm of 1a] (1a2) {$\triangle_2 = 0.6 M$};
+
+    % Relaciones terciarias para Giga Berlín
+    \draw[->, dashed, bend left=5] (1a) to node[above] {Demanda Alta 70\%} (1a1);
+    \draw[->, dashed, bend right=5] (1a) to node[below] {Demanda Baja 30\%} (1a2);
+
+    % Nodos terciarios para Giga Texas
+    \node[none, above right=2cm and 2cm of 1b] (1b1) {$\triangle_3 = -0.5 M$};
+    \node[block, below right=2cm and 2cm of 1b] (1b2) {(5)};
+
+    % Relaciones terciarias para Giga Texas
+    \draw[->, dashed, bend left=5] (1b) to node[above] {Se retrasa 25\%} (1b1);
+    \draw[->, dashed, bend right=5] (1b) to node[below] {No se retrasa 75\%} (1b2);
+
+    % Nodos terciarios para Giga Texas (desarrollar Model Y o ambos)
+    \node[state, above right=2cm and 2cm of 1b2] (1b2a) {(6)};
+    \node[state, below right=2cm and 2cm of 1b2] (1b2b) {(7)};
+
+    % Relaciones terciarias para Giga Texas
+    \draw[->, thick, bend left=5] (1b2) to node[above] {Desarrollar Model Y} (1b2a);
+    \draw[->, thick, bend right=5] (1b2) to node[below] {Desarrollar Ambos} (1b2b);
+
+    % Nodos cuaternarios para desarrollar Model Y
+    \node[none, above right=2cm and 2cm of 1b2a] (1b2a1) {$\triangle_4 = 2.5 M$};
+    \node[none, below right=2cm and 2cm of 1b2a] (1b2a2) {$\triangle_5 = 1.5 M$};
+
+    % Relaciones cuaternarias para desarrollar Model Y
+    \draw[->, dashed, bend left=5] (1b2a) to node[above] {Demanda Favorable 50\%} (1b2a1);
+    \draw[->, dashed, bend right=5] (1b2a) to node[below] {Demanda Desfavorable 50\%} (1b2a2);
+
+    % Nodos cuaternarios para desarrollar Ambos
+    \node[none, above right=2cm and 2cm of 1b2b] (1b2b1) {$\triangle_6 = 3 M$};
+    \node[none, right=6cm of 1b2b] (1b2b2) {$\triangle_7 = 1.3 M$};
+    \node[none, below right=2cm and 2cm of 1b2b] (1b2b3) {$\triangle_8 = 0.8 M$};
+    \node[none, below right=4cm and 2cm of 1b2b] (1b2b4) {$\triangle_9 = -0.6 M$};
+
+    % Relaciones cuaternarias para desarrollar Ambos
+    \draw[->, dashed, bend left=5] (1b2b) to node[above] {Ambos Favorables 35\%} (1b2b1);
+    \draw[->, dashed] (1b2b) -- ++(6,0) node[above] {Model Y Favorable, Cybertruck No 45\%} (1b2b2);
+    \draw[->, dashed, bend right=5] (1b2b) to node[below] {Cybertruck Favorable, Model Y No 15\%} (1b2b3);
+    \draw[->, dashed, bend right=18] (1b2b) to node[below] {Ninguno Favorable 5\%} (1b2b4);
+
+
+    
+
+
+    \end{tikzpicture}
+    }
+    \captionof{figure}{Diagrama de Transición del AFD del Ejercicio 6.}
+    \label{fig:rel2_ej6}
+\end{figure}
+
+Ahora vamos a calcular los valores monetarios esperados (VME) de cada nodo:
+\begin{align*}
+    VME_6 = & 0.5 \cdot 2.5M + 0.5 \cdot 1.5M = 2M \\
+    VME_7 = & 0.35 \cdot 3M + 0.45 \cdot 1.3M + 0.15 \cdot 0.8M + 0.05 \cdot (-0.6M) = 1.725M \\
+    VME_5 = & max(2M, 1.725M) = 2M \\
+    VME_3 = & 0.7 \cdot 1.2M + 0.3 \cdot 0.6M = 1.02M \\
+    VME_4 = & 0.25 \cdot (-0.5M) + 0.75 \cdot 2M = 1.375M \\
+    VME_2 = & max(1.02M, 1.375M) = 1.375M \\
+    VME_1 = & max(1.375M, 0) = 1.375M \\
+\end{align*}
+
+De esta manera es directo ver que el camino solución el aquel que nos proporcionar un mayor VME, es decir, construir Giga Texas sin retrasos y desarrollar únicamente el Model Y, con un beneficio esperado de 1.375 millones de dólares anuales\footnote{Todo esto teniendo en cuenta que todo sale según lo planeado.}.
+
+
+
+
+
+\end{solucion}
+
+
+
+
+
+
+\begin{ejercicio}
+''El futuro de Seat es Cupra''. Estas palabras de su director ejecutivo, Thomas Schäfer,
+durante el Salón del Automóvil de Múnich 2023 han hecho saltar las alarmas sobre la
+continuidad de la marca Seat, la rentabilidad de la planta de Martorell (Barcelona) y el
+impacto en los puestos de trabajo de la fábrica catalana. Con el fin de luchar por la
+viabilidad de la fábrica, que da empleo a más de 14.000 trabajadores, Seat España está
+barajando varias alternativas, de tal manera que la rentabilidad de la planta quede
+garantizada de cara a los próximos 10 años y sea una apuesta de futuro para la directiva
+del grupo Volkswagen.
+Una primera alternativa es apostar por las nuevas formas de movilidad vinculadas al
+ámbito urbano. Esta decisión supondría una reconfiguración total del proceso de
+producción. Si la directiva central no aprueba esta decisión, la empresa asumiría unas
+pérdidas de 10.000 euros derivadas de la preparación de la propuesta. Si la directiva
+aprueba esta decisión, lo que se espera que ocurra con un 90\% de probabilidad, la
+empresa se plantea dos posibles cursos de acción. Por un lado, si la empresa decide 
+fabricar patinetes eléctricos y hoverboards (sin manillar, se maneja con la inclinación del
+cuerpo), podría alcanzar un beneficio esperado de 87 millones de euros si existe una alta
+aceptación en el mercado, lo que se espera que ocurra con una probabilidad del 60\%.
+En caso contrario, los beneficios esperados ascenderían a 62 millones de euros. Si, en
+cambio, decide apostar por la fabricación de scooters eléctricas, podría alcanzar un
+beneficio esperado de 105 millones de euros si existe un programa gubernamental de
+incentivos a este tipo de vehículo eficiente, lo que se espera que ocurra con una
+probabilidad del 30\%. En caso contrario, los beneficios esperados ascenderían a 58
+millones de euros.
+La segunda alternativa es apostar por la electrificación de los vehículos. Dos son los
+modelos entre los que se plantea elegir. En primer lugar, la fábrica de Martorell puede
+apostar por fabricar el modelo 100 \% eléctrico de Cupra denominado Born. Si la directiva
+central apoya esta decisión, lo que se espera que ocurra con un 70\% de probabilidad,
+los beneficios esperados serían de 88 millones de euros. En caso de no contar con el
+apoyo de la directiva, los beneficios esperados serían de 44 millones de euros, ya que
+continuarían con la fabricación de modelos de combustión e híbridos como hasta ahora.
+En segundo lugar, podrían apostar por producir un Ibiza 100\% eléctrico de bajo coste y
+competir con sus propios vehículos de combustión e híbridos, tal y como lo hace el
+binomio Dacia-Renault. Convencer a la directiva de esta posibilidad es muy difícil, se
+espera que ocurra con una probabilidad del 20\%. En caso positivo, el beneficio esperado
+sería de 120 millones de euros. En caso contrario, continuarían con la fabricación de
+modelos de combustión e híbridos como hasta ahora, con unos beneficios esperados de
+44 millones de euros, al igual que en la decisión anterior.
+Considerando la información descrita, ¿qué decisión o secuencia de decisiones debería
+tomar Seat España si atendemos al criterio del beneficio esperado? Represente y
+resuelva el problema planteado mediante un árbol de decisión. Represente y resuelva
+el problema planteado mediante un árbol de decisión expresando la solución por
+escrito.
+\end{ejercicio}
+
+\begin{solucion}
+    El grafo de decisiones corresponde con el de la figura \ref{fig:rel2_ej7}. Algunas de las cantidades están el millones de euros.
+
+\begin{figure}
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tikzpicture}[
+        >={Stealth[round]},
+        node distance=3cm,
+        auto,
+        shorten >=1pt,
+        font=\sffamily\small
+    ]
+
+    % Nodo inicial
+    \node[block] (0) {(1)};
+
+    % Nodos secundarios para nuevas formas de movilidad o electrificar vehículos
+    \node[state, above right=3cm and 3cm of 0] (1c) {(2)};
+    \node[block, below right=12cm and 3cm of 0] (1d) {(3)};
+
+    % Relaciones desde el nodo inicial
+    \draw[->, thick, bend left=10] (0) to node[above] {Nuevas formas de movilidad} (1c);
+    \draw[->, thick, bend right=10] (0) to node[below] {Electrificar vehículos} (1d);
+
+    % Nodos terciarios para la decisión de la directiva
+    \node[none, above right=2cm and 2cm of 1c] (1c1) {$\triangle_{1} = -10000$};
+    \node[block, below right=2cm and 2cm of 1c] (1c2) {(4)};
+
+    % Relaciones terciarias para la decisión de la directiva
+    \draw[->, dashed, bend left=5] (1c) to node[above] {No aprueba 10\%} (1c1);
+    \draw[->, dashed, bend right=5] (1c) to node[below] {Aprueba 90\%} (1c2);
+
+    % Nodos terciarios para patinetes y hoverboards o scooters eléctricas
+    \node[state, above right=2cm and 2cm of 1c2] (1c2a) {(5)};
+    \node[state, below right=2cm and 2cm of 1c2] (1c2b) {(6)};
+
+    % Relaciones terciarias para patinetes y hoverboards o scooters eléctricas
+    \draw[->, thick, bend left=5] (1c2) to node[above] {Patinetes y Hoverboards} (1c2a);
+    \draw[->, thick, bend right=5] (1c2) to node[below] {Scooters Eléctricas} (1c2b);
+
+    % Nodos cuaternarios para aceptación o no aceptación de patinetes y hoverboards
+    \node[none, above right=2cm and 2cm of 1c2a] (1c2a1) {$\triangle_{3} = 87 M$};
+    \node[none, below right=2cm and 2cm of 1c2a] (1c2a2) {$\triangle_{4} = 62 M$};
+
+    % Relaciones cuaternarias para aceptación o no aceptación de patinetes y hoverboards
+    \draw[->, dashed, bend left=5] (1c2a) to node[above] {Alta aceptación 60\%} (1c2a1);
+    \draw[->, dashed, bend right=5] (1c2a) to node[below] {Baja aceptación 40\%} (1c2a2);
+
+    % Nodos cuaternarios para programa gubernamental o no
+    \node[none, above right=2cm and 2cm of 1c2b] (1c2b1) {$\triangle_{5} = 105M$};
+    \node[none, below right=2cm and 2cm of 1c2b] (1c2b2) {$\triangle_{6} = 58M$};
+
+    % Relaciones cuaternarias para programa gubernamental o no
+    \draw[->, dashed, bend left=5] (1c2b) to node[above] {Programa 30\%} (1c2b1);
+    \draw[->, dashed, bend right=5] (1c2b) to node[below] {No programa 70\%} (1c2b2);
+
+    % Nodos terciarios para Cupra Born o Ibiza Eléctrico
+    \node[state, above right=2cm and 2cm of 1d] (1d1) {(7)};
+    \node[state, below right=2cm and 2cm of 1d] (1d2) {(8)};
+
+    % Relaciones terciarias para Cupra Born o Ibiza Eléctrico
+    \draw[->, thick, bend left=5] (1d) to node[above] {Cupra Born} (1d1);
+    \draw[->, thick, bend right=5] (1d) to node[below] {Ibiza Eléctrico} (1d2);
+
+    % Nodos cuaternarios para Cupra Born
+    \node[none, above right=2cm and 2cm of 1d1] (1d1a) {$\triangle_{7} = 88M$};
+    \node[none, below right=2cm and 2cm of 1d1] (1d1b) {$\triangle_{8} = 44M$};
+
+    % Relaciones cuaternarias para Cupra Born
+    \draw[->, dashed, bend left=5] (1d1) to node[above] {Directiva aprueba 70\%} (1d1a);
+    \draw[->, dashed, bend right=5] (1d1) to node[below] {Directiva no aprueba 30\%} (1d1b);
+
+    % Nodos cuaternarios para Ibiza Eléctrico
+    \node[none, above right=2cm and 2cm of 1d2] (1d2a) {$\triangle_{9} = 120M$};
+    \node[none, below right=2cm and 2cm of 1d2] (1d2b) {$\triangle_{10} = 44M$};
+
+    % Relaciones cuaternarias para Ibiza Eléctrico
+    \draw[->, dashed, bend left=5] (1d2) to node[above] {Directiva aprueba 20\%} (1d2a);
+    \draw[->, dashed, bend right=5] (1d2) to node[below] {Directiva no aprueba 80\%} (1d2b);
+
+
+
+    
+
+
+    \end{tikzpicture}
+    }
+    \captionof{figure}{Diagrama de Transición del AFD del Ejercicio 7.}
+    \label{fig:rel2_ej7}
+\end{figure}
+
+Ahora vamos a calcular los valores monetarios esperados (VME) de cada nodo:
+\begin{align*}
+    VME_5 = & 0.6 \cdot 87M + 0.4 \cdot 62M = 77M \\
+    VME_6 = & 0.3 \cdot 105M + 0.7 \cdot 58M = 72.1M \\
+    VME_7 = & 0.7 \cdot 88M + 0.3 \cdot 44M = 74.8M \\
+    VME_8 = & 0.2 \cdot 120M + 0.8 \cdot 44M = 59.2M \\
+    VME_4 = & max(77M, 72.1M) = 77M \\
+    VME_3 = & max(74.8M, 59.2M) = 74.8M \\
+    VME_2 = & 0.9 \cdot 77M + 0.1 \cdot (-0.01M) = 69.299M \\
+    VME_1 = & max(69.299M, 74.8M) = 74.8M \\
+\end{align*}
+
+Por lo tanto, la mejor opción es electrificar vehículos apostando por fabricar el modelo 100 \% eléctrico de Cupra denominado Born, con una VME de 74.8 millones de euros.
+
+
+
+
+
+\end{solucion}
+
+
+
+
+
+
+
+\begin{ejercicio}
+Tom tiene un negocio de venta de automóviles. Un importante comerciante de la ciudad
+le ofrece la oportunidad de realizar un contrato por el que podría elegir un vehículo de
+este distribuidor para tratar de venderlo. Si lo vende, entonces tendría la posibilidad de
+escoger otro vehículo diferente. Existe un total de 3 vehículos distintos que Tom puede
+elegir vender (ver la tabla a continuación). Igualmente, Tom tiene la posibilidad de no
+aceptar la oferta del comerciante, obteniendo un beneficio nulo.
+El comerciante concluye la oferta de la siguiente manera:
+''Tom, no hemos tratado con usted de forma previa, así que procederemos con cautela:
+si acepta este trato, primero debe tomar el Micra. Si vende el Micra, obtendrá su
+comisión de venta y podrá elegir entre el Focus o el Passat, o bien finalizar el contrato.
+En caso de decidir continuar con el contrato, si vende el segundo coche (obteniendo la
+correspondiente comisión), puede elegir el modelo restante para venderlo, o bien
+finalizar el contrato.”
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Modelo} & \textbf{Comisión de Tom por venta} & \textbf{Costes} & \textbf{Probabilidad de venta} \\ \hline
+Micra & 900 euros & 600 euros & $\frac{3}{4}$ \\ \hline
+Focus & 1500 euros & 200 euros & $\frac{2}{3}$ \\ \hline
+Passat & 3000 euros & 600 euros & $\frac{1}{2}$ \\ \hline
+\end{tabular}
+\caption{Datos de los vehículos disponibles para Tom.}
+\label{tab:vehiculos_tom}
+\end{table}
+la(s) venta(s) de vehículo(s) que realice Tom según proceda en cada caso, y
+considerando los costes asociados a cada modelo. Incluya también un breve informe
+aconsejando qué decisión debería tomar Tom en función del criterio del beneficio
+esperado.
+\end{ejercicio}
+
+\begin{solucion}
+    El grafo de decisiones corresponde con el de la figura \ref{fig:rel2_ej8}. Las cantidades están el millones de euros.
+
+\begin{figure}
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tikzpicture}[
+        >={Stealth[round]},
+        node distance=3cm,
+        auto,
+        shorten >=1pt,
+        font=\sffamily\small
+    ]
+
+    % Nodo inicial
+    \node[block] (0) {(1)};
+
+    % Nodos secundarios para aceptar o no vender Micra
+    \node[state, above right=3cm and 3cm of 0] (1a) {(2)};
+    \node[none, below right=3cm and 3cm of 0] (1b) {($\triangle_{11} = 0$)};
+
+    % Relaciones desde el nodo inicial
+    \draw[->, thick, bend left=10] (0) to node[above] {Aceptar vender Micra} (1a);
+    \draw[->, thick, bend right=10] (0) to node[below] {No aceptar} (1b);
+
+    % Nodos terciarios para aceptar vender Micra
+    \node[none, above right=2cm and 2cm of 1a] (1a1) {$\triangle_{1} = -0.6$};
+    \node[block, below right=2cm and 2cm of 1a] (1a2) {(3)};
+
+    % Relaciones terciarias para aceptar vender Micra
+    \draw[->, dashed, bend left=5] (1a) to node[above] {No vende 25\%} (1a1);
+    \draw[->, dashed, bend right=5] (1a) to node[below] {Vende 75\%} (1a2);
+
+    % Nodos cuaternarios para decidir finalizar o continuar
+    \node[none, above right=2cm and 2cm of 1a2] (1a2a) {$\triangle_{2} = 300 = 900 - 600$};
+    \node[block, below right=2cm and 2cm of 1a2] (1a2b) {(4)};
+
+    % Relaciones cuaternarias para decidir finalizar o continuar
+    \draw[->, dashed, bend left=5] (1a2) to node[above] {Finalizar trato} (1a2a);
+    \draw[->, dashed, bend right=5] (1a2) to node[below] {Continuar trato} (1a2b);
+
+    % Nodos quíntuples para optar por Passat o Focus
+    \node[state, above right=2cm and 2cm of 1a2b] (1a2b1) {(5)};
+    \node[state, below right=6cm and 2cm of 1a2b] (1a2b2) {(6)};
+
+    % Relaciones quíntuples para optar por Passat o Focus
+    \draw[->, dashed, bend left=5] (1a2b) to node[above] {Optar por Passat} (1a2b1);
+    \draw[->, dashed, bend right=5] (1a2b) to node[below] {Optar por Focus} (1a2b2);
+
+    % Nodos séxtuples para decidir si vende el Passat o no
+    \node[none, above right=2cm and 2cm of 1a2b1] (1a2b1a) {$\triangle_{3} = 900 - 600 - 600 = -300$};
+    \node[block, below right=2cm and 2cm of 1a2b1] (1a2b1b) {(7)};
+
+    % Relaciones séxtuples para decidir si vende el Passat o no
+    \draw[->, dashed, bend left=5] (1a2b1) to node[above] {No vende Passat 50\%} (1a2b1a);
+    \draw[->, dashed, bend right=5] (1a2b1) to node[below] {Vende Passat 50\%} (1a2b1b);
+
+    % Nodos séxtuples para decidir si vende el Focus o no
+    \node[none, above right=2cm and 2cm of 1a2b1b] (1a2b1b1) {$\triangle_{4} = 300 + (3000-600) = 2700$};
+    \node[state, below right=2cm and 2cm of 1a2b1b] (1a2b1b2) {(9)};
+
+    % Relaciones séxtuples para decidir si vende el Focus o no
+    \draw[->, dashed, bend left=5] (1a2b1b) to node[above] {Fin} (1a2b1b1);
+    \draw[->, dashed, bend right=5] (1a2b1b) to node[below] {Vende Focus} (1a2b1b2);
+
+    % Nodos séxtuples para decidir si vende el Focus o no
+    \node[none, above right=2cm and 2cm of 1a2b1b2] (1a2b1b2a) {$\triangle_{5} = 1300 + 2700 = 4000$};
+    \node[none, below right=2cm and 2cm of 1a2b1b2] (1a2b1b2b) {$\triangle_{6} = 2500$};
+
+    % Relaciones séxtuples para decidir si vende el Focus o no
+    \draw[->, dashed, bend left=5] (1a2b1b2) to node[above] {Vende Focus 2/3} (1a2b1b2a);
+    \draw[->, dashed, bend right=5] (1a2b1b2) to node[below] {No vende Focus 1/3} (1a2b1b2b);
+    
+    % Nodos séxtuples para decidir si vende el Focus o no desde el nodo 6
+    \node[none, above right=2cm and 2cm of 1a2b2] (1a2b2a) {$\triangle_{7} = 100 = 900 - 600 - 200$};
+    \node[block, below right=2cm and 2cm of 1a2b2] (1a2b2b) {(8)};
+
+    % Relaciones séxtuples para decidir si vende el Focus o no desde el nodo 6
+    \draw[->, dashed, bend left=5] (1a2b2) to node[above] {Vende Focus 33\%} (1a2b2a);
+    \draw[->, dashed, bend right=5] (1a2b2) to node[below] {No vende Focus 67\%} (1a2b2b);
+
+    % Nodos séxtuples para decidir si intenta con el Passat o no desde el nodo 8
+    \node[none, above right=2cm and 2cm of 1a2b2b] (1a2b2b1) {$\triangle_{8} = 300 - 600  = -300$};
+    \node[state, below right=2cm and 2cm of 1a2b2b] (1a2b2b2) {(10)};
+
+    % Relaciones séxtuples para decidir si intenta con el Passat o no desde el nodo 8
+    \draw[->, dashed, bend left=5] (1a2b2b) to node[above] {Fin} (1a2b2b1);
+    \draw[->, dashed, bend right=5] (1a2b2b) to node[below] {Intentar con Passat} (1a2b2b2);
+
+    % Nodos séptuples para decidir si vende el Passat o no desde el nodo 10
+    \node[none, above right=2cm and 2cm of 1a2b2b2] (1a2b2b2a) {$\triangle_{9} = 4000$};
+    \node[none, below right=2cm and 2cm of 1a2b2b2] (1a2b2b2b) {$\triangle_{10} = 1000$};
+
+    % Relaciones séptuples para decidir si vende el Passat o no desde el nodo 10
+    \draw[->, dashed, bend left=5] (1a2b2b2) to node[above] {Vende Passat 50\%} (1a2b2b2a);
+    \draw[->, dashed, bend right=5] (1a2b2b2) to node[below] {No vende Passat 50\%} (1a2b2b2b);
+
+
+
+
+    
+
+
+    \end{tikzpicture}
+    }
+    \captionof{figure}{Diagrama de Transición del AFD del Ejercicio 8.}
+    \label{fig:rel2_ej8}
+\end{figure}
+
+
+\begin{align*}
+    VME_{9} = & \frac{2}{3} \cdot 4000 + \frac{1}{3} \cdot 2500 = 3500 \\
+    VME_{7} = & max(-300, 3500) = 3500 \\
+    VME_{5} = & 0.5 \cdot -300 + 0.5 \cdot 3500 = 1600 \\
+    VME_{10} = & 0.5 \cdot 4000 + 0.5 \cdot 1000 = 2500 \\
+    VME_{8} = & max(-300, 2500) = 2500 \\
+    VME_{6} = & \frac{1}{3} \cdot 100 + \frac{2}{3} \cdot 2500 = 1700 \\
+    VME_{4} = & max(1600, 1700) = 1700 \\
+    VME_{3} = & max(300, 1700) = 1700 \\
+    VME_{2} = & 0.25 \cdot -600 + 0.75 \cdot 1700 = 1125 \\
+    VME_{1} = & max(1125, 0) = 1125 \\
+\end{align*}
+
+\end{solucion}

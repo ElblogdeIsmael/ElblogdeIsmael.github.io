@@ -1,0 +1,667 @@
+\chapter{Parcial I}
+\section{Examen I}
+
+\textbf{Datos Examen}
+
+\begin{itemize}
+    \item 2021-2022
+\end{itemize}
+
+
+\begin{ejercicio}
+Encontrar una gramática que genere el lenguaje:
+$L_1 = \{a^n b^m c^k \in \{a, b, c\}^* \mid n, m, k \in \mathbb{N} \cup \{0\}, |n - m| = k\}$
+\end{ejercicio}
+
+% \textbf{Resolución del Ejercicio 1}
+\begin{solucion}
+
+
+
+
+
+\textbf{1. Análisis del Lenguaje}
+
+La condición principal del lenguaje es $|n - m| = k$. Esta ecuación de valor absoluto se puede dividir en dos casos mutuamente excluyentes (excepto cuando $n=m$ y $k=0$):
+
+\begin{itemize}
+    \item \textbf{Caso 1: $n \ge m$} \\
+    En esta situación, el valor absoluto $|n - m|$ es $n - m$. La condición se convierte en: $n - m = k$. Podemos despejar $n$: $n = m + k$. Las cadenas de este sub-lenguaje, que llamaremos $L_A$, tienen la forma: $a^{m+k} b^m c^k$.
+    \item \textbf{Caso 2: $n < m$} \\
+    En esta situación, el valor absoluto $|n - m|$ es $-(n - m) = m - n$. La condición se convierte en: $m - n = k$. Podemos despejar $m$: $m = n + k$. Las cadenas de este sub-lenguaje, que llamaremos $L_B$, tienen la forma: $a^n b^{n+k} c^k$.
+\end{itemize}
+
+El lenguaje $L_1$ es la unión de estos dos sub-lenguajes: $L_1 = L_A \cup L_B$.
+
+Dado que los lenguajes libres de contexto (generados por gramáticas) son cerrados bajo la operación de unión, podemos diseñar una gramática para $L_A$ y otra para $L_B$, y luego combinarlas usando un nuevo símbolo inicial $S$.
+
+La regla inicial será:
+$S \to S_A \mid S_B$
+Donde $S_A$ es el símbolo inicial para la gramática de $L_A$ y $S_B$ es el símbolo inicial para la gramática de $L_B$.
+
+\textbf{2. Gramática para $L_A$ (Caso 1: $n \ge m$)}
+
+Buscamos generar el lenguaje $L_A = \{a^{m+k} b^m c^k \mid m, k \ge 0\}$. Podemos reescribir la forma de la cadena como: $a^k a^m b^m c^k$.
+
+Esta estructura nos muestra dos relaciones de "conteo" anidadas:
+\begin{enumerate}
+    \item Una relación externa: $k$ $a$'s al principio se corresponden con $k$ $c$'s al final ($a^k ... c^k$).
+    \item Una relación interna: $m$ $a$'s se corresponden con $m$ $b$'s ($a^m b^m$).
+\end{enumerate}
+
+Podemos construir la gramática de la siguiente manera:
+\begin{itemize}
+    \item Usamos $S_A$ para generar la parte externa ($a^k ... c^k$). Cada vez que añadimos una $a$, también añadimos una $c$.
+    \item Cuando dejamos de generar $a$'s y $c$'s, pasamos a un nuevo símbolo (llamémoslo $M$) que generará la parte interna ($a^m b^m$).
+\end{itemize}
+
+Las producciones para $L_A$ son:
+\begin{align*}
+    S_A &\to a S_A c \mid M \\
+    M &\to a M b \mid \epsilon
+\end{align*}
+
+\textbf{Ejemplo de derivación para $a^3 b^1 c^2$ ($m=1, k=2$):}
+\[
+S_A \to a S_A c \to a (a S_A c) c \to aa S_A cc \to aa M cc \to aa (a M b) cc \to aa (a \epsilon b) cc = a^3 b^1 c^2
+\]
+
+\textbf{3. Gramática para $L_B$ (Caso 2: $n < m$)}
+
+Buscamos generar el lenguaje $L_B = \{a^n b^{n+k} c^k \mid n, k \ge 0\}$. Podemos reescribir la forma de la cadena como: $a^n b^n b^k c^k$.
+
+Esta estructura nos muestra dos relaciones de "conteo" secuenciales (una después de la otra):
+\begin{enumerate}
+    \item Una primera parte: $n$ $a$'s seguidas de $n$ $b$'s ($a^n b^n$).
+    \item Una segunda parte: $k$ $b$'s seguidas de $k$ $c$'s ($b^k c^k$).
+\end{enumerate}
+
+Este lenguaje $L_B$ es la concatenación de dos lenguajes libres de contexto más simples.
+\begin{itemize}
+    \item Podemos usar un símbolo $S_B$ que se derive en $Y Z$.
+    \item $Y$ generará la primera parte: $\{a^n b^n \mid n \ge 0\}$.
+    \item $Z$ generará la segunda parte: $\{b^k c^k \mid k \ge 0\}$.
+\end{itemize}
+
+Las producciones para $L_B$ son:
+\begin{align*}
+    S_B &\to Y Z \\
+    Y &\to a Y b \mid \epsilon \\
+    Z &\to b Z c \mid \epsilon
+\end{align*}
+
+\textbf{Ejemplo de derivación para $a^1 b^3 c^2$ ($n=1, k=2$):}
+\[
+S_B \to Y Z \to (a Y b) Z \to (a \epsilon b) Z \to a b Z \to a b (b Z c) \to a b (b (b Z c) c) \to a b (b b \epsilon c c) = a^1 b^3 c^2
+\]
+
+\textbf{4. Gramática Final (Unificada)}
+
+Ahora, combinamos todas las reglas.
+\begin{itemize}
+    \item Símbolo inicial: $S$
+    \item Variables (No terminales): $\{S, S_A, S_B, M, Y, Z\}$
+    \item Terminales: $\{a, b, c\}$
+\end{itemize}
+
+Producciones ($P$):
+\begin{align*}
+    S &\to S_A \mid S_B \\
+    S_A &\to a S_A c \mid M \\
+    S_B &\to M Z \\
+    M &\to a M b \mid \epsilon \\
+    Z &\to b Z c \mid \epsilon
+\end{align*}
+
+\end{solucion}
+
+\begin{ejercicio}
+Dar gramáticas que acepten los siguientes lenguajes:
+\begin{enumerate}
+    \item $L_1 = \{u \in \{0, 1\}^* \mid u^{-1} = u\}$, donde $u^{-1}$ representa el complemento de $u$, es decir, cambiando $0$'s por $1$'s y viceversa.
+    \item $L_2 = \{a^n b^m \mid n, m \in \mathbb{N} \cup \{0\}, 3m \ge n \ge 2m\}$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+Esta es una resolución detallada del ejercicio.
+
+\subsubsection*{Análisis del Lenguaje $L_1$}
+
+El lenguaje se define como $L_1 = \{u \in \{0, 1\}^* \mid u^{-1} = \bar{u}\}$. Vamos a desglosar las condiciones:
+\begin{itemize}
+    \item $u \in \{0, 1\}^*$: $u$ es una cadena (string) formada por 0s y 1s, de cualquier longitud, incluida la longitud 0 (la cadena vacía, $\epsilon$).
+    \item $u^{-1}$: Es la \textbf{reversa} de la cadena $u$. Si $u = w_1 w_2 \dots w_n$, entonces $u^{-1} = w_n \dots w_2 w_1$.
+    \item $\bar{u}$: Es el \textbf{complemento} de la cadena $u$. Si $u = w_1 w_2 \dots w_n$, entonces $\bar{u} = \overline{w_1} \overline{w_2} \dots \overline{w_n}$, donde $\overline{0} = 1$ y $\overline{1} = 0$.
+\end{itemize}
+
+La condición $u^{-1} = \bar{u}$ significa que la cadena reversa de $u$ debe ser idéntica a la cadena complemento de $u$.
+
+\subsubsection*{Análisis de la Longitud de las Cadenas}
+
+Veamos qué pasa con cadenas de diferentes longitudes:
+
+\begin{itemize}
+    \item \textbf{Longitud 0 ($u = \epsilon$):}
+    \[
+    u^{-1} = \epsilon, \quad \bar{u} = \epsilon
+    \]
+    $u^{-1} = \bar{u}$ se cumple. Por lo tanto, $\epsilon \in L_1$.
+
+    \item \textbf{Longitud 1 ($u = w_1$):}
+    La condición es $w_1 = \overline{w_1}$.
+    \begin{itemize}
+        \item Si $w_1 = 0$, la condición es $0 = \overline{0} = 1$ (Falso).
+        \item Si $w_1 = 1$, la condición es $1 = \overline{1} = 0$ (Falso).
+    \end{itemize}
+    Ninguna cadena de longitud 1 pertenece a $L_1$.
+
+    \item \textbf{Longitud 2 ($u = w_1 w_2$):}
+    La condición es $w_2 = \overline{w_1}$ y $w_1 = \overline{w_2}$.
+    \begin{itemize}
+        \item Si $w_1 = 0$, $w_2 = \overline{0} = 1$. La cadena es $u = 01$.\\
+        (Check: $u^{-1} = 10$, $\bar{u} = \overline{01} = 10$. Se cumple).
+        \item Si $w_1 = 1$, $w_2 = \overline{1} = 0$. La cadena es $u = 10$.\\
+        (Check: $u^{-1} = 01$, $\bar{u} = \overline{10} = 01$. Se cumple).
+    \end{itemize}
+    Las cadenas $01$ y $10$ pertenecen a $L_1$.
+
+    \item \textbf{Longitud 3 ($u = w_1 w_2 w_3$):}
+    Las condiciones son: $w_3 = \overline{w_1}$ y $w_2 = \overline{w_2}$ y $w_1 = \overline{w_3}$.
+    \begin{itemize}
+        \item La condición central, $w_2 = \overline{w_2}$, es la misma que vimos para longitud 1. Es imposible.
+    \end{itemize}
+    Ninguna cadena de longitud 3 pertenece a $L_1$.
+\end{itemize}
+
+\textbf{Conclusión:} El lenguaje $L_1$ solo contiene cadenas de longitud par.
+
+\subsubsection*{Diseño de la Gramática}
+
+Necesitamos una gramática que genere cadenas desde "afuera hacia adentro", asegurando que los pares de caracteres externos (primero y último) sean complementarios.
+
+Sea $S$ nuestro símbolo inicial.
+
+\begin{itemize}
+    \item \textbf{Caso Base:} La cadena más corta (y la única de longitud impar, que es 0) es la cadena vacía $\epsilon$. Esta debe ser nuestra regla de terminación.
+    \[
+    S \to \epsilon
+    \]
+    \item \textbf{Paso Recursivo:} Si tenemos una cadena $u$ que ya está en $L_1$ (es decir, $u$ es generable desde $S$), podemos formar una cadena nueva y más larga poniéndole caracteres complementarios en los extremos.
+    \begin{itemize}
+        \item Si $u \in L_1$, entonces $0u1$ también debe estar en $L_1$.
+        \item Del mismo modo, si $u \in L_1$, entonces $1u0$ también debe estar en $L_1$.
+    \end{itemize}
+    Esto nos da las reglas:
+    \[
+    S \to 0 S 1 \quad \text{y} \quad S \to 1 S 0
+    \]
+\end{itemize}
+
+\subsubsection*{Gramática Final}
+
+Combinando las reglas obtenidas, la gramática $G = (V, T, P, S)$ es:
+\begin{itemize}
+    \item \textbf{Variables (No terminales):} $\{S\}$
+    \item \textbf{Terminales:} $\{0, 1\}$
+    \item \textbf{Símbolo Inicial:} $S$
+    \item \textbf{Producciones:}
+    \begin{align*}
+        S &\to 0 S 1 \\
+        S &\to 1 S 0 \\
+        S &\to \epsilon
+    \end{align*}
+\end{itemize}
+
+\subsubsection*{Ejemplos de Derivación}
+
+\begin{itemize}
+    \item \textbf{Para generar $\epsilon$:}
+    \[
+    S \to \epsilon
+    \]
+    \item \textbf{Para generar $01$:}
+    \[
+    S \to 0 S 1 \to 0 \epsilon 1 = 01
+    \]
+    \item \textbf{Para generar $10$:}
+    \[
+    S \to 1 S 0 \to 1 \epsilon 0 = 10
+    \]
+    \item \textbf{Para generar $0011$:}
+    \[
+    S \to 0 S 1 \to 0 (0 S 1) 1 \to 00 \epsilon 11 = 0011
+    \]
+    \item \textbf{Para generar $1100$:}
+    \[
+    S \to 1 S 0 \to 1 (1 S 0) 0 \to 11 \epsilon 00 = 1100
+    \]
+\end{itemize}
+\end{solucion}
+
+\newpage
+\section{Examen II}
+
+\textbf{Datos Examen}
+
+\begin{itemize}
+    \item 2025-2026
+\end{itemize}
+
+\begin{ejercicio}
+    Dado el lenguaje $L = \{w \in \{a, b\}^* \mid$ los cambios de $a$ a $b$ solo ocurren cuando hay un número par de $a$'s, y los cambios de $b$ a $a$ solo ocurren cuando hay un número impar de $b$'s$\}$:
+
+    \begin{enumerate}
+        \item Diseñar el Autómata Finito Determinista (AFD) que reconozca el lenguaje $L$.
+        
+        Para ello debemos de proporcionar los estados necesarios, así como la función de transición, el estado inicial y los estados de aceptación. Para la resolución del ejercicio, nos serviremos del producto cartesiano de las posibilidades que estamos barajando.
+
+        Estados:
+        \begin{itemize}
+            \item $q_0$: estado inicial, número par de a's y de b's.
+            \item $q_1$: número impar de a's y par de b's.
+            \item $q_2$: número impar de a's e impar de b's.
+            \item $q_3$: número par de a's e impar de b's.
+        \end{itemize}
+
+        Funciones de transición:
+
+        \begin{itemize}
+            \item $\delta(q_0, a) = q_1$
+            \item $\delta(q_0, b) = q_3$
+            \item $\delta(q_1, a) = q_0$
+            \item $\delta(q_1, b) = E$
+            \item $\delta(q_2, a) = q_3$
+            \item $\delta(q_2, b) = E$
+            \item $\delta(q_3, a) = q_2$
+            \item $\delta(q_3, b) = q_0$
+        \end{itemize}
+        Debemos de añadir el estado de Error.
+
+        Los estados de aceptación serán aquellos en los que se cumplan las condiciones del lenguaje, es decir, \underline{todos}, debido a que los cambios que no se puedan producir van a error, por ende, el único que no puede ser final es el estado de error.
+
+        Por otro lado, podríamos pensar que si en $q_0$ recibo una a, como el estado de las b's, es par no se puede producir el cambio, pero no debemos de confundirnos, ya que no había ninguna b para cambiar a a, por lo que no hay problema en recibir una a en ese estado.
+
+
+
+        Por lo tanto el AFD queda definido como el de la figura \ref{fig:afd_ejercicio1_parcial1_examen2}.
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[shorten >=1pt, node distance=2cm, on grid, auto]
+                \node[state, initial, accepting] (q_0)   {$q_0$};
+                    \node[state, accepting] (q_1) [above right=3cm and 3cm of q_0] {$q_1$};
+                    \node[state, accepting] (q_3) [below right=3cm and 3cm of q_0] {$q_3$};
+                    \node[state, accepting] (q_2) [right=4cm of q_1] {$q_2$};
+                    \node[error] (E) [below=4cm of q_2] {$E$};
+
+                    \path[->]
+                    (q_0) edge [bend left] node {a} (q_1)
+                    (q_0) edge [bend left] node {b} (q_3)
+                    (q_1) edge [bend left] node {a} (q_0)
+                    (q_1) edge node {b} (E)
+                    (q_3) edge [bend left] node {b} (q_0)
+                    (q_3) edge [bend left] node {a} (q_2)
+                    (q_2) edge [bend left] node {a} (q_3)
+                    (q_2) edge node {b} (E)
+                    (E) edge [loop below] node {a,b} ();
+            \end{tikzpicture}
+            \caption{Autómata Finito Determinista (AFD) para el lenguaje $L$.}
+            \label{fig:afd_ejercicio1_parcial1_examen2}
+        \end{figure}
+
+        Tras esta resolución, podemos pensar que es correcta, pero no estamos teniendo en cuenta que no estamos tratando el punto de partida, es decir, si ha recibido una a o un b, parte fundamental, ya que si vemos que pasa de $q_0$ a $q_3$ y vuelve, tiene un número par de b's y puede cambiar a a, esto no debería de poderse, de manera que debemos de añadir más estados para tener en cuenta el primer símbolo que recibimos.   
+        
+        Por lo tanto, los estados quedarían de la siguiente manera:
+
+        \begin{itemize}
+            \item $q_{00}$: estado inicial, número par de a's y de b's, primer símbolo $a$.
+            \item $q_{01}$: número impar de a's y par de b's, primer símbolo $a$.
+            \item $q_{02}$: número impar de a's e impar de b's, primer símbolo $a$.
+            \item $q_{03}$: número par de a's e impar de b's, primer símbolo $a$.
+            \item $q_{10}$: estado inicial, número par de a's y de b's, primer símbolo $b$.
+            \item $q_{11}$: número impar de a's y par de b's, primer símbolo $b$.
+            \item $q_{12}$: número impar de a's e impar de b's, primer símbolo $b$.
+            \item $q_{13}$: número par de a's e impar de b's, primer símbolo $b$.
+        \end{itemize}
+
+        Funciones de transición:
+
+        \begin{itemize}
+            \item $\delta(q_{00}, a) = q_{01}$
+            \item $\delta(q_{00}, b) = q_{10}$
+            \item $\delta(q_{01}, a) = q_{00}$
+            \item $\delta(q_{01}, b) = q_{11}$
+            \item $\delta(q_{02}, a) = q_{03}$
+            \item $\delta(q_{02}, b) = q_{12}$
+            \item $\delta(q_{03}, a) = q_{02}$
+            \item $\delta(q_{03}, b) = q_{13}$
+            \item $\delta(q_{10}, a) = q_{11}$
+            \item $\delta(q_{10}, b) = q_{00}$
+            \item $\delta(q_{11}, a) = q_{10}$
+            \item $\delta(q_{11}, b) = q_{12}$
+            \item $\delta(q_{12}, a) = q_{13}$
+            \item $\delta(q_{12}, b) = q_{02}$
+            \item $\delta(q_{13}, a) = q_{12}$
+            \item $\delta(q_{13}, b) = q_{03}$
+        \end{itemize}
+
+        Los estados de aceptación serán aquellos en los que se cumplan las condiciones del lenguaje, es decir, \underline{todos}, debido a que los cambios que no se puedan producir van a error, por ende, el único que no puede ser final es el estado de error.
+
+        Por lo tanto el AFD queda definido mucho más complejo.
+
+        Otra forma es verlo de manera directa. Para ello vemos el grafo de la figura \ref{fig:example_graph}.
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[shorten >=1pt, node distance=2cm, on grid, auto]
+                \node[state, initial, accepting] (q_0)   {$q_0$};
+                \node[state, accepting] (q_1) [above right=3cm and 2cm of q_0] {$q_1$};
+                \node[state, accepting] (q_2) [below right=3cm and 2cm of q_0] {$q_2$};
+                \node[state, accepting] (q_3) [right=4cm of q_0] {$q_3$};
+                \node[error] (E) [right=4cm of q_3] {$E$};
+
+                \path[->]
+                (q_0) edge[bend left] node {a} (q_1)
+                (q_0) edge[bend right] node [below] {b} (q_2)
+                (q_1) edge[bend left] node {a} (q_0)
+                (q_1) edge[bend left] node {b} (E)
+                (q_2) edge[bend right] node [below] {a} (q_0)
+                (q_2) edge[bend left] node {b} (q_3)
+                (q_3) edge[bend left] node {a} (E)
+                (q_3) edge[bend left] node {b} (q_2)
+                (E) edge[loop below] node {a,b} ();
+            \end{tikzpicture}
+            \caption{Autómata Finito Determinista (AFD) para el lenguaje $L$. Versión simplificada de manera directa}
+            \label{fig:example_graph}
+        \end{figure}
+
+        
+        
+
+
+        \item Dar la expresión regular que describe el lenguaje $L$.
+        
+        Aplicamos de antemano que $E = \emptyset$ 
+                
+        % Cabe destacar que si tenemos varios estados finales, como es este caso, la ER esta compuesta por la unión de las ER de cada uno de los estados finales.
+
+        Por lo tanto, la ER que describe el lenguaje $L$ es la siguiente:
+        \begin{align*}
+            q_0 = aq_1 + bq_2 + \epsilon \\
+            q_1 = aq_0 + Eb + \epsilon \\
+            q_2 = bq_3 + aq_0 + \epsilon \\
+            q_3 = bq_2 + Ea + \epsilon 
+        \end{align*}
+
+        Resolviendo el sistemas nos queda:
+        \begin{align*}
+            (aa+abaaa)^* + b(bb+ab)^* + abaa + ba + bb + \epsilon
+        \end{align*}
+
+
+
+        \item Proporcionar la gramática lineal por la derecha que genera el lenguaje $L$ (Se ha hecho con el AFD de la figura \ref{fig:afd_ejercicio1_parcial1_examen2}).
+        
+        Para construir la gramática lineal por la derecha, tomamos como base el AFD diseñado en el apartado (a). Cada estado del AFD se convierte en un símbolo no terminal de la gramática, y las transiciones entre estados se convierten en producciones. De manera que nos quedan las siguientes producciones:
+        \begin{align*}
+            q_0 \rightarrow & a q_1 \mid b q_3 \mid \epsilon \\
+            q_1 \rightarrow & a q_0 \mid \epsilon \\
+            q_2 \rightarrow & a q_3 \mid \epsilon \\
+            q_3 \rightarrow & b q_0 \mid a q_2 \mid \epsilon
+        \end{align*}
+
+        \begin{anotacion}
+            Si se nos pidiera la gramática lineal por la izquierda, deberíamos invertir el AFD y construir la gramática a partir de ese AFD invertido, acto seguido invertimos el orden de las producciones para conseguir que sea lineal por la izquierda.
+        \end{anotacion}
+        
+        
+    
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+Dar las gramáticas que generan los siguientes lenguajes:
+\begin{enumerate}
+    \item El lenguaje de todos los números en binario múltiplos de 4.
+    
+    La resolución de este ejercicio es algorítimica y para ello vamos a explicarlo de cara a conseguir los múltiplos de cualquiera $k \mid k \in \mathbb{N}$. 
+
+    Para resolver este problema, utilizamos el concepto de aritmética modular para construir un autómata finito determinista (AFD) que reconozca números binarios múltiplos de $k$. A continuación, se describe el procedimiento general y se aplica específicamente para $k=4$.\\
+
+    \textbf{Concepto central:} Un número $N$ es múltiplo de $k$ si y solo si $N \pmod k = 0$. El AFD leerá el número binario bit a bit y usará sus estados para representar el resto de la división por $k$ del número leído hasta ese momento. Si al finalizar la lectura el autómata está en el estado que representa el resto $0$, la cadena será aceptada.
+
+    \textbf{Construcción del AFD:}
+    \begin{itemize}
+        \item \textbf{Estados ($Q$):} Se necesitan $k$ estados, donde cada estado $q_r$ representa el resto $r$ al dividir el número leído hasta el momento por $k$. Es decir, $Q = \{q_0, q_1, \dots, q_{k-1}\}$.
+        \item \textbf{Estado inicial ($q_0$):} El estado inicial es $q_0$, que representa el resto $0$ antes de leer cualquier bit.
+        \item \textbf{Estados finales ($F$):} El único estado final es $q_0$, ya que aceptamos la cadena solo si el resto final es $0$.
+        \item \textbf{Función de transición ($\delta$):} La transición entre estados se calcula como:
+        \[
+        \delta(q_r, b) = q_s, \quad \text{donde } s = (2r + b) \pmod k
+        \]
+        Aquí, $r$ es el resto actual, $b$ es el bit leído ($0$ o $1$), y $s$ es el nuevo resto.
+    \end{itemize}
+
+    \textbf{Ejemplo: Múltiplos de 4 ($k=4$)}
+
+    \begin{itemize}
+        \item \textbf{Estados:} $Q = \{q_0, q_1, q_2, q_3\}$
+        \item \textbf{Estado inicial:} $q_0$
+        \item \textbf{Estado final:} $F = \{q_0\}$
+        \item \textbf{Transiciones:} Calculamos las transiciones usando la fórmula $s = (2r + b) \pmod 4$.
+    \end{itemize}
+
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \textbf{Estado actual ($q_r$)} & \textbf{Leer $b=0$} & $\to s = (2r+0) \pmod 4$ & \textbf{Leer $b=1$} & $\to s = (2r+1) \pmod 4$ \\ \hline
+    $q_0$ (resto 0) & $q_0$ & $(0+0) \pmod 4 = 0$ & $q_1$ & $(0+1) \pmod 4 = 1$ \\ \hline
+    $q_1$ (resto 1) & $q_2$ & $(2+0) \pmod 4 = 2$ & $q_3$ & $(2+1) \pmod 4 = 3$ \\ \hline
+    $q_2$ (resto 2) & $q_0$ & $(4+0) \pmod 4 = 0$ & $q_1$ & $(4+1) \pmod 4 = 1$ \\ \hline
+    $q_3$ (resto 3) & $q_2$ & $(6+0) \pmod 4 = 2$ & $q_3$ & $(6+1) \pmod 4 = 3$ \\ \hline
+    \end{tabular}
+    \caption{Transiciones del AFD para múltiplos de 4.}
+    \end{table}
+
+    \textbf{Observación:} Este AFD acepta cadenas que terminan en $00$ (o son $0$). Esto se deduce automáticamente del método general, ya que para llegar al estado $q_0$ (final) después de leer una cadena, el número debe ser divisible por $4$.
+
+    \textbf{Ejemplo de derivación:}
+    \begin{itemize}
+        \item Cadena $1100$ (valor $12$, múltiplo de $4$):
+        \[
+        q_0 \xrightarrow{1} q_1 \xrightarrow{1} q_3 \xrightarrow{0} q_2 \xrightarrow{0} q_0 \quad \text{(Aceptada)}
+        \]
+        \item Cadena $101$ (valor $5$, no múltiplo de $4$):
+        \[
+        q_0 \xrightarrow{1} q_1 \xrightarrow{0} q_2 \xrightarrow{1} q_1 \quad \text{(Rechazada)}
+        \]
+    \end{itemize}
+
+    \textbf{Ejemplo 2: Múltiplos de 3 ($k=3$)}
+
+    \begin{itemize}
+        \item \textbf{Estados:} $Q = \{q_0, q_1, q_2\}$
+        \item \textbf{Estado inicial:} $q_0$
+        \item \textbf{Estado final:} $F = \{q_0\}$
+        \item \textbf{Transiciones:} Calculamos las transiciones usando la fórmula $s = (2r + b) \pmod 3$.
+    \end{itemize}
+
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \textbf{Estado actual ($q_r$)} & \textbf{Leer $b=0$} & $\to s = (2r+0) \pmod 3$ & \textbf{Leer $b=1$} & $\to s = (2r+1) \pmod 3$ \\ \hline
+    $q_0$ (resto 0) & $q_0$ & $(0+0) \pmod 3 = 0$ & $q_1$ & $(0+1) \pmod 3 = 1$ \\ \hline
+    $q_1$ (resto 1) & $q_2$ & $(2+0) \pmod 3 = 2$ & $q_0$ & $(2+1) \pmod 3 = 0$ \\ \hline
+    $q_2$ (resto 2) & $q_1$ & $(4+0) \pmod 3 = 1$ & $q_2$ & $(4+1) \pmod 3 = 2$ \\ \hline
+    \end{tabular}
+    \caption{Transiciones del AFD para múltiplos de 3.}
+    \end{table}
+
+    \textbf{Prueba:}
+    \begin{itemize}
+        \item \textbf{Cadena $110$ (valor $6$, múltiplo de $3$):}
+        \[
+        q_0 \xrightarrow{1} q_1 \xrightarrow{1} q_0 \xrightarrow{0} q_0 \quad \text{(Aceptada)}
+        \]
+        \item \textbf{Cadena $101$ (valor $5$, no múltiplo):}
+        \[
+        q_0 \xrightarrow{1} q_1 \xrightarrow{0} q_2 \xrightarrow{1} q_2 \quad \text{(Rechazada)}
+        \]
+    \end{itemize}
+
+    \underline{Retomando el caso de los múltiplos de 4}, la gramática lineal por la derecha correspondiente se calcularía mediante las funciones de transición del AFD diseñado, resultando en las siguientes producciones:
+    \begin{align*}
+        q_0 &\to 0 q_0 \mid 1 q_1 \mid \epsilon \\
+        q_1 &\to 0 q_2 \mid 1 q_3 \\
+        q_2 &\to 0 q_0 \mid 1 q_1 \\
+        q_3 &\to 0 q_2 \mid 1 q_3
+    \end{align*}
+
+    De nuevo debemos de tener en cuenta la \textit{Nota} anterior sobre la gramática lineal por la izquierda.
+
+
+    \item El lenguaje de todas las palabras pertenecientes a $\{a, b, c\}$ tales que el número de $a$'s es par si el número de $c$'s es par.
+    
+    Para resolver este problema, definimos cuatro estados basados en la paridad del número de $a$'s y $c$'s leídos hasta el momento:
+    \begin{itemize}
+        \item $q_{ee}$: número par de $a$'s y número par de $c$'s.
+        \item $q_{eo}$: número par de $a$'s y número impar de $c$'s.
+        \item $q_{oe}$: número impar de $a$'s y número par de $c$'s.
+        \item $q_{oo}$: número impar de $a$'s y número impar de $c$'s.
+    \end{itemize}
+
+    De manera análoga a como venimos resolviendo los ejercicios anteriores, definimos las transiciones entre estos estados basándonos en la lectura de los caracteres $a$, $b$ y $c$:
+    \begin{align*}
+        \delta(q_{ee}, a) &= q_{oe} & \delta(q_{ee}, b) &= q_{ee} & \delta(q_{ee}, c) &= q_{eo} \\
+        \delta(q_{eo}, a) &= q_{oo} & \delta(q_{eo}, b) &= q_{eo} & \delta(q_{eo}, c) &= q_{ee} \\
+        \delta(q_{oe}, a) &= q_{ee} & \delta(q_{oe}, b) &= q_{oe} & \delta(q_{oe}, c) &= q_{oo} \\
+        \delta(q_{oo}, a) &= q_{eo} & \delta(q_{oo}, b) &= q_{oo} & \delta(q_{oo}, c) &= q_{oe}
+    \end{align*}
+    Podemos ver que la columna correspondiente a la lectura de $b$'s no afecta al estado, ya que los $b$'s no influyen en las condiciones del lenguaje.
+
+    Debemos de definir el estado inicial y los estados de aceptación:
+    \begin{itemize}
+        \item Estado inicial: $q_{ee}$ (antes de leer cualquier símbolo, tenemos 0 $a$'s y 0 $c$'s, ambos pares).
+        \item Estados de aceptación: $q_{ee}$, $q_{eo}$ y $q_{oo}$ (estos estados cumplen la condición del lenguaje: si el número de $c$'s es par, el número de $a$'s también es par). El único que no es válido es $q_{oe}$, donde hay un número impar de $a$'s y un número par de $c$'s, lo cual viola la condición del lenguaje.
+    \end{itemize}
+
+    Dibujamos el AFD correspondiente, el cual es el de la figura \ref{fig:afd_ejercicio2_parcial1_examen2}.
+
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[shorten >=1pt, node distance=3cm, on grid, auto]
+            \node[state, initial, accepting] (q_ee)   {$q_{ee}$};
+                \node[state, accepting] (q_eo) [right=of q_ee] {$q_{eo}$};
+                \node[state] (q_oe) [below=of q_ee] {$q_{oe}$};
+                \node[state, accepting] (q_oo) [right=of q_oe] {$q_{oo}$};
+
+                \path[->]
+                (q_ee) edge [bend left] node {a} (q_oe)
+                       edge [loop above] node {b} ()
+                       edge [bend left] node {c} (q_eo)
+                (q_eo) edge [bend left] node {a} (q_oo)
+                       edge [loop above] node {b} ()
+                       edge [bend left] node {c} (q_ee)
+                (q_oe) edge [bend left] node {a} (q_ee)
+                       edge [loop below] node {b} ()
+                       edge [bend left] node {c} (q_oo)
+                (q_oo) edge [bend left] node {a} (q_eo)
+                       edge [loop below] node {b} ()
+                       edge [bend left] node {c} (q_oe);
+        \end{tikzpicture}
+        \caption{Autómata Finito Determinista (AFD) para el lenguaje del ejercicio 2.}
+        \label{fig:afd_ejercicio2_parcial1_examen2}
+    \end{figure}
+
+    A partir de este AFD, podemos construir la gramática lineal por la derecha correspondiente\footnote{No es necesario dibujar el AFD, aquí se incluye para hacer el ejercicio más completo, con tener las funciones de transición podemos conseguirla.}:
+    \begin{align*}
+        q_{ee} &\to a q_{oe} \mid b q_{ee} \mid c q_{eo} \mid \epsilon \\
+        q_{eo} &\to a q_{oo} \mid b q_{eo} \mid c q_{ee} \\
+        q_{oe} &\to a q_{ee} \mid b q_{oe} \mid c q_{oo} \\
+        q_{oo} &\to a q_{eo} \mid b q_{oo} \mid c q_{oe}
+    \end{align*}
+
+
+    \item El lenguaje de todos los palíndromos pertenecientes a $\{0, 1\}^*$ en los que el número de $1$'s es igual a $3k+1$ para algún $k \in \mathbb{N}$.
+    
+    Lo que nos pide el ejercicio son las palabras de 1's y 0's que son palíndromos y con 1's en número de la forma $3k+1$, como pueden ser $1, 4, 7, 10, \ldots$. Debemos de saber que nos pide exactamente. Lo que nos pide es los múltiplos de 3 más 1. Podemos verlo de la siguiente manera.
+    \begin{itemize}
+        \item $S_0$: constructor de palíndromos con número de $1$'s múltiplo de 3, por lo tanto el resto es 0.
+        \item $S_1$: constructor de palíndromos con número de $1$'s de la forma $3k+1$, por lo tanto el resto es 1.
+        \item $S_2$: constructor de palíndromos con número de $1$'s de la forma $3k+2$, por lo tanto el resto es 2.
+    \end{itemize}
+
+    Partimos del punto de que los 0's no afectan al conteo de 1's.
+    \begin{itemize}
+        \item Para construir $S_0$ en cuanto al número de 1's:
+        \begin{align*}
+            S_0 \rightarrow 1S_?1
+        \end{align*}
+        Añadimos 2 1's y queremos que:
+        \begin{equation*}
+            (\text{Resto del centro }+2)\pmod 3 = 0
+        \end{equation*} 
+        Vemos que funciona con $S_1$:
+        \begin{align*}
+            S_0 \rightarrow 1S_11
+        \end{align*}
+        \item Para construir $S_1$ en cuanto al número de 1's:
+        \begin{align*}
+            S_1 \rightarrow 1S_?1
+        \end{align*}
+        Añadimos 2 1's y queremos que:
+        \begin{equation*}
+            (\text{Resto del centro }+2)\pmod 3 = 1
+        \end{equation*} 
+        Vemos que funciona con $S_2$:
+        \begin{align*}
+            S_1 \rightarrow 1S_21
+        \end{align*}
+        \item Para construir $S_2$ en cuanto al número de 1's:
+        \begin{align*}
+            S_2 \rightarrow 1S_?1
+        \end{align*}
+        Añadimos 2 1's y queremos que:
+        \begin{equation*}
+            (\text{Resto del centro }+2)\pmod 3 = 2
+        \end{equation*} 
+        Vemos que funciona con $S_0$:
+        \begin{align*}
+            S_2 \rightarrow 1S_01
+        \end{align*}
+    \end{itemize}
+
+    Nos queda definir que palabras son el centro:
+    \begin{align*}
+        \varepsilon \text{ tiene 0 1's por lo que nos lleva a } S_0 \Rightarrow S_0 \rightarrow \varepsilon \\
+        0 \text{ tiene 0 1's por lo que nos lleva a } S_0 \Rightarrow S_0 \rightarrow 0 \\
+        1 \text{ tiene 1 1's por lo que nos lleva a } S_1 \Rightarrow S_1 \rightarrow 1 \\
+    \end{align*}
+
+    \textcolor{red}{\underline{IMPORTANTE:} Debemos de pensar que estábamos generando los palíndromos con 1's múltiplo de 3, por lo tanto para completar lo que el ejercicio nos pide, debemos de añadir las cadenas de manera que siempre se añada un 1 cumpliendo la condición de palíndromo. Asimismo, debemos de eliminar la cadena vacía de $S_0$ ya que no cumple la condición del número de 1's.}
+
+    Por lo tanto, podemos concluir con que las producciones de la gramática son:
+    \begin{align*}
+        S_0 &\rightarrow 1S_11 \mid 0S_00  \mid 1\\
+        S_1 &\rightarrow 1S_21 \mid 0S_10 \mid 101 \mid 11\\
+        S_2 &\rightarrow 1S_01 \mid 0S_20 \mid 10101 \mid 111
+    \end{align*}
+
+    
+
+
+    
+
+
+
+\end{enumerate}
+\end{ejercicio}
+
+
+
+
+
+
