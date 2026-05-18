@@ -1,0 +1,70 @@
+% ========================
+% main.tex - Plantilla LaTeX Pura
+% ========================
+
+\documentclass[12pt]{book}
+
+% 1. DATOS DE LA ASIGNATURA (Configura esto)
+\newcommand{\tituloAsignatura}{Economía Española}
+\newcommand{\subtituloAsignatura}{Apuntes del curso 2025/2026}
+\newcommand{\tipoAsignatura}{ade} % info o ade (para el fondo)
+
+% 2. CARGAR PREÁMBULOS OFICIALES
+\input{../../../extraFiles/preambulos_oficiales/paquetes.tex}
+\input{../../../extraFiles/preambulos_oficiales/estilos.tex}
+\input{../../../extraFiles/preambulos_oficiales/comandos.tex}
+\input{comandos.tex}
+
+\fancyfoot[L]{\normalsize \tituloAsignatura}
+
+\begin{document}
+
+% ==========================
+% PORTADA FANCY (NATIVA)
+% ==========================
+\begin{titlepage}
+    \newgeometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm}
+    
+    % Fondo con transparencia (Detecta si es info o ade)
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[inner sep=0pt] at (current page.center)
+            {\includegraphics[width=\paperwidth,height=\paperheight]{../../../extraFiles/img/fondo_\tipoAsignatura.jpg}};
+    \end{tikzpicture}
+
+    \begin{center}
+        \vspace*{2cm}
+        \vspace{5cm} 
+        {\Huge \bfseries\scshape\textcolor{white}{\tituloAsignatura} \par}
+        \vspace{0.5cm}
+        {\Large \itshape\textcolor{white}{\subtituloAsignatura} \par}
+
+        \vfill
+        
+        \begin{flushright}
+            {\textcolor{white}{Ismael Sallami Moreno} \par}
+            {\small \itshape \href{https://elblogdeismael.github.io}{\textcolor{white}{Recursos Ingeniería Informática y Ade}} \par}
+        \end{flushright}
+        \vspace{0.3cm}
+    \end{center}
+    
+    \restoregeometry
+\end{titlepage}
+
+% Página en blanco tras portada
+\thispagestyle{empty}
+\clearpage
+\mbox{}
+\thispagestyle{empty}
+\clearpage
+
+\tableofcontents
+\clearpage
+
+% --- Contenido ---
+\chapter{Teoría}
+\IfFileExists{secciones/01_teoria.tex}{\input{secciones/01_teoria.tex}}{Crea el archivo secciones/01_teoria.tex}
+
+\chapter{Prácticas}
+\IfFileExists{secciones/02_practicas.tex}{\input{secciones/02_practicas.tex}}{Crea el archivo secciones/02_practicas.tex}
+
+\end{document}
