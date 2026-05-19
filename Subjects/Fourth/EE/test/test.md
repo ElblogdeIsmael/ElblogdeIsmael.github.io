@@ -20,6 +20,21 @@
     - ( ) Cuenta de rentas primarias.
     - (x) Cuenta de Servicios.
 
+1a. En cuanto a la especialización productiva de la agricultura española, ¿cuáles son las orientaciones agrarias que aglutinan mayor ventaja comercial y liderazgo europeo?
+
+    - ( ) A) Cereales y semillas oleaginosas.
+    - (x) B) Olivar, frutales, cítricos y horticultura.
+    - ( ) C) Plantas forrajeras y tabaco.
+    - ( ) D) Agricultura general y viticultura.
+
+1b. Estructuralmente, el balance y la producción del sector energético en España se caracterizan por:
+
+    - ( ) A) Un altísimo nivel de autoabastecimiento basado en el carbón.
+    - (x) B) Una fuerte dependencia del exterior por la insuficiente producción nacional.
+    - ( ) C) Un exceso productivo que nos convierte en líderes de exportación de gas natural.
+    - ( ) D) Una estructura sin apenas regulaciones ni intervención del Estado.
+
+
 3. Respecto a la distribución geográfica del comercio internacional español se puede afirmar:
 
     - (x) La unión europea es nuestro principal cliente (principal destino de las exportaciones).
@@ -40,6 +55,20 @@
     - ( ) Las importaciones y exportaciones no se vean afectadas.
     - ( ) Las exportaciones crezcan más que las importaciones.
     - (x) Las importaciones crezcan más que las exportaciones.
+
+    5a. En la estructura de Ingresos Públicos en España, ¿qué componente recauda un mayor porcentaje del total de los ingresos públicos (situándose por encima del 31%)?
+
+        - ( ) A) El Impuesto de la Renta de las Personas Físicas (IRPF).
+        - ( ) B) El Impuesto sobre el Valor Añadido (IVA).
+        - ( ) C) Los impuestos directos sobre el patrimonio privado.
+        - (x) D) Las Cotizaciones Sociales.
+
+    5b. En el análisis económico, para eliminar el efecto causado por la subida de los precios en el cálculo de una variable y poder convertir el PIB nominal en PIB real, se emplea frecuentemente:
+
+        - ( ) A) El Índice de Desarrollo Humano.
+        - ( ) B) La NAIRU.
+        - ( ) C) La Tasa de Variación Media Anual Acumulativa.
+        - (x) D) El Deflactor implícito del PIB.
 
 6. Durante la crisis económica que empezó en el 2008, España logra reducir su déficit comercial mediante:
 
@@ -76,6 +105,20 @@
     - (x) Bienes de consumo derivados de la agricultura.
     - ( ) Bienes intermedios.
 
+    10a. Durante el proceso de desindustrialización en España, ¿a qué se debe principalmente que el peso de la industria haya caído menos midiendo el VAB en términos reales que en términos corrientes?
+
+        - ( ) A) Al encarecimiento relativo de las importaciones.
+        - ( ) B) A las continuas ayudas públicas concedidas por la Unión Europea.
+        - (x) C) A la mayor eficiencia de la industria (avance más rápido de la productividad) y al menor aumento relativo de sus precios.
+        - ( ) D) Al incremento vertiginoso del número total de fábricas.
+
+    10b. De acuerdo con las ventajas competitivas de la industria española, nuestro dinamismo exportador más sólido se concentra en:
+
+        - ( ) A) Sectores exclusivos de alta intensidad tecnológica (ordenadores).
+        - ( ) B) Industrias de extracción minera pesada.
+        - (x) C) Ramas más tradicionales y manufacturas de intensidad media-alta (como los vehículos de motor).
+        - ( ) D) Exclusivamente en la industria aeroespacial avanzada.
+
 11. La inversión extranjera directa:
 
     - ( ) Es un tipo de inversión cuyo objetivo es a largo plazo.
@@ -110,6 +153,20 @@
     - ( ) El 25% restante de la población mayor de 16 años forma parte de la población inactiva.
     - ( ) El 25% restante de la población mayor de 16 años pertenece a la población desempleada.
     - (x) Ninguna de las otras opciones es correcta.
+
+    15a. ¿Cómo ha sido el crecimiento del PIB per cápita en España entre 1961 y 2024 en comparación con la media de la Eurozona?
+
+        - ( ) A) Inferior a la Eurozona.
+        - ( ) B) Igual a la Eurozona.
+        - (x) C) Superior a la Eurozona.
+        - ( ) D) Crecimiento negativo frente a la Eurozona.
+
+    15b. Según los criterios del Tratado de Maastricht, ¿cuál era el límite máximo de Deuda Pública exigido en el examen de 1998 para el acceso a la UEM?
+
+        - ( ) A) 3% del PIB.
+        - (x) B) 60% del PIB.
+        - ( ) C) 67,4% del PIB.
+        - ( ) D) 100% del PIB.
 
 16. Entre los factores que explican la favorable evolución del mercado de trabajo en España entre 1995 y 2007 está:
 
@@ -146,6 +203,20 @@
     - ( ) Entrada de inmigrantes.
     - (x) Todas.
 
+20a. Debido al fuerte proceso de saneamiento bancario provocado por la crisis de 2008, ¿qué grupo de instituciones financieras prácticamente desapareció como tal del sistema bancario español?
+
+    - ( ) A) Las cooperativas de crédito.
+    - ( ) B) Las aseguradoras y fondos de pensiones.
+    - (x) C) Las Cajas de Ahorros.
+    - ( ) D) Los intermediarios financieros no bancarios.
+
+20b. Considerando el proceso histórico de descentralización de España, ¿qué nivel de la Administración asume competencialmente la inmensa mayoría del gasto en Sanidad y Educación pública?
+
+    - ( ) A) La Administración Central.
+    - (x) B) Las Comunidades Autónomas.
+    - ( ) C) Las Corporaciones Locales (Ayuntamientos).
+    - ( ) D) Los Fondos Estatales de la Seguridad Social.
+
 21. En relación al mercado de trabajo español y de la UE, indique cuál de las siguientes afirmaciones es verdadera:
 
     - (x) La tasa de paro juvenil es muy superior a la de la población general. Ello es así tanto en España como en la UE.
@@ -180,6 +251,20 @@
     - ( ) Aborda la problemática de la elevada contratación temporal que tiene España.
     - ( ) Reduce las prestaciones por desempleo a partir del tercer mes de desempleo.
     - ( ) Elimina el monopolio del servicio público de empleo y permite la entrada de agencias privadas.
+
+    25a. Al analizar el sector terciario, ¿qué rasgo intrínseco complica la medición de la productividad y caracteriza a este tipo de actividades?
+
+        - ( ) A) Tienen gran capacidad de almacenaje a largo plazo.
+        - (x) B) Exigen la necesaria concurrencia simultánea de la producción y el consumo en el espacio y en el tiempo.
+        - ( ) C) Requieren de maquinaria extremadamente pesada y tecnología de punta intensiva en capital.
+        - ( ) D) Todas las tareas pueden deslocalizarse completamente a países en desarrollo.
+
+    25b. En la Balanza de Pagos española, ¿qué componente ha registrado superávits continuados y muy elevados que logran compensar los déficits comerciales estructurales?
+
+        - ( ) A) Telecomunicaciones e información.
+        - ( ) B) Servicios financieros.
+        - (x) C) Turismo y viajes.
+        - ( ) D) Transferencias de capital internacionales.
 
 26. El desempleo persiste en España por:
 
@@ -216,6 +301,20 @@
     - (x) La calidad de las normas y el estudio del impacto económico de las regulaciones.
     - ( ) La escasez de normas y la no adopción de la regulación procedente de la UE.
 
+    30a. En los determinantes del crecimiento a largo plazo, el "empleo per cápita" se define como:
+
+        - ( ) A) Población Activa entre Población en Edad de Trabajar.
+        - (x) B) Empleo total dividido entre la Población total.
+        - ( ) C) Población ocupada entre Población Activa.
+        - ( ) D) Empleo dividido entre la Población inactiva.
+
+    30b. Según la función de producción Cobb-Douglas, ¿qué componente se extrae matemáticamente como el Residuo de Solow?
+
+        - ( ) A) El capital humano por trabajador.
+        - ( ) B) La productividad media del trabajo.
+        - (x) C) La Productividad Total de los Factores (PTF) o progreso técnico.
+        - ( ) D) El volumen de capital físico total.
+
 31. Desde mediados de los 70, España alcanzaría el superávit presupuestario:
 
     - (x) Entre 2005 y 2007, como resultado de la disciplina fiscal y la expansión cíclica.
@@ -250,6 +349,20 @@
     - (x) Pensiones sociales.
     - ( ) Compra de bienes y servicios.
     - ( ) Intereses de la Deuda.
+
+    35a. Durante la profunda crisis económica provocada por el Covid-19 en 2020, la caída masiva del empleo formal se amortiguó fundamentalmente gracias a:
+
+        - ( ) A) La devaluación nacional de los costes laborales unitarios nominales.
+        - ( ) B) El mecanismo RED de carácter sectorial inmediato.
+        - (x) C) Los Expedientes de Regulación Temporal de Empleo (ERTE).
+        - ( ) D) Las jubilaciones anticipadas forzosas.
+
+    35b. España pertenece al modelo de "Sistema Financiero Continental", que se define estructuralmente por:
+
+        - ( ) A) El predominio casi absoluto de la financiación directa en el mercado de bonos y acciones.
+        - (x) B) El predominio de la financiación intermediada, la banca universal y la vinculación banco-empresa.
+        - ( ) C) La fragmentación legislativa que separa obligatoriamente la banca comercial de la banca de inversión.
+        - ( ) D) El escaso nivel de endeudamiento del sistema empresarial y familias.
 
 36. Las reformas de 2011 y 2013 sobre el sistema de pensiones en España NO incluyeron:
 
@@ -286,6 +399,20 @@
     - ( ) Eliminación de las trabas que impedían a las cajas de ahorro operar en todo el territorio nacional.
     - (x) Todas las opciones anteriores son correctas.
 
+    40a. Históricamente, ¿qué causa de fondo motiva que España presente un saldo estructuralmente negativo en su Balanza Comercial de bienes?
+
+        - ( ) A) La masiva importación de servicios turísticos.
+        - (x) B) Las altísimas importaciones estructurales de bienes energéticos.
+        - ( ) C) Una total carencia de exportaciones automovilísticas.
+        - ( ) D) La pérdida constante de inversiones de capital extranjero.
+
+    40b. Para que una entrada de capital desde el exterior sea calificada estadísticamente como Inversión Extranjera Directa (IED), el inversor debe:
+
+        - ( ) A) Comprar únicamente bonos del Estado a corto plazo.
+        - ( ) B) No implicarse en modo alguno en la gestión societaria.
+        - (x) C) Adquirir un mínimo del 10% del capital social para ejercer influencia en el control o gestión continua de la empresa.
+        - ( ) D) Comprar y vender en un plazo inferior a 24 horas en bolsa.
+
 41. Para reducir el intervencionismo de la economía y alinearse con la economía de mercados de los países europeos, el gobierno de España elaboró en 1959:
 
     - (x) El plan de estabilización.
@@ -320,6 +447,20 @@
     - ( ) La política monetaria expansiva redujo la competitividad exterior.
     - (x) Se deterioró el saldo comercial exterior debido a la inflación dual y a la inflación diferencial.
     - ( ) Se incrementó el déficit público sobre todo en el componente estructural.
+
+    45a. ¿Qué indicador macroeconómico mide la diferencia coyuntural entre la senda del PIB potencial y el PIB real de la economía?
+
+        - ( ) A) Tasa de desempleo NAIRU.
+        - ( ) B) Deflactor implícito del PIB.
+        - (x) C) Output gap (brecha de producción).
+        - ( ) D) La tasa de cobertura comercial.
+
+    45b. Dentro de las transformaciones estructurales del empleo en España (1960-2023), ¿qué sector concentra la inmensa mayoría de los puestos de trabajo en la actualidad?
+
+        - ( ) A) Agricultura y pesca.
+        - ( ) B) Industria.
+        - ( ) C) Construcción.
+        - (x) D) Servicios.
 
 46. ¿Cuál de las siguientes etapas de la economía española ha registrado variaciones del PIB real positivas en todos los años?
 
@@ -356,6 +497,20 @@
     - (x) Tasas elevadas de inflación.
     - ( ) Todas las respuestas son correctas.
 
+    50a. En términos contables, el saldo de la Capacidad o Necesidad de Financiación de la economía nacional se obtiene de la suma de los saldos de:
+
+        - ( ) A) Cuenta Corriente y Cuenta de Errores y Omisiones.
+        - ( ) B) Cuenta Comercial y Cuenta Financiera.
+        - (x) C) Cuenta Corriente y Cuenta de Capital.
+        - ( ) D) Cuenta Financiera en exclusiva.
+
+    50b. ¿Cuál es la fórmula metodológica correcta para calcular la tasa de paro o desempleo en España?
+
+        - ( ) A) Población parada / Población inactiva x 100.
+        - (x) B) Población parada / Población activa x 100.
+        - ( ) C) Población parada / Población total x 100.
+        - ( ) D) Población activa / Población empleada x 100.
+
 51. En relación al comercio exterior de España, es cierto que:
 
     - (x) La economía española ha incrementado notablemente su apertura exterior desde 1985.
@@ -390,6 +545,20 @@
     - (x) Dualidad del mercado de trabajo, escaso incremento de la productividad del trabajo y escasa sensibilidad de los salarios a la evolución de la productividad.
     - ( ) Ninguna de las anteriores es correcta.
     - ( ) Necesidad de capitales extranjeros, creciente endeudamiento y dependencia exterior.
+
+    55a. El paro causado por las rigideces presentes en el mercado de trabajo (instituciones, negociación, etc.), que define una tasa compatible con una inflación estable, se conoce como:
+
+        - ( ) A) Desempleo cíclico.
+        - ( ) B) Desempleo friccional estacional.
+        - ( ) C) Tasa de cobertura salarial.
+        - (x) D) Desempleo estructural o de equilibrio (NAIRU).
+
+    55b. ¿Cuál fue el principal cambio que supuso la Reforma Laboral de 1984 en el mercado de trabajo español?
+
+        - ( ) A) El abaratamiento general del despido libre sin causa.
+        - (x) B) El fomento legal de la contratación temporal para facilitar la entrada y salida de empleo.
+        - ( ) C) La prohibición absoluta de los contratos en prácticas.
+        - ( ) D) La instauración de los mecanismos estructurales de ERTE por causa de fuerza mayor.
 
 56. Durante el periodo expansivo de 1995-2007, señale la respuesta falsa:
 
