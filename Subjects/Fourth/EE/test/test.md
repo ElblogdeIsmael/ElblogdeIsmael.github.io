@@ -1126,3 +1126,89 @@
     - ( ) No ha parado de crecer desde la crisis de 2008.
     - ( ) El pico más alto ocurre como consecuencia de la crisis interna de 1992.
 
+
+1.   ¿Cuál de las siguientes medidas reduce directamente los costes unitarios laborales?
+
+    - ( ) Aumentar las horas trabajadas por jornada sin cambios en salarios.
+    - (x) Mejoras en la productividad y formación profesional.
+    - ( ) Subir el salario mínimo sin productividad.
+    - ( ) Incrementar las cotizaciones sociales.
+
+2.   ¿Qué elemento suele explicar una mejora sostenida en la balanza comercial por volumen?
+
+    - ( ) Un aumento generalizado del consumo interno.
+    - (x) Aumento de la competitividad y diversificación de exportaciones.
+    - ( ) Mayor inflación interna que en socios comerciales.
+    - ( ) Incremento de las importaciones intermedias.
+
+3.   ¿Cuál de estas políticas favorecería más la creación de empleo a corto plazo?
+
+    - ( ) Subida inmediata y generalizada de impuestos.
+    - ( ) Reducción de la inversión pública en infraestructuras.
+    - (x) Incremento temporal del gasto público en obras e inversiones.
+    - ( ) Aumento de las tasas administrativas a empresas.
+
+4.   En una economía abierta, una apreciación real de la moneda tiende a:
+
+    - ( ) Favorecer las exportaciones por precios más competitivos.
+    - (x) Deteriorar la competitividad-exportadora por precios relativos.
+    - ( ) No tener impacto sobre el comercio exterior.
+    - ( ) Mejorar la balanza por cuenta corriente automáticamente.
+
+5.   ¿Qué instrumento es más adecuado para actuar sobre la demanda agregada en recesión?
+
+    - ( ) Restricciones al crédito bancario.
+    - (x) Política fiscal expansiva (reducción de impuestos o aumento del gasto).
+    - ( ) Subida de tipos de interés.
+    - ( ) Reducción del gasto público en infraestructuras.
+
+6.   ¿Qué causa suele explicar un aumento del desempleo estructural?
+
+    - ( ) Una recesión puntual y breve.
+    - (x) Desajuste entre habilidades demandadas y cualificaciones disponibles.
+    - ( ) Aumento temporal de la demanda agregada.
+    - ( ) Reducción de las cotizaciones sociales.
+
+143. ¿Cuál de las siguientes afirmaciones sobre inversión extranjera directa (IED) es correcta?
+
+    - ( ) Siempre busca retornos a corto plazo.
+    - ( ) No influye en la estructura productiva local.
+    - (x) Puede transferir tecnología y mejorar la productividad local.
+    - ( ) Es indistinguible de la inversión de cartera.
+
+144. ¿Qué política reduce el riesgo de crisis bancaria sistémica?
+
+    - ( ) Eliminación total de la regulación financiera.
+    - ( ) Aumento generalizado de apalancamiento bancario.
+    - (x) Fortalecimiento de los colchones de capital y supervisión bancaria.
+    - ( ) Disolución de las entidades pequeñas en grandes conglomerados.
+
+145. ¿Cuál es una consecuencia habitual de la concentración de exportaciones en productos poco diferenciados?
+
+    - ( ) Reducción de la exposición a la competencia de precios.
+    - (x) Mayor vulnerabilidad frente a cambios de precio internacionales.
+    - ( ) Mejora automática de la balanza comercial.
+    - ( ) Aumento de la innovación tecnológica.
+
+146. ¿Qué ayuda a mejorar la resiliencia económica ante shocks externos?
+
+    - ( ) Dependencia de un único mercado de exportación.
+    - (x) Diversificación de mercados y productos exportados.
+    - ( ) Aumento del endeudamiento externo sin control.
+    - ( ) Mayor rigidez en el mercado laboral.
+
+147. ¿Qué indicador aproxima mejor la capacidad de una economía para financiar deuda externa?
+
+    - ( ) La tasa de empleo.
+    - ( ) El IPC interanual.
+    - (x) Saldo por cuenta corriente y reservas internacionales.
+    - ( ) Nivel de inflación objetivo del banco central.
+
+148. En una economía pequeña y abierta, ¿qué factor facilita la transmisión rápida de shocks internacionales?
+
+    - ( ) Autarquía comercial.
+    - ( ) Alta intervención en precios internos.
+    - (x) Elevada apertura exterior y dependencia de importaciones/ exportaciones.
+    - ( ) Tipo de cambio rígido y controlado internamente.
+
+
