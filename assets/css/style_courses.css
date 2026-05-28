@@ -1,168 +1,361 @@
-/* Reset básico */
-* {
+/* =========================================================
+   style_courses.css — Dynamic redesign
+   ========================================================= */
+
+/* --- Variables & Theming --------------------------------- */
+:root {
+    --bg: #0f0f1a;
+    --bg-card: #1a1a2e;
+    --bg-card-hover: #16213e;
+    --accent: #7c3aed;
+    --accent-light: #a78bfa;
+    --accent-glow: rgba(124, 58, 237, 0.35);
+    --accent2: #06b6d4;
+    --accent2-glow: rgba(6, 182, 212, 0.3);
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: rgba(124, 58, 237, 0.25);
+    --border-open: rgba(6, 182, 212, 0.5);
+    --summary-bg: rgba(124, 58, 237, 0.12);
+    --summary-bg-hover: rgba(124, 58, 237, 0.28);
+    --item-border: rgba(6, 182, 212, 0.3);
+    --link: #38bdf8;
+    --link-hover: #7dd3fc;
+    --hr: rgba(124, 58, 237, 0.3);
+    --radius: 10px;
+    --radius-lg: 16px;
+    --transition: 0.25s cubic-bezier(.4,0,.2,1);
+    --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+    --shadow-glow: 0 0 20px var(--accent-glow);
+}
+
+/* --- Reset ------------------------------------------------ */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* --- Base ------------------------------------------------- */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    /* font-family: sans-serif; */
-    line-height: 1.6;
-    background-color: #f5f5f5;
-    background-image: url('./../images/');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    color: #333;
-    padding: 20px;
-    font-family: "Times New Roman", Times, serif;
-    font-style: italic;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    line-height: 1.65;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(124,58,237,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(6,182,212,0.1) 0%, transparent 50%);
+    background-attachment: fixed;
+    color: var(--text);
+    min-height: 100vh;
+    padding: clamp(16px, 4vw, 48px);
 }
 
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent-light); }
+
+/* --- Page title ------------------------------------------ */
+.h1_cursos {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-glow), inset 0 1px 0 rgba(255,255,255,0.05);
+    backdrop-filter: blur(4px);
+    position: relative;
+    overflow: hidden;
+    animation: float 4s ease-in-out infinite;
+}
+
+.h1_cursos::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,182,212,0.08));
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); box-shadow: var(--shadow-glow); }
+    50%       { transform: translateY(-6px); box-shadow: 0 0 36px var(--accent-glow); }
+}
+
+/* --- Section headers ------------------------------------- */
 .h2 {
-    color: rgb(117, 70, 228);
-    font-size: 2 em;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    font-weight: 700;
+    color: var(--accent-light);
+    margin: 2rem 0 0.6rem;
+    padding-left: 0.75rem;
+    border-left: 3px solid var(--accent);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-style: normal;
 }
 
-
-
-.intro-box a {
-    color: orange;
-    text-decoration: none;
-    font-weight: normal;
-    transition: font-weight 0.2s ease;
+/* --- Divider --------------------------------------------- */
+.linea-delimitadora {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--hr), transparent);
+    margin: 1rem 0 1.5rem;
 }
 
-.intro-box a:hover {
-    font-weight: bold;
-    font-size: large;
-}
-
-
-/* Cursos */
-/* Estilos para estructura de carpetas */
+/* --- Folder tree ----------------------------------------- */
 .folder {
     margin-left: 1rem;
-    padding-left: 1rem;
-    border-left: 2px solid #ccc;
+    padding-left: 0.75rem;
+    border-left: 1.5px solid var(--border);
+    transition: border-color var(--transition);
 }
 
+.folder:hover {
+    border-left-color: var(--accent);
+}
+
+/* --- Details / Summary ----------------------------------- */
 details {
     margin-bottom: 0.5rem;
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+details:hover {
+    border-color: rgba(124,58,237,0.5);
+    box-shadow: 0 2px 16px rgba(124,58,237,0.15);
+}
+
+details[open] {
+    border-color: var(--border-open);
+    box-shadow: 0 4px 24px var(--accent2-glow);
+    background: var(--bg-card-hover);
 }
 
 summary {
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    padding: 0.4rem 0.6rem;
-    background: #e9f0f4;
-    border-radius: 6px;
-    transition: background 0.2s;
+    padding: 0.65rem 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    list-style: none;
+    background: var(--summary-bg);
+    color: var(--text);
+    border-radius: var(--radius);
+    transition: background var(--transition), color var(--transition), padding-left var(--transition);
+    user-select: none;
+    position: relative;
 }
+
+summary::-webkit-details-marker { display: none; }
 
 summary:hover {
-    background: #6dccf8;
-    font-style: italic;
-    text-decoration: underline;
+    background: var(--summary-bg-hover);
+    color: var(--accent-light);
+    padding-left: 1.2rem;
 }
 
-summary:focus {
-    outline: 2px solid #6dccf8;
+summary:focus-visible {
+    outline: 2px solid var(--accent);
     outline-offset: 2px;
-    background: #6dccf8;
-    font-style: italic;
-    text-decoration: underline;
+    color: var(--accent-light);
 }
 
-/* Restaurar estilo cuando el elemento details se cierre */
-details:not([open]) summary {
-    font-style: normal;
-    text-decoration: none;
-}
-
-summary::-webkit-details-marker {
-    display: none;
-}
-
+/* Folder icon via CSS — no image dependency */
 summary::before {
-    content: "";
+    content: '';
     display: inline-block;
     width: 20px;
     height: 20px;
+    flex-shrink: 0;
     background-image: url('./../images/carpeta.png');
     background-size: contain;
     background-repeat: no-repeat;
-    margin-right: 6px;
-    vertical-align: middle;
+    background-position: center;
+    transition: transform var(--transition), filter var(--transition);
+    filter: saturate(1.2);
 }
 
 details[open] > summary::before {
     background-image: url('./../images/carpeta-abierta.png');
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 4px var(--accent2));
 }
 
+/* Animated chevron on summary */
+summary::after {
+    content: '›';
+    margin-left: auto;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    transition: transform var(--transition), color var(--transition);
+    line-height: 1;
+}
+
+details[open] > summary::after {
+    transform: rotate(90deg);
+    color: var(--accent2);
+}
+
+/* Stagger animation for inner content */
+details[open] > .folder,
+details[open] > .item {
+    animation: slideDown 0.22s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Items ----------------------------------------------- */
 .item {
-    padding: 0.3rem 0.6rem;
-    margin-left: 1.5rem;
-    border-left: 2px dotted #aaa;
-    color: #555;
+    padding: 0.35rem 0.8rem;
+    margin-left: 0.75rem;
+    border-left: 1.5px dashed var(--item-border);
+    position: relative;
+    transition: border-color var(--transition);
 }
 
-.h1_cursos {
-    font-size: 1.5em;
-    color: #4512ed;
-    text-align: center;
-    margin-bottom: 20px;
-    font-style: italic;
-    font-weight: bold;
-    border: 2px solid #4512ed;
-    border-radius: 10px;
-    padding: 15px;
-    background-color: #f7f6fd;
-    animation: bounce 2s infinite;
-    /* Añade la animación */
+.item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent2);
+    opacity: 0;
+    transition: opacity var(--transition), box-shadow var(--transition);
 }
 
-/* Definición de la animación */
-@keyframes bounce {
-
-    0%,
-    100% {
-        transform: translateY(0);
-        /* Posición inicial y final */
-    }
-
-    50% {
-        transform: translateY(-10px);
-        /* Rebote hacia arriba */
-    }
+.item:hover {
+    border-left-color: var(--accent2);
 }
 
-.linea-delimitadora {
-    border: none;
-    border-top: 2px solid #ccc;
-    margin: 2rem 0;
+.item:hover::before {
+    opacity: 1;
+    box-shadow: 0 0 8px var(--accent2);
 }
 
+/* --- Links ----------------------------------------------- */
+.file-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--link);
+    padding: 0.3rem 0.6rem 0.3rem 2rem;
+    border-radius: 6px;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    background-position: 0.4rem center;
+    font-size: 0.92rem;
+    transition: color var(--transition), background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    position: relative;
+}
+
+.file-link:hover {
+    color: var(--link-hover);
+    background-color: rgba(56,189,248,0.08);
+    transform: translateX(4px);
+    box-shadow: -3px 0 0 var(--accent2);
+}
+
+.file-link:active {
+    transform: translateX(2px) scale(0.98);
+}
+
+/* File type icons */
+.pdf-link      { background-image: url('./../images/pdf.png'); }
+.html-link     { background-image: url('./../images/html.png'); }
+.external-link { background-image: url('./../images/internet.png'); }
+.md-link       { background-image: url('./../images/md.png'); }
+.book-link     { background-image: url('./../images/book.png'); }
+.zip-link      { background-image: url('./../images/zip.png'); }
+
+/* Badge pill on file type hover */
+.pdf-link:hover::after      { content: 'PDF'; }
+.html-link:hover::after     { content: 'HTML'; }
+.external-link:hover::after { content: 'WEB'; }
+.md-link:hover::after       { content: 'MD'; }
+.book-link:hover::after     { content: 'LIBRO'; }
+.zip-link:hover::after      { content: 'ZIP'; }
+
+.file-link:hover::after {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 99px;
+    background: var(--accent2);
+    color: var(--bg);
+    margin-left: auto;
+    text-transform: uppercase;
+}
+
+/* --- Intro box links ------------------------------------- */
+.intro-box a {
+    color: var(--accent-light);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition), color var(--transition);
+}
+
+.intro-box a:hover {
+    color: var(--accent2);
+    border-bottom-color: var(--accent2);
+}
+
+/* --- Responsive ------------------------------------------ */
 @media (max-width: 768px) {
-
     body {
-        padding: 10px;
-        font-size: 0.95em;
+        padding: 12px;
+        font-size: 0.95rem;
     }
 
-    header {
-        padding: 10px;
+    .h1_cursos {
+        padding: 0.9rem 1rem;
     }
 
-    .about-section {
-        flex-direction: column;
-        padding: 30px 15px;
-        text-align: center;
+    .folder {
+        margin-left: 0.4rem;
+        padding-left: 0.4rem;
     }
 
-    .about-img img {
-        width: 180px;
-        margin: 0 auto;
+    summary {
+        padding: 0.6rem 0.7rem;
+        font-size: 0.95rem;
+    }
+
+    .file-link {
+        font-size: 0.88rem;
     }
 
     .menu-cursos {
@@ -172,70 +365,17 @@ details[open] > summary::before {
 
     .menu-cursos ul {
         flex-direction: column;
-        gap: 15px;
+        gap: 12px;
     }
 
-    .menu-cursos li a {
-        width: 80%;
-        height: auto;
-        line-height: 2.5;
-        font-size: 1em;
-    }
-
-    .form,
-    .wrapper {
+    .form, .wrapper {
         width: 95% !important;
     }
+}
 
-    .title {
-        font-size: 1.5em;
-        width: 90%;
-    }
-
-    .about-text {
-        padding: 10px;
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
     }
 }
-
-/* Estilo base común para todos los tipos de archivo */
-.file-link {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    color: #333;
-    padding-left: 25px;
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    background-position: left center;
-    transition: color 0.3s ease;
-}
-
-.file-link:hover {
-    color: #007bff;
-    text-decoration: underline;
-}
-
-.pdf-link {
-    background-image: url('./../images/pdf.png');
-}
-
-.html-link {
-    background-image: url('./../images/html.png'); /* Usa un icono HTML */
-}
-
-.external-link {
-    background-image: url('./../images/internet.png'); /* Icono de enlace externo */
-}
-
-.md-link {
-    background-image: url('./../images/md.png'); /* Icono markdown */
-}
-
-.book-link {
-    background-image: url('./../images/book.png'); /* Icono libro */
-}
-
-.zip-link {
-    background-image: url('./../images/zip.png'); /* Icono ZIP */
-}
-
