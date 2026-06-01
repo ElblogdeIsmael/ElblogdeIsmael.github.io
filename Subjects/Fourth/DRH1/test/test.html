@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test DRH1 - Dirección de Recursos Humanos (Ordinaria)</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+      :root {
+        --bg-color: #f0f2f5;
+        --text-color: #333;
+        --card-bg: #fff;
+        --border-color: #ddd;
+        --primary-color: #007bff;
+        --hover-color: #0056b3;
+      }
+
+      body {
+        font-family: "Segoe UI", "Palatino Linotype", serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        padding: 20px;
+        font-size: 18px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+      
+      h2 {
+        color: var(--primary-color);
+        margin-top: 40px;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+      }
+
+      .author {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-style: italic;
+        color: #666;
+      }
+      
+      .question {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+        overflow-wrap: break-word; 
+      }
+      .question:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .correct { border-color: #28a745; background-color: #d4edda; }
+      .partial { border-color: #ffc107; background-color: #fff3cd; }
+      .incorrect { border-color: #dc3545; background-color: #f8d7da; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+      
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+      
+      .opcion-linea, .opcion-bloque {
+        display: block;      
+        padding-left: 35px;  
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;   
+      }
+
+      .opcion-linea input[type="checkbox"], 
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 2px;
+        transform: scale(1.3);
+        margin: 0;
+        cursor: pointer;
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline; 
+      }
+
+      mjx-container { font-size: 110% !important; }
+      
+      img { max-width: 100%; height: auto; border-radius: 4px; }
+      table { border-collapse: collapse; width: 100%; margin: 10px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+      th { background-color: #f8f9fa; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 6px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 12px 16px;
+        border-left: 4px solid var(--primary-color);
+        background-color: rgba(0, 123, 255, 0.07);
+        border-radius: 4px;
+        font-size: 0.96em;
+      }
+      .dark-mode .btn-explicacion {
+        color: #93c5fd;
+        border-color: #93c5fd;
+      }
+      .dark-mode .btn-explicacion:hover {
+        background-color: #93c5fd;
+        color: #121212;
+      }
+      .dark-mode .explicacion {
+        background-color: rgba(147, 197, 253, 0.1);
+        border-left-color: #93c5fd;
+      }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: #555;
+      }
+      .instrucciones-extra li {
+        margin-bottom: 5px;
+      }
+
+      body.dark-mode {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --card-bg: #1e1e1e;
+        --border-color: #444;
+        --primary-color: #374151;
+        --hover-color: #4b5563;
+      }
+      .dark-mode .author { color: #aaa; }
+      .dark-mode th { background-color: #333; }
+      .dark-mode .correct { background-color: #064e3b !important; border-color: #059669; }
+      .dark-mode .partial { background-color: #451a03 !important; border-color: #d97706; }
+      .dark-mode .incorrect { background-color: #450a0a !important; border-color: #dc2626; }
+      .dark-mode .instrucciones-extra ul { color: #bbb; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; }
+        .question { page-break-inside: avoid; border: none; box-shadow: none; padding: 0; margin-bottom: 20px; }
+        .info-box, button, #extra-buttons { display: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Test DRH1 - Dirección de Recursos Humanos (Ordinaria)</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
+
+    <div class="info-box">
+      <p>Banco de preguntas Verdadero/Falso y tipo test del examen ordinario de RRHH, organizado por temas. Pulsa "Ver explicación" para razonar cada respuesta.</p>
+      
+      <div class="instrucciones-extra">
+        <ul>
+<li>Estos tests están diseñados para repasar y autoevaluar los conocimientos adquiridos en la asignatura.</li>
+<li>Ayudan a identificar áreas de mejora antes de los exámenes oficiales.</li>
+<li>Fomentan la práctica activa y permiten comprobar de forma inmediata las respuestas correctas.</li>
+<li>Proceden de diversas fuentes, por lo que podrían contener errores. Si detectas alguno, se agradecerá su notificación a través de <a href="https://elblogdeismael.github.io/#contact">este enlace</a>.</li>
+<li>El test puede desordenarse, mostrar respuestas correctas y ofrece otras funciones útiles que se recomienda explorar.</li>
+<li>Algunas preguntas pueden tener más de una respuesta correcta, marcadas en amarillo (parcialmente correctas).</li>
+<li>No hay un número fijo de respuestas correctas por pregunta; esto obliga al usuario a conocer cuántas son realmente válidas.</li>
+<li>Han sido generados con la herramienta <a href="https://github.com/Ismael-Sallami/md2html">md2html-testGenerator</a>, desarrollada por <a href="https://ismael-sallami.github.io/">Ismael Sallami</a>.</li>
+<li>Se recomienda acceder en modo escritorio para una mejor experiencia. En móviles, la interfaz se adapta mostrando las respuestas debajo de cada casilla para facilitar su uso. Si no se ve de manera correcta en teléfono móvil se recomienda actualizar la página.</li>
+<li>La intención de estas preguntas es repasar la teoría, por lo que algunas preguntas pueden parecer triviales.</li>
+</ul>
+      </div>
+      
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+      
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
+    </div>
+
+    <div id="questions-container">
+      <h2>TEMA 1: Introducción a la gestión de los RRHH</h2>
+<div class="question" id="q1" data-correct="0">
+  <div class="enunciado"><strong>1.</strong> Los procesos de afectación los lleva a cabo la organización para buscar e incorporar a las personas más adecuadas para cada puesto, e incluyen el reclutamiento, la selección y la socialización.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q2" data-correct="0">
+  <div class="enunciado"><strong>2.</strong> Entre las cualidades que debería tener un director de RRHH está el tener un liderazgo competente, es decir, disponer de credibilidad, conocimiento y poder de influencia.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q3" data-correct="0">
+  <div class="enunciado"><strong>3.</strong> El ajuste persona-organización es un factor que influye en la gestión de RRHH y es un factor individual.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q4" data-correct="1">
+  <div class="enunciado"><strong>4.</strong> Los RRHH de una empresa son exclusivamente las personas que pertenecen al departamento de RRHH.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q4')">Ver explicación</button>
+  <div class="explicacion" id="exp-q4" style="display:none">Falso. Los RRHH incluyen a todos los empleados de la organización, no solo al departamento de RRHH.</div>
+</div>
+<div class="question" id="q5" data-correct="1">
+  <div class="enunciado"><strong>5.</strong> Para conseguir estructuras más planas en ningún caso se realizarán cambios en el diseño de trabajo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q5')">Ver explicación</button>
+  <div class="explicacion" id="exp-q5" style="display:none">Falso. Es necesario hacer cambios en el diseño del trabajo o aplanar la estructura organizativa.</div>
+</div>
+<div class="question" id="q6" data-correct="1">
+  <div class="enunciado"><strong>6.</strong> La descentralización tiene un efecto directo sobre las prácticas de RRHH, pero la subcontratación y el uso de nuevas tecnologías no.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q6')">Ver explicación</button>
+  <div class="explicacion" id="exp-q6" style="display:none">Falso. Todas (descentralización, subcontratación y nuevas tecnologías) pueden tener un efecto en las prácticas de RRHH.</div>
+</div>
+<div class="question" id="q7" data-correct="0">
+  <div class="enunciado"><strong>7.</strong> La gestión de la diversidad es una estrategia integral basada en crear una plantilla diversa de empleados que aporten innovación, nuevas opciones y puntos de vista, soluciones creativas y conocimientos de diferentes culturas y mercados.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q8" data-correct="1">
+  <div class="enunciado"><strong>8.</strong> Entre las tendencias de la gestión de RRHH se encuentran la gestión de la diversidad, la gestión del talento y el empowerment.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q8')">Ver explicación</button>
+  <div class="explicacion" id="exp-q8" style="display:none">Falso. El empowerment es un factor individual. Las tendencias son gestión de la diversidad, gestión del talento, digitalización de RRHH y liderazgo emocional/employer branding.</div>
+</div>
+<div class="question" id="q9" data-correct="0">
+  <div class="enunciado"><strong>9.</strong> La reestructuración organizativa supone una reducción de los niveles jerárquicos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q9')">Ver explicación</button>
+  <div class="explicacion" id="exp-q9" style="display:none">Verdadero. Es el llamado downsizing (estructuras más planas).</div>
+</div>
+<div class="question" id="q10" data-correct="1">
+  <div class="enunciado"><strong>10.</strong> Los procesos de afectación están relacionados entre sí pero no con los procesos de formación y desarrollo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q10')">Ver explicación</button>
+  <div class="explicacion" id="exp-q10" style="display:none">Falso. Todos los procesos de gestión de RRHH están interrelacionados.</div>
+</div>
+<div class="question" id="q11" data-correct="0">
+  <div class="enunciado"><strong>11.</strong> El employer branding es una marca que define a la empresa como buen empleador y le permite atraer y retener a los mejores profesionales.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q12" data-correct="0">
+  <div class="enunciado"><strong>12.</strong> La función de personal es una función de integración, coordinación y de apoyo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q13" data-correct="0">
+  <div class="enunciado"><strong>13.</strong> Los objetivos explícitos de la gestión de RRHH son: atraer candidatos adecuados y cualificados, retener a los mejores empleados, motivar a los empleados y ayudarles a desarrollarse.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q14" data-correct="0">
+  <div class="enunciado"><strong>14.</strong> La posición competitiva de la organización es un factor organizativo que influye en la gestión de los RRHH de una empresa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q15" data-correct="1">
+  <div class="enunciado"><strong>15.</strong> Los objetivos implícitos son los que presentan el alcance estratégico de la gestión de los RRHH.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q15')">Ver explicación</button>
+  <div class="explicacion" id="exp-q15" style="display:none">Falso. El alcance estratégico lo presentan los objetivos a largo plazo (rentabilidad y competitividad, incremento de valor, mejora de eficiencia y eficacia).</div>
+</div>
+<div class="question" id="q16" data-correct="1">
+  <div class="enunciado"><strong>16.</strong> La reestructuración organizativa supone siempre una reducción del tamaño empresarial.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q16')">Ver explicación</button>
+  <div class="explicacion" id="exp-q16" style="display:none">Falso. Puede conllevar una reducción del tamaño, pero no siempre: cabe cambiar la estructura y el funcionamiento sin reducir el tamaño.</div>
+</div>
+<div class="question" id="q17" data-correct="0">
+  <div class="enunciado"><strong>17.</strong> Los objetivos implícitos están integrados en la filosofía o cultura empresarial: mejorar la productividad de las personas, mejorar la calidad de vida en el trabajo y el cumplimiento de la normativa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q18" data-correct="0">
+  <div class="enunciado"><strong>18.</strong> La descentralización, la subcontratación y el uso de nuevas tecnologías tienen un efecto directo sobre las prácticas de RRHH.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q18')">Ver explicación</button>
+  <div class="explicacion" id="exp-q18" style="display:none">Verdadero. Aportan mayor flexibilidad y son factores organizativos que afectan a las prácticas de RRHH.</div>
+</div>
+<div class="question" id="q19" data-correct="1">
+  <div class="enunciado"><strong>19.</strong> Los RRHH son exclusivamente las personas que ocupan el último nivel de la cadena de mando de una organización.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q19')">Ver explicación</button>
+  <div class="explicacion" id="exp-q19" style="display:none">Falso. Son todos los empleados de la organización, no solo los de un nivel concreto.</div>
+</div>
+<div class="question" id="q20" data-correct="1">
+  <div class="enunciado"><strong>20.</strong> La flexibilidad empresarial se puede lograr, entre otras formas, mediante la centralización, la subcontratación y el uso de nuevas tecnologías.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q20')">Ver explicación</button>
+  <div class="explicacion" id="exp-q20" style="display:none">Falso. Se logra mediante la descentralización (no centralización), la subcontratación y el uso de nuevas tecnologías.</div>
+</div>
+<div class="question" id="q21" data-correct="0">
+  <div class="enunciado"><strong>21.</strong> Las personas son un recurso estratégico para la empresa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q22" data-correct="1">
+  <div class="enunciado"><strong>22.</strong> Actualmente el director de RRHH se encarga solo de los aspectos relativos al coste de personal y a la legislación que afecta a los RRHH.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q22')">Ver explicación</button>
+  <div class="explicacion" id="exp-q22" style="display:none">Falso. Hoy tiene un papel mucho más amplio: gestor especializado tanto en aspectos económicos como humanos, que diseña estrategias, políticas y prácticas de gestión.</div>
+</div>
+<div class="question" id="q23" data-correct="1">
+  <div class="enunciado"><strong>23.</strong> Los RRHH son todas las personas que pertenecen a una organización, salvo las que ocupan un puesto directivo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q23')">Ver explicación</button>
+  <div class="explicacion" id="exp-q23" style="display:none">Falso. Son todos los miembros de la organización, independientemente de su nivel jerárquico (incluidos los directivos).</div>
+</div>
+<div class="question" id="q24" data-correct="0">
+  <div class="enunciado"><strong>24.</strong> La delegación de poder (empowerment) motiva a los empleados a ser creativos y asumir riesgos, ya que da la oportunidad a los trabajadores de tomar decisiones que tradicionalmente serían tomadas por los directivos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q24')">Ver explicación</button>
+  <div class="explicacion" id="exp-q24" style="display:none">Verdadero. El empowerment cede capacidad de decisión a los empleados, fomentando creatividad y asunción de riesgos.</div>
+</div>
+<div class="question" id="q25" data-correct="0">
+  <div class="enunciado"><strong>25.</strong> La reestructuración organizativa requiere, para realizar una buena gestión de RRHH, examinar las necesidades de personal, los flujos de trabajo, los canales de comunicación y las necesidades de formación.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q26" data-correct="1">
+  <div class="enunciado"><strong>26.</strong> Actualmente las empresas consideran que los recursos humanos solo actúan ante los estímulos económicos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q26')">Ver explicación</button>
+  <div class="explicacion" id="exp-q26" style="display:none">Falso. Influyen muchos más factores: retribución indirecta (ambiente o flexibilidad laboral), oportunidades de crecimiento profesional, el propósito de la empresa, etc.</div>
+</div>
+<div class="question" id="q27" data-correct="1">
+  <div class="enunciado"><strong>27.</strong> El departamento de RRHH es igual de importante y complejo en todas las organizaciones.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q27')">Ver explicación</button>
+  <div class="explicacion" id="exp-q27" style="display:none">Falso. Cuanto más grande es la empresa, más importante y complejo es; en empresas pequeñas puede no ser necesario.</div>
+</div>
+<h2>TEMA 2: Análisis y diseño del puesto de trabajo</h2>
+<div class="question" id="q28" data-correct="0">
+  <div class="enunciado"><strong>28.</strong> Cuando el análisis de puestos implica redactar la descripción teniendo en cuenta no solo tareas y responsabilidades, sino también conocimientos, experiencias y competencias, se refiere al análisis multifuncional.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q29" data-correct="0">
+  <div class="enunciado"><strong>29.</strong> La especificación o perfil del puesto recoge la información relativa a cada puesto en relación con las competencias del trabajador (conocimientos, habilidades, experiencia y formación necesarias).</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q30" data-correct="0">
+  <div class="enunciado"><strong>30.</strong> En la fase de análisis de puestos de trabajo se trata, entre otras cosas, de reunir las características y capacidades humanas necesarias.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q31" data-correct="1">
+  <div class="enunciado"><strong>31.</strong> La descripción del puesto de trabajo es el documento que recoge el perfil del puesto, es decir, los conocimientos, habilidades, experiencias y formación necesarios para desempeñarlo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q31')">Ver explicación</button>
+  <div class="explicacion" id="exp-q31" style="display:none">Falso. Eso es la especificación del puesto. La descripción recoge tareas, obligaciones, responsabilidades y condiciones laborales.</div>
+</div>
+<div class="question" id="q32" data-correct="1">
+  <div class="enunciado"><strong>32.</strong> Ese mismo análisis (que incluye conocimientos, experiencias y competencias) se refiere a la reingeniería.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q32')">Ver explicación</button>
+  <div class="explicacion" id="exp-q32" style="display:none">Falso. La reingeniería es rediseño radical de procesos. Lo descrito es el análisis multifuncional.</div>
+</div>
+<div class="question" id="q33" data-correct="0">
+  <div class="enunciado"><strong>33.</strong> La observación como método utilizado en el análisis de puestos permite analizar varios puestos de manera simultánea a un bajo coste.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q34" data-correct="1">
+  <div class="enunciado"><strong>34.</strong> Los problemas derivados de un puesto con alto nivel de especialización pueden solucionarse a través de la simplificación del trabajo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q34')">Ver explicación</button>
+  <div class="explicacion" id="exp-q34" style="display:none">Falso. Se solucionan a través de la ampliación o el enriquecimiento del puesto, no de la simplificación.</div>
+</div>
+<div class="question" id="q35" data-correct="0">
+  <div class="enunciado"><strong>35.</strong> Entre las técnicas utilizadas para realizar el rediseño de puestos se encuentran la simplificación del puesto, la ampliación del puesto y el enriquecimiento del puesto.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q36" data-correct="0">
+  <div class="enunciado"><strong>36.</strong> La descripción del puesto es el documento que recoge la información relativa a cada puesto en relación con las tareas, obligaciones, responsabilidades y condiciones laborales.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q37" data-correct="1">
+  <div class="enunciado"><strong>37.</strong> Los trabajadores temporales son los que tienen una jornada laboral más reducida.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q37')">Ver explicación</button>
+  <div class="explicacion" id="exp-q37" style="display:none">Falso. Trabajan bajo un contrato de duración determinada; no implica jornada reducida.</div>
+</div>
+<div class="question" id="q38" data-correct="1">
+  <div class="enunciado"><strong>38.</strong> El análisis de puestos de trabajo recopila información con la intención de identificar únicamente las tareas y obligaciones del puesto.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q38')">Ver explicación</button>
+  <div class="explicacion" id="exp-q38" style="display:none">Falso. También identifica las responsabilidades del puesto.</div>
+</div>
+<div class="question" id="q39" data-correct="0">
+  <div class="enunciado"><strong>39.</strong> La reingeniería es la reconsideración fundamental y el rediseño radical de los procesos de la empresa para lograr mejoras trascendentales en desempeño, coste, calidad, servicio y rapidez; se hace en torno a resultados y afecta a la descripción de puestos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q40" data-correct="1">
+  <div class="enunciado"><strong>40.</strong> Los trabajadores temporales son los que trabajan un periodo corto de tiempo para adquirir experiencia laboral y, además, tienen una jornada laboral más reducida.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q40')">Ver explicación</button>
+  <div class="explicacion" id="exp-q40" style="display:none">Falso. No tienen por qué tener una jornada laboral reducida.</div>
+</div>
+<div class="question" id="q41" data-correct="1">
+  <div class="enunciado"><strong>41.</strong> Determinar qué puestos de trabajo se van a analizar pertenece a la fase de análisis de puestos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q41" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q41" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q41')">Ver explicación</button>
+  <div class="explicacion" id="exp-q41" style="display:none">Falso. Determinar qué puestos se analizan corresponde a la fase de delimitación del análisis.</div>
+</div>
+<div class="question" id="q42" data-correct="1">
+  <div class="enunciado"><strong>42.</strong> Entre las técnicas utilizadas para realizar el rediseño de puestos se encuentran la simplificación del puesto, la ampliación del puesto y la reestructuración del puesto.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q42" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q42" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q42')">Ver explicación</button>
+  <div class="explicacion" id="exp-q42" style="display:none">Falso. La reestructuración no es una técnica de rediseño de puestos.</div>
+</div>
+<div class="question" id="q43" data-correct="1">
+  <div class="enunciado"><strong>43.</strong> La observación como método utilizado en el análisis de puestos permite recoger la opinión de un grupo de personas especialistas.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q43" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q43" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q43')">Ver explicación</button>
+  <div class="explicacion" id="exp-q43" style="display:none">Falso. Recoger la opinión de especialistas corresponde a la técnica de grupos de expertos, no a la observación.</div>
+</div>
+<div class="question" id="q44" data-correct="1">
+  <div class="enunciado"><strong>44.</strong> La rotación de puestos es una técnica adecuada para rediseñar un puesto cuando se pretende solventar los problemas derivados de un bajo nivel de especialización.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q44" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q44" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q44')">Ver explicación</button>
+  <div class="explicacion" id="exp-q44" style="display:none">Falso. La rotación de puestos es adecuada para solventar los problemas derivados de un ALTO nivel de especialización (favorece la diversidad de tareas y rompe la rutina).</div>
+</div>
+<div class="question" id="q45" data-correct="0">
+  <div class="enunciado"><strong>45.</strong> El análisis de puestos de trabajo es el proceso a través del cual la empresa recopila y analiza la información sobre el puesto para identificar las tareas, obligaciones y responsabilidades del puesto.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q45" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q45" value="1"> Falso</label></li>
+  </ol>
+</div>
+<h2>TEMA 3 y 10: Planificación de los RRHH y procesos sustractivos</h2>
+<div class="question" id="q46" data-correct="0">
+  <div class="enunciado"><strong>46.</strong> La planificación de RRHH es un proceso más completo y complejo que la planificación de plantillas.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q46" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q46" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q47" data-correct="0">
+  <div class="enunciado"><strong>47.</strong> Las jubilaciones son uno de los factores que modifican la demanda de personal.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q47" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q47" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q48" data-correct="1">
+  <div class="enunciado"><strong>48.</strong> La excedencia es una supresión laboral.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q48" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q48" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q48')">Ver explicación</button>
+  <div class="explicacion" id="exp-q48" style="display:none">Falso. La excedencia es una suspensión laboral (temporal). La supresión es la eliminación del puesto de trabajo.</div>
+</div>
+<div class="question" id="q49" data-correct="0">
+  <div class="enunciado"><strong>49.</strong> Los planes de RRHH se pueden clasificar en planes a largo, medio y corto plazo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q49" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q49" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q50" data-correct="0">
+  <div class="enunciado"><strong>50.</strong> La planificación de la sucesión permite tomar decisiones sobre las promociones internas.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q50" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q50" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q50')">Ver explicación</button>
+  <div class="explicacion" id="exp-q50" style="display:none">Verdadero. Se basa en la oferta interna de la empresa.</div>
+</div>
+<div class="question" id="q51" data-correct="1">
+  <div class="enunciado"><strong>51.</strong> La limitación de la contratación es una medida con la que se puede corregir el defecto en la oferta de personal.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q51" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q51" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q51')">Ver explicación</button>
+  <div class="explicacion" id="exp-q51" style="display:none">Falso. Corrige el EXCESO de oferta de personal. El defecto (faltan trabajadores) se corrige contratando.</div>
+</div>
+<div class="question" id="q52" data-correct="1">
+  <div class="enunciado"><strong>52.</strong> Entre las alternativas a la reducción de plantillas se proponen contratar nuevos empleados, renovar contratos que finalizan y aumentar las horas extras.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q52" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q52" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q52')">Ver explicación</button>
+  <div class="explicacion" id="exp-q52" style="display:none">Falso. Esas medidas son contraproducentes para reducir plantilla. Una alternativa válida es incentivar excedencias voluntarias.</div>
+</div>
+<div class="question" id="q53" data-correct="1">
+  <div class="enunciado"><strong>53.</strong> En la planificación empresarial la empresa analiza la cualificación actual de la plantilla.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q53" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q53" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q53')">Ver explicación</button>
+  <div class="explicacion" id="exp-q53" style="display:none">Falso. El análisis de la cualificación de la plantilla se hace en la planificación de RRHH, no en la empresarial.</div>
+</div>
+<div class="question" id="q54" data-correct="1">
+  <div class="enunciado"><strong>54.</strong> La ruptura laboral voluntaria está formada por la dimisión y los despidos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q54" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q54" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q54')">Ver explicación</button>
+  <div class="explicacion" id="exp-q54" style="display:none">Falso. La ruptura voluntaria es dimisión, jubilación y jubilación anticipada. Los despidos son ruptura involuntaria.</div>
+</div>
+<div class="question" id="q55" data-correct="1">
+  <div class="enunciado"><strong>55.</strong> En la planificación de RRHH se hace un estudio sobre las fuerzas del mercado.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q55" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q55" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q55')">Ver explicación</button>
+  <div class="explicacion" id="exp-q55" style="display:none">Falso. El estudio de las fuerzas del mercado se realiza en la planificación empresarial.</div>
+</div>
+<div class="question" id="q56" data-correct="1">
+  <div class="enunciado"><strong>56.</strong> Si la desvinculación del empleado con la empresa es voluntaria, no se considera ruptura laboral.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q56" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q56" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q56')">Ver explicación</button>
+  <div class="explicacion" id="exp-q56" style="display:none">Falso. La ruptura laboral puede ser tanto voluntaria como involuntaria.</div>
+</div>
+<div class="question" id="q57" data-correct="0">
+  <div class="enunciado"><strong>57.</strong> Un ERE es un proceso sustractivo de reducción de plantilla y, por tanto, una ruptura laboral involuntaria.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q57" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q57" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q58" data-correct="1">
+  <div class="enunciado"><strong>58.</strong> Para obtener información sobre la oferta externa de trabajo se usan las auditorías de RRHH en las empresas.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q58" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q58" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q58')">Ver explicación</button>
+  <div class="explicacion" id="exp-q58" style="display:none">Falso. Las auditorías de RRHH dan información sobre la oferta INTERNA (resumen de habilidades y conocimientos de los empleados).</div>
+</div>
+<div class="question" id="q59" data-correct="1">
+  <div class="enunciado"><strong>59.</strong> La demanda de RRHH de una empresa no se puede planificar.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q59" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q59" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q59')">Ver explicación</button>
+  <div class="explicacion" id="exp-q59" style="display:none">Falso. La demanda puede y debe ser planificada.</div>
+</div>
+<div class="question" id="q60" data-correct="0">
+  <div class="enunciado"><strong>60.</strong> La ruptura laboral supone la desvinculación del empleado con la empresa y puede ser voluntaria o involuntaria.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q60" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q60" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q61" data-correct="0">
+  <div class="enunciado"><strong>61.</strong> La alta tasa de paro en un país hace que aumente la oferta de personal.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q61" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q61" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q62" data-correct="1">
+  <div class="enunciado"><strong>62.</strong> Los organigramas recogen el porcentaje de empleados que mantienen su puesto año a año.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q62" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q62" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q62')">Ver explicación</button>
+  <div class="explicacion" id="exp-q62" style="display:none">Falso. Eso es el análisis de Markov. Los organigramas representan la estructura organizativa (ocupantes y necesidades futuras de personal).</div>
+</div>
+<div class="question" id="q63" data-correct="0">
+  <div class="enunciado"><strong>63.</strong> En la planificación de RRHH se analiza si la plantilla de la empresa es suficiente y si hay que iniciar procesos de reclutamiento y selección.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q63" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q63" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q64" data-correct="0">
+  <div class="enunciado"><strong>64.</strong> La excedencia debida a la designación o elección para un cargo público o a funciones sindicales de ámbito provincial o superior se considera excedencia forzosa (obligatoria).</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q64" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q64" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q64')">Ver explicación</button>
+  <div class="explicacion" id="exp-q64" style="display:none">Verdadero. Es una excedencia forzosa/obligatoria que la empresa siempre debe conceder al trabajador.</div>
+</div>
+<div class="question" id="q65" data-correct="1">
+  <div class="enunciado"><strong>65.</strong> La ruptura laboral involuntaria incluye despidos, reducciones de plantilla y jubilación anticipada.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q65" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q65" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q65')">Ver explicación</button>
+  <div class="explicacion" id="exp-q65" style="display:none">Falso. La involuntaria son despidos (individuales o colectivos) y reducciones de plantilla; la jubilación anticipada es voluntaria.</div>
+</div>
+<div class="question" id="q66" data-correct="1">
+  <div class="enunciado"><strong>66.</strong> La planificación de RRHH es lo mismo que la planificación empresarial.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q66" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q66" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q66')">Ver explicación</button>
+  <div class="explicacion" id="exp-q66" style="display:none">Falso. La planificación de RRHH asegura el número suficiente de personal, con la cualificación adecuada y en el momento oportuno; la empresarial cubre aspectos económicos, fuerzas de mercado, etc. Son distintas (la de RRHH complementa a la empresarial).</div>
+</div>
+<div class="question" id="q67" data-correct="1">
+  <div class="enunciado"><strong>67.</strong> El coste de un programa de outplacement o recolocación se descuenta de la indemnización de despido del empleado.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q67" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q67" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q67')">Ver explicación</button>
+  <div class="explicacion" id="exp-q67" style="display:none">Falso. La empresa que despide se hace cargo íntegramente del coste; no se descuenta de la indemnización.</div>
+</div>
+<div class="question" id="q68" data-correct="0">
+  <div class="enunciado"><strong>68.</strong> La ruptura laboral voluntaria comprende la dimisión, la jubilación y la jubilación anticipada.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q68" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q68" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q69" data-correct="0">
+  <div class="enunciado"><strong>69.</strong> El programa de outplacement o recolocación es un programa creado para ayudar a los empleados despedidos a superar el estrés emocional y a buscar nuevo empleo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q69" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q69" value="1"> Falso</label></li>
+  </ol>
+</div>
+<h2>TEMA 4 y 5: Reclutamiento, selección y socialización</h2>
+<div class="question" id="q70" data-correct="0">
+  <div class="enunciado"><strong>70.</strong> Las agencias públicas de empleo son un método de reclutamiento externo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q70" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q70" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q71" data-correct="1">
+  <div class="enunciado"><strong>71.</strong> Las agencias privadas de colocación contratan de manera temporal a empleados para que realicen su trabajo en otra empresa con la que han llegado a un acuerdo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q71" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q71" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q71')">Ver explicación</button>
+  <div class="explicacion" id="exp-q71" style="display:none">Falso. Eso lo realizan las ETT (Empresas de Trabajo Temporal).</div>
+</div>
+<div class="question" id="q72" data-correct="0">
+  <div class="enunciado"><strong>72.</strong> Entre las ventajas de las redes sociales para reclutar está su menor coste respecto al reclutamiento tradicional.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q72" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q72" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q73" data-correct="0">
+  <div class="enunciado"><strong>73.</strong> Los juegos de empresas, las entrevistas y los assessment centres son técnicas de selección.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q73" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q73" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q74" data-correct="0">
+  <div class="enunciado"><strong>74.</strong> La socialización puede ser formal, es decir, orientada por la dirección.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q74" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q74" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q75" data-correct="1">
+  <div class="enunciado"><strong>75.</strong> Entre las fuentes de reclutamiento interno se encuentran las empresas de trabajo temporal.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q75" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q75" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q75')">Ver explicación</button>
+  <div class="explicacion" id="exp-q75" style="display:none">Falso. Las ETT son una fuente de reclutamiento externo.</div>
+</div>
+<div class="question" id="q76" data-correct="1">
+  <div class="enunciado"><strong>76.</strong> Entre las ventajas de las redes sociales está la posibilidad de crear mala reputación para la empresa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q76" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q76" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q76')">Ver explicación</button>
+  <div class="explicacion" id="exp-q76" style="display:none">Falso. Crear mala reputación es un inconveniente, no una ventaja.</div>
+</div>
+<div class="question" id="q77" data-correct="1">
+  <div class="enunciado"><strong>77.</strong> La selección es anterior al reclutamiento.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q77" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q77" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q77')">Ver explicación</button>
+  <div class="explicacion" id="exp-q77" style="display:none">Falso. El orden es reclutamiento, selección y socialización.</div>
+</div>
+<div class="question" id="q78" data-correct="1">
+  <div class="enunciado"><strong>78.</strong> El reclutamiento externo mal gestionado produce endogamia en la organización.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q78" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q78" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q78')">Ver explicación</button>
+  <div class="explicacion" id="exp-q78" style="display:none">Falso. La endogamia se produce con un reclutamiento INTERNO mal gestionado, al evitar la entrada de nuevos puntos de vista e ideas.</div>
+</div>
+<div class="question" id="q79" data-correct="0">
+  <div class="enunciado"><strong>79.</strong> Los tests psicotécnicos son medidas objetivas y estandarizadas que analizan capacidades (verbales, de razonamiento...) o aptitudes y personalidad de los candidatos (extroversión, honradez...).</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q79" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q79" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q80" data-correct="1">
+  <div class="enunciado"><strong>80.</strong> La validez se refiere a la consistencia de la medida, normalmente a lo largo del tiempo pero también entre entrevistadores distintos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q80" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q80" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q80')">Ver explicación</button>
+  <div class="explicacion" id="exp-q80" style="display:none">Falso. Esa es la definición de fiabilidad. La validez es el grado en que una técnica mide los conocimientos, habilidades o capacidades requeridos por el perfil del puesto.</div>
+</div>
+<div class="question" id="q81" data-correct="1">
+  <div class="enunciado"><strong>81.</strong> Los impresos de biodatos son una versión detallada de la solicitud en la que los candidatos contestan a una serie de preguntas sobre su salud.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q81" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q81" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q81')">Ver explicación</button>
+  <div class="explicacion" id="exp-q81" style="display:none">Falso. Recogen antecedentes, experiencias y preferencias, e intentan valorarlas como predictores del comportamiento.</div>
+</div>
+<div class="question" id="q82" data-correct="1">
+  <div class="enunciado"><strong>82.</strong> El employer branding es el proceso por el cual las empresas buscan e identifican posibles candidatos para cubrir sus necesidades de empleo mediante las redes sociales.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q82" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q82" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q82')">Ver explicación</button>
+  <div class="explicacion" id="exp-q82" style="display:none">Falso. El employer branding potencia la marca de buen empleador; es la imagen con la que se pretende atraer a posibles candidatos.</div>
+</div>
+<div class="question" id="q83" data-correct="0">
+  <div class="enunciado"><strong>83.</strong> La entrevista es el método más común en la selección de personal, aunque es una prueba imprecisa y subjetiva.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q83" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q83" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q84" data-correct="1">
+  <div class="enunciado"><strong>84.</strong> Entre las ventajas del reclutamiento externo se encuentra que el candidato ya posee conocimientos sobre la empresa y esta sobre él.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q84" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q84" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q84')">Ver explicación</button>
+  <div class="explicacion" id="exp-q84" style="display:none">Falso. Eso es una ventaja del reclutamiento interno.</div>
+</div>
+<div class="question" id="q85" data-correct="1">
+  <div class="enunciado"><strong>85.</strong> El inventario de habilidades y las listas de ascensos son herramientas para hacer reclutamiento externo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q85" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q85" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q85')">Ver explicación</button>
+  <div class="explicacion" id="exp-q85" style="display:none">Falso. Son herramientas de reclutamiento interno.</div>
+</div>
+<div class="question" id="q86" data-correct="0">
+  <div class="enunciado"><strong>86.</strong> La selección es el conjunto de técnicas que permiten encontrar a las personas más adecuadas para desempeñar un puesto de trabajo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q86" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q86" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q87" data-correct="1">
+  <div class="enunciado"><strong>87.</strong> Entre las ventajas del reclutamiento externo se encuentra que refuerza la motivación y el compromiso de los empleados.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q87" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q87" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q87')">Ver explicación</button>
+  <div class="explicacion" id="exp-q87" style="display:none">Falso. Reforzar la motivación y el compromiso es una ventaja del reclutamiento interno.</div>
+</div>
+<div class="question" id="q88" data-correct="0">
+  <div class="enunciado"><strong>88.</strong> Entre los métodos de orientación destacan las charlas divulgativas, las visitas a las instalaciones y la entrega de manuales.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q88" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q88" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q89" data-correct="0">
+  <div class="enunciado"><strong>89.</strong> Aprovechar las inversiones de formación realizadas por otras empresas es una ventaja del reclutamiento externo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q89" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q89" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q90" data-correct="1">
+  <div class="enunciado"><strong>90.</strong> Los candidatos propuestos por los empleados son una fuente de reclutamiento interno.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q90" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q90" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q90')">Ver explicación</button>
+  <div class="explicacion" id="exp-q90" style="display:none">Falso. Los candidatos propuestos por los empleados son una fuente de reclutamiento externo.</div>
+</div>
+<div class="question" id="q91" data-correct="1">
+  <div class="enunciado"><strong>91.</strong> El reclutamiento 3.0 se refiere al proceso clásico de reclutamiento que se realiza en las empresas.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q91" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q91" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q91')">Ver explicación</button>
+  <div class="explicacion" id="exp-q91" style="display:none">Falso. El reclutamiento 3.0 utiliza la tecnología y las redes sociales.</div>
+</div>
+<div class="question" id="q92" data-correct="0">
+  <div class="enunciado"><strong>92.</strong> El reclutamiento externo consiste en la búsqueda de candidatos potenciales o reales empleados en otras empresas.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q92" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q92" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q93" data-correct="1">
+  <div class="enunciado"><strong>93.</strong> El reclutamiento es la práctica de gestión de RRHH que se ocupa de introducir a los nuevos trabajadores en la organización, explicarles sus cometidos y presentarles a sus compañeros.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q93" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q93" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q93')">Ver explicación</button>
+  <div class="explicacion" id="exp-q93" style="display:none">Falso. Esa es la definición de socialización. El reclutamiento se encarga de captar y atraer candidatos.</div>
+</div>
+<div class="question" id="q94" data-correct="0">
+  <div class="enunciado"><strong>94.</strong> Una técnica de selección es fiable si los resultados obtenidos al aplicarla son consistentes en el tiempo y entre entrevistadores.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q94" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q94" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q95" data-correct="1">
+  <div class="enunciado"><strong>95.</strong> La socialización formal se desarrolla fundamentalmente a través de los compañeros de trabajo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q95" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q95" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q95')">Ver explicación</button>
+  <div class="explicacion" id="exp-q95" style="display:none">Falso. La formal se desarrolla a través de la dirección; la que se desarrolla a través de los compañeros es la socialización informal.</div>
+</div>
+<div class="question" id="q96" data-correct="0">
+  <div class="enunciado"><strong>96.</strong> En el proceso de selección, las herramientas tienen que ser válidas y fiables.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q96" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q96" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q97" data-correct="1">
+  <div class="enunciado"><strong>97.</strong> La socialización tiene un sentido predominantemente objetivo, ya que el proceso no se desarrolla en el individuo sino en la empresa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q97" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q97" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q97')">Ver explicación</button>
+  <div class="explicacion" id="exp-q97" style="display:none">Falso. Es un proceso subjetivo, ya que depende de cada individuo.</div>
+</div>
+<div class="question" id="q98" data-correct="0">
+  <div class="enunciado"><strong>98.</strong> Entre las ventajas del reclutamiento externo se encuentra que atrae personal con nuevas ideas y formas de abordar los problemas organizativos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q98" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q98" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q99" data-correct="1">
+  <div class="enunciado"><strong>99.</strong> El reclutamiento es el proceso mediante el cual se identifican, se atraen y se eligen a las personas idóneas para ocupar los puestos vacantes.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q99" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q99" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q99')">Ver explicación</button>
+  <div class="explicacion" id="exp-q99" style="display:none">Falso. El reclutamiento identifica y atrae, pero no elige; la elección corresponde a la selección.</div>
+</div>
+<h2>TEMA 6 y 7: Formación y gestión de la carrera profesional</h2>
+<div class="question" id="q100" data-correct="0">
+  <div class="enunciado"><strong>100.</strong> El coaching es una herramienta que ayuda a potenciar el desarrollo de las personas mediante un proceso de reflexión para identificar, incorporar o desarrollar nuevas habilidades y competencias, favoreciendo un mejor desempeño actual y futuro.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q100" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q100" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q101" data-correct="1">
+  <div class="enunciado"><strong>101.</strong> El outdoor training es una formación mayoritariamente teórica que se imparte al aire libre para adquirir conocimientos más que habilidades y actitudes.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q101" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q101" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q101')">Ver explicación</button>
+  <div class="explicacion" id="exp-q101" style="display:none">Falso. Es una formación de carácter práctico en la que se adquieren habilidades individuales y grupales al aire libre.</div>
+</div>
+<div class="question" id="q102" data-correct="1">
+  <div class="enunciado"><strong>102.</strong> Uno de los beneficios indirectos de la formación es que incide positivamente en variables de RRHH como el compromiso y los niveles de rotación o absentismo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q102" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q102" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q102')">Ver explicación</button>
+  <div class="explicacion" id="exp-q102" style="display:none">Falso. Es un beneficio directo de la formación, no indirecto.</div>
+</div>
+<div class="question" id="q103" data-correct="1">
+  <div class="enunciado"><strong>103.</strong> Las fases del programa de formación son: identificación de las necesidades, diseño y evaluación.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q103" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q103" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q103')">Ver explicación</button>
+  <div class="explicacion" id="exp-q103" style="display:none">Falso. Son 4 fases: identificación de necesidades, diseño, implantación y evaluación.</div>
+</div>
+<div class="question" id="q104" data-correct="1">
+  <div class="enunciado"><strong>104.</strong> Es necesario que el coach tenga experiencia en el área donde asesora al coachee para poder ayudarle a maximizar su potencial.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q104" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q104" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q104')">Ver explicación</button>
+  <div class="explicacion" id="exp-q104" style="display:none">Falso. No es necesario en el coaching (el coach es un facilitador). Sí es necesario en el mentoring, donde el mentor debe tener experiencia en el área.</div>
+</div>
+<div class="question" id="q105" data-correct="1">
+  <div class="enunciado"><strong>105.</strong> La empleabilidad consiste en establecer redes de contacto profesional que permitan al empleado conocerse mejor a sí mismo y al negocio, escuchando y aprendiendo de otros.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q105" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q105" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q105')">Ver explicación</button>
+  <div class="explicacion" id="exp-q105" style="display:none">Falso. Esa es la definición de networking.</div>
+</div>
+<div class="question" id="q106" data-correct="0">
+  <div class="enunciado"><strong>106.</strong> Cuando para evaluar un programa de formación se analiza el impacto, se analizan los efectos de la formación en la empresa en cuanto a productividad, beneficios y desarrollo de la organización.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q106" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q106" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q107" data-correct="1">
+  <div class="enunciado"><strong>107.</strong> El método 70-20-10 asigna un 70% a la formación teórica, un 20% a la formación online y un 10% a la formación fuera del puesto.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q107" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q107" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q107')">Ver explicación</button>
+  <div class="explicacion" id="exp-q107" style="display:none">Falso. El 70% es experiencia (trabajando), el 20% exposición (aprender de otros) y el 10% educación (formación formal).</div>
+</div>
+<div class="question" id="q108" data-correct="1">
+  <div class="enunciado"><strong>108.</strong> El desarrollo de una marca personal adecuada permite a las empresas incrementar su capacidad para atraer y retener a trabajadores altamente cualificados.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q108" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q108" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q108')">Ver explicación</button>
+  <div class="explicacion" id="exp-q108" style="display:none">Falso. Eso es el employer branding. La marca personal (personal branding) aumenta la empleabilidad y la visibilidad del trabajador.</div>
+</div>
+<div class="question" id="q109" data-correct="1">
+  <div class="enunciado"><strong>109.</strong> El alcance de la formación es el grupo o la organización.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q109" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q109" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q109')">Ver explicación</button>
+  <div class="explicacion" id="exp-q109" style="display:none">Falso. La formación es individual; el alcance de grupo u organización corresponde al desarrollo.</div>
+</div>
+<div class="question" id="q110" data-correct="1">
+  <div class="enunciado"><strong>110.</strong> Mientras que la formación está más orientada a preparar al trabajador para el futuro, el desarrollo se centra en las necesidades formativas actuales de los individuos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q110" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q110" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q110')">Ver explicación</button>
+  <div class="explicacion" id="exp-q110" style="display:none">Falso. Es al revés: la formación atiende necesidades actuales del puesto y el desarrollo se proyecta hacia el futuro.</div>
+</div>
+<div class="question" id="q111" data-correct="1">
+  <div class="enunciado"><strong>111.</strong> Cuando un directivo experimentado y especializado en digitalización ejerce de mentor de un trabajador recién incorporado, se denomina Reverse Mentoring.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q111" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q111" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q111')">Ver explicación</button>
+  <div class="explicacion" id="exp-q111" style="display:none">Falso. En el Reverse Mentoring son los trabajadores más jóvenes quienes tutorizan a los de mayor experiencia en aspectos novedosos (como la digitalización).</div>
+</div>
+<div class="question" id="q112" data-correct="0">
+  <div class="enunciado"><strong>112.</strong> El método 70-20-10 se basa en tres fuentes: aprendizaje experimental (70%), interacción social (20%) y aprendizaje formal (10%).</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q112" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q112" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q112')">Ver explicación</button>
+  <div class="explicacion" id="exp-q112" style="display:none">Verdadero. 70% experiencia (trabajando), 20% exposición (aprender de otros), 10% educación (formación formal).</div>
+</div>
+<div class="question" id="q113" data-correct="0">
+  <div class="enunciado"><strong>113.</strong> El mentor es un profesional experimentado de la organización que guía a otro empleado con especial talento.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q113" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q113" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q114" data-correct="1">
+  <div class="enunciado"><strong>114.</strong> La carrera profesional recoge la sucesión de actividades laborales y puestos de trabajo desempeñados por una persona dentro de una misma empresa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q114" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q114" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q114')">Ver explicación</button>
+  <div class="explicacion" id="exp-q114" style="display:none">Falso. Es a lo largo de toda su vida laboral, tanto dentro como fuera de la empresa.</div>
+</div>
+<h2>TEMA 8: Evaluación y gestión del rendimiento</h2>
+<div class="question" id="q115" data-correct="0">
+  <div class="enunciado"><strong>115.</strong> La evaluación del rendimiento es un proceso formal y sistemático.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q115" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q115" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q116" data-correct="0">
+  <div class="enunciado"><strong>116.</strong> Los criterios subjetivos de evaluación del rendimiento valoran los comportamientos, actitudes y capacidades de los trabajadores en el desempeño de su labor.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q116" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q116" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q116')">Ver explicación</button>
+  <div class="explicacion" id="exp-q116" style="display:none">Verdadero. Los objetivos, en cambio, se basan en los resultados.</div>
+</div>
+<div class="question" id="q117" data-correct="0">
+  <div class="enunciado"><strong>117.</strong> La finalidad de la evaluación es ver si el trabajador es productivo y si podrá mejorar su rendimiento en el futuro.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q117" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q117" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q118" data-correct="0">
+  <div class="enunciado"><strong>118.</strong> Los métodos de medición objetivos (de resultados) miden el rendimiento en función de lo que aporta la persona a la organización con su trabajo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q118" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q118" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q119" data-correct="0">
+  <div class="enunciado"><strong>119.</strong> La evaluación 360º es la evaluación a través de todos los medios; es el método más completo y complejo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q119" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q119" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q120" data-correct="1">
+  <div class="enunciado"><strong>120.</strong> La evaluación del rendimiento es un proceso de 4 etapas.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q120" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q120" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q120')">Ver explicación</button>
+  <div class="explicacion" id="exp-q120" style="display:none">Falso. Son 3 etapas: delimitación de la evaluación, evaluación del rendimiento y gestión y mejora del rendimiento.</div>
+</div>
+<div class="question" id="q121" data-correct="0">
+  <div class="enunciado"><strong>121.</strong> El método con base en el desempeño futuro es la dirección o administración por objetivos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q121" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q121" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q122" data-correct="1">
+  <div class="enunciado"><strong>122.</strong> Se produce un error de primacía cuando el evaluador valora únicamente los comportamientos o resultados recientes y elimina la información anterior.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q122" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q122" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q122')">Ver explicación</button>
+  <div class="explicacion" id="exp-q122" style="display:none">Falso. Valorar solo lo reciente es el error de recencia. El error de primacía da más peso a la información inicial. (Atención: en algún enunciado del banco se confunde con lenidad.)</div>
+</div>
+<div class="question" id="q123" data-correct="0">
+  <div class="enunciado"><strong>123.</strong> La autoevaluación es una fuente de evaluación del desempeño que incrementa el compromiso de los empleados, pero debe usarse teniendo en cuenta los sesgos que conlleva.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q123" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q123" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q124" data-correct="1">
+  <div class="enunciado"><strong>124.</strong> Los tipos de procesos sustractivos son la desvinculación voluntaria o involuntaria del trabajador.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q124" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q124" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q124')">Ver explicación</button>
+  <div class="explicacion" id="exp-q124" style="display:none">Falso. Esos son los tipos de ruptura. Los procesos sustractivos pueden ser temporales o permanentes.</div>
+</div>
+<div class="question" id="q125" data-correct="0">
+  <div class="enunciado"><strong>125.</strong> El efecto halo (y eco) se produce cuando el evaluador generaliza una característica específica del evaluado a todos los aspectos de la evaluación, dando un resultado superior o inferior al merecido.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q125" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q125" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q126" data-correct="0">
+  <div class="enunciado"><strong>126.</strong> El etnocentrismo es la tendencia a considerar que los valores propios son siempre los más deseables.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q126" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q126" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q127" data-correct="1">
+  <div class="enunciado"><strong>127.</strong> Los sistemas de outplacement mezclan el coaching con la recolocación de los empleados en el mercado.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q127" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q127" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q127')">Ver explicación</button>
+  <div class="explicacion" id="exp-q127" style="display:none">Falso. Esa mezcla de coaching y recolocación se denomina coachplacement.</div>
+</div>
+<div class="question" id="q128" data-correct="1">
+  <div class="enunciado"><strong>128.</strong> A la hora de evaluar el rendimiento, el efecto halo se produce cuando el evaluador quiere evitar problemas con los evaluados y califica de forma indulgente, dando una calificación mayor de la que merece el trabajador.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q128" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q128" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q128')">Ver explicación</button>
+  <div class="explicacion" id="exp-q128" style="display:none">Falso. Eso es el error de lenidad. El efecto halo es generalizar una característica concreta a todas las dimensiones de la evaluación.</div>
+</div>
+<div class="question" id="q129" data-correct="0">
+  <div class="enunciado"><strong>129.</strong> Un indicador de la ruptura laboral existente en una empresa es la tasa o índice de rotación laboral.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q129" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q129" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q130" data-correct="0">
+  <div class="enunciado"><strong>130.</strong> Los métodos con base en el desempeño pasado son las medidas de productividad y el historial de logros.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q130" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q130" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q131" data-correct="1">
+  <div class="enunciado"><strong>131.</strong> La evaluación del rendimiento no tiene ninguna relación con el sistema de retribución de la empresa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q131" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q131" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q131')">Ver explicación</button>
+  <div class="explicacion" id="exp-q131" style="display:none">Falso. La evaluación del rendimiento está relacionada con la retribución (p. ej. incentivos ligados al desempeño).</div>
+</div>
+<div class="question" id="q132" data-correct="0">
+  <div class="enunciado"><strong>132.</strong> Existen dos criterios de evaluación: criterios objetivos y subjetivos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q132" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q132" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q133" data-correct="1">
+  <div class="enunciado"><strong>133.</strong> Lo más habitual es que sea el departamento de RRHH el único encargado de realizar las evaluaciones a los empleados.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q133" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q133" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q133')">Ver explicación</button>
+  <div class="explicacion" id="exp-q133" style="display:none">Falso. Las evaluaciones las realizan superiores, compañeros, clientes, el propio trabajador (autoevaluación), etc.</div>
+</div>
+<div class="question" id="q134" data-correct="0">
+  <div class="enunciado"><strong>134.</strong> El error de severidad consiste en calificar de forma desfavorable por falta de experiencia del evaluador, desconocimiento de los factores o para impresionar a los superiores.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q134" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q134" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q135" data-correct="1">
+  <div class="enunciado"><strong>135.</strong> Con la excedencia existe una desvinculación temporal del trabajador con la empresa que lleva a la extinción del contrato de trabajo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q135" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q135" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q135')">Ver explicación</button>
+  <div class="explicacion" id="exp-q135" style="display:none">Falso. La excedencia implica la suspensión del contrato, no su extinción.</div>
+</div>
+<div class="question" id="q136" data-correct="0">
+  <div class="enunciado"><strong>136.</strong> El error de lenidad se produce cuando el evaluador, para evitar problemas con los evaluados, califica de forma indulgente, dando en general una calificación más alta.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q136" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q136" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q137" data-correct="1">
+  <div class="enunciado"><strong>137.</strong> Los procesos sustractivos solo afectan a los procesos de evaluación y compensación, ya que se trata de una etapa final en la gestión de RRHH.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q137" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q137" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q137')">Ver explicación</button>
+  <div class="explicacion" id="exp-q137" style="display:none">Falso. Los procesos sustractivos afectan a todo el proceso de gestión de RRHH.</div>
+</div>
+<h2>TEMA 9: La retribución en la empresa</h2>
+<div class="question" id="q138" data-correct="0">
+  <div class="enunciado"><strong>138.</strong> Las dietas no son prestaciones ni salarios, sino simplemente un gasto empresarial.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q138" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q138" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q139" data-correct="1">
+  <div class="enunciado"><strong>139.</strong> Las empresas piensan que el principal motivante del trabajador es el dinero.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q139" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q139" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q139')">Ver explicación</button>
+  <div class="explicacion" id="exp-q139" style="display:none">Falso. Influyen también otros factores como el aprendizaje, el reconocimiento o el desarrollo profesional.</div>
+</div>
+<div class="question" id="q140" data-correct="0">
+  <div class="enunciado"><strong>140.</strong> La retribución financiera indirecta mediante prestaciones no suele pagarse de forma directa al empleado y se percibe por el hecho de formar parte de la organización.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q140" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q140" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q141" data-correct="0">
+  <div class="enunciado"><strong>141.</strong> Existe equidad individual retributiva si dos individuos que ocupan un puesto similar pero que no contribuyen de forma similar a la organización no reciben la misma retribución.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q141" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q141" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q141')">Ver explicación</button>
+  <div class="explicacion" id="exp-q141" style="display:none">Verdadero. En la equidad individual se cobra distinto por resultados o contribuciones distintas.</div>
+</div>
+<div class="question" id="q142" data-correct="1">
+  <div class="enunciado"><strong>142.</strong> El buen ambiente laboral, la flexibilidad horaria y los tickets guardería son considerados un tipo de remuneración indirecta.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q142" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q142" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q142')">Ver explicación</button>
+  <div class="explicacion" id="exp-q142" style="display:none">Falso. Los tickets guardería sí son remuneración indirecta, pero el ambiente y la flexibilidad son retribución no financiera (emocional).</div>
+</div>
+<div class="question" id="q143" data-correct="1">
+  <div class="enunciado"><strong>143.</strong> La retribución basada en competencias es un sistema donde se paga por el valor atribuido a los deberes, responsabilidades y tareas del trabajo y sus condiciones laborales.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q143" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q143" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q143')">Ver explicación</button>
+  <div class="explicacion" id="exp-q143" style="display:none">Falso. En la retribución basada en competencias se paga en función de las aptitudes, conocimientos, habilidades y capacidades del trabajador. Lo descrito es la retribución basada en el puesto.</div>
+</div>
+<div class="question" id="q144" data-correct="0">
+  <div class="enunciado"><strong>144.</strong> Para determinar el salario base de cada puesto se pueden usar la retribución basada en el puesto de trabajo y la basada en competencias o habilidades; para los incentivos se usa la retribución basada en el rendimiento.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q144" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q144" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q145" data-correct="1">
+  <div class="enunciado"><strong>145.</strong> La flexibilidad laboral, las prestaciones sociales y el clima laboral se consideran tipos de retribución no financiera.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q145" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q145" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q145')">Ver explicación</button>
+  <div class="explicacion" id="exp-q145" style="display:none">Falso. Las prestaciones sociales son un tipo de retribución financiera indirecta. La no financiera la forman el ambiente laboral, la flexibilidad y las características del puesto.</div>
+</div>
+<div class="question" id="q146" data-correct="0">
+  <div class="enunciado"><strong>146.</strong> La retribución o compensación total es el conjunto de percepciones financieras, servicios o beneficios tangibles que recibe el empleado como consecuencia de su actividad en la organización.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q146" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q146" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q147" data-correct="0">
+  <div class="enunciado"><strong>147.</strong> La equidad o consistencia interna se refiere a lograr una retribución justa haciendo que los individuos del mismo nivel o con contribuciones similares reciban la misma retribución.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q147" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q147" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q148" data-correct="0">
+  <div class="enunciado"><strong>148.</strong> La equidad o competitividad externa se refiere a que la retribución sea justa respecto a lo que se percibe en puestos similares en otras empresas.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q148" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q148" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q149" data-correct="0">
+  <div class="enunciado"><strong>149.</strong> La retribución no financiera (factores intrínsecos) se basa en 3 elementos fundamentales: autonomía, ambiente de trabajo y flexibilidad.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q149" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q149" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q150" data-correct="0">
+  <div class="enunciado"><strong>150.</strong> La retribución financiera directa puede ser fija o variable.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q150" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q150" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q151" data-correct="0">
+  <div class="enunciado"><strong>151.</strong> La política salarial es el conjunto de principios y directrices que reflejan la orientación y filosofía de la organización respecto al sistema de retribución.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q151" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q151" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q152" data-correct="0">
+  <div class="enunciado"><strong>152.</strong> El dinero es extrínseco y las otras compensaciones motivantes son intrínsecas.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q152" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q152" value="1"> Falso</label></li>
+  </ol>
+</div>
+<h2>TEMA 11: Diversidad, motivación y liderazgo</h2>
+<div class="question" id="q153" data-correct="1">
+  <div class="enunciado"><strong>153.</strong> Los beneficios laborales, como los seguros de salud y los planes de retiro, no son importantes para los empleados.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q153" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q153" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q153')">Ver explicación</button>
+  <div class="explicacion" id="exp-q153" style="display:none">Falso. La retribución indirecta (beneficios sociales) es muy importante: mantiene motivados a los empleados.</div>
+</div>
+<div class="question" id="q154" data-correct="0">
+  <div class="enunciado"><strong>154.</strong> La evaluación del desempeño es una herramienta importante para identificar fortalezas y debilidades de los empleados.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q154" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q154" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q155" data-correct="1">
+  <div class="enunciado"><strong>155.</strong> Las empresas deben enfocarse en la contratación de empleados con habilidades técnicas y no preocuparse por la personalidad o las habilidades sociales.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q155" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q155" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q155')">Ver explicación</button>
+  <div class="explicacion" id="exp-q155" style="display:none">Falso. La personalidad y las habilidades sociales (trabajo en equipo, resolución de problemas...) son esenciales para el éxito en el trabajo.</div>
+</div>
+<div class="question" id="q156" data-correct="1">
+  <div class="enunciado"><strong>156.</strong> La capacitación y el desarrollo de los empleados no son importantes si un empleado tiene las habilidades técnicas necesarias para el trabajo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q156" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q156" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q156')">Ver explicación</button>
+  <div class="explicacion" id="exp-q156" style="display:none">Falso. Son esenciales para el crecimiento profesional a largo plazo, independientemente de las habilidades técnicas.</div>
+</div>
+<div class="question" id="q157" data-correct="1">
+  <div class="enunciado"><strong>157.</strong> El reclutamiento es un proceso único y no hay necesidad de revisar o mejorar constantemente las prácticas de reclutamiento de una empresa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q157" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q157" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q157')">Ver explicación</button>
+  <div class="explicacion" id="exp-q157" style="display:none">Falso. Es un proceso dinámico y continuo que debe revisarse y mejorarse para atraer y seleccionar a los mejores candidatos.</div>
+</div>
+<div class="question" id="q158" data-correct="1">
+  <div class="enunciado"><strong>158.</strong> El acoso en el lugar de trabajo es un problema menor y no necesita ser abordado con seriedad.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q158" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q158" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q158')">Ver explicación</button>
+  <div class="explicacion" id="exp-q158" style="display:none">Falso. Es un problema grave que requiere atención y solución inmediata.</div>
+</div>
+<div class="question" id="q159" data-correct="0">
+  <div class="enunciado"><strong>159.</strong> La motivación de los empleados es una función importante de la gestión de RRHH.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q159" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q159" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q160" data-correct="0">
+  <div class="enunciado"><strong>160.</strong> El liderazgo transformacional se enfoca en motivar y empoderar a los empleados para que alcancen su máximo potencial.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q160" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q160" value="1"> Falso</label></li>
+  </ol>
+</div>
+<div class="question" id="q161" data-correct="1">
+  <div class="enunciado"><strong>161.</strong> La retroalimentación positiva es la única forma efectiva de motivar a los empleados.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q161" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q161" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q161')">Ver explicación</button>
+  <div class="explicacion" id="exp-q161" style="display:none">Falso. También se pueden establecer metas desafiantes, recompensas y oportunidades de mejora.</div>
+</div>
+<div class="question" id="q162" data-correct="1">
+  <div class="enunciado"><strong>162.</strong> La diversidad en el lugar de trabajo no tiene ningún impacto en la productividad de la empresa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q162" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q162" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q162')">Ver explicación</button>
+  <div class="explicacion" id="exp-q162" style="display:none">Falso. La diversidad influye en los resultados: atrae perfiles variados que aportan innovación, creatividad y distintos puntos de vista.</div>
+</div>
+<h2>Tipo TEST (opción múltiple)</h2>
+<div class="question" id="q163" data-correct="1">
+  <div class="enunciado"><strong>163.</strong> ¿Cuál es el objetivo principal de la compensación y los beneficios?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q163" value="0"> Asegurar que los empleados tengan la formación y habilidades necesarias.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q163" value="1"> Proporcionar a los empleados un salario justo y beneficios competitivos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q163" value="2"> Motivar a los empleados para que cumplan con sus responsabilidades.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q163" value="3"> Establecer objetivos y metas para la empresa.</label></li>
+  </ol>
+</div>
+<div class="question" id="q164" data-correct="1">
+  <div class="enunciado"><strong>164.</strong> ¿Cuál es el propósito de un proceso de retroalimentación efectivo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q164" value="0"> Identificar problemas de comunicación entre los empleados y la gerencia.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q164" value="1"> Fomentar el desarrollo profesional y personal de los empleados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q164" value="2"> Establecer objetivos y metas para la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q164" value="3"> Resolver conflictos entre los empleados.</label></li>
+  </ol>
+</div>
+<div class="question" id="q165" data-correct="3">
+  <div class="enunciado"><strong>165.</strong> ¿Cuál de los siguientes NO es un método común de evaluación del desempeño?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q165" value="0"> Entrevista de salida.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q165" value="1"> Autoevaluación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q165" value="2"> Evaluación 360 grados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q165" value="3"> Evaluación de habilidades matemáticas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q166" data-correct="2">
+  <div class="enunciado"><strong>166.</strong> ¿Qué es la diversidad en el lugar de trabajo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q166" value="0"> El proceso de selección de personal en una empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q166" value="1"> La variedad de habilidades técnicas que tienen los empleados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q166" value="2"> La variedad de antecedentes y características personales que tienen los empleados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q166" value="3"> La cantidad de empleados que trabaja en una empresa.</label></li>
+  </ol>
+</div>
+<div class="question" id="q167" data-correct="2">
+  <div class="enunciado"><strong>167.</strong> ¿Qué es el liderazgo situacional?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q167" value="0"> Un estilo que recompensa a los empleados por su desempeño.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q167" value="1"> Un estilo que supervisa de cerca a los empleados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q167" value="2"> Un estilo que se adapta a las necesidades individuales y a las situaciones específicas de los empleados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q167" value="3"> Un estilo que se enfoca en mantener la estabilidad y el orden.</label></li>
+  </ol>
+</div>
+<div class="question" id="q168" data-correct="2">
+  <div class="enunciado"><strong>168.</strong> ¿Qué es el liderazgo transformacional?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q168" value="0"> Un estilo que se enfoca en recompensar a los empleados por su desempeño.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q168" value="1"> Un estilo que supervisa de cerca a los empleados para asegurar que cumplen sus responsabilidades.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q168" value="2"> Un estilo que se enfoca en motivar y empoderar a los empleados para que alcancen su máximo potencial.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q168" value="3"> Un estilo que se enfoca en mantener la estabilidad y el orden en la empresa.</label></li>
+  </ol>
+</div>
+<div class="question" id="q169" data-correct="2">
+  <div class="enunciado"><strong>169.</strong> ¿Qué es la capacitación en el lugar de trabajo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q169" value="0"> La estrategia de crecimiento de una empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q169" value="1"> La variedad de habilidades técnicas que tienen los empleados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q169" value="2"> El proceso de enseñar habilidades y conocimientos específicos a los empleados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q169" value="3"> El proceso de identificar fortalezas y debilidades de los empleados.</label></li>
+  </ol>
+</div>
+<div class="question" id="q170" data-correct="2">
+  <div class="enunciado"><strong>170.</strong> ¿Qué es el desarrollo organizacional?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q170" value="0"> El proceso de selección de personal en una empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q170" value="1"> La estrategia de crecimiento de una empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q170" value="2"> El proceso de cambio planificado en una empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q170" value="3"> La evaluación del desempeño de los empleados.</label></li>
+  </ol>
+</div>
+<div class="question" id="q171" data-correct="0">
+  <div class="enunciado"><strong>171.</strong> ¿Qué es la cultura organizacional?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q171" value="0"> El conjunto de valores y prácticas que rigen el comportamiento de los empleados en una empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q171" value="1"> La estructura formal de una empresa, incluyendo sus políticas y procedimientos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q171" value="2"> El proceso de selección de personal en una empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q171" value="3"> El proceso de evaluación del desempeño de los empleados.</label></li>
+  </ol>
+</div>
+<div class="question" id="q172" data-correct="1">
+  <div class="enunciado"><strong>172.</strong> ¿Cuál es el objetivo de la gestión del talento?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q172" value="0"> Identificar las fortalezas y debilidades de los empleados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q172" value="1"> Planificar y desarrollar la carrera de los empleados dentro de la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q172" value="2"> Gestionar el proceso de selección de personal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q172" value="3"> Supervisar el cumplimiento de las políticas y procedimientos.</label></li>
+  </ol>
+</div>
+
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
+
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
+
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
+
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+        
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
+
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checked.length === 0) return;
+
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
+            } else {
+              q.classList.add("incorrect");
+            }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+        
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
+        }
+        
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
+
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+        
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+        
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+        
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+            
+            q.classList.remove("correct", "partial", "incorrect");
+            
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+        
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+        
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+        
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
+</html>
