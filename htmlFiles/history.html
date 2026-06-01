@@ -5,39 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/avif" href="../assets/images/desplazamiento-pergamino-abierto-realista-transparente_107791-19331.avif" />
     <title>Mi Historia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet" />
     <style>
+      :root {
+        --ink: #16142a;
+        --ink-2: #201d39;
+        --ember: #ff8a4c;
+        --gold: #ffd66b;
+        --sky: #7aa7ff;
+        --klein: #3a4bd8;
+        --chalk: #f3f4ff;
+        --mist: #b9b7d4;
+      }
+
+      * { box-sizing: border-box; }
+
       body {
-        background: url("https://www.transparenttextures.com/patterns/old-mathematics.png"), #f8f1dc;
-        background-size: cover;
-        font-family: "Georgia", serif;
-        padding: 40px;
         margin: 0;
+        padding: 64px 20px;
+        min-height: 100vh;
+        background-color: var(--ink);
+        background-image:
+          radial-gradient(50rem 50rem at 12% -8%, rgba(58, 75, 216, 0.35), transparent 60%),
+          radial-gradient(45rem 45rem at 108% 6%, rgba(255, 138, 76, 0.28), transparent 55%),
+          radial-gradient(60rem 60rem at 50% 120%, rgba(122, 167, 255, 0.18), transparent 60%);
+        background-attachment: fixed;
+        font-family: "Manrope", system-ui, sans-serif;
+        color: var(--mist);
+        line-height: 1.8;
+        -webkit-font-smoothing: antialiased;
       }
 
       .pergamino {
-        background: #f8f1dc;
-        border: 15px solid #c2a96d;
-        border-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png") 30 round;
-        padding: 40px;
-        max-width: 800px;
+        position: relative;
+        max-width: 820px;
         margin: 0 auto;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-        line-height: 1.8;
-        color: #5b4636;
+        padding: clamp(28px, 5vw, 56px);
+        background: color-mix(in oklab, var(--ink-2) 72%, transparent);
+        backdrop-filter: blur(14px) saturate(1.2);
+        -webkit-backdrop-filter: blur(14px) saturate(1.2);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        box-shadow: 0 30px 80px -30px #000;
       }
 
-      h1,
-      h2 {
-        text-align: center;
-        font-family: "Papyrus", "Georgia", serif;
-        margin-bottom: 30px;
-        color: #6d4b23;
+      .pergamino::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 24px;
+        bottom: 24px;
+        width: 3px;
+        border-radius: 999px;
+        background: linear-gradient(to bottom, var(--ember), var(--klein), transparent);
       }
+
+      h1, h2 {
+        text-align: center;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        margin: 0 0 32px;
+        line-height: 1.1;
+        background: linear-gradient(100deg, var(--chalk), var(--sky) 45%, var(--ember));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
 
       p {
-        text-indent: 2em;
-        margin-bottom: 20px;
-        font-size: 1.1em;
+        position: relative;
+        padding-left: 26px;
+        margin: 0 0 24px;
+        font-size: 1.08rem;
+        color: var(--mist);
+      }
+      p::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 12px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--ember);
+        box-shadow: 0 0 10px var(--ember);
+      }
+      p strong, p b { color: var(--chalk); }
+
+      .back-home {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 8px auto 0;
+        padding: 12px 26px;
+        border-radius: 999px;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-weight: 700;
+        color: var(--chalk);
+        background: linear-gradient(120deg, var(--ember), #e0561f);
+        box-shadow: 0 12px 40px -12px var(--ember);
+        transition: transform 0.25s ease, filter 0.25s ease;
+      }
+      .back-home:hover { transform: translateY(-2px); filter: brightness(1.06); }
+      .back-home-wrap { text-align: center; margin-top: 16px; }
+
+      @media (prefers-reduced-motion: reduce) {
+        * { transition-duration: 0.001ms !important; }
       }
     </style>
   </head>
@@ -63,9 +140,10 @@
       <p>
         Mi objetivo principal a largo plazo es aplicar la inteligencia artificial al ámbito de la medicina, buscando soluciones que mejoren diagnósticos, tratamientos o la gestión sanitaria. Sin embargo, también me apasiona seguir explorando otros campos como las finanzas, la física, las matemáticas o el emprendimiento, con la ambición de, en algún momento, lanzar mi propio proyecto o empresa. Esta web, en parte, refleja ese recorrido de aprendizaje multidisciplinar y crecimiento constante.
       </p>
-      
 
-      
+      <div class="back-home-wrap">
+        <a class="back-home" href="../index.html#home">&larr; Volver al inicio</a>
+      </div>
     </div>
   </body>
 </html>

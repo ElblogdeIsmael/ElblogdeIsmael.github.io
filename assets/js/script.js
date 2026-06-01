@@ -49,8 +49,12 @@ window.addEventListener("scroll", function () {
 
 /**
  * language toggle
+ * NOTE: el <select id="language-select"> está comentado en el HTML; se guarda la
+ * referencia para no romper el script (antes lanzaba TypeError sobre null y abortaba
+ * el resto de efectos). La lógica de traducción se conserva intacta para reactivarla.
  */
-document.getElementById("language-select").addEventListener("change", (event) => {
+const languageSelectEl = document.getElementById("language-select");
+if (languageSelectEl) languageSelectEl.addEventListener("change", (event) => {
   const translations = {
     es: {
       // Header
@@ -261,3 +265,105 @@ document.addEventListener("DOMContentLoaded", () => {
         languageSelect.dispatchEvent(new Event('change'));
     }
 });
+
+
+
+
+
+/*-----------------------------------------------------------*\
+  #GALAXIA — efectos visuales (progreso, tilt, parallax, reveal)
+  Añadido 2026. Vanilla JS, sin dependencias. Respeta touch y
+  prefers-reduced-motion.
+\*-----------------------------------------------------------*/
+
+(function () {
+  "use strict";
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isTouch = window.matchMedia("(hover: none)").matches;
+
+  /* --- Barra de progreso de scroll --- */
+  const progress = document.createElement("div");
+  progress.className = "scroll-progress";
+  document.body.appendChild(progress);
+
+  let ticking = false;
+  function updateProgress() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const ratio = max > 0 ? h.scrollTop / max : 0;
+    progress.style.transform = "scaleX(" + ratio + ")";
+    ticking = false;
+  }
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+  updateProgress();
+
+  /* --- Reveal on scroll --- */
+  const revealEls = document.querySelectorAll(
+    ".section, .portfolio-card, .about-section, .contact-card, .intro-box, .hero-content"
+  );
+  revealEls.forEach(function (el) { el.classList.add("reveal"); });
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+  } else {
+    const io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    );
+    revealEls.forEach(function (el) { io.observe(el); });
+  }
+
+  /* --- Tilt 3D + glare en las tarjetas de curso --- */
+  if (!reduceMotion && !isTouch) {
+    const cards = document.querySelectorAll(".portfolio-card");
+    cards.forEach(function (card) {
+      card.addEventListener("pointermove", function (e) {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        const rx = (0.5 - py) * 10;
+        const ry = (px - 0.5) * 12;
+        card.style.transform =
+          "perspective(1100px) rotateX(" + rx + "deg) rotateY(" + ry + "deg) translateZ(0)";
+        card.style.setProperty("--mx", px * 100 + "%");
+        card.style.setProperty("--my", py * 100 + "%");
+      });
+      card.addEventListener("pointerleave", function () {
+        card.style.transform = "";
+      });
+    });
+
+    /* --- Parallax suave del banner del hero con el ratón --- */
+    const heroBanner = document.querySelector(".hero-banner");
+    const hero = document.querySelector(".hero");
+    if (heroBanner && hero) {
+      hero.addEventListener("pointermove", function (e) {
+        const r = hero.getBoundingClientRect();
+        const dx = (e.clientX - r.left) / r.width - 0.5;
+        const dy = (e.clientY - r.top) / r.height - 0.5;
+        heroBanner.style.transform =
+          "translate3d(" + dx * 18 + "px," + dy * 18 + "px,0) rotateX(" + -dy * 6 + "deg) rotateY(" + dx * 6 + "deg)";
+      });
+      hero.addEventListener("pointerleave", function () {
+        heroBanner.style.transform = "";
+      });
+    }
+  }
+})();
