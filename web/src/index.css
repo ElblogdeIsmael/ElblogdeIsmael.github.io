@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+/* ===========================================================
+   Recursos GIIADE — design tokens
+   Paleta: teal/lima eléctrico sobre carbón. Sin púrpura-IA.
+   =========================================================== */
+@theme {
+  --color-bg: #0d0f12;
+  --color-bg-2: #14181d;
+  --color-bg-3: #1b2127;
+  --color-teal: #2ee6c5;
+  --color-teal-deep: #16b39a;
+  --color-lime: #b8ff3c;
+  --color-amber: #ffb627;
+  --color-ink: #f4f7f5;
+  --color-mist: #9aa6a0;
+  --color-line: rgba(46, 230, 197, 0.18);
+
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-mist);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-teal);
+  color: #04140f;
+}
+
+/* --- Atmósfera: rejilla técnica + glows tenues (req 2) --- */
+.bg-mesh {
+  background-color: var(--color-bg);
+  background-image:
+    /* glows pequeños y sutiles, no blobs grandes */
+    radial-gradient(28rem 24rem at 88% 4%, rgba(46, 230, 197, 0.10), transparent 60%),
+    radial-gradient(24rem 22rem at 4% 14%, rgba(184, 255, 60, 0.07), transparent 60%),
+    radial-gradient(30rem 26rem at 50% 116%, rgba(255, 182, 39, 0.05), transparent 60%),
+    /* rejilla fina de líneas */
+    linear-gradient(rgba(46, 230, 197, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 230, 197, 0.035) 1px, transparent 1px);
+  background-size:
+    100% 100%, 100% 100%, 100% 100%, 54px 54px, 54px 54px;
+}
+
+/* grain overlay sutil */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* texto con degradado teal→lima */
+.text-gradient {
+  background: linear-gradient(100deg, var(--color-ink) 0%, var(--color-teal) 55%, var(--color-lime) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* línea fina dividida */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-line), transparent);
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-teal-deep), var(--color-teal));
+  border-radius: 999px;
+  border: 3px solid var(--color-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
