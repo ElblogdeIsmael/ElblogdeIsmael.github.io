@@ -6,7 +6,7 @@
 
 ---
 
-<!-- TEMA 1: Introducción a la gestión de los RRHH -->
+<!-- TEMA 1: Introducción a la Gestión de los Recursos Humanos -->
 
 1. La delegación de poder (empowerment) motiva a los empleados a ser creativos y asumir riesgos, ya que da la oportunidad a los trabajadores de tomar decisiones que tradicionalmente serían tomadas por los directivos.
 
@@ -15,15 +15,19 @@
 
     > Verdadero. El empowerment cede capacidad de decisión a los empleados, fomentando creatividad y asunción de riesgos.
 
-2. La posición competitiva de la organización es un factor organizativo que influye en la gestión de los RRHH de una empresa.
+2. La posición competitiva de la organización: es un factor organizativo que influye en la gestión de los RRHH de una empresa.
 
     - (x) Verdadero
     - ( ) Falso
 
-3. El ajuste persona-organización es un factor que influye en la gestión de RRHH y es un factor individual.
+    > Verdadero. Verdadero.
+
+3. El ajuste persona-organización es un factor que influye en la gestión de RRHH y es un factor: Individual.
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. Verdadero.
 
 4. Las personas son un recurso estratégico para la empresa.
 
@@ -41,6 +45,8 @@
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. Verdadero.
 
 7. Los RRHH de una empresa son exclusivamente las personas que pertenecen al departamento de RRHH.
 
@@ -88,6 +94,8 @@
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. Verdadero.
 
 14. La flexibilidad empresarial se puede lograr, entre otras formas, mediante la centralización, la subcontratación y el uso de nuevas tecnologías.
 
@@ -153,10 +161,12 @@
     - (x) Verdadero
     - ( ) Falso
 
-24. La gestión de la diversidad es una estrategia integral basada en crear una plantilla diversa de empleados que aporten innovación, nuevas opciones y puntos de vista, soluciones creativas y conocimientos de diferentes culturas y mercados.
+24. La gestión de la diversidad es una estrategia integral basada en crear una plantilla diversa de empleados, que aporten innovación, nuevas opciones y puntos de vista, soluciones creativas, y conocimientos de diferentes culturas y mercados.
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. Verdadero.
 
 25. Los procesos de afectación están relacionados entre sí pero no con los procesos de formación y desarrollo.
 
@@ -175,7 +185,290 @@
     - (x) Verdadero
     - ( ) Falso
 
-<!-- TEMA 2: Análisis y diseño del puesto de trabajo -->
+28. La diversidad en el lugar de trabajo no tiene ningún impacto en la productividad de la empresa.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La diversidad influye en los resultados: atrae perfiles variados que aportan innovación, creatividad y distintos puntos de vista.
+
+29. La motivación de los empleados es una función importante de la gestión de RRHH.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+30. El liderazgo transformacional se enfoca en motivar y empoderar a los empleados para que alcancen su máximo potencial.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+31. El acoso en el lugar de trabajo es un problema menor y no necesita ser abordado con seriedad.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Es un problema grave que requiere atención y solución inmediata.
+
+32. En la actualidad, los recursos humanos se consideran un coste más a minimizar en la empresa.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. ya que actualmente, el factor humano es un factor estratégico, esa visión de los recursos humanos no es actual.
+
+33. Un objetivo explícito de la función de la función de RRHH es incrementar la productividad del factor humano.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. es un factor implícito, ya que se considera como explícito a aquellos objetivos que se encargan de atraer, retener, motivar y animar a los candidatos. Y en este caso al hablar de productividad, hace referencia a un objetivo implícito.
+
+34. Dentro de los procesos de afectación se encontrarían las prácticas de planificación, formación y valoración.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Dentro de los procesos de afectación se encuentran las prácticas reclutamiento.
+
+35. A medida que crecen las empresas los directores de RRHH incrementan sus estatus en la jerarquía directiva e intervienen en la definición de la estratégica empresarial.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+36. El desarrollo de una marca como empleador (Employer Branding) tiene como objetivo mejorar la imagen de la empresa con vistas a incrementar sus clientes.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El objetivo es atraer y retener a los mejores profesionales.
+
+37. Uno de los retos de las empresas actuales es: Hacer un buen análisis de la inversión que se necesita realizar en personal pero teniendo en cuenta aspectos cuantitativos y la motivación y satisfacción de las personas.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+38. Las personas son un recurso estratégico.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+39. La reestructuración organizativa supone una reducción del tamaño empresarial.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. la reestructuración organizativa puede conllevar una reducción del tamaño empresarial, pero no siempre es el caso.
+
+40. La flexibilidad empresarial se puede lograr con la descentralización, la subcontratación o el uso de nuevas tecnologías.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+41. Actualmente el director de RRHH se encarga solo de los aspectos relativos al coste de personal y a la legislación que afecta a los RRHH que hay en la misma.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El director de RRHH tiene un papel mucho más amplio que simplemente lidiar con el coste del personal y la legislación laboral.
+
+42. Actualmente el director de RRHH es un gestor que pone su atención en las personas.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+43. Actualmente el director de RRHH es un gestor que está especializado en aspectos económicos y en los aspectos humanos o sociales del ser humano.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+44. Entre las tendencias de la gestión de RRHH se encuentran: la gestión de la diversidad, la gestión del talento y el personal branding.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+45. Entre las tendencias de la gestión de RRHH se encuentran: la gestión de la diversidad, el personal branding y el empowerment.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+46. Los objetivos explícitos de la gestión de RRHH son: atraer a candidatos adecuados, calificados... retener a los mejores empleados, motivar a los empleados y ayudarles a desarrollarse.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+47. Los objetivos implícitos están integrados en la filosofía o cultura empresarial y son mejorar la productividad de las personas, mejorar la calidad de vida en el trabajo y el cumplimiento de la normativa.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+48. Los objetivos a largo plazo son los que presenten el alcance estratégico de la gestión de los RRHH y son la rentabilidad y competitividad, incremento de valor en la empresa y la mejora de la eficiencia y eficacia de la organización.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+49. Entre las cualidades que debería tener un director de RRHH está el tener un enfoque proactivo, es decir, disponer de credibilidad y conocimiento.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+50. El departamento de RRHH no es igual de importante y complejo en todas las organizaciones pero existe en todas las organizaciones
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+51. Los objetivos implícitos están integrados en la filosofía empresarial.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+52. Los objetivos explícitos son los que presentan el alcance estratégico de la gestión de los RRHH.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Los objetivos explícitos suelen ser más tácticos, mientras que los objetivos a largo plazo son los que representan el alcance estratégico de la gestión de los RRHH.
+
+53. La gestión de la diversidad es una estrategia integral basada en crear una plantilla diversa de empleados, con el objetivo de atraer, retener y potenciar a personas de diferentes perfiles.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+54. La gestión de la diversidad es una estrategia integral basada en crear una plantilla diversa de empleados.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+55. En la gestión del talento en la fase de desarrollo se incluye coaching, mentoring y retribución. Falso, retribución es de atracción
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Retribución pertenece a la fase de atracción del talento, no a la fase de desarrollo. En desarrollo se incluyen coaching, mentoring y eventos de visibilidad y networking.
+
+56. En la gestión del talento en la fase de desarrollo se incluye coaching. mentoring y personal branding.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El personal branding no es típicamente una parte de la fase de desarrollo en la gestión del talento.
+
+57. En la gestión del talento en la fase de desarrollo se incluye coaching, mentoring y assesment center
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El assessment center pertenece a la fase de identificación del talento, no a la fase de desarrollo.
+
+58. En la gestión del talento en la fase de desarrollo se incluye coaching, mentoring y eventos de visibilidad y networking.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+59. El objetivo principal de la gestión de RRHH consiste en la planificación, organización, desarrollo y control de una serie de técnicas.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+60. Los procesos de afectación están relacionados entre sí pero no están relacionados con los procesos de formación y desarrollo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Los procesos de afectación están relacionados tanto entre sí como con los procesos de formación y desarrollo. 49. Los procesos de afectación la organización los lleva a cabo para buscar e incorporar las personas mas adecuadas para cada puesto. Se incluyen el reclutamiento, la selección y la socialización. VERDADERO
+
+61. El employer branding es una marca que define como buen empleador y les permite atraer y retener a los mejores profesionales.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+62. Actualmente, el director de RRHH es un gestor especializado tanto en los aspectos económicos como en los humanos o sociales del ser humano. El director de RRHH se encarga de diseñar las estrategias, políticas y prácticas de gestión.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+63. El ajuste persona-organización es un factor q influye en la gestión de RRHH y es un factor: Individual.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+64. Los RRHH son todas las personas q pertenecen a una organización, salvo las que ocupan un puesto directivo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Los RRHH incluyen a todas las personas que pertenecen a la organización, incluyendo los puestos directivos.
+
+65. Actualmente el director de RRHH es un gestor q pone su atención en las personas.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+66. Los objetivos a largo plazo son los q presentan el alcance estratégico de la gestión de los RRHH y son la rentabilidad y competitividad, incremento de valor en la empresa y la mejora de la eficiencia y eficacia de la organización.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+67. Los procesos de afectación la organización los lleva a cabo para buscar e incorporar las personas mas adecuadas para cada puesto. Se incluyen el reclutamiento, la selección y la socialización.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+68. El employer branding es una marca q define como buen empleador y les permita atraer y retener a los mejores profesionales.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+<!-- TEMA 2: Análisis del puesto de trabajo -->
 
 1. La especificación o perfil del puesto recoge la información relativa a cada puesto en relación con las competencias del trabajador (conocimientos, habilidades, experiencia y formación necesarias).
 
@@ -217,6 +510,8 @@
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. Verdadero.
 
 8. La observación como método utilizado en el análisis de puestos permite recoger la opinión de un grupo de personas especialistas.
 
@@ -261,6 +556,8 @@
     - (x) Verdadero
     - ( ) Falso
 
+    > Verdadero. Verdadero.
+
 15. La rotación de puestos es una técnica adecuada para rediseñar un puesto cuando se pretende solventar los problemas derivados de un bajo nivel de especialización.
 
     - ( ) Verdadero
@@ -287,7 +584,546 @@
 
     > Falso. Determinar qué puestos se analizan corresponde a la fase de delimitación del análisis.
 
-<!-- TEMA 3 y 10: Planificación de los RRHH y procesos sustractivos -->
+19. La especificación o perfil del puesto recoge la información relativa a cada puesto con relación a las competencias del trabajador.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+20. La descripción del puesto se define como el documento que recoge la información relativa a cada puesto con relación a las tareas, obligaciones, responsabilidades y condiciones laborales.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+21. Los trabajadores temporales son los que trabajan un periodo corto de tiempo para adquirir experiencia laboral.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+22. Los trabajadores temporales son los que trabajan un periodo corto de tiempo para adquirir experiencia laboral y tienen una jornada laboral más reducida.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. No necesariamente los trabajadores temporales tienen una jornada laboral más reducida.
+
+23. La reingeniería es la reconsideración fundamental y el rediseño radical de los procesos de la empresa para lograr mejoras trascendentales en las medidas básicas del desempeño, el coste, la calidad, el servicio y la rapidez. Se hace en torno a resultados y afecta a la descripción de puestos de trabajo.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+24. Los tipos de cuestionarios que se utilizan son: abiertos y mixto
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+25. Los tipos de cuestionarios que se utilizan son: abiertos y cerrado
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Los tipos de cuestionarios utilizados pueden ser abiertos, cerrados o mixtos
+
+26. Los tipos de cuestionarios que se utilizan son: cerrado y mixto
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+27. El análisis de puestos de trabajo es el proceso a través del cual la empresa recopila y analiza la información sobre el puesto de trabajo con la intención de identificar las tareas, obligaciones y responsabilidades del puesto.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+28. El análisis de puestos de trabajo es el proceso a través del cual la empresa recopila y analiza la información sobre el puesto de trabajo con la intención de identificar las tareas y obligaciones.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Además de las tareas y obligaciones, se deberían identificar las responsabilidades y competencias necesarias para el puesto.
+
+29. El análisis de puestos de trabajo es el proceso a través del cual la empresa recopila y analiza la información sobre el puesto de trabajo con la intención de identificar las tareas del puesto.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Además de las tareas, también se deben identificar las responsabilidades, competencias y habilidades requeridas para el puesto.
+
+30. El análisis de puestos de trabajo es el proceso a través del cual la empresa recopila y analiza la información sobre el puesto de trabajo con la intención de identificar las tareas, y responsabilidades del puesto.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+31. El análisis de puestos de trabajo influye solo en la selección y formación de los recursos humanos.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El análisis de puestos de trabajo influye en muchos aspectos de los RRHH, incluyendo la planificación de RRHH, selección, formación, sistema retributivo, evaluación del rendimiento y desarrollo de carrera.
+
+32. El análisis de puestos de trabajo influye solo en la planificación y selección de los RRHH
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El análisis de puestos de trabajo influye en la planificación, selección, formación, sistema retributivo, evaluación del rendimiento y desarrollo de carrera de los RRHH
+
+33. El análisis de puestos de trabajo influye solo en la selección, formación y sistema retributivo de los RRHH.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El análisis de puestos de trabajo influye en la planificación, selección, formación, sistema retributivo, evaluación del rendimiento y desarrollo de carrera de los RRHH.
+
+34. Cuando el análisis de puestos implica la redacción de la descripción de puestos teniendo en cuenta no solo las tareas y responsabilidades, sino también los conocimientos, experiencias y competencias, se refiere al análisis multifuncional.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. 21. Cuando el análisis de puestos implica la redacción de la descripción de puestos teniendo en cuenta no solo las tareas y responsabilidades, sino también los conocimientos, experiencias y competencias, se refiere a la especificación del puesto de trabajo. FALSO, Se refiere al análisis de puestos
+
+35. Cuando el análisis de puestos implica la redacción de la descripción de puestos teniendo en cuenta no solo las tareas y responsabilidades, sino también los conocimientos, experiencias y competencias, se refiere a la reingeniería.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Se refiere al análisis de puestos
+
+36. Entre las técnicas utilizadas para realizar el rediseño de puestos se encuentran la simplificación del puesto, el enriquecimiento del puesto y la reestructuración del puesto.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+37. En la fase análisis de puestos de trabajo, entre otras cosas, se trata de determinar qué puestos de trabajo se van a analizar y de reunir datos sobre las actividades laborales necesarias.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+38. En la fase de análisis de puestos de trabajo, entre otras cosas, se trata de reunir las características y capacidades humanas necesarias.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+39. En la fase análisis de puestos de trabajo, entre otras cosas, se trata de determinar qué puestos de trabajo se van a analizar de reunir las características y capacidades humanas necesarias.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. En la fase de análisis de puestos de trabajo, se determinan los puestos a analizar y se recopilan datos sobre las actividades laborales, características y capacidades humanas necesarias para esos puestos.
+
+40. En la fase análisis de puestos de trabajo, entre otras cosas, se trata de determinar qué puestos de trabajo se van a analizar
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. En la fase de análisis de puestos de trabajo, no solo se determinan los puestos a analizar, también se recopilan datos sobre las actividades laborales, las características y las capacidades humanas necesarias para esos puestos.
+
+41. La descripción del puesto de trabajo es el documento que recoge el perfil del puesto, es decir, la información relativa a las tareas, obligaciones, responsabilidades y condiciones laborales del puesto.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El perfil del puesto recoge los conocimientos, habilidades, experiencias, la formación necesaria para desempeñar el puesto.
+
+42. Un programa de outplacement o recolocación tiene como objetivo minimizar las demandas judiciales que puedan interponer los trabajadores despedidos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+43. La planificación de RRHH es un proceso mas completo y complejo que la planificación de plantillas.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+44. Los despidos son ruptura laboral involuntaria.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+45. En el proceso de selección las herramientas tienen que ser válidas y fiables.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+46. Los juegos de empresas y assesment centres son técnicas de selección.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+47. Entre las fuentes de reclutamiento interno se encuentra las empresas de trabajo temporal.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Las empresas de trabajo temporal (ETT) son una fuente de reclutamiento externo.
+
+48. Los fines de la evaluación del rendimiento no son solo evaluar lo que no se hace bien, sino buscar la manera de mejorarlo.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+49. El efecto halo y eco es un error q se produce cuando el evaluador generaliza una característica especifica del evaluado a todos los aspectos de la evaluación de desempeño, dando un resultado superior o inferior al que merece el empleado.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+50. En la gestión y mejora del una vez identificadas la causaas se definen las estrategias disponibles y se establecen los planes de actuación para resolver el problema.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+51. Se proponen tres tipos de estrategias en En la gestión y mejora del rendimiento: estrategias de reforzamiento positivo, negativo y estrategias en caso de q las anteriores no funcionen.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+52. En el tipo de entrevista mixta se combina las de hablar y convencer con la solución de problemas, forma que la primera sirva para la evaluación y la segunda para la mejora.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+53. Los procesos sustractivos solamente afectan a los procesos de evaluación y compensación ya que se trata de una etapa final en el proceso de gestión de RRHH.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Los procesos sustractivos (desvinculación) afectan a todo el sistema de RRHH (planificación, moral, etc.), no solo a evaluación y compensación como etapa final.
+
+54. Las empresas piensan que el principal motivante del trabajador es el dinero.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Si bien el dinero es un motivador importante, no es el único. También influyen el aprendizaje, desarrollo, reconocimiento, ambiente, etc.
+
+55. La retribución o compensación total es el conjunto de percepciones financieras, servicios o beneficios tangibles que recibe el empleado como consecuencia de su actividad en la organización.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+56. El dinero es extrínseco y las otras compensaciones motivantes son intrínsecas.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+57. La retribución no financiera (factores intrínsecos) se basa en 3 elementos fundamentales: autonomía, ambiente de trabajo y flexibilidad.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+58. La retribución financiera indirecta mediante prestaciones no suelen pagarse de forma directa al empleado y se perciben por el hecho de formar parte de la organización.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+59. La retribución financiera directa puede fija o variable.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+60. Las dietas no son prestaciones ni salarios, son simplemente un gasto empresarial.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+61. La equidad o consistencia interna se refiere al logro de una retribución justa haciendo que los individuos que estan en el mismo nivel o que tiene contribuciones similares para la organización reciban la misma retribución.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+62. La equidad o competitividad externa se refiere a la consideración de que la retribución es justa respecto a lo que se percibe en puestos similares en otras empresas.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+63. En la equidad individual se cobra distinto por resultados distintos individualmente.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+64. La política salarial es el conjunto de principios y directrices que reflejan la orientación y filosofía de la organización respecto al sistema de retribución.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+65. La horquilla salarial diferencia monetariamente entre el que mas gana dentro de la empresa y el que menos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+66. Para determinar el salario base de cada puesto se pueden utilizar dos sistemas de retribución: la retribución basada en el puesto de trabajo y los sistemas de retribución basados en competencias o habilidades, y para determinar los incentivos, el sistema de retribución es aquel que esta basado en el rendimiento.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+67. La retribución basada en competencias es un sistema donde se paga por el valor que se atribuye a los deberes, responsabilidades, tareas y otros factores relacionados con el trabajo y las condiciones laborales.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Cuando la retribución se basa en competencias, se paga en función de las aptitudes, conocimientos, habilidades y capacidades del trabajador, no del valor del puesto en sí.
+
+68. Las entrevistas de trabajo son una de las fuentes de recopilación de información que se pueden utilizar para realizar un análisis de puestos de trabajo.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+69. Los problemas asociados a la baja especialización en los puestos de trabajo pueden solventarse mediante la ampliación o el enriquecimiento de tareas de los mismos.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La ampliación y el enriquecimiento de tareas son técnicas para solventar problemas de alta especialización (monotonía). Para la baja especialización (demasiadas tareas o muy complejas) se podría simplificar o dividir el trabajo.
+
+70. El área de recursos humanos debe tener muy en cuenta los cambios tecnológicos que ocurren en el entorno ya que pueden afectar a la planificación de plantillas a corto y largo plazo.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+71. El reclutamiento externo mal gestionado puede producir endogamia en la organización.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La endogamia se produce más comúnmente por un reclutamiento interno excesivo o mal gestionado.
+
+72. En la planificación de RRHH, se hace un estudio sobre las fuerzas del mercado.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. La planificación de RRHH puede incluir un estudio de las fuerzas del mercado, como la disponibilidad de trabajadores calificados en una determinada área o industria.
+
+73. La ruptura laboral voluntaria: dimisión, jubilación y jubilación anticipada.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+74. La entrevista es el método más común en la selección de personal, aunque es una prueba imprecisa y subjetiva.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+75. El outdoor training es una formación mayoritariamente teórica que se imparte al aire libre para adquirir conocimientos más que habilidades y actitudes.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Es una formación de carácter práctico en la que se adquieren habilidades individuales y grupales al aire libre.
+
+76. Se denomina empleabilidad a la sucesión de actividades y puestos de trabajo desempeñados por una persona a lo largo de su vida, así como las actitudes y reacciones asociadas que experimenta.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Esa definición se corresponde con la carrera profesional.
+
+77. La excedencia debida a la asignación o elección para un cargo público o a la realización de funciones sindicales de ámbito provincial o superior se considera excedencia voluntaria.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Se trata de una excedencia obligatoria que las empresas siempre tienen que concederle al trabajador.
+
+78. Un ERE es un proceso sustractivo de reducción de plantilla y por tanto se trata de una ruptura laboral involuntaria.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+79. La autoevaluación es una fuente de evaluación del desempeño que sirve para incrementar el compromiso de los empleados pero que debe ser utilizada teniendo en cuenta los sesgos que conlleva.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+80. El buen ambiente laboral, la retroalimentación de la información y la flexibilidad laboral son considerados un tipo de remuneración indirecta.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Se considera retribución no financiera o emocional.
+
+81. Hay equidad individual si dos trabajadores que tienen el mismo puesto pero obtienen diferentes resultados en su desempeño no perciben lo mismo como recompensa.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+82. Es importante que los responsables de realizar un proceso de selección posean la ficha del puesto para el que se hace la selección. Dicha ficha debe recoger el profesiograma del puesto (también denominado especificación) donde se definen las tareas, obligaciones y responsabilidades que deben asumir quienes lo van a ocupar.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Cuando se definen las responsabilidades, tareas y obligaciones se denomina descripción.
+
+83. Si una empresa se encuentra en una situación de crisis debido por ejemplo a la entrada de un nuevo competidor en su sector que venda a precios mucho más baratos, es posible que el área de recursos humanos se tenga que enfrentar a problemas en la planificación de la plantilla y que la oferta de trabajo exceda a la demanda.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+84. La fiabilidad hace referencia al grado en que una técnica de selección mide el conocimiento, las habilidades o las capacidades requeridas por el perfil de un puesto.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Esa definición se corresponde con la validez.
+
+85. Las agencias privadas de colocación contratan de manera temporal a empleados para que realicen su trabajo en otra empresa con la que han llegado a un acuerdo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Eso lo realizan las ETT (Empresas de Trabajo Temporal).
+
+86. Los métodos de medición del rendimiento que son objetivos, también llamados de resultados, miden el rendimiento en función de lo que aporta la persona a la organización en base a su trabajo.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+87. Es necesario que el coach tenga experiencia en el área donde asesora al coachee para poder ayudarle a maximizar su potencial.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. No es necesario. En el caso del mentoring sí que es necesario que el mentor tenga experiencia en el área.
+
+88. Los programas que se utilizan para mejorar los conocimientos, habilidades y actitudes de la plantilla tanto para el trabajo actual como para el futuro son, en esencia, los mismos.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Los programas para mejorar las habilidades de los empleados pueden variar ampliamente dependiendo del objetivo, la audiencia y la empresa.
+
+89. Los grupos nominales es una técnica grupal de investigación social a distancia donde no existe presión de grupo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Es presencial y sí hay presión de grupo. La definición corresponde al método Delphi.
+
+90. El reclutamiento es el proceso mediante el cual se identifican, se atraen y se eligen a las personas idóneas para ocupar los puestos vacantes.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. No se eligen, se eligen en la selección.
+
+91. Una empresa que quiere amortizar la inversión en formación realizada en sus trabajadores debe realizar reclutamiento externo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Debe realizar reclutamiento interno porque ha formado a sus trabajadores.
+
+92. Una de las desventajas del reclutamiento interno es la pérdida de creatividad e innovación.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+93. Entre las fuentes de reclutamiento interno se encuentra las agencias públicas de empleo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Son una fuente de reclutamiento externo.
+
+94. Una de las razones para desarrollar correctamente el proceso de reclutamiento de personal es para disminuir la tasa de rotación externa de personal recién contratado.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+95. En la planificación de RRHH si la demanda de personal es menor que la oferta, la empresa podría optar por realizar despidos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+<!-- TEMA 3: La planificación de los RRHH -->
 
 1. En la planificación empresarial la empresa analiza la cualificación actual de la plantilla.
 
@@ -301,6 +1137,8 @@
     - (x) Verdadero
     - ( ) Falso
 
+    > Verdadero. Parte de la planificación de RRHH implica determinar si la fuerza laboral actual es suficiente o si es necesario iniciar procesos de reclutamiento y selección. 3. En la planificación de RRHH, se hace un estudio sobre las fuerzas del mercado. VERDADERO, La planificación de RRHH puede incluir un estudio de las fuerzas del mercado, como la disponibilidad de trabajadores calificados en una determinada área o industria.
+
 3. En la planificación de RRHH se hace un estudio sobre las fuerzas del mercado.
 
     - ( ) Verdadero
@@ -313,10 +1151,14 @@
     - (x) Verdadero
     - ( ) Falso
 
+    > Verdadero. Cuando la tasa de desempleo es alta, la oferta de trabajadores tiende a aumentar.
+
 5. Las jubilaciones son uno de los factores que modifican la demanda de personal.
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. Las jubilaciones pueden afectar la demanda de personal al reducir el número de empleados disponibles en la empresa.
 
 6. La demanda de RRHH de una empresa no se puede planificar.
 
@@ -336,6 +1178,8 @@
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. La planificación de RRHH es un proceso más completo y complejo que la planificación de plantillas, ya que implica considerar una amplia gama de factores y futuros posibles.
 
 9. El coste de un programa de outplacement o recolocación se descuenta de la indemnización de despido del empleado.
 
@@ -360,6 +1204,8 @@
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. Verdadero.
 
 13. La planificación de la sucesión permite tomar decisiones sobre las promociones internas.
 
@@ -439,7 +1285,315 @@
 
     > Verdadero. Es una excedencia forzosa/obligatoria que la empresa siempre debe conceder al trabajador.
 
-<!-- TEMA 4 y 5: Reclutamiento, selección y socialización -->
+25. En la planificación de RRHH, la empresa analiza sus negocios y recursos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. En la planificación de RRHH, la empresa debe considerar sus recursos, incluyendo sus empleados, y la naturaleza de sus operaciones.
+
+26. Ante situaciones de crisis económica, las empresas suelen hacer cambios en sus planificaciones de RRHH.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Las empresas a menudo deben adaptar sus planificaciones de RRHH en respuesta a las crisis económicas
+
+27. El programa de outplacement o recolocación es un programa creado para ayudar a los empleados despedidos a superar el estrés emocional del mismo y a ayudarle a buscar nuevo empleo
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Minimizar las demandas judiciales es uno de los beneficios de los programas de outplacement, aunque no su único objetivo.
+
+28. El coste de un programa de outplacement o recolocación es asumido por la empresa que despide al empleado.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Los costos de los programas de outplacement son normalmente cubiertos por la empresa que despide al empleado
+
+29. Con la planificación de RRHH, la empresa establece planes y programas para asegurarse el número de personal, con la cualificación necesaria, en los puestos adecuados y en el momento oportuno.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. La planificación de RRHH se centra en asegurar que la empresa tenga el personal adecuado, en los puestos correctos, con la formación necesaria y en el momento adecuado
+
+30. La administración del personal se preocupa por la planificación de plantilla.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. La planificación de la plantilla es una parte importante de la administración del personal.
+
+31. El programa de outplacement o recolocación tiene como objetivo minimizar las demandas judiciales que puedan interponer los trabajadores despedidos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+32. Para hacer una planificación de plantilla es necesario hacer un análisis de las necesidades de plantilla existentes.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+33. La limitación de la contratación es una medida a través de la cual se puede corregir el defecto en la oferta de personal.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Se corrige el exceso de oferta. El defecto de personal es cuando faltan trabajadores.
+
+34. La ruptura laboral voluntaria es: dimisión y despidos.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La ruptura laboral voluntaria generalmente implica la dimisión o la jubilación, pero no los despidos
+
+35. La ruptura laboral involuntaria: despidos y jubilaciones anticipadas o no.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. despidos individuales y colectivos o reducciones de plantilla.
+
+36. La ruptura laboral supone la desvinculación del empleado con la empresa que puede ser voluntaria o involuntaria.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+37. La excedencia es supresión laboral.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La excedencia no es supresión laboral, es un período temporal de ausencia del trabajo otorgado por el empleador.
+
+38. Los despidos son una ruptura laboral involuntaria.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+39. Entre las alternativas a la reducción de plantillas se proponen: contratar a nuevos empleados.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Contratar a nuevos empleados no es una alternativa a la reducción de la plantilla, sino más bien una acción contraproducente
+
+40. Entre las alternativas a la reducción de plantillas se proponen: renovar los contratos que finalizan.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Renovar contratos que finalizan no necesariamente sirve como una alternativa a la reducción de plantillas.
+
+41. Entre las alternativas a la reducción de plantillas se proponen: aumentar las horas extras.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La reducción de plantillas es la reducción personal para optimizar los costes del trabajador.
+
+42. Incentivar a los empleados a que voluntariamente tomen excedencias es una alternativa a la reducción de plantillas.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+43. Las auditorias de RRHH ofrecen un resumen de las habilidades y conocimientos de los empleados de la empresa.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+44. Las auditorías de RRHH ofrecen un análisis de la tasa de empleo de las empresas de un país.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Las auditorías de RRHH se centran en las prácticas de RRHH de la empresa, no en la tasa de empleo en todo el país.
+
+<!-- TEMA 4: Reclutamiento -->
+
+1. Aprovechar las inversiones de formación realizadas por otras empresas es una ventaja del reclutamiento externo.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Uno de los beneficios del reclutamiento externo es que los nuevos empleados pueden traer consigo habilidades y conocimientos adquiridos en otras empresas.
+
+2. El reclutamiento externo consiste en la búsqueda de candidatos potenciales o reales empleados en otras empresas.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. El reclutamiento externo implica buscar candidatos fuera de la empresa actual.
+
+3. Los candidatos propuestos por los empleados son una fuente de reclutamiento interno.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Los candidatos propuestos por los empleados son una fuente de reclutamiento externo.
+
+4. El reclutamiento externo mal gestionado produce endogamia en la organización.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La endogamia se produce con un reclutamiento INTERNO mal gestionado, al evitar la entrada de nuevos puntos de vista e ideas.
+
+5. El reclutamiento 3.0 se refiere al proceso clásico de reclutamiento que se realiza en las empresas.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El reclutamiento 3.0 utiliza la tecnología y las redes sociales.
+
+6. Entre las ventajas de las redes sociales para reclutar está su menor coste respecto al reclutamiento tradicional.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+7. Entre las ventajas de las redes sociales está la posibilidad de crear mala reputación para la empresa.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Crear mala reputación es un inconveniente, no una ventaja.
+
+8. El inventario de habilidades y las listas de ascensos son herramientas para hacer reclutamiento externo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Son herramientas de reclutamiento interno.
+
+9. Las agencias públicas de empleo son un método de reclutamiento externo.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+10. Entre las fuentes de reclutamiento interno se encuentran las empresas de trabajo temporal.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Las ETT son una fuente de reclutamiento externo.
+
+11. Entre las ventajas del reclutamiento externo se encuentra que atrae personal con nuevas ideas y formas de abordar los problemas organizativos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+12. Entre las ventajas del reclutamiento externo se encuentra que refuerza la motivación y el compromiso de los empleados.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Reforzar la motivación y el compromiso es una ventaja del reclutamiento interno.
+
+13. Entre las ventajas del reclutamiento externo se encuentra que el candidato ya posee conocimientos sobre la empresa y esta sobre él.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Eso es una ventaja del reclutamiento interno.
+
+14. El employer branding es el proceso por el cual las empresas buscan e identifican posibles candidatos para cubrir sus necesidades de empleo mediante las redes sociales.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El employer branding potencia la marca de buen empleador; es la imagen con la que se pretende atraer a posibles candidatos.
+
+15. Las agencias privadas de colocación contratan de manera temporal a empleados para que realicen su trabajo en otra empresa con la que han llegado a un acuerdo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Eso lo realizan las ETT (Empresas de Trabajo Temporal).
+
+16. El reclutamiento es un proceso único y no hay necesidad de revisar o mejorar constantemente las prácticas de reclutamiento de una empresa.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Es un proceso dinámico y continuo que debe revisarse y mejorarse para atraer y seleccionar a los mejores candidatos.
+
+17. El reclutamiento interno es cuando la empresa busca dentro de su misma empresa los candidatos para un puesto de trabajo.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. El reclutamiento interno es cuando una empresa busca candidatos para un puesto de trabajo dentro de su propia organización
+
+18. Entre las ventajas que tienen las redes sociales para hacer reclutamiento está el menor coste que tienen respecto al reclutamiento tradicional.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Las redes sociales pueden reducir el costo de reclutamiento en comparación con los métodos tradicionales.
+
+19. Entre las ventajas que tienen las redes sociales está la posibilidad de crear mala reputación para la empresa.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Aunque no es una ventaja, es cierto que las redes sociales pueden dañar la reputación de una empresa si no se usan de manera efectiva y responsable.
+
+20. Los avances tecnológicos todavía no han permitido automatizar partes de la fase de reclutamiento.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Los avances tecnológicos han permitido la automatización de algunas partes del proceso de reclutamiento.
+
+21. Entre las fuentes de reclutamiento interno se encuentra el reclutamiento por internet.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El reclutamiento por Internet puede ser tanto interno como externo, dependiendo de dónde se publique la oferta de trabajo.
+
+22. Entre las fuentes de reclutamiento interno se encuentran las agencias públicas de empleo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Las agencias públicas de empleo son una fuente de reclutamiento externo
+
+23. Entre las ventajas del reclutamiento externo se encuentra que refuerza la motivación y compromiso de los empleados.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El reclutamiento externo puede no necesariamente reforzar la motivación y el compromiso de los empleados actuales
+
+24. Entre las ventajas del reclutamiento externo se encuentra que aprovecha las inversiones realizadas por la propia empresa en formación.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Esta es una ventaja del reclutamiento interno.
+
+<!-- TEMA 5: Selección y socialización -->
 
 1. La socialización tiene un sentido predominantemente objetivo, ya que el proceso no se desarrolla en el individuo sino en la empresa.
 
@@ -448,10 +1602,12 @@
 
     > Falso. Es un proceso subjetivo, ya que depende de cada individuo.
 
-2. La socialización puede ser formal, es decir, orientada por la dirección.
+2. La socialización puede ser formal, es decir orientada por la dirección.
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. La socialización puede ser formal, con actividades y procesos estructurados por la dirección de la empresa para integrar a los nuevos empleados.
 
 3. La socialización formal se desarrolla fundamentalmente a través de los compañeros de trabajo.
 
@@ -465,167 +1621,156 @@
     - (x) Verdadero
     - ( ) Falso
 
-5. Aprovechar las inversiones de formación realizadas por otras empresas es una ventaja del reclutamiento externo.
+5. La selección es el conjunto de técnicas que permiten encontrar a las personas más adecuadas para desempeñar un puesto de trabajo.
 
     - (x) Verdadero
     - ( ) Falso
 
-6. El reclutamiento externo consiste en la búsqueda de candidatos potenciales o reales empleados en otras empresas.
-
-    - (x) Verdadero
-    - ( ) Falso
-
-7. Los candidatos propuestos por los empleados son una fuente de reclutamiento interno.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. Los candidatos propuestos por los empleados son una fuente de reclutamiento externo.
-
-8. El reclutamiento externo mal gestionado produce endogamia en la organización.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. La endogamia se produce con un reclutamiento INTERNO mal gestionado, al evitar la entrada de nuevos puntos de vista e ideas.
-
-9. La selección es el conjunto de técnicas que permiten encontrar a las personas más adecuadas para desempeñar un puesto de trabajo.
-
-    - (x) Verdadero
-    - ( ) Falso
-
-10. La selección es anterior al reclutamiento.
+6. La selección es anterior al reclutamiento.
 
     - ( ) Verdadero
     - (x) Falso
 
     > Falso. El orden es reclutamiento, selección y socialización.
 
-11. En el proceso de selección, las herramientas tienen que ser válidas y fiables.
+7. En el proceso de selección, las herramientas tienen que ser válidas y fiables.
 
     - (x) Verdadero
     - ( ) Falso
 
-12. La validez se refiere a la consistencia de la medida, normalmente a lo largo del tiempo pero también entre entrevistadores distintos.
+8. La validez se refiere a la consistencia de la medida, normalmente a lo largo del tiempo pero también entre entrevistadores distintos.
 
     - ( ) Verdadero
     - (x) Falso
 
     > Falso. Esa es la definición de fiabilidad. La validez es el grado en que una técnica mide los conocimientos, habilidades o capacidades requeridos por el perfil del puesto.
 
-13. Una técnica de selección es fiable si los resultados obtenidos al aplicarla son consistentes en el tiempo y entre entrevistadores.
+9. Una técnica de selección es fiable si los resultados obtenidos al aplicarla son consistentes en el tiempo y entre entrevistadores.
 
     - (x) Verdadero
     - ( ) Falso
 
-14. El reclutamiento 3.0 se refiere al proceso clásico de reclutamiento que se realiza en las empresas.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. El reclutamiento 3.0 utiliza la tecnología y las redes sociales.
-
-15. Entre las ventajas de las redes sociales para reclutar está su menor coste respecto al reclutamiento tradicional.
-
-    - (x) Verdadero
-    - ( ) Falso
-
-16. Entre las ventajas de las redes sociales está la posibilidad de crear mala reputación para la empresa.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. Crear mala reputación es un inconveniente, no una ventaja.
-
-17. Los impresos de biodatos son una versión detallada de la solicitud en la que los candidatos contestan a una serie de preguntas sobre su salud.
+10. Los impresos de biodatos son una versión detallada de la solicitud en la que los candidatos contestan a una serie de preguntas sobre su salud.
 
     - ( ) Verdadero
     - (x) Falso
 
     > Falso. Recogen antecedentes, experiencias y preferencias, e intentan valorarlas como predictores del comportamiento.
 
-18. Los juegos de empresas, las entrevistas y los assessment centres son técnicas de selección.
+11. Los juegos de empresas, las entrevistas y los assessment centres son técnicas de selección.
 
     - (x) Verdadero
     - ( ) Falso
 
-19. El inventario de habilidades y las listas de ascensos son herramientas para hacer reclutamiento externo.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. Son herramientas de reclutamiento interno.
-
-20. Las agencias públicas de empleo son un método de reclutamiento externo.
+12. La entrevista es el método más común en la selección de personal, aunque es una prueba imprecisa y subjetiva.
 
     - (x) Verdadero
     - ( ) Falso
 
-21. Entre las fuentes de reclutamiento interno se encuentran las empresas de trabajo temporal.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. Las ETT son una fuente de reclutamiento externo.
-
-22. Entre las ventajas del reclutamiento externo se encuentra que atrae personal con nuevas ideas y formas de abordar los problemas organizativos.
+13. Los tests psicotécnicos son medidas objetivas y estandarizadas que analizan capacidades (verbales, de razonamiento...) o aptitudes y personalidad de los candidatos (extroversión, honradez...).
 
     - (x) Verdadero
     - ( ) Falso
 
-23. Entre las ventajas del reclutamiento externo se encuentra que refuerza la motivación y el compromiso de los empleados.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. Reforzar la motivación y el compromiso es una ventaja del reclutamiento interno.
-
-24. Entre las ventajas del reclutamiento externo se encuentra que el candidato ya posee conocimientos sobre la empresa y esta sobre él.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. Eso es una ventaja del reclutamiento interno.
-
-25. La entrevista es el método más común en la selección de personal, aunque es una prueba imprecisa y subjetiva.
-
-    - (x) Verdadero
-    - ( ) Falso
-
-26. Los tests psicotécnicos son medidas objetivas y estandarizadas que analizan capacidades (verbales, de razonamiento...) o aptitudes y personalidad de los candidatos (extroversión, honradez...).
-
-    - (x) Verdadero
-    - ( ) Falso
-
-27. El employer branding es el proceso por el cual las empresas buscan e identifican posibles candidatos para cubrir sus necesidades de empleo mediante las redes sociales.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. El employer branding potencia la marca de buen empleador; es la imagen con la que se pretende atraer a posibles candidatos.
-
-28. El reclutamiento es la práctica de gestión de RRHH que se ocupa de introducir a los nuevos trabajadores en la organización, explicarles sus cometidos y presentarles a sus compañeros.
+14. El reclutamiento es la práctica de gestión de RRHH que se ocupa de introducir a los nuevos trabajadores en la organización, explicarles sus cometidos y presentarles a sus compañeros.
 
     - ( ) Verdadero
     - (x) Falso
 
     > Falso. Esa es la definición de socialización. El reclutamiento se encarga de captar y atraer candidatos.
 
-29. Las agencias privadas de colocación contratan de manera temporal a empleados para que realicen su trabajo en otra empresa con la que han llegado a un acuerdo.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. Eso lo realizan las ETT (Empresas de Trabajo Temporal).
-
-30. El reclutamiento es el proceso mediante el cual se identifican, se atraen y se eligen a las personas idóneas para ocupar los puestos vacantes.
+15. El reclutamiento es el proceso mediante el cual se identifican, se atraen y se eligen a las personas idóneas para ocupar los puestos vacantes.
 
     - ( ) Verdadero
     - (x) Falso
 
     > Falso. El reclutamiento identifica y atrae, pero no elige; la elección corresponde a la selección.
 
-<!-- TEMA 6 y 7: Formación y gestión de la carrera profesional -->
+16. Las empresas deben enfocarse en la contratación de empleados con habilidades técnicas y no preocuparse por la personalidad o las habilidades sociales.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La personalidad y las habilidades sociales (trabajo en equipo, resolución de problemas...) son esenciales para el éxito en el trabajo.
+
+17. La socialización puede ser informal, es decir, al margen de los conductos oficiales.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. La socialización puede ser informal, ocurriendo de manera natural a través de las interacciones cotidianas en el lugar de trabajo.
+
+18. Entre los diferentes métodos de orientación destacan: las charlas divulgativas, las visitas a las instalaciones y la entrega de manuales.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Las charlas divulgativas, las visitas a las instalaciones y la entrega de manuales son métodos comunes de orientación en el proceso de socialización.
+
+19. La selección es un proceso básico de la gestión de RRHH.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. La selección es un proceso fundamental en la gestión de los recursos humanos.
+
+20. La selección es el conjunto de técnicas que van a permitir encontrar las personas más adecuadas para desempeñar un puesto de trabajo.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. La selección implica el uso de diversas técnicas para identificar a las personas más adecuadas para un puesto.
+
+21. En el proceso de selección las pruebas de selección evalúan factores como aptitudes, personalidad, habilidades y motivación de los empleados potenciales.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Las pruebas de selección pueden evaluar una variedad de factores, incluyendo aptitudes, personalidad, habilidades y motivación.
+
+22. Para realizar un buen proceso de selección hay que elegir las técnicas y herramientas más adecuadas en cada caso.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Elegir las técnicas y herramientas más adecuadas es clave para un proceso de selección exitoso.
+
+23. La preselección es la primera etapa del proceso de selección.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. La preselección es a menudo la primera etapa del proceso de selección.
+
+24. En la selección secuencial con tres o más actos de decisión, se realizan al menos tres pruebas de selección de forma secuencial.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+25. En la entrevista de contratación se explica la oferta de trabajo que el candidato elegido podrá aceptar o rechazar.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+26. Los juegos de empresas y assessment centres son técnicas de selección.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+27. Los juegos de empresas, las entrevistas y assessment centres son técnicas de selección.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+<!-- TEMA 6: La formación de los RRHH -->
 
 1. Cuando para evaluar un programa de formación se analiza el impacto, se analizan los efectos de la formación en la empresa en cuanto a productividad, beneficios y desarrollo de la organización.
 
@@ -726,17 +1871,77 @@
 
     > Falso. Es una formación de carácter práctico en la que se adquieren habilidades individuales y grupales al aire libre.
 
-<!-- TEMA 8: Evaluación y gestión del rendimiento -->
+16. La capacitación y el desarrollo de los empleados no son importantes si un empleado tiene las habilidades técnicas necesarias para el trabajo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Son esenciales para el crecimiento profesional a largo plazo, independientemente de las habilidades técnicas.
+
+17. Cuando para evaluar un programa de formación se analiza el impacto quiere decir que se analizan los efectos de la formación en la empresa, en cuanto a productividad, beneficios y desarrollo de la organización.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+18. El coaching es una herramienta que ayuda a potenciar el desarrollo de las personas mediante un proceso de reflexión para identificar, incorporar o desarrollar nuevas habilidades y competencias, y también favorece el desarrollo de acciones para lograr un mejor desempeño actual y futuro.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. 3. Los programas que se utilizan para mejorar los conocimientos, habilidades y actitudes de la plantilla tanto para el trabajo actual como para el futuro son, en esencia, los mismos. Esta afirmación puede ser correcta o incorrecta dependiendo del contexto. Los programas para mejorar las habilidades de los empleados pueden variar ampliamente dependiendo del objetivo, la audiencia y la empresa
+
+19. El método 70-20-10 se basa en tres fuentes de información: aprendizaje experimental, interacción social y aprendizaje formal.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+20. La marca personal está compuesta por la sucesión de actividades laborales y puestos de trabajo desempeñados por una persona a lo largo de su vida, así como por las diferentes decisiones que ha tomado y las experiencias profesionales que ha tenido en el desempeño de esas tareas y puestos de trabajo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La marca personal es la percepción que tienen los demás de un individuo, basada en sus habilidades, logros, valores y reputación en su campo. No está compuesta necesariamente por la sucesión de actividades laborales o puestos de trabajo de la persona, aunque estos elementos pueden influir en la marca personal
+
+21. Uno de los beneficios indirectos de la formación es que incide de forma positiva en variables de recursos humanos como el compromiso y los niveles de rotación o absentismo. Esta afirmación es discutible. Algunas personas pueden considerar que los beneficios mencionados son indirectos porque son consecuencias de la formación, en lugar de ser su objetivo principal. Sin embargo, otras personas podrían considerarlos como beneficios directos porque son resultados concretos y medibles de la formación.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Ver apuntes del tema.
+
+22. La empleabilidad es una nueva habilidad de dirección que consiste en establecer unas redes de contacto profesional que permitan al empleado conocerse mejor a sí mismo y al negocio, escuchando y aprendiendo de otros.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Esta definición corresponde a la del Networking
+
+23. En la fase de premisas de la gestión de la carrera profesional se identifican las fortalezas y debilidades del empleado.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Es en la etapa de valoración.
+
+<!-- TEMA 7: Evaluación y gestión del rendimiento -->
 
 1. La evaluación del rendimiento es un proceso formal y sistemático.
 
     - (x) Verdadero
     - ( ) Falso
 
+    > Verdadero. Verdadero.
+
 2. La finalidad de la evaluación es ver si el trabajador es productivo y si podrá mejorar su rendimiento en el futuro.
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. 3. Los fines de la evaluación del rendimiento no son solo evaluar lo que no se hace bien, sino buscar la manera de mejorarlo. VERDADERO
 
 3. La evaluación del rendimiento es un proceso de 4 etapas.
 
@@ -761,6 +1966,8 @@
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. Verdadero.
 
 7. Los criterios subjetivos de evaluación del rendimiento valoran los comportamientos, actitudes y capacidades de los trabajadores en el desempeño de su labor.
 
@@ -813,6 +2020,8 @@
     - (x) Verdadero
     - ( ) Falso
 
+    > Verdadero. Verdadero.
+
 16. Los procesos sustractivos solo afectan a los procesos de evaluación y compensación, ya que se trata de una etapa final en la gestión de RRHH.
 
     - ( ) Verdadero
@@ -831,6 +2040,8 @@
 
     - (x) Verdadero
     - ( ) Falso
+
+    > Verdadero. Verdadero.
 
 19. Con la excedencia existe una desvinculación temporal del trabajador con la empresa que lleva a la extinción del contrato de trabajo.
 
@@ -863,7 +2074,194 @@
 
     > Falso. La evaluación del rendimiento está relacionada con la retribución (p. ej. incentivos ligados al desempeño).
 
-<!-- TEMA 9: La retribución en la empresa -->
+24. La retroalimentación positiva es la única forma efectiva de motivar a los empleados.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. También se pueden establecer metas desafiantes, recompensas y oportunidades de mejora.
+
+25. La evaluación del desempeño es una herramienta importante para identificar fortalezas y debilidades de los empleados.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+26. Lo más habitual es que sea el departamento de RRHH el encargado de realizar las evaluaciones a los empleados.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+27. La evaluación 360º es la evaluación a través de todos los medios. Este método es el más completo y complejo.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+28. La practicidad en las características que deberían cumplir los criterios de evaluación significa que tienen que ser medibles y si es posible, cuantitativos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+29. El método de categorización se basa en criterios absolutos y permiten evaluar al trabajador a través de factores que pueden ser más o menos aplicables.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+30. El método narrativo analiza la actuación o comportamiento de los empleados en el puesto de trabajo para detectar sus fortalezas, debilidades éxitos y fracasos. Permiten obtener una evaluación cualitativa.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+31. Los métodos con base en el desempeño pasado son: medidas de productividad e historial de logros.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+32. El método con base al desempeño futuro es la dirección o administración por objetivos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+33. El método con base al desempeño futuro es la dirección o administración por objetivos puede dar una perspectiva distorsionada del rendimiento. No se tienen en cuenta cuestiones como la calidad o el servicio.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+34. En el método objetivo o de resultados, la jerarquización tiene base en el pasado y el evaluador clasifica a los empleados a través de una escala de preferencias.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El método objetivo o de resultados se enfoca en lo que un empleado logra en términos de resultados concretos, y no necesariamente incluye una jerarquización basada en el pasado.
+
+35. El objetivo de la distribución forzosa es establecer diferentes grados de rendimiento entre empleados.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+36. Las listas de verificación o listas de revisión de conductas es útil como método complementario y permite obtener una información más general y simple que los métodos cuantitativos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+37. Las formas narrativas o ensayos narrativos tienen base en el pasado.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+38. Las formas narrativas o ensayos narrativos tienen base en el pasado permiten detectar características específicas de cada empleado, pero es demasiado subjetivo. Es útil como complemento a otros métodos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+39. Los incidentes críticos tienen base en el pasado y prestan especial atención al comportamiento.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+40. Los criterios de evaluación o assessment center son costosos en términos de tiempo y dinero, pero son muy adecuados para niveles directivos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+41. El efecto halo y eco es un error que se produce cuando el evaluador generaliza una característica específica del evaluado a todos los aspectos de la evaluación de desempeño, dando un resultado superior o inferior al que merece el empleado.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+42. El error de lenidad el evaluador quiere evitar problemas con los evaluados y lo que hace es calificar de forma indulgente dando, en general, una calificación más alta.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+43. Error de severidad se tiende a calificar de forma desfavorable por falta de experiencia del evaluador, desconocimiento de los factores de evaluación o para lograr impresionar a los superiores.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+44. En la gestión y mejora del rendimiento hay que identificar las causas de los problemas de rendimiento y tomar medidas para resolverlos, formular estrategias y planes de acción.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+45. En la gestión y mejora del una vez identificadas la causas se definen las estrategias disponibles y se establecen los planes de actuación para resolver el problema.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+46. Se proponen tres tipos de estrategias en la gestión y mejora del rendimiento: estrategias de reforzamiento positivo, negativo y estrategias en caso de que las anteriores no funcionen.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+47. En el tipo de entrevista mixta se combinan las de hablar y convencer con la solución de problemas, forma que la primera sirva para la evaluación y la segunda para la mejora.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+48. La retroalimentación o feedback permanente busca personalizar la evaluación y orientar el desarrollo de las capacidades hacia el logro de los objetivos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. 30. Los procesos sustractivos solamente afectan a los procesos de evaluación y compensación ya que se trata de una etapa final en el proceso de gestión de RRHH. FALSO, Los procesos sustractivos pueden afectar a todos los aspectos de la gestión de RRHH, no solo la evaluación y compensación.
+
+49. Los tipos de procesos sustractivos con los que nos podemos encontrar son la desvinculación voluntaria o involuntaria del trabajador.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Estos son los tipos de rupturas laborales
+
+50. Con la excedencia (supresión laboral) existe una desvinculación temporal del trabajador con la empresa, lo cual lleva a la extinción del contrato del trabajo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Implica la suspensión del contrato, no la extinción.
+
+<!-- TEMA 8: La retribución en la empresa -->
 
 1. Las empresas piensan que el principal motivante del trabajador es el dinero.
 
@@ -950,71 +2348,480 @@
     - (x) Verdadero
     - ( ) Falso
 
-<!-- TEMA 11: Diversidad, motivación y liderazgo -->
-
-1. La diversidad en el lugar de trabajo no tiene ningún impacto en la productividad de la empresa.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. La diversidad influye en los resultados: atrae perfiles variados que aportan innovación, creatividad y distintos puntos de vista.
-
-2. La motivación de los empleados es una función importante de la gestión de RRHH.
-
-    - (x) Verdadero
-    - ( ) Falso
-
-3. El liderazgo transformacional se enfoca en motivar y empoderar a los empleados para que alcancen su máximo potencial.
-
-    - (x) Verdadero
-    - ( ) Falso
-
-4. El acoso en el lugar de trabajo es un problema menor y no necesita ser abordado con seriedad.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. Es un problema grave que requiere atención y solución inmediata.
-
-5. El reclutamiento es un proceso único y no hay necesidad de revisar o mejorar constantemente las prácticas de reclutamiento de una empresa.
-
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. Es un proceso dinámico y continuo que debe revisarse y mejorarse para atraer y seleccionar a los mejores candidatos.
-
-6. Los beneficios laborales, como los seguros de salud y los planes de retiro, no son importantes para los empleados.
+16. Los beneficios laborales, como los seguros de salud y los planes de retiro, no son importantes para los empleados.
 
     - ( ) Verdadero
     - (x) Falso
 
     > Falso. La retribución indirecta (beneficios sociales) es muy importante: mantiene motivados a los empleados.
 
-7. La retroalimentación positiva es la única forma efectiva de motivar a los empleados.
+<!-- Examen Ordinario 2023 -->
 
-    - ( ) Verdadero
-    - (x) Falso
-
-    > Falso. También se pueden establecer metas desafiantes, recompensas y oportunidades de mejora.
-
-8. La evaluación del desempeño es una herramienta importante para identificar fortalezas y debilidades de los empleados.
+1. Dentro de los procesos sustractivos clasificaremos al ERTE como una suspensión del contrato de trabajo mientras que el ERE se clasificaría como una ruptura laboral.
 
     - (x) Verdadero
     - ( ) Falso
 
-9. Las empresas deben enfocarse en la contratación de empleados con habilidades técnicas y no preocuparse por la personalidad o las habilidades sociales.
+    > Verdadero. Verdadero. El ERTE es una suspensión temporal del contrato de trabajo (el vínculo contractual no se rompe y el trabajador tiene derecho a reincorporarse), mientras que el ERE es una ruptura laboral (despido colectivo o extinción del contrato).
+
+2. Los sistemas de retribución flexible consisten en cambiar parte monetaria del salario por productos o servicios ofrecidos por la empresa, obteniendo el trabajador una menor disponibilidad neta dineraria después de pagar los impuestos y los gastos personales.
 
     - ( ) Verdadero
     - (x) Falso
 
-    > Falso. La personalidad y las habilidades sociales (trabajo en equipo, resolución de problemas...) son esenciales para el éxito en el trabajo.
+    > Falso. La retribución flexible permite al trabajador cambiar parte de su salario monetario por productos y servicios con ventajas fiscales, lo que le otorga una mayor disponibilidad neta dineraria después de pagar impuestos y gastos personales.
 
-10. La capacitación y el desarrollo de los empleados no son importantes si un empleado tiene las habilidades técnicas necesarias para el trabajo.
+3. Si un trabajador se quiere incorporar tras haber disfrutado de dos años de excedencia por ocupar un cargo público, la empresa debe reincorporarlo en cuanto quede un puesto vacante.
 
     - ( ) Verdadero
     - (x) Falso
 
-    > Falso. Son esenciales para el crecimiento profesional a largo plazo, independientemente de las habilidades técnicas.
+    > Falso. La excedencia por ocupar un cargo público es forzosa. En la excedencia forzosa el trabajador tiene derecho de reserva de su puesto de trabajo, por lo que la reincorporación es inmediata al finalizar la excedencia, sin necesidad de esperar a que quede un puesto vacante.
+
+4. Los incentivos ofrecidos a un trabajador que se asocian al volumen de ventas que consiga es de carácter organizativo y persiguen el logro del principio de equidad interna.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Los incentivos por volumen de ventas individual son de carácter individual (no organizativo). Además, persiguen recompensar el rendimiento personal, no establecer equidad interna (que compara el valor de diferentes puestos de trabajo).
+
+5. El personal branding persigue la atracción y retención de talento valioso, reforzando así la marca de empleador de la empresa
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso. Quien persigue la atracción y retención de talento reforzando la marca de empleador de la empresa es el Employer Branding. El Personal Branding (marca personal) es desarrollado por el propio individuo para potenciar su carrera.
+
+6. Los trabajadores de la empresa ferronautica siempre han considerado que juan, el evaluador de desempeño de la fábrica de montaje, comete errores de primacía porque normalmente evalúa calificando de forma indulgente a todo el mundo para no tener problemas.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Lo descrito es el error de LENIDAD, no de primacía. El error de lenidad se produce cuando el evaluador califica por encima de lo real para evitar conflictos con los evaluados. El error de primacía ocurre cuando la primera información recibida sobre un empleado condiciona desproporcionadamente las evaluaciones posteriores.
+
+7. La equidad interna trata de reconocer las diferencias que puede haber entre individuos que tienen el mismo puesto, logrando que empleados con diferentes niveles de eficiencia no reciban la misma remuneración.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Lo descrito es la equidad individual (diferente remuneración por diferente rendimiento en el mismo puesto). La equidad interna compara la retribución entre diferentes puestos de trabajo dentro de la misma organización según el valor de cada puesto.
+
+8. Los métodos objetivos, también denominados basados en resultados, miden el rendimiento del trabajador en función de su desempeño final.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+9. Una de las razones por las que se debe desarrollar correctamente el proceso de reclutamiento de personal es para disminuir la tasa de rotación externa de personal recién contratado.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Reclutamiento de personal puede contribuir a disminuir la tasa de rotación externa de empleados recién contratados.
+
+10. La carrera profesional recoge la sucesión de actividades laborales y puestos de trabajo desempeñados por una persona dentro de una misma empresa.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La carrera profesional abarca toda la vida laboral de una persona, incluyendo puestos en diferentes empresas, no solo en una misma organización.
+
+11. Una prueba de selección tiene validez si logra tener una combinación de resultados a lo largo del tiempo independientemente de los seleccionados.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso. La consistencia de los resultados a lo largo del tiempo y entre evaluadores define la fiabilidad de la prueba, no su validez (que mide si la prueba evalúa realmente lo que pretende medir).
+
+12. El enriquecimiento del puesto se produce cuando se aumentan las tareas o funciones que corresponden a un puesto, manteniéndose inadecuados los niveles de responsabilidad, autonomía y control.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El enriquecimiento del puesto aumenta las tareas (expansión horizontal) y también la responsabilidad, autonomía y control (expansión vertical). Mantener las tareas y el bajo control se denomina ampliación del puesto.
+
+13. La técnica del DELPHI aplicada a la planificación RRHH, es una técnica cualitativa de carácter presencial en la que discute la evolución de la oferta y la demanda de RRHH de forma abierta facilitando al intercambiando de ideas para expertos en la materia
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La técnica Delphi es una técnica cualitativa no presencial y anónima, donde se recopilan opiniones de expertos mediante cuestionarios sucesivos para evitar la presión de grupo.
+
+14. La empresa TELECOM está realizando una reestructuración interna de su plantilla porque su oferta de recursos humanos es mayor que la demanda. Como medidas para realizar dicha reestructuración podría incrementar el número de horas entra de la plantilla y contratar trabajadores a través de los servicios de una empresa de trabajo temporal.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Si la oferta es mayor que la demanda, las medidas correctoras deben reducir plantilla (jubilaciones anticipadas, excedencias, reducción de jornada), no aumentarla con horas extra o nuevas contrataciones.
+
+15. La entrevista es una prueba de selección subjetiva e imprecisa.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+<!-- Examen Ordinario 2024 -->
+
+1. Los problemas derivados de un puesto con alto nivel de especialización pueden solucionarse a través de la simplificación del trabajo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso. Los problemas derivados de un puesto con alto nivel de especialización se solucionan a través de la ampliación del puesto de trabajo.
+
+2. Luis Montiel, nuevo vicerrector de la UGR de personal, está rediseñando los puestos de la entidad y esta elabrando nuevamente la descripción de los puestos de administración incluyendo en el documento las tareas, responsabilidades, obligaciones del puesto y las competencias básicas y características que deberían tener las personas que los vayan a ocupar.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso. En el rediseño no sería necesario volver a elaborar nuevamente el documento. Bastaría únicamente modificar aquellas cosas necesarias, es decir, realizar cambios y mejoras.
+
+3. Los análisis de puestos basados en las competencias se centran en determinar las capacidades o conductas que un empleado debe poseer para desempeñar bien el trabajo.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+4. Si una empresa identifica que su demanda de trabajo es menor que la oferta puedes solucionarlo contratando personal, subcontratando o amortizando puestos.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso. Si la demanda (previsión de las personas necesarias para cumplir los objetivos de la organización) es menor que la oferta (disponibilidad de trabajadores con la cualificación necesaria) significa que sobran puestos de trabajo. Esto si se podría solucionar amortizando puestos y además, limitando la contratación y reduciendo las horas de jornada laboral; pero no con la contratación o subcontratación de personal.
+
+5. La diferencia entre una ruptura laboral voluntaria y una ruptura laboral involuntaria es que la primera supone una interrupción temporal de la relación laboral y la segunda una interrupción definitiva.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso, ambas son definitivas. La diferencia es que en la ruptura laboral voluntaria es el empleado quien decide finalizar su relación con la empresa, mientras que en la involuntaria es la empresa .
+
+6. El outplacement es un programa creado para ayudar a los empleados despedidos a superar el estrés emocional producido por la pérdida de su trabajo y ofrecerles apoyo para encontrar uno nuevo, siendo su coste asumido por la empresa.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+7. Si una empresa necesita cubrir una vacante y quiere asegurarse un mayor índice de validez y seguridad, reducir la endogamia y aprovechar la inversión información de otras empresas, debería llevar a cabo un reclutamiento interno.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso. Para reducir la endogamia y aprovechar la inversión en formación de otras empresas sería necesario buscar el personal fuera de la empresa, es decir, reclutamiento externo.
+
+8. El Yield Ratio permite medir la eficacia del proceso de socialización y considera el tiempo transcurrido desde que el nuevo empleado entra en la empresa hasta que se encuentra totalmente integrado en la misma.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso, esa es la definición de Time lapse ratio. El Yield ratio mide la relación entre las solicitudes presentadas y las aceptadas.
+
+9. La excedencia debida hoy la designación o elección para un cargo público o a la realización defunciones sindicales de ámbito provincial o superior se considera excedencia forzosa.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+10. Además de la entrevista, existen otros métodos de selección de personal como el Networking, las sesiones de coaching y mentoring, las técnicas de simulación de trabajo y la técnica de outdoor training.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso, sólo es método de selección de personal la entrevista. El resto son métodos de formación.
+
+11. Para seleccionar a un nuevo contable, una empresa realiza una prueba en la que el candidato debe realizar un caso práctico de asientos contables. La prueba de selección utilizada se considera válida al ser el contenido de la prueba representativo el contenido del puesto.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+12. Como parte de su proceso de socialización, hoy una empresa ha organizado con antelación una jornada al aire libre en la que los nuevos empleados tendrán ocasión de interactuar con sus compañeros en un ambiente más distendido.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+13. A la hora de evaluar los programas de formación, el criterio de aprendizaje considera los resultados tangibles en productividad, calidad o ahorro de tiempo, entre otros, que han sido consecuencia de la formación.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso, esa es la definición del criterio de rendimiento, el de aprendizaje analiza si se han adquirido los conocimientos y habilidades planificados.
+
+14. El método 70-20-10 considera el tipo de formación que deben recibir los empleados y el peso de cada una, asignando un 70% a la formación teórica, un 20% a la formación online y un 10% a la formación fuera del puesto de trabajo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso, el 10% de su tiempo a cursos de formación presenciales y online (educación), el 20% a aprender de otras personas como compañeros, miembros de su equipo, mentores u otros profesionales (exposición) y el 70% del tiempo trabajando (experiencia).
+
+15. Cuando un directivo con varios años de experiencia en la empresa y especializado en temas de digitalización ejerce como mentor de un trabajador recién incorporado, se denomina Reverse Mentor.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso, los trabajadores más jóvenes tutorizan a los de mayor experiencia en aspectos novedosos como la digitalización donde los millenials son más experimentados que los seniors.
+
+16. Los criterios de valoración subjetivos son aquellos que evalúan el rendimiento de los empleados a través de las opiniones emitidas por un evaluador.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso, es en base a actitudes, comportamientos y capacidades.
+
+17. Juan es responsable de RRHH una empresa y acaba de promocionar a Julieta, su prima. Algunos compañeros se quejan de que en la evaluación se ha podido producir un error de primacía por las relaciones familiares que tienen ambas personas.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso, en el error de primacía se valora únicamente comportamientos o resultados recientes y se elimina la información anterior. Este sería un caso de lenidad.
+
+18. Hoy la introducción de cualquier tipo de incentivo asociado a la consecución de objetivos individuales, grupales u organizativos permite a la empresa cumplir con el principio de equidad interna.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso, la equidad interna establece una retribución justa realizando comparaciones salariales entre los puestos de trabajo de la organización, con la idea de que los individuos que están en el mismo nivel o con parecida responsabilidad reciban una retribución similar. Se podría aplicar únicamente a nivel grupal. La única forma de que se cumpla en los tres casos la equidad interna sería que la organización estuviera formada únicamente por un solo grupo, cuyos miembros TODOS tuvieran la misma responsabilidad, es decir, todos fueran iguales en la empresa.
+
+19. Una empresa ofrece a sus trabajadores como parte de su salario emocional, un sistema de retribución flexible, Que consiste en permitir a los trabajadores determinar cuántos días a la semana trabajarán desde casa.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso, en el sistema de retribución flexible se persigue pagar mejor a los empleados y de manera más eficiente permitiendo cambiar parte monetaria del salario por productos y servicios ofrecidos por la empresa. Además, pueden tener una mayor disponibilidad neta dineraria después de pagar los impuestos y los gastos personales. La flexibilidad laboral es un componente no financiero de la retribución.
+
+20. El buen ambiente laboral, la flexibilidad horaria y los tickets guardería son considerados un tipo de remuneración indirecta.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Falso, los tickets guardería sí son remuneración indirecta. Remuneración no financiera son el ambiente laboral, la flexibilidad laboral y las características del puesto.
+
+<!-- Exámenes anteriores -->
+
+1. La rotación de puestos es una técnica adecuada para rediseñar un puesto cuando se pretende solventar los problemas derivados de un bajo nivel de especialización.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La rotación de puestos se usa para resolver problemas de alto nivel de especialización (monotonía, exceso de rutina), no de bajo nivel.
+
+2. La presión de un grupo se produce al utilizar la técnica Delphi en la planificación de recursos humanos, puede hacer que las valoraciones realizadas por los expertos sean menos de lo esperado.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Ese efecto ocurre en la técnica de Grupo Nominal, donde el debate cara a cara puede crear presión. La técnica Delphi es anónima precisamente para evitarlo.
+
+3. La empresa DANONE está realizando una reestructuración interna de su plantilla porque su oferta de recursos humanos es actualmente mayor que su demanda. Para realizar dicha reestructuración podría aplicar una reducción de jornada laboral a un porcentaje de sus trabajadores y promover jubilaciones anticipadas.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Cuando la oferta supera a la demanda, las empresas deben reducir plantilla. La reducción de jornada y las jubilaciones anticipadas son alternativas válidas a los despidos.
+
+4. La previsión de la demanda de recursos humanos se puede realizar utilizando tanto métodos cuantitativos, como, por ejemplo, el análisis de tendencias, como métodos cualitativos, como el diagrama de dispersión.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El análisis de tendencias Y el diagrama de dispersión son ambos métodos cuantitativos. Los métodos cualitativos incluyen el Delphi, la técnica de grupo nominal o el juicio de expertos.
+
+5. El reclutamiento es la práctica de gestión de RRHH que se ocupa de introducir a los nuevos trabajadores en la organización, explicarles los cometidos de sus puestos y presentarles a otras personas con las que van a trabajar.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Esa es la definición de socialización. El reclutamiento es el proceso de identificar y atraer candidatos potenciales para cubrir una vacante.
+
+6. El employer branding es el proceso por el cual las empresas buscan e identifican los posibles candidatos para cubrir sus necesidades internas de empleo mediante las redes sociales.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Esa descripción corresponde al reclutamiento 3.0. El employer branding consiste en potenciar la marca de la empresa como buen empleador para atraer y retener talento.
+
+7. El reclutamiento externo mal gestionado produce endogamia en la organización.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La endogamia se produce por un reclutamiento interno mal gestionado, al seleccionar siempre dentro de los mismos grupos cerrados sin incorporar perspectivas externas.
+
+8. Los tests psicotécnicos son medidas objetivas y estandarizadas que analizan determinadas capacidades (verbales, de razonamiento...) o aptitudes y personalidad de los candidatos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero. Los tests psicotécnicos son instrumentos estandarizados que permiten medir de forma objetiva aptitudes cognitivas y rasgos de personalidad relevantes para el puesto.
+
+9. La socialización formal se desarrolla fundamentalmente a través de los compañeros de trabajo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La socialización informal es la que se desarrolla a través de los compañeros de trabajo, de forma espontánea. La formal es la orientada y planificada por la dirección.
+
+10. Una técnica de selección es fiable si los resultados obtenidos al aplicarla son consistentes en el tiempo y entre entrevistadores.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero. La fiabilidad se refiere a la consistencia de la medida: que aplicada en diferentes momentos o por diferentes evaluadores, produzca resultados similares.
+
+11. Mientras que la formación está más orientada a preparar al trabajador para el futuro, el desarrollo se centra en las necesidades formativas actuales de los individuos de la organización.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Es exactamente al revés: la formación se orienta a las necesidades actuales del puesto, mientras que el desarrollo tiene un horizonte a largo plazo para preparar al empleado para roles futuros.
+
+12. El mentor es un profesional experimentado de la organización que guía a otro empleado con especial talento.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero. El mentoring consiste en que un profesional senior y experimentado guía y apoya el desarrollo profesional de un empleado con potencial.
+
+13. La carrera profesional recoge la sucesión de actividades laborales y puestos desempeñados por una persona dentro de una misma empresa.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La carrera profesional abarca toda la vida laboral de la persona, incluyendo puestos en diferentes empresas, no solo en una misma organización.
+
+14. El desarrollo de una marca personal adecuada permite a las empresas incrementar su capacidad para atraer y retener a trabajadores altamente cualificados.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Esa es la definición de employer branding. La marca personal (personal branding) es la imagen que proyecta el propio empleado, no la empresa.
+
+15. La suspensión del contrato de trabajo, como puede ser una jubilación o una dimisión, se produce cuando se interrumpe temporalmente la prestación laboral entre el trabajador y la empresa.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La jubilación y la dimisión son rupturas definitivas del contrato (extinción), no suspensiones temporales. La suspensión implica que la relación laboral se interrumpe temporalmente pero se mantiene el vínculo contractual.
+
+16. A la hora de evaluar el rendimiento, el efecto halo se produce cuando el evaluador quiere evitar problemas con los evaluados y tiende a calificar de forma indulgente, dando una mayor calificación de la que realmente merece.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Esa es la definición del error de lenidad. El efecto halo se produce cuando el evaluador generaliza una característica positiva o negativa del evaluado a todos los aspectos de la evaluación.
+
+17. Los criterios subjetivos de evaluación del rendimiento valoran los comportamientos, actitudes y capacidades de los trabajadores en el desempeño de su labor.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero. Los criterios subjetivos incluyen la valoración de comportamientos, actitudes y capacidades, a diferencia de los criterios objetivos que se basan en resultados medibles.
+
+18. La flexibilidad laboral, las prestaciones sociales y el clima laboral se consideran tipos de retribución no financiera.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Las prestaciones sociales (seguros, planes de pensiones...) son retribución financiera indirecta. La flexibilidad laboral y el clima laboral sí son elementos de retribución no financiera o emocional.
+
+19. Existe equidad individual retributiva si dos individuos que ocupan un puesto similar pero que no contribuyen de forma similar a la organización, no reciben la misma retribución.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero. La equidad individual o personal reconoce las diferencias de rendimiento y contribución entre empleados del mismo puesto, retribuyendo de forma diferente según su desempeño.
+
+20. La presión de grupo que se produce al utilizar la técnica Delphi en la planificación de recursos humanos, puede hacer que las valoraciones realizadas por los expertos sean menos precisas de lo esperado.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La presión de grupo se produce en la técnica de grupo nominal. En la técnica Delphi pueden surgir problemas al integrar las opiniones de los expertos, pero no típicamente por presión de grupo directa.
+
+21. El reclutamiento es la práctica de gestión de recursos humanos que se ocupa de introducir a los nuevos trabajadores en la organización, explicarles los cometidos de sus puestos y presentarles a otras personas con las que van a trabajar.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Esta descripción corresponde a la socialización u onboarding. El reclutamiento se encarga de la búsqueda y atracción de candidatos.
+
+22. La diversidad en el lugar de trabajo no tiene ningún impacto en la productividad de la empresa.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La diversidad, bien gestionada, puede tener un impacto positivo en la productividad, la innovación y la atracción de talento.
+
+23. La motivación de los empleados es una función importante de la gestión de recursos humanos.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+24. El liderazgo transformacional se enfoca en motivar y empoderar a los empleados para que alcancen su máximo potencial.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+25. El acoso en el lugar de trabajo es un problema menor y no necesita ser abordado con seriedad.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El acoso laboral es un problema grave que requiere atención y solución inmediata por parte de la empresa.
+
+26. El reclutamiento es un proceso único y no hay necesidad de revisar o mejorar constantemente las prácticas de reclutamiento de una empresa.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. El reclutamiento es un proceso dinámico y continuo que debe ser revisado y mejorado constantemente para asegurar su efectividad.
+
+27. Los beneficios laborales, como los seguros de salud y los planes de retiro, no son importantes para los empleados.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Los beneficios laborales (retribución indirecta) son muy importantes para los empleados y contribuyen a su motivación y retención.
+
+28. La retroalimentación positiva es la única forma efectiva de motivar a los empleados.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La retroalimentación positiva es importante, pero no la única forma. También se pueden usar metas desafiantes, recompensas, oportunidades de mejora y retroalimentación constructiva.
+
+29. La evaluación del desempeño es una herramienta importante para identificar fortalezas y debilidades de los empleados.
+
+    - (x) Verdadero
+    - ( ) Falso
+
+    > Verdadero. Verdadero.
+
+30. Las empresas deben enfocarse en la contratación de empleados con habilidades técnicas y no preocuparse por la personalidad o habilidades sociales.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. Tanto las habilidades técnicas como las habilidades sociales (personalidad, trabajo en equipo, comunicación) son cruciales para el éxito en el trabajo.
+
+31. La capacitación y el desarrollo de los empleados no son importantes si un empleado tiene las habilidades técnicas necesarias para el trabajo.
+
+    - ( ) Verdadero
+    - (x) Falso
+
+    > Falso. La capacitación y el desarrollo son importantes para todos los empleados para su crecimiento profesional a largo plazo y para adaptarse a los cambios.
 
 <!-- Tipo TEST (opción múltiple) -->
 
