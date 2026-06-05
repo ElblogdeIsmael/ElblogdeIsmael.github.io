@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>md2html · Conversor Markdown → Test HTML interactivo | El Blog de Ismael</title>
+  <meta name="description" content="Convierte apuntes en Markdown en tests HTML autocorregibles e interactivos. Arrastra tu archivo .md, elige tema y opciones, y descarga el examen listo. Gratis, sin instalar nada, funciona en el navegador." />
+  <meta name="keywords" content="markdown a html, conversor markdown, test html, examen interactivo, autocorregible, md2html, generador de tests, apuntes, estudiar, Ismael Sallami, elblogdeismael" />
+  <meta name="author" content="Ismael Sallami" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://elblogdeismael.github.io/md2html/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:url" content="https://elblogdeismael.github.io/md2html/" />
+  <meta property="og:title" content="md2html · Conversor Markdown → Test HTML interactivo" />
+  <meta property="og:description" content="Arrastra un .md y descarga un test HTML autocorregible con explicaciones, modo examen y modo oscuro. Sin instalar nada." />
+  <meta property="og:image" content="https://elblogdeismael.github.io/md2html/assets/og-image.svg" />
+  <meta property="og:site_name" content="El Blog de Ismael" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="md2html · Conversor Markdown → Test HTML interactivo" />
+  <meta name="twitter:description" content="Arrastra un .md y descarga un test HTML autocorregible. Gratis y en el navegador." />
+  <meta name="twitter:image" content="https://elblogdeismael.github.io/md2html/assets/og-image.svg" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- Google Analytics (mismo dominio del blog) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5W0LVJ83W7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5W0LVJ83W7');
+  </script>
+
+  <!-- JSON-LD: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "md2html — Conversor Markdown a Test HTML",
+    "url": "https://elblogdeismael.github.io/md2html/",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any (navegador web)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "inLanguage": "es",
+    "author": { "@type": "Person", "name": "Ismael Sallami" },
+    "description": "Convierte archivos Markdown en tests HTML interactivos y autocorregibles, con explicaciones, modo examen, modo oscuro y varias plantillas. Funciona íntegramente en el navegador."
+  }
+  </script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="https://elblogdeismael.github.io/">
+      <span class="brand-mark">&lt;/&gt;</span>
+      <span>El Blog de Ismael</span>
+    </a>
+    <nav class="header-links">
+      <a href="https://elblogdeismael.github.io/">Inicio</a>
+      <a href="https://github.com/Ismael-Sallami/md2html" target="_blank" rel="noopener">GitHub</a>
+      <button id="theme-toggle" class="ghost-btn" title="Cambiar tema de la página">🌙</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge">100% en tu navegador · sin subir nada · gratis</div>
+    <h1>Convierte tu <span class="grad">Markdown</span> en un <span class="grad2">test interactivo</span></h1>
+    <p class="hero-sub">
+      Arrastra un archivo <code>.md</code>, elige el tema y las opciones, y descarga un examen
+      HTML <strong>autocorregible</strong> con explicaciones, modo examen, modo oscuro, fórmulas
+      LaTeX y código resaltado. Mismo motor que la app de escritorio
+      <a href="https://github.com/Ismael-Sallami/md2html" target="_blank" rel="noopener">md2html</a>.
+    </p>
+  </section>
+
+  <main class="app">
+    <!-- ============ PANEL IZQUIERDO: controles ============ -->
+    <section class="panel controls" aria-label="Opciones de conversión">
+      <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Soltar o elegir archivo Markdown">
+        <input type="file" id="file-input" accept=".md,.markdown,text/markdown" hidden />
+        <div class="dz-inner">
+          <div class="dz-icon">📄⤵</div>
+          <p class="dz-title">Arrastra tu archivo <code>.md</code> aquí</p>
+          <p class="dz-or">o <span class="link">haz clic para buscarlo</span></p>
+          <button type="button" id="btn-ejemplo" class="ghost-btn small">✨ Probar con un ejemplo</button>
+        </div>
+        <div id="file-status" class="file-status" hidden>
+          <span id="file-name" class="fname"></span>
+          <span id="q-count" class="badge"></span>
+          <button type="button" id="btn-clear" class="ghost-btn small">Quitar</button>
+        </div>
+      </div>
+
+      <details class="group" open>
+        <summary>🎨 Tema / plantilla</summary>
+        <div class="group-body">
+          <div id="theme-grid" class="theme-grid"></div>
+        </div>
+      </details>
+
+      <details class="group" open>
+        <summary>⚙️ Opciones</summary>
+        <div class="group-body">
+          <label class="switch">
+            <input type="checkbox" id="opt-secciones" checked />
+            <span>Usar secciones <code>&lt;!-- Título --&gt;</code></span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="opt-shuffle" checked />
+            <span>Desordenar preguntas</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="opt-examen" />
+            <span>Activar modo examen al abrir</span>
+          </label>
+        </div>
+      </details>
+
+      <details class="group">
+        <summary>📝 Metadatos (opcional)</summary>
+        <div class="group-body">
+          <p class="hint">Si tu Markdown ya los trae, se respetan. Rellena solo para sobreescribir.</p>
+          <label class="field"><span>Título</span><input type="text" id="meta-titulo" placeholder="Se toma de la primera línea # ..." /></label>
+          <label class="field"><span>Autor</span><input type="text" id="meta-autor" placeholder="Desconocido" /></label>
+          <label class="field"><span>Titulación</span><input type="text" id="meta-titulacion" placeholder="" /></label>
+          <label class="field"><span>Descripción</span><input type="text" id="meta-desc" placeholder="" /></label>
+        </div>
+      </details>
+
+      <div class="actions">
+        <button id="btn-download" class="primary-btn" disabled>⬇ Descargar HTML</button>
+        <button id="btn-copy" class="secondary-btn" disabled>📋 Copiar</button>
+      </div>
+      <p id="toast" class="toast" hidden></p>
+    </section>
+
+    <!-- ============ PANEL DERECHO: vista previa ============ -->
+    <section class="panel preview" aria-label="Vista previa">
+      <div class="preview-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="preview-title">Vista previa en vivo</span>
+        <button id="btn-reload" class="ghost-btn small" title="Regenerar">↻</button>
+      </div>
+      <div id="preview-empty" class="preview-empty">
+        <div class="pe-icon">🧪</div>
+        <p>Carga un archivo <code>.md</code> para ver aquí tu test generado.</p>
+        <p class="pe-sub">Todo ocurre en tu equipo: tu archivo nunca se sube a ningún servidor.</p>
+      </div>
+      <iframe id="preview-frame" title="Vista previa del test" hidden></iframe>
+    </section>
+  </main>
+
+  <section class="howto">
+    <h2>¿Qué formato debe tener el Markdown?</h2>
+    <div class="howto-grid">
+      <div class="card">
+        <h3>Preguntas y opciones</h3>
+<pre><code>1. ¿Capital de Francia?
+   - ( ) Berlín
+   - (x) París
+   - ( ) Roma
+&gt; París es la capital desde 987.</code></pre>
+        <p><code>(x)</code> marca la opción correcta. <code>&gt;</code> añade una explicación.</p>
+      </div>
+      <div class="card">
+        <h3>Secciones y metadatos</h3>
+<pre><code># Mi examen
+- **Autor:** Ismael
+- **Titulación:** GII+ADE
+
+&lt;!-- Tema 1 --&gt;
+1. Primera pregunta...</code></pre>
+        <p>Los comentarios HTML crean secciones; los metadatos rellenan la cabecera.</p>
+      </div>
+      <div class="card">
+        <h3>Soporta de todo</h3>
+        <ul>
+          <li>Fórmulas LaTeX <code>$$...$$</code> (MathJax)</li>
+          <li>Código con resaltado (highlight.js)</li>
+          <li>Tablas, imágenes, negrita, listas…</li>
+          <li>Varias preguntas correctas a la vez</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>
+      Hecho por <a href="https://github.com/Ismael-Sallami" target="_blank" rel="noopener">Ismael Sallami</a> ·
+      Código: <a href="https://github.com/Ismael-Sallami/md2html" target="_blank" rel="noopener">github.com/Ismael-Sallami/md2html</a> ·
+      Parte de <a href="https://elblogdeismael.github.io/">El Blog de Ismael</a>
+    </p>
+  </footer>
+
+  <!-- Markdown engine (equivalente a python-markdown 'extra') -->
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/converter.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
