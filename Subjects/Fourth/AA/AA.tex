@@ -1,0 +1,1715 @@
+% ========================
+% estilo.latex mínimo funcional
+% ========================
+
+\documentclass[12pt]{book} % report para capítulos
+
+% ========================
+% Paquetes y comandos extra
+% ========================
+\input{../../../extraFiles/preambulos_oficiales/paquetes.tex}  % si tienes paquetes personalizados
+\input{../../../extraFiles/preambulos_oficiales/comandos.tex}  % comandos LaTeX propios
+\input{../../../extraFiles/preambulos_oficiales/estilos.tex}   % estilos de secciones, etc.
+
+% ========================
+% Configuración índice y listas
+% ========================
+\setlength{\cftbeforesecskip}{5pt}
+\setlength{\headheight}{14pt}  % un poco más que 13.6pt
+
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+
+% Fix para listas de Pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+%===============
+% ESPACIOS
+%===============
+
+% --- Compactar secciones ---
+\titlespacing*{\section}{0pt}{1.2ex plus 0.5ex minus 0.2ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{1ex plus 0.3ex minus 0.2ex}{0.5ex}
+
+% --- Compactar flotantes (figuras/tablas) ---
+\setlength{\textfloatsep}{8pt}
+\setlength{\intextsep}{6pt}
+\setlength{\floatsep}{6pt}
+
+% --- Compactar listas ---
+\setlist{nosep}
+
+% --- Espacio entre párrafos ---
+\setlength{\parskip}{4pt}
+
+
+
+%=======================
+% fancy with parameters
+%=======================
+%\fancyfoot[L]{\scriptsize\itshape Aprendizaje Automático}
+\fancyfoot[L]{\normalsize Aprendizaje
+Automático} % pie de página izquierdo con tamaño normal
+
+\setcounter{tocdepth}{1} % Muestra solo hasta subsecciones en el índice
+
+%=======================
+% reset chapter 0 with one more \part
+%=======================
+
+\makeatletter
+\@addtoreset{chapter}{part}
+\makeatother
+
+
+% ========================
+% Inicio del documento
+% ========================
+\begin{document}
+
+% Cambiar puntos suspensivos en el índice
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% Ajustar formato de secciones y subsecciones en el índice
+\renewcommand{\cftsecfont}{\bfseries} % Secciones en negrita
+\renewcommand{\cftsecpagefont}{\bfseries} % Números de página en negrita para secciones
+\renewcommand{\cftsubsecfont}{\normalfont} % Subsecciones en formato normal
+\renewcommand{\cftsubsecpagefont}{\normalfont} % Números de página en formato normal para subsecciones
+
+% Espaciado entre entradas del índice
+\setlength{\cftbeforesecskip}{8pt} % Espaciado antes de secciones
+\setlength{\cftbeforesubsecskip}{4pt} % Espaciado antes de subsecciones
+
+
+
+%\input{portada}
+
+
+%==========================
+% PORTADA: ENTRADA MANUAL
+%==========================
+
+% portada.tex
+\begin{titlepage}
+    \newgeometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm} % márgenes personalizados
+    
+    % Fondo con transparencia (solo si existe el fichero)
+    \begin{tikzpicture}[remember picture,overlay]
+        % \node[opacity=0.15,inner sep=0pt] at (current page.center)
+        \IfFileExists{../../../extraFiles/img/fondo_info.jpg}{%
+            \node[inner sep=0pt] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{../../../extraFiles/img/fondo_info.jpg}};
+        }{}
+    \end{tikzpicture}
+
+    % Definir color de texto de portada según existencia de fondo
+    \IfFileExists{../../../extraFiles/img/fondo_info.jpg}{%
+        \newcommand{\portadacolor}{white}
+    }{%
+        \newcommand{\portadacolor}{black}
+    }
+
+    % Contenido de la portada
+    \begin{center}
+        \vspace*{2cm}
+        
+        \vspace{5cm} % Añadir más espacio antes del contenido
+        {\Huge \bfseries\scshape\textcolor{\portadacolor}{Aprendizaje
+Automático} \par}
+        \vspace{0.5cm}
+        {\Large \itshape\textcolor{\portadacolor}{Apuntes de la
+asignatura} \par}
+        \vspace{0.5cm}
+        % {\small \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
+        % {\small \itshape \href{https://elblogdeismael.github.io}{https://elblogdeismael.github.io} \par}
+
+
+        \vfill
+        
+        % {\LARGE Ismael Sallami Moreno \par}
+
+        \begin{flushright}
+            {\textcolor{\portadacolor}{Ismael Sallami Moreno} \par}
+            {\textcolor{\portadacolor}{Recursos Ingeniería Informática y Ade} \par}
+            % {\small \itshape \href{https://elblogdeismael.github.io}{Recursos Ingeniería Informática y Ade} \par}
+        \end{flushright}
+        \vspace{0.3cm}
+        % {\Large Universidad de Granada \par}
+        
+        % \vspace{1cm}
+        % \includegraphics[width=0.25\textwidth]{../../../extraFiles/img/ugr.png} % opcional: logo
+        % \vspace{1cm}
+        
+        % {\large \today}
+    \end{center}
+    
+    \restoregeometry
+\end{titlepage}
+
+
+%==========================
+% LICENCIA
+%==========================
+
+\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=south west, xshift=1cm, yshift=1cm] at (current page.south west) {
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft}
+\section*{Licencia}
+
+Este trabajo está bajo una 
+\href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Licencia Creative Commons BY-NC-ND 4.0}.
+
+\bigskip
+
+Permisos: Se permite compartir, copiar y redistribuir el material en cualquier medio o formato.
+
+\bigskip
+
+Condiciones: Es necesario dar crédito adecuado, proporcionar un enlace a la licencia e indicar si se han realizado cambios. No se permite usar el material con fines comerciales ni distribuir material modificado.
+
+\bigskip
+
+\begin{center}
+  \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[width=0.35\textwidth]{../../../extraFiles/img/by-nc-nd.png}}
+\end{center}
+\end{flushleft}
+\end{minipage}
+};
+\end{tikzpicture}
+
+\thispagestyle{empty}
+\clearpage
+
+%==========================
+% AUTOR
+%==========================
+
+% Página del autor
+\begin{center}
+    \vspace*{3cm} % Añadir más espacio en la parte superior
+    {\Huge Aprendizaje
+Automático}\\[2cm] % Incrementar el espacio entre líneas
+    {\Large Ismael Sallami Moreno}\\[1cm] % Incrementar el espacio entre líneas
+    % \includegraphics[width=0.3\textwidth]{autor.jpg} % opcional foto
+    \vfill % Añadir espacio flexible para centrar verticalmente
+    {\small \itshape \href{https://elblogdeismael.github.io}{https://elblogdeismael.github.io}}
+\end{center}
+\thispagestyle{empty}
+
+% Página en blanco sin estilo
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+% Otra página en blanco sin estilo
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+
+%==========================
+% BIOGRAFÍA
+%==========================
+
+% Breve descripción del autor
+% \chapter*{Biografía}
+% \addcontentsline{toc}{chapter}{Biografía} % aparece en índice
+% Aquí escribes una breve descripción sobre ti, tu formación, experiencia, etc.
+% \cleardoublepage
+
+
+% \input{../../../extraFiles/preambulos_oficiales/licencia.tex}  % licencia
+% \thispagestyle{empty} % quitar número de página en la portada
+% \clearpage
+
+% --- Índice ---
+\cleardoublepage
+\phantomsection
+\addtocontents{toc}{\protect\thispagestyle{plain}}%
+\tableofcontents
+% \listoffigures
+\clearpage
+\thispagestyle{plain} % mostrar encabezado en la página del índice
+
+%\listoftables
+%\clearpage
+%\thispagestyle{empty} % quitar número de página en la portada
+%\clearpage
+%
+% Índice de código
+%\renewcommand{\lstlistlistingname}{Índice de Código}
+%\lstlistoflistings
+%\clearpage
+%
+% Índice de ecuaciones
+%\renewcommand{\listtheoremname}{Índice de Ecuaciones}
+%\listoftheorems[ignoreall,show={equation}]
+%\clearpage
+
+% --- Contenido Markdown generado por Pandoc ---
+\hypertarget{teoruxeda}{%
+\chapter{Teoría}\label{teoruxeda}}
+
+\begin{quote}
+Repaso completo orientado a examen tipo test. Cada término clave aparece
+en \textbf{negrita} con su definición. Redacción impersonal, sin
+relleno.
+\end{quote}
+
+\hypertarget{tema-1.-conceptos-buxe1sicos}{%
+\section{Tema 1. Conceptos básicos}\label{tema-1.-conceptos-buxe1sicos}}
+
+\hypertarget{quuxe9-es-el-aprendizaje-automuxe1tico-aa}{%
+\subsection{1. ¿Qué es el Aprendizaje Automático
+(AA)?}\label{quuxe9-es-el-aprendizaje-automuxe1tico-aa}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Definición clásica (Arthur Samuel, 1959):} ciencia y arte de
+  programar ordenadores para que aprendan de los datos sin ser
+  programados explícitamente.
+\item
+  \textbf{Definición de ingeniería (Tom Mitchell, 1997):} un programa
+  aprende de la \textbf{experiencia E}, respecto a una \textbf{tarea T}
+  y una \textbf{medida de rendimiento P}, si su rendimiento en T (medido
+  por P) mejora con la experiencia E.
+\item
+  \textbf{Formalización:} consiste en estimar una función \(f(x, w)\)
+  que minimice el riesgo o pérdida promedio sobre un conjunto de datos
+  de entrenamiento \((x_i, y_i)\).
+\item
+  \textbf{¿Cuándo conviene usarlo?} En problemas complejos donde las
+  reglas explícitas son ineficientes, en entornos fluctuantes (los datos
+  cambian) y para descubrir patrones ocultos en grandes volúmenes de
+  información (minería de datos).
+\end{itemize}
+
+\hypertarget{tipos-de-aprendizaje-automuxe1tico}{%
+\subsection{2. Tipos de Aprendizaje
+Automático}\label{tipos-de-aprendizaje-automuxe1tico}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Aprendizaje Supervisado:} se entrena con datos que incluyen
+  las soluciones deseadas, llamadas \textbf{etiquetas}. Dos tareas
+  principales:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Clasificación:} predecir una clase o categoría (p.~ej.
+    filtro antispam).
+  \item
+    \textbf{Regresión:} predecir un valor numérico objetivo a partir de
+    unas características o predictores (p.~ej. el precio de un coche).
+  \end{itemize}
+\item
+  \textbf{Aprendizaje No Supervisado:} los datos no están etiquetados;
+  el sistema aprende sin ``profesor''. Tareas:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Agrupamiento (Clustering):} detectar grupos similares
+    (K-Means, DBSCAN; segmentación de clientes).
+  \item
+    \textbf{Detección de anomalías:} identificar casos inusuales
+    (fraude, defectos; Isolation Forest).
+  \item
+    \textbf{Reducción de dimensionalidad y visualización:} simplificar
+    datos complejos (PCA, t-SNE).
+  \item
+    \textbf{Reglas de asociación:} descubrir relaciones entre atributos
+    (algoritmo \textbf{Apriori}).
+  \end{itemize}
+\item
+  \textbf{Aprendizaje Semi-supervisado:} combina pocos datos etiquetados
+  con muchos sin etiquetar; útil cuando etiquetar es caro.
+\item
+  \textbf{Aprendizaje por Refuerzo:} un \textbf{agente} observa un
+  \textbf{entorno}, ejecuta \textbf{acciones} y recibe
+  \textbf{recompensas} o penalizaciones, aprendiendo una
+  \textbf{política} que maximiza la recompensa acumulada (AlphaGo, bots
+  de videojuegos).
+\end{itemize}
+
+\hypertarget{enfoques-instancias-vs.-modelos}{%
+\subsection{3. Enfoques: Instancias
+vs.~Modelos}\label{enfoques-instancias-vs.-modelos}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Basado en instancias:} memoriza los ejemplos y clasifica los
+  casos nuevos por una medida de \textbf{similitud} (distancia) frente a
+  los datos almacenados. No requiere entrenamiento previo (p.~ej. k-NN).
+\item
+  \textbf{Basado en modelos:} construye un modelo que generaliza, usando
+  una \textbf{función de pérdida} (error) y un método de
+  \textbf{optimización}.
+\end{itemize}
+
+\hypertarget{evaluaciuxf3n-y-generalizaciuxf3n}{%
+\subsection{4. Evaluación y
+Generalización}\label{evaluaciuxf3n-y-generalizaciuxf3n}}
+
+\begin{itemize}
+\tightlist
+\item
+  Los datos se dividen en \textbf{conjunto de entrenamiento} y
+  \textbf{conjunto de test}.
+\item
+  \textbf{Generalización:} mide el comportamiento ante datos nuevos (no
+  vistos en entrenamiento). Para estimarla se usa la \textbf{validación
+  cruzada (k-fold)}, que particiona los datos en \(k\) bloques y rota
+  cuál actúa como test.
+\item
+  \textbf{Estimación de densidad:} estimar la función de densidad de
+  probabilidad (PDF) que generó los datos; útil para detectar anomalías
+  (zonas de baja densidad).
+\item
+  \textbf{Criterios de evaluación:} además de la precisión, se valoran
+  velocidad, robustez (tratar valores desconocidos), escalabilidad,
+  interpretabilidad y complejidad del modelo.
+\end{itemize}
+
+\hypertarget{retos-en-el-entorno-real}{%
+\subsection{5. Retos en el Entorno
+Real}\label{retos-en-el-entorno-real}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Teorema ``No Free Lunch'' (NFL):} sin suposiciones sobre los
+  datos, no hay razón para preferir un modelo sobre otro. No existe un
+  algoritmo óptimo para todos los problemas.
+\item
+  \textbf{Sobreajuste (Overfitting):} el modelo va muy bien en
+  entrenamiento pero generaliza mal. Se combate con
+  \textbf{regularización} y ajuste de hiperparámetros.
+\item
+  \textbf{Subajuste (Underfitting):} el modelo es demasiado simple para
+  capturar la estructura de los datos.
+\item
+  \textbf{Datos no representativos:} si validación y test no representan
+  la realidad, el modelo falla en producción.
+\end{itemize}
+
+\hypertarget{calidad-de-datos-y-enfoques-de-desarrollo}{%
+\subsection{6. Calidad de Datos y Enfoques de
+Desarrollo}\label{calidad-de-datos-y-enfoques-de-desarrollo}}
+
+\begin{itemize}
+\tightlist
+\item
+  Era del \textbf{Big Data}: el dato es el recurso clave y abarca
+  múltiples tipos (texto, imagen, audio, series temporales).
+\item
+  \textbf{Data-Centric vs Model-Centric:} transición desde mejorar el
+  modelo (Model-Centric) hacia el enfoque \textbf{Data-Centric}, donde
+  la arquitectura se estandariza y el esfuerzo se concentra en iterar,
+  adquirir, limpiar y auditar los datos.
+\end{itemize}
+
+\hypertarget{regulaciuxf3n-y-uxe9tica}{%
+\subsection{7. Regulación y Ética}\label{regulaciuxf3n-y-uxe9tica}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{AI Act:} marco regulatorio europeo que clasifica la IA por
+  nivel de riesgo (inaceptable, alto, limitado, mínimo).
+\item
+  \textbf{IA Fiable (Trustworthy AI):} exige sistemas robustos, lícitos
+  y éticos: transparencia, privacidad y supervisión humana durante todo
+  el ciclo de vida.
+\item
+  \textbf{AI Safety:} estudio de la seguridad y vulnerabilidades frente
+  a adversarios (p.~ej. patrones en ropa que actúan como ``capa de
+  invisibilidad'' ante detectores de objetos).
+\end{itemize}
+
+\hypertarget{tema-2.-aprendizaje-supervisado}{%
+\section{Tema 2. Aprendizaje
+Supervisado}\label{tema-2.-aprendizaje-supervisado}}
+
+\hypertarget{evaluaciuxf3n-de-modelos-muxe9tricas}{%
+\subsection{1. Evaluación de Modelos
+(Métricas)}\label{evaluaciuxf3n-de-modelos-muxe9tricas}}
+
+Antes de construir modelos, es necesario saber cómo evaluarlos.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Para Regresión:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{RMSE (Raíz del Error Cuadrático Medio):} medida preferida;
+    penaliza más los errores grandes y se basa en la norma Euclídea
+    (\(L_2\)).
+  \item
+    \textbf{MAE (Error Medio Absoluto):} con muchos valores atípicos
+    (\emph{outliers}), el MAE (norma Manhattan, \(L_1\)) es preferible
+    por ser más robusto.
+  \end{itemize}
+\item
+  \textbf{Para Clasificación:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Matriz de confusión:} recoge verdaderos positivos (TP),
+    falsos positivos (FP), verdaderos negativos (TN) y falsos negativos
+    (FN).
+  \item
+    \textbf{Precisión (Precision):} exactitud de las predicciones
+    positivas, \(TP / (TP+FP)\).
+  \item
+    \textbf{Recuperación / Sensibilidad (Recall):} capacidad de
+    encontrar todos los positivos, \(TP / (TP+FN)\). Existe un
+    \textbf{compromiso (trade-off) precision/recall}: subir el umbral de
+    decisión sube la precisión y baja el recall.
+  \item
+    \textbf{F1:} media armónica de precisión y recall.
+  \item
+    \textbf{Curva ROC y AUC:} la ROC traza sensibilidad frente a
+    1-especificidad; el \textbf{AUC} es el área bajo la curva (1 =
+    perfecto, 0,5 = azar).
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{aprendizaje-basado-en-instancias-vs.-modelos}{%
+\subsection{2. Aprendizaje Basado en Instancias
+vs.~Modelos}\label{aprendizaje-basado-en-instancias-vs.-modelos}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Basado en instancias (k-NN):} memoriza el entrenamiento y
+  clasifica midiendo similitud (distancia) con los vecinos más cercanos.
+  Sin fase de entrenamiento real. Clasificación: ``regla de la mayoría''
+  de los vecinos; regresión: media del vecindario.
+\item
+  \textbf{Basado en modelos:} construye una función matemática que
+  minimiza un error.
+\end{itemize}
+
+\hypertarget{modelos-lineales-y-regularizaciuxf3n-regresiuxf3n}{%
+\subsection{3. Modelos Lineales y Regularización
+(Regresión)}\label{modelos-lineales-y-regularizaciuxf3n-regresiuxf3n}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Regresión Lineal:} predice una suma ponderada de las
+  características más un término de sesgo (bias). Se entrena minimizando
+  el MSE.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Resolución directa con la \textbf{Ecuación Normal} (pseudoinversa o
+    SVD) o iterativa con \textbf{Descenso de Gradiente}. Como el coste
+    es convexo, el descenso de gradiente garantiza el mínimo global.
+  \end{itemize}
+\item
+  \textbf{Regresión Polinómica:} ajusta datos no lineales añadiendo
+  potencias de las características. Un grado alto provoca
+  \textbf{sobreajuste}.
+\item
+  \textbf{Regularización} (restringir pesos para evitar el sobreajuste):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Ridge:} penalización \(L_2\) sobre el MSE. Mantiene los
+    pesos pequeños. Buena opción por defecto.
+  \item
+    \textbf{Lasso:} penalización \(L_1\). Elimina características
+    inútiles forzando pesos exactamente a cero (modelo disperso).
+  \item
+    \textbf{Elastic Net:} término medio entre Ridge y Lasso; preferible
+    a Lasso cuando hay características muy correlacionadas.
+  \item
+    \textbf{Parada Anticipada (Early Stopping):} regulariza métodos
+    iterativos deteniendo el entrenamiento cuando el error de validación
+    alcanza un mínimo.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{clasificaciuxf3n-probabiluxedstica-regresiuxf3n-loguxedstica-y-nauxefve-bayes}{%
+\subsection{4. Clasificación Probabilística: Regresión Logística y Naïve
+Bayes}\label{clasificaciuxf3n-probabiluxedstica-regresiuxf3n-loguxedstica-y-nauxefve-bayes}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Regresión Logística:} estima la probabilidad de pertenencia a
+  una clase (si \(>50\%\), predice positivo). Coste convexo:
+  \textbf{Pérdida Logarítmica (Log Loss)}.
+\item
+  \textbf{Regresión Softmax:} generaliza la logística a múltiples clases
+  sin clasificadores binarios separados. Coste: \textbf{Entropía
+  Cruzada}.
+\item
+  \textbf{Naïve Bayes:} se basa en el Teorema de Bayes y la hipótesis
+  (ingenua) de independencia entre características; aplica la regla
+  \textbf{MAP (Maximum A Posteriori)} para devolver la clase más
+  probable.
+\end{itemize}
+
+\hypertarget{muxe1quinas-de-vectores-de-soporte-svm}{%
+\subsection{5. Máquinas de Vectores de Soporte
+(SVM)}\label{muxe1quinas-de-vectores-de-soporte-svm}}
+
+Basadas en la Teoría del Aprendizaje Estadístico.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{SVM Lineal (Clasificación):} busca la ``calle'' (margen) más
+  ancha posible entre clases.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Vectores de soporte:} instancias situadas en el borde de la
+    calle que determinan el margen. Muy sensibles a la \textbf{escala}
+    de las características.
+  \item
+    \textbf{Margen Duro vs Blando:} el duro no permite violaciones
+    (sensible a outliers, exige separabilidad lineal). El \textbf{margen
+    blando} usa el hiperparámetro \(C\) para equilibrar: permite algunas
+    violaciones para generalizar mejor. \(C\) grande \(\to\) menos
+    regularización.
+  \end{itemize}
+\item
+  \textbf{Regresión SVM:} invierte el objetivo: mete el mayor número de
+  instancias \emph{dentro} de la calle, cuyo ancho controla el
+  hiperparámetro \(\epsilon\) (modelo \(\epsilon\)-insensible).
+\item
+  \textbf{SVM No Lineal (truco del Kernel):} para datos no separables
+  linealmente. En vez de añadir características polinómicas (costoso),
+  usa funciones \textbf{Kernel} (Polinómico, \textbf{Gaussiano RBF},
+  Sigmoide) apoyándose en el \textbf{Teorema de Mercer} para operar en
+  dimensiones superiores sin calcularlas explícitamente.
+\end{itemize}
+
+\hypertarget{uxe1rboles-de-decisiuxf3n-y-ensembles}{%
+\subsection{6. Árboles de Decisión y
+Ensembles}\label{uxe1rboles-de-decisiuxf3n-y-ensembles}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Árboles de Decisión (CART):} árbol de preguntas (¿pétalo
+  \(< 2{,}45\) cm?). Clasificación: minimizan impureza \textbf{Gini} o
+  \textbf{Entropía}; regresión: minimizan el MSE. Son \textbf{no
+  paramétricos}, por lo que sin restricciones
+  (\passthrough{\lstinline!max\_depth!},
+  \passthrough{\lstinline!min\_samples\_leaf!}) tienden fuertemente al
+  sobreajuste. Tienen \textbf{alta varianza} y son sensibles a la
+  orientación de los ejes.
+\item
+  \textbf{Ensembles (sabiduría de la multitud):} combinar varios
+  modelos.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Voto duro vs blando:} el duro agrega por mayoría de clases
+    predichas; el blando promedia probabilidades (suele rendir mejor si
+    los modelos las estiman bien).
+  \item
+    \textbf{Bagging y Pasting:} entrena un mismo modelo en subconjuntos
+    aleatorios. \emph{Bagging} con reemplazo; \emph{Pasting} sin él.
+    Agregación final por moda (clasificación) o media (regresión).
+  \item
+    \textbf{Evaluación Out-of-Bag (OOB):} en bagging, cada predictor se
+    valida con las instancias que no le tocaron en su muestreo, sin
+    necesitar conjunto de validación aparte.
+  \item
+    \textbf{Random Patches / Random Subspaces:} muestrean también las
+    características (no solo las instancias).
+  \item
+    \textbf{Random Forests:} ensemble (bagging) de árboles que además
+    aleatoriza el subconjunto de características en cada división.
+    Promediar muchos árboles reduce drásticamente la varianza. Permite
+    medir la \textbf{importancia de las características}.
+  \item
+    \textbf{Extra-Trees (Extremely Randomized Trees):} como Random
+    Forest pero con umbrales de división aleatorios; más rápido y con
+    más sesgo y menos varianza.
+  \item
+    \textbf{Boosting:} entrena modelos en secuencia, cada uno
+    corrigiendo los fallos del anterior. \textbf{AdaBoost} da más peso a
+    las instancias mal clasificadas; \textbf{Gradient Boosting} ajusta
+    cada nuevo predictor a los errores residuales del conjunto.
+  \item
+    \textbf{Stacking:} entrena un meta-modelo (\emph{blender}) que
+    aprende a combinar las predicciones de varios modelos base.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{estrategias-multiclase}{%
+\subsection{7. Estrategias Multiclase}\label{estrategias-multiclase}}
+
+Para que un clasificador binario puro (como SVM) prediga sobre 3+
+clases:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{OvO (One-vs-One):} un modelo binario por cada par de clases.
+\item
+  \textbf{OvA / OvR (One-vs-All / One-vs-Rest):} un clasificador por
+  clase frente al resto; gana la clase con mayor confianza. Suele
+  preferirse por entrenar menos modelos.
+\end{itemize}
+
+\begin{quote}
+\textbf{Claves de examen (Tema 2).} Frente al sobreajuste, los recursos
+principales son la \textbf{regularización} (hiperparámetros como \(C\),
+\(\alpha\), profundidades de árbol; Ridge/Lasso/Elastic Net) y el
+\textbf{ensamblado} que reduce varianza (Random Forests). RMSE penaliza
+errores grandes; MAE es más robusto a outliers. Precision mide acierto
+de los positivos; recall, cobertura de los positivos.
+\end{quote}
+
+\hypertarget{tema-3.-calidad-de-datos}{%
+\section{Tema 3. Calidad de Datos}\label{tema-3.-calidad-de-datos}}
+
+Principio rector: \textbf{``Garbage In, Garbage Out''} (datos basura
+\(\to\) resultados basura). El preprocesamiento convierte datos brutos
+en \emph{Smart Data} y llega a ocupar el \textbf{80\% del tiempo} de un
+proyecto de minería de datos.
+
+\hypertarget{integraciuxf3n-limpieza-y-transformaciuxf3n}{%
+\subsection{1. Integración, Limpieza y
+Transformación}\label{integraciuxf3n-limpieza-y-transformaciuxf3n}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Integración:} combinar datos de múltiples fuentes, detectar
+  duplicados y eliminar atributos redundantes (p.~ej. por correlación).
+\item
+  \textbf{Limpieza de datos imperfectos:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Valores perdidos (Missing values):} ignorarlos (poco
+    recomendable), rellenar con una constante, usar media/desviación, o
+    imputarlos con algoritmos de AA (KNNI, SVMI, etc.).
+  \item
+    \textbf{Ruido:} ejemplos mal etiquetados o erróneos. Se filtran con
+    \emph{ensembles} de clasificadores por votación: \textbf{Ensemble
+    Filter (EF)}, \textbf{Cross-Validated Committees Filter (CVCF)},
+    \textbf{Iterative-Partitioning Filter (IPF)}.
+  \item
+    \textbf{Outliers:} datos muy diferentes del resto; se detectan por
+    distancias o por \emph{clustering} parcial.
+  \end{itemize}
+\item
+  \textbf{Transformación:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Agregación y generalización:} resumir (ventas diarias
+    \(\to\) mensuales) o subir en la jerarquía (edad numérica \(\to\)
+    ``joven/adulto'').
+  \item
+    \textbf{Normalización:} escalar valores numéricos para métodos
+    sensibles a la distancia (k-NN, redes neuronales), llevando los
+    rangos a \([0,1]\) o \([-1,1]\) (escala min-max, escala decimal,
+    estandarización z-score).
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{reducciuxf3n-de-datos}{%
+\subsection{2. Reducción de Datos}\label{reducciuxf3n-de-datos}}
+
+Objetivo: un conjunto más pequeño y manejable que conserve la
+relevancia, para aprender más rápido y generalizar mejor.
+
+\hypertarget{a.-discretizaciuxf3n}{%
+\subsubsection{A. Discretización}\label{a.-discretizaciuxf3n}}
+
+Convierte valores numéricos continuos en intervalos nominales; facilita
+la comprensión y es obligatoria para algunos algoritmos.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{No supervisada:} sin usar la clase. Igual amplitud (intervalos
+  del mismo tamaño) o igual frecuencia (mismo número de datos por
+  intervalo).
+\item
+  \textbf{Supervisada:} usa la clase para cortes más informados.
+  Destacan el algoritmo de \textbf{Fayyad e Irani} basado en
+  \textbf{Entropía (criterio MDLP)} y los métodos basados en
+  \textbf{Chi-cuadrado}.
+\end{itemize}
+
+\hypertarget{b.-selecciuxf3n-de-caracteruxedsticas-feature-selection}{%
+\subsubsection{B. Selección de Características (Feature
+Selection)}\label{b.-selecciuxf3n-de-caracteruxedsticas-feature-selection}}
+
+Busca el subconjunto óptimo de variables; demasiadas aumentan la
+complejidad y empeoran la generalización. Combina estrategias de
+búsqueda (añadir o quitar variables) con funciones de evaluación:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Filtro (Filter):} métricas matemáticas (correlación, entropía,
+  distancias). Rápido, pero tiende a seleccionar muchas variables.
+\item
+  \textbf{Envolvente (Wrapper):} usa el propio algoritmo de aprendizaje
+  para evaluar el subconjunto. Más exacto, pero \textbf{muy costoso} y
+  sesgado hacia ese clasificador concreto.
+\item
+  \textbf{Embebido (Embedded):} la selección ocurre dentro del
+  entrenamiento (p.~ej. Lasso, importancia en árboles).
+\end{itemize}
+
+\hypertarget{c.-selecciuxf3n-de-instancias}{%
+\subsubsection{C. Selección de
+Instancias}\label{c.-selecciuxf3n-de-instancias}}
+
+Elige las filas (ejemplos) más relevantes, eliminando ruido y
+redundancia; útil para métodos perezosos (k-NN) y para reducir tamaño en
+árboles.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Condensación (CNN):} retiene instancias de las fronteras de
+  decisión y descarta las interiores. Rápido (incremental) pero
+  dependiente del orden.
+\item
+  \textbf{Edición (ENN):} elimina instancias mal clasificadas por sus
+  \(k\) vecinos. Suaviza fronteras (quita ruido) pero no elimina
+  redundancia.
+\item
+  \textbf{Híbridos y evolutivos:} combinan ambos. Destacan
+  \textbf{DROP3}, algoritmos genéticos (\textbf{CHC}) y \textbf{SSMA}.
+\item
+  \textbf{Muestreo (Sampling):} seleccionar un subconjunto aleatorio
+  representativo.
+\end{itemize}
+
+\hypertarget{reducciuxf3n-de-dimensionalidad}{%
+\subsection{3. Reducción de
+Dimensionalidad}\label{reducciuxf3n-de-dimensionalidad}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Maldición de la dimensionalidad:} a más dimensiones, los datos
+  se vuelven dispersos, las distancias pierden significado y se necesita
+  exponencialmente más datos. Proyectar a menos dimensiones ayuda.
+\item
+  \textbf{Proyección:} los datos reales suelen vivir cerca de un
+  subespacio de menor dimensión; proyectar sobre él reduce dimensiones
+  (falla si el subespacio se ``retuerce'').
+\item
+  \textbf{Aprendizaje de variedades (Manifold Learning):} asume que los
+  datos yacen sobre una variedad de baja dimensión ``enrollada'' en el
+  espacio (p.~ej. desenrollar el \emph{Swiss roll} de 3D a 2D).
+\item
+  \textbf{PCA (Análisis de Componentes Principales):} método estrella.
+  Halla el hiperplano que preserva la \textbf{máxima varianza} y
+  proyecta sobre él, apoyándose en la \textbf{Descomposición en Valores
+  Singulares (SVD)}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{PCA incremental:} procesa los datos por lotes
+    (mini-batches), apto para conjuntos que no caben en RAM o flujos.
+  \item
+    \textbf{PCA aleatorio / Proyección aleatoria:} proyecta sobre un
+    subespacio aleatorio; muy rápido y con garantías teóricas (lema de
+    Johnson-Lindenstrauss).
+  \end{itemize}
+\item
+  \textbf{LLE (Locally Linear Embedding):} técnica no lineal de
+  \emph{manifold learning}; conserva las relaciones lineales locales
+  entre vecinos al reducir dimensiones. Bueno con datos no lineales sin
+  ruido.
+\end{itemize}
+
+\begin{quote}
+\textbf{Claves de examen (Tema 3).} Conviene distinguir
+\textbf{Selección de Características} (eliminar
+\emph{columnas/variables}) de \textbf{Selección de Instancias} (eliminar
+\emph{filas/ejemplos}). Los enfoques \emph{Wrapper} son más exactos pero
+mucho más lentos que los \emph{Filter}. PCA preserva varianza vía SVD;
+reduce dimensiones, no instancias.
+\end{quote}
+
+\hypertarget{tema-4.-aprendizaje-no-supervisado}{%
+\section{Tema 4. Aprendizaje No
+Supervisado}\label{tema-4.-aprendizaje-no-supervisado}}
+
+\hypertarget{tareas-principales}{%
+\subsection{1. Tareas Principales}\label{tareas-principales}}
+
+Se buscan patrones naturales sin etiquetas. Tres áreas:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Clustering (Agrupamiento):} asignar instancias similares a
+  grupos (segmentación de clientes, motores de búsqueda, segmentación de
+  imágenes).
+\item
+  \textbf{Detección de anomalías:} aprender el aspecto de los datos
+  ``normales'' (inliers) para identificar instancias raras (fraude,
+  defectos).
+\item
+  \textbf{Estimación de densidad:} estimar la PDF del proceso generador;
+  útil para análisis y para detectar anomalías (baja densidad).
+\end{itemize}
+
+\hypertarget{algoritmos-de-clustering}{%
+\subsection{2. Algoritmos de
+Clustering}\label{algoritmos-de-clustering}}
+
+\hypertarget{a.-familia-k-means}{%
+\subsubsection{A. Familia K-Means}\label{a.-familia-k-means}}
+
+Rápido y sencillo: inicializa \(k\) centroides, asigna cada punto al más
+cercano y recalcula el centroide (media) hasta converger. Minimiza la
+\textbf{inercia} (suma de distancias al cuadrado a su centroide).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Límites:} exige conocer \(k\) de antemano; debe ejecutarse
+  varias veces para no caer en óptimos locales; falla con clusters de
+  distinta densidad, tamaño o forma no esférica.
+\item
+  \textbf{Variantes:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{K-Means++:} inicialización inteligente: separa al máximo los
+    centroides iniciales, reduciendo soluciones subóptimas.
+  \item
+    \textbf{K-Means acelerado (Elkan):} usa la desigualdad triangular
+    para evitar cálculos de distancia innecesarios.
+  \item
+    \textbf{Mini-Batch K-Means:} actualiza con pequeños lotes; mucho más
+    rápido y apto para datos que no caben en RAM, con inercia algo peor.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{b.-nuxfamero-uxf3ptimo-de-clusters-k}{%
+\subsubsection{\texorpdfstring{B. Número óptimo de clusters
+(\(k\))}{B. Número óptimo de clusters (k)}}\label{b.-nuxfamero-uxf3ptimo-de-clusters-k}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Método del Codo (Elbow):} la inercia siempre baja al subir
+  \(k\); se busca el ``codo'' (punto de inflexión) en la curva inercia
+  vs \(k\).
+\item
+  \textbf{Puntuación de Silueta (Silhouette):} más precisa. Para cada
+  punto, \((b-a)/\max(a,b)\), con \(a\) = distancia media intra-cluster
+  y \(b\) = distancia media al cluster más cercano. Va de \(-1\) a
+  \(+1\) (cerca de \(+1\) = bien agrupado).
+\end{itemize}
+
+\hypertarget{c.-dbscan-basado-en-densidad}{%
+\subsubsection{C. DBSCAN (Basado en
+Densidad)}\label{c.-dbscan-basado-en-densidad}}
+
+Define clusters como regiones continuas de alta densidad.
+Hiperparámetros: radio de vecindad \(\epsilon\) y mínimo de muestras
+(\passthrough{\lstinline!min\_samples!}).
+
+\begin{itemize}
+\tightlist
+\item
+  Clasifica los puntos como \textbf{centrales} (con el mínimo de
+  vecinos), \textbf{de borde} o \textbf{anomalías}.
+\item
+  \textbf{Ventajas:} no exige \(k\), detecta formas arbitrarias y es
+  robusto a outliers.
+\item
+  \textbf{Desventajas:} falla con densidades muy distintas y escala mal,
+  \(O(m^2 n)\).
+\end{itemize}
+
+\hypertarget{d.-otros-algoritmos}{%
+\subsubsection{D. Otros algoritmos}\label{d.-otros-algoritmos}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Clustering Aglomerativo:} árbol jerárquico de abajo arriba,
+  emparejando los clusters más cercanos.
+\item
+  \textbf{BIRCH:} para datasets enormes; construye un árbol sobre la
+  marcha limitando memoria.
+\item
+  \textbf{Mean-Shift:} desplaza círculos hacia la zona de mayor densidad
+  (máximo local). Cualquier forma, pero lento.
+\item
+  \textbf{Affinity Propagation:} los puntos intercambian mensajes
+  ``votando'' por un ejemplar representativo; calcula \(k\)
+  automáticamente.
+\item
+  \textbf{Clustering Espectral:} reduce la dimensionalidad de una matriz
+  de similitud y aplica k-means. Excelente para grafos (redes sociales).
+\end{itemize}
+
+\hypertarget{medidas-de-calidad-del-clustering}{%
+\subsection{3. Medidas de Calidad del
+Clustering}\label{medidas-de-calidad-del-clustering}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Índice de Davies-Bouldin:} relación dispersión intra-cluster /
+  separación entre centroides. \textbf{Mejor cuanto más pequeño.}
+\item
+  \textbf{Silueta:} mide cercanía a los propios y lejanía del borde.
+  \textbf{Mejor cuanto más próximo a \(+1\).}
+\item
+  \textbf{Índice de Dunn:} distancia mínima entre clusters / diámetro
+  máximo de un cluster. \textbf{Mejor cuanto más alto.}
+\item
+  \textbf{Estadística pseudo-F:} distancias entre-clusters /
+  intra-clusters. \textbf{Mejor cuanto más alto.}
+\end{itemize}
+
+\hypertarget{detecciuxf3n-de-anomaluxedas}{%
+\subsection{4. Detección de
+Anomalías}\label{detecciuxf3n-de-anomaluxedas}}
+
+Eventos raros (fraude, intrusiones, enfermedades raras). Retos: la
+``normalidad'' cambia con el tiempo, la frontera es imprecisa y el ruido
+se camufla.
+
+\hypertarget{a.-tipos-de-anomaluxedas}{%
+\subsubsection{A. Tipos de Anomalías}\label{a.-tipos-de-anomaluxedas}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Puntuales:} un punto individual alejado del resto.
+\item
+  \textbf{Contextuales / Condicionales:} anómalo solo en su contexto (un
+  bajón de temperatura es normal en invierno, anómalo en verano).
+\item
+  \textbf{Colectivas:} una secuencia o grupo es anómalo en conjunto
+  (arritmia en un ECG) aunque cada punto parezca normal.
+\end{itemize}
+
+\hypertarget{b.-tuxe9cnicas-de-detecciuxf3n}{%
+\subsubsection{B. Técnicas de
+Detección}\label{b.-tuxe9cnicas-de-detecciuxf3n}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Basadas en distancia (k-NN):} anomalía = punto con mayor
+  distancia a su \(k\)-ésimo vecino. Falla con densidades distintas.
+\item
+  \textbf{Basadas en densidad (LOF, Local Outlier Factor):} compara la
+  densidad de un punto con la de sus vecinos; densidad mucho menor
+  \(\to\) outlier. Resuelve el problema de densidad variable de k-NN.
+\item
+  \textbf{Basadas en modelos (One-Class SVM):} envuelve las instancias
+  normales (maximizando el margen desde el origen o con una hiperesfera
+  mínima) para aislar la clase objetivo.
+\item
+  \textbf{Basadas en ensembles (Isolation Forest, iForest):} bosques de
+  ``árboles de aislamiento'' con divisiones aleatorias. Clave:
+  \textbf{las anomalías son más fáciles de aislar} y caen en ramas más
+  cortas (menor profundidad) \(\to\) score de anomalía alto.
+\end{itemize}
+
+\hypertarget{tema-5.-aprendizaje-profundo.-fundamentos}{%
+\section{Tema 5. Aprendizaje Profundo.
+Fundamentos}\label{tema-5.-aprendizaje-profundo.-fundamentos}}
+
+\hypertarget{del-perceptruxf3n-al-mlp}{%
+\subsection{1. Del Perceptrón al MLP}\label{del-perceptruxf3n-al-mlp}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Redes Neuronales Artificiales (RNA):} núcleo del aprendizaje
+  profundo; versátiles, potentes y escalables. Primer modelo:
+  \textbf{McCulloch y Pitts (1943)}, con neuronas de entradas/salida
+  binarias capaces de calcular proposiciones lógicas.
+\item
+  \textbf{Perceptrón (Rosenblatt, 1957):} basado en la \textbf{unidad
+  lógica de umbral (TLU/LTU)}. Calcula \(z = w^\top x + b\) y le aplica
+  una \textbf{función escalón} (Heaviside o signo). Equivale a una
+  clasificación lineal binaria. Una \textbf{capa densa / totalmente
+  conectada} conecta cada TLU con todas las entradas.
+\item
+  \textbf{Regla de aprendizaje del perceptrón:} refuerza las conexiones
+  que ayudan a reducir el error; converge \textbf{solo si los datos son
+  linealmente separables}.
+\item
+  \textbf{Limitación (Minsky y Papert, 1969):} el perceptrón no resuelve
+  problemas no lineales (p.~ej. la función \textbf{XOR}), como cualquier
+  modelo lineal.
+\item
+  \textbf{Perceptrón Multicapa (MLP):} apila una \textbf{capa de
+  entrada}, una o más \textbf{capas ocultas} y una \textbf{capa de
+  salida}. Resuelve el XOR y patrones complejos.
+\end{itemize}
+
+\hypertarget{retropropagaciuxf3n-backpropagation}{%
+\subsection{2. Retropropagación
+(Backpropagation)}\label{retropropagaciuxf3n-backpropagation}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Retropropagación:} combinación de \textbf{diferenciación
+  automática en modo inverso} y \textbf{descenso de gradiente}. En dos
+  pasadas calcula el gradiente del error respecto a cada parámetro.
+\item
+  \textbf{Paso hacia delante (forward):} calcula y guarda las salidas de
+  cada capa hasta la salida final.
+\item
+  \textbf{Paso hacia atrás (backward):} mide, vía \textbf{regla de la
+  cadena}, cuánto contribuye cada peso al error, propagando el gradiente
+  de salida a entrada.
+\item
+  \textbf{Paso de descenso de gradiente:} ajusta pesos y sesgos para
+  reducir el error.
+\item
+  \textbf{Detalles clave:} se procesa por \textbf{minilotes} (p.~ej. 32
+  instancias); una pasada completa al conjunto es una \textbf{época}.
+  Los pesos ocultos se \textbf{inicializan aleatoriamente} (si no, el
+  entrenamiento falla). La \textbf{función escalón} se sustituyó por la
+  \textbf{sigmoide} \(\sigma(z)=1/(1+e^{-z})\) porque tiene derivada no
+  nula y permite progresar al gradiente.
+\item
+  \textbf{Tipos de salida del MLP:} regresión (una neurona por valor a
+  predecir, sin activación o con ReLU); clasificación binaria (1 neurona
+  sigmoide); multiclase (una neurona por clase + \textbf{softmax}, con
+  pérdida de \textbf{entropía cruzada}).
+\end{itemize}
+
+\hypertarget{problema-de-los-gradientes-inestables}{%
+\subsection{3. Problema de los Gradientes
+Inestables}\label{problema-de-los-gradientes-inestables}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Gradientes que se desvanecen (vanishing):} al retropropagar,
+  los gradientes se hacen cada vez más pequeños en las capas inferiores,
+  que casi no se actualizan y no convergen. Causa típica: sigmoide +
+  mala inicialización (saturación).
+\item
+  \textbf{Gradientes que explotan (exploding):} crecen sin control y el
+  algoritmo diverge; frecuente en redes recurrentes.
+\item
+  \textbf{Inicialización Glorot (Xavier):} mantiene igual la varianza de
+  entradas y salidas (usa \(fan_{avg}\)). Variante \textbf{LeCun}
+  (\(fan_{in}\)). \textbf{Inicialización He (Kaiming):} para ReLU y
+  variantes.
+\end{itemize}
+
+\hypertarget{funciones-de-activaciuxf3n}{%
+\subsection{4. Funciones de
+Activación}\label{funciones-de-activaciuxf3n}}
+
+Necesarias y \textbf{no lineales}: sin ellas, una pila de capas equivale
+a una sola transformación lineal.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Sigmoide / tanh:} forma de S. La \textbf{tanh} va de \(-1\) a
+  \(1\) (centrada en 0, converge algo mejor que la sigmoide). Saturan en
+  los extremos \(\to\) gradientes que se desvanecen.
+\item
+  \textbf{ReLU} \(=\max(0,z)\): rápida y sin saturación para valores
+  positivos; opción por defecto. Problema de las \textbf{ReLU
+  moribundas} (neuronas que solo dan 0).
+\item
+  \textbf{Leaky ReLU} \(=\max(\alpha z, z)\): pendiente pequeña para
+  \(z<0\) evita la muerte de neuronas. Variantes: \textbf{RReLU}
+  (\(\alpha\) aleatorio, regulariza) y \textbf{PReLU} (\(\alpha\)
+  aprendible).
+\item
+  \textbf{ELU:} toma valores negativos (media más cercana a 0), suave en
+  \(z=0\); mejora ReLU pero más lenta.
+\item
+  \textbf{SELU (ELU escalada):} en un MLP de solo capas densas,
+  \textbf{autonormaliza} (media 0, desviación 1) y resuelve los
+  gradientes inestables; sujeta a restricciones estrictas.
+\item
+  \textbf{GELU / SiLU / Swish:} variantes suaves de ReLU, no convexas ni
+  monótonas; suelen rendir mejor en tareas complejas a mayor coste.
+  Swish\(_\beta(z)=z\,\sigma(\beta z)\).
+\item
+  \textbf{Recomendación práctica:} ReLU por defecto en tareas simples;
+  Swish/GELU en tareas complejas; SELU en MLP profundos.
+\end{itemize}
+
+\hypertarget{estabilizaciuxf3n-del-entrenamiento}{%
+\subsection{5. Estabilización del
+Entrenamiento}\label{estabilizaciuxf3n-del-entrenamiento}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Normalización por lotes (Batch Normalization, BN):} centra en
+  cero y normaliza las entradas de cada capa usando la media y
+  desviación del minilote, y luego las \textbf{reescala y desplaza} con
+  dos parámetros aprendibles (\(\gamma\), \(\beta\)). En test usa medias
+  móviles. Acelera el entrenamiento, reduce la sensibilidad a la
+  inicialización y actúa como \textbf{regularizador}.
+\item
+  \textbf{Recorte de gradiente (Gradient Clipping):} recorta los
+  gradientes para que no superen un umbral; mitiga la explosión, sobre
+  todo en redes recurrentes.
+\end{itemize}
+
+\hypertarget{reutilizaciuxf3n-de-capas-y-transfer-learning}{%
+\subsection{6. Reutilización de Capas y Transfer
+Learning}\label{reutilizaciuxf3n-de-capas-y-transfer-learning}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Transfer Learning:} reutilizar capas de una red preentrenada
+  en un problema similar; ahorra datos y tiempo y mejora la
+  generalización.
+\item
+  \textbf{Pretraining no supervisado:} con muchos datos sin etiquetar,
+  se preentrena capa a capa (p.~ej. con autoencoders) y luego se ajusta.
+\item
+  \textbf{Pretraining en tarea auxiliar:} entrenar primero en una tarea
+  con datos etiquetados abundantes y reutilizar lo aprendido.
+\end{itemize}
+
+\hypertarget{optimizadores-muxe1s-ruxe1pidos}{%
+\subsection{7. Optimizadores Más
+Rápidos}\label{optimizadores-muxe1s-ruxe1pidos}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{SGD (Descenso de Gradiente Estocástico):} actualización básica
+  con la tasa de aprendizaje.
+\item
+  \textbf{Momentum:} acumula un ``impulso'' de gradientes anteriores;
+  acelera en direcciones consistentes.
+\item
+  \textbf{Nesterov (NAG):} mide el gradiente un poco más adelante en la
+  dirección del momentum; suele converger algo más rápido.
+\item
+  \textbf{AdaGrad:} adapta la tasa por parámetro; buena para problemas
+  simples, pero se frena demasiado pronto en redes profundas.
+\item
+  \textbf{RMSProp:} corrige a AdaGrad usando una media móvil de los
+  gradientes al cuadrado.
+\item
+  \textbf{Adam (Adaptive Moment Estimation):} combina Momentum +
+  RMSProp; opción por defecto muy robusta. Variante \textbf{AdaMax}
+  (norma \(L_\infty\)).
+\item
+  \textbf{Programación del ritmo de aprendizaje (learning rate
+  scheduling):} reducir la tasa durante el entrenamiento. Estrategias:
+  \textbf{power scheduling}, \textbf{exponencial}, \textbf{constante a
+  trozos}, \textbf{performance scheduling} (baja al estancarse la
+  validación) y \textbf{1-cycle} (sube y luego baja; logra
+  \emph{superconvergencia}).
+\end{itemize}
+
+\hypertarget{regularizaciuxf3n-en-redes-neuronales}{%
+\subsection{8. Regularización en Redes
+Neuronales}\label{regularizaciuxf3n-en-redes-neuronales}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Parada anticipada (early stopping)} y la propia \textbf{Batch
+  Normalization} ya regularizan.
+\item
+  \textbf{Regularización \(\ell_1\) / \(\ell_2\):} \(\ell_2\) restringe
+  los pesos; \(\ell_1\) produce modelos dispersos (muchos pesos a 0).
+\item
+  \textbf{Dropout:} en cada paso, cada neurona (salvo las de salida) se
+  ``apaga'' con probabilidad \(p\) (tasa típica 10--50\%). Impide la
+  coadaptación y hace la red más robusta; equivale a promediar un enorme
+  ensemble de subredes. Tras entrenar, se compensan los pesos por
+  \((1-p)\).
+\item
+  \textbf{MC Dropout:} aplica dropout también en test y promedia varias
+  pasadas; mejora el rendimiento y estima la \textbf{incertidumbre} sin
+  reentrenar.
+\item
+  \textbf{Max-Norm:} restringe la norma de los pesos entrantes de cada
+  neurona, \(\lVert w \rVert_2 \le r\).
+\end{itemize}
+
+\hypertarget{autoencoders}{%
+\subsection{9. Autoencoders}\label{autoencoders}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Autoencoder:} arquitectura \textbf{encoder--decoder} que
+  aprende a reconstruir su entrada pasando por un \textbf{espacio
+  latente} comprimido. Usos: compresión, reducción de dimensionalidad,
+  detección de anomalías y pretraining no supervisado.
+\item
+  \textbf{Denoising Autoencoder:} se corrompe la entrada a propósito
+  (ruido o enmascarado) y la red aprende a reconstruir la versión
+  limpia, forzando una codificación robusta.
+\item
+  \textbf{ML vs Deep Learning:} el DL aprende las características
+  automáticamente (\emph{feature learning}) en lugar del diseño manual
+  (\emph{feature engineering}) del ML clásico.
+\end{itemize}
+
+\hypertarget{tema-6.-aprendizaje-profundo-en-diferentes-tipos-de-datos}{%
+\section{Tema 6. Aprendizaje Profundo en Diferentes Tipos de
+Datos}\label{tema-6.-aprendizaje-profundo-en-diferentes-tipos-de-datos}}
+
+\hypertarget{redes-neuronales-profundas-dnn}{%
+\subsection{1. Redes Neuronales Profundas
+(DNN)}\label{redes-neuronales-profundas-dnn}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{DNN:} modelos con muchas capas que aprenden
+  \textbf{representaciones jerárquicas} de los datos (características de
+  bajo nivel \(\to\) medio \(\to\) alto). Más capas \(\to\) funciones
+  más complejas.
+\end{itemize}
+
+\hypertarget{redes-neuronales-convolucionales-cnn-convnets}{%
+\subsection{2. Redes Neuronales Convolucionales (CNN /
+ConvNets)}\label{redes-neuronales-convolucionales-cnn-convnets}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{CNN:} red con al menos una capa de \textbf{convolución};
+  pensada para datos en forma de matriz/rejilla (imágenes).
+\item
+  \textbf{Convolución:} operación local lineal con una \textbf{máscara /
+  filtro / kernel}. El filtro se multiplica elemento a elemento sobre
+  una región, se suman los productos y el resultado forma el
+  \textbf{mapa de activación / mapa de características (feature map)}.
+  Ejemplos clásicos: filtro Gaussiano (suavizado), Sobel (bordes).
+\item
+  \textbf{Idea clave:} en una CNN los \textbf{coeficientes del filtro se
+  aprenden} (son pesos), no los fija un experto. (LeNet-5, LeCun 1998.)
+\item
+  \textbf{Capa convolucional vs densa:} la densa conecta todo con todo
+  (muchos pesos); la convolucional opera localmente con muchos menos
+  pesos.
+\end{itemize}
+
+\textbf{Ventajas de las ConvNets:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Conectividad dispersa:} cada unidad ``ve'' solo una región
+  local \(\to\) menos operaciones.
+\item
+  \textbf{Compartición de parámetros (weight sharing):} el mismo filtro
+  recorre toda la imagen \(\to\) pocos parámetros (actúa como
+  \textbf{regularización}).
+\item
+  \textbf{Equivarianza a la traslación:} si el objeto se traslada, su
+  representación se traslada igual (\(f(g(x))=g(f(x))\)). No es
+  equivariante a escala ni rotación.
+\end{itemize}
+
+\textbf{Elementos y dimensiones:}
+
+\begin{itemize}
+\tightlist
+\item
+  Las capas convolucionales se intercalan con \textbf{funciones de
+  activación no lineales} (ReLU y variantes). Los filtros tienen
+  \textbf{la misma profundidad} que el volumen de entrada.
+\item
+  \textbf{Stride (paso):} desplazamiento del filtro. \textbf{Padding
+  (relleno):} añadir bordes (p.~ej. \emph{zero-padding}) para conservar
+  el tamaño y no reducir la dimensionalidad demasiado rápido.
+\item
+  \textbf{Tamaño de salida:}
+  \(\text{Output} = \big((N + 2P - F)/S\big) + 1\), con \(N\) entrada,
+  \(F\) filtro, \(P\) padding, \(S\) stride.
+\item
+  \textbf{Pooling (max / average):} reduce dimensionalidad e introduce
+  \textbf{invarianza} a pequeñas traslaciones.
+\item
+  \textbf{Flatten:} aplana el volumen de feature maps a un vector para
+  las capas densas finales.
+\item
+  \textbf{Softmax:} activación final que da la probabilidad de cada
+  clase.
+\end{itemize}
+
+\hypertarget{transformers}{%
+\subsection{3. Transformers}\label{transformers}}
+
+Para \textbf{secuencias} (texto, series temporales, audio, vídeo):
+elementos + orden + contexto. Cada elemento se convierte primero en un
+vector (\textbf{embedding}).
+
+\textbf{Antecedentes y sus límites:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Red densa:} trata la entrada como bloque fijo, ignora el orden
+  y no admite longitud variable.
+\item
+  \textbf{CNN:} capta patrones \textbf{locales} pero no bien las
+  dependencias largas.
+\item
+  \textbf{RNN (recurrentes):} procesan paso a paso con una memoria
+  (estado oculto); pierden información lejana en secuencias largas.
+\item
+  \textbf{LSTM:} añaden puertas (\textbf{olvido}, \textbf{entrada},
+  \textbf{salida}) para regular qué recordar; siguen siendo secuenciales
+  (no paralelizables) y lentas.
+\end{itemize}
+
+\textbf{Mecanismo de Atención:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Atención:} cada elemento (token) consulta directamente al
+  resto y combina la información según su relevancia (suma ponderada),
+  en lugar de comprimir todo en una memoria secuencial.
+\item
+  \textbf{Query (Q), Key (K), Value (V):} de cada embedding se generan
+  tres vectores. Q = ``qué busco'', K = ``qué ofrezco'', V = ``qué
+  información transmito''. Se comparan Q con K para decidir a quién
+  atender y se combinan los V.
+\item
+  \textbf{Scaled Dot-Product Attention:} compara Q con K, escala para
+  estabilizar, aplica \textbf{softmax} (pesos que suman 1) y mezcla los
+  V.
+\item
+  \textbf{Self-attention:} Q, K y V salen de la misma secuencia; cada
+  token se contextualiza con todos los demás (dependencias largas y
+  directas).
+\item
+  \textbf{Cross-attention:} Q de una secuencia, K y V de otra (conecta
+  lo que se genera con la entrada).
+\item
+  \textbf{Máscaras de atención:} impiden mirar tokens futuros
+  (generación de texto).
+\item
+  \textbf{Multi-head attention:} varias atenciones en paralelo, cada
+  ``cabeza'' capta un tipo de relación (sintáctica, semántica,
+  posiciones, dependencias lejanas).
+\end{itemize}
+
+\textbf{Bloque y arquitectura Transformer:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Positional encoding:} la atención no conoce el orden \(\to\)
+  se suma información de posición al embedding. Entrada = contenido +
+  posición.
+\item
+  \textbf{Bloque Transformer:} Multi-head Attention (mezcla info entre
+  tokens) + \textbf{Feed-Forward Network (FFN)} (transforma cada token
+  por separado).
+\item
+  \textbf{Conexiones residuales:} suman la entrada original a la
+  transformada (estabilizan el gradiente, evitan olvidar).
+\item
+  \textbf{Layer Normalization:} normaliza cada representación para un
+  entrenamiento estable.
+\item
+  \textbf{Encoder:} Self-attention + Add\&Norm + FFN + Add\&Norm;
+  produce representaciones contextuales.
+\item
+  \textbf{Decoder:} Masked self-attention + Cross-attention + FFN;
+  genera la salida paso a paso.
+\item
+  \textbf{Arquitecturas:} \emph{encoder-only} (comprender/embeddings),
+  \emph{decoder-only} (generación; base de los LLM),
+  \emph{encoder-decoder} (completa, traducción).
+\end{itemize}
+
+\textbf{Propiedades, coste y aplicaciones:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Ventajas:} capturan dependencias a largo plazo,
+  \textbf{procesan en paralelo} (clave para escalar a miles de millones
+  de parámetros) y aprenden relaciones flexibles.
+\item
+  \textbf{Coste:} la atención es \textbf{cuadrática} \(O(T^2)\) en la
+  longitud \(T\) de la secuencia; exige mucha memoria y datos; sin
+  posición no entiende el orden; difícil de interpretar.
+\item
+  \textbf{LLM modernos:} Transformers escalados, con ajuste por
+  instrucciones, alineamiento con preferencias humanas, contexto largo,
+  multimodalidad y uso de herramientas.
+\item
+  \textbf{Aplicaciones:} texto, \textbf{series temporales} (Informer,
+  Autoformer, PatchTST, Chronos), \textbf{visión} (Vision Transformer:
+  dividir la imagen en parches \(\to\) embeddings \(\to\) Transformer).
+\end{itemize}
+
+\hypertarget{tema-9.-aspectos-avanzados-retos-y-desafuxedos}{%
+\section{Tema 9. Aspectos Avanzados, Retos y
+Desafíos}\label{tema-9.-aspectos-avanzados-retos-y-desafuxedos}}
+
+\hypertarget{inteligencia-artificial-explicable-xai}{%
+\subsection{1. Inteligencia Artificial Explicable
+(XAI)}\label{inteligencia-artificial-explicable-xai}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Motivación:} la precisión no basta. Ejemplo clásico
+  \textbf{LIME} (husky vs lobo): un clasificador con 94\% de acierto en
+  test miraba la \textbf{nieve del fondo}, no el animal (\emph{shortcut
+  learning}). Hay que auditar \textbf{qué} aprende el modelo.
+\item
+  \textbf{Tres motivos para XAI:} \textbf{confianza} (medicina,
+  conducción autónoma), \textbf{depuración} (sesgos ocultos, \emph{data
+  leakage}, atajos) y \textbf{cumplimiento} legal (EU AI Act, derecho a
+  explicación del GDPR).
+\item
+  \textbf{RED vs BLUE XAI:} RED (orientada al modelo): investigar,
+  explorar, depurar y garantizar seguridad. BLUE (orientada al humano):
+  confianza, ética y explicaciones para el usuario.
+\item
+  \textbf{Taxonomía (3 ejes):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Temporal:} \textbf{Pre-hoc} (modelo interpretable de origen:
+    árboles, reglas, modelos lineales) vs \textbf{Post-hoc} (caja negra
+    explicada a posteriori: LIME, SHAP).
+  \item
+    \textbf{Alcance:} \textbf{Local} (una predicción) vs \textbf{Global}
+    (todo el modelo).
+  \item
+    \textbf{Modelo:} \textbf{Agnóstico} (cualquier arquitectura) vs
+    \textbf{Específico} (requiere acceso interno).
+  \end{itemize}
+\item
+  \textbf{Métodos clave:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{LIME:} perturba la entrada localmente y ajusta un modelo
+    simple que aproxima la caja negra en esa vecindad. Agnóstico pero
+    \textbf{inestable}.
+  \item
+    \textbf{SHAP:} valores de \textbf{Shapley} (teoría de juegos);
+    reparte la contribución de cada característica de forma justa
+    (eficiencia, simetría, linealidad, dummy). Coste
+    \textbf{exponencial} en número de características.
+  \item
+    \textbf{Contraejemplos (Counterfactuals):} ``si tu ingreso fuera
+    5.000 € mayor, se aprobaría''; intuitivos y alineados con el
+    razonamiento causal.
+  \item
+    \textbf{Integrated Gradients:} integra el gradiente desde una
+    \emph{baseline} hasta la entrada real (específico de redes
+    neuronales).
+  \item
+    \textbf{LRP (Layer-wise Relevance Propagation):} propaga la
+    relevancia hacia atrás capa a capa con reglas de conservación;
+    produce \emph{heatmaps} por píxel.
+  \item
+    \textbf{CRP:} extiende LRP de píxeles a \textbf{conceptos} de alto
+    nivel.
+  \item
+    \textbf{ProtoPNet (basado en prototipos):} clasifica diciendo ``esto
+    se parece a este prototipo''; la explicación \textbf{es} el
+    razonamiento del modelo (XAI intrínseca / RED).
+  \item
+    \textbf{Métricas:} \emph{Quantus} (fidelidad, localización,
+    complejidad, robustez); propuestas DASCI: \textbf{REVEL},
+    \textbf{X-SHIELD} (regulariza ocultando características espurias),
+    \textbf{STOOD-X} (XAI + detección OOD), \textbf{CUBIC} (detecta
+    sesgos conceptuales).
+  \end{itemize}
+\item
+  \textbf{EU AI Act:} para sistemas de \textbf{alto riesgo} exige
+  trazabilidad, explicabilidad, supervisión humana y documentación. La
+  XAI deja de ser opcional.
+\item
+  \textbf{Desafíos:} las explicaciones post-hoc pueden ser engañosas
+  (\emph{confirmation bias}), no hay métrica única, alto coste (SHAP
+  exponencial), XAI multimodal y de cadenas de agentes.
+\end{itemize}
+
+\hypertarget{ai-safety-y-detecciuxf3n-out-of-distribution-ood}{%
+\subsection{2. AI Safety y Detección Out-of-Distribution
+(OOD)}\label{ai-safety-y-detecciuxf3n-out-of-distribution-ood}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{AI Safety:} campo interdisciplinar que previene accidentes,
+  usos indebidos y daños de los sistemas de IA. \textbf{AI safety
+  \(\neq\) AI security.}
+\item
+  \textbf{Robustez:} capacidad de mantener el rendimiento frente a
+  perturbaciones y entradas \textbf{adversarias} a lo largo del ciclo de
+  vida (anomalías, ataques adversarios, usos maliciosos, puertas
+  traseras).
+\item
+  \textbf{Mundo cerrado vs mundo abierto:} el supuesto de ``mundo
+  cerrado'' (todas las clases vistas en entrenamiento) provoca
+  sobreocupación del espacio y no se adapta a datos nuevos. El mundo
+  real es \textbf{abierto}.
+\item
+  \textbf{Detección Out-of-Distribution (OOD):} identificar entradas que
+  no pertenecen a la distribución de entrenamiento (\textbf{ID =
+  in-distribution}). Se distingue \textbf{Near-OOD} (parecido, p.~ej.
+  CIFAR-10 vs CIFAR-100) de \textbf{Far-OOD} (muy distinto, p.~ej.
+  EMNIST). Relacionado con el \textbf{Open Set Recognition}.
+\end{itemize}
+
+\hypertarget{aprendizaje-continuo-continual-learning}{%
+\subsection{3. Aprendizaje Continuo (Continual
+Learning)}\label{aprendizaje-continuo-continual-learning}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Definición:} paradigma donde el modelo aprende
+  \textbf{secuencialmente} tareas a lo largo del tiempo. Los humanos lo
+  hacen de forma natural; las redes, no.
+\item
+  \textbf{Olvido catastrófico (Catastrophic Forgetting):} al entrenar la
+  Tarea B, el rendimiento en la Tarea A cae drásticamente (caída de
+  \emph{accuracy}).
+\item
+  \textbf{Escenarios:} \textbf{Task-Incremental} (se sabe a qué tarea
+  pertenece el test), \textbf{Domain-Incremental} (misma tarea, distinta
+  distribución), \textbf{Class-Incremental} (nuevas clases en cada
+  tarea, el más difícil).
+\item
+  \textbf{Backward Transfer (BWT):} métrica del olvido:
+  \(\text{BWT} = \frac{1}{N-1}\sum_{j=1}^{N-1}[A(N,j) - A(j,j)]\).
+  \(\text{BWT}<0\) olvido; \(=0\) sin olvido; \(>0\) transferencia
+  positiva.
+\item
+  \textbf{Estrategias:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{EWC (Elastic Weight Consolidation):} penaliza cambiar los
+    pesos importantes para tareas previas, ponderando por la
+    \textbf{Matriz de Información de Fisher (FIM)}. A diferencia de
+    \(\ell_2\) puro (que penaliza todos los pesos por igual), protege
+    selectivamente.
+  \item
+    \textbf{LoRA y variantes:} adaptadores de bajo rango
+    (\(B\in\mathbb{R}^{d\times r}, A\in\mathbb{R}^{r\times k}\)) que
+    congelan los pesos base \(W_0\) y entrenan un adaptador por tarea.
+    Variantes: \textbf{O-LoRA} (ortogonaliza adaptadores),
+    \textbf{LoRA-Pro}, \emph{Adapter Merging}.
+  \end{itemize}
+\item
+  \textbf{Machine Unlearning:} problema inverso: hacer que un modelo
+  \textbf{olvide} información específica (p.~ej. por el ``derecho al
+  olvido'', GDPR Art. 17). Reentrenar desde cero es inviable.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{SISA (Sharded, Isolated, Sliced, Aggregated):} trocea los
+    datos; para olvidar un dato basta reentrenar el \emph{shard/slice}
+    afectado, dejando intactos los demás.
+  \item
+    \textbf{Algoritmo SSD (Selective Synaptic Dampening):} usa la FIM
+    para identificar y \textbf{amortiguar (dampening)} los pesos
+    específicos del dato a olvidar.
+  \item
+    \textbf{Reto:} verificar el olvido (distinguir un dato olvidado de
+    uno nunca visto).
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{causalidad-en-aprendizaje-automuxe1tico}{%
+\subsection{4. Causalidad en Aprendizaje
+Automático}\label{causalidad-en-aprendizaje-automuxe1tico}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Correlación \(\neq\) Causalidad:} ejemplo clásico helados vs
+  ahogamientos: su correlación positiva es \textbf{espuria}; el
+  \textbf{calor} es una \textbf{variable confusora (confounder)} que
+  aumenta ambos por separado.
+\item
+  \textbf{Shortcut learning / correlaciones espurias:} el modelo aprende
+  atajos (la nieve para ``lobo'', el fondo ``playa'' para una vaca) que
+  no generalizan.
+\item
+  \textbf{Causal Discovery:} inferir la estructura del \textbf{grafo
+  causal (DAG, grafo acíclico dirigido)} a partir de dependencias e
+  independencias condicionales, cuando no se puede intervenir.
+  Requisitos: \textbf{suficiencia causal} (haber observado todos los
+  confusores) y ausencia de ciclos.
+\item
+  \textbf{Causal Representation Learning:} separar el \textbf{espacio
+  latente} en \textbf{contenido \(Z_C\)} (mecanismos invariantes: la
+  vaca) y \textbf{estilo \(Z_S\)} (factores espurios: el fondo/playa).
+  Mediante \textbf{supervisión débil} e intervenciones sobre \(Z_S\), se
+  aprenden representaciones invariantes.
+\item
+  \textbf{V-REx (Variance Risk Extrapolation):}
+  \(R_{\text{V-REx}} = \sum_e R_e + \beta\cdot\text{Var}(\{R_e\})\).
+  Minimiza el riesgo medio y la \textbf{varianza} del rendimiento entre
+  entornos, forzando representaciones \(Z_C\) invariantes que ignoran
+  los factores espurios \(Z_S\).
+\end{itemize}
+
+\begin{quote}
+\textbf{Claves de examen (Tema 9).} XAI: distinguir pre-hoc/post-hoc,
+local/global, agnóstico/específico; LIME (inestable, local, agnóstico),
+SHAP (Shapley, exponencial). OOD: mundo abierto, Near vs Far. Continual
+learning: olvido catastrófico, EWC+Fisher, BWT negativo = olvido.
+Causalidad: confounder \(\to\) correlación espuria; separar contenido
+invariante del estilo espurio.
+\end{quote}
+
+\input{../../../extraFiles/preambulos_oficiales/referencias.tex}
+
+\end{document}
