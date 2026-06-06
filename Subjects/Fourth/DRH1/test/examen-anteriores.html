@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen DRH1 (años anteriores) - Dirección de Recursos Humanos (V/F)</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+      :root {
+        --bg-color: #f0fdfa;
+        --text-color: #134e4a;
+        --card-bg: #ffffff;
+        --border-color: #cdeae4;
+        --primary-color: #0d9488;
+        --hover-color: #0f766e;
+      }
+
+      body {
+        font-family: "Segoe UI", "Palatino Linotype", serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        padding: 20px;
+        font-size: 18px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+      
+      h2 {
+        color: var(--primary-color);
+        margin-top: 40px;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+      }
+
+      .author {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-style: italic;
+        color: #666;
+      }
+      
+      .question {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px 42px 20px 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+        overflow-wrap: break-word; 
+        position: relative;
+      }
+      .question:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .correct   { border-color: #1e7e34; background-color: #cdeccd; }
+      .partial   { border-color: #c79100; background-color: #fff0bf; }
+      .incorrect { border-color: #c12a37; background-color: #f7c9ce; }
+      .correct::before, .partial::before, .incorrect::before {
+        position: absolute; top: 12px; right: 14px;
+        font-weight: 700; font-size: 1.15rem; line-height: 1;
+      }
+      .correct::before   { content: "\2713"; color: #1e7e34; }
+      .incorrect::before { content: "\2717"; color: #c12a37; }
+      .partial::before   { content: "!"; color: #9a6b00; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+      
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+      
+      .opcion-linea, .opcion-bloque {
+        display: block;      
+        padding-left: 35px;  
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;   
+      }
+
+      .opcion-linea input[type="checkbox"], 
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 2px;
+        transform: scale(1.3);
+        margin: 0;
+        cursor: pointer;
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline; 
+      }
+
+      mjx-container { font-size: 110% !important; }
+      
+      img { max-width: 100%; height: auto; border-radius: 4px; }
+      table { border-collapse: collapse; width: 100%; margin: 10px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+      th { background-color: #f8f9fa; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 6px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 12px 16px;
+        border-left: 4px solid var(--primary-color);
+        background-color: rgba(142, 36, 52, 0.07);
+        border-radius: 4px;
+        font-size: 0.96em;
+      }
+      .dark-mode .btn-explicacion {
+        color: #e3a7af;
+        border-color: #e3a7af;
+      }
+      .dark-mode .btn-explicacion:hover {
+        background-color: #e3a7af;
+        color: #121212;
+      }
+      .dark-mode .explicacion {
+        background-color: rgba(147, 197, 253, 0.1);
+        border-left-color: #e3a7af;
+      }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: #555;
+      }
+      .instrucciones-extra li {
+        margin-bottom: 5px;
+      }
+
+      body.dark-mode {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --card-bg: #1e1e1e;
+        --border-color: #444;
+        --primary-color: #374151;
+        --hover-color: #4b5563;
+      }
+      .dark-mode .author { color: #aaa; }
+      .dark-mode th { background-color: #333; }
+      .dark-mode .correct { background-color: #0c5132 !important; border-color: #2ea44f; }
+      .dark-mode .partial { background-color: #5a3d00 !important; border-color: #d9a400; }
+      .dark-mode .incorrect { background-color: #5e1620 !important; border-color: #f06070; }
+      .dark-mode .correct::before { color: #5ce08a; }
+      .dark-mode .incorrect::before { color: #ff8a8a; }
+      .dark-mode .partial::before { color: #ffce5a; }
+      .dark-mode .instrucciones-extra ul { color: #bbb; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; }
+        .question { page-break-inside: avoid; border: none; box-shadow: none; padding: 0; margin-bottom: 20px; }
+        .info-box, button, #extra-buttons { display: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+<div class="md2html-marca" style="margin:0 auto 22px;padding:9px 16px;border:1px solid var(--primary-color,#888);border-radius:8px;font-size:13px;line-height:1.45;text-align:center;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;opacity:.92;">Este test se ha generado con la herramienta <a href="https://elblogdeismael.github.io/md2html/" target="_blank" rel="noopener" style="color:var(--primary-color,#0066cc);font-weight:700;text-decoration:none;">md2html</a> · <a href="https://github.com/Ismael-Sallami/md2html-testGenerator" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">repositorio de Ismael Sallami</a></div>
+
+    <h1>Examen DRH1 (años anteriores) - Dirección de Recursos Humanos (V/F)</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
+
+    <div class="info-box">
+      <p>Recopilación de preguntas de exámenes ordinarios de años anteriores de RRHH en formato Verdadero/Falso. Pulsa "Ver explicación" para razonar cada respuesta.</p>
+      
+      <div class="instrucciones-extra">
+        
+      </div>
+      
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+      
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
+    </div>
+
+    <div id="questions-container">
+      <div class="question" id="q1" data-correct="1">
+  <div class="enunciado"><strong>1.</strong> La rotación de puestos es una técnica adecuada para rediseñar un puesto cuando se pretende solventar los problemas derivados de un bajo nivel de especialización.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q1')">Ver explicación</button>
+  <div class="explicacion" id="exp-q1" style="display:none">Falso. La rotación de puestos es una técnica adecuada para rediseñar un puesto cuando se pretende solventar los problemas derivados de un alto nivel de especialización.</div>
+</div>
+<div class="question" id="q2" data-correct="1">
+  <div class="enunciado"><strong>2.</strong> La presión de un grupo, que se produce al utilizar la técnica Delphi en la planificación de recursos humanos, puede hacer que las valoraciones realizadas por los expertos sean menos precisas de lo esperado.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q2')">Ver explicación</button>
+  <div class="explicacion" id="exp-q2" style="display:none">Falso. La presión de un grupo se produce al utilizar la técnica del grupo nominal ya que, con esta técnica, hay un cara a cara entre los integrantes del grupo y hace que los resultados sean menos precisos. Al utilizar la técnica Delphi surgen problemas a la hora de integrar las opiniones de los expertos.</div>
+</div>
+<div class="question" id="q3" data-correct="0">
+  <div class="enunciado"><strong>3.</strong> La empresa DANONE está realizando una reestructuración interna de su plantilla porque, debido a algunas decisiones estratégicas realizadas, su oferta de recursos humanos es actualmente mayor que su demanda. Para realizar dicha reestructuración podría aplicar algunas medidas como una reducción de jornada laboral a un porcentaje de sus trabajadores y promover jubilaciones anticipadas.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q3')">Ver explicación</button>
+  <div class="explicacion" id="exp-q3" style="display:none">Verdadero.</div>
+</div>
+<div class="question" id="q4" data-correct="1">
+  <div class="enunciado"><strong>4.</strong> La previsión de la demanda de recursos humanos se puede realizar utilizando tanto métodos cuantitativos, como por ejemplo el análisis de tendencias, como métodos cualitativos, como el diagrama de dispersión.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q4')">Ver explicación</button>
+  <div class="explicacion" id="exp-q4" style="display:none">Falso, ambos son métodos cuantitativos. Un ejemplo de método cualitativo sería la técnica de grupo nominal o la técnica Delphi.</div>
+</div>
+<div class="question" id="q5" data-correct="1">
+  <div class="enunciado"><strong>5.</strong> El reclutamiento es la práctica de gestión de RRHH que se ocupa de introducir a los nuevos trabajadores en la organización, explicarles los cometidos de sus puestos y presentarles a otras personas con las que van a trabajar.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q5')">Ver explicación</button>
+  <div class="explicacion" id="exp-q5" style="display:none">Falso. La definición corresponde con la de socialización ya que el reclutamiento se encarga de la búsqueda de candidatos mediante reclutamiento interno o externo.</div>
+</div>
+<div class="question" id="q6" data-correct="1">
+  <div class="enunciado"><strong>6.</strong> El employer branding es el proceso por el cual las empresas buscan e identifican los posibles candidatos para cubrir sus necesidades internas de empleo o de mano de obra mediante las redes sociales.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q6')">Ver explicación</button>
+  <div class="explicacion" id="exp-q6" style="display:none">Falso. Consiste en potenciar a la empresa como la marca de buen empleador para así ser atractiva y atraer a posibles candidatos.</div>
+</div>
+<div class="question" id="q7" data-correct="1">
+  <div class="enunciado"><strong>7.</strong> El reclutamiento externo mal gestionado produce endogamia en la organización.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q7')">Ver explicación</button>
+  <div class="explicacion" id="exp-q7" style="display:none">Falso. Se produciría cuando hay un reclutamiento interno mal gestionado.</div>
+</div>
+<div class="question" id="q8" data-correct="0">
+  <div class="enunciado"><strong>8.</strong> Los tests psicotécnicos son medidas objetivas y estandarizadas que analizan determinadas capacidades (por ejemplo, verbales, de razonamiento, entre otras) o aptitudes y personalidad de los candidatos (extroversión, honradez, entre otras).</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q8')">Ver explicación</button>
+  <div class="explicacion" id="exp-q8" style="display:none">Verdadero.</div>
+</div>
+<div class="question" id="q9" data-correct="1">
+  <div class="enunciado"><strong>9.</strong> La socialización formal se desarrolla fundamentalmente a través de los compañeros de trabajo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q9')">Ver explicación</button>
+  <div class="explicacion" id="exp-q9" style="display:none">Falso. Sería la informal, ya que la formal es cuando la empresa lleva este proceso.</div>
+</div>
+<div class="question" id="q10" data-correct="0">
+  <div class="enunciado"><strong>10.</strong> Una técnica de selección es fiable si los resultados obtenidos al aplicarla son consistentes en el tiempo y entre entrevistadores.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q10')">Ver explicación</button>
+  <div class="explicacion" id="exp-q10" style="display:none">Verdadero.</div>
+</div>
+<div class="question" id="q11" data-correct="1">
+  <div class="enunciado"><strong>11.</strong> Mientras que la formación está más orientada a preparar al trabajador para el futuro, el desarrollo se centra en las necesidades formativas actuales de los individuos de la organización.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q11')">Ver explicación</button>
+  <div class="explicacion" id="exp-q11" style="display:none">Falso. Sería al contrario: la formación trata de formar y corregir deficiencias a los trabajadores para el trabajo actual, mientras que el desarrollo es más para grupos y hará que estén preparados para el futuro.</div>
+</div>
+<div class="question" id="q12" data-correct="0">
+  <div class="enunciado"><strong>12.</strong> El mentor es un profesional experimentado de la organización que guía a otro empleado con especial talento.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q12')">Ver explicación</button>
+  <div class="explicacion" id="exp-q12" style="display:none">Verdadero.</div>
+</div>
+<div class="question" id="q13" data-correct="1">
+  <div class="enunciado"><strong>13.</strong> La carrera profesional recoge la sucesión de actividades laborales y puestos desempeñados por una persona dentro de una misma empresa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q13')">Ver explicación</button>
+  <div class="explicacion" id="exp-q13" style="display:none">Falso. Tanto dentro como fuera de la empresa, a lo largo de su vida laboral.</div>
+</div>
+<div class="question" id="q14" data-correct="1">
+  <div class="enunciado"><strong>14.</strong> El desarrollo de una marca personal adecuada permite a las empresas incrementar su capacidad para atraer y retener a trabajadores altamente cualificados.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q14')">Ver explicación</button>
+  <div class="explicacion" id="exp-q14" style="display:none">Falso. La definición corresponde a la de employer branding, ya que la marca personal está en el trabajador: es la imagen o percepción que los demás tienen del trabajador.</div>
+</div>
+<div class="question" id="q15" data-correct="1">
+  <div class="enunciado"><strong>15.</strong> La suspensión del contrato de trabajo, como puede ser una jubilación o una dimisión, se produce cuando se interrumpe temporalmente la prestación laboral entre el trabajador y la empresa y las obligaciones entre ambas partes.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q15')">Ver explicación</button>
+  <div class="explicacion" id="exp-q15" style="display:none">Falso. La jubilación y la dimisión son rupturas del contrato de trabajo de forma voluntaria. La excedencia o el ERTE (más de un trabajador) son ejemplos de suspensión laboral.</div>
+</div>
+<div class="question" id="q16" data-correct="1">
+  <div class="enunciado"><strong>16.</strong> A la hora de evaluar el rendimiento, el efecto halo se produce cuando el evaluador quiere evitar problemas con los evaluados y tiende a calificar de forma indulgente, dando una mayor calificación de la que realmente debería obtener ese trabajador por la labor que ha realizado.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q16')">Ver explicación</button>
+  <div class="explicacion" id="exp-q16" style="display:none">Falso. La descripción concuerda con la del error de lenidad, ya que el efecto halo hace que el evaluador generalice una característica específica positiva del evaluado.</div>
+</div>
+<div class="question" id="q17" data-correct="0">
+  <div class="enunciado"><strong>17.</strong> Los criterios subjetivos de evaluación del rendimiento valoran los comportamientos, actitudes y capacidades de los trabajadores en el desempeño de su labor.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q17')">Ver explicación</button>
+  <div class="explicacion" id="exp-q17" style="display:none">Verdadero.</div>
+</div>
+<div class="question" id="q18" data-correct="1">
+  <div class="enunciado"><strong>18.</strong> La flexibilidad laboral, las prestaciones sociales y el clima laboral se consideran tipos de retribución no financiera.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q18')">Ver explicación</button>
+  <div class="explicacion" id="exp-q18" style="display:none">Falso, ya que las prestaciones sociales son un tipo de retribución financiera indirecta.</div>
+</div>
+<div class="question" id="q19" data-correct="0">
+  <div class="enunciado"><strong>19.</strong> Existe equidad individual retributiva si dos individuos que ocupan un puesto similar pero que no contribuyen de forma similar a la organización no reciben la misma retribución.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q19')">Ver explicación</button>
+  <div class="explicacion" id="exp-q19" style="display:none">Verdadero.</div>
+</div>
+<div class="question" id="q20" data-correct="1">
+  <div class="enunciado"><strong>20.</strong> La diversidad en el lugar de trabajo no tiene ningún impacto en la productividad de la empresa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q20')">Ver explicación</button>
+  <div class="explicacion" id="exp-q20" style="display:none">Falso. Sí tiene impacto en la productividad de la empresa, ya que puede proporcionar diferentes puntos de vista, creatividad… teniendo así un efecto en los resultados de la empresa.</div>
+</div>
+<div class="question" id="q21" data-correct="0">
+  <div class="enunciado"><strong>21.</strong> La motivación de los empleados es una función importante de la gestión de RRHH.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q21')">Ver explicación</button>
+  <div class="explicacion" id="exp-q21" style="display:none">Verdadero.</div>
+</div>
+<div class="question" id="q22" data-correct="0">
+  <div class="enunciado"><strong>22.</strong> El liderazgo transformacional se enfoca en motivar y empoderar a los empleados para que alcancen su máximo potencial.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q22')">Ver explicación</button>
+  <div class="explicacion" id="exp-q22" style="display:none">Verdadero.</div>
+</div>
+<div class="question" id="q23" data-correct="1">
+  <div class="enunciado"><strong>23.</strong> El acoso en el lugar de trabajo es un problema menor y no necesita ser abordado con seriedad.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q23')">Ver explicación</button>
+  <div class="explicacion" id="exp-q23" style="display:none">Falso. Es un problema grave que requiere de atención y solución inmediata.</div>
+</div>
+<div class="question" id="q24" data-correct="1">
+  <div class="enunciado"><strong>24.</strong> El reclutamiento es un proceso único y no hay necesidad de revisar o mejorar constantemente las prácticas de reclutamiento de una empresa.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q24')">Ver explicación</button>
+  <div class="explicacion" id="exp-q24" style="display:none">Falso. El reclutamiento es un proceso dinámico y continuo que debe ser revisado y mejorado constantemente para asegurar que la empresa atraiga y seleccione a los mejores candidatos.</div>
+</div>
+<div class="question" id="q25" data-correct="1">
+  <div class="enunciado"><strong>25.</strong> Los beneficios laborales, como los seguros de salud y los planes de retiro, no son importantes para los empleados.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q25')">Ver explicación</button>
+  <div class="explicacion" id="exp-q25" style="display:none">Falso. Son importantes para los empleados ya que los mantienen motivados.</div>
+</div>
+<div class="question" id="q26" data-correct="1">
+  <div class="enunciado"><strong>26.</strong> La retroalimentación positiva es la única forma efectiva de motivar a los empleados.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q26')">Ver explicación</button>
+  <div class="explicacion" id="exp-q26" style="display:none">Falso. No es la única manera de motivar a los empleados, ya que también encontramos el establecimiento de metas desafiantes, recompensas y oportunidades de mejora.</div>
+</div>
+<div class="question" id="q27" data-correct="0">
+  <div class="enunciado"><strong>27.</strong> La evaluación del desempeño es una herramienta importante para identificar fortalezas y debilidades de los empleados.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q27')">Ver explicación</button>
+  <div class="explicacion" id="exp-q27" style="display:none">Verdadero.</div>
+</div>
+<div class="question" id="q28" data-correct="1">
+  <div class="enunciado"><strong>28.</strong> Las empresas deben enfocarse en la contratación de empleados con habilidades técnicas y no preocuparse por la personalidad o habilidades sociales.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q28')">Ver explicación</button>
+  <div class="explicacion" id="exp-q28" style="display:none">Falso. Ambas habilidades son claves: el trabajador tiene que ser adecuado a nivel de formación (habilidad técnica), pero un determinado puesto requiere además características de personalidad como liderazgo, sociabilidad… para poder desempeñarlo de la mejor manera posible (habilidades sociales).</div>
+</div>
+<div class="question" id="q29" data-correct="1">
+  <div class="enunciado"><strong>29.</strong> La capacidad y el desarrollo de los empleados no son importantes si un empleado tiene las habilidades técnicas para el trabajo.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q29')">Ver explicación</button>
+  <div class="explicacion" id="exp-q29" style="display:none">Falso. Un empleado necesita tanto las habilidades técnicas (formación) como las capacidades y aptitudes que requiera el puesto. Además, el desarrollo es clave para que el empleado esté bien preparado de cara al futuro (largo plazo).</div>
+</div>
+<div class="question" id="q30" data-correct="0">
+  <div class="enunciado"><strong>30.</strong> La delegación de poder (empowerment) motiva a los empleados a ser creativos y asumir riesgos, ya que da la oportunidad a los trabajadores de tomar decisiones que tradicionalmente serían tomadas por los directivos.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="0"> Verdadero</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="1"> Falso</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q30')">Ver explicación</button>
+  <div class="explicacion" id="exp-q30" style="display:none">Verdadero.</div>
+</div>
+
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
+
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
+
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
+
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+        
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
+
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checked.length === 0) return;
+
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
+            } else {
+              q.classList.add("incorrect");
+            }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+        
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
+        }
+        
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
+
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+        
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+        
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+        
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+            
+            q.classList.remove("correct", "partial", "incorrect");
+            
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+        
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+        
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+        
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
+</html>
