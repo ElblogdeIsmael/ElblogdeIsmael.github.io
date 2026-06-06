@@ -11,6 +11,26 @@
 (function (global) {
   "use strict";
 
+  // --- Marca de agua (solo tests generados desde la web) ---
+  var REPO_URL = "https://github.com/Ismael-Sallami/md2html-testGenerator";
+  var WEB_URL = "https://elblogdeismael.github.io/md2html/";
+
+  function bannerMarca() {
+    return '\n<div class="md2html-marca" style="margin:0 auto 22px;padding:9px 16px;'
+      + 'border:1px solid var(--primary-color,#888);border-radius:8px;font-size:13px;line-height:1.45;'
+      + "text-align:center;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;opacity:.92;\">"
+      + 'Este test se ha generado con la herramienta '
+      + '<a href="' + WEB_URL + '" target="_blank" rel="noopener" '
+      + 'style="color:var(--primary-color,#0066cc);font-weight:700;text-decoration:none;">md2html</a>'
+      + ' · <a href="' + REPO_URL + '" target="_blank" rel="noopener" '
+      + 'style="color:inherit;text-decoration:underline;">repositorio de Ismael Sallami</a>'
+      + '</div>\n';
+  }
+
+  function inyectarMarca(html) {
+    return html.replace(/(<body[^>]*>)/i, "$1" + bannerMarca());
+  }
+
   // markdown-it con HTML en línea permitido (como el 'extra' de python-markdown).
   function nuevoMd() {
     if (typeof global.markdownit !== "function") {
@@ -255,6 +275,8 @@
     finalHtml = reemplazar(finalHtml, "{{DESCRIPCION}}", desc);
     finalHtml = reemplazar(finalHtml, "{{LISTA_INFO}}", htmlInstrucciones);
     finalHtml = reemplazar(finalHtml, "{{PREGUNTAS_HTML}}", htmlCuerpo);
+
+    if (opts.marca !== false) finalHtml = inyectarMarca(finalHtml);
 
     return { html: finalHtml, numPreguntas: numPreguntas };
   }
