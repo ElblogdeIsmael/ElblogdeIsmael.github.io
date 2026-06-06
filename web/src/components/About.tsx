@@ -60,7 +60,7 @@ export default function About() {
             Ismael Sallami Moreno
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-2 text-lg text-lime">
-            Estudiante, curioso, multidisciplinar
+            Estudiante de informática y ADE, siempre liado con algún proyecto
           </motion.p>
           <motion.p variants={fadeUp} className="mt-5 max-w-xl text-base leading-relaxed text-mist">
             Estudio el Doble Grado en Ingeniería Informática y ADE en la

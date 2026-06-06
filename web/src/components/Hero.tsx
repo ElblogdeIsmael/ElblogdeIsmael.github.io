@@ -65,10 +65,9 @@ export default function Hero() {
           className="mt-6 max-w-xl text-base leading-relaxed text-mist sm:text-lg"
         >
           Apuntes, prácticas y materiales del Doble Grado en Ingeniería
-          Informática y Administración y Dirección de Empresas. Una plataforma
-          creada por{" "}
-          <span className="font-600 text-ink">Ismael Sallami Moreno</span> para
-          compartir conocimiento y facilitar el aprendizaje.
+          Informática y Administración y Dirección de Empresas. La mantiene{" "}
+          <span className="font-600 text-ink">Ismael Sallami Moreno</span>: subo
+          lo que voy haciendo por si le sirve a alguien más.
         </motion.p>
 
         <motion.div variants={fadeUp} className="mt-9 flex flex-wrap items-center gap-4">
