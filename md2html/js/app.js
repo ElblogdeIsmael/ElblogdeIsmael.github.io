@@ -5,6 +5,7 @@
   var SWATCH = {
     pro: "#007bff", navy: "#1d4ed8", burdeos: "#8e2434", verde: "#0f766e",
     indigo: "#4338ca", grafito: "#475569", ambar: "#b45309", academico: "#8b2a0f",
+    terminal: "#00e58a", mono: "#111111", teal: "#0d9488", rosa: "#db2777",
   };
 
   var EJEMPLO = [
