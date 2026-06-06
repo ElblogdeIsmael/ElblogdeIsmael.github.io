@@ -67,7 +67,12 @@
   // ---------- Tema de la página (claro/oscuro) ----------
   (function initPageTheme() {
     var saved = localStorage.getItem("md2html_page_theme");
-    if (saved === "light") document.body.classList.add("light");
+    if (saved === "dark") {
+      document.body.classList.remove("light");
+    } else {
+      document.body.classList.add("light");
+      if (!saved) localStorage.setItem("md2html_page_theme", "light");
+    }
     var btn = $("theme-toggle");
     function paint() { btn.textContent = document.body.classList.contains("light") ? "☀️" : "🌙"; }
     paint();
