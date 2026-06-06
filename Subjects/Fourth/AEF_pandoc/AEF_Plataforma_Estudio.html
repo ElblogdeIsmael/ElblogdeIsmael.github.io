@@ -32,6 +32,9 @@
     --text-faint: #4a5068;
     --accent: #8b7cf6;
     --accent-dim: rgba(139,124,246,0.15);
+    --practica: #4ec9b0;
+    --practica-dim: rgba(78,201,176,0.12);
+    --practica-mid: rgba(78,201,176,0.25);
     --radius: 10px;
     --r2: 6px;
   }
@@ -41,12 +44,48 @@
   html { scroll-behavior: smooth; }
   
   body {
-    background: var(--bg);
+    background:
+      radial-gradient(900px 500px at 12% -8%, rgba(232,147,90,0.07), transparent 60%),
+      radial-gradient(900px 500px at 90% 0%, rgba(90,184,232,0.06), transparent 55%),
+      radial-gradient(1100px 700px at 50% 120%, rgba(78,201,176,0.05), transparent 60%),
+      var(--bg);
+    background-attachment: fixed;
     color: var(--text);
     font-family: 'DM Sans', sans-serif;
     font-size: 14px;
     line-height: 1.6;
     min-height: 100vh;
+  }
+  /* subtle grain overlay */
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    opacity: 0.025; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .header, .page { position: relative; z-index: 1; }
+
+  /* ── ENTRANCE REVEAL ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .page.visible > * {
+    opacity: 0; animation: fadeUp .5s cubic-bezier(.22,.61,.36,1) forwards;
+  }
+  .page.visible > *:nth-child(1) { animation-delay: .02s; }
+  .page.visible > *:nth-child(2) { animation-delay: .07s; }
+  .page.visible > *:nth-child(3) { animation-delay: .12s; }
+  .page.visible > *:nth-child(4) { animation-delay: .17s; }
+  .page.visible > *:nth-child(5) { animation-delay: .22s; }
+  .page.visible > *:nth-child(n+6) { animation-delay: .27s; }
+  @media (prefers-reduced-motion: reduce) {
+    .page.visible > * { animation: none; opacity: 1; }
+  }
+
+  /* ── FOCUS ── */
+  input:focus-visible, select:focus-visible, button:focus-visible {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
   }
 
   /* ── TOP HEADER ── */
@@ -88,6 +127,7 @@
   .tab-btn.active-cotton { color: var(--cotton); border-color: var(--cotton); background: var(--cotton-dim); }
   .tab-btn.active-teoria { color: var(--gold); border-color: var(--gold); background: var(--gold-dim); }
   .tab-btn.active-formulas { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+  .tab-btn.active-practica { color: var(--practica); border-color: var(--practica); background: var(--practica-dim); }
 
   /* ── LAYOUT ── */
   .page { display: none; padding: 28px 28px 60px; max-width: 1400px; margin: 0 auto; }
@@ -133,6 +173,18 @@
   }
   .card.primor-card { border-color: rgba(232,147,90,.25); }
   .card.cotton-card { border-color: rgba(90,184,232,.25); }
+  .card, .kpi, .indicator-card {
+    transition: transform .22s cubic-bezier(.22,.61,.36,1), border-color .22s, box-shadow .22s;
+  }
+  .card:hover, .indicator-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--border2);
+    box-shadow: 0 8px 28px -12px rgba(0,0,0,.6);
+  }
+  .kpi:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -14px rgba(0,0,0,.7);
+  }
 
   /* ── KPI CARDS ── */
   .kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
@@ -390,7 +442,196 @@
   .check-item.done { border-color:rgba(78,201,148,.3); background:rgba(78,201,148,.06); }
   .check-item.done span { color:var(--green); text-decoration:line-through; }
 
+  /* ════════════ PRÁCTICA (EXCEL DRAG&DROP) ════════════ */
+  .prac-toolbar {
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+    background:var(--bg2); border:1px solid var(--border);
+    border-radius:var(--radius); padding:12px 16px; margin-bottom:18px;
+  }
+  .prac-toolbar .tb-label {
+    font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--text-faint);
+  }
+  .prac-btn {
+    display:inline-flex; align-items:center; gap:6px;
+    padding:6px 14px; background:var(--bg3); border:1px solid var(--border);
+    color:var(--text-dim); border-radius:var(--r2);
+    font-family:'DM Sans',sans-serif; font-size:12px; font-weight:500; cursor:pointer;
+    transition:all .15s;
+  }
+  .prac-btn svg { flex-shrink:0; }
+  .prac-btn:hover { color:var(--text); border-color:var(--border2); }
+  .prac-btn.primor:hover, .prac-btn.primor.on { color:var(--primor); border-color:var(--primor); background:var(--primor-dim); }
+  .prac-btn.cotton:hover, .prac-btn.cotton.on { color:var(--cotton); border-color:var(--cotton); background:var(--cotton-dim); }
+  .prac-btn.solid {
+    background:var(--practica-dim); border-color:var(--practica); color:var(--practica); font-weight:600;
+  }
+  .prac-btn.solid:hover { background:var(--practica-mid); }
+  .prac-select {
+    flex:1; min-width:220px; padding:7px 12px;
+    background:var(--bg3); border:1px solid var(--border2); color:var(--text);
+    border-radius:var(--r2); font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer;
+  }
+  .prac-select optgroup { color:var(--practica); font-style:normal; }
+  .prac-select option { color:var(--text); background:var(--bg2); }
 
+  .prac-layout { display:grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap:18px; align-items:start; }
+  .prac-cells-col { min-width:0; }
+
+  /* unit badge + disclaimer */
+  .unit-badge {
+    margin-left:auto; font-family:'DM Mono',monospace; font-size:11px;
+    padding:3px 10px; border-radius:20px; background:var(--bg3);
+    border:1px solid var(--border2); color:var(--text-dim); letter-spacing:.02em;
+  }
+  .prac-disclaimer {
+    display:flex; gap:10px; align-items:flex-start;
+    background:var(--bg2); border:1px solid var(--border); border-left:3px solid var(--practica);
+    border-radius:var(--r2); padding:10px 14px; margin-bottom:16px;
+    font-size:12px; color:var(--text-dim); line-height:1.55;
+  }
+  .prac-disclaimer svg { flex-shrink:0; color:var(--practica); margin-top:1px; }
+  .prac-disclaimer em { color:var(--warn); font-style:normal; font-weight:600; }
+
+  /* casillas groups */
+  .cell-group { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:12px; }
+  .cell-group > summary {
+    list-style:none; cursor:pointer; padding:12px 16px;
+    display:flex; align-items:center; gap:10px;
+    font-size:11px; font-weight:600; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--text-dim); background:var(--bg3);
+    transition:color .15s;
+  }
+  .cell-group > summary::-webkit-details-marker { display:none; }
+  .cell-group > summary:hover { color:var(--text); }
+  .cell-group > summary::before {
+    content:'▸'; font-size:10px; color:var(--practica); transition:transform .2s;
+  }
+  .cell-group[open] > summary::before { transform:rotate(90deg); }
+  .cell-group .tag {
+    margin-left:auto; font-size:9px; padding:2px 7px; border-radius:20px;
+    background:var(--practica-mid); color:var(--practica); letter-spacing:.05em;
+  }
+  .cells-grid {
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(155px,1fr));
+    gap:8px; padding:14px 16px;
+  }
+  .cell-chip {
+    display:flex; flex-direction:column; gap:3px;
+    background:var(--bg); border:1px solid var(--border2);
+    border-radius:var(--r2); padding:7px 9px; cursor:grab;
+    transition:border-color .15s, box-shadow .15s, transform .12s;
+  }
+  .cell-chip:hover { border-color:var(--practica); box-shadow:0 4px 14px -8px rgba(78,201,176,.5); }
+  .cell-chip:active { cursor:grabbing; }
+  .cell-chip.dragging { opacity:.45; transform:scale(.97); }
+  .cell-chip .chip-label {
+    font-size:11px; color:var(--text-dim); line-height:1.3;
+    display:flex; align-items:center; gap:5px;
+  }
+  .cell-chip .chip-grip { color:var(--text-faint); display:inline-flex; cursor:grab; }
+  .cell-chip.sel { border-color:var(--practica); background:var(--practica-dim); box-shadow:0 0 0 2px var(--practica-mid); }
+  .cell-chip input {
+    width:100%; background:var(--bg2); border:1px solid var(--border);
+    border-radius:4px; padding:3px 6px;
+    font-family:'DM Mono',monospace; font-size:12px; color:var(--text);
+  }
+  /* bento accents por grupo */
+  .cell-group.g-balance > summary::before { color:var(--cotton); }
+  .cell-group.g-pyg_func > summary::before { color:var(--practica); }
+  .cell-group.g-pyg_rm > summary::before { color:var(--gold); }
+  .cell-group.g-manual > summary::before { color:var(--text-faint); }
+  .cell-group.g-manual .tag { background:var(--warn-dim); color:var(--warn); }
+
+  /* workbench */
+  .workbench { background:var(--bg2); border:1px solid var(--practica-mid); border-radius:var(--radius); padding:18px 20px; position:sticky; top:64px; }
+  .wb-title { font-family:'DM Serif Display',serif; font-size:18px; margin-bottom:4px; color:var(--practica); }
+  .wb-cat { font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.08em; margin-bottom:14px; }
+  .formula-builder {
+    display:flex; flex-wrap:wrap; align-items:stretch; gap:12px;
+    background:var(--bg); border:1px solid var(--border2); border-radius:var(--r2);
+    padding:18px; margin:10px 0; min-height:90px;
+  }
+  .fb-op { align-self:center; font-family:'DM Mono',monospace; font-size:26px; color:var(--text-dim); padding:0 2px; }
+  .fb-fraction { display:flex; flex-direction:column; gap:6px; flex:1; min-width:220px; }
+  .fb-fraction .fb-bar { height:2px; background:var(--text-dim); border-radius:2px; }
+  .drop-slot {
+    flex:1; min-width:200px;
+    border:1.5px dashed var(--border2); border-radius:var(--r2);
+    padding:10px; min-height:54px;
+    display:flex; flex-direction:column; gap:6px;
+    transition:border-color .15s, background .15s;
+  }
+  .drop-slot .slot-hint { font-size:11px; color:var(--text-faint); text-align:center; align-self:center; margin:auto; }
+  .drop-slot.over { border-color:var(--practica); background:var(--practica-dim); }
+  .drop-slot.ok { border-color:var(--green); border-style:solid; background:var(--green-dim); }
+  .drop-slot.bad { border-color:var(--red); border-style:solid; background:var(--red-dim); }
+  .slot-token {
+    display:flex; align-items:center; gap:6px;
+    background:var(--bg3); border:1px solid var(--border2); border-radius:4px;
+    padding:4px 8px; font-size:11.5px;
+  }
+  .slot-token .st-sign {
+    cursor:pointer; font-family:'DM Mono',monospace; font-weight:600; width:16px; text-align:center;
+    border-radius:3px; user-select:none;
+  }
+  .slot-token .st-sign.plus { color:var(--green); }
+  .slot-token .st-sign.minus { color:var(--red); }
+  .slot-token .st-sign:hover { background:var(--bg); }
+  .slot-token .st-val { font-family:'DM Mono',monospace; color:var(--text-dim); margin-left:auto; }
+  .slot-token .st-x { cursor:pointer; color:var(--text-faint); font-size:13px; }
+  .slot-token .st-x:hover { color:var(--red); }
+  .slot-token.wrong { border-color:var(--red); }
+  .slot-token.right { border-color:var(--green); }
+
+  .wb-actions { display:flex; gap:10px; margin-top:14px; }
+  .prac-result { display:none; margin-top:16px; }
+  .prac-result.show { display:block; animation:fadeUp .4s ease forwards; }
+  .res-value-card {
+    background:var(--bg); border:1px solid var(--border2); border-left:3px solid var(--practica);
+    border-radius:var(--r2); padding:14px 16px; margin-bottom:10px;
+  }
+  .res-value-card .rv-num { font-family:'DM Mono',monospace; font-size:26px; font-weight:500; }
+  .res-interp {
+    background:var(--gold-dim); border-left:3px solid var(--gold);
+    padding:10px 14px; border-radius:0 var(--r2) var(--r2) 0; font-size:12.5px; line-height:1.6;
+  }
+  .res-banner { padding:8px 12px; border-radius:var(--r2); font-size:12.5px; font-weight:600; margin-bottom:10px; }
+  .res-banner.ok { background:var(--green-dim); color:var(--green); border:1px solid rgba(78,201,148,.3); }
+  .res-banner.bad { background:var(--red-dim); color:var(--red); border:1px solid rgba(232,90,90,.3); }
+  .res-banner.info { background:var(--practica-dim); color:var(--practica); border:1px solid var(--practica-mid); }
+  .res-banner { display:flex; align-items:center; gap:7px; }
+  .res-banner svg { flex-shrink:0; }
+
+  /* slot caption + token name */
+  .drop-slot .slot-cap { font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--text-faint); margin-bottom:2px; }
+  .slot-token .st-name { line-height:1.25; }
+  .slot-token .st-x { display:inline-flex; }
+
+  /* workbench notices */
+  .wb-warn { background:var(--warn-dim); border-left:3px solid var(--warn); color:var(--warn); padding:8px 12px; border-radius:0 var(--r2) var(--r2) 0; font-size:12px; margin-bottom:10px; }
+  .wb-note { background:var(--bg3); border-left:3px solid var(--text-faint); color:var(--text-dim); padding:7px 12px; border-radius:0 var(--r2) var(--r2) 0; font-size:11.5px; margin-bottom:10px; }
+  .wb-field { display:flex; align-items:center; gap:8px; margin-bottom:10px; font-size:12px; color:var(--text-dim); }
+  .wb-field input { width:140px; background:var(--bg); border:1px solid var(--border2); color:var(--text); border-radius:4px; padding:4px 8px; font-family:'DM Mono',monospace; font-size:12px; }
+
+  /* derived box */
+  .derived-box { flex:1; text-align:center; padding:6px 4px; }
+  .derived-formula { color:var(--accent); font-size:12.5px; margin-bottom:10px; }
+  .derived-val { font-family:'DM Mono',monospace; font-size:30px; font-weight:500; color:var(--practica); }
+  .derived-tag { font-size:10.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.07em; margin-top:6px; }
+
+  /* result */
+  .res-value-card .rv-cap { font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px; }
+  .res-expected { font-size:12px; color:var(--text-dim); margin-top:8px; padding-top:8px; border-top:1px solid var(--border); }
+  .res-expected strong { color:var(--text); font-family:'DM Mono',monospace; }
+  .cmp { display:inline-flex; align-items:center; gap:3px; font-weight:600; margin-left:4px; }
+  .cmp.ok { color:var(--green); }
+  .cmp.approx { color:var(--warn); }
+
+  @media(max-width:980px){
+    .prac-layout { grid-template-columns: 1fr; }
+    .workbench { position:static; }
+  }
   @media(max-width:900px){
     .grid-4,.kpi-grid { grid-template-columns: 1fr 1fr; }
     .grid-3 { grid-template-columns: 1fr 1fr; }
@@ -415,6 +656,7 @@
     <button class="tab-btn" onclick="showPage('cotton',this)">Cotton South</button>
     <button class="tab-btn" onclick="showPage('teoria',this)">Teoría</button>
     <button class="tab-btn" onclick="showPage('formulas',this)">Fórmulas</button>
+    <button class="tab-btn" onclick="showPage('practica',this)">Práctica</button>
     <button class="tab-btn" onclick="showPage('examen',this)">Examen</button>
   </nav>
 </header>
@@ -1348,6 +1590,71 @@
   </div>
 </div><!-- end page-formulas -->
 
+<!-- ═══════════════════ PAGE: PRÁCTICA ═══════════════════ -->
+<div id="page-practica" class="page">
+
+  <div class="sec-head">
+    <h2>Hoja de Práctica</h2>
+    <span class="badge" style="background:var(--practica-mid);color:var(--practica)">EXCEL INTERACTIVO</span>
+    <span id="prac-unit-badge" class="unit-badge">Primor 2019 · €</span>
+  </div>
+  <p style="color:var(--text-dim);font-size:13px;margin-bottom:14px;max-width:820px">
+    Elige un indicador, carga un caso o mete tus datos, y <strong style="color:var(--practica)">arrastra</strong>
+    (o haz clic) en las casillas del Balance y de la Cuenta de PyG para colocarlas en los huecos de la fórmula.
+    Pulsa <strong>Comprobar</strong> para validar qué partidas has elegido y contrastar tu resultado con el del caso real.
+  </p>
+
+  <div class="prac-disclaimer">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+    <span>Los valores cargados son <strong>los datos reales de los casos</strong>: <strong style="color:var(--primor)">Primor 2019</strong> en € · <strong style="color:var(--cotton)">Cotton South 2024</strong> en miles €. Los indicadores marcados <em>aprox.</em> usan denominadores estimados; los marcados <em>sin datos</em> requieren que metas las cifras a mano.</span>
+  </div>
+
+  <!-- A. TOOLBAR -->
+  <div class="prac-toolbar">
+    <span class="tb-label">Caso</span>
+    <button class="prac-btn primor" onclick="loadPracticaPreset('primor')">Primor 2019</button>
+    <button class="prac-btn cotton" onclick="loadPracticaPreset('cotton')">Cotton South 2024</button>
+    <button class="prac-btn" onclick="loadPracticaPreset('blank')">En blanco</button>
+    <span class="tb-label" style="margin-left:8px">Indicador</span>
+    <select id="ind-select" class="prac-select" onchange="selectIndicador(this.value)"></select>
+  </div>
+
+  <div class="prac-layout">
+    <!-- B. CASILLAS -->
+    <div class="prac-cells-col">
+      <div id="cells-zone"></div>
+    </div>
+
+    <!-- C+D. WORKBENCH -->
+    <div class="workbench" id="workbench">
+      <div id="wb-head">
+        <div class="wb-title" id="wb-title">Selecciona un indicador</div>
+        <div class="wb-cat" id="wb-cat">— elige arriba para empezar —</div>
+      </div>
+      <div id="wb-notice"></div>
+      <div class="formula-builder" id="formula-builder">
+        <span class="slot-hint" style="margin:auto;color:var(--text-faint)">El esqueleto de la fórmula aparecerá aquí</span>
+      </div>
+      <button class="interp-btn" id="hint-btn" style="display:none" onclick="toggleHint()">
+        <span>Ver fórmula teórica (pista)</span><span class="chevron">▾</span>
+      </button>
+      <div class="interp-body" id="hint-body"></div>
+      <div class="wb-actions">
+        <button class="prac-btn solid" onclick="comprobarPractica()">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Comprobar
+        </button>
+        <button class="prac-btn" onclick="resetSlots()">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+          Reiniciar huecos
+        </button>
+      </div>
+      <div class="prac-result" id="prac-result"></div>
+    </div>
+  </div>
+
+</div><!-- end page-practica -->
+
 <!-- ═══════════════════ PAGE: EXAMEN ═══════════════════ -->
 <div id="page-examen" class="page">
   <div class="sec-head">
@@ -1932,6 +2239,439 @@ document.querySelectorAll('.interp-btn').forEach(btn => {
     }
   });
 });
+
+// ════════════════════ PRÁCTICA v2: EXCEL DRAG&DROP + DATOS REALES ════════════════════
+const SVG = {
+  grip: '<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg>',
+  check: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>',
+  x: '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>',
+  remove: '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+};
+
+const PRAC_GROUPS = {
+  balance:  { label: 'Balance de Situación', tag: 'Activo · PN · Pasivo' },
+  pyg_func: { label: 'Cuenta de PyG (funcional)', tag: 'Analítica / cascada' },
+  pyg_rm:   { label: 'Cuenta de PyG (Registro Mercantil)', tag: 'Modelo oficial' },
+  manual:   { label: 'Datos bursátiles / extra (manuales)', tag: 'Sin datos del caso' }
+};
+
+const PARTIDAS = {
+  // ── Balance ──
+  b_activo:'TOTAL ACTIVO', b_anc:'Activo no corriente', b_ac:'Activo corriente',
+  b_inmov_mat_neto:'Inmovilizado material (neto)', b_inmov_intang:'Inmovilizado intangible (neto)',
+  b_invfin_lp:'Inversiones financieras L/P', b_invfin_cp:'Inversiones financieras c/p',
+  b_materias_primas:'Existencias: materias primas', b_prod_curso:'Existencias: productos en curso',
+  b_prod_terminados:'Existencias: productos terminados', b_existencias:'Existencias (total / mercaderías)',
+  b_clientes:'Clientes / deudores comerciales', b_efectivo:'Efectivo y equivalentes', b_otros_ac:'Otros activos corrientes',
+  b_amort_acum:'Amortización acumulada (memoria)',
+  b_pn:'Patrimonio neto', b_fp:'Fondos propios', b_pnc:'Pasivo no corriente', b_pc:'Pasivo corriente',
+  b_proveedores:'Proveedores (acreedores comerciales)', b_otros_pc:'Otros pasivos corrientes (no banc.)',
+  b_deudas_banco_cp:'Deudas bancarias c/p', b_deudas_banco_lp:'Deudas bancarias L/P',
+  // ── PyG funcional ──
+  f_ing_exp:'Ingresos de explotación', f_incn:'Importe neto cifra de negocios', f_var_pt:'Var. existencias prod. terminados',
+  f_consumos:'Consumos de explotación', f_otros_gastos:'Otros gastos de explotación', f_vae:'Valor Añadido (VAE)',
+  f_gastos_personal:'Gastos de personal', f_ebitda:'EBITDA / Resultado bruto explot. (RBEX)',
+  f_amortizacion:'Amortización del inmovilizado', f_deterioro:'Deterioro y var. provisiones', f_ebit:'EBIT / Resultado neto explot. (RNE)',
+  f_ing_fin:'Ingresos financieros', f_gastos_fin:'Gastos financieros', f_dif_cambio:'Diferencias de cambio',
+  f_otros_result:'Otros resultados', f_rai:'Resultado antes de impuestos (RAI)', f_impuesto:'Impuesto sobre beneficios',
+  f_resultado:'Resultado del ejercicio', f_n_empleados:'Nº de empleados',
+  // ── PyG Registro Mercantil ──
+  rm_incn:'RM · Importe neto cifra negocios', rm_var_existencias:'RM · Var. existencias prod.',
+  rm_aprov:'RM · Aprovisionamientos', rm_otros_ing:'RM · Otros ingresos explotación', rm_gastos_personal:'RM · Gastos de personal',
+  rm_otros_gastos:'RM · Otros gastos explotación', rm_amort:'RM · Amortización inmovilizado', rm_deterioro:'RM · Deterioro/result. enajenaciones',
+  rm_ing_fin:'RM · Ingresos financieros', rm_gastos_fin:'RM · Gastos financieros', rm_impuesto:'RM · Impuesto beneficios', rm_resultado:'RM · Resultado del ejercicio',
+  // ── Manuales ──
+  m_n_acciones:'Nº de acciones', m_cotizacion:'Cotización por acción', m_dividendo_total:'Dividendo total repartido',
+  m_dividendo_accion:'Dividendo por acción', m_cashflow_accion:'Cash-flow por acción'
+};
+const GROUP_OF = k => k.startsWith('b_')?'balance':k.startsWith('f_')?'pyg_func':k.startsWith('rm_')?'pyg_rm':'manual';
+
+const PRESET_VALUES = {
+  primor: { __label:'Primor 2019', __unit:'€',
+    b_activo:3347691, b_anc:1387432, b_ac:1960258, b_inmov_mat_neto:1319626, b_inmov_intang:0, b_invfin_lp:67806, b_invfin_cp:0,
+    b_materias_primas:0, b_prod_curso:0, b_prod_terminados:0, b_existencias:1472123, b_clientes:77012, b_efectivo:411123, b_otros_ac:0,
+    b_amort_acum:247277, b_pn:1046135, b_fp:1043207, b_pnc:1083044, b_pc:1218512, b_proveedores:926953, b_otros_pc:185256,
+    b_deudas_banco_cp:106303, b_deudas_banco_lp:1083044,
+    f_ing_exp:10765985, f_incn:10758528, f_var_pt:0, f_consumos:8532791, f_otros_gastos:961580, f_vae:1271614, f_gastos_personal:521736,
+    f_ebitda:749878, f_amortizacion:145351, f_deterioro:0, f_ebit:604527, f_ing_fin:0, f_gastos_fin:5025, f_dif_cambio:0, f_otros_result:83248,
+    f_rai:517230, f_impuesto:43838, f_resultado:473392, f_n_empleados:null,
+    rm_incn:10758528, rm_var_existencias:0, rm_aprov:8532791, rm_otros_ing:7457, rm_gastos_personal:521736, rm_otros_gastos:961580,
+    rm_amort:145351, rm_deterioro:0, rm_ing_fin:0, rm_gastos_fin:5025, rm_impuesto:43838, rm_resultado:473392,
+    m_n_acciones:null, m_cotizacion:null, m_dividendo_total:null, m_dividendo_accion:null, m_cashflow_accion:null,
+    __prevNOF:-602987 },
+  cotton: { __label:'Cotton South 2024', __unit:'miles €',
+    b_activo:30068, b_anc:14556, b_ac:15512, b_inmov_mat_neto:14504, b_inmov_intang:13, b_invfin_lp:0, b_invfin_cp:0,
+    b_materias_primas:6380, b_prod_curso:0, b_prod_terminados:3788, b_existencias:10168, b_clientes:3081, b_efectivo:1183, b_otros_ac:1080,
+    b_amort_acum:23704, b_pn:16308, b_fp:15405, b_pnc:3561, b_pc:10199, b_proveedores:3265, b_otros_pc:2056,
+    b_deudas_banco_cp:4878, b_deudas_banco_lp:2140,
+    f_ing_exp:28260, f_incn:27612, f_var_pt:221, f_consumos:15256, f_otros_gastos:4639, f_vae:8365, f_gastos_personal:4085,
+    f_ebitda:4280, f_amortizacion:1233, f_deterioro:389, f_ebit:2658, f_ing_fin:31, f_gastos_fin:381, f_dif_cambio:100, f_otros_result:0,
+    f_rai:2821, f_impuesto:666, f_resultado:2155, f_n_empleados:56,
+    rm_incn:27612, rm_var_existencias:221, rm_aprov:15256, rm_otros_ing:648, rm_gastos_personal:4085, rm_otros_gastos:4639,
+    rm_amort:1233, rm_deterioro:389, rm_ing_fin:31, rm_gastos_fin:381, rm_impuesto:666, rm_resultado:2155,
+    m_n_acciones:null, m_cotizacion:null, m_dividendo_total:null, m_dividendo_accion:null, m_cashflow_accion:null,
+    __prevNOF:12667 }
+};
+
+// ── Catálogo completo de indicadores ──
+// layout: fraction | expr | fraction360 | derived ; expected: valor real del caso (pct → ratio)
+const INDICADORES = [
+ // A · ESTRUCTURA Y SOLVENCIA
+ {id:'envejec', nombre:'Grado de envejecimiento del activo', cat:'A · Estructura y solvencia', layout:'fraction', unit:'pct',
+  slots:[{label:'Numerador',correct:[{key:'b_amort_acum',s:1}]},{label:'Denominador (inmov. bruto)',correct:[{key:'b_inmov_mat_neto',s:1},{key:'b_amort_acum',s:1},{key:'b_inmov_intang',s:1}]}],
+  hint:'Amort. acumulada / (Inmov. material neto + Amort. acumulada + Inmov. intangible)',
+  interp:'% de vida útil consumida del inmovilizado. Alto (>60%) = maquinaria envejecida, habrá que renovar y saldrá caja.', expected:{primor:0.1578,cotton:0.620}},
+ {id:'nivel_endeud', nombre:'Nivel de endeudamiento', cat:'A · Estructura y solvencia', layout:'fraction', unit:'ratio',
+  slots:[{label:'Numerador',correct:[{key:'b_pnc',s:1},{key:'b_pc',s:1}]},{label:'Denominador',correct:[{key:'b_pn',s:1}]}],
+  hint:'(Pasivo no corriente + Pasivo corriente) / Patrimonio neto',
+  interp:'Riesgo financiero (Pasivo/PN). Alto = dependencia de bancos; bajo = autonomía.', expected:{primor:2.20,cotton:0.84}},
+ {id:'composic', nombre:'Composición del endeudamiento', cat:'A · Estructura y solvencia', layout:'fraction', unit:'ratio',
+  slots:[{label:'Numerador',correct:[{key:'b_pnc',s:1}]},{label:'Denominador',correct:[{key:'b_pc',s:1}]}],
+  hint:'Pasivo no corriente / Pasivo corriente',
+  interp:'Calidad de la deuda. Mayor = más deuda a largo plazo = más tiempo para pagar.', expected:{primor:0.89,cotton:0.35}},
+ {id:'garantia', nombre:'Ratio de Garantía', cat:'A · Estructura y solvencia', layout:'fraction', unit:'ratio',
+  slots:[{label:'Numerador',correct:[{key:'b_activo',s:1}]},{label:'Denominador',correct:[{key:'b_pnc',s:1},{key:'b_pc',s:1}]}],
+  hint:'Activo total / (Pasivo no corriente + Pasivo corriente)',
+  interp:'Distancia a la quiebra. >1 solvente; <1 quiebra técnica.', expected:{primor:1.45,cotton:2.19}},
+ {id:'solvencia', nombre:'Ratio de Solvencia (corto plazo)', cat:'A · Estructura y solvencia', layout:'fraction', unit:'ratio',
+  slots:[{label:'Numerador',correct:[{key:'b_ac',s:1}]},{label:'Denominador',correct:[{key:'b_pc',s:1}]}],
+  hint:'Activo corriente / Pasivo corriente',
+  interp:'Liquidez a corto. >1 cómodo; <1 riesgo de impago.', expected:{primor:1.61,cotton:1.52}},
+ {id:'fm', nombre:'Fondo de Maniobra (FM)', cat:'A · Estructura y solvencia', layout:'expr', unit:'eur',
+  slots:[{label:'FM = Σ (usa signos + / −)',correct:[{key:'b_ac',s:1},{key:'b_pc',s:-1}]}],
+  hint:'Activo corriente − Pasivo corriente',
+  interp:'Positivo = equilibrio a corto; negativo = financia largo plazo con deuda exigible.', expected:{primor:741747,cotton:5313}},
+ {id:'nof', nombre:'Necesidades Operativas de Financiación (NOF)', cat:'A · Estructura y solvencia', layout:'expr', unit:'eur',
+  slots:[{label:'NOF = Σ (usa signos + / −)',correct:[{key:'b_existencias',s:1},{key:'b_clientes',s:1},{key:'b_otros_ac',s:1},{key:'b_proveedores',s:-1},{key:'b_otros_pc',s:-1}]}],
+  hint:'Activo corriente de explotación − Pasivo corriente de explotación',
+  interp:'Fondos atrapados en el ciclo. Crecen con las ventas; si suben mucho exigen financiación.', expected:{primor:436927,cotton:9017}},
+ {id:'rln', nombre:'Recursos Líquidos Netos (RLN)', cat:'A · Estructura y solvencia', layout:'expr', unit:'eur',
+  slots:[{label:'RLN = Σ (usa signos + / −)',correct:[{key:'b_efectivo',s:1},{key:'b_invfin_cp',s:1},{key:'b_deudas_banco_cp',s:-1}]}],
+  hint:'Activo corriente financiero − Pasivo corriente no comercial',
+  interp:'Tesorería real. Positivo = liquidez; negativo = asfixia. Recuerda FM = NOF + RLN.', expected:{primor:304820,cotton:-3704}},
+ // B · CICLO PMM
+ {id:'subp_almacen', nombre:'Subperiodo de almacenamiento (MP)', cat:'B · Ciclo de maduración (PMM)', layout:'fraction360', unit:'dias', note:'aprox',
+  slots:[{label:'Numerador',correct:[{key:'b_materias_primas',s:1}]},{label:'Denominador (Consumo MP ≈ Consumos)',correct:[{key:'f_consumos',s:1}]}],
+  hint:'(Materias primas / Consumo de materias primas) × 360',
+  interp:'Días que la materia prima espera en almacén. Menor = mejor gestión de inventario.', expected:{primor:null,cotton:150.6}},
+ {id:'subp_fabric', nombre:'Subperiodo de fabricación', cat:'B · Ciclo de maduración (PMM)', layout:'fraction360', unit:'dias', note:'aprox',
+  slots:[{label:'Numerador',correct:[{key:'b_prod_curso',s:1}]},{label:'Denominador (Coste producción ≈ Consumos+Personal+Amort.)',correct:[{key:'f_consumos',s:1},{key:'f_gastos_personal',s:1},{key:'f_amortizacion',s:1}]}],
+  hint:'(Productos en curso / Coste de la producción terminada) × 360',
+  interp:'Días de elaboración del producto. Empresas comerciales = 0 (no fabrican).', expected:{primor:0,cotton:0}},
+ {id:'subp_venta_ind', nombre:'Subperiodo de venta (industrial)', cat:'B · Ciclo de maduración (PMM)', layout:'fraction360', unit:'dias', note:'aprox',
+  slots:[{label:'Numerador',correct:[{key:'b_prod_terminados',s:1}]},{label:'Denominador (Coste prod. vendida ≈ Consumos)',correct:[{key:'f_consumos',s:1}]}],
+  hint:'(Productos terminados / Coste de producción vendida) × 360',
+  interp:'Días que tarda en venderse el producto terminado. Alto = poca demanda.', expected:{primor:null,cotton:53.8}},
+ {id:'subp_venta_com', nombre:'Subperiodo de venta (comercial)', cat:'B · Ciclo de maduración (PMM)', layout:'fraction360', unit:'dias', note:'aprox',
+  slots:[{label:'Numerador',correct:[{key:'b_existencias',s:1}]},{label:'Denominador (Consumo de mercaderías ≈ Consumos)',correct:[{key:'f_consumos',s:1}]}],
+  hint:'(Mercaderías / Consumo de mercaderías) × 360',
+  interp:'Días de rotación del stock comercial. Modelo retail.', expected:{primor:62.1,cotton:null}},
+ {id:'subp_cobro', nombre:'Subperiodo de cobro a clientes', cat:'B · Ciclo de maduración (PMM)', layout:'fraction360', unit:'dias', note:'aprox',
+  slots:[{label:'Numerador',correct:[{key:'b_clientes',s:1}]},{label:'Denominador (Ventas)',correct:[{key:'f_incn',s:1}]}],
+  hint:'(Clientes / Importe neto cifra de negocios) × 360',
+  interp:'Días que tardan los clientes en pagar. Menor = antes tienes el dinero.', expected:{primor:1.5,cotton:37.6}},
+ {id:'subp_pago', nombre:'Subperiodo de pago a proveedores', cat:'B · Ciclo de maduración (PMM)', layout:'fraction360', unit:'dias', note:'aprox',
+  slots:[{label:'Numerador',correct:[{key:'b_proveedores',s:1}]},{label:'Denominador (Compras ≈ Consumos)',correct:[{key:'f_consumos',s:1}]}],
+  hint:'(Proveedores / Compras) × 360',
+  interp:'Días que tardas en pagar = financiación gratis. Conviene que sea alto (dentro de la ley).', expected:{primor:34.0,cotton:83.8}},
+ {id:'pmm_op', nombre:'PMM Operativo', cat:'B · Ciclo de maduración (PMM)', layout:'derived', unit:'dias', note:'aprox',
+  hint:'Σ subperiodos (almacenamiento + fabricación + venta + cobro)',
+  interp:'Duración total del ciclo: días desde la compra hasta el cobro. Menor = más eficiente.', expected:{primor:63.6,cotton:242.0}, compute:d=>d.pmm_op},
+ {id:'pmm_fin', nombre:'PMM Financiero', cat:'B · Ciclo de maduración (PMM)', layout:'derived', unit:'dias', note:'aprox',
+  hint:'PMM Operativo − Subperiodo de pago a proveedores',
+  interp:'Días que financias con recursos propios. Negativo = los proveedores financian todo el ciclo.', expected:{primor:24.5,cotton:158.1}, compute:d=>d.pmm_fin},
+ // C · GENERACIÓN DE EFECTIVO
+ {id:'fgo_aii', nombre:'FGO antes de Intereses e Impuestos', cat:'C · Generación de efectivo', layout:'derived', unit:'eur', note:'aprox',
+  hint:'EBIT + Amortización + Deterioro + Otros resultados (≈ RBEX ajustado)',
+  interp:'Caja bruta que genera el negocio antes de pagar bancos e impuestos.', expected:{primor:833126,cotton:4164}, compute:d=>d.fgo_aii},
+ {id:'fgo', nombre:'Fondos Generados por Operaciones (FGO)', cat:'C · Generación de efectivo', layout:'derived', unit:'eur', note:'aprox',
+  hint:'FGO a/I/I + Ingresos fin. − Gastos fin. − Impuesto',
+  interp:'Caja neta tras pagar banco y Hacienda. Mide la autofinanciación.', expected:{primor:784263,cotton:3315}, compute:d=>d.fgo},
+ {id:'feae', nombre:'Flujos de Efectivo de Explotación (FEAE)', cat:'C · Generación de efectivo', layout:'derived', unit:'eur', note:'aprox',
+  hint:'FGO − Variación de NOF  (usa el campo «NOF año anterior»)',
+  interp:'Caja real del negocio. Rentable (FGO+) pero FEAE− = vendes y no cobras / acumulas stock.', expected:{primor:-422146,cotton:6593}, compute:d=>d.feae},
+ {id:'cdd_cp', nombre:'Capacidad de devolución de deuda c/p', cat:'C · Generación de efectivo', layout:'derived', unit:'ratio', note:'aprox',
+  hint:'FGO a/I/I / Pasivo corriente no comercial (deudas bancarias c/p)',
+  interp:'Veces que la caja cubre la deuda bancaria a corto. >1 = seguridad.', expected:{primor:7.84,cotton:0.84}, compute:d=>d.cdd_cp},
+ {id:'cdd_total', nombre:'Capacidad de devolución de deuda total', cat:'C · Generación de efectivo', layout:'derived', unit:'ratio', note:'aprox',
+  hint:'FGO / Pasivo total no comercial (deuda bancaria c/p + L/P)',
+  interp:'Fracción de la deuda financiera total que puede devolver en un año.', expected:{primor:0.52,cotton:0.46}, compute:d=>d.cdd_total},
+ {id:'tiempo_devol', nombre:'Tiempo de devolución de la deuda', cat:'C · Generación de efectivo', layout:'derived', unit:'anios', note:'aprox',
+  hint:'Pasivo no comercial / FGO  (en años)',
+  interp:'Años que tardaría en saldar toda la deuda financiera con su FGO. Menor = más solvente.', expected:{primor:1.52,cotton:2.3}, compute:d=>d.tiempo_devol},
+ // D · RENTABILIDAD
+ {id:'roi', nombre:'Rentabilidad económica de explotación (ROI)', cat:'D · Rentabilidad', layout:'fraction', unit:'pct', note:'aprox',
+  slots:[{label:'Numerador (RNE/EBIT)',correct:[{key:'f_ebit',s:1}]},{label:'Denominador (Activo de explotación)',correct:[{key:'b_activo',s:1},{key:'b_invfin_lp',s:-1}]}],
+  hint:'EBIT / Activo de explotación (Activo − Inversiones financieras)',
+  interp:'Rendimiento puro del negocio principal. = Margen × Rotación.', expected:{primor:0.1843,cotton:0.0892}},
+ {id:'margen', nombre:'Margen de explotación', cat:'D · Rentabilidad', layout:'fraction', unit:'pct',
+  slots:[{label:'Numerador',correct:[{key:'f_ebit',s:1}]},{label:'Denominador',correct:[{key:'f_ing_exp',s:1}]}],
+  hint:'EBIT / Ingresos de explotación',
+  interp:'Beneficio por euro vendido. Junto con la rotación da la RE.', expected:{primor:0.0562,cotton:0.0941}},
+ {id:'rotacion', nombre:'Rotación del activo de explotación', cat:'D · Rentabilidad', layout:'fraction', unit:'veces', note:'aprox',
+  slots:[{label:'Numerador',correct:[{key:'f_ing_exp',s:1}]},{label:'Denominador (Activo de explotación)',correct:[{key:'b_activo',s:1},{key:'b_invfin_lp',s:-1}]}],
+  hint:'Ingresos de explotación / Activo de explotación',
+  interp:'Velocidad con la que el activo genera ingresos. Alta en retail, baja en industrial.', expected:{primor:3.28,cotton:0.95}},
+ {id:'roa', nombre:'Rentabilidad económica global (ROA)', cat:'D · Rentabilidad', layout:'fraction', unit:'pct',
+  slots:[{label:'Numerador (BAII = RAI + GF)',correct:[{key:'f_rai',s:1},{key:'f_gastos_fin',s:1}]},{label:'Denominador',correct:[{key:'b_activo',s:1}]}],
+  hint:'(Resultado antes de impuestos + Gastos financieros) / Activo total',
+  interp:'Eficiencia total del activo. Clave: si ROA > k, endeudarse amplifica la ROE.', expected:{primor:0.1560,cotton:0.1065}},
+ {id:'coste_k', nombre:'Coste del endeudamiento (k)', cat:'D · Rentabilidad', layout:'fraction', unit:'pct',
+  slots:[{label:'Numerador',correct:[{key:'f_gastos_fin',s:1}]},{label:'Denominador',correct:[{key:'b_pnc',s:1},{key:'b_pc',s:1}]}],
+  hint:'Gastos financieros / (Pasivo no corriente + Pasivo corriente)',
+  interp:'Interés medio de la deuda. Compáralo con la ROA para ver el apalancamiento.', expected:{primor:0.0022,cotton:0.0277}},
+ {id:'apalanc', nombre:'Efecto apalancamiento financiero', cat:'D · Rentabilidad', layout:'derived', unit:'num',
+  hint:'L × (ROA − k),  con L = (Activo − Fondos propios) / Fondos propios',
+  interp:'Si ROA > k el apalancamiento es positivo: la deuda amplifica la ROE del accionista.', expected:{primor:0.338,cotton:0.077}, compute:d=>d.apalanc},
+ {id:'roe_corta', nombre:'Rentabilidad financiera (ROE, fórmula corta)', cat:'D · Rentabilidad', layout:'fraction', unit:'pct',
+  slots:[{label:'Numerador',correct:[{key:'f_resultado',s:1}]},{label:'Denominador',correct:[{key:'b_fp',s:1}]}],
+  hint:'Resultado del ejercicio / Fondos propios',
+  interp:'Beneficio limpio del accionista por cada euro invertido.', expected:{primor:0.4538,cotton:0.1399}},
+ {id:'roe_larga', nombre:'ROE (fórmula larga / Du Pont)', cat:'D · Rentabilidad', layout:'derived', unit:'pct',
+  hint:'[ROA + L(ROA − k)] × (1 − t)',
+  interp:'Descompone la ROE en negocio (ROA), apalancamiento (L) y fiscalidad (t). Debe coincidir con la corta.', expected:{primor:0.4538,cotton:0.1399}, compute:d=>d.roe_larga},
+ {id:'tasa_imp', nombre:'Tasa impositiva efectiva (t)', cat:'D · Rentabilidad', layout:'fraction', unit:'pct',
+  slots:[{label:'Numerador',correct:[{key:'f_impuesto',s:1}]},{label:'Denominador',correct:[{key:'f_rai',s:1}]}],
+  hint:'Impuesto sobre beneficios / Resultado antes de impuestos',
+  interp:'Carga fiscal real (Impuesto/RAI). Mayor t penaliza la ROE.', expected:{primor:0.0848,cotton:0.236}},
+ {id:'productiv', nombre:'Productividad', cat:'D · Rentabilidad', layout:'fraction', unit:'eur', note:'sindatos_primor',
+  slots:[{label:'Numerador',correct:[{key:'f_vae',s:1}]},{label:'Denominador',correct:[{key:'f_n_empleados',s:1}]}],
+  hint:'Valor Añadido / Nº de empleados',
+  interp:'Valor económico generado por cada trabajador.', expected:{primor:null,cotton:149.375}},
+ // E · BURSÁTILES (sin datos del caso)
+ {id:'bpa', nombre:'Beneficio por acción (BPA)', cat:'E · Ratios bursátiles', layout:'fraction', unit:'eur', note:'sindatos',
+  slots:[{label:'Numerador',correct:[{key:'f_resultado',s:1}]},{label:'Denominador',correct:[{key:'m_n_acciones',s:1}]}],
+  hint:'Beneficio neto / Nº de acciones', interp:'Beneficio que corresponde a cada acción.', expected:{primor:null,cotton:null}},
+ {id:'per', nombre:'Ratio precio-ganancia (PER)', cat:'E · Ratios bursátiles', layout:'fraction', unit:'veces', note:'sindatos',
+  slots:[{label:'Numerador',correct:[{key:'m_cotizacion',s:1}]},{label:'Denominador (BPA por acción)',correct:[{key:'m_cashflow_accion',s:1}]}],
+  hint:'Cotización / Beneficio por acción', interp:'Años de beneficio que el mercado paga por la acción.', expected:{primor:null,cotton:null}},
+ {id:'per_cf', nombre:'Ratio precio-cash flow', cat:'E · Ratios bursátiles', layout:'fraction', unit:'veces', note:'sindatos',
+  slots:[{label:'Numerador',correct:[{key:'m_cotizacion',s:1}]},{label:'Denominador',correct:[{key:'m_cashflow_accion',s:1}]}],
+  hint:'Cotización / Cash-flow por acción', interp:'Versión del PER con flujo de caja en vez de beneficio.', expected:{primor:null,cotton:null}},
+ {id:'rent_div', nombre:'Rentabilidad por dividendo', cat:'E · Ratios bursátiles', layout:'fraction', unit:'pct', note:'sindatos',
+  slots:[{label:'Numerador',correct:[{key:'m_dividendo_accion',s:1}]},{label:'Denominador',correct:[{key:'m_cotizacion',s:1}]}],
+  hint:'Dividendo por acción / Cotización', interp:'Rentabilidad vía dividendo para el accionista.', expected:{primor:null,cotton:null}},
+ {id:'payout', nombre:'Pay-out', cat:'E · Ratios bursátiles', layout:'fraction', unit:'pct', note:'sindatos',
+  slots:[{label:'Numerador',correct:[{key:'m_dividendo_total',s:1}]},{label:'Denominador',correct:[{key:'f_resultado',s:1}]}],
+  hint:'Dividendo / Beneficio neto', interp:'% del beneficio que se reparte como dividendo.', expected:{primor:null,cotton:null}}
+];
+const INDByID = Object.fromEntries(INDICADORES.map(i=>[i.id,i]));
+
+// ── Estado ──
+let pracInd=null, pracSlots={}, pracCase='primor', selKey=null;
+
+function pracV(key){ const el=document.getElementById('cell-'+key); if(!el||el.value==='')return null; const n=parseFloat(el.value); return isNaN(n)?null:n; }
+function curUnit(){ return (PRESET_VALUES[pracCase]&&PRESET_VALUES[pracCase].__unit)||'€'; }
+
+// ── Magnitudes derivadas ──
+function DERIVED(){
+  const v=k=>pracV(k)||0;
+  const activo=v('b_activo'), fp=v('b_fp'), pnc=v('b_pnc'), pc=v('b_pc');
+  const L = fp? (activo-fp)/fp : NaN;
+  const roa = activo? (v('f_rai')+v('f_gastos_fin'))/activo : NaN;
+  const k = (pnc+pc)? v('f_gastos_fin')/(pnc+pc) : NaN;
+  const t = v('f_rai')? v('f_impuesto')/v('f_rai') : NaN;
+  const fm = v('b_ac')-v('b_pc');
+  const nof = v('b_existencias')+v('b_clientes')+v('b_otros_ac')-v('b_proveedores')-v('b_otros_pc');
+  const fgo_aii = v('f_ebit')+v('f_amortizacion')+v('f_deterioro')+v('f_otros_result');
+  const fgo = fgo_aii + v('f_ing_fin') - v('f_gastos_fin') - v('f_impuesto');
+  const pf=document.getElementById('prevNOF');
+  const prevNOF = (pf&&pf.value!=='')?parseFloat(pf.value):((PRESET_VALUES[pracCase]||{}).__prevNOF||0);
+  const feae = fgo - (nof - prevNOF);
+  const pc_no_com = v('b_deudas_banco_cp');
+  const pas_no_com = v('b_deudas_banco_cp')+v('b_deudas_banco_lp');
+  const cdd_cp = pc_no_com? fgo_aii/pc_no_com : NaN;
+  const cdd_total = pas_no_com? fgo/pas_no_com : NaN;
+  const tiempo_devol = fgo? pas_no_com/fgo : NaN;
+  const d360=(num,den)=>den? num/den*360 : 0;
+  const consumos=v('f_consumos');
+  const s_alm=d360(v('b_materias_primas'),consumos);
+  const s_fab=d360(v('b_prod_curso'),consumos+v('f_gastos_personal')+v('f_amortizacion'));
+  const s_ven=v('b_prod_terminados')>0? d360(v('b_prod_terminados'),consumos):d360(v('b_existencias'),consumos);
+  const s_cob=d360(v('b_clientes'),v('f_incn'));
+  const s_pag=d360(v('b_proveedores'),consumos);
+  const pmm_op = s_alm+s_fab+s_ven+s_cob;
+  const pmm_fin = pmm_op - s_pag;
+  const apalanc = L*(roa-k);
+  const roe_larga = (roa + apalanc)*(1-t);
+  return {L,roa,k,t,fm,nof,fgo_aii,fgo,feae,cdd_cp,cdd_total,tiempo_devol,pmm_op,pmm_fin,roe_larga,apalanc};
+}
+
+// ── Init ──
+function initPractica(){
+  const zone=document.getElementById('cells-zone'); let html='';
+  for(const gk of Object.keys(PRAC_GROUPS)){
+    const g=PRAC_GROUPS[gk];
+    const keys=Object.keys(PARTIDAS).filter(k=>GROUP_OF(k)===gk);
+    const open = (gk==='balance'||gk==='pyg_func')?' open':'';
+    html+=`<details class="cell-group g-${gk}"${open}><summary>${g.label}<span class="tag">${g.tag}</span></summary><div class="cells-grid">`;
+    for(const k of keys){
+      html+=`<div class="cell-chip" draggable="true" data-key="${k}" onclick="onChipClick('${k}')" ondragstart="onChipDragStart(event)" ondragend="onChipDragEnd(event)" title="Arrastra o haz clic para colocar">
+        <span class="chip-label"><span class="chip-grip">${SVG.grip}</span>${PARTIDAS[k]}</span>
+        <input type="number" id="cell-${k}" placeholder="—" oninput="refreshSlotValues()" onclick="event.stopPropagation()">
+      </div>`;
+    }
+    html+=`</div></details>`;
+  }
+  zone.innerHTML=html;
+  const sel=document.getElementById('ind-select');
+  const cats=[...new Set(INDICADORES.map(i=>i.cat))];
+  sel.innerHTML=cats.map(c=>`<optgroup label="${c}">`+INDICADORES.filter(i=>i.cat===c).map(i=>`<option value="${i.id}">${i.nombre}</option>`).join('')+`</optgroup>`).join('');
+  loadPracticaPreset('primor');
+  sel.value=INDICADORES[0].id; selectIndicador(INDICADORES[0].id);
+}
+
+function loadPracticaPreset(name){
+  pracCase=name;
+  const data = name==='blank'?null:PRESET_VALUES[name];
+  for(const k of Object.keys(PARTIDAS)){
+    const el=document.getElementById('cell-'+k);
+    if(el) el.value = data?(data[k]==null?'':data[k]):'';
+  }
+  const badge=document.getElementById('prac-unit-badge');
+  if(badge) badge.textContent = data?`${data.__label} · ${data.__unit}`:'Sin caso · introduce datos';
+  document.querySelectorAll('.prac-btn.primor,.prac-btn.cotton').forEach(b=>b.classList.remove('on'));
+  if(name==='primor')document.querySelector('.prac-btn.primor').classList.add('on');
+  if(name==='cotton')document.querySelector('.prac-btn.cotton').classList.add('on');
+  if(pracInd) selectIndicador(pracInd.id); else refreshSlotValues();
+}
+
+// ── Drag & click-to-place ──
+let _dragKey=null;
+function onChipDragStart(e){ _dragKey=e.currentTarget.dataset.key; e.currentTarget.classList.add('dragging'); e.dataTransfer.effectAllowed='copy'; e.dataTransfer.setData('text/plain',_dragKey); }
+function onChipDragEnd(e){ e.currentTarget.classList.remove('dragging'); _dragKey=null; }
+function onSlotDragOver(e){ e.preventDefault(); e.currentTarget.classList.add('over'); }
+function onSlotDragLeave(e){ e.currentTarget.classList.remove('over'); }
+function onSlotDrop(e){ e.preventDefault(); const slot=e.currentTarget; slot.classList.remove('over'); const key=e.dataTransfer.getData('text/plain')||_dragKey; addToSlot(+slot.dataset.slot,key); }
+function onChipClick(key){ selKey = (selKey===key)?null:key; document.querySelectorAll('.cell-chip').forEach(c=>c.classList.toggle('sel', c.dataset.key===selKey)); }
+function onSlotClick(idx){ if(selKey){ addToSlot(idx,selKey); selKey=null; document.querySelectorAll('.cell-chip').forEach(c=>c.classList.remove('sel')); } }
+function addToSlot(idx,key){ if(!key||!pracSlots[idx])return; if(pracSlots[idx].some(t=>t.key===key))return; pracSlots[idx].push({key,s:1}); renderBuilder(); }
+
+function selectIndicador(id){
+  pracInd=INDByID[id]; pracSlots={}; selKey=null;
+  (pracInd.slots||[]).forEach((_,i)=>pracSlots[i]=[]);
+  document.getElementById('wb-title').textContent=pracInd.nombre;
+  document.getElementById('wb-cat').textContent=pracInd.cat;
+  const nz=document.getElementById('wb-notice'); let notice='';
+  if(pracInd.note==='sindatos') notice=`<div class="wb-warn">Sin datos en los casos: introduce las cifras a mano en las casillas <strong>«manuales»</strong>.</div>`;
+  else if(pracInd.note==='sindatos_primor') notice=`<div class="wb-warn">Primor no aporta nº de empleados: con el caso Primor mete el dato a mano. Cotton sí lo trae (56).</div>`;
+  else if(pracInd.note==='aprox') notice=`<div class="wb-note">Denominador estimado a partir de Consumos / Cifra de negocios → el valor puede diferir algo del oficial.</div>`;
+  nz.innerHTML=notice;
+  const hb=document.getElementById('hint-btn'); hb.style.display='flex'; hb.classList.remove('open');
+  document.getElementById('hint-body').classList.remove('open');
+  document.getElementById('hint-body').innerHTML=`<span class="mono" style="color:var(--accent)">${pracInd.hint}</span>`;
+  if(pracInd.id==='feae'){
+    nz.innerHTML += `<div class="wb-field"><label for="prevNOF">NOF año anterior:</label><input type="number" id="prevNOF" value="${(PRESET_VALUES[pracCase]||{}).__prevNOF||''}" oninput="renderBuilder()"></div>`;
+  }
+  document.getElementById('prac-result').classList.remove('show');
+  renderBuilder();
+}
+
+function slotInner(idx){
+  const tokens=pracSlots[idx]||[];
+  if(!tokens.length) return `<span class="slot-hint">Arrastra o haz clic aquí</span>`;
+  return tokens.map((t,ti)=>{
+    const v=pracV(t.key); const vtxt=v===null?'—':new Intl.NumberFormat('es-ES',{maximumFractionDigits:0}).format(t.s*v);
+    return `<div class="slot-token" data-key="${t.key}">
+      <span class="st-sign ${t.s>0?'plus':'minus'}" onclick="toggleTokenSign(${idx},${ti})" title="Cambiar signo">${t.s>0?'+':'−'}</span>
+      <span class="st-name">${PARTIDAS[t.key]}</span><span class="st-val">${vtxt}</span>
+      <span class="st-x" onclick="removeToken(${idx},${ti})" title="Quitar">${SVG.remove}</span></div>`;
+  }).join('');
+}
+
+function renderBuilder(){
+  const wb=document.getElementById('formula-builder'); const ind=pracInd; if(!ind)return;
+  if(ind.layout==='derived'){
+    const val=ind.compute(DERIVED());
+    wb.innerHTML=`<div class="derived-box">
+      <div class="derived-formula mono">${ind.hint}</div>
+      <div class="derived-val">${fmtResult(val,ind.unit)}</div>
+      <div class="derived-tag">cálculo automático con las magnitudes intermedias</div></div>`;
+    return;
+  }
+  const slotHTML=i=>`<div class="drop-slot" data-slot="${i}" onclick="onSlotClick(${i})" ondragover="onSlotDragOver(event)" ondragleave="onSlotDragLeave(event)" ondrop="onSlotDrop(event)"><div class="slot-cap">${ind.slots[i].label}</div>${slotInner(i)}</div>`;
+  if(ind.layout==='expr'){
+    wb.innerHTML=`<div style="flex:1">${slotHTML(0)}</div>`;
+  } else {
+    const tail=ind.layout==='fraction360'?`<span class="fb-op">× 360</span>`:'';
+    wb.innerHTML=`<div class="fb-fraction">${slotHTML(0)}<div class="fb-bar"></div>${slotHTML(1)}</div>${tail}`;
+  }
+}
+
+function toggleTokenSign(i,ti){ pracSlots[i][ti].s*=-1; renderBuilder(); }
+function removeToken(i,ti){ pracSlots[i].splice(ti,1); renderBuilder(); }
+function resetSlots(){ (pracInd.slots||[]).forEach((_,i)=>pracSlots[i]=[]); document.getElementById('prac-result').classList.remove('show'); renderBuilder(); }
+function refreshSlotValues(){ if(pracInd) renderBuilder(); }
+function toggleHint(){ document.getElementById('hint-btn').classList.toggle('open'); document.getElementById('hint-body').classList.toggle('open'); }
+
+function slotSum(i){ return (pracSlots[i]||[]).reduce((a,t)=>{const v=pracV(t.key); return v===null?a:a+t.s*v;},0); }
+function slotMissing(i){ return (pracSlots[i]||[]).length===0 || (pracSlots[i]||[]).some(t=>pracV(t.key)===null); }
+const sigKey=t=>(t.s>0?'+':'-')+t.key;
+function slotCorrect(i){ const got=(pracSlots[i]||[]).map(sigKey).sort().join(','); const want=pracInd.slots[i].correct.map(sigKey).sort().join(','); return got===want; }
+
+function fmtResult(v,unit){
+  if(v==null||isNaN(v)||!isFinite(v))return '—';
+  if(unit==='pct')return (v*100).toFixed(2)+' %';
+  if(unit==='eur')return new Intl.NumberFormat('es-ES',{maximumFractionDigits:0}).format(v)+' '+curUnit();
+  if(unit==='veces')return v.toFixed(2)+' ×';
+  if(unit==='dias')return v.toFixed(1)+' días';
+  if(unit==='anios')return v.toFixed(2)+' años';
+  return v.toFixed(3);
+}
+function neareq(a,b,unit){
+  if(a==null||b==null||isNaN(a))return null;
+  if(unit==='dias'||unit==='anios')return Math.abs(a-b)<=Math.max(0.6,Math.abs(b)*0.03);
+  if(unit==='ratio'||unit==='num'||unit==='veces')return Math.abs(a-b)<=Math.max(0.03,Math.abs(b)*0.03);
+  if(unit==='pct')return Math.abs(a-b)<=0.004;
+  return Math.abs(a-b)<=Math.abs(b)*0.03+1;
+}
+
+function comprobarPractica(){
+  const ind=pracInd; const box=document.getElementById('prac-result');
+  let val=null, partidasOK=true;
+  if(ind.layout==='derived'){
+    val=ind.compute(DERIVED());
+  } else {
+    const oks=ind.slots.map((_,i)=>slotCorrect(i)); partidasOK=oks.every(Boolean);
+    document.querySelectorAll('#formula-builder .drop-slot').forEach(slot=>{
+      const i=+slot.dataset.slot; slot.classList.remove('ok','bad'); slot.classList.add(oks[i]?'ok':'bad');
+      const want=ind.slots[i].correct.map(sigKey);
+      slot.querySelectorAll('.slot-token').forEach(tok=>{
+        const t=(pracSlots[i]||[]).find(x=>x.key===tok.dataset.key);
+        tok.classList.remove('right','wrong'); tok.classList.add(t&&want.includes(sigKey(t))?'right':'wrong');
+      });
+    });
+    const missing=ind.slots.some((_,i)=>slotMissing(i));
+    if(!missing){
+      if(ind.layout==='expr')val=slotSum(0);
+      else { const den=slotSum(1); val=den===0?null:slotSum(0)/den; if(ind.layout==='fraction360'&&val!=null)val*=360; }
+    }
+  }
+  const exp = ind.expected?ind.expected[pracCase]:null;
+  const cmp = exp!=null? neareq(val,exp,ind.unit):null;
+  let banner;
+  if(ind.layout==='derived'){
+    banner=`<div class="res-banner info">${SVG.check} Indicador derivado: se calcula automáticamente con las magnitudes intermedias.</div>`;
+  } else if(partidasOK){
+    banner=`<div class="res-banner ok">${SVG.check} Partidas correctas — has compuesto bien el indicador.</div>`;
+  } else {
+    banner=`<div class="res-banner bad">${SVG.x} Revisa las partidas en rojo (¿faltan, sobran o el signo +/− está mal?).</div>`;
+  }
+  let expHTML='';
+  if(exp!=null){
+    const tag = cmp===true?`<span class="cmp ok">${SVG.check} coincide</span>`:cmp===false?`<span class="cmp approx">≈ aprox.</span>`:'';
+    expHTML=`<div class="res-expected">Esperado (caso real): <strong>${fmtResult(exp,ind.unit)}</strong> · Tu cálculo: <strong>${fmtResult(val,ind.unit)}</strong> ${tag}</div>`;
+  } else if(ind.note==='sindatos'||(ind.note==='sindatos_primor'&&pracCase==='primor')){
+    expHTML=`<div class="res-expected" style="color:var(--warn)">Este indicador no tiene datos en el caso seleccionado — introduce las cifras a mano.</div>`;
+  }
+  const valCard=`<div class="res-value-card"><div class="rv-cap">Resultado</div>
+    <div class="rv-num" style="color:${partidasOK?'var(--practica)':'var(--text)'}">${fmtResult(val,ind.unit)}</div>
+    ${expHTML}</div>`;
+  const interp=`<div class="res-interp"><strong style="color:var(--gold)">Interpretación:</strong> ${ind.interp}</div>`;
+  box.innerHTML=banner+valCard+interp; box.classList.add('show');
+}
+
+initPractica();
 
 // Set initial tab color
 document.querySelector('.tab-btn').className = 'tab-btn active-primor';
