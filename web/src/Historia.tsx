@@ -6,7 +6,7 @@ const MILESTONES = [
   {
     icon: Sprout,
     kicker: "El punto de partida",
-    title: "Una carpeta de apuntes que se desbordó",
+    title: "Al principio solo eran mis apuntes",
     body: "Todo empezó guardando resúmenes y prácticas para mí mismo. Decidí subirlos por si a alguien más le servían, y de ahí salió la idea de ponerlos en un sitio donde cualquiera pudiera encontrarlos.",
   },
   {
@@ -57,8 +57,7 @@ export default function Historia() {
             Aprender <span className="text-gradient">a construir</span>
           </motion.h1>
           <motion.p variants={fadeUp} className="mt-5 max-w-xl text-lg leading-relaxed text-mist">
-            De la curiosidad multidisciplinar a una plataforma de recursos. Este
-            es el recorrido que hay detrás del proyecto.
+            Cómo unos apuntes que guardaba para mí acabaron siendo esta web.
           </motion.p>
         </motion.div>
 

@@ -73,7 +73,7 @@ export const COURSES: Course[] = [
     cover: "/assets/images/4curso.png",
     tag: "Especialidad CSI",
     blurb:
-      "Mención de Computación y Sistemas Inteligentes. Contenido más estructurado y profesional.",
+      "Mención de Computación y Sistemas Inteligentes. Aquí el material ya es propio y más completo.",
     guiaDocente: null,
     subjects: [
       "Aprendizaje Automático",
@@ -90,7 +90,7 @@ export const COURSES: Course[] = [
     cover: "/assets/images/5curso.png",
     tag: "Avanzado",
     blurb:
-      "Materias avanzadas de la especialidad y trabajos finales. El contenido refleja el progreso técnico y personal.",
+      "Asignaturas avanzadas de la especialidad y los trabajos finales.",
     guiaDocente: null,
     subjects: [
       "Visión por Computador",
