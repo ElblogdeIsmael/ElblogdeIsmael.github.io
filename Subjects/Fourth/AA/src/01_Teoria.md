@@ -4,14 +4,14 @@
 
 ## Tema 1. Conceptos básicos
 
-### 1. ¿Qué es el Aprendizaje Automático (AA)?
+### ¿Qué es el Aprendizaje Automático (AA)?
 
 *   **Definición clásica (Arthur Samuel, 1959):** ciencia y arte de programar ordenadores para que aprendan de los datos sin ser programados explícitamente.
 *   **Definición de ingeniería (Tom Mitchell, 1997):** un programa aprende de la **experiencia E**, respecto a una **tarea T** y una **medida de rendimiento P**, si su rendimiento en T (medido por P) mejora con la experiencia E.
 *   **Formalización:** consiste en estimar una función $f(x, w)$ que minimice el riesgo o pérdida promedio sobre un conjunto de datos de entrenamiento $(x_i, y_i)$.
 *   **¿Cuándo conviene usarlo?** En problemas complejos donde las reglas explícitas son ineficientes, en entornos fluctuantes (los datos cambian) y para descubrir patrones ocultos en grandes volúmenes de información (minería de datos).
 
-### 2. Tipos de Aprendizaje Automático
+### Tipos de Aprendizaje Automático
 
 *   **Aprendizaje Supervisado:** se entrena con datos que incluyen las soluciones deseadas, llamadas **etiquetas**. Dos tareas principales:
     *   **Clasificación:** predecir una clase o categoría (p. ej. filtro antispam).
@@ -24,31 +24,31 @@
 *   **Aprendizaje Semi-supervisado:** combina pocos datos etiquetados con muchos sin etiquetar; útil cuando etiquetar es caro.
 *   **Aprendizaje por Refuerzo:** un **agente** observa un **entorno**, ejecuta **acciones** y recibe **recompensas** o penalizaciones, aprendiendo una **política** que maximiza la recompensa acumulada (AlphaGo, bots de videojuegos).
 
-### 3. Enfoques: Instancias vs. Modelos
+### Enfoques: Instancias vs. Modelos
 
 *   **Basado en instancias:** memoriza los ejemplos y clasifica los casos nuevos por una medida de **similitud** (distancia) frente a los datos almacenados. No requiere entrenamiento previo (p. ej. k-NN).
 *   **Basado en modelos:** construye un modelo que generaliza, usando una **función de pérdida** (error) y un método de **optimización**.
 
-### 4. Evaluación y Generalización
+### Evaluación y Generalización
 
 *   Los datos se dividen en **conjunto de entrenamiento** y **conjunto de test**.
 *   **Generalización:** mide el comportamiento ante datos nuevos (no vistos en entrenamiento). Para estimarla se usa la **validación cruzada (k-fold)**, que particiona los datos en $k$ bloques y rota cuál actúa como test.
 *   **Estimación de densidad:** estimar la función de densidad de probabilidad (PDF) que generó los datos; útil para detectar anomalías (zonas de baja densidad).
 *   **Criterios de evaluación:** además de la precisión, se valoran velocidad, robustez (tratar valores desconocidos), escalabilidad, interpretabilidad y complejidad del modelo.
 
-### 5. Retos en el Entorno Real
+### Retos en el Entorno Real
 
 *   **Teorema "No Free Lunch" (NFL):** sin suposiciones sobre los datos, no hay razón para preferir un modelo sobre otro. No existe un algoritmo óptimo para todos los problemas.
 *   **Sobreajuste (Overfitting):** el modelo va muy bien en entrenamiento pero generaliza mal. Se combate con **regularización** y ajuste de hiperparámetros.
 *   **Subajuste (Underfitting):** el modelo es demasiado simple para capturar la estructura de los datos.
 *   **Datos no representativos:** si validación y test no representan la realidad, el modelo falla en producción.
 
-### 6. Calidad de Datos y Enfoques de Desarrollo
+### Calidad de Datos y Enfoques de Desarrollo
 
 *   Era del **Big Data**: el dato es el recurso clave y abarca múltiples tipos (texto, imagen, audio, series temporales).
 *   **Data-Centric vs Model-Centric:** transición desde mejorar el modelo (Model-Centric) hacia el enfoque **Data-Centric**, donde la arquitectura se estandariza y el esfuerzo se concentra en iterar, adquirir, limpiar y auditar los datos.
 
-### 7. Regulación y Ética
+### Regulación y Ética
 
 *   **AI Act:** marco regulatorio europeo que clasifica la IA por nivel de riesgo (inaceptable, alto, limitado, mínimo).
 *   **IA Fiable (Trustworthy AI):** exige sistemas robustos, lícitos y éticos: transparencia, privacidad y supervisión humana durante todo el ciclo de vida.
@@ -56,7 +56,7 @@
 
 ## Tema 2. Aprendizaje Supervisado
 
-### 1. Evaluación de Modelos (Métricas)
+### Evaluación de Modelos (Métricas)
 
 Antes de construir modelos, es necesario saber cómo evaluarlos.
 
@@ -70,12 +70,12 @@ Antes de construir modelos, es necesario saber cómo evaluarlos.
     *   **F1:** media armónica de precisión y recall.
     *   **Curva ROC y AUC:** la ROC traza sensibilidad frente a 1-especificidad; el **AUC** es el área bajo la curva (1 = perfecto, 0,5 = azar).
 
-### 2. Aprendizaje Basado en Instancias vs. Modelos
+### Aprendizaje Basado en Instancias vs. Modelos
 
 *   **Basado en instancias (k-NN):** memoriza el entrenamiento y clasifica midiendo similitud (distancia) con los vecinos más cercanos. Sin fase de entrenamiento real. Clasificación: "regla de la mayoría" de los vecinos; regresión: media del vecindario.
 *   **Basado en modelos:** construye una función matemática que minimiza un error.
 
-### 3. Modelos Lineales y Regularización (Regresión)
+### Modelos Lineales y Regularización (Regresión)
 
 *   **Regresión Lineal:** predice una suma ponderada de las características más un término de sesgo (bias). Se entrena minimizando el MSE.
     *   Resolución directa con la **Ecuación Normal** (pseudoinversa o SVD) o iterativa con **Descenso de Gradiente**. Como el coste es convexo, el descenso de gradiente garantiza el mínimo global.
@@ -86,13 +86,13 @@ Antes de construir modelos, es necesario saber cómo evaluarlos.
     *   **Elastic Net:** término medio entre Ridge y Lasso; preferible a Lasso cuando hay características muy correlacionadas.
     *   **Parada Anticipada (Early Stopping):** regulariza métodos iterativos deteniendo el entrenamiento cuando el error de validación alcanza un mínimo.
 
-### 4. Clasificación Probabilística: Regresión Logística y Naïve Bayes
+### Clasificación Probabilística: Regresión Logística y Naïve Bayes
 
 *   **Regresión Logística:** estima la probabilidad de pertenencia a una clase (si $>50\%$, predice positivo). Coste convexo: **Pérdida Logarítmica (Log Loss)**.
 *   **Regresión Softmax:** generaliza la logística a múltiples clases sin clasificadores binarios separados. Coste: **Entropía Cruzada**.
 *   **Naïve Bayes:** se basa en el Teorema de Bayes y la hipótesis (ingenua) de independencia entre características; aplica la regla **MAP (Maximum A Posteriori)** para devolver la clase más probable.
 
-### 5. Máquinas de Vectores de Soporte (SVM)
+### Máquinas de Vectores de Soporte (SVM)
 
 Basadas en la Teoría del Aprendizaje Estadístico.
 
@@ -102,7 +102,7 @@ Basadas en la Teoría del Aprendizaje Estadístico.
 *   **Regresión SVM:** invierte el objetivo: mete el mayor número de instancias *dentro* de la calle, cuyo ancho controla el hiperparámetro $\epsilon$ (modelo $\epsilon$-insensible).
 *   **SVM No Lineal (truco del Kernel):** para datos no separables linealmente. En vez de añadir características polinómicas (costoso), usa funciones **Kernel** (Polinómico, **Gaussiano RBF**, Sigmoide) apoyándose en el **Teorema de Mercer** para operar en dimensiones superiores sin calcularlas explícitamente.
 
-### 6. Árboles de Decisión y Ensembles
+### Árboles de Decisión y Ensembles
 
 *   **Árboles de Decisión (CART):** árbol de preguntas (¿pétalo $< 2{,}45$ cm?). Clasificación: minimizan impureza **Gini** o **Entropía**; regresión: minimizan el MSE. Son **no paramétricos**, por lo que sin restricciones (`max_depth`, `min_samples_leaf`) tienden fuertemente al sobreajuste. Tienen **alta varianza** y son sensibles a la orientación de los ejes.
 *   **Ensembles (sabiduría de la multitud):** combinar varios modelos.
@@ -115,7 +115,7 @@ Basadas en la Teoría del Aprendizaje Estadístico.
     *   **Boosting:** entrena modelos en secuencia, cada uno corrigiendo los fallos del anterior. **AdaBoost** da más peso a las instancias mal clasificadas; **Gradient Boosting** ajusta cada nuevo predictor a los errores residuales del conjunto.
     *   **Stacking:** entrena un meta-modelo (*blender*) que aprende a combinar las predicciones de varios modelos base.
 
-### 7. Estrategias Multiclase
+### Estrategias Multiclase
 
 Para que un clasificador binario puro (como SVM) prediga sobre 3+ clases:
 
@@ -128,7 +128,7 @@ Para que un clasificador binario puro (como SVM) prediga sobre 3+ clases:
 
 Principio rector: **"Garbage In, Garbage Out"** (datos basura $\to$ resultados basura). El preprocesamiento convierte datos brutos en *Smart Data* y llega a ocupar el **80% del tiempo** de un proyecto de minería de datos.
 
-### 1. Integración, Limpieza y Transformación
+### Integración, Limpieza y Transformación
 
 *   **Integración:** combinar datos de múltiples fuentes, detectar duplicados y eliminar atributos redundantes (p. ej. por correlación).
 *   **Limpieza de datos imperfectos:**
@@ -139,7 +139,7 @@ Principio rector: **"Garbage In, Garbage Out"** (datos basura $\to$ resultados b
     *   **Agregación y generalización:** resumir (ventas diarias $\to$ mensuales) o subir en la jerarquía (edad numérica $\to$ "joven/adulto").
     *   **Normalización:** escalar valores numéricos para métodos sensibles a la distancia (k-NN, redes neuronales), llevando los rangos a $[0,1]$ o $[-1,1]$ (escala min-max, escala decimal, estandarización z-score).
 
-### 2. Reducción de Datos
+### Reducción de Datos
 
 Objetivo: un conjunto más pequeño y manejable que conserve la relevancia, para aprender más rápido y generalizar mejor.
 
@@ -167,7 +167,7 @@ Elige las filas (ejemplos) más relevantes, eliminando ruido y redundancia; úti
 *   **Híbridos y evolutivos:** combinan ambos. Destacan **DROP3**, algoritmos genéticos (**CHC**) y **SSMA**.
 *   **Muestreo (Sampling):** seleccionar un subconjunto aleatorio representativo.
 
-### 3. Reducción de Dimensionalidad
+### Reducción de Dimensionalidad
 
 *   **Maldición de la dimensionalidad:** a más dimensiones, los datos se vuelven dispersos, las distancias pierden significado y se necesita exponencialmente más datos. Proyectar a menos dimensiones ayuda.
 *   **Proyección:** los datos reales suelen vivir cerca de un subespacio de menor dimensión; proyectar sobre él reduce dimensiones (falla si el subespacio se "retuerce").
@@ -181,7 +181,7 @@ Elige las filas (ejemplos) más relevantes, eliminando ruido y redundancia; úti
 
 ## Tema 4. Aprendizaje No Supervisado
 
-### 1. Tareas Principales
+### Tareas Principales
 
 Se buscan patrones naturales sin etiquetas. Tres áreas:
 
@@ -189,7 +189,7 @@ Se buscan patrones naturales sin etiquetas. Tres áreas:
 *   **Detección de anomalías:** aprender el aspecto de los datos "normales" (inliers) para identificar instancias raras (fraude, defectos).
 *   **Estimación de densidad:** estimar la PDF del proceso generador; útil para análisis y para detectar anomalías (baja densidad).
 
-### 2. Algoritmos de Clustering
+### Algoritmos de Clustering
 
 #### A. Familia K-Means
 
@@ -222,14 +222,14 @@ Define clusters como regiones continuas de alta densidad. Hiperparámetros: radi
 *   **Affinity Propagation:** los puntos intercambian mensajes "votando" por un ejemplar representativo; calcula $k$ automáticamente.
 *   **Clustering Espectral:** reduce la dimensionalidad de una matriz de similitud y aplica k-means. Excelente para grafos (redes sociales).
 
-### 3. Medidas de Calidad del Clustering
+### Medidas de Calidad del Clustering
 
 *   **Índice de Davies-Bouldin:** relación dispersión intra-cluster / separación entre centroides. **Mejor cuanto más pequeño.**
 *   **Silueta:** mide cercanía a los propios y lejanía del borde. **Mejor cuanto más próximo a $+1$.**
 *   **Índice de Dunn:** distancia mínima entre clusters / diámetro máximo de un cluster. **Mejor cuanto más alto.**
 *   **Estadística pseudo-F:** distancias entre-clusters / intra-clusters. **Mejor cuanto más alto.**
 
-### 4. Detección de Anomalías
+### Detección de Anomalías
 
 Eventos raros (fraude, intrusiones, enfermedades raras). Retos: la "normalidad" cambia con el tiempo, la frontera es imprecisa y el ruido se camufla.
 
@@ -248,7 +248,7 @@ Eventos raros (fraude, intrusiones, enfermedades raras). Retos: la "normalidad" 
 
 ## Tema 5. Aprendizaje Profundo. Fundamentos
 
-### 1. Del Perceptrón al MLP
+### Del Perceptrón al MLP
 
 *   **Redes Neuronales Artificiales (RNA):** núcleo del aprendizaje profundo; versátiles, potentes y escalables. Primer modelo: **McCulloch y Pitts (1943)**, con neuronas de entradas/salida binarias capaces de calcular proposiciones lógicas.
 *   **Perceptrón (Rosenblatt, 1957):** basado en la **unidad lógica de umbral (TLU/LTU)**. Calcula $z = w^\top x + b$ y le aplica una **función escalón** (Heaviside o signo). Equivale a una clasificación lineal binaria. Una **capa densa / totalmente conectada** conecta cada TLU con todas las entradas.
@@ -256,7 +256,7 @@ Eventos raros (fraude, intrusiones, enfermedades raras). Retos: la "normalidad" 
 *   **Limitación (Minsky y Papert, 1969):** el perceptrón no resuelve problemas no lineales (p. ej. la función **XOR**), como cualquier modelo lineal.
 *   **Perceptrón Multicapa (MLP):** apila una **capa de entrada**, una o más **capas ocultas** y una **capa de salida**. Resuelve el XOR y patrones complejos.
 
-### 2. Retropropagación (Backpropagation)
+### Retropropagación (Backpropagation)
 
 *   **Retropropagación:** combinación de **diferenciación automática en modo inverso** y **descenso de gradiente**. En dos pasadas calcula el gradiente del error respecto a cada parámetro.
 *   **Paso hacia delante (forward):** calcula y guarda las salidas de cada capa hasta la salida final.
@@ -265,13 +265,13 @@ Eventos raros (fraude, intrusiones, enfermedades raras). Retos: la "normalidad" 
 *   **Detalles clave:** se procesa por **minilotes** (p. ej. 32 instancias); una pasada completa al conjunto es una **época**. Los pesos ocultos se **inicializan aleatoriamente** (si no, el entrenamiento falla). La **función escalón** se sustituyó por la **sigmoide** $\sigma(z)=1/(1+e^{-z})$ porque tiene derivada no nula y permite progresar al gradiente.
 *   **Tipos de salida del MLP:** regresión (una neurona por valor a predecir, sin activación o con ReLU); clasificación binaria (1 neurona sigmoide); multiclase (una neurona por clase + **softmax**, con pérdida de **entropía cruzada**).
 
-### 3. Problema de los Gradientes Inestables
+### Problema de los Gradientes Inestables
 
 *   **Gradientes que se desvanecen (vanishing):** al retropropagar, los gradientes se hacen cada vez más pequeños en las capas inferiores, que casi no se actualizan y no convergen. Causa típica: sigmoide + mala inicialización (saturación).
 *   **Gradientes que explotan (exploding):** crecen sin control y el algoritmo diverge; frecuente en redes recurrentes.
 *   **Inicialización Glorot (Xavier):** mantiene igual la varianza de entradas y salidas (usa $fan_{avg}$). Variante **LeCun** ($fan_{in}$). **Inicialización He (Kaiming):** para ReLU y variantes.
 
-### 4. Funciones de Activación
+### Funciones de Activación
 
 Necesarias y **no lineales**: sin ellas, una pila de capas equivale a una sola transformación lineal.
 
@@ -283,18 +283,18 @@ Necesarias y **no lineales**: sin ellas, una pila de capas equivale a una sola t
 *   **GELU / SiLU / Swish:** variantes suaves de ReLU, no convexas ni monótonas; suelen rendir mejor en tareas complejas a mayor coste. Swish$_\beta(z)=z\,\sigma(\beta z)$.
 *   **Recomendación práctica:** ReLU por defecto en tareas simples; Swish/GELU en tareas complejas; SELU en MLP profundos.
 
-### 5. Estabilización del Entrenamiento
+### Estabilización del Entrenamiento
 
 *   **Normalización por lotes (Batch Normalization, BN):** centra en cero y normaliza las entradas de cada capa usando la media y desviación del minilote, y luego las **reescala y desplaza** con dos parámetros aprendibles ($\gamma$, $\beta$). En test usa medias móviles. Acelera el entrenamiento, reduce la sensibilidad a la inicialización y actúa como **regularizador**.
 *   **Recorte de gradiente (Gradient Clipping):** recorta los gradientes para que no superen un umbral; mitiga la explosión, sobre todo en redes recurrentes.
 
-### 6. Reutilización de Capas y Transfer Learning
+### Reutilización de Capas y Transfer Learning
 
 *   **Transfer Learning:** reutilizar capas de una red preentrenada en un problema similar; ahorra datos y tiempo y mejora la generalización.
 *   **Pretraining no supervisado:** con muchos datos sin etiquetar, se preentrena capa a capa (p. ej. con autoencoders) y luego se ajusta.
 *   **Pretraining en tarea auxiliar:** entrenar primero en una tarea con datos etiquetados abundantes y reutilizar lo aprendido.
 
-### 7. Optimizadores Más Rápidos
+### Optimizadores Más Rápidos
 
 *   **SGD (Descenso de Gradiente Estocástico):** actualización básica con la tasa de aprendizaje.
 *   **Momentum:** acumula un "impulso" de gradientes anteriores; acelera en direcciones consistentes.
@@ -304,7 +304,7 @@ Necesarias y **no lineales**: sin ellas, una pila de capas equivale a una sola t
 *   **Adam (Adaptive Moment Estimation):** combina Momentum + RMSProp; opción por defecto muy robusta. Variante **AdaMax** (norma $L_\infty$).
 *   **Programación del ritmo de aprendizaje (learning rate scheduling):** reducir la tasa durante el entrenamiento. Estrategias: **power scheduling**, **exponencial**, **constante a trozos**, **performance scheduling** (baja al estancarse la validación) y **1-cycle** (sube y luego baja; logra *superconvergencia*).
 
-### 8. Regularización en Redes Neuronales
+### Regularización en Redes Neuronales
 
 *   **Parada anticipada (early stopping)** y la propia **Batch Normalization** ya regularizan.
 *   **Regularización $\ell_1$ / $\ell_2$:** $\ell_2$ restringe los pesos; $\ell_1$ produce modelos dispersos (muchos pesos a 0).
@@ -312,7 +312,7 @@ Necesarias y **no lineales**: sin ellas, una pila de capas equivale a una sola t
 *   **MC Dropout:** aplica dropout también en test y promedia varias pasadas; mejora el rendimiento y estima la **incertidumbre** sin reentrenar.
 *   **Max-Norm:** restringe la norma de los pesos entrantes de cada neurona, $\lVert w \rVert_2 \le r$.
 
-### 9. Autoencoders
+### Autoencoders
 
 *   **Autoencoder:** arquitectura **encoder–decoder** que aprende a reconstruir su entrada pasando por un **espacio latente** comprimido. Usos: compresión, reducción de dimensionalidad, detección de anomalías y pretraining no supervisado.
 *   **Denoising Autoencoder:** se corrompe la entrada a propósito (ruido o enmascarado) y la red aprende a reconstruir la versión limpia, forzando una codificación robusta.
@@ -320,11 +320,11 @@ Necesarias y **no lineales**: sin ellas, una pila de capas equivale a una sola t
 
 ## Tema 6. Aprendizaje Profundo en Diferentes Tipos de Datos
 
-### 1. Redes Neuronales Profundas (DNN)
+### Redes Neuronales Profundas (DNN)
 
 *   **DNN:** modelos con muchas capas que aprenden **representaciones jerárquicas** de los datos (características de bajo nivel $\to$ medio $\to$ alto). Más capas $\to$ funciones más complejas.
 
-### 2. Redes Neuronales Convolucionales (CNN / ConvNets)
+### Redes Neuronales Convolucionales (CNN / ConvNets)
 
 *   **CNN:** red con al menos una capa de **convolución**; pensada para datos en forma de matriz/rejilla (imágenes).
 *   **Convolución:** operación local lineal con una **máscara / filtro / kernel**. El filtro se multiplica elemento a elemento sobre una región, se suman los productos y el resultado forma el **mapa de activación / mapa de características (feature map)**. Ejemplos clásicos: filtro Gaussiano (suavizado), Sobel (bordes).
@@ -346,7 +346,7 @@ Necesarias y **no lineales**: sin ellas, una pila de capas equivale a una sola t
 *   **Flatten:** aplana el volumen de feature maps a un vector para las capas densas finales.
 *   **Softmax:** activación final que da la probabilidad de cada clase.
 
-### 3. Transformers
+### Transformers
 
 Para **secuencias** (texto, series temporales, audio, vídeo): elementos + orden + contexto. Cada elemento se convierte primero en un vector (**embedding**).
 
@@ -386,7 +386,7 @@ Para **secuencias** (texto, series temporales, audio, vídeo): elementos + orden
 
 ## Tema 9. Aspectos Avanzados, Retos y Desafíos
 
-### 1. Inteligencia Artificial Explicable (XAI)
+### Inteligencia Artificial Explicable (XAI)
 
 *   **Motivación:** la precisión no basta. Ejemplo clásico **LIME** (husky vs lobo): un clasificador con 94% de acierto en test miraba la **nieve del fondo**, no el animal (*shortcut learning*). Hay que auditar **qué** aprende el modelo.
 *   **Tres motivos para XAI:** **confianza** (medicina, conducción autónoma), **depuración** (sesgos ocultos, *data leakage*, atajos) y **cumplimiento** legal (EU AI Act, derecho a explicación del GDPR).
@@ -407,14 +407,14 @@ Para **secuencias** (texto, series temporales, audio, vídeo): elementos + orden
 *   **EU AI Act:** para sistemas de **alto riesgo** exige trazabilidad, explicabilidad, supervisión humana y documentación. La XAI deja de ser opcional.
 *   **Desafíos:** las explicaciones post-hoc pueden ser engañosas (*confirmation bias*), no hay métrica única, alto coste (SHAP exponencial), XAI multimodal y de cadenas de agentes.
 
-### 2. AI Safety y Detección Out-of-Distribution (OOD)
+### AI Safety y Detección Out-of-Distribution (OOD)
 
 *   **AI Safety:** campo interdisciplinar que previene accidentes, usos indebidos y daños de los sistemas de IA. **AI safety $\neq$ AI security.**
 *   **Robustez:** capacidad de mantener el rendimiento frente a perturbaciones y entradas **adversarias** a lo largo del ciclo de vida (anomalías, ataques adversarios, usos maliciosos, puertas traseras).
 *   **Mundo cerrado vs mundo abierto:** el supuesto de "mundo cerrado" (todas las clases vistas en entrenamiento) provoca sobreocupación del espacio y no se adapta a datos nuevos. El mundo real es **abierto**.
 *   **Detección Out-of-Distribution (OOD):** identificar entradas que no pertenecen a la distribución de entrenamiento (**ID = in-distribution**). Se distingue **Near-OOD** (parecido, p. ej. CIFAR-10 vs CIFAR-100) de **Far-OOD** (muy distinto, p. ej. EMNIST). Relacionado con el **Open Set Recognition**.
 
-### 3. Aprendizaje Continuo (Continual Learning)
+### Aprendizaje Continuo (Continual Learning)
 
 *   **Definición:** paradigma donde el modelo aprende **secuencialmente** tareas a lo largo del tiempo. Los humanos lo hacen de forma natural; las redes, no.
 *   **Olvido catastrófico (Catastrophic Forgetting):** al entrenar la Tarea B, el rendimiento en la Tarea A cae drásticamente (caída de *accuracy*).
@@ -428,7 +428,7 @@ Para **secuencias** (texto, series temporales, audio, vídeo): elementos + orden
     *   **Algoritmo SSD (Selective Synaptic Dampening):** usa la FIM para identificar y **amortiguar (dampening)** los pesos específicos del dato a olvidar.
     *   **Reto:** verificar el olvido (distinguir un dato olvidado de uno nunca visto).
 
-### 4. Causalidad en Aprendizaje Automático
+### Causalidad en Aprendizaje Automático
 
 *   **Correlación $\neq$ Causalidad:** ejemplo clásico helados vs ahogamientos: su correlación positiva es **espuria**; el **calor** es una **variable confusora (confounder)** que aumenta ambos por separado.
 *   **Shortcut learning / correlaciones espurias:** el modelo aprende atajos (la nieve para "lobo", el fondo "playa" para una vaca) que no generalizan.
