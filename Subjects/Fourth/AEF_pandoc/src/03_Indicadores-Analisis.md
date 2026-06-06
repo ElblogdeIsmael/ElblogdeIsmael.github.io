@@ -178,7 +178,7 @@
 
 ### 5. SECCIÓN EXTRA: CONCEPTOS Y REGLAS CLAVE (PARA MATRÍCULA DE HONOR)
 
-Dado que me pides información crucial que pueda marcar la diferencia de cara a interpretar el examen, la teoría de los temas esconde varios **principios matemáticos de oro** que no siempre aparecen como fórmulas aisladas, pero que te salvarán de errores fatales:
+En este apartado se añade información crucial que pueda marcar la diferencia de cara a interpretar el examen, la teoría de los temas esconde varios **principios matemáticos** que no siempre aparecen como fórmulas aisladas, pero que pueden servir para evitar errores fatales:
 
 1. **La Ecuación Fundamental del Corto Plazo (`FM = NOF + RLN`):** Esta regla de oro (basada en el Tema 3) es la visión _estática_ del equilibrio a corto plazo. Todo el Balance de Situación se divide en dos bloques: la Explotación (lo ligado al negocio diario) y lo Financiero/No comercial.
     
