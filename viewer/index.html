@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="brand">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Visor de apuntes · El Blog de Ismael</title>
+  <meta name="description" content="Visor de apuntes en Markdown renderizados al estilo Obsidian, con varios temas. Parte de El Blog de Ismael." />
+  <meta name="robots" content="noindex, follow" />
+
+  <!-- Evita flash de tema incorrecto: fija data-theme antes de pintar -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("viewer-theme");
+        if (!saved) {
+          var prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+          saved = prefersLight ? "paper" : "brand";
+        }
+        document.documentElement.setAttribute("data-theme", saved);
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="viewer.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="viewer-topbar">
+    <a class="vt-brand" href="/">← El Blog de Ismael</a>
+
+    <div class="vt-actions">
+      <label class="vt-theme">
+        <span class="vt-theme-label">Tema</span>
+        <select id="theme-select" aria-label="Elegir tema del visor">
+          <option value="brand">Marca (oscuro)</option>
+          <option value="paper">Papel (claro)</option>
+          <option value="obsidian">Obsidian (morado)</option>
+        </select>
+      </label>
+      <a id="gh-link" class="vt-gh" href="#" target="_blank" rel="noopener" hidden>Ver en GitHub ↗</a>
+    </div>
+  </header>
+
+  <main class="viewer-main">
+    <article id="md-content" class="md-content" aria-live="polite">
+      <div class="md-loading">Cargando apunte…</div>
+    </article>
+  </main>
+
+  <footer class="viewer-footer">
+    <p>Apuntes de <a href="/">Ismael Sallami</a> · renderizado en tu navegador, sin servidor.</p>
+  </footer>
+
+  <!-- Motor Markdown (misma versión que /md2html/) -->
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+  <script src="viewer.js"></script>
+</body>
+</html>
