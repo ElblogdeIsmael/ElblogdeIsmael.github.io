@@ -1,6 +1,6 @@
 # Teoría
 
-> Repaso completo orientado a examen tipo test. Cada término clave aparece en **negrita** con su definición. Redacción impersonal, sin relleno.
+*Tema 8 y 9 no entran en el examen*
 
 ## Tema 1. Conceptos básicos
 
@@ -383,6 +383,81 @@ Para **secuencias** (texto, series temporales, audio, vídeo): elementos + orden
 *   **Coste:** la atención es **cuadrática** $O(T^2)$ en la longitud $T$ de la secuencia; exige mucha memoria y datos; sin posición no entiende el orden; difícil de interpretar.
 *   **LLM modernos:** Transformers escalados, con ajuste por instrucciones, alineamiento con preferencias humanas, contexto largo, multimodalidad y uso de herramientas.
 *   **Aplicaciones:** texto, **series temporales** (Informer, Autoformer, PatchTST, Chronos), **visión** (Vision Transformer: dividir la imagen en parches $\to$ embeddings $\to$ Transformer).
+
+
+## Tema 7: Aprendizaje por Refuerzo (Reinforcement Learning)
+
+1. Fundamentos e interfaz agente‑entorno
+
+- **Definición:** a diferencia del aprendizaje supervisado, no existen etiquetas previas; el aprendizaje ocurre mediante la interacción entre un agente y su entorno.
+- **Elementos clave:** un **agente** observa un **entorno**, ejecuta **acciones** y recibe **recompensas** o penalizaciones.
+- **Objetivo:** el agente debe aprender una política $\pi$ que maximice la recompensa acumulada a lo largo del tiempo.
+- **Exploración vs. explotación:** equilibrio entre probar acciones nuevas (exploración) y aprovechar las acciones conocidas que proporcionan recompensa (explotación).
+
+2. Procesos de Decisión de Markov (MDP)
+
+- **Concepto:** formulación matemática que asume la propiedad de Markov (el futuro depende únicamente del estado actual y de la acción tomada).
+- **Componentes:** estados ($S_t$), acciones ($A_t$), recompensas ($R_{t+1}$) y probabilidades de transición.
+- **Tareas episódicas:** secuencias finitas de interacción que comienzan en un estado inicial y terminan en un estado terminal.
+
+3. Funciones de valor y ecuación de Bellman
+
+- **Retorno ($G_t$):** suma ponderada y descontada de las recompensas futuras.
+- **Función de valor de estado ($V(s)$):** medida de la bondad de un estado bajo una política dada.
+- **Función de valor de acción ($Q(s,a)$):** recompensa esperada tras tomar la acción $a$ en el estado $s$ y seguir la política.
+- **Ecuación de Bellman:** relación recursiva fundamental que permite resolver el MDP mediante programación dinámica.
+
+4. Algoritmos clásicos (model‑free)
+
+- **Métodos de Monte Carlo (MC):** actualizan valores usando el retorno real al terminar episodios completos.
+- **Diferencia Temporal (TD):** actualizaciones paso a paso tras cada acción, sin esperar al final del episodio.
+- **Q‑Learning (off‑policy):** aprende el valor de la política óptima mientras el agente sigue otra política exploratoria.
+- **Estrategia $\epsilon$‑greedy:** con probabilidad $1-\epsilon$ se elige la mejor acción conocida; con probabilidad $\epsilon$ se elige una acción aleatoria para explorar.
+
+5. Aprendizaje por refuerzo profundo (Deep RL)
+
+- **Motivación:** los métodos tabulares no escalan en entornos con espacios de estados muy grandes.
+- **Approximate Q‑Learning:** usar funciones que aproximen los valores Q en lugar de tablas.
+- **Deep Q‑Networks (DQN):** redes profundas que aproximan $Q(s,a)$; su éxito permitió superar a humanos en juegos Atari.
+- **Replay memory:** búfer de experiencias pasadas para entrenar con mini‑lotes aleatorios y estabilizar el aprendizaje.
+
+**Consejo práctico para la máxima nota:** comprender la ecuación de Bellman y dominar la implementación del bucle de interacción de Q‑Learning (entorno → estado → acción → recompensa → actualización), incluyendo el uso de la estrategia $\epsilon$‑greedy.
+
+## Tema 8: Optimización en Aprendizaje Automático, Hiperparámetros, Selección de Modelos y Regularización
+
+1. Selección de modelos y ajuste de hiperparámetros
+
+- **Concepto:** los hiperparámetros (p. ej. tasa de aprendizaje, profundidad de un árbol) no se aprenden durante el entrenamiento y requieren búsqueda/exploración.
+- **Riesgo de sobreajuste en test:** afinar exclusivamente sobre el conjunto de test induce sobreajuste y degrada el rendimiento en datos nuevos.
+- **Técnicas de búsqueda:** Grid Search (exhaustivo), búsqueda aleatoria y optimización bayesiana.
+- **Herramientas:** Keras Tuner, Hyperopt, skopt y enfoques AutoML (incluidos algoritmos evolutivos) para explorar arquitecturas y parámetros eficientemente.
+
+2. Regularización
+
+- **Propósito:** restringir la complejidad del modelo para reducir la varianza a cambio de aumentar ligeramente el sesgo, evitando el sobreajuste.
+- **Modelos lineales:**
+    - **Ridge:** penalización $L_2$ que mantiene los pesos pequeños.
+    - **Lasso:** penalización $L_1$ que fuerza muchos pesos a cero (modelos dispersos).
+- **Redes neuronales:**
+    - **Early stopping:** detener el entrenamiento cuando el error de validación deja de mejorar.
+    - **Dropout:** apagar aleatoriamente neuronas durante el entrenamiento; **MC Dropout** permite estimar incertidumbre en test.
+    - **Max‑Norm:** restringe la norma $L_2$ máxima de los pesos entrantes.
+    - **Data augmentation:** generar variaciones realistas del conjunto de entrenamiento.
+    - **Batch normalization:** estabiliza gradientes y funciona como regularizador práctico.
+
+3. Optimizadores avanzados
+
+- **Momentum:** acumula gradientes anteriores como impulso.
+- **RMSProp:** tasa de aprendizaje adaptativa por dimensión usando la media móvil de los gradientes al cuadrado.
+- **Adam:** combina momentos del gradiente y del cuadrado del gradiente (opción por defecto). Variantes: AdaMax, Nadam y AdamW.
+
+4. Tasa de aprendizaje (learning rate)
+
+- **Importancia:** una tasa demasiado baja retrasa la convergencia; una tasa demasiado alta puede provocar divergencia.
+- **Búsqueda:** experimentar subiendo exponencialmente la tasa para identificar el umbral antes de que la pérdida se dispare.
+- **Schedulers y estrategias:** reducir la tasa durante el entrenamiento; estrategias como **1cycle** (subida y bajada controlada del learning rate y ajuste del momentum) permiten superconvergencia.
+
+**Consejo práctico:** distinguir que SGD y Momentum usan una tasa fija compartida, mientras que RMSProp y Adam usan tasas adaptativas por dimensión; Grid Search sufre en espacios grandes y conviene optimización bayesiana o librerías específicas.
 
 ## Tema 9. Aspectos Avanzados, Retos y Desafíos
 
