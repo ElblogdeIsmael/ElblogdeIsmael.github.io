@@ -60,6 +60,14 @@
   /* ---------- Render ---------- */
   function render(file, texto) {
     var md = window.markdownit({ html: false, linkify: true, typographer: true });
+    // Fórmulas LaTeX ($…$ inline, $$…$$ en bloque) vía KaTeX. Guarda por si el CDN falla.
+    if (window.texmath && window.katex) {
+      md.use(window.texmath, {
+        engine: window.katex,
+        delimiters: "dollars",
+        katexOptions: { throwOnError: false, errorColor: "#ff6b6b" }
+      });
+    }
     var html = md.render(texto);
     contentEl.innerHTML = html;
 
