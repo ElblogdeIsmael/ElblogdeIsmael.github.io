@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>PDF → Markdown · Conversor de documentos a .md | El Blog de Ismael</title>
+  <meta name="description" content="Convierte PDF, Word (.docx) y Excel (.xlsx) a Markdown directamente en el navegador. Arrastra uno o varios archivos y descarga un .zip con el .md y las imágenes. Gratis, sin subir nada a ningún servidor." />
+  <meta name="keywords" content="pdf a markdown, convertir pdf a md, docx a markdown, excel a markdown, conversor documentos, pdf to md, markdown, apuntes, Ismael Sallami, elblogdeismael" />
+  <meta name="author" content="Ismael Sallami" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://elblogdeismael.github.io/pdf2md/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:url" content="https://elblogdeismael.github.io/pdf2md/" />
+  <meta property="og:title" content="PDF → Markdown · Conversor de documentos a .md" />
+  <meta property="og:description" content="Arrastra PDF, Word o Excel y descarga un .zip con Markdown e imágenes. Todo en tu navegador, sin instalar nada." />
+  <meta property="og:image" content="https://elblogdeismael.github.io/pdf2md/assets/og-image.svg" />
+  <meta property="og:site_name" content="El Blog de Ismael" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PDF → Markdown · Conversor de documentos a .md" />
+  <meta name="twitter:description" content="Arrastra PDF/Word/Excel y descarga Markdown en .zip. Gratis y en el navegador." />
+  <meta name="twitter:image" content="https://elblogdeismael.github.io/pdf2md/assets/og-image.svg" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- Google Analytics (mismo dominio del blog) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5W0LVJ83W7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5W0LVJ83W7');
+  </script>
+
+  <!-- JSON-LD: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PDF → Markdown — Conversor de documentos",
+    "url": "https://elblogdeismael.github.io/pdf2md/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any (navegador web)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "inLanguage": "es",
+    "author": { "@type": "Person", "name": "Ismael Sallami" },
+    "description": "Convierte PDF, Word (.docx) y Excel (.xlsx) a Markdown íntegramente en el navegador y descarga un .zip con el .md y las imágenes extraídas."
+  }
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="https://elblogdeismael.github.io/">
+      <span class="brand-mark">&lt;/&gt;</span>
+      <span>El Blog de Ismael</span>
+    </a>
+    <nav class="header-links">
+      <a href="https://elblogdeismael.github.io/">Inicio</a>
+      <a href="https://elblogdeismael.github.io/md2html/">md2html</a>
+      <button id="theme-noop" class="ghost-btn" title="Tema oscuro" disabled>🌙</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge">100% en tu navegador · sin subir nada · gratis</div>
+    <h1>Convierte <span class="grad">PDF, Word y Excel</span> en <span class="grad2">Markdown</span></h1>
+    <p class="hero-sub">
+      Arrastra uno o varios <code>.pdf</code>, <code>.docx</code> o <code>.xlsx</code>, mira la vista previa
+      y descarga un <strong>.zip</strong> con el <code>.md</code> y las imágenes extraídas. Todo ocurre en tu
+      equipo: <strong>ningún archivo se sube a ningún servidor</strong>.
+    </p>
+  </section>
+
+  <main class="app">
+    <!-- ============ PANEL IZQUIERDO ============ -->
+    <section class="panel controls" aria-label="Archivos">
+      <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Soltar o elegir documentos">
+        <input type="file" id="file-input" accept=".pdf,.docx,.xlsx,.xls" multiple hidden />
+        <div class="dz-inner" id="dz-inner">
+          <div class="dz-icon">📄⤵</div>
+          <p class="dz-title">Arrastra tus documentos aquí</p>
+          <p class="dz-or">o <span class="link">haz clic para buscarlos</span></p>
+          <p class="dz-formats">PDF · DOCX · XLSX · XLS — puedes soltar varios a la vez</p>
+        </div>
+
+        <div id="queue-bar" class="queue-bar" hidden>
+          <span id="q-count" class="badge">0 archivos</span>
+          <button type="button" id="btn-clear-all" class="ghost-btn small" disabled>Vaciar</button>
+        </div>
+        <div id="file-list" class="file-list" hidden></div>
+      </div>
+
+      <div class="actions">
+        <button id="btn-zip" class="primary-btn" disabled>⬇ Descargar .zip</button>
+      </div>
+      <p id="toast" class="toast" hidden></p>
+
+      <div class="note">
+        <strong>¿Cómo funciona?</strong> Cada documento genera una carpeta
+        <code>nombre/output.md</code> con sus imágenes en <code>nombre/images/</code>.
+        Si subes varios, el zip los agrupa por carpeta.
+      </div>
+    </section>
+
+    <!-- ============ PANEL DERECHO: vista previa ============ -->
+    <section class="panel preview" aria-label="Vista previa">
+      <div class="preview-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span id="preview-title" class="preview-title">Vista previa</span>
+      </div>
+      <div id="preview-empty" class="preview-empty">
+        <div class="pe-icon">📝</div>
+        <p>Suelta un documento para ver aquí su <code>Markdown</code> renderizado.</p>
+        <p class="pe-sub">Tu archivo nunca sale de tu equipo.</p>
+      </div>
+      <iframe id="preview-frame" title="Vista previa del Markdown" hidden></iframe>
+    </section>
+  </main>
+
+  <section class="howto">
+    <h2>Qué esperar de cada formato</h2>
+    <div class="howto-grid">
+      <div class="card">
+        <h3>📕 PDF</h3>
+        <p>Extrae texto, detecta <strong>encabezados por tamaño de fuente</strong> e imágenes embebidas.
+        Las tablas y los PDF escaneados (sin texto) son el caso difícil del navegador: los escaneados se
+        guardan como imagen de la página. <em>OCR no incluido (de momento).</em></p>
+      </div>
+      <div class="card">
+        <h3>📘 Word (.docx)</h3>
+        <p>Alta fidelidad: títulos, negritas, listas, enlaces, <strong>tablas</strong> e imágenes se
+        convierten limpiamente a Markdown. Las imágenes se vuelcan a <code>images/</code>.</p>
+      </div>
+      <div class="card">
+        <h3>📗 Excel (.xlsx / .xls)</h3>
+        <p>Cada hoja se convierte en una <strong>tabla Markdown GFM</strong> bajo su propio título
+        <code># NombreHoja</code>. Ideal para pasar datos a apuntes.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>
+      Hecho por <a href="https://github.com/Ismael-Sallami" target="_blank" rel="noopener">Ismael Sallami</a> ·
+      Parte de <a href="https://elblogdeismael.github.io/">El Blog de Ismael</a> ·
+      Funciona íntegramente en tu navegador
+    </p>
+  </footer>
+
+  <!-- Librerías (todas por CDN, client-side) -->
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/turndown@7.2.0/dist/turndown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/turndown-plugin-gfm@1.0.2/dist/turndown-plugin-gfm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="js/converters.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
