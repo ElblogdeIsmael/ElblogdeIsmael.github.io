@@ -1,6 +1,7 @@
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import CoursesGrid from "./components/CoursesGrid";
+import Tools from "./components/Tools";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -12,6 +13,8 @@ export default function App() {
       <main>
         <Hero />
         <CoursesGrid />
+        <div className="hairline mx-auto max-w-6xl px-8" />
+        <Tools />
         <div className="hairline mx-auto max-w-6xl px-8" />
         <About />
         <div className="hairline mx-auto max-w-6xl px-8" />
