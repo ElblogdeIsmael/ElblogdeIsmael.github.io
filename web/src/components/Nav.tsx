@@ -4,6 +4,7 @@ import { BookOpen } from "lucide-react";
 const LINKS = [
   { label: "Cursos", href: "#cursos" },
   { label: "Sobre mí", href: "#sobre-mi" },
+  { label: "Herramientas", href: "#herramientas" },
   { label: "Hablemos", href: "#contacto" },
   { label: "La historia", href: "/historia.html" },
 ];
