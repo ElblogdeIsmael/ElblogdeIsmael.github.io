@@ -11,6 +11,23 @@
   var $ = function (id) { return document.getElementById(id); };
   var md = window.markdownit ? window.markdownit({ html: false, linkify: true, breaks: false }) : null;
 
+  // ---------- tema claro/oscuro (persistido) ----------
+  (function initPageTheme() {
+    var saved = localStorage.getItem("pdf2md_theme");
+    if (saved === "light") document.body.classList.add("light");
+    else if (!saved) localStorage.setItem("pdf2md_theme", "dark");
+    var btn = $("theme-toggle");
+    if (!btn) return;
+    function paint() { btn.textContent = document.body.classList.contains("light") ? "☀️" : "🌙"; }
+    paint();
+    btn.addEventListener("click", function () {
+      document.body.classList.toggle("light");
+      localStorage.setItem("pdf2md_theme", document.body.classList.contains("light") ? "light" : "dark");
+      paint();
+      if (selected >= 0) renderPreview(); // re-render para que la preview siga el tema
+    });
+  })();
+
   // estado: lista de { file, name(base), status, result, error, objectUrls:[] }
   var items = [];
   var selected = -1;
@@ -147,9 +164,10 @@
       return a + (urlByPath[src] || src) + c;
     });
     var frame = $("preview-frame");
+    var light = document.body.classList.contains("light");
     frame.srcdoc =
       '<!doctype html><html><head><meta charset="utf-8">' +
-      "<style>" + PREVIEW_CSS + "</style></head><body><article class='md'>" +
+      "<style>" + buildPreviewCss(light) + "</style></head><body><article class='md'>" +
       rendered + "</article></body></html>";
     frame.hidden = false;
     $("preview-empty").hidden = true;
@@ -250,22 +268,34 @@
     toastTimer = setTimeout(function () { t.hidden = true; }, 3400);
   }
 
-  // CSS inyectado en el iframe de preview (estilo apuntes, dark)
-  var PREVIEW_CSS =
-    "body{margin:0;background:#0d0f12;color:#e8efe9;font:16px/1.7 'Manrope',system-ui,sans-serif;}" +
-    ".md{max-width:780px;margin:0 auto;padding:28px 26px;}" +
-    ".md h1,.md h2,.md h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.2;color:#fff;}" +
-    ".md h1{font-size:1.8rem;border-bottom:1px solid rgba(46,230,197,.25);padding-bottom:.3em;}" +
-    ".md h2{font-size:1.4rem;margin-top:1.4em;}.md h3{font-size:1.15rem;}" +
-    ".md a{color:#2ee6c5;}.md code{background:#161b20;padding:.15em .4em;border-radius:5px;font-family:ui-monospace,monospace;font-size:.9em;}" +
-    ".md pre{background:#14181d;border:1px solid rgba(46,230,197,.2);border-radius:10px;padding:14px;overflow:auto;}" +
-    ".md pre code{background:none;padding:0;}" +
-    ".md img{max-width:100%;border-radius:8px;border:1px solid rgba(46,230,197,.2);}" +
-    ".md table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.92rem;}" +
-    ".md th,.md td{border:1px solid rgba(46,230,197,.22);padding:7px 10px;text-align:left;}" +
-    ".md th{background:rgba(46,230,197,.1);}" +
-    ".md blockquote{border-left:3px solid #b8ff3c;margin:1em 0;padding:.2em 1em;color:#9aa6a0;}" +
-    "@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=Manrope:wght@400;600;700&display=swap');";
+  // CSS inyectado en el iframe de preview (estilo apuntes, sigue el tema de la página)
+  function buildPreviewCss(light) {
+    var bg = light ? "#ffffff" : "#0d0f12";
+    var fg = light ? "#11201c" : "#e8efe9";
+    var head = light ? "#0c1a16" : "#ffffff";
+    var codeBg = light ? "#eef2ef" : "#161b20";
+    var preBg = light ? "#f3f6f4" : "#14181d";
+    var link = light ? "#0f9a83" : "#2ee6c5";
+    var bd = light ? "rgba(18,164,139,.28)" : "rgba(46,230,197,.22)";
+    var thBg = light ? "rgba(18,164,139,.10)" : "rgba(46,230,197,.10)";
+    var quote = light ? "#5a6a63" : "#9aa6a0";
+    return (
+      "@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=Manrope:wght@400;600;700&display=swap');" +
+      "body{margin:0;background:" + bg + ";color:" + fg + ";font:16px/1.7 'Manrope',system-ui,sans-serif;}" +
+      ".md{max-width:780px;margin:0 auto;padding:28px 26px;}" +
+      ".md h1,.md h2,.md h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.2;color:" + head + ";}" +
+      ".md h1{font-size:1.8rem;border-bottom:1px solid " + bd + ";padding-bottom:.3em;}" +
+      ".md h2{font-size:1.4rem;margin-top:1.4em;}.md h3{font-size:1.15rem;}" +
+      ".md a{color:" + link + ";}.md code{background:" + codeBg + ";padding:.15em .4em;border-radius:5px;font-family:ui-monospace,monospace;font-size:.9em;}" +
+      ".md pre{background:" + preBg + ";border:1px solid " + bd + ";border-radius:10px;padding:14px;overflow:auto;}" +
+      ".md pre code{background:none;padding:0;}" +
+      ".md img{max-width:100%;border-radius:8px;border:1px solid " + bd + ";}" +
+      ".md table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.92rem;}" +
+      ".md th,.md td{border:1px solid " + bd + ";padding:7px 10px;text-align:left;}" +
+      ".md th{background:" + thBg + ";}" +
+      ".md blockquote{border-left:3px solid #b8ff3c;margin:1em 0;padding:.2em 1em;color:" + quote + ";}"
+    );
+  }
 
   renderList();
   updateDownloadState();
