@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EXAMEN OE 21-22 - Organización de Empresas</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+      :root {
+        --bg-color: #f0f2f5;
+        --text-color: #333;
+        --card-bg: #fff;
+        --border-color: #ddd;
+        --primary-color: #007bff;
+        --hover-color: #0056b3;
+      }
+
+      body {
+        font-family: "Segoe UI", "Palatino Linotype", serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        padding: 20px;
+        font-size: 18px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+      
+      h2 {
+        color: var(--primary-color);
+        margin-top: 40px;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+      }
+
+      .author {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-style: italic;
+        color: #666;
+      }
+      
+      .question {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+        overflow-wrap: break-word; 
+      }
+      .question:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .correct { border-color: #28a745; background-color: #d4edda; }
+      .partial { border-color: #ffc107; background-color: #fff3cd; }
+      .incorrect { border-color: #dc3545; background-color: #f8d7da; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+      
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+      
+      .opcion-linea, .opcion-bloque {
+        display: block;      
+        padding-left: 35px;  
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;   
+      }
+
+      .opcion-linea input[type="checkbox"], 
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 2px;
+        transform: scale(1.3);
+        margin: 0;
+        cursor: pointer;
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline; 
+      }
+
+      mjx-container { font-size: 110% !important; }
+      
+      img { max-width: 100%; height: auto; border-radius: 4px; }
+      table { border-collapse: collapse; width: 100%; margin: 10px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+      th { background-color: #f8f9fa; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 6px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 12px 16px;
+        border-left: 4px solid var(--primary-color);
+        background-color: rgba(0, 123, 255, 0.07);
+        border-radius: 4px;
+        font-size: 0.96em;
+      }
+      .dark-mode .btn-explicacion {
+        color: #93c5fd;
+        border-color: #93c5fd;
+      }
+      .dark-mode .btn-explicacion:hover {
+        background-color: #93c5fd;
+        color: #121212;
+      }
+      .dark-mode .explicacion {
+        background-color: rgba(147, 197, 253, 0.1);
+        border-left-color: #93c5fd;
+      }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: #555;
+      }
+      .instrucciones-extra li {
+        margin-bottom: 5px;
+      }
+
+      body.dark-mode {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --card-bg: #1e1e1e;
+        --border-color: #444;
+        --primary-color: #374151;
+        --hover-color: #4b5563;
+      }
+      .dark-mode .author { color: #aaa; }
+      .dark-mode th { background-color: #333; }
+      .dark-mode .correct { background-color: #064e3b !important; border-color: #059669; }
+      .dark-mode .partial { background-color: #451a03 !important; border-color: #d97706; }
+      .dark-mode .incorrect { background-color: #450a0a !important; border-color: #dc2626; }
+      .dark-mode .instrucciones-extra ul { color: #bbb; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; }
+        .question { page-break-inside: avoid; border: none; box-shadow: none; padding: 0; margin-bottom: 20px; }
+        .info-box, button, #extra-buttons { display: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+<div class="md2html-marca" style="margin:0 auto 22px;padding:9px 16px;border:1px solid var(--primary-color,#888);border-radius:8px;font-size:13px;line-height:1.45;text-align:center;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;opacity:.92;">Este test se ha generado con la herramienta <a href="https://elblogdeismael.github.io/md2html/" target="_blank" rel="noopener" style="color:var(--primary-color,#0066cc);font-weight:700;text-decoration:none;">md2html</a> · <a href="https://github.com/Ismael-Sallami/md2html-testGenerator" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">repositorio de Ismael Sallami</a></div>
+
+    <h1>EXAMEN OE 21-22 - Organización de Empresas</h1>
+    <div class="author">Autor: Desconocido | Grado en Administración y Dirección de Empresas / Ingeniería Informática</div>
+
+    <div class="info-box">
+      <p>Banco de preguntas tipo test del examen 21-22 de Organización de Empresas (basado en la teoría de Mintzberg), con las respuestas correctas marcadas y razonadas.</p>
+      
+      <div class="instrucciones-extra">
+        
+      </div>
+      
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+      
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
+    </div>
+
+    <div id="questions-container">
+      <div class="question" id="q1" data-correct="0">
+  <div class="enunciado"><strong>1.</strong> Con respecto a la organización como un sistema de flujos regulados, señale la afirmación correcta:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> La visión de la organización como un sistema de flujos regulados considera, entre otros, a los flujos horizontales que tienen lugar entre los especialistas del staff y tecnoestructura con los directivos de línea media.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> Los flujos regulados incluyen exclusivamente flujos verticales descendentes, que representan las órdenes que fluyen desde el ápice estratégico hasta el núcleo de operaciones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> La visión de la organización como un sistema de flujos regulados es un reflejo completo de todas las relaciones de flujo que tienen lugar dentro de la organización.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> La visión de la organización como un sistema de flujos regulados solo considera el flujo horizontal dentro del núcleo de operaciones.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q1')">Ver explicación</button>
+  <div class="explicacion" id="exp-q1" style="display:none">El sistema de flujos regulados describe el uso formal de la autoridad e información. Esto incluye el flujo de trabajo operativo, el flujo de control regulado y los flujos de información y asesoramiento (staff y tecnoestructura hacia la línea media).</div>
+</div>
+<div class="question" id="q2" data-correct="3">
+  <div class="enunciado"><strong>2.</strong> Un puesto de trabajo que está especializado horizontalmente:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Siempre estará muy formalizado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Está obligatoriamente ampliado verticalmente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> No puede exigir formación para ser realizado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> Realiza pocas tareas o tareas con poco contenido.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q2')">Ver explicación</button>
+  <div class="explicacion" id="exp-q2" style="display:none">La especialización horizontal se refiere a la amplitud del puesto; un puesto muy especializado horizontalmente engloba una gama muy reducida de tareas.</div>
+</div>
+<div class="question" id="q3" data-correct="1">
+  <div class="enunciado"><strong>3.</strong> Considerando una organización en la que todo el poder recae en los profesionales del núcleo de operaciones, indique la opción correcta:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> La organización se encuentra descentralizada verticalmente y centralizada horizontalmente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> La organización se encuentra descentralizada vertical y horizontalmente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> La organización se encuentra descentralizada horizontalmente y centralizada verticalmente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> La organización se encuentra centralizada vertical y horizontalmente.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q3')">Ver explicación</button>
+  <div class="explicacion" id="exp-q3" style="display:none">Es el caso típico de la Burocracia Profesional. El poder desciende hasta el núcleo de operaciones (descentralización vertical) y recae sobre los propios profesionales operativos, no sobre administradores ni analistas (descentralización horizontal).</div>
+</div>
+<div class="question" id="q4" data-correct="0">
+  <div class="enunciado"><strong>4.</strong> Indique cómo un directivo de primera línea podría incrementar el tamaño de la unidad que supervisa:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Formalizando el comportamiento de sus subordinados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> Permitiendo que sus subordinados se coordinen mediante adaptación mutua.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> Coordinando a sus subordinados a través de supervisión directa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> Un directivo de primera línea nunca podrá supervisar una unidad de gran tamaño.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q4')">Ver explicación</button>
+  <div class="explicacion" id="exp-q4" style="display:none">La estandarización (o normalización/formalización) del trabajo permite que un solo supervisor controle a muchos más subordinados, ampliando el tramo de control.</div>
+</div>
+<div class="question" id="q5" data-correct="2">
+  <div class="enunciado"><strong>5.</strong> La hipótesis de configuración extendida pone de manifiesto que la estructura eficaz requiere:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> Únicamente que los parámetros de diseño se ajusten debidamente a los factores de contingencia.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> Únicamente que exista una consistencia interna entre los distintos parámetros de diseño.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> Una consistencia interna entre los distintos parámetros de diseño y la adecuación de estos parámetros de diseño a los factores de contingencia.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> Según esta hipótesis no existe ninguna estructura eficaz.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q5')">Ver explicación</button>
+  <div class="explicacion" id="exp-q5" style="display:none">Mintzberg postula que la eficacia organizacional exige tanto coherencia interna (entre los parámetros de diseño) como externa (con los factores de contingencia).</div>
+</div>
+<div class="question" id="q6" data-correct="2">
+  <div class="enunciado"><strong>6.</strong> ¿Qué características tienen las estructuras organizativas planas?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> Tramos de control estrechos y pocos niveles jerárquicos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> Tramos de control estrechos y muchos niveles jerárquicos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> Tramos de control amplios y pocos niveles jerárquicos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> Tramos de control amplios y muchos niveles jerárquicos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q6')">Ver explicación</button>
+  <div class="explicacion" id="exp-q6" style="display:none">Una estructura plana surge cuando los tramos de control son amplios, lo que reduce la necesidad de crear múltiples capas directivas jerárquicas intermedias.</div>
+</div>
+<div class="question" id="q7" data-correct="0">
+  <div class="enunciado"><strong>7.</strong> La burocracia maquinal presenta:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> Un sistema técnico regulador y poco sofisticado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> Puestos de trabajo del núcleo de operaciones ampliados en ambas dimensiones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> Una formulación de estrategias intuitiva.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> Una división poco estricta del trabajo.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q7')">Ver explicación</button>
+  <div class="explicacion" id="exp-q7" style="display:none">En la burocracia maquinal el sistema técnico marca el ritmo y rige el trabajo rutinario (es regulador), pero no suele estar totalmente automatizado (poco sofisticado).</div>
+</div>
+<div class="question" id="q8" data-correct="2">
+  <div class="enunciado"><strong>8.</strong> Cuando el trabajo de los operarios se ve controlado y/o condicionado por el sistema técnico, se dice que el sistema técnico es...</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Sofisticado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> Automatizado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> Regulador.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> Complejo.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q8')">Ver explicación</button>
+  <div class="explicacion" id="exp-q8" style="display:none">Un sistema técnico &quot;regulador&quot; es aquel que impone el ritmo y estandariza el trabajo del operario, limitando su autonomía.</div>
+</div>
+<div class="question" id="q9" data-correct="3">
+  <div class="enunciado"><strong>9.</strong> La estructura simple presenta:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> Un entorno sencillo y estable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> Puestos de trabajo especializados y formalizados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> Una formulación de estrategias racional y analítica.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> Una división poco estricta del trabajo.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q9')">Ver explicación</button>
+  <div class="explicacion" id="exp-q9" style="display:none">La estructura simple carece de tecnoestructura y de formalización, lo que se traduce en una división del trabajo flexible y poco estricta donde todos hacen un poco de todo bajo la supervisión directa del líder. Su entorno es sencillo y dinámico.</div>
+</div>
+<div class="question" id="q10" data-correct="3">
+  <div class="enunciado"><strong>10.</strong> Uno de los inconvenientes de la burocracia profesional se encuentra en:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> Su sistema técnico regulador.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> La formalización del comportamiento de los profesionales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> La centralización de la estructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> Su dificultad para la innovación.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q10')">Ver explicación</button>
+  <div class="explicacion" id="exp-q10" style="display:none">La burocracia profesional está diseñada para perfeccionar programas estándar y encasillar los problemas conocidos (ej. hospitales, universidades), por lo que le resulta muy difícil crear respuestas nuevas ante problemas inéditos (innovación).</div>
+</div>
+<div class="question" id="q11" data-correct="0">
+  <div class="enunciado"><strong>11.</strong> Una de las ventajas de la burocracia maquinal es:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> Ser una estructura eficiente cuando se necesita realizar tareas sencillas y repetitivas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> Su adaptación rápida a los cambios del entorno.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="2"> El fuerte sentido de la misión de sus miembros.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="3"> La no existencia de problemas humanos en el núcleo de operaciones.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q11')">Ver explicación</button>
+  <div class="explicacion" id="exp-q11" style="display:none">Su diseño está concebido como una máquina para producir de forma masiva y con alta eficiencia en entornos estables.</div>
+</div>
+<div class="question" id="q12" data-correct="2">
+  <div class="enunciado"><strong>12.</strong> Analice la siguiente afirmación: &quot;Debido a la naturaleza de su principal mecanismo de coordinación, la organización misionaria puede considerarse como una adhocracia ideológica&quot;.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="0"> Es falsa, se puede considerar como una burocracia profesional.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="1"> Es falsa, se puede considerar como una adhocracia administrativa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="2"> Es falsa, se puede considerar como una burocracia ideológica.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="3"> Es verdadera.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q12')">Ver explicación</button>
+  <div class="explicacion" id="exp-q12" style="display:none">Falsa. La organización misionaria coordina mediante la normalización de normas y valores. Esta fuerte estandarización de las creencias la asemeja más a una forma de &quot;burocracia ideológica&quot; y no a la adhocracia, que es fluida y orgánica.</div>
+</div>
+<div class="question" id="q13" data-correct="1">
+  <div class="enunciado"><strong>13.</strong> ¿Qué dispositivo de enlace consiste en un conjunto de trabajadores que son convocados para cumplir una determinada tarea y se desagrupa tras su cumplimiento?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="0"> Puestos de enlace.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="1"> Grupos de trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="2"> Directivos integradores.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="3"> Estructura matricial permanente.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q13')">Ver explicación</button>
+  <div class="explicacion" id="exp-q13" style="display:none">También conocidos como &quot;Task forces&quot;. Son temporales y se disuelven cuando resuelven el problema específico.</div>
+</div>
+<div class="question" id="q14" data-correct="2">
+  <div class="enunciado"><strong>14.</strong> Teniendo en cuenta las hipótesis de congruencia, cuanto mayor sea el control externo de una organización...</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="0"> más descentralizada y formalizada resulta su estructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="1"> más descentralizada y menos formalizada resulta su estructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="2"> más centralizada y formalizada resulta su estructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="3"> más descentralizada y menos formalizada resulta su estructura.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q14')">Ver explicación</button>
+  <div class="explicacion" id="exp-q14" style="display:none">Cuando la organización está muy controlada desde el exterior (ej. filiales, entes públicos), el ápice estratégico retiene el poder para rendir cuentas (centralización) y estandariza al máximo para asegurar el cumplimiento (formalización).</div>
+</div>
+<div class="question" id="q15" data-correct="2">
+  <div class="enunciado"><strong>15.</strong> La burocracia maquinal se caracteriza por un diseño del sistema decisor:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="0"> Centralizado vertical y horizontalmente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="1"> Centralizado verticalmente y descentralizado horizontalmente hacia el staff de apoyo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="2"> Centralizado verticalmente y descentralizado horizontalmente hacia la tecnoestructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="3"> Centralizado verticalmente y descentralizado horizontalmente hacia el núcleo de operaciones.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q15')">Ver explicación</button>
+  <div class="explicacion" id="exp-q15" style="display:none">El poder formal está centralizado en el ápice, pero los analistas de la tecnoestructura ganan mucho poder informal (descentralización horizontal) porque son ellos quienes diseñan las reglas que todos obedecen.</div>
+</div>
+<div class="question" id="q16" data-correct="3">
+  <div class="enunciado"><strong>16.</strong> Con respecto a la normalización como mecanismo de coordinación, señale la respuesta correcta:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="0"> La normalización de resultados no deja libertad de acción al trabajador para determinar la forma de realizar el trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="1"> La normalización que deja una mayor autonomía al trabajador es la de procesos de trabajo y la que menos la de habilidades.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="2"> En la normalización de procesos coincide la persona que ejecuta y administra la tarea.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="3"> Mediante la normalización de habilidades, la organización sacrifica parte del control en beneficio de las entidades externas que forman a sus trabajadores.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q16')">Ver explicación</button>
+  <div class="explicacion" id="exp-q16" style="display:none">Al requerir habilidades estandarizadas (ej. título de medicina), la organización cede el control del proceso de formación a universidades y colegios profesionales.</div>
+</div>
+<div class="question" id="q17" data-correct="2">
+  <div class="enunciado"><strong>17.</strong> En las burocracias profesionales ¿suelen surgir dos jerarquías paralelas?:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="0"> No, en las burocracias profesionales no pueden existir dos jerarquías paralelas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="1"> Sí, una democrática y ascendente para los profesionales del staff de apoyo y otra con forma de burocracia maquinal para la tecnoestructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="2"> Sí, una democrática y ascendente para los profesionales de las unidades de línea y otra con forma de burocracia maquinal para el staff de apoyo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="3"> Sí, una forma de burocracia maquinal en el núcleo de operaciones y otra democrática y ascendente en los profesionales del staff y la tecnoestructura.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q17')">Ver explicación</button>
+  <div class="explicacion" id="exp-q17" style="display:none">Los profesionales del núcleo (ej. médicos) operan de forma democrática y autónoma, mientras que el personal de apoyo administrativo (staff) está sujeto a un control rígido, jerárquico y centralizado.</div>
+</div>
+<div class="question" id="q18" data-correct="2">
+  <div class="enunciado"><strong>18.</strong> La forma divisional pura se caracteriza por:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="0"> Una centralización total en la sede central.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="1"> Un cierto grado de descentralización horizontal paralela desde la sede central hacia las divisiones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="2"> Un cierto grado de descentralización vertical paralela desde la sede central hacia las divisiones y una centralización del poder de toma de decisiones en las propias divisiones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="3"> Un cierto grado de descentralización vertical selectiva desde la sede central hacia las divisiones y una descentralización del poder de toma de decisiones en las propias divisiones.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q18')">Ver explicación</button>
+  <div class="explicacion" id="exp-q18" style="display:none">La sede cede a los gerentes divisionales la autoridad (descentralización vertical paralela), pero estos suelen retener el poder en sus propias divisiones sin descentralizarlo más hacia abajo.</div>
+</div>
+<div class="question" id="q19" data-correct="0">
+  <div class="enunciado"><strong>19.</strong> El núcleo de operaciones de la adhocracia operativa:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="0"> Se encuentra fusionado con el resto de la estructura formando una &quot;masa orgánica&quot; en la que no está clara la diferencia entre línea y staff.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="1"> Se encuentra tronchado y separado de la estructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="2"> Se coordina mediante la normalización de procesos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="3"> Está automatizado y separado de la estructura.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q19')">Ver explicación</button>
+  <div class="explicacion" id="exp-q19" style="display:none">En la adhocracia operativa, los operarios trabajan en proyectos junto a los directivos y expertos del staff, disolviendo las fronteras tradicionales de la organización.</div>
+</div>
+<div class="question" id="q20" data-correct="1">
+  <div class="enunciado"><strong>20.</strong> El personal directivo de una organización:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="0"> Se distribuye entre la línea media, el ápice estratégico, la tecnoestructura y el staff de apoyo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="1"> Se encuentra solo en el ápice estratégico y la línea media.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="2"> Se distribuye entre la línea media y el núcleo de operaciones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="3"> Ocupa exclusivamente la línea media.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q20')">Ver explicación</button>
+  <div class="explicacion" id="exp-q20" style="display:none">El personal directivo constituye la cadena de autoridad formal (cadena de mando), que en el modelo de Mintzberg engloba exclusivamente el ápice estratégico y la línea media.</div>
+</div>
+<div class="question" id="q21" data-correct="3">
+  <div class="enunciado"><strong>21.</strong> Analice la siguiente afirmación: &quot;Como la estructura de cada una de las divisiones suele ser de burocracia maquinal, a la forma divisional también se la conoce con la denominación de burocracia duplicada&quot;.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="0"> Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la profesional.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="1"> Es falsa, las divisiones de la forma divisional nunca adoptan la forma de burocracia duplicada.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="2"> Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la forma divisional.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="3"> Es verdadera.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q21')">Ver explicación</button>
+  <div class="explicacion" id="exp-q21" style="display:none">Mintzberg define la configuración divisional muchas veces como &quot;burocracias de copia al carbón&quot; (burocracias duplicadas), ya que cada división suele adoptar la estructura de una burocracia maquinal independiente.</div>
+</div>
+<div class="question" id="q22" data-correct="3">
+  <div class="enunciado"><strong>22.</strong> Señale la afirmación correcta relacionada con el organigrama de una empresa:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="0"> La organización como un sistema de autoridad formal queda representada en el organigrama organizativo, reflejando las relaciones informales que tienen lugar dentro de la misma.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="1"> El organigrama organizativo representa la visión de la organización como un sistema de constelaciones de trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="2"> El organigrama organizativo permite identificar las unidades que se coordinan mediante adaptación mutua.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="3"> El organigrama refleja gráficamente las relaciones de autoridad formal de la organización y proporciona una adecuada representación de la división del trabajo que hay en ella.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q22')">Ver explicación</button>
+  <div class="explicacion" id="exp-q22" style="display:none">El organigrama es estrictamente la representación del esqueleto formal, mostrando quién rinde cuentas a quién (autoridad) y cómo se agrupan los puestos (división del trabajo).</div>
+</div>
+<div class="question" id="q23" data-correct="0">
+  <div class="enunciado"><strong>23.</strong> Indique cuál de las siguientes afirmaciones relacionadas con la planificación de acciones es FALSA:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="0"> La planificación de acciones permite introducir en la estructura el mecanismo de coordinación de la normalización de resultados de forma directa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="1"> A través de la planificación de acciones se determinan las acciones necesarias para alcanzar los objetivos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="2"> La planificación de acciones puede exceder el trabajo de una unidad, permitiendo coordinar así a distintas unidades involucradas en la consecución de un mismo objetivo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="3"> La planificación de acciones se considera un parámetro de diseño.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q23')">Ver explicación</button>
+  <div class="explicacion" id="exp-q23" style="display:none">Falsa. La planificación de acciones no normaliza los resultados, sino los comportamientos/decisiones a tomar. Es el <em>control de rendimiento</em> el parámetro que introduce la normalización de resultados.</div>
+</div>
+<div class="question" id="q24" data-correct="0">
+  <div class="enunciado"><strong>24.</strong> Teniendo en cuenta las hipótesis de congruencia, indique cuál de las siguientes afirmaciones es cierta:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="0"> La sencillez y extrema hostilidad del entorno conducen a una centralización de la estructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="1"> La complejidad y extrema hostilidad del entorno conducen a una centralización de la estructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="2"> La complejidad y munificencia del entorno conducen a una descentralización de la estructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="3"> La sencillez y munificencia del entorno conducen a una centralización de la estructura.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q24')">Ver explicación</button>
+  <div class="explicacion" id="exp-q24" style="display:none">Ante un entorno extremadamente hostil (crisis severa), la organización necesita una respuesta rápida y coordinada, por lo que el poder se centraliza fuertemente en la cúspide (ápice estratégico).</div>
+</div>
+<div class="question" id="q25" data-correct="3">
+  <div class="enunciado"><strong>25.</strong> En las estructuras divisionales puras ¿cuál es el principal mecanismo para coordinar a las divisiones?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="0"> Normalización de procesos de trabajo, para establecer la forma de trabajo de cada división.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="1"> Adaptación mutua, por la alta formación de los directivos medios.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="2"> Supervisión directa, por los valores compartidos por todos los directivos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="3"> Normalización de resultados, para conservar el control y proteger la autonomía divisional.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q25')">Ver explicación</button>
+  <div class="explicacion" id="exp-q25" style="display:none">La sede central concede autonomía operativa a las divisiones, pero evalúa y controla su rendimiento a través de la estandarización de los resultados esperados (ej. cuotas de rentabilidad).</div>
+</div>
+<div class="question" id="q26" data-correct="2">
+  <div class="enunciado"><strong>26.</strong> Los principales mecanismos de coordinación de la adhocracia operativa y de la adhocracia administrativa:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="0"> En ambos casos es la estructura matricial.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="1"> La normalización de habilidades en la operativa y la adaptación mutua en la administrativa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="2"> En ambos casos es la adaptación mutua.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="3"> La adaptación mutua en la operativa y la supervisión directa en la administrativa.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q26')">Ver explicación</button>
+  <div class="explicacion" id="exp-q26" style="display:none">La adhocracia es la configuración más orgánica; confía plenamente en la comunicación informal y el ajuste recíproco (adaptación mutua) entre expertos para realizar proyectos innovadores.</div>
+</div>
+<div class="question" id="q27" data-correct="0">
+  <div class="enunciado"><strong>27.</strong> La identificación natural del individuo con la ideología de una organización se produce cuando:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="0"> Sus valores personales son congruentes con la ideología de la organización.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="1"> Se ve sometido a procesos de socialización y adoctrinamiento por parte de la organización.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="2"> La propia escala de valores de la organización es la que atrae al individuo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="3"> Solamente cuando la cultura organizacional es débil.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q27')">Ver explicación</button>
+  <div class="explicacion" id="exp-q27" style="display:none">Esto ocurre por selección y afinidad intrínseca, diferenciándose del adoctrinamiento y socialización (que son métodos de la empresa para imponer o transmitir esos valores a posteriori).</div>
+</div>
+<div class="question" id="q28" data-correct="2">
+  <div class="enunciado"><strong>28.</strong> ¿Qué tipo de entorno comparten la estructura simple y la adhocracia?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="0"> Sencillo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="1"> Complejo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="2"> Dinámico.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="3"> Diversificado.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q28')">Ver explicación</button>
+  <div class="explicacion" id="exp-q28" style="display:none">Ambas configuraciones son orgánicas porque deben enfrentarse a un entorno cambiante, impredecible y dinámico.</div>
+</div>
+<div class="question" id="q29" data-correct="1">
+  <div class="enunciado"><strong>29.</strong> ¿Qué interdependencias se consiguen controlar usando una base de agrupación según mercado?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="0"> Interdependencias de las funciones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="1"> Interdependencias de flujo de trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="2"> Interdependencias de las tareas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="3"> Interdependencias de escala o tamaño.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q29')">Ver explicación</button>
+  <div class="explicacion" id="exp-q29" style="display:none">Al agrupar por mercado (clientes, productos o áreas), se encierran dentro de la misma unidad todas las fases secuenciales del proceso para crear ese producto o atender a ese cliente (flujo de trabajo).</div>
+</div>
+<div class="question" id="q30" data-correct="1">
+  <div class="enunciado"><strong>30.</strong> Analice la siguiente afirmación: &quot;La socialización y el adoctrinamiento son dos procesos de naturaleza formal mediante los cuales se transmiten las normas de comportamiento relacionadas con la cultura, valores e ideología de la organización&quot;.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="0"> Es falsa, a través de estos procesos se transmiten los conocimientos y habilidades necesarios para desempeñar un puesto.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="1"> Es falsa, la socialización es un proceso de naturaleza informal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="2"> Es falsa, el adoctrinamiento es un proceso de naturaleza informal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="3"> Es verdadera.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q30')">Ver explicación</button>
+  <div class="explicacion" id="exp-q30" style="display:none">El adoctrinamiento es el parámetro de diseño formal de la empresa, mientras que la socialización hace referencia al proceso natural e informal por el que un individuo asimila la cultura grupal.</div>
+</div>
+<div class="question" id="q31" data-correct="3">
+  <div class="enunciado"><strong>31.</strong> Indique cuál de las siguientes afirmaciones relacionadas con el concepto de estructura matricial es FALSA:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="0"> Es un dispositivo de enlace.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="1"> Existen dos tipos de estructuras matriciales, permanentes y variables.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="2"> Los individuos que forman parte de una estructura matricial deben responder ante dos responsables que tienen el mismo poder formal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="3"> Hay dos tipos de estructuras matriciales, unas que se agrupan sólo en base a la función y otras que se agrupan sólo en base al mercado.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q31')">Ver explicación</button>
+  <div class="explicacion" id="exp-q31" style="display:none">Falsa. La característica fundamental de la estructura matricial es que rompe el principio de unidad de mando creando un &quot;doble mando&quot;, combinando de forma <em>simultánea</em> la agrupación funcional y la agrupación por mercado.</div>
+</div>
+<div class="question" id="q32" data-correct="1">
+  <div class="enunciado"><strong>32.</strong> La adhocracia emprendedora:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="0"> Es una configuración híbrida que se mueve entre la adhocracia operativa y la burocracia profesional.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="1"> Es una configuración híbrida que se mueve entre la adhocracia operativa y la estructura simple.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="2"> Es una configuración híbrida que se mueve entre la adhocracia administrativa y la burocracia profesional.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="3"> Es una configuración híbrida que se mueve entre la adhocracia administrativa y la burocracia maquinal simple.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q32')">Ver explicación</button>
+  <div class="explicacion" id="exp-q32" style="display:none">Combina la fluidez y el talento experto (adhocracia) con el liderazgo fuerte y centralizado de un visionario (estructura simple), muy típica en startups tecnológicas.</div>
+</div>
+<div class="question" id="q33" data-correct="2">
+  <div class="enunciado"><strong>33.</strong> A mayor tamaño de la organización:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="0"> Menor será la necesidad de división del trabajo, menos especializadas estarán sus tareas, menos diferenciadas sus unidades y más desarrollado su componente administrativo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="1"> Mayor será la necesidad de división del trabajo, más especializadas estarán sus tareas, menos diferenciadas sus unidades y más desarrollado su componente administrativo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="2"> Mayor será la necesidad de división del trabajo, más especializadas estarán sus tareas, más diferenciadas sus unidades y más desarrollado su componente administrativo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="3"> Menor será la necesidad de división del trabajo, menos especializadas estarán sus tareas, menos diferenciadas sus unidades y menos desarrollado su componente administrativo.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q33')">Ver explicación</button>
+  <div class="explicacion" id="exp-q33" style="display:none">Conforme la organización crece, se vuelve más compleja: divide más las tareas, especializa, crea nuevos departamentos (diferenciación) y requiere más staff/jerarquía para coordinarlos (componente administrativo).</div>
+</div>
+<div class="question" id="q34" data-correct="1">
+  <div class="enunciado"><strong>34.</strong> Las organizaciones misionarias reformadoras:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="0"> Se orientan a fomentar cambios radicales en la sociedad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="1"> Intentan cambiar la sociedad cambiando la conducta de sus propios miembros de acuerdo con su misión.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="2"> Prefieren aislarse de cualquier influencia externa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="3"> Son una variante de la estructura simple.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q34')">Ver explicación</button>
+  <div class="explicacion" id="exp-q34" style="display:none">A diferencia de las conversoras (cambio exterior y proselitismo activo) o las de claustro (aislamiento), las reformadoras proponen el cambio social progresivo mediante el ejemplo y la rectitud de conducta de sus miembros.</div>
+</div>
+<div class="question" id="q35" data-correct="3">
+  <div class="enunciado"><strong>35.</strong> Si el poder se encuentra repartido de forma igualitaria entre todos los miembros de la organización:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="0"> Existe descentralización vertical y centralización horizontal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="1"> Existe descentralización horizontal y centralización vertical.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="2"> Existe descentralización horizontal y vertical.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="3"> Existe descentralización total.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q35')">Ver explicación</button>
+  <div class="explicacion" id="exp-q35" style="display:none">La descentralización es total cuando el poder fluye desde la cúspide a todos los niveles inferiores (vertical) y además recae en los operarios y no en staff o analistas (horizontal), asemejándose a un entorno asambleario o muy orgánico.</div>
+</div>
+<div class="question" id="q36" data-correct="3">
+  <div class="enunciado"><strong>36.</strong> Marque la opción correcta:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="0"> Las unidades de línea se encargan de prestar soporte y ayuda para que las actividades primarias de la cadena de valor se realicen con éxito.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="1"> Los analistas del staff de apoyo se encargan de normalizar los procesos, habilidades y outputs de la organización.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="2"> La tecnoestructura, el staff de apoyo y la línea media se consideran unidades de línea.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="3"> El staff de apoyo se encarga de realizar parte de las actividades secundarias de la cadena de valor, al margen del flujo fundamental del trabajo operativo.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q36')">Ver explicación</button>
+  <div class="explicacion" id="exp-q36" style="display:none">Servicios como cafetería, limpieza, relaciones públicas o asesoría legal operan al margen del flujo central de la organización y se integran en el staff de apoyo.</div>
+</div>
+<div class="question" id="q37" data-correct="3">
+  <div class="enunciado"><strong>37.</strong> Analice la siguiente afirmación: &quot;En las burocracias profesionales, los miembros de la línea media suelen ser elegidos, o al menos consentidos, por los operarios del núcleo de operaciones&quot;.</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="0"> Falso, esto ocurre en la adhocracia administrativa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="1"> Falso, esto ocurre en la burocracia maquinal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="2"> Falso, esto ocurre en la estructura simple.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="3"> Verdadero.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q37')">Ver explicación</button>
+  <div class="explicacion" id="exp-q37" style="display:none">Dado el enorme poder de los profesionales (ej. catedráticos en una universidad o médicos jefes en un hospital), los administradores de línea media suelen requerir el beneplácito de los operarios para poder coordinarlos.</div>
+</div>
+<div class="question" id="q38" data-correct="2">
+  <div class="enunciado"><strong>38.</strong> ¿Cómo se denomina el parámetro de diseño que introduce descripciones que indican en todo momento lo que han de hacer los trabajadores en sus puestos de trabajo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="0"> Especialización.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="1"> Preparación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="2"> Formalización.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="3"> Adoctrinamiento.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q38')">Ver explicación</button>
+  <div class="explicacion" id="exp-q38" style="display:none">La formalización del comportamiento persigue estandarizar los procesos de trabajo mediante reglas, manuales de procedimiento y descripciones exhaustivas de puestos.</div>
+</div>
+<div class="question" id="q39" data-correct="0">
+  <div class="enunciado"><strong>39.</strong> ¿Sobre qué parte de la organización recae el poder cuando existe centralización vertical y horizontal?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="0"> El poder formal e informal recae sobre el ápice estratégico.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="1"> El poder formal e informal recae sobre los profesionales del núcleo de operaciones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="2"> El poder formal recae sobre el ápice estratégico y el poder informal sobre la tecnoestructura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="3"> El poder formal e informal recae sobre cualquier miembro de la organización.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q39')">Ver explicación</button>
+  <div class="explicacion" id="exp-q39" style="display:none">En la centralización estricta (típica de la Estructura Simple), el líder o gerente superior retiene todo el poder en la toma de decisiones, sin delegarlo hacia abajo ni a los lados.</div>
+</div>
+<div class="question" id="q40" data-correct="1">
+  <div class="enunciado"><strong>40.</strong> La visión de la organización como un sistema de comunicación informal describe el uso de:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="0"> La supervisión directa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="1"> La adaptación mutua.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="2"> La normalización de procesos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="3"> La normalización de valores.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q40')">Ver explicación</button>
+  <div class="explicacion" id="exp-q40" style="display:none">El funcionamiento informal escapa a las reglas documentadas y recae sobre redes de contactos e intercambio espontáneo de información (sociometría) para coordinar el trabajo (adaptación mutua).</div>
+</div>
+
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
+
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
+
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
+
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+        
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
+
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checked.length === 0) return;
+
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
+            } else {
+              q.classList.add("incorrect");
+            }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+        
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
+        }
+        
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
+
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+        
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+        
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+        
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+            
+            q.classList.remove("correct", "partial", "incorrect");
+            
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+        
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+        
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+        
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
+</html>
