@@ -1,8 +1,10 @@
 # EXAMEN OE 21-22 - Organización de Empresas
 
+* **Autor:** Ismael Sallami Moreno
 * **Descripción:** Banco de preguntas tipo test del examen 21-22 de Organización de Empresas (basado en la teoría de Mintzberg), con las respuestas correctas marcadas y razonadas.
 * **Titulación:** Grado en Administración y Dirección de Empresas / Ingeniería Informática
 
+---
 
 1. Con respecto a la organización como un sistema de flujos regulados, señale la afirmación correcta:
 
@@ -126,7 +128,7 @@
     - ( ) más descentralizada y formalizada resulta su estructura.
     - ( ) más descentralizada y menos formalizada resulta su estructura.
     - (x) más centralizada y formalizada resulta su estructura.
-    - ( ) más descentralizada y menos formalizada resulta su estructura.
+    - ( ) más centralizada y menos formalizada resulta su estructura.
 
     > Cuando la organización está muy controlada desde el exterior (ej. filiales, entes públicos), el ápice estratégico retiene el poder para rendir cuentas (centralización) y estandariza al máximo para asegurar el cumplimiento (formalización).
 
@@ -169,7 +171,7 @@
 19. El núcleo de operaciones de la adhocracia operativa:
 
     - (x) Se encuentra fusionado con el resto de la estructura formando una "masa orgánica" en la que no está clara la diferencia entre línea y staff.
-    - ( ) Se encuentra tronchado y separado de la estructura.
+    - ( ) Se encuentra truncado y separado de la estructura.
     - ( ) Se coordina mediante la normalización de procesos.
     - ( ) Está automatizado y separado de la estructura.
 
@@ -177,21 +179,21 @@
 
 20. El personal directivo de una organización:
 
-    - ( ) Se distribuye entre la línea media, el ápice estratégico, la tecnoestructura y el staff de apoyo.
-    - (x) Se encuentra solo en el ápice estratégico y la línea media.
+    - (x) Se distribuye entre la línea media, el ápice estratégico, la tecnoestructura y el staff de apoyo.
+    - ( ) Se encuentra solo en el ápice estratégico y la línea media.
     - ( ) Se distribuye entre la línea media y el núcleo de operaciones.
     - ( ) Ocupa exclusivamente la línea media.
 
-    > El personal directivo constituye la cadena de autoridad formal (cadena de mando), que en el modelo de Mintzberg engloba exclusivamente el ápice estratégico y la línea media.
+    > El personal directivo incluye el ápice estratégico y a los directivos de nivel medio, y estos últimos se reparten entre la línea media, la tecnoestructura y el staff de apoyo (cada unidad de staff tiene sus propios directivos). La única parte sin personal directivo es el núcleo de operaciones.
 
 21. Analice la siguiente afirmación: "Como la estructura de cada una de las divisiones suele ser de burocracia maquinal, a la forma divisional también se la conoce con la denominación de burocracia duplicada".
 
     - ( ) Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la profesional.
     - ( ) Es falsa, las divisiones de la forma divisional nunca adoptan la forma de burocracia duplicada.
-    - ( ) Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la forma divisional.
-    - (x) Es verdadera.
+    - (x) Es falsa, la burocracia duplicada es una configuración híbrida entre la burocracia maquinal y la forma divisional.
+    - ( ) Es verdadera.
 
-    > Mintzberg define la configuración divisional muchas veces como "burocracias de copia al carbón" (burocracias duplicadas), ya que cada división suele adoptar la estructura de una burocracia maquinal independiente.
+    > Falsa. La "burocracia duplicada" no es un sinónimo de la forma divisional, sino una configuración híbrida concreta que surge al combinar la forma divisional con la burocracia maquinal.
 
 22. Señale la afirmación correcta relacionada con el organigrama de una empresa:
 
@@ -303,12 +305,12 @@
 
 34. Las organizaciones misionarias reformadoras:
 
-    - ( ) Se orientan a fomentar cambios radicales en la sociedad.
-    - (x) Intentan cambiar la sociedad cambiando la conducta de sus propios miembros de acuerdo con su misión.
+    - (x) Se orientan a fomentar cambios radicales en la sociedad.
+    - ( ) Intentan cambiar la sociedad cambiando la conducta de sus propios miembros de acuerdo con su misión.
     - ( ) Prefieren aislarse de cualquier influencia externa.
     - ( ) Son una variante de la estructura simple.
 
-    > A diferencia de las conversoras (cambio exterior y proselitismo activo) o las de claustro (aislamiento), las reformadoras proponen el cambio social progresivo mediante el ejemplo y la rectitud de conducta de sus miembros.
+    > Las reformadoras tienen una misión orientada a fomentar cambios radicales directamente en la sociedad. Cambiar la sociedad cambiando la conducta de los propios miembros corresponde a las conversoras, y el aislamiento a las de claustro.
 
 35. Si el poder se encuentra repartido de forma igualitaria entre todos los miembros de la organización:
 
