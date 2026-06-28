@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="brand">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Informes GSOC · Mifos Gazelle</title>
+  <meta name="description" content="Archivo privado de informes del proyecto GSOC Mifos Gazelle. Acceso restringido." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- KaTeX: fórmulas LaTeX ($…$ / $$…$$) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <!-- highlight.js: resaltado de código (shell, yaml, json…) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- ====================== LOGIN ====================== -->
+  <section id="gate" class="gate">
+    <div class="gate-card">
+      <p class="gate-kicker">Acceso restringido</p>
+      <h1 class="gate-title">Informes <span>GSOC</span></h1>
+      <p class="gate-sub">Mifos Gazelle · archivo privado cifrado de extremo a extremo.</p>
+
+      <form id="login-form" class="gate-form" autocomplete="off">
+        <label class="field">
+          <span>Usuario</span>
+          <input id="user" type="text" name="user" autocomplete="username" spellcheck="false" required />
+        </label>
+        <label class="field">
+          <span>Contraseña</span>
+          <input id="pass" type="password" name="pass" autocomplete="current-password" required />
+        </label>
+        <button id="login-btn" type="submit" class="btn-primary">Entrar</button>
+        <p id="login-error" class="gate-error" role="alert" hidden></p>
+      </form>
+
+      <p class="gate-foot">
+        Los informes están cifrados (AES-256-GCM). Sin la contraseña correcta no
+        se pueden descifrar ni leer, ni siquiera con acceso directo a los archivos.
+      </p>
+      <a class="gate-back" href="/">← El Blog de Ismael</a>
+    </div>
+  </section>
+
+  <!-- ====================== APP ====================== -->
+  <div id="app" class="app" hidden>
+    <header class="topbar">
+      <a class="tb-brand" href="/">← El Blog de Ismael</a>
+      <div class="tb-title">Informes GSOC · Mifos Gazelle</div>
+      <div class="tb-actions">
+        <input id="search" type="search" class="tb-search" placeholder="Buscar informe…" aria-label="Buscar informe" />
+        <button id="logout-btn" class="btn-ghost" type="button">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Índice de informes">
+        <div class="sidebar-head">
+          <span id="count-label" class="count-label"></span>
+        </div>
+        <nav id="tree" class="tree"></nav>
+      </aside>
+
+      <main class="reader">
+        <article id="md-content" class="md-content" aria-live="polite">
+          <div class="reader-empty">
+            <h2>Selecciona un informe</h2>
+            <p>Elige cualquier documento del índice de la izquierda para leerlo aquí, renderizado en tu navegador.</p>
+          </div>
+        </article>
+      </main>
+    </div>
+  </div>
+
+  <!-- Motor Markdown (misma versión que /md2html/ y /viewer/) -->
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+  <!-- Matemáticas: KaTeX + plugin (orden: markdown-it → katex → texmath) -->
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath@1.0.0/texmath.js"></script>
+  <!-- Código -->
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
