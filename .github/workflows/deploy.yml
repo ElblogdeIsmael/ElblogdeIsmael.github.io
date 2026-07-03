@@ -1,0 +1,65 @@
+name: Deploy to GitHub Pages
+
+# Publica el sitio estático (index/historia + courses + Subjects servidos) en
+# GitHub Pages, podando del artefacto el material pesado que ningún HTML
+# referencia (libros, diapositivas, zips de material bruto). Así el artefacto
+# se mantiene por debajo del límite de 1 GB de Pages.
+#
+# IMPORTANTE: en Settings -> Pages -> "Build and deployment" -> Source, elige
+# "GitHub Actions" para que se use este workflow (y no el build por rama).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un despliegue a la vez; no cancelar uno en curso.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Preparar copia del sitio (sin .git/.github/node_modules)
+        run: |
+          set -euo pipefail
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='web/node_modules' \
+            ./ "$RUNNER_TEMP/site/"
+
+      - name: Podar material pesado no referenciado
+        run: python3 .github/prune-pages.py "$RUNNER_TEMP/site" 1048576
+
+      - name: Evitar procesado Jekyll
+        run: touch "$RUNNER_TEMP/site/.nojekyll"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
