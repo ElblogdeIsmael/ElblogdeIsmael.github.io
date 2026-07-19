@@ -78,6 +78,7 @@ export const COURSES: Course[] = [
     subjects: [
       "Aprendizaje Automático",
       "Modelos de Computación",
+      "Metaheurísticas",
       "Minería de Datos",
       "Sistemas Inteligentes",
       "Dirección Estratégica",
