@@ -273,7 +273,7 @@
 
   /* ===================== Render de informe ===================== */
   var md = window.markdownit({
-    html: false,
+    html: true,
     linkify: true,
     typographer: true,
     highlight: function (str, lang) {
@@ -293,12 +293,87 @@
     });
   }
 
+  // Los bloques ```mermaid se emiten como <pre class="mermaid"> con la fuente
+  // cruda (mermaid necesita el texto sin escapar). El resto de fences siguen su
+  // camino normal (highlight.js).
+  var defaultFence =
+    md.renderer.rules.fence ||
+    function (t, i, o, e, s) {
+      return s.renderToken(t, i, o);
+    };
+  md.renderer.rules.fence = function (tokens, idx, options, env, self) {
+    if (tokens[idx].info.trim().toLowerCase() === "mermaid") {
+      // Escapamos: mermaid lee textContent (que decodifica las entidades), así
+      // que <, > y & del diagrama (p.ej. A[x < y]) llegan intactos sin romper
+      // el HTML del <pre>.
+      return (
+        '<pre class="mermaid">' + md.utils.escapeHtml(tokens[idx].content) + "</pre>"
+      );
+    }
+    return defaultFence(tokens, idx, options, env, self);
+  };
+
   function revokeObjectUrls() {
     state.objectUrls.forEach(function (u) {
       URL.revokeObjectURL(u);
     });
     state.objectUrls = [];
   }
+
+  // Renderiza los diagramas ```mermaid del informe actual. Cada openReport
+  // reconstruye contentEl, así que los nodos son nuevos (sin data-processed).
+  function renderMermaid() {
+    var nodes = contentEl.querySelectorAll("pre.mermaid");
+    if (!nodes.length) return;
+    var m = window.__mermaid;
+    if (!m) {
+      // El módulo ESM aún no cargó: reintentar cuando avise.
+      document.addEventListener("mermaid-ready", renderMermaid, { once: true });
+      return;
+    }
+    // m.run es asíncrono y rechaza ante sintaxis inválida (no lanza síncrono).
+    // Al fallar, revelamos los diagramas no procesados (la CSS los oculta hasta
+    // tener data-processed) para que el error sea visible, no un hueco vacío.
+    Promise.resolve(m.run({ nodes: nodes })).catch(function () {
+      Array.prototype.forEach.call(nodes, function (n) {
+        if (n.getAttribute("data-processed") !== "true") {
+          n.setAttribute("data-processed", "true");
+          n.classList.add("mermaid-error");
+        }
+      });
+    });
+  }
+
+  /* ===================== Lightbox de imágenes ===================== */
+  var lightbox = null;
+  function ensureLightbox() {
+    if (lightbox) return lightbox;
+    lightbox = document.createElement("div");
+    lightbox.className = "img-lightbox";
+    lightbox.hidden = true;
+    lightbox.innerHTML = '<img alt="" />';
+    lightbox.addEventListener("click", closeLightbox);
+    document.body.appendChild(lightbox);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeLightbox();
+    });
+    return lightbox;
+  }
+  function openLightbox(src, alt) {
+    var lb = ensureLightbox();
+    var img = lb.querySelector("img");
+    img.src = src;
+    img.alt = alt || "";
+    lb.hidden = false;
+  }
+  function closeLightbox() {
+    if (lightbox) lightbox.hidden = true;
+  }
+  // Click en cualquier imagen ampliable del informe -> lightbox (reutiliza blob).
+  contentEl.addEventListener("click", function (e) {
+    var img = e.target.closest && e.target.closest("img.zoomable");
+    if (img && img.src) openLightbox(img.src, img.alt);
+  });
 
   function idToRel(id) {
     var map = state.index.pathToId;
@@ -344,7 +419,10 @@
     // Imágenes
     contentEl.querySelectorAll("img[src]").forEach(function (img) {
       var src = img.getAttribute("src");
-      if (/^(https?:)?\/\//i.test(src) || src.indexOf("data:") === 0) return;
+      if (/^(https?:)?\/\//i.test(src) || src.indexOf("data:") === 0) {
+        img.classList.add("zoomable"); // externas/data: también ampliables
+        return;
+      }
       var rel = normalizeJoin(baseDir, src);
       var asset = assets[rel];
       if (!asset) {
@@ -361,6 +439,7 @@
           var url = URL.createObjectURL(blob);
           state.objectUrls.push(url);
           img.src = url;
+          img.classList.add("zoomable");
         })
         .catch(function () {});
     });
@@ -387,6 +466,9 @@
         });
       }
     });
+
+    // Diagramas mermaid del informe
+    renderMermaid();
   }
 
   /* ===================== Helpers de ruta ===================== */
