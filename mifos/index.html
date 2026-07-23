@@ -83,6 +83,29 @@
   <script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath@1.0.0/texmath.js"></script>
   <!-- Código -->
   <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+  <!-- Diagramas Mermaid (```mermaid). ESM: expone window.__mermaid. -->
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "strict",
+      theme: "base",
+      fontFamily: "'Manrope', system-ui, sans-serif",
+      themeVariables: {
+        background: "#0d0f12",
+        primaryColor: "#16181c",
+        primaryBorderColor: "#2ee6c5",
+        primaryTextColor: "#f4f7f5",
+        lineColor: "#868d89",
+        secondaryColor: "#1d2025",
+        tertiaryColor: "#11141a",
+        noteBkgColor: "rgba(184,255,60,0.10)",
+        noteTextColor: "#f4f7f5",
+      },
+    });
+    window.__mermaid = mermaid;
+    document.dispatchEvent(new Event("mermaid-ready"));
+  </script>
   <script src="app.js"></script>
 </body>
 </html>
