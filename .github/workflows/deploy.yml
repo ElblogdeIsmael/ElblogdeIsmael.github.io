@@ -42,15 +42,19 @@ jobs:
       - name: Comprobar que el sitio esta al dia
         run: npm run check
 
-      - name: Preparar copia del sitio (sin .git/.github/build/content)
+      # OJO con la barra inicial: un patron sin ancla coincide con cualquier
+      # carpeta de ese nombre a cualquier profundidad. Sin ella, 'build'
+      # excluiria tambien Subjects/**/build/, donde viven los PDF compilados
+      # que enlazan las paginas de curso.
+      - name: Preparar copia del sitio (sin fuentes del generador)
         run: |
           set -euo pipefail
           rsync -a \
             --exclude='.git' \
-            --exclude='.github' \
-            --exclude='build' \
-            --exclude='content' \
-            --exclude='package.json' \
+            --exclude='/.github' \
+            --exclude='/build' \
+            --exclude='/content' \
+            --exclude='/package.json' \
             ./ "$RUNNER_TEMP/site/"
 
       - name: Podar material pesado no referenciado
