@@ -23,6 +23,8 @@
   --code-bg:   #11141a;
   --code-ink:  #b8ff3c;
   --quote-bar: #2ee6c5;
+  --rule:      #f4f7f5;     /* hard border colour */
+  --accent-ink:#07120f;     /* text on top of the accent */
   --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-body:    'Manrope', system-ui, sans-serif;
   color-scheme: dark;
@@ -42,6 +44,8 @@
   --code-bg:   #f3f5f2;
   --code-ink:  #b1320a;
   --quote-bar: #0f9e86;
+  --rule:      #0d0f12;
+  --accent-ink:#ffffff;
   --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-body:    'Manrope', system-ui, sans-serif;
   color-scheme: light;
@@ -61,10 +65,15 @@
   --code-bg:   #2a2a2e;
   --code-ink:  #e0a3ff;
   --quote-bar: #a882ff;
+  --rule:      #dcddde;
+  --accent-ink:#1e1e1e;
   --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-body:    'Manrope', system-ui, sans-serif;
   color-scheme: dark;
 }
+
+/* Shared across the three themes. */
+:root { --line: 2px; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -90,76 +99,88 @@ body {
   background-size: 32px 32px;
 }
 
-/* ===================== TOPBAR ===================== */
+/* ===================== TOPBAR =====================
+   Brutalist chrome: flush to the edges, divided by hard rules, no
+   blur and no rounding. The note itself keeps a comfortable reading
+   setting further down; the hard treatment stops at the frame.
+   ================================================================ */
 .viewer-topbar {
   position: sticky;
   top: 0;
   z-index: 50;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
   gap: 16px;
-  padding: 12px 20px;
-  background: color-mix(in srgb, var(--bg) 86%, transparent);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  border-bottom: var(--line) solid var(--rule);
 }
 
 .vt-brand {
+  display: flex;
+  align-items: center;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: .9rem;
-  letter-spacing: .02em;
+  letter-spacing: .04em;
+  text-transform: uppercase;
   color: var(--ink);
   text-decoration: none;
-  transition: color .2s ease;
+  padding: 16px 22px;
+  border-right: var(--line) solid var(--rule);
+  transition: background .2s ease, color .2s ease;
 }
-.vt-brand:hover { color: var(--accent); }
+.vt-brand:hover { background: var(--accent); color: var(--accent-ink); }
 
 .vt-actions {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  align-items: stretch;
 }
 
 .vt-theme {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  padding: 0 18px;
+  border-left: var(--line) solid var(--rule);
 }
 .vt-theme-label {
-  font-size: .78rem;
+  font-size: .7rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .08em;
+  letter-spacing: .14em;
   color: var(--muted);
 }
 #theme-select {
   font-family: var(--font-body);
-  font-size: .85rem;
-  font-weight: 600;
+  font-size: .82rem;
+  font-weight: 700;
   color: var(--ink);
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: var(--line) solid var(--rule);
+  border-radius: 0;
   padding: 6px 10px;
   cursor: pointer;
 }
 #theme-select:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
 
 .vt-gh {
-  font-size: .82rem;
-  font-weight: 600;
-  color: var(--accent);
+  display: flex;
+  align-items: center;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
   text-decoration: none;
-  padding: 6px 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: border-color .2s ease, color .2s ease;
+  padding: 0 20px;
+  border-left: var(--line) solid var(--rule);
+  transition: background .2s ease, color .2s ease;
 }
-.vt-gh:hover { border-color: var(--accent); }
+.vt-gh:hover { background: var(--ink); color: var(--bg); }
 
 /* ===================== LAYOUT ===================== */
 .viewer-main {
@@ -188,7 +209,6 @@ body {
 .md-error code {
   background: var(--code-bg);
   padding: 1px 6px;
-  border-radius: 4px;
 }
 
 /* ===================== TIPOGRAFÍA DEL APUNTE ===================== */
@@ -239,9 +259,8 @@ body {
 .md-content blockquote {
   margin: 1.2em 0;
   padding: .6em 1.1em;
-  border-left: 3px solid var(--quote-bar);
+  border-left: 4px solid var(--quote-bar);
   background: var(--surface);
-  border-radius: 0 8px 8px 0;
   color: var(--muted);
 }
 .md-content blockquote p:last-child { margin-bottom: 0; }
@@ -252,14 +271,12 @@ body {
   background: var(--code-bg);
   color: var(--code-ink);
   padding: 2px 6px;
-  border-radius: 5px;
 }
 .md-content pre {
   margin: 1.2em 0;
   padding: 16px 18px;
   background: var(--code-bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  border: var(--line) solid var(--rule);
   overflow-x: auto;
 }
 .md-content pre code {
@@ -273,7 +290,7 @@ body {
 .md-content img {
   max-width: 100%;
   height: auto;
-  border-radius: 10px;
+  border: var(--line) solid var(--rule);
   margin: 1em 0;
 }
 

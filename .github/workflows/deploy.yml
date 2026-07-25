@@ -30,13 +30,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Preparar copia del sitio (sin .git/.github/node_modules)
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # El HTML generado se versiona, asi que aqui no se compila: solo se
+      # comprueba. Falla si alguien edito content/ sin ejecutar `npm run build`,
+      # o si un enlace local apunta a un fichero que ya no existe.
+      # El generador no tiene dependencias, no hace falta npm install.
+      - name: Comprobar que el sitio esta al dia
+        run: npm run check
+
+      - name: Preparar copia del sitio (sin .git/.github/build/content)
         run: |
           set -euo pipefail
           rsync -a \
             --exclude='.git' \
             --exclude='.github' \
-            --exclude='web/node_modules' \
+            --exclude='build' \
+            --exclude='content' \
+            --exclude='package.json' \
             ./ "$RUNNER_TEMP/site/"
 
       - name: Podar material pesado no referenciado
