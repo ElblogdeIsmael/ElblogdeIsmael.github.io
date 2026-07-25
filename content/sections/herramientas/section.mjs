@@ -12,6 +12,7 @@
 export default {
   slug: "herramientas",
   index: "02",
+  name: "Herramientas",
   title: "Herra",
   titleOutline: "mientas",
   blurb:
