@@ -27,9 +27,11 @@ document.documentElement.setAttribute("data-theme",s||l)}catch(e){}})();`;
  * @typedef {object} LayoutOptions
  * @property {string} title  browser title, without the site suffix
  * @property {string} description
- * @property {string} path   absolute site path, for example "/doble-grado/"
+ * @property {string} path   site path without a leading slash, for example
+ *                           "doble-grado/cuarto/". Empty string for the home page.
  * @property {string} body   page markup
  * @property {NavLink[]} [nav]
+ * @property {boolean} [exactTitle] use `title` as is, without the site suffix
  * @property {boolean} [ads] include the AdSense snippet
  * @property {boolean} [verification] include the Search Console tag
  * @property {string} [bodyId]
@@ -108,8 +110,8 @@ ${each(
  * @returns {string} a complete HTML document
  */
 export function layout(options) {
-  const canonical = site.url + options.path;
-  const fullTitle = options.title.includes(site.shortName)
+  const canonical = `${site.url}/${options.path}`;
+  const fullTitle = options.exactTitle
     ? options.title
     : `${options.title} · ${site.name}`;
 
