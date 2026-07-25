@@ -47,13 +47,13 @@ export const home = {
       "Estudio el Doble Grado en Ingeniería Informática y ADE en la Universidad " +
       "de Granada. Esta web reúne lo que voy aprendiendo por el camino, con la " +
       "intención de que le sirva a quien venga detrás.",
-    portrait: "/assets/images/ismael.png",
-    portraitAlt: "Foto de Ismael Sallami",
     place: "Granada",
     period: "UGR · 2021—hoy",
+    /* Cuatro entradas: la rejilla es de dos columnas y un número par la deja
+       cuadrada, sin huecos. */
     areas: [
+      { name: "Ingeniería de Software", note: "Web · herramientas propias" },
       { name: "Inteligencia Artificial", note: "Computación · IA" },
-      { name: "IA aplicada a Medicina", note: "Investigación" },
       { name: "Inversiones y gestión", note: "ADE · finanzas" },
       { name: "Documentación técnica", note: "HTML · LaTeX" },
     ],

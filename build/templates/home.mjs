@@ -103,10 +103,10 @@ function about() {
 
   return `    <section class="block" id="sobre-mi">
       <div class="about">
-        <div>
-          <div class="about-portrait reveal">
-            <img src="${copy.portrait}" alt="${escape(copy.portraitAlt)}" width="480" height="480" loading="lazy">
-          </div>
+        <div class="about-id">
+          <p class="kicker">${escape(copy.kicker)}</p>
+          <h2 class="block-title">${escape(copy.title)}</h2>
+          <p class="about-role">${escape(copy.role)}</p>
           <p class="about-meta">
             <span>${escape(copy.place)}</span>
             <span>${escape(copy.period)}</span>
@@ -114,10 +114,7 @@ function about() {
         </div>
 
         <div>
-          <p class="kicker">${escape(copy.kicker)}</p>
-          <h2 class="block-title">${escape(copy.title)}</h2>
-          <p class="about-role">${escape(copy.role)}</p>
-          <p class="lead" style="margin-top:18px">${escape(copy.body)}</p>
+          <p class="lead">${escape(copy.body)}</p>
 
           <div class="about-areas">
 ${each(

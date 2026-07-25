@@ -19,23 +19,9 @@
    @author Ismael Sallami Moreno
    ============================================================ */
 
+/* Light is the default. `:root` carries it so a page renders correctly even
+   before the theme script runs, or with scripting off entirely. */
 :root,
-[data-theme="dark"] {
-  --bg: #0d0f12;
-  --bg-grid: rgba(244, 247, 245, 0.035);
-  --surface: #16181c;
-  --surface-2: #1b1e23;
-  --ink: #f4f7f5;
-  --muted: #868d89;
-  --accent: #2ee6c5;
-  --accent-2: #b8ff3c;
-  --accent-ink: #07120f;
-  --shadow-col: #b8ff3c;
-  --tag-ink: var(--accent);
-  --tag-border: var(--accent);
-  color-scheme: dark;
-}
-
 [data-theme="light"] {
   --bg: #eef2ef;
   --bg-grid: rgba(13, 15, 18, 0.05);
@@ -50,6 +36,22 @@
   --tag-ink: var(--ink);
   --tag-border: var(--ink);
   color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0d0f12;
+  --bg-grid: rgba(244, 247, 245, 0.035);
+  --surface: #16181c;
+  --surface-2: #1b1e23;
+  --ink: #f4f7f5;
+  --muted: #868d89;
+  --accent: #2ee6c5;
+  --accent-2: #b8ff3c;
+  --accent-ink: #07120f;
+  --shadow-col: #b8ff3c; /* neon lime offset on charcoal */
+  --tag-ink: var(--accent);
+  --tag-border: var(--accent);
+  color-scheme: dark;
 }
 
 :root {
@@ -277,6 +279,22 @@ a {
 .topbar-brand:hover {
   background: var(--accent);
   color: var(--accent-ink);
+}
+
+/* The mark inherits currentColor, so it inverts with the brand on hover. */
+.brand-mark {
+  flex: none;
+  display: block;
+}
+
+/* Footer variant: no cell borders, no padding. */
+.topbar-brand-plain {
+  border: none;
+  padding: 0;
+}
+.topbar-brand-plain:hover {
+  background: none;
+  color: var(--accent);
 }
 
 .topbar-right {
@@ -1109,35 +1127,28 @@ textarea.field-input {
 
 /* ===================== ABOUT ===================== */
 
+/* Name and place on the left, what I do on the right. The asymmetry does the
+   work a portrait used to do. */
 .about {
   display: grid;
-  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
   gap: clamp(28px, 5vw, 64px);
   align-items: start;
 }
 
-/* Square portrait with the same hard offset as every card. No blur,
-   no glow, no rounding. */
-.about-portrait {
-  border: var(--line) solid var(--ink);
-  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
-}
-/* `height: auto` is required: the width and height attributes on the tag give
-   the browser a definite height, which would make `aspect-ratio` a no-op. The
-   attributes stay so the space is reserved before the image loads. */
-.about-portrait img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
-  display: block;
+/* The left column stays put while the right one scrolls past it. */
+.about-id {
+  position: sticky;
+  top: calc(var(--gap-xl) + 20px);
 }
 
 .about-meta {
   display: flex;
-  justify-content: space-between;
-  gap: var(--gap-xs);
-  margin-top: 18px;
+  flex-wrap: wrap;
+  gap: var(--gap-xs) var(--gap);
+  margin-top: var(--gap);
+  padding-top: var(--gap-sm);
+  border-top: var(--line) solid var(--ink);
   font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 700;
@@ -1147,7 +1158,7 @@ textarea.field-input {
 }
 
 .about-role {
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 1.05rem;
   color: var(--accent-2);
 }
@@ -1224,8 +1235,9 @@ textarea.field-input {
   .contact {
     grid-template-columns: 1fr;
   }
-  .about-portrait {
-    max-width: 320px;
+  /* Sticky makes no sense once the columns stack. */
+  .about-id {
+    position: static;
   }
 }
 

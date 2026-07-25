@@ -13,9 +13,14 @@
 
   // ---------- tema claro/oscuro (persistido) ----------
   (function initPageTheme() {
+    // Claro por defecto, igual que md2html y que el resto del sitio.
     var saved = localStorage.getItem("pdf2md_theme");
-    if (saved === "light") document.body.classList.add("light");
-    else if (!saved) localStorage.setItem("pdf2md_theme", "dark");
+    if (saved === "dark") {
+      document.body.classList.remove("light");
+    } else {
+      document.body.classList.add("light");
+      if (!saved) localStorage.setItem("pdf2md_theme", "light");
+    }
     var btn = $("theme-toggle");
     if (!btn) return;
     function paint() { btn.textContent = document.body.classList.contains("light") ? "☀️" : "🌙"; }

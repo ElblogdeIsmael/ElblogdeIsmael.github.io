@@ -13,22 +13,24 @@
    @author Ismael Sallami Moreno
    ============================================================ */
 
-/* These apps predate the site's `data-theme` switch and toggle a class on
-   <body> instead. Mapping it here means their JavaScript needs no change. */
-body.light {
-  --bg: #eef2ef;
-  --bg-grid: rgba(13, 15, 18, 0.05);
-  --surface: #ffffff;
-  --surface-2: #f4f7f5;
-  --ink: #0d0f12;
-  --muted: #5a635f;
-  --accent: #0f9e86;
-  --accent-2: #4fb31f;
-  --accent-ink: #ffffff;
-  --shadow-col: #0d0f12;
-  --tag-ink: var(--ink);
-  --tag-border: var(--ink);
-  color-scheme: light;
+/* These apps predate the site's `data-theme` switch: their JavaScript toggles
+   a `light` class on <body>, and its absence means dark. Light already comes
+   from the tokens, so only the dark case needs stating here. Their JavaScript
+   needs no change. */
+body:not(.light) {
+  --bg: #0d0f12;
+  --bg-grid: rgba(244, 247, 245, 0.035);
+  --surface: #16181c;
+  --surface-2: #1b1e23;
+  --ink: #f4f7f5;
+  --muted: #868d89;
+  --accent: #2ee6c5;
+  --accent-2: #b8ff3c;
+  --accent-ink: #07120f;
+  --shadow-col: #b8ff3c;
+  --tag-ink: var(--accent);
+  --tag-border: var(--accent);
+  color-scheme: dark;
 }
 
 :root {
