@@ -16,9 +16,13 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { SECTIONS } from "../content/registry.mjs";
+import { REDIRECTS } from "../content/redirects.mjs";
 import { bundleCss } from "./lib/css.mjs";
+import { renderHome } from "./templates/home.mjs";
+import { renderHistoria } from "./templates/historia.mjs";
 import { renderPage } from "./templates/page.mjs";
 import { renderSection } from "./templates/section.mjs";
+import { renderRedirect } from "./templates/redirect.mjs";
 import { renderSitemap } from "./lib/sitemap.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -33,6 +37,8 @@ function buildSite() {
   const files = new Map();
 
   files.set("assets/css/brutal.css", bundleCss(ROOT));
+  files.set("index.html", renderHome(SECTIONS));
+  files.set("historia/index.html", renderHistoria());
 
   for (const section of SECTIONS) {
     files.set(`${section.slug}/index.html`, renderSection(section));
@@ -40,6 +46,10 @@ function buildSite() {
     for (const page of section.pages) {
       files.set(`${section.slug}/${page.slug}/index.html`, renderPage(section, page));
     }
+  }
+
+  for (const redirect of REDIRECTS) {
+    files.set(redirect.from, renderRedirect(redirect));
   }
 
   files.set("sitemap.xml", renderSitemap(SECTIONS));
