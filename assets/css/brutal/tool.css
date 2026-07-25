@@ -1,0 +1,786 @@
+/* ============================================================
+   TOOL LAYER
+   Shared chrome for the standalone browser apps (md2html, pdf2md).
+   Both were generated from the same template, so they use the same
+   class names and can share one stylesheet.
+
+   Selectors are kept exactly as the apps' JavaScript expects them:
+   `light` on <body>, `dragover` on the drop zone, `active` on chips
+   and file rows. Only the look changes.
+
+   Bundled into assets/css/tool.css together with tokens and base.
+
+   @author Ismael Sallami Moreno
+   ============================================================ */
+
+/* These apps predate the site's `data-theme` switch and toggle a class on
+   <body> instead. Mapping it here means their JavaScript needs no change. */
+body.light {
+  --bg: #eef2ef;
+  --bg-grid: rgba(13, 15, 18, 0.05);
+  --surface: #ffffff;
+  --surface-2: #f4f7f5;
+  --ink: #0d0f12;
+  --muted: #5a635f;
+  --accent: #0f9e86;
+  --accent-2: #4fb31f;
+  --accent-ink: #ffffff;
+  --shadow-col: #0d0f12;
+  --tag-ink: var(--ink);
+  --tag-border: var(--ink);
+  color-scheme: light;
+}
+
+:root {
+  --danger: #ff5d6c;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+
+/* The apps hide panels with the `hidden` attribute, but several of them are
+   laid out with flex or grid, which beats the attribute's `display: none`.
+   Restoring it here fixes the empty state showing behind the preview. */
+[hidden] {
+  display: none !important;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: var(--line) solid transparent;
+  transition:
+    color var(--fast) ease,
+    border-color var(--fast) ease;
+}
+a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* The site draws its grid on <body>; these apps expect a separate layer. */
+.bg-grid {
+  display: none;
+}
+
+/* ===================== HEADER ===================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  background: var(--bg);
+  border-bottom: var(--line) solid var(--ink);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 16px 22px;
+  border-right: var(--line) solid var(--ink);
+  border-bottom: none;
+}
+.brand:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-bottom: none;
+}
+
+.brand-mark {
+  font-family: var(--font-mono);
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.header-links {
+  display: flex;
+  align-items: stretch;
+}
+
+.header-links a {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-left: var(--line) solid var(--ink);
+  border-bottom: none;
+}
+.header-links a:hover {
+  background: var(--ink);
+  color: var(--bg);
+  border-bottom: none;
+}
+
+/* ===================== BUTTONS ===================== */
+
+.ghost-btn {
+  background: transparent;
+  border: none;
+  border-left: var(--line) solid var(--ink);
+  color: var(--ink);
+  padding: 0 20px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background var(--base) ease,
+    color var(--base) ease;
+}
+.ghost-btn:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.ghost-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Inside panels the button needs its own frame, not just a divider. */
+.ghost-btn.small {
+  border: var(--line) solid var(--ink);
+  padding: 6px 12px;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.primary-btn,
+.secondary-btn {
+  flex: 1;
+  padding: 14px;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: var(--line) solid var(--ink);
+  transition:
+    transform var(--base) var(--ease),
+    box-shadow var(--base) var(--ease),
+    background var(--base) ease;
+}
+
+.primary-btn {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.primary-btn:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: var(--ink);
+}
+.secondary-btn:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.primary-btn:disabled,
+.secondary-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===================== HERO ===================== */
+
+.hero {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(40px, 7vw, 76px) clamp(16px, 5vw, 48px) clamp(20px, 3vw, 34px);
+}
+
+.hero-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  background: var(--accent);
+  padding: 6px 12px;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 8vw, 4.6rem);
+  line-height: 0.92;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+}
+
+/* The template used gradient text here. Solid accent and an outline read
+   better and match the rest of the site. */
+.grad {
+  color: var(--accent);
+}
+.grad2 {
+  color: transparent;
+  -webkit-text-stroke: var(--line) var(--ink);
+}
+
+.hero-sub {
+  max-width: var(--measure-text);
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+.hero-sub code {
+  color: var(--accent);
+}
+
+/* ===================== APP GRID ===================== */
+
+.app {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 5vw, 48px);
+  display: grid;
+  grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+  gap: var(--gap);
+  align-items: start;
+}
+
+.panel {
+  background: var(--surface);
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+}
+
+.controls {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+/* ===================== DROP ZONE ===================== */
+
+.dropzone {
+  border: var(--line) dashed var(--ink);
+  padding: 30px 18px;
+  text-align: center;
+  cursor: pointer;
+  background: var(--surface-2);
+  transition:
+    background var(--base) ease,
+    border-color var(--base) ease;
+}
+.dropzone:hover,
+.dropzone:focus-visible {
+  border-color: var(--accent);
+  background: var(--surface);
+  outline: none;
+}
+/* Solid border and inverted colours: unmistakable while dragging. */
+.dropzone.dragover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.dz-icon {
+  font-size: 2rem;
+}
+.dz-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  margin: 10px 0 4px;
+}
+.dz-or {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 0 0 10px;
+}
+.dropzone.dragover .dz-or,
+.dropzone.dragover .dz-formats {
+  color: var(--accent-ink);
+}
+.dz-or .link {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.dz-formats {
+  color: var(--muted);
+  font-size: 0.76rem;
+  margin: 4px 0 0;
+}
+
+.file-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.fname {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  word-break: break-all;
+}
+
+.badge {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+}
+
+/* ===================== OPTION GROUPS ===================== */
+
+.group {
+  border: var(--line) solid var(--ink);
+  background: var(--surface-2);
+}
+
+.group > summary {
+  cursor: pointer;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  list-style: none;
+  user-select: none;
+}
+.group > summary::-webkit-details-marker {
+  display: none;
+}
+.group > summary:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.group[open] > summary {
+  border-bottom: var(--line) solid var(--ink);
+}
+
+.group-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: -2px 0 4px;
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.switch input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.switch code {
+  color: var(--accent);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.field input {
+  background: var(--bg);
+  border: var(--line) solid var(--ink);
+  color: var(--ink);
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 3px 3px 0 var(--accent);
+}
+
+/* ===================== THEME CHIPS (md2html) ===================== */
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.theme-chip {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: var(--line) solid var(--ink);
+  padding: 9px 10px;
+  cursor: pointer;
+  background: var(--bg);
+  font: inherit;
+  font-size: 0.82rem;
+  color: var(--ink);
+  text-align: left;
+  transition:
+    background var(--fast) ease,
+    color var(--fast) ease;
+}
+.theme-chip:hover {
+  background: var(--surface-2);
+}
+.theme-chip.active {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.theme-chip span {
+  color: inherit;
+}
+
+.swatch {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  border: var(--line) solid var(--ink);
+}
+
+/* ===================== ACTIONS AND FEEDBACK ===================== */
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.toast {
+  margin: 0;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.note {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--muted);
+  border: var(--line) solid var(--ink);
+  padding: 12px 14px;
+  background: var(--surface-2);
+}
+.note strong {
+  color: var(--ink);
+}
+
+/* ===================== FILE QUEUE (pdf2md) ===================== */
+
+.queue-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--gap-sm);
+  padding-top: 12px;
+  border-top: var(--line) solid var(--ink);
+}
+
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.fitem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 11px;
+  border: var(--line) solid var(--ink);
+  background: var(--bg);
+  cursor: pointer;
+  transition:
+    background var(--fast) ease,
+    color var(--fast) ease;
+}
+.fitem:hover {
+  background: var(--surface-2);
+}
+.fitem.active {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.fitem.active .fi-status {
+  color: var(--accent-ink);
+}
+.fitem.err {
+  border-color: var(--danger);
+}
+.fitem.err .fi-status {
+  color: var(--danger);
+}
+
+.fi-ico {
+  font-size: 1.2rem;
+  flex: 0 0 auto;
+}
+.fi-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+.fi-name {
+  font-size: 0.86rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fi-status {
+  font-size: 0.74rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.fi-del {
+  flex: 0 0 auto;
+}
+
+/* Square spinner: a round one would be the only circle on the page. */
+.spin {
+  width: 12px;
+  height: 12px;
+  border: var(--line) solid color-mix(in srgb, var(--ink) 25%, transparent);
+  border-top-color: var(--accent);
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===================== PREVIEW ===================== */
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  min-height: 540px;
+  overflow: hidden;
+}
+
+.preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: var(--line) solid var(--ink);
+  background: var(--surface-2);
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+.dots i {
+  width: 10px;
+  height: 10px;
+  background: var(--ink);
+}
+.dots i:nth-child(1) {
+  background: var(--accent);
+}
+.dots i:nth-child(2) {
+  background: var(--accent-2);
+}
+
+.preview-title {
+  font-family: var(--font-mono);
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.preview-bar .ghost-btn {
+  margin-left: auto;
+}
+
+#preview-frame {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: #fff;
+  min-height: 540px;
+}
+
+.preview-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--muted);
+  padding: 40px 24px;
+  gap: 6px;
+}
+.pe-icon {
+  font-size: 2.6rem;
+}
+.pe-sub {
+  font-size: 0.84rem;
+}
+
+/* ===================== HOW TO ===================== */
+
+.howto {
+  max-width: 1080px;
+  margin: clamp(48px, 8vw, 88px) auto 0;
+  padding: 0 clamp(16px, 5vw, 48px);
+}
+
+.howto h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--gap);
+  padding-bottom: var(--gap-sm);
+  border-bottom: var(--line) solid var(--ink);
+}
+
+.howto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--gap);
+}
+
+.card {
+  background: var(--surface);
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+  padding: 20px;
+}
+.card h3 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+.card pre {
+  background: var(--bg);
+  border: var(--line) solid var(--ink);
+  padding: 12px;
+  overflow-x: auto;
+  margin: 0 0 12px;
+}
+.card pre code {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.card p,
+.card ul {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+.card ul {
+  padding-left: 18px;
+}
+.card code {
+  color: var(--accent);
+}
+
+/* ===================== FOOTER ===================== */
+
+.site-footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.82rem;
+  padding: var(--gap-lg) 20px;
+  border-top: var(--line) solid var(--ink);
+  margin-top: clamp(48px, 8vw, 88px);
+  background: var(--surface);
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+  .preview,
+  #preview-frame {
+    min-height: 460px;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand {
+    font-size: 0.78rem;
+    padding: 14px 16px;
+  }
+  .header-links a {
+    padding: 0 14px;
+    font-size: 0.7rem;
+  }
+  .ghost-btn {
+    padding: 0 16px;
+  }
+  .theme-grid {
+    grid-template-columns: 1fr;
+  }
+}

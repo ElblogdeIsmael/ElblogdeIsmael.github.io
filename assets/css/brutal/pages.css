@@ -1,0 +1,231 @@
+/* ============================================================
+   PAGES
+   Composition that belongs to one page type only. Anything reused
+   across pages lives in components.css instead.
+
+   @author Ismael Sallami Moreno
+   ============================================================ */
+
+/* ===================== HOME HERO ===================== */
+
+.hero {
+  border-bottom: var(--line) solid var(--ink);
+  padding: clamp(48px, 9vw, 110px) clamp(16px, 5vw, 48px) clamp(36px, 6vw, 64px);
+}
+
+.hero-inner {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+.hero-title {
+  margin: var(--gap) 0;
+}
+
+.hero-lead {
+  max-width: 46ch;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--muted);
+}
+.hero-lead strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+  margin-top: var(--gap-lg);
+}
+
+/* Fact rail. Numbers come from the content registry, so they can
+   never drift from what the site actually holds. */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-top: clamp(40px, 7vw, 72px);
+  border: var(--line) solid var(--ink);
+}
+
+.hero-stat {
+  padding: 20px 22px;
+  border-right: var(--line) solid var(--ink);
+}
+.hero-stat:last-child {
+  border-right: none;
+}
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1;
+  color: var(--accent);
+}
+
+.hero-stat-label {
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ===================== HOME BLOCKS ===================== */
+
+.block {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: clamp(56px, 9vw, 104px) clamp(16px, 5vw, 48px);
+}
+
+.block-head {
+  margin-bottom: var(--gap-lg);
+  padding-bottom: var(--gap-sm);
+  border-bottom: var(--line) solid var(--ink);
+}
+
+.block-title {
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 5vw, 3.2rem);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ===================== ABOUT ===================== */
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+/* Square portrait with the same hard offset as every card. No blur,
+   no glow, no rounding. */
+.about-portrait {
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+}
+/* `height: auto` is required: the width and height attributes on the tag give
+   the browser a definite height, which would make `aspect-ratio` a no-op. The
+   attributes stay so the space is reserved before the image loads. */
+.about-portrait img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.about-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap-xs);
+  margin-top: 18px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.about-role {
+  margin-top: 10px;
+  font-size: 1.05rem;
+  color: var(--accent-2);
+}
+
+.about-areas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: var(--line);
+  margin-top: var(--gap-lg);
+  background: var(--ink);
+  border: var(--line) solid var(--ink);
+}
+
+/* Cells sit on an ink background with a 2px gap, so the grid lines
+   read as hard rules without doubling borders. */
+.about-area {
+  background: var(--surface);
+  padding: 16px 18px;
+}
+
+.about-area-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.98rem;
+  text-transform: uppercase;
+}
+
+.about-area-note {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+  margin-top: var(--gap-lg);
+}
+
+/* ===================== CONTACT ===================== */
+
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+/* ===================== SECTION INDEX ===================== */
+
+.section-intro {
+  max-width: var(--measure-text);
+  margin-bottom: var(--gap-xl);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* ===================== HISTORIA ===================== */
+
+.historia-intro {
+  max-width: var(--measure-text);
+  margin-bottom: var(--gap-xl);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 860px) {
+  .about,
+  .contact {
+    grid-template-columns: 1fr;
+  }
+  .about-portrait {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-stat {
+    border-right: none;
+    border-bottom: var(--line) solid var(--ink);
+  }
+  .hero-stat:last-child {
+    border-bottom: none;
+  }
+}
