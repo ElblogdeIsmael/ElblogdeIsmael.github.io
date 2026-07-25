@@ -11,7 +11,8 @@ export const site = {
   url: "https://elblogdeismael.github.io",
   lang: "es",
   author: "Ismael Sallami Moreno",
-  themeColor: "#0d0f12",
+  /** Browser chrome colour. Matches the light theme background, the default. */
+  themeColor: "#eef2ef",
 
   title: "Recursos Ingeniería Informática - ADE del Blog de Ismael",
   description:

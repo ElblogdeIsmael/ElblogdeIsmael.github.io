@@ -100,35 +100,28 @@
 
 /* ===================== ABOUT ===================== */
 
+/* Name and place on the left, what I do on the right. The asymmetry does the
+   work a portrait used to do. */
 .about {
   display: grid;
-  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
   gap: clamp(28px, 5vw, 64px);
   align-items: start;
 }
 
-/* Square portrait with the same hard offset as every card. No blur,
-   no glow, no rounding. */
-.about-portrait {
-  border: var(--line) solid var(--ink);
-  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
-}
-/* `height: auto` is required: the width and height attributes on the tag give
-   the browser a definite height, which would make `aspect-ratio` a no-op. The
-   attributes stay so the space is reserved before the image loads. */
-.about-portrait img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
-  display: block;
+/* The left column stays put while the right one scrolls past it. */
+.about-id {
+  position: sticky;
+  top: calc(var(--gap-xl) + 20px);
 }
 
 .about-meta {
   display: flex;
-  justify-content: space-between;
-  gap: var(--gap-xs);
-  margin-top: 18px;
+  flex-wrap: wrap;
+  gap: var(--gap-xs) var(--gap);
+  margin-top: var(--gap);
+  padding-top: var(--gap-sm);
+  border-top: var(--line) solid var(--ink);
   font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 700;
@@ -138,7 +131,7 @@
 }
 
 .about-role {
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 1.05rem;
   color: var(--accent-2);
 }
@@ -215,8 +208,9 @@
   .contact {
     grid-template-columns: 1fr;
   }
-  .about-portrait {
-    max-width: 320px;
+  /* Sticky makes no sense once the columns stack. */
+  .about-id {
+    position: static;
   }
 }
 

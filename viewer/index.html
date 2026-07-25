@@ -12,12 +12,10 @@
   <script>
     (function () {
       try {
-        var saved = localStorage.getItem("viewer-theme");
-        if (!saved) {
-          var prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
-          saved = prefersLight ? "paper" : "brand";
-        }
-        document.documentElement.setAttribute("data-theme", saved);
+        // Papel por defecto, igual que el resto del sitio. Quien quiera oscuro
+        // lo elige en el selector y se recuerda.
+        document.documentElement.setAttribute(
+          "data-theme", localStorage.getItem("viewer-theme") || "paper");
       } catch (e) {}
     })();
   </script>
