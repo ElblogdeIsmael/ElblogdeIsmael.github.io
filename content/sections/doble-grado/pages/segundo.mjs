@@ -169,6 +169,16 @@ export default {
                 },
               ],
             },
+            {
+              label: "Ejercicios",
+              resources: [
+                {
+                  name: "Ejercicios de Macroeconomía",
+                  href: "/Subjects/Second/MACRO/Ejercicios_macroeconomia.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
           ],
         },
         {
