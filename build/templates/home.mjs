@@ -87,7 +87,7 @@ function heroStats(counts) {
  */
 function marquee() {
   const items = [...home.marquee, ...home.marquee]
-    .map((item) => `<span>${escape(item)} ✦</span>`)
+    .map((item) => `<span>${escape(item)} //</span>`)
     .join("\n        ");
 
   return `    <div class="marquee" aria-hidden="true">
