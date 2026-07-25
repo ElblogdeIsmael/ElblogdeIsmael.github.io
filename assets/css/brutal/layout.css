@@ -1,0 +1,287 @@
+/* ============================================================
+   LAYOUT
+   Top bar, page shell, breadcrumbs, marquee and footer. Everything
+   that frames content rather than being content.
+
+   @author Ismael Sallami Moreno
+   ============================================================ */
+
+/* ===================== TOP BAR ===================== */
+
+/* Full bleed, flush to the edges, divided by hard rules. No rounding,
+   no blur, no floating pill. */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--bg);
+  border-bottom: var(--line) solid var(--ink);
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 22px;
+  border-right: var(--line) solid var(--ink);
+  transition:
+    background var(--base) ease,
+    color var(--base) ease;
+}
+.topbar-brand:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: stretch;
+}
+
+.topbar-link {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0 20px;
+  border-left: var(--line) solid var(--ink);
+  white-space: nowrap;
+  transition:
+    background var(--base) ease,
+    color var(--base) ease;
+}
+.topbar-link:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* Theme switch. Shows the icon of the theme you would switch to. */
+.topbar-toggle {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-left: var(--line) solid var(--ink);
+  padding: 0 22px;
+  transition:
+    background var(--base) ease,
+    color var(--base) ease;
+}
+.topbar-toggle:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.topbar-toggle .ico-sun {
+  display: none;
+}
+[data-theme="light"] .topbar-toggle .ico-sun {
+  display: inline;
+}
+[data-theme="light"] .topbar-toggle .ico-moon {
+  display: none;
+}
+
+/* ===================== PAGE SHELL ===================== */
+
+.page {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: clamp(28px, 6vw, 72px) clamp(16px, 5vw, 48px) 96px;
+}
+
+/* Wide variant for the home page, which runs edge to edge in places. */
+.page-wide {
+  max-width: none;
+  padding: 0;
+}
+
+.page-title {
+  position: relative;
+  margin-bottom: var(--gap-xs);
+}
+
+/* Metadata strip under a page title, split to both edges. */
+.page-sub {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--gap-xs);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-top: var(--line) solid var(--ink);
+  padding-top: var(--gap-sm);
+  margin-top: 18px;
+  margin-bottom: 64px;
+}
+
+/* ===================== BREADCRUMBS ===================== */
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-xs);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--gap);
+}
+.crumbs a {
+  text-decoration: none;
+  border-bottom: var(--line) solid transparent;
+  transition:
+    color var(--fast) ease,
+    border-color var(--fast) ease;
+}
+.crumbs a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.crumbs-sep {
+  color: var(--accent);
+}
+
+/* ===================== MARQUEE ===================== */
+
+/* Scrolling ticker between blocks. Pure decoration, hidden from
+   assistive tech and frozen when motion is reduced. */
+.marquee {
+  overflow: hidden;
+  border-top: var(--line) solid var(--ink);
+  border-bottom: var(--line) solid var(--ink);
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 10px 0;
+  user-select: none;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: var(--gap-lg);
+  padding-left: var(--gap-lg);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  animation: marquee 38s linear infinite;
+}
+
+/* The track holds the item list twice, so it loops at -50%. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ===================== FOOTER ===================== */
+
+.site-footer {
+  border-top: var(--line) solid var(--ink);
+  background: var(--surface);
+}
+
+.site-footer-inner {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: var(--gap-lg) clamp(16px, 5vw, 48px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+.site-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm) var(--gap);
+  list-style: none;
+}
+
+.site-footer a {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: var(--line) solid transparent;
+  transition:
+    color var(--fast) ease,
+    border-color var(--fast) ease;
+}
+.site-footer a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.site-footer-legal {
+  width: 100%;
+  border-top: var(--line-hair) solid color-mix(in srgb, var(--ink) 22%, transparent);
+  padding-top: var(--gap);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 768px) {
+  .topbar-brand {
+    font-size: 0.78rem;
+    padding: 14px 16px;
+  }
+  .topbar-link {
+    padding: 0 14px;
+    font-size: 0.7rem;
+  }
+  .topbar-toggle {
+    padding: 0 16px;
+  }
+  .ttl-stroke {
+    -webkit-text-stroke-width: 1.5px;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Drop secondary nav links; the brand and the theme switch stay. */
+  .topbar-link[data-optional] {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .topbar-brand .brand-long {
+    display: none;
+  }
+}
