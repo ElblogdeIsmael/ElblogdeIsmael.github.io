@@ -18,7 +18,7 @@ export default {
   blurb:
     "Pequeñas apps que funcionan al 100% en tu navegador: sin instalar nada y " +
     "sin que tus archivos salgan de tu equipo.",
-  summary: "3 herramientas · sin servidor",
+  summary: "2 herramientas · sin servidor",
   pages: [],
   links: [
     {
@@ -31,10 +31,9 @@ export default {
       href: "/pdf2md/",
       kind: "WEB",
     },
-    {
-      name: "viewer — visor de apuntes Markdown con temas",
-      href: "/viewer/",
-      kind: "WEB",
-    },
   ],
 };
+
+// El visor de apuntes (/viewer/) no se lista aqui a proposito. Sigue
+// funcionando porque ocho recursos de tercero y cuarto abren sus .md a traves
+// de el; simplemente no se ofrece como herramienta suelta.

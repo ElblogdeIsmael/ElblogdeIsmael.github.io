@@ -73,9 +73,13 @@ en el editor sin necesidad de compilar TypeScript.
 ## Diseño
 
 Brutalismo: bordes duros de 2 px, sombras desplazadas sin difuminar, rejilla
-técnica de fondo, tipografía grande con la segunda mitad en contorno. Teal
-`#2ee6c5` y lima `#b8ff3c` sobre carbón `#0d0f12`, con tema claro sobre papel.
+técnica de fondo, tipografía grande con la segunda mitad en contorno.
 Tipos: Bricolage Grotesque para display, Manrope para texto.
+
+**El tema claro es el de por defecto**: papel `#eef2ef` con sombras duras
+oscuras y acentos teal `#0f9e86` y lima `#4fb31f`. El oscuro (carbón `#0d0f12`
+con teal `#2ee6c5` y lima `#b8ff3c`) se elige en el conmutador y se recuerda.
+No se consulta la preferencia del sistema: la web está diseñada en claro.
 
 Las cinco capas de `assets/css/brutal/` se editan por separado y el build las
 concatena en `assets/css/brutal.css`. Ese fichero está generado: no se edita a

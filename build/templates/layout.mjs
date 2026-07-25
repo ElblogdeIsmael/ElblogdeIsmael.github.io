@@ -11,10 +11,25 @@ import site from "../../content/site.mjs";
 /**
  * Runs before first paint and sets `data-theme`, so the page never flashes the
  * wrong background. It is inlined rather than loaded to avoid a round trip.
+ *
+ * Light is the default. The system preference is not consulted: the site is
+ * designed light first, and a reader who wants dark says so with the switch.
  */
 const THEME_SNIPPET = `(function(){try{var s=localStorage.getItem("course-theme");\
-var l=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";\
-document.documentElement.setAttribute("data-theme",s||l)}catch(e){}})();`;
+if(s)document.documentElement.setAttribute("data-theme",s)}catch(e){}})();`;
+
+/**
+ * Brand mark: a mortarboard. Drawn with a 2px stroke and no fill so it matches
+ * the hard rules used everywhere else, and inherits the text colour so it
+ * inverts along with the brand on hover.
+ */
+const BRAND_MARK = `<svg class="brand-mark" viewBox="0 0 24 24" width="20" height="20"
+      fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+      <path d="M12 3 23 8l-11 5L1 8z"/>
+      <path d="M5 10.5V15c0 1.7 3.1 3 7 3s7-1.3 7-3v-4.5"/>
+      <path d="M23 8v6"/>
+    </svg>`;
 
 /**
  * @typedef {object} NavLink
@@ -86,7 +101,7 @@ function footer() {
 
   return `  <footer class="site-footer">
     <div class="site-footer-inner">
-      <a class="topbar-brand" href="/" style="border:none;padding:0">✦ ${escape(site.name)}</a>
+      <a class="topbar-brand topbar-brand-plain" href="/">${BRAND_MARK}<span>${escape(site.name)}</span></a>
       <ul class="site-footer-nav">
 ${each(
   links,
@@ -116,7 +131,7 @@ export function layout(options) {
     : `${options.title} · ${site.name}`;
 
   return `<!DOCTYPE html>
-<html lang="${site.lang}" class="no-js" data-theme="dark">
+<html lang="${site.lang}" class="no-js" data-theme="light">
 
 <head>
   <meta charset="UTF-8">
@@ -157,7 +172,7 @@ ${thirdParty(options)}
   <a class="skip-link" href="#main">Saltar al contenido</a>
 
   <header class="topbar">
-    <a class="topbar-brand" href="/">✦ <span class="brand-long">${escape(site.name)}</span></a>
+    <a class="topbar-brand" href="/">${BRAND_MARK}<span class="brand-long">${escape(site.name)}</span></a>
     <div class="topbar-right">
 ${navLinks(options.nav ?? [])}
       <button class="topbar-toggle" type="button" data-theme-toggle
