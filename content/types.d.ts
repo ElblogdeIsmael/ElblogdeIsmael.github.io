@@ -98,6 +98,12 @@ export interface Page {
 export interface Section {
   slug: string;
   index: string;
+  /**
+   * Plain name, used in breadcrumbs, navigation and metadata.
+   * The heading splits into `title` + `titleOutline`, which may break the word
+   * anywhere ("Herra" + "mientas"), so it cannot be derived from them.
+   */
+  name: string;
   title: string;
   titleOutline: string;
   /** One or two sentences. Shown on the home page tile and on the index. */

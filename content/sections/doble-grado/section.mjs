@@ -17,6 +17,7 @@ import quinto from "./pages/quinto.mjs";
 export default {
   slug: "doble-grado",
   index: "01",
+  name: "Doble Grado",
   title: "Doble",
   titleOutline: "Grado",
   blurb:
