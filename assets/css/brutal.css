@@ -1,0 +1,1240 @@
+/* ============================================================
+   GENERATED FILE - DO NOT EDIT
+   Built from assets/css/brutal/{tokens,base,layout,components,pages}.css
+   Run `npm run build` after changing a layer.
+   ============================================================ */
+
+
+/* ============================================================
+   TOKENS
+   Every value the rest of the system reads. Change a brand colour
+   or a border width here and it lands everywhere at once.
+
+   Brand: teal #2ee6c5 + lime #b8ff3c on charcoal #0d0f12.
+   Type:  Bricolage Grotesque (display) + Manrope (body).
+
+   Theme is driven by `data-theme` on <html>, set before first paint
+   by assets/js/theme.mjs.
+
+   @author Ismael Sallami Moreno
+   ============================================================ */
+
+:root,
+[data-theme="dark"] {
+  --bg: #0d0f12;
+  --bg-grid: rgba(244, 247, 245, 0.035);
+  --surface: #16181c;
+  --surface-2: #1b1e23;
+  --ink: #f4f7f5;
+  --muted: #868d89;
+  --accent: #2ee6c5;
+  --accent-2: #b8ff3c;
+  --accent-ink: #07120f;
+  --shadow-col: #b8ff3c;
+  --tag-ink: var(--accent);
+  --tag-border: var(--accent);
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #eef2ef;
+  --bg-grid: rgba(13, 15, 18, 0.05);
+  --surface: #ffffff;
+  --surface-2: #f4f7f5;
+  --ink: #0d0f12;
+  --muted: #5a635f;
+  --accent: #0f9e86; /* darkened teal, readable on paper */
+  --accent-2: #4fb31f; /* darkened lime */
+  --accent-ink: #ffffff;
+  --shadow-col: #0d0f12; /* hard dark shadow keeps the brutalist contrast */
+  --tag-ink: var(--ink);
+  --tag-border: var(--ink);
+  color-scheme: light;
+}
+
+:root {
+  /* Structure. Hard rules and offset shadows carry the whole style. */
+  --line: 2px;
+  --line-hair: 1px;
+  --shadow: 6px;
+  --shadow-lift: 10px;
+  --grid-size: 32px;
+
+  /* Type */
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Manrope", system-ui, -apple-system, sans-serif;
+
+  /* Spacing. Used for rhythm between blocks, not inside components. */
+  --gap-xs: 8px;
+  --gap-sm: 14px;
+  --gap: 24px;
+  --gap-lg: 48px;
+  --gap-xl: 80px;
+
+  /* Widths */
+  --measure: 1080px;
+  --measure-text: 62ch;
+
+  /* Motion. One easing curve across the site. */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --fast: 0.15s;
+  --base: 0.2s;
+  --slow: 0.5s;
+}
+
+/* ============================================================
+   BASE
+   Reset, page background, type scale and accessibility defaults.
+
+   @author Ismael Sallami Moreno
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  /* Technical grid. The only background texture in the system. */
+  background-image:
+    linear-gradient(var(--bg-grid) var(--line-hair), transparent var(--line-hair)),
+    linear-gradient(90deg, var(--bg-grid) var(--line-hair), transparent var(--line-hair));
+  background-size: var(--grid-size) var(--grid-size);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* ---------- Type scale ---------- */
+
+/* Huge page heading. Half the identity of the style lives here. */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.8rem, 11vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+/* Outlined half of a heading. Pairs with solid ink text. */
+.ttl-stroke {
+  color: transparent;
+  -webkit-text-stroke: var(--line) var(--ink);
+}
+
+/* Small ordinal riding above a heading, for example "04 //". */
+.ttl-index {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  vertical-align: super;
+  color: var(--accent);
+  -webkit-text-fill-color: var(--accent);
+}
+
+/* Section label above a heading. */
+.kicker {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.lead {
+  max-width: var(--measure-text);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- Accessibility ---------- */
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Skip link. Visible only once focused. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  padding: 12px 18px;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   LAYOUT
+   Top bar, page shell, breadcrumbs, marquee and footer. Everything
+   that frames content rather than being content.
+
+   @author Ismael Sallami Moreno
+   ============================================================ */
+
+/* ===================== TOP BAR ===================== */
+
+/* Full bleed, flush to the edges, divided by hard rules. No rounding,
+   no blur, no floating pill. */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--bg);
+  border-bottom: var(--line) solid var(--ink);
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 22px;
+  border-right: var(--line) solid var(--ink);
+  transition:
+    background var(--base) ease,
+    color var(--base) ease;
+}
+.topbar-brand:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: stretch;
+}
+
+.topbar-link {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0 20px;
+  border-left: var(--line) solid var(--ink);
+  white-space: nowrap;
+  transition:
+    background var(--base) ease,
+    color var(--base) ease;
+}
+.topbar-link:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* Theme switch. Shows the icon of the theme you would switch to. */
+.topbar-toggle {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-left: var(--line) solid var(--ink);
+  padding: 0 22px;
+  transition:
+    background var(--base) ease,
+    color var(--base) ease;
+}
+.topbar-toggle:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.topbar-toggle .ico-sun {
+  display: none;
+}
+[data-theme="light"] .topbar-toggle .ico-sun {
+  display: inline;
+}
+[data-theme="light"] .topbar-toggle .ico-moon {
+  display: none;
+}
+
+/* ===================== PAGE SHELL ===================== */
+
+.page {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: clamp(28px, 6vw, 72px) clamp(16px, 5vw, 48px) 96px;
+}
+
+/* Wide variant for the home page, which runs edge to edge in places. */
+.page-wide {
+  max-width: none;
+  padding: 0;
+}
+
+.page-title {
+  position: relative;
+  margin-bottom: var(--gap-xs);
+}
+
+/* Metadata strip under a page title, split to both edges. */
+.page-sub {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--gap-xs);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-top: var(--line) solid var(--ink);
+  padding-top: var(--gap-sm);
+  margin-top: 18px;
+  margin-bottom: 64px;
+}
+
+/* ===================== BREADCRUMBS ===================== */
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-xs);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--gap);
+}
+.crumbs a {
+  text-decoration: none;
+  border-bottom: var(--line) solid transparent;
+  transition:
+    color var(--fast) ease,
+    border-color var(--fast) ease;
+}
+.crumbs a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.crumbs-sep {
+  color: var(--accent);
+}
+
+/* ===================== MARQUEE ===================== */
+
+/* Scrolling ticker between blocks. Pure decoration, hidden from
+   assistive tech and frozen when motion is reduced. */
+.marquee {
+  overflow: hidden;
+  border-top: var(--line) solid var(--ink);
+  border-bottom: var(--line) solid var(--ink);
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 10px 0;
+  user-select: none;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: var(--gap-lg);
+  padding-left: var(--gap-lg);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  animation: marquee 38s linear infinite;
+}
+
+/* The track holds the item list twice, so it loops at -50%. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ===================== FOOTER ===================== */
+
+.site-footer {
+  border-top: var(--line) solid var(--ink);
+  background: var(--surface);
+}
+
+.site-footer-inner {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: var(--gap-lg) clamp(16px, 5vw, 48px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+.site-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm) var(--gap);
+  list-style: none;
+}
+
+.site-footer a {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: var(--line) solid transparent;
+  transition:
+    color var(--fast) ease,
+    border-color var(--fast) ease;
+}
+.site-footer a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.site-footer-legal {
+  width: 100%;
+  border-top: var(--line-hair) solid color-mix(in srgb, var(--ink) 22%, transparent);
+  padding-top: var(--gap);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 768px) {
+  .topbar-brand {
+    font-size: 0.78rem;
+    padding: 14px 16px;
+  }
+  .topbar-link {
+    padding: 0 14px;
+    font-size: 0.7rem;
+  }
+  .topbar-toggle {
+    padding: 0 16px;
+  }
+  .ttl-stroke {
+    -webkit-text-stroke-width: 1.5px;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Drop secondary nav links; the brand and the theme switch stay. */
+  .topbar-link[data-optional] {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .topbar-brand .brand-long {
+    display: none;
+  }
+}
+
+/* ============================================================
+   COMPONENTS
+   The pieces content is made of. Names are generic on purpose: a
+   "group" is a semester in a course and a work line in a research
+   area, an "entry" is a subject or a project. Same markup, same CSS.
+
+   @author Ismael Sallami Moreno
+   ============================================================ */
+
+/* ===================== GROUP ===================== */
+
+.group {
+  margin-bottom: var(--gap-xl);
+}
+
+.group-head {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: var(--gap);
+  padding-bottom: var(--gap-sm);
+  border-bottom: var(--line) solid var(--ink);
+}
+
+.group-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 7vw, 4.5rem);
+  line-height: 1;
+  color: var(--accent);
+  -webkit-text-fill-color: var(--accent);
+}
+
+.group-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 3vw, 1.9rem);
+  text-transform: uppercase;
+}
+
+.entry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--gap);
+}
+
+/* ===================== ENTRY CARD ===================== */
+
+.entry-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+  transition:
+    transform var(--base) var(--ease),
+    box-shadow var(--base) var(--ease);
+}
+
+/* Lifting towards the light source deepens the offset shadow. */
+.entry-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-lift) var(--shadow-lift) 0 var(--shadow-col);
+}
+
+.entry-head {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  padding: 18px 20px;
+  border-bottom: var(--line) solid var(--ink);
+}
+
+.entry-code {
+  flex: none;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.78rem;
+  line-height: 1;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 5px 9px;
+}
+
+.entry-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.06rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+/* ===================== RESOURCE LIST ===================== */
+
+.res-list {
+  list-style: none;
+}
+
+/* Sub heading inside a card, for example "Practicas". */
+.res-group {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 12px 20px 6px;
+  border-top: var(--line) dashed var(--ink);
+}
+
+.res-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 20px;
+  text-decoration: none;
+  color: var(--ink);
+  border-top: var(--line-hair) solid color-mix(in srgb, var(--ink) 22%, transparent);
+  transition:
+    background var(--fast) ease,
+    color var(--fast) ease,
+    padding-left var(--base) ease;
+}
+.res-row:first-child {
+  border-top: none;
+}
+/* Inverts and steps right. The whole row is the hit target. */
+.res-row:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding-left: 26px;
+}
+
+.res-arrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  opacity: 0.5;
+  transition:
+    opacity var(--fast) ease,
+    transform var(--base) ease;
+}
+.res-row:hover .res-arrow {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.res-name {
+  flex: 1;
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.res-tag {
+  flex: none;
+  font-family: var(--font-body);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--tag-ink);
+  border: 1.5px solid var(--tag-border);
+  padding: 3px 6px;
+  transition:
+    border-color var(--fast) ease,
+    color var(--fast) ease;
+}
+.res-row:hover .res-tag {
+  color: var(--accent-ink);
+  border-color: var(--accent-ink);
+}
+
+/* Plain text item: bibliography, or material that is not published here. */
+.res-note {
+  font-size: 0.9rem;
+  line-height: 1.3;
+  color: var(--muted);
+  padding: 11px 20px;
+  border-top: var(--line-hair) solid color-mix(in srgb, var(--ink) 22%, transparent);
+}
+.res-note:first-child {
+  border-top: none;
+}
+
+.res-empty {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding: 22px 20px;
+  text-align: center;
+}
+
+/* ===================== TILE ===================== */
+
+/* Big numbered row linking to a section or a page. Used on the home
+   page and on section indexes. */
+.tile-list {
+  display: grid;
+  gap: var(--gap);
+}
+
+.tile {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--gap);
+  padding: clamp(20px, 4vw, 34px);
+  background: var(--surface);
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+  text-decoration: none;
+  color: var(--ink);
+  transition:
+    transform var(--base) var(--ease),
+    box-shadow var(--base) var(--ease),
+    background var(--base) ease;
+}
+.tile:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-lift) var(--shadow-lift) 0 var(--shadow-col);
+}
+
+/* Fixed width so the titles line up down the list even though each tile is
+   its own grid. */
+.tile-num {
+  min-width: 2.4ch;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The tile body is a <span> so the whole tile can stay a single <a>. Its
+   children must be told to stack. */
+.tile-title,
+.tile-blurb,
+.tile-summary {
+  display: block;
+}
+
+.tile-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.tile-blurb {
+  margin-top: var(--gap-xs);
+  max-width: var(--measure-text);
+  font-size: 0.94rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.tile-summary {
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+
+.tile-arrow {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--muted);
+  transition:
+    transform var(--base) var(--ease),
+    color var(--base) ease;
+}
+.tile:hover .tile-arrow {
+  transform: translateX(6px);
+  color: var(--accent);
+}
+
+/* ===================== SLAB ===================== */
+
+/* Generic bordered block. The base for anything that is not a card. */
+.slab {
+  background: var(--surface);
+  border: var(--line) solid var(--ink);
+  padding: clamp(20px, 4vw, 34px);
+}
+
+.slab-shadow {
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+}
+
+/* ===================== BUTTONS ===================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 24px;
+  border: var(--line) solid var(--ink);
+  cursor: pointer;
+  transition:
+    transform var(--base) var(--ease),
+    box-shadow var(--base) var(--ease),
+    background var(--base) ease,
+    color var(--base) ease;
+}
+
+.btn-solid {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.btn-solid:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ===================== FORM ===================== */
+
+.field {
+  display: block;
+  margin-bottom: var(--gap);
+}
+
+.field-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--gap-xs);
+}
+
+.field-input {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--bg);
+  border: var(--line) solid var(--ink);
+  padding: 13px 16px;
+  transition:
+    border-color var(--fast) ease,
+    box-shadow var(--fast) ease;
+}
+.field-input::placeholder {
+  color: var(--muted);
+}
+.field-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 4px 4px 0 var(--accent);
+}
+textarea.field-input {
+  resize: vertical;
+  min-height: 130px;
+}
+
+/* Honeypot. Bots fill it, people never see it. */
+.field-trap {
+  position: absolute;
+  left: -9999px;
+}
+
+/* ===================== TIMELINE ===================== */
+
+.timeline {
+  list-style: none;
+  border-left: var(--line) solid var(--ink);
+  margin-left: 10px;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 var(--gap-lg) clamp(24px, 5vw, 44px);
+}
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Hard square node instead of the usual soft dot. */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--line) * -1 - 9px);
+  top: 6px;
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  border: var(--line) solid var(--ink);
+}
+
+.timeline-kicker {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+
+.timeline-title {
+  margin: 10px 0 12px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.3rem, 3.4vw, 2rem);
+  text-transform: uppercase;
+}
+
+/* ===================== ENTRANCE ===================== */
+
+/* Staggered reveal. Elements set `--i` to their position in the list.
+   assets/js/reveal.mjs adds `.is-visible` when a block scrolls in;
+   above-the-fold markup carries `.reveal-now` and plays immediately. */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.reveal.is-visible,
+.reveal-now {
+  animation: enter var(--slow) var(--ease) forwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+@keyframes enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Without JavaScript nothing must stay invisible. */
+.no-js .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 768px) {
+  .entry-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .tile {
+    grid-template-columns: auto 1fr;
+    row-gap: var(--gap-xs);
+  }
+  .tile-arrow {
+    display: none;
+  }
+}
+
+/* ============================================================
+   PAGES
+   Composition that belongs to one page type only. Anything reused
+   across pages lives in components.css instead.
+
+   @author Ismael Sallami Moreno
+   ============================================================ */
+
+/* ===================== HOME HERO ===================== */
+
+.hero {
+  border-bottom: var(--line) solid var(--ink);
+  padding: clamp(48px, 9vw, 110px) clamp(16px, 5vw, 48px) clamp(36px, 6vw, 64px);
+}
+
+.hero-inner {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+.hero-title {
+  margin: var(--gap) 0;
+}
+
+.hero-lead {
+  max-width: 46ch;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--muted);
+}
+.hero-lead strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+  margin-top: var(--gap-lg);
+}
+
+/* Fact rail. Numbers come from the content registry, so they can
+   never drift from what the site actually holds. */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-top: clamp(40px, 7vw, 72px);
+  border: var(--line) solid var(--ink);
+}
+
+.hero-stat {
+  padding: 20px 22px;
+  border-right: var(--line) solid var(--ink);
+}
+.hero-stat:last-child {
+  border-right: none;
+}
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1;
+  color: var(--accent);
+}
+
+.hero-stat-label {
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ===================== HOME BLOCKS ===================== */
+
+.block {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: clamp(56px, 9vw, 104px) clamp(16px, 5vw, 48px);
+}
+
+.block-head {
+  margin-bottom: var(--gap-lg);
+  padding-bottom: var(--gap-sm);
+  border-bottom: var(--line) solid var(--ink);
+}
+
+.block-title {
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 5vw, 3.2rem);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ===================== ABOUT ===================== */
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+/* Square portrait with the same hard offset as every card. No blur,
+   no glow, no rounding. */
+.about-portrait {
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+}
+/* `height: auto` is required: the width and height attributes on the tag give
+   the browser a definite height, which would make `aspect-ratio` a no-op. The
+   attributes stay so the space is reserved before the image loads. */
+.about-portrait img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.about-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap-xs);
+  margin-top: 18px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.about-role {
+  margin-top: 10px;
+  font-size: 1.05rem;
+  color: var(--accent-2);
+}
+
+.about-areas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: var(--line);
+  margin-top: var(--gap-lg);
+  background: var(--ink);
+  border: var(--line) solid var(--ink);
+}
+
+/* Cells sit on an ink background with a 2px gap, so the grid lines
+   read as hard rules without doubling borders. */
+.about-area {
+  background: var(--surface);
+  padding: 16px 18px;
+}
+
+.about-area-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.98rem;
+  text-transform: uppercase;
+}
+
+.about-area-note {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+  margin-top: var(--gap-lg);
+}
+
+/* ===================== CONTACT ===================== */
+
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+/* ===================== SECTION INDEX ===================== */
+
+.section-intro {
+  max-width: var(--measure-text);
+  margin-bottom: var(--gap-xl);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* ===================== HISTORIA ===================== */
+
+.historia-intro {
+  max-width: var(--measure-text);
+  margin-bottom: var(--gap-xl);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 860px) {
+  .about,
+  .contact {
+    grid-template-columns: 1fr;
+  }
+  .about-portrait {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-stat {
+    border-right: none;
+    border-bottom: var(--line) solid var(--ink);
+  }
+  .hero-stat:last-child {
+    border-bottom: none;
+  }
+}

@@ -113,9 +113,13 @@
   border: var(--line) solid var(--ink);
   box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
 }
+/* `height: auto` is required: the width and height attributes on the tag give
+   the browser a definite height, which would make `aspect-ratio` a no-op. The
+   attributes stay so the space is reserved before the image loads. */
 .about-portrait img {
-  aspect-ratio: 1;
   width: 100%;
+  height: auto;
+  aspect-ratio: 1;
   object-fit: cover;
   display: block;
 }
