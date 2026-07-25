@@ -17,7 +17,7 @@ import { fileURLToPath } from "node:url";
 
 import { SECTIONS } from "../content/registry.mjs";
 import { REDIRECTS } from "../content/redirects.mjs";
-import { bundleCss } from "./lib/css.mjs";
+import { bundleCss, BUNDLES } from "./lib/css.mjs";
 import { renderHome } from "./templates/home.mjs";
 import { renderHistoria } from "./templates/historia.mjs";
 import { renderPage } from "./templates/page.mjs";
@@ -36,7 +36,10 @@ function buildSite() {
   /** @type {Map<string, string>} */
   const files = new Map();
 
-  files.set("assets/css/brutal.css", bundleCss(ROOT));
+  for (const [path, layers] of Object.entries(BUNDLES)) {
+    files.set(path, bundleCss(ROOT, layers));
+  }
+
   files.set("index.html", renderHome(SECTIONS));
   files.set("historia/index.html", renderHistoria());
 
