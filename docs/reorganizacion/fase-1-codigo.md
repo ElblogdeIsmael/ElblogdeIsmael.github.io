@@ -318,17 +318,62 @@ motivo escrito al lado, y se listan en las limitaciones del README. Mismo criter
 
 Resultado: **67 ficheros, 2.425 líneas**. 56 de 62 GDScript parsean limpio.
 
-### A.4 · `oracle-plsql-lab`
+### A.4 · `oracle-sql-exercises` — **hecho**
 
-**Origen:** `Subjects/Third/FBD` (solo el código, no el material)
+**Origen:** `Subjects/Third/FBD/Practica/2parte`
 **Asignatura:** FBD — Fundamentos de Bases de Datos, 3º
-**Stack:** Oracle SQL / PL-SQL
+**Stack:** Oracle SQL
+**Repositorio:** <https://github.com/Ismael-Sallami/oracle-sql-exercises> · release `v1.0`
 
-- [ ] Extraer solo los `.sql` y los seminarios; el material de teoría se queda en el blog o
-      va a `apuntes-material` en la [fase 2](fase-2-contenido.md).
-- [ ] Estructura: `src/esquema/`, `src/consultas/`, `src/plsql/`, `docs/seminarios/`.
-- [ ] README: el modelo de datos (diagrama E-R en `assets/`) y cómo levantar el entorno.
-- [ ] Topics: `ugr`, `coursework`, `sql`, `plsql`, `oracle`, `databases`.
+> **Se llamaba `oracle-plsql-lab` en el plan. No hay PL/SQL.** Ni un procedimiento, ni una
+> función, ni un trigger, ni un bloque `DECLARE/BEGIN`:
+>
+> ```bash
+> grep -rilE 'CREATE (OR REPLACE )?(PROCEDURE|FUNCTION|TRIGGER|PACKAGE)|^\s*DECLARE\b' .
+> # sin resultados
+> ```
+>
+> La asignatura cubrió DDL, DML, consultas, catálogo e índices. Mantener el nombre habría
+> prometido en la portada una destreza que el repositorio no contiene. Renombrado a
+> **`oracle-sql-exercises`**.
+
+- [x] Comprobar primero si el código estaba en los `.tex`, como en IG. **Aquí no**: los dos
+      únicos `lstlisting` de FBD son uno comentado y otro con una `i` suelta.
+- [x] Extraer los `.sql` y renombrarlos a una tubería legible: `01-schema`, `02-seed`,
+      `03-queries`.
+- [x] Separar `src/workbook/` (capítulos 1 y 2). Crea `Equipos` con `codE VARCHAR2(3)`
+      frente al `VARCHAR(5)` del esquema entregado: son **dos iteraciones que no pueden
+      convivir** en la misma base de datos, y ejecutarlas juntas fallaría.
+- [x] README con los 10 apartados, badges, `Makefile`, `LICENSE`, `.gitignore`, topics y
+      release `v1.0`.
+
+#### El CI ejecuta el SQL, no solo lo lee
+
+Dos jobs. El primero pasa `sqlfluff parse --dialect oracle`. El segundo levanta un Oracle de
+verdad con `gvenzl/oracle-free:slim` como *service container*, crea el esquema, carga los
+datos y ejecuta las 20 consultas con `python-oracledb` en modo thin (sin cliente Oracle).
+
+Salida real de la ejecución que dejó el badge en verde:
+
+```
+src/01-schema.sql: 4 statements
+src/02-seed.sql: 45 statements
+  Equipos        4 rows     Encuentros    10 rows
+  Jugadores     20 rows     Faltas        11 rows
+20 queries, all executed
+```
+
+Por qué importa: `sqlfluff` acepta una consulta contra una columna que no existe. Parsear
+demuestra que el texto está bien formado, no que la base de datos funcione.
+
+#### Qué se quedó en el blog
+
+`ApuntesFBD.md` tiene **163 bloques de SQL**, pero con **mediana de 3 líneas**: 125 de ellos
+son de 5 líneas o menos. Son ejemplos dentro de unos apuntes, no una base de código.
+Extraerlos habría producido 163 ficheros diminutos de ruido. Se quedan donde están, y la web
+ya enlaza su PDF.
+
+Igual el `Simulacro2`: es un test de opción múltiple, contenido del blog.
 
 ---
 
