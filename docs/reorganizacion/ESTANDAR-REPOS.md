@@ -77,7 +77,40 @@ Ismael Sallami Moreno. Released under the MIT licence (see `LICENSE`).
 - **«The solution» no es un resumen del enunciado.** Es lo que decidiste tú.
 - **«What I learned» incluye al menos una limitación.** Un README que solo se felicita no lo
   lee nadie dos veces.
-- Nada de badges decorativos que no informen.
+
+---
+
+## 1 bis. Badges
+
+Una fila de badges justo debajo del título, antes de la frase de resumen. Obligatoria en
+todos los repositorios.
+
+```markdown
+# <nombre>
+
+![<lenguaje>](https://img.shields.io/badge/<lenguaje>-<versión>-<color>)
+![<framework>](https://img.shields.io/badge/<framework>-<versión>-<color>)
+[![build](https://img.shields.io/github/actions/workflow/status/Ismael-Sallami/<repo>/ci.yml?branch=main&logo=github&label=build)](https://github.com/Ismael-Sallami/<repo>/actions/workflows/ci.yml)
+![license](https://img.shields.io/badge/license-MIT-4c1)
+```
+
+**Los cuatro que van siempre:** lenguaje con su versión, framework con su versión (si lo
+hay), estado del CI y licencia.
+
+**Cada badge dice un hecho comprobable.** Un badge es una afirmación pública sobre el
+repositorio, no un adorno. Reglas:
+
+- **El de estado tiene que venir de un workflow real.** Nada de
+  `badge/build-passing-green` puesto a mano: eso es mentir en la portada. Si no hay CI, se
+  añade el CI ([apartado 5](#5-integración-continua)) o no se pone el badge.
+- **La etiqueta describe lo que el workflow hace de verdad.** En `irrgarten` pone `build` y
+  no `tests`, porque el workflow compila y ejecuta unas comprobaciones que imprimen valores
+  sin verificarlos. Poner `tests passing` ahí sería falso.
+- **Las versiones son las que se han probado**, las mismas que el apartado «Requirements».
+- Nada de badges de estrellas, visitas, «made with love» ni contadores.
+
+Colores: los de la marca del lenguaje (`007396` Java, `CC342D` Ruby, `3776AB` Python,
+`009688` FastAPI) y `4c1` verde para la licencia.
 
 ---
 
@@ -166,6 +199,26 @@ Todo repo tiene una forma de compilar y ejecutar en un solo comando: `Makefile`,
 `CMakeLists.txt`, script, o el gestor del lenguaje. Nada de «abrir en NetBeans y darle al
 play».
 
+### Integración continua
+
+`.github/workflows/ci.yml` en todos. Es lo que hace que el badge de estado signifique algo
+y lo que garantiza que el repositorio sigue compilando dentro de dos años.
+
+Mínimo: instalar el toolchain en las versiones que declara el README, compilar, y ejecutar
+lo que haya (tests de verdad si los hay; si no, al menos una comprobación de sintaxis).
+
+```yaml
+name: build
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+```
+
+El nombre del workflow es el que sale en el badge, así que se llama por lo que hace:
+`build` si solo compila, `tests` si de verdad hay aserciones.
+
 ---
 
 ## 6. Nombres
@@ -187,6 +240,8 @@ Inglés, kebab-case, describe qué es. Ver
 Se copia en la PR o en la issue de cada repo durante la fase 1.
 
 - [ ] README con los 10 apartados, en inglés simple
+- [ ] Fila de badges: lenguaje, framework, estado del CI y licencia
+- [ ] `.github/workflows/ci.yml` en verde, y la etiqueta del badge describe lo que hace
 - [ ] Los comandos del README funcionan desde un clon limpio en una carpeta vacía
 - [ ] `LICENSE` MIT
 - [ ] `.gitignore` del lenguaje, sin restos
