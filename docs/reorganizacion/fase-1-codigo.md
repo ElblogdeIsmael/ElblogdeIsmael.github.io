@@ -64,6 +64,23 @@ inservibles.
 Y en `Ismael-Sallami` hay 36 repositorios sin convención de nombres, con tres copias del
 mismo trabajo de IA y siete repos obsoletos que ensucian el perfil.
 
+### Resultado del barrido, aplicado a los cuatro
+
+El aviso de arriba no es teórico: al pasarlo por las cuatro asignaturas **tres de ellas
+tenían más código fuera de la carpeta de código que dentro**.
+
+| Asignatura | Lo que había suelto | Lo que apareció al barrer | Dónde estaba |
+| --- | --- | --- | --- |
+| PDOO | el proyecto Irrgarten | **62 ejercicios** de teoría, Java y Ruby | 5 `.tex` de relaciones y diapositivas |
+| ISE | Ansible, Docker, JMeter | el **`group_vars/all.yml` original**, 5 informes en Markdown y una iteración anterior del playbook | `Resolucion/Capitulos/Ficheros_Ejercicios/` |
+| IG | 20 scripts | **47 bloques** de GDScript y C++ | los `.tex` del temario |
+| FBD | 6 `.sql` | **136 bloques** con el temario entero | `ApuntesFBD.md` |
+
+El caso de ISE es el que más duele: había documentado como «limitación conocida» que
+`group_vars/all.yml` estaba corrupto y que mi versión era una reconstrucción. **El original
+existía**, en una carpeta que no miré, y usa `lookup('file', 'claves/...')` en vez de claves
+escritas. Un barrido de dos minutos habría evitado publicar una limitación falsa.
+
 ---
 
 ## Parte A · Repositorios nuevos desde el blog
