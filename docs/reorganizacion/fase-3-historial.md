@@ -78,6 +78,11 @@ alineado con el remoto reescrito.
 
 - [ ] Revisar `.rutas-a-purgar.txt` línea a línea. Lo que entre aquí desaparece del
       historial: se lee entero antes de seguir.
+
+      Estado actual: **24 rutas**, aportadas por la [fase 0](fase-0-seguridad.md) — las 12
+      claves privadas de ISE y sus 12 `.pub`. La [fase 2](fase-2-contenido.md) añadirá el
+      material de terceros. Están sin comillas y sin escapes octales, como necesita
+      `--paths-from-file`.
 - [ ] Añadir los patrones que no dependen de rutas concretas:
 
   ```
