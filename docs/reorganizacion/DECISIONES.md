@@ -80,8 +80,9 @@ Un `git rm` deja el fichero en el historial: el clon sigue pesando lo mismo y la
 privada sigue siendo recuperable. `git filter-repo` es la única forma de eliminarlo de
 verdad.
 
-Coste asumido: cambian todos los hashes de commit, obliga a `push --force` y a re-clonar
-en todas las copias locales (ver [regla 7](REGLAS.md#7-las-dos-copias-locales-se-sincronizan-o-se-elimina-una)).
+Coste asumido: cambian todos los hashes de commit y obliga a `push --force`. Solo hay un
+clon local, así que basta con realinearlo (ver
+[regla 7](REGLAS.md#7-hay-un-solo-clon-con-dos-rutas)).
 
 Se descartó crear un repositorio nuevo desde cero: perdería el histórico de commits, que sí
 tiene valor.

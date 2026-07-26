@@ -87,19 +87,28 @@ cambios
 update
 ```
 
-## 7. Las dos copias locales se sincronizan o se elimina una
+## 7. Hay un solo clon, con dos rutas
 
-Hoy hay dos clones en el mismo commit:
+`~/Escritorio/GitHub` es un **enlace simbólico** a `~/workspace_ssd/GitHub`:
 
-- `/home/ismael-sallami/workspace_ssd/GitHub/ElblogdeIsmael.github.io`
-- `/home/ismael-sallami/Escritorio/GitHub/ElblogdeIsmael.github.io`
+```bash
+ls -ld ~/Escritorio/GitHub
+# lrwxrwxrwx … /home/ismael-sallami/Escritorio/GitHub -> /home/ismael-sallami/workspace_ssd/GitHub
+```
 
-3,3 GB cada uno. Tras la fase 3 los hashes de commit cambian y **la copia que no se
-actualice queda inservible**: cualquier `push` desde ella intentaría restaurar el historial
-viejo. Es la vía más fácil de perder trabajo en todo este plan.
+Las dos rutas llevan al mismo inodo. Hay **un clon de 3,3 GB**, no dos de 6,6 GB, y no hay
+nada que sincronizar.
 
-Decisión pendiente antes de la fase 3: cuál sobrevive. La otra se borra y, si hace falta,
-se vuelve a clonar del remoto ya limpio.
+Lo que sí hay que tener presente: **borrar por la ruta del Escritorio borra el original.**
+Un `rm -rf ~/Escritorio/GitHub/ElblogdeIsmael.github.io` destruye el repositorio de verdad,
+no una copia. Si alguna vez hace falta borrar el clon, se hace por la ruta real y con el
+espejo de la [regla 4](REGLAS.md#4-copia-espejo-antes-de-reescribir-el-historial) ya hecho.
+
+Comprobar antes de cualquier borrado:
+
+```bash
+realpath <ruta>          # dice cuál es el directorio de verdad
+```
 
 ## 8. Las claves privadas nunca vuelven al repo
 
