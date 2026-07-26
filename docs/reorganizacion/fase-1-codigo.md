@@ -87,19 +87,30 @@ gh repo create Ismael-Sallami/<nombre> --public \
     VARIOS_DISEÑOS/PROYECTO_SUPER_PLAYER/SolucionParcialPracticas2/P5-java/
   ```
 
-  Resultado:
+  Resultado, **1,8 MB de árbol y 540 KB de historial**:
 
   ```
-  src/java/irrgarten/   versión Java (juego completo)
-  src/ruby/irrgarten/   versión Ruby
-  docs/diagramas/       diagramas de clases de la práctica 4
-  docs/entregas/        P1 a P4 tal como se entregaron
-  docs/variantes/       los builds alternativos de VARIOS_DISEÑOS/
+  src/java/irrgarten/   versión Java (juego completo, 25 clases)
+  src/ruby/irrgarten/   versión Ruby (19 ficheros)
+  docs/diagrams/        diagramas de clases de la práctica 4
+  docs/assignment/      enunciado del examen
+  docs/variants/        builds alternativos, con su propio README
   ```
+
+  Los nombres de carpeta visibles van en inglés, igual que el README y el texto de la
+  release: son lo que ve quien abre el repositorio.
 
 - [x] Borrar lo generado: Javadoc y RDoc (~300 `.html`), `build/`, `dist/`, `nbproject/`,
       `.yardoc/`, `.vscode/` y los zip duplicados. El `Makefile` documenta cómo regenerar
       la documentación (`make docs-java`).
+- [x] **Retirar los zip de las entregas P1–P4.** Al abrirlos resultaron ser sobre todo
+      material generado: 147 `.html` de Javadoc solo en `Pr3.zip`, más `.class`, `.js`,
+      `.css` y ficheros de proyecto de NetBeans. Su código lo reemplaza `src/`, y un zip
+      no se puede navegar ni diferenciar en GitHub. Se rescató lo único con valor
+      (`extraIrgarrten.pdf` y el enunciado del examen) y los cuatro archivos van
+      **adjuntos a la release**, que no lastra el clon.
+- [x] Purgar del historial los zip, los `.class` y la documentación generada
+      (`git filter-repo --invert-paths --path-glob`). El clon pasó de 13 MB a **540 KB**.
 - [x] README con los 10 apartados, en inglés simple.
 - [x] Build: `Makefile` con `build-java`, `run-java`, `test-java`, `run-ruby`, `docs-java`,
       `clean`. Verificado desde un clon limpio.
@@ -124,15 +135,56 @@ Las variantes de `docs/variantes/` no son diseños alternativos, son **builds pa
 el parcial**: dos combinaciones de versión de Java, un esbozo de movimientos predefinidos y
 un jugador con estadísticas altas. El README lo dice así.
 
-#### Nota sobre el push
+#### Cómo se publica en `Ismael-Sallami`
 
-El push por SSH autentica como `ElblogdeIsmael`, que no tiene escritura en la cuenta
-`Ismael-Sallami`. Hay que empujar por HTTPS con el token de `gh`:
+La clave SSH por defecto autentica como **`ElblogdeIsmael`**, que no tiene escritura en esa
+cuenta. Hay una clave dedicada, `~/.ssh/id_github_ismael_sallami`, ya declarada en
+`~/.ssh/config` bajo el alias `github.com-ismael`. Se selecciona con `GIT_SSH_COMMAND`:
 
 ```bash
-git remote set-url origin https://github.com/Ismael-Sallami/<repo>.git
-git -c credential.helper='!gh auth git-credential' push -u origin main
+export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_github_ismael_sallami -o IdentitiesOnly=yes"
+git remote set-url origin git@github.com:Ismael-Sallami/<repo>.git
+git push -u origin main
 ```
+
+Comprobar antes de empujar, debe decir `Hi Ismael-Sallami!`:
+
+```bash
+ssh -T -o IdentitiesOnly=yes -i ~/.ssh/id_github_ismael_sallami git@github.com
+```
+
+`gh repo create --push` **no** sirve: usa la clave por defecto y falla con
+`exit status 128` después de haber creado ya el repositorio.
+
+#### Tres trampas al publicar, comprobadas en `irrgarten`
+
+1. **`filter-repo` conserva todas las ramas del clon.** El clon auxiliar traía `main`,
+   `reorg/*` y demás. El trabajo se hizo sobre la rama que estaba activa, y el
+   `git push origin main` subió la `main` heredada: el repositorio quedó publicado con el
+   entregable sin tocar y **sin README**. Hay que fijar la rama buena como `main` antes de
+   empujar:
+
+   ```bash
+   git branch -f main HEAD && git checkout main
+   ```
+
+2. **Las etiquetas mantienen vivo el historial viejo.** Tras purgar los zip del historial,
+   un clon nuevo seguía pesando 13 MB: la etiqueta `v1.0` apuntaba al commit anterior a la
+   purga y hacía alcanzable todo lo purgado. Hay que moverla:
+
+   ```bash
+   git tag -f v1.0 HEAD && git push --force origin v1.0
+   ```
+
+   La release conserva sus adjuntos: GitHub la sigue por nombre de etiqueta.
+
+3. **Verificar siempre contra el remoto, no contra el directorio local.** Lo que hay en
+   disco y lo que se ha publicado pueden no coincidir:
+
+   ```bash
+   gh api repos/Ismael-Sallami/<repo>/readme --jq .name    # 404 si no hay README
+   git clone git@github.com:Ismael-Sallami/<repo>.git /tmp/verif && cd /tmp/verif && make
+   ```
 
 ### A.2 · `ansible-infra-lab`
 

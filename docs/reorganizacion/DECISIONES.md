@@ -189,8 +189,9 @@ la fase 0.**
 | --- | --- | --- | --- |
 | 2026-07-26 | 0 | Añadir `id_rsa_*` y `**/claves/` al `.gitignore` | La regla `id_rsa` es un nombre exacto y no cubría `id_rsa_admin`. Las 24 claves quedaban como no rastreadas tras el `git rm --cached`, así que un `git add -A` las habría vuelto a subir |
 | 2026-07-26 | 0 | Generar `.rutas-a-purgar.txt` con `core.quotePath=false` | Sin esa opción git escapa los acentos de `Prácticas` en octal y entrecomilla la ruta, y `git filter-repo --paths-from-file` no la reconocería |
-| 2026-07-26 | 1 | Empujar a `Ismael-Sallami` por HTTPS con el token de `gh`, no por SSH | La clave SSH autentica como `ElblogdeIsmael`, que no tiene escritura en esa cuenta. `git -c credential.helper='!gh auth git-credential' push` usa el token correcto |
-| 2026-07-26 | 1 | En `irrgarten`, conservar `docs/entregas/` con los zip de P1–P4 | Son las entregas incrementales de la asignatura: documentan cómo creció el diseño. 8,6 MB, no lastran el repo |
+| 2026-07-26 | 1 | Empujar a `Ismael-Sallami` con `GIT_SSH_COMMAND` y la clave `id_github_ismael_sallami` | La clave SSH por defecto autentica como `ElblogdeIsmael`, sin escritura en esa cuenta. Existe una clave dedicada, ya declarada en `~/.ssh/config` como `github.com-ismael` |
+| 2026-07-26 | 1 | Retirar los zip de las entregas del árbol y adjuntarlos a la release | Al abrirlos resultaron ser sobre todo Javadoc generado, `.class` y ficheros de NetBeans; su código lo reemplaza `src/`. Un zip además no se navega ni se diferencia en GitHub. Adjuntos a la release se conservan sin lastrar el clon |
+| 2026-07-26 | 1 | Nombres de carpeta y texto de release en inglés | Es lo que ve quien abre el repositorio, igual que el README |
 | 2026-07-26 | 1 | Documentar los defectos del código en el README en vez de arreglarlos | Es un repositorio de un trabajo entregado. Arreglarlo ahora falsearía lo que se entregó; un apartado de limitaciones honesto vale más en una entrevista |
 
 ### Pendiente de decidir

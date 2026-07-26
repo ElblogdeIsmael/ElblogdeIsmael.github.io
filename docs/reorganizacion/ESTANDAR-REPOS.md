@@ -107,6 +107,22 @@ Ismael Sallami Moreno. Released under the MIT licence (see `LICENSE`).
 Adaptable al lenguaje (un proyecto Maven tendrá `src/main/java`), pero **la raíz nunca
 contiene el volcado del entregable de clase**.
 
+**Todo lo visible en el repositorio va en inglés**: nombres de carpeta (`docs/diagrams`, no
+`docs/diagramas`), README, y el título y el cuerpo de las releases. Es lo que lee quien
+abre el repositorio.
+
+### Nada de archivos comprimidos
+
+Un `.zip` en el árbol no se puede navegar, ni buscar, ni diferenciar en GitHub, y casi
+siempre esconde material generado. En `irrgarten`, los cuatro zip de las entregas contenían
+147 ficheros de Javadoc, `.class` y proyecto de NetBeans, y su código lo reemplazaba `src/`.
+
+Qué hacer con ellos:
+
+1. Abrirlos y rescatar lo que tenga valor propio (memorias, diagramas, enunciados).
+2. Adjuntar el archivo original a una **release**, que no forma parte del clon.
+3. Purgarlo del historial junto con el resto de material generado.
+
 ### Aplanado obligatorio
 
 La anidación heredada de las entregas se aplana siempre. Caso real que hay que arreglar en
@@ -179,8 +195,11 @@ Se copia en la PR o en la issue de cada repo durante la fase 1.
 - [ ] Descripción rellena en GitHub
 - [ ] Topics: `ugr`, `coursework`, lenguaje, dominio
 - [ ] Capturas o diagrama en `assets/` y enlazados en «Results»
-- [ ] Release `v1.0`
+- [ ] Release `v1.0`, con título y cuerpo en inglés
+- [ ] Sin `.zip` ni material generado en el árbol ni en el historial
 - [ ] Sin credenciales, claves ni datos personales de compañeros
+- [ ] **Verificado contra el remoto**: `gh api repos/Ismael-Sallami/<repo>/readme` responde,
+      y un clon del repositorio publicado compila siguiendo solo su README
 
 ---
 
