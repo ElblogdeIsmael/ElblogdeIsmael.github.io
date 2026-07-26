@@ -187,7 +187,22 @@ la fase 0.**
 
 | Fecha | Fase | Decisión | Motivo |
 | --- | --- | --- | --- |
-| _(vacío)_ | | | |
+| 2026-07-26 | 0 | Añadir `id_rsa_*` y `**/claves/` al `.gitignore` | La regla `id_rsa` es un nombre exacto y no cubría `id_rsa_admin`. Las 24 claves quedaban como no rastreadas tras el `git rm --cached`, así que un `git add -A` las habría vuelto a subir |
+| 2026-07-26 | 0 | Generar `.rutas-a-purgar.txt` con `core.quotePath=false` | Sin esa opción git escapa los acentos de `Prácticas` en octal y entrecomilla la ruta, y `git filter-repo --paths-from-file` no la reconocería |
+
+### Pendiente de decidir
+
+**El `.gitignore` no está versionado.** Se ignora a sí mismo (línea 88 de su propio
+fichero), así que las reglas solo existen en la máquina de Ismael. Un clon nuevo no lo trae,
+y ahí nada está protegido.
+
+Hay que resolverlo **antes de la [fase 3](fase-3-historial.md)**: en cuanto se purgue el
+historial, el `.gitignore` es la única barrera para que lo purgado no vuelva a subirse.
+
+| Opción | Efecto |
+| --- | --- |
+| Versionarlo (quitar la línea que lo excluye) | Las reglas viajan con el repositorio. Es lo normal en cualquier proyecto |
+| Dejarlo local | Sigue siendo un repositorio donde `git add -A` es peligroso desde cualquier clon nuevo |
 
 ---
 

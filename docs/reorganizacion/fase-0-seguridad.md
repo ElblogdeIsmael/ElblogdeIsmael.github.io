@@ -90,16 +90,24 @@ Son claves de un laboratorio Ansible de la asignatura ISE, no de producción. Au
     | tr '\n' '\0' | xargs -0 git rm --cached
   ```
 
-- [ ] Comprobar que `.gitignore` las cubre a partir de ahora (no debe imprimir nada).
+- [x] Comprobar que `.gitignore` las cubre a partir de ahora.
 
   ```bash
-  git status --porcelain --untracked-files=all | grep 'id_rsa'
+  git status --porcelain --untracked-files=all | grep '^??' | grep -c 'id_rsa'
   ```
 
-  Si aparecen como `??`, añadir a `.gitignore`:
+  **No las cubría.** La regla `id_rsa` del `.gitignore` es un nombre exacto y las claves
+  del laboratorio se llaman `id_rsa_admin`, `id_rsa_juan`, `id_rsa_maria`. Las 24
+  aparecían como no rastreadas, así que un `git add -A` las habría vuelto a meter.
+
+  ```bash
+  git check-ignore -v <ruta-de-una-clave>    # no devolvía nada
+  ```
+
+  Reglas añadidas a la sección de seguridad del `.gitignore`:
 
   ```
-  # Claves del laboratorio Ansible de ISE. Se generan, no se versionan.
+  id_rsa_*
   **/claves/
   ```
 
@@ -111,11 +119,22 @@ Son claves de un laboratorio Ansible de la asignatura ISE, no de producción. Au
 
 ### Anotar para la fase 3
 
-- [ ] Guardar la lista exacta de rutas a purgar del historial.
+- [x] Guardar la lista exacta de rutas a purgar del historial.
+
+  `core.quotePath=false` es obligatorio: sin él, git escapa los acentos de `Prácticas` en
+  octal y encierra la ruta entre comillas, y `git filter-repo --paths-from-file` no la
+  reconocería.
 
   ```bash
-  git show HEAD --name-only --diff-filter=D --pretty=format: \
+  git -c core.quotePath=false show HEAD --name-only --diff-filter=D --pretty=format: \
     | grep -v '^$' > docs/reorganizacion/.rutas-a-purgar.txt
+  ```
+
+  Comprobar que las 24 existen de verdad en el historial:
+
+  ```bash
+  while IFS= read -r p; do git log --all --oneline -- "$p" | head -1; done \
+    < docs/reorganizacion/.rutas-a-purgar.txt | wc -l
   ```
 
 - [ ] Añadir esa lista a la checklist de la [fase 3](fase-3-historial.md).
@@ -183,6 +202,24 @@ que no vuelvan (ver [regla 8](REGLAS.md#8-las-claves-privadas-nunca-vuelven-al-r
 versiones pero lo deja en disco. El laboratorio de ISE se moverá a `ansible-infra-lab` en la
 [fase 1](fase-1-codigo.md) y allí las claves se generarán con un script; hasta entonces
 conviene no perderlas.
+
+**Hallazgo: el `.gitignore` no está versionado.** Se ignora a sí mismo, en la sección 9:
+
+```bash
+git ls-files --error-unmatch .gitignore    # error: no está en el índice
+grep -n '^\.gitignore$' .gitignore         # 88
+```
+
+Consecuencia: las reglas solo existen en esta máquina. Un clon nuevo del repositorio no
+trae `.gitignore`, así que ahí nada está protegido y un `git add -A` volvería a meter las
+claves, los artefactos de LaTeX y todo lo demás. Las reglas añadidas en esta fase tampoco
+viajan.
+
+No se arregla aquí porque cambia cómo se comporta el repositorio para cualquiera que lo
+clone, y esa es una decisión aparte. Queda anotado en
+[DECISIONES.md](DECISIONES.md#cambios-sobre-la-marcha) para resolverlo antes de la
+[fase 3](fase-3-historial.md), que es cuando el `.gitignore` pasa a ser la única barrera
+contra volver a subir lo que se purgue.
 
 ---
 
