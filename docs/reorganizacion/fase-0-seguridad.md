@@ -15,25 +15,15 @@ rutas para esa purga.
 
 ## Precondiciones
 
-- **`gh` autenticado con la cuenta `ElblogdeIsmael`** para la parte de issues. Hoy lo está
-  con `Ismael-Sallami`, que sobre este repositorio solo tiene permiso de lectura:
+- Ninguna. Es la primera fase.
+
+  `gh` está autenticado como `Ismael-Sallami`, que es colaborador de este repositorio con
+  permisos de `push` y `triage`. Basta para crear issues, milestones y PR:
 
   ```bash
   gh api repos/ElblogdeIsmael/ElblogdeIsmael.github.io --jq '.permissions'
-  # {"admin":false,"maintain":false,"pull":true,"push":false,"triage":false}
+  # {"admin":false,"maintain":false,"pull":true,"push":true,"triage":true}
   ```
-
-  Cualquier `gh issue create`, `gh pr create` o `gh milestone` contra este repositorio falla
-  con `must be a collaborator` hasta que se añada la cuenta:
-
-  ```bash
-  gh auth login          # elegir la cuenta ElblogdeIsmael
-  gh auth switch --user ElblogdeIsmael
-  ```
-
-  `git push` sí funciona: usa la clave SSH, no el token de `gh`.
-
-  Alternativa si no quieres cambiar de cuenta: crear las issues a mano desde la web.
 
 ---
 
