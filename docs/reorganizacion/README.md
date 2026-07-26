@@ -4,7 +4,7 @@ Plan de trabajo para separar el sitio web, los apuntes, el material ajeno y el c
 prácticas, y para dejar los repositorios de `Ismael-Sallami` en condiciones de servir como
 portfolio.
 
-> **Estado:** fase 0 hecha, fase 1 en curso (`irrgarten` y `ansible-infra-lab` publicados).
+> **Estado:** fase 0 hecha, fase 1 en curso (`irrgarten`, `ansible-infra-lab` y `godot-graphics-exercises` publicados).
 > Las demás arrancan con una aprobación explícita cada una.
 >
 > Seguimiento en GitHub: milestone [Reorganización 2026](https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/milestone/1)
@@ -39,7 +39,7 @@ GitHub Pages.
 | Fase | Qué hace | Destructiva | Estado |
 | --- | --- | --- | --- |
 | [0 — Seguridad](fase-0-seguridad.md) | Saca del índice las 12 claves SSH privadas; abre issues y milestone | no | **hecha** |
-| [1 — Código](fase-1-codigo.md) | Extrae el código de prácticas a repos propios; renombra, fusiona y archiva | no | **en curso** (2 de 4 repos nuevos) |
+| [1 — Código](fase-1-codigo.md) | Extrae el código de prácticas a repos propios; renombra, fusiona y archiva | no | **en curso** (3 de 4 repos nuevos) |
 | [2 — Contenido](fase-2-contenido.md) | Material ajeno a repo privado; versiona lo que falta; estructura canónica | sí (borra del blog) | pendiente |
 | [3 — Historial](fase-3-historial.md) | `git filter-repo` para bajar de 1,38 GB a <300 MB | **sí, reescribe historial** | pendiente |
 | [4 — Plantillas](fase-4-plantillas.md) | Unifica LaTeX en la generación pandoc y los tests en md2html | no | pendiente |
