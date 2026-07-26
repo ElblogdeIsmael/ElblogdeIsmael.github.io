@@ -39,8 +39,16 @@ inservibles.
 | --- | --- | --- |
 | `Subjects/Third/PDOO/Practica/Proyecto_Irrgarten` | 102 `.java` + proyecto Ruby | `tree/main/...` |
 | `Subjects/Third/ISE/Prácticas` | Ansible, Docker, 45 JS, 18 YAML | `tree/main/...` |
-| `Subjects/Fourth/IG/code` | GDScript / Godot | no se enlaza |
+| `Subjects/Fourth/IG/code` **y `src/tex`** | GDScript / Godot, dentro del LaTeX | no se enlaza |
 | `Subjects/Third/FBD` | SQL / PL-SQL | no se enlaza |
+
+> **Aviso, aprendido en IG:** el código de una asignatura no está siempre en una carpeta de
+> código. En Informática Gráfica los ejercicios viven dentro de los `.tex`, en bloques
+> `lstlisting`. Antes de extraer, **buscar también ahí**:
+>
+> ```bash
+> grep -rc 'begin{lstlisting}' Subjects/<Curso>/<COD>/src/tex/
+> ```
 
 Y en `Ismael-Sallami` hay 36 repositorios sin convención de nombres, con tres copias del
 mismo trabajo de IA y siete repos obsoletos que ensucian el perfil.
@@ -256,17 +264,59 @@ Los otros cinco son del código entregado y **no se arreglan**: tres cosméticos
 motivo escrito al lado, y se listan en las limitaciones del README. Mismo criterio que en
 `irrgarten`: documentar, no falsear.
 
-### A.3 · `godot-graphics-exercises`
+### A.3 · `godot-graphics-exercises` — **hecho**
 
-**Origen:** `Subjects/Fourth/IG/code`
+**Origen:** `Subjects/Fourth/IG/code` **y `Subjects/Fourth/IG/src/tex`**
 **Asignatura:** IG — Informática Gráfica, 4º
-**Lenguaje:** GDScript (Godot)
+**Lenguaje:** GDScript (Godot 4), más cinco algoritmos en C++
+**Repositorio:** <https://github.com/Ismael-Sallami/godot-graphics-exercises> · release `v1.0`
 
-- [ ] Extraer con el procedimiento general.
-- [ ] Estructura: `src/` con las escenas y scripts, `docs/` con los enunciados.
-- [ ] `.gitignore` de Godot (`.godot/`, `.import/`, `export_presets.cfg`).
-- [ ] README: qué ejercicio resuelve cada escena y la versión exacta de Godot.
-- [ ] Topics: `ugr`, `coursework`, `godot`, `gdscript`, `computer-graphics`.
+> **El dato que cambió la fase.** El código de IG **no estaba en `code/`**. Está dentro del
+> documento LaTeX, en `src/tex/`: cada ejercicio con su enunciado, su desarrollo matemático
+> y su solución en un bloque `lstlisting`. `code/` solo tenía 20 scripts sueltos. En el
+> documento hay **47 bloques más**, que nunca se habían podido parsear, ejecutar ni revisar
+> porque vivían dentro de un `.tex`.
+>
+> Antes de extraer un proyecto, **buscar el código también en los `.tex` de la asignatura**.
+
+- [x] Extraer las dos fuentes: `code/EjerciciosTeoria` → `src/problems/` y `src/tex` →
+      `docs/latex/`. Comprobado que no se solapan: la coincidencia entre ambos conjuntos es
+      de líneas sueltas de boilerplate.
+- [x] Escribir `tools/extract-from-latex.py`, que saca los 47 bloques a ficheros reales
+      aprovechando los metadatos de cada `lstlisting`:
+
+      | Metadato | Para qué sirve |
+      | --- | --- |
+      | `caption=` | Nombre del fichero. `script-del-reloj-analogico.gd` en vez de `solution-7.gd` |
+      | `language=` | Extensión. Cinco bloques son **C++**, no GDScript: los algoritmos de intersección rayo-disco, rayo-esfera y cuádricas |
+
+      Cinco bloques etiquetados `language=Python` son GDScript (`onready`, `export`,
+      `$Node`, `_process`): la etiqueta era para el resaltador, que no tiene modo GDScript.
+      Se escriben como `.gd` y cada uno lo dice en su cabecera.
+- [x] Corregir en el extractor dos artefactos de maquetación: la sangría del `lstlisting`
+      (sin `textwrap.dedent`, GDScript lee el fichero entero como un bloque anidado) y los
+      escapes de LaTeX que se habían colado en el código (`"activar\_brazo"`, `\#`).
+- [x] Cada fichero generado lleva en la cabecera el `.tex` y la sección de origen.
+- [x] `make diff-check` regenera y falla si lo commiteado no coincide, para que las dos
+      mitades no se separen. Es lo que evita que editar el LaTeX y olvidar reextraer deje el
+      repositorio mintiendo.
+- [x] `tools/check.sh` parsea todo con `gdtoolkit` y falla salvo en los ficheros listados en
+      `tools/known-parse-failures.txt`, cada uno con su motivo. Además avisa si una entrada
+      de esa lista se queda obsoleta.
+- [x] README con los 10 apartados, badges, `.gitignore` de Godot, `LICENSE`, `Makefile`,
+      topics y release `v1.0`. CI en verde.
+
+#### Lo que se encontró
+
+| Hallazgo | Detalle |
+| --- | --- |
+| **Seis ficheros no parsean como Godot 4** | Cinco scripts de animación de la sesión 11 usan sintaxis de **Godot 3** (`onready var`, `export var`). Se escribieron antes en el curso y nunca se migraron: un documento no comprueba tipos |
+| **Una indentación perdida** | `session-09/solution.gd` tiene el cuerpo de `_process` en la columna 0. Se perdió **al pegar el código en el `.tex`**, así que el listado del PDF también está mal. Adivinar el anidamiento sería inventar código |
+| **Una `y` suelta** | `funciones_auxiliares_t5.gd` tenía una `y` en la línea 2, una pulsación accidental que impedía parsear 121 líneas de trabajo real. Es el **único carácter** que se ha tocado de lo entregado |
+| **La sesión 5 no tiene bloques de código** | Su trabajo está en los scripts sueltos: `problema_5_1` a `problema_5_5` y `funciones_auxiliares_t5.gd`, que monta una casa con partes reutilizables |
+| **`code/sesion2/` no es trabajo propio** | Son fragmentos de las diapositivas con `...` donde debería ir el código; **5 de 9 ni siquiera parsean**. Material de clase, se queda con los apuntes |
+
+Resultado: **67 ficheros, 2.425 líneas**. 56 de 62 GDScript parsean limpio.
 
 ### A.4 · `oracle-plsql-lab`
 
