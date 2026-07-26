@@ -192,6 +192,8 @@ la fase 0.**
 | 2026-07-26 | 1 | Empujar a `Ismael-Sallami` con `GIT_SSH_COMMAND` y la clave `id_github_ismael_sallami` | La clave SSH por defecto autentica como `ElblogdeIsmael`, sin escritura en esa cuenta. Existe una clave dedicada, ya declarada en `~/.ssh/config` como `github.com-ismael` |
 | 2026-07-26 | 1 | Retirar los zip de las entregas del árbol y adjuntarlos a la release | Al abrirlos resultaron ser sobre todo Javadoc generado, `.class` y ficheros de NetBeans; su código lo reemplaza `src/`. Un zip además no se navega ni se diferencia en GitHub. Adjuntos a la release se conservan sin lastrar el clon |
 | 2026-07-26 | 1 | Nombres de carpeta y texto de release en inglés | Es lo que ve quien abre el repositorio, igual que el README |
+| 2026-07-26 | 1 | Fila de badges y `ci.yml` obligatorios en todos los repos | Un badge de estado sin CI detrás sería falso, así que el badge obliga al workflow. De paso garantiza que el repositorio sigue compilando dentro de dos años |
+| 2026-07-26 | 1 | En `irrgarten` el badge dice `build`, no `tests` | El workflow compila y ejecuta unas comprobaciones que imprimen valores sin verificarlos. `tests passing` sería mentira en la portada |
 | 2026-07-26 | 1 | Documentar los defectos del código en el README en vez de arreglarlos | Es un repositorio de un trabajo entregado. Arreglarlo ahora falsearía lo que se entregó; un apartado de limitaciones honesto vale más en una entrevista |
 
 ### Pendiente de decidir
