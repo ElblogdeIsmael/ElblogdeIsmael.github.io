@@ -58,7 +58,7 @@ tests/        <what lives here>
 
 ## Results
 
-<Screenshots, a diagram, a timing table or sample output. Whatever fits the project.>
+<A diagram, a timing table or sample output. Whatever fits the project.>
 
 ## What I learned
 
@@ -131,7 +131,7 @@ Colores: los de la marca del lenguaje (`007396` Java, `CC342D` Ruby, `3776AB` Py
 ├── src/          código fuente
 ├── docs/         memoria, enunciado, diagramas, variantes
 ├── tests/        pruebas, si las hay
-├── assets/       capturas e imágenes del README
+├── assets/       imágenes y diagramas del README, si hacen falta
 ├── README.md
 ├── LICENSE
 └── <Makefile | CMakeLists.txt | pyproject.toml | …>
@@ -249,7 +249,7 @@ Se copia en la PR o en la issue de cada repo durante la fase 1.
 - [ ] Build en un comando
 - [ ] Descripción rellena en GitHub
 - [ ] Topics: `ugr`, `coursework`, lenguaje, dominio
-- [ ] Capturas o diagrama en `assets/` y enlazados en «Results»
+- [ ] «Results» con algo real: diagrama, tabla de tiempos o salida de ejemplo
 - [ ] Release `v1.0`, con título y cuerpo en inglés
 - [ ] Sin `.zip` ni material generado en el árbol ni en el historial
 - [ ] Sin credenciales, claves ni datos personales de compañeros
