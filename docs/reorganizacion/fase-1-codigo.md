@@ -102,9 +102,9 @@ gh repo create Ismael-Sallami/<nombre> --public \
   ```
 
   Añadir al README cómo regenerarlos (`javadoc`, `rdoc`).
-- [ ] README con los 10 apartados. En «La solución», explicar el diseño de clases del
+- [ ] README con los 10 apartados. En «The solution», explicar el diseño de clases del
       laberinto (jugador, monstruo, laberinto, combate) y por qué se hizo la versión Ruby.
-      En «Aprendizajes», el contraste entre el mismo diseño en un lenguaje de tipado
+      En «What I learned», el contraste entre el mismo diseño en un lenguaje de tipado
       estático y en uno dinámico: es lo que hace interesante esta práctica.
 - [ ] Explicar en el README qué son las variantes de `docs/variantes/` y en qué se
       diferencian.
@@ -147,8 +147,8 @@ gh repo create Ismael-Sallami/<nombre> --public \
 - [ ] Quitar el dashboard de JMeter generado
       (`resultados_carga/dashboard_html/…/bower_components/`): son dependencias de terceros
       volcadas, cientos de ficheros.
-- [ ] README: en «La solución», el aprovisionamiento con Ansible y qué mide la prueba de
-      carga. En «Requisitos», versiones exactas de Ansible y Docker.
+- [ ] README: en «The solution», el aprovisionamiento con Ansible y qué mide la prueba de
+      carga. En «Requirements», versiones exactas de Ansible y Docker.
 - [ ] Topics: `ugr`, `coursework`, `ansible`, `docker`, `devops`, `jmeter`.
 
 ### A.3 · `godot-graphics-exercises`
