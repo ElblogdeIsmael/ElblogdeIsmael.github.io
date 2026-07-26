@@ -39,11 +39,47 @@ inservibles.
 | --- | --- | --- |
 | `Subjects/Third/PDOO/Practica/Proyecto_Irrgarten` | 102 `.java` + proyecto Ruby | `tree/main/...` |
 | `Subjects/Third/ISE/Prácticas` | Ansible, Docker, 45 JS, 18 YAML | `tree/main/...` |
-| `Subjects/Fourth/IG/code` | GDScript / Godot | no se enlaza |
+| `Subjects/Fourth/IG/code` **y `src/tex`** | GDScript / Godot, dentro del LaTeX | no se enlaza |
 | `Subjects/Third/FBD` | SQL / PL-SQL | no se enlaza |
+
+> **Aviso, aprendido en IG y confirmado en FBD:** el código de una asignatura casi nunca
+> está solo en una carpeta de código. En IG los ejercicios viven en bloques `lstlisting` de
+> los `.tex`; en FBD, en bloques ` ```sql ` de un `.md` de apuntes. En los dos casos era
+> **más código que el que había suelto**.
+>
+> Barrido obligatorio antes de extraer cualquier proyecto:
+>
+> ```bash
+> COD=Subjects/<Curso>/<COD>
+> grep -rc 'begin{lstlisting}\|begin{verbatim}' $COD --include='*.tex'   # LaTeX
+> grep -rc '^```' $COD --include='*.md'                                  # Markdown
+> find $COD -name '*.zip' -exec unzip -l {} \;                           # entregas comprimidas
+> for f in $(find $COD -name '*.pdf'); do \
+>   pdftotext "$f" - | grep -ciE 'SELECT .*FROM|CREATE TABLE|class |def '; done
+> ```
+>
+> Y comprobar que lo que se extrae **está versionado**: `filter-repo` trabaja sobre el
+> historial, así que un fichero en disco sin commitear no aparecería en el repo nuevo.
 
 Y en `Ismael-Sallami` hay 36 repositorios sin convención de nombres, con tres copias del
 mismo trabajo de IA y siete repos obsoletos que ensucian el perfil.
+
+### Resultado del barrido, aplicado a los cuatro
+
+El aviso de arriba no es teórico: al pasarlo por las cuatro asignaturas **tres de ellas
+tenían más código fuera de la carpeta de código que dentro**.
+
+| Asignatura | Lo que había suelto | Lo que apareció al barrer | Dónde estaba |
+| --- | --- | --- | --- |
+| PDOO | el proyecto Irrgarten | **62 ejercicios** de teoría, Java y Ruby | 5 `.tex` de relaciones y diapositivas |
+| ISE | Ansible, Docker, JMeter | el **`group_vars/all.yml` original**, 5 informes en Markdown y una iteración anterior del playbook | `Resolucion/Capitulos/Ficheros_Ejercicios/` |
+| IG | 20 scripts | **47 bloques** de GDScript y C++ | los `.tex` del temario |
+| FBD | 6 `.sql` | **136 bloques** con el temario entero | `ApuntesFBD.md` |
+
+El caso de ISE es el que más duele: había documentado como «limitación conocida» que
+`group_vars/all.yml` estaba corrupto y que mi versión era una reconstrucción. **El original
+existía**, en una carpeta que no miré, y usa `lookup('file', 'claves/...')` en vez de claves
+escritas. Un barrido de dos minutos habría evitado publicar una limitación falsa.
 
 ---
 
@@ -256,29 +292,154 @@ Los otros cinco son del código entregado y **no se arreglan**: tres cosméticos
 motivo escrito al lado, y se listan en las limitaciones del README. Mismo criterio que en
 `irrgarten`: documentar, no falsear.
 
-### A.3 · `godot-graphics-exercises`
+### A.3 · `godot-graphics-exercises` — **hecho**
 
-**Origen:** `Subjects/Fourth/IG/code`
+**Origen:** `Subjects/Fourth/IG/code` **y `Subjects/Fourth/IG/src/tex`**
 **Asignatura:** IG — Informática Gráfica, 4º
-**Lenguaje:** GDScript (Godot)
+**Lenguaje:** GDScript (Godot 4), más cinco algoritmos en C++
+**Repositorio:** <https://github.com/Ismael-Sallami/godot-graphics-exercises> · release `v1.0`
 
-- [ ] Extraer con el procedimiento general.
-- [ ] Estructura: `src/` con las escenas y scripts, `docs/` con los enunciados.
-- [ ] `.gitignore` de Godot (`.godot/`, `.import/`, `export_presets.cfg`).
-- [ ] README: qué ejercicio resuelve cada escena y la versión exacta de Godot.
-- [ ] Topics: `ugr`, `coursework`, `godot`, `gdscript`, `computer-graphics`.
+> **El dato que cambió la fase.** El código de IG **no estaba en `code/`**. Está dentro del
+> documento LaTeX, en `src/tex/`: cada ejercicio con su enunciado, su desarrollo matemático
+> y su solución en un bloque `lstlisting`. `code/` solo tenía 20 scripts sueltos. En el
+> documento hay **47 bloques más**, que nunca se habían podido parsear, ejecutar ni revisar
+> porque vivían dentro de un `.tex`.
+>
+> Antes de extraer un proyecto, **buscar el código también en los `.tex` de la asignatura**.
 
-### A.4 · `oracle-plsql-lab`
+- [x] Extraer las dos fuentes: `code/EjerciciosTeoria` → `src/problems/` y `src/tex` →
+      `docs/latex/`. Comprobado que no se solapan: la coincidencia entre ambos conjuntos es
+      de líneas sueltas de boilerplate.
+- [x] Escribir `tools/extract-from-latex.py`, que saca los 47 bloques a ficheros reales
+      aprovechando los metadatos de cada `lstlisting`:
 
-**Origen:** `Subjects/Third/FBD` (solo el código, no el material)
+      | Metadato | Para qué sirve |
+      | --- | --- |
+      | `caption=` | Nombre del fichero. `script-del-reloj-analogico.gd` en vez de `solution-7.gd` |
+      | `language=` | Extensión. Cinco bloques son **C++**, no GDScript: los algoritmos de intersección rayo-disco, rayo-esfera y cuádricas |
+
+      Cinco bloques etiquetados `language=Python` son GDScript (`onready`, `export`,
+      `$Node`, `_process`): la etiqueta era para el resaltador, que no tiene modo GDScript.
+      Se escriben como `.gd` y cada uno lo dice en su cabecera.
+- [x] Corregir en el extractor dos artefactos de maquetación: la sangría del `lstlisting`
+      (sin `textwrap.dedent`, GDScript lee el fichero entero como un bloque anidado) y los
+      escapes de LaTeX que se habían colado en el código (`"activar\_brazo"`, `\#`).
+- [x] Cada fichero generado lleva en la cabecera el `.tex` y la sección de origen.
+- [x] `make diff-check` regenera y falla si lo commiteado no coincide, para que las dos
+      mitades no se separen. Es lo que evita que editar el LaTeX y olvidar reextraer deje el
+      repositorio mintiendo.
+- [x] `tools/check.sh` parsea todo con `gdtoolkit` y falla salvo en los ficheros listados en
+      `tools/known-parse-failures.txt`, cada uno con su motivo. Además avisa si una entrada
+      de esa lista se queda obsoleta.
+- [x] README con los 10 apartados, badges, `.gitignore` de Godot, `LICENSE`, `Makefile`,
+      topics y release `v1.0`. CI en verde.
+
+#### Lo que se encontró
+
+| Hallazgo | Detalle |
+| --- | --- |
+| **Seis ficheros no parsean como Godot 4** | Cinco scripts de animación de la sesión 11 usan sintaxis de **Godot 3** (`onready var`, `export var`). Se escribieron antes en el curso y nunca se migraron: un documento no comprueba tipos |
+| **Una indentación perdida** | `session-09/solution.gd` tiene el cuerpo de `_process` en la columna 0. Se perdió **al pegar el código en el `.tex`**, así que el listado del PDF también está mal. Adivinar el anidamiento sería inventar código |
+| **Una `y` suelta** | `funciones_auxiliares_t5.gd` tenía una `y` en la línea 2, una pulsación accidental que impedía parsear 121 líneas de trabajo real. Es el **único carácter** que se ha tocado de lo entregado |
+| **La sesión 5 no tiene bloques de código** | Su trabajo está en los scripts sueltos: `problema_5_1` a `problema_5_5` y `funciones_auxiliares_t5.gd`, que monta una casa con partes reutilizables |
+| **`code/sesion2/` no es trabajo propio** | Son fragmentos de las diapositivas con `...` donde debería ir el código; **5 de 9 ni siquiera parsean**. Material de clase, se queda con los apuntes |
+
+Resultado: **67 ficheros, 2.425 líneas**. 56 de 62 GDScript parsean limpio.
+
+### A.4 · `oracle-sql-exercises` — **hecho**
+
+**Origen:** `Subjects/Third/FBD/Practica/2parte`
 **Asignatura:** FBD — Fundamentos de Bases de Datos, 3º
-**Stack:** Oracle SQL / PL-SQL
+**Stack:** Oracle SQL
+**Repositorio:** <https://github.com/Ismael-Sallami/oracle-sql-exercises> · release `v1.0`
 
-- [ ] Extraer solo los `.sql` y los seminarios; el material de teoría se queda en el blog o
-      va a `apuntes-material` en la [fase 2](fase-2-contenido.md).
-- [ ] Estructura: `src/esquema/`, `src/consultas/`, `src/plsql/`, `docs/seminarios/`.
-- [ ] README: el modelo de datos (diagrama E-R en `assets/`) y cómo levantar el entorno.
-- [ ] Topics: `ugr`, `coursework`, `sql`, `plsql`, `oracle`, `databases`.
+> **Se llamaba `oracle-plsql-lab` en el plan. No hay PL/SQL.** Ni un procedimiento, ni una
+> función, ni un trigger, ni un bloque `DECLARE/BEGIN`:
+>
+> ```bash
+> grep -rilE 'CREATE (OR REPLACE )?(PROCEDURE|FUNCTION|TRIGGER|PACKAGE)|^\s*DECLARE\b' .
+> # sin resultados
+> ```
+>
+> La asignatura cubrió DDL, DML, consultas, catálogo e índices. Mantener el nombre habría
+> prometido en la portada una destreza que el repositorio no contiene. Renombrado a
+> **`oracle-sql-exercises`**.
+
+- [x] Comprobar primero si el código estaba en los `.tex`, como en IG. **Aquí no**: los dos
+      únicos `lstlisting` de FBD son uno comentado y otro con una `i` suelta.
+- [x] Extraer los `.sql` y renombrarlos a una tubería legible: `01-schema`, `02-seed`,
+      `03-queries`.
+- [x] Separar `src/workbook/` (capítulos 1 y 2). Crea `Equipos` con `codE VARCHAR2(3)`
+      frente al `VARCHAR(5)` del esquema entregado: son **dos iteraciones que no pueden
+      convivir** en la misma base de datos, y ejecutarlas juntas fallaría.
+- [x] README con los 10 apartados, badges, `Makefile`, `LICENSE`, `.gitignore`, topics y
+      release `v1.0`.
+
+#### El CI ejecuta el SQL, no solo lo lee
+
+Dos jobs. El primero pasa `sqlfluff parse --dialect oracle`. El segundo levanta un Oracle de
+verdad con `gvenzl/oracle-free:slim` como *service container*, crea el esquema, carga los
+datos y ejecuta las 20 consultas con `python-oracledb` en modo thin (sin cliente Oracle).
+
+Salida real de la ejecución que dejó el badge en verde:
+
+```
+src/01-schema.sql: 4 statements
+src/02-seed.sql: 45 statements
+  Equipos        4 rows     Encuentros    10 rows
+  Jugadores     20 rows     Faltas        11 rows
+20 queries, all executed
+```
+
+Por qué importa: `sqlfluff` acepta una consulta contra una columna que no existe. Parsear
+demuestra que el texto está bien formado, no que la base de datos funcione.
+
+#### Lo que casi se queda fuera
+
+La primera versión del repositorio llevaba solo los 6 `.sql`: **588 líneas**. Descarté
+`ApuntesFBD.md` con el argumento de que sus bloques tienen mediana de 3 líneas y extraerlos
+daría un montón de ficheros diminutos.
+
+El argumento estaba mal planteado. El problema no era extraer, era **la unidad de
+extracción**: por bloque son 136 fragmentos, pero **por capítulo son 5 ficheros** que se
+leen como un cuaderno de ejercicios. Y ahí está el temario entero de la asignatura, de
+`CREATE TABLE` a `GRANT`, que en Markdown no se podía parsear ni ejecutar.
+
+`tools/extract-from-notes.py` los saca conservando el encabezado y el número de ejercicio de
+cada bloque:
+
+| Fichero | Bloques | Tema |
+| --- | --- | --- |
+| `chapter-1-schema-definition.sql` | 1 | `CREATE TABLE`, tipos de datos |
+| `chapter-2-data-maintenance.sql` | 15 | `INSERT`, `UPDATE`, `DELETE`, fechas |
+| `chapter-3-queries.sql` | 109 | joins, agregación, subconsultas, operadores de conjunto |
+| `chapter-4-views.sql` | 7 | nivel externo: vistas |
+| `chapter-5-catalogue-and-privileges.sql` | 4 | catálogo, `GRANT` y `REVOKE` |
+
+Siete bloques documentan la sintaxis en vez de ejecutarse
+(`UPDATE t SET a = v [WHERE <cond>];`) y se escriben comentados, para que el capítulo siga
+parseando. `make diff-check` regenera y falla si los capítulos dejan de coincidir con los
+apuntes.
+
+**De 588 líneas a 920 sentencias en 11 ficheros.**
+
+#### Barrido completo del resto de FBD
+
+Para asegurar que no queda SQL fuera:
+
+| Dónde | Resultado |
+| --- | --- |
+| Los 6 `.sql` del árbol | Todos versionados, todos incluidos |
+| `Entregables_FBD_parte2.zip` | Mismos 3 ficheros; solo difieren en comentarios, y la versión del árbol es la más completa |
+| 11 `.tex` propios | Sin SQL, salvo `Practica1-Oracle.tex`: un bloque comentado y otro con una `i` suelta |
+| `seminario1.tex` (782 líneas) | Diseño conceptual y ER, sin SQL |
+| `Teoria/Relacion1-3.tex` | Solo portada e `includegraphics` |
+| PDF de relaciones, seminarios y temarios | `pdftotext` + búsqueda de `SELECT/CREATE/INSERT`: **0 coincidencias** |
+| `S4_FBD.md`, `RelacionT4_FBD.md` | Álgebra relacional y nivel interno; sin SQL |
+| `Simulacro2` | Test de opción múltiple, contenido del blog |
+
+Los apuntes se quedan **también** en el blog: la web enlaza su PDF y ese enlace no cambia.
+El repositorio lleva el `.md` en `notes/` porque es la fuente de la que genera los capítulos.
 
 ---
 
