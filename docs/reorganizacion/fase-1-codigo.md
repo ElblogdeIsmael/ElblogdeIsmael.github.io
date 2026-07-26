@@ -42,13 +42,24 @@ inservibles.
 | `Subjects/Fourth/IG/code` **y `src/tex`** | GDScript / Godot, dentro del LaTeX | no se enlaza |
 | `Subjects/Third/FBD` | SQL / PL-SQL | no se enlaza |
 
-> **Aviso, aprendido en IG:** el código de una asignatura no está siempre en una carpeta de
-> código. En Informática Gráfica los ejercicios viven dentro de los `.tex`, en bloques
-> `lstlisting`. Antes de extraer, **buscar también ahí**:
+> **Aviso, aprendido en IG y confirmado en FBD:** el código de una asignatura casi nunca
+> está solo en una carpeta de código. En IG los ejercicios viven en bloques `lstlisting` de
+> los `.tex`; en FBD, en bloques ` ```sql ` de un `.md` de apuntes. En los dos casos era
+> **más código que el que había suelto**.
+>
+> Barrido obligatorio antes de extraer cualquier proyecto:
 >
 > ```bash
-> grep -rc 'begin{lstlisting}' Subjects/<Curso>/<COD>/src/tex/
+> COD=Subjects/<Curso>/<COD>
+> grep -rc 'begin{lstlisting}\|begin{verbatim}' $COD --include='*.tex'   # LaTeX
+> grep -rc '^```' $COD --include='*.md'                                  # Markdown
+> find $COD -name '*.zip' -exec unzip -l {} \;                           # entregas comprimidas
+> for f in $(find $COD -name '*.pdf'); do \
+>   pdftotext "$f" - | grep -ciE 'SELECT .*FROM|CREATE TABLE|class |def '; done
 > ```
+>
+> Y comprobar que lo que se extrae **está versionado**: `filter-repo` trabaja sobre el
+> historial, así que un fichero en disco sin commitear no aparecería en el repo nuevo.
 
 Y en `Ismael-Sallami` hay 36 repositorios sin convención de nombres, con tres copias del
 mismo trabajo de IA y siete repos obsoletos que ensucian el perfil.
@@ -366,14 +377,52 @@ src/02-seed.sql: 45 statements
 Por qué importa: `sqlfluff` acepta una consulta contra una columna que no existe. Parsear
 demuestra que el texto está bien formado, no que la base de datos funcione.
 
-#### Qué se quedó en el blog
+#### Lo que casi se queda fuera
 
-`ApuntesFBD.md` tiene **163 bloques de SQL**, pero con **mediana de 3 líneas**: 125 de ellos
-son de 5 líneas o menos. Son ejemplos dentro de unos apuntes, no una base de código.
-Extraerlos habría producido 163 ficheros diminutos de ruido. Se quedan donde están, y la web
-ya enlaza su PDF.
+La primera versión del repositorio llevaba solo los 6 `.sql`: **588 líneas**. Descarté
+`ApuntesFBD.md` con el argumento de que sus bloques tienen mediana de 3 líneas y extraerlos
+daría un montón de ficheros diminutos.
 
-Igual el `Simulacro2`: es un test de opción múltiple, contenido del blog.
+El argumento estaba mal planteado. El problema no era extraer, era **la unidad de
+extracción**: por bloque son 136 fragmentos, pero **por capítulo son 5 ficheros** que se
+leen como un cuaderno de ejercicios. Y ahí está el temario entero de la asignatura, de
+`CREATE TABLE` a `GRANT`, que en Markdown no se podía parsear ni ejecutar.
+
+`tools/extract-from-notes.py` los saca conservando el encabezado y el número de ejercicio de
+cada bloque:
+
+| Fichero | Bloques | Tema |
+| --- | --- | --- |
+| `chapter-1-schema-definition.sql` | 1 | `CREATE TABLE`, tipos de datos |
+| `chapter-2-data-maintenance.sql` | 15 | `INSERT`, `UPDATE`, `DELETE`, fechas |
+| `chapter-3-queries.sql` | 109 | joins, agregación, subconsultas, operadores de conjunto |
+| `chapter-4-views.sql` | 7 | nivel externo: vistas |
+| `chapter-5-catalogue-and-privileges.sql` | 4 | catálogo, `GRANT` y `REVOKE` |
+
+Siete bloques documentan la sintaxis en vez de ejecutarse
+(`UPDATE t SET a = v [WHERE <cond>];`) y se escriben comentados, para que el capítulo siga
+parseando. `make diff-check` regenera y falla si los capítulos dejan de coincidir con los
+apuntes.
+
+**De 588 líneas a 920 sentencias en 11 ficheros.**
+
+#### Barrido completo del resto de FBD
+
+Para asegurar que no queda SQL fuera:
+
+| Dónde | Resultado |
+| --- | --- |
+| Los 6 `.sql` del árbol | Todos versionados, todos incluidos |
+| `Entregables_FBD_parte2.zip` | Mismos 3 ficheros; solo difieren en comentarios, y la versión del árbol es la más completa |
+| 11 `.tex` propios | Sin SQL, salvo `Practica1-Oracle.tex`: un bloque comentado y otro con una `i` suelta |
+| `seminario1.tex` (782 líneas) | Diseño conceptual y ER, sin SQL |
+| `Teoria/Relacion1-3.tex` | Solo portada e `includegraphics` |
+| PDF de relaciones, seminarios y temarios | `pdftotext` + búsqueda de `SELECT/CREATE/INSERT`: **0 coincidencias** |
+| `S4_FBD.md`, `RelacionT4_FBD.md` | Álgebra relacional y nivel interno; sin SQL |
+| `Simulacro2` | Test de opción múltiple, contenido del blog |
+
+Los apuntes se quedan **también** en el blog: la web enlaza su PDF y ese enlace no cambia.
+El repositorio lleva el `.md` en `notes/` porque es la fuente de la que genera los capítulos.
 
 ---
 
