@@ -112,6 +112,10 @@ gh repo create Ismael-Sallami/<nombre> --public \
 - [x] Purgar del historial los zip, los `.class` y la documentación generada
       (`git filter-repo --invert-paths --path-glob`). El clon pasó de 13 MB a **540 KB**.
 - [x] README con los 10 apartados, en inglés simple.
+- [x] Fila de badges: `java 17`, `ruby 3.2`, estado del CI y `license MIT`.
+- [x] `.github/workflows/ci.yml`: compila Java, ejecuta las comprobaciones de la práctica 1
+      y parsea los 19 fuentes Ruby. Ambos jobs en verde. El badge dice **`build`**, no
+      `tests`, porque las comprobaciones imprimen valores sin verificarlos.
 - [x] Build: `Makefile` con `build-java`, `run-java`, `test-java`, `run-ruby`, `docs-java`,
       `clean`. Verificado desde un clon limpio.
 - [x] Topics: `ugr`, `coursework`, `java`, `ruby`, `oop`, `game`.
