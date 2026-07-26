@@ -10,69 +10,72 @@ repo público mal explicado resta aunque no esté destacado en el perfil.
 Diez apartados, en este orden. El README es el producto: alguien tiene que entender qué
 hiciste y por qué sin abrir un solo fichero de código.
 
+**Se escribe en inglés simple**: frases cortas, vocabulario común, voz activa. Son
+repositorios de portfolio y los va a leer gente que no habla español. Por eso la plantilla
+de abajo está en inglés aunque este documento esté en español.
+
 ### Plantilla
 
 ```markdown
-# <nombre-del-proyecto>
+# <project-name>
 
-<Una frase de qué hace. Sin jerga, sin adjetivos de relleno.>
+<One sentence on what it does. No jargon, no filler adjectives.>
 
-## Contexto
+## Context
 
-Práctica de **<Asignatura>**, <N>º curso del Doble Grado en Ingeniería Informática y
-Administración y Dirección de Empresas, Universidad de Granada (<curso académico>).
-Trabajo <individual | en pareja con …>.
+Coursework for **<Subject>**, year <N> of the double degree in Computer Science and
+Business Administration, University of Granada (<academic year>).
+<Solo work | Joint work with …>.
 
-## El problema
+## The problem
 
-<Qué pedía el enunciado, en 3–5 líneas. Qué restricciones había.>
+<What the assignment asked for, in 3–5 lines. What the constraints were.>
 
-## La solución
+## The solution
 
-<El enfoque. Las decisiones de diseño que tomaste y por qué esa y no otra. Si hay un
-algoritmo o una estructura de datos que carga con el peso, se nombra aquí. Es la parte
-que se lee en una entrevista.>
+<Your approach. The design decisions you made and why that one and not another. If an
+algorithm or a data structure does the heavy lifting, name it here. This is the part
+people read in an interview.>
 
-## Estructura
+## Layout
 
 ​```
-src/          <qué hay aquí>
-docs/         <qué hay aquí>
-tests/        <qué hay aquí>
+src/          <what lives here>
+docs/         <what lives here>
+tests/        <what lives here>
 ​```
 
-## Requisitos
+## Requirements
 
-- <Compilador o runtime, con versión exacta>
-- <Librerías, con versión>
+- <Compiler or runtime, exact version>
+- <Libraries, with versions>
 
-## Compilar y ejecutar
+## Build and run
 
 ​```bash
-<comandos copiables que funcionen tal cual desde un clon limpio>
+<commands that work as written, from a fresh clone>
 ​```
 
-## Resultados
+## Results
 
-<Capturas, diagrama, tabla de tiempos o salida de ejemplo. Lo que aplique al proyecto.>
+<Screenshots, a diagram, a timing table or sample output. Whatever fits the project.>
 
-## Aprendizajes
+## What I learned
 
-- <Punto honesto>
-- <Punto honesto, incluida alguna limitación de lo que hiciste>
+- <An honest point>
+- <An honest point, including a limitation of what you built>
 
-## Autoría y licencia
+## Author and licence
 
-Ismael Sallami Moreno. Publicado bajo licencia MIT (ver `LICENSE`).
+Ismael Sallami Moreno. Released under the MIT licence (see `LICENSE`).
 ```
 
 ### Reglas del README
 
-- **Los comandos de «Compilar y ejecutar» funcionan desde un clon limpio.** Se comprueba
-  clonando en una carpeta vacía y siguiendo el README a ciegas. Si no compila, el README
-  está mal.
-- **«La solución» no es un resumen del enunciado.** Es lo que decidiste tú.
-- **«Aprendizajes» incluye al menos una limitación.** Un README que solo se felicita no lo
+- **Los comandos de «Build and run» funcionan desde un clon limpio.** Se comprueba clonando
+  en una carpeta vacía y siguiendo el README a ciegas. Si no compila, el README está mal.
+- **«The solution» no es un resumen del enunciado.** Es lo que decidiste tú.
+- **«What I learned» incluye al menos una limitación.** Un README que solo se felicita no lo
   lee nadie dos veces.
 - Nada de badges decorativos que no informen.
 
@@ -167,7 +170,7 @@ Inglés, kebab-case, describe qué es. Ver
 
 Se copia en la PR o en la issue de cada repo durante la fase 1.
 
-- [ ] README con los 10 apartados
+- [ ] README con los 10 apartados, en inglés simple
 - [ ] Los comandos del README funcionan desde un clon limpio en una carpeta vacía
 - [ ] `LICENSE` MIT
 - [ ] `.gitignore` del lenguaje, sin restos
@@ -175,7 +178,7 @@ Se copia en la PR o en la issue de cada repo durante la fase 1.
 - [ ] Build en un comando
 - [ ] Descripción rellena en GitHub
 - [ ] Topics: `ugr`, `coursework`, lenguaje, dominio
-- [ ] Capturas o diagrama en `assets/` y enlazados en «Resultados»
+- [ ] Capturas o diagrama en `assets/` y enlazados en «Results»
 - [ ] Release `v1.0`
 - [ ] Sin credenciales, claves ni datos personales de compañeros
 
