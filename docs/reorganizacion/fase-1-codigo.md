@@ -72,47 +72,67 @@ gh repo create Ismael-Sallami/<nombre> --public \
 
 `--path-rename 'a/b/':''` mueve el contenido de esa carpeta a la raíz del repo nuevo.
 
-### A.1 · `irrgarten`
+### A.1 · `irrgarten` — **hecho**
 
 **Origen:** `Subjects/Third/PDOO/Practica/Proyecto_Irrgarten`
 **Asignatura:** PDOO — Programación y Diseño Orientado a Objetos, 3º
 **Lenguajes:** Java y Ruby
+**Repositorio:** <https://github.com/Ismael-Sallami/irrgarten> · release `v1.0`
 
-- [ ] Extraer con el procedimiento general.
-- [ ] **Aplanar.** Hoy hay siete niveles hasta el código:
+- [x] Extraer con el procedimiento general.
+- [x] **Aplanar.** Había siete niveles hasta el código:
 
   ```
   Proyecto_Irrgarten/Proyecto_Irrgarten/SUBIR_A_PRADO_2_PARCIAL_PDOO/
     VARIOS_DISEÑOS/PROYECTO_SUPER_PLAYER/SolucionParcialPracticas2/P5-java/
   ```
 
-  Destino:
+  Resultado:
 
   ```
-  src/java/            versión final Java
-  src/ruby/            versión final Ruby
-  docs/variantes/      los diseños alternativos de VARIOS_DISEÑOS/
-  docs/enunciado/      guiones de prácticas
+  src/java/irrgarten/   versión Java (juego completo)
+  src/ruby/irrgarten/   versión Ruby
+  docs/diagramas/       diagramas de clases de la práctica 4
+  docs/entregas/        P1 a P4 tal como se entregaron
+  docs/variantes/       los builds alternativos de VARIOS_DISEÑOS/
   ```
 
-- [ ] Borrar los `doc/` de Javadoc y RDoc generados (~300 `.html`). Se regeneran:
+- [x] Borrar lo generado: Javadoc y RDoc (~300 `.html`), `build/`, `dist/`, `nbproject/`,
+      `.yardoc/`, `.vscode/` y los zip duplicados. El `Makefile` documenta cómo regenerar
+      la documentación (`make docs-java`).
+- [x] README con los 10 apartados, en inglés simple.
+- [x] Build: `Makefile` con `build-java`, `run-java`, `test-java`, `run-ruby`, `docs-java`,
+      `clean`. Verificado desde un clon limpio.
+- [x] Topics: `ugr`, `coursework`, `java`, `ruby`, `oop`, `game`.
+- [x] Release `v1.0`, con los dos PDF de diagramas adjuntos.
+- [ ] **Capturas de la partida.** Pendiente: requiere lanzar la interfaz Swing. Mientras
+      tanto, «Results» usa la salida real del tablero en terminal y enlaza los diagramas.
+- [x] Checklist de [ESTANDAR-REPOS.md §7](ESTANDAR-REPOS.md#7-lista-de-verificación-por-repo).
 
-  ```bash
-  find . -type d -name doc -path '*P5-*' -exec rm -rf {} +
-  ```
+#### Lo que se encontró al revisar el código para el README
 
-  Añadir al README cómo regenerarlos (`javadoc`, `rdoc`).
-- [ ] README con los 10 apartados. En «The solution», explicar el diseño de clases del
-      laberinto (jugador, monstruo, laberinto, combate) y por qué se hizo la versión Ruby.
-      En «What I learned», el contraste entre el mismo diseño en un lenguaje de tipado
-      estático y en uno dinámico: es lo que hace interesante esta práctica.
-- [ ] Explicar en el README qué son las variantes de `docs/variantes/` y en qué se
-      diferencian.
-- [ ] Build: `Makefile` con `make build-java`, `make run-java`, `make run-ruby`.
-- [ ] Capturas de la partida en `assets/`.
-- [ ] Topics: `ugr`, `coursework`, `java`, `ruby`, `oop`, `game`.
-- [ ] Release `v1.0`.
-- [ ] Checklist de [ESTANDAR-REPOS.md §7](ESTANDAR-REPOS.md#7-lista-de-verificación-por-repo).
+Cuatro cosas que el README documenta como limitaciones conocidas, porque son reales:
+
+| Hallazgo | Detalle |
+| --- | --- |
+| `TextUI` no implementa `UI` | `Controller` recibe un `UI`, así que la interfaz de texto no se le puede pasar. Por eso `Main.java` fija `GraphicUI` y deja `TextUI` comentado. La abstracción está declarada pero no honrada |
+| `TestP2.java` comentado entero | No llega a compilar en una clase. Su equivalente Ruby, `test_p2.rb`, sí existe |
+| `test_p1.rb` falla | Llama a `gamestate1.getlabyrinth()`, nombre al estilo Java que quedó del port; `GameState` expone `attr_reader :labyrinth`. El juego en sí funciona |
+| `GameCharacter` es un `enum` | Vale `PLAYER` o `MONSTER`. El nombre sugiere una clase base y no lo es. La jerarquía real es `LabyrinthCharacter → {Monster, Player → FuzzyPlayer}` |
+
+Las variantes de `docs/variantes/` no son diseños alternativos, son **builds para preparar
+el parcial**: dos combinaciones de versión de Java, un esbozo de movimientos predefinidos y
+un jugador con estadísticas altas. El README lo dice así.
+
+#### Nota sobre el push
+
+El push por SSH autentica como `ElblogdeIsmael`, que no tiene escritura en la cuenta
+`Ismael-Sallami`. Hay que empujar por HTTPS con el token de `gh`:
+
+```bash
+git remote set-url origin https://github.com/Ismael-Sallami/<repo>.git
+git -c credential.helper='!gh auth git-credential' push -u origin main
+```
 
 ### A.2 · `ansible-infra-lab`
 

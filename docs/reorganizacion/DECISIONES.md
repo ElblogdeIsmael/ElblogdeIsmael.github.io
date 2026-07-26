@@ -189,6 +189,9 @@ la fase 0.**
 | --- | --- | --- | --- |
 | 2026-07-26 | 0 | Añadir `id_rsa_*` y `**/claves/` al `.gitignore` | La regla `id_rsa` es un nombre exacto y no cubría `id_rsa_admin`. Las 24 claves quedaban como no rastreadas tras el `git rm --cached`, así que un `git add -A` las habría vuelto a subir |
 | 2026-07-26 | 0 | Generar `.rutas-a-purgar.txt` con `core.quotePath=false` | Sin esa opción git escapa los acentos de `Prácticas` en octal y entrecomilla la ruta, y `git filter-repo --paths-from-file` no la reconocería |
+| 2026-07-26 | 1 | Empujar a `Ismael-Sallami` por HTTPS con el token de `gh`, no por SSH | La clave SSH autentica como `ElblogdeIsmael`, que no tiene escritura en esa cuenta. `git -c credential.helper='!gh auth git-credential' push` usa el token correcto |
+| 2026-07-26 | 1 | En `irrgarten`, conservar `docs/entregas/` con los zip de P1–P4 | Son las entregas incrementales de la asignatura: documentan cómo creció el diseño. 8,6 MB, no lastran el repo |
+| 2026-07-26 | 1 | Documentar los defectos del código en el README en vez de arreglarlos | Es un repositorio de un trabajo entregado. Arreglarlo ahora falsearía lo que se entregó; un apartado de limitaciones honesto vale más en una entrevista |
 
 ### Pendiente de decidir
 
