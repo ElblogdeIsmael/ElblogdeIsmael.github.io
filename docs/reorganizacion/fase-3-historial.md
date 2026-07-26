@@ -13,14 +13,12 @@ privadas y el material de terceros, que hoy siguen en el historial aunque ya no 
 
 ## Precondiciones
 
-Estas cuatro, sin excepción:
+Estas tres, sin excepción:
 
 - [ ] [Fase 1](fase-1-codigo.md) cerrada y **verificada**: los repos nuevos compilan desde un
       clon limpio. Lo que se purgue aquí ya no se recupera fácilmente.
 - [ ] [Fase 2](fase-2-contenido.md) cerrada: el material ya está en `apuntes-material`.
 - [ ] `.rutas-a-purgar.txt` completo, con lo anotado en las fases 0 y 2.
-- [ ] **Decidido cuál de las dos copias locales sobrevive**
-      ([regla 7](REGLAS.md#7-las-dos-copias-locales-se-sincronizan-o-se-elimina-una)).
 
 ---
 
@@ -34,8 +32,9 @@ Un `git rm` quita el fichero del árbol pero **lo deja en el historial**. Consec
 `git filter-repo` reescribe todos los commits eliminando esas rutas como si nunca hubieran
 existido. Es la única herramienta que resuelve las dos cosas.
 
-**Coste:** cambian todos los hashes de commit. Eso obliga a `push --force` y a re-clonar en
-todas las copias locales.
+**Coste:** cambian todos los hashes de commit. Eso obliga a `push --force`. Solo hay un clon
+local ([regla 7](REGLAS.md#7-hay-un-solo-clon-con-dos-rutas)), así que basta con dejarlo
+alineado con el remoto reescrito.
 
 ---
 
@@ -159,19 +158,27 @@ todas las copias locales.
   git push --force origin --tags
   ```
 
-### 5 · Sincronizar las copias
+### 5 · Alinear el clon local
 
-- [ ] Borrar la copia local que no sobreviva y re-clonar si hace falta:
+Solo hay un clon, accesible por dos rutas
+([regla 7](REGLAS.md#7-hay-un-solo-clon-con-dos-rutas)). No hay nada que sincronizar entre
+copias, pero el clon actual conserva los objetos del historial viejo hasta que se limpien.
+
+- [ ] Recoger el historial reescrito y podar lo viejo:
 
   ```bash
-  rm -rf /home/ismael-sallami/Escritorio/GitHub/ElblogdeIsmael.github.io   # o la otra
+  cd /home/ismael-sallami/workspace_ssd/GitHub/ElblogdeIsmael.github.io
+  git fetch --all --prune
+  git reflog expire --expire=now --all
+  git gc --prune=now --aggressive
+  du -sh .git
   ```
 
-- [ ] Re-clonar del remoto ya limpio y comprobar el tamaño:
+- [ ] Si el tamaño no baja, es más rápido re-clonar desde cero. **Nunca por la ruta del
+      Escritorio**: es un symlink y borraría el original.
 
   ```bash
-  git clone git@github.com:ElblogdeIsmael/ElblogdeIsmael.github.io.git
-  du -sh ElblogdeIsmael.github.io/.git
+  realpath ~/Escritorio/GitHub/ElblogdeIsmael.github.io   # confirma que es el mismo sitio
   ```
 
 ### 6 · Verificar la publicación

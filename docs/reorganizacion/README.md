@@ -17,7 +17,7 @@ prácticas. Medido el 26 de julio de 2026:
 | --- | --- |
 | Tamaño en GitHub | **1,38 GB** (`size: 1415669 KB`) |
 | `.git` local / copia de trabajo | 1,4 GB / 3,3 GB |
-| Copias locales del repo | **2** (`workspace_ssd/` y `Escritorio/`), 6,6 GB en total |
+| Clon local | 1, en `workspace_ssd/`. `Escritorio/GitHub` es un symlink al mismo sitio |
 | Ficheros versionados bajo `Subjects/` | 2.798 |
 | De esos, enlazados por el sitio | **137 (4,9 %)** |
 | Peso versionado bajo `Subjects/` | ~1,63 GB |
