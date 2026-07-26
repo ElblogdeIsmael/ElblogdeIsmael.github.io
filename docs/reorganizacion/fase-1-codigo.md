@@ -120,8 +120,6 @@ gh repo create Ismael-Sallami/<nombre> --public \
       `clean`. Verificado desde un clon limpio.
 - [x] Topics: `ugr`, `coursework`, `java`, `ruby`, `oop`, `game`.
 - [x] Release `v1.0`, con los dos PDF de diagramas adjuntos.
-- [ ] **Capturas de la partida.** Pendiente: requiere lanzar la interfaz Swing. Mientras
-      tanto, «Results» usa la salida real del tablero en terminal y enlaza los diagramas.
 - [x] Checklist de [ESTANDAR-REPOS.md §7](ESTANDAR-REPOS.md#7-lista-de-verificación-por-repo).
 
 #### Lo que se encontró al revisar el código para el README
@@ -190,42 +188,73 @@ ssh -T -o IdentitiesOnly=yes -i ~/.ssh/id_github_ismael_sallami git@github.com
    git clone git@github.com:Ismael-Sallami/<repo>.git /tmp/verif && cd /tmp/verif && make
    ```
 
-### A.2 · `ansible-infra-lab`
+### A.2 · `ansible-infra-lab` — **hecho**
 
 **Origen:** `Subjects/Third/ISE/Prácticas`
 **Asignatura:** ISE — Infraestructura de Sistemas Empresariales, 3º
-**Stack:** Ansible, Docker, JMeter, Nginx
+**Stack:** Ansible, Docker Compose, Prometheus, Grafana, JMeter
+**Repositorio:** <https://github.com/Ismael-Sallami/ansible-infra-lab> · release `v1.0`
 
-- [ ] Extraer con el procedimiento general.
-- [ ] **Verificar que no entra ninguna clave** (debe dar `0`):
+- [x] Extraer con el procedimiento general y **purgar las claves del historial** antes de
+      nada. La fase 0 las sacó del índice, pero seguían en el historial y `filter-repo` las
+      arrastra al repositorio nuevo:
 
-  ```bash
-  git log --all --diff-filter=A --name-only --pretty=format: | grep -c 'id_rsa' || echo 0
-  ```
+      ```bash
+      git filter-repo --force --invert-paths \
+        --path-glob '*id_rsa*' --path-glob '*/claves/*' \
+        --path-glob '*prometheus_data/*' --path-glob '*grafana_data/*' \
+        --path-glob '*dashboard_html/*' --path-glob '*bower_components/*' \
+        --path-glob '*node_modules/*' --path-glob '*.log'
+      ```
 
-  Si aparecen, purgarlas aquí con `git filter-repo --invert-paths --path-glob '*id_rsa*'`
-  antes de crear el repo. **No se sube nada hasta que esto dé cero.**
-- [ ] Añadir `generar-claves.sh`:
+      Comprobado: `git log --all --name-only | grep -c id_rsa` → **0**.
+- [x] `scripts/generate-keys.sh` y `keys/` en `.gitignore`. Verificado desde un clon: el
+      script crea las tres parejas y `git status` no ve nada.
+- [x] Aplanar a `src/ansible/{users,webservers}`, `src/monitoring`, `src/load-testing`.
+- [x] **Dejar fuera el material del profesorado.** De 62 MB a **224 KB**.
+- [x] README con los 10 apartados, badges y `ci.yml` con tres jobs, todos en verde.
+- [x] Topics: `ugr`, `coursework`, `ansible`, `docker`, `devops`, `prometheus`, `grafana`,
+      `jmeter`.
+- [x] Release `v1.0`.
 
-  ```bash
-  #!/usr/bin/env bash
-  # Genera las claves del laboratorio. No se versionan (ver .gitignore).
-  set -euo pipefail
-  mkdir -p claves
-  for user in admin juan maria; do
-    ssh-keygen -t ed25519 -N '' -C "$user@lab" -f "claves/id_$user"
-  done
-  ```
+#### Qué se quedó fuera, y por qué
 
-- [ ] `.gitignore` con `claves/`.
-- [ ] Aplanar `Entrega_Practicas/` y `Resolucion/` → `src/ansible/`, `src/docker/`,
-      `src/jmeter/`, `docs/`.
-- [ ] Quitar el dashboard de JMeter generado
-      (`resultados_carga/dashboard_html/…/bower_components/`): son dependencias de terceros
-      volcadas, cientos de ficheros.
-- [ ] README: en «The solution», el aprovisionamiento con Ansible y qué mide la prueba de
-      carga. En «Requirements», versiones exactas de Ansible y Docker.
-- [ ] Topics: `ugr`, `coursework`, `ansible`, `docker`, `devops`, `jmeter`.
+| Descartado | Motivo |
+| --- | --- |
+| `Jmeter/…/nodejs/` y `mongodb/` | La API que se somete a carga **la proporciona la asignatura**. Su propio README dice que «su desarrollo queda fuera del ámbito de esta asignatura». No es material propio y además trae credenciales escritas en `config.json` |
+| `Guiones/*.pdf`, `Guia24-25.pdf` | Enunciados del profesorado. Mismo criterio que los libros y los wuolah de la fase 2 |
+| `prometheus_data/`, `grafana_data/` | 21 MB de bases de datos de runtime de los contenedores |
+| `dashboard_html/…/bower_components/` | Dashboard de JMeter generado, con dependencias de terceros volcadas |
+| `Resolucion/` | Es la memoria en LaTeX: **apuntes**, no código. Se queda en el blog y se migra en la [fase 4](fase-4-plantillas.md) |
+
+#### Dos defectos encontrados en el código entregado
+
+1. **`group_vars/all.yml` estaba sobrescrito con apuntes de otra asignatura.** En vez de las
+   variables del playbook contenía preguntas tipo test sobre casos de uso y diagramas de
+   clases, de FIS. El playbook referencia `admin_user`, `ssh_pub_key_admin` y
+   `usuarios_extra`, así que tal cual **no podía ejecutarse**.
+
+   Comprobado en el historial del blog: ya estaba así en la subida inicial, no hay original
+   que recuperar. Se reconstruye a partir del uso que hace el playbook, con claves de
+   ejemplo, y el fichero lo dice en su cabecera.
+
+2. **Credenciales de la API escritas en el plan de JMeter.** `ETSII_API.jmx` llevaba el
+   usuario y la contraseña de HTTP Basic en el gestor de autorización. Pasan a
+   `${__P(api.user,)}` y `${__P(api.password,)}`.
+
+Son los **dos únicos cambios** sobre lo entregado, y el README los declara.
+
+#### Sobre `ansible-lint`
+
+Falla con 7 avisos. Dos eran una **dependencia que faltaba de verdad**: `authorized_key` y
+`firewalld` no están en `ansible-core`, viven en la colección `ansible.posix`. Se añade
+`requirements.yml` y el CI la instala.
+
+Los otros cinco son del código entregado y **no se arreglan**: tres cosméticos (`fqcn`,
+`yaml[truthy]`, `yaml[empty-lines]`) y tres reales — `ignore-errors`,
+`risky-file-permissions` y `name[template]`. Se saltan en `.ansible-lint`, cada uno con su
+motivo escrito al lado, y se listan en las limitaciones del README. Mismo criterio que en
+`irrgarten`: documentar, no falsear.
 
 ### A.3 · `godot-graphics-exercises`
 
@@ -237,8 +266,6 @@ ssh -T -o IdentitiesOnly=yes -i ~/.ssh/id_github_ismael_sallami git@github.com
 - [ ] Estructura: `src/` con las escenas y scripts, `docs/` con los enunciados.
 - [ ] `.gitignore` de Godot (`.godot/`, `.import/`, `export_presets.cfg`).
 - [ ] README: qué ejercicio resuelve cada escena y la versión exacta de Godot.
-- [ ] Capturas de cada ejercicio en `assets/` — es un repo gráfico, las capturas son el
-      contenido.
 - [ ] Topics: `ugr`, `coursework`, `godot`, `gdscript`, `computer-graphics`.
 
 ### A.4 · `oracle-plsql-lab`
@@ -351,7 +378,7 @@ borra nada.
 - [ ] Fijar 6 repositorios en el perfil (Settings → Pinned repositories). Propuesta:
       `irrgarten`, `ansible-infra-lab`, `metaheuristics`, `rescue-agents`,
       `algorithms-and-patterns`, `personal-finance-manager`.
-- [ ] Revisar que los 6 tengan capturas o diagrama: son los que se abren primero.
+- [ ] Revisar que los 6 tengan el README al día: son los que se abren primero.
 
 ---
 

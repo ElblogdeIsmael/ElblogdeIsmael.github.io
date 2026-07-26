@@ -31,7 +31,7 @@ buscables y no cuestan nada en la lectura del nombre.
 
 **Fecha:** 2026-07-26 · **Estado:** adoptada
 
-Se propuso dividir en «Tier A — portfolio» (README completo, capturas, release) y
+Se propuso dividir en «Tier A — portfolio» (README completo, release) y
 «Tier B — archivo» (README mínimo). Se descarta: si un repo está público, alguien puede
 abrirlo, y un repo mal explicado resta aunque no esté fijado en el perfil.
 
@@ -194,6 +194,10 @@ la fase 0.**
 | 2026-07-26 | 1 | Nombres de carpeta y texto de release en inglés | Es lo que ve quien abre el repositorio, igual que el README |
 | 2026-07-26 | 1 | Fila de badges y `ci.yml` obligatorios en todos los repos | Un badge de estado sin CI detrás sería falso, así que el badge obliga al workflow. De paso garantiza que el repositorio sigue compilando dentro de dos años |
 | 2026-07-26 | 1 | En `irrgarten` el badge dice `build`, no `tests` | El workflow compila y ejecuta unas comprobaciones que imprimen valores sin verificarlos. `tests passing` sería mentira en la portada |
+| 2026-07-26 | 1 | No republicar el material del profesorado en `ansible-infra-lab` | La API de Node y MongoDB que se somete a carga la proporciona la asignatura y su propio README declara que su desarrollo queda fuera del ámbito. Mismo criterio para los enunciados. Es la misma regla que aplica la fase 2 a libros y wuolah |
+| 2026-07-26 | 1 | Reconstruir `group_vars/all.yml` en vez de publicarlo roto | Estaba sobrescrito con apuntes de otra asignatura desde la subida inicial del blog, así que no hay original. Sin él el playbook no puede ejecutarse. Se reconstruye del uso que hace el playbook y el fichero lo declara en su cabecera |
+| 2026-07-26 | 1 | Parametrizar las credenciales del plan de JMeter | Iban escritas en el `.jmx`. Publicar credenciales en un repo público es justo lo que corrigió la fase 0, aunque sean de laboratorio |
+| 2026-07-26 | 1 | Saltar seis reglas de `ansible-lint` documentando cada una | Tres son cosméticas y tres son defectos reales del código entregado. Arreglarlos falsearía la entrega; dejar el CI en rojo haría inútil el badge. Se saltan con su motivo escrito y se listan en las limitaciones del README |
 | 2026-07-26 | 1 | Documentar los defectos del código en el README en vez de arreglarlos | Es un repositorio de un trabajo entregado. Arreglarlo ahora falsearía lo que se entregó; un apartado de limitaciones honesto vale más en una entrevista |
 
 ### Pendiente de decidir
