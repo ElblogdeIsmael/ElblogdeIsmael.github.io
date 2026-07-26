@@ -192,7 +192,7 @@ la fase 0.**
 
 ### Pendiente de decidir
 
-**El `.gitignore` no está versionado.** Se ignora a sí mismo (línea 88 de su propio
+**El `.gitignore` no está versionado.** Se ignora a sí mismo (línea 120 de su propio
 fichero), así que las reglas solo existen en la máquina de Ismael. Un clon nuevo no lo trae,
 y ahí nada está protegido.
 

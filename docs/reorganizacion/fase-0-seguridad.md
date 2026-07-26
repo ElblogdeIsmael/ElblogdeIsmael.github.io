@@ -45,8 +45,9 @@ Más sus 12 `.pub` correspondientes, que no son secretas pero acompañan.
 Son claves de un laboratorio Ansible de la asignatura ISE, no de producción. Aun así:
 
 - Los escáneres de secretos de GitHub y de terceros las indexan.
-- `.gitignore` ya las cubre con la regla `id_rsa`, pero se añadieron **antes** de esa regla,
-  así que siguen en el índice: `.gitignore` no afecta a lo ya versionado.
+- El `.gitignore` **no las cubría**: su regla `id_rsa` es un nombre exacto y estas claves se
+  llaman `id_rsa_admin`, `id_rsa_juan` y `id_rsa_maria`. Y aunque las cubriera, `.gitignore`
+  no afecta a lo que ya está versionado.
 
 ---
 
@@ -54,13 +55,13 @@ Son claves de un laboratorio Ansible de la asignatura ISE, no de producción. Au
 
 ### Preparación
 
-- [ ] Crear la rama.
+- [x] Crear la rama.
 
   ```bash
   git switch -c reorg/fase-0-seguridad
   ```
 
-- [ ] Etiqueta de respaldo del estado actual ([regla 3](REGLAS.md#3-etiqueta-de-respaldo-antes-de-cada-fase-destructiva)).
+- [x] Etiqueta de respaldo del estado actual ([regla 3](REGLAS.md#3-etiqueta-de-respaldo-antes-de-cada-fase-destructiva)).
 
   ```bash
   git tag backup/pre-reorg
@@ -69,20 +70,20 @@ Son claves de un laboratorio Ansible de la asignatura ISE, no de producción. Au
 
 ### Sacar las claves del índice
 
-- [ ] Confirmar el inventario antes de tocar nada (debe dar **12**).
+- [x] Confirmar el inventario antes de tocar nada (debe dar **12**).
 
   ```bash
   git ls-files -z | tr '\0' '\n' | grep -E 'id_rsa_[a-z]+$' | wc -l
   ```
 
-- [ ] Verificar que son claves privadas de verdad (debe dar **12**).
+- [x] Verificar que son claves privadas de verdad (debe dar **12**).
 
   ```bash
   git ls-files -z | tr '\0' '\n' | grep -E 'id_rsa_[a-z]+$' \
     | while IFS= read -r f; do head -1 "$f" | grep -q 'PRIVATE KEY' && echo "$f"; done | wc -l
   ```
 
-- [ ] Sacarlas del índice **conservando el fichero en disco** (`--cached`), junto con sus
+- [x] Sacarlas del índice **conservando el fichero en disco** (`--cached`), junto con sus
       `.pub`.
 
   ```bash
@@ -111,7 +112,7 @@ Son claves de un laboratorio Ansible de la asignatura ISE, no de producción. Au
   **/claves/
   ```
 
-- [ ] Commit.
+- [x] Commit.
 
   ```bash
   git commit -m "sacar del indice las claves privadas del laboratorio de ISE"
@@ -137,11 +138,11 @@ Son claves de un laboratorio Ansible de la asignatura ISE, no de producción. Au
     < docs/reorganizacion/.rutas-a-purgar.txt | wc -l
   ```
 
-- [ ] Añadir esa lista a la checklist de la [fase 3](fase-3-historial.md).
+- [x] Añadir esa lista a la checklist de la [fase 3](fase-3-historial.md).
 
 ### Seguimiento en GitHub
 
-- [ ] Crear el milestone.
+- [x] Crear el milestone.
 
   ```bash
   gh api repos/ElblogdeIsmael/ElblogdeIsmael.github.io/milestones \
@@ -149,7 +150,7 @@ Son claves de un laboratorio Ansible de la asignatura ISE, no de producción. Au
     -f description="Separar sitio, apuntes, material y código. Ver docs/reorganizacion/"
   ```
 
-- [ ] Crear las 7 issues, una por fase, con el cuerpo apuntando a su fichero.
+- [x] Crear las 7 issues, una por fase, con el cuerpo apuntando a su fichero.
 
   ```bash
   for n in 0:seguridad 1:codigo 2:contenido 3:historial 4:plantillas 5:indexado 6:contenido-pendiente; do
@@ -161,9 +162,9 @@ Son claves de un laboratorio Ansible de la asignatura ISE, no de producción. Au
   done
   ```
 
-- [ ] Crear la issue paraguas que enlace a las 7 y al `README.md` del directorio.
+- [x] Crear la issue paraguas que enlace a las 7 y al `README.md` del directorio.
 
-- [ ] Cerrar la issue de la fase 0.
+- [x] Cerrar la issue de la fase 0.
 
 ### Cierre
 
@@ -207,7 +208,7 @@ conviene no perderlas.
 
 ```bash
 git ls-files --error-unmatch .gitignore    # error: no está en el índice
-grep -n '^\.gitignore$' .gitignore         # 88
+grep -n "^\.gitignore$" .gitignore     # 120
 ```
 
 Consecuencia: las reglas solo existen en esta máquina. Un clon nuevo del repositorio no
