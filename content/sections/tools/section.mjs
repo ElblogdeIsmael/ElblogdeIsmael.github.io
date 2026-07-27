@@ -10,7 +10,7 @@
  */
 
 export default {
-  slug: "herramientas",
+  slug: "tools",
   index: "02",
   name: "Herramientas",
   title: "Herra",

@@ -14,10 +14,10 @@
  */
 
 import dobleGrado from "./sections/doble-grado/section.mjs";
-import herramientas from "./sections/herramientas/section.mjs";
+import tools from "./sections/tools/section.mjs";
 
 /** @type {import("./types.d.ts").Section[]} */
-export const SECTIONS = [dobleGrado, herramientas];
+export const SECTIONS = [dobleGrado, tools];
 
 /**
  * Finds a section by its URL slug.

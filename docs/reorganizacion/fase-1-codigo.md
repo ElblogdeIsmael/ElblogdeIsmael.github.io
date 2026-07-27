@@ -509,10 +509,35 @@ escritos en el README de su repositorio.
 
 | Repo | Qué hay que hacerle |
 | --- | --- |
-| `oracle-dbms-project` | La aplicación vive dentro de `LaTeX/pr3/src`: sacarla a `src/`. Purgar del historial los 499 `.pyc` y la caché de minted (24 MB). CI que compile el LaTeX y pase por el Python |
-| `machine-learning-practices` | Cuatro notebooks. CI que los valide con `nbformat` o los ejecute. El proyecto final es conjunto y hay que decirlo |
-| `econometric-model` | Estándar adaptado: CI con `latexmk` **y** con `trabajo.py` y el notebook, que sí son código. El zip de datos se abre y va a la release |
-| `software-engineering-practices` | Trabajo de grupo de cuatro personas. CI con `latexmk`. Los 16 `.doc` se convierten o se documentan |
+| `oracle-dbms-project` | **hecho.** App fuera de `LaTeX/pr3/src`, credenciales purgadas, CI contra un Oracle real |
+| `machine-learning-practices` | **hecho.** Notebooks con nombres legibles, CI que los valida, proyecto declarado como conjunto |
+| `econometric-model` | **hecho.** Zip de datos abierto, CI que comprueba script, notebook y dataset |
+| `software-engineering-practices` | **hecho.** Siete informes que compilan en CI dentro de la imagen de TeX Live |
+
+#### `oracle-dbms-project`
+
+Lo que apareció al abrirlo, y no era pequeño:
+
+| Hallazgo | Detalle |
+| --- | --- |
+| **Credenciales de Oracle de la UGR en cuatro ficheros** | La mía y las de dos compañeros, con la contraseña igual al usuario, contra `oracle0.ugr.es`. El repositorio era público desde enero. Purgadas del árbol y del historial con `filter-repo --replace-text`; la conexión lee ahora `ORACLE_USER`, `ORACLE_PASSWORD` y `ORACLE_DSN` del entorno. **Es el único cambio sobre lo entregado**, y se hace porque publicar credenciales ajenas no es un defecto que se documente, es uno que se quita |
+| Un **entorno virtual entero** commiteado | `seminario1/chapters/venv/`, con 499 `.pyc` y hasta un `.so` de 900 KB. Fuera del historial junto a la caché de minted |
+| **Dos bloques PL/SQL que nunca compilaron** | `triggers_publicaciones.sql` captura el error de índice duplicado con `IF SQL_CODE != -955`, y PL/SQL tiene `SQLCODE`. Oracle devuelve PLS-00201 y los dos índices sobre `ME_GUSTA` no se crean. **Lo encontró el CI**, que levanta un Oracle de verdad; parsear el SQL no lo habría visto |
+| `menu_TUI.py` no compila | Un bloque de comillas triples abierto para comentar un prototipo antiguo nunca se cierra y se traga el resto del fichero |
+
+Los dos últimos se afirman en `tools/known-sql-failures.txt` y en `tools/check-python.sh`:
+si algún día empiezan a funcionar, el CI falla y avisa de que la lista miente.
+
+#### Los otros tres
+
+| Repo | Qué se hizo |
+| --- | --- |
+| `machine-learning-practices` | Notebooks a `src/` con nombres que dicen qué son. CI que valida el JSON y parsea cada celda de código: no pueden ejecutarse porque sus datos se descargan en tiempo de ejecución y el chatbot pide GPU, y el badge dice `checks`, no `tests` |
+| `econometric-model` | `Data_Obesity.zip` se abre: el dataset a `data/` y el original adjunto a la release. El CI comprueba que el CSV tiene las 2.111 filas y los doce regresores que usa el modelo. El script es un export de Colab que monta Drive, y se deja como está |
+| `software-engineering-practices` | Los cinco entregables a `docs/` y fuera las **16 plantillas en blanco en Word** del profesorado, repetidas en cuatro carpetas. El CI compila los siete informes en la imagen `texlive/texlive` y sube los PDF. `practice-3-part-1` compila con la portada en borrador: le falta `figures/ugrA4.pdf`, que nunca se subió |
+
+Al renombrar las carpetas de FIS a inglés, dos documentos de la práctica 1 seguían apuntando
+al nombre viejo en sus `\input`. Esas rutas se actualizaron; nada más de las fuentes se tocó.
 
 ---
 
@@ -626,35 +651,61 @@ suya.
 Archivar deja el repo en solo lectura y lo saca del listado activo. Es reversible y no
 borra nada.
 
-- [ ] Versiones antiguas del sitio:
+- [x] Versiones antiguas del sitio:
 
   ```bash
-  gh repo archive Ismael-Sallami/ElblogdeIsmael     --yes
-  gh repo archive Ismael-Sallami/ElblogdeIsmael_v1  --yes
-  gh repo archive Ismael-Sallami/Ismael-Sallami2    --yes
+  gh repo archive Ismael-Sallami/ElblogdeIsmael   --yes
+  gh repo archive Ismael-Sallami/Ismael-Sallami2  --yes
   ```
 
-- [ ] Cursos ya recogidos en `early-courses` (verificar la equivalencia antes de archivar):
+- [x] Cursos, verificados uno a uno antes de archivar:
 
   ```bash
   gh repo archive Ismael-Sallami/Web-development           --yes
   gh repo archive Ismael-Sallami/Intro-Machine-Learning    --yes
-  gh repo archive Ismael-Sallami/Macroeconomia-ejercicios  --yes
   gh repo archive Ismael-Sallami/Course-of-python          --yes
+  gh repo archive Ismael-Sallami/Macroeconomia-ejercicios  --yes
   ```
 
-- [ ] **No tocar** `gestor-finanzas` ([regla 10](REGLAS.md#10-no-se-toca-mifos-ni-gestor-finanzas)).
-- [ ] Los 5 forks (`cbioportal`, `cbioportal-frontend`, `mifos-gazelle`,
+- [ ] **`ElblogdeIsmael/ElblogdeIsmael_v1`, pendiente.** Esta ficha lo listaba como
+      `Ismael-Sallami/ElblogdeIsmael_v1` y **ahí no existe**: está en la cuenta
+      `ElblogdeIsmael`, pesa 1 GB y tiene Pages. `gh` corre como `Ismael-Sallami`, que ahí no
+      es admin, así que hay que archivarlo desde la web. Mismo tope que el renombrado de
+      ramas.
+- [x] **No tocar** `gestor-finanzas` ([regla 10](REGLAS.md#10-no-se-toca-mifos-ni-gestor-finanzas)),
+      ni `Ismael-Sallami` (el README del perfil), ni `Ismael-Sallami.github.io` (el sitio
+      vivo). Los 5 forks (`cbioportal`, `cbioportal-frontend`, `mifos-gazelle`,
       `mifos-x-reporting-plugin-birt`, `scorecard-ai`) se quedan como están.
+
+#### La equivalencia, comprobada
+
+| Repo | Dónde está su contenido |
+| --- | --- |
+| `Web-development` | `early-courses/web-development/`: el PDF (701.385 bytes) idéntico, y el zip descomprimido en `src/` |
+| `Intro-Machine-Learning` | `early-courses/machine-learning/`: PDF de 1.957.503 bytes, idéntico |
+| `Course-of-python` | `early-courses/python-course/`: PDF de 568.092 bytes, idéntico |
+| `Macroeconomia-ejercicios` | **No está en `early-courses`**, al contrario de lo que suponía esta ficha: ahí solo hay esos tres cursos. Su PDF (1.007.502 bytes) está en el blog, en `Subjects/Second/MACRO/`, y enlazado desde `segundo.mjs` |
 
 ---
 
 ## Parte E · Escaparate
 
-- [ ] Fijar 6 repositorios en el perfil (Settings → Pinned repositories). Propuesta:
-      `irrgarten`, `ansible-infra-lab`, `metaheuristics`, `rescue-agents`,
-      `algorithms-and-patterns`, `personal-finance-manager`.
-- [ ] Revisar que los 6 tengan el README al día: son los que se abren primero.
+Los seis elegidos, uno por lenguaje y por dominio, sin repetir asignatura:
+
+| Repo | Por qué está | Estado |
+| --- | --- | --- |
+| `personal-finance-manager` | Producto propio, no coursework: FastAPI, Postgres y un bot de Telegram | topics puestos; **sin release** |
+| `metaheuristics` | 15 algoritmos en C++ bajo el mismo presupuesto de evaluaciones | completo |
+| `ansible-infra-lab` | La única muestra de infraestructura | completo |
+| `irrgarten` | El mismo diseño construido dos veces, en Java y en Ruby | completo |
+| `algorithms-and-patterns` | 183 implementaciones catalogadas por patrón | topics puestos; **sin CI ni release** |
+| `rescue-agents` | Agentes reactivos y deliberativos, Dijkstra y A\* | completo |
+
+- [ ] **Fijarlos hay que hacerlo desde la web** (perfil → *Customize your pins*): GitHub no
+      expone API para los pines.
+- [ ] `algorithms-and-patterns` necesita CI y release, y `personal-finance-manager` una
+      release, antes de quedar del todo al nivel de los otros cuatro. Los dos ya tienen
+      descripción, licencia MIT y topics.
 
 ---
 
@@ -670,14 +721,13 @@ están completos y funcionan
 ## Criterio de hecho
 
 - Los 4 repos nuevos existen, compilan desde un clon limpio y cumplen el estándar.
-- Los 8 renombrados responden en su nombre nuevo, con descripción y topics. Cuatro
-  (`metaheuristics`, `concurrency-mpi`, `airline-routes-adt`, `image-adt`) pasan además la
-  checklist entera, con CI en verde y release `v1.0`; los otros cuatro tienen su criterio
-  escrito en [§B.2](#b2--los-cuatro-que-quedan-con-su-criterio-ya-decidido).
+- **Los 8 renombrados están acabados**: nombre nuevo, descripción, topics, README de 10
+  apartados, licencia MIT, CI en verde y release `v1.0`.
 - `rescue-agents` tiene la práctica 2 y `parchis-ai` la práctica 3, cada una con su
   repositorio; `IA_Practica2` y `practica3` archivados.
-- 7 repos archivados.
-- 6 repos fijados en el perfil.
+- 6 de los 7 archivados. Falta `ElblogdeIsmael/ElblogdeIsmael_v1`, que necesita entrar como
+  `ElblogdeIsmael` desde la web.
+- Los 6 del escaparate, elegidos y revisados; fijarlos es un clic en el perfil.
 - `gestor-finanzas` intacto.
 
 ## Verificación

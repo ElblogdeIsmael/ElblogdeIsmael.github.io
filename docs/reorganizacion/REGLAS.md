@@ -67,16 +67,23 @@ en otro orden, ni siquiera «un momento».
 
 Aplica a los libros y diapositivas de la fase 2, y al código de la fase 1.
 
-## 6. Un commit por unidad lógica
+## 6. Un commit por unidad lógica, y en inglés simple
 
-Mensajes en español, en la voz de Ismael. Un commit de 800 ficheros llamado «reorg» es
-imposible de revisar y de revertir.
+**Desde el 2026-07-27, los mensajes de commit de este repositorio se escriben en inglés
+simple.** Frases cortas, vocabulario común, voz activa: es lo que ve quien abre el
+repositorio desde fuera, igual que los README. Lo que sigue en español es todo lo demás: las
+descripciones de las PR, las issues y esta documentación.
+
+Los commits anteriores a esa fecha se quedan como están. Reescribirlos cambiaría el SHA de
+cientos de commits y rompería las referencias de las PR ya mezcladas, a cambio de nada.
+
+Un commit de 800 ficheros llamado «reorg» es imposible de revisar y de revertir.
 
 Bien:
 
 ```
-mover el material de CF1 a apuntes-material
-versionar el temario de DRH1, que la web enlazaba y no existía
+Move the CF1 material to apuntes-material
+Version the DRH1 syllabus, which the site linked and did not exist
 ```
 
 Mal:
