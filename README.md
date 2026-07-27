@@ -24,7 +24,7 @@ assets/css/brutal/  sistema de diseño en cinco capas
 ```
 
 Se genera desde `content/` hacia la raíz: `index.html`, `doble-grado/`,
-`herramientas/`, `historia/`, `sitemap.xml` y `assets/css/brutal.css`. El HTML
+`tools/`, `historia/`, `sitemap.xml` y `assets/css/brutal.css`. El HTML
 generado se versiona, así que Pages publica sin necesidad de compilar nada.
 
 ## Comandos
@@ -85,13 +85,34 @@ Las cinco capas de `assets/css/brutal/` se editan por separado y el build las
 concatena en `assets/css/brutal.css`. Ese fichero está generado: no se edita a
 mano.
 
-## Otras carpetas
+## Qué es cada carpeta
 
-- `Subjects/` — el material en sí: PDF, LaTeX, Markdown, tests y prácticas.
-- `md2html/` — convierte apuntes en Markdown a tests HTML autocorregibles.
-- `pdf2md/` — convierte PDF, Word y Excel a Markdown.
-- `viewer/` — visor de apuntes en Markdown.
-- `extraFiles/` — plantillas de LaTeX y utilidades.
+Las que se escriben a mano:
+
+| Carpeta | Qué es |
+| --- | --- |
+| `content/` | Los datos: qué se publica y con qué texto |
+| `build/` | El generador y sus plantillas |
+| `assets/css/brutal/` | El sistema de diseño, en cinco capas |
+| `Subjects/` | El material en sí: PDF, LaTeX, Markdown, tests y prácticas |
+| `md2html/`, `pdf2md/`, `viewer/` | Tres apps que funcionan enteras en el navegador |
+| `docs/reorganizacion/` | El plan de la reorganización en curso, por fases |
+
+Las que **genera el build** y no se editan a mano:
+
+| Carpeta | Qué contiene |
+| --- | --- |
+| `doble-grado/` | La sección del Doble Grado: un índice y una página por curso |
+| `tools/` | El índice de las tres apps del navegador |
+| `historia/` | La página sobre el proyecto |
+| `courses/` | Las URLs antiguas, que redirigen a su sitio nuevo |
+
+`doble-grado` es el *slug* de la sección, así que da nombre a la URL y a la
+carpeta generada. Una sección nueva —investigación, proyectos, lo que sea—
+aparece igual con solo registrarla: ver «Añadir contenido».
+
+`extraFiles/` y `htmlFiles/` son restos del sitio anterior: nada del generador
+los enlaza. Se revisan y se retiran en la fase 2 de la reorganización.
 
 ## Contacto
 
