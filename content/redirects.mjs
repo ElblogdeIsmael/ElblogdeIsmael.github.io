@@ -19,6 +19,7 @@ export const REDIRECTS = [
   { from: "courses/fourth.html", to: "/doble-grado/cuarto/" },
   { from: "courses/fifth.html", to: "/doble-grado/quinto/" },
   { from: "historia.html", to: "/historia/" },
+  { from: "herramientas/index.html", to: "/tools/" },
 ];
 
 export default REDIRECTS;
