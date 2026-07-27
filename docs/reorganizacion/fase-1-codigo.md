@@ -61,8 +61,8 @@ inservibles.
 > Y comprobar que lo que se extrae **está versionado**: `filter-repo` trabaja sobre el
 > historial, así que un fichero en disco sin commitear no aparecería en el repo nuevo.
 
-Y en `Ismael-Sallami` hay 36 repositorios sin convención de nombres, con tres copias del
-mismo trabajo de IA y siete repos obsoletos que ensucian el perfil.
+Y en `Ismael-Sallami` hay 36 repositorios sin convención de nombres, con cuatro repos de IA
+que se pisan entre sí y siete repos obsoletos que ensucian el perfil.
 
 ### Resultado del barrido, aplicado a los cuatro
 
@@ -461,9 +461,9 @@ existentes siguen funcionando.
   gh repo rename software-engineering-practices  --repo Ismael-Sallami/FIS
   ```
 
-- [ ] `Parcherckers`: **identificar primero la asignatura** (contiene `src/` y
-      `Memoria.pdf`; el nombre apunta a un juego de parchís, probable práctica de
-      Metodología de la Programación o de PDOO). Confirmar y renombrar a `parcheesi-game`.
+- [x] `Parcherckers` → **`parchis-ai`**. Es la **práctica 3 de IA**, no una práctica sin
+      identificar: el juego ParCheckers es el que se usa en esa asignatura. Se cierra en la
+      [parte C](#parte-c--los-cuatro-repositorios-de-ia).
 - [ ] Sin cambio de nombre, ya son correctos: `algorithms-and-patterns`,
       `3-Partition-NP-Completeness`, `personal-finance-manager`, `media-manager`,
       `early-courses`, `pdf-to-md`, `md2html-testGenerator`, `Arch_Configuration`,
@@ -477,32 +477,108 @@ existentes siguen funcionando.
 
 ---
 
-## Parte C · Fusionar los duplicados de IA
+## Parte C · Los cuatro repositorios de IA — **hecha**
 
-Hoy hay tres copias del mismo trabajo:
+> **Esta parte decía que había tres copias del mismo trabajo y que se fusionaban en uno.
+> Era falso.** Los cuatro repositorios son **una asignatura y dos prácticas distintas**:
+> rescate (práctica 2) y parchís (práctica 3). Fusionarlas habría juntado trabajos sin
+> relación y, peor, habría publicado el simulador del profesorado.
 
-| Repo | Visibilidad | Nota |
+Lo que resultó ser cada uno, comprobado con la API y con los ficheros:
+
+| Repo | Qué es | Destino |
 | --- | --- | --- |
-| `Practica2_IA` | pública | contiene además las carpetas anidadas `IA_Practica2/` y `practica2/` |
-| `IA_Practica2` | privada | copia |
-| `practica3` | privada | práctica 3, C++ |
+| `Practica2_IA` (pub, 8,3 MB) | Práctica 2. Envuelve `IA_Practica2/` (era submódulo) y `practica2/` con la entrega del 2025-05-11. Arrastra el simulador entero, un `a.out` y un `jmeter.log` | → **`rescue-agents`** |
+| `IA_Practica2` (priv) | Importación de `ugr-ccia-IA/practica2` con commits propios mezclados con los del profesorado. **No es una copia** | archivado, tras rescatar lo suyo |
+| `Parcherckers` (pub) | Práctica 3. Ya curado: `AIPlayer.cpp` (1.467 líneas), `.h`, memoria y README | → **`parchis-ai`** |
+| `practica3` (priv, 14 MB) | Importación **sin tocar** de `ugr-ccia-IA/practica3`. Los 10 commits son de los profesores y su `AIPlayer.cpp` es el stub de 155 líneas con movimiento aleatorio. **Cero código propio** | archivado |
 
-- [ ] Partir de `Practica2_IA` (es la pública y la que ya está enlazada desde la web).
-- [ ] Aplanar sus carpetas anidadas → `src/practica2/`.
-- [ ] Añadir el contenido de `practica3` como `src/practica3/`.
-- [ ] Comprobar que `IA_Practica2` no aporta nada que no esté ya:
+### C.1 · `parchis-ai` — **hecho**
 
-  ```bash
-  diff -rq <copia-de-IA_Practica2> <carpeta-equivalente-en-Practica2_IA>
-  ```
+**Origen:** `Parcherckers` · **Asignatura:** IA, práctica 3 · **Lenguaje:** C++
+**Repositorio:** <https://github.com/Ismael-Sallami/parchis-ai> · release `v1.0`
 
-- [ ] Renombrar: `gh repo rename rescue-agents --repo Ismael-Sallami/Practica2_IA`.
-- [ ] README único que cubra las dos prácticas: agentes reactivos y deliberativos para
-      simulaciones de rescate en terreno.
-- [ ] Archivar `IA_Practica2` y `practica3` una vez confirmado que su contenido está
-      incorporado.
-- [ ] Actualizar el enlace en `content/sections/doble-grado/pages/tercero.mjs` — se hace en
-      la [fase 5](fase-5-indexado.md).
+- [x] Renombrar. `gh repo rename` deja redirección permanente.
+- [x] Estructura: `src/AIPlayer.{cpp,h}`, `docs/report.pdf` (antes `Memoria.pdf`).
+- [x] README con los 10 apartados, `LICENSE` MIT, `.gitignore`, topics, descripción.
+- [x] Release `v1.0` con el informe adjunto.
+- [x] Verificado contra el blog: `AIPlayer.cpp` y `.h` **idénticos byte a byte**.
+
+El README documenta lo que hace el motor con datos del propio código —poda alfa-beta a
+profundidad 8, poda probabilística con `epsilon` 0,3, ordenación de movimientos,
+profundidad dinámica por factor de ramificación y búsqueda de quietud de hasta 3 niveles— y
+la tabla de resultados sale de la memoria: **4/6 contra los tres ninjas** con poda
+probabilística y quietud, 3/6 con poda simple, 1/6 con todas las mejoras encima. El mejor
+jugador no es el que más maquinaria lleva.
+
+### C.2 · `rescue-agents` — **hecho**
+
+**Origen:** `Practica2_IA` · **Asignatura:** IA, práctica 2 · **Lenguaje:** C++
+**Repositorio:** <https://github.com/Ismael-Sallami/rescue-agents> · release `v1.0`
+
+- [x] **Rescatar antes de purgar.** `IA_Practica2` tenía seis funciones que la entrega
+      final perdió, más dos instantáneas del rescatador de nivel 2:
+
+      | Fichero | Solo en la versión del 2025-05-05 |
+      | --- | --- |
+      | `auxiliar.cpp` | `AnchuraAuxiliar`, `AnchuraAuxiliar_V2`, `applyA_lvl4`, `CasillaAccesibleAuxiliar_lvl4`, `ComportamientoAuxiliarNivel_E` |
+      | `rescatador.cpp` | `rastroXensensores` |
+      | `nivel2.cpp` | 534 líneas, de las que solo 64 sobreviven en la entrega |
+
+      Van a `docs/earlier-iterations/`, con un README que explica qué hacía cada una.
+- [x] Purgar del árbol y del historial el simulador del profesorado (`mapas`, `ply`,
+      `include`, `src`, `bin_src`, `doc`, `debug_tutorial`, `CMakeLists.txt`, `install.sh`,
+      la plantilla y los `.gitpod*`), el `a.out`, el `jmeter.log` y `SALIDAS.txt`.
+      **De 8,3 MB a 244 KB.**
+- [x] Fuera también `Autoevaluacion.pdf`: son 24 páginas del **formulario del profesorado**
+      con las respuestas escritas encima. No se republica.
+- [x] Aplanar: `practica2/` → `src/`, los scripts a `tools/`, las salidas de los once tests
+      a `docs/results/`.
+- [x] README con los 10 apartados, `LICENSE` MIT corregido a «Ismael Sallami Moreno»,
+      `.gitignore`, topics, descripción y release `v1.0`.
+- [x] Verificado: `src/` **idéntico al `practica2.zip` del blog**, cero rutas del simulador
+      en el historial y los enlaces publicados siguen funcionando por la redirección.
+
+#### Lo que se encontró al revisar el código para el README
+
+| Hallazgo | Detalle |
+| --- | --- |
+| `ComportamientoRescatadorNivel_3` devuelve `IDLE` | El rescatador no juega el nivel 3. La alternativa, `ComportamientoRescatadorNivel_E`, está escrita pero comentada en `think()` |
+| `tools/test.sh` exige llamarse desde `IA_Practica2` | Comprueba el nombre de la carpeta actual, que es la del simulador, no la del repositorio |
+| Los dos planificadores no son el mismo | El rescatador resuelve el nivel 2 con **Dijkstra** y el auxiliar con **A\***; el nivel 4 usa A\* en los dos |
+| `docs/earlier-iterations/` no compila junto a `src/` | Definen las mismas clases. Están para leerse |
+
+El CI de los dos repos ejecuta `cppcheck` (y `shellcheck` en `rescue-agents`), no compila, y
+el badge lo dice. **No puede compilar**: los dos repositorios del profesorado se reiniciaron
+para la edición 2026 —`practica2` arranca el 2026-03-03 y `practica3` el 2026-04-27— así que
+el marco de 2024-25 no se puede descargar de ningún sitio público, y republicarlo está
+prohibido. `cppcheck` analiza sin resolver los `#include` que faltan: 0 errores en los dos.
+
+### C.3 · Archivar los dos privados — **hecho**
+
+```bash
+gh repo archive Ismael-Sallami/IA_Practica2 --yes
+gh repo archive Ismael-Sallami/practica3    --yes
+```
+
+Archivar deja el repositorio en solo lectura, no cambia su visibilidad y es reversible.
+`IA_Practica2` no se borra porque tiene historial propio; `practica3` tampoco, por la
+[regla 5](REGLAS.md#5-nada-se-borra-sin-haberse-movido-antes), aunque no tenga ni una línea
+suya.
+
+### C.4 · Barrido de IA, completo
+
+| Dónde | Resultado |
+| --- | --- |
+| `.tex` de la asignatura | **0** bloques `lstlisting` o `verbatim` |
+| `.md` de la asignatura | **0** bloques de código |
+| `practica3.zip`, `practica2.zip` | Las dos entregas, ya cubiertas por los repos nuevos |
+| `SoftwareRP1(1).zip` y su copia desplegada | `agent_hormiga.cpp`, `agent_robot.cpp` y `agent_golpe.cpp` **idénticos al zip plantilla de 2018**: material de clase, no trabajo propio |
+| Práctica 1 | Lo propio son `solve_8puzzle.py` y `solve_8puzzle_v2.py`, 158 líneas en total. **No dan para repositorio**: se quedan en el blog |
+
+- [ ] Actualizar los enlaces de IA en `content/sections/doble-grado/pages/tercero.mjs` — se
+      hace en la [fase 5](fase-5-indexado.md). Mientras tanto siguen funcionando por la
+      redirección que deja `gh repo rename`.
 
 ---
 
@@ -556,7 +632,8 @@ están completos y funcionan
 
 - Los 4 repos nuevos existen, compilan desde un clon limpio y cumplen el estándar.
 - Los 8 renombrados responden en su nombre nuevo y su README pasa la checklist.
-- `rescue-agents` contiene las prácticas 2 y 3; `IA_Practica2` y `practica3` archivados.
+- `rescue-agents` tiene la práctica 2 y `parchis-ai` la práctica 3, cada una con su
+  repositorio; `IA_Practica2` y `practica3` archivados.
 - 7 repos archivados.
 - 6 repos fijados en el perfil.
 - `gestor-finanzas` intacto.
