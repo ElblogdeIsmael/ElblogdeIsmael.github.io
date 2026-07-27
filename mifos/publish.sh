@@ -79,8 +79,7 @@ if git diff --cached --quiet; then
 fi
 
 stamp="$(date '+%Y-%m-%d %H:%M')"
-git commit -m "chore(mifos): publicar informes cifrados ($stamp)" \
-  -m "Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"
+git commit -m "chore(mifos): publicar informes cifrados ($stamp)"
 
 branch="$(git rev-parse --abbrev-ref HEAD)"
 c_info "Haciendo push a origin/$branch…"
