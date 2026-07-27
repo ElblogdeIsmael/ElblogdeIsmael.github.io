@@ -448,18 +448,21 @@ El repositorio lleva el `.md` en `notes/` porque es la fuente de la que genera l
 `gh repo rename` deja una redirección permanente: los enlaces publicados y los `git remote`
 existentes siguen funcionando.
 
-- [ ] Renombrar:
+- [x] Renombrados los ocho, con **descripción en inglés y topics** en todos:
 
-  ```bash
-  gh repo rename metaheuristics                  --repo Ismael-Sallami/MH-Practices
-  gh repo rename concurrency-mpi                 --repo Ismael-Sallami/SCD-Concurrency-MPI
-  gh repo rename oracle-dbms-project             --repo Ismael-Sallami/DDSI
-  gh repo rename machine-learning-practices      --repo Ismael-Sallami/AA-practices
-  gh repo rename airline-routes-adt              --repo Ismael-Sallami/Air-lines-Project
-  gh repo rename image-adt                       --repo Ismael-Sallami/TDA-Imagen
-  gh repo rename econometric-model               --repo Ismael-Sallami/ModeloEconometrico
-  gh repo rename software-engineering-practices  --repo Ismael-Sallami/FIS
-  ```
+  | Antes | Ahora |
+  | --- | --- |
+  | `MH-Practices` | `metaheuristics` |
+  | `SCD-Concurrency-MPI` | `concurrency-mpi` |
+  | `DDSI` | `oracle-dbms-project` |
+  | `AA-practices` | `machine-learning-practices` |
+  | `Air-lines-Project` | `airline-routes-adt` |
+  | `TDA-Imagen` | `image-adt` |
+  | `ModeloEconometrico` | `econometric-model` |
+  | `FIS` | `software-engineering-practices` |
+
+  La descripción de `TDA-Imagen` describía el otro proyecto —«a system abour air-lines»,
+  con la errata incluida— y cuatro estaban vacías.
 
 - [x] `Parcherckers` → **`parchis-ai`**. Es la **práctica 3 de IA**, no una práctica sin
       identificar: el juego ParCheckers es el que se usa en esa asignatura. Se cierra en la
@@ -468,12 +471,48 @@ existentes siguen funcionando.
       `3-Partition-NP-Completeness`, `personal-finance-manager`, `media-manager`,
       `early-courses`, `pdf-to-md`, `md2html-testGenerator`, `Arch_Configuration`,
       `neetcode-submissions`.
-- [ ] **Revisar cada uno con el mismo rasero.** Renombrar no basta: todos pasan la checklist
-      de [ESTANDAR-REPOS.md §7](ESTANDAR-REPOS.md#7-lista-de-verificación-por-repo). El
-      README de `metaheuristics` (`practice-1..4`) o el de `machine-learning-practices`
-      necesitan los 10 apartados igual que los nuevos.
-- [ ] `concurrency-mpi`: incorporar los exámenes de `Subjects/Third/SCD/Examenes/*.cpp`, que
-      hoy están solo en el blog, como `docs/examenes/`.
+
+### B.1 · Los cuatro con código, acabados
+
+Renombrar no basta: pasan la checklist de
+[ESTANDAR-REPOS §7](ESTANDAR-REPOS.md#7-lista-de-verificación-por-repo) entera.
+
+| Repo | Qué se hizo | CI |
+| --- | --- | --- |
+| **`metaheuristics`** | Las cuatro prácticas a `src/`, las memorias a `docs/reports/`. Licencia Apache-2.0 → MIT. Fuera del historial los datasets grandes del portfolio (33 MB) y las matrices del CEC'17 de 30, 50 y 100 dimensiones (39 MB), que son de la asignatura y del benchmark: **de 26 MB a 8,8 MB** | `build`, compila las prácticas 1, 2 y 4 con cmake |
+| **`concurrency-mpi`** | 31 programas con nombres en inglés que dicen qué resuelven. Incorporados los **siete exámenes** que solo estaban en el blog. `tools/build-all.sh` compila todo con `g++` y `mpic++` | `build`, los 31 programas |
+| **`airline-routes-adt`** | `src/`, `include/`, `data/` y `docs/`. Fuera el enunciado y la presentación del profesorado | `build` + dibuja la ruta R1 y comprueba que sale un PPM válido |
+| **`image-adt`** | Misma estructura. `tools/run-tests.sh` ejecuta los seis programas y compara el negativo con la imagen de referencia del juez | `tests`, con una comparación byte a byte |
+
+Los cuatro con `LICENSE` MIT, `.gitignore`, README de 10 apartados en inglés, topics y
+release `v1.0`.
+
+#### Lo que apareció al revisarlos
+
+| Repo | Hallazgo |
+| --- | --- |
+| `metaheuristics` | **La práctica 3 no compila tal y como está publicada**: su `CMakeLists.txt` incluye `common/`, pero esa carpeta nunca se subió. Las otras tres sí la tienen. El CI la deja fuera y el README lo explica |
+| `metaheuristics` | El README viejo llamaba a la práctica 4 «Ladybug Courtship Algorithm». Es el **Liver Cancer Algorithm** (Houssein et al., 2023), como dice su propio `LEEME.md` |
+| `concurrency-mpi` | **Mi DNI estaba escrito en cuatro ficheros**, tres del repositorio y uno de los exámenes. Purgado del árbol y del historial con `filter-repo --replace-text` |
+| `concurrency-mpi` | `smokers.cpp` no compila: llama a `fumar()` en la línea 75 y la función se define en la 83, sin declaración previa. Está en `tools/known-build-failures.txt`, y el script falla si algún día empieza a compilar |
+| `image-adt` | **`Crop` casca cuando el recorte tiene menos filas que columnas.** `subimagen … 0 0 60 80` peta; `0 0 80 60` y cualquier recorte cuadrado van bien. La imagen de referencia del juez es de 80 × 60, así que es justo el caso que probaban. El script de pruebas **afirma el fallo** en vez de saltarlo |
+
+Ninguno se arregla: reescribir una entrega para que pase un linter la falsea. Todos están
+escritos en el README de su repositorio.
+
+- [x] `concurrency-mpi`: incorporados los exámenes de `Subjects/Third/SCD/Examenes`, en
+      `docs/exams/`, con nombres por el problema que resuelven —colas de caja, filósofos con
+      camarero en dos estilos, productor-consumidor con consumidores pares e impares y dos
+      juegos por turnos sobre MPI—. Los nombres de las carpetas originales no se usan.
+
+### B.2 · Los cuatro que quedan, con su criterio ya decidido
+
+| Repo | Qué hay que hacerle |
+| --- | --- |
+| `oracle-dbms-project` | La aplicación vive dentro de `LaTeX/pr3/src`: sacarla a `src/`. Purgar del historial los 499 `.pyc` y la caché de minted (24 MB). CI que compile el LaTeX y pase por el Python |
+| `machine-learning-practices` | Cuatro notebooks. CI que los valide con `nbformat` o los ejecute. El proyecto final es conjunto y hay que decirlo |
+| `econometric-model` | Estándar adaptado: CI con `latexmk` **y** con `trabajo.py` y el notebook, que sí son código. El zip de datos se abre y va a la release |
+| `software-engineering-practices` | Trabajo de grupo de cuatro personas. CI con `latexmk`. Los 16 `.doc` se convierten o se documentan |
 
 ---
 
@@ -631,7 +670,10 @@ están completos y funcionan
 ## Criterio de hecho
 
 - Los 4 repos nuevos existen, compilan desde un clon limpio y cumplen el estándar.
-- Los 8 renombrados responden en su nombre nuevo y su README pasa la checklist.
+- Los 8 renombrados responden en su nombre nuevo, con descripción y topics. Cuatro
+  (`metaheuristics`, `concurrency-mpi`, `airline-routes-adt`, `image-adt`) pasan además la
+  checklist entera, con CI en verde y release `v1.0`; los otros cuatro tienen su criterio
+  escrito en [§B.2](#b2--los-cuatro-que-quedan-con-su-criterio-ya-decidido).
 - `rescue-agents` tiene la práctica 2 y `parchis-ai` la práctica 3, cada una con su
   repositorio; `IA_Practica2` y `practica3` archivados.
 - 7 repos archivados.
