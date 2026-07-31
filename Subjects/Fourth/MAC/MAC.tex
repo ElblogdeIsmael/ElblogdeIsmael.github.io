@@ -586,11 +586,502 @@ Mochila (optimización) & NP-difícil, FPTAS & programación dinámica
 Ejercicios resueltos de las relaciones de la asignatura. Cada apartado
 enuncia el problema y desarrolla la demostración completa.
 
-\hypertarget{relaciuxf3n-4}{%
-\section{Relación 4}\label{relaciuxf3n-4}}
+\hypertarget{relaciuxf3n-1}{%
+\section{Relación 1}\label{relaciuxf3n-1}}
 
 \hypertarget{ejercicio-1}{%
 \subsection{Ejercicio 1}\label{ejercicio-1}}
+
+\hypertarget{a-palabras-sobre-el-alfabeto-01-con-el-mismo-nuxfamero-de-ceros-que-de-unos}{%
+\paragraph{(a) Palabras sobre el alfabeto \{0,1\} con el mismo número de
+ceros que de
+unos}\label{a-palabras-sobre-el-alfabeto-01-con-el-mismo-nuxfamero-de-ceros-que-de-unos}}
+
+\textbf{Base teórica:} Este es un lenguaje incontextual (libre de
+contexto), pero que una MT puede decidir fácilmente utilizando una
+estrategia de emparejamiento cruzado (``zig-zag''), demostrando que la
+MT no está limitada por el orden de aparición de los símbolos gracias a
+su cinta de acceso bidireccional.
+
+\textbf{Diseño detallado (Algoritmo sin ambigüedad):} 1. \textbf{Estado
+inicial (q0):} El cabezal lee el primer símbolo no marcado. * Si es
+\textbf{0}, lo marca con \textbf{X}, se mueve a la derecha (R) y pasa a
+un estado \textbf{q1} (buscando un 1). * Si es \textbf{1}, lo marca con
+\textbf{Y}, se mueve a la derecha (R) y pasa a un estado \textbf{q2}
+(buscando un 0). * Si es un blanco \textbf{\#} o si todos los símbolos
+restantes son marcas (\textbf{X} o \textbf{Y}), pasa al estado de
+aceptación \textbf{q\_acc} y se detiene. 2. \textbf{Estado de búsqueda
+(q1 - busca un 1):} * Lee \textbf{0}, \textbf{X} o \textbf{Y}: avanza a
+la derecha (R). * Lee \textbf{1}: lo marca con \textbf{Y}, cambia de
+dirección a la izquierda (L) y pasa al estado \textbf{q\_rewind}. 3.
+\textbf{Estado de búsqueda (q2 - busca un 0):} * Lee \textbf{1},
+\textbf{X} o \textbf{Y}: avanza a la derecha (R). * Lee \textbf{0}: lo
+marca con \textbf{X}, cambia de dirección a la izquierda (L) y pasa al
+estado \textbf{q\_rewind}. 4. \textbf{Estado de rebobinado (q\_rewind):}
+* Se mueve hacia la izquierda (L) saltando cualquier símbolo
+(\textbf{0}, \textbf{1}, \textbf{X}, \textbf{Y}) hasta encontrar un
+blanco \textbf{\#}. * Al encontrar el blanco \textbf{\#}, da un paso a
+la derecha (R) y vuelve al estado \textbf{q0} para iniciar el siguiente
+ciclo. 5. \textbf{Rechazo implícito:} Si en \textbf{q1} o \textbf{q2} se
+encuentra un blanco \textbf{\#} antes de hallar la pareja
+correspondiente, la máquina no tiene transición definida y se detiene
+rechazando la palabra.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{b-l-an-bn-cn-mid-n-ge-1}{%
+\paragraph{\texorpdfstring{(b)
+\(L = \{a^n b^n c^n \mid n \ge 1\}\)}{(b) L = \textbackslash\{a\^{}n b\^{}n c\^{}n \textbackslash mid n \textbackslash ge 1\textbackslash\}}}\label{b-l-an-bn-cn-mid-n-ge-1}}
+
+\textbf{Base teórica:} Este es el ejemplo canónico de un lenguaje
+sensible al contexto (no incontextual). Las gramáticas libres de
+contexto no pueden generar este lenguaje (demostrable vía el Lema del
+Bombeo), pero una MT lo decide emparejando tríos de símbolos.
+
+\textbf{Diseño detallado (Algoritmo sin ambigüedad):} 1. \textbf{Estado
+inicial (q0):} * Lee \textbf{a}, la sustituye por \textbf{X}, se mueve a
+la derecha y pasa a \textbf{q1}. * Si lee \textbf{Y} (lo que indicaría
+que ya no quedan \textbf{a}'s), pasa a un estado de verificación
+\textbf{q\_verify}. 2. \textbf{Estado q1 (buscar la b):} * Salta las
+\textbf{a} y las \textbf{Y} moviéndose a la derecha. * Al leer la
+primera \textbf{b}, la sustituye por \textbf{Y}, se mueve a la derecha y
+pasa a \textbf{q2}. 3. \textbf{Estado q2 (buscar la c):} * Salta las
+\textbf{b} y las \textbf{Z} moviéndose a la derecha. * Al leer la
+primera \textbf{c}, la sustituye por \textbf{Z}, se mueve a la izquierda
+y pasa al estado de rebobinado \textbf{q3}. 4. \textbf{Estado q3
+(rebobinar):} * Se mueve a la izquierda saltando \textbf{a}, \textbf{b},
+\textbf{Y}, \textbf{Z} hasta encontrar la última \textbf{X} escrita. *
+Da un paso a la derecha y vuelve a \textbf{q0}. 5. \textbf{Estado
+q\_verify (comprobar fin de cadena):} * Se mueve a la derecha saltando
+únicamente marcas \textbf{Y} y \textbf{Z}. * Si encuentra un blanco
+\textbf{\#}, la cadena es válida y transita al estado de aceptación
+\textbf{q\_acc}. Si encuentra alguna \textbf{a}, \textbf{b} o \textbf{c}
+suelta, rechaza.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{c-ww-1-mid-w-in-01}{%
+\paragraph{\texorpdfstring{(c)
+\(\{ww^{-1} \mid w \in \{0,1\}^*\}\)}{(c) \textbackslash\{ww\^{}\{-1\} \textbackslash mid w \textbackslash in \textbackslash\{0,1\textbackslash\}\^{}*\textbackslash\}}}\label{c-ww-1-mid-w-in-01}}
+
+\textbf{Base teórica:} Este lenguaje describe palíndromos de longitud
+par. Aquí la notación formal \[w^{-1}\] representa la palabra invertida
+de la cadena binaria \[w\]. Utilizaremos el no determinismo implícito o
+un diseño determinista que recuerda símbolos utilizando el propio estado
+finito de la máquina.
+
+\textbf{Diseño detallado (Algoritmo determinista sin ambigüedad):} 1.
+\textbf{Memorizar y marcar (q0):} * Si lee \textbf{0}, lo marca con
+\textbf{X}, avanza a la derecha y entra en \textbf{q\_find\_0}
+(recordando que debe emparejar un 0). * Si lee \textbf{1}, lo marca con
+\textbf{X}, avanza a la derecha y entra en \textbf{q\_find\_1}
+(recordando que debe emparejar un 1). * Si lee \textbf{X} o un blanco
+\textbf{\#}, significa que la cadena se ha analizado completamente con
+éxito y pasa a \textbf{q\_acc}. 2. \textbf{Ir al final no procesado
+(q\_find\_0 / q\_find\_1):} * Salta los \textbf{0} y \textbf{1} hacia la
+derecha hasta encontrar un blanco \textbf{\#} o una marca \textbf{X}. *
+Retrocede un paso a la izquierda y entra en un estado de verificación
+respectivo \textbf{q\_check\_0} o \textbf{q\_check\_1}. 3.
+\textbf{Verificar el extremo (q\_check\_0 / q\_check\_1):} * En
+\textbf{q\_check\_0}: Si el símbolo es \textbf{0}, lo marca con
+\textbf{X}, se mueve a la izquierda y pasa a \textbf{q\_rewind}. Si no
+es \textbf{0}, rechaza. * En \textbf{q\_check\_1}: Si el símbolo es
+\textbf{1}, lo marca con \textbf{X}, se mueve a la izquierda y pasa a
+\textbf{q\_rewind}. Si no es \textbf{1}, rechaza. 4. \textbf{Rebobinar
+(q\_rewind):} * Se mueve a la izquierda saltando \textbf{0} y \textbf{1}
+hasta encontrar la última marca \textbf{X} de la izquierda. * Da un paso
+a la derecha y vuelve a \textbf{q0}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{d-wcw-mid-w-in-01}{%
+\paragraph{\texorpdfstring{(d)
+\(\{wcw \mid w \in \{0,1\}^*\}\)}{(d) \textbackslash\{wcw \textbackslash mid w \textbackslash in \textbackslash\{0,1\textbackslash\}\^{}*\textbackslash\}}}\label{d-wcw-mid-w-in-01}}
+
+\textbf{Base teórica:} Este es el lenguaje copia, un lenguaje que no es
+libre de contexto. El diseño de esta MT ilustra la técnica de
+``Múltiples pistas'' o marcado de símbolos, donde el alfabeto de trabajo
+es un producto cartesiano. El documento de referencia proporciona el
+modelo exacto detallado para este caso.
+
+\textbf{Diseño detallado (extraído de la demostración algorítmica
+formal):} La MT asume un alfabeto de entrada \textbf{A = \{0, 1, c\}}.
+La idea fundamental radica en recordar el primer símbolo leído mediante
+el estado y verificar que coincida con el primer símbolo no marcado
+después del separador \textbf{c}. 1. \textbf{Marcar y recordar (q1):}
+Leemos el primer símbolo \textbf{a} (donde \textbf{a} puede ser 0 o 1),
+lo recordamos en el estado interno pasando a \textbf{{[}q2, a{]}}, lo
+marcamos como leído (escribiendo el equivalente a \textbf{{[}a, *{]}} en
+una pista virtual) y nos movemos a la derecha. 2. \textbf{Buscar el
+centro (q2):} En el estado \textbf{{[}q2, a{]}}, nos movemos hacia la
+derecha saltando \textbf{0}s y \textbf{1}s hasta encontrar el separador
+\textbf{c}. Al encontrarlo, cambiamos al estado \textbf{{[}q3, a{]}}. 3.
+\textbf{Buscar y comparar destino (q3):} En \textbf{{[}q3, a{]}},
+saltamos todo lo que ya esté marcado a la derecha de \textbf{c}. Cuando
+encontremos el primer símbolo no marcado, verificamos que sea
+exactamente el símbolo \textbf{a} que la máquina recordó en el paso 1.
+Lo marcamos y pasamos al estado de retorno \textbf{{[}q4, \#{]}}. 4.
+\textbf{Retorno (q4 a q6):} Nos movemos hacia la izquierda recorriendo
+todo hasta llegar a \textbf{c} (estado \textbf{q5}) y seguimos a la
+izquierda saltando los símbolos no marcados de la primera mitad hasta
+chocar con el símbolo que marcamos en el paso 1. Al encontrarlo, damos
+un paso a la derecha y volvemos a iniciar el ciclo en \textbf{q1}. 5.
+\textbf{Aceptación (q7 a q9):} Cuando en la primera fase encontramos
+directamente la \textbf{c}, verificamos que todos los símbolos a la
+derecha de la \textbf{c} también estén marcados. Si es así, la máquina
+acepta.
+
+Te animo a trazar estos pasos con cadenas de prueba cortas (por ejemplo,
+\textbf{0011} para el primer problema, o \textbf{0c0} para el último)
+simulando las transiciones estado por estado. Esto consolidará
+definitivamente tu comprensión de la lógica interna de estos autómatas.
+
+\hypertarget{errores-comunes-en-el-apartado-b}{%
+\subsubsection{Errores comunes en el apartado
+b}\label{errores-comunes-en-el-apartado-b}}
+
+\hypertarget{fundamento-teuxf3rico-ampliaciuxf3n-del-alfabeto-marcado-de-suxedmbolos}{%
+\paragraph{1. Fundamento Teórico: Ampliación del Alfabeto (Marcado de
+Símbolos)}\label{fundamento-teuxf3rico-ampliaciuxf3n-del-alfabeto-marcado-de-suxedmbolos}}
+
+En la teoría de autómatas, cuando necesitamos contabilizar o ``tachar''
+un símbolo sin perder el espacio físico que ocupa en la cinta (para no
+destruir la contigüidad de los datos), recurrimos a una técnica conocida
+en textos clásicos (como Hopcroft y Ullman) como \textbf{ampliación del
+alfabeto de cinta} o el uso de \textbf{pistas múltiples}.
+
+En lugar de borrar el símbolo con un blanco general (\texttt{-} o
+\texttt{\#}), lo reemplazamos por una versión ``marcada'' de sí mismo.
+Por ejemplo, si en tu Fase 1 conviertes el alfabeto original en
+\(X, Y, Z\), en tu Fase 2 puedes ``tachar'' usando letras minúsculas:
+\(x, y, z\).
+
+De este modo, el cabezal puede ``caminar'' sobre los símbolos tachados
+(\(x, y, z\)) sabiendo que ya fueron procesados, pero sin confundirlos
+jamás con el límite exterior de la cinta (\texttt{-}).
+
+\hypertarget{algunos-errores-la-soluciuxf3n-detallada-correcciuxf3n-de-fase-2}{%
+\paragraph{2. (Algunos errores) La Solución Detallada (Corrección de
+Fase
+2)}\label{algunos-errores-la-soluciuxf3n-detallada-correcciuxf3n-de-fase-2}}
+
+Vamos a reescribir la Fase 2 de tu algoritmo utilizando \(x, y, z\) como
+símbolos de tachado. Fíjate bien en cómo el estado de rebobinado
+(\texttt{q-rewind}) ahora funciona perfectamente.
+
+\begin{itemize}
+\item
+  \textbf{Paso A: Iniciar el tachado en \texttt{q-verify}} El cabezal
+  está sobre la primera \(X\) disponible. La se tacharon (escribiendo
+  \(x\)) y vamos a buscar la \(Y\).
+  \texttt{q-verify\ X\ x\ r\ qeliminaY}
+\item
+  \textbf{Paso B: Buscar y tachar la \(Y\) en \texttt{qeliminaY}} Hay
+  que saltar las \(X\) aún sin procesar y las \(y\) ya tachadas en
+  ciclos anteriores. \texttt{qeliminaY\ X\ X\ r\ qeliminaY} (salta las
+  \(X\) restantes) \texttt{qeliminaY\ y\ y\ r\ qeliminaY} (salta las
+  \(Y\) ya tachadas) \texttt{qeliminaY\ Y\ y\ r\ qeliminaZ} (encuentra
+  la primera \(Y\) válida, la tacha con \(y\) y avanza)
+\item
+  \textbf{Paso C: Buscar y tachar la \(Z\) en \texttt{qeliminaZ}} Igual
+  que antes, saltamos lo necesario. \textbf{Nota crucial:} Una vez que
+  tachas la \(Z\), el movimiento inmediato debe ser a la izquierda
+  (\texttt{l}), ¡no a la derecha!, para empezar a volver.
+  \texttt{qeliminaZ\ Y\ Y\ r\ qeliminaZ} (salta las \(Y\) restantes)
+  \texttt{qeliminaZ\ z\ z\ r\ qeliminaZ} (salta las \(Z\) ya tachadas)
+  \texttt{qeliminaZ\ Z\ z\ l\ q-rewind} (encuentra la \(Z\), la tacha
+  con \(z\) y \textbf{gira a la izquierda})
+\item
+  \textbf{Paso D: El Rebobinado seguro en \texttt{q-rewind}} Ahora
+  retrocedemos saltando todo (marcados y no marcados) hasta chocar con
+  el símbolo \(x\) que acabamos de marcar en el Paso A.
+  \texttt{q-rewind\ i\ i\ l\ q-rewind} (con \(i \in \{X, Y, Z, y, z\}\))
+  \texttt{q-rewind\ x\ x\ r\ q-verify} (Al chocar con la \(x\), damos un
+  paso a la derecha. ¡El cabezal queda exactamente sobre la siguiente
+  \(X\) lista para el próximo ciclo!)
+\end{itemize}
+
+\hypertarget{la-condiciuxf3n-de-parada-aceptaciuxf3n}{%
+\paragraph{3. La Condición de Parada
+(Aceptación)}\label{la-condiciuxf3n-de-parada-aceptaciuxf3n}}
+
+Con este diseño, ¿qué ocurre cuando ya no quedan más \(X\) que tachar?
+El cabezal, estando en \texttt{q-verify}, leerá una \(y\) (la primera
+\(Y\) que se tachó). Esto indica que se han agotado las \(X\). Para que
+la MT acepte formalmente, hay que verificar que \textbf{solo} quedan
+símbolos tachados (\(y\), \(z\)) hasta llegar al blanco (\texttt{-}), lo
+que demuestra que no sobraron letras.
+
+Añadimos estas transiciones finales:
+\texttt{q-verify\ y\ y\ r\ q-check-end}
+\texttt{q-check-end\ y\ y\ r\ q-check-end} (salta todas las \(y\))
+\texttt{q-check-end\ z\ z\ r\ q-check-end} (salta todas las \(z\))
+\texttt{q-check-end\ -\ -\ *\ halt-accept} (Si llega al final y todo
+estaba tachado, la palabra es perfecta).
+
+\hypertarget{ejercicio-2}{%
+\subsection{Ejercicio 2}\label{ejercicio-2}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Almacenamiento de símbolo:} El conjunto de estados pasa a ser
+  \(Q' \times B\), permitiendo que la unidad de control ``recuerde'' un
+  símbolo (el estado se denota como \([q, b]\)).
+\item
+  \textbf{Pistas Múltiples:} El alfabeto de trabajo de la cinta se
+  define como \(B^k\). Esto nos permite tener los datos intactos en una
+  pista y utilizar otra pista exclusivamente para colocar marcas de
+  control (ej. un símbolo sería \([a, *]\) o \([a, \#]\)).
+\item
+  \textbf{Subrutinas:} Definimos un conjunto de estados con un punto de
+  entrada y uno de retorno para realizar tareas mecánicas repetitivas
+  (como rebobinar o desplazar bloques) sin tener que reescribir la
+  lógica.
+\end{enumerate}
+
+La solución sería:
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{a-palabras-sobre-el-alfabeto-01-con-el-mismo-nuxfamero-de-ceros-que-de-unos-1}{%
+\paragraph{(a) Palabras sobre el alfabeto \{0,1\} con el mismo número de
+ceros que de
+unos}\label{a-palabras-sobre-el-alfabeto-01-con-el-mismo-nuxfamero-de-ceros-que-de-unos-1}}
+
+\textbf{Técnica aplicada:} Pistas múltiples + Almacenamiento de símbolo.
+
+En el diseño original, ``ensuciábamos'' la cinta sobrescribiendo con
+\(X\) e \(Y\). Ahora, utilizaremos una cinta de dos pistas. La pista
+superior tendrá los datos y la inferior las marcas (usaremos \(*\) para
+``emparejado'' y \(\#\) para ``no procesado''). El alfabeto será
+\(B = \{0, 1, \#\} \times \{\#, *\}\). Además, almacenaremos en el
+estado el símbolo que buscamos.
+
+\textbf{Lógica del programa:} 1. \textbf{Inicio y Memorización:} La
+máquina lee el primer símbolo no marcado, por ejemplo, \([0, \#]\). Lo
+marca en la segunda pista escribiendo \([0, *]\) y ``guarda'' en su
+estado finito el símbolo complementario que debe buscar (el \(1\))
+transitando al estado \([q_{buscar}, 1]\). 2. \textbf{Búsqueda
+(Subrutina):} En el estado \([q_{buscar}, 1]\), el cabezal avanza a la
+derecha ignorando cualquier símbolo que ya esté marcado en la segunda
+pista \([*, *]\) y saltando también los de la misma clase no marcados
+\([0, \#]\). 3. \textbf{Emparejamiento:} Al encontrar el símbolo
+complementario \([1, \#]\), lo marca escribiendo \([1, *]\). 4.
+\textbf{Rebobinado (Subrutina):} Llama a una subrutina estándar que
+retrocede a la izquierda hasta encontrar el límite o el último símbolo
+procesado, y reinicia el ciclo principal.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{b-l-an-bn-cn-mid-n-ge-1-1}{%
+\paragraph{\texorpdfstring{(b)
+\(L = \{a^n b^n c^n \mid n \ge 1\}\)}{(b) L = \textbackslash\{a\^{}n b\^{}n c\^{}n \textbackslash mid n \textbackslash ge 1\textbackslash\}}}\label{b-l-an-bn-cn-mid-n-ge-1-1}}
+
+\textbf{Técnica aplicada:} Pistas múltiples (Multipista) y Subrutinas.
+
+Al igual que en el caso anterior, evitaremos borrar las letras
+originales para mantener la integridad de los datos, usando el alfabeto
+\(B = \{a, b, c, \#\} \times \{\#, *\}\).
+
+\textbf{Lógica del programa:} 1. \textbf{Marcar A:} Leemos \([a, \#]\),
+escribimos \([a, *]\) y pasamos a la subrutina \texttt{BUSCAR\_B}. 2.
+\textbf{Subrutina \texttt{BUSCAR\_B}:} El cabezal avanza a la derecha.
+Caben tres lecturas: \([a, \#]\) (otras \(a\) pendientes), \([a, *]\)
+(\(a\) ya procesadas) o \([b, *]\) (\(b\) ya procesadas de ciclos
+anteriores). Saltamos todas ellas. Al leer la primera \([b, \#]\), la
+marcamos como \([b, *]\) y pasamos a \texttt{BUSCAR\_C}. 3.
+\textbf{Subrutina \texttt{BUSCAR\_C}:} Saltamos las \([b, \#]\)
+restantes y las \([c, *]\) ya procesadas. Al leer la primera
+\([c, \#]\), la marcamos como \([c, *]\) y pasamos a la subrutina
+\texttt{REBOBINAR}. 4. \textbf{Subrutina \texttt{REBOBINAR}:} Nos
+movemos hacia la izquierda incondicionalmente hasta encontrar la última
+\([a, *]\) que marcamos. Damos un paso a la derecha y reiniciamos el
+ciclo.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{c-ww-1-mid-w-in-0-1-paluxedndromos-pares}{%
+\paragraph{\texorpdfstring{(c) \(\{ww^{-1} \mid w \in \{0, 1\}^*\}\)
+(Palíndromos
+pares)}{(c) \textbackslash\{ww\^{}\{-1\} \textbackslash mid w \textbackslash in \textbackslash\{0, 1\textbackslash\}\^{}*\textbackslash\} (Palíndromos pares)}}\label{c-ww-1-mid-w-in-0-1-paluxedndromos-pares}}
+
+\textbf{Técnica aplicada:} Almacenamiento de símbolo en el estado.
+
+En tu diseño clásico, necesitabas bifurcar tu programa completamente:
+una rama entera de estados para procesar si leías un \(0\), y otra rama
+entera si leías un \(1\). La técnica de almacenamiento de símbolo
+compacta esto drásticamente.
+
+\textbf{Lógica del programa:} 1. Definimos los estados como
+\([q, \sigma]\) donde \(\sigma \in \{0, 1, \#\}\). 2. \textbf{Leer y
+Recordar:} En el estado inicial \([q_0, \#]\), leemos un símbolo
+\(a \in \{0,1\}\), lo sobrescribimos con un blanco \(\#\) (o lo
+marcamos), y lo ``cargamos'' en el estado pasando a
+\([q_{buscar\_fin}, a]\). 3. \textbf{Avanzar:} La transición genérica
+\(\delta([q_{buscar\_fin}, a], b) = ([q_{buscar\_fin}, a], b, D)\) (para
+cualquier \(b\)) nos lleva al final de la palabra. Al chocar con el
+blanco, retrocedemos un paso a la izquierda pasando a
+\([q_{verificar}, a]\). 4. \textbf{Verificación Mágica:} Aquí ocurre la
+elegancia técnica. Definimos la transición
+\(\delta([q_{verificar}, a], a) = ([q_{rebobinar}, \#], \#, I)\). Esta
+única regla obliga matemáticamente a que el símbolo en la cinta coincida
+con el \(a\) almacenado en el estado. Si no coincide, la MT no tiene
+transición y rechaza inmediatamente.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{d-wcw-mid-w-in-0-1}{%
+\paragraph{\texorpdfstring{(d)
+\(\{wcw \mid w \in \{0, 1\}^*\}\)}{(d) \textbackslash\{wcw \textbackslash mid w \textbackslash in \textbackslash\{0, 1\textbackslash\}\^{}*\textbackslash\}}}\label{d-wcw-mid-w-in-0-1}}
+
+\textbf{Técnica aplicada:} Almacenamiento de símbolo + Pistas Múltiples.
+
+Este es el ejemplo canónico que se resuelve de forma oficial en el
+material de clase (Tema 1, diapositivas 53 a 58). Utiliza el alfabeto
+\(B = \{0, 1, c, \#\} \times \{\#, *\}\) y estados formados por la tupla
+\(Q' \times \{0, 1, \#\}\).
+
+\textbf{Lógica del programa (extraída del modelo formal):} 1.
+\textbf{Fase de memorización:} Leemos el primer símbolo no marcado \(a\)
+(que será \(0\) o \(1\)), lo registramos en la unidad de control
+cambiando al estado \([q_2, a]\), lo marcamos en la cinta escribiendo
+\([a, *]\) y nos movemos a la derecha. 2. \textbf{Transición al segundo
+bloque:} En el estado \([q_2, a]\), avanzamos hacia la derecha hasta que
+detectamos el separador central \texttt{c} (representado como
+\([c, \#]\)), momento en el que transitamos a \([q_3, a]\). 3.
+\textbf{Comprobación de identidad:} En \([q_3, a]\), saltamos todos los
+símbolos que ya tengan la marca \texttt{*} en la segunda pista. Cuando
+encontramos el primer símbolo no marcado, exigimos mediante la función
+de transición que coincida exactamente con el símbolo \(a\) almacenado
+en el estado. Si coincide, se marca escribiendo \([a, *]\) y pasamos al
+estado de retorno \([q_4, \#]\). 4. \textbf{Retorno guiado:} Rebobinamos
+hacia la izquierda cruzando la \texttt{c} (pasando a \(q_5\)) y seguimos
+hasta encontrar un símbolo marcado \([a, *]\) del primer bloque. Damos
+un paso a la derecha hacia el nuevo símbolo no marcado, cambiamos al
+estado inicial \([q_1, \#]\) y repetimos.
+
+\hypertarget{ejercicio-3}{%
+\subsection{Ejercicio 3}\label{ejercicio-3}}
+
+Para este problema, el requerimiento nos impone una restricción muy
+estricta: el alfabeto de trabajo es únicamente \(B = \{0, 1, \#\}\).
+Esto significa que \textbf{no cabe usar pistas múltiples ni símbolos
+especiales de marcado} (como \(X\) o \(Y\)) para recordar dónde
+empezamos.
+
+\hypertarget{fundamentos-teuxf3ricos-acarreo-y-almacenamiento-de-suxedmbolo}{%
+\paragraph{1. Fundamentos Teóricos: ``Acarreo'' y Almacenamiento de
+Símbolo}\label{fundamentos-teuxf3ricos-acarreo-y-almacenamiento-de-suxedmbolo}}
+
+Para solucionar este desafío, hay que aplicar la técnica de
+\textbf{almacenamiento de símbolo en el estado} (recordando el símbolo
+leído en la unidad de control). La estrategia algorítmica es un
+``acarreo'' (shift) en cadena: 1. Leemos el símbolo actual, lo borramos
+(escribiendo un blanco \(\#\)) y se almacena en el estado. 2. Nos
+movemos a la derecha. Leemos el siguiente símbolo, escribimos el que
+traíamos guardado, y guardamos el nuevo. 3. Repetimos hasta encontrar el
+primer blanco \(\#\). Allí depositamos el último símbolo que traíamos.
+4. Retrocedemos a la izquierda hasta chocar con el blanco \(\#\) dejado
+en el paso 1. Esa es la posición original.
+
+\hypertarget{diseuxf1o-detallado-de-las-transiciones}{%
+\paragraph{2. Diseño Detallado de las
+Transiciones}\label{diseuxf1o-detallado-de-las-transiciones}}
+
+Asumiremos que los movimientos posibles son \textbf{D} (Derecha) e
+\textbf{I} (Izquierda). Los estados de la subrutina son:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado inicial de la subrutina:} \(q_{inicio}\)
+\item
+  \textbf{Estados de acarreo:} \(q_{lleva\_0}\) y \(q_{lleva\_1}\)
+\item
+  \textbf{Estado de rebobinado:} \(q_{retorno}\)
+\item
+  \textbf{Estado final de la subrutina (punto de salida):} \(q_{fin}\)
+\end{itemize}
+
+\textbf{Fase 1: Extraer el primer símbolo y dejar el hueco} Si leemos un
+\(0\) o un \(1\), lo guardamos pasando al estado correspondiente, se
+deja un \(\#\) que marca el punto de retorno y se avanza a la derecha.
+Si leemos \(\#\), no hay nada que desplazar y terminamos directamente. *
+\(\delta(q_{inicio}, 0) = (q_{lleva\_0}, \#, D)\) *
+\(\delta(q_{inicio}, 1) = (q_{lleva\_1}, \#, D)\) *
+\(\delta(q_{inicio}, \#) = (q_{fin}, \#, S)\) \emph{(Nota: Si la MT
+permite el movimiento estático \textbf{S}, nos quedamos ahí; si no, la
+subrutina simplemente asume que ya está en la posición correcta).}
+
+\textbf{Fase 2: El desplazamiento en cadena (Acarreo)} En estos estados,
+soltamos el símbolo transportado, se recoge el de la cinta para el
+estado siguiente y se avanza a la derecha. *
+\(\delta(q_{lleva\_0}, 0) = (q_{lleva\_0}, 0, D)\) \emph{(Traigo un 0,
+leo un 0 \(\rightarrow\) dejo un 0, me llevo un 0)} *
+\(\delta(q_{lleva\_0}, 1) = (q_{lleva\_1}, 0, D)\) \emph{(Traigo un 0,
+leo un 1 \(\rightarrow\) dejo el 0, me llevo un 1)} *
+\(\delta(q_{lleva\_1}, 0) = (q_{lleva\_0}, 1, D)\) \emph{(Traigo un 1,
+leo un 0 \(\rightarrow\) dejo el 1, me llevo un 0)} *
+\(\delta(q_{lleva\_1}, 1) = (q_{lleva\_1}, 1, D)\) \emph{(Traigo un 1,
+leo un 1 \(\rightarrow\) dejo el 1, me llevo un 1)}
+
+\textbf{Fase 3: Fin del bloque y depositar el último símbolo} Cuando el
+acarreo encuentra el primer blanco \(\#\), significa que el bloque ha
+terminado. Escribimos el último símbolo que traíamos y comenzamos a
+retroceder a la izquierda. *
+\(\delta(q_{lleva\_0}, \#) = (q_{retorno}, 0, I)\) *
+\(\delta(q_{lleva\_1}, \#) = (q_{retorno}, 1, I)\)
+
+\textbf{Fase 4: Rebobinar hasta la posición de inicio} Ahora nos movemos
+hacia la izquierda saltando los \(0\)s y \(1\)s que acabamos de
+desplazar. Cuando topemos con el blanco \(\#\) (que es exactamente el
+que creamos en la Fase 1), nos detenemos. *
+\(\delta(q_{retorno}, 0) = (q_{retorno}, 0, I)\) *
+\(\delta(q_{retorno}, 1) = (q_{retorno}, 1, I)\) *
+\(\delta(q_{retorno}, \#) = (q_{fin}, \#, S)\) \emph{(O si no se permite
+movimiento \textbf{S}, pasamos a \(q_{fin}\) y damos el control a la
+siguiente instrucción del programa principal).}
+
+\hypertarget{relaciuxf3n-2}{%
+\section{Relación 2}\label{relaciuxf3n-2}}
+
+\paragraph*{Problema 10}
+
+Dado el siguiente programa con variables:
+
+\begin{flushleft}
+\hspace*{2em}\texttt{IF X ENDS 0 GOTO A} \\
+\hspace*{2em}\texttt{IF X ENDS 1 GOTO B} \\
+\hspace*{2em}\texttt{HALT}
+
+\vspace{0.5em}
+\begin{tabular}{@{}l l@{}}
+[A] & \texttt{X <- X-} \\
+    & \texttt{Y <- 0Y} \\
+    & \texttt{IF X ENDS 0 GOTO A}
+\end{tabular}
+
+\vspace{0.8em}
+\begin{tabular}{@{}l l@{}}
+[B] & \texttt{IF X ENDS 1 GOTO B} \\
+    & \texttt{HALT} \\
+    & \texttt{X <- X-} \\
+    & \texttt{Y <- 1Y} \\
+    & \texttt{IF X ENDS 0 GOTO A} \\
+    & \texttt{IF X ENDS 1 GOTO B} \\
+    & \texttt{HALT}
+\end{tabular}
+\end{flushleft}
+
+Construir un programa Post-Turing equivalente (se pueden usar macros).
+
+\hypertarget{relaciuxf3n-4}{%
+\section{Relación 4}\label{relaciuxf3n-4}}
+
+\hypertarget{ejercicio-1-1}{%
+\subsection{Ejercicio 1}\label{ejercicio-1-1}}
 
 \hypertarget{a-todo-grafo-finito-dirigido-acuxedclico-dag-tiene-una-fuente.}{%
 \subsubsection{(a) Todo grafo finito dirigido acíclico (DAG) tiene una
@@ -704,8 +1195,8 @@ que es de tiempo polinómico (lineal).
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{ejercicio-2}{%
-\subsection{Ejercicio 2}\label{ejercicio-2}}
+\hypertarget{ejercicio-2-1}{%
+\subsection{Ejercicio 2}\label{ejercicio-2-1}}
 
 \hypertarget{a-un-grafo-es-bipartito-si-y-solo-si-todos-sus-ciclos-son-de-longitud-par.}{%
 \subsubsection{(a) Un grafo es bipartito si y solo si todos sus ciclos
@@ -794,8 +1285,8 @@ complejidad temporal es \textbf{\(O(|V| + |E|)\)}, que es polinómica.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{ejercicio-3}{%
-\subsection{Ejercicio 3}\label{ejercicio-3}}
+\hypertarget{ejercicio-3-1}{%
+\subsection{Ejercicio 3}\label{ejercicio-3-1}}
 
 \hypertarget{demostrar-que-p-es-cerrada-para-la-uniuxf3n-y-la-intersecciuxf3n.}{%
 \subsubsection{Demostrar que P es cerrada para la unión y la
