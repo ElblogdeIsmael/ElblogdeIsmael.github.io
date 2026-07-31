@@ -1,0 +1,57 @@
+// --- BLOQUE PRINCIPAL (Decisión y Parada) ---
+// Simula: IF X ENDS 0 GOTO A / IF X ENDS 1 GOTO B / HALT
+[START] RIGHT TO NEXT BLANK [1]    // Vamos al final de X
+        LEFT                       // Leemos el último símbolo de X
+        IF 0 GOTO C_0              // Si es 0, preparamos salto a [A]
+        IF 1 GOTO C_1              // Si es 1, preparamos salto a [B]
+        GOTO D                     // Si es # (X está vacía), vamos a parar
+
+[C_0]   LEFT TO NEXT BLANK [1]     // Devolvemos el cabezal al inicio de X
+        GOTO A
+
+[C_1]   LEFT TO NEXT BLANK [1]     // Devolvemos el cabezal al inicio de X
+        GOTO B
+
+[D]     RIGHT                      // Reposicionamos si estaba vacía
+        LEFT TO NEXT BLANK [1]     // Volvemos al inicio de X
+        ERASE BLOCK [1]            // Borramos X (l-1 variables a borrar) para dejar solo Y como salida
+        HALT
+
+// --- ETIQUETA [A]: CASO 0 ---
+// Simula: X <- X- (Expansión para j=1)
+[A]     RIGHT TO NEXT BLANK [1]
+        LEFT
+        IF # GOTO END_X_A          // Si está vacía, no borra nada
+        MOVE BLOCK RIGHT [1]       // Desplaza X a la derecha, machacando el último símbolo
+        RIGHT                      // Reposiciona cabezal
+[END_X_A] 
+
+// Simula: Y <- 0Y (Expansión para j=2, l=2.  [l-j+1] = [2-2+1] = [1])
+        RIGHT TO NEXT BLANK [2]    // Vamos al final de todas las variables
+        MOVE BLOCK RIGHT [1]       // Hacemos hueco desplazando todo desde Y
+        RIGHT
+        PRINT 0                    // Escribimos el 0 al principio de Y
+        LEFT TO NEXT BLANK [2]     // Devolvemos el cabezal al inicio de X
+
+// Simula: GOTO START
+        GOTO START
+
+
+// --- ETIQUETA [B]: CASO 1 ---
+// Simula: X <- X- (Expansión para j=1)
+[B]     RIGHT TO NEXT BLANK [1]
+        LEFT
+        IF # GOTO END_X_B
+        MOVE BLOCK RIGHT [1]
+        RIGHT
+[END_X_B]
+
+// Simula: Y <- 1Y (Expansión para j=2, l=2. [l-j+1] = [1])
+        RIGHT TO NEXT BLANK [2]
+        MOVE BLOCK RIGHT [1]
+        RIGHT
+        PRINT 1
+        LEFT TO NEXT BLANK [2]
+
+// Simula: GOTO START
+        GOTO START

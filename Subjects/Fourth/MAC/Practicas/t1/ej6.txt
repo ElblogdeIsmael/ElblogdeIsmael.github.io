@@ -1,0 +1,66 @@
+; ejercicio 6
+
+; la idea es poner un marcador al final 'c' y llevar las pares al final y luego las impares y ya borrar
+
+; inicialización, ponemos la c al final y volvemos
+
+q0 0 0 r q0
+q0 1 1 r q0
+q0 _ c l rewind
+; q0 _ _ * accept ; si es la palabra vacía aceptamos
+
+q1 0 0 r q1
+q1 1 1 r q1
+q1 _ s l rewind_s
+
+rewind_s 0 0 l rewind_s
+rewind_s 1 1 l rewind_s
+rewind_s _ _ r vuelve_s
+
+rewind 0 0 l rewind
+rewind 1 1 l rewind
+rewind _ _ r q_impar ; sabemos que la pos 1 es impar
+
+q_impar 0 0 r q_par
+q_impar 1 1 r q_par
+q_impar c c l q_par ; nos vamos para la izq porque queremos marcar la parte de la izquierda del separado, no tiene sentido marcar los pares
+
+q_par 0 X r lleva0
+q_par 1 X r lleva1
+q_par c c l copy_impar
+q_par Y Y l copy_impar ; pasamos las Y y seguimos copiando los impares
+q_par X X l copy_impar
+
+copy_impar X X l copy_impar
+copy_impar Y Y l copy_impar
+copy_impar 1 Y r lleva1
+copy_impar 0 Y r lleva0
+copy_impar _ _ r delete_all
+
+; subrutina de copia --------------------
+lleva0 0 0 r lleva0
+lleva0 1 1 r lleva0
+lleva0 c c r lleva0
+lleva0 _ 0 l vuelve
+lleva0 X X r lleva0
+lleva0 Y Y r lleva0 ; hacemos que pase de las X e Y
+
+lleva1 0 0 r lleva1
+lleva1 1 1 r lleva1
+lleva1 c c r lleva1
+lleva1 _ 1 l vuelve
+lleva1 X X r lleva1
+lleva1 Y Y r lleva1 ; hacemos que pase de las X e Y
+
+; -----------------------------------------
+
+; volvemos hasta la marca con X
+vuelve 0 0 l vuelve
+vuelve 1 1 l vuelve
+vuelve c c l vuelve
+vuelve X X r q_impar ; cuando veamos la X damos un paso hacia la derecha y repetimos
+vuelve Y Y r q_impar
+
+delete_all X _ r delete_all
+delete_all Y _ r delete_all
+delete_all c _ r accept

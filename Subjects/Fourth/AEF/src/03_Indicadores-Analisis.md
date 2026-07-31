@@ -183,7 +183,7 @@ En este apartado se añade información crucial que pueda marcar la diferencia d
 1. **La Ecuación Fundamental del Corto Plazo (`FM = NOF + RLN`):** Esta regla de oro (basada en el Tema 3) es la visión _estática_ del equilibrio a corto plazo. Todo el Balance de Situación se divide en dos bloques: la Explotación (lo ligado al negocio diario) y lo Financiero/No comercial.
     
     - Si a tus **NOF** (que son las necesidades del día a día productivo) le sumas los **RLN** (lo que te sobra o te falta en caja), el resultado matemático SIEMPRE será tu **Fondo de Maniobra**.
-    - _Visión dinámica (Tema 5):_ `Δ FM = Δ NOF + Δ RLN`. Si en un año las NOF aumentan brutalmente porque se mete mucho stock, y el FM no crece, matemáticamente se destrozará las RLN (asfixia de tesorería, caso Primor).
+    - _Visión dinámica (Tema 5):_ $\Delta \text{FM} = \Delta \text{NOF} + \Delta \text{RLN}$. Si en un año las NOF aumentan brutalmente porque se mete mucho stock, y el FM no crece, matemáticamente se destrozará las RLN (asfixia de tesorería, caso Primor).
 2. **La Relación Matemática `NOF` y `FEAE` (Flujos de Explotación):** En el Tema 5 se expresa la fórmula vital: `FEAE = FGO - Variación de NOF`.
     
     - **Concepto de examen:** Nunca se debe de confundir ser rentable (FGO positivo) con tener dinero en la caja (FEAE positivo). Si una empresa factura muchísimo pero triplica su almacén de materias primas o le dejan de pagar sus clientes (Aumento inmenso de las NOF), la resta hará que el FEAE se vuelva **negativo**. La empresa será rentable, pero se quedará sin efectivo para pagar nóminas (Cobros < Pagos).
