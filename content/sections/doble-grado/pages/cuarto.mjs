@@ -174,18 +174,23 @@ export default {
                   kind: "PDF",
                 },
                 {
+                  name: "Fundamentos del análisis contable",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/01_fundamentos.md",
+                  kind: "MD",
+                },
+                {
                   name: "Indicadores y Análisis Financiero",
-                  href: "/viewer/?file=Subjects/Fourth/AEF/src/01_teoria.md",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/02_indicadores.md",
                   kind: "MD",
                 },
                 {
                   name: "Formulario",
-                  href: "/viewer/?file=Subjects/Fourth/AEF/src/02_formulario.md",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/03_formulario.md",
                   kind: "MD",
                 },
                 {
                   name: "Simulacro de Examen",
-                  href: "/viewer/?file=Subjects/Fourth/AEF/src/04_simulacro.md",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/05_simulacro.md",
                   kind: "MD",
                 },
                 {
@@ -359,38 +364,13 @@ export default {
                   kind: "MD",
                 },
                 {
-                  name: "Relaciones de problemas resueltas",
+                  name: "Relaciones 1, 2, 4 y 5 resueltas",
                   href: "/viewer/?file=Subjects/Fourth/MAC/src/03_relaciones.md",
                   kind: "MD",
                 },
                 {
                   name: "Convocatorias resueltas 2021-2025",
                   href: "/viewer/?file=Subjects/Fourth/MAC/src/04_examenes.md",
-                  kind: "MD",
-                },
-              ],
-            },
-            {
-              label: "Relaciones de ejercicios",
-              resources: [
-                {
-                  name: "Relación Tema 2",
-                  href: "/Subjects/Fourth/MAC/Practicas/t2/relacion2.pdf",
-                  kind: "PDF",
-                },
-                {
-                  name: "Relación Tema 4",
-                  href: "/Subjects/Fourth/MAC/Practicas/t4/relacion4.pdf",
-                  kind: "PDF",
-                },
-                {
-                  name: "Relación Tema 4 comentada",
-                  href: "/Subjects/Fourth/MAC/Practicas/t4/relacion4_comentada.pdf",
-                  kind: "PDF",
-                },
-                {
-                  name: "Relación Tema 1",
-                  href: "/viewer/?file=Subjects/Fourth/MAC/Practicas/t1/rel1.md",
                   kind: "MD",
                 },
               ],
