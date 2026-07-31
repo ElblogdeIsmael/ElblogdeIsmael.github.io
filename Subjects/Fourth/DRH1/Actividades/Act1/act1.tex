@@ -1,0 +1,256 @@
+% ========================
+% estilo.latex mínimo funcional
+% ========================
+
+\documentclass[12pt]{book} % report para capítulos
+
+% ========================
+% Paquetes y comandos extra
+% ========================
+\input{../../../../../extraFiles/preambulos_oficiales/paquetes.tex}  % si tienes paquetes personalizados
+\input{../../../../../extraFiles/preambulos_oficiales/comandos.tex}  % comandos LaTeX propios
+\input{../../../../../extraFiles/preambulos_oficiales/estilos.tex}   % estilos de secciones, etc.
+
+% % --- AÑADE ESTO AQUÍ ---
+% % Definimos los márgenes generales y el espacio del pie de página
+% \geometry{
+%     a4paper,
+%     top=2.5cm,
+%     bottom=3cm,       % Aumentamos el margen inferior para que quepa el footer
+%     left=2.5cm,
+%     right=2.5cm,
+%     footskip=1.2cm    % Distancia entre el texto normal y el pie de página
+% }
+% % -----------------------
+
+% ========================
+% Inicio del documento
+% ========================
+\begin{document}
+
+% Cambiar puntos suspensivos en el índice
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% Ajustar formato de secciones y subsecciones en el índice
+\renewcommand{\cftsecfont}{\bfseries} % Secciones en negrita
+\renewcommand{\cftsecpagefont}{\bfseries} % Números de página en negrita para secciones
+\renewcommand{\cftsubsecfont}{\normalfont} % Subsecciones en formato normal
+\renewcommand{\cftsubsecpagefont}{\normalfont} % Números de página en formato normal para subsecciones
+
+% Espaciado entre entradas del índice
+\setlength{\cftbeforesecskip}{8pt} % Espaciado antes de secciones
+\setlength{\cftbeforesubsecskip}{4pt} % Espaciado antes de subsecciones
+
+%\input{portada}
+
+%==========================
+% PORTADA: ENTRADA MANUAL
+%==========================
+
+% portada.tex
+\begin{titlepage}
+    \newgeometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm} % márgenes personalizados
+    
+    % Fondo con transparencia
+    \begin{tikzpicture}[remember picture,overlay]
+        % \node[opacity=0.15,inner sep=0pt] at (current page.center)
+        \node[inner sep=0pt] at (current page.center)
+            {\includegraphics[width=\paperwidth,height=\paperheight]{../../../../../extraFiles/img/fondo_ade.jpg}};
+    \end{tikzpicture}
+
+    % Contenido de la portada
+    \begin{center}
+        \vspace*{2cm}
+        
+        \vspace{5cm} % Añadir más espacio antes del contenido
+        {\Huge \bfseries\scshape\textcolor{white}{Recursos Humanos} \par}
+        \vspace{0.5cm}
+        {\Large \itshape\textcolor{white}{Actividad 1} \par}
+        \vspace{0.5cm}
+        % {\small \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
+        % {\small \itshape \href{https://elblogdeismael.github.io}{https://elblogdeismael.github.io} \par}
+
+        \vfill
+        
+        % {\LARGE Ismael Sallami Moreno \par}
+
+        \begin{flushright}
+            {Ismael Sallami Moreno \par}
+            % {\small \itshape \href{https://elblogdeismael.github.io}{Recursos Ingeniería Informática y Ade} \par}
+        \end{flushright}
+        \vspace{0.3cm}
+        % {\Large Universidad de Granada \par}
+        
+        % \vspace{1cm}
+        % \includegraphics[width=0.25\textwidth]{../../../../../extraFiles/img/ugr.png} % opcional: logo
+        % \vspace{1cm}
+        
+        % {\large \today}
+    \end{center}
+    
+    \restoregeometry
+\end{titlepage}
+
+%==========================
+% LICENCIA
+%==========================
+
+% \begin{tikzpicture}[remember picture,overlay]
+% \node[anchor=south west, xshift=1cm, yshift=1cm] at (current page.south west) {
+% \begin{minipage}{0.4\textwidth}
+% \begin{flushleft}
+% \section*{Licencia}
+
+% Este trabajo está bajo una 
+% \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Licencia Creative Commons BY-NC-ND 4.0}.
+
+% \bigskip
+
+% Permisos: Se permite compartir, copiar y redistribuir el material en cualquier medio o formato.
+
+% \bigskip
+
+% Condiciones: Es necesario dar crédito adecuado, proporcionar un enlace a la licencia e indicar si se han realizado cambios. No se permite usar el material con fines comerciales ni distribuir material modificado.
+
+% \bigskip
+
+% \begin{center}
+%   \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[width=0.35\textwidth]{../../../../../extraFiles/img/by-nc-nd.png}}
+% \end{center}
+% \end{flushleft}
+% \end{minipage}
+% };
+% \end{tikzpicture}
+
+% \thispagestyle{empty}
+% \clearpage
+
+%==========================
+% AUTOR
+%==========================
+
+% Página del autor
+% \begin{center}
+%     \vspace*{3cm} % Añadir más espacio en la parte superior
+%     {\Huge Recursos Humanos}\\[2cm] % Incrementar el espacio entre líneas
+%     {\Huge Actividad 1}\\[2cm] % Incrementar el espacio entre líneas
+%     {\Large Ismael Sallami Moreno}\\[1cm] % Incrementar el espacio entre líneas
+%     % \includegraphics[width=0.3\textwidth]{autor.jpg} % opcional foto
+%     \vfill % Añadir espacio flexible para centrar verticalmente
+% \end{center}
+% \thispagestyle{empty}
+
+% % Página en blanco sin estilo
+% \newpage
+% \thispagestyle{empty}
+% \mbox{}
+
+% % Otra página en blanco sin estilo
+% \newpage
+% \thispagestyle{empty}
+% \mbox{}
+
+%==========================
+% BIOGRAFÍA
+%==========================
+
+% Breve descripción del autor
+% \chapter*{Biografía}
+% \addcontentsline{toc}{chapter}{Biografía} % aparece en índice
+% Aquí escribes una breve descripción sobre ti, tu formación, experiencia, etc.
+% \cleardoublepage
+
+% \input{../../../../../extraFiles/preambulos_oficiales/licencia.tex}  % licencia
+% \thispagestyle{empty} % quitar número de página en la portada
+% \clearpage
+
+% --- Índice ---
+% \tableofcontents
+% \listoffigures
+% \clearpage
+% \thispagestyle{empty} % quitar estilo de la página en blanco
+
+%\listoftables
+%\clearpage
+%\thispagestyle{empty} % quitar número de página en la portada
+%\clearpage
+%
+% Índice de código
+%\renewcommand{\lstlistlistingname}{Índice de Código}
+%\lstlistoflistings
+%\clearpage
+%
+% Índice de ecuaciones
+%\renewcommand{\listtheoremname}{Índice de Ecuaciones}
+%\listoftheorems[ignoreall,show={equation}]
+%\clearpage
+
+% --- Contenido Markdown generado por Pandoc ---
+% --- INICIO PÁGINA 2 EN BLANCO ---
+\clearpage
+\thispagestyle{empty} % Quita el número de página y el pie/encabezado
+\mbox{}               % Inserta una caja vacía invisible
+\clearpage
+% --- FIN PÁGINA 2 EN BLANCO ---
+
+% Resolución de la actividad 1
+
+\section*{Preguntas de las tres lecturas}
+
+\begin{enumerate}
+    \item ¿Qué entiende por EMPLOYER BRANDING? Justifique su respuesta.
+    Por EMPLOYER BRANDING se entiende como el conjunto de estrategias, políticas, iniciativas y herramientas que una empresa utiliza para posicionar y gestionar su marca. El objetivo principal de esta gestión es servir como un elemento determinante para la atracción y retención de las personas (enfocándose en el talento). Con esto se busca no solo incorporar a los mejores profesionales, sino también conseguir su máximo compromiso para que ``vivan con pasión'' la marca de la empresa. Este concepto surgió en Estados Unidos a finales de los años 80, justificándose por la exigencia de las nuevas generaciones, la evolución hacia el entorno digital y la inmersión competitiva a futuro.
+    \item Explique cómo esta tendencia puede condicionar la gestión de los recursos humanos de la empresa.
+    Esto exige que la función de los Recursos Humanos experimente un cambio profundo y rompa con sus inercias tradicionales. Abarca varios puntos: Evolución de un rol puramente gestor a uno ``facilitador'', ya que si el departamento quiere aportar verdadero valor estratégico, el departamento debe de externalizar o automatizar las tareas operativas, la gestión proactiva de la diversidad generacional, fomento de la co-creación y la escucha activa (escucha constante a través de encuestas y focus groups), alianza estratégica con Marketing y Comunicación, decisiones basadas en datos y métricas y la gestión del cambio y la brecha motivacional.
+    \item Busque 3 ejemplos de empresas catalogadas como ``EMPLOYER BRANDING'' y explique qué acciones realizan en esa materia.
+    Según las lecturas encontramos:
+    \begin{enumerate}
+        \item MSD del sector farmacéutico: basó su premisa de que el valor de sus empleados es su principal ventaja, ya que solo con profesionales altamente comprometidos se obtienen buenos resultados. Crearon una propuesta de un proyecto ``Está en mí'' tras un proceso de autodescubrimiento para averiguar que unía a la organización. Llevaron a cabo una escucha activa preguntando tanto a nivel interno como externo que era lo que más valoraban de la empresa, descubrieron que sus empleados se enorgullecían de cuatro pilares (formar parte de una compañia grande en valores, con oportunidades de desarrollo continuo, innovadora y con un fuerte compromiso social que fomenta flexibilidad) y difundieron esta cultura a través de su intranet, decorando los centros de trabajo, publicando en medios externos y participando en certificaciones como Top Employers.
+        \item Securitas Direct del sector de seguridad: el reto de la empresa era transformar una percecepción externa negativa, ya que se le veia como una compañia tradicional, simple y comercial, lo que dificultaba el reclutamiento. Para ello identificaron sus verdaderos atributos diferenciales (alta innovación, liderazgo, crecimiento constante y rol social de proteger a las personas). Incrementaron sus apariciones en medios de comunicación, participaron en eventos y redes sociales, ... con el fin de posicionarse como un excelente lugar para trabajar. Implementaron encuestas de compromiso, potenciarn la comunicación interna e identificaron a los trabajadores más comprometidos para convertirlos en prescriptores logrando un crecimiento neto de 350 personas en un solo año.
+        \item Banc Sabadell del sector financiero: a pesar de pertenecer a un sector castigado reputacionalmente en los últimos años, el banco apostó por diferenciarse mediante una cultura basada en el buen servicio, la confianza y la cercanía. Tomaron la responsabilidad social corporativa como experiencia de marca fomentando la alta participación de los empleados de todas las edades en causas solidarias, de salud o deportivas. Premian a jóvenes destacados en investigación e innovación (reconocimiento del talento joven). Participaron en proyectos solidarios como el Trail Walker de Intermón Oxfam, esta acción que no requiere de grandes inversiones económicas, refuerza enormemente los valores de superación, la cohesión, el orgullo de pertenencia y difunde una excelente imagen de marca.
+    \end{enumerate}
+    \item Aporte propuestas a la dirección de recursos humanos de una empresa para que gestione eficientemente las diferentes generaciones que puedan existir en su plantilla.
+    Tenemos que hoy en día hay una gran diversidad generacional en las plantillas, abarcando desde los Baby Boomers hasta la Generación Z, por lo que podemos considerar estas opciones para gestionar eficientemente esta diversidad:
+    \begin{itemize}
+        \item Implementar sistemas de retribución y beneficios flexibles que se adapten a las necesidades de cada generación. Por ejemplo, los Baby Boomers suelen interesarse más en planes de retiro, la generación X busca compensaciones a corto plazo para equilibrar su vida familiar y los Milennials prefieren beneficios que les permitan continuar formándose.
+        \item Fomentar el aprendizaje cruzado y el mentoring intergeneracional. Se puede proponer instaurar programas donde los empleados más jóvenes enseñen el uso de las nuevas tecnologías a los veteranos, mientras que los profesionales con más antigüedad pueden compartir su conocimiento de negocio y experiencia con los más jóvenes.
+        \item Promover la co-creación mediante la escucha activa. Por ejemplo, realizando encuestas periódicas para conocer las preferencias.
+        \item Impulsar la flexibilidad laborar y erradicar el presentismo. Fomentando el teletrabajo que hemos tratado en la asignatura y facilitar la formación virtual. 
+        \item Gestionar activamente la brecha motivacional. Con la responsabilidad de acompañar a los más profesionales más veteranos para que desarrollen su automotivación y no se queden estancados del nuevo entorno digital. Se debe de gestionar, simultáneamente, la rápida frustración y el aburrimiento de los jóvenes.
+        \item Generar cohesión a través de experiencias compartidas de RSC. Fomentar lap participación conjunta en causas de Resposabilidad Social Corporativa, ayudándose así a difuminar las barreras de la edad. Este tipo de actividades refuerzan enormemente el orgullo de pertenencia, la cohesión y el trabajo en equipo sin requerir grandes inversiones económicas.
+    \end{itemize}
+    \item Identifique y justifique los principales retos a los que se van a enfrentar las organizaciones en materia de dirección de recursos humanos.
+    Podemos encontrar los siguientes:
+    \begin{itemize}
+        \item Tranformación radicalmente el rol de RR.HH. de gestor a facilitador. Las organizaciones deben de romper con la inercia tradicional. El reto consiste en dejar de ser un departamento enfocado enn al prestación de servicios básicos y el control de los procesos. Para logarlo, se deben de automatizar entre el 70\% y el 80\% de las tareas operativas que no aportan valor directo al negocio. De esta manera, RR.HH. podrá centrarse en ser un facilitador que crea entornos y espacios donde los profesionales puedan desarrollarse y poner en valor su conocimiento.
+        \item Atraer y fidelizar talento en un entorno 100\% digital. A pesar de las altas tasas de paro, es un error pensar que el talento llegará solo por el miedo a la incertidumbre laboral. Las nuevas generaciones son muy exigentes, por lo que las empresas se enfrental al reto de construir un fuerte Employer Branding digital. Dado que la mayoría de candidatos busca empleo vía online, la marca como emprendedor debe estar activa en redes sociales y plataformas digitales para ``enamorar'' a los candidatos, exigiendo una alianza estrecha entre RR.HH. y Marketing.
+        \item Gestionar la diversidad generacional mediante políticas flexibles. En las plantillas actuales conviven los Baby Boomers, la Generación X, los Milennials, cada uno con valores, necesidades y momentos vitales muy diferentes. El desafio es abandonar las políticas de ``café para todos'' e implementar sistemas de compensación diferenciados y flexibles, que permitan a cada empleado elegir sus beneficios. Además, RR.HH debe aprovechar esta diversidad promoviendo el aprendizaje cruzado (que los jóvenes enseñen tecnología y los veteranos aporten su experiencia).
+        \item Afrontar la brecha motivacional y gestionar las emociones. Más allá de la brecha digital, encontramos la brecha motivacional. RR.HH. debe de acompañar a los profesionales para que no queden descolgados, fomentando entre ellos la automotivación y la capacidad de reinventarse. Además, se enfrentan al reto de gestionar la frustación, los egos y el rápido aburrimiento de los perfiles más jóvenes, quienes demandan sistemas muy dinámicos, cambios constantes de paisaje y un propósito en los que hacen.
+        \item Fomentar la co-creación y la escucha activa. Los nuevos profesionales rechazan las jerarquías rígidas y los modelos altamente burocratizados. El reto es es integrar a los empleados como parte activa en el diseño de las políticas de gestión de personas. Para ello, las empresas deben utilizar herramientas como encuestas o focus groups que recojan la opinión real de los colaboradores y adapten la propuesta de valor a sus verdaderas preferencias.
+        \item Erradicar el presentismo apostando por la flexibilidad laboral. La relación entre el mero presentismo físico en la oficina y la productividad está obsoleta. Los candidatos, especialmente las nuevas generaciones, valoran enormemente la libertar para trabajar y tomar decisiones. Las organizaciones deben transformar sus cultura corporativa hacia una cultura de resultados, implementando planes de flexibilidad, teletrabajo y conciliación, ya que son factores determinantes para situarse en la mente de los mejores candidatos.
+        \item Medir el retorno de inversión (Big Data) y garantizar la coherencia. Cualquier estrategia de talento exige una inversión que debe ser justificada. RR.HH. tiene el reto de integrar métricas y herramientas de Big Data para conocer el retorno exacto de sus acciones, evaluar la eficacia de los canales de captación y saber cuánto cuesta contratar a cada persona. Todo esto debe destar englobado en un marco de absoluta coherencia, donde los líderes prediquen con el ejemplo, prometer medidas que no se cumplen genera decepción y es la actitud más destructiva para la rentención del talento.
+    \end{itemize}
+\end{enumerate}
+
+\section*{Pregunta del bloque ``Lecturas Complementarias''}
+
+\begin{enumerate}
+    \setcounter{enumi}{5}
+    \item Identifique y justifique las principales tendencias en dirección de recursos humanos a raíz de la pandemia COVID-19.
+    Las principales tendencias en dirección de recursos humanos a raíz de la pandemia COVID-19 son:
+    \begin{itemize}
+        \item Consolidación del modelo de trabajo híbrido y la flexibilidad laboral. La pandemia provocó un auge inicial del teletrabajo forzado, pero la principal tendencia que ha llegado para quedarse es el modelo de trabajo mixto o híbrido, que combina la actividad en remoto con la presencial en la oficina. Esta tendencia se justifica porque el teletrabajo al 100\% resiente el aspecto social y humano de los equipos, dificultando la transmisión de la cultura empresarial y propiciando escenarios de estrés laboral. Hoy en día, los empleados anteponen la flexibilidad laboral y la autonomía al salario a la hora de cambiar de empleo. Por ello, 9 de cada 10 candidatos valoran el trabajo híbrido positivamente, convirtiéndolo en una herramienta determinante y un beneficio extra indispensable para la captación y retención de talento.
+        
+        \item Aceleración de la digitalización y el ``Onboarding'' digital. La crisis sanitaria y el distanciamiento obligaron a acelerar exponencialmente la adopción de tecnología en el entorno laboral. Como resultado, los procesos de RR.HH. se han digitalizado profundamente mediante el uso de Inteligencia Artificial y Big Data para el reclutamiento, o la implementación de redes sociales corporativas colaborativas. Destaca especialmente el \textit{onboarding digital}, al no haber contacto físico, las empresas se han visto obligadas a diseñar experiencias virtuales, plataformas interactivas y técnicas de gamificación (mecánicas de juego) para integrar a las nuevas incorporaciones y lograr que asimilen la cultura de la empresa desde la distancia.
+        
+        \item Foco prioritario en el bienestar emocional y el derecho a la desconexión. El teletrabajo durante la pandemia alargó las jornadas laborales de los empleados (hasta dos horas más durante el confinamiento), dificultando la separación entre la vida profesional y personal. Por este motivo, garantizar la salud mental y el equilibrio emocional de las plantillas se ha convertido en uno de los grandes retos de RR.HH.. Las tendencias actuales se centran en implementar programas para garantizar la desconexión digital fuera del horario laboral y de las vacaciones. Además, se han afianzado iniciativas como las líneas de atención psicológica 24/7, prácticas de mindfulness y cursos para gestionar el estrés.
+        
+        \item Estrategias frente a ``la gran renuncia'' mediante el desarrollo del talento interno. La pandemia provocó un profundo cambio en las percepciones y objetivos vitales de los profesionales, detonando tasas de dimisión inusualmente altas conocidas como ``la gran renuncia'' o ``fuga de cerebros''. Para evitar la pérdida de talento, las organizaciones están priorizando el desarrollo de carreras internas y el reciclaje profesional (\textit{reskilling} y \textit{upskilling}). Para ello se justifican técnicas innovadoras como el \textit{snack learning} o microaprendizaje, que permite a los empleados consumir formación digital en pequeñas píldoras a su propio ritmo. También se potencia el \textit{implacement}, es decir, analizar internamente las capacidades de los trabajadores para reubicarlos en nuevas responsabilidades o áreas dentro de la misma empresa y fomentar su motivación profesional.
+        
+        \item Liderazgo con mentalidad híbrida y auge de las habilidades blandas. Las estructuras organizativas han cambiado, por lo que se requiere un nuevo estilo de liderazgo adaptado a entornos híbridos y basado en la empatía, la confianza y la comunicación transparente. Para construir estos nuevos ``súper equipos'' capaces de lidiar con la incertidumbre, las competencias transversales o \textit{soft skills} han cobrado un protagonismo igual o mayor que las habilidades puramente técnicas. Destacan altamente la capacidad de resolución de problemas, el espíritu de equipo, la resiliencia, la comunicación y la inteligencia emocional para gestionar las crisis del nuevo paradigma laboral.
+    \end{itemize}
+\end{enumerate}
+
+
+
+\end{document}
