@@ -40,6 +40,9 @@
 \pgfplotsset{compat=1.18}
 \usepackage{float}            % Control de posición de figuras/tablas
 \usepackage{booktabs}         % Tablas profesionales
+\usepackage{longtable}        % Tablas que ocupan varias páginas: pandoc las usa
+                              % para toda tabla de markdown, así que sin este
+                              % paquete cualquier asignatura con tablas no compila
 \usepackage{multirow}         % Celdas que ocupan varias filas
 \usepackage{array}            % Más control en tablas
 \usepackage{colortbl}         % Tablas con colores
@@ -179,6 +182,28 @@
 % \usegdlibrary{force, layered}
 
 \usepackage[htt]{hyphenat}
+
+% pandoc envuelve el código en línea en \passthrough cuando se le pasa
+% --listings, y normalmente lo define en el preámbulo que él mismo genera. Como
+% aquí usamos plantilla propia, ese preámbulo no llega y hay que definirlo.
+\providecommand{\passthrough}[1]{#1}
+
+% ===========================
+% Símbolos Unicode del markdown
+% ===========================
+% pdfLaTeX solo entiende los caracteres que inputenc conoce, y aborta con
+% «Unicode character not set up for use with LaTeX» ante el resto. Los apuntes
+% se escriben en markdown, donde estos símbolos se teclean directamente, así
+% que se declaran aquí en vez de obligar a escribirlos como comandos.
+\DeclareUnicodeCharacter{2265}{\ensuremath{\geq}}
+\DeclareUnicodeCharacter{2264}{\ensuremath{\leq}}
+\DeclareUnicodeCharacter{2260}{\ensuremath{\neq}}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+\DeclareUnicodeCharacter{2190}{\ensuremath{\leftarrow}}
+\DeclareUnicodeCharacter{21D2}{\ensuremath{\Rightarrow}}
+\DeclareUnicodeCharacter{00D7}{\ensuremath{\times}}
+\DeclareUnicodeCharacter{2248}{\ensuremath{\approx}}
+\DeclareUnicodeCharacter{20AC}{\euro{}}
 
 
 
