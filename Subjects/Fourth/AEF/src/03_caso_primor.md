@@ -21,13 +21,13 @@ No ha sido suficiente. Si el Periodo Medio de Maduración (PMM) es de 64 días y
 * **A la vista de los análisis realizados, y de los que usted quiera añadir, ¿cree que la empresa está financiando adecuadamente las inversiones que mantiene en el año 2019?**
 Sí, la empresa cuenta con una estructura financiera sólida para sus inversiones. Su Fondo de Maniobra en 2019 asciende a 741.746,57. Al ser este mayor que sus Necesidades Operativas de Financiación (436.926,50), la empresa genera unos Recursos Líquidos Netos (RLN) positivos de 304.820,07. Esto indica un cómodo colchón financiero de seguridad.
 
-Para ello podemos ver el coste de financiación no propia que es de 0,2180 y ver que esta fenomenal, ya que solo usa el 0,2180 de financiación en el 2019.
+El coste de la financiación no propia lo confirma: se sitúa en el 0,2180 % en 2019, un nivel muy reducido.
 
 
 * **Explique por qué el resultado neto de explotación se ha incrementado en un 125%**
 El fuerte incremento del resultado neto de explotación se explica por una doble mejora en sus componentes. Por un lado, el margen de explotación ha mejorado ligeramente del 5,38% al 5,62%. Por otro, la rotación del activo de explotación ha experimentado una subida de más del 50%, pasando de 2,11 a 3,28, impulsando de forma combinada la rentabilidad económica de la explotación. 
 
-Debemos de fijarnos en la PyG funcional, y vemos que el aumento del resultado de explotación se debe fundamentalmente de las cifras de ventas de la empresa (ingresos de explotación).
+La cuenta de pérdidas y ganancias funcional lo aclara: el aumento del resultado de explotación procede sobre todo de la cifra de ventas, es decir, de los ingresos de explotación.
 
 
 * **Explique por qué el resultado del ejercicio ha sufrido un aumento del 84% durante el ejercicio 2019 cuando el resultado neto de explotación se ha incrementado en un 125%**
@@ -146,7 +146,7 @@ Si la opción e existiese, sería la d.
 
 
 **Respuesta correcta: d) Las respuestas a y b son correctas.** 
-*Justificación:* Si te exigen pagar antes, pierdes financiación gratuita, por lo que el pasivo espontáneo cae y, por matemáticas, tus Necesidades Operativas de Financiación (NOF) aumentan. Al mismo tiempo, al tener que pagar facturas más rápido de lo habitual, hay una salida acelerada de dinero de tu caja, lo que reduce tus Flujos de Efectivo de las Actividades de Explotación (FEAE).
+*Justificación:* Si te exigen pagar antes, pierdes financiación gratuita, por lo que el pasivo espontáneo cae y, por matemáticas, tus Necesidades Operativas de Financiación (NOF) aumentan. Al mismo tiempo, al tener que pagar facturas más rápido de lo habitual, se produce una salida acelerada de tesorería, lo que reduce los Flujos de Efectivo de las Actividades de Explotación (FEAE).
 
 
 
@@ -165,7 +165,7 @@ Si la opción e existiese, sería la d.
 
 
 
-**Respuesta correcta: c) La reducción en el tiempo de pago a sus proveedores.** *Justificación:* En los indicadores vemos un hundimiento del 75,99% en el subperiodo de pago a proveedores (de 141,33 días en 2018 a solo 33,94 días en 2019). Esta brutal aceleración a la hora de pagar a los proveedores es la principal fuga de efectivo operativo de la compañía durante el año.
+**Respuesta correcta: c) La reducción en el tiempo de pago a sus proveedores.** *Justificación:* Los indicadores recogen un hundimiento del 75,99 % en el subperiodo de pago a proveedores (de 141,33 días en 2018 a solo 33,94 días en 2019). Esta brutal aceleración a la hora de pagar a los proveedores es la principal fuga de efectivo operativo de la compañía durante el año.
 
 
 
@@ -184,7 +184,7 @@ Si la opción e existiese, sería la d.
 
 
 
-**Respuesta correcta: a) Ha sido más eficiente en la utilización de los consumos de la explotación...** *Justificación:* Sabemos que el Margen de Explotación aumentó del 5,38% al 5,62%. Que el margen mejore significa que por cada euro de ingresos por ventas, la empresa consigue retener más beneficio operativo, lo que es sinónimo de una mayor eficiencia gestionando los consumos y costes del día a día frente a los ingresos generados.
+**Respuesta correcta: a) Ha sido más eficiente en la utilización de los consumos de la explotación...** *Justificación:* El Margen de Explotación aumentó del 5,38 % al 5,62 %. Que el margen mejore significa que por cada euro de ingresos por ventas, la empresa consigue retener más beneficio operativo, lo que es sinónimo de una mayor eficiencia gestionando los consumos y costes del día a día frente a los ingresos generados.
 
 
 
@@ -247,7 +247,7 @@ Justificación: Tal y como confirma el aumento de plantilla de la pregunta 8 (pa
 
 
 
-11. En base a los indicadores de Rentabilidad que presenta la empresa Perfumerías PRIMOR podemos concluir que, en el ejercicio 2019: 
+11. En base a los indicadores de Rentabilidad que presenta la empresa Perfumerías PRIMOR cabe concluir que, en el ejercicio 2019: 
 
 * a) La rentabilidad financiera ha aumentado de forma menos que proporcional a la rentabilidad económica. 
 

@@ -175,7 +175,12 @@ export default {
                 },
                 {
                   name: "Indicadores y Análisis Financiero",
-                  href: "/viewer/?file=Subjects/Fourth/AEF/src/03_Indicadores-Analisis.md",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/01_teoria.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Formulario",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/02_formulario.md",
                   kind: "MD",
                 },
                 {
@@ -344,18 +349,23 @@ export default {
                   kind: "PDF",
                 },
                 {
-                  name: "Ejercicios Relación 4 y 5",
-                  href: "/viewer/?file=Subjects/Fourth/MAC/src/03_tercer_examen_MAC_practicas.md",
+                  name: "Calculabilidad y modelos de cómputo",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/src/01_calculabilidad.md",
                   kind: "MD",
                 },
                 {
-                  name: "Simulacro Examen 3 MAC",
-                  href: "/viewer/?file=Subjects/Fourth/MAC/src/04_simulacro_examen3_practicas.md",
+                  name: "Clases de complejidad",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/src/02_complejidad.md",
                   kind: "MD",
                 },
                 {
-                  name: "Guía Resolución Exámenes 2021-2025",
-                  href: "/viewer/?file=Subjects/Fourth/MAC/src/GUIA_RESOLUCION_EXAMENES_2021-2025.md",
+                  name: "Relaciones de problemas resueltas",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/src/03_relaciones.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Convocatorias resueltas 2021-2025",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/src/04_examenes.md",
                   kind: "MD",
                 },
               ],
