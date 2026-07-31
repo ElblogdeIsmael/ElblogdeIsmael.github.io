@@ -1,0 +1,88 @@
+;  inicializamos...
+; Colocamos el marcador 'c' al final y volvemos al inicio
+q0 0 0 r q0
+q0 1 1 r q0
+q0 _ c l rewind
+
+rewind 0 0 l rewind
+rewind 1 1 l rewind
+rewind _ _ r q_impar
+
+;  procesamos pares...
+; Avanzamos por la palabra marcando los pares con X
+q_impar 0 0 r q_par ; sabemos que empezamos por 1 que es impar
+q_impar 1 1 r q_par
+q_impar c c l rewind_fase2 ; Si llegamos a 'c', la palabra era de longitud par
+
+q_par 0 X r lleva0_par
+q_par 1 X r lleva1_par
+q_par c c l rewind_fase2 ; Si llegamos a 'c', la palabra era de longitud impar
+
+; Subrutinas de copia PARA LOS PARES
+lleva0_par 0 0 r lleva0_par
+lleva0_par 1 1 r lleva0_par
+lleva0_par c c r lleva0_par
+lleva0_par X X r lleva0_par
+lleva0_par _ 0 l vuelve_par
+
+lleva1_par 0 0 r lleva1_par
+lleva1_par 1 1 r lleva1_par
+lleva1_par c c r lleva1_par
+lleva1_par X X r lleva1_par
+lleva1_par _ 1 l vuelve_par
+
+vuelve_par 0 0 l vuelve_par
+vuelve_par 1 1 l vuelve_par
+vuelve_par c c l vuelve_par
+vuelve_par X X r q_impar 
+
+;  pasamos a la fase 2.....
+; Rebobinamos al inicio absoluto para empezar con los impares
+rewind_fase2 0 0 l rewind_fase2
+rewind_fase2 1 1 l rewind_fase2
+rewind_fase2 X X l rewind_fase2
+rewind_fase2 c c l rewind_fase2
+rewind_fase2 _ _ r q_copia_impar
+
+;  procesamos impares, esta es la fase 2...
+; Buscamos los 0s y 1s restantes, los marcamos con Y y los copiamos al final
+q_copia_impar X X r q_copia_impar
+q_copia_impar Y Y r q_copia_impar
+q_copia_impar 0 Y r lleva0_imp
+q_copia_impar 1 Y r lleva1_imp
+q_copia_impar c c l rewind_cleanup ; Fin de procesamiento
+
+; Subrutinas de copia IMPARES ...
+lleva0_imp 0 0 r lleva0_imp
+lleva0_imp 1 1 r lleva0_imp
+lleva0_imp c c r lleva0_imp
+lleva0_imp X X r lleva0_imp
+lleva0_imp Y Y r lleva0_imp
+lleva0_imp _ 0 l vuelve_imp
+
+lleva1_imp 0 0 r lleva1_imp
+lleva1_imp 1 1 r lleva1_imp
+lleva1_imp c c r lleva1_imp
+lleva1_imp X X r lleva1_imp
+lleva1_imp Y Y r lleva1_imp
+lleva1_imp _ 1 l vuelve_imp
+
+vuelve_imp 0 0 l vuelve_imp
+vuelve_imp 1 1 l vuelve_imp
+vuelve_imp c c l vuelve_imp
+vuelve_imp X X l vuelve_imp
+vuelve_imp Y Y r q_copia_impar ; Retorno seguro al bucle de impares
+
+;  limpieza...
+; Volvemos al principio para borrar los marcadores
+rewind_cleanup 0 0 l rewind_cleanup
+rewind_cleanup 1 1 l rewind_cleanup
+rewind_cleanup X X l rewind_cleanup
+rewind_cleanup Y Y l rewind_cleanup
+rewind_cleanup c c l rewind_cleanup
+rewind_cleanup _ _ r delete_all
+
+; Borramos X, Y y c convirtiéndolos en blancos...
+delete_all X _ r delete_all
+delete_all Y _ r delete_all
+delete_all c _ r accept

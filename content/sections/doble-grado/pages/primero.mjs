@@ -330,7 +330,7 @@ export default {
               resources: [
                 {
                   name: "Air-lines Project",
-                  href: "https://github.com/Ismael-Sallami/Air-lines-Project",
+                  href: "https://github.com/Ismael-Sallami/airline-routes-adt",
                   kind: "WEB",
                 },
               ],

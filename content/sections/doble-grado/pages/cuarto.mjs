@@ -28,6 +28,16 @@ export default {
             {
               resources: [
                 {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/CG/TEX/CG.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Exámenes",
+              resources: [
+                {
                   name: "Tests Parcial 1",
                   href: "/Subjects/Fourth/CG/test/test.html",
                   kind: "HTML",
@@ -68,8 +78,13 @@ export default {
             {
               resources: [
                 {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/DDSI/build/DDSI.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Repositorio GitHub de Prácticas",
-                  href: "https://github.com/Ismael-Sallami/DDSI",
+                  href: "https://github.com/Ismael-Sallami/oracle-dbms-project",
                   kind: "WEB",
                 },
               ],
@@ -154,18 +169,33 @@ export default {
             {
               resources: [
                 {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/AEF/AEF.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Fundamentos del análisis contable",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/01_fundamentos.md",
+                  kind: "MD",
+                },
+                {
                   name: "Indicadores y Análisis Financiero",
-                  href: "/viewer/?file=Subjects/Fourth/AEF_pandoc/src/03_Indicadores-Analisis.md",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/02_indicadores.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Formulario",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/03_formulario.md",
                   kind: "MD",
                 },
                 {
                   name: "Simulacro de Examen",
-                  href: "/viewer/?file=Subjects/Fourth/AEF_pandoc/src/04_simulacro.md",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/05_simulacro.md",
                   kind: "MD",
                 },
                 {
                   name: "Plataforma de Estudio",
-                  href: "/Subjects/Fourth/AEF_pandoc/AEF_Plataforma_Estudio.html",
+                  href: "/Subjects/Fourth/AEF/AEF_Plataforma_Estudio.html",
                   kind: "HTML",
                 },
               ],
@@ -177,6 +207,21 @@ export default {
           name: "Dirección de Recursos Humanos I",
           blocks: [
             {
+              resources: [
+                {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/DRH1/DRH1.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Portafolio CaixaBank (trabajo en grupo)",
+                  href: "/Subjects/Fourth/DRH1/practicas/portafolio-caixabank.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Exámenes",
               resources: [
                 {
                   name: "Tests Ordinaria",
@@ -228,6 +273,11 @@ export default {
                   href: "/Subjects/Fourth/EE/EE.pdf",
                   kind: "PDF",
                 },
+                {
+                  name: "Informe de coyuntura (trabajo en grupo)",
+                  href: "/Subjects/Fourth/EE/practicas/informe-coyuntura-economia-espanola.pdf",
+                  kind: "PDF",
+                },
               ],
             },
           ],
@@ -237,6 +287,16 @@ export default {
           name: "Organización de Empresas",
           blocks: [
             {
+              resources: [
+                {
+                  name: "Informe-diagnóstico CaixaBank (trabajo en grupo)",
+                  href: "/Subjects/Fourth/OE/practicas/informe-caixabank.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Exámenes",
               resources: [
                 {
                   name: "Test Exámenes Anteriores",
@@ -275,7 +335,7 @@ export default {
                 },
                 {
                   name: "Repositorio GitHub de Prácticas",
-                  href: "https://github.com/Ismael-Sallami/AA-practices",
+                  href: "https://github.com/Ismael-Sallami/machine-learning-practices",
                   kind: "WEB",
                 },
               ],
@@ -289,18 +349,28 @@ export default {
             {
               resources: [
                 {
-                  name: "Ejercicios Relación 4 y 5",
-                  href: "/viewer/?file=Subjects/Fourth/MAC_pandoc/src/03_tercer_examen_MAC_practicas.md",
+                  name: "Temario",
+                  href: "/Subjects/Fourth/MAC/MAC.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Calculabilidad y modelos de cómputo",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/src/01_calculabilidad.md",
                   kind: "MD",
                 },
                 {
-                  name: "Simulacro Examen 3 MAC",
-                  href: "/viewer/?file=Subjects/Fourth/MAC_pandoc/src/04_simulacro_examen3_practicas.md",
+                  name: "Clases de complejidad",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/src/02_complejidad.md",
                   kind: "MD",
                 },
                 {
-                  name: "Guía Resolución Exámenes 2021-2025",
-                  href: "/viewer/?file=Subjects/Fourth/MAC_pandoc/src/GUIA_RESOLUCION_EXAMENES_2021-2025.md",
+                  name: "Relaciones 1, 2, 4 y 5 resueltas",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/src/03_relaciones.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Convocatorias resueltas 2021-2025",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/src/04_examenes.md",
                   kind: "MD",
                 },
               ],
@@ -315,7 +385,7 @@ export default {
               resources: [
                 {
                   name: "Repositorio GitHub de Prácticas",
-                  href: "https://github.com/Ismael-Sallami/MH-Practices",
+                  href: "https://github.com/Ismael-Sallami/metaheuristics",
                   kind: "WEB",
                 },
               ],
