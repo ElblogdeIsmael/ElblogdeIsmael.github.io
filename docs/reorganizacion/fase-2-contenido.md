@@ -5,6 +5,47 @@ copiarlo) · **Rama:** `reorg/fase-2-contenido`
 
 ---
 
+## Estado: primera pasada hecha, la destructiva pendiente
+
+La pasada del 2026-07-31 hizo **la parte C, la parte D de cuarto y las prácticas de
+grupo**. La parte A y la B —mover el material ajeno— siguen pendientes, a propósito:
+**`git rm` no baja ni un byte del `size-pack`**, porque el peso vive en el historial y
+solo la [fase 3](fase-3-historial.md) lo reescribe. Lo que sí queda es el inventario
+medido en `.inventario-material-ajeno.txt`: **217 ficheros, 972 MB**.
+
+Decisiones tomadas en esa pasada:
+
+- El material ajeno irá a **copia local**, no al repositorio privado `apuntes-material`
+  que proponía la parte A. Son 1,5 GB con libros comerciales dentro.
+- **Tercero sale de esta fase.** Ninguna de sus 13 asignaturas sigue la estructura
+  canónica y su material es PDF, no markdown: convertirlo es migrar contenido, que es el
+  trabajo de la [fase 6](fase-6-contenido-pendiente.md).
+
+### Lo que estaba mal en este documento
+
+1. **`git add -f Subjects/Fourth/*/build/*.pdf` habría publicado menos.** CG, DO-1, EM,
+   IG y MC guardan su contenido en `src/tex/*.tex`, que `TEX/<ASIG>.tex` incluye con
+   `\input`; el `Makefile` hace `glob src/*.md` y nunca los ve. El PDF de LaTeX es más
+   completo en los cuatro casos que compilan (CG 46/33, DO-1 57/43, EM 69/54, MC
+   103/61), y `DO-1/src/` son nueve líneas de markdown detrás de un documento de 57
+   páginas. **El flujo canónico de esas cinco es el LaTeX**, y unificarlo con el pandoc
+   es trabajo de la [fase 4](fase-4-plantillas.md).
+2. **`AEF` no era un duplicado sino un esqueleto**: sus secciones tenían una línea. El
+   contenido estaba en `AEF_pandoc`. Solo una pregunta corta vivía únicamente en el
+   `primor.tex` viejo.
+3. **`MAC` era al revés**: `src/01_Teoria.md` y `src/02_Practicas.md` eran el texto de la
+   plantilla sin rellenar («Este es un ejemplo de contenido de teoría»), versionados, y
+   el PDF publicado eran 11 páginas de relleno mientras 2.871 líneas de trabajo real
+   estaban sin versionar bajo `Practicas/` y `TEX/`.
+4. **`extraFiles/` y `htmlFiles/` no son residuo.** `extraFiles/preambulos_oficiales/` es
+   la plantilla LaTeX que comparten 8 Makefile y una veintena de `.tex`, y
+   `htmlFiles/history.html` es un stub de redirección vivo a `/historia.html`. La nota de
+   que «nada del generador los enlaza» es cierta pero engañosa: los Makefile sí.
+5. **`OE` no tiene temario, pero sí prácticas.** Están en repos privados de la
+   organización `InfoBoys`, igual que las de EE y DRH1.
+
+---
+
 ## Objetivo
 
 Dejar en el blog **solo lo que el sitio publica**: apuntes propios en fuente y PDF.
@@ -167,13 +208,17 @@ es lo que hace que la web tenga huecos.
 - [ ] **OE**: versionar y preparar el temario; hoy solo hay 3 tests.
 - [ ] **DDSI**: 11 ficheros versionados y **cero enlaces** en la web. Versionar el PDF y
       dejarlo listo para enlazar en la [fase 5](fase-5-indexado.md).
-- [ ] **PDF de `build/` que faltan**: CG (11 de 24), DO-1, EM, IG, MC. La regla
-      `!Subjects/**/build/*.pdf` del `.gitignore` ya los permite; simplemente no se
-      añadieron.
-
-  ```bash
-  git add -f Subjects/Fourth/*/build/*.pdf
-  ```
+- [x] **DRH1**: hecho. Su `Makefile` además apuntaba a `../preambulos_oficiales/`, que no
+      existe; como el flag va protegido por `$(wildcard ...)`, pandoc corría sin plantilla
+      y producía 11 páginas planas en vez del libro. Con la ruta arreglada, 47 páginas.
+- [x] **DDSI**: hecho. `src/01_Teoria` y `src/02_practica` habían perdido la extensión
+      `.md`, así que el glob no los cogía y las prácticas no entraban en el PDF. 21 → 24
+      páginas.
+- [x] **CG**: no tenía ningún PDF versionado. Publicadas sus 46 páginas.
+- [ ] **OE**: no hay temario en disco. Pasa a la [fase 6](fase-6-contenido-pendiente.md).
+      Sus prácticas sí se publicaron, ver más abajo.
+- [x] ~~`git add -f Subjects/Fourth/*/build/*.pdf`~~ **No hacerlo.** Publicaría menos que
+      lo que la web ya sirve: ver el punto 1 del estado, arriba.
 
 - [ ] Comprobar que ningún enlace de `content/` apunta a algo no versionado:
 
@@ -187,10 +232,37 @@ es lo que hace que la web tenga huecos.
 
 ---
 
+## Parte C bis · Las prácticas que estaban en repos de la organización
+
+Hecho el 2026-07-31. Tres asignaturas tenían su trabajo de grupo en repositorios
+**privados** de `InfoBoys`, y el blog no los enlazaba. Enlazar el repositorio habría dado
+un 404 a cualquiera de fuera del equipo, así que **se copió solo el PDF final**. Los
+repositorios no se tocaron y siguen privados.
+
+| Repo | Asignatura | Qué se publicó |
+| --- | --- | --- |
+| `OrganizacionCaixaBank` | OE | `OE.pdf`, 42 páginas |
+| `Spanish-Economy` | EE | compilado de `main.tex`, 46 páginas |
+| `RecursosHumanosCaixaBank` | DRH1 | `portafoliofinal.tex`, 120 páginas |
+
+Detalles que costaron tiempo:
+
+- **Solo OE traía el PDF compilado.** `Spanish-Economy` solo tiene fuentes, y el
+  `capitulos.pdf` de `RecursosHumanosCaixaBank` son 583 bytes sin trailer ni tabla xref:
+  no es un PDF válido.
+- **DRH1 tiene cuatro documentos raíz**, pero `portafoliofinal.tex` hace `\input` de los
+  capítulos de los otros tres más el informe global, la autoevaluación y las entrevistas.
+  Ese solo cubre todo.
+- **`InfoBoys/SpanishEconomyJJDM` no es de Ismael**: cero commits suyos, es el trabajo del
+  otro grupo. Es la trampa 7 otra vez.
+- No se copiaron los enunciados del profesorado ni los cuatro PDF de wuolah que hay dentro
+  de esos repositorios, ni `TodosLosTemas.pdf`, que produjo iOS Quartz y es un escaneo de
+  móvil, no el trabajo del equipo.
+
 ## Parte D · Estructura canónica
 
-Aplicar a las 14 asignaturas de cuarto y las 13 de tercero la estructura que ya usan CG,
-DO-1, EM, IG, MC y DDSI:
+**Solo las asignaturas de cuarto.** Tercero queda fuera, ver el estado al principio.
+Aplicar la estructura que ya usan CG, DO-1, EM, IG, MC y DDSI:
 
 ```
 Subjects/<Curso>/<CODIGO>/
@@ -202,15 +274,28 @@ Subjects/<Curso>/<CODIGO>/
 └── referencias.bib
 ```
 
-- [ ] Fusionar los duplicados: `AEF_pandoc` → `AEF`, `MAC_pandoc` → `MAC`. Hoy hay dos
-      árboles por asignatura y **ninguno de los dos tiene el PDF versionado**, así que el
-      temario no llega a la web por partida doble.
-- [ ] Renombrar `Subjects/Fourth/MAC_pandoc/NOMBRE_ASIGNATURA.pdf` → `MAC.pdf` y el `.tex`
-      correspondiente. Es la plantilla que se quedó sin renombrar.
-- [ ] Ajustar `PROJECT` en el `Makefile` de esas asignaturas.
-- [ ] Actualizar los enlaces de `content/sections/doble-grado/pages/cuarto.mjs` que apuntan
-      a `AEF_pandoc/` y `MAC_pandoc/`.
-- [ ] `npm run build` tras cada cambio de rutas.
+- [x] Fusionar los duplicados: `AEF_pandoc` → `AEF` (23 → 40 páginas), `MAC_pandoc` →
+      `MAC` (11 → 62). No quedan carpetas `*_pandoc`.
+- [x] Renombrar `NOMBRE_ASIGNATURA.{pdf,tex}` → `MAC.{pdf,tex}` y `PROJECT = MAC`. La
+      portada de MAC también seguía diciendo «Nombre de la Asignatura».
+- [x] Actualizar los enlaces de `cuarto.mjs`, y de paso los siete de `content/` que
+      apuntaban a nombres viejos de repositorio y vivían de la redirección de GitHub.
+- [x] `npm run build` tras cada cambio de rutas.
+
+**`--listings` fuera en AEF y MAC.** El paquete `listings` lee en verbatim, así que no
+pasa por `inputenc`: cualquier acento o símbolo dentro de un fragmento de código aborta la
+compilación, y encima señala una línea que no es la culpable. MAC tiene 193 fragmentos
+así. Las asignaturas con código de verdad lo conservan.
+
+**Tres arreglos en la plantilla compartida** (`extraFiles/preambulos_oficiales/`), que
+faltaban desde siempre y solo salían cuando una asignatura los pisaba:
+
+- `\usepackage{longtable}`: pandoc lo emite para toda tabla de markdown. DRH1 es la única
+  asignatura con tablas, por eso el hueco no se había visto.
+- `\providecommand{\passthrough}`: pandoc lo usa para el código en línea con `--listings`
+  y lo define en el preámbulo que él genera, que con plantilla propia no llega. AA fallaba
+  por esto.
+- Cuarenta y tantos `\DeclareUnicodeCharacter` con los símbolos que usan los apuntes.
 
 ---
 

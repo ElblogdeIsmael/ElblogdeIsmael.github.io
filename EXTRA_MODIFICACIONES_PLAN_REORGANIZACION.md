@@ -1,0 +1,21 @@
+- [x] añadir autores a quienes lo son también OK
+- [x] corregir PDF to md
+- [x] corregir md2html y enlaces poner en inglés
+- [x] Repo de arch inglés quitar emoticonos y mejorar a ser posible
+- [x] Media manager dejar imágenes pero repasar e inglés
+- [x] Añadir repo de algorítmica
+- [x] Añadir repo de algorítmica (te tengo que dar mas info)
+- [x] Añadiendo los algoritmos al repo de algoritmos
+- [x] eliminar mifos del repo y ponerlo en otro privado para verlo yo, son los informes que estan en workspace_ssd/PROJECTS_GSOC_2026/MIFOS/mifos-gazelle 
+- [ ] En la fase tres no entiendo por qué se tiene que hacer eso y reescribir lo que es todo no quiero que se destruya nada así que investiga para ver cuál es la mejor manera
+- [ ] Claro, y se borran todos los cómmits? Porque eso después cuenta hombre que el número de cómics cuenta para lo que es el por folio
+- [ ] He mirado que ahí un látex moderno que es typst es igual de potente que látex? Es que veo que supone mucho cambio pasarlo todo ahí
+- [ ] Veo que si tienen dos markdown y látex mi idea cuando se hizo fue que hacerlo todo en Markdown, pero es que claro si tú te pones a escribir un gráfico en látex, pero en Mark no te auto completa y eso es bastante tedioso entonces cuál es la mejor idea aquí
+- [x] En el repaso de asignaturas añadir que en economía española recursos humanos y organización de empresas las prácticas están en repos de organización — hecho el 2026-07-31: se copió el PDF final de cada uno al blog y se enlazó. Los repos de InfoBoys siguen privados y sin tocar. Detalle en PRACTICAS_ORG_DEMAS.md
+- [ ] Discutir aún lo de la sección de proyectos, porque mi por folio si los tengo, pero tampoco lo veo mala idea que se pongan en el blogdeismael, pero estaria duplicado no?
+- [ ] Añadir que para los casos que no haya contenido hacer un plan revisando la guía docente de la asignatura y añadiendo el contenido bien redactado el 3 persona y demás sin IA. Como si quieres las asignaturas de 3 pasar el contenido de PDF a el formato que se va a usar y hacerlo para tener todo con una estructura correcta ya que los de 1,2 los añadiremos viendo el contenido en guía docente y demás
+      - Lo que la fase 2 dejó en esta lista, el 2026-07-31:
+        - **OE no tiene temario** en ningún sitio, solo tres tests. Sus prácticas ya se publicaron, pero el temario hay que escribirlo.
+        - **Las 13 asignaturas de tercero** salen de la fase 2: ninguna sigue la estructura canónica y su material es PDF, no markdown. Pasarlas al formato nuevo es este punto.
+        - **IG no compila**: le falta `src/tex/pr1-2.tex`, que no está ni en disco ni en git. Su PDF publicado (157 páginas) sigue sirviendo, pero el fuente no lo reproduce.
+        - **DRH1: dos preguntas perdidas.** `test/test.md.bak` tiene dos preguntas que no están en el `test.md` actual. El respaldo se dejó en disco, sin versionar, para que decidas si se recuperan.
