@@ -146,7 +146,7 @@ El ratio de garantía de **1,45** es adecuado. Significa que por cada euro de de
 
 **Respuesta:**
 
-La reducción de los deudores en **154.096,06 €** ha tenido un **impacto positivo** sobre las NOF. En la fórmula `NOF = Activo de Explotación − Pasivo de Explotación`, cualquier descenso del activo operativo reduce directamente las necesidades de financiación en el mismo importe, liberando tesorería. Es decir, la empresa ha cobrado más rápido y ha "desatascado" dinero que antes estaba inmovilizado en facturas pendientes.
+La reducción de los deudores en **154.096,06 €** ha tenido un **impacto positivo** sobre las NOF. En la fórmula $\text{NOF} = \text{Activo de Explotación} - \text{Pasivo de Explotación}$, cualquier descenso del activo operativo reduce directamente las necesidades de financiación en el mismo importe, liberando tesorería. Es decir, la empresa ha cobrado más rápido y ha "desatascado" dinero que antes estaba inmovilizado en facturas pendientes.
 
 No obstante, este efecto favorable queda completamente sepultado por el brutal aumento de las existencias (+692.845 €), que es el verdadero responsable del disparo global de las NOF.
 
@@ -274,7 +274,7 @@ La cantidad absoluta de pasivo aumenta (+501.291 €), pero la proporción cae d
 
 **Pregunta 3 — Respuesta D ("Ninguna es correcta") — Trampa clásica**
 
-Si `NOF = −602.987 €`, el resultado es **negativo**, lo que matemáticamente significa que el Pasivo de Explotación (acreedores) supera al Activo de Explotación. No hay "necesidades" que financiar: son los **proveedores quienes financian a la empresa** (y no al revés), generando un excedente de financiación gratuita. En este escenario:
+Si $\text{NOF} = -602.987\ €$, el resultado es **negativo**, lo que matemáticamente significa que el Pasivo de Explotación (acreedores) supera al Activo de Explotación. No hay "necesidades" que financiar: son los **proveedores quienes financian a la empresa** (y no al revés), generando un excedente de financiación gratuita. En este escenario:
 
 - La opción A es falsa: los acreedores ya están "de más", no "financiando" ninguna necesidad.
 - La opción B es falsa: los RLN absorben ese excedente, no lo generan.
@@ -316,7 +316,7 @@ La opción C es falsa: los FGO dependen del resultado contable (ventas, gastos),
 | Variación NOF | +1.146.232 € | — |
 | **FEAE estimado** | **~−422.000 €** | **~+positive** |
 
-Aunque el beneficio crece enormemente (FGO sólido), el dinero queda atrapado en existencias disparadas. La fórmula `FEAE = FGO − ΔNOF` convierte el resultado positivo en un flujo de caja negativo. Las demás opciones son falsas: la amortización forma parte del FGO (no lo destruye) y los proveedores pagaron *antes* (reduciendo el Pasivo de Explotación y elevando las NOF aún más).
+Aunque el beneficio crece enormemente (FGO sólido), el dinero queda atrapado en existencias disparadas. La fórmula $\text{FEAE} = \text{FGO} - \Delta \text{NOF}$ convierte el resultado positivo en un flujo de caja negativo. Las demás opciones son falsas: la amortización forma parte del FGO (no lo destruye) y los proveedores pagaron *antes* (reduciendo el Pasivo de Explotación y elevando las NOF aún más).
 
 ---
 

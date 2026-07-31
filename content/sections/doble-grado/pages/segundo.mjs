@@ -80,7 +80,7 @@ export default {
               resources: [
                 {
                   name: "TDA-Image",
-                  href: "https://github.com/Ismael-Sallami/TDA-Imagen/tree/main",
+                  href: "https://github.com/Ismael-Sallami/image-adt/tree/main",
                   kind: "WEB",
                 },
               ],

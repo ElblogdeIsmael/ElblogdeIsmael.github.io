@@ -159,18 +159,23 @@ export default {
             {
               resources: [
                 {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/AEF/AEF.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Indicadores y Análisis Financiero",
-                  href: "/viewer/?file=Subjects/Fourth/AEF_pandoc/src/03_Indicadores-Analisis.md",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/03_Indicadores-Analisis.md",
                   kind: "MD",
                 },
                 {
                   name: "Simulacro de Examen",
-                  href: "/viewer/?file=Subjects/Fourth/AEF_pandoc/src/04_simulacro.md",
+                  href: "/viewer/?file=Subjects/Fourth/AEF/src/04_simulacro.md",
                   kind: "MD",
                 },
                 {
                   name: "Plataforma de Estudio",
-                  href: "/Subjects/Fourth/AEF_pandoc/AEF_Plataforma_Estudio.html",
+                  href: "/Subjects/Fourth/AEF/AEF_Plataforma_Estudio.html",
                   kind: "HTML",
                 },
               ],
@@ -310,7 +315,7 @@ export default {
                 },
                 {
                   name: "Repositorio GitHub de Prácticas",
-                  href: "https://github.com/Ismael-Sallami/AA-practices",
+                  href: "https://github.com/Ismael-Sallami/machine-learning-practices",
                   kind: "WEB",
                 },
               ],
@@ -324,18 +329,48 @@ export default {
             {
               resources: [
                 {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/MAC/MAC.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Ejercicios Relación 4 y 5",
-                  href: "/viewer/?file=Subjects/Fourth/MAC_pandoc/src/03_tercer_examen_MAC_practicas.md",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/src/03_tercer_examen_MAC_practicas.md",
                   kind: "MD",
                 },
                 {
                   name: "Simulacro Examen 3 MAC",
-                  href: "/viewer/?file=Subjects/Fourth/MAC_pandoc/src/04_simulacro_examen3_practicas.md",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/src/04_simulacro_examen3_practicas.md",
                   kind: "MD",
                 },
                 {
                   name: "Guía Resolución Exámenes 2021-2025",
-                  href: "/viewer/?file=Subjects/Fourth/MAC_pandoc/src/GUIA_RESOLUCION_EXAMENES_2021-2025.md",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/src/GUIA_RESOLUCION_EXAMENES_2021-2025.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              label: "Relaciones de ejercicios",
+              resources: [
+                {
+                  name: "Relación Tema 2",
+                  href: "/Subjects/Fourth/MAC/Practicas/t2/relacion2.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Relación Tema 4",
+                  href: "/Subjects/Fourth/MAC/Practicas/t4/relacion4.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Relación Tema 4 comentada",
+                  href: "/Subjects/Fourth/MAC/Practicas/t4/relacion4_comentada.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Relación Tema 1",
+                  href: "/viewer/?file=Subjects/Fourth/MAC/Practicas/t1/rel1.md",
                   kind: "MD",
                 },
               ],
@@ -350,7 +385,7 @@ export default {
               resources: [
                 {
                   name: "Repositorio GitHub de Prácticas",
-                  href: "https://github.com/Ismael-Sallami/MH-Practices",
+                  href: "https://github.com/Ismael-Sallami/metaheuristics",
                   kind: "WEB",
                 },
               ],

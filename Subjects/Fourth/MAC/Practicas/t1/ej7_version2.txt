@@ -1,0 +1,22 @@
+;  como estado inicial buscamos el primer 1 
+; Escaneamos de izquierda a derecha saltando los ceros.
+q0 0 0 r q0
+q0 1 X r q_find_end  ; encontramos un 1, lo marcamos con x y vamos a buscar al final
+q0 _ _ * accept      ; si solo vemos ceros o llegamos al final, la cadena ya está ordenada.
+
+;  SUBRUTINA: Ir al final de la cadena 
+q_find_end 0 0 r q_find_end
+q_find_end 1 1 r q_find_end 
+q_find_end _ _ l q_find_0    ; llegamos al blanco final, damos un paso a la izq.
+
+;  SUBRUTINA: Buscar el último 0 
+; Escaneamos de derecha a izquierda saltando los unos.
+q_find_0 1 1 l q_find_0
+q_find_0 0 1 l q_return_X    ; vemos un 0 mal ubicado, lo cambiamos por 1 (hacemos la mitad del swap) y volvemos.
+q_find_0 X 1 r accept        ; si chocamos con la X sin encontrar un 0, todo está ordenado. restauramos el 1 y aceptamos.
+
+;  SUBRUTINA: Volver a la marca X 
+; Viajamos a la izquierda hasta encontrar nuestra marca X.
+q_return_X 0 0 l q_return_X
+q_return_X 1 1 l q_return_X
+q_return_X X 0 r q0          ; vemos la X. La cambiamos por 0 (completamos el swap). Damos un paso a la derecha y reiniciamos el ciclo. 

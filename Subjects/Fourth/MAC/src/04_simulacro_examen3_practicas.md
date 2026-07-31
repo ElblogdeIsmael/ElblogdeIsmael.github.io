@@ -104,6 +104,7 @@ Si le prohibimos a la máquina mover su cabezal hacia atrás, le impedimos ejecu
 6.  Sabiendo que una memoria de tamaño $s$ puede codificar como máximo $2^{O(s)}$ configuraciones diferentes, la desigualdad $2^{O(s)} \ge 2^m$ requiere matemáticamente que **$s = \Omega(m)$**. Tomando la longitud de los prefijos como la mitad de la palabra ($m = \lfloor n/2 \rfloor$), se demuestra formalmente que la máquina precisa almacenar todos los tipos, necesitando forzosamente un espacio lineal **$O(n)$**.
 
 ---
+
 ### Ejercicio 5 (Cierre de la Clase NP para la Estrella de Kleene $L^*$)
 
 **Enunciado del Simulacro:**
@@ -211,6 +212,7 @@ En el interior de cada ciclo, la máquina solo realiza multiplicaciones y divisi
 Por consiguiente, el tiempo total global del algoritmo es el producto del número de vueltas por el coste interno ($O(n) \cdot O(n^2)$), lo que resulta en un tiempo estrictamente acotado por un polinomio **$O(n^3)$**. Queda demostrado así formalmente que el problema se ubica dentro de la **clase P**.
 
 ---
+
 ### Pregunta 9 (El Problema de la Factorización)
 
 **Enunciado:**

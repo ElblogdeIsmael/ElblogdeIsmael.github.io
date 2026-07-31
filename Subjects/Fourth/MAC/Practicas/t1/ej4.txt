@@ -1,0 +1,21 @@
+; Si leemos un 0, invocamos la subrutina para saltar ceros sin movernos aún.
+q0 0 0 * skip_zeros
+; Si leemos un 1, nos movemos a la derecha y pasamos al estado de verificación.
+q0 1 1 r seen_one
+; Si la cadena está vacía, aceptamos.
+q0 _ _ * halt-accept
+
+; SUBRUTINA:
+; Mientras lea 0, se mueve a la derecha manteniéndose en el bucle de la subrutina.
+skip_zeros 0 0 r skip_zeros
+; Si alcanza un 1, termina la subrutina, se mueve a la derecha y pasa el control al estado global.
+skip_zeros 1 1 r seen_one
+; Si alcanza un blanco, termina la subrutina y acepta la cadena.
+skip_zeros _ _ * halt-accept
+
+; Si acabamos de procesar un 1 y leemos un 0, "11" no... Volvemos a invocar la subrutina.
+seen_one 0 0 * skip_zeros
+; Si acabamos de procesar un 1 y leemos otro 1, la cadena es inválida. Rechazamos.
+seen_one 1 1 * halt-reject
+; Si acabamos de procesar un 1 y leemos un blanco, llegamos al final de forma segura. Aceptamos.
+seen_one _ _ * halt-accept

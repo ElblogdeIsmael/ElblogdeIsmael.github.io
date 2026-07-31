@@ -1,0 +1,4435 @@
+% ========================
+% estilo.latex mínimo funcional
+% ========================
+
+\documentclass[12pt]{book} % report para capítulos
+
+% ========================
+% Paquetes y comandos extra
+% ========================
+\input{../../../extraFiles/preambulos_oficiales/paquetes.tex}  % si tienes paquetes personalizados
+\input{../../../extraFiles/preambulos_oficiales/comandos.tex}  % comandos LaTeX propios
+\input{../../../extraFiles/preambulos_oficiales/estilos.tex}   % estilos de secciones, etc.
+
+% ========================
+% Configuración índice y listas
+% ========================
+\setlength{\cftbeforesecskip}{5pt}
+\setlength{\headheight}{14pt}  % un poco más que 13.6pt
+
+\renewcommand{\normalsize}{\fontsize{10}{12}\selectfont}
+
+% Fix para listas de Pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+%===============
+% ESPACIOS
+%===============
+
+% --- Compactar secciones ---
+\titlespacing*{\section}{0pt}{1.2ex plus 0.5ex minus 0.2ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{1ex plus 0.3ex minus 0.2ex}{0.5ex}
+
+% --- Compactar flotantes (figuras/tablas) ---
+\setlength{\textfloatsep}{8pt}
+\setlength{\intextsep}{6pt}
+\setlength{\floatsep}{6pt}
+
+% --- Compactar listas ---
+\setlist{nosep}
+
+% --- Espacio entre párrafos ---
+\setlength{\parskip}{4pt}
+
+
+
+%=======================
+% fancy with parameters
+%=======================
+%\fancyfoot[L]{\scriptsize\itshape Modelos Avanzados de Computación}
+\fancyfoot[L]{\normalsize Modelos Avanzados de
+Computación} % pie de página izquierdo con tamaño normal
+
+\setcounter{tocdepth}{1} % Muestra solo hasta subsecciones en el índice
+
+%=======================
+% reset chapter 0 with one more \part
+%=======================
+
+\makeatletter
+\@addtoreset{chapter}{part}
+\makeatother
+
+
+% ========================
+% Inicio del documento
+% ========================
+\begin{document}
+
+% Cambiar puntos suspensivos en el índice
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% Ajustar formato de secciones y subsecciones en el índice
+\renewcommand{\cftsecfont}{\bfseries} % Secciones en negrita
+\renewcommand{\cftsecpagefont}{\bfseries} % Números de página en negrita para secciones
+\renewcommand{\cftsubsecfont}{\normalfont} % Subsecciones en formato normal
+\renewcommand{\cftsubsecpagefont}{\normalfont} % Números de página en formato normal para subsecciones
+
+% Espaciado entre entradas del índice
+\setlength{\cftbeforesecskip}{8pt} % Espaciado antes de secciones
+\setlength{\cftbeforesubsecskip}{4pt} % Espaciado antes de subsecciones
+
+
+
+%\input{portada}
+
+
+%==========================
+% PORTADA: ENTRADA MANUAL
+%==========================
+
+% portada.tex
+\begin{titlepage}
+    \newgeometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm} % márgenes personalizados
+    
+    % Fondo con transparencia
+    \begin{tikzpicture}[remember picture,overlay]
+        % \node[opacity=0.15,inner sep=0pt] at (current page.center)
+        \node[inner sep=0pt] at (current page.center)
+            {\includegraphics[width=\paperwidth,height=\paperheight]{../../../extraFiles/img/fondo_info.jpg}};
+    \end{tikzpicture}
+
+    % Contenido de la portada
+    \begin{center}
+        \vspace*{2cm}
+        
+        \vspace{5cm} % Añadir más espacio antes del contenido
+        {\Huge \bfseries\scshape\textcolor{white}{Modelos Avanzados de
+Computación} \par}
+        \vspace{0.5cm}
+        {\Large \itshape\textcolor{white}{Apuntes de la
+asignatura} \par}
+        \vspace{0.5cm}
+        % {\small \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
+        % {\small \itshape \href{https://elblogdeismael.github.io}{https://elblogdeismael.github.io} \par}
+
+
+        \vfill
+        
+        % {\LARGE Ismael Sallami Moreno \par}
+
+        \begin{flushright}
+            {\textcolor{white}{Ismael Sallami Moreno} \par}
+            {\textcolor{white}{Recursos Ingeniería Informática y Ade} \par}
+            % {\small \itshape \href{https://elblogdeismael.github.io}{Recursos Ingeniería Informática y Ade} \par}
+        \end{flushright}
+        \vspace{0.3cm}
+        % {\Large Universidad de Granada \par}
+        
+        % \vspace{1cm}
+        % \includegraphics[width=0.25\textwidth]{../../../extraFiles/img/ugr.png} % opcional: logo
+        % \vspace{1cm}
+        
+        % {\large \today}
+    \end{center}
+    
+    \restoregeometry
+\end{titlepage}
+
+
+%==========================
+% LICENCIA
+%==========================
+
+\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=south west, xshift=1cm, yshift=1cm] at (current page.south west) {
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft}
+\section*{Licencia}
+
+Este trabajo está bajo una 
+\href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Licencia Creative Commons BY-NC-ND 4.0}.
+
+\bigskip
+
+Permisos: Se permite compartir, copiar y redistribuir el material en cualquier medio o formato.
+
+\bigskip
+
+Condiciones: Es necesario dar crédito adecuado, proporcionar un enlace a la licencia e indicar si se han realizado cambios. No se permite usar el material con fines comerciales ni distribuir material modificado.
+
+\bigskip
+
+\begin{center}
+  \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[width=0.35\textwidth]{../../../extraFiles/img/by-nc-nd.png}}
+\end{center}
+\end{flushleft}
+\end{minipage}
+};
+\end{tikzpicture}
+
+\thispagestyle{empty}
+\clearpage
+
+%==========================
+% AUTOR
+%==========================
+
+% Página del autor
+\begin{center}
+    \vspace*{3cm} % Añadir más espacio en la parte superior
+    {\Huge Modelos Avanzados de
+Computación}\\[2cm] % Incrementar el espacio entre líneas
+    {\Large Ismael Sallami Moreno}\\[1cm] % Incrementar el espacio entre líneas
+    % \includegraphics[width=0.3\textwidth]{autor.jpg} % opcional foto
+    \vfill % Añadir espacio flexible para centrar verticalmente
+    {\small \itshape \href{https://elblogdeismael.github.io}{https://elblogdeismael.github.io}}
+\end{center}
+\thispagestyle{empty}
+
+% Página en blanco sin estilo
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+% Otra página en blanco sin estilo
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+
+%==========================
+% BIOGRAFÍA
+%==========================
+
+% Breve descripción del autor
+% \chapter*{Biografía}
+% \addcontentsline{toc}{chapter}{Biografía} % aparece en índice
+% Aquí escribes una breve descripción sobre ti, tu formación, experiencia, etc.
+% \cleardoublepage
+
+
+% \input{../../../extraFiles/preambulos_oficiales/licencia.tex}  % licencia
+% \thispagestyle{empty} % quitar número de página en la portada
+% \clearpage
+
+% --- Índice ---
+\tableofcontents
+% \listoffigures
+\clearpage
+\thispagestyle{empty} % quitar estilo de la página en blanco
+
+%\listoftables
+%\clearpage
+%\thispagestyle{empty} % quitar número de página en la portada
+%\clearpage
+%
+% Índice de código
+%\renewcommand{\lstlistlistingname}{Índice de Código}
+%\lstlistoflistings
+%\clearpage
+%
+% Índice de ecuaciones
+%\renewcommand{\listtheoremname}{Índice de Ecuaciones}
+%\listoftheorems[ignoreall,show={equation}]
+%\clearpage
+
+% --- Contenido Markdown generado por Pandoc ---
+\hypertarget{relaciuxf3n-4-mac}{%
+\chapter{Relación 4 MAC}\label{relaciuxf3n-4-mac}}
+
+\hypertarget{ejercicio-1}{%
+\section{Ejercicio 1}\label{ejercicio-1}}
+
+\hypertarget{a-todo-grafo-finito-dirigido-acuxedclico-dag-tiene-una-fuente.}{%
+\subsection{(a) Todo grafo finito dirigido acíclico (DAG) tiene una
+fuente.}\label{a-todo-grafo-finito-dirigido-acuxedclico-dag-tiene-una-fuente.}}
+
+\textbf{Prueba:} Supongamos por contradicción que el grafo no tiene
+ninguna fuente. Por definición, una fuente es un nodo con grado de
+entrada igual a 0. Si no existe ninguna fuente, significa que
+\textbf{todos los nodos del grafo tienen al menos un arco entrante}.
+
+Empecemos en un nodo cualquiera \(v_1\). Como \(v_1\) tiene al menos un
+arco entrante, debe existir un nodo \(v_2\) tal que
+\((v_2, v_1) \in E\). Del mismo modo, como \(v_2\) no es una fuente,
+existe un \(v_3\) tal que \((v_3, v_2) \in E\). Podemos prolongar este
+proceso de forma indefinida construyendo un camino hacia atrás:
+
+\[\dots \longrightarrow v_3 \longrightarrow v_2 \longrightarrow v_1\]
+
+Como el grafo es \textbf{finito} (tiene un número \(n\) finito de
+nodos), por el \textbf{principio del palomar} (\emph{pigeonhole
+principle}), eventualmente tendremos que repetir un nodo en nuestra
+secuencia de longitud mayor a \(n\). Es decir, existen índices \(i < j\)
+tales que \(v_i = v_j\). Esto demuestra la existencia de un ciclo
+dirigido
+(\(v_j \rightarrow v_{j-1} \rightarrow \dots \rightarrow v_i\)), lo cual
+contradice directamente la hipótesis de que el grafo es acíclico. Por lo
+tanto, el grafo debe tener al menos una fuente.
+
+\hypertarget{b-caracterizaciuxf3n-de-numeraciuxf3n-topoluxf3gica.}{%
+\subsection{(b) Caracterización de numeración
+topológica.}\label{b-caracterizaciuxf3n-de-numeraciuxf3n-topoluxf3gica.}}
+
+\textbf{Prueba:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Implicación directa (\(\Rightarrow\)):} Supongamos que el
+  grafo es acíclico. Por el apartado (a), sabemos que tiene al menos una
+  fuente. Le asignamos a esta fuente el número \(1\) y la eliminamos del
+  grafo junto con todos sus arcos salientes. El grafo restante sigue
+  siendo finito y acíclico, por lo que tendrá otra fuente en el subgrafo
+  resultante, a la cual le asignamos el número \(2\). Repitiendo este
+  proceso de forma inductiva, numeramos los nodos del \(1\) al \(n\).
+  Como en cada paso eliminamos un nodo que no tiene arcos entrantes en
+  el grafo restante, cualquier arco del grafo original irá
+  necesariamente de un nodo eliminado antes (número menor) a uno
+  eliminado después (número mayor).
+\item
+  \textbf{Implicación inversa (\(\Leftarrow\)):} Supongamos que existe
+  dicha numeración. Queremos probar que el grafo no tiene ciclos.
+  Supongamos por contradicción que existe un ciclo dirigido de la forma:
+\end{itemize}
+
+\[v_{i_1} \longrightarrow v_{i_2} \longrightarrow \dots \longrightarrow v_{i_k} \longrightarrow v_{i_1}\]
+
+Por la propiedad de la numeración, se debe cumplir simultáneamente que:
+
+\[\text{num}(v_{i_1}) < \text{num}(v_{i_2}) < \dots < \text{num}(v_{i_k}) < \text{num}(v_{i_1})\]
+
+Lo cual implica que \(\text{num}(v_{i_1}) < \text{num}(v_{i_1})\), una
+contradicción matemática estricta. Por tanto, el grafo no contiene
+ciclos.
+
+\hypertarget{c-algoritmo-en-tiempo-polinuxf3mico-algoritmo-de-kahn.}{%
+\subsection{(c) Algoritmo en tiempo polinómico (Algoritmo de
+Kahn).}\label{c-algoritmo-en-tiempo-polinuxf3mico-algoritmo-de-kahn.}}
+
+El algoritmo se basa en la eliminación iterativa de fuentes descrita en
+el apartado anterior:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Calcular el grado de entrada (\emph{in-degree}) de todos los nodos del
+  grafo.
+\item
+  Introducir en una cola todos los nodos cuyo grado de entrada sea
+  \(0\).
+\item
+  Mientras la cola no esté vacía:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Extraer un nodo \(u\) de la cola.
+\item
+  Para cada vecino \(v\) tal que exista el arco dirigido \((u, v)\),
+  decrementar el grado de entrada de \(v\) en \(1\).
+\item
+  Si el grado de entrada de \(v\) se reduce a \(0\), añadir \(v\) a la
+  cola.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Si al finalizar el bucle se han extraído los \(n\) nodos, el grafo es
+  \textbf{acíclico}. Si quedan nodos sin procesar, el grafo contiene
+  \textbf{al menos un ciclo}.
+\end{enumerate}
+
+\textbf{Complejidad:} Calcular el grado de entrada inicial cuesta
+\(O(|V|+|E|)\). Cada nodo y cada arco se procesa exactamente una vez en
+la cola, por lo que la complejidad total es \textbf{\(O(|V| + |E|)\)},
+que es de tiempo polinómico (lineal).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-2}{%
+\section{Ejercicio 2}\label{ejercicio-2}}
+
+\hypertarget{a-un-grafo-es-bipartito-si-y-solo-si-todos-sus-ciclos-son-de-longitud-par.}{%
+\subsection{(a) Un grafo es bipartito si y solo si todos sus ciclos son
+de longitud
+par.}\label{a-un-grafo-es-bipartito-si-y-solo-si-todos-sus-ciclos-son-de-longitud-par.}}
+
+\textbf{Prueba:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Implicación directa (\(\Rightarrow\)):} Sea \(G=(V,E)\) un
+  grafo bipartito con partición \(V = V_1 \cup V_2\). Cualquier arista
+  conecta un nodo de \(V_1\) con uno de \(V_2\). Por tanto, cualquier
+  camino en el grafo debe alternar estrictamente entre ambos conjuntos.
+  Para empezar en un nodo de \(V_1\), recorrer un camino cerrado (ciclo)
+  y regresar al mismo nodo de \(V_1\), el camino debe realizar
+  obligatoriamente un número par de transiciones (ir a \(V_2\) y
+  volver). Así, la longitud de todo ciclo es par.
+\item
+  \textbf{Implicación inversa (\(\Leftarrow\)):} Supongamos que todos
+  los ciclos tienen longitud par. Asumiendo que el grafo es conexo (si
+  no lo es, se aplica a cada componente), elegimos un nodo origen
+  \(v_0\). Definimos la partición de vértices como:
+\end{itemize}
+
+\[V_1 = \{u \in V : \text{dist}(v_0, u) \text{ es par}\}\]
+
+\[V_2 = \{u \in V : \text{dist}(v_0, u) \text{ es impar}\}\]
+
+Supongamos por contradicción que existen dos nodos \(x, y \in V_1\)
+conectados por una arista \((x,y) \in E\). Como ambos están en \(V_1\),
+la longitud de los caminos mínimos desde \(v_0\) a \(x\) y a \(y\)
+tienen la misma paridad. El circuito cerrado formado por el camino
+mínimo \(v_0 \rightsquigarrow x\), la arista \((x, y)\) y el camino
+mínimo inverso \(y \rightsquigarrow v_0\) tendría una longitud total de
+\(\text{dist}(v_0, x) + 1 + \text{dist}(v_0, y)\), lo cual es un número
+impar (\(\text{par} + 1 + \text{par} = \text{impar}\)). Todo circuito
+impar contiene necesariamente un ciclo de longitud impar, contradiciendo
+la hipótesis. Por tanto, no existen aristas internas y el grafo es
+bipartito.
+
+\hypertarget{b-algoritmo-en-tiempo-polinuxf3mico.}{%
+\subsection{(b) Algoritmo en tiempo
+polinómico.}\label{b-algoritmo-en-tiempo-polinuxf3mico.}}
+
+Utilizamos un recorrido en anchura (BFS) para intentar colorear el grafo
+con 2 colores:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Inicializar todos los nodos como \emph{no visitados}.
+\item
+  Para cada nodo no visitado, asignarle el ``Color 1'' y meterlo en una
+  cola BFS.
+\item
+  Mientras la cola no esté vacía:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Extraer el nodo \(u\).
+\item
+  Para cada vecino \(v\) de \(u\):
+\item
+  Si \(v\) no ha sido visitado, asignarle el color opuesto a \(u\) y
+  meterlo en la cola.
+\item
+  Si \(v\) ya está visitado y tiene el mismo color que \(u\), detener el
+  algoritmo y devolver \textbf{FALSO} (se detectó un ciclo impar).
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Si el recorrido termina sin conflictos, devolver \textbf{VERDADERO}.
+\end{enumerate}
+
+\textbf{Complejidad:} Al ser una modificación directa de BFS, su
+complejidad temporal es \textbf{\(O(|V| + |E|)\)}, que es polinómica.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-3}{%
+\section{Ejercicio 3}\label{ejercicio-3}}
+
+\hypertarget{demostrar-que-p-es-cerrada-para-la-uniuxf3n-y-la-intersecciuxf3n.}{%
+\subsection{Demostrar que P es cerrada para la unión y la
+intersección.}\label{demostrar-que-p-es-cerrada-para-la-uniuxf3n-y-la-intersecciuxf3n.}}
+
+Sean \(L_1, L_2 \in \text{P}\). Por definición, existen dos Máquinas de
+Turing Deterministas (MTD) \(M_1\) y \(M_2\) que deciden \(L_1\) y
+\(L_2\) en tiempos acotados por los polinomios \(p_1(n)\) y \(p_2(n)\)
+respectivamente.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Clausura para la Unión (\(L_1 \cup L_2\)):} Construimos una
+  MTD \(M_{\cup}\) que recibe una entrada \(x\) de longitud \(n\).
+  \(M_{\cup}\) simula en primer lugar la ejecución de \(M_1(x)\). Si
+  \(M_1\) acepta, \(M_{\cup}\) acepta inmediatamente. Si \(M_1\)
+  rechaza, \(M_{\cup}\) pasa a simular \(M_2(x)\), aceptando si esta
+  acepta y rechazando en caso contrario. El tiempo total de ejecución
+  está acotado por \(p_1(n) + p_2(n)\), que sigue siendo una función
+  polinómica.
+\item
+  \textbf{Clausura para la Intersección (\(L_1 \cap L_2\)):} Construimos
+  de igual forma una MTD \(M_{\cap}\). Ante una entrada \(x\), ejecuta
+  secuencialmente \(M_1(x)\). Si \(M_1\) rechaza, \(M_{\cap}\) rechaza
+  inmediatamente. Si \(M_1\) acepta, ejecuta \(M_2(x)\), devolviendo el
+  mismo resultado que \(M_2\). El tiempo máximo vuelve a ser
+  \(p_1(n) + p_2(n)\), un orden polinómico.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-4}{%
+\section{Ejercicio 4}\label{ejercicio-4}}
+
+Siguiendo la nota del documento, evaluamos el comportamiento
+sustituyendo polinomios genéricos por \(p(n) = n^l\) (\(l > 0\)).
+
+\hypertarget{a-nk-k-0}{%
+\subsection{\texorpdfstring{(a)
+\(\{n^k : k > 0\}\)}{(a) \textbackslash\{n\^{}k : k \textgreater{} 0\textbackslash\}}}\label{a-nk-k-0}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Izquierda:} \(p(f(n)) = (n^k)^l = n^{k \cdot l}\). Como
+  \(k \cdot l > 0\), la función pertenece a la clase. \textbf{Sí es
+  cerrada}.
+\item
+  \textbf{Derecha:} \(f(p(n)) = (n^l)^k = n^{l \cdot k}\). Mismo caso.
+  \textbf{Sí es cerrada}.
+\end{itemize}
+
+\hypertarget{b-n-cdot-k-k-ge-0}{%
+\subsection{\texorpdfstring{(b)
+\(\{n \cdot k : k \ge 0\}\)}{(b) \textbackslash\{n \textbackslash cdot k : k \textbackslash ge 0\textbackslash\}}}\label{b-n-cdot-k-k-ge-0}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Izquierda:} \(p(f(n)) = (n \cdot k)^l = n^l \cdot k^l\). Si
+  \(l > 1\), la función resultante crece como \(O(n^l)\), que supera la
+  escala lineal de la clase. \textbf{No es cerrada}.
+\item
+  \textbf{Derecha:} \(f(p(n)) = n^l \cdot k\). Para cualquier \(l > 1\),
+  no pertenece a la clase. \textbf{No es cerrada}.
+\end{itemize}
+
+\hypertarget{c-kn-k-0}{%
+\subsection{\texorpdfstring{(c)
+\(\{k^n : k > 0\}\)}{(c) \textbackslash\{k\^{}n : k \textgreater{} 0\textbackslash\}}}\label{c-kn-k-0}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Izquierda:} \(p(f(n)) = (k^n)^l = k^{l \cdot n} = (k^l)^n\).
+  Como \(k^l\) es una constante, la función resultante mantiene la forma
+  exponencial de la clase. \textbf{Sí es cerrada}.
+\item
+  \textbf{Derecha:} \(f(p(n)) = k^{(n^l)}\). Para \(l > 1\), la función
+  de orden \(k^{n^2}\) o superior crece mucho más rápido que cualquier
+  simple exponencial \(m^n\). \textbf{No es cerrada}.
+\end{itemize}
+
+\hypertarget{d-2nk-k-0}{%
+\subsection{\texorpdfstring{(d)
+\(\{2^{n^k} : k > 0\}\)}{(d) \textbackslash\{2\^{}\{n\^{}k\} : k \textgreater{} 0\textbackslash\}}}\label{d-2nk-k-0}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Izquierda:} \(p(f(n)) = (2^{n^k})^l = 2^{l \cdot n^k}\). Al
+  aplicar la notación \(O\), se cumple que
+  \(2^{l \cdot n^k} \le 2^{n^{k+1}}\) para \(n\) suficientemente grande,
+  cuya función base está en la clase (\(k+1 > 0\)). \textbf{Sí es
+  cerrada}.
+\item
+  \textbf{Derecha:} \(f(p(n)) = 2^{(n^l)^k} = 2^{n^{l \cdot k}}\). Como
+  \(l \cdot k > 0\), la función pertenece a la clase. \textbf{Sí es
+  cerrada}.
+\end{itemize}
+
+\hypertarget{e-logkn-k-0}{%
+\subsection{\texorpdfstring{(e)
+\(\{\log^k(n) : k > 0\}\)}{(e) \textbackslash\{\textbackslash log\^{}k(n) : k \textgreater{} 0\textbackslash\}}}\label{e-logkn-k-0}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Izquierda:}
+  \(p(f(n)) = (\log^k n)^l = \log^{k \cdot l} n \in C\). \textbf{Sí es
+  cerrada}.
+\item
+  \textbf{Derecha:}
+  \(f(p(n)) = \log^k(n^l) = (l \cdot \log n)^k = l^k \cdot \log^k n = O(\log^k n) \in C\).
+  \textbf{Sí es cerrada}.
+\end{itemize}
+
+\hypertarget{f-loglog-n}{%
+\subsection{\texorpdfstring{(f)
+\(\{\log(\log n)\}\)}{(f) \textbackslash\{\textbackslash log(\textbackslash log n)\textbackslash\}}}\label{f-loglog-n}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Izquierda:} \(p(f(n)) = (\log(\log n))^l \notin C\) para
+  \(l > 1\). \textbf{No es cerrada}.
+\item
+  \textbf{Derecha:}
+  \(f(p(n)) = \log(\log(n^l)) = \log(l \cdot \log n) = \log l + \log(\log n) = O(\log(\log n)) \in C\).
+  \textbf{Sí es cerrada}.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-5}{%
+\section{Ejercicio 5}\label{ejercicio-5}}
+
+\hypertarget{demostrar-que-lwcwwin01-estuxe1-en-espacio-logn.}{%
+\subsection{\texorpdfstring{Demostrar que \(L=\{wcw:w\in\{0,1\}^{*}\}\)
+está en espacio
+\(\log(n)\).}{Demostrar que L=\textbackslash\{wcw:w\textbackslash in\textbackslash\{0,1\textbackslash\}\^{}\{*\}\textbackslash\} está en espacio \textbackslash log(n).}}\label{demostrar-que-lwcwwin01-estuxe1-en-espacio-logn.}}
+
+Para diseñar un algoritmo en espacio logarítmico, contamos con una cinta
+de entrada de \emph{solo lectura} y cintas de trabajo con espacio
+limitado a \(O(\log n)\). No podemos almacenar la palabra \(w\) en la
+memoria de trabajo porque ocuparía espacio lineal.
+
+\textbf{Algoritmo:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Recorrer la cinta de entrada con un contador en binario para localizar
+  la posición exacta del carácter especial `c'. Almacenamos este índice
+  \(m\) en la cinta de trabajo (ocupa \(\approx \log_2 n\) bits).
+\item
+  Verificar que la longitud total del string sea exactamente \(2m + 1\).
+  Si no es así, rechazar.
+\item
+  Utilizar un segundo contador en binario, \(i\), inicializado en \(0\).
+\item
+  Mientras \(i < m\):
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Mover el cabezal de la cinta de entrada a la posición \(i\) y leer el
+  símbolo \(w[i]\).
+\item
+  Mover el cabezal de entrada a la posición \(m + 1 + i\) y leer el
+  símbolo correspondiente.
+\item
+  Comparar ambos símbolos. Si difieren, \textbf{rechazar}.
+\item
+  Incrementar el contador \(i\) en \(1\).
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Si el bucle finaliza con éxito, \textbf{aceptar}.
+\end{enumerate}
+
+\textbf{Análisis de espacio:} Únicamente se han utilizado dos contadores
+enteros binarios (\(m\) e \(i\)) cuyos valores máximos están acotados
+por el tamaño de la entrada \(n\). Por tanto, el espacio de trabajo
+utilizado es estrictamente \textbf{\(O(\log n)\)}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-6}{%
+\section{Ejercicio 6}\label{ejercicio-6}}
+
+\hypertarget{demostrar-que-si-l-in-textp-entonces-l-in-textp.}{%
+\subsection{\texorpdfstring{Demostrar que si \(L \in \text{P}\),
+entonces
+\(L^{*} \in \text{P}\).}{Demostrar que si L \textbackslash in \textbackslash text\{P\}, entonces L\^{}\{*\} \textbackslash in \textbackslash text\{P\}.}}\label{demostrar-que-si-l-in-textp-entonces-l-in-textp.}}
+
+Resolvemos este problema mediante un enfoque de \textbf{programación
+dinámica}. Sea \(x\) una palabra de entrada de longitud \(n\). Queremos
+determinar si \(x\) se puede descomponer en \(x = w_1 w_2 \dots w_k\)
+tal que cada subpalabra \(w_i \in L\).
+
+Definimos un vector booleano \(T\) de tamaño \(n + 1\), donde
+\(T[i] = \text{VERDADERO}\) si y solo si el prefijo de la palabra de
+longitud \(i\) (\(x[1 \dots i]\)) pertenece a \(L^*\).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Caso base:} \(T[0] = \text{VERDADERO}\) (la palabra vacía
+  \(\epsilon\) siempre pertenece a \(L^*\)).
+\item
+  \textbf{Paso inductivo:} Para cada \(i\) desde \(1\) hasta \(n\):
+\end{itemize}
+
+\[T[i] = \text{VERDADERO} \iff \exists j \in \{0, \dots, i-1\} \text{ tal que } (T[j] == \text{VERDADERO} \land x[j+1 \dots i] \in L)\]
+
+Como \(L \in \text{P}\), la verificación de si la subpalabra de entrada
+\(x[j+1 \dots i]\) pertenece a \(L\) tarda un tiempo polinómico
+\(p(n)\). El algoritmo realiza como máximo \(O(n^2)\) subconsultas. La
+complejidad temporal total estará acotada por \(O(n^2 \cdot p(n))\), que
+es polinómica, por tanto \(L^* \in \text{P}\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-7}{%
+\section{Ejercicio 7}\label{ejercicio-7}}
+
+\hypertarget{demostrar-que-si-l-in-textnp-entonces-l-in-textnp.}{%
+\subsection{\texorpdfstring{Demostrar que si \(L \in \text{NP}\),
+entonces
+\(L^{*} \in \text{NP}\).}{Demostrar que si L \textbackslash in \textbackslash text\{NP\}, entonces L\^{}\{*\} \textbackslash in \textbackslash text\{NP\}.}}\label{demostrar-que-si-l-in-textnp-entonces-l-in-textnp.}}
+
+Si \(L \in \text{NP}\), existe una Máquina de Turing No Determinista
+(MTND) \(M\) que decide el lenguaje \(L\) en tiempo polinómico.
+Diseñamos una nueva MTND \(M^*\) para decidir \(L^*\):
+
+Ante una palabra de entrada \(x\) de longitud \(n\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Adivinar de forma no determinista} una partición de la cadena
+  \(x\) en \(k\) subpalabras (\(1 \le k \le n\)). Esto equivale a
+  seleccionar un conjunto de índices de corte intermedios.
+\item
+  Para cada una de las subpalabras de la partición
+  (\(w_1, w_2, \dots, w_k\)), ejecutar de forma secuencial (o en
+  paralelo no determinista) la MTND original \(M\).
+\item
+  Si todas las simulaciones de las subpalabras entran en estado de
+  aceptación, entonces \(M^*\) \textbf{acepta}. En caso de que alguna
+  subpalabra sea rechazada, esa rama del cómputo no determinista
+  \textbf{rechaza}.
+\end{enumerate}
+
+\textbf{Complejidad:} La fase de generación no determinista de los
+cortes toma tiempo lineal \(O(n)\), y la verificación de las subpalabras
+toma a lo sumo \(n \cdot p(n)\) pasos. Al ser la composición de procesos
+polinómicos, \(M^*\) opera en tiempo polinómico no determinista, luego
+\(L^* \in \text{NP}\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-8}{%
+\section{Ejercicio 8}\label{ejercicio-8}}
+
+\hypertarget{demostrar-que-np-es-cerrada-para-la-uniuxf3n-y-la-intersecciuxf3n.}{%
+\subsection{Demostrar que NP es cerrada para la unión y la
+intersección.}\label{demostrar-que-np-es-cerrada-para-la-uniuxf3n-y-la-intersecciuxf3n.}}
+
+Sean \(L_1, L_2 \in \text{NP}\) decididos por las MTND \(M_1\) y \(M_2\)
+en tiempo polinómico acotado por \(p_1(n)\) y \(p_2(n)\)
+respectivamente.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unión (\(L_1 \cup L_2\)):} Diseñamos una MTND \(M_{\cup}\)
+  que, ante una entrada \(x\), realiza en su primer paso una
+  ramificación no determinista con dos opciones. La primera opción
+  ejecuta \(M_1(x)\) y la segunda ejecuta \(M_2(x)\). Si al menos una de
+  las ramas alcanza un estado de aceptación, la máquina acepta. El
+  tiempo global del árbol de cómputo es \(\max(p_1(n), p_2(n))\), que es
+  polinómico.
+\item
+  \textbf{Intersección (\(L_1 \cap L_2\)):} Diseñamos una MTND
+  \(M_{\cap}\) que, ante una entrada \(x\), ejecuta secuencialmente la
+  simulación de \(M_1(x)\). Si \(M_1\) alcanza una configuración de
+  aceptación, la máquina no se detiene, sino que toma esa configuración
+  y procede a simular de forma no determinista \(M_2(x)\). Si esta
+  segunda fase también encuentra una ruta de aceptación, la máquina
+  \(M_{\cap}\) acepta. La profundidad del cómputo está acotada por
+  \(p_1(n) + p_2(n)\), manteniendo la condición polinómica.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-9}{%
+\section{Ejercicio 9}\label{ejercicio-9}}
+
+\hypertarget{demostrar-que-si-textnp-neq-textconp-entonces-textp-neq-textnp.}{%
+\subsection{\texorpdfstring{Demostrar que si
+\(\text{NP} \neq \text{coNP}\) entonces
+\(\text{P} \neq \text{NP}\).}{Demostrar que si \textbackslash text\{NP\} \textbackslash neq \textbackslash text\{coNP\} entonces \textbackslash text\{P\} \textbackslash neq \textbackslash text\{NP\}.}}\label{demostrar-que-si-textnp-neq-textconp-entonces-textp-neq-textnp.}}
+
+Demostramos esta propiedad utilizando el razonamiento
+\textbf{contrarrecíproco}: probaremos que si \(\text{P} = \text{NP}\),
+entonces obligatoriamente \(\text{NP} = \text{coNP}\).
+
+Por la propia naturaleza de las Máquinas de Turing Deterministas, la
+clase \(\text{P}\) es cerrada bajo complementación
+(\(\text{P} = \text{coP}\)), dado que para calcular el complemento de un
+lenguaje en \(\text{P}\) basta con intercambiar los estados de
+aceptación y rechazo de la MTD que lo resuelve.
+
+Si asumimos como premisa que \(\text{P} = \text{NP}\), podemos aplicar
+el operador de complemento a ambos lados de la igualdad, obteniendo que
+\(\text{coP} = \text{coNP}\). Combinando todas las equivalencias:
+
+\[\text{NP} = \text{P} = \text{coP} = \text{coNP} \implies \text{NP} = \text{coNP}\]
+
+Por tanto, si la comunidad matemática demuestra que
+\(\text{NP} \neq \text{coNP}\), se deduce de forma directa y rigurosa
+que \(\text{P} \neq \text{NP}\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-10}{%
+\section{Ejercicio 10}\label{ejercicio-10}}
+
+\hypertarget{demostrar-que-determinar-si-una-entrada-de-paruxe9ntesis-estuxe1-correctamente-emparejada-y-anidada-estuxe1-en-l.}{%
+\subsection{Demostrar que determinar si una entrada de paréntesis está
+correctamente emparejada y anidada está en
+L.}\label{demostrar-que-determinar-si-una-entrada-de-paruxe9ntesis-estuxe1-correctamente-emparejada-y-anidada-estuxe1-en-l.}}
+
+Para verificar el anidamiento correcto sin recurrir a una estructura de
+pila en memoria (que requeriría espacio lineal), podemos emplear un
+único contador entero dinámico.
+
+\textbf{Algoritmo:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Inicializar un contador binario \(c = 0\) en la cinta de trabajo.
+\item
+  Leer la cadena de entrada de izquierda a derecha, símbolo a símbolo:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Si el símbolo actual es \texttt{(}, incrementar el contador:
+  \(c = c + 1\).
+\item
+  Si el símbolo actual es \texttt{)}, decrementar el contador:
+  \(c = c - 1\).
+\item
+  Si en algún punto intermedio del recorrido se cumple que \(c < 0\),
+  \textbf{rechazar inmediatamente} (indica un exceso de paréntesis de
+  cierre mal balanceados).
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Al alcanzar el final de la cinta de entrada, comprobar el valor de
+  \(c\):
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Si \(c == 0\), \textbf{aceptar}.
+\item
+  Si \(c > 0\), \textbf{rechazar} (quedaron paréntesis abiertos sin
+  cerrar).
+\end{itemize}
+
+\textbf{Espacio:} El valor máximo que puede alcanzar el contador \(c\)
+es el tamaño de la entrada \(n\). Representar el valor entero \(n\) en
+binario requiere exactamente \(\lceil \log_2(n+1) \rceil\) casillas en
+la cinta de memoria de trabajo, lo que es del orden de
+\textbf{\(O(\log n)\)}. Por tanto, el problema pertenece a \(\text{L}\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-11}{%
+\section{Ejercicio 11}\label{ejercicio-11}}
+
+\hypertarget{caso-con-dos-tipos-de-paruxe9ntesis-y-.}{%
+\subsection{\texorpdfstring{Caso con dos tipos de paréntesis \texttt{()}
+y
+\texttt{{[}{]}}.}{Caso con dos tipos de paréntesis () y {[}{]}.}}\label{caso-con-dos-tipos-de-paruxe9ntesis-y-.}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Demostración de que está en L:} Si disponemos de la capacidad
+  de mover el cabezal de la cinta de entrada en cualquier dirección
+  (hacia adelante y hacia atrás), podemos resolver el problema en
+  espacio logarítmico combinando dos fases:
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Verificar que los paréntesis \texttt{()} y los corchetes
+  \texttt{{[}{]}} están balanceados de manera independiente
+  numéricamente utilizando dos contadores logarítmicos (tal como se
+  implementó en el Ejercicio 10).
+\item
+  Para comprobar que el anidamiento es correcto y no existen cruces
+  ilegales del tipo \texttt{({[}){]}}, aplicamos el siguiente análisis
+  geométrico: para cada símbolo de cierre (por ejemplo, un \texttt{{]}}
+  en la posición \(i\)), hacemos un recorrido hacia atrás (a la
+  izquierda) buscando su apertura correspondiente. Para ello, usamos un
+  contador que se incrementa con cierres del mismo tipo y se decrementa
+  con aperturas. Cuando el contador vuelve a 0, localizamos su apertura
+  correspondiente en el índice \(j\). En ese momento, validamos que la
+  subcadena interna contenida entre \(j\) e \(i\) tenga un balance de
+  paréntesis correcto. Como solo almacenamos los índices de las
+  posiciones de los cabezales y pequeños contadores locales de valor
+  inferior a \(n\), el espacio consumido en las cintas es estrictamente
+  \textbf{\(O(\log n)\)}, lo que prueba que el problema está en
+  \(\text{L}\).
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Demostración de que requiere \(O(n)\) de memoria si no se
+  puede volver hacia atrás:} Si se restringe la lectura a un único
+  recorrido secuencial de izquierda a derecha sin retroceso
+  (\emph{algoritmo online}), la máquina se ve obligada a recordar el
+  orden exacto de los tipos de paréntesis abiertos que todavía no han
+  sido cerrados para verificar la validez del cierre inmediato
+  (estructura LIFO). Consideremos una entrada que comienza con una
+  secuencia de longitud \(m = n/2\) formada exclusivamente por símbolos
+  de apertura arbitrarios (elección libre entre \texttt{(} y
+  \texttt{{[}}). Existen exactamente \(2^m\) posibles combinaciones
+  distintas de apertura. Para que la máquina responda correctamente ante
+  cualquier secuencia posterior de cierre, debe ser capaz de almacenar
+  un estado interno único por cada una de estas combinaciones. Por la
+  teoría de la información, para diferenciar de manera unívoca entre
+  \(2^m\) estados posibles de almacenamiento, la memoria interna de
+  trabajo debe tener una capacidad mínima de:
+\end{itemize}
+
+\[\log_2(2^m) = m = \frac{n}{2} = O(n) \text{ bits}\]
+
+Por consiguiente, sin retroceso de cabezal, el problema requiere espacio
+lineal \textbf{\(O(n)\)}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-12}{%
+\section{Ejercicio 12}\label{ejercicio-12}}
+
+\hypertarget{demostrar-que-el-problema-del-paluxedndromo-requiere-on-de-memoria-si-no-puede-volver-hacia-atruxe1s.}{%
+\subsection{\texorpdfstring{Demostrar que el problema del palíndromo
+requiere \(O(n)\) de memoria si no puede volver hacia
+atrás.}{Demostrar que el problema del palíndromo requiere O(n) de memoria si no puede volver hacia atrás.}}\label{demostrar-que-el-problema-del-paluxedndromo-requiere-on-de-memoria-si-no-puede-volver-hacia-atruxe1s.}}
+
+\textbf{Prueba:} Supongamos una Máquina de Turing restringida a leer la
+entrada de izquierda a derecha sin posibilidad de retroceder su cabezal
+principal. Consideremos el conjunto de todas las cadenas binarias
+posibles de longitud \(m = n/2\) que forman la primera mitad del
+palíndromo. Existen \(2^m\) cadenas distintas.
+
+Si la máquina dispusiera de menos de \(m\) bits de memoria de trabajo,
+por el principio de las casillas, existirían al menos dos cadenas
+iniciales distintas, \(w_1 \neq w_2\), que llevarían a la máquina
+exactamente al mismo estado de memoria interna tras leer los primeros
+\(m\) caracteres.
+
+Si la entrada continuase con el reverso exacto de la primera cadena
+(\(w_1^R\)), el string total sería \(w_1 w_1^R\), el cual es un
+palíndromo válido y la máquina debería aceptarlo. Sin embargo, al
+recibir la entrada \(w_2 w_1^R\), como el estado interno de la memoria
+tras los primeros \(m\) pasos es idéntico al caso anterior, la máquina
+procesaría la segunda mitad de la misma manera y también la
+\textbf{aceptaría}. Esto representa un error algorítmico, ya que
+\(w_2 w_1^R\) no es un palíndromo si \(w_1 \neq w_2\).
+
+Para evitar este solapamiento de configuraciones, la máquina debe
+registrar de forma unívoca cada uno de los \(2^m\) estados
+informacionales posibles. Por tanto, la memoria de trabajo requiere un
+número de bits de orden:
+
+\[\log_2(2^m) = m = \frac{n}{2} = O(n)\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-13}{%
+\section{Ejercicio 13}\label{ejercicio-13}}
+
+\hypertarget{demostrar-que-textnp-neq-textespacion.}{%
+\subsection{\texorpdfstring{Demostrar que
+\(\text{NP} \neq \text{ESPACIO}(n)\).}{Demostrar que \textbackslash text\{NP\} \textbackslash neq \textbackslash text\{ESPACIO\}(n).}}\label{demostrar-que-textnp-neq-textespacion.}}
+
+Siguiendo la sugerencia del enunciado, analizamos el comportamiento de
+ambas clases respecto al operador de reducción en espacio logarítmico
+(\(\text{L}\)-reducciones, denotado como \(\propto_{\text{L}}\)):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{La clase NP es cerrada bajo \(\text{L}\)-reducciones:} Sean
+  dos problemas tales que \(P_1 \propto_{\text{L}} P_2\) y
+  \(P_2 \in \text{NP}\). Por definición de reducción en espacio
+  logarítmico, existe una MTD que transforma cualquier instancia \(x\)
+  de \(P_1\) en una instancia \(y\) de \(P_2\) utilizando un espacio de
+  trabajo acotado por \(O(\log |x|)\). Dado que el espacio es
+  logarítmico, la longitud de la salida estará acotada polinómicamente
+  respecto a la entrada (\(|y| = O(|x|^c)\)). Como
+  \(P_2 \in \text{NP}\), existe una MTND que decide \(P_2\) en tiempo
+  polinómico respecto a la longitud de su entrada \(y\), lo cual se
+  traduce en un tiempo polinómico respecto a la entrada original \(x\).
+  Componiendo ambos procesos mediante la técnica de ``recálculo de bits
+  de salida bajo demanda en espacio logarítmico'' (evitando escribir la
+  cadena intermedia \(y\) completa en una cinta de trabajo ), obtenemos
+  que el problema completo se puede decidir en tiempo no determinista
+  polinómico. Por tanto, \(P_1 \in \text{NP}\). \textbf{NP es cerrada
+  bajo \(\text{L}\)-reducciones}.
+\item
+  \textbf{La clase \(\text{ESPACIO}(n)\) NO es cerrada bajo
+  \(\text{L}\)-reducciones:} Por el \textbf{Teorema de la Jerarquía en
+  Espacio}, sabemos de forma rigurosa que un incremento en la cota de
+  espacio permite decidir lenguajes estrictamente más complejos; por
+  ejemplo, \(\text{ESPACIO}(n) \subsetneq \text{ESPACIO}(n^2)\).
+  Mediante una reducción en espacio logarítmico, es posible mapear
+  (comprimir) instancias de un problema de una clase espacial superior
+  en instancias de tamaño lineal de un problema base. Si la clase
+  \(\text{ESPACIO}(n)\) fuese cerrada bajo este tipo de reducciones,
+  provocaría un colapso en cadena de la jerarquía espacial, permitiendo
+  resolver problemas de orden cuadrático o superior en espacio
+  estrictamente lineal, lo cual contradice el teorema fundamental de la
+  jerarquía.
+\item
+  \textbf{Conclusión:} Al haber demostrado que la clase de complejidad
+  \(\text{NP}\) posee la propiedad estructural de clausura ante
+  reducciones en espacio logarítmico y la clase \(\text{ESPACIO}(n)\)
+  carece de ella, concluimos de forma matemática que ambas clases
+  representan conjuntos de lenguajes diferentes, luego
+  \textbf{\(\text{NP} \neq \text{ESPACIO}(n)\)}.
+\end{enumerate}
+
+\hypertarget{relaciuxf3n-5}{%
+\chapter{Relación 5}\label{relaciuxf3n-5}}
+
+\hypertarget{ejercicio-2-muxe1quinas-de-turing-no-deterministas-fuertes-y-textnp-cap-textconp}{%
+\section{\texorpdfstring{Ejercicio 2: Máquinas de Turing No
+Deterministas Fuertes y
+\(\text{NP} \cap \text{coNP}\)}{Ejercicio 2: Máquinas de Turing No Deterministas Fuertes y \textbackslash text\{NP\} \textbackslash cap \textbackslash text\{coNP\}}}\label{ejercicio-2-muxe1quinas-de-turing-no-deterministas-fuertes-y-textnp-cap-textconp}}
+
+Queremos demostrar que un lenguaje \(L\) es decidido por una Máquina de
+Turing No Determinista Fuerte (MTND-F) en tiempo polinómico si y solo si
+\(L \in \text{NP} \cap \text{coNP}\).
+
+\hypertarget{implicaciuxf3n-directa-rightarrow}{%
+\subsection{\texorpdfstring{Implicación directa
+(\(\Rightarrow\))}{Implicación directa (\textbackslash Rightarrow)}}\label{implicaciuxf3n-directa-rightarrow}}
+
+Supongamos que \(L\) es decidido por una MTND-F polinómica \(M\).
+
+\begin{itemize}
+\item
+  \textbf{Probar que \(L \in \text{NP}\):} Por definición de la máquina,
+  si \(x \in L\), existe al menos un camino de cómputo que termina en
+  `Si'. Si \(x \notin L\), ningún camino termina en `Si' (todos terminan
+  en `No' o `Duda'). Si ignoramos las salidas `No' y tratamos `Duda'
+  como un estado de no-aceptación estándar, \(M\) se comporta
+  exactamente como una MTND polinómica clásica que acepta \(L\). Por
+  tanto, \(L \in \text{NP}\).
+\item
+  \textbf{Probar que \(L \in \text{coNP}\) (es decir,
+  \(\bar{L} \in \text{NP}\)):} Construimos una nueva máquina \(M'\) a
+  partir de \(M\) modificando únicamente los estados finales:
+  intercambiamos las salidas `Si' por `No', y las salidas `No' por `Si',
+  manteniendo `Duda' intacto. Si \(x \in \bar{L}\) (es decir,
+  \(x \notin L\)), la máquina original \(M\) garantizaba al menos un
+  camino hacia `No', el cual ahora será un camino hacia `Si' en \(M'\).
+  Si \(x \in L\), ningún camino en \(M'\) llegará a `Si'. Así, \(M'\) es
+  una MTND polinómica que acepta \(\bar{L}\) , lo que implica que
+  \(\bar{L} \in \text{NP} \implies L \in \text{coNP}\).
+\end{itemize}
+
+Al cumplirse ambas condiciones, \(L \in \text{NP} \cap \text{coNP}\).
+
+\hypertarget{implicaciuxf3n-inversa-leftarrow}{%
+\subsection{\texorpdfstring{Implicación inversa
+(\(\Leftarrow\))}{Implicación inversa (\textbackslash Leftarrow)}}\label{implicaciuxf3n-inversa-leftarrow}}
+
+Supongamos ahora que \(L \in \text{NP} \cap \text{coNP}\).
+
+\begin{itemize}
+\item
+  Como \(L \in \text{NP}\), existe una MTND polinómica \(M_1\) que
+  acepta \(L\).
+\item
+  Como \(L \in \text{coNP} \implies \bar{L} \in \text{NP}\), existe otra
+  MTND polinómica \(M_2\) que acepta \(\bar{L}\).
+\end{itemize}
+
+Construimos una MTND Fuerte \(M\) que, ante una entrada \(x\), comienza
+con una \textbf{bifurcación no determinista} de dos ramas principales:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  La primera rama simula el cómputo de \(M_1(x)\). Si la simulación de
+  \(M_1\) acepta, nuestra máquina \(M\) finaliza devolviendo
+  \textbf{`Si'}. Si la simulación termina sin aceptar, devuelve
+  \textbf{`Duda'}.
+\item
+  La segunda rama simula el cómputo de \(M_2(x)\). Si la simulación de
+  \(M_2\) acepta (lo que significa que \(x \in \bar{L}\)), \(M\)
+  finaliza devolviendo \textbf{`No'}. Si no acepta, devuelve
+  \textbf{`Duda'}.
+\end{enumerate}
+
+\textbf{Verificación de las condiciones:}
+
+\begin{itemize}
+\item
+  Si \(x \in L\), \(M_1(x)\) tiene al menos un camino de aceptación (que
+  dará `Si') , y \(M_2(x)\) no tiene ninguno (todos darán `Duda'). Todos
+  los caminos terminan en `Si' o `Duda' con al menos un `Si'.
+\item
+  Si \(x \notin L\), \(M_1(x)\) no tiene caminos de aceptación (todos
+  darán `Duda') , y \(M_2(x)\) tiene al menos uno (que dará `No'). Todos
+  los caminos terminan en `No' o `Duda' con al menos un `No'.
+\end{itemize}
+
+El tiempo de ejecución sigue estando acotado polinómicamente. Queda
+demostrado.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-3-certificado-de-pratt-para-p-13}{%
+\section{\texorpdfstring{Ejercicio 3: Certificado de Pratt para
+\(p = 13\)}{Ejercicio 3: Certificado de Pratt para p = 13}}\label{ejercicio-3-certificado-de-pratt-para-p-13}}
+
+El teorema de Pratt establece que un número \(p > 1\) es primo si y solo
+si existe un testigo \(r\) (\(1 < r < p\)) tal que:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \(r^{p-1} \equiv 1 \pmod p\)
+\item
+  \(r^{\frac{p-1}{q}} \not\equiv 1 \pmod p\) para todos los divisores
+  primos \(q\) de \(p-1\).
+\end{enumerate}
+
+\hypertarget{paso-1-aplicaciuxf3n-a-p-13}{%
+\subsection{\texorpdfstring{Paso 1: Aplicación a
+\(p = 13\)}{Paso 1: Aplicación a p = 13}}\label{paso-1-aplicaciuxf3n-a-p-13}}
+
+\begin{itemize}
+\item
+  Los componentes son \(p - 1 = 12\). Los divisores primos de 12 son
+  \(q_1 = 2\) y \(q_2 = 3\).
+\item
+  Elegimos como testigo \(r = 2\).
+\item
+  \textbf{Condición 1:} \(2^{12} = 4096\). Calculando el módulo:
+  \(4096 \pmod{13} = 1\). Se cumple.
+\item
+  \textbf{Condición 2 (para \(q=2\)):}
+  \(\frac{12}{2} = 6 \implies 2^6 = 64\). Calculando el módulo:
+  \(64 \equiv 12 \not\equiv 1 \pmod{13}\). Se cumple.
+\item
+  \textbf{Condición 2 (para \(q=3\)):}
+  \(\frac{12}{3} = 4 \implies 2^4 = 16\). Calculando el módulo:
+  \(16 \equiv 3 \not\equiv 1 \pmod{13}\). Se cumple.
+\end{itemize}
+
+\hypertarget{paso-2-certificaciuxf3n-recursiva-de-los-divisores-primos}{%
+\subsection{Paso 2: Certificación recursiva de los divisores
+primos}\label{paso-2-certificaciuxf3n-recursiva-de-los-divisores-primos}}
+
+Siguiendo la estructura del certificado de Pratt (pág. 33-34 del Tema
+4), el divisor \(2\) es un caso base que no requiere desglose , pero el
+divisor \(3\) debe ser certificado a su vez de forma recursiva.
+
+\begin{itemize}
+\item
+  Para \(p = 3\), tenemos \(p - 1 = 2\), cuyo único divisor primo es
+  \(q = 2\).
+\item
+  Elegimos el testigo \(r = 2\).
+\item
+  \textbf{Condición 1:} \(2^{3-1} = 2^2 = 4 \equiv 1 \pmod 3\). Se
+  cumple.
+\item
+  \textbf{Condición 2:}
+  \(2^{\frac{2}{2}} = 2^1 = 2 \not\equiv 1 \pmod 3\). Se cumple.
+\end{itemize}
+
+\hypertarget{formato-final-del-certificado-estructural}{%
+\subsection{Formato Final del Certificado
+Estructural}\label{formato-final-del-certificado-estructural}}
+
+Siguiendo la sintaxis formal explicada por el profesor Serafín Moral:
+
+\[\text{Cert}(13) = \Big( \big(13 : 2 \ (2, 3)\big), \ \big(3 : 2 \ (2)\big) \Big)\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-4-demostraciuxf3n-de-que-la-exponenciaciuxf3n-modular-estuxe1-en-p}{%
+\section{Ejercicio 4: Demostración de que la Exponenciación Modular está
+en
+P}\label{ejercicio-4-demostraciuxf3n-de-que-la-exponenciaciuxf3n-modular-estuxe1-en-p}}
+
+Deseamos probar que el problema de determinar si
+\(a^b \equiv c \pmod p\) es resoluble en tiempo polinómico respecto a la
+longitud de la entrada \(n\).
+
+Consideremos que \(n\) representa la cantidad total de bits necesarios
+para almacenar los cuatro números en memoria. El valor del exponente
+\(b\) puede ser de un orden de magnitud de hasta \(2^n\). Por tanto, un
+bucle de multiplicaciones sucesivas de tamaño \(b\) tardaría un tiempo
+exponencial \(O(2^n)\).
+
+Para resolverlo en tiempo polinómico aplicamos el \textbf{Algoritmo de
+Exponenciación Binaria} (también conocido como
+\emph{Square-and-Multiply}):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Expresar el exponente \(b\) en su representación binaria:
+  \(b = (b_k b_{k-1} \dots b_0)_2\). El número de bits del exponente
+  está estrictamente acotado por la longitud de la entrada: \(k \le n\).
+\item
+  Inicializar una variable acumuladora \(R = 1\) y otra variable para
+  las potencias de la base \(A = a \pmod p\).
+\item
+  Para cada bit \(b_i\) desde \(0\) hasta \(k\):
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Si \(b_i == 1\), hacer \(R = (R \cdot A) \pmod p\).
+\item
+  Hacer \(A = (A \cdot A) \pmod p\).
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Finalmente, comprobar si \(R == c\).
+\end{enumerate}
+
+\hypertarget{anuxe1lisis-de-complejidad-temporal}{%
+\subsection{Análisis de Complejidad
+Temporal}\label{anuxe1lisis-de-complejidad-temporal}}
+
+\begin{itemize}
+\item
+  El bucle principal se ejecuta exactamente \(k\) veces, por lo que
+  realiza un máximo de \textbf{\(n\) iteraciones}.
+\item
+  En cada iteración se efectúan multiplicaciones y operaciones de módulo
+  con números cuyo tamaño máximo de almacenamiento está acotado por
+  \(n\) bits. El coste de multiplicar y aplicar el módulo a dos enteros
+  de \(n\) bits mediante métodos estándar es de orden
+  \textbf{\(O(n^2)\)}.
+\item
+  La complejidad total del algoritmo es
+  \(O(n \cdot n^2) = \mathbf{O(n^3)}\), lo cual constituye una cota
+  estrictamente polinómica. Por tanto, el problema está en P.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-5-el-problema-de-la-factorizaciuxf3n-estuxe1-en-textnp-cap-textconp}{%
+\section{\texorpdfstring{Ejercicio 5: El Problema de la Factorización
+está en
+\(\text{NP} \cap \text{coNP}\)}{Ejercicio 5: El Problema de la Factorización está en \textbackslash text\{NP\} \textbackslash cap \textbackslash text\{coNP\}}}\label{ejercicio-5-el-problema-de-la-factorizaciuxf3n-estuxe1-en-textnp-cap-textconp}}
+
+El problema consiste en determinar si un número \(x\) tiene un divisor
+\(k\) en el rango abierto \(1 < k < y\).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Demostración de que está en NP:} El certificado es simplemente
+  el valor del propio divisor \(k\). El verificador polinómico realiza
+  únicamente dos comprobaciones:
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Validar que \(1 < k < y\).
+\item
+  Efectuar la división entera y comprobar que el resto de la operación
+  \(x \pmod k\) sea exactamente \(0\). Dado que una división de números
+  de tamaño polinómico se computa de forma eficiente en tiempo
+  \(O(n^2)\) , el problema se puede verificar de forma polinómica, luego
+  está en NP.
+\end{enumerate}
+
+\begin{itemize}
+\item
+  \textbf{Demostración de que está en coNP:} Para probar que pertenece a
+  coNP, debemos demostrar que el problema complementario (``\(x\)
+  \textbf{NO} tiene ningún divisor \(k\) en el rango \(1 < k < y\)'') se
+  encuentra en la clase NP.
+\item
+  \textbf{Certificado de la instancia NO:} El certificado consiste en
+  proporcionar la \textbf{descomposición en factores primos completa} de
+  \(x\), expresada como \(x = p_1^{e_1} p_2^{e_2} \dots p_m^{e_m}\) ,
+  adjuntando además el correspondiente \textbf{certificado de Pratt}
+  para cada uno de los factores primos \(p_i\) indicados.
+\item
+  \textbf{Algoritmo Verificador de co-Factorización:}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Multiplicar todos los factores de la lista aportada y comprobar que el
+  producto resultante sea exactamente igual a \(x\).
+\item
+  Validar la primalidad de cada factor \(p_i\) utilizando sus
+  respectivos certificados de Pratt adjuntos (lo cual toma tiempo
+  polinómico).
+\item
+  Revisar de forma directa que todos los factores primos de la lista
+  cumplan la condición de ser \textbf{mayores o iguales que \(y\)} (es
+  decir, \(p_i \ge y\)). Si todos los divisores primos de un número son
+  \(\ge y\), es matemáticamente imposible construir un divisor compuesto
+  que sea menor que \(y\) y mayor que 1. Al ser todas estas
+  comprobaciones polinómicas, el problema complementario está en NP
+  \(\implies\) el problema original pertenece a coNP.
+\end{enumerate}
+
+Como consecuencia directa de ambos apartados, el problema se encuadra en
+\(\text{NP} \cap \text{coNP}\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-6-correspondencia-entre-textnp-cap-textconp-y-la-clase-tfnp}{%
+\section{\texorpdfstring{Ejercicio 6: Correspondencia entre
+\(\text{NP} \cap \text{coNP}\) y la Clase
+TFNP}{Ejercicio 6: Correspondencia entre \textbackslash text\{NP\} \textbackslash cap \textbackslash text\{coNP\} y la Clase TFNP}}\label{ejercicio-6-correspondencia-entre-textnp-cap-textconp-y-la-clase-tfnp}}
+
+La clase \textbf{TFNP} (\emph{Total Functional NP}) representa el
+conjunto de los problemas de búsqueda de funciones dentro de FNP para
+los cuales se garantiza matemáticamente que \textbf{siempre existe al
+menos una solución válida} para cualquier valor de entrada posible.
+
+Dado un lenguaje arbitrario \(L \in \text{NP} \cap \text{coNP}\), por
+las caracterizaciones de los problemas de verificación sabemos que:
+
+\begin{itemize}
+\item
+  Si \(x \in L\), existe un certificado polinómico \(c_1\) que satisface
+  a un verificador \(V_1(x, c_1) = 1\).
+\item
+  Si \(x \notin L\), existe un certificado polinómico \(c_2\) que
+  satisface a un verificador de su complemento \(V_2(x, c_2) = 1\).
+\end{itemize}
+
+Por tanto, cada lenguaje en esta intersección sugiere el siguiente
+problema de búsqueda de funciones en TFNP:
+
+\begin{quote}
+\textbf{Problema sugerido:} ``Dada una cadena de entrada \(x\),
+encontrar un objeto \(c\) que cumpla alguna de estas dos condiciones
+verificables de forma polinómica: o bien \(c\) es un certificado válido
+de que \(x \in L\) (haciendo \(V_1(x, c) = 1\)), o bien \(c\) es un
+certificado válido de que \(x \notin L\) (haciendo \(V_2(x, c) = 1\)).''
+\end{quote}
+
+\hypertarget{por-quuxe9-pertenece-a-tfnp}{%
+\subsection{¿Por qué pertenece a
+TFNP?}\label{por-quuxe9-pertenece-a-tfnp}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Es un problema total:} Debido a que por la ley del bando
+  excluido una cadena de entrada necesariamente se cumple que
+  \(x \in L\) o bien que \(x \notin L\), la existencia de la solución
+  (ya sea el testigo \(c_1\) o el testigo \(c_2\)) está
+  \textbf{absolutamente garantizada} para todo elemento \(x\). No
+  existen instancias con respuesta vacía (\(\epsilon\)).
+\item
+  \textbf{Es verificable en tiempo polinómico:} Un verificador
+  determinista puede tomar la solución \(c\) suministrada y evaluar los
+  algoritmos \(V_1\) y \(V_2\) eficientemente para comprobar su validez.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-7-demostraciuxf3n-de-que-fsat-es-fnp-completo}{%
+\section{Ejercicio 7: Demostración de que FSAT es
+FNP-completo}\label{ejercicio-7-demostraciuxf3n-de-que-fsat-es-fnp-completo}}
+
+Para demostrar la FNP-completitud de FSAT (\emph{la versión de búsqueda
+de soluciones de SAT}), debemos validar los dos pasos de la teoría de
+funciones de complejidad:
+
+\hypertarget{pertenencia-a-la-clase-textfsat-in-textfnp}{%
+\subsection{\texorpdfstring{1. Pertenencia a la clase:
+\(\text{FSAT} \in \text{FNP}\)}{1. Pertenencia a la clase: \textbackslash text\{FSAT\} \textbackslash in \textbackslash text\{FNP\}}}\label{pertenencia-a-la-clase-textfsat-in-textfnp}}
+
+El problema recibe como datos un conjunto de cláusulas \(C\). Su
+relación asociada es \(R(C, A) = 1 \iff A\) es una asignación de valores
+de verdad que satisface la fórmula booleana \(C\). La longitud en bits
+de la asignación \(A\) está estrictamente acotada de forma lineal por el
+número de variables de \(C\), y comprobar si la asignación satisface las
+cláusulas toma tiempo polinómico lineal. Por tanto, FSAT pertenece a
+FNP.
+
+\hypertarget{dificultad-cualquier-problema-pi-in-textfnp-se-reduce-a-fsat}{%
+\subsection{\texorpdfstring{2. Dificultad: Cualquier problema
+\(\Pi \in \text{FNP}\) se reduce a
+FSAT}{2. Dificultad: Cualquier problema \textbackslash Pi \textbackslash in \textbackslash text\{FNP\} se reduce a FSAT}}\label{dificultad-cualquier-problema-pi-in-textfnp-se-reduce-a-fsat}}
+
+Sea \(\Pi\) un problema genérico de funciones de la clase FNP, definido
+por una relación polinómica \(R_{\Pi}(x, y)\). Por la propia definición
+de la clase, el problema de decisión subyacente (``¿Existe un objeto
+\(y\) tal que \(R_{\Pi}(x, y) = 1\)?'') pertenece por derecho propio a
+la clase NP.
+
+Por el \textbf{Teorema de Cook-Levin}, sabemos que cualquier problema de
+decisión en la clase NP se puede reducir en espacio logarítmico al
+problema de decisión SAT. Existe una transformación polinómica \(f(x)\)
+que genera un conjunto de cláusulas \(C = f(x)\) que reproduce fielmente
+el comportamiento de la Máquina de Turing No Determinista que evalúa la
+relación.
+
+La reducción estándar de Cook-Levin tiene la propiedad fundamental de
+ser constructiva respecto a las variables : dentro de las variables
+proposicionales del diseño de componentes de la reducción, un
+subconjunto específico de variables de la fórmula ---denotémoslas como
+el grupo de variables de opciones o configuración inicial--- codifica de
+forma directa, bit a bit, los elementos correspondientes a la cadena
+solución \(y\) que satisface la relación del problema original.
+
+Definimos las dos funciones de nuestra reducción en FNP (siguiendo el
+esquema formal de la pág. 38 del Tema 4):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Transformador de entrada (\(R\)):} Toma la instancia \(x\) de
+  nuestro problema original y aplica la reducción de Cook-Levin para
+  generar la fórmula de cláusulas de FSAT: \(C = R(x)\).
+\item
+  \textbf{Transformador de soluciones (\(S\)):} Es un algoritmo que toma
+  la asignación de variables de verdad \(A\) que satisface a la fórmula
+  calculada \(C\) y, leyendo de forma directa las posiciones asignadas a
+  las variables que representaban las opciones de la máquina,
+  reconstruye y escribe el string solución \(y = S(A, x)\).
+\end{enumerate}
+
+Dado que ambas funciones de transformación operan eficientemente en
+espacio logarítmico, queda demostrado que FSAT es FNP-completo.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-8-a-el-problema-de-los-spines-con-j_ij-ge-0-estuxe1-en-p}{%
+\section{\texorpdfstring{Ejercicio 8: (a) El Problema de los Spines con
+\(J_{ij} \ge 0\) está en
+P}{Ejercicio 8: (a) El Problema de los Spines con J\_\{ij\} \textbackslash ge 0 está en P}}\label{ejercicio-8-a-el-problema-de-los-spines-con-j_ij-ge-0-estuxe1-en-p}}
+
+Dada la función de energía del sistema sobre un grafo \(G = (V, E)\):
+
+\[R(s) = -\sum_{(i,j)\in E} J_{ij} s_i s_j\]
+
+Donde cada nodo tiene asignado un spin \(s_i \in \{-1, +1\}\).
+Analicemos algebraicamente el término multiplicativo de la interacción
+para cada arista del grafo:
+
+\begin{itemize}
+\tightlist
+\item
+  Si los dos extremos conectados tienen asignado el mismo signo
+  (\(s_i = s_j\)), entonces el producto es par y positivo:
+  \(s_i s_j = 1\).
+\item
+  Si los extremos tienen signos opuestos (\(s_i \neq s_j\)), entonces el
+  producto es negativo: \(s_i s_j = -1\).
+\end{itemize}
+
+Podemos reescribir analíticamente el sumatorio de la energía total
+descomponiéndolo en estos dos conjuntos de aristas excluyentes:
+
+\[R(s) = -\left( \sum_{s_i = s_j} J_{ij} - \sum_{s_i \neq s_j} J_{ij} \right)\]
+
+Definamos \(W = \sum_{(i,j)\in E} J_{ij}\) como la constante fija que
+representa la suma total de los pesos de todas las aristas del grafo
+original. Es evidente que la suma de las interacciones de los nodos con
+igual signo se puede calcular restando del total las aristas de signo
+opuesto: \(\sum_{s_i = s_j} J_{ij} = W - \sum_{s_i \neq s_j} J_{ij}\).
+Sustituyendo este término en nuestra ecuación de energía:
+
+\[R(s) = -\left( W - \sum_{s_i \neq s_j} J_{ij} - \sum_{s_i \neq s_j} J_{ij} \right) = -W + 2 \sum_{s_i \neq s_j} J_{ij}\]
+
+Queremos determinar si existe una configuración de spines tal que
+\(R(s) \le K\). Despejando el sumatorio de nuestra equivalencia
+matemática obtenemos:
+
+\[-W + 2 \sum_{s_i \neq s_j} J_{ij} \le K \iff \sum_{s_i \neq s_j} J_{ij} \le \frac{K + W}{2}\]
+
+\hypertarget{reducciuxf3n-al-problema-del-corte-muxednimo}{%
+\subsection{Reducción al Problema del Corte
+Mínimo}\label{reducciuxf3n-al-problema-del-corte-muxednimo}}
+
+El término \(\sum_{s_i \neq s_j} J_{ij}\) representa exactamente la
+definición matemática del \textbf{peso de un corte} en un grafo; es
+decir, la suma de los valores de las aristas que conectan el conjunto de
+vértices de la partición asignada al bando \(+1\) con los vértices de la
+partición asignada al bando \(-1\).
+
+Como la hipótesis del enunciado nos garantiza estrictamente que
+\textbf{\(J_{ij} \ge 0\) para todas las aristas del grafo}, el problema
+se reduce de forma directa a encontrar el \textbf{Corte Mínimo Global}
+(\emph{Global Minimum Cut}) de un grafo con capacidades no negativas.
+
+Este problema clásico se resuelve de forma exacta y eficiente en tiempo
+polinómico utilizando algoritmos estándar de flujos sobre redes (como el
+algoritmo de Edmonds-Karp o el algoritmo de Ford-Fulkerson por caminos
+cortos estudiado en el Tema 3), que operan en un coste polinómico de
+\(O(|V| \cdot |E|^2)\).
+
+Por tanto, al poder calcular el valor mínimo absoluto de la energía en
+tiempo polinómico y evaluar si es menor o igual que la cota solicitada,
+\textbf{el problema está en P}.
+
+\hypertarget{simulacro-examen-3-mac}{%
+\chapter{Simulacro Examen 3 MAC}\label{simulacro-examen-3-mac}}
+
+\hypertarget{ejercicio-1-el-paluxedndromo-en-clase-l}{%
+\subsection{Ejercicio 1 (El Palíndromo en Clase
+L)}\label{ejercicio-1-el-paluxedndromo-en-clase-l}}
+
+\textbf{Enunciado:} Demuestre formalmente que el problema de determinar
+si una palabra de entrada es un palíndromo (se lee igual de izquierda a
+derecha que de derecha a izquierda) pertenece a la clase de complejidad
+\textbf{L}.
+
+\textbf{Resolución detallada:} Para demostrar que el problema pertenece
+a la clase \textbf{L} (espacio logarítmico), utilizamos el modelo
+computacional estándar para la evaluación de espacio sublineal: una
+Máquina de Turing equipada con una \textbf{cinta de entrada de solo
+lectura}, cuyo espacio no se contabiliza y que permite mover el cabezal
+libremente hacia adelante y hacia atrás, y una cinta de trabajo de
+lectura/escritura separada.
+
+\textbf{Diseño del Algoritmo:} 1. Inicializamos dos punteros (contadores
+numéricos) en la cinta de trabajo: \(i = 1\) apuntando al principio de
+la palabra de entrada, y \(j = n\) apuntando al símbolo final. 2.
+Iniciamos un bucle que se ejecuta mientras \(i < j\). 3. En cada
+iteración, la máquina mueve el cabezal de la cinta de entrada a la
+posición \(i\) para leer su símbolo, y posteriormente lo mueve a la
+posición \(j\) para leer el suyo. 4. Si los símbolos leídos en \(i\) y
+\(j\) son diferentes, la máquina \textbf{rechaza} inmediatamente, ya que
+la palabra no es simétrica. 5. Si los símbolos coinciden, se incrementa
+el puntero \(i\) en 1 y se decrementa el puntero \(j\) en 1, continuando
+la comprobación hacia el centro de la palabra. 6. Si el bucle finaliza
+sin haber encontrado ninguna diferencia, la máquina \textbf{acepta} la
+entrada.
+
+\textbf{Justificación de Complejidad (Espacio):} Los únicos datos que se
+han almacenado en la cinta de trabajo durante toda la ejecución han sido
+los contadores \(i\) y \(j\). Como el valor numérico máximo que pueden
+alcanzar estos contadores está estrictamente acotado por la longitud
+total de la entrada \(n\), representarlos en formato binario requiere
+exactamente \(\lceil \log_2(n+1) \rceil\) casillas de memoria. Al
+emplear un número constante de contadores de este tamaño, el espacio de
+memoria de trabajo total consumido es \textbf{\(O(\log n)\)}, lo que
+demuestra formalmente que el problema se encuadra en la clase
+\textbf{L}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-2-anuxe1lisis-de-conjuntos-numuxe9ricos}{%
+\subsection{Ejercicio 2 (Análisis de Conjuntos
+Numéricos)}\label{ejercicio-2-anuxe1lisis-de-conjuntos-numuxe9ricos}}
+
+\textbf{Enunciado:} Se plantean los dos siguientes problemas de decisión
+sobre conjuntos de números: * \textbf{Problema A:} Dado un conjunto de
+números, determinar si existe un elemento que sea la mediana. Si la
+cantidad total de números en la entrada no es impar, la máquina debe
+rechazar automáticamente. * \textbf{Problema B:} Dado un conjunto de
+números, determinar si es posible agrupar todos sus elementos en parejas
+de tal forma que la suma de los dos elementos de cada pareja sea
+exactamente la misma.
+
+Sabiendo que uno de los problemas pertenece a la clase \textbf{L} y el
+otro pertenece a la clase \textbf{P}, identifique a qué clase de
+complejidad pertenece cada uno y demuestre formalmente su clasificación
+detallando el algoritmo utilizado y analizando su consumo de recursos.
+
+\textbf{Resolución detallada:}
+
+\hypertarget{el-problema-a-la-mediana-pertenece-a-la-clase-l}{%
+\subsubsection{\texorpdfstring{\textbf{1. El Problema A (La Mediana)
+pertenece a la Clase
+L}}{1. El Problema A (La Mediana) pertenece a la Clase L}}\label{el-problema-a-la-mediana-pertenece-a-la-clase-l}}
+
+Para demostrar que este problema se puede decidir en espacio
+logarítmico, diseñamos un algoritmo usando la misma máquina de Turing
+con cinta de entrada de solo lectura descrita anteriormente. Es
+fundamental \textbf{no copiar nunca la entrada en la cinta de trabajo},
+ya que eso supondría gastar un espacio de tamaño lineal.
+
+\textbf{Algoritmo y Justificación:} * La máquina primero cuenta el
+número total de elementos \(n\). Si \(n\) es par, rechaza
+automáticamente la entrada. * Si es impar, utiliza un contador \(i\)
+para iterar por cada elemento del array, tratándolo como el ``candidato
+a mediana''. * Para cada candidato \(Array[i]\), lanza un segundo bucle
+interno con un índice \(j\) que recorre todo el conjunto. Durante este
+recorrido, utiliza dos contadores numéricos auxiliares:
+\texttt{C\_menores} (que suma 1 si \(Array[j] < Array[i]\)) y
+\texttt{C\_mayores} (que suma 1 si \(Array[j] > Array[i]\)). * Al
+finalizar el recorrido interno, si \texttt{C\_menores} es exactamente
+igual a \texttt{C\_mayores}, la máquina \textbf{acepta} (ha encontrado
+la mediana). Si no coinciden, reinicia los contadores y pasa al
+siguiente candidato con el índice \(i\). * \textbf{Espacio:} La máquina
+solo ha utilizado 4 variables enteras (\(i\), \(j\), \texttt{C\_menores}
+y \texttt{C\_mayores}). Como sus valores están acotados por la longitud
+de la entrada \(n\), cada una ocupa un espacio binario de
+\(\lceil \log_2(n+1) \rceil\). Al utilizar un número fijo de contadores
+logarítmicos, el espacio total consumido es \textbf{\(O(\log n)\)},
+justificando su pertenencia a \textbf{L}.
+
+\hypertarget{el-problema-b-parejas-de-sumas-iguales-pertenece-a-la-clase-p}{%
+\subsubsection{\texorpdfstring{\textbf{2. El Problema B (Parejas de
+sumas iguales) pertenece a la Clase
+P}}{2. El Problema B (Parejas de sumas iguales) pertenece a la Clase P}}\label{el-problema-b-parejas-de-sumas-iguales-pertenece-a-la-clase-p}}
+
+Este problema no se puede resolver eficientemente en espacio \(L\) sin
+alterar la entrada, por lo que demostraremos que pertenece a la clase
+\textbf{P} diseñando una Máquina de Turing determinista que lo resuelva
+en un tiempo acotado por un polinomio \(O(n^c)\).
+
+\textbf{Algoritmo y Justificación:} * \textbf{Paso 1:} La máquina ordena
+todos los elementos del array de menor a mayor. Los algoritmos de
+ordenación deterministas más eficientes toman un tiempo de
+\textbf{\(O(n \log n)\)}. * \textbf{Paso 2:} Por pura lógica matemática,
+para que todos los pares sumen lo mismo, el número más pequeño
+(\(Array\)) debe estar emparejado obligatoriamente con el número más
+grande (\(Array[n]\)). La máquina suma ambos extremos para obtener la
+única constante de ``Suma Objetivo'' posible: \(S = Array + Array[n]\).
+Esto cuesta un tiempo constante \(O(1)\). * \textbf{Paso 3:} La máquina
+emplea dos punteros (uno al inicio y otro al final) y los va moviendo
+hacia el centro del array paso a paso. En cada iteración suma los dos
+elementos a los que apuntan y verifica que su resultado sea exactamente
+igual a \(S\). Este recorrido toma un tiempo lineal \textbf{\(O(n)\)}. *
+Si alguna pareja falla, \textbf{rechaza}. Si los punteros se cruzan en
+el centro y todas han sumado \(S\), \textbf{acepta}. * \textbf{Tiempo:}
+El paso de mayor coste es la ordenación (\(O(n \log n)\)). Como el
+tiempo global de ejecución está dominado por este paso y, por tanto,
+acotado superiormente por la función polinómica cuadrática genérica
+\(O(n^2)\), queda formalmente demostrado que el problema pertenece a la
+clase \textbf{P}.
+
+\hypertarget{ejercicio-3-cuestiuxf3n-conceptual-el-uxf3ptimo-del-viajante-de-comercio}{%
+\subsection{Ejercicio 3 (Cuestión Conceptual: El Óptimo del Viajante de
+Comercio)}\label{ejercicio-3-cuestiuxf3n-conceptual-el-uxf3ptimo-del-viajante-de-comercio}}
+
+\textbf{Enunciado:} En relación con el Problema del Viajante de
+Comercio, justifique detalladamente por qué comprobar si un circuito
+dado es la solución ÓPTIMA absoluta del grafo no pertenece a la clase NP
+ni a la clase coNP, sino que su resolución requiere utilizar clases de
+ESPACIO.
+
+\textbf{Resolución detallada:} El problema de certificar que un circuito
+es el \textbf{óptimo absoluto} en el Viajante de Comercio es
+estructuralmente distinto a simplemente comprobar si existe un camino
+con un coste menor o igual a un límite dado.
+
+Para poder convencer a un verificador de que un circuito concreto es la
+solución óptima, el certificado aportado tendría que demostrar dos
+afirmaciones de naturaleza opuesta simultáneamente: 1. \textbf{Condición
+existencial:} Demostrar que el camino existe, es válido y tiene un coste
+\(X\). Esta propiedad es característica de la clase \textbf{NP}
+(``Existe un camino\ldots{}''). 2. \textbf{Condición universal:}
+Demostrar que \textbf{NO existe} en la totalidad del grafo ningún otro
+circuito posible cuyo coste sea estrictamente menor que \(X\). Para
+refutar la existencia de alternativas mejores necesitamos evaluar todas
+las combinaciones, lo cual es una propiedad característica de la clase
+\textbf{coNP} (``Para todo camino, ninguno es mejor\ldots{}'').
+
+Dado que evaluar una ``solución óptima'' exige simultáneamente verificar
+un ``Existe'' y un ``Para todo'', un certificado de tamaño polinómico
+simple no puede abarcar la evaluación de todas las rutas alternativas,
+por lo que certificar el óptimo no se encuadra de forma aislada ni en
+\textbf{NP} ni en \textbf{coNP}.
+
+\textbf{Resolución mediante clases de ESPACIO:} A pesar de lo anterior,
+el problema sí puede resolverse de forma determinista si apelamos a los
+recursos de \textbf{ESPACIO} (dentro de clases como PSPACE). Una Máquina
+de Turing determinista puede recorrer de manera sistemática todo el
+árbol de caminos posibles del grafo mediante un algoritmo de búsqueda en
+profundidad (backtracking). La clave radica en que la máquina
+\textbf{reutiliza constantemente la memoria}. Al explorar rama por rama,
+solo necesita almacenar el estado de la ruta actual y llevar la cuenta
+del ``mejor coste encontrado hasta el momento''. Por lo tanto, el
+espacio de memoria que consume está acotado de forma \textbf{lineal
+\(O(n)\)} respecto al tamaño del grafo, logrando encontrar la solución
+óptima sin agotar la memoria, a pesar de que el proceso requiera un
+tiempo de ejecución de orden exponencial.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-4-estructuras-anidadas-y-la-restricciuxf3n-sin-retroceso}{%
+\subsection{Ejercicio 4 (Estructuras Anidadas y la restricción sin
+retroceso)}\label{ejercicio-4-estructuras-anidadas-y-la-restricciuxf3n-sin-retroceso}}
+
+\textbf{Enunciado:} Dada una cadena de entrada compuesta por dos tipos
+de paréntesis (por ejemplo, \texttt{()} y \texttt{{[}{]}}), demuestre
+que determinar si están correctamente emparejados y anidados pertenece a
+la clase L. Indique teóricamente por qué este problema requeriría
+obligatoriamente un espacio lineal \(O(n)\) si la cabeza de lectura no
+tuviera permitido retroceder.
+
+\textbf{Resolución detallada:}
+
+\textbf{Parte 1: Pertenencia a la Clase L (Modelo estándar)} Utilizamos
+una Máquina de Turing que dispone de una cinta de entrada de solo
+lectura \textbf{con capacidad para retroceder} (releer) y una cinta de
+trabajo separada. Para que la cadena de paréntesis múltiples sea válida,
+se deben verificar dos propiedades: el balance global de la cadena
+ignorando los tipos, y que cada cierre coincida en tipo con su apertura
+correspondiente en el anidamiento.
+
+\textbf{Algoritmo en Espacio \(O(\log n)\):} 1. La máquina recorre la
+palabra con un \textbf{contador de balance global \(b\)},
+incrementándolo en las aperturas y decrementándolo en los cierres, y
+comprobando que nunca sea menor a 0 para validar el balance. 2. Cada vez
+que el cabezal de lectura encuentra un símbolo de cierre (por ejemplo en
+la posición \(j\)), la máquina detiene su avance, memoriza el índice
+\(j\) y debe localizar su apertura asociada. 3. La apertura asociada a
+ese cierre será exactamente la \textbf{última posición \(i < j\)} tal
+que el segmento intermedio de la palabra (\(x[i+1 .. j-1]\)) está
+\textbf{perfectamente balanceado}. 4. Para encontrar ese punto
+operativamente, el algoritmo lanza un segundo recorrido auxiliar desde
+el inicio hasta \(j\). Lleva un contador sub-balance y memoriza el
+índice \(i\) de la última apertura que provocó que el sub-balance se
+situara en cero justo antes del cierre. 5. Una vez localizada la
+posición de apertura \(i\), la máquina comprueba de manera directa que
+el símbolo situado en \(i\) y el situado en \(j\) \textbf{sean
+exactamente del mismo tipo} (ambos redondos o ambos cuadrados). Si
+difieren, rechaza.
+
+\textbf{Justificación Matemática:} Durante toda esta operación, la
+máquina ha evitado utilizar estructuras de datos dinámicas como pilas.
+Solamente ha necesitado almacenar en la cinta de trabajo unos pocos
+contadores enteros (como \(b\)) y punteros a índices de la cinta (como
+\(i\) y \(j\)). Como el valor numérico máximo de todas estas variables
+está estrictamente limitado por la longitud total \(n\), su escritura
+binaria precisa un número constante de contadores de tamaño
+\(\lceil \log_2(n+1) \rceil\). En consecuencia, el espacio total
+empleado en la memoria es \textbf{\(O(\log n)\)}, lo que demuestra
+formalmente su pertenencia a \textbf{L}.
+
+\textbf{Parte 2: Por qué requiere espacio \(O(n)\) si NO se permite
+retroceder (Modelo Online)} Si le prohibimos a la máquina mover su
+cabezal hacia atrás, le impedimos ejecutar la estrategia de ``buscar
+emparejamientos bajo demanda''. Teóricamente, esto la obliga a emplear
+un espacio \textbf{lineal \(\Omega(n)\)}, lo cual se demuestra usando un
+\textbf{argumento de distinguibilidad (fooling set)}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Consideremos un conjunto de \(2^m\) cadenas distintas que están
+  formadas exclusivamente por un prefijo de \(m\) símbolos de apertura
+  combinados de redondos y cuadrados (por ejemplo, \texttt{({[}(({[}} vs
+  \texttt{({[}{[}{[}{[}}).
+\item
+  Para cualquier par de prefijos diferentes \(u \neq u'\), siempre
+  existirá una posición concreta donde el tipo de paréntesis elegido no
+  coincide.
+\item
+  Si le suministramos a la máquina la continuación exacta de cierres del
+  primer prefijo (su ``espejo'' lógicamente correcto), esta
+  concatenación formará una palabra válida y la máquina la
+  \textbf{aceptará}. Sin embargo, si le adjuntamos esa misma
+  continuación al segundo prefijo \(u'\), los tipos chocarán y la
+  máquina debe \textbf{rechazar}.
+\item
+  Como la máquina no puede retroceder en la cinta para revisar qué
+  prefijo leyó al principio, su decisión futura depende única y
+  exclusivamente de la ``fotografía'' o estado en el que quedó su
+  memoria tras leer la primera mitad de la entrada.
+\item
+  Para evitar equivocarse al evaluar las \(2^m\) posibles continuaciones
+  en el futuro, la máquina \textbf{debe obligatoriamente alcanzar una
+  configuración de memoria completamente distinta para cada uno de los
+  \(2^m\) prefijos posibles}.
+\item
+  Sabiendo que una memoria de tamaño \(s\) puede codificar como máximo
+  \(2^{O(s)}\) configuraciones diferentes, la desigualdad
+  \(2^{O(s)} \ge 2^m\) requiere matemáticamente que
+  \textbf{\(s = \Omega(m)\)}. Tomando la longitud de los prefijos como
+  la mitad de la palabra (\(m = \lfloor n/2 \rfloor\)), se demuestra
+  formalmente que la máquina precisa almacenar todos los tipos,
+  necesitando forzosamente un espacio lineal \textbf{\(O(n)\)}.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-5-cierre-de-la-clase-np-para-la-estrella-de-kleene-l}{%
+\subsection{\texorpdfstring{Ejercicio 5 (Cierre de la Clase NP para la
+Estrella de Kleene
+\(L^*\))}{Ejercicio 5 (Cierre de la Clase NP para la Estrella de Kleene L\^{}*)}}\label{ejercicio-5-cierre-de-la-clase-np-para-la-estrella-de-kleene-l}}
+
+\textbf{Enunciado del Simulacro:} Demuestre, definiendo rigurosamente su
+certificado y su verificador, que si un lenguaje \(L\) pertenece a la
+clase \textbf{NP}, entonces la clausura de Kleene \(L^*\) también
+pertenece a \textbf{NP}.
+
+\textbf{Resolución detallada:} La definición de la estrella de Kleene
+\(L^*\) establece que una palabra \(x \in L^*\) si, y solo si, se puede
+particionar en \(k\) trozos consecutivos (\(w_1, w_2, \dots, w_k\)) de
+forma que cada subpalabra o bloque \(w_j\) pertenezca obligatoriamente
+al lenguaje original \(L\).
+
+\textbf{1. Hipótesis de partida:} Dado que el enunciado nos garantiza
+que \(L \in \text{NP}\), sabemos por teoría que existe un verificador
+determinista polinómico \(V\) y que toda palabra válida cuenta con un
+certificado individual de tamaño polinómico acotado por un polinomio
+\(q(|w|)\).
+
+\textbf{2. El Diseño del Certificado para \(L^*\) (El
+Súper-Certificado):} Para demostrar que la palabra completa \(x\) (de
+longitud \(n\)) pertenece a \(L^*\), no podemos comprobarlo de golpe,
+por lo que el certificado aportado debe constar de dos elementos clave:
+* \textbf{Los puntos de partición (Cortes):} Una secuencia de índices
+\(i_0 = 0 < i_1 < i_2 < \dots < i_k = n\) que delimitan exactamente
+dónde empieza y dónde termina cada trozo \(w_j\) dentro de la palabra
+\(x\). * \textbf{Las pruebas individuales:} Una lista de
+sub-certificados \((c_1, c_2, \dots, c_k)\), donde cada \(c_j\) es el
+certificado individual que convence al verificador original de que ese
+trozo concreto \(w_j \in L\).
+
+\textbf{3. El Verificador Determinista \(V^*\) para \(L^*\):} El
+algoritmo verificador recibe la entrada \(x\) y el súper-certificado,
+operando de la siguiente manera: 1. Comprueba lógicamente que los
+índices de corte (\(i_j\)) están ordenados, no se solapan y cubren toda
+la longitud \(n\). 2. Para cada subpalabra \(w_j\) delimitada por los
+cortes, ejecuta el verificador original de la hipótesis:
+\(V(w_j, c_j) == 1\). 3. Si el verificador devuelve ``1'' (Acepta) para
+todos y cada uno de los trozos, \(V^*\) \textbf{acepta}. Si alguna
+subpalabra es rechazada, \(V^*\) rechaza automáticamente.
+
+\textbf{4. Justificación Matemática (El Cierre Polinómico):} Para probar
+la pertenencia a NP, debemos justificar que estos recursos no explotan
+exponencialmente: * \textbf{Tamaño del Súper-Certificado:} Como la
+palabra se puede partir como máximo en \(n\) trozos de 1 carácter
+(\(k \le n\)), hay a lo sumo \(n\) índices de corte, y cada índice
+requiere \(O(\log n)\) bits. Por otro lado, la suma de las longitudes de
+todos los trozos es exactamente \(n\) (\(\sum |w_j| = n\)). Dado que
+cada certificado individual \(c_j\) está acotado por \(q(|w_j|)\), el
+tamaño total de la suma de todos los certificados no superará
+\(n \cdot q(n)\), lo cual es una medida estrictamente polinómica. *
+\textbf{Tiempo de Ejecución:} Comprobar los cortes toma tiempo lineal.
+La ejecución del verificador original \(V\) es de coste polinómico y se
+llama, a lo sumo, \(n\) veces. Como multiplicar un polinomio por \(n\)
+da como resultado otro polinomio, el proceso entero requiere un tiempo
+determinista polinómico. * \textbf{Conclusión:} Existe un certificado de
+tamaño polinómico evaluable en tiempo polinómico, por lo que queda
+demostrado que \textbf{\(L^* \in \text{NP}\)}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-6-composiciuxf3n-de-funciones}{%
+\subsection{Ejercicio 6 (Composición de
+Funciones)}\label{ejercicio-6-composiciuxf3n-de-funciones}}
+
+\textbf{Enunciado del Simulacro:} Evalúe el comportamiento de la clase
+de funciones exponenciales de la forma \(\{k^n : k > 0\}\) bajo la
+composición polinómica por la izquierda \(p(f(n))\) y por la derecha
+\(f(p(n))\), asumiendo para la prueba que \(p(n) = n^l\) (\(l>0\)). ¿Es
+la clase cerrada en ambos casos? Demuéstrelo matemáticamente.
+
+\textbf{Resolución detallada:} Para evaluar si la clase sobrevive o es
+``absorbida'' bajo composición polinómica, introduciremos nuestra
+función genérica \(p(n) = n^l\) (donde \(l\) es una constante entera
+\(\ge 2\) para evaluar el crecimiento no lineal).
+
+\textbf{1. Composición polinómica por la izquierda \(p(f(n))\):} En este
+escenario, sustituimos la función completa dentro del polinomio, lo que
+equivale a elevar la función a una potencia constante \(l\):
+\[p(f(n)) = (k^n)^l\] Por las propiedades de las potencias,
+multiplicamos los exponentes: \[(k^n)^l = k^{n \cdot l} = (k^l)^n\] Dado
+que \(k\) y \(l\) son dos valores constantes positivas, podemos definir
+una nueva constante \(K = k^l\). Si sustituimos esto, nos queda la
+función \(K^n\). Como el resultado sigue teniendo la misma estructura
+exacta de una base constante elevada a \(n\) (\(K^n \in \{k^n\}\)), la
+función no se ha salido de la familia. \textbf{Conclusión:} La familia
+exponencial de base constante \textbf{SÍ es cerrada} bajo la composición
+por la izquierda.
+
+\textbf{2. Composición polinómica por la derecha \(f(p(n))\):} En este
+caso, se introduce el polinomio \(n^l\) directamente como el argumento
+(la variable \(n\)) de la función exponencial, lo que se traduce en
+colocar el polinomio en el exponente: \[f(p(n)) = k^{(n^l)}\] Para
+\(l \ge 2\), la expresión \(k^{n^l}\) crece de forma dramáticamente más
+violenta que la clase base. Para que estuviera dentro de la familia
+original \(\{k^n : k > 0\}\), tendría que existir alguna constante
+mágica enorme \(K'\) tal que \(k^{n^l} \le (K')^n\) para cualquier \(n\)
+grande. Sin embargo, es matemáticamente imposible acotar \(k^{n^l}\)
+usando una función con exponente puramente lineal (\(n\)), ya que un
+grado de libertad adicional introducido en el exponente (\(n^l\))
+``explota'' superando a cualquier constante \(K'\) que intentemos fijar
+en la base. \textbf{Conclusión:} La familia no contiene ninguna función
+capaz de dominar ese crecimiento masivo. Por lo tanto, la clase
+exponencial de base constante \textbf{NO es cerrada} bajo la composición
+por la derecha.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{pregunta-7-separaciuxf3n-de-clases-textnp-neq-textespacion}{%
+\subsection{\texorpdfstring{Pregunta 7 (Separación de Clases:
+\(\text{NP} \neq \text{ESPACIO}(n)\))}{Pregunta 7 (Separación de Clases: \textbackslash text\{NP\} \textbackslash neq \textbackslash text\{ESPACIO\}(n))}}\label{pregunta-7-separaciuxf3n-de-clases-textnp-neq-textespacion}}
+
+\textbf{Enunciado:} Demuestre formalmente que
+\(\text{NP} \neq \text{ESPACIO}(n)\). Para ello, base su demostración en
+el comportamiento que tiene cada una de estas dos clases frente a las
+reducciones computables en espacio logarítmico (\(L\)-reducciones).
+
+\textbf{Resolución detallada:} Para demostrar matemáticamente que ambas
+clases no son iguales, no vamos a evaluar si una contiene a la otra,
+sino que emplearemos la táctica de buscar una propiedad estructural que
+una clase posea y la otra no. Dos clases idénticas tendrían las mismas
+propiedades; al diferir en al menos una, queda demostrado que son
+distintas. La propiedad a evaluar es la \textbf{clausura bajo
+reducciones en espacio logarítmico (\(\propto_L\))}.
+
+\textbf{Paso 1: Demostrar que NP sí es cerrada para L-reducciones.}
+Decir que es cerrada significa que si \(P_1 \propto_L P_2\) y
+\(P_2 \in \text{NP}\), entonces obligatoriamente \(P_1 \in \text{NP}\).
+Una reducción calculable en espacio logarítmico \(O(\log n)\) puede
+alcanzar como máximo un número polinómico de configuraciones de memoria
+distintas (\(2^{O(\log n)} = n^{O(1)}\)) sin entrar en bucle infinito.
+Por tanto, cualquier reducción en espacio \(L\) se ejecuta a lo sumo en
+tiempo polinómico. Al encadenar esta reducción polinómica con el
+verificador polinómico del problema \(P_2\), el tiempo de cómputo global
+sigue siendo estrictamente polinómico, demostrando que \textbf{la clase
+NP es cerrada bajo estas reducciones}.
+
+\textbf{Paso 2: Demostrar que ESPACIO(n) NO es cerrada para
+L-reducciones.} Para este paso, nos apoyamos en el \textbf{Teorema de la
+Jerarquía de Espacio}, el cual garantiza que disponer de más memoria
+estricta nos permite resolver más problemas; en concreto:
+\(\text{ESPACIO}(n) \subsetneq \text{ESPACIO}(n^2)\). Gracias a esto,
+podemos fijar un problema testigo ``muy difícil'' \(A\) tal que sabemos
+de forma absoluta que \textbf{\(A \in \text{ESPACIO}(n^2)\) pero
+\(A \notin \text{ESPACIO}(n)\)}.
+
+Utilizamos ahora la técnica del \textbf{Padding} (Relleno). Construimos
+un lenguaje disfrazado \(B\) añadiendo caracteres neutros \texttt{\#} a
+la entrada original \(x \in A\) hasta que el tamaño total de la nueva
+cadena sea el cuadrado de la original (\(N = |x|^2\)). *
+\textbf{\(B \in \text{ESPACIO}(n)\):} Para que una máquina decida \(B\),
+solo tiene que extraer \(x\) y ejecutar el decididor original de \(A\).
+Como este decididor consumía un espacio de \(|x|^2\), y nuestra entrada
+de ahora mide exactamente \(N = |x|^2\), el espacio consumido respecto
+al nuevo tamaño es exactamente lineal \(O(N)\). * \textbf{La reducción:}
+El proceso de transformar la entrada corta \(x\) en la entrada gigante
+\(x\#^{|x|^2 - |x|}\) consiste en ir contando caracteres, lo cual
+requiere apuntadores logarítmicos. Así que \(A\) se reduce a \(B\) en
+espacio \(L\) (\(A \propto_L B\)).
+
+\textbf{Conclusión final:} Hemos demostrado que \(A \propto_L B\) y que
+\(B \in \text{ESPACIO}(n)\). Si la clase \(\text{ESPACIO}(n)\) fuera
+verdaderamente cerrada bajo estas reducciones, obligaría a que \(A\)
+estuviera en \(\text{ESPACIO}(n)\). Sin embargo, la Jerarquía de Espacio
+nos prohíbe esto (\(A \notin \text{ESPACIO}(n)\)). Para evitar esta
+contradicción matemática, la única salida es que
+\textbf{\(\text{ESPACIO}(n)\) NO es cerrada}. Al diferir en esta
+propiedad fundamental, concluimos formalmente que
+\textbf{\(\text{NP} \neq \text{ESPACIO}(n)\)}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{pregunta-8-tratabilidad-numuxe9rica-de-la-exponenciaciuxf3n-modular}{%
+\subsection{Pregunta 8 (Tratabilidad Numérica de la Exponenciación
+Modular)}\label{pregunta-8-tratabilidad-numuxe9rica-de-la-exponenciaciuxf3n-modular}}
+
+\textbf{Enunciado:} Se desea probar que el problema de la Exponenciación
+Modular (determinar si \(a^b \equiv c \pmod p\)) pertenece a la clase
+\textbf{P}. Demuestre esta pertenencia detallando el algoritmo eficiente
+necesario, y justifique previamente por qué un enfoque de
+multiplicaciones sucesivas estándar tendría un coste exponencial
+respecto al tamaño de la entrada en bits.
+
+\textbf{Resolución detallada:} El problema exige demostrar que la
+decisión \(a^b \equiv c \pmod p\) se puede computar en tiempo polinómico
+respecto a la longitud de la entrada.
+
+\textbf{1. Análisis de los recursos y la trampa del enfoque estándar:}
+En la teoría de complejidad, el tamaño de la entrada \(n\) representa la
+\textbf{cantidad total de bits} necesarios para almacenar los cuatro
+números (\(a, b, c, p\)) en la memoria de la máquina. Si decidiéramos
+abordar el problema con un bucle simple de fuerza bruta que multiplicase
+consecutivamente \(a \cdot a \cdot a \dots\) dando tantas vueltas como
+indique el exponente \(b\), caeríamos en una trampa exponencial. Dado
+que el tamaño de la entrada está en bits, el valor numérico del
+exponente \(b\) puede ascender a un orden de magnitud enorme de hasta
+\(2^n\). Por consiguiente, dar esa cantidad de vueltas requeriría
+efectuar un tiempo de ejecución exponencial \textbf{\(O(2^n)\)}, un
+coste inasumible para la clase P.
+
+\textbf{2. El algoritmo eficiente (Exponenciación Binaria por Cuadrados
+Sucesivos):} Para situar el problema en la clase \textbf{P}, debemos
+evadir el valor gigante de \(b\) y fijarnos únicamente en su longitud en
+bits. Diseñamos una Máquina de Turing determinista que emplea la
+\textbf{exponenciación binaria}: * La máquina reserva una variable
+acumuladora inicializada a 1 y recorre, uno a uno, los bits que componen
+el exponente \(b\) (que son a lo sumo \(n\) bits). * En cada paso
+(iteración del bucle), la máquina \textbf{eleva al cuadrado} su variable
+de base actual, aplicando la operación módulo \(p\) inmediatamente para
+garantizar que el número resultante nunca supere el tamaño de la entrada
+(evitando desbordamientos de memoria). * Si el bit evaluado en esa
+vuelta es un \texttt{1}, la máquina además multiplica el acumulador por
+el valor actual y vuelve a aplicar el módulo \(p\). * Al concluir el
+bucle por los bits, si el resultado contenido en el acumulador coincide
+exactamente con \(c\), la máquina acepta. En caso contrario, rechaza.
+
+\textbf{3. Justificación Matemática del Tiempo:} A diferencia del caso
+exponencial, este bucle determinista da un número de iteraciones
+estrictamente equivalente a la cantidad de bits del exponente. Como el
+exponente es parte de la entrada, el bucle da a lo sumo \(O(n)\)
+vueltas. En el interior de cada ciclo, la máquina solo realiza
+multiplicaciones y divisiones enteras (el módulo) entre variables cuyo
+tamaño en bits está matemáticamente acotado. Dichas operaciones
+aritméticas básicas entre números de tamaño \(n\) se pueden realizar
+eficientemente en tiempo \(O(n^2)\). Por consiguiente, el tiempo total
+global del algoritmo es el producto del número de vueltas por el coste
+interno (\(O(n) \cdot O(n^2)\)), lo que resulta en un tiempo
+estrictamente acotado por un polinomio \textbf{\(O(n^3)\)}. Queda
+demostrado así formalmente que el problema se ubica dentro de la
+\textbf{clase P}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{pregunta-9-el-problema-de-la-factorizaciuxf3n}{%
+\subsection{Pregunta 9 (El Problema de la
+Factorización)}\label{pregunta-9-el-problema-de-la-factorizaciuxf3n}}
+
+\textbf{Enunciado:} Dado un número \(x\), se desea determinar si tiene
+un divisor \(k\) en el rango abierto \(1 < k < y\). Demuestre con todo
+detalle que este problema pertenece a la intersección
+\(\text{NP} \cap \text{coNP}\), indicando los certificados exactos
+requeridos para las instancias afirmativas y negativas.
+
+\textbf{Resolución detallada:} Para demostrar que el problema de la
+factorización pertenece a la intersección
+\textbf{\(\text{NP} \cap \text{coNP}\)}, es imperativo estructurar la
+demostración validando su pertenencia a ambas clases de complejidad por
+separado.
+
+\textbf{1. Demostración de pertenencia a NP (Instancias afirmativas):}
+Si la respuesta a la pregunta es ``SÍ'', existe un divisor pequeño
+oculto en ese rango. * \textbf{Certificado:} Definimos como certificado
+simplemente el propio valor numérico del divisor \(k\). *
+\textbf{Verificador:} Una Máquina de Turing Determinista (MTD) tomará la
+entrada (\(x, y\)) y el certificado \(k\), y evaluará en tiempo
+polinómico dos propiedades: 1. Validar las cotas numéricas: comprobar
+que \(1 < k < y\). 2. Efectuar la división entera para constatar que el
+resto \(x \pmod k == 0\). * \textbf{Justificación de complejidad:} La
+operación aritmética de división entera entre números de un tamaño \(n\)
+medido en bits se computa eficientemente en un tiempo algorítmico
+acotado por \textbf{\(O(n^2)\)}. Dado que un certificado de tamaño
+polinómico se puede verificar en tiempo polinómico, queda demostrado que
+el problema \textbf{pertenece a NP}.
+
+\textbf{2. Demostración de pertenencia a coNP (Instancias negativas):}
+Para probar que el problema original pertenece a coNP, debemos demostrar
+teóricamente que el problema complementario (``¿Es cierto que \(x\) NO
+tiene divisores en el rango \(1 < k < y\)?'') pertenece a la clase NP. *
+\textbf{Certificado para el NO:} Para refutar la existencia de divisores
+en ese rango, el certificado debe proporcionar la \textbf{descomposición
+completa en factores primos de \(x\)}
+(\(x = p_1^{e_1} \cdot p_2^{e_2} \cdots p_m^{e_m}\)). El elemento
+crucial de la demostración es que se debe adjuntar obligatoriamente el
+\textbf{Certificado de Pratt} para cada uno de los factores primos
+\(p_i\) suministrados en la lista. * \textbf{Verificador:} Con este
+súper-certificado, la MTD ejecutará tres pasos deterministas: 1.
+Multiplicará todos los factores de la lista para corroborar que el
+resultado general iguala exactamente a la entrada \(x\). 2. Validará
+irrefutablemente que cada uno de esos factores es primo comprobando la
+validez de sus respectivos Certificados de Pratt (cuyo formato formal
+sería, por ejemplo,
+\(\text{Cert}(13) = \Big( \big(13 : 2 \ (2, 3)\big), \ \big(3 : 2 \ (2)\big) \Big)\)).
+Esto se realiza en tiempo polinómico. 3. Comprobará visualmente que
+todos y cada uno de los factores primos validados cumplen la condición
+de ser \textbf{mayores o iguales que \(y\)} (\(p_i \ge y\)). *
+\textbf{Justificación matemática:} El Teorema Fundamental de la
+Aritmética nos asegura que, si todos los componentes o ``ladrillos''
+primos indivisibles de un número son estrictamente mayores o iguales que
+\(y\), es algebraicamente imposible que combinándolos podamos construir
+un divisor compuesto menor que \(y\). Dado que todo el proceso de
+validación opera en tiempo polinómico, el problema complementario está
+en NP.
+
+\textbf{Conclusión:} Como el problema original pertenece a NP y su
+complementario también (lo que lo ubica en coNP), el lenguaje queda
+clasificado lógicamente en la región
+\textbf{\(\text{NP} \cap \text{coNP}\)}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{pregunta-10-problemas-de-buxfasqueda-y-tfnp}{%
+\subsection{Pregunta 10 (Problemas de Búsqueda y
+TFNP)}\label{pregunta-10-problemas-de-buxfasqueda-y-tfnp}}
+
+\textbf{Enunciado:} Todo lenguaje \(L\) arbitrario que pertenezca a la
+intersección \(\text{NP} \cap \text{coNP}\) sugiere un problema de
+búsqueda de funciones. Defina dicho problema sugerido y demuestre
+teóricamente que pertenece a la clase TFNP (Total Functional NP).
+
+\textbf{Resolución detallada:} La clase \textbf{TFNP (Total Functional
+NP)} abarca problemas de búsqueda donde, además de operar con
+certificados polinómicos, existe una garantía matemática inquebrantable
+de que \textbf{siempre existirá al menos una solución válida} para
+cualquier entrada (la relación es total).
+
+\textbf{1. Definición del problema sugerido:} Sea un lenguaje arbitrario
+\(L \in \text{NP} \cap \text{coNP}\). Por la definición de pertenencia
+simultánea a estas clases, sabemos que: * Al estar en NP, existe una
+Máquina de Turing verificadora polinómica \(M_1\) que valida un
+certificado \(c_1\) demostrando que \(x \in L\). * Al estar en coNP (es
+decir, \(\bar{L} \in \text{NP}\)), existe otro verificador polinómico
+\(M_2\) que evalúa un certificado \(c_2\) demostrando que
+\(x \notin L\).
+
+Basándonos en esto, el problema de búsqueda que la intersección sugiere
+se define formalmente como: * \emph{``Dada una cadena de entrada \(x\),
+encontrar un objeto \(c\) que actúe como un testigo comprobable de forma
+eficiente de que, o bien \(x \in L\) (satisfaciendo a \(M_1\)), o bien
+\(x \notin L\) (satisfaciendo a \(M_2\)).''}
+
+\textbf{2. Demostración de pertenencia a TFNP:} Para clasificar este
+problema en \textbf{TFNP}, debemos validar las dos condiciones
+principales de la clase:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Verificación polinómica (Condición FNP):} Tanto \(c_1\) como
+  \(c_2\) son certificados cuya longitud en memoria está matemáticamente
+  acotada por polinomios. Un algoritmo evaluador general puede
+  simplemente recibir el certificado \(c\) suministrado y ejecutar
+  secuencialmente los verificadores \(M_1\) y \(M_2\) en tiempo
+  polinómico para determinar si la solución cumple las condiciones del
+  problema. Por tanto, es tratable en el esquema NP funcional.
+\item
+  \textbf{Totalidad garantizada (Condición T):} Para demostrar que la
+  función nunca queda ``indefinida'', invocamos el principio lógico de
+  la \textbf{Ley del bando excluido}. Para cualquier cadena \(x\) que se
+  introduzca como entrada, independientemente de su estructura, rige una
+  dualidad estricta: \textbf{obligatoriamente se debe cumplir que
+  \(x \in L\) o que \(x \notin L\)}. Como forzosamente una de estas dos
+  afirmaciones será una verdad matemática, la existencia del testigo (ya
+  sea la solución \(c_1\) que prueba el ``Sí'', o el testigo \(c_2\) que
+  prueba el ``No'') está garantizada para el \(100\%\) de las
+  instancias. Nunca existirá una entrada \(x\) que carezca de solución.
+\end{itemize}
+
+\textbf{Conclusión:} Al haber construido un problema de búsqueda que es
+verificable algorítmicamente en tiempo polinómico y cuya solución está
+siempre garantizada mediante la totalidad lógica, concluimos que se
+inserta perfectamente en los márgenes teóricos de la clase
+\textbf{TFNP}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{pregunta-11-completitud-funcional-fsat}{%
+\subsection{Pregunta 11 (Completitud Funcional:
+FSAT)}\label{pregunta-11-completitud-funcional-fsat}}
+
+\textbf{Enunciado:} Demuestre formalmente, validando los dos pasos
+exigidos por la teoría de complejidad de funciones, que el problema
+\textbf{FSAT} (la versión de búsqueda que exige devolver la asignación
+de valores de verdad) es \textbf{FNP-completo}.
+
+\textbf{Resolución detallada:} Para demostrar que la versión de búsqueda
+funcional de SAT (FSAT) es completa para la clase FNP, debemos
+justificar formalmente dos pasos: su pertenencia a la clase y su
+completitud (dificultad funcional).
+
+\textbf{Paso 1: Demostrar que \(\text{FSAT} \in \text{FNP}\)} Un
+problema pertenece a la clase de búsqueda FNP si la solución solicitada
+tiene un tamaño acotado y es verificable en tiempo polinómico: 1. Dada
+una entrada formada por un conjunto de cláusulas lógicas \(C\), el
+objeto solución que buscamos es una asignación de verdad \(A\) (qué
+variables son Verdaderas y cuáles Falsas). 2. La longitud en bits de
+esta asignación \(A\) está estrictamente \textbf{acotada de forma
+lineal} por el número total de variables lógicas presentes en \(C\). Por
+tanto, el tamaño de la solución cumple el requisito polinómico. 3. El
+algoritmo verificador simplemente toma la asignación \(A\) propuesta,
+sustituye los valores en las cláusulas de \(C\) y evalúa las puertas
+lógicas. Esta comprobación se ejecuta eficientemente en \textbf{tiempo
+polinómico}. Al cumplir ambas propiedades, concluimos que
+\(\text{FSAT} \in \text{FNP}\).
+
+\textbf{Paso 2: Demostrar la completitud (FNP-dificultad)} Debemos
+probar que cualquier problema de búsqueda genérico
+\(\Pi \in \text{FNP}\) puede ser reducido a FSAT operando en espacio
+logarítmico. A diferencia de los problemas de decisión, aquí requerimos
+definir dos funciones (transformador de entrada \(R\) y transformador de
+solución \(S\)): 1. Por el \textbf{Teorema de Cook-Levin}, sabemos que
+la ejecución de cualquier Máquina de Turing No Determinista se puede
+traducir a un conjunto de cláusulas proposicionales (SAT) computándolo
+en espacio logarítmico. 2. La propiedad fundamental de esta reducción es
+que es \textbf{``constructiva respecto a las variables''}. Esto
+significa que, dentro de la enorme fórmula proposicional generada por la
+máquina, hay un pequeño grupo de variables lógicas que codifican y
+almacenan bit a bit la solución original del problema. 3. Definimos el
+\textbf{transformador \(R\)} para que aplique Cook-Levin y convierta la
+entrada de \(\Pi\) en cláusulas. A continuación, definimos el
+\textbf{transformador \(S\)} para que tome la asignación \(A\) devuelta
+por FSAT, lea únicamente los valores V/F de esas variables constructivas
+clave, y traduzca esos bits para imprimir la solución exacta de \(\Pi\).
+4. Como ambos transformadores \(R\) y \(S\) son computables
+eficientemente y permiten que cualquier problema construya su solución a
+través de FSAT, queda demostrado que \textbf{FSAT es FNP-completo}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{pregunta-12-el-problema-de-los-spines-red-feliz}{%
+\subsection{Pregunta 12 (El Problema de los Spines / Red
+Feliz)}\label{pregunta-12-el-problema-de-los-spines-red-feliz}}
+
+\textbf{Enunciado:} Dado un grafo \(G = (V, E)\) donde cada arista
+\((i,j)\) tiene asignada una fuerza de interacción \(J_{ij} \ge 0\), y
+donde cada nodo tiene un spin \(s_i \in \{-1, +1\}\). La energía total
+se define como \(R(s) = -\sum_{(i,j)\in E} J_{ij} s_i s_j\). Demuestre
+analíticamente que el problema de determinar si existe una asignación
+tal que la energía sea menor o igual a una cota \(K\) (\(R(s) \le K\))
+se puede resolver en tiempo polinómico (\textbf{Clase P}).
+
+\textbf{Resolución detallada:} Para demostrar que este problema es
+tratable (Clase P), no podemos probar todas las combinaciones de spines
+(lo cual sería un tiempo exponencial \(O(2^n)\)), sino que debemos
+realizar un análisis algebraico sobre la fórmula de la energía que
+explote el hecho de que todos los pesos son positivos o cero
+(\(J_{ij} \ge 0\)).
+
+\textbf{1. Descomposición del Sumatorio:} Al multiplicar los spines de
+los dos extremos de una arista (\(s_i \cdot s_j\)), los valores
+resultantes solo pueden ser dos: * Si ambos nodos tienen el
+\textbf{mismo signo} (por ejemplo, ambos \(+1\) o ambos \(-1\)), su
+producto es positivo: \(s_i s_j = 1\). * Si tienen \textbf{signos
+opuestos}, su producto es negativo: \(s_i s_j = -1\).
+
+Con esta premisa, podemos dividir el cálculo de la energía separando las
+aristas del grafo en esos dos conjuntos excluyentes:
+\[R(s) = -\left( \sum_{s_i = s_j} J_{ij} - \sum_{s_i \neq s_j} J_{ij} \right)\]
+
+\textbf{2. Sustitución Matemática:} Definimos una constante universal
+\(W\) equivalente a la suma total de todos los pesos del grafo:
+\(W = \sum_{(i,j)\in E} J_{ij}\). Sabiendo que las aristas de igual
+signo equivalen al total menos las de distinto signo
+(\(\sum_{s_i = s_j} J_{ij} = W - \sum_{s_i \neq s_j} J_{ij}\)), lo
+sustituimos en la ecuación inicial:
+\[R(s) = -\left( W - \sum_{s_i \neq s_j} J_{ij} - \sum_{s_i \neq s_j} J_{ij} \right) = -W + 2 \sum_{s_i \neq s_j} J_{ij}\]
+
+\textbf{3. Condición de Decisión y Algoritmo Determinista:} El problema
+nos pide evaluar si se puede cumplir que \(R(s) \le K\), lo que
+matemáticamente equivale a despejar nuestra nueva fórmula:
+\[ \sum_{s_i \neq s_j} J_{ij} \le \frac{K + W}{2} \] El sumatorio
+\(\sum_{s_i \neq s_j} J_{ij}\) representa el coste de las aristas que
+conectan nodos con signos diferentes (el ``peso del corte''). Como el
+enunciado garantiza que absolutamente todas las interacciones son nulas
+o positivas (\(J_{ij} \ge 0\)), \textbf{este sumatorio nunca puede ser
+negativo}.
+
+Por tanto, el valor absoluto mínimo que puede alcanzar la energía se da
+cuando ese sumatorio vale exactamente \(0\). El algoritmo para lograr
+este mínimo es trivial: \textbf{asignar a todos los nodos del grafo
+exactamente el mismo signo} (por ejemplo, todos \(+1\)). En este caso,
+la energía colapsa a su mínimo posible: \textbf{\(-W\)}.
+
+\textbf{4. Conclusión (Pertenencia a P):} Una Máquina de Turing
+determinista simplemente tiene que recorrer las aristas para sumar su
+peso total y calcular el valor extremo \(-W\). Si \(-W \le K\), acepta;
+si no, rechaza. Como la suma y la comparación de \(n\) aristas es un
+proceso aritmético lineal evaluable en tiempo estrictamente polinómico,
+el problema \textbf{pertenece a la Clase P}.
+
+\hypertarget{guuxeda-de-resoluciuxf3n-de-exuxe1menes-mac-20212025}{%
+\chapter{Guía de resolución de exámenes --- MAC
+2021--2025}\label{guuxeda-de-resoluciuxf3n-de-exuxe1menes-mac-20212025}}
+
+Modelos Avanzados de Computación. Documento orientado a la obtención de
+la máxima calificación en la parte de teoría (Ejercicios 1 a 6).
+
+No se incluyen los problemas de prácticas ni de evaluación global, dado
+que las prácticas ya constan como superadas.
+
+La Parte 1 reúne las plantillas y la teoría de respaldo. La Parte 2
+contiene la resolución desarrollada, ejercicio por ejercicio, de las
+diez convocatorias de 2021 a 2025. La Parte 3 ofrece una síntesis final.
+La calificación recae sobre la justificación; por ello cada respuesta
+razona el porqué y, cuando procede, describe la construcción completa
+(la máquina que decide, la búsqueda que semidecide o la reducción que
+prueba la no semidecidibilidad).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{estructura-y-puntuaciuxf3n-del-examen}{%
+\section{0. Estructura y puntuación del
+examen}\label{estructura-y-puntuaciuxf3n-del-examen}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0755}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1132}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2075}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3019}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3019}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Ej
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Tema
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Contenido
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Puntos 2024-25
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Puntos 2022-23
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & T1-T2 Decidibilidad & Clasificar 4 problemas: decidible /
+semidecidible / no semidecidible & 2.4 & 2.0 \\
+2 & T2 Church-Turing & Simulación entre modelos o programa a bajo nivel
+& 1.3 & 2.0 \\
+3 & Varios & 4-5 afirmaciones de Verdadero/Falso razonadas & 2.4 &
+1.5 \\
+4 & T4 & SAT / NP-completitud / reducción concreta & 1.3 & 1.5 \\
+5 & T3 & Definición de clases de complejidad y relaciones & 1.3 & 1.5 \\
+6 & T3-T4-T5-T6 & Problema específico (grafos, parejas, Red Feliz,
+mochila\ldots) & 1.3 & 1.5 \\
+\end{longtable}
+
+Los Ejercicios 1 y 3 suman casi 5 puntos (la mitad del examen).
+
+\hypertarget{parte-1-plantillas-y-teoruxeda-de-respaldo}{%
+\chapter{PARTE 1 --- Plantillas y teoría de
+respaldo}\label{parte-1-plantillas-y-teoruxeda-de-respaldo}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-1-decidibilidad-semidecidibilidad}{%
+\section{1. Ejercicio 1 --- Decidibilidad /
+Semidecidibilidad}\label{ejercicio-1-decidibilidad-semidecidibilidad}}
+
+\hypertarget{definiciones-base}{%
+\subsection{1.1 Definiciones base}\label{definiciones-base}}
+
+\begin{itemize}
+\tightlist
+\item
+  Recursivo (decidible): existe una MT que siempre se detiene y responde
+  SÍ/NO para cualquier entrada.
+\item
+  Recursivamente enumerable, r.e. (semidecidible): existe una MT que se
+  detiene y acepta cuando la respuesta es SÍ, pero puede ciclar
+  indefinidamente cuando es NO.
+\item
+  No semidecidible: no existe siquiera esa MT que acepte los casos
+  afirmativos.
+\end{itemize}
+
+Teorema de los complementarios: 1. Si \texttt{L} es recursivo,
+\texttt{L̄} también lo es. 2. Si \texttt{L} y \texttt{L̄} son ambos r.e.,
+entonces \texttt{L} es recursivo. 3. Si \texttt{L} es r.e. pero no
+decidible, entonces \texttt{L̄} no es semidecidible.
+
+Propiedades de cierre útiles: r.e. es cerrada bajo unión e intersección
+finitas. La intersección de finitos r.e. es r.e.; por ello un ``para
+todo sobre un conjunto finito de aceptaciones'' sigue siendo r.e.
+(semidecidible), pero no por ello decidible.
+
+Teoría de reducciones (\texttt{P1\ ∝\ P2} = ``P1 se reduce a P2''; P2 es
+al menos tan difícil): - Si \texttt{P1} es indecidible, \texttt{P2} es
+indecidible. - Si \texttt{P1} no es semidecidible, \texttt{P2} no es
+semidecidible. - Si \texttt{P2} es semidecidible, entonces \texttt{P1}
+también lo es.
+
+\hypertarget{uxe1rbol-de-decisiuxf3n-cuestiuxf3n-previa-obligatoria}{%
+\subsection{1.2 Árbol de decisión (cuestión previa
+obligatoria)}\label{uxe1rbol-de-decisiuxf3n-cuestiuxf3n-previa-obligatoria}}
+
+Pregunta inicial: ¿la propiedad depende del lenguaje \texttt{L(M)} (qué
+palabras acepta) o del comportamiento de la máquina \texttt{M} (pasos,
+casillas, estados, movimientos)?
+
+\begin{verbatim}
+Existe un LÍMITE FINITO explícito de pasos o de espacio (≤N pasos, ≤c casillas)
+        -> DECIDIBLE (simulación acotada). No aplicar Rice.
+
+Solo se acota la LONGITUD de la entrada, pero NO los pasos, y la condición es "aceptar"
+        -> CUIDADO: "aceptar" es semidecidible. Suele quedar SEMIDECIDIBLE (no decidible),
+           no decidible. La finitud del conjunto de entradas no basta si no hay cota de pasos.
+
+Propiedad del LENGUAJE L(M) y NO trivial (acepta palíndromo, L regular, L vacío,
+acepta 011, L = {todas}, acepta u^i...)
+        -> NO DECIDIBLE por el TEOREMA DE RICE; después se matiza:
+           · "¿Existe una palabra...?"           -> SEMIDECIDIBLE
+           · "¿Para TODA palabra...?" / "L1⊆L2"  -> NO SEMIDECIDIBLE
+
+Propiedad de la MÁQUINA M sin límite finito (visita el estado q, no se detiene nunca,
+cicla para alguna entrada...)
+        -> NO DECIDIBLE, no por Rice -> REDUCCIÓN desde PARADA / UNIVERSAL / DIAGONAL.
+\end{verbatim}
+
+Distinción crítica (origen de la mayoría de errores): ``¿acepta toda
+palabra ≤K en ≤f(K) pasos?'' es DECIDIBLE (hay cota de pasos), mientras
+que ``¿acepta toda palabra ≤K?'' sin cota de pasos es SEMIDECIDIBLE no
+decidible.
+
+\hypertarget{las-cuatro-plantillas-de-redacciuxf3n}{%
+\subsection{1.3 Las cuatro plantillas de
+redacción}\label{las-cuatro-plantillas-de-redacciuxf3n}}
+
+Plantilla 1 --- DECIDIBLE por simulación acotada: \textgreater{} ``Es
+decidible. Se construye una MT que simula \texttt{M} durante exactamente
+\texttt{N} pasos (o sobre las palabras de un conjunto finito). Como el
+espacio de búsqueda es finito, la simulación siempre termina y devuelve
+SÍ o NO. Si solo se acota el espacio (\texttt{c} casillas) sin acotar
+pasos, el número de configuraciones distintas es finito (≤
+\textbar Q\textbar·c·\textbar Γ\textbar\^{}c); si la simulación supera
+ese número, hay ciclo y se responde en consecuencia.''
+
+Plantilla 2 --- NO DECIDIBLE por Rice (propiedad del lenguaje):
+\textgreater{} ``Es una propiedad no trivial de los lenguajes r.e.:
+existe una MT que la cumple (p.~ej. una que acepta \texttt{\{011\}}) y
+otra que no (p.~ej. una que acepta \texttt{∅}). Por el Teorema de Rice,
+el problema es indecidible.''
+
+Plantilla 3 --- SEMIDECIDIBLE por búsqueda en anchura: \textgreater{}
+``Es semidecidible. Se diseña una MT que enumera las palabras
+\texttt{w0,\ w1,\ w2,\ …} y aplica dovetailing: en la etapa \texttt{k}
+simula \texttt{k} pasos de \texttt{M} sobre \texttt{w0,\ …,\ wk}. Si
+existe la palabra buscada, en una etapa finita se detecta y se acepta.
+Si no existe, la máquina no se detiene, lo cual es compatible con la
+semidecidibilidad.'' \textgreater{} La búsqueda debe ser en anchura: en
+profundidad, si una palabra cicla, nunca se probaría la siguiente.
+
+Plantilla 4 --- NO SEMIDECIDIBLE por reducción: \textgreater{} ``No es
+semidecidible. Se reduce un problema conocido como no semidecidible
+(\texttt{C-UNIVERSAL}, \texttt{DIAGONAL} o \texttt{EMPTY}) a este. Se
+describe el algoritmo \texttt{F} que transforma la instancia y se
+comprueba que la respuesta se conserva en ambos sentidos.''
+
+Gadget de ``simulación durante \textbar x\textbar{} pasos'' (clave para
+reducir a propiedades del tipo ``acepta todas'' o ``existe palabra no
+aceptada''): dada \texttt{(M,\ w)}, se construye
+\texttt{M\textquotesingle{}} que, ante una entrada \texttt{x}, ignora su
+contenido y simula \texttt{M} sobre \texttt{w} durante
+\texttt{\textbar{}x\textbar{}} pasos; \texttt{M\textquotesingle{}}
+acepta \texttt{x} salvo que en esos \texttt{\textbar{}x\textbar{}} pasos
+\texttt{M} haya aceptado \texttt{w}. Entonces, si \texttt{M} nunca
+acepta \texttt{w}, \texttt{M\textquotesingle{}} acepta toda palabra
+(\texttt{L(M\textquotesingle{})=Σ*}); y si \texttt{M} acepta \texttt{w}
+en \texttt{k} pasos, \texttt{M\textquotesingle{}} rechaza toda
+\texttt{x} con \texttt{\textbar{}x\textbar{}≥k}. Este artificio
+transforma \texttt{C-UNIVERSAL} en
+``¿\texttt{L(M\textquotesingle{})=Σ*}?''.
+
+\hypertarget{catuxe1logo-de-problemas-base}{%
+\subsection{1.4 Catálogo de problemas
+base}\label{catuxe1logo-de-problemas-base}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2778}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3056}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4167}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Problema
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enunciado
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Clasificación
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+UNIVERSAL (Lu) & ¿\texttt{M} acepta \texttt{w}? & Semidecidible, no
+decidible \\
+C-UNIVERSAL & ¿\texttt{M} NO acepta \texttt{w}? & No semidecidible \\
+PARADA & ¿\texttt{M} se detiene con \texttt{w}? & Semidecidible, no
+decidible \\
+DIAGONAL (Ld) & ¿\texttt{M} no acepta su código \texttt{⟨M⟩}? & No
+semidecidible \\
+C-DIAGONAL & ¿\texttt{M} sí acepta \texttt{⟨M⟩}? & Semidecidible \\
+EMPTY / VACÍO (Le) & ¿\texttt{L(M)=∅}? & No semidecidible \\
+C-VACÍO (Lne) & ¿\texttt{L(M)≠∅}? & Semidecidible \\
+PCP (Post) & Correspondencias de Post & Indecidible si
+\textbar alfabeto\textbar≥2; decidible si alfabeto \texttt{\{1\}} \\
+GIC ambigua & ¿una gramática indep. del contexto es ambigua? &
+Indecidible \\
+GIC genera w / AP acepta w & --- & Decidible (CYK) \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-2-tesis-de-church-turing-y-simulaciones}{%
+\section{2. Ejercicio 2 --- Tesis de Church-Turing y
+simulaciones}\label{ejercicio-2-tesis-de-church-turing-y-simulaciones}}
+
+\hypertarget{simulaciones-entre-modelos}{%
+\subsection{2.1 Simulaciones entre
+modelos}\label{simulaciones-entre-modelos}}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Programa con variables hacia programa Post-Turing:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Organización: las variables \texttt{X1,…,Xm,Z1,…,Zk,Y} se disponen en
+  la cinta separadas por el blanco \texttt{\#}, con la forma
+  \texttt{\#V1\#V2\#…\#Vn\#}.
+\item
+  Instrucciones: añadir un símbolo (\texttt{Vj\ ←\ ai\ Vj}) o borrar el
+  último (\texttt{Vj\ ←\ Vj−}) se simulan con macros Post-Turing que
+  desplazan el cabezal hasta la variable, desplazan el bloque a la
+  derecha para crear o cerrar hueco, y escriben o borran.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Programa Post-Turing hacia MT:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Organización: mismo alfabeto. Por cada instrucción \texttt{Ii} un
+  estado \texttt{qi}, más un estado final \texttt{qf}.
+\item
+  Traducción uno a uno: \texttt{PRINT\ a} →
+  \texttt{δ(qi,b)=(qi+1,\ a,\ S)}; \texttt{RIGHT} →
+  \texttt{δ(qi,b)=(qi+1,\ b,\ D)}; \texttt{IF\ ak\ GOTO\ L} → desde
+  \texttt{qi} a \texttt{qL} si se lee \texttt{ak}, y a \texttt{qi+1} en
+  otro caso.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  MT hacia programa con variables:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Organización: \texttt{X} = parte izquierda del cabezal, \texttt{Z} =
+  símbolo leído, \texttt{Y} = parte derecha.
+\item
+  Transición \texttt{δ(qi,aj)=(qm,ak,D)}: se escribe \texttt{ak} en
+  \texttt{X}, se vacía \texttt{Z}, se lee el primer símbolo de
+  \texttt{Y} y se traslada a \texttt{Z}, y se salta a la etiqueta de
+  \texttt{qm}.
+\end{itemize}
+
+\hypertarget{sobrecarga-de-las-simulaciones-de-cintas}{%
+\subsection{2.2 Sobrecarga de las simulaciones de
+cintas}\label{sobrecarga-de-las-simulaciones-de-cintas}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6316}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3684}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Simulación
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Coste
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+MT multicinta hacia 1 cinta & tiempo \texttt{O(t²)} \\
+Cinta doble infinita hacia semiinfinita (por la derecha) & mismo orden
+\texttt{O(t)}, con 2 pistas \\
+MT multipista hacia 1 cinta & mismo número de pasos \\
+\end{longtable}
+
+\hypertarget{variables-numuxe9ricas-frente-a-variables-de-palabras}{%
+\subsection{2.3 Variables numéricas frente a variables de
+palabras}\label{variables-numuxe9ricas-frente-a-variables-de-palabras}}
+
+\begin{itemize}
+\tightlist
+\item
+  Numéricas: \texttt{Xi,Zi,Y}; instrucciones \texttt{A←A+1},
+  \texttt{A←A−1}, \texttt{IF\ A≠0\ GOTO\ L}.
+\item
+  Equivalencia: existe una biyección entre palabras y naturales
+  (\texttt{N(w)=n}); \texttt{+1} equivale a la palabra siguiente en
+  orden lexicográfico.
+\end{itemize}
+
+\hypertarget{tesis-de-church-turing}{%
+\subsection{2.4 Tesis de Church-Turing}\label{tesis-de-church-turing}}
+
+\begin{itemize}
+\tightlist
+\item
+  Enunciado: ``Toda función efectivamente calculable mediante un proceso
+  mecánico bien definido puede ser calculada por una Máquina de
+  Turing''.
+\item
+  ``Está demostrada'': FALSO (es una tesis, no un teorema). ``La
+  computación cuántica la pone en duda'': FALSO (afecta a la
+  eficiencia).
+\end{itemize}
+
+\hypertarget{macros-y-algoritmos-cluxe1sicos}{%
+\subsection{2.5 Macros y algoritmos
+clásicos}\label{macros-y-algoritmos-cluxe1sicos}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{U←V} (copia con variable auxiliar para invertir y reinvertir),
+  \texttt{V←−V} (borrar el primer símbolo), suma de cadenas, número
+  siguiente, \texttt{V←V+1}, comprobar múltiplo.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ejercicio-3-verdaderofalso-banco-de-referencia}{%
+\section{3. Ejercicio 3 --- Verdadero/Falso (banco de
+referencia)}\label{ejercicio-3-verdaderofalso-banco-de-referencia}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3750}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1562}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4688}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Afirmación
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+V/F
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Justificación
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{PESPACIO\ =\ NPESPACIO} & V & Teorema de Savitch:
+\texttt{NESPACIO(f)\ ⊆\ ESPACIO(f²)}. \\
+\texttt{L\ ≠\ PESPACIO} & V & \texttt{L\ ⊊\ PESPACIO} por la jerarquía
+de espacio. \\
+Se sabe que \texttt{L\ =\ PESPACIO} & F & Se sabe que son distintas. \\
+\texttt{NL\ ⊆\ P} (en NL implica tiempo polinómico) & V & Inclusión de
+la cadena. \\
+\texttt{NP\ ⊆\ PESPACIO} y \texttt{NP\ ⊆\ EXP} & V & Cadena de
+inclusiones. \\
+Si \texttt{P=NP}, TSP en tiempo polinómico determinista & V &
+TSP(decisión) es NP-completo. \\
+Si \texttt{NL\ =\ NP}, entonces \texttt{NP\ =\ coNP} & V & NL cerrada
+bajo complementario. \\
+El complementario de SAT no tiene algoritmo polinómico (se sabe) & F &
+No demostrado. \\
+Si \texttt{A} NP-completo y \texttt{A∝B}, entonces \texttt{B}
+NP-completo & F & Falta \texttt{B∈NP} (solo NP-difícil). \\
+NP-difícil es siempre NP-completo & F & Falta pertenecer a NP. \\
+Horn-SAT es NP-completo & F & Es polinómico. \\
+\texttt{P\ =\ EXP} & F & \texttt{P\ ⊊\ EXP} (jerarquía de tiempo). \\
+FNPT se resuelven en tiempo polinómico determinista & F & La existencia
+está garantizada; el cálculo no. \\
+La tesis de Church-Turing está demostrada & F & Es una tesis. \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{clases-de-complejidad}{%
+\section{4. Clases de complejidad}\label{clases-de-complejidad}}
+
+Cadena:
+\texttt{L\ ⊆\ NL\ ⊆\ P\ ⊆\ NP\ ⊆\ PESPACIO\ =\ NPESPACIO\ ⊊\ EXP}.
+Estrictas demostradas: \texttt{L⊊PESPACIO}, \texttt{NL⊊PESPACIO},
+\texttt{P⊊EXP}. \texttt{PESPACIO=NPESPACIO} por Savitch.
+
+Definiciones: \texttt{P=⋃TIEMPO(nʲ)}; NP = MT no determinista en tiempo
+polinómico, o equivalentemente existencia de certificado verificable en
+tiempo polinómico; coNP = complementario en NP; L/NL = espacio
+logarítmico det./no det.; PESPACIO = espacio polinómico;
+\texttt{EXP=⋃TIEMPO(2\^{}\{nʲ\})}.
+
+Medida: sobre la longitud de la representación \texttt{n=log(x)}. En
+espacio no se cuentan la cinta de entrada (si no se sobrescribe) ni la
+de salida (si se escribe en una sola dirección).
+
+Funciones: FNP (búsqueda), FP (se calcula la solución en tiempo
+polinómico), TFNP (la solución existe siempre). Aproximación: APX (δ
+constante), PTAS (cualquier precisión en tiempo polinómico en
+\texttt{n}), FPTAS (polinómico en \texttt{n} y en \texttt{1/(δ−1)}). DP
+\texttt{=\ L1∩L2} con \texttt{L1∈NP}, \texttt{L2∈coNP}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{reducciones-np-completas}{%
+\section{5. Reducciones NP-completas}\label{reducciones-np-completas}}
+
+Cuatro pasos de \texttt{P1\ ∝\ P2}: (1) algoritmo de transformación; (2)
+eficiencia (espacio logarítmico o tiempo polinómico); (3) SÍ en origen ⟹
+SÍ en destino; (4) SÍ en destino ⟹ SÍ en origen.
+
+Para demostrar \texttt{B} NP-completo: probar \texttt{B∈NP} y reducir
+\texttt{A∝B} con \texttt{A} NP-completo conocido.
+
+Mapa: \texttt{SAT\ →\ 3-SAT\ →\ VC\ →\ CH\ →\ TSP};
+\texttt{3-SAT\ →\ ACTRI\ →\ SUMA\ →\ PARTICIÓN\ →\ MOCHILA};
+\texttt{Clique\ ≡\ Conjunto\ Independiente\ ≡\ VC}.
+
+Variantes de SAT: SAT, 3-SAT, MAX2SAT y NAESAT son NP-completos; 2-SAT y
+Horn-SAT son polinómicos.
+
+Reducibilidad: Karp/logarítmica (una llamada, mapea la respuesta) es más
+fuerte; Turing (oráculo, varias llamadas) es más débil. NP-difícil: un
+NP-completo se reduce Turing a él.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{problemas-cluxe1sicos}{%
+\section{6. Problemas clásicos}\label{problemas-cluxe1sicos}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4348}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3043}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2609}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Problema
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Clase
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Idea
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Caminos en grafos dirigidos & NL & adivinar el camino guardando nodo
+actual y contador \\
+Parejas (emparejamiento perfecto) & P & reducción a Flujo Máximo
+(Ford-Fulkerson) \\
+Red Feliz & TFNP (PLS) & mejora local: voltear nodos infelices hasta
+converger \\
+Isomorfismo de grafos & GI & en NP, no demostrado NP-completo ni P \\
+PRIMO(n) & NP (de hecho P) & certificado de Pratt \\
+ACTRI (tripletas) & NP-completo & versión tridimensional de Parejas \\
+Mochila (optimización) & NP-difícil, FPTAS & programación dinámica
+\texttt{O(n·B)} \\
+\end{longtable}
+
+\hypertarget{parte-2-resoluciuxf3n-desarrollada-examen-por-examen}{%
+\chapter{PARTE 2 --- Resolución desarrollada, examen por
+examen}\label{parte-2-resoluciuxf3n-desarrollada-examen-por-examen}}
+
+Cada apartado incluye: enunciado, identificación del tipo, clasificación
+y desarrollo (construcción de la máquina, búsqueda o reducción según
+corresponda).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section}{%
+\section{2021}\label{section}}
+
+\hypertarget{de-junio-de-2021}{%
+\subsection{22 de junio de 2021}\label{de-junio-de-2021}}
+
+Ejercicio 1. Decidibilidad
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Dada MT \texttt{M} y palabra \texttt{w}, ¿es cierto que
+  \texttt{M} NO acepta \texttt{w}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: comportamiento sobre una entrada fija; es directamente el
+    problema base C-UNIVERSAL.
+  \item
+    Clasificación: NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: el problema UNIVERSAL (``¿\texttt{M} acepta
+    \texttt{w}?'') es semidecidible y no decidible (se semidecide con el
+    simulador universal: acepta si \texttt{M} acepta \texttt{w}, y cicla
+    en caso contrario). Por el Teorema de los complementarios, si
+    UNIVERSAL es r.e. y no recursivo, su complementario ``¿\texttt{M} no
+    acepta \texttt{w}?'' no es r.e. Por tanto, no es semidecidible.
+  \end{itemize}
+\item
+  \emph{Dada una GIC, ¿es ambigua?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad estructural de gramáticas independientes del
+    contexto.
+  \item
+    Clasificación: NO DECIDIBLE (indecidible).
+  \item
+    Desarrollo: la ambigüedad de una GIC es un problema clásico
+    indecidible (se demuestra por reducción del Problema de
+    Correspondencias de Post: a partir de una instancia de PCP se
+    construye una gramática que es ambigua si y solo si la instancia
+    tiene solución). No se exige reproducir la reducción, pero conviene
+    citarla.
+  \end{itemize}
+\item
+  \emph{Dada una GIC \texttt{G} y una palabra \texttt{u}, ¿\texttt{G}
+  genera \texttt{u}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: pertenencia de una palabra concreta al lenguaje de una GIC.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: el algoritmo CYK decide la pertenencia en tiempo
+    \texttt{O(\textbar{}u\textbar{}³)} tras pasar \texttt{G} a forma
+    normal de Chomsky. El procedimiento es finito y siempre termina con
+    SÍ o NO.
+  \end{itemize}
+\item
+  \emph{¿Existe una palabra de longitud ≤100 aceptada por \texttt{M} en
+  menos de 1000 pasos?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: doble cota finita (longitud de entrada y número de pasos).
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: el conjunto de palabras de longitud ≤100 sobre
+    \texttt{\{0,1\}} es finito (a lo sumo \texttt{2\^{}\{101\}−1}). Para
+    cada una se simula \texttt{M} durante 999 pasos como máximo. Como
+    tanto el número de palabras como el de pasos por palabra son
+    finitos, la simulación completa termina; se responde SÍ si alguna
+    acepta dentro del límite, y NO en caso contrario.
+  \end{itemize}
+\end{enumerate}
+
+Ejercicio 2. Verdadero/Falso
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Todo problema NP puede resolverse en espacio polinómico y tiempo
+  exponencial.} VERDADERO. Se recorre el árbol de cálculo no
+  determinista por backtracking: cada rama tiene profundidad polinómica,
+  luego se reutiliza el espacio (polinómico) y el tiempo total es
+  exponencial. Equivale a \texttt{NP\ ⊆\ PESPACIO\ ⊆\ EXP}.
+\item
+  \emph{Una MT universal puede calcular cualquier cosa que cualquier
+  otra MT pueda calcular.} VERDADERO por definición de máquina
+  universal: recibe \texttt{⟨M⟩} y \texttt{w} y reproduce el cómputo de
+  \texttt{M} sobre \texttt{w}.
+\item
+  \emph{Se sabe que el complementario de SAT no tiene un algoritmo de
+  tiempo polinómico.} FALSO. Afirmarlo equivaldría a demostrar
+  \texttt{P≠coNP} (y \texttt{P≠NP}), cuestión abierta.
+\item
+  \emph{Si \texttt{A} es NP-completo y \texttt{A∝B}, entonces \texttt{B}
+  es NP-completo.} FALSO. La reducción solo prueba que \texttt{B} es
+  NP-difícil; para ser NP-completo debe además pertenecer a NP, lo que
+  aquí no se afirma.
+\item
+  \emph{Si \texttt{P=NP}, el Viajante de Comercio se resuelve en tiempo
+  polinómico determinista.} VERDADERO. La versión decisión del TSP es
+  NP-completa; si \texttt{P=NP}, toda la clase NP cae en P.
+\end{enumerate}
+
+Ejercicio 3. NP-completitud --- \emph{Reducción de SUMA(A,s,B) a
+PARTICIÓN(A',s').} - Enunciados: SUMA pregunta si existe un subconjunto
+de \texttt{A} cuyos tamaños (función \texttt{s}) sumen exactamente
+\texttt{B}. PARTICIÓN pregunta si un conjunto se puede dividir en dos
+partes de igual suma. - (1) Transformación: sea
+\texttt{T\ =\ Σ\_\{a∈A\}\ s(a)}. Se construye
+\texttt{A\textquotesingle{}\ =\ A\ ∪\ \{y,\ z\}} con
+\texttt{s\textquotesingle{}(y)\ =\ T\ +\ B} y
+\texttt{s\textquotesingle{}(z)\ =\ 2T\ −\ B} (ambos positivos si
+\texttt{0\ ≤\ B\ ≤\ T}). La suma total de \texttt{A\textquotesingle{}}
+es \texttt{T\ +\ (T+B)\ +\ (2T−B)\ =\ 4T}, de modo que cada mitad debe
+sumar \texttt{2T}. - (2) Eficiencia: el cálculo de \texttt{T} y la
+creación de dos elementos es espacio logarítmico. - (3) Implicación
+directa: si en \texttt{A} existe \texttt{S} con suma \texttt{B},
+entonces \texttt{S\ ∪\ \{z\}} suma \texttt{B\ +\ (2T−B)\ =\ 2T}; su
+complementario \texttt{(A∖S)\ ∪\ \{y\}} suma
+\texttt{(T−B)\ +\ (T+B)\ =\ 2T}. Hay partición. - (4) Implicación
+recíproca: en cualquier partición de \texttt{A\textquotesingle{}}, los
+elementos \texttt{y} y \texttt{z} no pueden caer en la misma parte
+(sumarían \texttt{3T−...\ \textgreater{}\ 2T}); por tanto quedan
+separados. La parte que contiene \texttt{z} debe completar
+\texttt{2T\ −\ (2T−B)\ =\ B} con elementos de \texttt{A}; ese
+subconjunto resuelve SUMA. - Ejemplo: \texttt{A=\{3,1,2\}},
+\texttt{B=3}. \texttt{T=6}, \texttt{y=9}, \texttt{z=9}.
+\texttt{A\textquotesingle{}=\{3,1,2,9,9\}}, total \texttt{24}, mitad
+\texttt{12}. La partición \texttt{\{3,9\}} y \texttt{\{1,2,9\}}
+corresponde al subconjunto \texttt{\{3\}} (suma 3) de SUMA.
+
+Ejercicio 4. Grafos --- \emph{Complejidad en espacio del problema de
+caminos en grafos dirigidos.} - Pertenece a NL (espacio logarítmico no
+determinista). Algoritmo: partiendo del nodo origen, se adivina de forma
+no determinista el siguiente nodo del camino, guardando únicamente el
+nodo actual y un contador del número de pasos (a lo sumo \texttt{n}, es
+decir \texttt{log\ n} bits). Se acepta si se alcanza el destino en ≤
+\texttt{n} pasos. El espacio es logarítmico. En versión determinista
+pertenece a P (recorrido en anchura/profundidad).
+
+Ejercicio 5. Simulaciones --- \emph{MT con cinta ilimitada en ambas
+direcciones mediante MT con cinta ilimitada solo por la derecha.} -
+Organización: se pliega la cinta bi-infinita por la casilla 0 y se
+representa con 2 pistas: la pista superior almacena las posiciones
+\texttt{0,\ 1,\ 2,\ …} y la inferior las posiciones
+\texttt{−1,\ −2,\ −3,\ …}. La cinta resultante es semiinfinita (tope a
+la izquierda en la casilla 0). - Simulación: la MT marca en qué pista
+trabaja; un movimiento a la derecha en la cinta original avanza en la
+pista superior (o retrocede en la inferior, según la zona); al cruzar la
+casilla 0 se cambia de pista. El control finito duplica los estados (uno
+por pista). - Complejidad: cada paso de la original es un paso (o un
+cambio de pista) en la simulación, luego el orden temporal es el mismo,
+\texttt{O(t)}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{de-julio-de-2021}{%
+\subsection{12 de julio de 2021}\label{de-julio-de-2021}}
+
+Ejercicio 1. Decidibilidad
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Dada \texttt{M} y \texttt{w}, ¿el número de estados de
+  \texttt{M} es ≤ \texttt{\textbar{}w\textbar{}}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad sintáctica de \texttt{⟨M⟩}, sin ejecutar \texttt{M}.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: se cuentan los estados que aparecen en la codificación
+    \texttt{⟨M⟩} y se compara con \texttt{\textbar{}w\textbar{}}. Es una
+    comprobación finita y directa que no requiere simular la máquina.
+  \end{itemize}
+\item
+  \emph{¿\texttt{M} acepta al menos 3 palabras distintas?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad del lenguaje (cardinalidad ≥ 3), de tipo
+    existencial.
+  \item
+    Clasificación: SEMIDECIDIBLE, no decidible.
+  \item
+    Desarrollo: no decidible por Rice (la propiedad ``tener al menos 3
+    palabras'' es no trivial: hay lenguajes que la cumplen y otros que
+    no). Semidecidible mediante dovetailing: se simulan en anchura todas
+    las palabras; en cuanto se acumulan 3 aceptaciones distintas, se
+    acepta. Si el lenguaje tiene menos de 3 palabras, la máquina no se
+    detiene.
+  \end{itemize}
+\item
+  \emph{¿\texttt{M} acepta exactamente 3 palabras distintas?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: conjunción de ``al menos 3'' (existencial, r.e.) y ``como
+    mucho 3'' (universal sobre el resto, co-r.e.).
+  \item
+    Clasificación: NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: ``como mucho 3'' exige garantizar que ninguna otra
+    palabra es aceptada, lo cual no es r.e. (es una condición universal
+    sobre infinitas palabras, emparentada con el complementario del
+    problema de no vacuidad). La intersección de un r.e. con un problema
+    que no es r.e. no es r.e. Se prueba reduciendo un problema no
+    semidecidible (del tipo EMPTY ampliado): se construye una máquina
+    que acepta 3 palabras testigo fijas y, además, simula \texttt{M}
+    para añadir aceptaciones; el resultado tiene exactamente 3 palabras
+    si y solo si \texttt{M} no acepta ninguna, que es EMPTY.
+  \end{itemize}
+\item
+  \emph{¿\texttt{M} acepta \texttt{w} sin usar más de
+  \texttt{2\textbar{}w\textbar{}} casillas?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: cota finita de espacio.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: con el espacio limitado a
+    \texttt{2\textbar{}w\textbar{}} casillas, el número de
+    configuraciones posibles es finito (acotado por
+    \texttt{\textbar{}Q\textbar{}·(2\textbar{}w\textbar{})·\textbar{}Γ\textbar{}\^{}\{2\textbar{}w\textbar{}\}}).
+    Se simula \texttt{M} sobre \texttt{w} respetando ese límite: si
+    acepta dentro del espacio, SÍ; si intenta usar la casilla
+    \texttt{2\textbar{}w\textbar{}+1}, NO; si el número de pasos supera
+    la cota de configuraciones sin aceptar, hay ciclo y se responde NO.
+    Siempre termina.
+  \end{itemize}
+\end{enumerate}
+
+Ejercicio 2. Verdadero/Falso
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{La clase L es distinta de PESPACIO.} VERDADERO. Por el Teorema
+  de la Jerarquía de Espacio, \texttt{L\ ⊊\ PESPACIO} es una inclusión
+  estricta demostrada.
+\item
+  \emph{El problema SAT para cláusulas Horn es NP-completo.} FALSO.
+  Horn-SAT se resuelve en tiempo polinómico por propagación unitaria;
+  pertenece a P.
+\item
+  \emph{Si \texttt{P1∝P2} y \texttt{P2} es semidecidible, entonces
+  \texttt{P1} lo es.} VERDADERO. Componiendo el algoritmo de
+  transformación con el semidecisor de \texttt{P2} se obtiene un
+  semidecisor de \texttt{P1}.
+\item
+  \emph{Si un problema está en NL, se resuelve en tiempo polinómico
+  determinista.} VERDADERO. \texttt{NL\ ⊆\ P}.
+\item
+  \emph{La computación cuántica pone en duda la tesis de Church-Turing.}
+  FALSO. Afecta a la eficiencia (posibles aceleraciones), no a lo que es
+  computable; todo lo cuánticamente calculable lo es por una MT.
+\end{enumerate}
+
+Ejercicio 3. Clase NP --- \emph{Definición con certificados y
+verificadores, con ejemplo.} - Definición: un problema pertenece a NP si
+existe una relación \texttt{R(x,y)} verificable en tiempo polinómico y
+un polinomio \texttt{p} tales que \texttt{x} es instancia positiva si y
+solo si existe un certificado \texttt{y} con
+\texttt{\textbar{}y\textbar{}\ ≤\ p(\textbar{}x\textbar{})} y
+\texttt{R(x,y)} cierto. El verificador es una MT determinista que, dados
+\texttt{x} e \texttt{y}, comprueba \texttt{R} en tiempo polinómico. -
+Ejemplo (SAT): la entrada \texttt{x} es una fórmula; el certificado
+\texttt{y} es una asignación de verdad de sus variables; el verificador
+sustituye y evalúa todas las cláusulas en tiempo polinómico. Si alguna
+asignación la satisface, existe certificado; en caso contrario, ninguno
+funciona.
+
+Ejercicio 4. Decidibilidad (P y su contrario) --- \emph{Relaciones entre
+\texttt{P(x)} y \texttt{C-P(x)}.} - Resultados: (i) si \texttt{P} es
+decidible, \texttt{C-P} es decidible (se invierte la salida del
+decisor). (ii) Si \texttt{P} y \texttt{C-P} son ambos semidecidibles,
+entonces \texttt{P} (y \texttt{C-P}) son decidibles: se ejecutan en
+paralelo los dos semidecisores y, como exactamente uno se detiene, se
+obtiene siempre una respuesta. (iii) Si \texttt{P} es semidecidible pero
+no decidible, entonces \texttt{C-P} no es semidecidible (de lo
+contrario, por (ii), \texttt{P} sería decidible). Conviene ilustrarlo
+con UNIVERSAL (semidecidible) y C-UNIVERSAL (no semidecidible).
+
+Ejercicio 5. Simulaciones --- \emph{MT multicinta mediante MT de una
+sola cinta y relación temporal.} - Organización: una sola cinta con
+multipista; se dedican dos pistas por cada cinta original (una para el
+contenido y otra para marcar la posición de su cabezal). - Simulación de
+un paso: la MT recorre toda la zona usada de izquierda a derecha para
+leer los símbolos bajo todos los cabezales, decide la transición
+conjunta, y vuelve a recorrer para escribir y mover las marcas de
+cabezal. - Complejidad: si la multicinta ejecuta \texttt{t(n)} pasos, la
+zona usada tiene longitud \texttt{O(t(n))}; cada paso simulado cuesta
+\texttt{O(t(n))} recorridos, luego el total es \texttt{O(t(n)²)}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-1}{%
+\section{2022}\label{section-1}}
+
+\hypertarget{de-junio-de-2022}{%
+\subsection{27 de junio de 2022}\label{de-junio-de-2022}}
+
+Ejercicio 1. Decidibilidad
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{¿\texttt{u} es subcadena de \texttt{⟨M⟩}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad sintáctica de la codificación.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: \texttt{⟨M⟩} es una cadena finita; se aplica un
+    algoritmo de búsqueda de subcadena. No requiere ejecutar \texttt{M}.
+    Termina siempre.
+  \end{itemize}
+\item
+  \emph{¿\texttt{M} NO acepta la palabra \texttt{011}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: comportamiento sobre entrada fija (\texttt{w=011}).
+  \item
+    Clasificación: NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: es C-UNIVERSAL con \texttt{w=011}. UNIVERSAL es r.e. no
+    recursivo; su complementario no es r.e. (Teorema de los
+    complementarios).
+  \end{itemize}
+\item
+  \emph{¿\texttt{L(M)} es exactamente el conjunto de palíndromos sobre
+  \texttt{\{0,1\}}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: igualdad del lenguaje con un lenguaje fijo; propiedad del
+    lenguaje.
+  \item
+    Clasificación: NO DECIDIBLE (Rice) y, además, NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: por Rice es indecidible (propiedad no trivial de
+    \texttt{L(M)}). No es semidecidible porque \texttt{L(M)\ =\ PAL}
+    exige \texttt{PAL\ ⊆\ L(M)} (universal sobre infinitas palabras) y
+    \texttt{L(M)\ ⊆\ PAL}. La parte \texttt{PAL\ ⊆\ L(M)} se reduce
+    desde un problema no semidecidible del tipo ``acepta todas'' (usando
+    el gadget de simulación durante \texttt{\textbar{}x\textbar{}} pasos
+    restringido a palíndromos): así se transforma C-UNIVERSAL en esta
+    igualdad.
+  \end{itemize}
+\item
+  \emph{¿\texttt{M} acepta alguna palabra de la forma
+  \texttt{0\^{}\{2n\}}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad del lenguaje, existencial.
+  \item
+    Clasificación: SEMIDECIDIBLE, no decidible.
+  \item
+    Desarrollo: no decidible por Rice. Semidecidible por dovetailing
+    sobre las palabras \texttt{0\^{}0,\ 0\^{}2,\ 0\^{}4,\ …}: se simulan
+    en anchura y se acepta en cuanto una es aceptada. Si ninguna lo es,
+    no se detiene.
+  \end{itemize}
+\end{enumerate}
+
+Ejercicio 2. Verdadero/Falso
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Si una MT escribe en su primera cinta, su complejidad en espacio
+  es \texttt{O(n)}.} FALSO. El espacio depende de cuántas casillas
+  distintas visite o escriba, no del hecho de escribir; puede ser
+  sublineal (logarítmica) o superlineal según el algoritmo.
+\item
+  \emph{Si un problema de optimización tiene umbral de aproximación 2,
+  entonces tiene un algoritmo δ-aproximado polinómico con δ=2.} FALSO.
+  El umbral es el ínfimo de las razones alcanzables; puede no alcanzarse
+  con igualdad, de modo que existan algoritmos con
+  \texttt{δ\textgreater{}2} pero no exactamente \texttt{2}.
+\item
+  \emph{La composición de dos algoritmos espacio-logarítmicos es
+  espacio-logarítmica.} VERDADERO. No se almacena la salida intermedia
+  \texttt{y=ALG1(x)}: cuando \texttt{ALG2} necesita el bit \texttt{i} de
+  \texttt{y}, se relanza \texttt{ALG1(x)} y se cuenta hasta ese bit. El
+  espacio adicional es un índice logarítmico.
+\item
+  \emph{Si \texttt{P1∝P2∝P3} y \texttt{P1} es semidecidible, entonces
+  \texttt{P3} lo es.} FALSO. La semidecidibilidad se transmite del
+  destino al origen, no al revés: de \texttt{P1∝P2} y \texttt{P2}
+  semidecidible se deduce \texttt{P1} semidecidible, pero \texttt{P1}
+  semidecidible no dice nada de \texttt{P3}.
+\item
+  \emph{Si \texttt{NL=NP}, entonces \texttt{NP=coNP}.} VERDADERO. NL es
+  cerrada bajo complementario (Immerman--Szelepcsényi); si
+  \texttt{NL=NP}, esa propiedad se traslada a NP, luego
+  \texttt{NP=coNP}.
+\end{enumerate}
+
+Ejercicio 3. NP-completitud --- \emph{Reducción de 3-SAT(V,C) a
+Cubrimiento por Vértices VC(G,K), con ejemplo.} - (1) Transformación:
+por cada variable \texttt{xi} se crea un gadget de 2 vértices unidos por
+una arista (\texttt{xi}, \texttt{¬xi}). Por cada cláusula de 3 literales
+se crea un triángulo de 3 vértices (gadget de cláusula). Se conecta cada
+vértice del triángulo con el vértice del literal correspondiente del
+gadget de variable. Se fija
+\texttt{K\ =\ \textbar{}V\textbar{}\ +\ 2\textbar{}C\textbar{}} (un
+vértice por variable más dos por cláusula). - (2) Eficiencia: la
+construcción del grafo es espacio logarítmico (recorre variables y
+cláusulas). - (3) Directa: dada una asignación que satisface la fórmula,
+se toma de cada gadget de variable el vértice del literal FALSO, y de
+cada triángulo los 2 vértices cuyos literales no satisfacen (dejando
+fuera uno que sí satisface). Esos
+\texttt{\textbar{}V\textbar{}\ +\ 2\textbar{}C\textbar{}} vértices
+cubren todas las aristas. - (4) Recíproca: un cubrimiento de tamaño
+\texttt{K\ =\ \textbar{}V\textbar{}\ +\ 2\textbar{}C\textbar{}} debe
+usar exactamente 1 vértice por gadget de variable (cubrir su arista) y 2
+por triángulo (cubrir las 3 aristas internas). El literal no elegido en
+cada variable define una asignación; las aristas de conexión obligan a
+que cada cláusula tenga al menos un literal verdadero, luego la fórmula
+es satisfacible. - Ejemplo: \texttt{(x1\ ∨\ x2\ ∨\ x3)}. Gadgets de
+variable \texttt{\{x1,¬x1\}}, \texttt{\{x2,¬x2\}}, \texttt{\{x3,¬x3\}};
+un triángulo para la cláusula; \texttt{K\ =\ 3\ +\ 2\ =\ 5}. La
+asignación \texttt{x1=V} cubre con el vértice \texttt{¬x1}, etc.
+
+Ejercicio 4. Existencia de caminos --- \emph{Complejidad en espacio
+determinista, con justificación.} - Pertenece a NL en versión no
+determinista (adivina el camino, guarda nodo actual y contador, espacio
+logarítmico). En determinista se ubica en su clase
+logarítmica/polinómica y, en todo caso, en P. Por el Teorema de Savitch,
+el problema (no determinista en espacio \texttt{log\ n}) se resuelve en
+espacio determinista \texttt{O(log²n)}.
+
+Ejercicio 5. Church-Turing --- \emph{Simular una MT con un programa con
+variables; detalle de la transición.} - Organización: tres variables
+\texttt{X} (izquierda del cabezal, almacenada invertida para tener el
+símbolo más cercano accesible), \texttt{Z} (símbolo bajo el cabezal) e
+\texttt{Y} (derecha del cabezal). Un bloque de etiquetas por estado. -
+Transición \texttt{δ(qi,aj)=(qm,ak,D)}: estando en la etiqueta de
+\texttt{qi} y con \texttt{Z=aj}, se escribe \texttt{ak} y se añade a
+\texttt{X} (el cabezal avanza, lo escrito queda a la izquierda), se toma
+el primer símbolo de \texttt{Y} y se coloca en \texttt{Z} (si \texttt{Y}
+está vacío, \texttt{Z} recibe el blanco), y se salta a la etiqueta de
+\texttt{qm}. Un movimiento a la izquierda es simétrico (se traslada de
+\texttt{X} a \texttt{Z}).
+
+Ejercicio 6. Reducciones --- \emph{Diferencias entre reducibilidad
+Turing y logarítmica; cuál es más fuerte.} - La reducción logarítmica
+(Karp) transforma una instancia de \texttt{P1} en una de \texttt{P2} con
+una única llamada y devuelve directamente la respuesta de \texttt{P2};
+preserva las clases NP, coNP, etc. - La reducción Turing resuelve
+\texttt{P1} en tiempo polinómico empleando un oráculo de \texttt{P2} al
+que puede llamar varias veces y combinar las respuestas con lógica
+adicional. - La logarítmica es más fuerte (más restrictiva): toda
+reducción logarítmica es una reducción Turing, pero no al revés. La de
+Turing es más permisiva.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{de-julio-de-2022-extraordinario}{%
+\subsection{15 de julio de 2022
+(Extraordinario)}\label{de-julio-de-2022-extraordinario}}
+
+Ejercicio 1. Decidibilidad
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Dada \texttt{M}, \texttt{u} y \texttt{n} (en binario),
+  ¿\texttt{M} acepta \texttt{u} usando \texttt{n} o más casillas?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: existencia de un cálculo aceptador con consumo de espacio ≥
+    \texttt{n}; no hay cota superior.
+  \item
+    Clasificación: SEMIDECIDIBLE, no decidible.
+  \item
+    Desarrollo: se simula \texttt{M} sobre \texttt{u}; si \texttt{M}
+    acepta y, en esa computación, llegó a usar al menos \texttt{n}
+    casillas, se acepta. La aceptación es semidecidible; al detenerse
+    aceptando se conoce el espacio usado. Si \texttt{M} no acepta
+    \texttt{u}, la simulación no se detiene. No es decidible porque el
+    caso negativo (no acepta) no se puede confirmar.
+  \end{itemize}
+\item
+  \emph{Igual, pero usando \texttt{n} o menos casillas.}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: cota finita de espacio (\texttt{≤\ n}).
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: con el espacio limitado a \texttt{n}, las
+    configuraciones son finitas; se simula con detección de ciclo. Si
+    acepta dentro de \texttt{n} casillas, SÍ; si excede \texttt{n}
+    casillas o entra en ciclo sin aceptar, NO.
+  \end{itemize}
+\item
+  \emph{¿Existe un palíndromo que NO sea aceptado por \texttt{M}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: existencia de una palabra (palíndromo) en el complementario
+    del lenguaje.
+  \item
+    Clasificación: NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: ``no aceptada'' remite al complementario, que no es r.e.
+    Para confirmar que un palíndromo concreto no es aceptado habría que
+    descartar la no parada, lo cual no es semidecidible. Se reduce
+    C-UNIVERSAL: a partir de \texttt{(M,w)} se construye una máquina que
+    sobre un palíndromo testigo simula \texttt{M} sobre \texttt{w}, de
+    modo que ``existe palíndromo no aceptado'' equivale a ``M no acepta
+    w''.
+  \end{itemize}
+\item
+  \emph{Dada \texttt{M} y \texttt{u}, ¿en el cálculo sobre \texttt{u} la
+  MT nunca se mueve a la izquierda?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: comportamiento sobre una entrada fija, sin movimientos a la
+    izquierda.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: si la MT nunca se mueve a la izquierda, el cabezal solo
+    avanza o se mantiene; nunca revisita casillas escritas. Tras pasar
+    la entrada \texttt{u} lee blancos, y el comportamiento sobre blancos
+    depende solo del estado (finitos). Se simula: si en algún paso se
+    mueve a la izquierda, NO; si el cabezal avanza indefinidamente o
+    repite un par (estado, símbolo bajo cabezal) en la zona de blancos
+    sin moverse a la izquierda, se concluye que nunca lo hará, SÍ. El
+    proceso termina.
+  \end{itemize}
+\end{enumerate}
+
+Ejercicio 2. Verdadero/Falso
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Una MT multicinta se puede simular con una MT multipista con la
+  misma complejidad en tiempo.} VERDADERO. La multipista es una sola
+  cinta cuyo alfabeto agrupa los símbolos de todas las pistas; un acceso
+  simultáneo a las pistas es un único paso, luego se mantiene el orden
+  temporal.
+\item
+  \emph{Si un problema se resuelve con complejidad \texttt{f(n)},
+  también con \texttt{0.25·f(n)+n}.} VERDADERO. Por el teorema de
+  aceleración lineal (compresión de cinta mediante un alfabeto
+  ampliado), se puede reducir el factor constante; el término
+  \texttt{+n} cubre la lectura inicial de la entrada.
+\item
+  \emph{Si SAT se resolviera en tiempo polinómico, FSAT también.}
+  VERDADERO. Por autorreducibilidad: se fija \texttt{x1=V} y se consulta
+  SAT sobre la fórmula resultante; si sigue siendo satisfacible se
+  mantiene, si no \texttt{x1=F}; se repite variable a variable, con un
+  número polinómico de llamadas, hasta construir una asignación.
+\item
+  \emph{Si \texttt{P1∝P2} en espacio logarítmico y \texttt{P1} es
+  NP-completo, entonces \texttt{P2} también.} FALSO. De ello se deduce
+  que \texttt{P2} es NP-difícil, pero para ser NP-completo debe
+  pertenecer a NP, lo que no se afirma.
+\item
+  \emph{Si una MT se mueve a la izquierda en la cinta de salida, su
+  complejidad en espacio es al menos \texttt{O(n)}.} VERDADERO. La cinta
+  de salida solo deja de contabilizarse si se escribe en una única
+  dirección sin retroceder; al moverse a la izquierda en ella, deja de
+  ser de solo escritura y pasa a contar como espacio de trabajo, que
+  para producir una salida de tamaño \texttt{O(n)} es al menos lineal.
+\end{enumerate}
+
+Ejercicio 3. Complejidad --- \emph{Problema de las parejas: enunciado y
+complejidad.} - Enunciado: dado un grafo bipartito (o dos conjuntos con
+compatibilidades), determinar si existe un emparejamiento perfecto que
+asocie todos los elementos uno a uno. - Complejidad: pertenece a P. Se
+reduce en tiempo polinómico al problema de Flujo Máximo (fuente
+conectada a un lado, sumidero al otro, capacidades 1) y se resuelve con
+Ford--Fulkerson; un flujo entero máximo igual al número de elementos
+equivale a un emparejamiento perfecto.
+
+Ejercicio 4. Decidibilidad --- \emph{Correspondencias de Post:
+descripción y decidibilidad.} - Enunciado: dadas dos listas de palabras
+\texttt{(α1,…,αk)} y \texttt{(β1,…,βk)} sobre un alfabeto, determinar si
+existe una secuencia de índices \texttt{i1,…,im} tal que
+\texttt{αi1…αim\ =\ βi1…βim}. - Decidibilidad: indecidible cuando el
+alfabeto tiene al menos 2 símbolos (se demuestra reduciendo el problema
+de la palabra/parada de las MT). Semidecidible en general: se enumeran
+en anchura todas las secuencias de índices y se acepta si alguna iguala
+las concatenaciones. Con alfabeto de un solo símbolo \texttt{\{1\}} el
+problema se reduce a una condición aritmética y es decidible.
+
+Ejercicio 5. Church-Turing --- \emph{Programa con variables para
+\texttt{V←V+1} sobre \texttt{\{a,b\}}.} - Se interpreta la palabra como
+un número en base 2 con dígitos \texttt{a=0}, \texttt{b=1}, leído de
+modo que la operación sea sumar 1 con acarreo. Recorriendo la palabra
+desde el dígito menos significativo: mientras el dígito sea \texttt{b}
+(1) se cambia a \texttt{a} (0) y se propaga el acarreo; al encontrar el
+primer \texttt{a} (0) se cambia a \texttt{b} (1) y se detiene; si todos
+eran \texttt{b}, se añade un \texttt{b} al final. Equivale a calcular la
+palabra siguiente en orden lexicográfico.
+
+Ejercicio 6. Problemas --- \emph{Red Feliz: enunciado y clase de
+complejidad.} - Enunciado: en una red de nodos con estados, cada nodo es
+``feliz'' o ``infeliz'' según una condición local respecto a sus
+vecinos; se busca una configuración estable (todos felices o sin
+posibilidad de mejora local). - Clase: TFNP (funciones totales),
+concretamente del tipo búsqueda local (PLS). El equilibrio existe
+siempre, por lo que la decisión es trivialmente ``sí''; el algoritmo
+cambia el estado de un nodo infeliz de forma iterativa y, como cada
+cambio mejora una función potencial acotada, converge. Encontrar el
+equilibrio puede no ser polinómico.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-2}{%
+\section{2023}\label{section-2}}
+
+\hypertarget{de-junio-de-2023}{%
+\subsection{12 de junio de 2023}\label{de-junio-de-2023}}
+
+Ejercicio 1. Decidibilidad
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{PCP con alfabeto \texttt{A=\{1\}}.}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: caso particular del Problema de Correspondencias de Post.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: con un único símbolo, cada palabra \texttt{αi},
+    \texttt{βi} se reduce a su longitud; la existencia de una secuencia
+    se convierte en una condición lineal entera (existencia de
+    coeficientes no negativos que igualen sumas de longitudes), que es
+    decidible. Con alfabeto de ≥2 símbolos sería indecidible.
+  \end{itemize}
+\item
+  \emph{¿La complejidad del lenguaje aceptado por \texttt{M} es
+  polinómica?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad del lenguaje aceptado.
+  \item
+    Clasificación: NO DECIDIBLE (Rice); no semidecidible.
+  \item
+    Desarrollo: por Rice es indecidible (propiedad no trivial de
+    \texttt{L(M)}). No es semidecidible: afirmar que la complejidad es
+    polinómica cuantifica sobre el comportamiento en infinitas entradas
+    y no admite confirmación finita; se reduce un problema no r.e.
+  \end{itemize}
+\item
+  \emph{Dado un programa Post-Turing \texttt{P}, ¿\texttt{P} NO acepta
+  la palabra vacía?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: comportamiento sobre la entrada fija \texttt{λ}.
+  \item
+    Clasificación: NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: los programas Post-Turing son equivalentes a las MT, por
+    lo que ``P no acepta \texttt{λ}'' es C-UNIVERSAL con \texttt{w=λ},
+    que no es r.e.
+  \end{itemize}
+\item
+  \emph{Dadas \texttt{M1} y \texttt{M2}, ¿\texttt{⟨M1⟩} es subcadena de
+  \texttt{⟨M2⟩}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad sintáctica de las codificaciones.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: ambas codificaciones son cadenas finitas; se aplica
+    búsqueda de subcadena. Termina siempre.
+  \end{itemize}
+\end{enumerate}
+
+Ejercicio 2. Verdadero/Falso
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Si existe un algoritmo δ-aproximado polinómico con δ=2, también
+  con δ=3.} VERDADERO. Una razón de aproximación mayor es una cota más
+  laxa; el mismo algoritmo, que garantiza estar dentro del factor 2,
+  también está dentro del factor 3.
+\item
+  \emph{Caracterización de coNP: una MT no determinista tal que para
+  ``SÍ'' todos los cálculos aceptan y para ``NO'' al menos uno rechaza.}
+  VERDADERO. Es la definición de coNP por ramas universales (aceptación
+  si y solo si todas las ramas aceptan).
+\item
+  \emph{Si \texttt{P1∝P2∝P3} y \texttt{P3} no es semidecidible, entonces
+  \texttt{P1} tampoco.} FALSO. La no semidecidibilidad se transmite del
+  origen al destino (\texttt{P1∝P3} con \texttt{P1} no r.e. implica
+  \texttt{P3} no r.e.), no en sentido contrario; que \texttt{P3} sea no
+  r.e. no fuerza a \texttt{P1}.
+\item
+  \emph{Un problema NP-difícil es siempre NP-completo.} FALSO.
+  NP-completo exige además pertenecer a NP; existen problemas
+  NP-difíciles fuera de NP (por ejemplo, problemas indecidibles o de
+  clases superiores).
+\end{enumerate}
+
+Ejercicio 3. SAT --- \emph{Relación entre 2-SAT y la búsqueda de caminos
+en grafos dirigidos.} - Construcción: para una fórmula 2-SAT se define
+el grafo de implicaciones, con un vértice por cada literal (\texttt{x} y
+\texttt{¬x}). Cada cláusula \texttt{(a\ ∨\ b)} genera dos aristas
+dirigidas: \texttt{¬a\ →\ b} y \texttt{¬b\ →\ a} (si \texttt{a} es
+falso, \texttt{b} debe ser verdadero, y viceversa). - Criterio: la
+fórmula es insatisfacible si y solo si existe alguna variable \texttt{x}
+con caminos dirigidos \texttt{x\ →\ ¬x} y \texttt{¬x\ →\ x} (es decir,
+\texttt{x} y \texttt{¬x} en la misma componente fuertemente conexa). La
+búsqueda de tales caminos es un problema de alcanzabilidad en grafos
+dirigidos. - Consecuencia: 2-SAT se resuelve mediante alcanzabilidad,
+luego pertenece a NL (y a P).
+
+Ejercicio 4. Clases --- \emph{Definición de P y EXP, y relación.} -
+\texttt{P\ =\ ⋃\_\{j\textgreater{}0\}\ TIEMPO(nʲ)} (tiempo polinómico
+determinista).
+\texttt{EXP\ =\ ⋃\_\{j\textgreater{}0\}\ TIEMPO(2\^{}\{nʲ\})} (tiempo
+exponencial determinista). - Relación: \texttt{P\ ⊆\ EXP} y, por el
+Teorema de la Jerarquía de Tiempo, la inclusión es estricta:
+\texttt{P\ ⊊\ EXP}.
+
+Ejercicio 5. Reducciones --- \emph{Reducción de Conjunto Independiente a
+Cubrimiento por Vértices (decisión).} - (1) Transformación: se conserva
+el mismo grafo \texttt{G} de \texttt{n} vértices; si la pregunta de
+Conjunto Independiente es ``¿existe un independiente de tamaño ≥ k?'',
+se traduce a ``¿existe un cubrimiento de tamaño ≤ n−k?''. - (2)
+Eficiencia: la transformación es trivial (solo cambia el umbral),
+espacio logarítmico. - (3) y (4): \texttt{S} es un conjunto
+independiente si y solo si su complementario \texttt{V∖S} es un
+cubrimiento por vértices (toda arista tiene al menos un extremo fuera de
+\texttt{S}, es decir, en \texttt{V∖S}). Luego existe independiente de
+tamaño ≥ k si y solo si existe cubrimiento de tamaño ≤ n−k. La
+equivalencia es exacta en ambos sentidos.
+
+Ejercicio 6. MT --- \emph{Simulación de multicinta a una cinta; relación
+de pasos \texttt{t(n)}.} - Idéntica a la del 12 de julio de 2021,
+Ejercicio 5: multipista con marcas de cabezal; cada paso simulado cuesta
+\texttt{O(t(n))} y el total es \texttt{O(t(n)²)}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{de-julio-de-2023}{%
+\subsection{6 de julio de 2023}\label{de-julio-de-2023}}
+
+Ejercicio 1. Decidibilidad
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Dadas \texttt{M1} y \texttt{M2}, ¿existe un palíndromo aceptado
+  por \texttt{M1} y NO aceptado por \texttt{M2}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: existencial sobre \texttt{M1}, combinado con ``no aceptada''
+    por \texttt{M2} (complementario).
+  \item
+    Clasificación: NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: aunque ``existe palíndromo aceptado por \texttt{M1}''
+    sería semidecidible, la condición ``y no aceptada por \texttt{M2}''
+    depende del complementario de \texttt{L(M2)}, que no es r.e. Se
+    reduce un problema no r.e. (tipo C-UNIVERSAL/EMPTY) construyendo
+    \texttt{M2} para que ``no acepta'' equivalga a la condición no
+    semidecidible.
+  \end{itemize}
+\item
+  \emph{Dadas \texttt{M1} y \texttt{M2}, ¿existe \texttt{u} aceptada por
+  \texttt{M1} tal que \texttt{u⁻¹} es aceptada por \texttt{M2}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: existencial con dos condiciones de aceptación.
+  \item
+    Clasificación: SEMIDECIDIBLE, no decidible.
+  \item
+    Desarrollo: ambas condiciones son de aceptación (r.e.). Se hace
+    dovetailing: se enumeran las palabras \texttt{u}; para cada una se
+    simulan en anchura \texttt{M1(u)} y \texttt{M2(u⁻¹)}; se acepta
+    cuando ambas aceptan. Si no existe tal \texttt{u}, no se detiene.
+  \end{itemize}
+\item
+  \emph{¿\texttt{M} acepta todas las palabras del alfabeto de entrada?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad universal del lenguaje (\texttt{L(M)=Σ*}).
+  \item
+    Clasificación: NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: no decidible por Rice. No es semidecidible: se reduce
+    C-UNIVERSAL con el gadget de ``simulación durante
+    \texttt{\textbar{}x\textbar{}} pasos''. Dada \texttt{(M,w)}, se
+    construye \texttt{M\textquotesingle{}} que ante \texttt{x} simula
+    \texttt{M} sobre \texttt{w} durante \texttt{\textbar{}x\textbar{}}
+    pasos y acepta salvo que \texttt{M} haya aceptado \texttt{w} en ese
+    tramo. Entonces \texttt{M} no acepta \texttt{w} (caso C-UNIVERSAL
+    positivo) si y solo si \texttt{M\textquotesingle{}} acepta todas las
+    palabras. Como C-UNIVERSAL no es r.e., ``acepta todas'' tampoco.
+  \end{itemize}
+\item
+  \emph{¿\texttt{M} nunca escribe en sus cintas cuando lee la palabra
+  vacía?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: comportamiento sobre entrada fija (\texttt{λ}).
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: si \texttt{M} no escribe, la cinta permanece toda en
+    blanco; la configuración queda determinada por el estado y la
+    posición del cabezal sobre celdas indistinguibles (blancas). El
+    comportamiento reading-blank en cada estado es determinista, de modo
+    que sin escribir se entra en un ciclo de estados en a lo sumo
+    \texttt{\textbar{}Q\textbar{}} pasos. Se simula: si en algún paso
+    \texttt{M} escribe, NO; si transcurren más de
+    \texttt{\textbar{}Q\textbar{}} pasos sin escribir, se concluye que
+    nunca escribirá, SÍ. Termina.
+  \end{itemize}
+\end{enumerate}
+
+Ejercicio 2. Variables numéricas --- \emph{Qué son y cómo se simulan con
+palabras.} - Un programa con variables numéricas opera sobre naturales
+con instrucciones elementales \texttt{A←A+1}, \texttt{A←A−1} (con tope
+en 0) e \texttt{IF\ A≠0\ GOTO\ L}. - Simulación con variables que
+contienen palabras: se fija un alfabeto y una biyección
+\texttt{N:\ Σ*\ →\ ℕ} (orden lexicográfico). Cada variable numérica se
+representa por la palabra cuya imagen es su valor. \texttt{A←A+1} se
+simula calculando la palabra siguiente; \texttt{A←A−1}, la anterior;
+\texttt{IF\ A≠0} comprueba si la palabra es la que codifica el 0 (la
+vacía). La equivalencia es exacta porque \texttt{N} es biyectiva.
+
+Ejercicio 3. Verdadero/Falso
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{¿Es posible que un problema de decisión no trivial tenga
+  complejidad en espacio \texttt{O(1)}?} En general NO de forma
+  significativa: un problema no trivial requiere al menos leer la
+  entrada; con espacio de trabajo constante solo se reconocen lenguajes
+  regulares. Cualquier problema que dependa de la estructura global de
+  la entrada necesita más que \texttt{O(1)} de trabajo.
+\item
+  \emph{Si un problema está en TFNP, su problema de decisión asociado se
+  resuelve en tiempo lineal.} VERDADERO para la decisión ``¿existe
+  solución?'', que es trivialmente ``sí'' (la solución siempre existe);
+  FALSO si se interpreta como encontrar la solución, que puede ser
+  difícil.
+\item
+  \emph{Se sabe que la clase L es distinta de PESPACIO.} VERDADERO.
+  \texttt{L\ ⊊\ PESPACIO} está demostrado por la jerarquía de espacio.
+\item
+  \emph{El Viajante de Comercio tiene un algoritmo δ-aproximado
+  polinómico con δ=2.} VERDADERO solo para la variante métrica/euclídea
+  (por ejemplo, el algoritmo de Christofides da \texttt{3/2}, y la cota
+  \texttt{2} es alcanzable con árbol generador mínimo). El TSP general
+  no admite aproximación constante salvo que \texttt{P=NP}.
+\end{enumerate}
+
+Ejercicio 4. NP-completitud --- \emph{Reducción de Circuito Hamiltoniano
+a Viajante de Comercio (decisión).} - (1) Transformación: dado el grafo
+\texttt{G=(V,E)} de Circuito Hamiltoniano, se construye una instancia de
+TSP con las mismas \texttt{n} ciudades y matriz de distancias
+\texttt{d(i,j)=1} si \texttt{\{i,j\}∈E} y \texttt{d(i,j)=2} si no. El
+umbral de coste es \texttt{B=n}. - (2) Eficiencia: construir la matriz
+es espacio logarítmico. - (3) Directa: si \texttt{G} tiene un circuito
+hamiltoniano, ese mismo recorrido usa \texttt{n} aristas de peso
+\texttt{1}, coste total \texttt{n\ ≤\ B}. - (4) Recíproca: una ruta TSP
+de coste \texttt{≤\ n} que visita las \texttt{n} ciudades usa \texttt{n}
+aristas; como cada una pesa al menos \texttt{1}, todas deben pesar
+exactamente \texttt{1}, es decir, todas son aristas de \texttt{G}; esa
+ruta es un circuito hamiltoniano. - Ejemplo: un cuadrilátero
+\texttt{1-2-3-4-1} con aristas presentes da una ruta de coste
+\texttt{4=n}; si faltara una arista, la ruta mínima costaría
+\texttt{5\textgreater{}4}.
+
+Ejercicio 5. Verificadores --- \emph{Justificar que PRIMO(n) está en
+NP.} - El certificado de primalidad de Pratt para \texttt{n} consiste en
+una raíz primitiva \texttt{g} módulo \texttt{n} y la factorización de
+\texttt{n−1}, junto con certificados recursivos de la primalidad de cada
+factor primo. El verificador comprueba que
+\texttt{g\^{}\{n−1\}\ ≡\ 1\ (mod\ n)} y que
+\texttt{g\^{}\{(n−1)/q\}\ ≢\ 1\ (mod\ n)} para cada factor primo
+\texttt{q} de \texttt{n−1}, todo con exponenciación modular en tiempo
+polinómico en \texttt{log\ n}. La recursión tiene profundidad
+logarítmica, luego el certificado es de tamaño polinómico y verificable
+en tiempo polinómico. Por tanto, PRIMO ∈ NP.
+
+Ejercicio 6. Complejidad --- \emph{Parejas y Acoplamiento por Tripletas
+(ACTRI): complejidad.} - Parejas (emparejamiento bipartito) pertenece a
+P (reducción a Flujo Máximo). - ACTRI (acoplamiento por tripletas, la
+variante con tres conjuntos) es NP-completo: pertenece a NP (un
+acoplamiento es un certificado verificable) y es NP-difícil (se reduce
+3-SAT a ACTRI). El salto de dimensión de 2 a 3 conjuntos cambia la
+complejidad de P a NP-completo.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-3}{%
+\section{2024}\label{section-3}}
+
+\hypertarget{de-junio-de-2024}{%
+\subsection{12 de junio de 2024}\label{de-junio-de-2024}}
+
+Ejercicio 1. Decidibilidad
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{¿Es cierto que siempre que \texttt{M} acepta \texttt{u} también
+  acepta \texttt{u⁻¹}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad del lenguaje (cierre bajo inversión), de forma
+    universal.
+  \item
+    Clasificación: NO DECIDIBLE (Rice) y NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: por Rice es indecidible (propiedad no trivial de
+    \texttt{L(M)}: hay lenguajes cerrados bajo inversión y otros que
+    no). No es semidecidible porque la condición es universal (``para
+    toda palabra aceptada\ldots{}''); confirmarla exigiría comprobar
+    infinitas palabras y descartar no paradas. Se reduce un problema no
+    r.e. (tipo EMPTY): si \texttt{L(M)=∅}, la propiedad se cumple
+    vacuamente; con la construcción adecuada, decidir el cierre
+    equivaldría a decidir un problema no r.e.
+  \end{itemize}
+\item
+  \emph{¿Toda palabra de longitud ≤100 se acepta en un número de pasos ≤
+  \texttt{\textbar{}u\textbar{}³}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: cota de longitud de entrada y cota explícita de pasos.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: hay un número finito de palabras de longitud ≤100. Para
+    cada una se simula \texttt{M} durante a lo sumo
+    \texttt{\textbar{}u\textbar{}³} pasos (cota finita) y se comprueba
+    si acepta dentro de ese límite. Conjunto finito de simulaciones
+    finitas, luego termina. La presencia de la cota de pasos es lo que
+    lo hace decidible.
+  \end{itemize}
+\item
+  \emph{¿La complejidad en tiempo de \texttt{M} NO es \texttt{n³}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad asintótica del comportamiento.
+  \item
+    Clasificación: NO DECIDIBLE.
+  \item
+    Desarrollo: la complejidad en tiempo depende del comportamiento
+    sobre infinitas entradas; es una propiedad no decidible (se reduce
+    desde el problema de la parada: no se puede determinar en general la
+    cota de pasos de una MT arbitraria).
+  \end{itemize}
+\item
+  \emph{Dada una MT no determinista \texttt{M} y \texttt{u}, ¿todos los
+  caminos terminan en menos de 100 pasos?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: cota explícita de pasos (100) sobre un árbol de cómputo no
+    determinista.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: el árbol de configuraciones hasta profundidad 100 es
+    finito (el factor de ramificación está acotado por el número de
+    transiciones posibles). Se explora por completo y se comprueba que
+    toda rama se detiene en menos de 100 pasos. Termina siempre.
+  \end{itemize}
+\end{enumerate}
+
+Ejercicio 2. Decidibilidad teórica --- \emph{Relaciones entre
+\texttt{P(x)} y \texttt{C-P(x)}.} - Mismos resultados que en el 12 de
+julio de 2021, Ejercicio 4, demostrados: complementario de decidible es
+decidible; si ambos son semidecidibles, son decidibles (ejecución en
+paralelo); si uno es semidecidible no decidible, el otro no es
+semidecidible.
+
+Ejercicio 3. Verdadero/Falso
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Si se tiene una MT multipista, se puede simular con una MT de
+  una sola cinta con el mismo número de pasos.} VERDADERO. La multipista
+  ya es una sola cinta con alfabeto compuesto; el acceso a todas las
+  pistas en una posición es un único paso.
+\item
+  \emph{PESPACIO = NPESPACIO.} VERDADERO por el Teorema de Savitch
+  (\texttt{NESPACIO(f)\ ⊆\ ESPACIO(f²)}, y \texttt{f²} sigue siendo
+  polinómica si \texttt{f} lo es).
+\item
+  \emph{Descomponer un número en factores primos es de la clase FNPT,
+  pero sin algoritmo polinómico conocido.} VERDADERO. La factorización
+  siempre tiene solución (todo número tiene factorización), luego es
+  total; encontrarla no se sabe hacer en tiempo polinómico.
+\item
+  \emph{Todo programa con variables numéricas se simula con un programa
+  con variables (palabras) ejecutándose con el mismo número de pasos
+  para cualquier entrada.} FALSO. Ambos modelos son equivalentes en
+  potencia, pero la traducción introduce sobrecarga (cada operación
+  numérica se simula con varias instrucciones sobre palabras); el
+  ``mismo número de pasos'' no se mantiene.
+\end{enumerate}
+
+Ejercicio 4. NP-completitud (a elegir) - Opción A --- Partición a
+Mochila: la Mochila (decisión) pregunta si existe un subconjunto con
+peso ≤ W y valor ≥ V. Tomando una instancia de Partición con suma total
+\texttt{2T}, se define cada objeto con peso = valor = su tamaño,
+\texttt{W\ =\ T} y \texttt{V\ =\ T}. Existe partición en dos mitades de
+suma \texttt{T} si y solo si existe un subconjunto de peso ≤ T y valor ≥
+T, es decir, de peso y valor exactamente \texttt{T}. Esto prueba que
+Mochila es NP-difícil; como está en NP (un subconjunto es certificado),
+es NP-completa. - Opción B --- Cubrimiento por Vértices a Circuito
+Hamiltoniano: cada arista \texttt{\{u,v\}} de \texttt{G} se sustituye
+por un gadget (dispositivo) de 12 vértices que solo puede atravesarse de
+tres maneras consistentes (entrar y salir por el lado de \texttt{u}, por
+el de \texttt{v}, o por ambos). Se añaden \texttt{k} vértices selectores
+conectados a todos los gadgets. El grafo resultante tiene circuito
+hamiltoniano si y solo si \texttt{G} tiene un cubrimiento de tamaño
+\texttt{k}; cada selector ``elige'' un vértice de la cobertura que
+recorre sus gadgets incidentes.
+
+Ejercicio 5. Clases --- \emph{Clase de complejidad de la existencia de
+caminos en grafos dirigidos.} - Pertenece a NL. Algoritmo no
+determinista en espacio logarítmico: se guarda el nodo actual
+(inicialmente el origen) y un contador de pasos; en cada paso se adivina
+un vecino y se actualiza el nodo actual; se acepta si se alcanza el
+destino en ≤ \texttt{n} pasos. Solo se almacenan un nodo y un contador,
+ambos en \texttt{log\ n} bits.
+
+Ejercicio 6. Problemas --- \emph{Red Feliz: enunciado, algoritmo y
+clase.} - Igual que en el 15 de julio de 2022, Ejercicio 6: TFNP
+(búsqueda local); algoritmo de voltear nodos infelices con función
+potencial decreciente que garantiza la convergencia.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{de-julio-de-2024}{%
+\subsection{8 de julio de 2024}\label{de-julio-de-2024}}
+
+Ejercicio 1. Decidibilidad
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{¿\texttt{M} acepta todas las palabras de longitud ≤100?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad universal sobre un conjunto finito de palabras, pero
+    SIN cota de pasos; la condición es ``aceptar''.
+  \item
+    Clasificación: SEMIDECIDIBLE, no decidible.
+  \item
+    Desarrollo: hay un número finito de palabras de longitud ≤100, pero
+    ``¿\texttt{M} acepta una palabra dada?'' es semidecidible
+    (UNIVERSAL), no decidible. La conjunción finita de condiciones r.e.
+    es r.e.: se simulan en anchura \texttt{M} sobre todas las palabras
+    de longitud ≤100 y se acepta cuando todas han aceptado. Si alguna no
+    es aceptada (rechazo por parada o ciclo), no se detiene. No es
+    decidible porque ese caso negativo no se puede confirmar; además,
+    por Rice, la propiedad ``contener todas las palabras ≤100'' es no
+    trivial, luego indecidible. (Contraste con el 12 de junio de 2024,
+    Ej.1.2, que sí es decidible por incluir cota de pasos.)
+  \end{itemize}
+\item
+  \emph{Dado uno de sus estados \texttt{q}, ¿\texttt{M} nunca visita
+  \texttt{q} sea cual sea la entrada?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad universal del comportamiento sobre todas las
+    entradas.
+  \item
+    Clasificación: NO DECIDIBLE.
+  \item
+    Desarrollo: ``para cualquier entrada nunca alcanza \texttt{q}''
+    cuantifica sobre infinitas entradas y cómputos posiblemente no
+    terminantes. Se reduce el problema de la PARADA/UNIVERSAL: se
+    transforma \texttt{M} para que alcanzar \texttt{q} equivalga a
+    aceptar \texttt{w}, de modo que decidir esta propiedad decidiría un
+    problema indecidible.
+  \end{itemize}
+\end{enumerate}
+
+Ejercicio 2. Church-Turing --- \emph{Simular un programa con variables
+(palabras) mediante un programa Post-Turing.} - Organización de la
+información: las variables se concatenan en la cinta separadas por el
+blanco \texttt{\#}, con la forma \texttt{\#V1\#V2\#…\#Vn\#}. El programa
+Post-Turing mantiene la convención de posición para localizar cada
+variable. - Simulación de instrucciones básicas: \texttt{Vj\ ←\ ai\ Vj}
+(añadir el símbolo \texttt{ai} al principio de \texttt{Vj}) se simula
+localizando el separador de \texttt{Vj}, desplazando hacia la derecha
+todo el bloque a partir de ahí para abrir una casilla, y escribiendo
+\texttt{ai}. \texttt{Vj\ ←\ Vj−} (borrar el último símbolo) localiza el
+final de \texttt{Vj} y desplaza hacia la izquierda el resto para cerrar
+la casilla. Las comprobaciones de tipo \texttt{IF\ Vj\ ENDS\ a} se
+simulan leyendo el último símbolo de \texttt{Vj}.
+
+Ejercicio 3. Verdadero/Falso
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Si existiera un algoritmo polinómico para decidir la existencia
+  de circuito hamiltoniano, también existiría uno para encontrarlo.}
+  VERDADERO. Por autorreducibilidad: se prueba a eliminar cada arista y
+  se consulta el oráculo de decisión; si tras eliminarla el grafo sigue
+  teniendo circuito, se descarta; si no, la arista es necesaria y se
+  conserva. Con un número polinómico de llamadas se reconstruye el
+  circuito.
+\item
+  \emph{Una MT con 1 cinta ilimitada en ambas direcciones se simula con
+  una de cinta limitada solo por la derecha con el mismo orden de
+  complejidad en tiempo.} VERDADERO. La técnica de las 2 pistas (plegado
+  por la casilla 0) mantiene el orden \texttt{O(t)}.
+\item
+  \emph{El problema del isomorfismo de grafos es NP-completo.} FALSO.
+  Está en NP, pero no se ha demostrado que sea NP-completo ni que esté
+  en P; se ubica en la clase GI.
+\item
+  \emph{Si \texttt{L2∝L1} y \texttt{L3∝L1}, y \texttt{L1} es r.e.,
+  entonces \texttt{L2∪L3} es r.e.} VERDADERO. Si \texttt{L1} es r.e., de
+  \texttt{L2∝L1} se sigue que \texttt{L2} es r.e., e igualmente
+  \texttt{L3}; la unión de dos lenguajes r.e. es r.e. (se semidecide
+  ejecutando ambos semidecisores en paralelo).
+\end{enumerate}
+
+Ejercicio 4. NP-completitud --- \emph{Complejidad de SAT para cláusulas
+Horn, 2-SAT y NAESAT.} - Horn-SAT: polinómico. Una cláusula Horn tiene a
+lo sumo un literal positivo; se resuelve por propagación unitaria (se
+fijan los literales obligados y se propagan hasta saturar o hallar
+contradicción). - 2-SAT: polinómico (pertenece a NL). Se resuelve con el
+grafo de implicaciones y la búsqueda de \texttt{x} y \texttt{¬x} en la
+misma componente fuertemente conexa. - NAESAT: NP-completo. A pesar de
+exigir que en cada cláusula no todos los literales sean iguales, sigue
+siendo tan difícil como SAT (se demuestra por reducción desde 3-SAT con
+un literal de control).
+
+Ejercicio 5. Jerarquía --- \emph{Definir P, NPESPACIO, NP, L, PESPACIO,
+NL y sus relaciones.} - Definiciones: \texttt{L} y \texttt{NL} = espacio
+logarítmico determinista y no determinista; \texttt{P\ =\ ⋃TIEMPO(nʲ)};
+\texttt{NP} = tiempo polinómico no determinista; \texttt{PESPACIO} =
+espacio polinómico determinista; \texttt{NPESPACIO} = espacio polinómico
+no determinista. - Relaciones:
+\texttt{L\ ⊆\ NL\ ⊆\ P\ ⊆\ NP\ ⊆\ PESPACIO}, y
+\texttt{PESPACIO\ =\ NPESPACIO} por Savitch. Estrictas demostradas:
+\texttt{L\ ⊊\ PESPACIO} y \texttt{NL\ ⊊\ PESPACIO}. El resto de
+inclusiones se conjeturan estrictas pero no se ha demostrado.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-4}{%
+\section{2025}\label{section-4}}
+
+\hypertarget{de-junio-de-2025}{%
+\subsection{11 de junio de 2025}\label{de-junio-de-2025}}
+
+Ejercicio 1. Decidibilidad
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{MT \texttt{M} de dos cintas y
+  \texttt{\textbar{}u\textbar{}≤100}: ¿nunca usa más de 100 casillas en
+  la primera cinta al leer \texttt{u}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: cota finita de espacio (100 casillas) y de entrada.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: limitando la primera cinta a 100 casillas (y observando
+    la segunda en consonancia), el número de configuraciones distintas
+    es finito. Se simula \texttt{M} sobre \texttt{u}: si intenta acceder
+    a la casilla 101 de la primera cinta, se responde NO; si se detiene
+    o repite configuración (ciclo) sin superar las 100 casillas, se
+    responde SÍ. Termina siempre porque las configuraciones acotadas en
+    espacio son finitas.
+  \end{itemize}
+\item
+  \emph{¿\texttt{M} acepta todas las palabras de longitud ≤10?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad universal sobre conjunto finito de palabras, SIN
+    cota de pasos.
+  \item
+    Clasificación: SEMIDECIDIBLE, no decidible.
+  \item
+    Desarrollo: análogo al 8 de julio de 2024, Ej.1.1. Las palabras de
+    longitud ≤10 son finitas, pero la aceptación de cada una es
+    semidecidible. Se semidecide simulando en anchura todas ellas y
+    aceptando cuando todas hayan aceptado; no se detiene si alguna no es
+    aceptada. No es decidible (por Rice, la propiedad del lenguaje es no
+    trivial; y el caso negativo no es confirmable). Contraste con el
+    apartado 1, que sí es decidible por tener cota de espacio.
+  \end{itemize}
+\item
+  \emph{Dadas \texttt{M1} y \texttt{M2}, ¿toda palabra de longitud ≤100
+  aceptada por \texttt{M1} lo es también por \texttt{M2} con un número
+  de pasos ≤ al empleado por \texttt{M1}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: condición universal con aceptación de \texttt{M1}
+    (semidecidible) en el antecedente.
+  \item
+    Clasificación: NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: el complementario sí es semidecidible: para refutar la
+    afirmación basta encontrar una palabra \texttt{w} (≤100) que
+    \texttt{M1} acepte en \texttt{k1} pasos y que \texttt{M2} no acepte
+    en ≤ \texttt{k1} pasos; esto se busca por dovetailing (al aceptar
+    \texttt{M1} se conoce \texttt{k1} y se simula \texttt{M2} durante
+    \texttt{k1} pasos). Como el complementario es r.e., la afirmación es
+    co-r.e.; y no es r.e., porque su verdad incluye casos en que
+    \texttt{M1} cicla sobre alguna \texttt{w} (antecedente falso, no
+    confirmable). Por tanto, no es semidecidible.
+  \end{itemize}
+\item
+  \emph{Dadas \texttt{M1} y \texttt{M2} (con \texttt{M2} garantizada de
+  terminar para toda entrada) y una palabra \texttt{u}, ¿\texttt{M1} da
+  más pasos que \texttt{M2} al leer \texttt{u}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: comparación de pasos sobre una entrada fija, con \texttt{M2}
+    total.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: como \texttt{M2} siempre termina, se simula \texttt{M2}
+    sobre \texttt{u} y se obtiene su número exacto de pasos \texttt{k2}
+    (finito). Después se simula \texttt{M1} sobre \texttt{u} durante
+    \texttt{k2+1} pasos: si \texttt{M1} se detiene en ≤ \texttt{k2}
+    pasos, no da más que \texttt{M2}, NO; si tras \texttt{k2+1} pasos
+    \texttt{M1} sigue en ejecución, entonces dará al menos
+    \texttt{k2+1\ \textgreater{}\ k2} pasos (incluso si cicla
+    indefinidamente), SÍ. La simulación está acotada por \texttt{k2+1},
+    luego siempre termina.
+  \end{itemize}
+\end{enumerate}
+
+Ejercicio 2. Máquinas de Turing --- \emph{Describir una MT que reconozca
+\texttt{uu} (\texttt{u∈\{0,1\}*}) en espacio logarítmico.} - Idea de
+alto nivel: la entrada \texttt{w} tiene longitud par \texttt{2m} (si es
+impar, se rechaza). Hay que comprobar que la primera mitad coincide con
+la segunda. - Construcción en espacio logarítmico: se usa una cinta de
+trabajo como contador binario (a lo sumo \texttt{log(2m)} casillas).
+Primero se determina \texttt{m} contando símbolos. Después, para cada
+índice \texttt{i} de \texttt{1} a \texttt{m}, se guardan en binario los
+índices \texttt{i} e \texttt{i+m}, se sitúa el cabezal sobre la posición
+\texttt{i} (recorriendo con el contador), se memoriza el símbolo en el
+control finito, se desplaza a la posición \texttt{i+m} y se compara; si
+difieren, se rechaza. Solo se almacenan índices en espacio logarítmico
+(no se copia la mitad de la palabra), de modo que el espacio de trabajo
+es \texttt{O(log\ m)}. No es necesario detallar los estados.
+
+Ejercicio 3. Verdadero/Falso
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Una MT ilimitada en ambos lados se simula con una ilimitada a la
+  derecha con los mismos pasos.} FALSO. Se simula con el mismo orden de
+  complejidad \texttt{O(t)} mediante 2 pistas, pero no exactamente con
+  el mismo número de pasos (los cambios de pista y la gestión del
+  plegado añaden pasos constantes).
+\item
+  \emph{Para que una MT tenga complejidad en espacio \texttt{O(n²)}
+  necesita más de una cinta para no escribir en la cinta de entrada.}
+  VERDADERO. La cinta de entrada no se contabiliza solo si no se
+  sobrescribe; para disponer de espacio de trabajo \texttt{O(n²)} sin
+  tocar la entrada se requiere al menos una cinta de trabajo separada.
+\item
+  \emph{El conocimiento actual es compatible con que \texttt{P≠NP} y
+  \texttt{NP=coNP}.} VERDADERO. Ninguna de las dos relaciones está
+  demostrada ni refutada; son escenarios posibles con el conocimiento
+  actual.
+\item
+  \emph{Está demostrado que la tesis de Church-Turing es cierta.} FALSO.
+  Es una tesis, no un teorema: ``efectivamente calculable'' no es un
+  concepto matemático formalizable, por lo que no admite demostración.
+\end{enumerate}
+
+Ejercicio 4. NP-completitud --- \emph{Problema de la SUMA: enunciado y
+complejidad.} - Enunciado: dados un conjunto de naturales y un objetivo
+\texttt{B}, ¿existe un subconjunto cuya suma sea exactamente \texttt{B}?
+- Complejidad: NP-completo. Pertenece a NP (el subconjunto es un
+certificado y la suma se comprueba en tiempo polinómico). Es NP-difícil
+porque problemas NP-completos se reducen a él (3-SAT mediante ACTRI, o
+directamente desde otras variantes numéricas); de SUMA se reduce además
+a PARTICIÓN y a MOCHILA.
+
+Ejercicio 5. Complejidad --- \emph{Definir EXP y su relación con
+PESPACIO y P.} -
+\texttt{EXP\ =\ ⋃\_\{j\textgreater{}0\}\ TIEMPO(2\^{}\{nʲ\})} (tiempo
+exponencial determinista). - Relaciones:
+\texttt{P\ ⊆\ PESPACIO\ ⊆\ EXP}. Además \texttt{P\ ⊊\ EXP} (jerarquía de
+tiempo). \texttt{PESPACIO\ ⊆\ EXP} porque una MT con espacio polinómico
+\texttt{p(n)} tiene un número de configuraciones acotado por
+\texttt{2\^{}\{O(p(n))\}}; recorrerlas (o detectar ciclo) cuesta tiempo
+exponencial. No se sabe si \texttt{PESPACIO\ ⊊\ EXP} es estricta.
+
+Ejercicio 6. Reducciones (a elegir) --- \emph{Reducción Turing de FSAT a
+SAT, o de FHAMILTONIANO a HAMILTONIANO.} - FSAT a SAT: con un oráculo
+para SAT (decisión), se construye una asignación satisfactoria. Se
+comprueba primero que la fórmula es satisfacible; luego, variable a
+variable, se fija \texttt{xi=V} y se pregunta al oráculo por la fórmula
+resultante; si sigue siendo satisfacible se mantiene, si no se fija
+\texttt{xi=F}. Tras \texttt{n} llamadas se obtiene una asignación que
+satisface la fórmula. Es una reducción Turing (varias llamadas al
+oráculo, con lógica adicional). - FHAMILTONIANO a HAMILTONIANO: con un
+oráculo de decisión, se prueban aristas: se elimina una arista y se
+pregunta si el grafo conserva circuito hamiltoniano; si sí, se descarta;
+si no, la arista es necesaria y se conserva. Al final quedan exactamente
+las aristas del circuito.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{de-julio-de-2025}{%
+\subsection{7 de julio de 2025}\label{de-julio-de-2025}}
+
+Ejercicio 1. Decidibilidad
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{¿Existe una entrada \texttt{u} tal que \texttt{M} cicla con
+  \texttt{u}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: existencial sobre el comportamiento de no parada.
+  \item
+    Clasificación: NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: ``ciclar con \texttt{u}'' es no detenerse, propiedad
+    co-r.e. (no r.e.) para una entrada fija. ``Existe \texttt{u} que
+    cicla'' combina un cuantificador existencial con un predicado no
+    r.e., y no es r.e. Confirmar que una \texttt{u} concreta cicla no es
+    semidecidible; tampoco lo es la existencia. Se reduce el
+    complementario del problema de la parada.
+  \end{itemize}
+\item
+  \emph{Dadas \texttt{M1} y \texttt{M2}, ¿para toda \texttt{u}, si
+  \texttt{M1} cicla entonces \texttt{M2} también cicla?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: condición universal con predicados de no parada.
+  \item
+    Clasificación: NO SEMIDECIDIBLE.
+  \item
+    Desarrollo: el ``para toda \texttt{u}'' junto con ``ciclar'' (no
+    r.e.) impide la semidecidibilidad. No hay forma de confirmar en
+    tiempo finito que la implicación se cumple para todas las entradas,
+    ya que ``M1 cicla'' no es confirmable. Se reduce un problema no r.e.
+    (tipo C-UNIVERSAL/no parada).
+  \end{itemize}
+\item
+  \emph{MT \texttt{M} sin ningún movimiento a la izquierda y palabra
+  \texttt{u}: ¿\texttt{M} acepta \texttt{u}?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: aceptación sobre entrada fija con una restricción estructural
+    (sin movimientos a la izquierda).
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: sin movimientos a la izquierda, el cabezal solo avanza
+    (o se mantiene) y nunca revisita una casilla escrita. Al pasar la
+    entrada \texttt{u}, lee blancos; la conducta en la zona de blancos
+    depende únicamente del estado, con un número finito de
+    posibilidades. Se simula: si acepta, SÍ; si se detiene sin aceptar,
+    NO; si repite un par (estado, símbolo leído) en blancos sin avanzar
+    hacia la aceptación, se concluye que no aceptará, NO. El proceso
+    termina en un número acotado de pasos.
+  \end{itemize}
+\item
+  \emph{¿Para ninguna entrada \texttt{M} se mueve a la izquierda en sus
+  5 primeros movimientos?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Tipo: propiedad universal sobre las entradas, pero limitada a los 5
+    primeros pasos.
+  \item
+    Clasificación: DECIDIBLE.
+  \item
+    Desarrollo: en 5 movimientos el cabezal solo puede leer las primeras
+    casillas de la entrada; el comportamiento durante esos pasos depende
+    solo de un prefijo de longitud ≤5. Hay un número finito de prefijos
+    de longitud ≤5 sobre \texttt{\{0,1\}}. Se simulan los 5 primeros
+    pasos para cada prefijo y se comprueba si en algún caso hay un
+    movimiento a la izquierda. Finito, luego decidible.
+  \end{itemize}
+\end{enumerate}
+
+Ejercicio 2. Church-Turing --- \emph{Programa con variables numéricas
+frente a variables con palabras.} - Un programa con variables numéricas
+usa naturales (\texttt{A←A+1}, \texttt{A←A−1},
+\texttt{IF\ A≠0\ GOTO\ L}). Un programa con variables que contienen
+palabras opera sobre cadenas (\texttt{A←aA}, \texttt{A←A−},
+comprobaciones de símbolo). - Equivalencia: mediante la biyección
+\texttt{N:\ Σ*\ →\ ℕ} (orden lexicográfico), cada natural se corresponde
+con una palabra. Incrementar un natural equivale a calcular la palabra
+siguiente, y decrementar, la anterior. Por ello cualquier cómputo de un
+modelo se reproduce en el otro; son equivalentes en potencia (aunque no
+paso a paso).
+
+Ejercicio 3. Verdadero/Falso
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{El PCP sobre el alfabeto \texttt{\{1\}} es semidecidible pero no
+  decidible.} FALSO. Con un solo símbolo, el PCP es decidible (se reduce
+  a una condición aritmética sobre longitudes).
+\item
+  \emph{Si una MT tiene una sola cinta, su complejidad en espacio es al
+  menos \texttt{O(n)}.} FALSO. Si la cinta de entrada no se sobrescribe
+  (o si hay una cinta de trabajo separada), el espacio puede ser
+  sublineal, por ejemplo logarítmico.
+\item
+  \emph{Los problemas FNPT se resuelven en tiempo polinómico
+  determinista.} FALSO. La solución existe siempre (totales), pero
+  encontrarla puede no ser polinómico (por ejemplo, la factorización).
+\item
+  \emph{Caracterización de coNP: una MT no determinista que, si la
+  respuesta es ``NO'', rechaza en al menos un cálculo, y si es ``SÍ'',
+  acepta en todos.} VERDADERO. Es la definición de coNP por ramas
+  universales (aceptación si y solo si todas las ramas aceptan).
+\end{enumerate}
+
+Ejercicio 4. NP-completitud --- \emph{Cláusulas Horn: enunciado y
+complejidad.} - Enunciado: una cláusula Horn es una disyunción con a lo
+sumo un literal positivo (equivalente a una implicación
+\texttt{a1\ ∧\ …\ ∧\ ak\ →\ b}). Horn-SAT pregunta si un conjunto de
+cláusulas Horn es satisfacible. - Complejidad: polinómico. Algoritmo de
+propagación unitaria: se ponen a verdadero los literales forzados por
+cláusulas unitarias positivas y se propagan; si se deduce una
+contradicción (una cláusula sin literal positivo cuyos antecedentes son
+todos verdaderos), es insatisfacible; en caso contrario, la asignación
+construida la satisface. Pertenece a P.
+
+Ejercicio 5. Máquinas de Turing --- \emph{MT no deterministas frente a
+deterministas: ventajas y ejemplo.} - Una MT no determinista puede tener
+varias transiciones posibles por configuración; acepta si existe algún
+camino de cómputo que acepte. Es equivalente en potencia a la
+determinista (toda MTND se simula con una MTD explorando su árbol de
+cómputo), aunque con coste temporal potencialmente exponencial. -
+Ventaja: simplifica el diseño cuando basta ``adivinar'' un testigo y
+verificarlo. Ejemplo: para reconocer \texttt{L\ =\ \{uu\}} o palabras
+compuestas, la MTND adivina el punto de corte (o el factor) y solo
+verifica; la versión determinista debe probar todas las posibilidades.
+
+Ejercicio 6. Optimización --- \emph{Mochila en versión de optimización:
+complejidad.} - Enunciado: dados objetos con peso y valor y una
+capacidad \texttt{W}, maximizar el valor total sin superar \texttt{W}. -
+Complejidad: NP-difícil (su versión decisión es NP-completa). Admite un
+algoritmo de programación dinámica pseudopolinómico \texttt{O(n·W)}
+(polinómico en el valor de \texttt{W}, no en su longitud). Admite un
+esquema de aproximación totalmente polinómico (FPTAS), por lo que
+pertenece a la mejor clase de aproximabilidad.
+
+\hypertarget{parte-3-suxedntesis-final}{%
+\chapter{PARTE 3 --- Síntesis final}\label{parte-3-suxedntesis-final}}
+
+\hypertarget{tabla-de-referencia-ruxe1pida-del-ejercicio-1}{%
+\section{Tabla de referencia rápida del Ejercicio
+1}\label{tabla-de-referencia-ruxe1pida-del-ejercicio-1}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Si el enunciado indica\ldots{}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Respuesta inmediata
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Justificación
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Cota de PASOS (≤N pasos) o de ESPACIO (≤c casillas), aun con entrada
+acotada & DECIDIBLE & Simulación acotada / configuraciones finitas \\
+Solo cota de LONGITUD de entrada, sin cota de pasos, y condición
+``aceptar'' & SEMIDECIDIBLE, no decidible & Aceptar es r.e.; conjunción
+finita de r.e. es r.e. \\
+``¿es subcadena de ⟨M⟩?'', número de estados & DECIDIBLE & Propiedad
+sintáctica de la codificación \\
+Propiedad no trivial de \texttt{L(M)}: palíndromo, regular, finito,
+``acepta 011'' & NO DECIDIBLE & Rice \\
+``¿Existe palabra\ldots?'', ``¿acepta alguna\ldots?'' & SEMIDECIDIBLE
+(no decidible por Rice) & Búsqueda en anchura / MT no determinista \\
+``¿Para TODA palabra\ldots?'', ``¿acepta todas?'', ``L1⊆L2'', ``L(M)=∅''
+& NO SEMIDECIDIBLE & Reducir EMPTY / C-UNIVERSAL / DIAGONAL \\
+``¿M NO acepta w?'' & NO SEMIDECIDIBLE & Es C-UNIVERSAL \\
+``¿visita el estado q (cualquier entrada)?'', ``¿cicla para alguna
+entrada?'', ``¿no se detiene nunca?'' & NO DECIDIBLE / NO SEMIDECIDIBLE
+& Reducción desde PARADA / su complementario \\
+``PCP'' & Indecidible (\textbar A\textbar≥2) / Decidible (A=\{1\}) &
+Caso particular del alfabeto \\
+``GIC ambigua'' & Indecidible. ``GIC genera u'' & Decidible (CYK) \\
+\end{longtable}
+
+\hypertarget{errores-frecuentes-que-reducen-la-calificaciuxf3n}{%
+\section{Errores frecuentes que reducen la
+calificación}\label{errores-frecuentes-que-reducen-la-calificaciuxf3n}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Aplicar Rice a propiedades de la máquina (pasos, casillas, estados,
+  movimientos): Rice solo vale para propiedades no triviales de
+  \texttt{L(M)}.
+\item
+  Confundir ``cota de pasos'' con ``cota de longitud de entrada'': con
+  cota de pasos es decidible; sin ella, ``acepta todas las palabras ≤K''
+  es solo semidecidible.
+\item
+  Afirmar que \texttt{B} es NP-completo solo con \texttt{A∝B}: falta
+  probar \texttt{B∈NP}.
+\item
+  Afirmar que la tesis de Church-Turing está demostrada.
+\item
+  Confundir ``se sabe que'' con ``se conjetura'': \texttt{L=PESPACIO} es
+  falso (son distintas), \texttt{P=NP} permanece abierto.
+\item
+  Omitir la implicación recíproca en las reducciones.
+\item
+  Realizar búsqueda en profundidad en las pruebas de semidecidibilidad
+  (debe ser en anchura / dovetailing).
+\end{enumerate}
+
+\hypertarget{formulaciones-recomendadas-para-la-justificaciuxf3n}{%
+\section{Formulaciones recomendadas para la
+justificación}\label{formulaciones-recomendadas-para-la-justificaciuxf3n}}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Por el Teorema de Savitch, \texttt{NESPACIO(f)⊆ESPACIO(f²)}, luego
+  \texttt{PESPACIO=NPESPACIO}.''
+\item
+  ``Por el Teorema de la Jerarquía (de tiempo o de espacio), la
+  inclusión es estricta (\texttt{P⊊EXP}, \texttt{L⊊PESPACIO}).''
+\item
+  ``Por el Teorema de Rice, toda propiedad no trivial de los lenguajes
+  r.e. es indecidible.''
+\item
+  ``Por el Teorema de Cook-Levin, SAT es NP-completo (codifica el
+  cómputo de una MT no determinista como fórmula booleana).''
+\item
+  ``Por el Teorema de los complementarios, si \texttt{L} es r.e. no
+  recursivo, \texttt{L̄} no es r.e.''
+\item
+  En toda reducción se enuncian los cuatro pasos: transformación,
+  eficiencia, implicación directa e implicación recíproca.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Documento elaborado a partir de los 24 archivos \texttt{.md} del export
+NotebookLM (estructura del examen, enunciados 2021-2025, Manual de
+Decidibilidad, temas tr1-tr6, clases de complejidad, mapa de reducciones
+y puntuaciones). Cubre exclusivamente la parte de teoría (Ejercicios 1 a
+6).
+
+\input{../../../extraFiles/preambulos_oficiales/referencias.tex}
+
+\end{document}

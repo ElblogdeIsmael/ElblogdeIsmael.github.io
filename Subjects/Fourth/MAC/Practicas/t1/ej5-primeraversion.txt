@@ -1,0 +1,22 @@
+; ejercicio 5 (si da igual que haya huecos en blanco entre las palabras)
+
+; el alfabeto es {0,1}, marco con a's y luego las borro, supongo que empiezo por la pos 1
+
+; Fase de lectura y marcaje
+q0 0 a r first_read
+q0 1 a r first_read
+
+first_read 0 0 r q0
+first_read 1 1 r q0
+
+; Transiciones explícitas para el final de la cadena
+q0 _ _ l delete
+first_read _ _ l delete
+
+; Fase de borrado
+delete 0 0 l delete
+delete 1 1 l delete
+delete a _ l delete
+
+; Condición de parada explícita y correcta
+delete _ _ * halt
