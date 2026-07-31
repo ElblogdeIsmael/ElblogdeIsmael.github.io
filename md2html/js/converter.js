@@ -45,7 +45,37 @@
     return _md;
   }
 
-  // --- procesar_texto_md (md2html.py:469-479) ---
+  // --- _a_reproductor (core.py) ---
+  // Markdown no sabe de multimedia: `![audio](x.mp3)` sale como un <img> que
+  // apunta a un mp3 y que el navegador no puede reproducir. La palabra del alt
+  // es lo que distingue el caso, y es fija por eso.
+  //
+  // Los atributos se leen por separado a proposito: markdown-it escribe el src
+  // antes que el alt y python-markdown al reves, asi que un regex que dependiera
+  // del orden solo funcionaria en una de las dos versiones.
+  const RE_IMG = /<img\s[^>]*?\/?>/g;
+
+  function atributo(etiqueta, nombre) {
+    const m = etiqueta.match(new RegExp(nombre + '="([^"]*)"'));
+    return m ? m[1] : null;
+  }
+
+  function aReproductor(etiqueta) {
+    const alt = atributo(etiqueta, "alt");
+    const src = atributo(etiqueta, "src");
+    if (alt === null || src === null) return etiqueta;
+
+    const tipo = alt.trim().toLowerCase();
+    if (tipo === "audio") return '<audio controls src="' + src + '"></audio>';
+    if (tipo === "video") {
+      // El estilo va en linea porque las plantillas no tienen CSS para video, y
+      // sin limite un video grande se sale de la tarjeta de la pregunta.
+      return '<video controls src="' + src + '" style="max-width:100%"></video>';
+    }
+    return etiqueta;
+  }
+
+  // --- procesar_texto_md (core.py) ---
   function procesarTextoMd(textoMd) {
     let out;
     try {
@@ -53,6 +83,7 @@
     } catch (e) {
       out = textoMd;
     }
+    out = out.replace(RE_IMG, aReproductor);
     out = out.trim();
     // Quitar el <p>...</p> único envolvente, igual que el Python.
     if (
