@@ -28,6 +28,16 @@ export default {
             {
               resources: [
                 {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/CG/TEX/CG.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Exámenes",
+              resources: [
+                {
                   name: "Tests Parcial 1",
                   href: "/Subjects/Fourth/CG/test/test.html",
                   kind: "HTML",
