@@ -188,6 +188,11 @@ export default {
                   href: "/Subjects/Fourth/DRH1/DRH1.pdf",
                   kind: "PDF",
                 },
+                {
+                  name: "Portafolio CaixaBank (trabajo en grupo)",
+                  href: "/Subjects/Fourth/DRH1/practicas/portafolio-caixabank.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
@@ -243,6 +248,11 @@ export default {
                   href: "/Subjects/Fourth/EE/EE.pdf",
                   kind: "PDF",
                 },
+                {
+                  name: "Informe de coyuntura (trabajo en grupo)",
+                  href: "/Subjects/Fourth/EE/practicas/informe-coyuntura-economia-espanola.pdf",
+                  kind: "PDF",
+                },
               ],
             },
           ],
@@ -252,6 +262,16 @@ export default {
           name: "Organización de Empresas",
           blocks: [
             {
+              resources: [
+                {
+                  name: "Informe-diagnóstico CaixaBank (trabajo en grupo)",
+                  href: "/Subjects/Fourth/OE/practicas/informe-caixabank.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Exámenes",
               resources: [
                 {
                   name: "Test Exámenes Anteriores",
