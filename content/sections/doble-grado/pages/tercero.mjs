@@ -162,7 +162,7 @@ export default {
                 },
                 {
                   name: "Archivos Modelo Econométrico",
-                  href: "https://github.com/Ismael-Sallami/ModeloEconometrico",
+                  href: "https://github.com/Ismael-Sallami/econometric-model",
                   kind: "WEB",
                 },
               ],
@@ -706,7 +706,7 @@ export default {
                 },
                 {
                   name: "Práctica 2",
-                  href: "https://github.com/Ismael-Sallami/Practica2_IA",
+                  href: "https://github.com/Ismael-Sallami/rescue-agents",
                   kind: "WEB",
                 },
                 {

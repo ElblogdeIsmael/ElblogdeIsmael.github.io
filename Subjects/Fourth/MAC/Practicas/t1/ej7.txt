@@ -1,0 +1,55 @@
+; ejercicio 7
+
+; inicializamos ...
+; Colocamos el marcador 'c' al final y volvemos al inicio
+q0 0 0 r q0
+q0 1 1 r q0
+q0 _ c l rewind
+
+rewind 0 0 l rewind
+rewind 1 1 l rewind
+rewind _ _ r q_copyceros
+
+; copiamos ceros...
+q_copyceros 1 1 r q_copyceros
+q_copyceros 0 X r lleva0
+q_copyceros c c l q_copyunos
+q_copyceros X X r q_copyceros; si ve una X todos los de la X en hacia atrás estan copiados, miramos en la derecha
+
+; copiamos unos...
+q_copyunos 0 0 l q_copyunos
+q_copyunos X X l q_copyunos
+q_copyunos 1 Y r lleva1
+q_copyunos c c r q_copyunos
+q_copyunos Y Y l q_copyunos 
+q_copyunos _ _ r delete_all; si llega hasta el final izquierdo todo ok borramos
+
+lleva0 0 0 r lleva0
+lleva0 1 1 r lleva0
+lleva0 c c r lleva0
+lleva0 _ 0 l vuelve0
+
+lleva1 0 0 r lleva1
+lleva1 1 1 r lleva1
+lleva1 c c r lleva1
+lleva1 _ 1 l vuelve1
+lleva1 X X r lleva1
+lleva1 Y Y r lleva1
+
+vuelve0 1 1 l vuelve0
+vuelve0 0 0 l vuelve0
+vuelve0 c c l vuelve0
+vuelve0 X X r q_copyceros
+vuelve0 _ _ r q_copyunos ; ya se han copiado todos los ceros ...
+
+vuelve1 1 1 l vuelve1
+vuelve1 0 0 l vuelve1
+vuelve1 c c l vuelve1
+vuelve1 Y Y l q_copyunos
+; vuelve1 _ _ r accept ; ya se han copiado todos los unos ...
+
+delete_all X _ r delete_all
+delete_all Y _ r delete_all
+delete_all c _ r delete_all
+delete_all 0 0 * accept ; si ve 0 acepta
+

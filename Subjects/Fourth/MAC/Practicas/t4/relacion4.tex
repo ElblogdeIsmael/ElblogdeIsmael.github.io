@@ -1,0 +1,1065 @@
+\documentclass[11pt,a4paper]{article}
+
+% ------------------------------------------------------------------
+%  Modelos Avanzados de Computacion - Relacion 4 (resuelta)
+%  Resolucion con fines de estudio.
+% ------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{babel}
+\babelprovide[import, main]{spanish}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,automata}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+
+\geometry{margin=2.4cm}
+
+% --- Entornos de teoremas -----------------------------------------
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}
+\newtheorem{lema}{Lema}
+\newtheorem{proposicion}{Proposici\'on}
+\theoremstyle{definition}
+\newtheorem{definicion}{Definici\'on}
+\newtheorem*{nota}{Nota}
+\newtheorem*{idea}{Idea}
+
+% --- Macros utiles ------------------------------------------------
+\newcommand{\NP}{\mathrm{NP}}
+\newcommand{\coNP}{\mathrm{CoNP}}
+\newcommand{\Pclass}{\mathrm{P}}
+\newcommand{\Lclass}{\mathrm{L}}
+\newcommand{\SPACE}{\mathrm{ESPACIO}}
+\newcommand{\TIME}{\mathrm{TIEMPO}}
+\newcommand{\reduce}{\propto}
+\newcommand{\Lstar}{L^{*}}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% --- Encabezados --------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Modelos Avanzados de Computaci\'on}
+\rhead{Relaci\'on 4}
+\cfoot{\thepage}
+
+\title{\textbf{Modelos Avanzados de Computaci\'on}\\[2mm]
+\large Relaci\'on 4 --- Resoluci\'on para estudio}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\begin{nota}
+Documento de estudio con las soluciones de la Relaci\'on 4. La relaci\'on cubre
+clases de complejidad ($\Pclass$, $\NP$, $\coNP$, $\Lclass=\SPACE(\log n)$,
+$\SPACE(n)$), reducciones en espacio logar\'itmico, grafos y composici\'on de
+funciones. Las t\'ecnicas empleadas (verificadores con certificado, simulaci\'on
+con punteros en espacio $O(\log n)$, argumentos de cierre por uni\'on/intersecci\'on,
+diagonalizaci\'on impl\'icita v\'ia teoremas de jerarqu\'ia) son resultados
+cl\'asicos del \'area, y coinciden con los desarrollos est\'andar de Sipser
+(\emph{Introduction to the Theory of Computation}), Papadimitriou
+(\emph{Computational Complexity}) y Garey--Johnson (\emph{Computers and
+Intractability}). Donde un argumento sigue de cerca uno de estos textos se
+indica expl\'icitamente.
+\end{nota}
+
+\tableofcontents
+\vspace{4mm}
+\hrule
+\vspace{4mm}
+
+% ==================================================================
+\section{Grafos dirigidos ac\'iclicos (DAG)}
+% ==================================================================
+
+\subsection*{(a) Todo DAG finito tiene una fuente}
+
+\begin{proposicion}
+Todo grafo dirigido finito y ac\'iclico posee al menos una \emph{fuente}: un nodo
+sin arcos entrantes.
+\end{proposicion}
+
+\begin{proof}
+Razonamos por contradicci\'on. Sea $G=(V,E)$ finito y ac\'iclico, y supongamos que
+\emph{ning\'un} nodo es fuente; es decir, todo nodo tiene al menos un arco entrante.
+
+Construimos un camino hacia atr\'as. Tomamos un nodo cualquiera $v_0$. Como $v_0$ no
+es fuente, existe un arco $(v_1,v_0)\in E$. Como $v_1$ tampoco es fuente, existe
+$(v_2,v_1)\in E$. Repitiendo, generamos una sucesi\'on
+\[
+\cdots \to v_3 \to v_2 \to v_1 \to v_0,
+\]
+en la que cada $v_{i+1}$ tiene un arco hacia $v_i$. Como $|V|=n$ es finito, entre
+los $n+1$ primeros nodos $v_0,v_1,\dots,v_n$ debe haber, por el principio del
+palomar, dos \'indices $i<j$ con $v_i=v_j$. El tramo
+\[
+v_j \to v_{j-1}\to \cdots \to v_i = v_j
+\]
+es entonces un \textbf{ciclo dirigido}, lo que contradice que $G$ sea ac\'iclico.
+
+Por tanto, alg\'un nodo no puede tener arco entrante: $G$ tiene una fuente.
+\end{proof}
+
+\begin{nota}
+Por simetr\'ia (invirtiendo todos los arcos) el mismo argumento prueba que todo DAG
+finito tiene tambi\'en un \emph{sumidero} (nodo sin arcos salientes). Esto se usar\'a
+impl\'icitamente para el orden topol\'ogico.
+\end{nota}
+
+\subsection*{(b) Numeraci\'on topol\'ogica}
+
+\begin{proposicion}
+Un grafo dirigido con $n$ nodos es ac\'iclico si y solo si se pueden numerar sus nodos
+$1,2,\dots,n$ de modo que todo arco vaya de un n\'umero menor a uno mayor.
+\end{proposicion}
+
+\begin{proof}
+$(\Leftarrow)$ Supongamos que existe tal numeraci\'on $\nu:V\to\{1,\dots,n\}$ con
+$\nu(u)<\nu(v)$ para todo arco $(u,v)$. Si hubiera un ciclo
+$w_1\to w_2\to\cdots\to w_k\to w_1$, encadenando las desigualdades obtendr\'iamos
+\[
+\nu(w_1)<\nu(w_2)<\cdots<\nu(w_k)<\nu(w_1),
+\]
+es decir $\nu(w_1)<\nu(w_1)$, absurdo. Luego $G$ es ac\'iclico.
+
+$(\Rightarrow)$ Supongamos $G$ ac\'iclico. Construimos la numeraci\'on por inducci\'on
+sobre $n$ (este es el algoritmo de \emph{ordenaci\'on topol\'ogica}).
+
+Por el apartado (a), $G$ tiene una fuente $s$. Le asignamos el n\'umero $1$:
+$\nu(s)=1$. Consideramos $G'=G\setminus\{s\}$ (eliminamos $s$ y sus arcos
+salientes). $G'$ sigue siendo ac\'iclico (quitar nodos/arcos no crea ciclos) y tiene
+$n-1$ nodos; por hip\'otesis de inducci\'on admite una numeraci\'on
+$\nu':V\setminus\{s\}\to\{1,\dots,n-1\}$ compatible. Definimos
+$\nu(v)=\nu'(v)+1$ para $v\neq s$.
+
+Comprobamos que todo arco va de menor a mayor:
+\begin{itemize}[nosep]
+  \item Arcos que salen de $s$: van de $\nu(s)=1$ a alg\'un $\nu(v)\geq 2$. Correcto.
+  \item Arcos que no tocan $s$: estaban en $G'$ y eran crecientes para $\nu'$, luego
+        siguen siendo crecientes para $\nu=\nu'+1$. Correcto.
+  \item No hay arcos \emph{entrantes} a $s$ porque $s$ es fuente.
+\end{itemize}
+Esto completa la inducci\'on.
+\end{proof}
+
+\subsection*{(c) Algoritmo polin\'omico para decidir si un grafo es ac\'iclico}
+
+La prueba de (b) es constructiva y da directamente el algoritmo (ordenaci\'on
+topol\'ogica mediante eliminaci\'on iterativa de fuentes, conocido como
+algoritmo de Kahn):
+
+\begin{quote}
+\textbf{Algoritmo} \textsc{EsAciclico}$(G=(V,E))$:
+\begin{enumerate}[nosep]
+  \item Calcular el grado de entrada $d^{-}(v)$ de cada nodo. Inicializar una cola
+        $Q$ con todos los nodos de grado de entrada $0$ (las fuentes). Contador
+        $c\leftarrow 0$.
+  \item Mientras $Q\neq\emptyset$:
+        \begin{enumerate}[nosep]
+          \item Extraer $u$ de $Q$; $c\leftarrow c+1$.
+          \item Para cada arco $(u,w)$: decrementar $d^{-}(w)$; si queda en $0$,
+                a\~nadir $w$ a $Q$.
+        \end{enumerate}
+  \item Si $c=|V|$ devolver \textsc{Aciclico}; en otro caso devolver
+        \textsc{Tiene Ciclo}.
+\end{enumerate}
+\end{quote}
+
+\paragraph{Correcci\'on.} Si $G$ es ac\'iclico, por (a) en cada paso del subgrafo
+restante siempre queda una fuente, as\'i que el proceso elimina los $n$ nodos y
+$c=n$. Rec\'iprocamente, si el proceso se detiene con $c<n$, todos los nodos
+restantes tienen grado de entrada $\geq 1$, luego (por el argumento de (a)
+aplicado al subgrafo restante) ese subgrafo contiene un ciclo, y por tanto $G$
+tambi\'en.
+
+\paragraph{Complejidad.} Cada arco se procesa exactamente una vez (al eliminar su
+origen) y cada nodo se encola/desencola una vez. El coste es
+$O(|V|+|E|)$, lineal y en particular polin\'omico.
+
+% ==================================================================
+\section{Grafos bipartitos}
+% ==================================================================
+
+\subsection*{(a) Bipartito $\Leftrightarrow$ todos los ciclos de longitud par}
+
+Trabajamos con grafos \emph{no dirigidos}.
+
+\begin{proposicion}
+Un grafo $G=(V,E)$ es bipartito si y solo si todos sus ciclos tienen longitud par.
+\end{proposicion}
+
+\begin{proof}
+$(\Rightarrow)$ Supongamos $G$ bipartito con partici\'on $V=A\,\dot\cup\,B$ (toda
+arista une un v\'ertice de $A$ con uno de $B$). Sea
+$v_0,v_1,\dots,v_k=v_0$ un ciclo. Cada arista cambia de lado: si $v_0\in A$ entonces
+$v_1\in B$, $v_2\in A$, \dots; en general $v_i\in A$ si $i$ es par y $v_i\in B$ si $i$
+es impar. Como debe cerrarse en $v_k=v_0\in A$, el \'indice $k$ ha de ser par. Luego
+todo ciclo tiene longitud par.
+
+$(\Leftarrow)$ Supongamos que todos los ciclos son de longitud par. Basta trabajar
+por componentes conexas (la uni\'on de biparticiones de cada componente es una
+biparticion del grafo). Fijada una componente, elegimos una ra\'iz $r$ y
+definimos, para cada v\'ertice $v$, la distancia $d(v)=$ longitud del camino m\'as
+corto de $r$ a $v$. Coloreamos:
+\[
+A=\{v: d(v)\text{ par}\},\qquad B=\{v: d(v)\text{ impar}\}.
+\]
+Veamos que ninguna arista une dos v\'ertices del mismo color. Sea $\{u,v\}\in E$.
+Si fuera $d(u)\equiv d(v)\pmod 2$, considere\-mos los caminos m\'as cortos
+$P_u$ de $r$ a $u$ y $P_v$ de $r$ a $v$. Sea $w$ su \'ultimo v\'ertice com\'un. Los
+tramos $w\!\to\!u$ y $w\!\to\!v$ tienen longitudes $d(u)-d(w)$ y $d(v)-d(w)$, de la
+\emph{misma} paridad. El recorrido
+\[
+w\to\cdots\to u \;-\; v\to\cdots\to w
+\]
+(bajar a $u$, usar la arista $\{u,v\}$, subir desde $v$) es un ciclo de longitud
+\[
+\big(d(u)-d(w)\big) + 1 + \big(d(v)-d(w)\big),
+\]
+que es \textbf{impar} (suma de dos n\'umeros de igual paridad m\'as $1$). Esto
+contradice la hip\'otesis. Por tanto toda arista une colores distintos y la
+componente es bipartita.
+\end{proof}
+
+\subsection*{(b) Algoritmo polin\'omico para comprobar bipartici\'on}
+
+La prueba sugiere directamente un algoritmo de \emph{2-coloreado} por BFS:
+
+\begin{quote}
+\textbf{Algoritmo} \textsc{EsBipartito}$(G)$:
+\begin{enumerate}[nosep]
+  \item Marcar todos los v\'ertices como sin color.
+  \item Para cada v\'ertice $r$ a\'un sin color (cabecera de una componente):
+        \begin{enumerate}[nosep]
+          \item Asignar $color(r)=0$ y lanzar un BFS desde $r$.
+          \item Al visitar una arista $\{u,v\}$: si $v$ no tiene color, asignar
+                $color(v)=1-color(u)$; si ya lo tiene y $color(v)=color(u)$,
+                devolver \textsc{No bipartito}.
+        \end{enumerate}
+  \item Si nunca se produjo conflicto, devolver \textsc{Bipartito} con la
+        partici\'on dada por los colores.
+\end{enumerate}
+\end{quote}
+
+\paragraph{Correcci\'on.} El BFS asigna a cada v\'ertice la paridad de su distancia
+a la ra\'iz, exactamente el coloreado de la prueba de (a). Un conflicto
+($color(u)=color(v)$ en una arista) corresponde a la situaci\'on del ciclo impar; su
+ausencia certifica una biparticion v\'alida.
+
+\paragraph{Complejidad.} Es un recorrido BFS est\'andar: $O(|V|+|E|)$, polin\'omico.
+
+% ==================================================================
+\section{$\Pclass$ es cerrada para uni\'on e intersecci\'on}
+% ==================================================================
+
+\begin{teorema}
+Si $L_1,L_2\in\Pclass$, entonces $L_1\cup L_2\in\Pclass$ y
+$L_1\cap L_2\in\Pclass$.
+\end{teorema}
+
+\begin{proof}
+Por hip\'otesis existen m\'aquinas de Turing deterministas $M_1$ y $M_2$ que deciden
+$L_1$ y $L_2$ en tiempo $O(n^{c_1})$ y $O(n^{c_2})$ respectivamente, para ciertas
+constantes $c_1,c_2$.
+
+Construimos una m\'aquina $M$ que, con entrada $x$ de longitud $n$:
+\begin{enumerate}[nosep]
+  \item Simula $M_1(x)$ y guarda su respuesta $b_1\in\{\text{S\'i},\text{No}\}$.
+  \item Simula $M_2(x)$ y guarda su respuesta $b_2$.
+  \item \textbf{Uni\'on:} acepta si $b_1=\text{S\'i}$ \emph{o} $b_2=\text{S\'i}$.\\
+        \textbf{Intersecci\'on:} acepta si $b_1=\text{S\'i}$ \emph{y}
+        $b_2=\text{S\'i}$.
+\end{enumerate}
+
+$M$ es determinista y siempre se detiene. Su tiempo es a lo sumo
+\[
+O(n^{c_1}) + O(n^{c_2}) + O(1) = O\!\big(n^{\max(c_1,c_2)}\big),
+\]
+es decir, polin\'omico. Adem\'as $L(M)=L_1\cup L_2$ (resp. $L_1\cap L_2$) por
+construcci\'on. Luego ambos lenguajes est\'an en $\Pclass$.
+\end{proof}
+
+\begin{nota}
+El mismo argumento prueba que $\Pclass$ es cerrada para complementaci\'on: basta
+intercambiar los estados de aceptaci\'on y rechazo de una m\'aquina polin\'omica
+determinista (la determinaci\'on y la parada garantizada son esenciales aqu\'i).
+\end{nota}
+
+% ==================================================================
+\section{Cierre de clases de funciones por composici\'on polin\'omica}
+% ==================================================================
+
+\begin{definicion}[recordatorio del enunciado]
+Sea $\mathcal{C}$ una clase de funciones $\mathbb{N}\to\mathbb{N}$ y $p$ un polinomio
+arbitrario.
+\begin{itemize}[nosep]
+  \item $\mathcal{C}$ es cerrada para la composici\'on polin\'omica \textbf{por la
+        izquierda} si $f\in\mathcal{C}\Rightarrow p(f(n))=O(g(n))$ para alguna
+        $g\in\mathcal{C}$.
+  \item $\mathcal{C}$ es cerrada para la composici\'on polin\'omica \textbf{por la
+        derecha} si $f\in\mathcal{C}\Rightarrow f(p(n))=O(g(n))$ para alguna
+        $g\in\mathcal{C}$.
+\end{itemize}
+Como indica la nota del enunciado, por tratarse de \'ordenes de complejidad basta
+considerar $p(n)=n^{l}$ con $l\in\mathbb{N}$.
+\end{definicion}
+
+\begin{idea}
+\emph{Por la izquierda} aplicamos primero $f$ y luego elevamos a una potencia:
+$p(f(n))=f(n)^{l}$. \emph{Por la derecha} sustituimos $n$ por $n^{l}$ dentro de $f$:
+$f(n^{l})$. La clase es cerrada si el resultado vuelve a estar dominado por una
+funci\'on de la misma familia.
+\end{idea}
+
+A continuaci\'on analizamos las seis familias. Resumimos al final en una tabla.
+
+% ---------------------------------------------------------------
+\subsection*{(a) $\mathcal{C}=\{n^{k}: k>0\}$ (polinomios mon\'omicos)}
+
+Sea $f(n)=n^{k}\in\mathcal{C}$.
+
+\paragraph{Izquierda.} $p(f(n)) = (n^{k})^{l} = n^{kl}$. Como $kl>0$, la funci\'on
+$n^{kl}\in\mathcal{C}$, y $p(f(n))=O(n^{kl})$. \textbf{Cerrada por la izquierda.}
+
+\paragraph{Derecha.} $f(p(n)) = (n^{l})^{k} = n^{lk}\in\mathcal{C}$.
+\textbf{Cerrada por la derecha.}
+
+\medskip\noindent\fbox{(a) cerrada por ambos lados.}
+
+% ---------------------------------------------------------------
+\subsection*{(b) $\mathcal{C}=\{n\cdot k: k>0\}$ (funciones lineales)}
+
+Aqu\'i $f(n)=k\,n$ es lineal con pendiente $k>0$ (el factor constante, no el
+exponente).
+
+\paragraph{Izquierda.} $p(f(n)) = (k\,n)^{l} = k^{l}\,n^{l}$. Para $l\geq 2$ esto es
+$\Theta(n^{l})$, un crecimiento \emph{superlineal} que \textbf{no} puede acotarse por
+ninguna funci\'on lineal $g(n)=k'n$ (pues $n^{l}/n=n^{l-1}\to\infty$). \textbf{No
+cerrada por la izquierda.}
+
+\paragraph{Derecha.} $f(p(n)) = k\,(n^{l}) = k\,n^{l}$. Igual que antes, para
+$l\geq 2$ es $\Theta(n^{l})$, no acotable por una funci\'on lineal. \textbf{No
+cerrada por la derecha.}
+
+\medskip\noindent\fbox{(b) no cerrada por ning\'un lado.}
+
+% ---------------------------------------------------------------
+\subsection*{(c) $\mathcal{C}=\{k^{n}: k>0\}$ (exponenciales de base constante)}
+
+Sea $f(n)=k^{n}$. (Tomamos $k\geq 2$; para $k=1$ es la constante $1$ y para $k>1$ el
+an\'alisis es el interesante.)
+
+\paragraph{Izquierda.} $p(f(n)) = (k^{n})^{l} = k^{ln} = (k^{l})^{n}$. Llamando
+$k'=k^{l}>0$ obtenemos $(k')^{n}\in\mathcal{C}$. \textbf{Cerrada por la izquierda.}
+
+\paragraph{Derecha.} $f(p(n)) = k^{\,n^{l}}$. Para $l\geq 2$ esto crece como
+$k^{n^{2}}$, mucho m\'as r\'apido que cualquier $(k')^{n}=k'^{\,n}$, ya que
+\[
+\frac{k^{\,n^{l}}}{(k')^{\,n}} = \frac{k^{\,n^{l}}}{k^{\,n\log_k k'}}
+= k^{\,n^{l}-n\log_k k'}\longrightarrow\infty.
+\]
+No existe $g\in\mathcal{C}$ que lo domine. \textbf{No cerrada por la derecha.}
+
+\medskip\noindent\fbox{(c) cerrada por la izquierda, no por la derecha.}
+
+% ---------------------------------------------------------------
+\subsection*{(d) $\mathcal{C}=\{2^{\,n^{k}}: k>0\}$ (exponenciales con exponente polin\'omico)}
+
+Sea $f(n)=2^{\,n^{k}}$.
+
+\paragraph{Izquierda.} $p(f(n)) = \big(2^{\,n^{k}}\big)^{l} = 2^{\,l\,n^{k}}$.
+Necesitamos acotar $2^{\,l\,n^{k}}$ por alg\'un $2^{\,n^{k'}}$. Como $l$ es
+constante, para $n$ grande $l\,n^{k}\leq n^{k+1}$, luego
+\[
+2^{\,l\,n^{k}} \leq 2^{\,n^{k+1}} = O\!\big(2^{\,n^{k+1}}\big),\qquad
+2^{\,n^{k+1}}\in\mathcal{C}.
+\]
+\textbf{Cerrada por la izquierda.}
+
+\paragraph{Derecha.} $f(p(n)) = 2^{\,(n^{l})^{k}} = 2^{\,n^{lk}}$. Como $lk>0$, la
+funci\'on $2^{\,n^{lk}}\in\mathcal{C}$. \textbf{Cerrada por la derecha.}
+
+\medskip\noindent\fbox{(d) cerrada por ambos lados.}
+
+% ---------------------------------------------------------------
+\subsection*{(e) $\mathcal{C}=\{\log^{k}(n): k>0\}$ (potencias de logaritmo)}
+
+Sea $f(n)=(\log n)^{k}=\log^{k} n$ (con redondeo al entero m\'as cercano, irrelevante
+para el orden).
+
+\paragraph{Izquierda.} $p(f(n)) = (\log^{k} n)^{l} = \log^{kl} n\in\mathcal{C}$, pues
+$kl>0$. \textbf{Cerrada por la izquierda.}
+
+\paragraph{Derecha.} $f(p(n)) = \log^{k}(n^{l}) = (l\log n)^{k} = l^{k}\,\log^{k} n
+= O(\log^{k} n)$, y $\log^{k} n\in\mathcal{C}$. \textbf{Cerrada por la derecha.}
+
+\medskip\noindent\fbox{(e) cerrada por ambos lados.}
+
+% ---------------------------------------------------------------
+\subsection*{(f) $\mathcal{C}=\{\log n\}$ (un \'unico elemento: el logaritmo)}
+
+Ahora la clase tiene \emph{una sola} funci\'on, $f(n)=\log n$, as\'i que la \'unica
+candidata posible para $g$ es la propia $\log n$.
+
+\paragraph{Izquierda.} $p(f(n)) = (\log n)^{l} = \log^{l} n$. Para $l\geq 2$ se tiene
+$\log^{l} n / \log n = \log^{l-1} n\to\infty$, de modo que $\log^{l} n\neq O(\log n)$.
+La \'unica $g$ disponible no lo acota. \textbf{No cerrada por la izquierda.}
+
+\paragraph{Derecha.} $f(p(n)) = \log(n^{l}) = l\log n = O(\log n)$, y la \'unica
+funci\'on de la clase, $\log n$, s\'i lo domina. \textbf{Cerrada por la derecha.}
+
+\medskip\noindent\fbox{(f) cerrada por la derecha, no por la izquierda.}
+
+% ---------------------------------------------------------------
+\subsection*{Resumen}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Clase} & \textbf{Izquierda} $p(f(n))=f(n)^{l}$ & \textbf{Derecha} $f(n^{l})$\\
+\hline
+(a) $\{n^{k}\}$        & S\'i & S\'i \\
+(b) $\{k\,n\}$         & No   & No   \\
+(c) $\{k^{n}\}$        & S\'i & No   \\
+(d) $\{2^{\,n^{k}}\}$  & S\'i & S\'i \\
+(e) $\{\log^{k} n\}$   & S\'i & S\'i \\
+(f) $\{\log n\}$       & No   & S\'i \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{nota}
+Patr\'on conceptual: la composici\'on \emph{por la izquierda} eleva $f$ a la
+potencia $l$; sobrevive cuando la clase es estable al elevar a potencias
+constantes (familias param\'etricas en el exponente o en el \'indice de
+logaritmo). La composici\'on \emph{por la derecha} mete $n^{l}$ dentro de $f$;
+sobrevive cuando ``elevar el argumento a una potencia'' equivale a moverse dentro de
+la familia. Las familias con \emph{un solo grado de libertad mal situado} (lineales,
+o el logaritmo aislado) fallan en el lado que ataca ese grado de libertad.
+\end{nota}
+
+% ==================================================================
+\section{$L=\{wcw : w\in\{0,1\}^{*}\}$ se reconoce en espacio $\log n$}
+% ==================================================================
+
+\begin{teorema}
+El lenguaje $L=\{wcw : w\in\{0,1\}^{*}\}$ pertenece a
+$\Lclass=\SPACE(\log n)$.
+\end{teorema}
+
+\begin{idea}
+No podemos copiar $w$ a la cinta de trabajo (eso costar\'ia espacio lineal). En su
+lugar usamos \emph{punteros}: comparamos las dos mitades posici\'on a posici\'on
+guardando solo \'indices, y cada \'indice cabe en $O(\log n)$ bits.
+\end{idea}
+
+\begin{proof}
+Trabajamos con el modelo est\'andar de m\'aquina de Turing con cinta de entrada de
+\emph{solo lectura} y una cinta de trabajo aparte cuyo espacio es el que contamos.
+Sea la entrada de longitud $n$.
+
+\textbf{Fase 1: validar el formato.} Recorremos la entrada y comprobamos que contiene
+\emph{exactamente} un s\'imbolo $c$. Para ello mantenemos un contador del n\'umero de
+$c$ vistos y la posici\'on $m$ de la $c$. El contador y la posici\'on son n\'umeros
+$\leq n$, luego ocupan $O(\log n)$ bits. Si el n\'umero de $c$ no es $1$, rechazar.
+Sea $m$ la posici\'on de la $c$ (separa la entrada en parte izquierda
+$u=x_1\cdots x_{m-1}$ y parte derecha $v=x_{m+1}\cdots x_{n}$).
+
+\textbf{Fase 2: comprobar longitudes iguales.} La pertenencia exige $|u|=|v|$, es
+decir $m-1 = n-m$. Esto se verifica con aritm\'etica sobre los \'indices $m$ y $n$,
+de nuevo en $O(\log n)$ espacio. Si no coinciden, rechazar.
+
+\textbf{Fase 3: comparar car\'acter a car\'acter.} Para
+$i=1,2,\dots,m-1$ comparamos el s\'imbolo en la posici\'on $i$ (mitad izquierda) con
+el de la posici\'on $m+i$ (mitad derecha). Concretamente, mantenemos un contador $i$
+y, en cada iteraci\'on:
+\begin{itemize}[nosep]
+  \item movemos la cabeza de \emph{solo lectura} a la posici\'on $i$ y leemos
+        $x_i$ (guardando ese \'unico bit);
+  \item movemos la cabeza a la posici\'on $m+i$ y leemos $x_{m+i}$;
+  \item si $x_i\neq x_{m+i}$, rechazar.
+\end{itemize}
+Si todas las comparaciones coinciden, aceptar.
+
+\textbf{An\'alisis de espacio.} En la cinta de trabajo solo almacenamos en cada
+momento un contador (el \'indice $i$, o $m$, o el n\'umero de $c$) y a lo sumo uno o
+dos bits le\'idos. Todos los \'indices est\'an acotados por $n$, luego se codifican en
+$\lceil\log_2 n\rceil + O(1)$ bits. El n\'umero de variables es constante. Por tanto
+el espacio total es $O(\log n)$.
+
+(El tiempo es polin\'omico --- $O(n^2)$ por los reposicionamientos de la cabeza ---
+pero el enunciado solo exige la cota de espacio.)
+\end{proof}
+
+% ==================================================================
+\section{Si $L\in\Pclass$ entonces $\Lstar\in\Pclass$}
+% ==================================================================
+
+\begin{teorema}
+$\Pclass$ es cerrada para la estrella de Kleene: si $L\in\Pclass$, entonces
+$\Lstar\in\Pclass$.
+\end{teorema}
+
+\begin{idea}
+$x\in\Lstar$ significa que $x$ se puede \emph{partir} en bloques consecutivos
+$x=w_1 w_2\cdots w_k$ con cada $w_j\in L$ (y $\varepsilon\in\Lstar$ siempre). Esto se
+decide con programaci\'on din\'amica sobre los prefijos de $x$.
+\end{idea}
+
+\begin{proof}
+Sea $M$ una m\'aquina que decide $L$ en tiempo $O(n^{c})$. Dada
+$x=x_1 x_2\cdots x_n$, escribimos $x[i..j]=x_i\cdots x_j$ (subcadena), y por convenio
+$x[i..i-1]=\varepsilon$.
+
+Definimos un vector booleano $A[0..n]$ con la interpretaci\'on
+\[
+A[j] = \text{Verdadero} \iff \text{el prefijo } x[1..j]\in\Lstar .
+\]
+Recurrencia (descomponiendo seg\'un d\'onde empieza el \'ultimo bloque):
+\[
+A[0]=\text{Verdadero (el prefijo vac\'io est\'a en }\Lstar),
+\]
+\[
+A[j]=\bigvee_{0\le i<j}\Big(A[i]\ \wedge\ \big(x[i+1..j]\in L\big)\Big),
+\quad 1\le j\le n .
+\]
+Es decir, $x[1..j]\in\Lstar$ si existe un punto de corte $i$ tal que el prefijo
+$x[1..i]$ ya estaba en $\Lstar$ y el \'ultimo trozo $x[i+1..j]$ pertenece a $L$.
+
+\textbf{Algoritmo.} Calcular $A[0],A[1],\dots,A[n]$ en orden creciente usando la
+recurrencia; para cada par $(i,j)$ se invoca $M$ sobre la subcadena $x[i+1..j]$.
+Aceptar si $A[n]=\text{Verdadero}$.
+
+\textbf{Correcci\'on.} Por inducci\'on sobre $j$: $A[j]$ es verdadero exactamente
+cuando $x[1..j]$ admite una descomposici\'on en factores de $L$, que es justo la
+definici\'on de pertenencia a $\Lstar$. El caso base $A[0]$ corresponde a
+$\varepsilon\in\Lstar$. En particular $A[n]$ decide $x\in\Lstar$.
+
+\textbf{Complejidad.} Hay $O(n^{2})$ pares $(i,j)$. Cada uno requiere una llamada a
+$M$ sobre una subcadena de longitud $\le n$, con coste $O(n^{c})$. El total es
+\[
+O(n^{2})\cdot O(n^{c}) = O(n^{c+2}),
+\]
+polin\'omico. Por tanto $\Lstar\in\Pclass$.
+\end{proof}
+
+% ==================================================================
+\section{Si $L\in\NP$ entonces $\Lstar\in\NP$}
+% ==================================================================
+
+\begin{teorema}
+$\NP$ es cerrada para la estrella de Kleene: si $L\in\NP$, entonces $\Lstar\in\NP$.
+\end{teorema}
+
+\begin{idea}
+Caracterizamos $\NP$ por verificador y certificado. Para $\Lstar$ el certificado
+consta de: (i) los \emph{puntos de corte} que parten $x$ en bloques, y (ii) un
+certificado de pertenencia a $L$ para cada bloque. Todo ello es de tama\~no
+polin\'omico y verificable en tiempo polin\'omico.
+\end{idea}
+
+\begin{proof}[Demostraci\'on (versi\'on verificador)]
+Como $L\in\NP$, existe un verificador determinista $V$ y un polinomio $q$ tales que,
+para toda cadena $w$,
+\[
+w\in L \iff \exists\, c_w,\ |c_w|\le q(|w|),\ \ V(w,c_w)=1,
+\]
+y $V$ corre en tiempo polin\'omico.
+
+Definimos un verificador $V^{*}$ para $\Lstar$. Dado $x$ de longitud $n$, el
+certificado propuesto es
+\[
+\big(\, i_0=0 < i_1 < i_2 < \cdots < i_k = n,\ \ c_1, c_2,\dots, c_k \,\big),
+\]
+donde los $i_j$ marcan los cortes (el bloque $j$-\'esimo es $w_j=x[i_{j-1}+1..i_j]$)
+y $c_j$ es un certificado de que $w_j\in L$. El caso $x=\varepsilon$ se acepta
+directamente ($k=0$).
+
+$V^{*}$ procede as\'i:
+\begin{enumerate}[nosep]
+  \item Comprobar que $0=i_0<i_1<\cdots<i_k=n$ (los cortes son v\'alidos y cubren
+        todo $x$ sin solapes).
+  \item Para cada $j=1,\dots,k$: extraer $w_j=x[i_{j-1}+1..i_j]$ y verificar
+        $V(w_j,c_j)=1$.
+  \item Aceptar si y solo si todas las verificaciones tienen \'exito.
+\end{enumerate}
+
+\textbf{Correcci\'on.} $x\in\Lstar$ syss existe una partici\'on de $x$ en bloques
+$w_1\cdots w_k$ con cada $w_j\in L$, lo cual equivale a la existencia de cortes
+v\'alidos y de certificados $c_j$ aceptados por $V$. Esto es exactamente lo que
+$V^{*}$ comprueba.
+
+\textbf{Tama\~no del certificado.} Hay a lo sumo $k\le n$ cortes, cada uno un \'indice
+$\le n$: $O(n\log n)$ bits. Cada $c_j$ tiene tama\~no $\le q(|w_j|)\le q(n)$, y
+$\sum_j |w_j|=n$, luego la suma de longitudes de los certificados es a lo sumo
+$n\cdot q(n)$, polin\'omica.
+
+\textbf{Tiempo de verificaci\'on.} Comprobar los cortes es lineal; ejecutar $V$
+sobre cada bloque cuesta polin\'omico y se hace $k\le n$ veces. Total polin\'omico.
+
+Por tanto $\Lstar\in\NP$.
+\end{proof}
+
+\begin{nota}[demostraci\'on alternativa con MT no determinista]
+De forma equivalente: una m\'aquina no determinista para $\Lstar$ va leyendo $x$ de
+izquierda a derecha, ``adivina'' d\'onde termina cada bloque, y para cada bloque
+ejecuta (no deterministamente) la m\'aquina de $L$. Como $\sum|w_j|=n$, el c\'omputo
+total es de longitud polin\'omica. Tambi\'en se puede usar la t\'ecnica de
+programaci\'on din\'amica del Ejercicio 6 sustituyendo ``$x[i+1..j]\in L$'' por una
+llamada al verificador no determinista; el esquema es id\'entico.
+\end{nota}
+
+% ==================================================================
+\section{$\NP$ es cerrada para uni\'on e intersecci\'on}
+% ==================================================================
+
+\begin{teorema}
+Si $L_1,L_2\in\NP$, entonces $L_1\cup L_2\in\NP$ y $L_1\cap L_2\in\NP$.
+\end{teorema}
+
+\begin{proof}
+Usamos la caracterizaci\'on por verificadores. Sean $V_1,V_2$ verificadores
+polin\'omicos y $q_1,q_2$ polinomios con
+\[
+x\in L_i \iff \exists\, c_i,\ |c_i|\le q_i(|x|),\ V_i(x,c_i)=1
+\qquad (i=1,2).
+\]
+
+\paragraph{Uni\'on.} El certificado es un par (etiqueta, testigo): un bit
+$b\in\{1,2\}$ que indica ``a qu\'e lenguaje pertenece $x$'' junto con el certificado
+correspondiente $c_b$. El verificador $V_\cup(x,(b,c))$ ejecuta $V_b(x,c)$ y acepta
+si este acepta. Entonces
+\[
+x\in L_1\cup L_2 \iff (\exists c_1: V_1(x,c_1)=1)\ \text{o}\ (\exists c_2:
+V_2(x,c_2)=1) \iff \exists (b,c): V_\cup(x,(b,c))=1 .
+\]
+El certificado tiene tama\~no $1+\max(q_1,q_2)(|x|)$ y $V_\cup$ es polin\'omico. Luego
+$L_1\cup L_2\in\NP$.
+
+\paragraph{Intersecci\'on.} El certificado es el \emph{par} $(c_1,c_2)$ de ambos
+testigos. El verificador $V_\cap(x,(c_1,c_2))$ ejecuta $V_1(x,c_1)$ y $V_2(x,c_2)$ y
+acepta si \emph{ambos} aceptan. Entonces
+\[
+x\in L_1\cap L_2 \iff (\exists c_1: V_1(x,c_1)=1)\ \text{y}\ (\exists c_2:
+V_2(x,c_2)=1)\iff \exists(c_1,c_2): V_\cap(x,(c_1,c_2))=1 .
+\]
+
+\medskip
+Un detalle sobre la intersecci\'on: el cuantificador conjunto
+``$\exists(c_1,c_2)$'' es correcto porque los dos testigos son
+\emph{independientes} --- elegir uno no condiciona al otro --- de modo que
+``$\exists c_1\,\exists c_2$'' equivale a ``existe el par''. El certificado tiene
+tama\~no $q_1(|x|)+q_2(|x|)$, polin\'omico, y $V_\cap$ es polin\'omico. Luego
+$L_1\cap L_2\in\NP$.
+\end{proof}
+
+% ==================================================================
+\section{Si $\NP\neq\coNP$ entonces $\Pclass\neq\NP$}
+% ==================================================================
+
+\begin{teorema}
+Si $\NP\neq\coNP$, entonces $\Pclass\neq\NP$.
+\end{teorema}
+
+\begin{idea}
+Demostramos el contrarrec\'iproco: si $\Pclass=\NP$ entonces $\NP=\coNP$. La clave es
+que $\Pclass$ es cerrada para complementaci\'on (Ejercicio 3 / Nota), propiedad que
+\emph{no} se sabe que tenga $\NP$.
+\end{idea}
+
+\begin{proof}
+Probamos la afirmaci\'on equivalente (contrarrec\'iproca):
+\[
+\Pclass=\NP \;\Longrightarrow\; \NP=\coNP .
+\]
+
+Supongamos $\Pclass=\NP$. Recordemos que $\Pclass$ es cerrada para complementaci\'on:
+si $A\in\Pclass$, intercambiando aceptaci\'on y rechazo en una m\'aquina
+determinista polin\'omica que decide $A$ obtenemos otra que decide $\overline{A}$ en
+tiempo polin\'omico, luego $\overline{A}\in\Pclass$.
+
+Veamos la doble inclusi\'on $\NP=\coNP$.
+
+\textbf{$\NP\subseteq\coNP$:} Sea $A\in\NP$. Por hip\'otesis $A\in\Pclass$. Como
+$\Pclass$ es cerrada para complemento, $\overline{A}\in\Pclass=\NP$. Pero
+``$\overline{A}\in\NP$'' es precisamente la definici\'on de ``$A\in\coNP$''. Luego
+$A\in\coNP$.
+
+\textbf{$\coNP\subseteq\NP$:} Sea $A\in\coNP$, esto es $\overline{A}\in\NP$. Por
+hip\'otesis $\overline{A}\in\Pclass$, y por cierre bajo complemento
+$A\in\Pclass=\NP$. Luego $A\in\NP$.
+
+De ambas inclusiones, $\NP=\coNP$.
+
+Hemos probado $\Pclass=\NP\Rightarrow\NP=\coNP$. Tomando contrarrec\'iproco:
+\[
+\NP\neq\coNP \;\Longrightarrow\; \Pclass\neq\NP. \qedhere
+\]
+\end{proof}
+
+% ==================================================================
+\section{Par\'entesis bien emparejados est\'a en $\Lclass$}
+% ==================================================================
+
+\begin{teorema}
+El lenguaje de las cadenas de par\'entesis $\{(,)\}$ correctamente emparejados y
+anidados pertenece a $\Lclass=\SPACE(\log n)$.
+\end{teorema}
+
+\begin{idea}
+Con un \emph{\'unico} tipo de par\'entesis no hace falta una pila: basta un
+\emph{contador} de profundidad. La condici\'on de buen emparejamiento es local:
+``el contador nunca se vuelve negativo y termina en cero''.
+\end{idea}
+
+\begin{proof}
+Sea la entrada $x=x_1\cdots x_n$ sobre el alfabeto $\{(,)\}$. Mantenemos en la cinta
+de trabajo un \'unico contador entero $b$ (``balance''), inicializado a $0$.
+Recorremos la entrada de izquierda a derecha:
+\begin{itemize}[nosep]
+  \item si $x_i = $ \verb|(| , hacer $b\leftarrow b+1$;
+  \item si $x_i = $ \verb|)| , hacer $b\leftarrow b-1$;
+  \item si en alg\'un momento $b<0$, \textbf{rechazar} (hay un \verb|)| sin
+        su \verb|(| previo).
+\end{itemize}
+Al terminar, \textbf{aceptar} si y solo si $b=0$.
+
+\textbf{Correcci\'on.} Una cadena de un solo tipo de par\'entesis est\'a bien formada
+syss en todo prefijo el n\'umero de \verb|(| es $\ge$ el de \verb|)| (nunca se cierra
+de m\'as) y al final ambos coinciden (todo lo abierto se cierra). El contador $b$
+mide exactamente \#\verb|(| $-$ \#\verb|)| del prefijo le\'ido; ``$b\ge 0$ siempre''
+y ``$b=0$ al final'' son justo esas dos condiciones. As\'i,
+\verb|(()())| y \verb|((()))| son aceptadas, mientras \verb|)()(| (el balance se
+hace $-1$ al primer s\'imbolo) y \verb|(()))(| (balance llega a $-1$) son
+rechazadas.
+
+\textbf{Espacio.} El contador $b$ satisface $0\le b\le n$ en todo instante (mientras
+no se rechace), luego se almacena en $\lceil\log_2(n+1)\rceil = O(\log n)$ bits. No se
+usa nada m\'as. Por tanto el algoritmo es $O(\log n)$ en espacio, y el problema est\'a
+en $\Lclass$.
+\end{proof}
+
+% ==================================================================
+\section{Dos tipos de par\'entesis}
+% ==================================================================
+
+\begin{teorema}
+El lenguaje de cadenas bien formadas con dos tipos de par\'entesis,
+$(,)$ y $[,]$, tambi\'en pertenece a $\Lclass$.
+\end{teorema}
+
+\begin{idea}
+Con dos tipos importa el \emph{orden} de cierre (anidamiento correcto:
+\verb|([]())| s\'i, \verb|([)]| no). La forma natural de resolverlo es con una pila,
+pero una pila puede crecer $\Theta(n)$. El truco para mantenernos en $O(\log n)$ es
+\emph{no almacenar la pila}: para verificar cada cierre, recalculamos cu\'al es su
+par\'entesis de apertura asociado recorriendo la entrada con contadores.
+\end{idea}
+
+\begin{proof}
+\textbf{Condici\'on de validez.} La cadena es correcta syss:
+\begin{enumerate}[nosep]
+  \item est\'a balanceada \emph{ignorando el tipo} (el contador global de
+        ``abiertos menos cerrados'' nunca es negativo y acaba en $0$); y
+  \item cada s\'imbolo de cierre case en \emph{tipo} con su apertura asociada
+        (la apertura que lo empareja en el anidamiento).
+\end{enumerate}
+
+\textbf{Emparejamiento sin pila.} Para una posici\'on de cierre $j$, su apertura
+asociada es la posici\'on $i<j$ tal que el segmento $x[i+1..j-1]$ est\'a balanceado;
+equivalentemente, $i$ es la \'ultima posici\'on $<j$ en la que el balance (contando
+\emph{cualquier} tipo) tom\'o el valor $\big(\text{balance en }j\big)$ justo
+\emph{antes} de cerrar. La idea operativa, en espacio $O(\log n)$:
+
+Recorremos $x$ con un contador de balance $b$ (como en el Ejercicio 10, comprobando
+de paso la condici\'on 1). Cada vez que encontramos un cierre en posici\'on $j$
+(supongamos que deja el balance en valor $d=b$ tras decrementar), buscamos su
+apertura: \emph{reiniciamos} un segundo recorrido desde el principio hasta $j$
+llevando un contador auxiliar, y localizamos la \'ultima posici\'on $i<j$ que es una
+apertura y desde la cual el sub-balance de $x[i+1..j-1]$ es $0$. Comprobamos que
+$x_i$ y $x_j$ son del mismo tipo (ambos redondos o ambos cuadrados); si no, rechazar.
+
+Todo el almacenamiento son unos pocos contadores acotados por $n$ (la posici\'on $j$,
+la posici\'on candidata $i$, los balances), cada uno $O(\log n)$ bits. No guardamos la
+pila completa: la ``recomputamos'' tantas veces como cierres haya. Esto sacrifica
+tiempo (polin\'omico, del orden de $O(n^{2})$) a cambio de espacio.
+
+\textbf{Espacio total:} $O(\log n)$. Por tanto el problema con dos tipos de
+par\'entesis tambi\'en est\'a en $\Lclass$.
+
+\medskip
+\textbf{Segunda parte: lectura de izquierda a derecha sin retroceder requiere
+$O(n)$.}
+
+Si imponemos que la entrada se lee \emph{una sola vez, de izquierda a derecha, sin
+volver atr\'as} (modelo \emph{online} / aut\'omata con memoria pero sin re-lectura),
+entonces necesitamos recordar la secuencia de aperturas a\'un no cerradas, en orden:
+es esencialmente una \textbf{pila} de tipos. Justificaci\'on (argumento de
+distinguibilidad / \emph{fooling set}):
+
+Consideremos los $2^{m}$ prefijos formados por $m$ aperturas cada una de tipo redondo
+o cuadrado, p.\,ej. $u_S = s_1 s_2\cdots s_m$ con $s_t\in\{\,(\,,\,[\,\}$. Para dos
+prefijos distintos $u_S\neq u_{S'}$ existe una primera posici\'on $t$ donde difieren
+los tipos. La continuaci\'on que cierra en el orden correcto para $u_S$ ---es decir,
+el ``espejo'' de tipos $\bar s_m\cdots\bar s_1$ donde $\bar{(}=)$ y $\bar{[}=]$---
+completa $u_S$ a una cadena \emph{v\'alida}, pero aplicada a $u_{S'}$ produce un
+\emph{desajuste de tipo} en alguna posici\'on, dando cadena \emph{inv\'alida}. Por
+tanto la m\'aquina debe quedar en \emph{estados de memoria distintos} tras leer
+$u_S$ y $u_{S'}$ (si coincidieran, aceptar\'ia o rechazar\'ia igual ambas
+continuaciones, contradicci\'on).
+
+As\'i, hay al menos $2^{m}$ configuraciones de memoria distinguibles tras leer $m$
+s\'imbolos. Representar $2^{m}$ estados distintos exige al menos
+$\log_2(2^{m}) = m$ bits de memoria. Como $m$ puede ser $\Theta(n)$, la memoria
+necesaria es $\Omega(n)$, es decir $O(n)$ (lineal) en el peor caso.
+\end{proof}
+
+\begin{nota}
+La diferencia con el Ejercicio 10 (un solo tipo) es esencial: con un tipo, la
+informaci\'on relevante de la pila es solo su \emph{altura} (un n\'umero, $O(\log n)$
+bits); con dos o m\'as tipos hay que recordar tambi\'en la \emph{secuencia de tipos},
+que es informaci\'on de $\Theta(n)$ bits si no se permite re-leer. La cota
+logar\'itmica de la primera parte se logra precisamente \emph{gracias} a poder
+re-leer la entrada (acceso aleatorio de solo lectura), recomputando la pila en vez de
+almacenarla.
+\end{nota}
+
+% ==================================================================
+\section{El pal\'indromo requiere $O(n)$ sin retroceder}
+% ==================================================================
+
+\begin{teorema}
+El problema de reconocer pal\'indromos requiere memoria $\Omega(n)$ (lineal) si la
+entrada se lee de izquierda a derecha sin poder volver atr\'as.
+\end{teorema}
+
+\begin{idea}
+Mismo principio de \emph{distinguibilidad} que en el Ejercicio 11: exhibimos
+exponencialmente muchos prefijos que la m\'aquina \emph{tiene} que distinguir, lo que
+fuerza un n\'umero exponencial de configuraciones de memoria y por tanto
+$\Omega(n)$ bits.
+\end{idea}
+
+\begin{proof}
+Sea $L_{\text{pal}}=\{w : w=w^{R}\}$ sobre $\{0,1\}$ (donde $w^{R}$ es $w$ invertida).
+Supongamos una m\'aquina $M$ que lee la entrada una sola vez, de izquierda a derecha,
+con memoria de trabajo de tama\~no $s(n)$.
+
+Fijado $m$, consideramos el conjunto de los $2^{m}$ prefijos $u\in\{0,1\}^{m}$.
+Afirmamos que $M$ debe llegar a configuraciones de memoria \emph{distintas} tras leer
+dos prefijos distintos $u\neq u'$ (con $|u|=|u'|=m$).
+
+En efecto, supongamos por reducci\'on al absurdo que $M$ alcanza la \emph{misma}
+configuraci\'on de memoria tras leer $u$ y tras leer $u'$, con $u\neq u'$. Como
+$u\neq u'$, difieren en alguna posici\'on $t$: $u_t\neq u'_t$. Construimos la
+continuaci\'on $z=u^{R}$ (el reverso de $u$). Entonces:
+\begin{itemize}[nosep]
+  \item La cadena $u\,z = u\,u^{R}$ es un pal\'indromo (es de la forma $w w^{R}$),
+        as\'i que $M$ debe \textbf{aceptar} $u z$.
+  \item La cadena $u'\,z = u'\,u^{R}$ \textbf{no} es un pal\'indromo: su posici\'on
+        $t$ (en la primera mitad) vale $u'_t$, mientras que la posici\'on sim\'etrica
+        (en la segunda mitad) corresponde a $u_t\neq u'_t$. Luego $M$ debe
+        \textbf{rechazar} $u' z$.
+\end{itemize}
+Pero tras leer $u$ y $u'$ la configuraci\'on de $M$ es la misma \emph{por hip\'otesis},
+y como $M$ no puede volver atr\'as, su comportamiento al leer la parte restante $z$ es
+id\'entico en ambos casos: aceptar\'ia ambas o rechazar\'ia ambas. Esto contradice que
+deba aceptar $uz$ y rechazar $u'z$.
+
+Por tanto las $2^{m}$ configuraciones tras leer los $2^{m}$ prefijos son todas
+distintas. El n\'umero de configuraciones de memoria con $s$ celdas (sobre un
+alfabeto de trabajo finito de tama\~no $\gamma$, con la cabeza en una de $s$
+posiciones y uno de $Q$ estados de control) es a lo sumo
+\[
+\#\text{config} \le Q\cdot s\cdot \gamma^{s} = 2^{\,O(s)} .
+\]
+Necesitamos $\#\text{config}\ge 2^{m}$, luego $2^{O(s)}\ge 2^{m}$, de donde
+$s = \Omega(m)$. Tomando $m=\lfloor n/2\rfloor$ (cadenas de longitud $n=2m$),
+obtenemos
+\[
+s(n) = \Omega(n).
+\]
+Es decir, el pal\'indromo requiere memoria \emph{lineal} en el modelo de lectura
+\'unica sin retroceso.
+\end{proof}
+
+\begin{nota}
+Compara con el Ejercicio 5: $\{wcw\}$ \emph{s\'i} est\'a en $\Lclass$ porque con
+acceso de \emph{solo lectura con re-posicionamiento} podemos comparar las dos mitades
+con punteros ($O(\log n)$). El pal\'indromo $\{ww^{R}\}$ tambi\'en estar\'ia en
+$\Lclass$ con re-lectura (comparando $x_i$ con $x_{n+1-i}$ mediante dos punteros). La
+cota $\Omega(n)$ de este ejercicio depende \emph{cr\'iticamente} de la restricci\'on
+``sin volver atr\'as'': es lo que prohibe usar punteros y obliga a memorizar la
+primera mitad entera.
+\end{nota}
+
+% ==================================================================
+\section{$\NP\neq\SPACE(n)$}
+% ==================================================================
+
+\begin{nota}
+Este ejercicio es delicado. \textbf{No} se conoce si $\NP\subseteq\SPACE(n)$ o
+viceversa: lo que se demuestra es que las dos clases \emph{no pueden coincidir},
+exhibiendo una \emph{propiedad estructural} que una tiene y la otra no. Seguimos la
+sugerencia del enunciado: $\NP$ es cerrada bajo reducciones en espacio logar\'itmico
+(en general, bajo reducciones de muchos-uno polin\'omicas/$\log$-espaciales),
+mientras que $\SPACE(n)$ \emph{no} lo es. Una clase cerrada bajo $\log$-reducciones y
+otra que no lo es no pueden ser la misma clase. El ingrediente que rompe el cierre de
+$\SPACE(n)$ es el \textbf{Teorema de Jerarqu\'ia de Espacio}.
+\end{nota}
+
+\begin{definicion}[cierre bajo reducciones en $\Lclass$]
+Una clase $\mathcal{D}$ es \emph{cerrada para reducciones en espacio logar\'itmico}
+si: siempre que $P_1\reduce P_2$ (reducci\'on muchos-uno calculable en espacio
+$\log$) y $P_2\in\mathcal{D}$, se tiene $P_1\in\mathcal{D}$.
+\end{definicion}
+
+\subsection*{Paso 1: $\NP$ es cerrada para reducciones en $\Lclass$}
+
+\begin{lema}
+Si $P_1\reduce P_2$ (reducci\'on en espacio logar\'itmico) y $P_2\in\NP$, entonces
+$P_1\in\NP$.
+\end{lema}
+
+\begin{proof}
+Sea $f$ la funci\'on de reducci\'on, calculable en espacio $O(\log n)$ (y por tanto en
+tiempo polin\'omico, pues una m\'aquina $\log$-espacial tiene a lo sumo
+$2^{O(\log n)}=n^{O(1)}$ configuraciones distintas, luego se detiene en tiempo
+polin\'omico; en particular $|f(x)|$ es de tama\~no polin\'omico). La reducci\'on
+cumple
+\[
+x\in P_1 \iff f(x)\in P_2 .
+\]
+Como $P_2\in\NP$, sea $V_2$ su verificador polin\'omico con certificados de tama\~no
+$\le q(|y|)$.
+
+Construimos un verificador para $P_1$: dado $x$ y un certificado candidato $c$,
+\begin{enumerate}[nosep]
+  \item calcular $y=f(x)$ (tiempo polin\'omico);
+  \item aceptar syss $V_2(y,c)=1$.
+\end{enumerate}
+Entonces
+\[
+x\in P_1 \iff f(x)\in P_2 \iff \exists c\ \big(|c|\le q(|f(x)|)\big):\ V_2(f(x),c)=1,
+\]
+y como $|f(x)|$ es polin\'omico en $|x|$, el tama\~no del certificado y el tiempo de
+verificaci\'on son polin\'omicos en $|x|$. Luego $P_1\in\NP$.
+\end{proof}
+
+\subsection*{Paso 2: $\SPACE(n)$ \emph{no} es cerrada para reducciones en $\Lclass$}
+
+La idea es exhibir dos lenguajes $A\reduce B$ con $B\in\SPACE(n)$ pero
+$A\notin\SPACE(n)$. La reducci\'on ser\'a un simple ``\emph{padding}'' (relleno) que
+agranda la entrada, y la separaci\'on entre ``$A$ dentro'' y ``$A$ fuera'' la
+garantiza el teorema de jerarqu\'ia.
+
+\begin{teorema}[Jerarqu\'ia de espacio; Stearns--Hartmanis--Lewis]
+Si $s_1(n)=o(s_2(n))$ y $s_2$ es construible en espacio (y $s_2(n)\ge\log n$),
+entonces
+\[
+\SPACE(s_1(n)) \subsetneq \SPACE(s_2(n)),
+\]
+la inclusi\'on es \emph{estricta}. En particular, para todo $k\ge 1$,
+\[
+\SPACE(n) \subsetneq \SPACE(n^{2})\subsetneq\cdots\subsetneq\SPACE(n^{k}),
+\]
+ya que $n = o(n^{2})$, etc.
+\end{teorema}
+
+\begin{lema}
+$\SPACE(n)$ no es cerrada para reducciones en espacio logar\'itmico.
+\end{lema}
+
+\begin{proof}
+Por la jerarqu\'ia de espacio, $\SPACE(n)\subsetneq\SPACE(n^{2})$; fijemos un lenguaje
+testigo
+\[
+A\in\SPACE(n^{2})\setminus\SPACE(n) .
+\]
+($A$ existe por la inclusi\'on estricta: es decidible en espacio cuadr\'atico pero
+\emph{no} en espacio lineal.)
+
+Definimos su versi\'on ``rellenada''. A\~nadimos un s\'imbolo nuevo
+$\#\notin\Sigma$ y ponemos
+\[
+B = \{\, x\#^{\,t} \ :\ x\in A,\ t = |x|^{2}-|x| \,\}.
+\]
+Es decir, a cada $x\in A$ le pegamos suficientes s\'imbolos de relleno para que la
+longitud total pase de $|x|$ a $|x|^{2}$. Sea $N=|x\#^{t}|=|x|^{2}$ la longitud de la
+cadena rellenada.
+
+\textbf{(i) $B\in\SPACE(n)$.} Con entrada $z$ de longitud $N$: comprobamos que $z$
+tiene la forma $x\#^{t}$ con $t=|x|^2-|x|$ (verificable contando, en espacio
+$O(\log N)$), extraemos $x$ y ejecutamos el decididor de $A$, que usa espacio
+$O(|x|^{2})$. Pero $|x|^{2}=N$, luego ese espacio es $O(N)$, \emph{lineal en la
+longitud de la entrada} $z$. Por tanto $B\in\SPACE(N)=\SPACE(n)$. (El relleno
+``diluye'' el coste cuadr\'atico en $|x|$ hasta volverlo lineal en $N$.)
+
+\textbf{(ii) $A\reduce B$ en espacio logar\'itmico.} La reducci\'on
+$f(x)=x\#^{\,|x|^{2}-|x|}$ se calcula en espacio $O(\log|x|)$: copiar $x$ a la salida
+y luego escribir $|x|^{2}-|x|$ s\'imbolos $\#$ llevando solo un contador
+($O(\log|x|)$ bits). Claramente
+\[
+x\in A \iff f(x)=x\#^{t}\in B,
+\]
+as\'i que es una reducci\'on muchos-uno v\'alida y $\log$-espacial.
+
+\textbf{(iii) Conclusi\'on.} Tenemos $A\reduce B$ con $B\in\SPACE(n)$. Si
+$\SPACE(n)$ fuera cerrada para reducciones en $\Lclass$, deber\'iamos concluir
+$A\in\SPACE(n)$. Pero elegimos $A\notin\SPACE(n)$. Contradicci\'on. Luego
+$\SPACE(n)$ \textbf{no} es cerrada para reducciones en espacio logar\'itmico.
+\end{proof}
+
+\subsection*{Conclusi\'on: $\NP\neq\SPACE(n)$}
+
+\begin{proof}
+Combinamos los dos pasos:
+\begin{itemize}[nosep]
+  \item $\NP$ \emph{s\'i} es cerrada para reducciones en espacio logar\'itmico
+        (Paso 1).
+  \item $\SPACE(n)$ \emph{no} es cerrada para reducciones en espacio logar\'itmico
+        (Paso 2).
+\end{itemize}
+El cierre para $\log$-reducciones es una propiedad que una clase tiene o no tiene; no
+puede ser que dos clases \emph{iguales} difieran en ella. Como $\NP$ la posee y
+$\SPACE(n)$ no, forzosamente
+\[
+\boxed{\ \NP\neq\SPACE(n).\ }
+\]
+\end{proof}
+
+\begin{nota}[por qu\'e este argumento no decide la inclusi\'on]
+El razonamiento prueba la \emph{desigualdad} de clases sin decir cu\'al contiene a
+cu\'al --- de hecho hoy se desconoce si $\NP\subseteq\SPACE(n)$. La t\'ecnica
+(``una clase es cerrada bajo cierto tipo de reducci\'on y la otra no, luego son
+distintas'') es un patr\'on cl\'asico para separar clases. El \'unico ingrediente no
+elemental es el Teorema de Jerarqu\'ia de Espacio, que proporciona el lenguaje
+$A\in\SPACE(n^2)\setminus\SPACE(n)$; este teorema se demuestra por
+\emph{diagonalizaci\'on} (se construye una m\'aquina que en espacio $n^2$ contradice a
+toda m\'aquina de espacio lineal). La maniobra de \emph{padding} ``traslada'' esa
+separaci\'on a un par de lenguajes relacionados por una reducci\'on trivial,
+exhibiendo el fallo de cierre.
+\end{nota}
+
+\vspace{6mm}
+\hrule
+\vspace{3mm}
+\begin{center}\small
+Fin de la Relaci\'on 4.\\[1mm]
+Documento elaborado con fines de estudio. Los resultados son est\'andar en teor\'ia
+de la complejidad (Sipser; Papadimitriou; Garey--Johnson); las demostraciones siguen
+los esquemas habituales de esos textos y la terminolog\'ia de la asignatura.
+\end{center}
+
+\end{document}

@@ -1,0 +1,38 @@
+; inicialización, ponemos la c al final y volvemos
+q0 0 0 r q0
+q0 1 1 r q0
+q0 _ c l rewind
+
+rewind 0 0 l rewind
+rewind 1 1 l rewind
+rewind _ _ r q_impar
+
+; marcamos con x lo que vamos leyendo
+q_impar 0 X r q_par
+q_impar 1 X r q_par
+q_impar c _ l cleanup  ; Si encontramos la 'c', ya no hay mas letras
+
+q_par 0 X r lleva0
+q_par 1 X r lleva1
+q_par c _ l cleanup    ; Si encontramos la 'c', terminamos 
+
+; subrutina de copia: Recordamos el simbolo en el estado y vamos al final 
+lleva0 0 0 r lleva0
+lleva0 1 1 r lleva0
+lleva0 c c r lleva0
+lleva0 _ 0 l vuelve    ; Escribimos el 0 y comenzamos el retorno
+
+lleva1 0 0 r lleva1
+lleva1 1 1 r lleva1
+lleva1 c c r lleva1
+lleva1 _ 1 l vuelve    ; Escribimos el 1 y comenzamos el retorno
+
+; volvemos hasta la última marca con X
+vuelve 0 0 l vuelve
+vuelve 1 1 l vuelve
+vuelve c c l vuelve
+vuelve X X r q_impar   ; Al encontrar la X, damos un paso a la derecha y repetimos
+
+; borramos todas las marcas con X
+cleanup X _ l cleanup
+cleanup _ _ r halt
