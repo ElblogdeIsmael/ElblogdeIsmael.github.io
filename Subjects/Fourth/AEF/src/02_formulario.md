@@ -13,9 +13,9 @@ $$RF = RE + L(RE - k)$$
 
 *¿Qué es cada variable?*
 
-* **$RF$ (Rentabilidad Financiera):** Es la rentabilidad de los accionistas o socios. Lo que ganan por cada euro que han puesto de su bolsillo.
+* **$RF$ (Rentabilidad Financiera):** Es la rentabilidad de los accionistas o socios. Mide lo que obtienen por cada euro aportado.
 * **$RE$ (Rentabilidad Económica):** Es el rendimiento bruto de los activos (las inversiones) de la empresa, independientemente de cómo se hayan financiado.
-* **$L$ (Leverage o Apalancamiento):** Es tu nivel de endeudamiento (Pasivo / Patrimonio Neto). Mide cuánta deuda usas en proporción a tu propio dinero.
+* **$L$ (Leverage o Apalancamiento):** Es el nivel de endeudamiento (Pasivo / Patrimonio Neto). Mide cuánta deuda soporta la empresa en proporción a sus recursos propios.
 * **$(RE - k)$:** Este es el famoso diferencial o margen de apalancamiento.
 * k: es el coste medio de endeudamiento.
 
@@ -23,13 +23,13 @@ La fórmula fundamental que relaciona las tres magnitudes y que cuadra la liquid
 
 $$FM = NOF + RLN$$
 
-A partir de esta ecuación principal, se puede despejar la variable que necesites según lo que estés analizando. Las dos variantes más útiles son:
+A partir de esta ecuación principal, se despeja la variable que interese según el objeto del análisis. Las dos variantes más útiles son:
 
 * **Para calcular el dinero en caja (Recursos Líquidos Netos):**
 
 $$RLN = FM - NOF$$
 
-*(La lógica: Al dinero de tu colchón de seguridad a largo plazo le restas el dinero que necesitas inyectar en el día a día. Lo que sobra es tu liquidez real).*
+*(Al colchón de seguridad a largo plazo se le resta el dinero que exige el día a día; lo que sobra es la liquidez real).*
 * **Para calcular las necesidades operativas (NOF):**
 
 $$NOF = FM - RLN$$
@@ -38,7 +38,7 @@ $$NOF = FM - RLN$$
 
 ### 1. Rentabilidad Económica (RE) o ROA
 
-Responde a la pregunta: ***¿Cuánto dinero genera el negocio por sí mismo, independientemente de cómo se haya financiado?*** Mide la eficiencia de los activos de la empresa. En tu caso práctico se divide en dos enfoques:
+Responde a la pregunta: ***¿Cuánto dinero genera el negocio por sí mismo, independientemente de cómo se haya financiado?*** Mide la eficiencia de los activos de la empresa. Admite dos enfoques:
 
 **A) Rentabilidad Económica Global (o Total):**
 Toma en cuenta toda la empresa en su conjunto.
@@ -53,7 +53,7 @@ Se centra puramente en la actividad principal del negocio (vender perfumes, en e
 $$RE_{Explotación} = \frac{\text{Resultado Neto de Explotación}}{\text{Activo de Explotación}}$$
 
 **C) El Desglose (Ecuación de DuPont para la RE):**
-Como vimos en algunas preguntas tipo test, la Rentabilidad Económica se puede mejorar subiendo los precios (Margen) o vendiendo más rápido (Rotación). Matemáticamente se desglosa así:
+Como recogen varias preguntas tipo test, la Rentabilidad Económica se mejora subiendo los precios (Margen) o vendiendo más rápido (Rotación). Matemáticamente se desglosa así:
 
 
 $$RE = \text{Margen de Explotación} \times \text{Rotación del Activo}$$
@@ -71,23 +71,23 @@ Donde sus sub-fórmulas son:
 
 ### 2. Rentabilidad Financiera (RF) o ROE
 
-Responde a la pregunta: ***¿Qué porcentaje de ganancia se llevan los dueños o accionistas por el dinero que han puesto de su bolsillo?***
+Responde a la pregunta: ***¿Qué porcentaje de ganancia se llevan los dueños o accionistas por el capital que han aportado?***
 
-Mide el rendimiento del capital propio. Tienes dos formas de calcularla dependiendo de los datos que tengas en el examen:
+Mide el rendimiento del capital propio. Admite dos formas de cálculo, según los datos disponibles:
 
 **A) La Fórmula Contable (Directa):**
-Es la más rápida si tienes delante el Balance y la Cuenta de Pérdidas y Ganancias. Utiliza el beneficio final, una vez que ya se han pagado los intereses al banco y los impuestos a Hacienda.
+Es la más directa cuando se dispone del Balance y de la Cuenta de Pérdidas y Ganancias. Utiliza el beneficio final, una vez que ya se han pagado los intereses al banco y los impuestos a Hacienda.
 
 
 $$RF = \frac{\text{Resultado del Ejercicio (Beneficio Neto)}}{\text{Patrimonio Neto}}$$
 
 **B) La Fórmula Analítica (Con Apalancamiento):**
-Es la fórmula que tenías en tus apuntes y la más importante para analizar *por qué* ha subido o bajado la rentabilidad de los socios. Relaciona la Rentabilidad Económica ($RE$), el nivel de endeudamiento ($L$) y el coste de la deuda ($k$).
+Es la fórmula de referencia y la más útil para analizar *por qué* ha subido o bajado la rentabilidad de los socios. Relaciona la Rentabilidad Económica ($RE$), el nivel de endeudamiento ($L$) y el coste de la deuda ($k$).
 
 
 $$RF = RE + L(RE - k)$$
 
-*Nota analítica: Esta fórmula teórica asume un escenario sin impuestos para entender el efecto palanca. Si en un ejercicio te piden ser extremadamente preciso e incluir el pago de impuestos de Sociedades (donde $t$ es el tipo impositivo), la fórmula completa sería: $RF = [RE + L(RE - k)] \times (1 - t)$.*
+*Nota analítica: Esta fórmula teórica asume un escenario sin impuestos para entender el efecto palanca. Si el enunciado exige incluir el impuesto sobre Sociedades (donde $t$ es el tipo impositivo), la fórmula completa sería: $RF = [RE + L(RE - k)] \times (1 - t)$.*
 
 ### Cálculo del activo neto de la explotación
 
@@ -99,7 +99,7 @@ En otras palabras: son cosas que la empresa tiene en su balance, a menudo para s
 
 ### Ejemplos clásicos de activos extrafuncionales
 
-1. **Inversiones Inmobiliarias:** Imagina una empresa que fabrica zapatos (su negocio principal) pero que con los beneficios de años anteriores compró un local comercial en el centro de la ciudad y lo tiene alquilado a una cafetería. Ese local le genera ingresos por las rentas, pero no tiene nada que ver con fabricar o vender zapatos.
+1. **Inversiones Inmobiliarias:** una empresa que fabrica zapatos (su negocio principal) y que con los beneficios de años anteriores compró un local comercial en el centro de la ciudad y lo tiene alquilado a una cafetería. Ese local le genera ingresos por las rentas, pero no tiene nada que ver con fabricar o vender zapatos.
 2. **Inversiones Financieras:** La compra de acciones de otras empresas, bonos del Estado o fondos de inversión. Generan dividendos o intereses, pero no participan en el ciclo productivo de la empresa.
 3. **Excedentes de Tesorería:** Una cuenta bancaria con 500.000 € ahorrados, cuando la empresa solo necesita 50.000 € al mes para pagar nóminas, impuestos y proveedores. Esos 450.000 € restantes son "caja ociosa" o extrafuncional.
 4. **Activos ociosos o paralizados:** Una máquina antigua o un terreno vacío que la empresa ya no utiliza para su actividad pero que todavía no ha vendido. Al no aportar nada al ciclo productivo actual, dejan de ser funcionales.
@@ -230,25 +230,25 @@ Estimación: Acreedores varios / (Servicios exteriores + Otros gastos de gestió
 \subsection*{Indicadores económicos}
 \begin{description}
 \item[Rentabilidad económica de explotación]
-	extit{(Calculada con la cuenta de PyG funcional)}
+\textit{(Calculada con la cuenta de PyG funcional)}
 Fórmula: $$\displaystyle \frac{\text{Resultado neto explotación}}{\text{Activo de explotación (saldo final)}}$$
 Activo de explotación: Inmovilizado intangible + Inmovilizado material + Activos por impuesto diferido + Deudas comerciales no corrientes + Existencias + Deudores comerciales y otras cuentas cobrar + Periodificaciones + Efectivo y otros activos líquidos equivalentes
 
 \item[Margen de explotación]
-	extit{(Calculado con la cuenta de PyG funcional)}
+\textit{(Calculado con la cuenta de PyG funcional)}
 Fórmula: $$\displaystyle \frac{\text{Resultado neto de explotación}}{\text{Ingresos de explotación}}$$
 
 \item[Rotación del activo de explotación]
-	extit{(Calculado con la cuenta de PyG funcional)}
+\textit{(Calculado con la cuenta de PyG funcional)}
 Fórmula: $$\displaystyle \frac{\text{Ingresos de explotación}}{\text{Activo de explotación (saldo final)}}$$
 
 \item[Rentabilidad económica global o total]
-	extit{(Calculado con la cuenta de PyG funcional)}
+\textit{(Calculado con la cuenta de PyG funcional)}
 Fórmula: $$\displaystyle \frac{\text{Resultado antes de intereses e impuestos}}{\text{Activo total (saldo final)}}$$
 Alternativa: (Resultado antes de impuestos + Gastos financieros) / Activo total
 
 \item[Coste del endeudamiento]
-	extit{(Calculado con la cuenta de PyG funcional)}
+\textit{(Calculado con la cuenta de PyG funcional)}
 Fórmula: $$\displaystyle \frac{\text{Gastos financieros}}{\text{Pasivo total (saldo final)}}$$
 Equivalente: Gastos financieros / (Pasivo no corriente + Pasivo corriente)
 
@@ -263,16 +263,23 @@ Denominador: (Patrimonio neto - Fondos propios + Pasivo no corriente + Pasivo co
 Fórmula: $$\displaystyle \frac{\text{Impuesto sobre beneficio}}{\text{Resultado por operaciones continuadas antes de impuestos}}$$
 
 \item[Efecto apalancamiento financiero]
-Fórmula: $$(\text{Activo total} - \text{Fondos propios}) / \text{Fondos propios} \times (\text{Rentabilidad económica total} - \text{coste financiación no propia})$$
+Fórmula:
+\[
+\begin{aligned}
+\frac{\text{Activo total} - \text{Fondos propios}}{\text{Fondos propios}}
+\times \bigl(&\text{Rentabilidad económica total} \\
+           &- \text{coste financiación no propia}\bigr)
+\end{aligned}
+\]
 
 \item[Rentabilidad financiera (fórmula larga)]
 Fórmula completa:
-\noindent\resizebox{\linewidth}{!}{$\displaystyle
+\[
 \begin{aligned}
-RF &= \frac{\text{RE} + L\left(\text{RE} - k\right)}{1 - t} \\
-L &= \frac{\text{TPN} - \text{FP}}{\text{FP}}
+RF &= \frac{\text{RE} + L\left(\text{RE} - k\right)}{1 - t} \\[0.4em]
+L  &= \frac{\text{TPN} - \text{FP}}{\text{FP}}
 \end{aligned}
-$}
+\]
 Donde: RE = rentabilidad económica global; TPN = total patrimonio neto y pasivo; FP = fondos propios.
 
 \end{description}

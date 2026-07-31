@@ -1,21 +1,9 @@
 # Simulacro de Examen — Perfumerías Primor (2019–2018)
-### Análisis de Estados Financieros · Guía de Estudio Definitiva
+Análisis de Estados Financieros.
 
----
+## Estados Financieros
 
-## ÍNDICE
-
-1. [Estados Financieros](#1-estados-financieros)
-2. [Información complementaria](#2-información-complementaria)
-3. [Bloque 2 — Preguntas de desarrollo (con soluciones)](#3-bloque-2--preguntas-de-desarrollo)
-4. [Bloque 3 — Test (con soluciones razonadas)](#4-bloque-3--tipo-test)
-5. [Formulario de referencia rápida](#5-formulario-de-referencia-rápida)
-
----
-
-## 1. Estados Financieros
-
-### 1.1 Balance de Situación
+### Balance de Situación
 
 #### ACTIVO
 
@@ -49,7 +37,7 @@
 
 ---
 
-### 1.2 Cuenta de Pérdidas y Ganancias (Funcional)
+### Cuenta de Pérdidas y Ganancias (Funcional)
 
 | Partida | 2019 (€) | 2018 (€) | Var. % |
 |---|---:|---:|---:|
@@ -67,7 +55,7 @@
 
 ---
 
-## 2. Información Complementaria
+## Información Complementaria
 
 | Nota | Contenido |
 |---|---|
@@ -77,7 +65,7 @@
 
 ---
 
-## 3. Bloque 2 — Preguntas de Desarrollo
+## Bloque 2 — Preguntas de Desarrollo
 
 ---
 
@@ -230,7 +218,7 @@ En resumen: **más apalancamiento sí, pero controlando que el crecimiento de la
 
 ---
 
-## 4. Bloque 3 — Tipo Test
+## Bloque 3 — Tipo Test
 
 ### Tabla resumen de respuestas
 
@@ -347,9 +335,9 @@ Como RE >> k, la regla es clara: el banco cobra muy barato por el dinero que Pri
 
 ---
 
-## 5. Formulario de Referencia Rápida
+## Formulario de Referencia Rápida
 
-### 5.1 Estructura y Solvencia
+### Estructura y Solvencia
 
 | Indicador | Fórmula | Umbral clave |
 |---|---|---|
@@ -361,7 +349,7 @@ Como RE >> k, la regla es clara: el banco cobra muy barato por el dinero que Pri
 | NOF | AC Explotación − PC Explotación | Si < 0 → proveedores financian |
 | RLN | FM − NOF | Si < 0 → asfixia de tesorería |
 
-### 5.2 Ciclo de Explotación (PMM)
+### Ciclo de Explotación (PMM)
 
 | Subperiodo | Fórmula (empresa comercial) |
 |---|---|
@@ -371,7 +359,7 @@ Como RE >> k, la regla es clara: el banco cobra muy barato por el dinero que Pri
 | Pago a proveedores | (Proveedores / Compras) × 360 |
 | **PMM Financiero** | **PMM Operativo − S. Pago proveedores** |
 
-### 5.3 Generación de Efectivo
+### Generación de Efectivo
 
 | Magnitud | Fórmula |
 |---|---|
@@ -380,7 +368,7 @@ Como RE >> k, la regla es clara: el banco cobra muy barato por el dinero que Pri
 | Ecuación corto plazo | **FM = NOF + RLN** |
 | Dinámica | **ΔFM = ΔNOF + ΔRLN** |
 
-### 5.4 Rentabilidad y Apalancamiento
+### Rentabilidad y Apalancamiento
 
 | Indicador | Fórmula |
 |---|---|
@@ -393,7 +381,7 @@ Como RE >> k, la regla es clara: el banco cobra muy barato por el dinero que Pri
 | ROE (fórmula corta) | Resultado / Fondos Propios |
 | ROE (fórmula larga) | (RE + L×(RE−k)) × (1 − t) |
 
-### 5.5 Regla de Oro del Apalancamiento
+### Regla de Oro del Apalancamiento
 
 ```
 Si  RE > k  →  Apalancamiento POSITIVO  →  endeudarse impulsa el ROE
