@@ -68,8 +68,13 @@ export default {
             {
               resources: [
                 {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/DDSI/build/DDSI.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Repositorio GitHub de Prácticas",
-                  href: "https://github.com/Ismael-Sallami/DDSI",
+                  href: "https://github.com/Ismael-Sallami/oracle-dbms-project",
                   kind: "WEB",
                 },
               ],
@@ -177,6 +182,16 @@ export default {
           name: "Dirección de Recursos Humanos I",
           blocks: [
             {
+              resources: [
+                {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/DRH1/DRH1.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Exámenes",
               resources: [
                 {
                   name: "Tests Ordinaria",
