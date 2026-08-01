@@ -7,8 +7,17 @@
 
 ## Objetivo
 
-Producir los apuntes de las 26 asignaturas de primero y segundo. Hoy sus fichas solo tienen
-la guía docente de la UGR y la bibliografía; el material no existe.
+Dejar con apuntes propios las **39 asignaturas** que hoy no los tienen, en dos situaciones
+distintas:
+
+- **Primero y segundo, 26 asignaturas.** Sus fichas solo tienen la guía docente de la UGR y
+  la bibliografía; el material no existe y hay que escribirlo.
+- **Tercero, 13 asignaturas.** El material existe y sobra, pero está en PDF suelto y sin
+  estructura canónica. Hay que convertirlo, no redactarlo.
+
+**OE, de cuarto, queda fuera por decisión de Ismael**
+([D-14](DECISIONES.md#d-14--tercero-entra-en-la-fase-6-por-escrito)): se queda con sus tres
+tests y sus prácticas.
 
 No es una fase que se «termine»: se va tachando asignatura a asignatura, al ritmo que dé.
 
@@ -25,8 +34,9 @@ Una asignatura se tacha cuando tiene las tres cosas:
 
 1. **Apuntes en `src/`** — al menos el temario completo en Markdown.
 2. **PDF en `build/`** — compilado con la plantilla de la fase 4 y versionado.
-3. **Enlace en su ficha** — en `content/sections/doble-grado/pages/{primero,segundo}.mjs`,
-   y `npm run build` ejecutado.
+3. **Enlace en su ficha** — en
+   `content/sections/doble-grado/pages/{primero,segundo,tercero}.mjs`, y `npm run build`
+   ejecutado.
 
 Opcional pero recomendable: un test en `test/` hecho con `/md2html/`.
 
@@ -116,6 +126,45 @@ Dos códigos se repiten entre cursos y la insignia de la ficha queda ambigua
 - [ ] **DC** · Dirección Comercial
 - [ ] **LMD** · Lógica y Métodos Discretos
 - [ ] **TC2** · Técnicas Cuantitativas II
+
+---
+
+## Tercero — 13 asignaturas
+
+**Añadidas el 2026-08-01 ([D-14](DECISIONES.md#d-14--tercero-entra-en-la-fase-6-por-escrito)).**
+Eran un hueco del plan: la [fase 2](fase-2-contenido.md) las delegaba aquí y este documento
+solo cubría primero y segundo, así que llevaban meses sin checklist en ninguna parte.
+
+Tercero **no es como primero y segundo**. Allí no hay material y hay que escribirlo; aquí
+el material existe y sobra, pero está en PDF suelto y sin la estructura canónica.
+**Ninguna de las 13 tiene carpeta `src/`**, y solo IA, ISE y SCD tienen algún `Makefile`.
+El trabajo es convertir, no redactar de cero.
+
+| Código | Asignatura | `.md` | `.tex` | `.pdf` | Makefile | Plan en [fase 4](fase-4-plantillas.md) |
+| --- | --- | --- | --- | --- | --- | --- |
+| CF1 | Contabilidad Financiera I | 4 | 18 | 43 | — | sí (14 carpetas) |
+| SCD | Sistemas Concurrentes y Distribuidos | 4 | 9 | 33 | 1 | sí (9) |
+| PDOO | Programación y Diseño Orientado a Objetos | 14 | 7 | 35 | — | sí (6) |
+| ECO | Econometría | 1 | 4 | 27 | — | sí (4) |
+| FR | Fundamentos de Redes | 4 | 9 | 44 | — | sí (3) |
+| DAE | Dirección y Administración de Empresas | 0 | 4 | 49 | — | sí (2) |
+| CF2 | Contabilidad Financiera II | 10 | 9 | 19 | — | **no** |
+| AOF | Análisis de Operaciones Financieras | 1 | 3 | 22 | — | **no** |
+| FBD | Fundamentos de Base de Datos | 7 | 11 | 29 | — | **no** |
+| FIS | Fundamentos de Ingeniería del Software | 1 | 7 | 45 | — | **no** |
+| IA | Inteligencia Artificial | 0 | 15 | 34 | 3 | **no** |
+| ISE | Ingeniería de Servidores | 25 | 14 | 35 | 1 | **no** |
+| MC | Métodos Cuantitativos | 0 | 2 | 14 | — | **no** |
+
+**Las siete de la mitad inferior no tienen plan de migración escrito en ninguna fase.** Ese
+es el hueco de verdad: la fase 4 solo planifica seis de las trece.
+
+Dos avisos que salen de la fase 2 y aplican aquí enteros:
+
+- **Comparar páginas antes de sustituir.** Un PDF recién compilado puede ser más pobre que
+  el que ya está publicado. `pdfinfo` a los dos, siempre.
+- **Buscar el contenido también dentro de los `.tex` y los `.md`**, no solo en las carpetas
+  de material. IA tiene 15 `.tex` y cero `.md`; ISE tiene 25 `.md`. No son carpetas vacías.
 
 ---
 

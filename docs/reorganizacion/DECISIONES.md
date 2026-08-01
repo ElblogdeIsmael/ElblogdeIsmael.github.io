@@ -121,6 +121,10 @@ HTML antiguo. A partir de ahí:
 El extractor `build/scripts/test-html-to-md.mjs` se conserva en el repo: sirve para
 cualquier test antiguo que aparezca después.
 
+**Acotada por la [D-11 a D-14](#d-12--el-formato-de-escritura-es-híbrido-y-ya-lo-era) el
+2026-08-01**: esta decisión vale para los tests, no para los apuntes. En los apuntes el
+formato es híbrido, ver D-12.
+
 ---
 
 ## D-08 · Primero y segundo son trabajo pendiente, no huecos
@@ -169,6 +173,78 @@ coherente con lo que hay.
 
 ---
 
+## D-11 · LaTeX se queda, typst no se evalúa
+
+**Fecha:** 2026-08-01 · **Estado:** adoptada
+
+typst es un sustituto real de LaTeX, pero migrar el repositorio entero cuesta mucho más de
+lo que aporta: toda la plantilla compartida de `extraFiles/preambulos_oficiales/`, los ocho
+Makefile que hacen `\input` de ella y las decenas de `.tex` de tercero y cuarto habría que
+rehacerlos. Un `grep -rni typst` sobre el repositorio devuelve hoy una sola línea, la del
+propio punto abierto: no hay nada construido en esa dirección.
+
+Se cierra el punto. Único motivo para reabrirlo: que la toolchain de pandoc deje de
+mantenerse.
+
+---
+
+## D-12 · El formato de escritura es híbrido, y ya lo era
+
+**Fecha:** 2026-08-01 · **Estado:** adoptada
+
+La idea original era escribirlo todo en markdown. En la práctica no ocurrió, y por un
+motivo bueno: markdown no autocompleta figuras tikz ni matemática pesada, así que ese
+contenido acabó en `.tex` por su cuenta.
+
+- Markdown para la prosa: capítulos, explicaciones, listas.
+- `.tex` bajo `src/tex/` para figuras tikz, tablas complejas, pseudocódigo y matemática
+  pesada, incluido desde el markdown con `\input`.
+
+**No se migra nada, porque es lo que ya hacen cinco asignaturas.**
+`Subjects/Fourth/IG/src/01_Teoria.md` son diez líneas que solo hacen `\input`, y en CG,
+DO-1, EM, IG y MC el contenido real vive en `src/tex/`. La fase 2 ya midió que ahí el PDF
+de LaTeX sale más completo que el de pandoc (MC: 103 páginas frente a 61).
+
+Lo que sí hay que arreglar es el glob de los Makefile, que hace `src/*.md` y por eso nunca
+ve los `.tex` sueltos. Es trabajo de la [fase 4](fase-4-plantillas.md).
+
+Esta decisión **acota la D-07**: aquella fijaba markdown como fuente, pero solo se cumple
+—y solo se pretendía— para los tests.
+
+---
+
+## D-13 · No habrá sección Proyectos en el blog
+
+**Fecha:** 2026-08-01 · **Estado:** adoptada
+
+La [fase 5](fase-5-indexado.md) proponía crear `content/sections/proyectos/` con once repos
+en cinco bloques. Los once son un subconjunto de los 27 que ya lista el portfolio de
+`ismael-sallami.github.io`, con los mismos enlaces a GitHub y sin ninguna capa propia
+encima. Sería duplicar la misma información en dos sitios que hay que mantener a la vez.
+
+Se elimina la parte C de la fase 5. **Se conserva la parte B**, que es la que sí aporta
+algo que el portfolio no hace: enlazar cada repositorio desde la ficha de la asignatura de
+la que salió. El portfolio lista proyectos; el blog cuenta de dónde salieron.
+
+---
+
+## D-14 · Tercero entra en la fase 6 por escrito
+
+**Fecha:** 2026-08-01 · **Estado:** adoptada
+
+Las 13 asignaturas de tercero eran un hueco del plan. La [fase 2](fase-2-contenido.md) las
+delegaba explícitamente en la fase 6, y la fase 6 solo cubría las 26 de primero y segundo,
+así que no tenían checklist en ningún sitio. De las 13, la [fase 4](fase-4-plantillas.md)
+solo planifica seis.
+
+Se documentan en [fase-6-contenido-pendiente.md](fase-6-contenido-pendiente.md) con su
+estado real. Convertirlas es trabajo aparte y no lo bloquea nada.
+
+**OE queda fuera por decisión de Ismael**: se queda con sus tres tests y sus prácticas, y
+no se escribe su temario. Se retira de la lista de pendientes.
+
+---
+
 ## Documentos sin fuente
 
 Los PDF que se queden en su plantilla original porque no se conserva el `.tex` o el `.md`
@@ -206,17 +282,9 @@ la fase 0.**
 
 ### Pendiente de decidir
 
-**El `.gitignore` no está versionado.** Se ignora a sí mismo (línea 120 de su propio
-fichero), así que las reglas solo existen en la máquina de Ismael. Un clon nuevo no lo trae,
-y ahí nada está protegido.
-
-Hay que resolverlo **antes de la [fase 3](fase-3-historial.md)**: en cuanto se purgue el
-historial, el `.gitignore` es la única barrera para que lo purgado no vuelva a subirse.
-
-| Opción | Efecto |
-| --- | --- |
-| Versionarlo (quitar la línea que lo excluye) | Las reglas viajan con el repositorio. Es lo normal en cualquier proyecto |
-| Dejarlo local | Sigue siendo un repositorio donde `git add -A` es peligroso desde cualquier clon nuevo |
+~~**El `.gitignore` no está versionado.**~~ **Resuelto el 2026-08-01: se versiona.** Se
+quitó la línea que lo excluía a sí mismo. `CLAUDE.md` y `.claude/` siguen fuera a
+propósito, y el fichero ahora dice por qué.
 
 ---
 

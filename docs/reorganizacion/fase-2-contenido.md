@@ -19,7 +19,9 @@ Decisiones tomadas en esa pasada:
   que proponía la parte A. Son 1,5 GB con libros comerciales dentro.
 - **Tercero sale de esta fase.** Ninguna de sus 13 asignaturas sigue la estructura
   canónica y su material es PDF, no markdown: convertirlo es migrar contenido, que es el
-  trabajo de la [fase 6](fase-6-contenido-pendiente.md).
+  trabajo de la [fase 6](fase-6-contenido-pendiente.md). Las 13 quedaron meses sin
+  checklist porque aquel documento solo cubría primero y segundo; están escritas ahí desde
+  el 2026-08-01, en «[Tercero — 13 asignaturas](fase-6-contenido-pendiente.md#tercero--13-asignaturas)».
 
 ### Lo que estaba mal en este documento
 
