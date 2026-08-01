@@ -20,6 +20,47 @@ historial** · **Rama:** se ejecuta sobre `main` ya fusionado
 
 ---
 
+## Segunda pasada, el mismo día: las claves SSH
+
+**La primera pasada se dejó tres claves privadas.** Al preparar el ticket a Support apareció
+que el historial reescrito **todavía contenía tres claves OpenSSH privadas** del laboratorio
+de Ansible de ISE (`id_rsa_admin`, `id_rsa_juan`, `id_rsa_maria`), replicadas en 24 rutas y
+recuperables con un `git show`.
+
+El motivo es que **nadie las había purgado nunca**: la [fase 0](fase-0-seguridad.md) las
+sacó del índice, que solo las quita del árbol de trabajo, y la lista de purga de la primera
+pasada eran las 238 rutas del inventario de material ajeno, donde no estaban.
+
+Resultado tras la segunda pasada, verificado desde un clon limpio: **0 claves privadas en
+7.801 objetos**, 0 de 238 rutas de material ajeno, 256 commits y `npm run check` en verde.
+
+### Tres cosas que costaron un intento cada una
+
+1. **Sacar algo del índice no lo saca del historial.** Es lo que dejó las claves vivas siete
+   meses. «Resuelto en la fase 0» significaba solo que ya no estaba en el árbol.
+2. **Purgar por ruta no basta: hay que purgar por patrón.** `git rev-list --objects` lista
+   cada blob **una sola vez, con una sola ruta**, aunque el mismo blob viva en veinte. Al
+   purgar las 6 rutas que devolvía, las mismas claves seguían alcanzables desde
+   `Segunda_Parte/` y `Resolucion/`. Lo que funciona:
+
+   ```
+   glob:**/claves/**
+   glob:**/id_rsa*
+   glob:**/id_ed25519*
+   glob:**/*.pem
+   glob:**/*.key
+   ```
+
+   Y comprobar **por contenido**, no por nombre: recorrer los blobs alcanzables y buscar
+   `PRIVATE KEY` en sus primeros bytes.
+3. **La trampa 3 mordió por tercera vez.** En la segunda pasada se empujó solo
+   `refs/heads/main`, y `main` salía limpia; pero `backup/pre-fase-2` y `backup/pre-reorg`
+   seguían apuntando al historial con las claves, así que un clon con `--tags` las traía.
+   **En cada pasada se empujan los tags, no solo la rama**, y se verifica desde un clon
+   limpio con `--tags`.
+
+---
+
 ## Objetivo
 
 Bajar el repositorio de **1,38 GB a menos de 300 MB** y eliminar de verdad las claves
@@ -71,6 +112,17 @@ según la API). El único modo de perder commits es que alguno quede vacío al p
    `refs/pull`. Sin él, GitHub no reempaqueta —el tamaño que muestra no baja— y las catorce
    referencias de PR siguen conservando el material. Es la recomendación oficial de GitHub
    para retirar contenido de un historial.
+
+   **Se pide como retirada de datos sensibles, que es lo que fue: había tres claves SSH
+   privadas.** Su documentación dice explícitamente que Support **no** hace esto para
+   reducir tamaño ni para contenido no sensible, así que enmarcarlo como limpieza de peso
+   lo manda a la categoría que rechazan. Hay que incluir los datos que piden: propietario y
+   repositorio, número de PR afectadas (15), qué era el dato sensible, y si `filter-repo`
+   avisó de objetos LFS huérfanos (aquí no, el repositorio no usa LFS).
+
+   **Coste que hay que aceptar antes de pedirlo:** las 15 pull requests se quedan sin diffs
+   ni commits. La conversación sobrevive, «Files changed» no, y los enlaces a commits
+   viejos desde issues o comentarios dejan de resolver.
 3. **Copiar `~/backups/` a un disco externo.** Hoy están en el mismo `/dev/nvme0n1p4` que el
    repositorio, así que un fallo de disco se lleva el respaldo y el original a la vez.
 
