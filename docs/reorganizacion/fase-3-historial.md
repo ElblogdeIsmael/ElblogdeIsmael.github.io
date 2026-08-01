@@ -36,6 +36,51 @@ existido. Es la única herramienta que resuelve las dos cosas.
 local ([regla 7](REGLAS.md#7-hay-un-solo-clon-con-dos-rutas)), así que basta con dejarlo
 alineado con el remoto reescrito.
 
+**Lo que NO cuesta, y era la duda que tenía parada esta fase:** `filter-repo` no borra
+commits ni toca la autoría. Conserva nombre, email y fecha de autor; solo cambia el hash.
+El contador de contribuciones de GitHub se calcula con el email del autor y su fecha, y
+`ismEngineer23@gmail.com` está vinculado a la cuenta `Ismael-Sallami` (236 contribuciones
+según la API). El único modo de perder commits es que alguno quede vacío al purgar y
+`filter-repo` lo pode, y eso se desactiva con **`--prune-empty=never`**.
+
+---
+
+## Ensayo del 2026-08-01, con números
+
+Ejecutado sobre un espejo, sin tocar el remoto. Se purgaron los 183 ficheros del cubo
+`PURGABLE` del inventario, que son los que no bloquean nada.
+
+| Comprobación | Antes | Después | |
+| --- | --- | --- | --- |
+| Commits (`--all`) | 358 | **358** | ni uno perdido |
+| `md5` de `%aE %aI` de todo el historial | `4585c23e…` | **`4585c23e…`** | autoría idéntica |
+| Commits por email en `main` | 233 / 11 / 3 | **233 / 11 / 3** | contribuciones intactas |
+| `size-pack` | 1,34 GiB | **799 MiB** | −573 MiB |
+| `npm run check` | verde | **verde** | 141 enlaces locales resuelven |
+| Ficheros en el árbol | 3.063 | 2.880 | exactamente los 183, cero colaterales |
+
+**Queda demostrado que no se pierde nada.** Purgando también los cubos `TOOL` (24 ficheros,
+137 MiB) y `WEB` (10, 32 MiB) se bajaría a unos 610 MiB, pero esos 34 exigen decisión
+previa: ver el encabezado del inventario.
+
+Reproducir el ensayo:
+
+```bash
+git clone --mirror . ~/backups/elblogdeismael-pre-fase3.git
+cp -a ~/backups/elblogdeismael-pre-fase3.git ~/backups/ensayo-fase3.git
+cd ~/backups/ensayo-fase3.git
+for r in $(git for-each-ref --format='%(refname)' 'refs/pull/*' 'refs/replace/*'); do
+  git update-ref -d "$r"
+done
+awk -F'\t' '$1=="PURGABLE"{print $3}' \
+  <ruta>/docs/reorganizacion/.inventario-material-ajeno.txt > ~/backups/purgar.txt
+git filter-repo --force --invert-paths \
+  --paths-from-file ~/backups/purgar.txt --prune-empty=never
+```
+
+Al comparar árboles, usar **`git -c core.quotepath=false ls-tree`**: por defecto git escapa
+los acentos y 46 rutas parecen no coincidir cuando sí lo hacen.
+
 ---
 
 ## Advertencia
