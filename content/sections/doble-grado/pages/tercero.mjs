@@ -80,18 +80,8 @@ export default {
               label: "Prácticas · Proyecto Irrgarten",
               resources: [
                 {
-                  name: "Código Java",
-                  href: "https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/Subjects/Third/PDOO/Practica/Proyecto_Irrgarten/Proyecto_Irrgarten/P5-java",
-                  kind: "WEB",
-                },
-                {
-                  name: "Código Ruby",
-                  href: "https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/Subjects/Third/PDOO/Practica/Proyecto_Irrgarten/Proyecto_Irrgarten/P5-Ruby",
-                  kind: "WEB",
-                },
-                {
-                  name: "Prácticas Resueltas",
-                  href: "https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/Subjects/Third/PDOO/Practica/Proyecto_Irrgarten",
+                  name: "Código del juego, en Java y en Ruby",
+                  href: "https://github.com/Ismael-Sallami/irrgarten",
                   kind: "WEB",
                 },
               ],
@@ -331,11 +321,6 @@ export default {
                   name: "Apuntes Teoría",
                   href: "/Subjects/Third/DAE/TeoriaDAE/FCCEE/build/Teoria.pdf",
                   kind: "PDF",
-                },
-                {
-                  name: "Diapositivas de clase",
-                  href: "https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/Subjects/Third/DAE/Direcci%C3%B3n%20y%20administraci%C3%B3n%20de%20empresas/Direcci%C3%B3n%20y%20administraci%C3%B3n%20de%20empresas",
-                  kind: "WEB",
                 },
               ],
             },
@@ -659,14 +644,19 @@ export default {
               label: "Ejercicios-Controles y Controles",
               resources: [
                 {
-                  name: "Ejercicios",
-                  href: "https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Ejercicios/",
-                  kind: "WEB",
+                  name: "Ejercicio 3 · Modelo conceptual",
+                  href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Ejercicio3/Ejercicio3/chapters/Ejercicio3.pdf",
+                  kind: "PDF",
                 },
                 {
-                  name: "Controles",
-                  href: "https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Controles/",
-                  kind: "WEB",
+                  name: "Apuntes Control 2",
+                  href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Controles/Guia_Control2/C2_FIS.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Guía completa Control 2",
+                  href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Controles/Guia_Control2/GuiaCompletaC2-FIS.pdf",
+                  kind: "PDF",
                 },
               ],
             },
@@ -680,19 +670,34 @@ export default {
               label: "Prácticas",
               resources: [
                 {
-                  name: "Práctica 1",
-                  href: "https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Subjects/Third/IA/Practicas/Practicas/Practica1/",
-                  kind: "WEB",
+                  name: "Práctica 1 · Notas",
+                  href: "/Subjects/Third/IA/Practicas/Practicas/Practica1/notas.pdf",
+                  kind: "PDF",
                 },
                 {
-                  name: "Práctica 2",
+                  name: "Práctica 1 · Cuestionario 1",
+                  href: "/Subjects/Third/IA/Practicas/Practicas/Practica1/cuestionario1.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Práctica 1 · Cuestionario 2",
+                  href: "/Subjects/Third/IA/Practicas/Practicas/Practica1/cuestionario2.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Práctica 2 · Agentes de rescate",
                   href: "https://github.com/Ismael-Sallami/rescue-agents",
                   kind: "WEB",
                 },
                 {
-                  name: "Práctica 3",
-                  href: "https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Subjects/Third/IA/Practicas/Practicas/Practica3/practica3/practica3/",
+                  name: "Práctica 3 · Parchís con poda alfa-beta",
+                  href: "https://github.com/Ismael-Sallami/parchis-ai",
                   kind: "WEB",
+                },
+                {
+                  name: "Práctica 3 · Memoria",
+                  href: "/Subjects/Third/IA/Practicas/Practicas/Practica3/practica3/practica3/Memoria.pdf",
+                  kind: "PDF",
                 },
               ],
             },
@@ -716,8 +721,8 @@ export default {
                   kind: "HTML",
                 },
                 {
-                  name: "Prácticas",
-                  href: "https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/blob/main/Subjects/Third/ISE/Prácticas/EntregaPracticas/",
+                  name: "Código · Ansible, Prometheus y JMeter",
+                  href: "https://github.com/Ismael-Sallami/ansible-infra-lab",
                   kind: "WEB",
                 },
               ],
