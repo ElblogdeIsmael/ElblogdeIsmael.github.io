@@ -1,4 +1,11 @@
-## EJERCICIO PROPUESTO 8
+# Contabilidad Financiera I · Tema 4
+
+Ejercicios propuestos resueltos que no entran en la relación publicada del tema.
+Cada apartado lleva su asiento contable y los cálculos que lo justifican.
+
+---
+
+## Ejercicio propuesto 8
 
 La sociedad FAITH, S.A. realiza las siguientes operaciones durante el mes de diciembre:
 

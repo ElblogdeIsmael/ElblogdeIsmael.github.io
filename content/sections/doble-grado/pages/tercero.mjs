@@ -174,6 +174,26 @@ export default {
           name: "Contabilidad Financiera I",
           blocks: [
             {
+              label: "Teoría",
+              resources: [
+                {
+                  name: "Tema 1 · Normalización Contable y PGC",
+                  href: "/Subjects/Third/CF1/Teoria/Tema1/FCCEE/build/Tema1.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Tema 2 · Existencias: Compras y Ventas",
+                  href: "/Subjects/Third/CF1/Teoria/Tema2/FCCEE/build/Tema2.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Tema 3 · Deudores y Acreedores de la Actividad Habitual",
+                  href: "/Subjects/Third/CF1/Teoria/Tema3/FCCEE/build/Tema3.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
               label: "Prácticas",
               resources: [
                 {
@@ -190,6 +210,11 @@ export default {
                   name: "Relación de Ejercicios · Tema 4",
                   href: "/Subjects/Third/CF1/Practica/Tema4/EjerciciosPropuestos/FCCEE/build/EjPropT4.pdf",
                   kind: "PDF",
+                },
+                {
+                  name: "Ejercicios Resueltos Adicionales · Tema 4",
+                  href: "/viewer/?file=Subjects/Third/CF1/Practica/Tema4/EjerciciosPropuestos/EjerciciosResueltosAdicionales.md",
+                  kind: "MD",
                 },
                 {
                   name: "Relación de Ejercicios · Tema 5",
