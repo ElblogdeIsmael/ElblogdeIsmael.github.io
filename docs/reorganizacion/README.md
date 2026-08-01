@@ -41,13 +41,14 @@ GitHub Pages.
 | [0 — Seguridad](fase-0-seguridad.md) | Saca del índice las 12 claves SSH privadas; abre issues y milestone | no | **hecha** |
 | [1 — Código](fase-1-codigo.md) | Extrae el código de prácticas a repos propios; renombra, fusiona y archiva | no | **hecha** (PR #15 a #19) |
 | [2 — Contenido](fase-2-contenido.md) | Versiona lo que falta; estructura canónica; inventaría el material ajeno | no en su primera pasada | **hecha y mergeada** (PR #22). Mover el material ajeno espera a la fase 3 |
-| [3 — Historial](fase-3-historial.md) | `git filter-repo` para bajar de 1,34 GiB a ~612 MiB | **sí, reescribe historial** | **siguiente**, en preparación |
+| [3 — Historial](fase-3-historial.md) | `git filter-repo` para purgar el material ajeno del historial | **sí, reescribe historial** | **hecha** el 2026-08-01: 1,34 GiB → 442,78 MiB, 255 commits intactos |
 | [4 — Plantillas](fase-4-plantillas.md) | Unifica LaTeX en la generación pandoc y los tests en md2html | no | pendiente |
 | [5 — Indexado](fase-5-indexado.md) | Enlaza los repos nuevos y arregla lo no indexado. La sección Proyectos se retiró ([D-13](DECISIONES.md)) | no | pendiente |
 | [6 — Contenido pendiente](fase-6-contenido-pendiente.md) | Apuntes de las 26 asignaturas de 1º y 2º, y conversión de las 13 de 3º | no | continua |
 
-Orden obligatorio: **0 → 1 → 2 → 3**. La 4, la 5 y la 6 pueden empezar en cualquier
-momento después de la 3, y entre ellas son independientes.
+Orden obligatorio: **0 → 1 → 2 → 3**. **Las cuatro están hechas desde el 2026-08-01.** La
+4, la 5 y la 6 ya no tienen nada que las bloquee y son independientes entre sí: se pueden
+coger en el orden que apetezca.
 
 La fase 3 va después de la 1 y la 2 porque reescribe el historial: si se ejecuta antes, hay
 que volver a hacerlo cuando se borre lo que aquellas dos mueven.

@@ -3,6 +3,21 @@
 **Duración estimada:** 1 sesión concentrada · **Destructiva:** **sí, reescribe el
 historial** · **Rama:** se ejecuta sobre `main` ya fusionado
 
+> ## HECHA el 2026-08-01
+>
+> `main` reescrita y publicada. **1,34 GiB → 442,78 MiB** en el remoto, 418,70 MiB en el
+> clon local tras un `gc --aggressive`. Los 255 commits siguen siendo 255, la autoría y las
+> fechas no cambian y el reparto por email se mantiene en 240 / 11 / 4.
+>
+> Verificado **desde un clon limpio recién sacado de GitHub**, que es lo único que vale
+> ([trampa 4](#si-algo-sale-mal)): **las 238 rutas purgadas dan 0 commits**, y
+> `npm run check` sale verde con sus 181 enlaces.
+>
+> Queda una cosa, y no depende de nosotros: **14 de las 15 `refs/pull` siguen conteniendo el
+> material**. Son de solo lectura y solo GitHub Support puede borrarlas. Un `git clone`
+> normal no las trae —comprobado, 0 commits—, pero un `git fetch origin '+refs/pull/*'`
+> sí. Ver «Lo que queda pendiente» al final.
+
 ---
 
 ## Objetivo
@@ -44,6 +59,20 @@ según la API). El único modo de perder commits es que alguno quede vacío al p
 `filter-repo` lo pode, y eso se desactiva con **`--prune-empty=never`**.
 
 ---
+
+## Lo que quedó pendiente, y no lo cierra nadie desde aquí
+
+1. **Renombrar la rama por defecto, dos veces**, para que GitHub reindexe el peso y el
+   widget de contribuidores. Exige `admin`: `gh` corre como `Ismael-Sallami`, que en este
+   repositorio solo tiene `push` y `triage`. Se hace desde la web como `ElblogdeIsmael`:
+   `Settings` → `General` → `Default branch` → renombrar `main` a `reindex-tmp`, esperar y
+   renombrarla de vuelta.
+2. **Ticket a GitHub Support** pidiendo `gc` del repositorio y el borrado de las
+   `refs/pull`. Sin él, GitHub no reempaqueta —el tamaño que muestra no baja— y las catorce
+   referencias de PR siguen conservando el material. Es la recomendación oficial de GitHub
+   para retirar contenido de un historial.
+3. **Copiar `~/backups/` a un disco externo.** Hoy están en el mismo `/dev/nvme0n1p4` que el
+   repositorio, así que un fallo de disco se lleva el respaldo y el original a la vez.
 
 ## Ensayo del 2026-08-01, con números
 
