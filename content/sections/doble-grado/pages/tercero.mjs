@@ -152,8 +152,8 @@ export default {
               resources: [
                 {
                   name: "Base de Datos",
-                  href: "/Subjects/Third/ECO/Practicas/Trabajo/Data_Obesity.zip",
-                  kind: "ZIP",
+                  href: "https://github.com/Ismael-Sallami/econometric-model/blob/main/data/obesity-dataset.csv",
+                  kind: "WEB",
                 },
                 {
                   name: "Prácticas",
@@ -324,49 +324,9 @@ export default {
               label: "Prácticas",
               resources: [
                 {
-                  name: "Práctica 1",
-                  href: "/Subjects/Third/SCD/Practicas/Practica1.zip",
-                  kind: "ZIP",
-                },
-                {
-                  name: "Práctica 2",
-                  href: "/Subjects/Third/SCD/Practicas/Practica2.zip",
-                  kind: "ZIP",
-                },
-                {
-                  name: "Práctica 3",
-                  href: "/Subjects/Third/SCD/Practicas/Practica3.zip",
-                  kind: "ZIP",
-                },
-                {
-                  name: "Práctica 4",
-                  href: "/Subjects/Third/SCD/Practicas/Practica4.zip",
-                  kind: "ZIP",
-                },
-                {
-                  name: "Prácticas Resueltas",
-                  href: "https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/Subjects/Third/SCD/Practicas/Practicas_Resueltas",
+                  name: "Prácticas 1 a 4 resueltas",
+                  href: "https://github.com/Ismael-Sallami/concurrency-mpi",
                   kind: "WEB",
-                },
-              ],
-            },
-            {
-              label: "Seminarios",
-              resources: [
-                {
-                  name: "Seminario 1",
-                  href: "/Subjects/Third/SCD/Seminarios/Seminario1.zip",
-                  kind: "ZIP",
-                },
-                {
-                  name: "Seminario 2",
-                  href: "/Subjects/Third/SCD/Seminarios/Seminario2.zip",
-                  kind: "ZIP",
-                },
-                {
-                  name: "Seminario 3",
-                  href: "/Subjects/Third/SCD/Seminarios/Seminario3.zip",
-                  kind: "ZIP",
                 },
               ],
             },
@@ -398,11 +358,6 @@ export default {
             {
               label: "Exámenes",
               resources: [
-                {
-                  name: "Primer Parcial / Simulacro",
-                  href: "/Subjects/Third/SCD/Examenes/Primer_Parcial-Simulacro.zip",
-                  kind: "ZIP",
-                },
                 {
                   name: "Enunciado Examen de Prácticas",
                   href: "/Subjects/Third/SCD/Examenes/Enunciado_Examen_Practicas_Primerparcial.pdf",
