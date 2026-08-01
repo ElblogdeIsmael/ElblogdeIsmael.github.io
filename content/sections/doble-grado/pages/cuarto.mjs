@@ -133,8 +133,8 @@ export default {
             {
               resources: [
                 {
-                  name: "Ejercicios Resueltos",
-                  href: "/Subjects/Fourth/IG/TEX/IG.pdf",
+                  name: "Temario",
+                  href: "/Subjects/Fourth/IG/build/IG.pdf",
                   kind: "PDF",
                 },
               ],
