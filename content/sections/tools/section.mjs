@@ -18,7 +18,7 @@ export default {
   blurb:
     "Pequeñas apps que funcionan al 100% en tu navegador: sin instalar nada y " +
     "sin que tus archivos salgan de tu equipo.",
-  summary: "2 herramientas · sin servidor",
+  summary: "2 herramientas · sin servidor · código abierto",
   pages: [],
   links: [
     {
@@ -27,8 +27,18 @@ export default {
       kind: "WEB",
     },
     {
+      name: "md2html · código fuente",
+      href: "https://github.com/Ismael-Sallami/md2html-testGenerator",
+      kind: "WEB",
+    },
+    {
       name: "pdf2md — PDF, Word y Excel a Markdown",
       href: "/pdf2md/",
+      kind: "WEB",
+    },
+    {
+      name: "pdf2md · código fuente",
+      href: "https://github.com/Ismael-Sallami/pdf-to-md",
       kind: "WEB",
     },
   ],
