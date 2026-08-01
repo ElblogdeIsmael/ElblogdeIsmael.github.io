@@ -123,8 +123,7 @@ export default {
               resources: [
                 {
                   name: "Guía docente (no disponible)",
-                  href: "#",
-                  kind: "GUIA",
+                  note: true,
                 },
               ],
             },
@@ -284,8 +283,7 @@ export default {
               resources: [
                 {
                   name: "Guía docente (no disponible)",
-                  href: "#",
-                  kind: "GUIA",
+                  note: true,
                 },
               ],
             },

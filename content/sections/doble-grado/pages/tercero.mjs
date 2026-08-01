@@ -238,7 +238,7 @@ export default {
                 },
                 {
                   name: "Test T2",
-                  href: "/Subjects/Third/CF1/Tests/testT2Libro.html",
+                  href: "/Subjects/Third/CF1/Tests/test-tema2.html",
                   kind: "HTML",
                 },
                 {
@@ -254,6 +254,11 @@ export default {
                 {
                   name: "Test T5 del libro",
                   href: "/Subjects/Third/CF1/Tests/testT5Libro.html",
+                  kind: "HTML",
+                },
+                {
+                  name: "Test extra · Temas 4, 5 y 6",
+                  href: "/Subjects/Third/CF1/Tests/testPDF/tipoTestExtraTema4-5-6.html",
                   kind: "HTML",
                 },
                 {
@@ -471,6 +476,11 @@ export default {
                   kind: "HTML",
                 },
                 {
+                  name: "Fondos Propios · segunda versión",
+                  href: "/Subjects/Third/CF2/Teoria/Tests/test_t4v2.html",
+                  kind: "HTML",
+                },
+                {
                   name: "Provisiones y Contingencias",
                   href: "/Subjects/Third/CF2/Teoria/Tests/Tema5.html",
                   kind: "HTML",
@@ -580,6 +590,16 @@ export default {
                 {
                   name: "Simulacro 2",
                   href: "/Subjects/Third/FBD/Practica/2parte/Simulacro2/simulacro2.html",
+                  kind: "HTML",
+                },
+                {
+                  name: "Simulacro 2 · cuestionario DML de prácticas",
+                  href: "/Subjects/Third/FBD/Practica/2parte/Simulacro2/simulacro2_practicas.html",
+                  kind: "HTML",
+                },
+                {
+                  name: "Simulacro 2 · cuestionario DML breve",
+                  href: "/Subjects/Third/FBD/Practica/2parte/Simulacro2/test.html",
                   kind: "HTML",
                 },
               ],

@@ -223,6 +223,11 @@ export default {
                   href: "/Subjects/Fourth/DRH1/practicas/portafolio-caixabank.pdf",
                   kind: "PDF",
                 },
+                {
+                  name: "Actividad 1",
+                  href: "/Subjects/Fourth/DRH1/Actividades/Act1/act1.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
