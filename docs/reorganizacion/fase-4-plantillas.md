@@ -100,7 +100,7 @@ Las 38 carpetas de gen 1, agrupadas por asignatura:
 | **PDOO** | `Practica/ETSIIT`, `Teoria/ETSIIT`, `Teoria/Diapositivas/t3/ETSIIT`, `Teoria/RelacionesEjercicios/Solt{1,2,3}/ETSIIT` — 6 |
 | **ECO** | `Formulario/FCCEE`, `Practicas/FCCEE`, `Practicas/EjerciciosPropuestos/SolucionesEjercicios/FCCEE`, `Teoria/FCCEE` — 4 |
 | **FR** | `Practicas/ETSIIT`, `Resumenes/ETSIIT`, `Teoria/ETSIIT` — 3 |
-| **DAE** | `PracticasDAE/FCCEE`, `TeoriaDAE/FCCEE` — 2 |
+| **DAE** | `PracticasDAE/FCCEE` — 1. `TeoriaDAE/` se retiró en la fase 5: era material descargado con reserva de derechos |
 
 Por cada documento:
 

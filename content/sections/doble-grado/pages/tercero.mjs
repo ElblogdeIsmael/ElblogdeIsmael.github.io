@@ -323,9 +323,8 @@ export default {
               label: "Teoría",
               resources: [
                 {
-                  name: "Apuntes Teoría",
-                  href: "/Subjects/Third/DAE/TeoriaDAE/FCCEE/build/Teoria.pdf",
-                  kind: "PDF",
+                  name: "Temario propio pendiente de escribir",
+                  note: true,
                 },
               ],
             },
