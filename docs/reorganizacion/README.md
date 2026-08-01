@@ -39,12 +39,12 @@ GitHub Pages.
 | Fase | Qué hace | Destructiva | Estado |
 | --- | --- | --- | --- |
 | [0 — Seguridad](fase-0-seguridad.md) | Saca del índice las 12 claves SSH privadas; abre issues y milestone | no | **hecha** |
-| [1 — Código](fase-1-codigo.md) | Extrae el código de prácticas a repos propios; renombra, fusiona y archiva | no | **en curso** (4 de 4 repos nuevos; faltan renombrados, fusión y archivados) |
-| [2 — Contenido](fase-2-contenido.md) | Material ajeno a repo privado; versiona lo que falta; estructura canónica | sí (borra del blog) | pendiente |
-| [3 — Historial](fase-3-historial.md) | `git filter-repo` para bajar de 1,38 GB a <300 MB | **sí, reescribe historial** | pendiente |
+| [1 — Código](fase-1-codigo.md) | Extrae el código de prácticas a repos propios; renombra, fusiona y archiva | no | **hecha** (PR #15 a #19) |
+| [2 — Contenido](fase-2-contenido.md) | Versiona lo que falta; estructura canónica; inventaría el material ajeno | no en su primera pasada | **hecha y mergeada** (PR #22). Mover el material ajeno espera a la fase 3 |
+| [3 — Historial](fase-3-historial.md) | `git filter-repo` para bajar de 1,34 GiB a ~612 MiB | **sí, reescribe historial** | **siguiente**, en preparación |
 | [4 — Plantillas](fase-4-plantillas.md) | Unifica LaTeX en la generación pandoc y los tests en md2html | no | pendiente |
-| [5 — Indexado](fase-5-indexado.md) | Enlaza los repos nuevos; sección Proyectos; arregla lo no indexado | no | pendiente |
-| [6 — Contenido pendiente](fase-6-contenido-pendiente.md) | Apuntes de las 26 asignaturas de 1º y 2º | no | continua |
+| [5 — Indexado](fase-5-indexado.md) | Enlaza los repos nuevos y arregla lo no indexado. La sección Proyectos se retiró ([D-13](DECISIONES.md)) | no | pendiente |
+| [6 — Contenido pendiente](fase-6-contenido-pendiente.md) | Apuntes de las 26 asignaturas de 1º y 2º, y conversión de las 13 de 3º | no | continua |
 
 Orden obligatorio: **0 → 1 → 2 → 3**. La 4, la 5 y la 6 pueden empezar en cualquier
 momento después de la 3, y entre ellas son independientes.

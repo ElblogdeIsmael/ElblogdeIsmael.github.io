@@ -84,44 +84,24 @@ Contenido del blog que existe y no se enlaza:
 
 ---
 
-## Parte C · Sección Proyectos
+## Parte C · Sección Proyectos — retirada
 
-Los proyectos personales no tienen hoy ningún sitio en la web. El modelo lo soporta sin
-tocar plantillas: una sección nueva se registra y ya.
+**No se hace.** Decidido el 2026-08-01, [D-13](DECISIONES.md#d-13--no-habrá-sección-proyectos-en-el-blog).
 
-- [ ] Copiar la plantilla:
+Los once repos que proponía esta parte son un subconjunto de los 27 que ya lista el
+portfolio de `ismael-sallami.github.io`, con los mismos enlaces a GitHub y sin ninguna capa
+propia encima: sería la misma información en dos sitios que mantener a la vez.
 
-  ```bash
-  cp -r content/sections/_template content/sections/proyectos
-  ```
-
-- [ ] Registrar en `content/registry.mjs`:
-
-  ```js
-  import proyectos from "./sections/proyectos/section.mjs";
-  export const SECTIONS = [dobleGrado, proyectos, herramientas];
-  ```
-
-- [ ] Estructura propuesta — un bloque por área, una ficha por proyecto:
-
-  | Bloque | Fichas |
-  | --- | --- |
-  | Algoritmia | `algorithms-and-patterns`, `3-Partition-NP-Completeness`, `neetcode-submissions` |
-  | Sistemas e infraestructura | `ansible-infra-lab`, `Arch_Configuration` |
-  | Datos e IA | `rescue-agents`, `machine-learning-practices`, `econometric-model` |
-  | Aplicaciones | `personal-finance-manager`, `media-manager` |
-  | Aprendizaje | `early-courses` |
-
-- [ ] Cada ficha: nombre, una frase de qué hace y enlace al repo con `kind: "WEB"`.
-- [ ] Ajustar `index` de las secciones para que el orden en la home sea el que quieras.
-- [ ] **No incluir `gestor-finanzas`** ([regla 10](REGLAS.md#10-no-se-toca-mifos-ni-gestor-finanzas)).
+Lo que sí se conserva es la **parte B**, que enlaza cada repositorio desde la ficha de la
+asignatura de la que salió. Eso el portfolio no lo hace, así que no duplica nada.
 
 ---
 
 ## Parte D · Herramientas
 
-`content/sections/herramientas/section.mjs` lista `/md2html/` y `/pdf2md/`, pero no dice
-dónde está su código.
+`content/sections/tools/section.mjs` lista `/md2html/` y `/pdf2md/`, pero no dice
+dónde está su código. Ojo con el nombre: el directorio y el import se llaman **`tools`**,
+no `herramientas`, aunque la sección se titule así en la web.
 
 - [ ] Añadir dos enlaces más: `Ismael-Sallami/md2html-testGenerator` y
       `Ismael-Sallami/pdf-to-md`, etiquetados como código fuente.
@@ -136,8 +116,7 @@ dónde está su código.
 - [ ] `npm run build`.
 - [ ] `npm run check`.
 - [ ] Revisar el diff del HTML generado: debe cambiar solo lo esperado.
-- [ ] `npm run dev` y recorrer a mano la home, las cinco páginas de curso, Proyectos y
-      Herramientas.
+- [ ] `npm run dev` y recorrer a mano la home, las cinco páginas de curso y Herramientas.
 
 ---
 
@@ -145,8 +124,8 @@ dónde está su código.
 
 - Cero enlaces `tree/main` o `blob/main` al repositorio del sitio en `content/`.
 - Todos los repos con contenido académico están enlazados desde su ficha.
-- DRH1, OE y DDSI muestran su temario.
-- La sección Proyectos existe y aparece en la home.
+- DRH1 y DDSI muestran su temario. OE se queda sin temario por decisión, ver
+  [D-14](DECISIONES.md#d-14--tercero-entra-en-la-fase-6-por-escrito).
 - Herramientas enlaza el código fuente de las dos apps.
 - El número de enlaces sube claramente de los 172 actuales.
 

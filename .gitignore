@@ -1,0 +1,142 @@
+# ------------------------------------------------------
+# 0. DONDE ESTAN LOS RESPALDOS
+# ------------------------------------------------------
+# Nada se borra de este repositorio sin copiarlo antes fuera. Los respaldos
+# viven en ~/backups/, en la maquina de Ismael, y NO estan versionados:
+#
+#   material-ajeno-2026-08-01/   224 ficheros, 1,1 GB. Todo el material del
+#                                profesorado que se retiro el 2026-08-01:
+#                                libros, guiones, diapositivas y los cuatro
+#                                PDF que los embebian. Conserva la estructura
+#                                de carpetas original, asi que restaurar es un
+#                                rsync de vuelta.
+#   elblogdeismael-pre-fase3.git espejo integro previo a reescribir el
+#                                historial.
+#   ensayo-fase3.git             resultado del ensayo de la fase 3.
+#
+# El inventario de que se retiro, con su clasificacion, esta versionado en
+# docs/reorganizacion/.inventario-material-ajeno.txt
+#
+# ------------------------------------------------------
+# 1. SISTEMA OPERATIVO Y ENTORNOS (General)
+# ------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# ------------------------------------------------------
+# 2. SEGURIDAD (¡IMPORTANTE!)
+# ------------------------------------------------------
+# Bloquear claves privadas detectadas en ISE/Ansible.
+# OJO: "id_rsa" es un nombre exacto, no cubre "id_rsa_admin". Las claves del
+# laboratorio se llaman id_rsa_<usuario>, asi que se ignora la carpeta entera.
+id_rsa
+id_rsa.pub
+id_rsa_*
+**/claves/
+*.pem
+*.key
+*.log
+# Excepción: si quieres mantener logs específicos, coméntalo, 
+# pero veo muchos logs de JMeter y LaTeX que ensucian.
+
+# ------------------------------------------------------
+# 3. LATEX (Usado en casi todas las asignaturas)
+# ------------------------------------------------------
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.toc
+*.log
+*.out
+*.bbl
+*.blg
+*.lof
+*.lot
+*.lol
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+# Lo que latexmk deja al abortar: renombra el .bcf y el .bbl con este sufijo,
+# que las reglas de arriba no cubren. Cinco se habian colado en el repositorio.
+*-SAVE-ERROR
+.tex-other-files/
+_minted*
+# Salida de compilación de LaTeX dentro de Subjects/.
+# Se ignoran los intermedios (.aux, .log, .toc...) pero NO los PDF: la web
+# enlaza a ellos y si no están en el repositorio dan 404.
+# Se ignora el CONTENIDO (build/*), no el directorio: git no puede reincluir
+# un fichero cuyo directorio padre esté excluido.
+Subjects/**/build/*
+!Subjects/**/build/*.pdf
+
+# ------------------------------------------------------
+# 4. JAVA / NETBEANS (Asignatura PDOO)
+# ------------------------------------------------------
+# Esto reemplaza a todas las líneas específicas que tenías antes
+*.class
+*.jar
+*.war
+# Carpetas de compilación de NetBeans/Java
+nbproject/private/
+dist/
+
+# ------------------------------------------------------
+# 5. C / C++ (Asignaturas SCD, IG)
+# ------------------------------------------------------
+*.o
+*.obj
+*.exe
+# Ignorar ejecutables sin extensión (común en Linux/Mac)
+# Si tus ejecutables tienen nombres específicos, añádelos aquí:
+*_exe
+
+# ------------------------------------------------------
+# 6. PYTHON / JUPYTER (Asignaturas IA, ECO)
+# ------------------------------------------------------
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+venv/
+env/
+
+# ------------------------------------------------------
+# 7. WEB / NODE.JS (Asignatura ISE)
+# ------------------------------------------------------
+node_modules/
+npm-debug.log
+.env
+
+# ------------------------------------------------------
+# 8. GODOT (Asignatura IG)
+# ------------------------------------------------------
+.import/
+export.cfg
+export_presets.cfg
+
+# ------------------------------------------------------
+# 9. OTROS Y ESPECÍFICOS TUYOS
+# ------------------------------------------------------
+token.txt
+vacio_sinconocimientos.html
+ficherosPesados/
+agents/
+arbol.txt
+plantillas.txt
+# Este fichero SI se versiona. Se ignoraba a si mismo, asi que quien clonaba el
+# repositorio se quedaba sin ninguna regla, incluidas las de seguridad de la
+# seccion 2. No volver a anadir ".gitignore" a esta lista.
+.gitignore_v1
+indices_sacar.txt
+insertar_agentes.txt
+update_git.sh
+
+# Las notas de trabajo locales se excluyen desde .git/info/exclude, que no se
+# versiona. Este fichero si viaja con el repositorio, asi que no lista sus
+# nombres.

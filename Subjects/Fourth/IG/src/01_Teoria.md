@@ -1,2 +1,10 @@
 \part{Teoría}
 \input{src/tex/t1}
+\input{src/tex/t2}
+\input{src/tex/t3}
+\input{src/tex/t4}
+\input{src/tex/t5}
+\input{src/tex/t6}
+\input{src/tex/t7}
+\input{src/tex/t8}
+\input{src/tex/t9}
