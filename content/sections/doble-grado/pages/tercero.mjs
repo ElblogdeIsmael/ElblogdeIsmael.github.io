@@ -528,6 +528,11 @@ export default {
                   kind: "PDF",
                 },
                 {
+                  name: "Esquema, datos y 920 sentencias SQL",
+                  href: "https://github.com/Ismael-Sallami/oracle-sql-exercises",
+                  kind: "WEB",
+                },
+                {
                   name: "Relación 1",
                   href: "/Subjects/Third/FBD/Teoria/build/Relacion1.pdf",
                   kind: "PDF",
@@ -657,6 +662,16 @@ export default {
                   name: "Guía completa Control 2",
                   href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Controles/Guia_Control2/GuiaCompletaC2-FIS.pdf",
                   kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Prácticas",
+              resources: [
+                {
+                  name: "Los siete informes, en grupo de cuatro",
+                  href: "https://github.com/Ismael-Sallami/software-engineering-practices",
+                  kind: "WEB",
                 },
               ],
             },

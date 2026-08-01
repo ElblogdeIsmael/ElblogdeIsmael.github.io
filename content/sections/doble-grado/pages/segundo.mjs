@@ -254,6 +254,11 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/algoritmica/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Prácticas 2 a 5 · 19 problemas y 31 programas, en grupo de cinco",
+                  href: "https://github.com/Ismael-Sallami/algorithm-design-techniques",
+                  kind: "WEB",
+                },
               ],
             },
             {
