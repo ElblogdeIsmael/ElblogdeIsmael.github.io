@@ -137,6 +137,11 @@ export default {
                   href: "/Subjects/Fourth/IG/build/IG.pdf",
                   kind: "PDF",
                 },
+                {
+                  name: "Código · 67 scripts de Godot",
+                  href: "https://github.com/Ismael-Sallami/godot-graphics-exercises",
+                  kind: "WEB",
+                },
               ],
             },
           ],
@@ -216,6 +221,11 @@ export default {
                 {
                   name: "Portafolio CaixaBank (trabajo en grupo)",
                   href: "/Subjects/Fourth/DRH1/practicas/portafolio-caixabank.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Actividad 1",
+                  href: "/Subjects/Fourth/DRH1/Actividades/Act1/act1.pdf",
                   kind: "PDF",
                 },
               ],
@@ -372,6 +382,11 @@ export default {
                   name: "Convocatorias resueltas 2021-2025",
                   href: "/viewer/?file=Subjects/Fourth/MAC/src/04_examenes.md",
                   kind: "MD",
+                },
+                {
+                  name: "NP-completitud de 3-Partition",
+                  href: "https://github.com/Ismael-Sallami/3-Partition-NP-Completeness",
+                  kind: "WEB",
                 },
               ],
             },

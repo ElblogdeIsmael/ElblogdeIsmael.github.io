@@ -80,7 +80,7 @@ export default {
               resources: [
                 {
                   name: "TDA-Image",
-                  href: "https://github.com/Ismael-Sallami/image-adt/tree/main",
+                  href: "https://github.com/Ismael-Sallami/image-adt",
                   kind: "WEB",
                 },
               ],
@@ -123,8 +123,7 @@ export default {
               resources: [
                 {
                   name: "Guía docente (no disponible)",
-                  href: "#",
-                  kind: "GUIA",
+                  note: true,
                 },
               ],
             },
@@ -254,6 +253,11 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/algoritmica/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Prácticas 2 a 5 · 19 problemas y 31 programas, en grupo de cinco",
+                  href: "https://github.com/Ismael-Sallami/algorithm-design-techniques",
+                  kind: "WEB",
+                },
               ],
             },
             {
@@ -279,8 +283,7 @@ export default {
               resources: [
                 {
                   name: "Guía docente (no disponible)",
-                  href: "#",
-                  kind: "GUIA",
+                  note: true,
                 },
               ],
             },
