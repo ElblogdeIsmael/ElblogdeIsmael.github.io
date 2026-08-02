@@ -1,4 +1,4 @@
-# Test de Teoría del Capítulo 6 - EL INMOVILIZADO INTANGIBLE
+# Contabilidad Financiera I — Test Tema 6
 
 * **Autor:** Ismael Sallami Moreno
 * **Titulación:** Doble Grado en Ingeniería Informática y ADE

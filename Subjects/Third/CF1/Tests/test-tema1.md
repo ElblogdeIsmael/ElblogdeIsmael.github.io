@@ -1,4 +1,4 @@
-# Test de Contabilidad Financiera-T1
+# Contabilidad Financiera I — Test Tema 1 · ampliado
 
 * **Autor:** Ismael Sallami Moreno
 * **Titulación:** Doble Grado en Ingeniería Informática y ADE

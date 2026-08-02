@@ -1,4 +1,4 @@
-# Test de Teoría del Capítulo 4 - Contabilidad Financiera I
+# Contabilidad Financiera I — Test Tema 4
 
 * **Autor:** Ismael Sallami Moreno
 * **Titulación:** Doble Grado en Ingeniería Informática y ADE

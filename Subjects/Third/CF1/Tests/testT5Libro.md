@@ -1,4 +1,4 @@
-# Test de Teoría del Capítulo 5 - EL INMOVILIZADO MATERIAL EN LAS CUENTAS ANUALES
+# Contabilidad Financiera I — Test Tema 5
 
 * **Autor:** Ismael Sallami Moreno
 * **Titulación:** Doble Grado en Ingeniería Informática y ADE
