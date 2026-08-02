@@ -1,228 +1,579 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cuestionario Impuesto sobre Beneficios</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuestionario Impuesto sobre Beneficios (Capítulo 6)</title>
 
-<style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 20px;
-        background: linear-gradient(to right, #fceabb, #f8b500);
-        color: #333;
-    }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 
-    .quiz-container {
-        max-width: 800px;
-        margin: auto;
-        background: #ffffff;
-        padding: 30px 25px;
-        border-radius: 16px;
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-    }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 
-    h1 {
-        text-align: center;
-        color: #2c3e50;
-        margin-bottom: 30px;
-        font-size: 2.4em;
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+      :root {
+        --bg-color: #f5f0e8;
+        --text-color: #1a1410;
+        --card-bg: #fbf8f2;
+        --border-color: #d4c9b0;
+        --primary-color: #8b2a0f;
+        --hover-color: #6e2009;
+        --muted: #7a6a54;
+        --rule: #d4c9b0;
+      }
+
+      body {
+        font-family: 'Source Serif 4', Georgia, serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.75;
+        padding: 40px 20px 80px;
+        font-size: 18px;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
+        text-align: left;
+        color: var(--primary-color);
+        font-size: 2.6rem;
+        margin-bottom: 6px;
+        border-bottom: 3px solid var(--text-color);
+        padding-bottom: 16px;
+      }
+
+      h2 {
+        font-family: 'Playfair Display', Georgia, serif;
         font-weight: 700;
-    }
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-top: 48px;
+        border-top: 2px solid var(--primary-color);
+        padding-top: 14px;
+      }
 
-    .question-block {
-        margin-bottom: 30px;
-        padding: 20px;
-        border-left: 6px solid #f39c12;
-        border-radius: 12px;
-        background-color: #fef9f3;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease;
-    }
+      .author {
+        text-align: left;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        font-style: italic;
+        color: var(--muted);
+      }
 
-    .question-block:hover {
-        transform: translateY(-2px);
-    }
+      .question {
+        background: transparent;
+        border: none;
+        border-bottom: 1px dashed var(--rule);
+        border-radius: 0;
+        padding: 24px 40px 24px 4px;
+        margin-bottom: 0;
+        box-shadow: none;
+        transition: background 0.2s;
+        overflow-wrap: break-word;
+        position: relative;
+      }
+      .question:hover {
+        transform: none;
+        background: rgba(139, 42, 15, 0.03);
+      }
+      .question:last-child { border-bottom: none; }
 
-    .question-block p {
-        font-size: 1.25em;
-        font-weight: 600;
-        color: #34495e;
-        margin-bottom: 15px;
-    }
+      .correct   { border-left: 4px solid #2f7d32; background-color: #e3efe0; padding-left: 14px; }
+      .partial   { border-left: 4px solid #b8860b; background-color: #f4ead0; padding-left: 14px; }
+      .incorrect { border-left: 4px solid #a4161a; background-color: #f3dcd8; padding-left: 14px; }
+      .correct::before, .partial::before, .incorrect::before {
+        position: absolute; top: 22px; right: 14px;
+        font-family: "Playfair Display", Georgia, serif;
+        font-weight: 700; font-size: 1.2rem; line-height: 1;
+      }
+      .correct::before   { content: "\2713"; color: #2f7d32; }
+      .incorrect::before { content: "\2717"; color: #a4161a; }
+      .partial::before   { content: "!"; color: #8a6508; }
 
-    .options div {
-        background: #ecf0f1;
-        padding: 12px 18px;
-        margin-bottom: 10px;
-        border-radius: 8px;
+      .enunciado { margin-bottom: 15px; }
+      .enunciado strong:first-child {
+        font-family: 'Playfair Display', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.1em;
+      }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+
+      .opcion-linea, .opcion-bloque {
+        display: block;
+        padding-left: 35px;
+        position: relative;
         cursor: pointer;
-        transition: background 0.3s ease, transform 0.2s ease;
-        font-size: 1em;
-    }
+        min-height: 24px;
+      }
 
-    .options div:hover {
-        background: #d0d7de;
-        transform: scale(1.02);
-    }
+      .opcion-linea input[type="checkbox"],
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 4px;
+        transform: scale(1.2);
+        margin: 0;
+        cursor: pointer;
+        accent-color: var(--primary-color);
+      }
 
-    .options div.correct {
-        background-color: #27ae60 !important;
-        color: #fff;
-        font-weight: 600;
-    }
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline;
+      }
 
-    .options div.incorrect {
-        background-color: #e74c3c !important;
-        color: #fff;
-        font-weight: 600;
-    }
+      mjx-container { font-size: 108% !important; }
 
-    .question-number {
-        font-weight: bold;
-        margin-right: 8px;
-        color: #e67e22;
-    }
-</style>
+      img { max-width: 100%; height: auto; border-radius: 3px; }
+      table { border-collapse: collapse; width: 100%; margin: 14px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid var(--border-color); padding: 8px; text-align: left; }
+      th { background-color: rgba(139,42,15,0.07); }
 
-</head>
-<body>
+      code, pre { font-family: 'SFMono-Regular', Consolas, monospace; }
 
-<div class="quiz-container">
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 5px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 2px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border-left: 3px solid var(--border-color);
+        background-color: rgba(0,0,0,0.025);
+        border-radius: 0 3px 3px 0;
+        font-size: 0.95em;
+        font-style: italic;
+        color: #4a3820;
+      }
+      .explicacion strong { font-style: normal; }
+      .dark-mode .btn-explicacion { color: #e0a890; border-color: #e0a890; }
+      .dark-mode .btn-explicacion:hover { background-color: #e0a890; color: #1a1209; }
+      .dark-mode .explicacion { background-color: rgba(255,255,255,0.05); border-left-color: #6b5840; color: #d8c8b0; }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: #fbf8f2;
+        border: none;
+        padding: 9px 15px;
+        margin: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.85rem;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: var(--muted);
+      }
+      .instrucciones-extra li { margin-bottom: 5px; }
+
+      body.dark-mode {
+        --bg-color: #1f1812;
+        --text-color: #e8ddca;
+        --card-bg: #2a2118;
+        --border-color: #4a3c2c;
+        --primary-color: #d98050;
+        --hover-color: #c06a3a;
+        --muted: #b3a285;
+        --rule: #4a3c2c;
+      }
+      .dark-mode h1 { border-bottom-color: var(--text-color); }
+      .dark-mode .author { color: var(--muted); }
+      .dark-mode th { background-color: rgba(217,128,80,0.12); }
+      .dark-mode .correct { background-color: rgba(47,125,50,0.30); border-left-color: #4caf50; }
+      .dark-mode .partial { background-color: rgba(184,134,11,0.30); border-left-color: #d4a017; }
+      .dark-mode .incorrect { background-color: rgba(170,17,17,0.32); border-left-color: #e05555; }
+      .dark-mode .correct::before { color: #6bdc8e; }
+      .dark-mode .incorrect::before { color: #ff8a8a; }
+      .dark-mode .partial::before { color: #e6c14d; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; font-size: 13px; }
+        .question { page-break-inside: avoid; border-bottom: 1px solid #ccc; padding: 12px 0; }
+        .info-box, button, #extra-buttons { display: none !important; }
+        h1 { font-size: 1.9rem; }
+      }
+    </style>
+  </head>
+  <body>
     <h1>Cuestionario Impuesto sobre Beneficios (Capítulo 6)</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
 
-    <div class="author" style="text-align: center; margin-bottom: 30px; font-size: 1.1em; color: #555;">
-        <p style="margin: 5px 0; font-weight: 600;">Autor: <span style="color: #e67e22;">Ismael Sallami Moreno</span></p>
-        <p style="margin: 5px 0;">Asignatura: <span style="color: #3498db;">Contabilidad Financiera II</span></p>
-        <p style="margin: 5px 0;">Titulación: <span style="color: #9b59b6;">Ingeniería Informática + ADE</span></p>
+    <div class="info-box">
+      <p></p>
+
+      <div class="instrucciones-extra">
+        
+      </div>
+
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
     </div>
 
-    <div class="question-block" id="q1">
-        <p><span class="question-number">1.</span> Respecto al impuesto sobre beneficios:</p>
-        <div class="options">
-        <div onclick="checkAnswer(this, false, 'q1')">a) Es un impuesto de carácter indirecto, y el sujeto pasivo lo constituyen las personas jurídicas.</div>
-        <div onclick="checkAnswer(this, true, 'q1')">b) El hecho imponible lo constituye la obtención de la renta.</div>
-        <div onclick="checkAnswer(this, false, 'q1')">c) El tipo de gravamen que se aplica es de tipo progresivo en función de la renta obtenida.</div>
-        <div onclick="checkAnswer(this, false, 'q1')">d) El sujeto pasivo lo constituyen las personas físicas que realizan la liquidacióndel impuesto.</div>
-        </div>
-        </div>
-        
-        <div class="question-block" id="q2">
-        <p><span class="question-number">2.</span> El impuesto corriente:</p>
-        <div class="options">
-        <div onclick="checkAnswer(this, true, 'q2')">a) Se calcula de acuerdo con las leyes fiscales.</div>
-        <div onclick="checkAnswer(this, false, 'q2')">b) Se concreta en el reconocimiento contable de pasivos y activos por impuesto diferido.</div>
-        <div onclick="checkAnswer(this, false, 'q2')">c) Los activos y pasivos por impuesto corriente no se pagan ni se cobran.</div>
-        <div onclick="checkAnswer(this, false, 'q2')">d) Es un concepto contable, no fiscal.</div>
-        </div>
-        </div>
-        
-        <div class="question-block" id="q3">
-        <p><span class="question-number">3.</span> El impuesto diferido:</p>
-        <div class="options">
-        <div onclick="checkAnswer(this, false, 'q3')">a) Los activos y pasivos por impuesto diferido se pagan o se cobran el año en el que surgen las diferencias permanentes.</div>
-        <div onclick="checkAnswer(this, true, 'q3')">b) Es un concepto contable, no fiscal.</div>
-        <div onclick="checkAnswer(this, false, 'q3')">c) Es la cantidad a pagar o recuperar por el impuesto sobre los beneficios.</div>
-        <div onclick="checkAnswer(this, false, 'q3')">d) Se origina como consecuencia de las diferencias temporarias.</div>
-        </div>
-        </div>
-        
-        <div class="question-block" id="q4">
-        <p><span class="question-number">4.</span> Respecto al resultado contable y el resultado fiscal:</p>
-        <div class="options">
-        <div onclick="checkAnswer(this, false, 'q4')">a) Podemos afirmar que siempre son iguales.</div>
-        <div onclick="checkAnswer(this, true, 'q4')">b) Podemos afirmar que pueden ser diferentes en algunas ocasiones.</div>
-        <div onclick="checkAnswer(this, false, 'q4')">c) Podemos afirmar que no existe relación alguna entre ellos.</div>
-        <div onclick="checkAnswer(this, false, 'q4')">d) Podemos afirmar que son conceptos totalmente independientes.</div>
-        </div>
-        </div>
-        
-        <div class="question-block" id="q5">
-        <p><span class="question-number">5.</span> Las Diferencias temporarias:</p>
-        <div class="options">
-        <div onclick="checkAnswer(this, false, 'q5')">a) Son aquellas derivadas de la diferente valoración contable y fiscal, atribuida a los activos, pasivos y determinados instrumentos de patrimonio propio de la empresa, en la medida en que no tengan incidencia en la carga fiscal futura.</div>
-        <div onclick="checkAnswer(this, true, 'q5')">b) Son aquellas derivadas de la diferente valoración contable y fiscal, atribuida a los activos, pasivos y determinados instrumentos de patrimonio propio de la empresa, en la medida en que tengan incidencia en la carga fiscal futura.</div>
-        <div onclick="checkAnswer(this, false, 'q5')">c) Son aquellas derivadas de la diferente valoración contable y fiscal, atribuida a los activos, pasivos y determinados instrumentos de patrimonio propio de la empresa, tengan o no incidencia en la carga fiscal futura:</div>
-        <div onclick="checkAnswer(this, false, 'q5')">d) Todas las respuestas anteriores son incorrectas.</div>
-        </div>
-        </div>
-        
-        <div class="question-block" id="q6">
-        <p><span class="question-number">6.</span> Las Diferencias permanentes:</p>
-        <div class="options">
-        <div onclick="checkAnswer(this, false, 'q6')">a) Producen ajuste en el cálculo del impuesto a pagar, pero no producen ajuste contable.</div>
-        <div onclick="checkAnswer(this, false, 'q6')">b) Producen diferencias en su valoración entre la contabilidad y fiscalidad, y nunca van a coincidir.</div>
-        <div onclick="checkAnswer(this, false, 'q6')">c) No revierten en los ejercicios siguientes.</div>
-        <div onclick="checkAnswer(this, true, 'q6')">d) Todas las respuestas son correctas.</div>
-        </div>
-        </div>
-        
-        <div class="question-block" id="q7">
-        <p><span class="question-number">7.</span> En el registro contable del impuesto sobre beneficios, las diferencias temporarias deducibles:</p>
-        <div class="options">
-        <div onclick="checkAnswer(this, true, 'q7')">a) Se registran cuando suponen un menor pago de impuestos en el futuro.</div>
-        <div onclick="checkAnswer(this, false, 'q7')">b) Se registran cuando suponen un mayor pago de impuestos en el futuro.</div>
-        <div onclick="checkAnswer(this, false, 'q7')">c) Se cancelan al practicar la liquidación en el siguiente ejercicio al de su registro contable.</div>
-        <div onclick="checkAnswer(this, false, 'q7')">d) Se llevan a la cuenta de Pérdidas y Ganancias del ejercicio en que se producen.</div>
-        </div>
-        </div>
-        
-        <div class="question-block" id="q8">
-        <p><span class="question-number">8.</span> En la liquidación del impuesto sobre sociedades la cuota diferencial tiene la consideración de:</p>
-        <div class="options">
-        <div onclick="checkAnswer(this, false, 'q8')">a) Activo financiero.</div>
-        <div onclick="checkAnswer(this, false, 'q8')">b) Pasivo financiero.</div>
-        <div onclick="checkAnswer(this, false, 'q8')">c) Pasivo financiero o activo financiero según su signo.</div>
-        <div onclick="checkAnswer(this, true, 'q8')">d) Ninguna de las respuestas anteriores es correcta.</div>
-        </div>
-        </div>
-        
-        <div class="question-block" id="q9">
-        <p><span class="question-number">9.</span> Siguiendo las normas de registro y valoración del PGC, en el tratamiento contable del impuesto sobre sociedades, las diferencias permanentes forman parte:</p>
-        <div class="options">
-        <div onclick="checkAnswer(this, false, 'q9')">a) De la base imponible, como activos.</div>
-        <div onclick="checkAnswer(this, false, 'q9')">b) De la base imponible, como pasivos.</div>
-        <div onclick="checkAnswer(this, true, 'q9')">c) De la base imponible, sin reflejo contable en balance.</div>
-        <div onclick="checkAnswer(this, false, 'q9')">d) De la base imponible como patrimonio neto.</div>
-        </div>
-        </div>
-        
-        <div class="question-block" id="q10">
-        <p><span class="question-number">10.</span> En el registro contable del impuesto sobre beneficios, las diferencias temporarias imponibles (Cuenta 479) en origen:</p>
-        <div class="options">
-        <div onclick="checkAnswer(this, true, 'q10')">a) Implican que el valor fiscal de los activos es menor que su valor contable</div>
-        <div onclick="checkAnswer(this, false, 'q10')">b) Implican que el valor fiscal de los activos es mayor que su valor contable.</div>
-        <div onclick="checkAnswer(this, false, 'q10')">c) Se cancelarán al practicar la liquidación en el siguiente ejercicio al de su registro contable.</div>
-        <div onclick="checkAnswer(this, false, 'q10')">d) Son aquellas que darán lugar a menores cantidades a pagar o a mayores cantidades a devolver por impuestos en ejercicios futuros.</div>
-        </div>
-        </div>
-
-        <!-- Preguntas extra -->
-
-        
-
+    <div id="questions-container">
+      <div class="question" id="q1" data-correct="1">
+  <div class="enunciado"><strong>1.</strong> Respecto al impuesto sobre beneficios:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> Es un impuesto de carácter indirecto, y el sujeto pasivo lo constituyen las personas jurídicas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> El hecho imponible lo constituye la obtención de la renta.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> El tipo de gravamen que se aplica es de tipo progresivo en función de la renta obtenida.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> El sujeto pasivo lo constituyen las personas físicas que realizan la liquidacióndel impuesto.</label></li>
+  </ol>
+</div>
+<div class="question" id="q2" data-correct="0">
+  <div class="enunciado"><strong>2.</strong> El impuesto corriente:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Se calcula de acuerdo con las leyes fiscales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Se concreta en el reconocimiento contable de pasivos y activos por impuesto diferido.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> Los activos y pasivos por impuesto corriente no se pagan ni se cobran.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> Es un concepto contable, no fiscal.</label></li>
+  </ol>
+</div>
+<div class="question" id="q3" data-correct="1">
+  <div class="enunciado"><strong>3.</strong> El impuesto diferido:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> Los activos y pasivos por impuesto diferido se pagan o se cobran el año en el que surgen las diferencias permanentes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> Es un concepto contable, no fiscal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> Es la cantidad a pagar o recuperar por el impuesto sobre los beneficios.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> Se origina como consecuencia de las diferencias temporarias.</label></li>
+  </ol>
+</div>
+<div class="question" id="q4" data-correct="1">
+  <div class="enunciado"><strong>4.</strong> Respecto al resultado contable y el resultado fiscal:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Podemos afirmar que siempre son iguales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> Podemos afirmar que pueden ser diferentes en algunas ocasiones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> Podemos afirmar que no existe relación alguna entre ellos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> Podemos afirmar que son conceptos totalmente independientes.</label></li>
+  </ol>
+</div>
+<div class="question" id="q5" data-correct="1">
+  <div class="enunciado"><strong>5.</strong> Las Diferencias temporarias:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> Son aquellas derivadas de la diferente valoración contable y fiscal, atribuida a los activos, pasivos y determinados instrumentos de patrimonio propio de la empresa, en la medida en que no tengan incidencia en la carga fiscal futura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> Son aquellas derivadas de la diferente valoración contable y fiscal, atribuida a los activos, pasivos y determinados instrumentos de patrimonio propio de la empresa, en la medida en que tengan incidencia en la carga fiscal futura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> Son aquellas derivadas de la diferente valoración contable y fiscal, atribuida a los activos, pasivos y determinados instrumentos de patrimonio propio de la empresa, tengan o no incidencia en la carga fiscal futura:</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> Todas las respuestas anteriores son incorrectas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q6" data-correct="3">
+  <div class="enunciado"><strong>6.</strong> Las Diferencias permanentes:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> Producen ajuste en el cálculo del impuesto a pagar, pero no producen ajuste contable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> Producen diferencias en su valoración entre la contabilidad y fiscalidad, y nunca van a coincidir.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> No revierten en los ejercicios siguientes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> Todas las respuestas son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q7" data-correct="0">
+  <div class="enunciado"><strong>7.</strong> En el registro contable del impuesto sobre beneficios, las diferencias temporarias deducibles:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> Se registran cuando suponen un menor pago de impuestos en el futuro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> Se registran cuando suponen un mayor pago de impuestos en el futuro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> Se cancelan al practicar la liquidación en el siguiente ejercicio al de su registro contable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> Se llevan a la cuenta de Pérdidas y Ganancias del ejercicio en que se producen.</label></li>
+  </ol>
+</div>
+<div class="question" id="q8" data-correct="3">
+  <div class="enunciado"><strong>8.</strong> En la liquidación del impuesto sobre sociedades la cuota diferencial tiene la consideración de:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Activo financiero.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> Pasivo financiero.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> Pasivo financiero o activo financiero según su signo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> Ninguna de las respuestas anteriores es correcta.</label></li>
+  </ol>
+</div>
+<div class="question" id="q9" data-correct="2">
+  <div class="enunciado"><strong>9.</strong> Siguiendo las normas de registro y valoración del PGC, en el tratamiento contable del impuesto sobre sociedades, las diferencias permanentes forman parte:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> De la base imponible, como activos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> De la base imponible, como pasivos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> De la base imponible, sin reflejo contable en balance.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> De la base imponible como patrimonio neto.</label></li>
+  </ol>
+</div>
+<div class="question" id="q10" data-correct="0">
+  <div class="enunciado"><strong>10.</strong> En el registro contable del impuesto sobre beneficios, las diferencias temporarias imponibles (Cuenta 479) en origen:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> Implican que el valor fiscal de los activos es menor que su valor contable</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> Implican que el valor fiscal de los activos es mayor que su valor contable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> Se cancelarán al practicar la liquidación en el siguiente ejercicio al de su registro contable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> Son aquellas que darán lugar a menores cantidades a pagar o a mayores cantidades a devolver por impuestos en ejercicios futuros.</label></li>
+  </ol>
 </div>
 
-<script>
-    function checkAnswer(selectedOption, isCorrect, questionId) {
-        // Primero, limpiar clases de otras opciones de la misma pregunta
-        const questionBlock = document.getElementById(questionId);
-        const options = questionBlock.querySelectorAll('.options div');
-        options.forEach(opt => {
-            opt.classList.remove('correct', 'incorrect');
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
+
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
+
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
+
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
+
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checked.length === 0) return;
+
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
+            } else {
+              q.classList.add("incorrect");
+            }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
+        }
+
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
+
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
         });
 
-        // Luego, aplicar la clase a la opción seleccionada
-        if (isCorrect) {
-            selectedOption.classList.add('correct');
-        } else {
-            selectedOption.classList.add('incorrect');
-        }
-    }
-</script>
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
 
-</body>
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
 </html>

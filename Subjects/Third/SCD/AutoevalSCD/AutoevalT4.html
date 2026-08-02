@@ -1,459 +1,789 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 2 - Exclusión Mutua</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 4 - Sistemas de Tiempo Real</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            font-size: 18px;
-        }
-        h1 {
-            text-align: center;
-            color: #007bff;
-            margin-bottom: 30px;
-        }
-        .question {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .question:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .question.correct {
-            border-color: #28a745;
-            background-color: #d4edda;
-        }
-        .question.incorrect {
-            border-color: #dc3545;
-            background-color: #f8d7da;
-        }
-        .explanation {
-            background: #e7f3fe;
-            border: 1px solid #b2d4fe;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 10px;
-        }
-        .author {
-            margin-top: 20px;
-            font-style: italic;
-            text-align: center;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-            transform: scale(1.2);
-        }
-        input[type="button"] {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        input[type="button"]:hover {
-            background-color: #0056b3;
-            transform: translateY(-3px);
-        }
+      :root {
+        --bg-color: #f5f0e8;
+        --text-color: #1a1410;
+        --card-bg: #fbf8f2;
+        --border-color: #d4c9b0;
+        --primary-color: #8b2a0f;
+        --hover-color: #6e2009;
+        --muted: #7a6a54;
+        --rule: #d4c9b0;
+      }
+
+      body {
+        font-family: 'Source Serif 4', Georgia, serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.75;
+        padding: 40px 20px 80px;
+        font-size: 18px;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
+        text-align: left;
+        color: var(--primary-color);
+        font-size: 2.6rem;
+        margin-bottom: 6px;
+        border-bottom: 3px solid var(--text-color);
+        padding-bottom: 16px;
+      }
+
+      h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-top: 48px;
+        border-top: 2px solid var(--primary-color);
+        padding-top: 14px;
+      }
+
+      .author {
+        text-align: left;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        font-style: italic;
+        color: var(--muted);
+      }
+
+      .question {
+        background: transparent;
+        border: none;
+        border-bottom: 1px dashed var(--rule);
+        border-radius: 0;
+        padding: 24px 40px 24px 4px;
+        margin-bottom: 0;
+        box-shadow: none;
+        transition: background 0.2s;
+        overflow-wrap: break-word;
+        position: relative;
+      }
+      .question:hover {
+        transform: none;
+        background: rgba(139, 42, 15, 0.03);
+      }
+      .question:last-child { border-bottom: none; }
+
+      .correct   { border-left: 4px solid #2f7d32; background-color: #e3efe0; padding-left: 14px; }
+      .partial   { border-left: 4px solid #b8860b; background-color: #f4ead0; padding-left: 14px; }
+      .incorrect { border-left: 4px solid #a4161a; background-color: #f3dcd8; padding-left: 14px; }
+      .correct::before, .partial::before, .incorrect::before {
+        position: absolute; top: 22px; right: 14px;
+        font-family: "Playfair Display", Georgia, serif;
+        font-weight: 700; font-size: 1.2rem; line-height: 1;
+      }
+      .correct::before   { content: "\2713"; color: #2f7d32; }
+      .incorrect::before { content: "\2717"; color: #a4161a; }
+      .partial::before   { content: "!"; color: #8a6508; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado strong:first-child {
+        font-family: 'Playfair Display', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.1em;
+      }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+
+      .opcion-linea, .opcion-bloque {
+        display: block;
+        padding-left: 35px;
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;
+      }
+
+      .opcion-linea input[type="checkbox"],
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 4px;
+        transform: scale(1.2);
+        margin: 0;
+        cursor: pointer;
+        accent-color: var(--primary-color);
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline;
+      }
+
+      mjx-container { font-size: 108% !important; }
+
+      img { max-width: 100%; height: auto; border-radius: 3px; }
+      table { border-collapse: collapse; width: 100%; margin: 14px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid var(--border-color); padding: 8px; text-align: left; }
+      th { background-color: rgba(139,42,15,0.07); }
+
+      code, pre { font-family: 'SFMono-Regular', Consolas, monospace; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 5px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 2px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border-left: 3px solid var(--border-color);
+        background-color: rgba(0,0,0,0.025);
+        border-radius: 0 3px 3px 0;
+        font-size: 0.95em;
+        font-style: italic;
+        color: #4a3820;
+      }
+      .explicacion strong { font-style: normal; }
+      .dark-mode .btn-explicacion { color: #e0a890; border-color: #e0a890; }
+      .dark-mode .btn-explicacion:hover { background-color: #e0a890; color: #1a1209; }
+      .dark-mode .explicacion { background-color: rgba(255,255,255,0.05); border-left-color: #6b5840; color: #d8c8b0; }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: #fbf8f2;
+        border: none;
+        padding: 9px 15px;
+        margin: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.85rem;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: var(--muted);
+      }
+      .instrucciones-extra li { margin-bottom: 5px; }
+
+      body.dark-mode {
+        --bg-color: #1f1812;
+        --text-color: #e8ddca;
+        --card-bg: #2a2118;
+        --border-color: #4a3c2c;
+        --primary-color: #d98050;
+        --hover-color: #c06a3a;
+        --muted: #b3a285;
+        --rule: #4a3c2c;
+      }
+      .dark-mode h1 { border-bottom-color: var(--text-color); }
+      .dark-mode .author { color: var(--muted); }
+      .dark-mode th { background-color: rgba(217,128,80,0.12); }
+      .dark-mode .correct { background-color: rgba(47,125,50,0.30); border-left-color: #4caf50; }
+      .dark-mode .partial { background-color: rgba(184,134,11,0.30); border-left-color: #d4a017; }
+      .dark-mode .incorrect { background-color: rgba(170,17,17,0.32); border-left-color: #e05555; }
+      .dark-mode .correct::before { color: #6bdc8e; }
+      .dark-mode .incorrect::before { color: #ff8a8a; }
+      .dark-mode .partial::before { color: #e6c14d; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; font-size: 13px; }
+        .question { page-break-inside: avoid; border-bottom: 1px solid #ccc; padding: 12px 0; }
+        .info-box, button, #extra-buttons { display: none !important; }
+        h1 { font-size: 1.9rem; }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <h1>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 4 - Sistemas de Tiempo Real</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
 
-    <h1>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 4 - Sistemas de Tiempo Real </h1>
-    <!-- autor, titulación y asignatura -->
-    <ul class="author"></ul>
-        <li><strong>Autor:</strong> Ismael Sallami Moreno</li>
-        <li><strong>Titulación:</strong> Ingeniería Informática y ADE</li>
-        <li><strong>Asignatura:</strong> Sistemas Concurrentes y Distribuidos</li>
-    </ul>
-    <br>
-    
-    <div class="question" id="q1">
-        <p>1. Una tarea espaciada por "Jitter" o deriva tiene:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q1" value="0"> Activaciones a intervalos exactos</label></li>
-            <li><label><input type="radio" name="q1" value="0"> Holgura máxima constante</label></li>
-            <li><label><input type="radio" name="q1" value="0"> Prioridades dinámicas en cada activación</label></li>
-            <li><label><input type="radio" name="q1" value="1"> Variaciones en su tiempo de activación</label></li>
-            <li><label><input type="radio" name="q1" value="0"> Plazos de respuesta arbitrarios</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q2">
-        <p>2. ¿Qué propiedad define el determinismo en los STR?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q2" value="0"> Interrupciones rápidas y eficientes</label></li>
-            <li><label><input type="radio" name="q2" value="0"> Ejecutar tareas concurrentes</label></li>
-            <li><label><input type="radio" name="q2" value="0"> Acceso a recursos compartidos</label></li>
-            <li><label><input type="radio" name="q2" value="1"> Predecir con certeza los tiempos de respuesta</label></li>
-            <li><label><input type="radio" name="q2" value="0"> Asignación dinámica de prioridades</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q3">
-        <p>3. El modelo de tareas simples asume:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q3" value="0"> Dependencia entre todas las tareas</label></li>
-            <li><label><input type="radio" name="q3" value="0"> Exclusión mutua en tiempo real</label></li>
-            <li><label><input type="radio" name="q3" value="0"> Acceso concurrente a recursos compartidos</label></li>
-            <li><label><input type="radio" name="q3" value="1"> Tareas periódicas con plazos iguales a su periodo</label></li>
-            <li><label><input type="radio" name="q3" value="0"> Activaciones dinámicas no predecibles</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q4">
-        <p>4. ¿Qué factor reduce los bloqueos en sistemas STR?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q4" value="0"> Uso de algoritmos dinámicos</label></li>
-            <li><label><input type="radio" name="q4" value="0"> Planificación con servidores diferidos</label></li>
-            <li><label><input type="radio" name="q4" value="1"> Protocolos de techo de prioridad</label></li>
-            <li><label><input type="radio" name="q4" value="0"> Todas las anteriores</label></li>
-            <li><label><input type="radio" name="q4" value="0"> Exclusión mutua en todos los recursos</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q5">
-        <p>5. La prioridad relativa en un esquema RMS se basa en:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q5" value="0"> Número de recursos compartidos</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Tiempo de respuesta más corto</label></li>
-            <li><label><input type="radio" name="q5" value="1"> Periodos más pequeños</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Uso eficiente de CPU</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Plazos de respuesta máximos</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q6">
-        <p>6. El bloqueo indirecto ocurre cuando:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q6" value="0"> Dos tareas tienen igual prioridad</label></li>
-            <li><label><input type="radio" name="q6" value="0"> Las tareas tienen restricciones temporales flexibles</label></li>
-            <li><label><input type="radio" name="q6" value="0"> Ninguna de las anteriores</label></li>
-            <li><label><input type="radio" name="q6" value="0"> Una tarea depende de múltiples recursos</label></li>
-            <li><label><input type="radio" name="q6" value="1"> Un recurso compartido interfiere en tareas no relacionadas</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q7">
-        <p>7. ¿Qué ocurre en un STR durante una sobrecarga transitoria?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q7" value="0"> La planificación dinámica falla</label></li>
-            <li><label><input type="radio" name="q7" value="0"> La prioridad máxima se asigna automáticamente</label></li>
-            <li><label><input type="radio" name="q7" value="1"> Los esquemas estáticos son más predecibles</label></li>
-            <li><label><input type="radio" name="q7" value="0"> Todas las tareas se reinician</label></li>
-            <li><label><input type="radio" name="q7" value="0"> Las tareas de menor prioridad se descartan</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q8">
-        <p>8. El análisis de planificabilidad con servidor diferido garantiza:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q8" value="0"> Mayor flexibilidad en tareas aperiódicas</label></li>
-            <li><label><input type="radio" name="q8" value="0"> Exclusión de tareas esporádicas</label></li>
-            <li><label><input type="radio" name="q8" value="0"> Uso máximo de CPU</label></li>
-            <li><label><input type="radio" name="q8" value="0"> Bloqueos mínimos en recursos compartidos</label></li>
-            <li><label><input type="radio" name="q8" value="1"> Plazos cumplidos para tareas periódicas</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q9">
-        <p>9. Un sistema operativo de tiempo real garantiza:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q9" value="0"> Multitarea ilimitada</label></li>
-            <li><label><input type="radio" name="q9" value="0"> Exclusión mutua en todos los recursos</label></li>
-            <li><label><input type="radio" name="q9" value="0"> Acceso prioritario a memoria</label></li>
-            <li><label><input type="radio" name="q9" value="0"> Máxima utilización de CPU</label></li>
-            <li><label><input type="radio" name="q9" value="1"> Respuesta dentro de un tiempo limitado predefinido</label></li>
-        </ol>
+    <div class="info-box">
+      <p></p>
+
+      <div class="instrucciones-extra">
+        
+      </div>
+
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
     </div>
 
-    <div class="question" id="q10">
-        <p>10. ¿Qué significa STR de misión crítica?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q10" value="0"> Tareas con tiempo límite flexible</label></li>
-            <li><label><input type="radio" name="q10" value="1"> Tareas donde la falla puede tener consecuencias graves</label></li>
-            <li><label><input type="radio" name="q10" value="0"> Tareas con alta tolerancia a fallos</label></li>
-            <li><label><input type="radio" name="q10" value="0"> Planificación exclusivamente dinámica</label></li>
-            <li><label><input type="radio" name="q10" value="0"> Aplicaciones que solo usan recursos compartidos</label></li>
-        </ol>
+    <div id="questions-container">
+      <div class="question" id="q1" data-correct="3">
+  <div class="enunciado"><strong>1.</strong> Una tarea espaciada por "Jitter" o deriva tiene:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> Activaciones a intervalos exactos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> Holgura máxima constante</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> Prioridades dinámicas en cada activación</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> Variaciones en su tiempo de activación</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="4"> Plazos de respuesta arbitrarios</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q1')">Ver explicación</button>
+  <div class="explicacion" id="exp-q1" style="display:none">Las tareas espaciadas por 'Jitter' tienen variaciones en su tiempo de activación.</div>
+</div>
+<div class="question" id="q2" data-correct="3">
+  <div class="enunciado"><strong>2.</strong> ¿Qué propiedad define el determinismo en los STR?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Interrupciones rápidas y eficientes</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Ejecutar tareas concurrentes</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> Acceso a recursos compartidos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> Predecir con certeza los tiempos de respuesta</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="4"> Asignación dinámica de prioridades</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q2')">Ver explicación</button>
+  <div class="explicacion" id="exp-q2" style="display:none">El determinismo en los STR permite predecir con certeza los tiempos de respuesta.</div>
+</div>
+<div class="question" id="q3" data-correct="3">
+  <div class="enunciado"><strong>3.</strong> El modelo de tareas simples asume:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> Dependencia entre todas las tareas</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> Exclusión mutua en tiempo real</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> Acceso concurrente a recursos compartidos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> Tareas periódicas con plazos iguales a su periodo</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="4"> Activaciones dinámicas no predecibles</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q3')">Ver explicación</button>
+  <div class="explicacion" id="exp-q3" style="display:none">El modelo de tareas simples asume tareas periódicas con plazos iguales a su periodo.</div>
+</div>
+<div class="question" id="q4" data-correct="2">
+  <div class="enunciado"><strong>4.</strong> ¿Qué factor reduce los bloqueos en sistemas STR?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Uso de algoritmos dinámicos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> Planificación con servidores diferidos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> Protocolos de techo de prioridad</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> Todas las anteriores</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="4"> Exclusión mutua en todos los recursos</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q4')">Ver explicación</button>
+  <div class="explicacion" id="exp-q4" style="display:none">Los protocolos de techo de prioridad reducen los bloqueos en sistemas STR.</div>
+</div>
+<div class="question" id="q5" data-correct="2">
+  <div class="enunciado"><strong>5.</strong> La prioridad relativa en un esquema RMS se basa en:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> Número de recursos compartidos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> Tiempo de respuesta más corto</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> Periodos más pequeños</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> Uso eficiente de CPU</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="4"> Plazos de respuesta máximos</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q5')">Ver explicación</button>
+  <div class="explicacion" id="exp-q5" style="display:none">En un esquema RMS, la prioridad relativa se basa en periodos más pequeños.</div>
+</div>
+<div class="question" id="q6" data-correct="4">
+  <div class="enunciado"><strong>6.</strong> El bloqueo indirecto ocurre cuando:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> Dos tareas tienen igual prioridad</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> Las tareas tienen restricciones temporales flexibles</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> Ninguna de las anteriores</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> Una tarea depende de múltiples recursos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="4"> Un recurso compartido interfiere en tareas no relacionadas</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q6')">Ver explicación</button>
+  <div class="explicacion" id="exp-q6" style="display:none">El bloqueo indirecto ocurre cuando un recurso compartido interfiere en tareas no relacionadas.</div>
+</div>
+<div class="question" id="q7" data-correct="2">
+  <div class="enunciado"><strong>7.</strong> ¿Qué ocurre en un STR durante una sobrecarga transitoria?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> La planificación dinámica falla</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> La prioridad máxima se asigna automáticamente</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> Los esquemas estáticos son más predecibles</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> Todas las tareas se reinician</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="4"> Las tareas de menor prioridad se descartan</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q7')">Ver explicación</button>
+  <div class="explicacion" id="exp-q7" style="display:none">Durante una sobrecarga transitoria, los esquemas estáticos son más predecibles.</div>
+</div>
+<div class="question" id="q8" data-correct="4">
+  <div class="enunciado"><strong>8.</strong> El análisis de planificabilidad con servidor diferido garantiza:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Mayor flexibilidad en tareas aperiódicas</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> Exclusión de tareas esporádicas</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> Uso máximo de CPU</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> Bloqueos mínimos en recursos compartidos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="4"> Plazos cumplidos para tareas periódicas</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q8')">Ver explicación</button>
+  <div class="explicacion" id="exp-q8" style="display:none">El análisis de planificabilidad con servidor diferido garantiza plazos cumplidos para tareas periódicas.</div>
+</div>
+<div class="question" id="q9" data-correct="4">
+  <div class="enunciado"><strong>9.</strong> Un sistema operativo de tiempo real garantiza:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> Multitarea ilimitada</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> Exclusión mutua en todos los recursos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> Acceso prioritario a memoria</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> Máxima utilización de CPU</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="4"> Respuesta dentro de un tiempo limitado predefinido</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q9')">Ver explicación</button>
+  <div class="explicacion" id="exp-q9" style="display:none">Un sistema operativo de tiempo real garantiza respuesta dentro de un tiempo limitado predefinido.</div>
+</div>
+<div class="question" id="q10" data-correct="1">
+  <div class="enunciado"><strong>10.</strong> ¿Qué significa STR de misión crítica?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> Tareas con tiempo límite flexible</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> Tareas donde la falla puede tener consecuencias graves</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> Tareas con alta tolerancia a fallos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> Planificación exclusivamente dinámica</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="4"> Aplicaciones que solo usan recursos compartidos</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q10')">Ver explicación</button>
+  <div class="explicacion" id="exp-q10" style="display:none">STR de misión crítica significa tareas donde la falla puede tener consecuencias graves.</div>
+</div>
+<div class="question" id="q11" data-correct="2">
+  <div class="enunciado"><strong>11.</strong> Un ejemplo de STR permisivo es:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> Monitoreo de redes</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> Control de tráfico aéreo</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="2"> Adquisición de datos meteorológicos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="3"> Reservas de vuelos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="4"> Planificación de producción</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q11')">Ver explicación</button>
+  <div class="explicacion" id="exp-q11" style="display:none">Un ejemplo de STR permisivo es la adquisición de datos meteorológicos.</div>
+</div>
+<div class="question" id="q12" data-correct="1">
+  <div class="enunciado"><strong>12.</strong> ¿Qué tipo de tiempo NO es usado en los STR?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="0"> Relativo</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="1"> Incremental</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="2"> Absoluto</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="3"> GPS</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="4"> Atómico</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q12')">Ver explicación</button>
+  <div class="explicacion" id="exp-q12" style="display:none">El tiempo incremental no es usado en los STR.</div>
+</div>
+<div class="question" id="q13" data-correct="2">
+  <div class="enunciado"><strong>13.</strong> ¿Cuál es una característica clave de los relojes de tiempo real?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="0"> Sincronización con tiempo relativo</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="1"> Deriva acumulativa constante</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="2"> Tiempo de desbordamiento definido</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="3"> Baja precisión</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="4"> Granularidad variable</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q13')">Ver explicación</button>
+  <div class="explicacion" id="exp-q13" style="display:none">Una característica clave de los relojes de tiempo real es el tiempo de desbordamiento definido.</div>
+</div>
+<div class="question" id="q14" data-correct="2">
+  <div class="enunciado"><strong>14.</strong> Un temporizador periódico se caracteriza por:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="0"> Activarse una vez y detenerse</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="1"> Presentar una deriva acumulativa constante</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="2"> Realizar activaciones repetitivas en intervalos definidos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="3"> Permitir modificaciones dinámicas de los intervalos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="4"> Interrumpir la planificación actual</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q14')">Ver explicación</button>
+  <div class="explicacion" id="exp-q14" style="display:none">Un temporizador periódico se caracteriza por realizar activaciones repetitivas en intervalos definidos.</div>
+</div>
+<div class="question" id="q15" data-correct="2">
+  <div class="enunciado"><strong>15.</strong> ¿Qué atributo temporal tiene una tarea de tiempo real?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="0"> Periodo mínimo de activación</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="1"> Prioridad dinámica asignada</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="2"> Tiempo de cómputo máximo</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="3"> Número máximo de interrupciones</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="4"> Tiempo de respuesta variable</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q15')">Ver explicación</button>
+  <div class="explicacion" id="exp-q15" style="display:none">Una tarea de tiempo real tiene como atributo temporal el tiempo de cómputo máximo.</div>
+</div>
+<div class="question" id="q16" data-correct="3">
+  <div class="enunciado"><strong>16.</strong> ¿Cuál es una característica clave de los STR?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="0"> Exclusión de tareas concurrentes</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="1"> Uso de sistemas operativos generales</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="2"> Uso exclusivo de tareas periódicas</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="3"> Respuesta correcta dentro de un tiempo límite</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="4"> Alta disponibilidad de memoria</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q16')">Ver explicación</button>
+  <div class="explicacion" id="exp-q16" style="display:none">Una característica clave de los STR es la respuesta correcta dentro de un tiempo límite.</div>
+</div>
+<div class="question" id="q17" data-correct="1">
+  <div class="enunciado"><strong>17.</strong> ¿Qué tipo de tarea se activa en instantes arbitrarios?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="0"> Esporádica</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="1"> Aperiódica</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="2"> Periódica</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="3"> Asíncrona</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="4"> Sincrónica</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q17')">Ver explicación</button>
+  <div class="explicacion" id="exp-q17" style="display:none">Una tarea aperiódica se activa en instantes arbitrarios.</div>
+</div>
+<div class="question" id="q18" data-correct="3">
+  <div class="enunciado"><strong>18.</strong> La planificación cíclica usa:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="0"> Exclusión de tareas esporádicas</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="1"> Prioridades dinámicas</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="2"> Acceso a múltiples procesadores</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="3"> Hiperperiodos basados en MCM</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="4"> Algoritmos de análisis temporal</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q18')">Ver explicación</button>
+  <div class="explicacion" id="exp-q18" style="display:none">La planificación cíclica usa hiperperiodos basados en MCM.</div>
+</div>
+<div class="question" id="q19" data-correct="1">
+  <div class="enunciado"><strong>19.</strong> Un algoritmo dinámico como EDF asigna prioridad según:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="0"> Uso del procesador más bajo</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="1"> Tiempo límite más próximo</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="2"> Periodos más cortos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="3"> Requerimientos de memoria</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="4"> Holgura más alta</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q19')">Ver explicación</button>
+  <div class="explicacion" id="exp-q19" style="display:none">Un algoritmo dinámico como EDF asigna prioridad según el tiempo límite más próximo.</div>
+</div>
+<div class="question" id="q20" data-correct="1">
+  <div class="enunciado"><strong>20.</strong> ¿En qué consiste la inversión de prioridad?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="0"> Un error en el orden de asignación de prioridades</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="1"> Una tarea prioritaria puede quedar bloqueada indefinidamente</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="2"> La planificación cíclica falla en el análisis de Gantt</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="3"> Ninguna de las anteriores</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="4"> Las tareas menos críticas interrumpen las más importantes</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q20')">Ver explicación</button>
+  <div class="explicacion" id="exp-q20" style="display:none">La inversión de prioridad ocurre cuando una tarea prioritaria puede quedar bloqueada indefinidamente.</div>
+</div>
+<div class="question" id="q21" data-correct="4">
+  <div class="enunciado"><strong>21.</strong> El protocolo de herencia de prioridad:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="0"> Garantiza exclusión mutua completa</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="1"> Desactiva tareas aperiódicas</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="2"> Asigna prioridad máxima a todas las tareas</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="3"> Reduce las prioridades de tareas esporádicas</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="4"> Dinamiza prioridades según el bloqueo de recursos</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q21')">Ver explicación</button>
+  <div class="explicacion" id="exp-q21" style="display:none">El protocolo de herencia de prioridad dinamiza prioridades según el bloqueo de recursos.</div>
+</div>
+<div class="question" id="q22" data-correct="3">
+  <div class="enunciado"><strong>22.</strong> ¿Qué es el "techo de prioridad" de un recurso?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="0"> Un atributo dinámico definido por EDF</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="1"> La prioridad mínima que puede acceder al recurso</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="2"> La prioridad asignada por el sistema operativo</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="3"> La prioridad más alta que puede bloquear</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="4"> La prioridad promedio de las tareas que lo usan</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q22')">Ver explicación</button>
+  <div class="explicacion" id="exp-q22" style="display:none">El 'techo de prioridad' de un recurso es la prioridad más alta que puede bloquear.</div>
+</div>
+<div class="question" id="q23" data-correct="1">
+  <div class="enunciado"><strong>23.</strong> Un servidor diferido es útil para:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="0"> Sincronizar relojes del sistema</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="1"> Gestionar peticiones aperiódicas</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="2"> Sustituir el protocolo de herencia</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="3"> Optimizar los tiempos de cómputo máximo</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="4"> Tareas periódicas críticas</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q23')">Ver explicación</button>
+  <div class="explicacion" id="exp-q23" style="display:none">Un servidor diferido es útil para gestionar peticiones aperiódicas.</div>
+</div>
+<div class="question" id="q24" data-correct="2">
+  <div class="enunciado"><strong>24.</strong> El test de Liu y Layland (RMS) es aplicable a:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="0"> Sistemas distribuidos concurrentes</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="1"> Tareas esporádicas con plazos variables</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="2"> Tareas periódicas independientes</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="3"> Procesos con múltiples recursos compartidos</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="4"> Tareas aperiódicas con plazos fijos</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q24')">Ver explicación</button>
+  <div class="explicacion" id="exp-q24" style="display:none">El test de Liu y Layland (RMS) es aplicable a tareas periódicas independientes.</div>
+</div>
+<div class="question" id="q25" data-correct="4">
+  <div class="enunciado"><strong>25.</strong> ¿Cuál es el límite de utilización de CPU para N tareas según RMS?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="0"> U0 × N</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="1"> N × 2^(1/N)</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="2"> N(3^(1/N))</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="3"> N^2 × T</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="4"> N(2^(1/N) − 1)</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q25')">Ver explicación</button>
+  <div class="explicacion" id="exp-q25" style="display:none">El límite de utilización de CPU para N tareas según RMS es N(2^(1/N) − 1).</div>
+</div>
+
     </div>
 
-    <div class="question" id="q11">
-        <p>11. Un ejemplo de STR permisivo es:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q11" value="0"> Monitoreo de redes</label></li>
-            <li><label><input type="radio" name="q11" value="0"> Control de tráfico aéreo</label></li>
-            <li><label><input type="radio" name="q11" value="1"> Adquisición de datos meteorológicos</label></li>
-            <li><label><input type="radio" name="q11" value="0"> Reservas de vuelos</label></li>
-            <li><label><input type="radio" name="q11" value="0"> Planificación de producción</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q12">
-        <p>12. ¿Qué tipo de tiempo NO es usado en los STR?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q12" value="0"> Relativo</label></li>
-            <li><label><input type="radio" name="q12" value="1"> Incremental</label></li>
-            <li><label><input type="radio" name="q12" value="0"> Absoluto</label></li>
-            <li><label><input type="radio" name="q12" value="0"> GPS</label></li>
-            <li><label><input type="radio" name="q12" value="0"> Atómico</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q13">
-        <p>13. ¿Cuál es una característica clave de los relojes de tiempo real?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q13" value="0"> Sincronización con tiempo relativo</label></li>
-            <li><label><input type="radio" name="q13" value="0"> Deriva acumulativa constante</label></li>
-            <li><label><input type="radio" name="q13" value="1"> Tiempo de desbordamiento definido</label></li>
-            <li><label><input type="radio" name="q13" value="0"> Baja precisión</label></li>
-            <li><label><input type="radio" name="q13" value="0"> Granularidad variable</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q14">
-        <p>14. Un temporizador periódico se caracteriza por:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q14" value="0"> Activarse una vez y detenerse</label></li>
-            <li><label><input type="radio" name="q14" value="0"> Presentar una deriva acumulativa constante</label></li>
-            <li><label><input type="radio" name="q14" value="1"> Realizar activaciones repetitivas en intervalos definidos</label></li>
-            <li><label><input type="radio" name="q14" value="0"> Permitir modificaciones dinámicas de los intervalos</label></li>
-            <li><label><input type="radio" name="q14" value="0"> Interrumpir la planificación actual</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q15">
-        <p>15. ¿Qué atributo temporal tiene una tarea de tiempo real?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q15" value="0"> Periodo mínimo de activación</label></li>
-            <li><label><input type="radio" name="q15" value="0"> Prioridad dinámica asignada</label></li>
-            <li><label><input type="radio" name="q15" value="1"> Tiempo de cómputo máximo</label></li>
-            <li><label><input type="radio" name="q15" value="0"> Número máximo de interrupciones</label></li>
-            <li><label><input type="radio" name="q15" value="0"> Tiempo de respuesta variable</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q16">
-        <p>16. ¿Cuál es una característica clave de los STR?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q16" value="0"> Exclusión de tareas concurrentes</label></li>
-            <li><label><input type="radio" name="q16" value="0"> Uso de sistemas operativos generales</label></li>
-            <li><label><input type="radio" name="q16" value="0"> Uso exclusivo de tareas periódicas</label></li>
-            <li><label><input type="radio" name="q16" value="1"> Respuesta correcta dentro de un tiempo límite</label></li>
-            <li><label><input type="radio" name="q16" value="0"> Alta disponibilidad de memoria</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q17">
-        <p>17. ¿Qué tipo de tarea se activa en instantes arbitrarios?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q17" value="0"> Esporádica</label></li>
-            <li><label><input type="radio" name="q17" value="1"> Aperiódica</label></li>
-            <li><label><input type="radio" name="q17" value="0"> Periódica</label></li>
-            <li><label><input type="radio" name="q17" value="0"> Asíncrona</label></li>
-            <li><label><input type="radio" name="q17" value="0"> Sincrónica</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q18">
-        <p>18. La planificación cíclica usa:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q18" value="0"> Exclusión de tareas esporádicas</label></li>
-            <li><label><input type="radio" name="q18" value="0"> Prioridades dinámicas</label></li>
-            <li><label><input type="radio" name="q18" value="0"> Acceso a múltiples procesadores</label></li>
-            <li><label><input type="radio" name="q18" value="1"> Hiperperiodos basados en MCM</label></li>
-            <li><label><input type="radio" name="q18" value="0"> Algoritmos de análisis temporal</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q19">
-        <p>19. Un algoritmo dinámico como EDF asigna prioridad según:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q19" value="0"> Uso del procesador más bajo</label></li>
-            <li><label><input type="radio" name="q19" value="1"> Tiempo límite más próximo</label></li>
-            <li><label><input type="radio" name="q19" value="0"> Periodos más cortos</label></li>
-            <li><label><input type="radio" name="q19" value="0"> Requerimientos de memoria</label></li>
-            <li><label><input type="radio" name="q19" value="0"> Holgura más alta</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q20">
-        <p>20. ¿En qué consiste la inversión de prioridad?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q20" value="0"> Un error en el orden de asignación de prioridades</label></li>
-            <li><label><input type="radio" name="q20" value="1"> Una tarea prioritaria puede quedar bloqueada indefinidamente</label></li>
-            <li><label><input type="radio" name="q20" value="0"> La planificación cíclica falla en el análisis de Gantt</label></li>
-            <li><label><input type="radio" name="q20" value="0"> Ninguna de las anteriores</label></li>
-            <li><label><input type="radio" name="q20" value="0"> Las tareas menos críticas interrumpen las más importantes</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q21">
-        <p>21. El protocolo de herencia de prioridad:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q21" value="0"> Garantiza exclusión mutua completa</label></li>
-            <li><label><input type="radio" name="q21" value="0"> Desactiva tareas aperiódicas</label></li>
-            <li><label><input type="radio" name="q21" value="0"> Asigna prioridad máxima a todas las tareas</label></li>
-            <li><label><input type="radio" name="q21" value="0"> Reduce las prioridades de tareas esporádicas</label></li>
-            <li><label><input type="radio" name="q21" value="1"> Dinamiza prioridades según el bloqueo de recursos</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q22">
-        <p>22. ¿Qué es el "techo de prioridad" de un recurso?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q22" value="0"> Un atributo dinámico definido por EDF</label></li>
-            <li><label><input type="radio" name="q22" value="0"> La prioridad mínima que puede acceder al recurso</label></li>
-            <li><label><input type="radio" name="q22" value="0"> La prioridad asignada por el sistema operativo</label></li>
-            <li><label><input type="radio" name="q22" value="1"> La prioridad más alta que puede bloquear</label></li>
-            <li><label><input type="radio" name="q22" value="0"> La prioridad promedio de las tareas que lo usan</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q23">
-        <p>23. Un servidor diferido es útil para:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q23" value="0"> Sincronizar relojes del sistema</label></li>
-            <li><label><input type="radio" name="q23" value="1"> Gestionar peticiones aperiódicas</label></li>
-            <li><label><input type="radio" name="q23" value="0"> Sustituir el protocolo de herencia</label></li>
-            <li><label><input type="radio" name="q23" value="0"> Optimizar los tiempos de cómputo máximo</label></li>
-            <li><label><input type="radio" name="q23" value="0"> Tareas periódicas críticas</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q24">
-        <p>24. El test de Liu y Layland (RMS) es aplicable a:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q24" value="0"> Sistemas distribuidos concurrentes</label></li>
-            <li><label><input type="radio" name="q24" value="0"> Tareas esporádicas con plazos variables</label></li>
-            <li><label><input type="radio" name="q24" value="1"> Tareas periódicas independientes</label></li>
-            <li><label><input type="radio" name="q24" value="0"> Procesos con múltiples recursos compartidos</label></li>
-            <li><label><input type="radio" name="q24" value="0"> Tareas aperiódicas con plazos fijos</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q25">
-        <p>25. ¿Cuál es el límite de utilización de CPU para N tareas según RMS?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q25" value="0"> U0 × N</label></li>
-            <li><label><input type="radio" name="q25" value="0"> N × 2^(1/N)</label></li>
-            <li><label><input type="radio" name="q25" value="0"> N(3^(1/N))</label></li>
-            <li><label><input type="radio" name="q25" value="0"> N^2 × T</label></li>
-            <li><label><input type="radio" name="q25" value="1"> N(2^(1/N) − 1)</label></li>
-        </ol>
-    </div>
-    
-    
-    
-    
-    
-    
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
 
-   
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
 
-    
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
 
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
 
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
 
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
 
+            if (checked.length === 0) return;
 
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
 
-
-
-
-
-
-
-
-
-
-
-    <!-- Añadir las preguntas adicionales de la misma manera -->
-
-    <input type="button" value="¿Aprobarás?" onclick="checkAnswers()">
-</form>
-
-
-<div id="results" style="margin-top: 20px;"></div>
-
-<script>
-    function checkAnswers() {
-        let score = 0;
-        const totalQuestions = 25;
-        const resultsDiv = document.getElementById("results");
-        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
-
-        // Respuestas correctas
-        const answers = {
-            q1: { answer: "1", explanation: "Las tareas espaciadas por 'Jitter' tienen variaciones en su tiempo de activación." },
-            q2: { answer: "1", explanation: "El determinismo en los STR permite predecir con certeza los tiempos de respuesta." },
-            q3: { answer: "1", explanation: "El modelo de tareas simples asume tareas periódicas con plazos iguales a su periodo." },
-            q4: { answer: "1", explanation: "Los protocolos de techo de prioridad reducen los bloqueos en sistemas STR." },
-            q5: { answer: "1", explanation: "En un esquema RMS, la prioridad relativa se basa en periodos más pequeños." },
-            q6: { answer: "1", explanation: "El bloqueo indirecto ocurre cuando un recurso compartido interfiere en tareas no relacionadas." },
-            q7: { answer: "1", explanation: "Durante una sobrecarga transitoria, los esquemas estáticos son más predecibles." },
-            q8: { answer: "1", explanation: "El análisis de planificabilidad con servidor diferido garantiza plazos cumplidos para tareas periódicas." },
-            q9: { answer: "1", explanation: "Un sistema operativo de tiempo real garantiza respuesta dentro de un tiempo limitado predefinido." },
-            q10: { answer: "1", explanation: "STR de misión crítica significa tareas donde la falla puede tener consecuencias graves." },
-            q11: { answer: "1", explanation: "Un ejemplo de STR permisivo es la adquisición de datos meteorológicos." },
-            q12: { answer: "1", explanation: "El tiempo incremental no es usado en los STR." },
-            q13: { answer: "1", explanation: "Una característica clave de los relojes de tiempo real es el tiempo de desbordamiento definido." },
-            q14: { answer: "1", explanation: "Un temporizador periódico se caracteriza por realizar activaciones repetitivas en intervalos definidos." },
-            q15: { answer: "1", explanation: "Una tarea de tiempo real tiene como atributo temporal el tiempo de cómputo máximo." },
-            q16: { answer: "1", explanation: "Una característica clave de los STR es la respuesta correcta dentro de un tiempo límite." },
-            q17: { answer: "1", explanation: "Una tarea aperiódica se activa en instantes arbitrarios." },
-            q18: { answer: "1", explanation: "La planificación cíclica usa hiperperiodos basados en MCM." },
-            q19: { answer: "1", explanation: "Un algoritmo dinámico como EDF asigna prioridad según el tiempo límite más próximo." },
-            q20: { answer: "1", explanation: "La inversión de prioridad ocurre cuando una tarea prioritaria puede quedar bloqueada indefinidamente." },
-            q21: { answer: "1", explanation: "El protocolo de herencia de prioridad dinamiza prioridades según el bloqueo de recursos." },
-            q22: { answer: "1", explanation: "El 'techo de prioridad' de un recurso es la prioridad más alta que puede bloquear." },
-            q23: { answer: "1", explanation: "Un servidor diferido es útil para gestionar peticiones aperiódicas." },
-            q24: { answer: "1", explanation: "El test de Liu y Layland (RMS) es aplicable a tareas periódicas independientes." },
-            q25: { answer: "1", explanation: "El límite de utilización de CPU para N tareas según RMS es N(2^(1/N) − 1)." }
-        };
-
-        for (let i = 1; i <= totalQuestions; i++) {
-            const question = document.querySelectorAll(`input[name="q${i}"]:checked`);
-            if (question.length > 0) {
-            const selectedValues = Array.from(question).map(q => q.value);
-            const correctAnswers = Array.isArray(answers[`q${i}`].answer) ? answers[`q${i}`].answer : [answers[`q${i}`].answer];
-            const isCorrect = selectedValues.length === correctAnswers.length && selectedValues.every(val => correctAnswers.includes(val));
-            
-            if (isCorrect) {
-                score++;
-                document.getElementById(`q${i}`).classList.add('correct');
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
             } else {
-                document.getElementById(`q${i}`).classList.add('incorrect');
-                // Mostrar solo la justificación
-                const explanation = answers[`q${i}`].explanation;
-                const explanationDiv = document.createElement("div");
-                explanationDiv.className = "explanation";
-                explanationDiv.innerHTML = `<strong>Justificación:</strong> ${explanation}`;
-                document.getElementById(`q${i}`).appendChild(explanationDiv);
+              q.classList.add("incorrect");
             }
-            }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
         }
 
-        // Cálculo de la nota sobre 10
-        const grade = (score / totalQuestions) * 10;
-        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
-        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
-    }
-</script>
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
 
-</body>
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
 </html>

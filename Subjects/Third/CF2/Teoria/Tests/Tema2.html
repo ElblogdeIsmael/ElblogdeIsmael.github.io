@@ -1,263 +1,599 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Teoría: Activos Financieros </title>
-    <style>
-        body {
-            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-            background-color: #f0f2f5;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            font-size: 18px;
-        }
-        h1 {
-            text-align: center;
-            color: #007bff;
-            margin-bottom: 30px;
-        }
-        .question {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .question:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .question.correct {
-            border-color: #28a745;
-            background-color: #d4edda;
-        }
-        .question.incorrect {
-            border-color: #dc3545;
-            background-color: #f8d7da;
-        }
-        .explanation {
-            background: #e7f3fe;
-            border: 1px solid #b2d4fe;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 10px;
-        }
-        .author {
-            margin-top: 20px;
-            font-style: italic;
-            text-align: center;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-            transform: scale(1.2);
-        }
-        input[type="button"] {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        input[type="button"]:hover {
-            background-color: #0056b3;
-            transform: translateY(-3px);
-        }
-    </style>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test de Teoría: Activos Financieros</title>
 
-<div class="author">
-    <p>Autor: Ismael Sallami Moreno</p>
-    <p>Asignatura: Contabilidad Financiera II</p>
-    <p>Titulación: Ingeniería Informática + ADE</p>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+      :root {
+        --bg-color: #f5f0e8;
+        --text-color: #1a1410;
+        --card-bg: #fbf8f2;
+        --border-color: #d4c9b0;
+        --primary-color: #8b2a0f;
+        --hover-color: #6e2009;
+        --muted: #7a6a54;
+        --rule: #d4c9b0;
+      }
+
+      body {
+        font-family: 'Source Serif 4', Georgia, serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.75;
+        padding: 40px 20px 80px;
+        font-size: 18px;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
+        text-align: left;
+        color: var(--primary-color);
+        font-size: 2.6rem;
+        margin-bottom: 6px;
+        border-bottom: 3px solid var(--text-color);
+        padding-bottom: 16px;
+      }
+
+      h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-top: 48px;
+        border-top: 2px solid var(--primary-color);
+        padding-top: 14px;
+      }
+
+      .author {
+        text-align: left;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        font-style: italic;
+        color: var(--muted);
+      }
+
+      .question {
+        background: transparent;
+        border: none;
+        border-bottom: 1px dashed var(--rule);
+        border-radius: 0;
+        padding: 24px 40px 24px 4px;
+        margin-bottom: 0;
+        box-shadow: none;
+        transition: background 0.2s;
+        overflow-wrap: break-word;
+        position: relative;
+      }
+      .question:hover {
+        transform: none;
+        background: rgba(139, 42, 15, 0.03);
+      }
+      .question:last-child { border-bottom: none; }
+
+      .correct   { border-left: 4px solid #2f7d32; background-color: #e3efe0; padding-left: 14px; }
+      .partial   { border-left: 4px solid #b8860b; background-color: #f4ead0; padding-left: 14px; }
+      .incorrect { border-left: 4px solid #a4161a; background-color: #f3dcd8; padding-left: 14px; }
+      .correct::before, .partial::before, .incorrect::before {
+        position: absolute; top: 22px; right: 14px;
+        font-family: "Playfair Display", Georgia, serif;
+        font-weight: 700; font-size: 1.2rem; line-height: 1;
+      }
+      .correct::before   { content: "\2713"; color: #2f7d32; }
+      .incorrect::before { content: "\2717"; color: #a4161a; }
+      .partial::before   { content: "!"; color: #8a6508; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado strong:first-child {
+        font-family: 'Playfair Display', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.1em;
+      }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+
+      .opcion-linea, .opcion-bloque {
+        display: block;
+        padding-left: 35px;
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;
+      }
+
+      .opcion-linea input[type="checkbox"],
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 4px;
+        transform: scale(1.2);
+        margin: 0;
+        cursor: pointer;
+        accent-color: var(--primary-color);
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline;
+      }
+
+      mjx-container { font-size: 108% !important; }
+
+      img { max-width: 100%; height: auto; border-radius: 3px; }
+      table { border-collapse: collapse; width: 100%; margin: 14px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid var(--border-color); padding: 8px; text-align: left; }
+      th { background-color: rgba(139,42,15,0.07); }
+
+      code, pre { font-family: 'SFMono-Regular', Consolas, monospace; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 5px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 2px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border-left: 3px solid var(--border-color);
+        background-color: rgba(0,0,0,0.025);
+        border-radius: 0 3px 3px 0;
+        font-size: 0.95em;
+        font-style: italic;
+        color: #4a3820;
+      }
+      .explicacion strong { font-style: normal; }
+      .dark-mode .btn-explicacion { color: #e0a890; border-color: #e0a890; }
+      .dark-mode .btn-explicacion:hover { background-color: #e0a890; color: #1a1209; }
+      .dark-mode .explicacion { background-color: rgba(255,255,255,0.05); border-left-color: #6b5840; color: #d8c8b0; }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: #fbf8f2;
+        border: none;
+        padding: 9px 15px;
+        margin: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.85rem;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: var(--muted);
+      }
+      .instrucciones-extra li { margin-bottom: 5px; }
+
+      body.dark-mode {
+        --bg-color: #1f1812;
+        --text-color: #e8ddca;
+        --card-bg: #2a2118;
+        --border-color: #4a3c2c;
+        --primary-color: #d98050;
+        --hover-color: #c06a3a;
+        --muted: #b3a285;
+        --rule: #4a3c2c;
+      }
+      .dark-mode h1 { border-bottom-color: var(--text-color); }
+      .dark-mode .author { color: var(--muted); }
+      .dark-mode th { background-color: rgba(217,128,80,0.12); }
+      .dark-mode .correct { background-color: rgba(47,125,50,0.30); border-left-color: #4caf50; }
+      .dark-mode .partial { background-color: rgba(184,134,11,0.30); border-left-color: #d4a017; }
+      .dark-mode .incorrect { background-color: rgba(170,17,17,0.32); border-left-color: #e05555; }
+      .dark-mode .correct::before { color: #6bdc8e; }
+      .dark-mode .incorrect::before { color: #ff8a8a; }
+      .dark-mode .partial::before { color: #e6c14d; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; font-size: 13px; }
+        .question { page-break-inside: avoid; border-bottom: 1px solid #ccc; padding: 12px 0; }
+        .info-box, button, #extra-buttons { display: none !important; }
+        h1 { font-size: 1.9rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Test de Teoría: Activos Financieros</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
+
+    <div class="info-box">
+      <p></p>
+
+      <div class="instrucciones-extra">
+        
+      </div>
+
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
+    </div>
+
+    <div id="questions-container">
+      <div class="question" id="q1" data-correct="1">
+  <div class="enunciado"><strong>1.</strong> Se consideran activos financieros:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> Valores representativos de deuda emitidos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> Derivados con valoración favorable para la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> Instrumentos de patrimonio emitidos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> Débitos por operaciones comerciales.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q1')">Ver explicación</button>
+  <div class="explicacion" id="exp-q1" style="display:none">Los derivados con valoración favorable para la empresa se consideran activos financieros.</div>
+</div>
+<div class="question" id="q2" data-correct="2">
+  <div class="enunciado"><strong>2.</strong> Los activos financieros en poder de una empresa:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> No se amortizan porque no se deprecian.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Solo se amortizan cuando se deprecien de manera reversible y sistemática.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> No se amortizan porque no se deprecian de manera irreversible y sistemática.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> Solo se amortizan cuando se liquida la empresa en la que se ha invertido.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q2')">Ver explicación</button>
+  <div class="explicacion" id="exp-q2" style="display:none">Los activos financieros no se amortizan porque no se deprecian de manera irreversible y sistemática.</div>
+</div>
+<div class="question" id="q3" data-correct="0">
+  <div class="enunciado"><strong>3.</strong> Los activos financieros en poder de una empresa pueden tener origen:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> En operaciones financieras y en operaciones comerciales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> Solamente en operaciones financieras.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> Solamente en operaciones comerciales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> Solamente en operaciones financieras con vencimiento superior al año.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q3')">Ver explicación</button>
+  <div class="explicacion" id="exp-q3" style="display:none">Los activos financieros pueden tener origen tanto en operaciones financieras como en operaciones comerciales.</div>
+</div>
+<div class="question" id="q4" data-correct="1">
+  <div class="enunciado"><strong>4.</strong> En relación a los activos financieros a valor razonable incluidos en la categoría "con cambios en el patrimonio neto":</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Los costes de transacción se contabilizan en una cuenta de pérdidas y ganancias del ejercicio y no procede su deterioro a cierre del ejercicio.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> Los costes de transacción se contabilizan como mayor valor del precio de adquisición y habrá que estudiar su deterioro a cierre del ejercicio.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> Los costes de transacción se contabilizan en una cuenta de pérdidas y ganancias del ejercicio y habrá que estudiar su deterioro a cierre del ejercicio.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> Los costes de transacción se contabilizan como mayor valor del precio de adquisición y no procede su deterioro a cierre del ejercicio.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q4')">Ver explicación</button>
+  <div class="explicacion" id="exp-q4" style="display:none">Los costes de transacción se contabilizan como mayor valor del precio de adquisición y habrá que estudiar su deterioro a cierre del ejercicio.</div>
+</div>
+<div class="question" id="q5" data-correct="2">
+  <div class="enunciado"><strong>5.</strong> Dentro de las categorías que establece la NIIF 9, en función de la naturaleza del activo, podemos encontrar:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> Activos financieros a coste amortizado con cambios en el patrimonio neto.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> Activos financieros a coste amortizado con cambios en pérdidas y ganancias.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> Activos financieros a coste.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> Todas las alternativas anteriores son correctas.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q5')">Ver explicación</button>
+  <div class="explicacion" id="exp-q5" style="display:none">Dentro de las categorías de la NIIF 9, podemos encontrar activos financieros a coste.</div>
+</div>
+<div class="question" id="q6" data-correct="0">
+  <div class="enunciado"><strong>6.</strong> Según establece la NIIF 9.2.3, en relación a la valoración posterior de los activos financieros con valoración a coste:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> Salvo mejor evidencia del importe recuperable de las inversiones en instrumentos de patrimonio, la estimación de la pérdida o deterioro se calculará en función del patrimonio neto de la entidad participada y de las plusvalías tácitas existentes en la fecha de la valoración.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> La estimación de su posible deterioro se efectuará, en cualquier caso, comparando el valor en libros con el importe recuperable, entendiendo por éste, el mayor valor entre el valor razonable menos los costes de las ventas y el valor actual de los flujos de efectivo futuros derivados de la inversión.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> La estimación de su posible deterioro se efectuará, en cualquier caso, comparando el valor en libros con el importe recuperable, entendiendo por éste, el menor valor entre el valor razonable menos los costes de las ventas y el valor actual de los flujos de efectivo futuros derivados de la inversión.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> En esta categoría para estimar el posible deterioro hay que aplicar reglas específicas, y se aplican sólo en casos de descensos importantes (posibles pérdidas) en su valor inicial.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q6')">Ver explicación</button>
+  <div class="explicacion" id="exp-q6" style="display:none">La estimación de la pérdida o deterioro se calculará en función del patrimonio neto de la entidad participada y de las plusvalías tácitas existentes en la fecha de la valoración.</div>
+</div>
+<div class="question" id="q7" data-correct="3">
+  <div class="enunciado"><strong>7.</strong> El deterioro de valor de los activos financieros incluidos en la categoría "Activos a coste amortizado" será:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> En cualquier caso, la diferencia entre el valor en libros y su valor razonable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> En esta categoría no se pueden reconocer deterioros de valor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> La diferencia entre su coste o coste amortizado y el valor razonable en el momento de la valoración.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> La diferencia o minusvalía potencial entre su valor en libros y el valor actual de los flujos de efectivo futuros (VAFE) que se estima van a generar.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q7')">Ver explicación</button>
+  <div class="explicacion" id="exp-q7" style="display:none">El deterioro de valor será la diferencia entre su valor en libros y el valor actual de los flujos de efectivo futuros que se estima van a generar.</div>
+</div>
+<div class="question" id="q8" data-correct="2">
+  <div class="enunciado"><strong>8.</strong> Según la NIIF 9, las inversiones realizadas en acciones no cotizadas se incluirán dentro de la categoría:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Activos financieros a valor razonable con cambios en pérdidas y ganancias en el caso de que su adquisición sea con intención de venderlas en el corto plazo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> Activos financieros a valor razonable con cambios en el patrimonio neto en el caso de que su adquisición sea con intención de mantenerlas durante un largo periodo de tiempo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> Activos financieros a coste.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> Activos financieros a coste amortizado.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q8')">Ver explicación</button>
+  <div class="explicacion" id="exp-q8" style="display:none">Las inversiones en acciones no cotizadas se incluirán dentro de la categoría de activos financieros a coste.</div>
+</div>
+<div class="question" id="q9" data-correct="0">
+  <div class="enunciado"><strong>9.</strong> El proceso de registro contable de los activos financieros en la categoría de "Activos financieros a valor razonable con cambios en el patrimonio neto", comprende:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> Las inversiones en instrumentos de patrimonio que no se mantengan para negociar, ni deban valorarse al coste.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> Los instrumentos de patrimonio de empresas que formen parte de empresas del grupo, multigrupo o asociadas que tengan valor razonable fiable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> Los activos financieros con condiciones contractuales que no den lugar, en fechas específicas, a flujos de efectivo que son únicamente cobros de principal e intereses sobre el importe del principal pendiente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> Cualquier activo con el que se tenga una clara intención de especular.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q9')">Ver explicación</button>
+  <div class="explicacion" id="exp-q9" style="display:none">El registro contable de los activos financieros a valor razonable con cambios en el patrimonio neto comprende las inversiones en instrumentos de patrimonio que no se mantengan para negociar, ni deban valorarse al coste.</div>
+</div>
+<div class="question" id="q10" data-correct="3">
+  <div class="enunciado"><strong>10.</strong> En virtud de las normas de registro y valoración del PGC, la reclasificación de activos financieros entre categorías:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> No está permitida.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> Solo se permite entre determinadas categorías si están destinadas a la misma finalidad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> Se permite siempre que no genere resultados (beneficios, pérdidas).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> Solo se permite entre determinadas categorías y previo cumplimiento de ciertas condiciones.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q10')">Ver explicación</button>
+  <div class="explicacion" id="exp-q10" style="display:none">La reclasificación de activos financieros entre categorías solo se permite entre determinadas categorías y previo cumplimiento de ciertas condiciones.</div>
 </div>
 
-<body>
-    <div class="question" id="q1">
-        <p>1. Se consideran activos financieros:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q1" value="0"> Valores representativos de deuda emitidos.</label></li>
-            <li><label><input type="radio" name="q1" value="1"> Derivados con valoración favorable para la empresa.</label></li>
-            <li><label><input type="radio" name="q1" value="0"> Instrumentos de patrimonio emitidos.</label></li>
-            <li><label><input type="radio" name="q1" value="0"> Débitos por operaciones comerciales.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q2">
-        <p>2. Los activos financieros en poder de una empresa:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q2" value="0"> No se amortizan porque no se deprecian.</label></li>
-            <li><label><input type="radio" name="q2" value="0"> Solo se amortizan cuando se deprecien de manera reversible y sistemática.</label></li>
-            <li><label><input type="radio" name="q2" value="1"> No se amortizan porque no se deprecian de manera irreversible y sistemática.</label></li>
-            <li><label><input type="radio" name="q2" value="0"> Solo se amortizan cuando se liquida la empresa en la que se ha invertido.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q3">
-        <p>3. Los activos financieros en poder de una empresa pueden tener origen:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q3" value="1"> En operaciones financieras y en operaciones comerciales.</label></li>
-            <li><label><input type="radio" name="q3" value="0"> Solamente en operaciones financieras.</label></li>
-            <li><label><input type="radio" name="q3" value="0"> Solamente en operaciones comerciales.</label></li>
-            <li><label><input type="radio" name="q3" value="0"> Solamente en operaciones financieras con vencimiento superior al año.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q4">
-        <p>4. En relación a los activos financieros a valor razonable incluidos en la categoría "con cambios en el patrimonio neto":</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q4" value="0"> Los costes de transacción se contabilizan en una cuenta de pérdidas y ganancias del ejercicio y no procede su deterioro a cierre del ejercicio.</label></li>
-            <li><label><input type="radio" name="q4" value="1"> Los costes de transacción se contabilizan como mayor valor del precio de adquisición y habrá que estudiar su deterioro a cierre del ejercicio.</label></li>
-            <li><label><input type="radio" name="q4" value="0"> Los costes de transacción se contabilizan en una cuenta de pérdidas y ganancias del ejercicio y habrá que estudiar su deterioro a cierre del ejercicio.</label></li>
-            <li><label><input type="radio" name="q4" value="0"> Los costes de transacción se contabilizan como mayor valor del precio de adquisición y no procede su deterioro a cierre del ejercicio.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q5">
-        <p>5. Dentro de las categorías que establece la NIIF 9, en función de la naturaleza del activo, podemos encontrar:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q5" value="0"> Activos financieros a coste amortizado con cambios en el patrimonio neto.</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Activos financieros a coste amortizado con cambios en pérdidas y ganancias.</label></li>
-            <li><label><input type="radio" name="q5" value="1"> Activos financieros a coste.</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Todas las alternativas anteriores son correctas.</label></li>
-        </ol>
     </div>
 
-    <div class="question" id="q6">
-        <p>6. Según establece la NIIF 9.2.3, en relación a la valoración posterior de los activos financieros con valoración a coste:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q6" value="1"> Salvo mejor evidencia del importe recuperable de las inversiones en instrumentos de patrimonio, la estimación de la pérdida o deterioro se calculará en función del patrimonio neto de la entidad participada y de las plusvalías tácitas existentes en la fecha de la valoración.</label></li>
-            <li><label><input type="radio" name="q6" value="0"> La estimación de su posible deterioro se efectuará, en cualquier caso, comparando el valor en libros con el importe recuperable, entendiendo por éste, el mayor valor entre el valor razonable menos los costes de las ventas y el valor actual de los flujos de efectivo futuros derivados de la inversión.</label></li>
-            <li><label><input type="radio" name="q6" value="0"> La estimación de su posible deterioro se efectuará, en cualquier caso, comparando el valor en libros con el importe recuperable, entendiendo por éste, el menor valor entre el valor razonable menos los costes de las ventas y el valor actual de los flujos de efectivo futuros derivados de la inversión.</label></li>
-            <li><label><input type="radio" name="q6" value="0"> En esta categoría para estimar el posible deterioro hay que aplicar reglas específicas, y se aplican sólo en casos de descensos importantes (posibles pérdidas) en su valor inicial.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q7">
-        <p>7. El deterioro de valor de los activos financieros incluidos en la categoría "Activos a coste amortizado" será:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q7" value="0"> En cualquier caso, la diferencia entre el valor en libros y su valor razonable.</label></li>
-            <li><label><input type="radio" name="q7" value="0"> En esta categoría no se pueden reconocer deterioros de valor.</label></li>
-            <li><label><input type="radio" name="q7" value="0"> La diferencia entre su coste o coste amortizado y el valor razonable en el momento de la valoración.</label></li>
-            <li><label><input type="radio" name="q7" value="1"> La diferencia o minusvalía potencial entre su valor en libros y el valor actual de los flujos de efectivo futuros (VAFE) que se estima van a generar.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q8">
-        <p>8. Según la NIIF 9, las inversiones realizadas en acciones no cotizadas se incluirán dentro de la categoría:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q8" value="0"> Activos financieros a valor razonable con cambios en pérdidas y ganancias en el caso de que su adquisición sea con intención de venderlas en el corto plazo.</label></li>
-            <li><label><input type="radio" name="q8" value="0"> Activos financieros a valor razonable con cambios en el patrimonio neto en el caso de que su adquisición sea con intención de mantenerlas durante un largo periodo de tiempo.</label></li>
-            <li><label><input type="radio" name="q8" value="1"> Activos financieros a coste.</label></li>
-            <li><label><input type="radio" name="q8" value="0"> Activos financieros a coste amortizado.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q9">
-        <p>9. El proceso de registro contable de los activos financieros en la categoría de "Activos financieros a valor razonable con cambios en el patrimonio neto", comprende:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q9" value="1"> Las inversiones en instrumentos de patrimonio que no se mantengan para negociar, ni deban valorarse al coste.</label></li>
-            <li><label><input type="radio" name="q9" value="0"> Los instrumentos de patrimonio de empresas que formen parte de empresas del grupo, multigrupo o asociadas que tengan valor razonable fiable.</label></li>
-            <li><label><input type="radio" name="q9" value="0"> Los activos financieros con condiciones contractuales que no den lugar, en fechas específicas, a flujos de efectivo que son únicamente cobros de principal e intereses sobre el importe del principal pendiente.</label></li>
-            <li><label><input type="radio" name="q9" value="0"> Cualquier activo con el que se tenga una clara intención de especular.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q10">
-        <p>10. En virtud de las normas de registro y valoración del PGC, la reclasificación de activos financieros entre categorías:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q10" value="0"> No está permitida.</label></li>
-            <li><label><input type="radio" name="q10" value="0"> Solo se permite entre determinadas categorías si están destinadas a la misma finalidad.</label></li>
-            <li><label><input type="radio" name="q10" value="0"> Se permite siempre que no genere resultados (beneficios, pérdidas).</label></li>
-            <li><label><input type="radio" name="q10" value="1"> Solo se permite entre determinadas categorías y previo cumplimiento de ciertas condiciones.</label></li>
-        </ol>
-    </div>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
 
-    
-    
-    
-    
-    
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
 
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
 
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
 
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
 
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
 
+            if (checked.length === 0) return;
 
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
 
-
-
-
-
-
-
-
-
-
-    <!-- Añadir las preguntas adicionales de la misma manera -->
-
-    <input type="button" value="Contabilizar el resultado" onclick="checkAnswers()">
-</form>
-
-
-
-<div id="results" style="margin-top: 20px;"></div>
-
-<script>
-    function checkAnswers() {
-        let score = 0;
-        const totalQuestions = 10;
-        const resultsDiv = document.getElementById("results");
-        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
-
-        // Respuestas correctas
-        const answers = {
-            q1: { answer: "1", explanation: "Los derivados con valoración favorable para la empresa se consideran activos financieros." },
-            q2: { answer: "1", explanation: "Los activos financieros no se amortizan porque no se deprecian de manera irreversible y sistemática." },
-            q3: { answer: "1", explanation: "Los activos financieros pueden tener origen tanto en operaciones financieras como en operaciones comerciales." },
-            q4: { answer: "1", explanation: "Los costes de transacción se contabilizan como mayor valor del precio de adquisición y habrá que estudiar su deterioro a cierre del ejercicio." },
-            q5: { answer: "1", explanation: "Dentro de las categorías de la NIIF 9, podemos encontrar activos financieros a coste." },
-            q6: { answer: "1", explanation: "La estimación de la pérdida o deterioro se calculará en función del patrimonio neto de la entidad participada y de las plusvalías tácitas existentes en la fecha de la valoración." },
-            q7: { answer: "1", explanation: "El deterioro de valor será la diferencia entre su valor en libros y el valor actual de los flujos de efectivo futuros que se estima van a generar." },
-            q8: { answer: "1", explanation: "Las inversiones en acciones no cotizadas se incluirán dentro de la categoría de activos financieros a coste." },
-            q9: { answer: "1", explanation: "El registro contable de los activos financieros a valor razonable con cambios en el patrimonio neto comprende las inversiones en instrumentos de patrimonio que no se mantengan para negociar, ni deban valorarse al coste." },
-            q10: { answer: "1", explanation: "La reclasificación de activos financieros entre categorías solo se permite entre determinadas categorías y previo cumplimiento de ciertas condiciones." }
-        };
-
-        for (let i = 1; i <= totalQuestions; i++) {
-            const question = document.querySelectorAll(`input[name="q${i}"]:checked`);
-            if (question.length > 0) {
-            const selectedValues = Array.from(question).map(q => q.value);
-            const correctAnswers = Array.isArray(answers[`q${i}`].answer) ? answers[`q${i}`].answer : [answers[`q${i}`].answer];
-            const isCorrect = selectedValues.length === correctAnswers.length && selectedValues.every(val => correctAnswers.includes(val));
-            
-            if (isCorrect) {
-                score++;
-                document.getElementById(`q${i}`).classList.add('correct');
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
             } else {
-                document.getElementById(`q${i}`).classList.add('incorrect');
-                // Mostrar solo la justificación
-                const explanation = answers[`q${i}`].explanation;
-                const explanationDiv = document.createElement("div");
-                explanationDiv.className = "explanation";
-                explanationDiv.innerHTML = `<strong>Justificación:</strong> ${explanation}`;
-                document.getElementById(`q${i}`).appendChild(explanationDiv);
+              q.classList.add("incorrect");
             }
-            }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
         }
 
-        // Cálculo de la nota sobre 10
-        const grade = (score / totalQuestions) * 10;
-        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
-        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
-    }
-</script>
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
 
-</body>
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
 </html>

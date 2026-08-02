@@ -1,371 +1,668 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test de Prácticas de Fundamentos de Redes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
-        body {
-            font-family: 'Georgia', 'Times New Roman', Times, serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            font-size: 22px;
-        }
-        h1 {
-            text-align: center;
-            color: #4CAF50;
-        }
-        .question {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 20px;
-            transition: 0.3s;
-        }
-        .question.correct {
-            border-color: #4CAF50;
-            background-color: #d4edda;
-        }
-        .question.incorrect {
-            border-color: #f44336;
-            background-color: #f8d7da;
-        }
-        .explanation {
-            background: #e7f3fe;
-            border: 1px solid #b2d4fe;
-            border-radius: 5px;
-            padding: 10px;
-            margin-top: 10px;
-        }
-        .author {
-            margin-top: 20px;
-            font-style: italic;
-            text-align: center;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-        }
-        input[type="button"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        input[type="button"]:hover {
-            background-color: #45a049;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px; /* Ajusta este valor según sea necesario */
-        }
+      :root {
+        --bg-color: #f5f0e8;
+        --text-color: #1a1410;
+        --card-bg: #fbf8f2;
+        --border-color: #d4c9b0;
+        --primary-color: #8b2a0f;
+        --hover-color: #6e2009;
+        --muted: #7a6a54;
+        --rule: #d4c9b0;
+      }
+
+      body {
+        font-family: 'Source Serif 4', Georgia, serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.75;
+        padding: 40px 20px 80px;
+        font-size: 18px;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
+        text-align: left;
+        color: var(--primary-color);
+        font-size: 2.6rem;
+        margin-bottom: 6px;
+        border-bottom: 3px solid var(--text-color);
+        padding-bottom: 16px;
+      }
+
+      h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-top: 48px;
+        border-top: 2px solid var(--primary-color);
+        padding-top: 14px;
+      }
+
+      .author {
+        text-align: left;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        font-style: italic;
+        color: var(--muted);
+      }
+
+      .question {
+        background: transparent;
+        border: none;
+        border-bottom: 1px dashed var(--rule);
+        border-radius: 0;
+        padding: 24px 40px 24px 4px;
+        margin-bottom: 0;
+        box-shadow: none;
+        transition: background 0.2s;
+        overflow-wrap: break-word;
+        position: relative;
+      }
+      .question:hover {
+        transform: none;
+        background: rgba(139, 42, 15, 0.03);
+      }
+      .question:last-child { border-bottom: none; }
+
+      .correct   { border-left: 4px solid #2f7d32; background-color: #e3efe0; padding-left: 14px; }
+      .partial   { border-left: 4px solid #b8860b; background-color: #f4ead0; padding-left: 14px; }
+      .incorrect { border-left: 4px solid #a4161a; background-color: #f3dcd8; padding-left: 14px; }
+      .correct::before, .partial::before, .incorrect::before {
+        position: absolute; top: 22px; right: 14px;
+        font-family: "Playfair Display", Georgia, serif;
+        font-weight: 700; font-size: 1.2rem; line-height: 1;
+      }
+      .correct::before   { content: "\2713"; color: #2f7d32; }
+      .incorrect::before { content: "\2717"; color: #a4161a; }
+      .partial::before   { content: "!"; color: #8a6508; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado strong:first-child {
+        font-family: 'Playfair Display', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.1em;
+      }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+
+      .opcion-linea, .opcion-bloque {
+        display: block;
+        padding-left: 35px;
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;
+      }
+
+      .opcion-linea input[type="checkbox"],
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 4px;
+        transform: scale(1.2);
+        margin: 0;
+        cursor: pointer;
+        accent-color: var(--primary-color);
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline;
+      }
+
+      mjx-container { font-size: 108% !important; }
+
+      img { max-width: 100%; height: auto; border-radius: 3px; }
+      table { border-collapse: collapse; width: 100%; margin: 14px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid var(--border-color); padding: 8px; text-align: left; }
+      th { background-color: rgba(139,42,15,0.07); }
+
+      code, pre { font-family: 'SFMono-Regular', Consolas, monospace; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 5px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 2px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border-left: 3px solid var(--border-color);
+        background-color: rgba(0,0,0,0.025);
+        border-radius: 0 3px 3px 0;
+        font-size: 0.95em;
+        font-style: italic;
+        color: #4a3820;
+      }
+      .explicacion strong { font-style: normal; }
+      .dark-mode .btn-explicacion { color: #e0a890; border-color: #e0a890; }
+      .dark-mode .btn-explicacion:hover { background-color: #e0a890; color: #1a1209; }
+      .dark-mode .explicacion { background-color: rgba(255,255,255,0.05); border-left-color: #6b5840; color: #d8c8b0; }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: #fbf8f2;
+        border: none;
+        padding: 9px 15px;
+        margin: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.85rem;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: var(--muted);
+      }
+      .instrucciones-extra li { margin-bottom: 5px; }
+
+      body.dark-mode {
+        --bg-color: #1f1812;
+        --text-color: #e8ddca;
+        --card-bg: #2a2118;
+        --border-color: #4a3c2c;
+        --primary-color: #d98050;
+        --hover-color: #c06a3a;
+        --muted: #b3a285;
+        --rule: #4a3c2c;
+      }
+      .dark-mode h1 { border-bottom-color: var(--text-color); }
+      .dark-mode .author { color: var(--muted); }
+      .dark-mode th { background-color: rgba(217,128,80,0.12); }
+      .dark-mode .correct { background-color: rgba(47,125,50,0.30); border-left-color: #4caf50; }
+      .dark-mode .partial { background-color: rgba(184,134,11,0.30); border-left-color: #d4a017; }
+      .dark-mode .incorrect { background-color: rgba(170,17,17,0.32); border-left-color: #e05555; }
+      .dark-mode .correct::before { color: #6bdc8e; }
+      .dark-mode .incorrect::before { color: #ff8a8a; }
+      .dark-mode .partial::before { color: #e6c14d; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; font-size: 13px; }
+        .question { page-break-inside: avoid; border-bottom: 1px solid #ccc; padding: 12px 0; }
+        .info-box, button, #extra-buttons { display: none !important; }
+        h1 { font-size: 1.9rem; }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <h1>Test de Prácticas de Fundamentos de Redes</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
 
-<h1>Test de Prácticas de Fundamentos de Redes</h1>
+    <div class="info-box">
+      <p></p>
 
-<form id="quizForm">
-    <!-- Aquí puedes agregar las preguntas y respuestas -->
-    <!-- Pregunta 1 -->
-    <div class="question" id="q1">
-        <p><strong>1. ¿Cuál es el propósito de un cortafuegos en una red?</strong></p>
-        <input type="radio" name="q1" value="a"> a. Proteger contra ataques físicos. <br>
-        <input type="radio" name="q1" value="b"> b. Filtrar y controlar el tráfico de red. <br>
-        <input type="radio" name="q1" value="c"> c. Aumentar la velocidad de la red. <br>
-        <input type="radio" name="q1" value="d"> d. Monitorear el uso de la electricidad. <br>
-    </div>
-
-    <div class="question" id="q2">
-        <p><strong>2. Considerando la topología de la red de datos del laboratorio, si configuramos la acción DROP para la cadena FORWARD en RX_1 de la isla X:</strong></p>
-        <input type="radio" name="q2" value="a"> a. Se podrá seguir haciendo ping desde el router RX_1 a cualquiera de las interfaces de la red. <br>
-        <input type="radio" name="q2" value="b"> b. El router RX_1 podrá seguir siendo configurado desde cualquiera de sus interfaces. <br>
-        <input type="radio" name="q2" value="c"> c. Excluyendo la red de gestión, la red 33.X.1.0/24 dejará de ser alcanzable desde cualquier interfaz externa a dicha red. <br>
-        <input type="radio" name="q2" value="d"> d. Todas las respuestas son correctas. <br>
-    </div>
-
-    <div class="question" id="q3">
-        <p><strong>3. ¿Cuál de estas afirmaciones es cierta?</strong></p>
-        <input type="radio" name="q3" value="a"> a. La acción Accept, permitirá pasar a todos los paquetes, independientemente de si cumplen el criterio de selección o no. <br>
-        <input type="radio" name="q3" value="b"> b. El orden en el que se definen las reglas del firewall en un router es importante. <br>
-        <input type="radio" name="q3" value="c"> c. La acción Drop es conveniente definirla al principio de una lista de reglas. <br>
-        <input type="radio" name="q3" value="d"> d. Las acciones Drop y Reject hacen lo mismo. <br>
-    </div>
-
-    <div class="question" id="q4">
-        <p><strong>4. ¿A qué se refiere la cadena INPUT a la hora de definir una regla para un firewall en el router?</strong></p>
-        <input type="radio" name="q4" value="a"> a. Se refiere al tráfico (paquetes) que tienen como destino una de las IPs del router. <br>
-        <input type="radio" name="q4" value="b"> b. No se refiere a ningún tráfico que pase por el router. <br>
-        <input type="radio" name="q4" value="c"> c. Se refiere al tráfico (paquetes) que atraviesa el router y entra por uno de sus interfaces. <br>
-        <input type="radio" name="q4" value="d"> d. Se refiere al tráfico que tiene como destino una de las salidas del router. <br>
-    </div>
-
-    <div class="question" id="q5">
-        <p><strong>5. ¿Cuál de las siguientes afirmaciones sobre el protocolo OSPF es correcta?</strong></p>
-        <input type="radio" name="q5" value="a"> a. OSPF utiliza el algoritmo de vector de distancia para determinar la mejor ruta. <br>
-        <input type="radio" name="q5" value="b"> b. OSPF es un protocolo de enrutamiento de estado de enlace que utiliza el algoritmo Dijkstra. <br>
-        <input type="radio" name="q5" value="c"> c. OSPF no soporta la autenticación de los mensajes de enrutamiento. <br>
-        <input type="radio" name="q5" value="d"> d. OSPF es un protocolo de enrutamiento propietario de Cisco. <br>
-    </div>
-
-    <div class="question" id="q6">
-        <p><strong>6. A la hora de establecer una entrada en una tabla de encaminamiento de un router Mikrotik, ¿qué campos principales añadiría?</strong></p>
-        <input type="radio" name="q6" value="a"> a. La dirección del próximo salto <br>
-        <input type="radio" name="q6" value="b"> b. La dirección de red origen y la pasarela por defecto <br>
-        <input type="radio" name="q6" value="c"> c. La dirección de red destino y la dirección del salto origen <br>
-        <input type="radio" name="q6" value="d"> d. La dirección de red destino y la dirección del próximo salto <br>
-    </div>
-
-    <div class="question" id="q7">
-        <p><strong>7. Las acciones básicas que se pueden utilizar en el firewall de un router Mikrotik son:</strong></p>
-        <input type="radio" name="q7" value="a"> a. reject, drop, accept <br>
-        <input type="radio" name="q7" value="b"> b. reject, drop, input <br>
-        <input type="radio" name="q7" value="c"> c. reject, forward, accept <br>
-        <input type="radio" name="q7" value="d"> d. react, drop, accept <br>
-    </div>
-
-    <div class="question" id="q8">
-        <p><strong>8. Cuando un paquete IP llega a un router, ¿cómo sabe este hacia dónde reenviarlo?</strong></p>
-        <input type="radio" name="q8" value="a"> a. Mediante la comparación de la dirección IP de origen con las entradas en la tabla de encaminamiento <br>
-        <input type="radio" name="q8" value="b"> b. Mediante la comparación de la dirección MAC de origen con la entradas en la tabla encaminamiento <br>
-        <input type="radio" name="q8" value="c"> c. Mediante la comparación de la dirección IP de destino con las entradas en la tabla de encaminamiento <br>
-        <input type="radio" name="q8" value="d"> d. Mediante la comparación de la dirección MAC de destino con las entradas en la tabla encaminamiento <br>
-    </div>
-
-    <div class="question" id="q9">
-        <p><strong>9. Considerando la topología de las redes del laboratorio y asumiendo que RX_4 solo conoce las redes que tiene directamente conectadas, ¿cómo se conectaría a dicho router desde PCX_1 para administrarlo?</strong></p>
-        <input type="radio" name="q9" value="a"> a. A través de cualquiera de sus interfaces. <br>
-        <input type="radio" name="q9" value="b"> b. A través de la red de gestión. <br>
-        <input type="radio" name="q9" value="c"> c. No habría posibilidad de administrarlo. <br>
-        <input type="radio" name="q9" value="d"> d. A través de la red gestión o la interfaz perteneciente a la red 172.16.X.0/24 <br>
-    </div>
-
-    <div class="question" id="q10">
-        <p><strong>10. Asumiendo que el protocolo RIP está correctamente configurado en la red de datos de la isla X, ¿qué pasaría si se cae la interfaz eth1 con IP 33.X.2.1 de RX_2?</strong></p>
-        <input type="radio" name="q10" value="a"> a. La red 33.X.2.0/24 dejaría de ser alcanzable desde cualquier interfaz externa a dicha red. <br>
-        <input type="radio" name="q10" value="b"> b. La red 33.X.2.0/24 seguiría siendo alcanzable a través de la red de gestión. <br>
-        <input type="radio" name="q10" value="c"> c. La red 33.X.2.0/24 seguiría siendo alcanzable porque RIP es un protocolo dinámico capaz de encontrar rutas alternativas de forma autónoma. <br>
-        <input type="radio" name="q10" value="d"> d. PCX_3 y PCX_4 podrían alcanzar el resto de las interfaces de la red de datos, pero ellos dejarían de ser alcanzables. <br>
-    </div>
-
-    <div class="question" id="q11">
-        <p><strong>11. Si toda aquella información que no vaya a la subred a la que pertenece cierto dispositivo se reenvía hacia un punto de salida dentro de dicha subred, ¿de qué se está hablando?</strong></p>
-        <input type="radio" name="q11" value="a"> a. Máscara de subred. <br>
-        <input type="radio" name="q11" value="b"> b. Pasarela por defecto. <br>
-        <input type="radio" name="q11" value="c"> c. Próximo salto. <br>
-        <input type="radio" name="q11" value="d"> d. Dirección de broadcast. <br>
-    </div>
-
-    <div class="question" id="q12">
-        <p><strong>12. Considerando la topología de la red de datos del laboratorio, ¿qué lista de redes elegiría para configurar el protocolo RIP en RX_6 de la isla X?</strong></p>
-        <input type="radio" name="q12" value="a"> a. 172.16.X.0/24 y 172.17.X.0/24. <br>
-        <input type="radio" name="q12" value="b"> b. 33.X.1.0/24, 33.X.2.0/24, 33.X.3.0/24 y 172.16.X.0/24. <br>
-        <input type="radio" name="q12" value="c"> c. 33.X.1.0/24, 33.X.2.0/24, 33.X.3.0/24, 172.16.X.0/24, 172.17.X.0/24 y 220.10.10.0/24. <br>
-        <input type="radio" name="q12" value="d"> d. 172.17.X.0/24 y 220.10.10.0/24. <br>
-    </div>
-
-    <div class="question" id="q13">
-        <p><strong>13. ¿Cuál es el menú que debemos elegir en un router Mikrotik usando Winbox para utilizar el encaminamiento dinámico con RIP?</strong></p>
-        <input type="radio" name="q13" value="a"> a. Routing->Dynamic Protocols->RIP. <br>
-        <input type="radio" name="q13" value="b"> b. IP->Routing Information Protocol. <br>
-        <input type="radio" name="q13" value="c"> c. Routing->RIP->Networks. <br>
-        <input type="radio" name="q13" value="d"> d. IP->RIP. <br>
-    </div>
-
-    <div class="question" id="q14">
-        <p><strong>14. Considerando la topología de la red de datos del laboratorio, ¿cuál de las siguientes configuraciones para la tabla de enrutamiento sería válida para que RX_4 supiera alcanzar cualquier interfaz dentro de su isla X?</strong></p>
+      <div class="instrucciones-extra">
         
-        <label>
-            <input type="radio" name="q14" value="a">
-            Ninguna respuesta es correcta
-        </label>
-        
-        <label>
-            <input type="radio" name="q14" value="b">
-            <table>
-                <tr>
-                    <th>Red de Destino</th>
-                    <th>Pasarela (gw)</th>
-                </tr>
-                <tr>
-                    <td>172.16.X.0/24</td>
-                    <td>ether1</td>
-                </tr>
-                <tr>
-                    <td>172.17.X.0/24</td>
-                    <td>ether2</td>
-                </tr>
-                <tr>
-                    <td>33.X.2.0/24</td>
-                    <td>172.16.X.2</td>
-                </tr>
-                <tr>
-                    <td>33.X.3.0/24</td>
-                    <td>172.16.X.3</td>
-                </tr>
-                <tr>
-                    <td>0.0.0.0</td>
-                    <td>172.17.X.4</td>
-                </tr>
-            </table>
-        </label>
-        
-        <label>
-            <input type="radio" name="q14" value="c">
-            <table>
-                <tr>
-                    <th>Red de Destino</th>
-                    <th>Pasarela (gw)</th>
-                </tr>
-                <tr>
-                    <td>172.16.X.0/24</td>
-                    <td>ether1</td>
-                </tr>
-                <tr>
-                    <td>172.17.X.0/24</td>
-                    <td>ether2</td>
-                </tr>
-                <tr>
-                    <td>33.X.1.0/24</td>
-                    <td>172.16.X.1</td>
-                </tr>
-                <tr>
-                    <td>33.X.2.0/24</td>
-                    <td>172.16.X.2</td>
-                </tr>
-                <tr>
-                    <td>33.X.3.0/24</td>
-                    <td>172.16.X.3</td>
-                </tr>
-                <tr>
-                    <td>220.10.10.X/24</td>
-                    <td>172.17.X.4</td>
-                </tr>
-            </table>
-        </label>
-        
-        <label>
-            <input type="radio" name="q14" value="d">
-            <table>
-                <tr>
-                    <th>Red de Destino</th>
-                    <th>Pasarela (gw)</th>
-                </tr>
-                <tr>
-                    <td>172.16.X.0/24</td>
-                    <td>ether1</td>
-                </tr>
-                <tr>
-                    <td>172.17.X.0/24</td>
-                    <td>ether2</td>
-                </tr>
-                <tr>
-                    <td>33.X.1.0/24</td>
-                    <td>172.16.X.1</td>
-                </tr>
-                <tr>
-                    <td>33.X.2.0/24</td>
-                    <td>172.16.X.2</td>
-                </tr>
-                <tr>
-                    <td>33.X.3.0/24</td>
-                    <td>172.16.X.3</td>
-                </tr>
-                <tr>
-                    <td>220.10.10.X/24</td>
-                    <td>172.17.X.6</td>
-                </tr>
-            </table>
-        </label>
+      </div>
+
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
     </div>
 
-    <div class="question" id="q15">
-        <p><strong>15. ¿Cuál de los siguientes comandos usaría para configurar la ruta por defecto (default gateway) de PCX_1 a través de la red de datos?</strong></p>
-        <input type="radio" name="q15" value="a"> a. route add default gw 33.X.1.1 <br>
-        <input type="radio" name="q15" value="b"> b. route add -net 0.0.0.0 netmask 0.0.0.0 gw ether1 <br>
-        <input type="radio" name="q15" value="c"> c. route add -net 33.X.1.0 netmask 255.255.255.0 gw 33.X.1.1 <br>
-        <input type="radio" name="q15" value="d"> d. route add default gw 33.X.1.0/24 <br>
-    </div>
-
-    <div class="question" id="q16">
-        <p><strong>16. Las cadenas básicas en las que se agrupan las reglas de filtrado de paquetes en un router Mikrotik son:</strong></p>
-        <input type="radio" name="q16" value="a"> a. INPUT, OUTPUT, THROUGH. <br>
-        <input type="radio" name="q16" value="b"> b. INPUT, OUTPUT, FORWARD. <br>
-        <input type="radio" name="q16" value="c"> c. INSIDE, OUTSIDE, FORWARD. <br>
-        <input type="radio" name="q16" value="d"> d. LEFT, RIGHT, UP, DOWN. <br>
-    </div>
-
-    <!-- Añadir las preguntas adicionales de la misma manera -->
-
-    <input type="button" value="¿Suspenderás?" onclick="checkAnswers()">
-</form>
-
-<!-- INSERTAR IMAGEN  -->
-<img src="isla.png" alt="Isla del aula" style="width: 100%; height: auto; margin: 20px 0;">
-<div class="author">
-    <p>Autor: Ismael Sallami Moreno</p>
+    <div id="questions-container">
+      <div class="question" id="q1" data-correct="1">
+  <div class="enunciado"><strong>1.</strong> ¿Cuál es el propósito de un cortafuegos en una red?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> Proteger contra ataques físicos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> Filtrar y controlar el tráfico de red.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> Aumentar la velocidad de la red.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> Monitorear el uso de la electricidad.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q1')">Ver explicación</button>
+  <div class="explicacion" id="exp-q1" style="display:none">Filtrar y controlar el tráfico de red es la función principal de un cortafuegos.</div>
+</div>
+<div class="question" id="q2" data-correct="3">
+  <div class="enunciado"><strong>2.</strong> Considerando la topología de la red de datos del laboratorio, si configuramos la acción DROP para la cadena FORWARD en RX_1 de la isla X:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Se podrá seguir haciendo ping desde el router RX_1 a cualquiera de las interfaces de la red.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> El router RX_1 podrá seguir siendo configurado desde cualquiera de sus interfaces.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> Excluyendo la red de gestión, la red 33.X.1.0/24 dejará de ser alcanzable desde cualquier interfaz externa a dicha red.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> Todas las respuestas son correctas.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q2')">Ver explicación</button>
+  <div class="explicacion" id="exp-q2" style="display:none">Todas las respuestas son correctas.</div>
+</div>
+<div class="question" id="q3" data-correct="1">
+  <div class="enunciado"><strong>3.</strong> ¿Cuál de estas afirmaciones es cierta?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> La acción Accept, permitirá pasar a todos los paquetes, independientemente de si cumplen el criterio de selección o no.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> El orden en el que se definen las reglas del firewall en un router es importante.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> La acción Drop es conveniente definirla al principio de una lista de reglas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> Las acciones Drop y Reject hacen lo mismo.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q3')">Ver explicación</button>
+  <div class="explicacion" id="exp-q3" style="display:none">El orden en el que se definen las reglas del firewall en un router es importante.</div>
+</div>
+<div class="question" id="q4" data-correct="0">
+  <div class="enunciado"><strong>4.</strong> ¿A qué se refiere la cadena INPUT a la hora de definir una regla para un firewall en el router?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Se refiere al tráfico (paquetes) que tienen como destino una de las IPs del router.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> No se refiere a ningún tráfico que pase por el router.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> Se refiere al tráfico (paquetes) que atraviesa el router y entra por uno de sus interfaces.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> Se refiere al tráfico que tiene como destino una de las salidas del router.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q4')">Ver explicación</button>
+  <div class="explicacion" id="exp-q4" style="display:none">Se refiere al tráfico (paquetes) que tienen como destino una de las IPs del router.</div>
+</div>
+<div class="question" id="q5" data-correct="1">
+  <div class="enunciado"><strong>5.</strong> ¿Cuál de las siguientes afirmaciones sobre el protocolo OSPF es correcta?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> OSPF utiliza el algoritmo de vector de distancia para determinar la mejor ruta.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> OSPF es un protocolo de enrutamiento de estado de enlace que utiliza el algoritmo Dijkstra.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> OSPF no soporta la autenticación de los mensajes de enrutamiento.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> OSPF es un protocolo de enrutamiento propietario de Cisco.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q5')">Ver explicación</button>
+  <div class="explicacion" id="exp-q5" style="display:none">OSPF es un protocolo de enrutamiento de estado de enlace que utiliza el algoritmo Dijkstra.</div>
+</div>
+<div class="question" id="q6" data-correct="3">
+  <div class="enunciado"><strong>6.</strong> A la hora de establecer una entrada en una tabla de encaminamiento de un router Mikrotik, ¿qué campos principales añadiría?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> La dirección del próximo salto</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> La dirección de red origen y la pasarela por defecto</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> La dirección de red destino y la dirección del salto origen</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> La dirección de red destino y la dirección del próximo salto</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q6')">Ver explicación</button>
+  <div class="explicacion" id="exp-q6" style="display:none">La dirección de red destino y la dirección del próximo salto.</div>
+</div>
+<div class="question" id="q7" data-correct="0">
+  <div class="enunciado"><strong>7.</strong> Las acciones básicas que se pueden utilizar en el firewall de un router Mikrotik son:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> reject, drop, accept</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> reject, drop, input</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> reject, forward, accept</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> react, drop, accept</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q7')">Ver explicación</button>
+  <div class="explicacion" id="exp-q7" style="display:none">Las acciones básicas que se pueden utilizar en el firewall de un router Mikrotik son reject, drop, accept.</div>
+</div>
+<div class="question" id="q8" data-correct="2">
+  <div class="enunciado"><strong>8.</strong> Cuando un paquete IP llega a un router, ¿cómo sabe este hacia dónde reenviarlo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Mediante la comparación de la dirección IP de origen con las entradas en la tabla de encaminamiento</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> Mediante la comparación de la dirección MAC de origen con la entradas en la tabla encaminamiento</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> Mediante la comparación de la dirección IP de destino con las entradas en la tabla de encaminamiento</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> Mediante la comparación de la dirección MAC de destino con las entradas en la tabla encaminamiento</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q8')">Ver explicación</button>
+  <div class="explicacion" id="exp-q8" style="display:none">Mediante la comparación de la dirección IP de destino con las entradas en la tabla de encaminamiento.</div>
+</div>
+<div class="question" id="q9" data-correct="1">
+  <div class="enunciado"><strong>9.</strong> Considerando la topología de las redes del laboratorio y asumiendo que RX_4 solo conoce las redes que tiene directamente conectadas, ¿cómo se conectaría a dicho router desde PCX_1 para administrarlo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> A través de cualquiera de sus interfaces.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> A través de la red de gestión.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> No habría posibilidad de administrarlo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> A través de la red gestión o la interfaz perteneciente a la red 172.16.X.0/24</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q9')">Ver explicación</button>
+  <div class="explicacion" id="exp-q9" style="display:none">A través de la red de gestión.</div>
+</div>
+<div class="question" id="q10" data-correct="0">
+  <div class="enunciado"><strong>10.</strong> Asumiendo que el protocolo RIP está correctamente configurado en la red de datos de la isla X, ¿qué pasaría si se cae la interfaz eth1 con IP 33.X.2.1 de RX_2?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> La red 33.X.2.0/24 dejaría de ser alcanzable desde cualquier interfaz externa a dicha red.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> La red 33.X.2.0/24 seguiría siendo alcanzable a través de la red de gestión.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> La red 33.X.2.0/24 seguiría siendo alcanzable porque RIP es un protocolo dinámico capaz de encontrar rutas alternativas de forma autónoma.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> PCX_3 y PCX_4 podrían alcanzar el resto de las interfaces de la red de datos, pero ellos dejarían de ser alcanzables.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q10')">Ver explicación</button>
+  <div class="explicacion" id="exp-q10" style="display:none">La red 33.X.2.0/24 dejaría de ser alcanzable desde cualquier interfaz externa a dicha red.</div>
+</div>
+<div class="question" id="q11" data-correct="1">
+  <div class="enunciado"><strong>11.</strong> Si toda aquella información que no vaya a la subred a la que pertenece cierto dispositivo se reenvía hacia un punto de salida dentro de dicha subred, ¿de qué se está hablando?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> Máscara de subred.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> Pasarela por defecto.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="2"> Próximo salto.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="3"> Dirección de broadcast.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q11')">Ver explicación</button>
+  <div class="explicacion" id="exp-q11" style="display:none">Pasarela por defecto.</div>
+</div>
+<div class="question" id="q12" data-correct="3">
+  <div class="enunciado"><strong>12.</strong> Considerando la topología de la red de datos del laboratorio, ¿qué lista de redes elegiría para configurar el protocolo RIP en RX_6 de la isla X?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="0"> 172.16.X.0/24 y 172.17.X.0/24.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="1"> 33.X.1.0/24, 33.X.2.0/24, 33.X.3.0/24 y 172.16.X.0/24.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="2"> 33.X.1.0/24, 33.X.2.0/24, 33.X.3.0/24, 172.16.X.0/24, 172.17.X.0/24 y 220.10.10.0/24.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="3"> 172.17.X.0/24 y 220.10.10.0/24.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q12')">Ver explicación</button>
+  <div class="explicacion" id="exp-q12" style="display:none">172.17.X.0/24 y 220.10.10.0/24.</div>
+</div>
+<div class="question" id="q13" data-correct="2">
+  <div class="enunciado"><strong>13.</strong> ¿Cuál es el menú que debemos elegir en un router Mikrotik usando Winbox para utilizar el encaminamiento dinámico con RIP?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="0"> Routing-&gt;Dynamic Protocols-&gt;RIP.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="1"> IP-&gt;Routing Information Protocol.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="2"> Routing-&gt;RIP-&gt;Networks.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="3"> IP-&gt;RIP.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q13')">Ver explicación</button>
+  <div class="explicacion" id="exp-q13" style="display:none">Routing-&gt;RIP-&gt;Networks.</div>
+</div>
+<div class="question" id="q14" data-correct="3">
+  <div class="enunciado"><strong>14.</strong> Considerando la topología de la red de datos del laboratorio, ¿cuál de las siguientes configuraciones para la tabla de enrutamiento sería válida para que RX_4 supiera alcanzar cualquier interfaz dentro de su isla X?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="0"> Ninguna respuesta es correcta</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="1"> <table> <tr> <th>Red de Destino</th> <th>Pasarela (gw)</th> </tr> <tr> <td>172.16.X.0/24</td> <td>ether1</td> </tr> <tr> <td>172.17.X.0/24</td> <td>ether2</td> </tr> <tr> <td>33.X.2.0/24</td> <td>172.16.X.2</td> </tr> <tr> <td>33.X.3.0/24</td> <td>172.16.X.3</td> </tr> <tr> <td>0.0.0.0</td> <td>172.17.X.4</td> </tr> </table>
+<p></label> <label></p></label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="2"> <table> <tr> <th>Red de Destino</th> <th>Pasarela (gw)</th> </tr> <tr> <td>172.16.X.0/24</td> <td>ether1</td> </tr> <tr> <td>172.17.X.0/24</td> <td>ether2</td> </tr> <tr> <td>33.X.1.0/24</td> <td>172.16.X.1</td> </tr> <tr> <td>33.X.2.0/24</td> <td>172.16.X.2</td> </tr> <tr> <td>33.X.3.0/24</td> <td>172.16.X.3</td> </tr> <tr> <td>220.10.10.X/24</td> <td>172.17.X.4</td> </tr> </table>
+<p></label> <label></p></label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="3"> <table> <tr> <th>Red de Destino</th> <th>Pasarela (gw)</th> </tr> <tr> <td>172.16.X.0/24</td> <td>ether1</td> </tr> <tr> <td>172.17.X.0/24</td> <td>ether2</td> </tr> <tr> <td>33.X.1.0/24</td> <td>172.16.X.1</td> </tr> <tr> <td>33.X.2.0/24</td> <td>172.16.X.2</td> </tr> <tr> <td>33.X.3.0/24</td> <td>172.16.X.3</td> </tr> <tr> <td>220.10.10.X/24</td> <td>172.17.X.6</td> </tr> </table>
+<p></label></p></label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q14')">Ver explicación</button>
+  <div class="explicacion" id="exp-q14" style="display:none">Tabla opción d.</div>
+</div>
+<div class="question" id="q15" data-correct="0">
+  <div class="enunciado"><strong>15.</strong> ¿Cuál de los siguientes comandos usaría para configurar la ruta por defecto (default gateway) de PCX_1 a través de la red de datos?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="0"> route add default gw 33.X.1.1</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="1"> route add -net 0.0.0.0 netmask 0.0.0.0 gw ether1</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="2"> route add -net 33.X.1.0 netmask 255.255.255.0 gw 33.X.1.1</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="3"> route add default gw 33.X.1.0/24</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q15')">Ver explicación</button>
+  <div class="explicacion" id="exp-q15" style="display:none">route add default gw 33.X.1.1.</div>
+</div>
+<div class="question" id="q16" data-correct="1">
+  <div class="enunciado"><strong>16.</strong> Las cadenas básicas en las que se agrupan las reglas de filtrado de paquetes en un router Mikrotik son:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="0"> INPUT, OUTPUT, THROUGH.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="1"> INPUT, OUTPUT, FORWARD.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="2"> INSIDE, OUTSIDE, FORWARD.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="3"> LEFT, RIGHT, UP, DOWN.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q16')">Ver explicación</button>
+  <div class="explicacion" id="exp-q16" style="display:none">INPUT, OUTPUT, FORWARD.</div>
 </div>
 
-<div id="results" style="margin-top: 20px;"></div>
+    </div>
 
-<script>
-    function checkAnswers() {
-        let score = 0;
-        const totalQuestions = 16;
-        const resultsDiv = document.getElementById("results");
-        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
 
-        // Respuestas correctas
-        const answers = {
-            q1: { answer: 'b', explanation: 'Filtrar y controlar el tráfico de red es la función principal de un cortafuegos.' },
-            q2: { answer: 'd', explanation: 'Todas las respuestas son correctas.' },
-            q3: { answer: 'b', explanation: 'El orden en el que se definen las reglas del firewall en un router es importante.' },
-            q4: { answer: 'a', explanation: 'Se refiere al tráfico (paquetes) que tienen como destino una de las IPs del router.' },
-            q5: { answer: 'b', explanation: 'OSPF es un protocolo de enrutamiento de estado de enlace que utiliza el algoritmo Dijkstra.' },
-            q6: { answer: 'd', explanation: 'La dirección de red destino y la dirección del próximo salto.' },
-            q7: { answer: 'a', explanation: 'Las acciones básicas que se pueden utilizar en el firewall de un router Mikrotik son reject, drop, accept.' },
-            q8: { answer: 'c', explanation: 'Mediante la comparación de la dirección IP de destino con las entradas en la tabla de encaminamiento.' },
-            q9: { answer: 'b', explanation: 'A través de la red de gestión.' },
-            q10: { answer: 'a', explanation: ' La red 33.X.2.0/24 dejaría de ser alcanzable desde cualquier interfaz externa a dicha red. ' },
-            q11: { answer: 'b', explanation: 'Pasarela por defecto.' },
-            q12: { answer: 'd', explanation: '172.17.X.0/24 y 220.10.10.0/24.' },
-            q13: { answer: 'c', explanation: 'Routing->RIP->Networks.' },
-            q14: { answer: 'd', explanation: 'Tabla opción d.' },
-            q15: { answer: 'a', explanation: 'route add default gw 33.X.1.1.' },
-            q16: { answer: 'b', explanation: 'INPUT, OUTPUT, FORWARD.' }
-        };
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
 
-        for (let i = 1; i <= totalQuestions; i++) {
-            const question = document.querySelector(`input[name="q${i}"]:checked`);
-            if (question) {
-                if (question.value === answers[`q${i}`].answer) {
-                    score++;
-                    document.getElementById(`q${i}`).classList.add('correct');
-                } else {
-                    document.getElementById(`q${i}`).classList.add('incorrect');
-                    // Mostrar la respuesta correcta y su justificación
-                    const correctAnswer = answers[`q${i}`].answer;
-                    const explanation = answers[`q${i}`].explanation;
-                    const explanationDiv = document.createElement("div");
-                    explanationDiv.className = "explanation";
-                    explanationDiv.innerHTML = `<strong>Respuesta correcta:</strong> ${correctAnswer}<br><strong>Justificación:</strong> ${explanation}`;
-                    document.getElementById(`q${i}`).appendChild(explanationDiv);
-                }
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
+
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
+
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checked.length === 0) return;
+
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
+            } else {
+              q.classList.add("incorrect");
             }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
         }
 
-        // Cálculo de la nota sobre 10
-        const grade = (score / totalQuestions) * 10;
-        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
-        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
-    }
-</script>
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
 
-</body>
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
 </html>
