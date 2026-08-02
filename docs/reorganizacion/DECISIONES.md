@@ -323,6 +323,24 @@ con otro nombre y se retira. La fase 6 se queda con primero y segundo.
 
 ---
 
+## D-16 · Los tests de CF1 son transcripción propia
+
+**Fecha:** 2026-08-02 · **Estado:** adoptada
+
+Los seis `testTNLibro.html` de CF1 quedaron señalados en la fase 5 porque su nombre decía
+«del libro» y sus 62 preguntas son enunciados de banco de test. Se dudó si eran material de
+un manual, que no se republica.
+
+**Las transcribió Ismael.** El punto se cierra: los seis `.md` declaran
+`**Autor:** Ismael Sallami Moreno` y no hay nada que retirar.
+
+Distinto es `CF1/Tests/testPDF/TESTS.pdf`, que sí estaba descargado —portada de la
+Universidad Autónoma de Madrid, «Anónimo», «Reservados todos los derechos» y hash de marca
+de agua— y se retiró el 2026-08-02. Sus preguntas **no** coinciden con las de los seis
+tests: se comprobó antes de decidir.
+
+---
+
 ## Documentos sin fuente
 
 Los PDF que se quedan en su plantilla original. Por la [D-15](#d-15--tercero-no-migra-a-la-plantilla-de-cuarto)

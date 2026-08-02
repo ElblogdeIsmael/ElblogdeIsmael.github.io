@@ -1,6 +1,6 @@
 # Fase 4 — Plantillas
 
-**Estado:** **hecha el 2026-08-02**, con el alcance recortado ·
+**Estado:** **cerrada el 2026-08-02**, con el alcance recortado ·
 **Destructiva:** no · **Rama:** `reorg/fase-4-plantillas`
 
 ---
@@ -236,14 +236,32 @@ caso: **no sirve para tapar un fallo del parser**.
 
 ---
 
-## Lo que sigue pendiente
+## Lo que quedaba pendiente — cerrado el 2026-08-02
 
-- **Cuatro tests con `.md` propio siguen en dialecto viejo**, así que quedaron fuera de
-  este barrido: `FBD/…/Simulacro2/simulacro2.html` y `test.html`, e
-  `ISE/Prácticas/Test/preguntas.html` y `test.html`. Los tres primeros los enlaza la web.
-- **ISE tiene el mismo test tres veces.** `preguntas.md`, `testISE.md` y el nuevo
-  `test_oficial_completo_ISE.md` tienen los tres 468 preguntas; `Test/test.md` tiene 354 y
-  `cuestionario_generado.md` 353. Hay que decidir cuál se queda.
+Los dos puntos que dejó abiertos esta fase están resueltos, y ninguno era lo que decía.
+
+**«Cuatro tests con `.md` propio en dialecto viejo».** Al abrirlos eran tres problemas
+distintos:
+
+| Fichero | Lo que resultó ser |
+| --- | --- |
+| `FBD/…/Simulacro2/test.html` | **la plantilla de md2html renderizada**: «Título de la pregunta», «Opción 1», «Opción 2». Su `test.md` era la plantilla en blanco. La web lo publicaba como «cuestionario DML breve». Retirado con su tarjeta |
+| `FBD/…/Simulacro2/simulacro2.html` | **desfasado respecto a su propio `.md`**: el HTML tenía 5 preguntas y decía DML, el markdown tenía 7 y decía DDL. Regenerado **desde el markdown**, que era la fuente rica; extraer del HTML habría perdido dos preguntas |
+| `ISE/…/Test/preguntas.html` | duplicado exacto de `test_oficial_completo_ISE`. Borrado |
+| `ISE/…/Test/test.html` | tenía **468 preguntas y su `test.md` 354**: el markdown no era su fuente. Regenerado desde él |
+
+**«ISE tiene el mismo test tres veces».** Comparando el texto de cada pregunta y no el
+número, son dos duplicados exactos y dos ficheros con contenido propio:
+
+- `preguntas.md` ≡ `testISE.md` ≡ `test_oficial_completo_ISE.md`. Los dos primeros se
+  borran.
+- `cuestionario.md` ≡ `test.md`. Se borra el primero.
+- **`test.md` tiene 96 preguntas que no están en el oficial** y `cuestionario_generado.md`
+  otras 168. Se quedan los dos. **Borrar por conteo habría perdido 264 preguntas.**
+
+Lección para la próxima: **comparar el contenido, no el recuento.** Dos ficheros con el
+mismo número de preguntas pueden no tener las mismas, y dos con distinto número pueden ser
+el mismo test.
 
 ---
 
