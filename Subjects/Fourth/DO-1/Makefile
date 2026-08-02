@@ -4,6 +4,11 @@
 
 PROJECT = DO-1
 SRC = src/*.md
+
+# The .tex files the markdown pulls in with \input. They are prerequisites and
+# not pandoc arguments: LaTeX resolves them at compile time, pandoc never sees
+# them. Without this line, editing a diagram does not rebuild anything.
+TEXSRC = $(shell find src -name '*.tex')
 MEDIA = media/*
 
 TEMPLATE_DIR = ../../../extraFiles
@@ -36,7 +41,7 @@ $(PDF): $(TEX)
 	@echo "Compilando $(PDF) con latexmk..."
 	$(PDF_ENGINE) $(PDF_OPTIONS) $(TEX)
 
-$(TEX): $(SRC) $(MEDIA) $(TEX_TEMPLATE) $(METADATA)
+$(TEX): $(SRC) $(TEXSRC) $(MEDIA) $(TEX_TEMPLATE) $(METADATA)
 	@mkdir -p $(OUTDIR)
 	@echo "Generando $(TEX) con pandoc..."
 	pandoc $(SRC) \
