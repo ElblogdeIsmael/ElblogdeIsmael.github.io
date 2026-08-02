@@ -587,18 +587,13 @@ export default {
                   kind: "SQL",
                 },
                 {
-                  name: "Simulacro 2",
+                  name: "Simulacro 2 · cuestionario DDL",
                   href: "/Subjects/Third/FBD/Practica/2parte/Simulacro2/simulacro2.html",
                   kind: "HTML",
                 },
                 {
                   name: "Simulacro 2 · cuestionario DML de prácticas",
                   href: "/Subjects/Third/FBD/Practica/2parte/Simulacro2/simulacro2_practicas.html",
-                  kind: "HTML",
-                },
-                {
-                  name: "Simulacro 2 · cuestionario DML breve",
-                  href: "/Subjects/Third/FBD/Practica/2parte/Simulacro2/test.html",
                   kind: "HTML",
                 },
               ],
