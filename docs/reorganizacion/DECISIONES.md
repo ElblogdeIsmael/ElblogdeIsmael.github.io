@@ -193,23 +193,64 @@ mantenerse.
 
 ## D-12 · El formato de escritura es híbrido, y ya lo era
 
-**Fecha:** 2026-08-01 · **Estado:** adoptada
+**Fecha:** 2026-08-01 · **Estado:** adoptada, **con el criterio corregido el 2026-08-02**
 
-La idea original era escribirlo todo en markdown. En la práctica no ocurrió, y por un
-motivo bueno: markdown no autocompleta figuras tikz ni matemática pesada, así que ese
-contenido acabó en `.tex` por su cuenta.
+El formato es híbrido y lo seguirá siendo. Lo que cambia es **cuándo se sale a LaTeX**,
+porque la razón que daba esta decisión no se sostuvo al medirla.
 
-- Markdown para la prosa: capítulos, explicaciones, listas.
-- `.tex` bajo `src/tex/` para figuras tikz, tablas complejas, pseudocódigo y matemática
-  pesada, incluido desde el markdown con `\input`.
+### Lo que decía, y por qué era falso
 
-**No se migra nada, porque es lo que ya hacen cinco asignaturas.**
-`Subjects/Fourth/IG/src/01_Teoria.md` son diez líneas que solo hacen `\input`, y en CG,
-DO-1, EM, IG y MC el contenido real vive en `src/tex/`. La fase 2 ya midió que ahí el PDF
-de LaTeX sale más completo que el de pandoc (MC: 103 páginas frente a 61).
+Decía que el contenido acabó en `.tex` porque «markdown no autocompleta figuras tikz ni
+matemática pesada». Contando cuántas líneas de esos `.tex` están dentro de un entorno que
+de verdad necesita LaTeX —`tikzpicture`, `equation`, `align`, `tabular`, `lstlisting`,
+`figure`— sale esto:
 
-Lo que sí hay que arreglar es el glob de los Makefile, que hace `src/*.md` y por eso nunca
-ve los `.tex` sueltos. Es trabajo de la [fase 4](fase-4-plantillas.md).
+| Asignatura | Líneas `.tex` | En entornos LaTeX | Prosa |
+| --- | ---: | ---: | ---: |
+| DDSI | 332 | 0 % | **100 %** |
+| EM | 4.247 | 10 % | 89 % |
+| CG | 1.402 | 14 % | 85 % |
+| MC | 5.097 | 19 % | 80 % |
+| DO-1 | 2.201 | 41 % | 58 % |
+| IG | 8.641 | 44 % | 55 % |
+
+CG son 1.402 líneas de LaTeX **sin un solo `tikzpicture` ni una sola ecuación**: capítulos
+enteros de prosa escritos con `\section` y `\begin{itemize}`. No están ahí porque hiciera
+falta, sino porque el documento empezó ahí.
+
+Y la contraprueba: **MAC, la asignatura más matemática de cuarto, es markdown puro.** 1.942
+líneas, 67 páginas, veinte bloques `$$`, setenta filas de tabla markdown y **tres** líneas
+de LaTeX crudo en todo el documento.
+
+Comprobado además que **pandoc pasa LaTeX crudo escrito dentro de un `.md` intacto al
+`.tex`** —probado con un `tikzpicture` y prosa alrededor—, así que ni siquiera hace falta
+partir el contenido en dos ficheros.
+
+### El criterio, por orden
+
+1. **Todo en markdown**: prosa, listas, tablas `|`, matemática `$…$` y `$$…$$`, código.
+2. **LaTeX crudo dentro del `.md`** cuando markdown no llegue: `tikzpicture`, `align` de
+   varias líneas, tablas con celdas combinadas, `algorithm`.
+3. **`.tex` aparte solo si el bloque pasa de unas 50 líneas** y estorba leer el capítulo.
+   Va en `src/tex/` y entra con `\input{src/tex/nombre}`, como hace IG.
+
+Nunca un capítulo entero de prosa en `.tex`.
+
+**Las cinco de cuarto no se migran**, por la misma lógica de la [D-15](#d-15--tercero-no-migra-a-la-plantilla-de-cuarto):
+funcionan, publican, y recompilarlas arriesga publicar menos de lo que hay. El criterio
+vale para lo que se escriba a partir de ahora, y va escrito en
+`Subjects/_template/README.md`.
+
+### El arreglo que esta decisión encargó, hecho el 2026-08-02
+
+Decía que había que arreglar el glob de los Makefile, que hace `src/*.md` y nunca ve los
+`.tex` sueltos, y lo encargaba a la [fase 4](fase-4-plantillas.md). **La fase 4 no lo hizo
+y su documento no lo menciona.** Comprobado: `make -n` sobre IG después de tocar
+`src/tex/t1.tex` invocaba pandoc **cero** veces.
+
+Resuelto añadiendo `TEXSRC = $(shell find src -name '*.tex')` como dependencia en las seis
+asignaturas afectadas. `find` cubre las dos disposiciones del árbol —`src/tex/` en CG,
+DDSI, DO-1, IG y MC, y `src/t1…t6/` en EM— sin tener que uniformarlas.
 
 Esta decisión **acota la D-07**: aquella fijaba markdown como fuente, pero solo se cumple
 —y solo se pretendía— para los tests.

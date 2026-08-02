@@ -46,6 +46,16 @@ Necesita Node 20 o superior. No hay que instalar nada.
 **Una asignatura** — añade un objeto `{ code, name, blocks }` al semestre que
 toque, en el mismo fichero.
 
+**Los apuntes de una asignatura**, que es escribir un PDF nuevo:
+
+1. `cp -r Subjects/_template Subjects/Second/SO`
+2. En el `Makefile`, `PROJECT = SO`.
+3. Escribe en `src/`, un fichero por tema. Se escribe **en Markdown**; el LaTeX
+   solo para lo que Markdown no cubre, y dentro del propio `.md`.
+4. `make` deja el PDF en `build/SO.pdf`. Enlázalo y `npm run build`.
+
+Está todo en [`Subjects/_template/README.md`](Subjects/_template/README.md).
+
 **Una sección nueva** (investigación, proyectos, lo que sea):
 
 1. `cp -r content/sections/_template content/sections/investigacion`
