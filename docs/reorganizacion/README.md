@@ -4,8 +4,8 @@ Plan de trabajo para separar el sitio web, los apuntes, el material ajeno y el c
 prácticas, y para dejar los repositorios de `Ismael-Sallami` en condiciones de servir como
 portfolio.
 
-> **Estado:** fase 0 hecha, fase 1 en curso (los 4 repos nuevos publicados).
-> Las demás arrancan con una aprobación explícita cada una.
+> **Estado: seis fases cerradas, queda la 6.** Las fases 4 y 5 se cerraron del todo el
+> 2026-08-02, con los puntos que habían dejado pendientes resueltos.
 >
 > Seguimiento en GitHub: milestone [Reorganización 2026](https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/milestone/1)
 > e issue paraguas [#10](https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/issues/10).
@@ -42,19 +42,22 @@ GitHub Pages.
 | [1 — Código](fase-1-codigo.md) | Extrae el código de prácticas a repos propios; renombra, fusiona y archiva | no | **hecha** (PR #15 a #19) |
 | [2 — Contenido](fase-2-contenido.md) | Versiona lo que falta; estructura canónica; inventaría el material ajeno | no en su primera pasada | **hecha y mergeada** (PR #22). Mover el material ajeno espera a la fase 3 |
 | [3 — Historial](fase-3-historial.md) | `git filter-repo` para purgar el material ajeno del historial | **sí, reescribe historial** | **hecha** el 2026-08-01: 1,34 GiB → 442,78 MiB, 255 commits intactos |
-| [4 — Plantillas](fase-4-plantillas.md) | Arregla la plantilla compartida y pasa los tests a md2html. La migración de tercero se descartó ([D-15](DECISIONES.md)) | no | **hecha** el 2026-08-02. 34 tests y 2.481 preguntas con fuente Markdown |
-| [5 — Indexado](fase-5-indexado.md) | Enlaza los repos nuevos y arregla lo no indexado. La sección Proyectos se retiró ([D-13](DECISIONES.md)) | no | **hecha** el 2026-08-01 (PR #24). Cero enlaces al propio repo, 186 recursos |
+| [4 — Plantillas](fase-4-plantillas.md) | Arregla la plantilla compartida y pasa los tests a md2html. La migración de tercero se descartó ([D-15](DECISIONES.md)) | no | **cerrada** el 2026-08-02. 34 tests con fuente Markdown, más la plantilla de asignatura y el arreglo que encargaba la [D-12](DECISIONES.md) |
+| [5 — Indexado](fase-5-indexado.md) | Enlaza los repos nuevos y arregla lo no indexado. La sección Proyectos se retiró ([D-13](DECISIONES.md)) | no | **cerrada** el 2026-08-02 (PR #24 y cierre posterior). Cero enlaces al propio repo, y 37 PDF del profesorado retirados |
 | [6 — Contenido pendiente](fase-6-contenido-pendiente.md) | Apuntes de las 26 asignaturas de 1º y 2º. Tercero salió el 2026-08-02 ([D-15](DECISIONES.md)) | no | continua |
 
-Orden obligatorio: **0 → 1 → 2 → 3**. **Las cuatro están hechas desde el 2026-08-01**, y ese
-mismo día se cerró la 5. La 4 se cerró el 2026-08-02. **Queda solo la 6**, que no se
-termina: se va tachando asignatura a asignatura.
+Orden obligatorio: **0 → 1 → 2 → 3**. Las cuatro están hechas desde el 2026-08-01. **Las
+fases 4 y 5 se cerraron del todo el 2026-08-02**, con lo que habían dejado pendiente
+resuelto. **Queda solo la 6**, que no se termina: se va tachando asignatura a asignatura.
 
-Aviso para quien retome la 6: **los documentos de fase envejecen, y ya han fallado dos
+Aviso para quien retome la 6: **los documentos de fase envejecen, y ya han fallado tres
 veces**. El de la fase 5 daba por pendientes cosas ya hechas, citaba un repositorio con su
 nombre viejo y su fragmento de código no compilaba. El de la fase 4 contaba 26 tests cuando
 eran 34, decía dos dialectos cuando eran cinco, y su solución para las rutas fijas
-—`--resource-path`— **no funciona**, porque esas rutas las resuelve LaTeX y no pandoc.
+—`--resource-path`— **no funciona**, porque esas rutas las resuelve LaTeX y no pandoc. Y al
+cerrar las dos el 2026-08-02 resultó que sus «cuatro tests en dialecto viejo» eran otra
+cosa, que el «mismo test tres veces» de ISE eran dos duplicados y dos ficheros con 264
+preguntas propias, y que la fase 4 nunca hizo el arreglo que le encargaba la D-12.
 Comprobar el estado antes de ejecutar, no fiarse del texto.
 
 La fase 3 va después de la 1 y la 2 porque reescribe el historial: si se ejecuta antes, hay
@@ -84,16 +87,17 @@ código están en inglés; su equivalente en estos documentos:
 
 ## Objetivos medibles
 
-Al terminar la fase 5:
+Estado al cerrar las fases 4 y 5, el 2026-08-02:
 
-- `git count-objects -vH` → `size-pack` **por debajo de 300 MB**.
-- **0** claves privadas versionadas o en el historial.
-- **0** ficheros de terceros con copyright en el repo público.
-- **0** enlaces `github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/tree/main/...` en
-  `content/`.
-- Todo enlace local de `content/` existe en disco **y** está versionado.
-- Todos los repos activos de `Ismael-Sallami` cumplen [ESTANDAR-REPOS.md](ESTANDAR-REPOS.md).
-- Una sola generación de plantilla LaTeX y una sola de tests HTML.
+| Objetivo | Estado |
+| --- | --- |
+| `size-pack` por debajo de 300 MB | **no**, 418 MiB. Depende del ticket [#4622497](https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io) de GitHub Support, que ha de borrar las `refs/pull`. No es trabajo local |
+| 0 claves privadas versionadas o en el historial | sí, verificado en la fase 3 sobre 7.801 objetos |
+| 0 ficheros de terceros con copyright | **casi**: 37 más retirados el 2026-08-02, y quedan **24 PDF sin clasificar** en `.inventario-pdf-no-indexados.txt` |
+| 0 enlaces `tree/main` al propio repo en `content/` | sí |
+| Todo enlace local de `content/` existe y está versionado | sí, `npm run check` en verde |
+| Los repos activos de `Ismael-Sallami` cumplen [ESTANDAR-REPOS.md](ESTANDAR-REPOS.md) | sí, los diecisiete |
+| Una sola generación de plantilla LaTeX y una sola de tests HTML | sí, y desde el 2026-08-02 hay plantilla de asignatura en `Subjects/_template/` |
 
 ## Cómo se trabaja
 

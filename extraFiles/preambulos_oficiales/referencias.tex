@@ -1,0 +1,9 @@
+% Prints the bibliography. estilo.latex inputs this right before \end{document}.
+%
+% Guarded because not every document that uses the shared preamble loads
+% biblatex: the ones that build their own preamble reach here anyway through
+% TEXINPUTS, and \printbibliography would abort for them. The guard makes this
+% file a no-op instead.
+\makeatletter
+\@ifpackageloaded{biblatex}{\printbibliography}{}
+\makeatother

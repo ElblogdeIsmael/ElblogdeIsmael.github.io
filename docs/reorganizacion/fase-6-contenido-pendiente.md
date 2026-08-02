@@ -64,12 +64,24 @@ Subjects/{First,Second}/<CODIGO>/
 └── referencias.bib
 ```
 
-Arrancar copiando una asignatura ya migrada:
+Se arranca copiando la plantilla:
 
 ```bash
-cp -r Subjects/Fourth/MC Subjects/Second/SO
-# ajustar PROJECT en el Makefile y src/00_portada.md
+cp -r Subjects/_template Subjects/Second/SO
+# en el Makefile: PROJECT = SO
+# en src/00_portada.md: subject, type y about
+make
 ```
+
+**Este documento decía `cp -r Subjects/Fourth/MC` y era mala idea**, además de que la
+plantilla no existía cuando se escribió. MC es de las cuatro asignaturas cuyo Makefile
+escribe `build/MC.pdf` (61 páginas) mientras la web sirve `TEX/MC.pdf` (103), mantenido a
+mano: copiándola arrancas con un flujo que no reproduce lo publicado. La plantilla sale del
+Makefile de DDSI, que sí es coherente. Corregido el 2026-08-02.
+
+Cómo se escribe —Markdown por defecto, LaTeX solo para lo que Markdown no cubre y dentro
+del propio `.md`— está en [`Subjects/_template/README.md`](../../Subjects/_template/README.md)
+y en la [D-12](DECISIONES.md#d-12--el-formato-de-escritura-es-híbrido-y-ya-lo-era).
 
 Las carpetas `Subjects/First/` y `Subjects/Second/` hay que crearlas: hoy solo existe
 `Subjects/Second/MACRO` con un único PDF de ejercicios.

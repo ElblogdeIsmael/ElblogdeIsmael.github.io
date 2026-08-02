@@ -1,7 +1,7 @@
 # Fase 5 — Indexado
 
-**Duración estimada:** 1–2 sesiones · **Destructiva:** no ·
-**Rama:** `reorg/fase-5-indexado`
+**Estado:** **cerrada el 2026-08-02** · **Destructiva:** no ·
+**Rama:** `reorg/fase-5-indexado`, cerrada con la PR #24 y el cierre del 2026-08-02
 
 ---
 
@@ -39,20 +39,20 @@ carpetas sin README dentro de un repo enorme: para quien llega desde la web, no 
 | `tercero.mjs:688` | `…/FIS/Teoria/Ejercicios-Controles/Controles/` | valorar: `/viewer/` o repo |
 | `tercero.mjs:312` | `…/DAE/Dirección y administración de empresas/…` | material: se retira |
 
-- [ ] Sustituir los siete primeros por el repositorio correspondiente.
-- [ ] Los tres enlaces de PDOO se convierten en un único bloque «Código» con un enlace a
+- [x] Sustituir los siete primeros por el repositorio correspondiente.
+- [x] Los tres enlaces de PDOO se convierten en un único bloque «Código» con un enlace a
       `irrgarten`, en lugar de tres enlaces a subcarpetas.
-- [ ] Los dos de FIS: si son PDF, enlazarlos directos; si son `.md`, usar
+- [x] Los dos de FIS: si son PDF, enlazarlos directos; si son `.md`, usar
       `/viewer/?file=…`. Nunca una ruta relativa a un `.md`.
-- [ ] El de DAE apunta a material que se movió en la fase 2: se retira el enlace.
-- [ ] Actualizar también los enlaces a repos renombrados
+- [x] El de DAE apunta a material que se movió en la fase 2: se retira el enlace.
+- [x] Actualizar también los enlaces a repos renombrados
       (`AA-practices` → `machine-learning-practices`, `MH-Practices` → `metaheuristics`,
       `DDSI` → `oracle-dbms-project`, `TDA-Imagen` → `image-adt`,
       `Air-lines-Project` → `airline-routes-adt`,
       `ModeloEconometrico` → `econometric-model`, `Practica2_IA` → `rescue-agents`).
       GitHub redirige igualmente, pero el enlace correcto es el nuevo.
 
-- [ ] Comprobar que no queda ninguno:
+- [x] Comprobar que no queda ninguno:
 
   ```bash
   grep -rn 'ElblogdeIsmael.github.io/tree/main\|ElblogdeIsmael.github.io/blob/main' content/
@@ -65,22 +65,22 @@ carpetas sin README dentro de un repo enorme: para quien llega desde la web, no 
 
 Repositorios que ya existen y la web ignora:
 
-- [ ] **`concurrency-mpi`** → ficha SCD de tercero, bloque «Código».
-- [ ] **`software-engineering-practices`** (antes `FIS`) → ficha FIS de tercero.
-- [ ] **`3-Partition-NP-Completeness`** → ficha MC o MAC de cuarto (es una demostración de
+- [x] **`concurrency-mpi`** → ficha SCD de tercero, bloque «Código».
+- [x] **`software-engineering-practices`** (antes `FIS`) → ficha FIS de tercero.
+- [x] **`3-Partition-NP-Completeness`** → ficha MC o MAC de cuarto (es una demostración de
       NP-completitud; encaja en Modelos de Computación).
-- [ ] **`oracle-dbms-project`** (antes `DDSI`) → ficha DDSI de cuarto, que hoy tiene **cero
+- [x] **`oracle-dbms-project`** (antes `DDSI`) → ficha DDSI de cuarto, que hoy tiene **cero
       enlaces** pese a haber contenido.
-- [ ] **`oracle-plsql-lab`** → ficha FBD de tercero.
-- [ ] **`godot-graphics-exercises`** → ficha IG de cuarto.
-- [ ] **`parcheesi-game`** → confirmar la asignatura en la fase 1 y colocarlo en su ficha.
+- [x] **`oracle-plsql-lab`** → ficha FBD de tercero.
+- [x] **`godot-graphics-exercises`** → ficha IG de cuarto.
+- [x] **`parcheesi-game`** → confirmar la asignatura en la fase 1 y colocarlo en su ficha.
 
 Contenido del blog que existe y no se enlaza:
 
-- [ ] **DRH1**: bloque «Temario» con `DRH1.pdf` y las actividades. Hoy solo se enlazan los
+- [x] **DRH1**: bloque «Temario» con `DRH1.pdf` y las actividades. Hoy solo se enlazan los
       6 tests.
-- [ ] **OE**: bloque «Temario». Hoy solo 3 tests.
-- [ ] **DDSI**: sus 11 ficheros versionados no tienen ni un enlace.
+- [x] **OE**: bloque «Temario». Hoy solo 3 tests.
+- [x] **DDSI**: sus 11 ficheros versionados no tienen ni un enlace.
 
 ---
 
@@ -103,20 +103,20 @@ asignatura de la que salió. Eso el portfolio no lo hace, así que no duplica na
 dónde está su código. Ojo con el nombre: el directorio y el import se llaman **`tools`**,
 no `herramientas`, aunque la sección se titule así en la web.
 
-- [ ] Añadir dos enlaces más: `Ismael-Sallami/md2html-testGenerator` y
+- [x] Añadir dos enlaces más: `Ismael-Sallami/md2html-testGenerator` y
       `Ismael-Sallami/pdf-to-md`, etiquetados como código fuente.
-- [ ] Actualizar `summary` si cambia el número de elementos.
-- [ ] El visor (`/viewer/`) sigue sin listarse, a propósito: se usa desde ocho recursos de
+- [x] Actualizar `summary` si cambia el número de elementos.
+- [x] El visor (`/viewer/`) sigue sin listarse, a propósito: se usa desde ocho recursos de
       tercero y cuarto, pero no se ofrece suelto. Mantener el comentario que ya lo explica.
 
 ---
 
 ## Parte E · Regenerar
 
-- [ ] `npm run build`.
-- [ ] `npm run check`.
-- [ ] Revisar el diff del HTML generado: debe cambiar solo lo esperado.
-- [ ] `npm run dev` y recorrer a mano la home, las cinco páginas de curso y Herramientas.
+- [x] `npm run build`.
+- [x] `npm run check`.
+- [x] Revisar el diff del HTML generado: debe cambiar solo lo esperado.
+- [x] `npm run dev` y recorrer a mano la home, las cinco páginas de curso y Herramientas.
 
 ---
 

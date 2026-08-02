@@ -138,7 +138,7 @@ export default {
                   kind: "PDF",
                 },
                 {
-                  name: "Código · 67 scripts de Godot",
+                  name: "Código",
                   href: "https://github.com/Ismael-Sallami/godot-graphics-exercises",
                   kind: "WEB",
                 },

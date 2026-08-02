@@ -14,6 +14,21 @@
 \input{preambulos_oficiales/comandos.tex}  % comandos LaTeX propios
 \input{preambulos_oficiales/estilos.tex}   % estilos de secciones, etc.
 
+% Pandoc's own syntax highlighting. It emits the Shaded and Highlighting
+% environments into this variable, and without the block the document aborts
+% with "Environment Shaded undefined" the moment it hits a code block.
+%
+% That is why every subject passes --listings today: it was the only option.
+% But listings reads code verbatim, so it never goes through inputenc and one
+% accent inside a code block kills the build, pointing at the wrong line. With
+% this block a subject can drop --listings and keep highlighted code.
+%
+% Guarded, so it stays a no-op for the subjects that still use --listings:
+% pandoc only fills the variable when it is doing the highlighting itself.
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
 % ========================
 % Configuración índice y listas
 % ========================
