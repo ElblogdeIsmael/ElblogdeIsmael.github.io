@@ -2,7 +2,7 @@
 # Makefile para la asignatura (Pandoc)
 # ==========================
 
-PROJECT = MAC
+PROJECT = AA
 # Encuentra archivos fuente ordenados
 SRC = $(shell find src -name '*.md' | sort)
 AUXDIR = .tex-other-files
@@ -49,11 +49,8 @@ $(TEX): $(SRC) $(TEX_TEMPLATE) $(METADATA)
 		$(METADATA_FLAG) \
 		--toc --toc-depth=2 \
 		--top-level-division=chapter \
+		--listings \
 		-o $(TEX)
-
-# Sin --listings a propósito: 193 fragmentos de código de estos apuntes llevan
-# acentos u otros símbolos no ASCII, y el paquete listings lee en verbatim, así
-# que no pasa por inputenc y aborta la compilación ante cualquiera de ellos.
 
 .PHONY: all clean clean-all
 

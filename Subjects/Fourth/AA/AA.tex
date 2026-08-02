@@ -7,9 +7,12 @@
 % ========================
 % Paquetes y comandos extra
 % ========================
-\input{../../../extraFiles/preambulos_oficiales/paquetes.tex}  % si tienes paquetes personalizados
-\input{../../../extraFiles/preambulos_oficiales/comandos.tex}  % comandos LaTeX propios
-\input{../../../extraFiles/preambulos_oficiales/estilos.tex}   % estilos de secciones, etc.
+% Paths are relative to extraFiles/, which the subject Makefile puts on
+% TEXINPUTS. Do not write ../ here: the template is shared by subjects that
+% sit at different depths, and a fixed depth only works for some of them.
+\input{preambulos_oficiales/paquetes.tex}  % si tienes paquetes personalizados
+\input{preambulos_oficiales/comandos.tex}  % comandos LaTeX propios
+\input{preambulos_oficiales/estilos.tex}   % estilos de secciones, etc.
 
 % ========================
 % Configuración índice y listas
@@ -95,30 +98,22 @@ Automático} % pie de página izquierdo con tamaño normal
 \begin{titlepage}
     \newgeometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm} % márgenes personalizados
     
-    % Fondo con transparencia (solo si existe el fichero)
+    % Fondo con transparencia
     \begin{tikzpicture}[remember picture,overlay]
         % \node[opacity=0.15,inner sep=0pt] at (current page.center)
-        \IfFileExists{../../../extraFiles/img/fondo_info.jpg}{%
-            \node[inner sep=0pt] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{../../../extraFiles/img/fondo_info.jpg}};
-        }{}
+        \node[inner sep=0pt] at (current page.center)
+            {\includegraphics[width=\paperwidth,height=\paperheight]{img/fondo_info.jpg}};
     \end{tikzpicture}
-
-    % Definir color de texto de portada según existencia de fondo
-    \IfFileExists{../../../extraFiles/img/fondo_info.jpg}{%
-        \newcommand{\portadacolor}{white}
-    }{%
-        \newcommand{\portadacolor}{black}
-    }
 
     % Contenido de la portada
     \begin{center}
         \vspace*{2cm}
         
         \vspace{5cm} % Añadir más espacio antes del contenido
-        {\Huge \bfseries\scshape\textcolor{\portadacolor}{Aprendizaje
+        {\Huge \bfseries\scshape\textcolor{white}{Aprendizaje
 Automático} \par}
         \vspace{0.5cm}
-        {\Large \itshape\textcolor{\portadacolor}{Apuntes de la
+        {\Large \itshape\textcolor{white}{Apuntes de la
 asignatura} \par}
         \vspace{0.5cm}
         % {\small \itshape \href{https://ismael-sallami.github.io}{https://ismael-sallami.github.io} \par}
@@ -130,15 +125,15 @@ asignatura} \par}
         % {\LARGE Ismael Sallami Moreno \par}
 
         \begin{flushright}
-            {\textcolor{\portadacolor}{Ismael Sallami Moreno} \par}
-            {\textcolor{\portadacolor}{Recursos Ingeniería Informática y Ade} \par}
+            {\textcolor{white}{Ismael Sallami Moreno} \par}
+            {\textcolor{white}{Recursos Ingeniería Informática y Ade} \par}
             % {\small \itshape \href{https://elblogdeismael.github.io}{Recursos Ingeniería Informática y Ade} \par}
         \end{flushright}
         \vspace{0.3cm}
         % {\Large Universidad de Granada \par}
         
         % \vspace{1cm}
-        % \includegraphics[width=0.25\textwidth]{../../../extraFiles/img/ugr.png} % opcional: logo
+        % \includegraphics[width=0.25\textwidth]{img/ugr.png} % opcional: logo
         % \vspace{1cm}
         
         % {\large \today}
@@ -172,7 +167,7 @@ Condiciones: Es necesario dar crédito adecuado, proporcionar un enlace a la lic
 \bigskip
 
 \begin{center}
-  \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[width=0.35\textwidth]{../../../extraFiles/img/by-nc-nd.png}}
+  \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[width=0.35\textwidth]{img/by-nc-nd.png}}
 \end{center}
 \end{flushleft}
 \end{minipage}
@@ -220,18 +215,15 @@ Automático}\\[2cm] % Incrementar el espacio entre líneas
 % \cleardoublepage
 
 
-% \input{../../../extraFiles/preambulos_oficiales/licencia.tex}  % licencia
+% \input{preambulos_oficiales/licencia.tex}  % licencia
 % \thispagestyle{empty} % quitar número de página en la portada
 % \clearpage
 
 % --- Índice ---
-\cleardoublepage
-\phantomsection
-\addtocontents{toc}{\protect\thispagestyle{plain}}%
 \tableofcontents
 % \listoffigures
 \clearpage
-\thispagestyle{plain} % mostrar encabezado en la página del índice
+\thispagestyle{empty} % quitar estilo de la página en blanco
 
 %\listoftables
 %\clearpage
@@ -2311,6 +2303,6 @@ invariante del estilo espurio.
   o ajustarse ni siquiera a los datos de entrenamiento base.
 \end{itemize}
 
-\input{../../../extraFiles/preambulos_oficiales/referencias.tex}
+\input{preambulos_oficiales/referencias.tex}
 
 \end{document}
