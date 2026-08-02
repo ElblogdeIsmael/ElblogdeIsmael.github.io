@@ -42,17 +42,20 @@ GitHub Pages.
 | [1 — Código](fase-1-codigo.md) | Extrae el código de prácticas a repos propios; renombra, fusiona y archiva | no | **hecha** (PR #15 a #19) |
 | [2 — Contenido](fase-2-contenido.md) | Versiona lo que falta; estructura canónica; inventaría el material ajeno | no en su primera pasada | **hecha y mergeada** (PR #22). Mover el material ajeno espera a la fase 3 |
 | [3 — Historial](fase-3-historial.md) | `git filter-repo` para purgar el material ajeno del historial | **sí, reescribe historial** | **hecha** el 2026-08-01: 1,34 GiB → 442,78 MiB, 255 commits intactos |
-| [4 — Plantillas](fase-4-plantillas.md) | Unifica LaTeX en la generación pandoc y los tests en md2html | no | pendiente |
+| [4 — Plantillas](fase-4-plantillas.md) | Arregla la plantilla compartida y pasa los tests a md2html. La migración de tercero se descartó ([D-15](DECISIONES.md)) | no | **hecha** el 2026-08-02. 34 tests y 2.481 preguntas con fuente Markdown |
 | [5 — Indexado](fase-5-indexado.md) | Enlaza los repos nuevos y arregla lo no indexado. La sección Proyectos se retiró ([D-13](DECISIONES.md)) | no | **hecha** el 2026-08-01 (PR #24). Cero enlaces al propio repo, 186 recursos |
-| [6 — Contenido pendiente](fase-6-contenido-pendiente.md) | Apuntes de las 26 asignaturas de 1º y 2º, y conversión de las 13 de 3º | no | continua |
+| [6 — Contenido pendiente](fase-6-contenido-pendiente.md) | Apuntes de las 26 asignaturas de 1º y 2º. Tercero salió el 2026-08-02 ([D-15](DECISIONES.md)) | no | continua |
 
 Orden obligatorio: **0 → 1 → 2 → 3**. **Las cuatro están hechas desde el 2026-08-01**, y ese
-mismo día se cerró también la 5. Quedan la **4** y la **6**, independientes entre sí.
+mismo día se cerró la 5. La 4 se cerró el 2026-08-02. **Queda solo la 6**, que no se
+termina: se va tachando asignatura a asignatura.
 
-Aviso para quien retome cualquiera de las dos: **los documentos de fase envejecen**. El de
-la fase 5 daba por pendientes cosas ya hechas, citaba un repositorio con su nombre viejo y
-su fragmento de código no compilaba. Comprobar el estado antes de ejecutar, no fiarse del
-texto.
+Aviso para quien retome la 6: **los documentos de fase envejecen, y ya han fallado dos
+veces**. El de la fase 5 daba por pendientes cosas ya hechas, citaba un repositorio con su
+nombre viejo y su fragmento de código no compilaba. El de la fase 4 contaba 26 tests cuando
+eran 34, decía dos dialectos cuando eran cinco, y su solución para las rutas fijas
+—`--resource-path`— **no funciona**, porque esas rutas las resuelve LaTeX y no pandoc.
+Comprobar el estado antes de ejecutar, no fiarse del texto.
 
 La fase 3 va después de la 1 y la 2 porque reescribe el historial: si se ejecuta antes, hay
 que volver a hacerlo cuando se borre lo que aquellas dos mueven.

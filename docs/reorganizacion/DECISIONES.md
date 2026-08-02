@@ -91,10 +91,13 @@ tiene valor.
 
 ## D-06 · Todo LaTeX a la generación pandoc
 
-**Fecha:** 2026-07-26 · **Estado:** adoptada
+**Fecha:** 2026-07-26 · **Estado:** **revocada en parte el 2026-08-02, ver [D-15](#d-15--tercero-no-migra-a-la-plantilla-de-cuarto)**
 
 Tres generaciones conviviendo. Se unifica en la tercera, la de cuarto curso, que ya está
 construida y funcionando.
+
+> La parte de arreglar y propagar la plantilla sigue vigente y está hecha. Lo que se
+> revoca es migrar los 38 documentos de tercero: se quedan donde están.
 
 **Criterio por documento:**
 
@@ -230,7 +233,7 @@ la que salió. El portfolio lista proyectos; el blog cuenta de dónde salieron.
 
 ## D-14 · Tercero entra en la fase 6 por escrito
 
-**Fecha:** 2026-08-01 · **Estado:** adoptada
+**Fecha:** 2026-08-01 · **Estado:** **revocada el 2026-08-02, ver [D-15](#d-15--tercero-no-migra-a-la-plantilla-de-cuarto)**
 
 Las 13 asignaturas de tercero eran un hueco del plan. La [fase 2](fase-2-contenido.md) las
 delegaba explícitamente en la fase 6, y la fase 6 solo cubría las 26 de primero y segundo,
@@ -245,14 +248,48 @@ no se escribe su temario. Se retira de la lista de pendientes.
 
 ---
 
+## D-15 · Tercero no migra a la plantilla de cuarto
+
+**Fecha:** 2026-08-02 · **Estado:** adoptada · **Revoca:** la parte de migración de
+[D-06](#d-06--todo-latex-a-la-generación-pandoc) y [D-14](#d-14--tercero-entra-en-la-fase-6-por-escrito)
+
+Los 38 documentos LaTeX de tercero se quedan en su plantilla actual. Son 46 `.tex` de
+primera generación y 216 PDF versionados, de los que la web enlaza 67.
+
+**Por qué no se hace:**
+
+1. **La ganancia es cosmética y el riesgo no.** La lección 1 de la
+   [fase 2](fase-2-contenido.md) dice que un PDF recompilado puede salir más pobre que el
+   publicado. Ahí pasó en cinco asignaturas de cuarto; aquí habría que comprobarlo 38
+   veces, documento a documento, y basta fallar una para publicar menos de lo que ya hay.
+2. **La variedad de plantillas es contenido.** Esos documentos enseñan cómo fue
+   evolucionando la forma de componerlos. Uniformarlos borra eso a cambio de que el índice
+   se vea igual.
+3. **No bloquea nada.** La plantilla compartida ya está arreglada y las once de cuarto la
+   usan. Tercero no la necesita para nada de lo que queda.
+
+**Qué sí se hizo de la fase 4**, porque eran defectos y no cosmética:
+
+- `metadata.yaml` afirmaba que todo documento se titulaba «Álgebra Lineal», lo firmaba
+  «Ismael» y era de «Matemáticas». Solo funcionaba porque cada portada pisaba `subject`.
+- `estilo.latex` llegaba a sus piezas por exactamente tres niveles de `../`, y en el árbol
+  conviven cuatro profundidades. Ahora las rutas son relativas a `extraFiles/` y cada
+  Makefile pone ese directorio en `TEXINPUTS`.
+- El Makefile de cuarto compilaba seis de las once asignaturas que tienen uno.
+
+**Consecuencia para la fase 6:** su bloque «Tercero — 13 asignaturas» era esta migración
+con otro nombre y se retira. La fase 6 se queda con primero y segundo.
+
+---
+
 ## Documentos sin fuente
 
-Los PDF que se queden en su plantilla original porque no se conserva el `.tex` o el `.md`
-que los generó. **Se rellena durante la fase 4.**
+Los PDF que se quedan en su plantilla original. Por la [D-15](#d-15--tercero-no-migra-a-la-plantilla-de-cuarto)
+ya no es una lista de excepciones: **todo tercero se queda como está**, tenga fuente o no.
 
 | Ruta | Asignatura | Motivo |
 | --- | --- | --- |
-| _(pendiente de la fase 4)_ | | |
+| `Subjects/Third/**` | las 13 de tercero | D-15: no se migran |
 
 ---
 
