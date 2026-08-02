@@ -1,278 +1,608 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Teoría del Capítulo 5 - EL INMOVILIZADO MATERIAL EN LAS CUENTAS ANUALES </title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contabilidad Financiera I — Test Tema 6</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
-        body {
-            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-            background-color: #f0f2f5;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            font-size: 18px;
-        }
-        h1 {
-            text-align: center;
-            color: #007bff;
-            margin-bottom: 30px;
-        }
-        .question {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .question:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .question.correct {
-            border-color: #28a745;
-            background-color: #d4edda;
-        }
-        .question.incorrect {
-            border-color: #dc3545;
-            background-color: #f8d7da;
-        }
-        .explanation {
-            background: #e7f3fe;
-            border: 1px solid #b2d4fe;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 10px;
-        }
-        .author {
-            margin-top: 20px;
-            font-style: italic;
-            text-align: center;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-            transform: scale(1.2);
-        }
-        input[type="button"] {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        input[type="button"]:hover {
-            background-color: #0056b3;
-            transform: translateY(-3px);
-        }
+      :root {
+        --bg-color: #f5f0e8;
+        --text-color: #1a1410;
+        --card-bg: #fbf8f2;
+        --border-color: #d4c9b0;
+        --primary-color: #8b2a0f;
+        --hover-color: #6e2009;
+        --muted: #7a6a54;
+        --rule: #d4c9b0;
+      }
+
+      body {
+        font-family: 'Source Serif 4', Georgia, serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.75;
+        padding: 40px 20px 80px;
+        font-size: 18px;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
+        text-align: left;
+        color: var(--primary-color);
+        font-size: 2.6rem;
+        margin-bottom: 6px;
+        border-bottom: 3px solid var(--text-color);
+        padding-bottom: 16px;
+      }
+
+      h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-top: 48px;
+        border-top: 2px solid var(--primary-color);
+        padding-top: 14px;
+      }
+
+      .author {
+        text-align: left;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        font-style: italic;
+        color: var(--muted);
+      }
+
+      .question {
+        background: transparent;
+        border: none;
+        border-bottom: 1px dashed var(--rule);
+        border-radius: 0;
+        padding: 24px 40px 24px 4px;
+        margin-bottom: 0;
+        box-shadow: none;
+        transition: background 0.2s;
+        overflow-wrap: break-word;
+        position: relative;
+      }
+      .question:hover {
+        transform: none;
+        background: rgba(139, 42, 15, 0.03);
+      }
+      .question:last-child { border-bottom: none; }
+
+      .correct   { border-left: 4px solid #2f7d32; background-color: #e3efe0; padding-left: 14px; }
+      .partial   { border-left: 4px solid #b8860b; background-color: #f4ead0; padding-left: 14px; }
+      .incorrect { border-left: 4px solid #a4161a; background-color: #f3dcd8; padding-left: 14px; }
+      .correct::before, .partial::before, .incorrect::before {
+        position: absolute; top: 22px; right: 14px;
+        font-family: "Playfair Display", Georgia, serif;
+        font-weight: 700; font-size: 1.2rem; line-height: 1;
+      }
+      .correct::before   { content: "\2713"; color: #2f7d32; }
+      .incorrect::before { content: "\2717"; color: #a4161a; }
+      .partial::before   { content: "!"; color: #8a6508; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado strong:first-child {
+        font-family: 'Playfair Display', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.1em;
+      }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+
+      .opcion-linea, .opcion-bloque {
+        display: block;
+        padding-left: 35px;
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;
+      }
+
+      .opcion-linea input[type="checkbox"],
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 4px;
+        transform: scale(1.2);
+        margin: 0;
+        cursor: pointer;
+        accent-color: var(--primary-color);
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline;
+      }
+
+      mjx-container { font-size: 108% !important; }
+
+      img { max-width: 100%; height: auto; border-radius: 3px; }
+      table { border-collapse: collapse; width: 100%; margin: 14px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid var(--border-color); padding: 8px; text-align: left; }
+      th { background-color: rgba(139,42,15,0.07); }
+
+      code, pre { font-family: 'SFMono-Regular', Consolas, monospace; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 5px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 2px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border-left: 3px solid var(--border-color);
+        background-color: rgba(0,0,0,0.025);
+        border-radius: 0 3px 3px 0;
+        font-size: 0.95em;
+        font-style: italic;
+        color: #4a3820;
+      }
+      .explicacion strong { font-style: normal; }
+      .dark-mode .btn-explicacion { color: #e0a890; border-color: #e0a890; }
+      .dark-mode .btn-explicacion:hover { background-color: #e0a890; color: #1a1209; }
+      .dark-mode .explicacion { background-color: rgba(255,255,255,0.05); border-left-color: #6b5840; color: #d8c8b0; }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: #fbf8f2;
+        border: none;
+        padding: 9px 15px;
+        margin: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.85rem;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: var(--muted);
+      }
+      .instrucciones-extra li { margin-bottom: 5px; }
+
+      body.dark-mode {
+        --bg-color: #1f1812;
+        --text-color: #e8ddca;
+        --card-bg: #2a2118;
+        --border-color: #4a3c2c;
+        --primary-color: #d98050;
+        --hover-color: #c06a3a;
+        --muted: #b3a285;
+        --rule: #4a3c2c;
+      }
+      .dark-mode h1 { border-bottom-color: var(--text-color); }
+      .dark-mode .author { color: var(--muted); }
+      .dark-mode th { background-color: rgba(217,128,80,0.12); }
+      .dark-mode .correct { background-color: rgba(47,125,50,0.30); border-left-color: #4caf50; }
+      .dark-mode .partial { background-color: rgba(184,134,11,0.30); border-left-color: #d4a017; }
+      .dark-mode .incorrect { background-color: rgba(170,17,17,0.32); border-left-color: #e05555; }
+      .dark-mode .correct::before { color: #6bdc8e; }
+      .dark-mode .incorrect::before { color: #ff8a8a; }
+      .dark-mode .partial::before { color: #e6c14d; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; font-size: 13px; }
+        .question { page-break-inside: avoid; border-bottom: 1px solid #ccc; padding: 12px 0; }
+        .info-box, button, #extra-buttons { display: none !important; }
+        h1 { font-size: 1.9rem; }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <h1>Contabilidad Financiera I — Test Tema 6</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
 
-    <h1>Test de Teoría del Capítulo 6 - EL INMOVILIZADO INTANGIBLE </h1>
-    <!-- añadir preguntas -->
-    <!-- <div class="question" id="qn">
-        <p>Según se establece en el marco conceptual del PGC, el cumplimiento del principio contable de devengo implica:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q1" value="1"> Que el registro de los gastos e ingresos se hará en base a la corriente real de bienes y servicios.</label></li>
-            <li><label><input type="radio" name="q1" value="0"> Que el registro de los gastos e ingresos se hará en base a la corriente financiera o monetaria.</label></li>
-            <li><label><input type="radio" name="q1" value="0"> Que los ingresos se registrarán tan pronto sean conocidos, mientras que los gastos se registrarán solamente cuando la empresa tenga total certeza de que se han producido.</label></li>
-            <li><label><input type="radio" name="q1" value="0"> Las respuestas a) y c) son correctas.</label></li>
-        </ol>
-    </div> -->
-    <div class="question" id="q1"> 
-        <p>1.Según la NRV 5ª del PGC, la identificabilidad de los inmovilizados intangibles supone que:</p> 
-        <ol type="a"> 
-            <li><label><input type="radio" name="q1" value="0"> Los activos sean separables, esto es, que puedan venderse o cederse para su explotación.</label></li> 
-            <li><label><input type="radio" name="q1" value="0"> Los activos surjan de derechos legales o contractuales.</label></li> 
-            <li><label><input type="radio" name="q1" value="0"> Los activos intangibles pueden generarse tanto interna como externamente.</label></li> 
-            <li><label><input type="radio" name="q1" value="1"> Las respuestas a) y b) son correctas.</label></li> 
-        </ol> 
+    <div class="info-box">
+      <p></p>
+
+      <div class="instrucciones-extra">
+        
+      </div>
+
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
     </div>
 
-    <div class="question" id="q2"> 
-        <p>2.Señale, entre las siguientes opciones, qué elemento NO es un inmovilizado intangible:</p> 
-        <ol type="a"> 
-            <li><label><input type="radio" name="q2" value="0"> Los derechos de traspaso.</label></li> 
-            <li><label><input type="radio" name="q2" value="0"> La propiedad industrial.</label></li> 
-            <li><label><input type="radio" name="q2" value="1"> Los gastos de traslado o reorganización de la empresa.</label></li> 
-            <li><label><input type="radio" name="q2" value="0"> El fondo de comercio.</label></li> 
-        </ol> 
-    </div>
-
-    <div class="question" id="q3"> 
-        <p>3.Según la NRV 5ª.2, una vez adaptada a la modificación del Código de Comercio, los inmovilizados intangibles cuya vida útil NO pueda estimarse:</p> 
-        <ol type="a"> 
-            <li><label><input type="radio" name="q3" value="1"> Serán sometidos, cada año, a las oportunas correcciones valorativas reversibles.</label></li> 
-            <li><label><input type="radio" name="q3" value="0"> No podrán nunca amortizarse.</label></li> 
-            <li><label><input type="radio" name="q3" value="0"> Se amortizarán en un plazo máximo de 10 años, si no se estableciera otro plazo inferior normativamente.</label></li> 
-            <li><label><input type="radio" name="q3" value="1"> Las respuestas a) y c) son correctas.</label></li> 
-        </ol> 
-    </div>
-
-    <div class="question" id="q4"> 
-        <p>4.Según la NRV 5ª del PGC, en el caso concreto de la contabilización del deterioro de los inmovilizados intangibles:</p> 
-        <ol type="a"> 
-            <li><label><input type="radio" name="q4" value="0"> Se aplica, en cualquier caso, la norma del inmovilizado material.</label></li> 
-            <li><label><input type="radio" name="q4" value="1"> El deterioro del fondo de comercio no será objeto de reversión.</label></li> 
-            <li><label><input type="radio" name="q4" value="0"> Los inmovilizados intangibles no serán sometidos a este tipo de correcciones valorativas.</label></li> 
-            <li><label><input type="radio" name="q4" value="0"> El deterioro de las concesiones administrativas se considera directamente como pérdidas.</label></li> 
-        </ol> 
-    </div>
-
-    <div class="question" id="q5">
-        <p>5.En relación con el inmovilizado intangible, señale la respuesta INCORRECTA:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q5" value="1"> Los gastos de mantenimiento de las aplicaciones informáticas se incluyen como mayor valor del inmovilizado.</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Si en una concesión administrativa se requiere la construcción o compra de inmovilizados reversibles, estos activos se amortizarán durante el plazo que dure la concesión o su vida útil si fuera inferior.</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Si se ha realizado una reforma en el local cedido bajo derechos de traspaso se registrará como inmovilizado material siempre que tenga un coste relevante y contribuya a la generación de rendimientos económicos.</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Se presume que la vida útil del fondo de comercio es de diez años.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q6">
-        <p>6.Señale, entre las siguientes opciones, qué elemento aparece recogido como inmovilizado intangible:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q6" value="0"> Los gastos de establecimiento.</label></li>
-            <li><label><input type="radio" name="q6" value="0"> Las marcas creadas por la empresa.</label></li>
-            <li><label><input type="radio" name="q6" value="0"> Los gastos de formación.</label></li>
-            <li><label><input type="radio" name="q6" value="1"> Anticipos para inmovilizaciones intangibles.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q7">
-        <p>7.Según AECA 2013, son gastos de investigación los siguientes:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q7" value="0"> Los costes de administración general de la empresa.</label></li>
-            <li><label><input type="radio" name="q7" value="0"> Los sueldos y salarios del personal de ventas.</label></li>
-            <li><label><input type="radio" name="q7" value="0"> La amortización del equipo e instalaciones empleadas en las actividades de investigación.</label></li>
-            <li><label><input type="radio" name="q7" value="1"> Ninguna de las respuestas anteriores es correcta.</label></li>
-        </ol>
-    </div>
-
-    <div class="question" id="q8">
-        <p>8. Si una vez iniciada la vida útil de un elemento del inmovilizado intangible se detecta que la amortización acumulada no es correcta, debe contabilizarse:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q8" value="0"> Un ajuste retrospectivo con cargo a reservas.</label></li>
-            <li><label><input type="radio" name="q8" value="0"> Un ajuste prospectivo por el resto de la vida útil.</label></li>
-            <li><label><input type="radio" name="q8" value="0"> Un ajuste prospectivo si el origen está en conocimiento de nuevas circunstancias.</label></li>
-            <li><label><input type="radio" name="q8" value="1"> Un ajuste prospectivo si tiene origen en un error acumulado.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q9">
-        <p>9. Los activos no corrientes afectos a la explotación de una concesión administrativa:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q9" value="0"> Se amortizan por su vida útil económica.</label></li>
-            <li><label><input type="radio" name="q9" value="0"> Se amortizan por el plazo de vigencia de la concesión administrativa.</label></li>
-            <li><label><input type="radio" name="q9" value="0"> No se amortizan.</label></li>
-            <li><label><input type="radio" name="q9" value="1"> Se amortizan por su vida útil económica, o bien por el plazo de vigencia de la concesión administrativa si es inferior.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q10">
-        <p>10. Las depreciaciones reversibles del Fondo de Comercio se registran como:</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q10" value="0"> Deterioros de valor.</label></li>
-            <li><label><input type="radio" name="q10" value="0"> Amortizaciones técnicas.</label></li>
-            <li><label><input type="radio" name="q10" value="1"> Pérdidas irreversibles.</label></li>
-            <li><label><input type="radio" name="q10" value="0"> Menor importe entre amortizaciones técnicas y valor en uso.</label></li>
-        </ol>
-    </div>
-    
-    
-
-    
-
-
-
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Añadir las preguntas adicionales de la misma manera -->
-
-    <input type="button" value="Contabilizar el resultado" onclick="checkAnswers()">
-</form>
-
-<div class="author">
-    <p>Autor: Ismael Sallami Moreno</p>
-    <p>Asignatura: Contabilidad Financiera I</p>
-    <p>Titulación: Ingeniería Informática + ADE</p>
+    <div id="questions-container">
+      <div class="question" id="q1" data-correct="0">
+  <div class="enunciado"><strong>1.</strong> Según se establece en el marco conceptual del PGC, el cumplimiento del principio contable de devengo implica:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> Que el registro de los gastos e ingresos se hará en base a la corriente real de bienes y servicios.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> Que el registro de los gastos e ingresos se hará en base a la corriente financiera o monetaria.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> Que los ingresos se registrarán tan pronto sean conocidos, mientras que los gastos se registrarán solamente cuando la empresa tenga total certeza de que se han producido.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> Las respuestas a) y c) son correctas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q2" data-correct="3">
+  <div class="enunciado"><strong>2.</strong> Según la NRV 5ª del PGC, la identificabilidad de los inmovilizados intangibles supone que:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Los activos sean separables, esto es, que puedan venderse o cederse para su explotación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Los activos surjan de derechos legales o contractuales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> Los activos intangibles pueden generarse tanto interna como externamente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> Las respuestas a) y b) son correctas.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q2')">Ver explicación</button>
+  <div class="explicacion" id="exp-q2" style="display:none">La identificabilidad de los inmovilizados intangibles supone que los activos sean separables y surjan de derechos legales o contractuales.</div>
+</div>
+<div class="question" id="q3" data-correct="2">
+  <div class="enunciado"><strong>3.</strong> Señale, entre las siguientes opciones, qué elemento NO es un inmovilizado intangible:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> Los derechos de traspaso.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> La propiedad industrial.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> Los gastos de traslado o reorganización de la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> El fondo de comercio.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q3')">Ver explicación</button>
+  <div class="explicacion" id="exp-q3" style="display:none">Los gastos de traslado o reorganización de la empresa no son considerados inmovilizados intangibles.</div>
+</div>
+<div class="question" id="q4" data-correct="0,3">
+  <div class="enunciado"><strong>4.</strong> Según la NRV 5ª.2, una vez adaptada a la modificación del Código de Comercio, los inmovilizados intangibles cuya vida útil NO pueda estimarse:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Serán sometidos, cada año, a las oportunas correcciones valorativas reversibles.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> No podrán nunca amortizarse.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> Se amortizarán en un plazo máximo de 10 años, si no se estableciera otro plazo inferior normativamente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> Las respuestas a) y c) son correctas.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q4')">Ver explicación</button>
+  <div class="explicacion" id="exp-q4" style="display:none">Los inmovilizados intangibles cuya vida útil no pueda estimarse serán sometidos a correcciones valorativas reversibles cada año.</div>
+</div>
+<div class="question" id="q5" data-correct="1">
+  <div class="enunciado"><strong>5.</strong> Según la NRV 5ª del PGC, en el caso concreto de la contabilización del deterioro de los inmovilizados intangibles:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> Se aplica, en cualquier caso, la norma del inmovilizado material.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> El deterioro del fondo de comercio no será objeto de reversión.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> Los inmovilizados intangibles no serán sometidos a este tipo de correcciones valorativas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> El deterioro de las concesiones administrativas se considera directamente como pérdidas.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q5')">Ver explicación</button>
+  <div class="explicacion" id="exp-q5" style="display:none">El deterioro del fondo de comercio no será objeto de reversión.</div>
+</div>
+<div class="question" id="q6" data-correct="0">
+  <div class="enunciado"><strong>6.</strong> En relación con el inmovilizado intangible, señale la respuesta INCORRECTA:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> Los gastos de mantenimiento de las aplicaciones informáticas se incluyen como mayor valor del inmovilizado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> Si en una concesión administrativa se requiere la construcción o compra de inmovilizados reversibles, estos activos se amortizarán durante el plazo que dure la concesión o su vida útil si fuera inferior.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> Si se ha realizado una reforma en el local cedido bajo derechos de traspaso se registrará como inmovilizado material siempre que tenga un coste relevante y contribuya a la generación de rendimientos económicos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> Se presume que la vida útil del fondo de comercio es de diez años.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q6')">Ver explicación</button>
+  <div class="explicacion" id="exp-q6" style="display:none">Los gastos de mantenimiento de las aplicaciones informáticas no se incluyen como mayor valor del inmovilizado.</div>
+</div>
+<div class="question" id="q7" data-correct="3">
+  <div class="enunciado"><strong>7.</strong> Señale, entre las siguientes opciones, qué elemento aparece recogido como inmovilizado intangible:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> Los gastos de establecimiento.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> Las marcas creadas por la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> Los gastos de formación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> Anticipos para inmovilizaciones intangibles.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q7')">Ver explicación</button>
+  <div class="explicacion" id="exp-q7" style="display:none">Los anticipos para inmovilizaciones intangibles son considerados inmovilizados intangibles.</div>
+</div>
+<div class="question" id="q8" data-correct="3">
+  <div class="enunciado"><strong>8.</strong> Según AECA 2013, son gastos de investigación los siguientes:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Los costes de administración general de la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> Los sueldos y salarios del personal de ventas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> La amortización del equipo e instalaciones empleadas en las actividades de investigación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> Ninguna de las respuestas anteriores es correcta.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q8')">Ver explicación</button>
+  <div class="explicacion" id="exp-q8" style="display:none">Ninguna de las respuestas anteriores es correcta en relación a los gastos de investigación según AECA 2013.</div>
+</div>
+<div class="question" id="q9" data-correct="3">
+  <div class="enunciado"><strong>9.</strong> Si una vez iniciada la vida útil de un elemento del inmovilizado intangible se detecta que la amortización acumulada no es correcta, debe contabilizarse:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> Un ajuste retrospectivo con cargo a reservas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> Un ajuste prospectivo por el resto de la vida útil.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> Un ajuste prospectivo si el origen está en conocimiento de nuevas circunstancias.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> Un ajuste prospectivo si tiene origen en un error acumulado.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q9')">Ver explicación</button>
+  <div class="explicacion" id="exp-q9" style="display:none">Un ajuste prospectivo debe contabilizarse si tiene origen en un error acumulado.</div>
+</div>
+<div class="question" id="q10" data-correct="3">
+  <div class="enunciado"><strong>10.</strong> Los activos no corrientes afectos a la explotación de una concesión administrativa:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> Se amortizan por su vida útil económica.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> Se amortizan por el plazo de vigencia de la concesión administrativa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> No se amortizan.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> Se amortizan por su vida útil económica, o bien por el plazo de vigencia de la concesión administrativa si es inferior.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q10')">Ver explicación</button>
+  <div class="explicacion" id="exp-q10" style="display:none">Los activos no corrientes afectos a la explotación de una concesión administrativa se amortizan por su vida útil económica, o bien por el plazo de vigencia de la concesión administrativa si es inferior.</div>
+</div>
+<div class="question" id="q11" data-correct="2">
+  <div class="enunciado"><strong>11.</strong> Las depreciaciones reversibles del Fondo de Comercio se registran como:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> Deterioros de valor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> Amortizaciones técnicas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="2"> Pérdidas irreversibles.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="3"> Menor importe entre amortizaciones técnicas y valor en uso.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q11')">Ver explicación</button>
+  <div class="explicacion" id="exp-q11" style="display:none">Las depreciaciones reversibles del Fondo de Comercio se registran como pérdidas irreversibles.</div>
 </div>
 
-<div id="results" style="margin-top: 20px;"></div>
+    </div>
 
-<script>
-    function checkAnswers() {
-        let score = 0;
-        const totalQuestions = 10;
-        const resultsDiv = document.getElementById("results");
-        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
 
-        // Respuestas correctas
-        const answers = {
-            q1: { answer: "1", explanation: "La identificabilidad de los inmovilizados intangibles supone que los activos sean separables y surjan de derechos legales o contractuales." },
-            q2: { answer: "1", explanation: "Los gastos de traslado o reorganización de la empresa no son considerados inmovilizados intangibles." },
-            q3: { answer: "1", explanation: "Los inmovilizados intangibles cuya vida útil no pueda estimarse serán sometidos a correcciones valorativas reversibles cada año." },
-            q4: { answer: "1", explanation: "El deterioro del fondo de comercio no será objeto de reversión." },
-            q5: { answer: "1", explanation: "Los gastos de mantenimiento de las aplicaciones informáticas no se incluyen como mayor valor del inmovilizado." },
-            q6: { answer: "1", explanation: "Los anticipos para inmovilizaciones intangibles son considerados inmovilizados intangibles." },
-            q7: { answer: "1", explanation: "Ninguna de las respuestas anteriores es correcta en relación a los gastos de investigación según AECA 2013." },
-            q8: { answer: "1", explanation: "Un ajuste prospectivo debe contabilizarse si tiene origen en un error acumulado." },
-            q9: { answer: "1", explanation: "Los activos no corrientes afectos a la explotación de una concesión administrativa se amortizan por su vida útil económica, o bien por el plazo de vigencia de la concesión administrativa si es inferior." },
-            q10: { answer: "1", explanation: "Las depreciaciones reversibles del Fondo de Comercio se registran como pérdidas irreversibles." }
-        };
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
 
-        for (let i = 1; i <= totalQuestions; i++) {
-            const question = document.querySelectorAll(`input[name="q${i}"]:checked`);
-            if (question.length > 0) {
-            const selectedValues = Array.from(question).map(q => q.value);
-            const correctAnswers = Array.isArray(answers[`q${i}`].answer) ? answers[`q${i}`].answer : [answers[`q${i}`].answer];
-            const isCorrect = selectedValues.length === correctAnswers.length && selectedValues.every(val => correctAnswers.includes(val));
-            
-            if (isCorrect) {
-                score++;
-                document.getElementById(`q${i}`).classList.add('correct');
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
+
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
+
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checked.length === 0) return;
+
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
             } else {
-                document.getElementById(`q${i}`).classList.add('incorrect');
-                // Mostrar solo la justificación
-                const explanation = answers[`q${i}`].explanation;
-                const explanationDiv = document.createElement("div");
-                explanationDiv.className = "explanation";
-                explanationDiv.innerHTML = `<strong>Justificación:</strong> ${explanation}`;
-                document.getElementById(`q${i}`).appendChild(explanationDiv);
+              q.classList.add("incorrect");
             }
-            }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
         }
 
-        // Cálculo de la nota sobre 10
-        const grade = (score / totalQuestions) * 10;
-        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
-        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
-    }
-</script>
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
 
-</body>
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
 </html>

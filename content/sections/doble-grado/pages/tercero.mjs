@@ -222,48 +222,48 @@ export default {
               label: "Tests",
               resources: [
                 {
-                  name: "Test T1 del libro",
+                  name: "Test Tema 1",
                   href: "/Subjects/Third/CF1/Tests/testT1Libro.html",
                   kind: "HTML",
                 },
                 {
-                  name: "Test T1",
+                  name: "Test Tema 1 · ampliado",
                   href: "/Subjects/Third/CF1/Tests/test-tema1.html",
                   kind: "HTML",
                 },
                 {
-                  name: "Test T2 del libro",
+                  name: "Test Tema 2",
                   href: "/Subjects/Third/CF1/Tests/testT2Libro.html",
                   kind: "HTML",
                 },
                 {
-                  name: "Test T2",
+                  name: "Test Tema 2 · ampliado",
                   href: "/Subjects/Third/CF1/Tests/test-tema2.html",
                   kind: "HTML",
                 },
                 {
-                  name: "Test T3 del libro",
+                  name: "Test Tema 3",
                   href: "/Subjects/Third/CF1/Tests/testT3Libro.html",
                   kind: "HTML",
                 },
                 {
-                  name: "Test T4 del libro",
+                  name: "Test Tema 4",
                   href: "/Subjects/Third/CF1/Tests/testT4libro.html",
                   kind: "HTML",
                 },
                 {
-                  name: "Test T5 del libro",
+                  name: "Test Tema 5",
                   href: "/Subjects/Third/CF1/Tests/testT5Libro.html",
+                  kind: "HTML",
+                },
+                {
+                  name: "Test Tema 6",
+                  href: "/Subjects/Third/CF1/Tests/testT6Libro.html",
                   kind: "HTML",
                 },
                 {
                   name: "Test extra · Temas 4, 5 y 6",
                   href: "/Subjects/Third/CF1/Tests/testPDF/tipoTestExtraTema4-5-6.html",
-                  kind: "HTML",
-                },
-                {
-                  name: "Test T6 del libro",
-                  href: "/Subjects/Third/CF1/Tests/testT6Libro.html",
                   kind: "HTML",
                 },
               ],

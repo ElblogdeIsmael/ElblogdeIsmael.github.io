@@ -7,24 +7,34 @@
 
 ## Objetivo
 
-Dejar con apuntes propios las **39 asignaturas** que hoy no los tienen, en dos situaciones
-distintas:
+Dejar con apuntes propios las **26 asignaturas de primero y segundo** que hoy no los
+tienen. Sus fichas solo tienen la guía docente de la UGR y la bibliografía; el material no
+existe y hay que escribirlo.
 
-- **Primero y segundo, 26 asignaturas.** Sus fichas solo tienen la guía docente de la UGR y
-  la bibliografía; el material no existe y hay que escribirlo.
-- **Tercero, 13 asignaturas.** El material existe y sobra, pero está en PDF suelto y sin
-  estructura canónica. Hay que convertirlo, no redactarlo.
+**Tercero salió de esta fase el 2026-08-02**
+([D-15](DECISIONES.md#d-15--tercero-no-migra-a-la-plantilla-de-cuarto)). Su bloque era la
+migración de plantillas de la [fase 4](fase-4-plantillas.md) con otro nombre, y esa
+migración se descartó: el material ya está publicado y funciona, uniformarlo es cosmético y
+recompilarlo arriesga publicar menos de lo que hay. El inventario de lo que tiene cada una
+sigue abajo, como información, no como lista de tareas.
 
-**OE, de cuarto, queda fuera por decisión de Ismael**
-([D-14](DECISIONES.md#d-14--tercero-entra-en-la-fase-6-por-escrito)): se queda con sus tres
-tests y sus prácticas.
+**OE, de cuarto, queda fuera por decisión de Ismael**: se queda con sus tres tests y sus
+prácticas.
 
 No es una fase que se «termine»: se va tachando asignatura a asignatura, al ritmo que dé.
 
 ## Precondiciones
 
-- [Fase 4](fase-4-plantillas.md) cerrada, o al menos la plantilla arreglada: no tiene
-  sentido crear 26 asignaturas nuevas con una plantilla que hay que rehacer después.
+- [Fase 4](fase-4-plantillas.md) **cerrada el 2026-08-02**. La plantilla compartida ya no
+  lleva datos de una asignatura concreta ni depende de una profundidad de ruta fija, así
+  que una asignatura nueva puede copiarla sin arrastrar nada que haya que rehacer después.
+
+## De dónde sale el material
+
+**Del programa oficial de la guía docente** —temario, competencias, resultados de
+aprendizaje—, no del texto de los manuales de la bibliografía. Redactar desde los manuales
+produce obra derivada de material con derechos, que es exactamente lo que ha costado las
+fases 2, 3 y 5. La bibliografía se cita; no se reescribe.
 
 ---
 
@@ -129,42 +139,42 @@ Dos códigos se repiten entre cursos y la insignia de la ficha queda ambigua
 
 ---
 
-## Tercero — 13 asignaturas
+## Tercero — fuera de esta fase
 
-**Añadidas el 2026-08-01 ([D-14](DECISIONES.md#d-14--tercero-entra-en-la-fase-6-por-escrito)).**
-Eran un hueco del plan: la [fase 2](fase-2-contenido.md) las delegaba aquí y este documento
-solo cubría primero y segundo, así que llevaban meses sin checklist en ninguna parte.
+**Entró el 2026-08-01 ([D-14](DECISIONES.md#d-14--tercero-entra-en-la-fase-6-por-escrito))
+y salió el 2026-08-02 ([D-15](DECISIONES.md#d-15--tercero-no-migra-a-la-plantilla-de-cuarto)).**
 
-Tercero **no es como primero y segundo**. Allí no hay material y hay que escribirlo; aquí
-el material existe y sobra, pero está en PDF suelto y sin la estructura canónica.
-**Ninguna de las 13 tiene carpeta `src/`**, y solo IA, ISE y SCD tienen algún `Makefile`.
-El trabajo es convertir, no redactar de cero.
+El bloque describía «convertir, no redactar»: pasar los documentos de tercero a la
+plantilla de cuarto. Eso es la parte A.3 de la [fase 4](fase-4-plantillas.md), que se
+descartó. Son 46 `.tex` y 216 PDF versionados, de los que la web enlaza 67; el material ya
+está publicado y funciona, uniformarlo solo cambia cómo se ve, y recompilar 38 documentos
+arriesga publicar menos de lo que hay —la lección 1 de la [fase 2](fase-2-contenido.md)—.
+De paso, la variedad de plantillas cuenta cómo fue evolucionando la forma de componerlos.
 
-| Código | Asignatura | `.md` | `.tex` | `.pdf` | Makefile | Plan en [fase 4](fase-4-plantillas.md) |
-| --- | --- | --- | --- | --- | --- | --- |
-| CF1 | Contabilidad Financiera I | 4 | 18 | 43 | — | sí (14 carpetas) |
-| SCD | Sistemas Concurrentes y Distribuidos | 4 | 9 | 33 | 1 | sí (9) |
-| PDOO | Programación y Diseño Orientado a Objetos | 14 | 7 | 35 | — | sí (6) |
-| ECO | Econometría | 1 | 4 | 27 | — | sí (4) |
-| FR | Fundamentos de Redes | 4 | 9 | 44 | — | sí (3) |
-| DAE | Dirección y Administración de Empresas | 0 | 4 | 49 | — | sí (2) |
-| CF2 | Contabilidad Financiera II | 10 | 9 | 19 | — | **no** |
-| AOF | Análisis de Operaciones Financieras | 1 | 3 | 22 | — | **no** |
-| FBD | Fundamentos de Base de Datos | 7 | 11 | 29 | — | **no** |
-| FIS | Fundamentos de Ingeniería del Software | 1 | 7 | 45 | — | **no** |
-| IA | Inteligencia Artificial | 0 | 15 | 34 | 3 | **no** |
-| ISE | Ingeniería de Servidores | 25 | 14 | 35 | 1 | **no** |
-| MC | Métodos Cuantitativos | 0 | 2 | 14 | — | **no** |
+**Lo único de tercero que se tocó son sus tests**, que la fase 4 sí hizo: 34 ficheros y
+2.481 preguntas con fuente Markdown y un solo generador.
 
-**Las siete de la mitad inferior no tienen plan de migración escrito en ninguna fase.** Ese
-es el hueco de verdad: la fase 4 solo planifica seis de las trece.
+La tabla se queda como inventario de lo que hay en cada una:
 
-Dos avisos que salen de la fase 2 y aplican aquí enteros:
+| Código | Asignatura | `.md` | `.tex` | `.pdf` | Makefile |
+| --- | --- | --- | --- | --- | --- |
+| CF1 | Contabilidad Financiera I | 4 | 18 | 43 | — |
+| SCD | Sistemas Concurrentes y Distribuidos | 4 | 9 | 33 | 1 |
+| PDOO | Programación y Diseño Orientado a Objetos | 14 | 7 | 35 | — |
+| ECO | Econometría | 1 | 4 | 27 | — |
+| FR | Fundamentos de Redes | 4 | 9 | 44 | — |
+| DAE | Dirección y Administración de Empresas | 0 | 4 | 49 | — |
+| CF2 | Contabilidad Financiera II | 10 | 9 | 19 | — |
+| AOF | Análisis de Operaciones Financieras | 1 | 3 | 22 | — |
+| FBD | Fundamentos de Base de Datos | 7 | 11 | 29 | — |
+| FIS | Fundamentos de Ingeniería del Software | 1 | 7 | 45 | — |
+| IA | Inteligencia Artificial | 0 | 15 | 34 | 3 |
+| ISE | Ingeniería de Servidores | 25 | 14 | 35 | 1 |
+| MC | Métodos Cuantitativos | 0 | 2 | 14 | — |
 
-- **Comparar páginas antes de sustituir.** Un PDF recién compilado puede ser más pobre que
-  el que ya está publicado. `pdfinfo` a los dos, siempre.
-- **Buscar el contenido también dentro de los `.tex` y los `.md`**, no solo en las carpetas
-  de material. IA tiene 15 `.tex` y cero `.md`; ISE tiene 25 `.md`. No son carpetas vacías.
+**Buscar el contenido también dentro de los `.tex` y los `.md`**, no solo en las carpetas de
+material: IA tiene 15 `.tex` y cero `.md`; ISE tiene 25 `.md`. No son carpetas vacías. Sigue
+valiendo para cualquier revisión de tercero, aunque ya no haya migración.
 
 ---
 

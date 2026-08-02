@@ -1,198 +1,579 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Contabilidad Financiera</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contabilidad Financiera I — Test Tema 1</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
-        body {
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            font-size: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #364220;
-        }
-        .question {
-            background: #dfe764;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 20px;
-            transition: 0.3s;
-        }
-        .question.correct {
-            border-color: #04f70c;
-            background-color: #44e76a;
-        }
-        .question.incorrect {
-            border-color: #f12e20;
-            background-color: #f09da3;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-            transform: scale(1.5);
-        }
-        input[type="button"] {
-            background-color: #ff0000;
-            color: white;
-            border: none;
-            padding: 15px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 20px;
-            transition: background-color 0.3s;
-        }
+      :root {
+        --bg-color: #f5f0e8;
+        --text-color: #1a1410;
+        --card-bg: #fbf8f2;
+        --border-color: #d4c9b0;
+        --primary-color: #8b2a0f;
+        --hover-color: #6e2009;
+        --muted: #7a6a54;
+        --rule: #d4c9b0;
+      }
+
+      body {
+        font-family: 'Source Serif 4', Georgia, serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.75;
+        padding: 40px 20px 80px;
+        font-size: 18px;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
+        text-align: left;
+        color: var(--primary-color);
+        font-size: 2.6rem;
+        margin-bottom: 6px;
+        border-bottom: 3px solid var(--text-color);
+        padding-bottom: 16px;
+      }
+
+      h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-top: 48px;
+        border-top: 2px solid var(--primary-color);
+        padding-top: 14px;
+      }
+
+      .author {
+        text-align: left;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        font-style: italic;
+        color: var(--muted);
+      }
+
+      .question {
+        background: transparent;
+        border: none;
+        border-bottom: 1px dashed var(--rule);
+        border-radius: 0;
+        padding: 24px 40px 24px 4px;
+        margin-bottom: 0;
+        box-shadow: none;
+        transition: background 0.2s;
+        overflow-wrap: break-word;
+        position: relative;
+      }
+      .question:hover {
+        transform: none;
+        background: rgba(139, 42, 15, 0.03);
+      }
+      .question:last-child { border-bottom: none; }
+
+      .correct   { border-left: 4px solid #2f7d32; background-color: #e3efe0; padding-left: 14px; }
+      .partial   { border-left: 4px solid #b8860b; background-color: #f4ead0; padding-left: 14px; }
+      .incorrect { border-left: 4px solid #a4161a; background-color: #f3dcd8; padding-left: 14px; }
+      .correct::before, .partial::before, .incorrect::before {
+        position: absolute; top: 22px; right: 14px;
+        font-family: "Playfair Display", Georgia, serif;
+        font-weight: 700; font-size: 1.2rem; line-height: 1;
+      }
+      .correct::before   { content: "\2713"; color: #2f7d32; }
+      .incorrect::before { content: "\2717"; color: #a4161a; }
+      .partial::before   { content: "!"; color: #8a6508; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado strong:first-child {
+        font-family: 'Playfair Display', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.1em;
+      }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+
+      .opcion-linea, .opcion-bloque {
+        display: block;
+        padding-left: 35px;
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;
+      }
+
+      .opcion-linea input[type="checkbox"],
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 4px;
+        transform: scale(1.2);
+        margin: 0;
+        cursor: pointer;
+        accent-color: var(--primary-color);
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline;
+      }
+
+      mjx-container { font-size: 108% !important; }
+
+      img { max-width: 100%; height: auto; border-radius: 3px; }
+      table { border-collapse: collapse; width: 100%; margin: 14px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid var(--border-color); padding: 8px; text-align: left; }
+      th { background-color: rgba(139,42,15,0.07); }
+
+      code, pre { font-family: 'SFMono-Regular', Consolas, monospace; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 5px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 2px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border-left: 3px solid var(--border-color);
+        background-color: rgba(0,0,0,0.025);
+        border-radius: 0 3px 3px 0;
+        font-size: 0.95em;
+        font-style: italic;
+        color: #4a3820;
+      }
+      .explicacion strong { font-style: normal; }
+      .dark-mode .btn-explicacion { color: #e0a890; border-color: #e0a890; }
+      .dark-mode .btn-explicacion:hover { background-color: #e0a890; color: #1a1209; }
+      .dark-mode .explicacion { background-color: rgba(255,255,255,0.05); border-left-color: #6b5840; color: #d8c8b0; }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: #fbf8f2;
+        border: none;
+        padding: 9px 15px;
+        margin: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.85rem;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: var(--muted);
+      }
+      .instrucciones-extra li { margin-bottom: 5px; }
+
+      body.dark-mode {
+        --bg-color: #1f1812;
+        --text-color: #e8ddca;
+        --card-bg: #2a2118;
+        --border-color: #4a3c2c;
+        --primary-color: #d98050;
+        --hover-color: #c06a3a;
+        --muted: #b3a285;
+        --rule: #4a3c2c;
+      }
+      .dark-mode h1 { border-bottom-color: var(--text-color); }
+      .dark-mode .author { color: var(--muted); }
+      .dark-mode th { background-color: rgba(217,128,80,0.12); }
+      .dark-mode .correct { background-color: rgba(47,125,50,0.30); border-left-color: #4caf50; }
+      .dark-mode .partial { background-color: rgba(184,134,11,0.30); border-left-color: #d4a017; }
+      .dark-mode .incorrect { background-color: rgba(170,17,17,0.32); border-left-color: #e05555; }
+      .dark-mode .correct::before { color: #6bdc8e; }
+      .dark-mode .incorrect::before { color: #ff8a8a; }
+      .dark-mode .partial::before { color: #e6c14d; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; font-size: 13px; }
+        .question { page-break-inside: avoid; border-bottom: 1px solid #ccc; padding: 12px 0; }
+        .info-box, button, #extra-buttons { display: none !important; }
+        h1 { font-size: 1.9rem; }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <h1>Contabilidad Financiera I — Test Tema 1</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
 
-<h1>Test de Contabilidad Financiera Tema 1</h1>
+    <div class="info-box">
+      <p></p>
 
-<form id="quizForm">
-    <!-- Pregunta 1 -->
-    <div class="question" id="q1">
-        <p><strong>1. La adopción de una NIIF (Normas Internacionales de Información Financiera) en Europa exige que sus créditos contables:</strong></p>
-        <input type="radio" name="q1" value="a"> a. Cumplan con los requisitos de relevancia, fiabilidad, comprensibilidad y comparabilidad.<br>
-        <input type="radio" name="q1" value="b"> b. No resulten contrarios a la consecución de la imagen fiel en las cuentas anuales.<br>
-        <input type="radio" name="q1" value="c"> c. Favorece el interés público en Europa.<br>
-        <input type="radio" name="q1" value="d"> d. Todas las respuestas anteriores son ciertas.<br>
-    </div>
-    
-    <div class="question" id="q2">
-        <p><strong>2. El Plan General de Contabilidad define a los activos como:</strong></p>
-        <input type="radio" name="q2" value="a"> a. Bienes controlados económicamente por la empresa, resultado de sucesos pasados o futuros y de los que se espera que la empresa obtenga beneficios o rendimientos económicos en el futuro.<br>
-        <input type="radio" name="q2" value="b"> b. Bienes y derechos controlados económicamente por la empresa, que resulten de sucesos pasados, y que generen flujos en efectivo.<br>
-        <input type="radio" name="q2" value="c"> c. Bienes y derechos cuya titularidad jurídica pertenezca a la empresa, resultante de sucesos pasados, de los que se espera que la empresa obtenga beneficios o rendimientos económicos en el futuro.<br>
-        <input type="radio" name="q2" value="d"> d. Bienes, derechos y otros recursos controlados económicamente por la empresa, resultantes de sucesos pasados, de los que se espera que la empresa obtenga beneficios y rendimientos económicos en el futuro.<br>
-    </div>
-    
-    <div class="question" id="q3">
-        <p><strong>3. El Plan General de Contabilidad está formado por cinco partes, de ellas:</strong></p>
-        <input type="radio" name="q3" value="a"> a. Todas son obligatorias.<br>
-        <input type="radio" name="q3" value="b"> b. Sólo las cuatro primeras (Marco conceptual, Normas de registro y valoración, Cuentas anuales y cuadro de Cuentas) son obligatorias.<br>
-        <input type="radio" name="q3" value="c"> c. Son obligatorias las tres primeras (Marco conceptual, Normas de registro y valoración, Cuentas anuales) y la quinta (Definiciones y relaciones contables) cuando incluya criterios de registro y valoración.<br>
-        <input type="radio" name="q3" value="d"> d. Las empresas podrán utilizar las que considere convenientes para la mejor representación de la imagen fiel del patrimonio, de la situación financiera y del resultado.<br>
-    </div>
-    
-    <div class="question" id="q4">
-        <p><strong>4. De acuerdo con el marco conceptual del PGC, los requisitos que debe reunir la información financiera son:</strong></p>
-        <input type="radio" name="q4" value="a"> a. Relevancia, fiabilidad, prudencia y comparabilidad.<br>
-        <input type="radio" name="q4" value="b"> b. Relevancia, fiabilidad, imagen fiel y claridad.<br>
-        <input type="radio" name="q4" value="c"> c. Claridad, comparabilidad, relevancia y fiabilidad.<br>
-        <input type="radio" name="q4" value="d"> d. Fiabilidad, integridad, claridad y comparabilidad.<br>
-    </div>
-    
-    <div class="question" id="q5">
-        <p><strong>5. En Europa, el Organismo cuyo propósito principal es la emisión de NIIF (Normas Internacionales de Información Financiera) es:</strong></p>
-        <input type="radio" name="q5" value="a"> a. International Federation of Accountants (IFAC).<br>
-        <input type="radio" name="q5" value="b"> b. International Accounting Standards Board (IASB).<br>
-        <input type="radio" name="q5" value="c"> c. Interamerican Accounting Association (IAA).<br>
-        <input type="radio" name="q5" value="d"> d. Financial Accounting Standards Board (FASB).<br>
-    </div>
-    <div class="question" id="q6">
-        <p><strong>6. En virtud del marco conceptual del PGC-2007:</strong></p>
-        <input type="radio" name="q6" value="a"> a. En el registro contable de las operaciones se atenderá a su realidad económica y no sólo a su forma jurídica.<br>
-        <input type="radio" name="q6" value="b"> b. Se determinan explícitamente los usuarios principales de la información financiera, sus necesidades de información y el concepto de mantenimiento de capital a aplicar.<br>
-        <input type="radio" name="q6" value="c"> c. Se pretende el cumplimiento del objetivo de control más que en el de predicción.<br>
-        <input type="radio" name="q6" value="d"> d. Todas las respuestas anteriores son incorrectas.<br>
-    </div>
-    
-    <div class="question" id="q7">
-        <p><strong>7. El PGC define los pasivos como:</strong></p>
-        <input type="radio" name="q7" value="a"> a. Obligación futura surgida como consecuencia de sucesos pasados, para cuya extinción se espera desprenderse de recursos.<br>
-        <input type="radio" name="q7" value="b"> b. Obligación presente surgida de sucesos pasados, cuya extinción se realizará con recursos líquidos existentes en el futuro.<br>
-        <input type="radio" name="q7" value="c"> c. Obligación a valor razonable, surgida de sucesos pasados, para cuya extinción la empresa se desprenderá de recursos que podrían producir beneficios o rendimientos económicos en el futuro.<br>
-        <input type="radio" name="q7" value="d"> d. Obligación actual surgida como consecuencia de sucesos pasados, para cuya extinción la empresa espera desprenderse de recursos que puedan producir beneficios o rendimientos económicos en el futuro.<br>
-    </div>
-    
-    <div class="question" id="q8">
-        <p><strong>8. En España, las normas contables de obligado cumplimiento son emitidas por:</strong></p>
-        <input type="radio" name="q8" value="a"> a. La Federación Internacional de Contadores (IFAC).<br>
-        <input type="radio" name="q8" value="b"> b. El Instituto de Contabilidad y Auditoría de Cuentas.<br>
-        <input type="radio" name="q8" value="c"> c. El Instituto de Contabilidad y Auditoría de Cuentas y asociaciones profesionales como la Asociación Española de Contabilidad y Administración de Empresas (AECA).<br>
-        <input type="radio" name="q8" value="d"> d. El International Accounting Standard Board por delegación del Instituto de Contabilidad y Auditoría de Cuentas.<br>
-    </div>
-    
-    <div class="question" id="q9">
-        <p><strong>9. Según el marco conceptual del PGC, en caso de conflicto en la aplicación de los principios contables, prevalece:</strong></p>
-        <input type="radio" name="q9" value="a"> a. Aquel que mejor conduzca a la imagen fiel.<br>
-        <input type="radio" name="q9" value="b"> b. El principio de prudencia, en todo caso.<br>
-        <input type="radio" name="q9" value="c"> c. Siempre el principio de prudencia y el principio de devengo.<br>
-        <input type="radio" name="q9" value="d"> d. El principio de relevancia y el principio de fiabilidad.<br>
-    </div>
-    
-    <div class="question" id="q10">
-        <p><strong>10. El Instituto de Contabilidad y Auditoría de Cuentas (ICAC) ejerce, entre otras, las siguientes funciones:</strong></p>
-        <input type="radio" name="q10" value="a"> a. Recopilar y analizar la información contable de las empresas en España.<br>
-        <input type="radio" name="q10" value="b"> b. Realizar la revisión de las cuentas de las empresas cotizadas.<br>
-        <input type="radio" name="q10" value="c"> c. Modernización de la información financiera.<br>
-        <input type="radio" name="q10" value="d"> d. Coordinación y cooperación internacional con otras Instituciones emisores de pronunciamientos contables.<br>
-    </div>
-    
+      <div class="instrucciones-extra">
+        
+      </div>
 
-    <!-- hay preguntas hasta el punto 1.4, sin este incluido -->
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
 
-    <input type="button" value="Comprobar respuestas" onclick="checkAnswers()">
-</form>
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
+    </div>
 
-<div style="text-align: center; margin-top: 20px;">
-    <p><strong>Autor: Ismael Sallami Moreno</strong></p>
+    <div id="questions-container">
+      <div class="question" id="q1" data-correct="3">
+  <div class="enunciado"><strong>1.</strong> La adopción de una NIIF (Normas Internacionales de Información Financiera) en Europa exige que sus créditos contables:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> Cumplan con los requisitos de relevancia, fiabilidad, comprensibilidad y comparabilidad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> No resulten contrarios a la consecución de la imagen fiel en las cuentas anuales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> Favorece el interés público en Europa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> Todas las respuestas anteriores son ciertas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q2" data-correct="3">
+  <div class="enunciado"><strong>2.</strong> El Plan General de Contabilidad define a los activos como:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Bienes controlados económicamente por la empresa, resultado de sucesos pasados o futuros y de los que se espera que la empresa obtenga beneficios o rendimientos económicos en el futuro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Bienes y derechos controlados económicamente por la empresa, que resulten de sucesos pasados, y que generen flujos en efectivo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> Bienes y derechos cuya titularidad jurídica pertenezca a la empresa, resultante de sucesos pasados, de los que se espera que la empresa obtenga beneficios o rendimientos económicos en el futuro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> Bienes, derechos y otros recursos controlados económicamente por la empresa, resultantes de sucesos pasados, de los que se espera que la empresa obtenga beneficios y rendimientos económicos en el futuro.</label></li>
+  </ol>
+</div>
+<div class="question" id="q3" data-correct="2">
+  <div class="enunciado"><strong>3.</strong> El Plan General de Contabilidad está formado por cinco partes, de ellas:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> Todas son obligatorias.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> Sólo las cuatro primeras (Marco conceptual, Normas de registro y valoración, Cuentas anuales y cuadro de Cuentas) son obligatorias.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> Son obligatorias las tres primeras (Marco conceptual, Normas de registro y valoración, Cuentas anuales) y la quinta (Definiciones y relaciones contables) cuando incluya criterios de registro y valoración.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> Las empresas podrán utilizar las que considere convenientes para la mejor representación de la imagen fiel del patrimonio, de la situación financiera y del resultado.</label></li>
+  </ol>
+</div>
+<div class="question" id="q4" data-correct="2">
+  <div class="enunciado"><strong>4.</strong> De acuerdo con el marco conceptual del PGC, los requisitos que debe reunir la información financiera son:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Relevancia, fiabilidad, prudencia y comparabilidad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> Relevancia, fiabilidad, imagen fiel y claridad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> Claridad, comparabilidad, relevancia y fiabilidad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> Fiabilidad, integridad, claridad y comparabilidad.</label></li>
+  </ol>
+</div>
+<div class="question" id="q5" data-correct="1">
+  <div class="enunciado"><strong>5.</strong> En Europa, el Organismo cuyo propósito principal es la emisión de NIIF (Normas Internacionales de Información Financiera) es:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> International Federation of Accountants (IFAC).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> International Accounting Standards Board (IASB).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> Interamerican Accounting Association (IAA).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> Financial Accounting Standards Board (FASB).</label></li>
+  </ol>
+</div>
+<div class="question" id="q6" data-correct="0">
+  <div class="enunciado"><strong>6.</strong> En virtud del marco conceptual del PGC-2007:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> En el registro contable de las operaciones se atenderá a su realidad económica y no sólo a su forma jurídica.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> Se determinan explícitamente los usuarios principales de la información financiera, sus necesidades de información y el concepto de mantenimiento de capital a aplicar.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> Se pretende el cumplimiento del objetivo de control más que en el de predicción.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> Todas las respuestas anteriores son incorrectas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q7" data-correct="3">
+  <div class="enunciado"><strong>7.</strong> El PGC define los pasivos como:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> Obligación futura surgida como consecuencia de sucesos pasados, para cuya extinción se espera desprenderse de recursos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> Obligación presente surgida de sucesos pasados, cuya extinción se realizará con recursos líquidos existentes en el futuro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> Obligación a valor razonable, surgida de sucesos pasados, para cuya extinción la empresa se desprenderá de recursos que podrían producir beneficios o rendimientos económicos en el futuro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> Obligación actual surgida como consecuencia de sucesos pasados, para cuya extinción la empresa espera desprenderse de recursos que puedan producir beneficios o rendimientos económicos en el futuro.</label></li>
+  </ol>
+</div>
+<div class="question" id="q8" data-correct="1">
+  <div class="enunciado"><strong>8.</strong> En España, las normas contables de obligado cumplimiento son emitidas por:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> La Federación Internacional de Contadores (IFAC).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> El Instituto de Contabilidad y Auditoría de Cuentas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> El Instituto de Contabilidad y Auditoría de Cuentas y asociaciones profesionales como la Asociación Española de Contabilidad y Administración de Empresas (AECA).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> El International Accounting Standard Board por delegación del Instituto de Contabilidad y Auditoría de Cuentas.</label></li>
+  </ol>
+</div>
+<div class="question" id="q9" data-correct="0">
+  <div class="enunciado"><strong>9.</strong> Según el marco conceptual del PGC, en caso de conflicto en la aplicación de los principios contables, prevalece:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> Aquel que mejor conduzca a la imagen fiel.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> El principio de prudencia, en todo caso.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> Siempre el principio de prudencia y el principio de devengo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> El principio de relevancia y el principio de fiabilidad.</label></li>
+  </ol>
+</div>
+<div class="question" id="q10" data-correct="3">
+  <div class="enunciado"><strong>10.</strong> El Instituto de Contabilidad y Auditoría de Cuentas (ICAC) ejerce, entre otras, las siguientes funciones:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> Recopilar y analizar la información contable de las empresas en España.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> Realizar la revisión de las cuentas de las empresas cotizadas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> Modernización de la información financiera.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> Coordinación y cooperación internacional con otras Instituciones emisores de pronunciamientos contables.</label></li>
+  </ol>
 </div>
 
+    </div>
 
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
 
-<script>
-    function checkAnswers() {
-        let score = 0;
-        const totalQuestions = 10;
-        const results = [];
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
 
-        // Respuestas correctas
-        const answers = {
-            q1: 'd', q2: 'd', q3: 'c', q4: 'c', q5: 'b', 
-            q6: 'a', q7: 'd', q8: 'b', q9: 'a', q10: 'd'
-        };
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
 
-        for (let i = 1; i <= totalQuestions; i++) {
-            const questionDiv = document.getElementById(`q${i}`);
-            const question = document.querySelector(`input[name="q${i}"]:checked`);
-            const correctAnswer = answers[`q${i}`];
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
 
-            if (question) {
-                if (question.value === correctAnswer) {
-                    score++;
-                    questionDiv.classList.add('correct');
-                    results.push(`Pregunta ${i}: Correcta`);
-                } else {
-                    questionDiv.classList.add('incorrect');
-                    results.push(`Pregunta ${i}: Incorrecta. La respuesta correcta es ${correctAnswer}`);
-                    const correctAnswerElement = document.createElement('p');
-                    correctAnswerElement.style.color = '#f44336';
-                    correctAnswerElement.innerText = `Respuesta correcta: ${correctAnswer}`;
-                    questionDiv.appendChild(correctAnswerElement);
-                }
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
+
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checked.length === 0) return;
+
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
             } else {
-                questionDiv.classList.add('incorrect');
-                results.push(`Pregunta ${i}: No respondida. La respuesta correcta es ${correctAnswer}`);
-                const correctAnswerElement = document.createElement('p');
-                correctAnswerElement.style.color = '#f44336';
-                correctAnswerElement.innerText = `Respuesta correcta: ${correctAnswer}`;
-                questionDiv.appendChild(correctAnswerElement);
+              q.classList.add("incorrect");
             }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
         }
 
-        const grade = (score / totalQuestions) * 10;
-        alert(`Tu puntuación es ${grade.toFixed(1)} sobre 10`);
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
 
-        console.log(results); // Muestra un resumen en la consola (opcional)
-    }
-</script>
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
 
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
 
-</body>
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
 </html>

@@ -1,433 +1,788 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 2 - Exclusión Mutua</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 3 - Sistemas basados en el paso de mensajes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            font-size: 18px;
-        }
-        h1 {
-            text-align: center;
-            color: #007bff;
-            margin-bottom: 30px;
-        }
-        .question {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .question:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .question.correct {
-            border-color: #28a745;
-            background-color: #d4edda;
-        }
-        .question.incorrect {
-            border-color: #dc3545;
-            background-color: #f8d7da;
-        }
-        .explanation {
-            background: #e7f3fe;
-            border: 1px solid #b2d4fe;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 10px;
-        }
-        .author {
-            margin-top: 20px;
-            font-style: italic;
-            text-align: center;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-            transform: scale(1.2);
-        }
-        input[type="button"] {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        input[type="button"]:hover {
-            background-color: #0056b3;
-            transform: translateY(-3px);
-        }
+      :root {
+        --bg-color: #f5f0e8;
+        --text-color: #1a1410;
+        --card-bg: #fbf8f2;
+        --border-color: #d4c9b0;
+        --primary-color: #8b2a0f;
+        --hover-color: #6e2009;
+        --muted: #7a6a54;
+        --rule: #d4c9b0;
+      }
+
+      body {
+        font-family: 'Source Serif 4', Georgia, serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.75;
+        padding: 40px 20px 80px;
+        font-size: 18px;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
+        text-align: left;
+        color: var(--primary-color);
+        font-size: 2.6rem;
+        margin-bottom: 6px;
+        border-bottom: 3px solid var(--text-color);
+        padding-bottom: 16px;
+      }
+
+      h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-top: 48px;
+        border-top: 2px solid var(--primary-color);
+        padding-top: 14px;
+      }
+
+      .author {
+        text-align: left;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        font-style: italic;
+        color: var(--muted);
+      }
+
+      .question {
+        background: transparent;
+        border: none;
+        border-bottom: 1px dashed var(--rule);
+        border-radius: 0;
+        padding: 24px 40px 24px 4px;
+        margin-bottom: 0;
+        box-shadow: none;
+        transition: background 0.2s;
+        overflow-wrap: break-word;
+        position: relative;
+      }
+      .question:hover {
+        transform: none;
+        background: rgba(139, 42, 15, 0.03);
+      }
+      .question:last-child { border-bottom: none; }
+
+      .correct   { border-left: 4px solid #2f7d32; background-color: #e3efe0; padding-left: 14px; }
+      .partial   { border-left: 4px solid #b8860b; background-color: #f4ead0; padding-left: 14px; }
+      .incorrect { border-left: 4px solid #a4161a; background-color: #f3dcd8; padding-left: 14px; }
+      .correct::before, .partial::before, .incorrect::before {
+        position: absolute; top: 22px; right: 14px;
+        font-family: "Playfair Display", Georgia, serif;
+        font-weight: 700; font-size: 1.2rem; line-height: 1;
+      }
+      .correct::before   { content: "\2713"; color: #2f7d32; }
+      .incorrect::before { content: "\2717"; color: #a4161a; }
+      .partial::before   { content: "!"; color: #8a6508; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado strong:first-child {
+        font-family: 'Playfair Display', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.1em;
+      }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+
+      .opcion-linea, .opcion-bloque {
+        display: block;
+        padding-left: 35px;
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;
+      }
+
+      .opcion-linea input[type="checkbox"],
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 4px;
+        transform: scale(1.2);
+        margin: 0;
+        cursor: pointer;
+        accent-color: var(--primary-color);
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline;
+      }
+
+      mjx-container { font-size: 108% !important; }
+
+      img { max-width: 100%; height: auto; border-radius: 3px; }
+      table { border-collapse: collapse; width: 100%; margin: 14px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid var(--border-color); padding: 8px; text-align: left; }
+      th { background-color: rgba(139,42,15,0.07); }
+
+      code, pre { font-family: 'SFMono-Regular', Consolas, monospace; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 5px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 2px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border-left: 3px solid var(--border-color);
+        background-color: rgba(0,0,0,0.025);
+        border-radius: 0 3px 3px 0;
+        font-size: 0.95em;
+        font-style: italic;
+        color: #4a3820;
+      }
+      .explicacion strong { font-style: normal; }
+      .dark-mode .btn-explicacion { color: #e0a890; border-color: #e0a890; }
+      .dark-mode .btn-explicacion:hover { background-color: #e0a890; color: #1a1209; }
+      .dark-mode .explicacion { background-color: rgba(255,255,255,0.05); border-left-color: #6b5840; color: #d8c8b0; }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: #fbf8f2;
+        border: none;
+        padding: 9px 15px;
+        margin: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.85rem;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: var(--muted);
+      }
+      .instrucciones-extra li { margin-bottom: 5px; }
+
+      body.dark-mode {
+        --bg-color: #1f1812;
+        --text-color: #e8ddca;
+        --card-bg: #2a2118;
+        --border-color: #4a3c2c;
+        --primary-color: #d98050;
+        --hover-color: #c06a3a;
+        --muted: #b3a285;
+        --rule: #4a3c2c;
+      }
+      .dark-mode h1 { border-bottom-color: var(--text-color); }
+      .dark-mode .author { color: var(--muted); }
+      .dark-mode th { background-color: rgba(217,128,80,0.12); }
+      .dark-mode .correct { background-color: rgba(47,125,50,0.30); border-left-color: #4caf50; }
+      .dark-mode .partial { background-color: rgba(184,134,11,0.30); border-left-color: #d4a017; }
+      .dark-mode .incorrect { background-color: rgba(170,17,17,0.32); border-left-color: #e05555; }
+      .dark-mode .correct::before { color: #6bdc8e; }
+      .dark-mode .incorrect::before { color: #ff8a8a; }
+      .dark-mode .partial::before { color: #e6c14d; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; font-size: 13px; }
+        .question { page-break-inside: avoid; border-bottom: 1px solid #ccc; padding: 12px 0; }
+        .info-box, button, #extra-buttons { display: none !important; }
+        h1 { font-size: 1.9rem; }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <h1>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 3 - Sistemas basados en el paso de mensajes</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
 
-    <h1>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 3 - Sistemas basados en el paso de mensajes </h1>
-    <!-- autor, titulación y asignatura -->
-    <ul class="author"></ul>
-        <li><strong>Autor:</strong> Ismael Sallami Moreno</li>
-        <li><strong>Titulación:</strong> Ingeniería Informática y ADE</li>
-        <li><strong>Asignatura:</strong> Sistemas Concurrentes y Distribuidos</li>
-    </ul>
-    <br>
-    
-    <div class="question" id="q1">
-        <p>1. ¿Qué problema resuelve la espera selectiva?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q1" value="1"> La recepción no determinística de señales.</label></li>
-            <li><label><input type="radio" name="q1" value="0"> La prioridad entre alternativas.</label></li>
-            <li><label><input type="radio" name="q1" value="0"> La reducción de recursos de hardware.</label></li>
-            <li><label><input type="radio" name="q1" value="0"> El uso de búferes compartidos.</label></li>
-            <li><label><input type="radio" name="q1" value="0"> La sincronización entre nodos paralelos.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q2">
-        <p>2. ¿Qué ocurre si ninguna guarda es ejecutable en un select?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q2" value="0"> Se selecciona una guarda potencialmente ejecutable.</label></li>
-            <li><label><input type="radio" name="q2" value="0"> La instrucción select se bloquea.</label></li>
-            <li><label><input type="radio" name="q2" value="0"> La instrucción termina inmediatamente.</label></li>
-            <li><label><input type="radio" name="q2" value="1"> Se genera un error o excepción.</label></li>
-            <li><label><input type="radio" name="q2" value="0"> El proceso emisor se bloquea.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q3">
-        <p>3. ¿En qué caso la sentencia select selecciona no determinísticamente una alternativa?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q3" value="0"> Cuando todas las alternativas contienen condiciones lógicas falsas.</label></li>
-            <li><label><input type="radio" name="q3" value="0"> Cuando ninguna alternativa es ejecutable ni potencialmente ejecutable.</label></li>
-            <li><label><input type="radio" name="q3" value="1"> Cuando hay alternativas potencialmente ejecutables sin una orden de recibir mensajes en la guarda.</label></li>
-            <li><label><input type="radio" name="q3" value="0"> Cuando todas las alternativas son ejecutables y tienen una orden de recibir mensajes.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q4">
-        <p>4. ¿Cuál es una ventaja principal de las arquitecturas con múltiples elementos de cómputo?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q4" value="0"> Mayor costo de producción.</label></li>
-            <li><label><input type="radio" name="q4" value="0"> Menor escalabilidad.</label></li>
-            <li><label><input type="radio" name="q4" value="0"> Requieren más energía.</label></li>
-            <li><label><input type="radio" name="q4" value="0"> Uso exclusivo de hardware especializado.</label></li>
-            <li><label><input type="radio" name="q4" value="1"> Mejor rendimiento al evitar el cuello de botella.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q5">
-        <p>5. En el modelo SPMD, ¿qué característica principal lo distingue?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q5" value="0"> Comunicación asíncrona entre nodos.</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Uso exclusivo de hardware SIMD.</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Uso de un procesador único.</label></li>
-            <li><label><input type="radio" name="q5" value="1"> Código idéntico ejecutado sobre diferentes datos.</label></li>
-            <li><label><input type="radio" name="q5" value="0"> Código único ejecutado sobre datos idénticos.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q6">
-        <p>6. ¿Qué problema es común en sistemas distribuidos con paso de mensajes?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q6" value="1"> Complejidad en la sincronización.</label></li>
-            <li><label><input type="radio" name="q6" value="0"> Facilidad de depuración.</label></li>
-            <li><label><input type="radio" name="q6" value="0"> Baja interoperabilidad.</label></li>
-            <li><label><input type="radio" name="q6" value="0"> Escalabilidad ilimitada.</label></li>
-            <li><label><input type="radio" name="q6" value="0"> Dependencia de memoria compartida.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q7">
-        <p>7. ¿Qué tipo de operación de paso de mensajes no bloquea al emisor?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q7" value="0"> Operación con comunicación garantizada.</label></li>
-            <li><label><input type="radio" name="q7" value="1"> Operación no bloqueante.</label></li>
-            <li><label><input type="radio" name="q7" value="0"> Operación de cita.</label></li>
-            <li><label><input type="radio" name="q7" value="0"> Operación síncrona.</label></li>
-            <li><label><input type="radio" name="q7" value="0"> Operación en búfer.</label></li>
-        </ol>
+    <div class="info-box">
+      <p></p>
+
+      <div class="instrucciones-extra">
+        
+      </div>
+
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
     </div>
 
-    <div class="question" id="q8">
-        <p>8. ¿Qué define una comunicación con cita en paso de mensajes?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q8" value="0"> Comunicación de baja latencia.</label></li>
-            <li><label><input type="radio" name="q8" value="1"> Comunicación síncrona sin búfer.</label></li>
-            <li><label><input type="radio" name="q8" value="0"> Comunicación no bloqueante con hardware especializado.</label></li>
-            <li><label><input type="radio" name="q8" value="0"> Comunicación asíncrona sin búfer.</label></li>
-            <li><label><input type="radio" name="q8" value="0"> Comunicación síncrona con búfer.</label></li>
-        </ol>
+    <div id="questions-container">
+      <div class="question" id="q1" data-correct="0">
+  <div class="enunciado"><strong>1.</strong> ¿Qué problema resuelve la espera selectiva?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> La recepción no determinística de señales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> La prioridad entre alternativas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> La reducción de recursos de hardware.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> El uso de búferes compartidos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="4"> La sincronización entre nodos paralelos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q1')">Ver explicación</button>
+  <div class="explicacion" id="exp-q1" style="display:none">La espera selectiva resuelve la recepción no determinística de señales.</div>
+</div>
+<div class="question" id="q2" data-correct="3">
+  <div class="enunciado"><strong>2.</strong> ¿Qué ocurre si ninguna guarda es ejecutable en un select?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Se selecciona una guarda potencialmente ejecutable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> La instrucción select se bloquea.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> La instrucción termina inmediatamente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> Se genera un error o excepción.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="4"> El proceso emisor se bloquea.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q2')">Ver explicación</button>
+  <div class="explicacion" id="exp-q2" style="display:none">Si ninguna guarda es ejecutable en un select, se genera un error o excepción.</div>
+</div>
+<div class="question" id="q3" data-correct="2">
+  <div class="enunciado"><strong>3.</strong> ¿En qué caso la sentencia select selecciona no determinísticamente una alternativa?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> Cuando todas las alternativas contienen condiciones lógicas falsas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> Cuando ninguna alternativa es ejecutable ni potencialmente ejecutable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> Cuando hay alternativas potencialmente ejecutables sin una orden de recibir mensajes en la guarda.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> Cuando todas las alternativas son ejecutables y tienen una orden de recibir mensajes.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q3')">Ver explicación</button>
+  <div class="explicacion" id="exp-q3" style="display:none">La sentencia select selecciona no determinísticamente una alternativa cuando hay alternativas potencialmente ejecutables sin una orden de recibir mensajes en la guarda.</div>
+</div>
+<div class="question" id="q4" data-correct="4">
+  <div class="enunciado"><strong>4.</strong> ¿Cuál es una ventaja principal de las arquitecturas con múltiples elementos de cómputo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Mayor costo de producción.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> Menor escalabilidad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> Requieren más energía.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> Uso exclusivo de hardware especializado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="4"> Mejor rendimiento al evitar el cuello de botella.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q4')">Ver explicación</button>
+  <div class="explicacion" id="exp-q4" style="display:none">Una ventaja principal de las arquitecturas con múltiples elementos de cómputo es el mejor rendimiento al evitar el cuello de botella.</div>
+</div>
+<div class="question" id="q5" data-correct="3">
+  <div class="enunciado"><strong>5.</strong> En el modelo SPMD, ¿qué característica principal lo distingue?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> Comunicación asíncrona entre nodos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> Uso exclusivo de hardware SIMD.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> Uso de un procesador único.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> Código idéntico ejecutado sobre diferentes datos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="4"> Código único ejecutado sobre datos idénticos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q5')">Ver explicación</button>
+  <div class="explicacion" id="exp-q5" style="display:none">En el modelo SPMD, la característica principal es el código idéntico ejecutado sobre diferentes datos.</div>
+</div>
+<div class="question" id="q6" data-correct="0">
+  <div class="enunciado"><strong>6.</strong> ¿Qué problema es común en sistemas distribuidos con paso de mensajes?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> Complejidad en la sincronización.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> Facilidad de depuración.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> Baja interoperabilidad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> Escalabilidad ilimitada.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="4"> Dependencia de memoria compartida.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q6')">Ver explicación</button>
+  <div class="explicacion" id="exp-q6" style="display:none">Un problema común en sistemas distribuidos con paso de mensajes es la complejidad en la sincronización.</div>
+</div>
+<div class="question" id="q7" data-correct="1">
+  <div class="enunciado"><strong>7.</strong> ¿Qué tipo de operación de paso de mensajes no bloquea al emisor?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> Operación con comunicación garantizada.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> Operación no bloqueante.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> Operación de cita.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> Operación síncrona.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="4"> Operación en búfer.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q7')">Ver explicación</button>
+  <div class="explicacion" id="exp-q7" style="display:none">Una operación de paso de mensajes no bloqueante no bloquea al emisor.</div>
+</div>
+<div class="question" id="q8" data-correct="1">
+  <div class="enunciado"><strong>8.</strong> ¿Qué define una comunicación con cita en paso de mensajes?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Comunicación de baja latencia.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> Comunicación síncrona sin búfer.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> Comunicación no bloqueante con hardware especializado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> Comunicación asíncrona sin búfer.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="4"> Comunicación síncrona con búfer.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q8')">Ver explicación</button>
+  <div class="explicacion" id="exp-q8" style="display:none">Una comunicación con cita en paso de mensajes se define como comunicación síncrona sin búfer.</div>
+</div>
+<div class="question" id="q9" data-correct="1">
+  <div class="enunciado"><strong>9.</strong> ¿Cuál de los siguientes lenguajes utiliza bindings para MPI?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> PHP.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> FORTRAN.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> Ruby.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> JavaScript.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="4"> Python.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q9')">Ver explicación</button>
+  <div class="explicacion" id="exp-q9" style="display:none">FORTRAN utiliza bindings para MPI.</div>
+</div>
+<div class="question" id="q10" data-correct="2">
+  <div class="enunciado"><strong>10.</strong> ¿Qué significa MPI_Comm_size en el contexto de MPI?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> Calcula el tamaño máximo del mensaje.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> Establece las etiquetas de los mensajes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> Determina el número de procesos en un comunicador.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> Inicia la comunicación entre procesos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="4"> Define el tamaño del búfer de mensajes.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q10')">Ver explicación</button>
+  <div class="explicacion" id="exp-q10" style="display:none">MPI_Comm_size en el contexto de MPI determina el número de procesos en un comunicador.</div>
+</div>
+<div class="question" id="q11" data-correct="4">
+  <div class="enunciado"><strong>11.</strong> ¿Qué es un cuello de botella en arquitecturas de programa único almacenado?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> Limitación en el número de instrucciones ejecutadas simultáneamente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> Uso excesivo de la memoria compartida.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="2"> Baja velocidad de las operaciones en paralelo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="3"> Alta latencia de las operaciones aritméticas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="4"> Lentitud en el bus de datos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q11')">Ver explicación</button>
+  <div class="explicacion" id="exp-q11" style="display:none">Un cuello de botella en arquitecturas de programa único almacenado es la lentitud en el bus de datos.</div>
+</div>
+<div class="question" id="q12" data-correct="3">
+  <div class="enunciado"><strong>12.</strong> ¿Qué es una guarda en una instrucción select?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="0"> Un protocolo de comunicación síncrono.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="1"> Un identificador único para procesos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="2"> Una sentencia que fuerza una condición.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="3"> Una condición lógica que habilita una alternativa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="4"> Un mecanismo para evitar interbloqueos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q12')">Ver explicación</button>
+  <div class="explicacion" id="exp-q12" style="display:none">Una guarda en una instrucción select es una condición lógica que habilita una alternativa.</div>
+</div>
+<div class="question" id="q13" data-correct="1">
+  <div class="enunciado"><strong>13.</strong> ¿Qué alternativa es correcta para sistemas con paso de mensajes?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="0"> Siempre dependen de memoria compartida.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="1"> Permiten comunicación entre procesos independientes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="2"> Limitan la cantidad de procesos en ejecución.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="3"> No requieren sincronización entre procesos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="4"> Excluyen operaciones síncronas.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q13')">Ver explicación</button>
+  <div class="explicacion" id="exp-q13" style="display:none">Una alternativa correcta para sistemas con paso de mensajes es que permiten comunicación entre procesos independientes.</div>
+</div>
+<div class="question" id="q14" data-correct="3">
+  <div class="enunciado"><strong>14.</strong> ¿Qué instrucción de MPI inicia una comunicación no bloqueante?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="0"> MPI_Send.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="1"> MPI_Irecv.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="2"> MPI_Recv.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="3"> MPI_Isend.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="4"> MPI_Wait.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q14')">Ver explicación</button>
+  <div class="explicacion" id="exp-q14" style="display:none">MPI_Isend inicia una comunicación no bloqueante en MPI.</div>
+</div>
+<div class="question" id="q15" data-correct="1">
+  <div class="enunciado"><strong>15.</strong> ¿Qué ventaja ofrece el paso de mensajes con búfer?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="0"> Mejora en la eficiencia del hardware.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="1"> Reducción del tiempo de espera.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="2"> Reducción de memoria utilizada.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="3"> Mayor flexibilidad en el código.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="4"> Eliminación de interbloqueos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q15')">Ver explicación</button>
+  <div class="explicacion" id="exp-q15" style="display:none">El paso de mensajes con búfer ofrece la ventaja de reducción del tiempo de espera.</div>
+</div>
+<div class="question" id="q16" data-correct="0">
+  <div class="enunciado"><strong>16.</strong> ¿Qué herramienta facilita la ejecución de programas MPI?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="0"> mpirun.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="1"> MPI_Get_Count.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="2"> PVM.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="3"> mpicc.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="4"> mpi.h.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q16')">Ver explicación</button>
+  <div class="explicacion" id="exp-q16" style="display:none">mpirun facilita la ejecución de programas MPI.</div>
+</div>
+<div class="question" id="q17" data-correct="2">
+  <div class="enunciado"><strong>17.</strong> ¿Cuál es un ejemplo de comunicación síncrona en sistemas distribuidos?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="0"> Intercambio de mensajes en paralelo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="1"> Comunicación basada en búferes internos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="2"> Operaciones de cita entre procesos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="3"> Comunicación con operaciones no bloqueantes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="4"> Comunicación con hardware especializado.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q17')">Ver explicación</button>
+  <div class="explicacion" id="exp-q17" style="display:none">Un ejemplo de comunicación síncrona en sistemas distribuidos son las operaciones de cita entre procesos.</div>
+</div>
+<div class="question" id="q18" data-correct="1">
+  <div class="enunciado"><strong>18.</strong> ¿Qué define el término "cliente" en un modelo cliente/servidor?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="0"> Un proceso que almacena mensajes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="1"> Un proceso activo que solicita servicios.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="2"> Un proceso intermedio entre servidor y base de datos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="3"> Un proceso pasivo que recibe datos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="4"> Un controlador centralizado.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q18')">Ver explicación</button>
+  <div class="explicacion" id="exp-q18" style="display:none">En un modelo cliente/servidor, un cliente es un proceso activo que solicita servicios.</div>
+</div>
+<div class="question" id="q19" data-correct="1">
+  <div class="enunciado"><strong>19.</strong> ¿Qué representa una alternativa indexada en un select?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="0"> Varias alternativas combinadas en una sola.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="1"> Una forma de replicar alternativas con índices.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="2"> Una instrucción para manejar errores.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="3"> Una comunicación síncrona.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="4"> Un índice que prioriza procesos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q19')">Ver explicación</button>
+  <div class="explicacion" id="exp-q19" style="display:none">Una alternativa indexada en un select es una forma de replicar alternativas con índices.</div>
+</div>
+<div class="question" id="q20" data-correct="0">
+  <div class="enunciado"><strong>20.</strong> ¿Qué tipo de mensajes permite el uso de MPI_ANY_SOURCE?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="0"> Mensajes de cualquier origen.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="1"> Mensajes sin etiquetas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="2"> Mensajes con etiquetas específicas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="3"> Mensajes de un único proceso.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="4"> Mensajes bloqueados.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q20')">Ver explicación</button>
+  <div class="explicacion" id="exp-q20" style="display:none">MPI_ANY_SOURCE permite mensajes de cualquier origen.</div>
+</div>
+<div class="question" id="q21" data-correct="2">
+  <div class="enunciado"><strong>21.</strong> ¿Qué proceso controla la sincronización en un sistema productor-consumidor?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="0"> Consumidor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="1"> Productor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="2"> Búfer intermedio.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="3"> Coordinador externo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="4"> Cliente.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q21')">Ver explicación</button>
+  <div class="explicacion" id="exp-q21" style="display:none">En un sistema productor-consumidor, el búfer intermedio controla la sincronización.</div>
+</div>
+<div class="question" id="q22" data-correct="0">
+  <div class="enunciado"><strong>22.</strong> ¿Qué modelo de multiprocesamiento utiliza múltiples procesadores para ejecutar instrucciones independientes?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="0"> MIMD.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="1"> SISD.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="2"> SIMD.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="3"> MISD.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="4"> SPMD.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q22')">Ver explicación</button>
+  <div class="explicacion" id="exp-q22" style="display:none">El modelo de multiprocesamiento MIMD utiliza múltiples procesadores para ejecutar instrucciones independientes.</div>
+</div>
+<div class="question" id="q23" data-correct="3">
+  <div class="enunciado"><strong>23.</strong> ¿Qué asegura una guarda ejecutable en un select?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="0"> La transmisión directa de datos sin validación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="1"> La ejecución inmediata del proceso emisor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="2"> La ejecución de varias alternativas nodeterminísticamente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="3"> Que el proceso receptor esté listo para recibir.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="4"> La sincronización de todos los procesos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q23')">Ver explicación</button>
+  <div class="explicacion" id="exp-q23" style="display:none">Una guarda ejecutable en un select asegura que el proceso receptor esté listo para recibir.</div>
+</div>
+<div class="question" id="q24" data-correct="0">
+  <div class="enunciado"><strong>24.</strong> ¿Qué mecanismo minimiza interbloqueos en comunicación no bloqueante?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="0"> MPI_Test.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="1"> MPI_Get_Count.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="2"> MPI_Comm_rank.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="3"> MPI_Wait.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="4"> MPI_Recv.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q24')">Ver explicación</button>
+  <div class="explicacion" id="exp-q24" style="display:none">MPI_Test minimiza interbloqueos en comunicación no bloqueante.</div>
+</div>
+<div class="question" id="q25" data-correct="2">
+  <div class="enunciado"><strong>25.</strong> ¿Qué instrucción libera una solicitud en MPI?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="0"> MPI_Finalize.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="1"> MPI_Wait.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="2"> MPI_Request_free.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="3"> MPI_Recv.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="4"> MPI_Send.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q25')">Ver explicación</button>
+  <div class="explicacion" id="exp-q25" style="display:none">MPI_Request_free libera una solicitud en MPI.</div>
+</div>
+
     </div>
-    <div class="question" id="q9">
-        <p>9. ¿Cuál de los siguientes lenguajes utiliza bindings para MPI?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q9" value="0"> PHP.</label></li>
-            <li><label><input type="radio" name="q9" value="1"> FORTRAN.</label></li>
-            <li><label><input type="radio" name="q9" value="0"> Ruby.</label></li>
-            <li><label><input type="radio" name="q9" value="0"> JavaScript.</label></li>
-            <li><label><input type="radio" name="q9" value="0"> Python.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q10">
-        <p>10. ¿Qué significa MPI_Comm_size en el contexto de MPI?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q10" value="0"> Calcula el tamaño máximo del mensaje.</label></li>
-            <li><label><input type="radio" name="q10" value="0"> Establece las etiquetas de los mensajes.</label></li>
-            <li><label><input type="radio" name="q10" value="1"> Determina el número de procesos en un comunicador.</label></li>
-            <li><label><input type="radio" name="q10" value="0"> Inicia la comunicación entre procesos.</label></li>
-            <li><label><input type="radio" name="q10" value="0"> Define el tamaño del búfer de mensajes.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q11">
-        <p>11. ¿Qué es un cuello de botella en arquitecturas de programa único almacenado?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q11" value="0"> Limitación en el número de instrucciones ejecutadas simultáneamente.</label></li>
-            <li><label><input type="radio" name="q11" value="0"> Uso excesivo de la memoria compartida.</label></li>
-            <li><label><input type="radio" name="q11" value="0"> Baja velocidad de las operaciones en paralelo.</label></li>
-            <li><label><input type="radio" name="q11" value="0"> Alta latencia de las operaciones aritméticas.</label></li>
-            <li><label><input type="radio" name="q11" value="1"> Lentitud en el bus de datos.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q12">
-        <p>12. ¿Qué es una guarda en una instrucción select?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q12" value="0"> Un protocolo de comunicación síncrono.</label></li>
-            <li><label><input type="radio" name="q12" value="0"> Un identificador único para procesos.</label></li>
-            <li><label><input type="radio" name="q12" value="0"> Una sentencia que fuerza una condición.</label></li>
-            <li><label><input type="radio" name="q12" value="1"> Una condición lógica que habilita una alternativa.</label></li>
-            <li><label><input type="radio" name="q12" value="0"> Un mecanismo para evitar interbloqueos.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q13">
-        <p>13. ¿Qué alternativa es correcta para sistemas con paso de mensajes?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q13" value="0"> Siempre dependen de memoria compartida.</label></li>
-            <li><label><input type="radio" name="q13" value="1"> Permiten comunicación entre procesos independientes.</label></li>
-            <li><label><input type="radio" name="q13" value="0"> Limitan la cantidad de procesos en ejecución.</label></li>
-            <li><label><input type="radio" name="q13" value="0"> No requieren sincronización entre procesos.</label></li>
-            <li><label><input type="radio" name="q13" value="0"> Excluyen operaciones síncronas.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q14">
-        <p>14. ¿Qué instrucción de MPI inicia una comunicación no bloqueante?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q14" value="0"> MPI_Send.</label></li>
-            <li><label><input type="radio" name="q14" value="0"> MPI_Irecv.</label></li>
-            <li><label><input type="radio" name="q14" value="0"> MPI_Recv.</label></li>
-            <li><label><input type="radio" name="q14" value="1"> MPI_Isend.</label></li>
-            <li><label><input type="radio" name="q14" value="0"> MPI_Wait.</label></li>
-        </ol>
-    </div>
-    
-    <div class="question" id="q15">
-        <p>15. ¿Qué ventaja ofrece el paso de mensajes con búfer?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q15" value="0"> Mejora en la eficiencia del hardware.</label></li>
-            <li><label><input type="radio" name="q15" value="1"> Reducción del tiempo de espera.</label></li>
-            <li><label><input type="radio" name="q15" value="0"> Reducción de memoria utilizada.</label></li>
-            <li><label><input type="radio" name="q15" value="0"> Mayor flexibilidad en el código.</label></li>
-            <li><label><input type="radio" name="q15" value="0"> Eliminación de interbloqueos.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q16">
-        <p>16. ¿Qué herramienta facilita la ejecución de programas MPI?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q16" value="1"> mpirun.</label></li>
-            <li><label><input type="radio" name="q16" value="0"> MPI_Get_Count.</label></li>
-            <li><label><input type="radio" name="q16" value="0"> PVM.</label></li>
-            <li><label><input type="radio" name="q16" value="0"> mpicc.</label></li>
-            <li><label><input type="radio" name="q16" value="0"> mpi.h.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q17">
-        <p>17. ¿Cuál es un ejemplo de comunicación síncrona en sistemas distribuidos?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q17" value="0"> Intercambio de mensajes en paralelo.</label></li>
-            <li><label><input type="radio" name="q17" value="0"> Comunicación basada en búferes internos.</label></li>
-            <li><label><input type="radio" name="q17" value="1"> Operaciones de cita entre procesos.</label></li>
-            <li><label><input type="radio" name="q17" value="0"> Comunicación con operaciones no bloqueantes.</label></li>
-            <li><label><input type="radio" name="q17" value="0"> Comunicación con hardware especializado.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q18">
-        <p>18. ¿Qué define el término "cliente" en un modelo cliente/servidor?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q18" value="0"> Un proceso que almacena mensajes.</label></li>
-            <li><label><input type="radio" name="q18" value="1"> Un proceso activo que solicita servicios.</label></li>
-            <li><label><input type="radio" name="q18" value="0"> Un proceso intermedio entre servidor y base de datos.</label></li>
-            <li><label><input type="radio" name="q18" value="0"> Un proceso pasivo que recibe datos.</label></li>
-            <li><label><input type="radio" name="q18" value="0"> Un controlador centralizado.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q19">
-        <p>19. ¿Qué representa una alternativa indexada en un select?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q19" value="0"> Varias alternativas combinadas en una sola.</label></li>
-            <li><label><input type="radio" name="q19" value="1"> Una forma de replicar alternativas con índices.</label></li>
-            <li><label><input type="radio" name="q19" value="0"> Una instrucción para manejar errores.</label></li>
-            <li><label><input type="radio" name="q19" value="0"> Una comunicación síncrona.</label></li>
-            <li><label><input type="radio" name="q19" value="0"> Un índice que prioriza procesos.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q20">
-        <p>20. ¿Qué tipo de mensajes permite el uso de MPI_ANY_SOURCE?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q20" value="1"> Mensajes de cualquier origen.</label></li>
-            <li><label><input type="radio" name="q20" value="0"> Mensajes sin etiquetas.</label></li>
-            <li><label><input type="radio" name="q20" value="0"> Mensajes con etiquetas específicas.</label></li>
-            <li><label><input type="radio" name="q20" value="0"> Mensajes de un único proceso.</label></li>
-            <li><label><input type="radio" name="q20" value="0"> Mensajes bloqueados.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q21">
-        <p>21. ¿Qué proceso controla la sincronización en un sistema productor-consumidor?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q21" value="0"> Consumidor.</label></li>
-            <li><label><input type="radio" name="q21" value="0"> Productor.</label></li>
-            <li><label><input type="radio" name="q21" value="1"> Búfer intermedio.</label></li>
-            <li><label><input type="radio" name="q21" value="0"> Coordinador externo.</label></li>
-            <li><label><input type="radio" name="q21" value="0"> Cliente.</label></li>
-        </ol>
-    </div>
 
-    <div class="question" id="q22">
-        <p>22. ¿Qué modelo de multiprocesamiento utiliza múltiples procesadores para ejecutar instrucciones independientes?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q22" value="1"> MIMD.</label></li>
-            <li><label><input type="radio" name="q22" value="0"> SISD.</label></li>
-            <li><label><input type="radio" name="q22" value="0"> SIMD.</label></li>
-            <li><label><input type="radio" name="q22" value="0"> MISD.</label></li>
-            <li><label><input type="radio" name="q22" value="0"> SPMD.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q23">
-        <p>23. ¿Qué asegura una guarda ejecutable en un select?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q23" value="0"> La transmisión directa de datos sin validación.</label></li>
-            <li><label><input type="radio" name="q23" value="0"> La ejecución inmediata del proceso emisor.</label></li>
-            <li><label><input type="radio" name="q23" value="0"> La ejecución de varias alternativas nodeterminísticamente.</label></li>
-            <li><label><input type="radio" name="q23" value="1"> Que el proceso receptor esté listo para recibir.</label></li>
-            <li><label><input type="radio" name="q23" value="0"> La sincronización de todos los procesos.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q24">
-        <p>24. ¿Qué mecanismo minimiza interbloqueos en comunicación no bloqueante?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q24" value="1"> MPI_Test.</label></li>
-            <li><label><input type="radio" name="q24" value="0"> MPI_Get_Count.</label></li>
-            <li><label><input type="radio" name="q24" value="0"> MPI_Comm_rank.</label></li>
-            <li><label><input type="radio" name="q24" value="0"> MPI_Wait.</label></li>
-            <li><label><input type="radio" name="q24" value="0"> MPI_Recv.</label></li>
-        </ol>
-    </div>
-    <div class="question" id="q25">
-        <p>25. ¿Qué instrucción libera una solicitud en MPI?</p>
-        <ol type="a">
-            <li><label><input type="radio" name="q25" value="0"> MPI_Finalize.</label></li>
-            <li><label><input type="radio" name="q25" value="0"> MPI_Wait.</label></li>
-            <li><label><input type="radio" name="q25" value="1"> MPI_Request_free.</label></li>
-            <li><label><input type="radio" name="q25" value="0"> MPI_Recv.</label></li>
-            <li><label><input type="radio" name="q25" value="0"> MPI_Send.</label></li>
-        </ol>
-    </div>
-    
-    
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
 
-   
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
 
-    
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
 
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
 
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
 
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
 
+            if (checked.length === 0) return;
 
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
 
-
-
-
-
-
-
-
-
-
-
-    <!-- Añadir las preguntas adicionales de la misma manera -->
-
-    <input type="button" value="¿Aprobarás?" onclick="checkAnswers()">
-</form>
-
-
-<div id="results" style="margin-top: 20px;"></div>
-
-<script>
-    function checkAnswers() {
-        let score = 0;
-        const totalQuestions = 25;
-        const resultsDiv = document.getElementById("results");
-        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
-
-        // Respuestas correctas
-        const answers = {
-            q1: { answer: "1", explanation: "La espera selectiva resuelve la recepción no determinística de señales." },
-            q2: { answer: "1", explanation: "Si ninguna guarda es ejecutable en un select, se genera un error o excepción." },
-            q3: { answer: "1", explanation: "La sentencia select selecciona no determinísticamente una alternativa cuando hay alternativas potencialmente ejecutables sin una orden de recibir mensajes en la guarda." },
-            q4: { answer: "1", explanation: "Una ventaja principal de las arquitecturas con múltiples elementos de cómputo es el mejor rendimiento al evitar el cuello de botella." },
-            q5: { answer: "1", explanation: "En el modelo SPMD, la característica principal es el código idéntico ejecutado sobre diferentes datos." },
-            q6: { answer: "1", explanation: "Un problema común en sistemas distribuidos con paso de mensajes es la complejidad en la sincronización." },
-            q7: { answer: "1", explanation: "Una operación de paso de mensajes no bloqueante no bloquea al emisor." },
-            q8: { answer: "1", explanation: "Una comunicación con cita en paso de mensajes se define como comunicación síncrona sin búfer." },
-            q9: { answer: "1", explanation: "FORTRAN utiliza bindings para MPI." },
-            q10: { answer: "1", explanation: "MPI_Comm_size en el contexto de MPI determina el número de procesos en un comunicador." },
-            q11: { answer: "1", explanation: "Un cuello de botella en arquitecturas de programa único almacenado es la lentitud en el bus de datos." },
-            q12: { answer: "1", explanation: "Una guarda en una instrucción select es una condición lógica que habilita una alternativa." },
-            q13: { answer: "1", explanation: "Una alternativa correcta para sistemas con paso de mensajes es que permiten comunicación entre procesos independientes." },
-            q14: { answer: "1", explanation: "MPI_Isend inicia una comunicación no bloqueante en MPI." },
-            q15: { answer: "1", explanation: "El paso de mensajes con búfer ofrece la ventaja de reducción del tiempo de espera." },
-            q16: { answer: "1", explanation: "mpirun facilita la ejecución de programas MPI." },
-            q17: { answer: "1", explanation: "Un ejemplo de comunicación síncrona en sistemas distribuidos son las operaciones de cita entre procesos." },
-            q18: { answer: "1", explanation: "En un modelo cliente/servidor, un cliente es un proceso activo que solicita servicios." },
-            q19: { answer: "1", explanation: "Una alternativa indexada en un select es una forma de replicar alternativas con índices." },
-            q20: { answer: "1", explanation: "MPI_ANY_SOURCE permite mensajes de cualquier origen." },
-            q21: { answer: "1", explanation: "En un sistema productor-consumidor, el búfer intermedio controla la sincronización." },
-            q22: { answer: "1", explanation: "El modelo de multiprocesamiento MIMD utiliza múltiples procesadores para ejecutar instrucciones independientes." },
-            q23: { answer: "1", explanation: "Una guarda ejecutable en un select asegura que el proceso receptor esté listo para recibir." },
-            q24: { answer: "1", explanation: "MPI_Test minimiza interbloqueos en comunicación no bloqueante." },
-            q25: { answer: "1", explanation: "MPI_Request_free libera una solicitud en MPI." }
-        };
-
-        for (let i = 1; i <= totalQuestions; i++) {
-            const question = document.querySelectorAll(`input[name="q${i}"]:checked`);
-            if (question.length > 0) {
-            const selectedValues = Array.from(question).map(q => q.value);
-            const correctAnswers = Array.isArray(answers[`q${i}`].answer) ? answers[`q${i}`].answer : [answers[`q${i}`].answer];
-            const isCorrect = selectedValues.length === correctAnswers.length && selectedValues.every(val => correctAnswers.includes(val));
-            
-            if (isCorrect) {
-                score++;
-                document.getElementById(`q${i}`).classList.add('correct');
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
             } else {
-                document.getElementById(`q${i}`).classList.add('incorrect');
-                // Mostrar solo la justificación
-                const explanation = answers[`q${i}`].explanation;
-                const explanationDiv = document.createElement("div");
-                explanationDiv.className = "explanation";
-                explanationDiv.innerHTML = `<strong>Justificación:</strong> ${explanation}`;
-                document.getElementById(`q${i}`).appendChild(explanationDiv);
+              q.classList.add("incorrect");
             }
-            }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
         }
 
-        // Cálculo de la nota sobre 10
-        const grade = (score / totalQuestions) * 10;
-        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
-        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
-    }
-</script>
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
 
-</body>
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
 </html>

@@ -1,377 +1,789 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 2 - Exclusión Mutua</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 2 - Monitores</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            font-size: 18px;
-        }
-        h1 {
-            text-align: center;
-            color: #007bff;
-            margin-bottom: 30px;
-        }
-        .question {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .question:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .question.correct {
-            border-color: #28a745;
-            background-color: #d4edda;
-        }
-        .question.incorrect {
-            border-color: #dc3545;
-            background-color: #f8d7da;
-        }
-        .explanation {
-            background: #e7f3fe;
-            border: 1px solid #b2d4fe;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 10px;
-        }
-        .author {
-            margin-top: 20px;
-            font-style: italic;
-            text-align: center;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-            transform: scale(1.2);
-        }
-        input[type="button"] {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        input[type="button"]:hover {
-            background-color: #0056b3;
-            transform: translateY(-3px);
-        }
+      :root {
+        --bg-color: #f5f0e8;
+        --text-color: #1a1410;
+        --card-bg: #fbf8f2;
+        --border-color: #d4c9b0;
+        --primary-color: #8b2a0f;
+        --hover-color: #6e2009;
+        --muted: #7a6a54;
+        --rule: #d4c9b0;
+      }
+
+      body {
+        font-family: 'Source Serif 4', Georgia, serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.75;
+        padding: 40px 20px 80px;
+        font-size: 18px;
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        line-height: 1.1;
+        text-align: left;
+        color: var(--primary-color);
+        font-size: 2.6rem;
+        margin-bottom: 6px;
+        border-bottom: 3px solid var(--text-color);
+        padding-bottom: 16px;
+      }
+
+      h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-top: 48px;
+        border-top: 2px solid var(--primary-color);
+        padding-top: 14px;
+      }
+
+      .author {
+        text-align: left;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        font-style: italic;
+        color: var(--muted);
+      }
+
+      .question {
+        background: transparent;
+        border: none;
+        border-bottom: 1px dashed var(--rule);
+        border-radius: 0;
+        padding: 24px 40px 24px 4px;
+        margin-bottom: 0;
+        box-shadow: none;
+        transition: background 0.2s;
+        overflow-wrap: break-word;
+        position: relative;
+      }
+      .question:hover {
+        transform: none;
+        background: rgba(139, 42, 15, 0.03);
+      }
+      .question:last-child { border-bottom: none; }
+
+      .correct   { border-left: 4px solid #2f7d32; background-color: #e3efe0; padding-left: 14px; }
+      .partial   { border-left: 4px solid #b8860b; background-color: #f4ead0; padding-left: 14px; }
+      .incorrect { border-left: 4px solid #a4161a; background-color: #f3dcd8; padding-left: 14px; }
+      .correct::before, .partial::before, .incorrect::before {
+        position: absolute; top: 22px; right: 14px;
+        font-family: "Playfair Display", Georgia, serif;
+        font-weight: 700; font-size: 1.2rem; line-height: 1;
+      }
+      .correct::before   { content: "\2713"; color: #2f7d32; }
+      .incorrect::before { content: "\2717"; color: #a4161a; }
+      .partial::before   { content: "!"; color: #8a6508; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado strong:first-child {
+        font-family: 'Playfair Display', Georgia, serif;
+        color: var(--primary-color);
+        font-size: 1.1em;
+      }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+
+      .opcion-linea, .opcion-bloque {
+        display: block;
+        padding-left: 35px;
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;
+      }
+
+      .opcion-linea input[type="checkbox"],
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 4px;
+        transform: scale(1.2);
+        margin: 0;
+        cursor: pointer;
+        accent-color: var(--primary-color);
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline;
+      }
+
+      mjx-container { font-size: 108% !important; }
+
+      img { max-width: 100%; height: auto; border-radius: 3px; }
+      table { border-collapse: collapse; width: 100%; margin: 14px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid var(--border-color); padding: 8px; text-align: left; }
+      th { background-color: rgba(139,42,15,0.07); }
+
+      code, pre { font-family: 'SFMono-Regular', Consolas, monospace; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 5px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 2px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border-left: 3px solid var(--border-color);
+        background-color: rgba(0,0,0,0.025);
+        border-radius: 0 3px 3px 0;
+        font-size: 0.95em;
+        font-style: italic;
+        color: #4a3820;
+      }
+      .explicacion strong { font-style: normal; }
+      .dark-mode .btn-explicacion { color: #e0a890; border-color: #e0a890; }
+      .dark-mode .btn-explicacion:hover { background-color: #e0a890; color: #1a1209; }
+      .dark-mode .explicacion { background-color: rgba(255,255,255,0.05); border-left-color: #6b5840; color: #d8c8b0; }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: #fbf8f2;
+        border: none;
+        padding: 9px 15px;
+        margin: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: 'Source Serif 4', serif;
+        font-size: 0.85rem;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: var(--muted);
+      }
+      .instrucciones-extra li { margin-bottom: 5px; }
+
+      body.dark-mode {
+        --bg-color: #1f1812;
+        --text-color: #e8ddca;
+        --card-bg: #2a2118;
+        --border-color: #4a3c2c;
+        --primary-color: #d98050;
+        --hover-color: #c06a3a;
+        --muted: #b3a285;
+        --rule: #4a3c2c;
+      }
+      .dark-mode h1 { border-bottom-color: var(--text-color); }
+      .dark-mode .author { color: var(--muted); }
+      .dark-mode th { background-color: rgba(217,128,80,0.12); }
+      .dark-mode .correct { background-color: rgba(47,125,50,0.30); border-left-color: #4caf50; }
+      .dark-mode .partial { background-color: rgba(184,134,11,0.30); border-left-color: #d4a017; }
+      .dark-mode .incorrect { background-color: rgba(170,17,17,0.32); border-left-color: #e05555; }
+      .dark-mode .correct::before { color: #6bdc8e; }
+      .dark-mode .incorrect::before { color: #ff8a8a; }
+      .dark-mode .partial::before { color: #e6c14d; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; font-size: 13px; }
+        .question { page-break-inside: avoid; border-bottom: 1px solid #ccc; padding: 12px 0; }
+        .info-box, button, #extra-buttons { display: none !important; }
+        h1 { font-size: 1.9rem; }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <h1>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 2 - Monitores</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
 
-    <h1>Test de Prácticas de Sistemas Concurrentes y Distribuidos - Tema 2 - Monitores </h1>
-    <ul class="author"></ul>
-        <li><strong>Autor:</strong> Ismael Sallami Moreno</li>
-        <li><strong>Titulación:</strong> Ingeniería Informática y ADE</li>
-        <li><strong>Asignatura:</strong> Sistemas Concurrentes y Distribuidos</li>
-    </ul>
-    <br>
-    <form id="quizForm">
-        <div id="q1" class="question">
-            <p>¿Cuál es la principal limitación de los semáforos en sistemas concurrentes?</p>
-            <input type="radio" name="q1" value="a"> Solo funcionan con variables estáticas.<br>
-            <input type="radio" name="q1" value="b"> Dependen de variables locales.<br>
-            <input type="radio" name="q1" value="c"> Requieren mucho espacio de memoria.<br>
-            <input type="radio" name="q1" value="d"> Son difíciles de implementar en hardware.<br>
-            <input type="radio" name="q1" value="e"> No permiten encapsulación de la sincronización.<br>
-        </div>
-        <div id="q2" class="question">
-            <p>¿Qué es un monitor en programación concurrente?</p>
-            <input type="radio" name="q2" value="a"> Un dispositivo de entrada de datos.<br>
-            <input type="radio" name="q2" value="b"> Un controlador de semáforos.<br>
-            <input type="radio" name="q2" value="c"> Un mecanismo de programación que permite sincronización de procesos.<br>
-            <input type="radio" name="q2" value="d"> Un programa antivirus.<br>
-            <input type="radio" name="q2" value="e"> Una interfaz gráfica de usuario.<br>
-        </div>
-        <div id="q3" class="question">
-            <p>¿Quién introdujo el concepto de monitor y en qué año?</p>
-            <input type="radio" name="q3" value="a"> C.A.R. Hoare, en 1974.<br>
-            <input type="radio" name="q3" value="b"> Donald Knuth, en 1975.<br>
-            <input type="radio" name="q3" value="c"> Edsger Dijkstra, en 1972.<br>
-            <input type="radio" name="q3" value="d"> John von Neumann, en 1965.<br>
-            <input type="radio" name="q3" value="e"> Alan Turing, en 1970.<br>
-        </div>
-        <div id="q4" class="question">
-            <p>¿Qué es una variable permanente en un monitor?</p>
-            <input type="radio" name="q4" value="a"> Una variable que cambia continuamente.<br>
-            <input type="radio" name="q4" value="b"> Una variable local a cada procedimiento del monitor.<br>
-            <input type="radio" name="q4" value="c"> Una variable de solo lectura.<br>
-            <input type="radio" name="q4" value="d"> Una variable utilizada solo para imprimir.<br>
-            <input type="radio" name="q4" value="e"> La variable que guarda el estado interno del monitor.<br>
-        </div>
-        <div id="q5" class="question">
-            <p>¿Qué garantiza la exclusión mutua en los monitores?</p>
-            <input type="radio" name="q5" value="a"> Las interrupciones de hardware.<br>
-            <input type="radio" name="q5" value="b"> Los procedimientos dentro del monitor.<br>
-            <input type="radio" name="q5" value="c"> Los semáforos externos que se usan para implementar los monitores.<br>
-            <input type="radio" name="q5" value="d"> El sistema operativo.<br>
-            <input type="radio" name="q5" value="e"> Las condiciones de sincronización.<br>
-        </div>
-        <div id="q6" class="question">
-            <p>¿Cuál de los siguientes NO es un componente de los monitores?</p>
-            <input type="radio" name="q6" value="a"> Variables permanentes.<br>
-            <input type="radio" name="q6" value="b"> Variables temporales.<br>
-            <input type="radio" name="q6" value="c"> Condiciones de sincronización.<br>
-            <input type="radio" name="q6" value="d"> Procedimientos.<br>
-            <input type="radio" name="q6" value="e"> Código de inicialización.<br>
-        </div>
-        <div id="q7" class="question">
-            <p>¿Qué función cumple la operación c.wait() en un monitor?</p>
-            <input type="radio" name="q7" value="a"> Bloquear al proceso que llama al procedimiento que la ejecuta hasta que se cumpla una condición.<br>
-            <input type="radio" name="q7" value="b"> Liberar todos los procesos en la cola.<br>
-            <input type="radio" name="q7" value="c"> Permitir la sincronización sin bloquear.<br>
-            <input type="radio" name="q7" value="d"> Bloquear el monitor hasta que se libere.<br>
-            <input type="radio" name="q7" value="e"> Incrementar el valor de una variable.<br>
-        </div>
-        <div id="q8" class="question">
-            <p>¿Qué sucede cuando se ejecuta c.signal() y la cola está vacía?</p>
-            <input type="radio" name="q8" value="a"> Se libera un recurso de memoria.<br>
-            <input type="radio" name="q8" value="b"> La operación se descarta sin efecto.<br>
-            <input type="radio" name="q8" value="c"> Se bloquea el monitor.<br>
-            <input type="radio" name="q8" value="d"> Se activa el primer proceso de la cola.<br>
-            <input type="radio" name="q8" value="e"> Cambia el valor de la variable de condición.<br>
-        </div>
-        <div id="q9" class="question">
-            <p>¿Qué asegura el "invariante del monitor" en un sistema concurrente?</p>
-            <input type="radio" name="q9" value="a"> Que el monitor mantenga una propiedad específica siempre que no esté en uso.<br>
-            <input type="radio" name="q9" value="b"> La reusabilidad de las variables.<br>
-            <input type="radio" name="q9" value="c"> La verificación de sincronización.<br>
-            <input type="radio" name="q9" value="d"> La exclusión mutua de procesos.<br>
-            <input type="radio" name="q9" value="e"> El acceso constante a las variables.<br>
-        </div>
-        <div id="q10" class="question">
-            <p>¿Cuál de las siguientes es una característica de la "señal automática" (SA)?</p>
-            <input type="radio" name="q10" value="a"> Se ejecuta una señal implícita sin desplazamiento.<br>
-            <input type="radio" name="q10" value="b"> Los procesos señaladores esperan en la cola.<br>
-            <input type="radio" name="q10" value="c"> El monitor entra en espera forzada.<br>
-            <input type="radio" name="q10" value="d"> Se reinicia el monitor automáticamente.<br>
-            <input type="radio" name="q10" value="e"> El proceso señalador continúa su ejecución tras signal.<br>
-        </div>
-        <div id="q11" class="question">
-            <p>¿Qué significa la semántica de "Señalar y Continuar" (SC)?</p>
-            <input type="radio" name="q11" value="a"> Todos los procesos en la cola se desbloquean.<br>
-            <input type="radio" name="q11" value="b"> El proceso señalador continúa su ejecución después de signal.<br>
-            <input type="radio" name="q11" value="c"> La operación signal se omite.<br>
-            <input type="radio" name="q11" value="d"> El proceso señalador espera en la cola.<br>
-            <input type="radio" name="q11" value="e"> El monitor se reinicia.<br>
-        </div>
-        <div id="q12" class="question">
-            <p>¿Qué significa la semántica de "Señalar y Esperar" (SE)?</p>
-            <input type="radio" name="q12" value="a"> No se permite el acceso a la exclusión mutua del monitor.<br>
-            <input type="radio" name="q12" value="b"> El proceso señalado abandona el monitor.<br>
-            <input type="radio" name="q12" value="c"> El proceso señalador se bloquea después de signal.<br>
-            <input type="radio" name="q12" value="d"> Los procesos en cola no se despiertan.<br>
-            <input type="radio" name="q12" value="e"> El proceso señalador sigue ejecutando código del monitor.<br>
-        </div>
-        <div id="q13" class="question">
-            <p>¿Para qué tipo de problemas es útil el patrón de Exclusión Mutua (EM)?</p>
-            <input type="radio" name="q13" value="a"> Para asignación de memoria dinámica.<br>
-            <input type="radio" name="q13" value="b"> Para acceso exclusivo a una sección crítica.<br>
-            <input type="radio" name="q13" value="c"> Para sincronización de semáforos.<br>
-            <input type="radio" name="q13" value="d"> Para desbloquear colas de procesos.<br>
-            <input type="radio" name="q13" value="e"> Para almacenamiento de variables compartidas.<br>
-        </div>
-        <div id="q14" class="question">
-            <p>¿Cuál es el invariante del monitor de exclusión mutua?</p>
-            <input type="radio" name="q14" value="a"> num_sc >= 2.<br>
-            <input type="radio" name="q14" value="b"> libre + num_sc == 2.<br>
-            <input type="radio" name="q14" value="c"> ocupada == false.<br>
-            <input type="radio" name="q14" value="d"> num_sc > 1.<br>
-            <input type="radio" name="q14" value="e"> ocupada == true cuando hay un proceso en SC.<br>
-        </div>
-        <div id="q15" class="question">
-            <p>¿Qué define la operación escribir en un monitor Productor-Consumidor?</p>
-            <input type="radio" name="q15" value="a"> Borra el valor compartido.<br>
-            <input type="radio" name="q15" value="b"> Inicia una señal de bloqueo.<br>
-            <input type="radio" name="q15" value="c"> Desbloquea el monitor.<br>
-            <input type="radio" name="q15" value="d"> Escribe el valor en una variable compartida.<br>
-            <input type="radio" name="q15" value="e"> Lee el valor de la variable compartida.<br>
-        </div>
-        <div id="q16" class="question">
-            <p>¿Qué hace la operación leer() en el monitor de Productor-Consumidor?</p>
-            <input type="radio" name="q16" value="a"> Limpia la cola de procesos.<br>
-            <input type="radio" name="q16" value="b"> Elimina el valor de la variable.<br>
-            <input type="radio" name="q16" value="c"> Activa al proceso productor.<br>
-            <input type="radio" name="q16" value="d"> Lee el valor compartido y lo devuelve.<br>
-            <input type="radio" name="q16" value="e"> Bloquea al proceso productor.<br>
-        </div>
-        <div id="q17" class="question">
-            <p>¿Cuál es el propósito de la variable pendiente en el monitor Productor-Consumidor?</p>
-            <input type="radio" name="q17" value="a"> Indicar que el valor ha sido leído y no escrito.<br>
-            <input type="radio" name="q17" value="b"> Indicar si hay procesos señaladores.<br>
-            <input type="radio" name="q17" value="c"> Guardar el número de procesos en cola.<br>
-            <input type="radio" name="q17" value="d"> Mostrar si el monitor está activo.<br>
-            <input type="radio" name="q17" value="e"> Controlar el estado de las operaciones de lectura y escritura.<br>
-        </div>
-        <div id="q18" class="question">
-            <p>¿Qué es una cola de prioridad en monitores?</p>
-            <input type="radio" name="q18" value="a"> Una lista de operaciones de señal.<br>
-            <input type="radio" name="q18" value="b"> Un grupo de semáforos.<br>
-            <input type="radio" name="q18" value="c"> Un tipo de variable temporal.<br>
-            <input type="radio" name="q18" value="d"> Una cola que permite ordenar procesos según prioridad.<br>
-            <input type="radio" name="q18" value="e"> Una cola para ejecutar en último lugar.<br>
-        </div>
-        <div id="q19" class="question">
-            <p>¿Qué es el Patrón de Espera Única (EU) en programación concurrente?</p>
-            <input type="radio" name="q19" value="a"> Un proceso bloquea a otro.<br>
-            <input type="radio" name="q19" value="b"> Un proceso finaliza antes de que inicie otro.<br>
-            <input type="radio" name="q19" value="c"> Un proceso espera indefinidamente en una cola.<br>
-            <input type="radio" name="q19" value="d"> Un proceso espera que otro finalice antes de iniciar una acción.<br>
-            <input type="radio" name="q19" value="e"> Un proceso se elimina automáticamente.<br>
-        </div>
-        <div id="q20" class="question">
-            <p>¿Cuál de las siguientes NO es una operación de sincronización en monitores?</p>
-            <input type="radio" name="q20" value="a"> signal_all().<br>
-            <input type="radio" name="q20" value="b"> wait().<br>
-            <input type="radio" name="q20" value="c"> signal().<br>
-            <input type="radio" name="q20" value="d"> queue().<br>
-            <input type="radio" name="q20" value="e"> init().<br>
-        </div>
-        <div id="q21" class="question">
-            <p>¿Qué sucede en la semántica de Señalar y Salir (SS)?</p>
-            <input type="radio" name="q21" value="a"> El proceso señalador sale del monitor después de signal.<br>
-            <input type="radio" name="q21" value="b"> El proceso señalado queda en espera.<br>
-            <input type="radio" name="q21" value="c"> El proceso señalador continúa ejecutando.<br>
-            <input type="radio" name="q21" value="d"> Todos los procesos son liberados.<br>
-            <input type="radio" name="q21" value="e"> Se detiene la ejecución del monitor.<br>
-        </div>
-        <div id="q22" class="question">
-            <p>¿Cuál es el propósito de c.signal_all() en un monitor?</p>
-            <input type="radio" name="q22" value="a"> Liberar todos los procesos en la cola de condición.<br>
-            <input type="radio" name="q22" value="b"> Reiniciar el monitor.<br>
-            <input type="radio" name="q22" value="c"> Bloquear todos los procesos.<br>
-            <input type="radio" name="q22" value="d"> Cambiar el valor de las variables permanentes.<br>
-            <input type="radio" name="q22" value="e"> Liberar sólo el primer proceso en cola.<br>
-        </div>
-        <div id="q23" class="question">
-            <p>¿Qué es un Monitor de Barrera Parcial?</p>
-            <input type="radio" name="q23" value="a"> Un monitor que bloquea procesos hasta que un grupo alcanza un estado.<br>
-            <input type="radio" name="q23" value="b"> Un monitor que reduce el tiempo de espera.<br>
-            <input type="radio" name="q23" value="c"> Un monitor que libera procesos en intervalos.<br>
-            <input type="radio" name="q23" value="d"> Un monitor que libera a todos los procesos al mismo tiempo.<br>
-            <input type="radio" name="q23" value="e"> Un monitor que detiene todos los procesos.<br>
-        </div>
-        <div id="q24" class="question">
-            <p>¿Cuál es la semántica ideal para el monitor de barrera parcial?</p>
-            <input type="radio" name="q24" value="a"> SU.<br>
-            <input type="radio" name="q24" value="b"> SA.<br>
-            <input type="radio" name="q24" value="c"> SE.<br>
-            <input type="radio" name="q24" value="d"> SS.<br>
-            <input type="radio" name="q24" value="e"> SC.<br>
-        </div>
-        <div id="q25" class="question">
-            <p>¿Qué sucede con un proceso en cola cuando se usa signal en una semántica SC?</p>
-            <input type="radio" name="q25" value="a"> Se ejecuta automáticamente.<br>
-            <input type="radio" name="q25" value="b"> Permanece bloqueado indefinidamente.<br>
-            <input type="radio" name="q25" value="c"> Se despierta y sale inmediatamente.<br>
-            <input type="radio" name="q25" value="d"> Ignora la operación signal.<br>
-            <input type="radio" name="q25" value="e"> Se mueve a la cola de entrada del monitor.<br>
-        </div>
-    
+    <div class="info-box">
+      <p></p>
 
+      <div class="instrucciones-extra">
+        
+      </div>
 
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
 
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Añadi</div>r las preguntas adicionales de la misma manera -->
-
-    <input type="button" value="¿Aprobarás?" onclick="checkAnswers()">
-</form>
-
-<div class="author">
-    <p>Autor: Ismael Sallami Moreno</p>
+    <div id="questions-container">
+      <div class="question" id="q1" data-correct="4">
+  <div class="enunciado"><strong>1.</strong> ¿Cuál es la principal limitación de los semáforos en sistemas concurrentes?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> Solo funcionan con variables estáticas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> Dependen de variables locales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> Requieren mucho espacio de memoria.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> Son difíciles de implementar en hardware.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="4"> No permiten encapsulación de la sincronización.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q1')">Ver explicación</button>
+  <div class="explicacion" id="exp-q1" style="display:none">Los semáforos no permiten encapsulación de la sincronización, lo que puede llevar a errores difíciles de detectar.</div>
+</div>
+<div class="question" id="q2" data-correct="2">
+  <div class="enunciado"><strong>2.</strong> ¿Qué es un monitor en programación concurrente?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Un dispositivo de entrada de datos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Un controlador de semáforos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> Un mecanismo de programación que permite sincronización de procesos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> Un programa antivirus.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="4"> Una interfaz gráfica de usuario.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q2')">Ver explicación</button>
+  <div class="explicacion" id="exp-q2" style="display:none">Un monitor es un mecanismo de programación que permite la sincronización de procesos en sistemas concurrentes.</div>
+</div>
+<div class="question" id="q3" data-correct="0">
+  <div class="enunciado"><strong>3.</strong> ¿Quién introdujo el concepto de monitor y en qué año?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> C.A.R. Hoare, en 1974.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> Donald Knuth, en 1975.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> Edsger Dijkstra, en 1972.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> John von Neumann, en 1965.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="4"> Alan Turing, en 1970.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q3')">Ver explicación</button>
+  <div class="explicacion" id="exp-q3" style="display:none">C.A.R. Hoare introdujo el concepto de monitor en 1974.</div>
+</div>
+<div class="question" id="q4" data-correct="4">
+  <div class="enunciado"><strong>4.</strong> ¿Qué es una variable permanente en un monitor?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> Una variable que cambia continuamente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> Una variable local a cada procedimiento del monitor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> Una variable de solo lectura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> Una variable utilizada solo para imprimir.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="4"> La variable que guarda el estado interno del monitor.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q4')">Ver explicación</button>
+  <div class="explicacion" id="exp-q4" style="display:none">Una variable permanente en un monitor guarda el estado interno del monitor.</div>
+</div>
+<div class="question" id="q5" data-correct="1">
+  <div class="enunciado"><strong>5.</strong> ¿Qué garantiza la exclusión mutua en los monitores?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> Las interrupciones de hardware.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> Los procedimientos dentro del monitor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> Los semáforos externos que se usan para implementar los monitores.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> El sistema operativo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="4"> Las condiciones de sincronización.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q5')">Ver explicación</button>
+  <div class="explicacion" id="exp-q5" style="display:none">Los procedimientos dentro del monitor garantizan la exclusión mutua.</div>
+</div>
+<div class="question" id="q6" data-correct="1">
+  <div class="enunciado"><strong>6.</strong> ¿Cuál de los siguientes NO es un componente de los monitores?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> Variables permanentes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> Variables temporales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> Condiciones de sincronización.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> Procedimientos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="4"> Código de inicialización.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q6')">Ver explicación</button>
+  <div class="explicacion" id="exp-q6" style="display:none">Las variables temporales no son un componente de los monitores.</div>
+</div>
+<div class="question" id="q7" data-correct="0">
+  <div class="enunciado"><strong>7.</strong> ¿Qué función cumple la operación c.wait() en un monitor?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> Bloquear al proceso que llama al procedimiento que la ejecuta hasta que se cumpla una condición.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> Liberar todos los procesos en la cola.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> Permitir la sincronización sin bloquear.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> Bloquear el monitor hasta que se libere.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="4"> Incrementar el valor de una variable.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q7')">Ver explicación</button>
+  <div class="explicacion" id="exp-q7" style="display:none">La operación c.wait() bloquea al proceso que llama al procedimiento hasta que se cumpla una condición.</div>
+</div>
+<div class="question" id="q8" data-correct="1">
+  <div class="enunciado"><strong>8.</strong> ¿Qué sucede cuando se ejecuta c.signal() y la cola está vacía?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Se libera un recurso de memoria.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> La operación se descarta sin efecto.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> Se bloquea el monitor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> Se activa el primer proceso de la cola.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="4"> Cambia el valor de la variable de condición.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q8')">Ver explicación</button>
+  <div class="explicacion" id="exp-q8" style="display:none">Si la cola está vacía, la operación c.signal() se descarta sin efecto.</div>
+</div>
+<div class="question" id="q9" data-correct="0">
+  <div class="enunciado"><strong>9.</strong> ¿Qué asegura el "invariante del monitor" en un sistema concurrente?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> Que el monitor mantenga una propiedad específica siempre que no esté en uso.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> La reusabilidad de las variables.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> La verificación de sincronización.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> La exclusión mutua de procesos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="4"> El acceso constante a las variables.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q9')">Ver explicación</button>
+  <div class="explicacion" id="exp-q9" style="display:none">El invariante del monitor asegura que el monitor mantenga una propiedad específica siempre que no esté en uso.</div>
+</div>
+<div class="question" id="q10" data-correct="0">
+  <div class="enunciado"><strong>10.</strong> ¿Cuál de las siguientes es una característica de la "señal automática" (SA)?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> Se ejecuta una señal implícita sin desplazamiento.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> Los procesos señaladores esperan en la cola.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> El monitor entra en espera forzada.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> Se reinicia el monitor automáticamente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="4"> El proceso señalador continúa su ejecución tras signal.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q10')">Ver explicación</button>
+  <div class="explicacion" id="exp-q10" style="display:none">Sin desplazamiento.</div>
+</div>
+<div class="question" id="q11" data-correct="1">
+  <div class="enunciado"><strong>11.</strong> ¿Qué significa la semántica de "Señalar y Continuar" (SC)?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> Todos los procesos en la cola se desbloquean.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> El proceso señalador continúa su ejecución después de signal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="2"> La operación signal se omite.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="3"> El proceso señalador espera en la cola.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="4"> El monitor se reinicia.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q11')">Ver explicación</button>
+  <div class="explicacion" id="exp-q11" style="display:none">En la semántica de Señalar y Continuar (SC), el proceso señalador continúa su ejecución después de signal.</div>
+</div>
+<div class="question" id="q12" data-correct="2">
+  <div class="enunciado"><strong>12.</strong> ¿Qué significa la semántica de "Señalar y Esperar" (SE)?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="0"> No se permite el acceso a la exclusión mutua del monitor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="1"> El proceso señalado abandona el monitor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="2"> El proceso señalador se bloquea después de signal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="3"> Los procesos en cola no se despiertan.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="4"> El proceso señalador sigue ejecutando código del monitor.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q12')">Ver explicación</button>
+  <div class="explicacion" id="exp-q12" style="display:none">En la semántica de Señalar y Esperar (SE), el proceso señalador se bloquea después de signal.</div>
+</div>
+<div class="question" id="q13" data-correct="1">
+  <div class="enunciado"><strong>13.</strong> ¿Para qué tipo de problemas es útil el patrón de Exclusión Mutua (EM)?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="0"> Para asignación de memoria dinámica.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="1"> Para acceso exclusivo a una sección crítica.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="2"> Para sincronización de semáforos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="3"> Para desbloquear colas de procesos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="4"> Para almacenamiento de variables compartidas.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q13')">Ver explicación</button>
+  <div class="explicacion" id="exp-q13" style="display:none">El patrón de Exclusión Mutua (EM) es útil para acceso exclusivo a una sección crítica.</div>
+</div>
+<div class="question" id="q14" data-correct="4">
+  <div class="enunciado"><strong>14.</strong> ¿Cuál es el invariante del monitor de exclusión mutua?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="0"> num_sc &gt;= 2.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="1"> libre + num_sc == 2.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="2"> ocupada == false.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="3"> num_sc &gt; 1.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="4"> ocupada == true cuando hay un proceso en SC.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q14')">Ver explicación</button>
+  <div class="explicacion" id="exp-q14" style="display:none">El invariante del monitor de exclusión mutua es que ocupada == true cuando hay un proceso en SC.</div>
+</div>
+<div class="question" id="q15" data-correct="3">
+  <div class="enunciado"><strong>15.</strong> ¿Qué define la operación escribir en un monitor Productor-Consumidor?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="0"> Borra el valor compartido.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="1"> Inicia una señal de bloqueo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="2"> Desbloquea el monitor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="3"> Escribe el valor en una variable compartida.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="4"> Lee el valor de la variable compartida.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q15')">Ver explicación</button>
+  <div class="explicacion" id="exp-q15" style="display:none">La operación escribir en un monitor Productor-Consumidor escribe el valor en una variable compartida.</div>
+</div>
+<div class="question" id="q16" data-correct="3">
+  <div class="enunciado"><strong>16.</strong> ¿Qué hace la operación leer() en el monitor de Productor-Consumidor?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="0"> Limpia la cola de procesos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="1"> Elimina el valor de la variable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="2"> Activa al proceso productor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="3"> Lee el valor compartido y lo devuelve.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="4"> Bloquea al proceso productor.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q16')">Ver explicación</button>
+  <div class="explicacion" id="exp-q16" style="display:none">La operación leer() en el monitor de Productor-Consumidor lee el valor compartido y lo devuelve.</div>
+</div>
+<div class="question" id="q17" data-correct="4">
+  <div class="enunciado"><strong>17.</strong> ¿Cuál es el propósito de la variable pendiente en el monitor Productor-Consumidor?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="0"> Indicar que el valor ha sido leído y no escrito.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="1"> Indicar si hay procesos señaladores.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="2"> Guardar el número de procesos en cola.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="3"> Mostrar si el monitor está activo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="4"> Controlar el estado de las operaciones de lectura y escritura.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q17')">Ver explicación</button>
+  <div class="explicacion" id="exp-q17" style="display:none">La variable pendiente en el monitor Productor-Consumidor controla el estado de las operaciones de lectura y escritura.</div>
+</div>
+<div class="question" id="q18" data-correct="3">
+  <div class="enunciado"><strong>18.</strong> ¿Qué es una cola de prioridad en monitores?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="0"> Una lista de operaciones de señal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="1"> Un grupo de semáforos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="2"> Un tipo de variable temporal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="3"> Una cola que permite ordenar procesos según prioridad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="4"> Una cola para ejecutar en último lugar.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q18')">Ver explicación</button>
+  <div class="explicacion" id="exp-q18" style="display:none">Una cola de prioridad en monitores permite ordenar procesos según prioridad.</div>
+</div>
+<div class="question" id="q19" data-correct="3">
+  <div class="enunciado"><strong>19.</strong> ¿Qué es el Patrón de Espera Única (EU) en programación concurrente?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="0"> Un proceso bloquea a otro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="1"> Un proceso finaliza antes de que inicie otro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="2"> Un proceso espera indefinidamente en una cola.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="3"> Un proceso espera que otro finalice antes de iniciar una acción.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="4"> Un proceso se elimina automáticamente.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q19')">Ver explicación</button>
+  <div class="explicacion" id="exp-q19" style="display:none">El Patrón de Espera Única (EU) es cuando un proceso espera que otro finalice antes de iniciar una acción.</div>
+</div>
+<div class="question" id="q20" data-correct="4">
+  <div class="enunciado"><strong>20.</strong> ¿Cuál de las siguientes NO es una operación de sincronización en monitores?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="0"> signal_all().</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="1"> wait().</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="2"> signal().</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="3"> queue().</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="4"> init().</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q20')">Ver explicación</button>
+  <div class="explicacion" id="exp-q20" style="display:none">init().</div>
+</div>
+<div class="question" id="q21" data-correct="0">
+  <div class="enunciado"><strong>21.</strong> ¿Qué sucede en la semántica de Señalar y Salir (SS)?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="0"> El proceso señalador sale del monitor después de signal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="1"> El proceso señalado queda en espera.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="2"> El proceso señalador continúa ejecutando.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="3"> Todos los procesos son liberados.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="4"> Se detiene la ejecución del monitor.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q21')">Ver explicación</button>
+  <div class="explicacion" id="exp-q21" style="display:none">En la semántica de Señalar y Salir (SS), el proceso señalador sale del monitor después de signal.</div>
+</div>
+<div class="question" id="q22" data-correct="0">
+  <div class="enunciado"><strong>22.</strong> ¿Cuál es el propósito de c.signal_all() en un monitor?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="0"> Liberar todos los procesos en la cola de condición.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="1"> Reiniciar el monitor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="2"> Bloquear todos los procesos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="3"> Cambiar el valor de las variables permanentes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="4"> Liberar sólo el primer proceso en cola.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q22')">Ver explicación</button>
+  <div class="explicacion" id="exp-q22" style="display:none">El propósito de c.signal_all() en un monitor es liberar todos los procesos en la cola de condición.</div>
+</div>
+<div class="question" id="q23" data-correct="0">
+  <div class="enunciado"><strong>23.</strong> ¿Qué es un Monitor de Barrera Parcial?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="0"> Un monitor que bloquea procesos hasta que un grupo alcanza un estado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="1"> Un monitor que reduce el tiempo de espera.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="2"> Un monitor que libera procesos en intervalos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="3"> Un monitor que libera a todos los procesos al mismo tiempo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="4"> Un monitor que detiene todos los procesos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q23')">Ver explicación</button>
+  <div class="explicacion" id="exp-q23" style="display:none">Un Monitor de Barrera Parcial bloquea procesos hasta que un grupo alcanza un estado.</div>
+</div>
+<div class="question" id="q24" data-correct="0">
+  <div class="enunciado"><strong>24.</strong> ¿Cuál es la semántica ideal para el monitor de barrera parcial?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="0"> SU.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="1"> SA.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="2"> SE.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="3"> SS.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="4"> SC.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q24')">Ver explicación</button>
+  <div class="explicacion" id="exp-q24" style="display:none">La semántica ideal para el monitor de barrera parcial es SU.</div>
+</div>
+<div class="question" id="q25" data-correct="4">
+  <div class="enunciado"><strong>25.</strong> ¿Qué sucede con un proceso en cola cuando se usa signal en una semántica SC?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="0"> Se ejecuta automáticamente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="1"> Permanece bloqueado indefinidamente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="2"> Se despierta y sale inmediatamente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="3"> Ignora la operación signal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="4"> Se mueve a la cola de entrada del monitor.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q25')">Ver explicación</button>
+  <div class="explicacion" id="exp-q25" style="display:none">Se mueve a la cola de entrada del monitor.</div>
 </div>
 
-<div id="results" style="margin-top: 20px;"></div>
+    </div>
 
-<script>
-    function checkAnswers() {
-        let score = 0;
-        const totalQuestions = 25;
-        const resultsDiv = document.getElementById("results");
-        resultsDiv.innerHTML = ""; // Limpiar resultados anteriores
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
 
-        // Respuestas correctas
-        const answers = {
-            q1: { answer: "e", explanation: "Los semáforos no permiten encapsulación de la sincronización, lo que puede llevar a errores difíciles de detectar." },
-            q2: { answer: "c", explanation: "Un monitor es un mecanismo de programación que permite la sincronización de procesos en sistemas concurrentes." },
-            q3: { answer: "a", explanation: "C.A.R. Hoare introdujo el concepto de monitor en 1974." },
-            q4: { answer: "e", explanation: "Una variable permanente en un monitor guarda el estado interno del monitor." },
-            q5: { answer: "b", explanation: "Los procedimientos dentro del monitor garantizan la exclusión mutua." },
-            q6: { answer: "b", explanation: "Las variables temporales no son un componente de los monitores." },
-            q7: { answer: "a", explanation: "La operación c.wait() bloquea al proceso que llama al procedimiento hasta que se cumpla una condición." },
-            q8: { answer: "b", explanation: "Si la cola está vacía, la operación c.signal() se descarta sin efecto." },
-            q9: { answer: "a", explanation: "El invariante del monitor asegura que el monitor mantenga una propiedad específica siempre que no esté en uso." },
-            q10: { answer: "a", explanation: "Sin desplazamiento." },
-            q11: { answer: "b", explanation: "En la semántica de Señalar y Continuar (SC), el proceso señalador continúa su ejecución después de signal." },
-            q12: { answer: "c", explanation: "En la semántica de Señalar y Esperar (SE), el proceso señalador se bloquea después de signal." },
-            q13: { answer: "b", explanation: "El patrón de Exclusión Mutua (EM) es útil para acceso exclusivo a una sección crítica." },
-            q14: { answer: "e", explanation: "El invariante del monitor de exclusión mutua es que ocupada == true cuando hay un proceso en SC." },
-            q15: { answer: "d", explanation: "La operación escribir en un monitor Productor-Consumidor escribe el valor en una variable compartida." },
-            q16: { answer: "d", explanation: "La operación leer() en el monitor de Productor-Consumidor lee el valor compartido y lo devuelve." },
-            q17: { answer: "e", explanation: "La variable pendiente en el monitor Productor-Consumidor controla el estado de las operaciones de lectura y escritura." },
-            q18: { answer: "d", explanation: "Una cola de prioridad en monitores permite ordenar procesos según prioridad." },
-            q19: { answer: "d", explanation: "El Patrón de Espera Única (EU) es cuando un proceso espera que otro finalice antes de iniciar una acción." },
-            q20: { answer: "e", explanation: "init()." },
-            q21: { answer: "a", explanation: "En la semántica de Señalar y Salir (SS), el proceso señalador sale del monitor después de signal." },
-            q22: { answer: "a", explanation: "El propósito de c.signal_all() en un monitor es liberar todos los procesos en la cola de condición." },
-            q23: { answer: "a", explanation: "Un Monitor de Barrera Parcial bloquea procesos hasta que un grupo alcanza un estado." },
-            q24: { answer: "a", explanation: "La semántica ideal para el monitor de barrera parcial es SU." },
-            q25: { answer: "e", explanation: "Se mueve a la cola de entrada del monitor." }
-        };
-            
-        
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
 
-        for (let i = 1; i <= totalQuestions; i++) {
-            const question = document.querySelector(`input[name="q${i}"]:checked`);
-            if (question) {
-                if (question.value === answers[`q${i}`].answer) {
-                    score++;
-                    document.getElementById(`q${i}`).classList.add('correct');
-                } else {
-                    document.getElementById(`q${i}`).classList.add('incorrect');
-                    // Mostrar la respuesta correcta y su justificación
-                    const correctAnswer = answers[`q${i}`].answer;
-                    const explanation = answers[`q${i}`].explanation;
-                    const explanationDiv = document.createElement("div");
-                    explanationDiv.className = "explanation";
-                    explanationDiv.innerHTML = `<strong>Respuesta correcta:</strong> ${correctAnswer}<br><strong>Justificación:</strong> ${explanation}`;
-                    document.getElementById(`q${i}`).appendChild(explanationDiv);
-                }
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
+
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
+
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checked.length === 0) return;
+
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
+            } else {
+              q.classList.add("incorrect");
             }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
         }
 
-        // Cálculo de la nota sobre 10
-        const grade = (score / totalQuestions) * 10;
-        resultsDiv.innerHTML = `<h3>Tu puntuación es ${grade.toFixed(1)} sobre 10</h3>`;
-        alert(`Tu puntuación es ${score} de ${totalQuestions}`);
-    }
-</script>
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
 
-</body>
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
 </html>
