@@ -537,7 +537,7 @@ export default {
                   kind: "PDF",
                 },
                 {
-                  name: "Esquema, datos y 920 sentencias SQL",
+                  name: "Código",
                   href: "https://github.com/Ismael-Sallami/oracle-sql-exercises",
                   kind: "WEB",
                 },

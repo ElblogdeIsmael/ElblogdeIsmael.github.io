@@ -323,11 +323,12 @@ a {
   color: var(--bg);
 }
 
-/* Theme switch. Shows the icon of the theme you would switch to. */
+/* Theme switch. Shows the icon of the theme you would switch to.
+   Grid rather than inline flow: both icons sit in the same cell, so the button
+   keeps its width when they swap and nothing shifts along the topbar. */
 .topbar-toggle {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.95rem;
+  display: grid;
+  place-items: center;
   cursor: pointer;
   color: var(--ink);
   background: transparent;
@@ -342,11 +343,15 @@ a {
   background: var(--accent);
   color: var(--accent-ink);
 }
+.topbar-toggle .ico-sun,
+.topbar-toggle .ico-moon {
+  grid-area: 1 / 1;
+}
 .topbar-toggle .ico-sun {
   display: none;
 }
 [data-theme="light"] .topbar-toggle .ico-sun {
-  display: inline;
+  display: block;
 }
 [data-theme="light"] .topbar-toggle .ico-moon {
   display: none;

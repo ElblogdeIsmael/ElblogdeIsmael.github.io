@@ -254,7 +254,7 @@ export default {
                   kind: "GUIA",
                 },
                 {
-                  name: "Prácticas 2 a 5 · 19 problemas y 31 programas, en grupo de cinco",
+                  name: "Prácticas",
                   href: "https://github.com/Ismael-Sallami/algorithm-design-techniques",
                   kind: "WEB",
                 },

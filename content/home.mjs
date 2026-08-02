@@ -16,10 +16,8 @@ export const home = {
     titleOutline: "recursos",
     name: "Web de recursos",
     lead:
-      "Apuntes, prácticas y materiales del Doble Grado en Ingeniería Informática " +
-      "y Administración y Dirección de Empresas. La mantiene " +
-      "<strong>Ismael Sallami Moreno</strong>: subo lo que voy haciendo por si le " +
-      "sirve a alguien más.",
+      "Apuntes, prácticas, herramientas y más. " +
+      "La mantiene <strong>Ismael Sallami Moreno</strong>.",
   },
 
   /** Ticker between the hero and the sections. Decoration only. */
