@@ -1,5 +1,7 @@
-<!-- Autor: Ismael Sallami Moreno -->
-# Cuestionario Ingeniería de Servidores
+# Ingeniería de Servidores - Cuestionario
+
+* **Autor:** Ismael Sallami Moreno
+* **Titulación:** Doble Grado en Ingeniería Informática y ADE
 <!-- Bloque 1 -->
 
 1. ¿Qué tecnología permite agrupar varios dispositivos de almacenamiento creando un nuevo dispositivo virtual con capacidades extendidas?
