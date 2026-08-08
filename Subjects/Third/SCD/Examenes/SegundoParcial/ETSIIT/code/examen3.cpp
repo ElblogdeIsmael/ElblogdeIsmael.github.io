@@ -1,5 +1,5 @@
 //Ismael Sallami Moreno
-//DNI: 20888108Z
+//Doble Grado en Ingeniería Informática + ADE
 
 //para la resolución de este problema vamos a usar la plantilla del problema de los filósofos con un camarero
 

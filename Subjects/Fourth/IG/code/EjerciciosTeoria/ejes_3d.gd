@@ -1,5 +1,5 @@
 ## Nombre: Ismael, Apellidos: Sallami Moreno, Titulación: GIADE
-## email: ism350zsallami@correo.ugr.es, DNI o pasaporte: 20888108Z
+## email: ism350zsallami@correo.ugr.es
 
 extends Node3D
 
