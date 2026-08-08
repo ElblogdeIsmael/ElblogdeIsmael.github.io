@@ -664,7 +664,7 @@ export default {
               resources: [
                 {
                   name: "Ejercicio 3 · Modelo conceptual",
-                  href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Ejercicio3/Ejercicio3/chapters/Ejercicio3.pdf",
+                  href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Ejercicio3/Ejercicio3/main.pdf",
                   kind: "PDF",
                 },
                 {
