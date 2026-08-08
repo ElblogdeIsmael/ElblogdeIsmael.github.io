@@ -215,6 +215,90 @@ enlazar según se vaya produciendo.
 
 ---
 
+---
+
+## El inventario de PDF, cerrado el 2026-08-08
+
+La entrada de esta fase eran los 203 PDF versionados que la web no enlaza, en
+`.inventario-pdf-no-indexados.txt`. Quedaban **24 en `REVISAR`**. Abiertos uno a uno:
+**16 ajenos y 8 propios**. Ya no queda ninguno por revisar.
+
+El reparto que daba `CLAUDE.md` estaba mal en dos sitios: CF1 son **7**, no 8, y faltaba un
+PDF de SCD. El total sí cuadraba en 24, que es justo por lo que nadie lo notó.
+
+### Lo que se retiró
+
+| Asignatura | Nº | Prueba |
+| --- | ---: | --- |
+| CF1 | 7 | «Reservados todos los derechos», con códigos de descarga `R0006` y `CanelitanRama` |
+| PDOO | 3 | Relaciones del profesorado: «Ejercicios: Objetos / Atributos y Métodos / Herencia» |
+| FIS | 3 | Dos temas de transparencias en PDFium y un enunciado con *Author* `ceci` |
+| FBD | 2 | Los dos `.docx` de enunciados de seminario |
+| ECO | 1 | El examen oficial, con casillas de DNI y apellidos |
+
+18 MB, respaldados con sus rutas en `~/backups/material-ajeno-2026-08-08`.
+
+### Cinco los incluía un documento que compila
+
+Borrar sin más habría roto builds en silencio. Lo que se hizo en cada uno:
+
+| Quién lo incluía | Arreglo |
+| --- | --- |
+| `PDOO/Teoria/ETSIIT/Teoria.tex` | Los tres `\includepdf` apuntan ahora a `Solt1`, `Solt2` y `Solt3`, que son **las soluciones de Ismael**. El documento pasó a 51 páginas y gana contenido propio |
+| `FIS/Teoria/Temario.tex` | Comentados. La prosa de introducción de cada tema, que es propia, se queda |
+| `FBD/…/S4_FBD.md` | Quitado el `\includepdf` y el `\usepackage{pdfpages}` que ya no hacía falta. `Ejercicios_S4.pdf`, que **la web sí publica**, recompilado: 11 → 9 páginas, y el diff de texto es exactamente el enunciado |
+| `FIS/…/Ejercicio3.tex` | El diagrama se **redibujó en tikz**, con los errores del enunciado intactos |
+| `FBD/Practica/Temario.tex` | Ya estaba comentado |
+
+### El diagrama de FIS, y el PDF roto que había detrás
+
+`figures/Ejercicio.pdf` era el modelo conceptual que el ejercicio manda corregir, así que
+retirarlo sin más dejaba el ejercicio sin sentido. Se ha vuelto a dibujar en tikz dentro de
+`chapters/Ejercicio3.tex`: cinco clases y los cinco errores que la solución enumera —la
+generalización mal puesta entre Habitación y Hotel, la asociación sin nombre con Ciudad, el
+extremo no navegable, Reserva colgando como clase asociación y la dependencia redundante
+Hotel–Cliente—. La solución dibujada a mano por Ismael no se toca.
+
+**Y al abrirlo apareció otra cosa.** La ficha «Ejercicio 3 · Modelo conceptual» apuntaba a
+`chapters/Ejercicio3.pdf`, que es **una página con los nombres de clase apilados en
+columna**: un artefacto roto, sin cajas ni líneas, publicado desde el commit inicial. El
+documento de verdad es `main.pdf`, 8 páginas, versionado y sin enlazar. La ficha apunta ya
+ahí y el artefacto roto se ha borrado.
+
+**Lección:** que un enlace resuelva no dice nada de lo que hay al otro lado. `npm run check`
+comprueba que el fichero existe, no que valga algo.
+
+### El DNI
+
+Al mirar el PDF propio de SCD apareció el DNI en la portada, y de ahí salió un barrido:
+estaba en **seis cabeceras de código versionadas** —dos `.gd` de IG y cuatro `.cpp` de SCD—
+y en **dos PDF**, uno de ellos publicado (`SegundoParcial/…/ExamenesAnteriores.pdf`, que lo
+arrastraba por un `\lstinputlisting`).
+
+Quitado de las seis cabeceras y el PDF publicado recompilado: 42 páginas antes y después, y
+el diff de texto es una sola línea. El de `Parcial_SCD_Extra` no tenía fuente editable, así
+que su explicación se ha pasado a `explicacion.md` y el PDF se ha retirado a
+`~/backups/dni-scd-2026-08-08`.
+
+**Sin tocar el historial**: el dato sigue siendo alcanzable con `git log`. Reescribir los
+272 commits otra vez no compensa mientras el ticket #4622497 siga abierto.
+
+### Lo que queda del inventario
+
+Los **9 `ESCANEO`**. No tienen capa de texto, así que ni los metadatos ni un `pdftotext` los
+clasifican: hay que abrirlos. Son 53,7 MiB y la mayoría tiene pinta de material ajeno.
+
+Barrido de control sobre todos los PDF versionados buscando marca de descarga: solo salieron
+los 7 de CF1, ya retirados. Por esa señal no queda nada.
+
+**Un defecto que se ve y no se toca:** `FBD/Teoria/Temario.tex` hace
+`\includepdf{../../../../licencia.pdf}` y el fichero está en `extraFiles/licencia.pdf`, así
+que su compilación falla. El mismo error tenía FIS y ahí se arregló, porque hacía falta para
+verificar este trabajo. En FBD se deja: arreglarlo cambia un PDF que la web publica y eso es
+una decisión de contenido, no de esta tanda.
+
+---
+
 ## Criterio de hecho
 
 Esta fase no se cierra: se cierra cada asignatura por separado. El progreso se lleva en la
