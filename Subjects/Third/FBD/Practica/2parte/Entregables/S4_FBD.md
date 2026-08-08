@@ -37,11 +37,7 @@ book: true                       # Para un estilo más de "libro" con Eisvogel (
 
 # IMPORTANTE: Elimina cualquier `header-includes` complejo que tuvieras antes para la portada.
 # Dejamos que Eisvogel maneje la creación de la portada con las variables de arriba.
-header-includes:
-- \usepackage{pdfpages}
 ---
-
-\includepdf[pages=-]{EjerciciosAlgebraEnunciados.pdf}
 
 **Anotaciones sobre la notación usada:**
 

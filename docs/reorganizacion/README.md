@@ -87,13 +87,14 @@ código están en inglés; su equivalente en estos documentos:
 
 ## Objetivos medibles
 
-Estado al cerrar las fases 4 y 5, el 2026-08-02:
+Estado al cerrar el inventario de PDF, el 2026-08-08:
 
 | Objetivo | Estado |
 | --- | --- |
 | `size-pack` por debajo de 300 MB | **no**, 418 MiB. Depende del ticket [#4622497](https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io) de GitHub Support, que ha de borrar las `refs/pull`. No es trabajo local |
 | 0 claves privadas versionadas o en el historial | sí, verificado en la fase 3 sobre 7.801 objetos |
-| 0 ficheros de terceros con copyright | **casi**: 37 más retirados el 2026-08-02, y quedan **24 PDF sin clasificar** en `.inventario-pdf-no-indexados.txt` |
+| 0 ficheros de terceros con copyright | **casi**: los 24 sin clasificar se abrieron el 2026-08-08 y 16 se retiraron. `.inventario-pdf-no-indexados.txt` ya no tiene ni una entrada en `REVISAR`. Quedan los **9 `ESCANEO`**, que no tienen capa de texto y hay que abrir a mano |
+| 0 datos personales en el árbol | sí desde el 2026-08-08: el DNI salía en seis cabeceras de código y en dos PDF, uno de ellos publicado |
 | 0 enlaces `tree/main` al propio repo en `content/` | sí |
 | Todo enlace local de `content/` existe y está versionado | sí, `npm run check` en verde |
 | Los repos activos de `Ismael-Sallami` cumplen [ESTANDAR-REPOS.md](ESTANDAR-REPOS.md) | sí, los diecisiete |
