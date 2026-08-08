@@ -1,9 +1,91 @@
 \section{Enunciado}
 
+Dado el modelo conceptual de la figura~\ref{fig:pdf}, indicar los errores que se
+pueden observar en el diagrama y representar el correcto.
+
 \begin{figure}[H]
     \centering
-    \fbox{\includegraphics[width=0.8\textwidth,height=0.8\textheight,keepaspectratio]{figures/Ejercicio.pdf}}
-    \caption{Enunciado del Ejercicio}
+    \begin{tikzpicture}[
+        font=\scriptsize,
+        clase/.style={
+            draw,
+            rectangle split,
+            rectangle split parts=3,
+            rectangle split part align={center, left, left},
+            text width=40mm,
+            inner sep=3pt,
+        },
+        clase2/.style={clase, rectangle split parts=2},
+        herencia/.style={draw, -{Triangle[open, length=3mm, width=3mm]}},
+        dependencia/.style={draw, dashed, -{Stealth[length=2.5mm]}},
+        etiqueta/.style={inner sep=1.5pt, fill=white},
+    ]
+
+    \node[clase] (hotel) at (0,0) {
+        \textbf{Hotel}
+        \nodepart{two}
+        - nombre: String\\
+        - categoría: int\\
+        - dirección: String\\
+        - teléfono: String
+        \nodepart{three}
+        + hacerReserva(cli: Cliente)
+    };
+
+    \node[clase] (habitacion) at (5.9,0) {
+        \textbf{Habitación}
+        \nodepart{two}
+        - número: int\\
+        - tipo: String
+        \nodepart{three}
+        + estáOcupada(): boolean\\
+        + obtenerNúmero(): int\\
+        + modificarTipo(nuevoTipo)
+    };
+
+    \node[clase2] (reserva) at (11.2,-2.6) {
+        \textbf{Reserva}
+        \nodepart{two}
+        - fechaEntrada\\
+        - fechaSalida
+    };
+
+    \node[clase2] (ciudad) at (0,-5.9) {
+        \textbf{Ciudad}
+        \nodepart{two}
+        - nombre: String
+    };
+
+    \node[clase] (cliente) at (5.9,-5.9) {
+        \textbf{Cliente}
+        \nodepart{two}
+        - DNI: String\\
+        - nombre: String
+        \nodepart{three}
+        + obtenerReservas(): Reserva
+    };
+
+    % Generalización mal usada: Habitación no es un Hotel.
+    \draw[herencia] (habitacion.west) -- (hotel.east);
+
+    % Asociación sin nombre entre Hotel y Ciudad.
+    \draw (hotel.south) -- node[etiqueta, pos=0.15, right] {0..*}
+                           node[etiqueta, pos=0.55, left] {ubicado} (ciudad.north);
+
+    % Asociación Habitación-Cliente, con el extremo no navegable marcado.
+    \draw (habitacion.south) -- node[etiqueta, pos=0.12, right] {1..*}
+                                coordinate[pos=0.5] (asoc)
+                                node[etiqueta, pos=0.80, right] {1..*}
+                                node[etiqueta, pos=0.92] {$\times$} (cliente.north);
+
+    % Reserva colgada de la asociación como clase asociación.
+    \draw[dashed] (reserva.west) -- (asoc);
+
+    % Dependencia redundante entre Hotel y Cliente.
+    \draw[dependencia] (hotel.south east) -- (cliente.north west);
+
+    \end{tikzpicture}
+    \caption{Modelo conceptual del enunciado, redibujado.}
     \label{fig:pdf}
 \end{figure}
 
