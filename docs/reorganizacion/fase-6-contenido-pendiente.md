@@ -310,9 +310,9 @@ deja vacío y declara `pdfTeX` como productor, exactamente igual que la cadena d
 Ismael.** Así que las transparencias de clase entraron en el mismo cajón que sus apuntes:
 244 páginas de Econometría, 480 de SCD y 140 de FR.
 
-CLAUDE.md avisaba de esto —«la teoría de SCD y de ECO cae ahí»— y el cierre del 2026-08-08
-dio el aviso por caducado porque esos ficheros **no estaban en `REVISAR`: estaban en
-`PROPIO`**, que nadie había vuelto a mirar.
+El aviso estaba escrito desde la fase 5 —«la teoría de SCD y de ECO es por donde empezar»— y
+el cierre del 2026-08-08 lo dio por caducado porque esos ficheros **no estaban en `REVISAR`:
+estaban en `PROPIO`**, que nadie había vuelto a mirar.
 
 Las tres señales que sí funcionan, en orden:
 
@@ -390,14 +390,23 @@ Dos tarjetas de `tercero.mjs`, las dos sirviendo ahora contenido enteramente pro
 
 `npm run check` sigue en 189 enlaces, 146 locales, todos resuelven.
 
-### Lo que queda pendiente
+### `ExamenesAnteriores.pdf`: se queda, y por qué
 
-**`SegundoParcial/…/ExamenesAnteriores.pdf`, publicado.** Es el único que sale en el barrido
-de control final sobre los 161 PDF que quedan versionados. Transcribe cinco exámenes
-anteriores con soluciones; cuatro son suyos, pero el primero es el examen de Carlos Ureña de
-2014-15 **y su solución oficial**, unas 9 de sus 42 páginas. Por la regla de no republicar
-material del profesorado habría que quitar esa sección y recompilar, pero eso cambia otra vez
-lo que la web sirve y es decisión de contenido.
+Es el único que sale en el barrido de control final sobre los 161 PDF que quedan versionados,
+por el nombre «Carlos Ureña» en su índice. **Está publicado**, así que se miró con cuidado.
+
+La primera lectura fue equivocada, y conviene dejarla escrita: el índice dice «1.2. Solución
+Carlos Ureña 2014-2015» y eso **no es la solución oficial**. Es la de Ismael, escrita en
+primera persona y con su propio código; el nombre solo identifica de qué examen es. Leer el
+índice no basta, hay que abrir el `.tex`.
+
+Lo ajeno de verdad son dos cosas mucho más pequeñas: los cinco enunciados, transcritos por
+él, y los tres `plantilla.cpp` con los errores plantados que repartió el profesorado. **Se
+quedan por decisión de Ismael**: los enunciados son transcripción suya y sin ellos las
+soluciones no se entienden, y las plantillas son el fragmento de código sobre el que trata el
+ejercicio. Es el mismo criterio que se aplicó a los diagramas E/R de FBD.
+
+### Lo que queda pendiente
 
 Los `PROFESORADO` que **no** se retiraron, porque no lo eran: las dos copias de
 `CF1/Practica/plantillaEjercicios.pdf`, una tabla contable en blanco hecha en TeX, y
