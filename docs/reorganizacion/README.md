@@ -99,7 +99,7 @@ Estado al cerrar la auditoría de PDF, el 2026-08-09:
 | Todo enlace local de `content/` existe y está versionado | sí, `npm run check` en verde |
 | Los repos activos de `Ismael-Sallami` cumplen [ESTANDAR-REPOS.md](ESTANDAR-REPOS.md) | sí, los diecisiete |
 | Una sola generación de plantilla LaTeX y una sola de tests HTML | sí, y desde el 2026-08-02 hay plantilla de asignatura en `Subjects/_template/` |
-| Todo documento LaTeX del árbol se reconstruye | sí desde el 2026-08-09: **104 de 104**. Se comprueba con `node build/scripts/check-latex-builds.mjs --check`, que compila fuera del repositorio y avisa también de los que salen con un capítulo de menos sin fallar |
+| Todo documento LaTeX del árbol se reconstruye | sí desde el 2026-08-09: **104 de 104, y desde un clon limpio**. Se comprueba con `node build/scripts/check-latex-builds.mjs --check`, que compila fuera del repositorio y avisa también de los que salen con un capítulo de menos sin fallar |
 
 ## Cómo se trabaja
 

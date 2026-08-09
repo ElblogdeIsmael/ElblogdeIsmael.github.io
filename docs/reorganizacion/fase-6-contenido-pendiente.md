@@ -479,6 +479,26 @@ Dos afirmaciones del 2026-08-08 estaban mal y se corrigen aquí:
 El barrido estático que precedió a este trabajo se equivocó en las dos direcciones: predijo
 19 rotos y eran 11, y no vio el de CF2. **Compilar es la única respuesta que vale.**
 
+### El clon limpio encontró tres más
+
+Con el árbol de trabajo en 104 de 104, un `git clone` a `/tmp` seguía dando **tres fallos**.
+Es la única forma de ver un fichero que está en disco y no en git:
+
+| Documento | Le faltaba |
+| --- | --- |
+| `DAE/PracticasDAE/FCCEE/Practicas.tex` | `ACT8/…/build/ACT8.pdf` |
+| `ECO/Practicas/FCCEE/Practica.tex` | `…/SolucionesEjercicios/FCCEE/build/Ejercicios.pdf` |
+| `FR/TestsFR/…/preguntas.tex` | `build/IMAGEN_FR.jpg` |
+
+Los dos PDF **ya estaban permitidos** por el `.gitignore` —existe la línea
+`!Subjects/**/build/*.pdf`— pero nadie los había añadido nunca. La imagen estaba guardada
+dentro de un directorio de compilación, así que la regla la ignoraba; se ha movido a
+`images/`, que es donde va una entrada.
+
+**El segundo importa más que los otros dos:** `ECO/Practicas/FCCEE/build/Practica.pdf` es el
+que la web publica, y es el que se recompiló el mismo día para quitarle los cuadernillos del
+profesorado. Desde un clon limpio no se podía reconstruir.
+
 ### Los PDF publicados
 
 De los ocho publicados cuya fuente se tocó, **siete salen idénticos salvo por la fecha de
