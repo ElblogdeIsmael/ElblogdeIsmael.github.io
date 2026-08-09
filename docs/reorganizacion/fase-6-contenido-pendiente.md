@@ -545,10 +545,11 @@ el capítulo entero y añadir la referencia debajo sigue siendo reproducirlo.
 
 | | Antes | Ahora |
 | --- | ---: | ---: |
-| `EM/TEX/EM.pdf`, publicado | 69 p | **57 p** |
+| `EM/TEX/EM.pdf`, publicado | 69 p | **63 p** |
+| Temas del programa oficial cubiertos | 4 de 6 | **6 de 6** |
 | Líneas de prosa de manual | 446 | 0 |
 | Marcas de agua de descarga en el PDF | 1 | 0 |
-| Bibliografía | ninguna | 5 obras citadas |
+| Bibliografía | ninguna | **13 obras citadas** |
 
 Lo que se hizo:
 
@@ -571,8 +572,12 @@ Lo que se hizo:
 - **Siete encabezados en primera persona** («nuestro país pequeño») pasan a impersonal, misma
   revisión que se hizo en AEF y MAC.
 
-**El tema 6, crecimiento y desarrollo, sigue sin escribirse.** No había material propio del
-que partir, así que se deja dicho en el `.tex` y aquí, en vez de rellenarlo.
+- **El tema 6, crecimiento y desarrollo, también está escrito**, con el mismo criterio: el
+  guion del programa oficial —crecimiento y su medida, del crecimiento al desarrollo,
+  globalización y la crisis de la economía global— y las fuentes en la bibliografía, citadas
+  donde el texto se apoya en ellas. Se documentaron para esto el Maddison Project en su
+  actualización de 2023 y el Informe sobre Desarrollo Humano del PNUD de 2025, que se suman a
+  las obras de la guía docente.
 
 Y las cuatro marcas de los tests más la cita de CF1: las preguntas son transcripciones de
 exámenes anteriores y los ejercicios de CF1 salen del manual de prácticas de la asignatura,
