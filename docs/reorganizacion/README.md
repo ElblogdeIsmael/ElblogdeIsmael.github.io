@@ -99,6 +99,7 @@ Estado al cerrar la auditoría de PDF, el 2026-08-09:
 | Todo enlace local de `content/` existe y está versionado | sí, `npm run check` en verde |
 | Los repos activos de `Ismael-Sallami` cumplen [ESTANDAR-REPOS.md](ESTANDAR-REPOS.md) | sí, los diecisiete |
 | Una sola generación de plantilla LaTeX y una sola de tests HTML | sí, y desde el 2026-08-02 hay plantilla de asignatura en `Subjects/_template/` |
+| Todo documento LaTeX del árbol se reconstruye | sí desde el 2026-08-09: **104 de 104, y desde un clon limpio**. Se comprueba con `node build/scripts/check-latex-builds.mjs --check`, que compila fuera del repositorio y avisa también de los que salen con un capítulo de menos sin fallar |
 
 ## Cómo se trabaja
 
@@ -108,6 +109,15 @@ git switch -c reorg/fase-N-nombre     # una rama por fase
 npm run check                          # obligatorio antes de la PR
 gh pr create --fill                    # checklist de la fase en la descripción
 ```
+
+Si se ha tocado un `.tex`, antes de la PR también:
+
+```bash
+node build/scripts/check-latex-builds.mjs --check   # los 104, unos 8 min
+node build/scripts/check-latex-builds.mjs --only FBD  # solo lo que has tocado
+```
+
+No está en el CI: compilar cien documentos LaTeX en cada push no cabe en un runner.
 
 Al cerrar una fase: marcar su checklist, cerrar su issue y actualizar la columna «Estado»
 de la tabla de arriba.

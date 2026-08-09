@@ -25,6 +25,9 @@
 % \usepackage{mathpazo} % Palatino (opcional si tienes el paquete)
 \usepackage[T1]{fontenc}
 
+% El texto usa \euro dentro de fórmulas y el paquete no estaba declarado.
+\usepackage{eurosym}
+
 % --- Colores Personalizados ---
 \definecolor{corporateblue}{rgb}{0.07,0.29,0.49}
 \definecolor{corporatebg}{rgb}{0.98,0.98,0.98}
@@ -59,6 +62,16 @@
     \begin{tcolorbox}[colframe=corporateblue, colback=corporatebg, title=\textbf{#1}]
         #2
     \end{tcolorbox}
+}
+
+% El documento usaba el entorno solucion sin definirlo en ninguna parte, así que
+% no compilaba. Va en la misma caja que \nota, que es el estilo del fichero.
+\tcbuselibrary{breakable}
+\newtcolorbox{solucion}{
+    colframe=corporateblue,
+    colback=corporatebg,
+    title=\textbf{Solución},
+    breakable,
 }
 
 % Configuración de página y encabezados
