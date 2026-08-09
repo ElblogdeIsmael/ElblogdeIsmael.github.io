@@ -87,13 +87,13 @@ código están en inglés; su equivalente en estos documentos:
 
 ## Objetivos medibles
 
-Estado al cerrar el inventario de PDF, el 2026-08-08:
+Estado al cerrar la auditoría de PDF, el 2026-08-09:
 
 | Objetivo | Estado |
 | --- | --- |
 | `size-pack` por debajo de 300 MB | **no**, 418 MiB. Depende del ticket [#4622497](https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io) de GitHub Support, que ha de borrar las `refs/pull`. No es trabajo local |
 | 0 claves privadas versionadas o en el historial | sí, verificado en la fase 3 sobre 7.801 objetos |
-| 0 ficheros de terceros con copyright | **casi**: los 24 sin clasificar se abrieron el 2026-08-08 y 16 se retiraron. `.inventario-pdf-no-indexados.txt` ya no tiene ni una entrada en `REVISAR`. Quedan los **9 `ESCANEO`**, que no tienen capa de texto y hay que abrir a mano |
+| 0 ficheros de terceros con copyright | sí en el árbol. El inventario no tiene ya ninguna entrada sin clasificar: 78 `PROPIO` y 125 `RETIRADO`. La auditoría del 2026-08-09 sacó 51 más, 39 de ellos escondidos en la clase `PROPIO` porque los metadatos no distinguen un Beamer del profesorado de un documento propio. El único que salía en el barrido de control final, `ExamenesAnteriores.pdf`, resultó ser un falso positivo |
 | 0 datos personales en el árbol | sí desde el 2026-08-08: el DNI salía en seis cabeceras de código y en dos PDF, uno de ellos publicado |
 | 0 enlaces `tree/main` al propio repo en `content/` | sí |
 | Todo enlace local de `content/` existe y está versionado | sí, `npm run check` en verde |

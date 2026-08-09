@@ -283,10 +283,9 @@ que su explicación se ha pasado a `explicacion.md` y el PDF se ha retirado a
 **Sin tocar el historial**: el dato sigue siendo alcanzable con `git log`. Reescribir los
 272 commits otra vez no compensa mientras el ticket #4622497 siga abierto.
 
-### Lo que queda del inventario
+### Lo que quedaba del inventario
 
-Los **9 `ESCANEO`**. No tienen capa de texto, así que ni los metadatos ni un `pdftotext` los
-clasifican: hay que abrirlos. Son 53,7 MiB y la mayoría tiene pinta de material ajeno.
+Los **9 `ESCANEO`**, que se cerraron al día siguiente. Ver la sección de abajo.
 
 Barrido de control sobre todos los PDF versionados buscando marca de descarga: solo salieron
 los 7 de CF1, ya retirados. Por esa señal no queda nada.
@@ -296,6 +295,122 @@ los 7 de CF1, ya retirados. Por esa señal no queda nada.
 que su compilación falla. El mismo error tenía FIS y ahí se arregló, porque hacía falta para
 verificar este trabajo. En FBD se deja: arreglarlo cambia un PDF que la web publica y eso es
 una decisión de contenido, no de esta tanda.
+
+---
+
+## La auditoría del 2026-08-09: la clase `PROPIO` estaba mal
+
+Abrir los 9 `ESCANEO` era el último punto del inventario. Se cerró, pero de camino apareció
+algo bastante peor: **`PROPIO` llevaba meses conteniendo 39 ficheros del profesorado**.
+
+### Por qué falló la clasificación
+
+La fase 5 clasificó por metadatos, y ahí la señal era el campo *Author* del PDF. **Beamer lo
+deja vacío y declara `pdfTeX` como productor, exactamente igual que la cadena de LaTeX de
+Ismael.** Así que las transparencias de clase entraron en el mismo cajón que sus apuntes:
+244 páginas de Econometría, 480 de SCD y 140 de FR.
+
+El aviso estaba escrito desde la fase 5 —«la teoría de SCD y de ECO es por donde empezar»— y
+el cierre del 2026-08-08 lo dio por caducado porque esos ficheros **no estaban en `REVISAR`:
+estaban en `PROPIO`**, que nadie había vuelto a mirar.
+
+Las tres señales que sí funcionan, en orden:
+
+1. **La portada.** Los nombres salen ahí aunque el metadato esté vacío: «Carlos Ureña / Jose
+   M. Mantas / Pedro Villar / Manuel Noguera», «Manuel I. Capel, manuelcapel@ugr.es»,
+   «GII-ADE-M. Relación de problemas».
+2. **La fecha de creación contra el curso.** Los diez cuadernillos de prácticas de ECO se
+   compilaron con MiKTeX entre septiembre y noviembre de **2021**, y la asignatura se cursó
+   en 2024-25.
+3. **La marca de descarga**: «Reservados todos los derechos», wuolah, el hash de marca de
+   agua, «Escaneado con CamScanner».
+
+### Los 9 `ESCANEO`
+
+| Fichero | Qué era | Decisión |
+| --- | --- | --- |
+| `CF1/…/Ejercicios_Propuestos_T2.pdf` | páginas 38-57 del *Manual de Supuestos Prácticos de Contabilidad Financiera Vol. I*, CamScanner, con sus respuestas escritas encima | retirado |
+| `CF1/Resumenes/Tema6/ultimaParteT6TeoriaCF1.pdf` | página 323 de un libro de texto, sin anotar | retirado |
+| `ECO/Teoria/Apendice_VariablesFicticias_rotated.pdf` | «Apéndice A», páginas 153-156 de unos apuntes de la FCCEE | retirado |
+| `FBD/…/Ejercicios_FBD_S1.pdf` | 19 diagramas E/R resueltos a mano, con el enunciado recortado pegado arriba | propio, con nota |
+| `CF1/Practica/Tema{2,3}/T{2,3}.pdf` | 31 páginas de cuaderno manuscrito | propio |
+| `FIS/…/figures/Solucion.pdf` | el diagrama UML corregido a mano | propio |
+| `FIS/…/figures/ugrA4.pdf` | membrete institucional de la UGR, vectorial | no era un escaneo |
+| `DAE/TeoriaDAE/Tema 5.pdf` | **no existía**: lo retiró la fase 5 y el inventario seguía listándolo | marcado |
+
+### Lo que se retiró, 51 ficheros y 64 MB
+
+| Grupo | Nº | Prueba |
+| --- | ---: | --- |
+| Seminarios y prácticas de SCD | 8 | los cuatro nombres del profesorado en la portada |
+| Transparencias de teoría de SCD | 5 | Beamer con plantilla LOGIK, «SCD para GIIM» |
+| Relaciones de problemas de SCD | 5 | «GII-ADE-M. Relación de problemas. Tema N» |
+| Transparencia de tiempo real de FR, por duplicado | 2 | firma «Manuel I. Capel» |
+| `ECO/Teoria/Tema{1..6}.pdf` | 6 | Beamer «ECONOMETRÍA», curso 2024-2025 |
+| `PDOO/…/Transparencias Tema 5.pdf` | 1 | es el Tema 5 de Econometría, archivado en la carpeta equivocada |
+| Cuadernillos de prácticas de ECO | 10 | MiKTeX, 2021 |
+| Tabla de Durbin-Watson | 1 | 2012 |
+| Examen oficial de ECO | 1 | casillas «APELLIDOS, NOMBRE / DNI» |
+| Los tres escaneos de arriba | 3 | libro y apuntes de facultad |
+| Los `PROFESORADO` que seguían en el árbol | 9 | ya estaban clasificados desde la fase 5 y nadie los sacó |
+
+Respaldados con sus rutas en `~/backups/material-ajeno-2026-08-09`, comprobados byte a byte.
+
+### Seis documentos los incluían, y dos producen un PDF versionado
+
+| Documento | Qué se hizo | Su PDF |
+| --- | --- | --- |
+| `SCD/Teoria/ETSIIT/Teoria.tex` | fuera las cinco transparencias y los cinco enunciados; se añade la solución propia de la relación 4, que estaba escrita y sin enlazar | 389 → **116 p**, no versionado |
+| `SCD/Practicas/ETSIIT/Practicas.tex` | fuera los cuatro guiones y los tres seminarios; quedan sus resoluciones | 317 → **8 p**, **versionado** |
+| `ECO/Teoria/FCCEE/Teoria.tex` | era solo un envoltorio; queda de esqueleto | 258 → 3 p, no versionado |
+| `ECO/Practicas/FCCEE/Practica.tex` | fuera los diez cuadernillos y la tabla DW; quedan sus soluciones y el trabajo en grupo | 93 → **23 p**, **versionado y publicado** |
+| `FR/Practicas/ETSIIT/Practicas.tex` | **no compilaba**: once de sus doce `\includepdf` apuntaban a ficheros que fases anteriores ya habían retirado. Comentados los doce | 110 → 3 p, no versionado |
+| `CF1/…/Resument6.tex` | la última sección era un enlace al escaneo del libro; se ha escrito esa sección | 8 → **9 p**, **versionado y publicado** |
+
+**No basta con comentar el `\includepdf`.** Los `\subsection` que solo existían para
+sostenerlo se quedan en el índice apuntando a una página vacía, y el documento promete un
+contenido que ya no tiene. Se ven en el PDF, no en el log.
+
+**Y el nombre del fichero no basta para saber si es el tuyo:** `T3.pdf` existe en SCD (del
+profesorado, retirado) y en CF1 (cuaderno manuscrito, se queda). Hay que resolver la ruta del
+`\includepdf` contra el directorio del documento, no comparar nombres.
+
+**`SCD/Practicas/ETSIIT/Practicas.tex` tampoco compilaba del todo:** incluía
+`../Practicas/P1.pdf` en mayúscula y los ficheros son `p1.pdf`. En Linux eso no resuelve, así
+que su PDF de 317 páginas se generó en algún sitio que no distinguía mayúsculas.
+
+### Lo que cambió en la web
+
+Dos tarjetas de `tercero.mjs`, las dos sirviendo ahora contenido enteramente propio:
+
+- **ECO › Prácticas**: 93 páginas de las que 61 eran ajenas → 23.
+- **CF1 › Resumen Tema 6**: la sección «El Inmovilizado Intangible en las cuentas anuales»
+  pasa de un enlace muerto al escaneo a texto escrito. De paso, el enlace al test apuntaba a
+  `Asignaturas/Tercer%20A%C3%B1o/`, ruta que no existe desde la fase 1.
+
+`npm run check` sigue en 189 enlaces, 146 locales, todos resuelven.
+
+### `ExamenesAnteriores.pdf`: se queda, y por qué
+
+Es el único que sale en el barrido de control final sobre los 161 PDF que quedan versionados,
+por el nombre «Carlos Ureña» en su índice. **Está publicado**, así que se miró con cuidado.
+
+La primera lectura fue equivocada, y conviene dejarla escrita: el índice dice «1.2. Solución
+Carlos Ureña 2014-2015» y eso **no es la solución oficial**. Es la de Ismael, escrita en
+primera persona y con su propio código; el nombre solo identifica de qué examen es. Leer el
+índice no basta, hay que abrir el `.tex`.
+
+Lo ajeno de verdad son dos cosas mucho más pequeñas: los cinco enunciados, transcritos por
+él, y los tres `plantilla.cpp` con los errores plantados que repartió el profesorado. **Se
+quedan por decisión de Ismael**: los enunciados son transcripción suya y sin ellos las
+soluciones no se entienden, y las plantillas son el fragmento de código sobre el que trata el
+ejercicio. Es el mismo criterio que se aplicó a los diagramas E/R de FBD.
+
+### Lo que queda pendiente
+
+Los `PROFESORADO` que **no** se retiraron, porque no lo eran: las dos copias de
+`CF1/Practica/plantillaEjercicios.pdf`, una tabla contable en blanco hecha en TeX, y
+`DAE/…/imagenDaeAct8.pdf`, la ficha de los doce jurados anotada a mano para la actividad 8.
 
 ---
 
