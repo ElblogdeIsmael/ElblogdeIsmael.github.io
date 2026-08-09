@@ -535,8 +535,52 @@ publica: `EM/test/test.md:161` y `:256`, `CG/test/test.md:954` e
 de ellos de exámenes de un profesor con nombre y apellido. Y
 `CF1/Practica/FCCEE/Practica.tex:111` pone `wuolah.com` como «Fuentes de la Información».
 
-Son transcripciones propias de material descargado, no los ficheros en sí. **Queda pendiente
-de decidir**: no se ha tocado nada porque cambia contenido publicado.
+Son transcripciones propias de material descargado, no los ficheros en sí.
+
+### Resuelto el mismo día: EM se reescribe y la bibliografía se usa para lo que es
+
+Decisión de Ismael: los temas se escriben con sus palabras y el manual va a la bibliografía,
+que para eso está. Citar una fuente es lo correcto **cuando se cita o se parafrasea**; copiar
+el capítulo entero y añadir la referencia debajo sigue siendo reproducirlo.
+
+| | Antes | Ahora |
+| --- | ---: | ---: |
+| `EM/TEX/EM.pdf`, publicado | 69 p | **57 p** |
+| Líneas de prosa de manual | 446 | 0 |
+| Marcas de agua de descarga en el PDF | 1 | 0 |
+| Bibliografía | ninguna | 5 obras citadas |
+
+Lo que se hizo:
+
+- **El tema 5 está escrito de cero**, siguiendo el temario oficial de la guía docente
+  ([2161143](https://grados.ugr.es/informatica-ade/docencia/plan-estudios/economia-mundial/guia-docente)):
+  el tipo de cambio y el mercado de divisas, los regímenes cambiarios y el trilema, la
+  integración financiera y cómo se mide, y la evolución del SMI del patrón oro al «no
+  sistema». En impersonal, como el resto de sus apuntes.
+- **Bibliografía de verdad.** `TEX/referencias.bib` con las entradas de la guía docente y
+  `\printbibliography`. Antes había un `\input` del `.bib`, que LaTeX leía como comentarios y
+  se saltaba sin decir nada, así que el documento no tenía bibliografía ninguna. **El `.bib`
+  tiene que estar al lado del documento raíz** —en `TEX/`, no en la carpeta de la
+  asignatura—, porque el `.` inicial de `TEXINPUTS` resuelve desde ahí; puesto un nivel más
+  arriba, biber cae en el compartido, que está vacío, y la bibliografía sale en blanco.
+- **Fuera 521 líneas de `src/t6/t6.tex`**, que eran una conversación de chat pegada en LaTeX
+  con los encabezados incluidos («¡Excelente comienzo!», «POSIBLES PREGUNTAS DE EXAMEN»). No
+  las incluía ningún documento.
+- **La numeración cuadra con el temario.** El capítulo de casos y titulares acompaña a los
+  temas 1 a 4 y estaba en medio robándoles el número; ahora va en apéndice.
+- **Siete encabezados en primera persona** («nuestro país pequeño») pasan a impersonal, misma
+  revisión que se hizo en AEF y MAC.
+
+**El tema 6, crecimiento y desarrollo, sigue sin escribirse.** No había material propio del
+que partir, así que se deja dicho en el `.tex` y aquí, en vez de rellenarlo.
+
+Y las cuatro marcas de los tests más la cita de CF1: las preguntas son transcripciones de
+exámenes anteriores y los ejercicios de CF1 salen del manual de prácticas de la asignatura,
+así que eso es lo que dicen ahora las fuentes. **Los comentarios no llegaban al HTML
+publicado** —md2html los usa para partir el documento y los descarta—, comprobado antes de
+tocarlos, así que los `.html` no hay que regenerarlos.
+
+Respaldo de lo retirado en `~/backups/em-material-copiado-2026-08-09`.
 
 ---
 
