@@ -414,6 +414,112 @@ Los `PROFESORADO` que **no** se retiraron, porque no lo eran: las dos copias de
 
 ---
 
+## Los builds, el 2026-08-09
+
+Nadie había comprobado nunca si los documentos LaTeX del árbol se pueden reconstruir. Los
+fallos salían de uno en uno y por accidente. Ahora hay un barrido:
+`build/scripts/check-latex-builds.mjs` compila **los 104 documentos raíz** —todo `.tex` con
+`\documentclass`— **a un directorio fuera del repositorio**, así que una pasada no pisa ni un
+PDF de los que sirve la web.
+
+### La línea base
+
+| | Antes | Ahora |
+| --- | ---: | ---: |
+| Documentos que compilan enteros | 94 | **104** |
+| No compilaban | 11 | 0 |
+| Compilaban con huecos | 1 | 0 |
+
+Los once, y lo que tenían:
+
+| Documento | Causa |
+| --- | --- |
+| `FBD/Teoria/Temario.tex`, `IA/Practicas/Temario.tex`, `IA/Teoria/Temario.tex`, `ISE/Teoria/Temario.tex` | `\includepdf{../../../../licencia.pdf}`, y el fichero es `extraFiles/licencia.pdf` |
+| `IG/TEX/IG.tex` | las rutas llevaban escrito a mano el nombre del directorio del repositorio: `../../../ElblogdeIsmael.github.io/extraFiles/…` |
+| `CF1/Practica/FCCEE/Practica.tex` | buscaba sus imágenes de portada en `../images/` y están en `images/` |
+| `FR/Teoria/ETSIIT/Teoria.tex`, `FR/…/preguntas.tex` | incluían diez PDF que la fase 3 retiró el 2026-08-01 y dejó los `\includepdf` puestos |
+| `ISE/Teoria/Temario.tex` | además, un `\input` a un capítulo que no llegó a escribirse |
+| `EM/src/casos-titulares-practica-ordinaria.tex` | usaba un entorno `solucion` que no está definido en ninguna parte, y `\euro` sin cargar `eurosym` |
+| `FR/Resumenes/ETSIIT/plantilla/plantilla.tex`, `MAC/Practicas/t2/relacion2-documento.tex` | muertos: no los referencia nada. Borrados, con respaldo en `~/backups/documentos-muertos-2026-08-09` |
+
+**La solución de las rutas no es contar bien los `../`, es quitarlos.** `TEXINPUTS` ya lleva
+`extraFiles//` en recursivo, así que `\includepdf{licencia.pdf}` resuelve desde cualquier
+profundidad. Normalizadas las once que lo usaban, compiladas o no.
+
+### El hueco silencioso, que es lo que de verdad importa
+
+**Un `\include` que no resuelve no rompe nada.** LaTeX escribe `No file X.tex.` en el log,
+sigue, y `latexmk` sale con 0 dejando un PDF con un capítulo de menos. Comprobado con un
+documento de prueba: dos páginas, código de salida 0, capítulo desaparecido.
+
+`CF2/Teoria/Temario.tex` hacía `\include` de un `ARCHIVOS_LATEX/` **por la ruta absoluta de
+la máquina de Ismael**, a una carpeta que nunca estuvo en el repositorio. Su PDF, que la web
+publica, llevaba saliendo con 119 páginas y sin ese índice sin que nada lo dijera.
+
+El barrido lo detecta y lo cuenta aparte de los fallos. Costó dos intentos:
+
+1. **TeX parte las líneas del log a los 79 caracteres**, así que una ruta larga sale cortada
+   por la mitad y ningún patrón la encuentra. Hay que volver a unirlas antes de buscar.
+2. **`No file MC.bbl.` no es un fichero que falte**, es biblatex trabajando. Los productos de
+   la propia compilación se filtran por extensión o salen cinco falsos positivos.
+
+### Lo que NO era un fallo, y yo dije que sí
+
+Dos afirmaciones del 2026-08-08 estaban mal y se corrigen aquí:
+
+- **`kpathsea` reintenta ignorando mayúsculas.** `kpsewhich -var-value=texmf_casefold_search`
+  devuelve `1`. Así que `\includepdf{P1.pdf}` encuentra `p1.pdf` y
+  `\input{Capitulos/Conclusion_memoria.tex}` encuentra `conclusion_memoria.tex`. La
+  diferencia de mayúsculas de SCD **no** era la causa de nada, y sus 317 páginas se
+  generaron aquí perfectamente.
+- **La ruta rota de `licencia.pdf` no estaba viva en diez documentos, sino en cuatro.** En
+  los otros cinco de FBD la línea ya estaba comentada. El recuento salió de un `git grep`
+  sin filtrar comentarios.
+
+El barrido estático que precedió a este trabajo se equivocó en las dos direcciones: predijo
+19 rotos y eran 11, y no vio el de CF2. **Compilar es la única respuesta que vale.**
+
+### Los PDF publicados
+
+De los ocho publicados cuya fuente se tocó, **siete salen idénticos salvo por la fecha de
+`\today`** y se dejan como están. El octavo sí cambia:
+
+- **`FBD/Teoria/build/Temario.pdf`, de 19 páginas a 25.** Llevaba sin poder compilarse desde
+  que se rompió la ruta de la licencia, así que el PDF se congeló mientras los ejercicios
+  seguían escribiéndose. Las seis páginas nuevas son la relación 3.
+
+`TEX/IG.pdf`, que **no** es el que la web sirve —publica `build/IG.pdf`, de 239 páginas—,
+pierde una página al reconstruirse: su bibliografía. El `.tex` actual no la genera, así que
+el PDF versionado está por delante de su fuente. Se deja.
+
+### Material descargado dentro de un `.tex`, y publicado
+
+Al mirar por qué no compilaba EM apareció esto, que **no es un problema de build**:
+
+```
+Subjects/Fourth/EM/src/t6/t6-bengochea-copiado.tex:31
+  \footnote{Universidad de Granada 1000564-2601141753}
+```
+
+Es una marca de agua de descarga, y **sale en el `EM.pdf` que la web publica**, en la línea
+3150 de su texto. Los dos ficheros «bengochea» son 446 líneas de prosa de manual y el nombre
+de uno dice `copiado`.
+
+**Por qué no se detectó antes: los tres barridos de control anteriores miraron solo PDF.**
+Este material entra al PDF publicado desde un `.tex`, y ni `pdfinfo` ni el campo *Author* lo
+delatan.
+
+Barriendo las fuentes con el mismo criterio salen cuatro casos más, todos en tests que la web
+publica: `EM/test/test.md:161` y `:256`, `CG/test/test.md:954` e
+`ISE/Teoria/Test/test.md:1170` llevan comentarios de procedencia que citan PDF de wuolah, uno
+de ellos de exámenes de un profesor con nombre y apellido. Y
+`CF1/Practica/FCCEE/Practica.tex:111` pone `wuolah.com` como «Fuentes de la Información».
+
+Son transcripciones propias de material descargado, no los ficheros en sí. **Queda pendiente
+de decidir**: no se ha tocado nada porque cambia contenido publicado.
+
+---
+
 ## Criterio de hecho
 
 Esta fase no se cierra: se cierra cada asignatura por separado. El progreso se lleva en la
