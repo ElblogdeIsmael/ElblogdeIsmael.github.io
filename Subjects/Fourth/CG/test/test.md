@@ -951,7 +951,7 @@
 - ( ) La improcedencia de inventariar costes de comercialización.
 - ( ) Ninguna de las respuestas anteriores es correcta.
 
-<!-- test wuolah -->
+<!-- Preguntas transcritas de exámenes de años anteriores -->
 
 1. En un determinado periodo que se inicia sin existencias de materiales, una empresa ha adquirido 5 mil kilos de materiales a 4 euros el kilo. Si el stock final asciende a 2 mil kilos, podrá afirmarse que:
 - ( ) El coste ascendió a 12 mil euros.

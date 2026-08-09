@@ -1167,7 +1167,7 @@ medir el número de veces que se compila y c2 para estimar su tiempo de CPU.
 - (x) Teniendo en cuenta el tiempo total de CPU del programa y los contadores c2, se estima el tiempo de CPU de cada función. Se generan el flat profile y el call profile a partir de la información recopilada.
 - ( ) Teniendo en cuenta el tiempo total de CPU del programa y los contadores c1, se estima el tiempo de CPU de cada función. Se generan el flat profile y el call profile a partir de la información recopilada.
 
-<!-- Wuolah preguntas verdadero y falso-->
+<!-- Preguntas de verdadero y falso de exámenes anteriores -->
 
 1. Xeon es una familia de microprocesadores de IBM especialmente dirigida a los servidores.
 - ( ) Verdadero

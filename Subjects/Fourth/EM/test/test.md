@@ -158,7 +158,7 @@
 <!-- VOY POR LA 10 DEL 2 -->
 
 
-<!-- test wuolah wuolah-free-examenes-em-saez-lozano -->
+<!-- Preguntas transcritas de exámenes de años anteriores de la asignatura -->
 
 1. La corriente fisiológica (Quesnay y Leontief), reduce el objeto de estudio de la economía mundial:  
 - ( ) Al simple análisis de los aspectos sociales y políticos que afectan a la realidad económica.  
@@ -253,7 +253,7 @@ Por tanto, ninguna de las opciones anteriores es universalmente cierta según el
 - (x) Stock.  
 - ( ) Flujo.  
 
-<!-- otro pdf: wuolah-free-Examenes-EM-->
+<!-- Más preguntas de exámenes de años anteriores -->
 
 
 1. Se dice que en la economía mundial, las relaciones han de ser coherentes, dado que:  
