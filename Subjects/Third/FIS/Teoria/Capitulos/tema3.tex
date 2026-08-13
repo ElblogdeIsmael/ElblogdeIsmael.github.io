@@ -1,0 +1,134 @@
+\chapter{Diseño del software}
+
+\section{Conceptos y principios de diseño}
+
+El diseño es la actividad que decide cómo se organiza el sistema para satisfacer
+los requisitos. Entre la especificación y el código hay un espacio de decisiones
+que no está determinado por ninguno de los dos, y es ahí donde se juega la
+mantenibilidad futura.
+
+Los conceptos que sostienen esas decisiones son pocos y llevan décadas siendo los
+mismos \cite{pressman2021}:
+
+\begin{itemize}
+    \item \textbf{Abstracción.} Trabajar con una descripción que retiene lo
+          relevante y omite el resto, y hacerlo por niveles.
+    \item \textbf{Modularidad.} Dividir el sistema en partes con una
+          responsabilidad identificable, de forma que cada una pueda entenderse y
+          modificarse por separado.
+    \item \textbf{Ocultación de información.} Que cada módulo esconda sus
+          decisiones internas tras una interfaz. Es lo que permite cambiar la
+          implementación sin arrastrar a los clientes del módulo.
+    \item \textbf{Separación de intereses.} Que cada parte se ocupe de una
+          cuestión y no de varias entremezcladas.
+\end{itemize}
+
+De ellos se derivan las dos medidas con las que se juzga una descomposición:
+
+\begin{itemize}
+    \item La \textbf{cohesión} mide hasta qué punto los elementos de un módulo
+          contribuyen a un mismo propósito. Interesa que sea alta.
+    \item El \textbf{acoplamiento} mide la dependencia entre módulos. Interesa que
+          sea bajo, y sobre todo que las dependencias vayan hacia abstracciones
+          estables y no hacia detalles.
+\end{itemize}
+
+Las dos van juntas: una descomposición que reparte una misma responsabilidad entre
+varios módulos baja la cohesión y sube el acoplamiento a la vez, porque esos
+módulos tendrán que cambiar siempre juntos.
+
+Por encima de estas medidas están los principios que guían la asignación de
+responsabilidades. Los patrones GRASP —experto en información, creador,
+controlador, bajo acoplamiento, alta cohesión— dan un vocabulario para justificar
+por qué una operación va en una clase y no en otra, que es la decisión más
+frecuente del diseño orientado a objetos \cite{larman2006}.
+
+\section{Diseño de los casos de uso}
+
+El diseño de casos de uso conecta el análisis con la estructura de objetos:
+partiendo de las operaciones del sistema identificadas en el análisis, se decide
+qué objetos colaboran para realizarlas y con qué mensajes.
+
+El instrumento habitual es el \textbf{diagrama de interacción}, en cualquiera de
+sus dos formas. El diagrama de secuencia ordena los mensajes en el tiempo y se lee
+bien cuando el flujo importa; el diagrama de comunicación destaca los enlaces
+entre objetos y se lee mejor cuando lo que interesa es la estructura de
+colaboración \cite{arlow2006}.
+
+Diseñar una interacción obliga a repartir responsabilidades, y ese reparto es el
+que determina el acoplamiento del resultado. Dos criterios ayudan a decidirlo:
+
+\begin{itemize}
+    \item Asignar cada responsabilidad a la clase que ya tiene la información
+          necesaria para cumplirla, en vez de crear una clase que pida esa
+          información a todas las demás.
+    \item Introducir un \emph{controlador} que reciba los eventos del sistema y
+          delegue, en lugar de dejar que la capa de presentación hable
+          directamente con el dominio.
+\end{itemize}
+
+Cuando un objeto necesita datos de muchos otros para hacer su trabajo, la
+interacción lo delata: el diagrama se llena de mensajes de consulta salientes.
+Esa forma es la señal de que la responsabilidad está mal colocada.
+
+\section{Diseño de la estructura de objetos}
+
+El resultado del diseño de las interacciones se consolida en el \textbf{diagrama
+de clases de diseño}, que añade al modelo conceptual lo que el análisis
+deliberadamente omitía: las operaciones, la visibilidad de los atributos, los
+tipos, la navegabilidad de las asociaciones y las clases que no pertenecen al
+dominio sino a la solución.
+
+Hay que distinguirlo del modelo conceptual del que procede. Aquel describía el
+problema; este describe la solución, y por eso puede contener clases que no
+existen en el dominio —repositorios, adaptadores, fábricas— sin que eso sea un
+defecto.
+
+Sobre esa estructura se aplican los \textbf{patrones de diseño}, soluciones
+probadas a problemas recurrentes. Los que más se emplean en este nivel son los de
+creación, para desacoplar al cliente de la clase concreta que instancia; los
+estructurales, como adaptador o fachada, para acomodar interfaces que no encajan;
+y los de comportamiento, como estrategia u observador, para dejar variable lo que
+se sabe que va a cambiar \cite{larman2006}.
+
+Los patrones se aplican cuando el problema que resuelven está presente. Aplicarlos
+por anticipado, «por si acaso», añade indirección sin beneficio y es una forma
+frecuente de complicar un diseño sin necesidad.
+
+\section{Arquitectura del software}
+
+La arquitectura es el conjunto de decisiones de diseño de mayor alcance: la
+descomposición del sistema en partes principales, la relación entre ellas y las
+propiedades globales que esa organización garantiza. Son las decisiones más caras
+de revertir, porque el resto del diseño se apoya en ellas.
+
+La arquitectura la determinan, sobre todo, los requisitos no funcionales. El
+rendimiento empuja hacia componentes gruesos y poca comunicación entre ellos; la
+seguridad, hacia capas con control de acceso en las fronteras; la disponibilidad,
+hacia la redundancia; la mantenibilidad, hacia componentes pequeños y
+reemplazables. Como estas fuerzas tiran en direcciones opuestas, no existe una
+arquitectura buena en abstracto, solo una adecuada a unas prioridades declaradas
+\cite{sommerville2016}.
+
+Los estilos más comunes son:
+
+\begin{itemize}
+    \item \textbf{En capas.} Cada capa usa solo servicios de la inmediatamente
+          inferior. Facilita sustituir una capa entera y aísla el dominio de la
+          tecnología, a costa de rendimiento en las llamadas que la atraviesan.
+    \item \textbf{Cliente-servidor.} Separa a quien pide de quien sirve, lo que
+          permite escalar cada lado por separado.
+    \item \textbf{Modelo-vista-controlador.} Aísla la presentación del estado y de
+          la lógica, de modo que varias vistas puedan compartir un mismo modelo.
+    \item \textbf{Por componentes o servicios.} Divide el sistema en unidades
+          desplegables de forma independiente. Gana en escalabilidad y en
+          autonomía de los equipos; paga con complejidad de operación y con los
+          problemas propios de la comunicación en red.
+    \item \textbf{Tuberías y filtros.} Encadena transformaciones sobre un flujo de
+          datos. Encaja bien en procesamiento por lotes.
+\end{itemize}
+
+Decidir la arquitectura incluye documentarla. Una arquitectura que solo existe en
+la cabeza de quien la diseñó deja de cumplirse en cuanto el equipo crece, y la
+erosión resultante es difícil de revertir porque el código ya depende de la forma
+degradada.

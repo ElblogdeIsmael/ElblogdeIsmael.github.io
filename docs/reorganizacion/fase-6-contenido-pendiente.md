@@ -594,6 +594,194 @@ Respaldo de lo retirado en `~/backups/em-material-copiado-2026-08-09`.
 
 ---
 
+## El indexado de los `PROPIO`, abierto el 2026-08-13
+
+Los 78 `PROPIO` del inventario son ficheros comprobados como suyos que **la web no
+enlaza**. Al medirlo antes de empezar aparece que esa frase no significa lo que parece.
+
+**«No lo enlaza» no es «no lo publica».** De los 77 sin enlace —uno se enlazó después de
+generarse el inventario—, **18 se incluyen desde algún `.tex` con `\includepdf`, y 15 de
+ellos salen dentro de un PDF que la web sí sirve**:
+
+| Asignatura | Nº | Dónde salen |
+| --- | ---: | --- |
+| DAE | 8 | Las actividades 1 a 7 y la 9, dentro de `PracticasDAE/FCCEE/build/Practicas.pdf`, 91 páginas |
+| CF2 | 4 | `PropuestosT4/T5/T6` en `Practica/Temario.pdf` y `Resumenes/Temario_Md.pdf` en `Teoria/Temario.pdf` |
+| ECO | 2 | Los dos del trabajo, en `Practicas/FCCEE/build/Practica.pdf` |
+| AOF | 1 | `ApuntesMD/Temario_Md.pdf`, en `Teoria/Teoria.pdf` |
+
+Indexarlos por separado no publicaría nada nuevo: duplicaría.
+
+**Y esto solo se ve resolviendo la ruta contra el directorio del documento que incluye**,
+como hace LaTeX. Un `grep` por basename daba 24 y tres eran falsos: `T2.pdf` aparece en
+`ISE/Teoria/Temario.tex` y en `DAE/…/Practicas.tex`, que incluyen cada uno el suyo. Es la
+misma trampa que ya avisaba el napkin sobre `\includegraphics`.
+
+### EM, la primera tanda
+
+Las **20 presentaciones** de `EM/PRESENTACIONES/t2…t6`, 108 páginas de casos y titulares en
+Beamer. No las incluye ningún `.tex` y no las enlazaba nadie. **19 indexadas** en un bloque
+«Presentaciones» de su ficha; la web pasa de 189 enlaces a 208.
+
+No se indexa `t3/caso3-5.pdf`: es idéntica a `caso3-5_SALLAMI_MORENO_ISMAEL.pdf` salvo una
+cita que la segunda sí tiene, y esa es la entregada.
+
+**Dos defectos de autoría que había que arreglar antes de publicar:**
+
+- **`caso2-15_v2.tex` y `caso2-19_v2.tex` firmaban `\author{Profesor de Economía
+  Internacional}` con `\institute{Harvard University}`**, y uno de ellos fechaba en un
+  «Seminario Avanzado de Comercio Internacional» que no existe. Son presentaciones distintas
+  de las firmadas —otra estructura, en español—, no duplicados, así que se corrigió la firma
+  a Ismael Sallami Moreno y UGR y se recompilaron. **Publicar una atribución inventada a una
+  universidad real no es una opción**, y dejarla en un `.tex` versionado de un repositorio
+  público tampoco.
+- **`caso2-19.tex` firmaba «Ismael Sallam Moreno»**, sin la i, y salía en la portada y en el
+  pie de cada página.
+
+De paso, las dos `_v2` usaban `\date{\today}`, así que al recompilar se fechaban hoy.
+Fijadas al 29 de octubre de 2025, que es cuando se entregaron. **`\today` en un documento
+entregado convierte cada recompilación en una mentira sobre la fecha.**
+
+Barrido de procedencia sobre las 20: cero marcas de descarga, cero nombres del profesorado,
+y los 19 `.tex` firman todos igual.
+
+### Las 58 restantes, el mismo día
+
+Medidas una a una, **la mayoría no eran candidatas**. El criterio: comparar el texto de cada
+una contra la **unión de todo lo que su asignatura ya publica**, no contra un documento
+suelto. Comparando solo contra uno, `FIS/…/ej3.pdf` parecía aportar 106 palabras de 174;
+contra todo lo publicado son **8**, porque es el «Ejercicio 3» que la ficha ya sirve.
+
+| Estado | Nº |
+| --- | ---: |
+| Ya salen dentro de otro PDF que la web sirve | 16 |
+| Ya publicadas como fichero propio en otra ruta | 6 |
+| Duplicado interno o versión peor que la publicada | 9 |
+| Figuras y plantillas en blanco | 6 |
+| Enunciado incrustado, no se indexan tal cual | 4 |
+| Retiradas por decisión previa (MAC) | 3 |
+| Carcasas vacías o punteros | 2 |
+| **Indexadas** | **7** |
+
+Las siete: `FIS/…/ej2.pdf` y `control1.pdf`, `FBD/Practica/Temario.pdf`,
+`SCD/…/RelacionEjerciciosTema1.pdf`, `IA/…/apuntesClase.pdf` y las dos de PDOO.
+
+**Con esto el inventario queda cerrado**: las 78 líneas llevan decisión escrita en su nota,
+26 indexadas y 52 no.
+
+### El formulario de Econometría, 47 páginas, que el inventario no podía ver
+
+`ECO/Formulario/FCCEE/build/Formulario.pdf` existía solo en disco, **sin `git add`**, y sin
+enlazar. No salía en el inventario porque **el inventario solo lista PDF versionados**. Son
+47 páginas propias —2.308 palabras que no están en nada de lo que ECO publicaba—, compilan
+desde fuentes versionadas y la ficha de ECO no tenía teoría de ningún tipo. Versionado y
+publicado.
+
+Para buscar más de esa clase:
+
+```bash
+comm -13 <(git -c core.quotepath=false ls-files '*.pdf' | sort -u) \
+         <(find Subjects -name '*.pdf' | sort -u)
+```
+
+**El `core.quotepath=false` no es opcional.** Sin él, `git ls-files` escapa los acentos
+—`Pr\303\241cticas`— y las rutas con tilde salen como si no estuvieran versionadas. Con el
+patrón corto llegué a creer que la web publicaba un PDF de 115 páginas que no estaba en git.
+
+Los otros 32 que salen del barrido son salida de `build/` de la tanda del 2026-08-09 y
+reconstruyen documentos ya publicados.
+
+### Dos defectos que aparecieron al abrirlos
+
+- **`IA/Teoria/Temario.pdf` era una carcasa vacía**, y se ha resuelto el mismo día. Ver
+  abajo.
+- **`SCD/Practicas/ETSIIT/Practicas.pdf` pasó de 317 páginas a 8** en la recompilación del
+  2026-08-09 que quitó lo ajeno, y lo que queda son punteros al repositorio
+  `concurrency-mpi` que la ficha ya enlaza directamente. No se indexa, pero **el inventario
+  seguía diciendo 317**: los recuentos envejecen igual que las clasificaciones.
+
+### La teoría de IA, escrita y comentada
+
+`IA/Teoria/Temario.tex` llevaba **todos** sus `\input{Capitulos/…}` comentados, así que el
+PDF publicable eran 5 páginas: portada, licencia, índice vacío y una bibliografía cuya
+única entrada era el propio autor del documento. Y lo comentado existe: **886 líneas
+escritas** en `Capitulos/`.
+
+Descomentado y reordenado en tres capítulos. `Tema3.tex` son catorce líneas que introducen
+la búsqueda en espacios de estados, así que no da para capítulo: abre el tercero y el
+problema del mono y el plátano lo desarrolla. **De 5 páginas a 21**, y la ficha de IA, que
+no tenía bloque de teoría, ya lo tiene.
+
+Tres cosas más de esa revisión:
+
+- **33 formas en primera persona** —«podemos», «debemos», «vamos a ver»— reescritas en
+  impersonal, el mismo criterio que se aplicó a AEF, MAC y EM.
+- **La bibliografía se citaba a sí misma**: su única entrada era «Ismael Sallami Moreno,
+  Estudiante del Doble Grado…». El texto no cita ninguna obra, así que el bloque se retira
+  entero en vez de inventarle referencias.
+- **Un párrafo prometía código en una ruta del sitio antiguo**, «Asignaturas/Tercer Año/…»,
+  que ya no resuelve. El código está versionado pero no se publica: el marco de la práctica
+  es del profesorado y solo el comportamiento del agente es propio. El párrafo dice ahora
+  dónde está en el repositorio.
+
+## El cajón de `build/`, el 2026-08-13
+
+El inventario de PDF solo lista ficheros **versionados**, así que hay una clase entera que
+no puede ver: documentos propios que existen únicamente como salida en `build/` sin
+`git add`. El `.gitignore` los permite —`!Subjects/**/build/*.pdf`— pero nadie los añadió.
+
+Medido: bajo `Subjects/` había **851 ficheros sin versionar, 74 MB**. De ellos **818 los
+ignora `.gitignore`** —`.aux`, `.log`, `.class`— y **33 no**. Esos 33 no eran homogéneos:
+
+| Qué eran | Nº | Qué se hizo |
+| --- | ---: | --- |
+| Propios, sin publicar y reconstruibles | 5 | **Publicados** |
+| Recompilaciones de lo que la web ya sirve desde otra ruta | 16 | Borrados |
+| Muertos | 5 | Borrados |
+| Propios pero sin fuente | 3 | Respaldados, no publicados |
+| Otros (un `.gitignore` suelto, plantillas) | 4 | Borrados |
+
+Los cinco publicados: dos colecciones de preguntas de examen resueltas de FR, la criba de
+Eratóstenes con MPI y la demostración de un algoritmo de exclusión mutua de SCD, y el
+**parcial extra de SCD**, cuyo PDF anterior se retiró el 2026-08-08 por llevar el DNI. Este
+se recompiló desde la fuente ya limpia y se verificó que no lo lleva.
+
+**Los cinco muertos son la huella de una retirada bien hecha.**
+`FBD/Practica/build/Temario.pdf` eran **0 bytes** desde mayo de 2025. Y las prácticas de FR,
+la teoría de ECO y las diapositivas de ISE se habían quedado en tres páginas de portada e
+índice: lo que llevaban dentro no era suyo y las fases anteriores lo retiraron. La de ISE,
+además, era un `\includepdf` de las transparencias del profesorado con portada propia —lo
+mismo que ECO Prácticas—, y su `.fls` lo delata.
+
+**Los tres sin fuente no se publican.** `PDOO/…/Visibilidad.pdf`, `Herencia…` e
+`ISE/…/Libro.pdf` son propios y limpios, pero su `.fls` apunta a rutas del árbol antiguo
+(`Asignaturas/Tercer Año/`) que ya no existen. Publicar un documento que no se puede
+reconstruir es justo lo que el barrido de builds vino a impedir. Respaldados en
+`~/backups/builds-huerfanos-2026-08-13`.
+
+**`git status` pasa de 33 entradas `??` a ninguna.** Y una advertencia: `git clean -d` no
+sirve para esto. Barrería también `Subjects/Fifth/`, `EM/src/t7/`, `FBD/Practica/images/` y
+las carpetas de datos de Grafana, que están vacías pero no son basura declarada. Hay que
+borrar por lista explícita.
+
+### El temario de FIS
+
+`FIS/Teoria/Temario.tex` producía 9 páginas: portada, licencia, índice y **dos aperturas de
+capítulo escritas para presentar las transparencias del profesorado**, que una fase anterior
+había comentado. Lo que quedaba parafraseaba la guía docente. Y su bibliografía eran dos
+entradas con la misma clave `Referencia1`: «Transparencias de la Asignatura…» y una autocita.
+
+Reescrito con el criterio de EM, siguiendo la
+[guía docente oficial 216113B](https://grados.ugr.es/informatica-ade/docencia/plan-estudios/fundamentos-ingenieria-del-software/guia-docente):
+un capítulo por tema y sus apartados en el orden de la guía —el producto software y su ciclo
+de vida, ingeniería de requisitos, diseño, y gestión de proyectos, verificación y
+mantenimiento—. **De 9 páginas a 21**, en impersonal, con la bibliografía fundamental de la
+asignatura citada donde el texto se apoya en ella y cero citas sin resolver.
+
+**Aquí la bibliografía no va en un `.bib`.** El documento tiene preámbulo propio con
+`\usepackage{cite}` y `thebibliography`, no biblatex. Añadirle biblatex por seguir la
+convención de cuarto habría sido cambiar su cadena para no ganar nada.
+
 ## Criterio de hecho
 
 Esta fase no se cierra: se cierra cada asignatura por separado. El progreso se lleva en la

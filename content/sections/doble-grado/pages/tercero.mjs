@@ -26,6 +26,21 @@ export default {
           name: "Fundamentos de Redes",
           blocks: [
             {
+              label: "Preguntas de Examen",
+              resources: [
+                {
+                  name: "Preguntas resueltas paso a paso",
+                  href: "/Subjects/Third/FR/Teoria/Preguntas_Examen_Teoria/build/preguntas.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Preguntas de otros exámenes",
+                  href: "/Subjects/Third/FR/TestsFR/Preguntas_Teoria_Otros_Examenes/build/preguntas.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
               label: "Tipo Test Práctica",
               resources: [
                 {
@@ -104,6 +119,16 @@ export default {
                   href: "/Subjects/Third/PDOO/Teoria/RelacionesEjercicios/Solt3/ETSIIT/build/solt3.pdf",
                   kind: "PDF",
                 },
+                {
+                  name: "Atributos y métodos",
+                  href: "/Subjects/Third/PDOO/Teoria/otros/relacionEjercicios/relacionAtributo_metodos_PDOO.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Métodos de instancia y de clase en Java y Ruby",
+                  href: "/Subjects/Third/PDOO/Teoria/otros/extraINfo/diferenciasEntremetodosJAVAruby.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
@@ -154,6 +179,16 @@ export default {
                   name: "Archivos Modelo Econométrico",
                   href: "https://github.com/Ismael-Sallami/econometric-model",
                   kind: "WEB",
+                },
+              ],
+            },
+            {
+              label: "Teoría",
+              resources: [
+                {
+                  name: "Formulario y resumen",
+                  href: "/Subjects/Third/ECO/Formulario/FCCEE/build/Formulario.pdf",
+                  kind: "PDF",
                 },
               ],
             },
@@ -353,6 +388,11 @@ export default {
                   kind: "MD",
                 },
                 {
+                  name: "Tema 1 · en PDF",
+                  href: "/Subjects/Third/SCD/Teoria/Tema1/RelacionEjerciciosTema1.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Tema 2",
                   href: "/viewer/?file=Subjects/Third/SCD/Teoria/Tema2/RelacionEjerciciosTema2.md",
                   kind: "MD",
@@ -380,6 +420,11 @@ export default {
                 {
                   name: "Segundo Parcial",
                   href: "/Subjects/Third/SCD/Examenes/SegundoParcial/ETSIIT/build/ExamenesAnteriores.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Parcial Extra · resuelto y explicado",
+                  href: "/Subjects/Third/SCD/Examenes/Parcial_SCD_Extra/ETSIIT/build/Parcial.pdf",
                   kind: "PDF",
                 },
               ],
@@ -411,6 +456,21 @@ export default {
                   name: "Autoevaluación 4 · Sistemas de Tiempo Real",
                   href: "/Subjects/Third/SCD/AutoevalSCD/AutoevalT4.html",
                   kind: "HTML",
+                },
+              ],
+            },
+            {
+              label: "Actividades Extra",
+              resources: [
+                {
+                  name: "Criba de Eratóstenes con MPI",
+                  href: "/Subjects/Third/SCD/Teoria/Actividad_Extra/cribadeErastotenes/ETSIIT/build/Erastotenes.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Demostración de un algoritmo de exclusión mutua",
+                  href: "/Subjects/Third/SCD/Teoria/Actividad_Extra/Demostracion_Prop_ALG_EM/ETSIIT/build/Demostracion.pdf",
+                  kind: "PDF",
                 },
               ],
             },
@@ -582,6 +642,11 @@ export default {
                   kind: "PDF",
                 },
                 {
+                  name: "Temario de Prácticas",
+                  href: "/Subjects/Third/FBD/Practica/Temario.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Ejercicios-Controles SQL",
                   href: "/Subjects/Third/FBD/Practica/2parte/Practicas/Ejercicios.sql",
                   kind: "SQL",
@@ -648,6 +713,11 @@ export default {
               label: "Teoría",
               resources: [
                 {
+                  name: "Temario",
+                  href: "/Subjects/Third/FIS/Teoria/build/Temario.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Apuntes Teoría",
                   href: "/viewer/?file=Subjects/Third/FIS/Teoria/resumenOrdinaria.md",
                   kind: "MD",
@@ -663,8 +733,18 @@ export default {
               label: "Ejercicios-Controles y Controles",
               resources: [
                 {
+                  name: "Ejercicio 2 · Diagrama de casos de uso",
+                  href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Ejercicios/ej2.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Ejercicio 3 · Modelo conceptual",
                   href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Ejercicio3/Ejercicio3/main.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Apuntes Control 1",
+                  href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Controles/control1.pdf",
                   kind: "PDF",
                 },
                 {
@@ -704,6 +784,11 @@ export default {
                   kind: "PDF",
                 },
                 {
+                  name: "Práctica 1 · Apuntes de clase",
+                  href: "/Subjects/Third/IA/Practicas/Practicas/Practica1/apuntesClase.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Práctica 1 · Cuestionario 1",
                   href: "/Subjects/Third/IA/Practicas/Practicas/Practica1/cuestionario1.pdf",
                   kind: "PDF",
@@ -726,6 +811,16 @@ export default {
                 {
                   name: "Práctica 3 · Memoria",
                   href: "/Subjects/Third/IA/Practicas/Practicas/Practica3/practica3/practica3/Memoria.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Teoría",
+              resources: [
+                {
+                  name: "Temario",
+                  href: "/Subjects/Third/IA/Teoria/Temario.pdf",
                   kind: "PDF",
                 },
               ],
