@@ -693,15 +693,36 @@ reconstruyen documentos ya publicados.
 
 ### Dos defectos que aparecieron al abrirlos
 
-- **`IA/Teoria/Temario.pdf` es una carcasa vacía.** Su `Temario.tex` lleva **todos** los
-  `\input{Capitulos/…}` comentados, así que salen 5 páginas con portada, índice vacío y una
-  bibliografía que se cita a sí misma. Y lo comentado existe: **886 líneas escritas** en
-  `Capitulos/` —Tema 1, Tema 2, Tema 3, la relación 1 y el problema del mono y el plátano—
-  que no llegan a ningún sitio. Es el mismo patrón que EM. Queda pendiente.
+- **`IA/Teoria/Temario.pdf` era una carcasa vacía**, y se ha resuelto el mismo día. Ver
+  abajo.
 - **`SCD/Practicas/ETSIIT/Practicas.pdf` pasó de 317 páginas a 8** en la recompilación del
   2026-08-09 que quitó lo ajeno, y lo que queda son punteros al repositorio
   `concurrency-mpi` que la ficha ya enlaza directamente. No se indexa, pero **el inventario
   seguía diciendo 317**: los recuentos envejecen igual que las clasificaciones.
+
+### La teoría de IA, escrita y comentada
+
+`IA/Teoria/Temario.tex` llevaba **todos** sus `\input{Capitulos/…}` comentados, así que el
+PDF publicable eran 5 páginas: portada, licencia, índice vacío y una bibliografía cuya
+única entrada era el propio autor del documento. Y lo comentado existe: **886 líneas
+escritas** en `Capitulos/`.
+
+Descomentado y reordenado en tres capítulos. `Tema3.tex` son catorce líneas que introducen
+la búsqueda en espacios de estados, así que no da para capítulo: abre el tercero y el
+problema del mono y el plátano lo desarrolla. **De 5 páginas a 21**, y la ficha de IA, que
+no tenía bloque de teoría, ya lo tiene.
+
+Tres cosas más de esa revisión:
+
+- **33 formas en primera persona** —«podemos», «debemos», «vamos a ver»— reescritas en
+  impersonal, el mismo criterio que se aplicó a AEF, MAC y EM.
+- **La bibliografía se citaba a sí misma**: su única entrada era «Ismael Sallami Moreno,
+  Estudiante del Doble Grado…». El texto no cita ninguna obra, así que el bloque se retira
+  entero en vez de inventarle referencias.
+- **Un párrafo prometía código en una ruta del sitio antiguo**, «Asignaturas/Tercer Año/…»,
+  que ya no resuelve. El código está versionado pero no se publica: el marco de la práctica
+  es del profesorado y solo el comportamiento del agente es propio. El párrafo dice ahora
+  dónde está en el repositorio.
 
 ## Criterio de hecho
 

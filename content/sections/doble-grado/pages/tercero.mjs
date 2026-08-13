@@ -775,6 +775,16 @@ export default {
                 },
               ],
             },
+            {
+              label: "Teoría",
+              resources: [
+                {
+                  name: "Temario",
+                  href: "/Subjects/Third/IA/Teoria/Temario.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
           ],
         },
         {
