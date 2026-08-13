@@ -26,6 +26,21 @@ export default {
           name: "Fundamentos de Redes",
           blocks: [
             {
+              label: "Preguntas de Examen",
+              resources: [
+                {
+                  name: "Preguntas resueltas paso a paso",
+                  href: "/Subjects/Third/FR/Teoria/Preguntas_Examen_Teoria/build/preguntas.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Preguntas de otros exámenes",
+                  href: "/Subjects/Third/FR/TestsFR/Preguntas_Teoria_Otros_Examenes/build/preguntas.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
               label: "Tipo Test Práctica",
               resources: [
                 {
@@ -407,6 +422,11 @@ export default {
                   href: "/Subjects/Third/SCD/Examenes/SegundoParcial/ETSIIT/build/ExamenesAnteriores.pdf",
                   kind: "PDF",
                 },
+                {
+                  name: "Parcial Extra · resuelto y explicado",
+                  href: "/Subjects/Third/SCD/Examenes/Parcial_SCD_Extra/ETSIIT/build/Parcial.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
@@ -436,6 +456,21 @@ export default {
                   name: "Autoevaluación 4 · Sistemas de Tiempo Real",
                   href: "/Subjects/Third/SCD/AutoevalSCD/AutoevalT4.html",
                   kind: "HTML",
+                },
+              ],
+            },
+            {
+              label: "Actividades Extra",
+              resources: [
+                {
+                  name: "Criba de Eratóstenes con MPI",
+                  href: "/Subjects/Third/SCD/Teoria/Actividad_Extra/cribadeErastotenes/ETSIIT/build/Erastotenes.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Demostración de un algoritmo de exclusión mutua",
+                  href: "/Subjects/Third/SCD/Teoria/Actividad_Extra/Demostracion_Prop_ALG_EM/ETSIIT/build/Demostracion.pdf",
+                  kind: "PDF",
                 },
               ],
             },
