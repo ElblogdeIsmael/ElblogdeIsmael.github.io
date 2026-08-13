@@ -124,6 +124,106 @@ export default {
                 },
               ],
             },
+            {
+              label: "Presentaciones",
+              resources: [
+                {
+                  name: "Caso 2.15 · Economía política de la migración",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t2/caso2-15.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 2.15 · segunda versión",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t2/caso2-15_v2.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 2.19 · Efectos de la migración sobre los salarios",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t2/caso2-19.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 2.19 · segunda versión",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t2/caso2-19_v2.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 2.22 · Inversión extranjera directa en Singapur",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t2/caso2-22.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 3.5 · Aranceles de la Administración Trump",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t3/caso3-5_SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Titular 3.2 · La guerra comercial EE. UU.-China",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t3/titular-3-2_SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 4.5 · Estándares globales y soberanía nacional",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t4/CASO-4-5-SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 4.10 · Alimentos biotecnológicos en Europa",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t4/caso-4-10_SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 4.15 · Paneles solares y política ambiental",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t4/caso-4-15-SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Titular 4.3 · Los estándares de Walmart y sus proveedores",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t4/titular-4-3-SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Práctica del tema 4 · Elasticidad y creación de comercio",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t4/Practica-t4-SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Titular 5.1 · Activos financieros internacionales",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t5/titular-5-1-SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 5.5 · Paridad de intereses no cubierta",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t5/caso-5-5-SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Titular 5.6 · Overshooting del tipo de cambio",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t5/titular-5-6_SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 5.10 · Anclas nominales",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t5/caso-5-10-SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 5.15 · Régimen cambiario y flujos comerciales",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t5/caso-5-15-SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 6.4 · Los primeros años de tipos flexibles",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t6/caso-6-4-SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Caso 6.9 · Crisis cambiarias",
+                  href: "/Subjects/Fourth/EM/PRESENTACIONES/t6/caso-6-9-SALLAMI_MORENO_ISMAEL.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
           ],
         },
         {
