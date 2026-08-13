@@ -594,6 +594,57 @@ Respaldo de lo retirado en `~/backups/em-material-copiado-2026-08-09`.
 
 ---
 
+## El indexado de los `PROPIO`, abierto el 2026-08-13
+
+Los 78 `PROPIO` del inventario son ficheros comprobados como suyos que **la web no
+enlaza**. Al medirlo antes de empezar aparece que esa frase no significa lo que parece.
+
+**«No lo enlaza» no es «no lo publica».** De los 77 sin enlace —uno se enlazó después de
+generarse el inventario—, **18 se incluyen desde algún `.tex` con `\includepdf`, y 15 de
+ellos salen dentro de un PDF que la web sí sirve**:
+
+| Asignatura | Nº | Dónde salen |
+| --- | ---: | --- |
+| DAE | 8 | Las actividades 1 a 7 y la 9, dentro de `PracticasDAE/FCCEE/build/Practicas.pdf`, 91 páginas |
+| CF2 | 4 | `PropuestosT4/T5/T6` en `Practica/Temario.pdf` y `Resumenes/Temario_Md.pdf` en `Teoria/Temario.pdf` |
+| ECO | 2 | Los dos del trabajo, en `Practicas/FCCEE/build/Practica.pdf` |
+| AOF | 1 | `ApuntesMD/Temario_Md.pdf`, en `Teoria/Teoria.pdf` |
+
+Indexarlos por separado no publicaría nada nuevo: duplicaría.
+
+**Y esto solo se ve resolviendo la ruta contra el directorio del documento que incluye**,
+como hace LaTeX. Un `grep` por basename daba 24 y tres eran falsos: `T2.pdf` aparece en
+`ISE/Teoria/Temario.tex` y en `DAE/…/Practicas.tex`, que incluyen cada uno el suyo. Es la
+misma trampa que ya avisaba el napkin sobre `\includegraphics`.
+
+### EM, la primera tanda
+
+Las **20 presentaciones** de `EM/PRESENTACIONES/t2…t6`, 108 páginas de casos y titulares en
+Beamer. No las incluye ningún `.tex` y no las enlazaba nadie. **19 indexadas** en un bloque
+«Presentaciones» de su ficha; la web pasa de 189 enlaces a 208.
+
+No se indexa `t3/caso3-5.pdf`: es idéntica a `caso3-5_SALLAMI_MORENO_ISMAEL.pdf` salvo una
+cita que la segunda sí tiene, y esa es la entregada.
+
+**Dos defectos de autoría que había que arreglar antes de publicar:**
+
+- **`caso2-15_v2.tex` y `caso2-19_v2.tex` firmaban `\author{Profesor de Economía
+  Internacional}` con `\institute{Harvard University}`**, y uno de ellos fechaba en un
+  «Seminario Avanzado de Comercio Internacional» que no existe. Son presentaciones distintas
+  de las firmadas —otra estructura, en español—, no duplicados, así que se corrigió la firma
+  a Ismael Sallami Moreno y UGR y se recompilaron. **Publicar una atribución inventada a una
+  universidad real no es una opción**, y dejarla en un `.tex` versionado de un repositorio
+  público tampoco.
+- **`caso2-19.tex` firmaba «Ismael Sallam Moreno»**, sin la i, y salía en la portada y en el
+  pie de cada página.
+
+De paso, las dos `_v2` usaban `\date{\today}`, así que al recompilar se fechaban hoy.
+Fijadas al 29 de octubre de 2025, que es cuando se entregaron. **`\today` en un documento
+entregado convierte cada recompilación en una mentira sobre la fecha.**
+
+Barrido de procedencia sobre las 20: cero marcas de descarga, cero nombres del profesorado,
+y los 19 `.tex` firman todos igual.
+
 ## Criterio de hecho
 
 Esta fase no se cierra: se cierra cada asignatura por separado. El progreso se lleva en la
