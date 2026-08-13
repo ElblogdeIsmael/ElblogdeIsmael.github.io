@@ -713,6 +713,11 @@ export default {
               label: "Teoría",
               resources: [
                 {
+                  name: "Temario",
+                  href: "/Subjects/Third/FIS/Teoria/build/Temario.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Apuntes Teoría",
                   href: "/viewer/?file=Subjects/Third/FIS/Teoria/resumenOrdinaria.md",
                   kind: "MD",

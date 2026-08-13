@@ -1,0 +1,160 @@
+\chapter{Introducción a la Ingeniería del Software}
+
+\section{El producto software, propiedades y ciclo de vida}
+
+El software no se parece a los productos que fabrica el resto de las ingenierías.
+No se gasta con el uso, no está sujeto a tolerancias de material y su coste de
+replicación es prácticamente nulo: una copia vale lo mismo que un millón. Lo que
+cuesta es concebirlo y mantenerlo, y ahí es donde se concentra el esfuerzo de la
+disciplina.
+
+De esa naturaleza salen dos consecuencias que condicionan todo lo demás. La
+primera es que no hay límites físicos que frenen la complejidad. Un puente no
+puede crecer sin que la estructura lo acuse; un sistema software sí, y por eso
+puede llegar a un tamaño que ninguna persona abarca. La segunda es que el
+software no se deteriora, pero sí se degrada: cada cambio que se le hace lo aleja
+del diseño con el que nació, y la facilidad para modificarlo acaba siendo la causa
+de que se vuelva difícil de modificar \cite{sommerville2016}.
+
+Conviene separar dos términos que se usan como sinónimos y no lo son. El
+\textbf{producto software} es lo que se entrega: los programas, los datos de
+configuración y la documentación que permite instalarlo, usarlo y mantenerlo. El
+\textbf{sistema software} incluye además el entorno en el que ese producto opera.
+Entregar solo los ejecutables no es entregar el producto.
+
+\subsection*{Propiedades de un producto software}
+
+La calidad de un producto software no se mide únicamente por que haga lo que se le
+pide. Las propiedades que suelen exigirse son:
+
+\begin{itemize}
+    \item \textbf{Corrección y fiabilidad.} Que haga lo especificado y que siga
+          haciéndolo en condiciones adversas, incluidas las que no se previeron.
+    \item \textbf{Mantenibilidad.} Que pueda evolucionar con un coste razonable.
+          Es la propiedad que más peso tiene a largo plazo, porque el grueso del
+          gasto de un sistema se produce después de la primera entrega.
+    \item \textbf{Eficiencia.} Que use de forma razonable el tiempo de cómputo, la
+          memoria y el resto de recursos.
+    \item \textbf{Usabilidad.} Que las personas a las que va dirigido puedan
+          usarlo sin formación desproporcionada.
+    \item \textbf{Seguridad y protección.} Que no cause daños y que resista un uso
+          malintencionado.
+\end{itemize}
+
+Estas propiedades compiten entre sí. Un diseño muy eficiente suele ser menos
+legible y, por tanto, menos mantenible; una interfaz muy flexible complica la
+validación. Parte del trabajo de ingeniería consiste precisamente en decidir qué
+se sacrifica y dejar constancia de por qué.
+
+\subsection*{El ciclo de vida}
+
+El ciclo de vida es el conjunto de etapas por las que pasa un producto desde que
+se identifica la necesidad hasta que se retira. Con distintos nombres, casi todos
+los modelos reconocen las mismas actividades: especificación, diseño e
+implementación, validación y evolución.
+
+Lo que distingue a un modelo de otro no son las actividades, sino cómo se
+ordenan y con qué frecuencia se repiten. Merece la pena insistir en la última
+etapa: \textbf{la evolución no es un apéndice del ciclo de vida, es la mayor parte
+de él}. Un sistema en producción recibe cambios durante años, y el diseño con el
+que se construyó determina lo caros que resultan.
+
+\section{Concepto de Ingeniería del Software}
+
+El término nació en la conferencia de la OTAN de 1968, convocada porque los
+proyectos software se entregaban tarde, por encima del presupuesto y sin la
+calidad prometida. La expresión «crisis del software» describía esa situación, y
+la propuesta fue tratar el desarrollo como una ingeniería: con métodos, medidas y
+procesos, en lugar de como un oficio artesanal.
+
+La Ingeniería del Software es, en esa línea, la disciplina que se ocupa de todos
+los aspectos de la producción de software, desde las primeras etapas de la
+especificación hasta el mantenimiento posterior a la entrega
+\cite{sommerville2016}. Dos matices de esa definición importan:
+
+\begin{itemize}
+    \item \textbf{Todos los aspectos}, no solo la programación. La gestión del
+          proyecto, la elección de herramientas y la organización del equipo
+          forman parte de la disciplina.
+    \item \textbf{Hasta el mantenimiento}, no hasta la entrega. Un método que
+          funciona bien hasta el día del despliegue y deja el sistema
+          intratable después no ha resuelto el problema.
+\end{itemize}
+
+Conviene distinguirla de dos disciplinas vecinas. La \textbf{informática} estudia
+los fundamentos teóricos del cómputo; la ingeniería del software se ocupa de
+construir sistemas útiles con esos fundamentos, aceptando restricciones de plazo,
+coste y personas. La \textbf{ingeniería de sistemas} es más amplia: abarca el
+hardware, los procesos y la organización, y el software es solo una de sus
+partes.
+
+\subsection*{Responsabilidad profesional}
+
+La disciplina lleva asociada una dimensión ética que no es decorativa. Quien
+construye software decide, en la práctica, sobre la privacidad de terceros, sobre
+la accesibilidad de un servicio y, en sistemas críticos, sobre la seguridad de
+las personas. Los códigos deontológicos de ACM e IEEE recogen los compromisos
+habituales: confidencialidad, competencia declarada con honestidad, respeto a la
+propiedad intelectual y no aceptar encargos que se sepan perjudiciales
+\cite{sommerville2016}.
+
+\section{El proceso de desarrollo de software}
+
+Un proceso de desarrollo es un conjunto ordenado de actividades que produce un
+producto software. Los modelos que se estudian a continuación no son recetas
+excluyentes: en un proyecto real se combinan, y la elección depende de cuánto se
+conoce el problema al empezar y de cuánto cuesta equivocarse.
+
+\subsection*{Modelo en cascada}
+
+Ordena las actividades en fases sucesivas —especificación, diseño,
+implementación, verificación y mantenimiento— y exige cerrar cada una antes de
+abrir la siguiente. Su ventaja es la trazabilidad: cada fase deja documentos
+revisables, lo que encaja bien en desarrollos con requisitos contractuales o
+sujetos a certificación.
+
+Su inconveniente es el que lo hizo célebre: los requisitos rara vez se conocen por
+completo al principio, y el modelo hace caro cambiarlos. Un error de
+especificación no se detecta hasta la validación, cuando corregirlo cuesta
+órdenes de magnitud más que en su fase de origen \cite{pressman2021}.
+
+\subsection*{Desarrollo incremental}
+
+Divide el sistema en incrementos que se especifican, construyen y entregan por
+separado, empezando por los de mayor valor. Cada entrega es funcional y sirve para
+obtener realimentación antes de comprometerse con el resto.
+
+Reduce el coste de acomodar cambios y adelanta el momento en que el cliente ve
+algo que funciona. A cambio, el proceso es menos visible desde fuera —no hay
+documentos de fase que marquen el avance— y la estructura del sistema tiende a
+degradarse si no se reserva esfuerzo para reorganizarla.
+
+\subsection*{Modelos evolutivos y por prototipos}
+
+Cuando el problema no está claro, resulta razonable construir una versión reducida
+que sirva para entenderlo. El prototipo puede ser \emph{desechable}, si su único
+fin es aclarar requisitos y luego se descarta, o \emph{evolutivo}, si se refina
+hasta convertirse en el producto. El riesgo del segundo es conocido: un prototipo
+se construye sin las garantías que se exigen a un producto, y promoverlo tal cual
+deja una base frágil.
+
+El \textbf{modelo en espiral} de Boehm organiza el desarrollo en ciclos y sitúa el
+análisis de riesgos como actividad explícita al principio de cada uno. Su
+aportación duradera no es la forma de la espiral, sino la idea de que el proceso
+debe adaptarse al riesgo asumido.
+
+\subsection*{Métodos ágiles}
+
+Los métodos ágiles parten de una constatación: en muchos proyectos el coste de
+predecir es mayor que el de adaptarse. Priorizan las entregas frecuentes, la
+colaboración con el cliente y la respuesta al cambio por encima de la planificación
+detallada y la documentación exhaustiva. Scrum organiza el trabajo en iteraciones
+cortas con roles y reuniones definidos; la programación extrema añade prácticas
+técnicas como la integración continua, la programación por parejas y el desarrollo
+guiado por pruebas \cite{beck2002,lasa2017}.
+
+No son la respuesta a todo. Su eficacia se apoya en equipos pequeños, en un cliente
+disponible y en un dominio donde equivocarse sea barato. En sistemas con
+certificación obligatoria, con muchos equipos coordinados o con un coste de fallo
+muy alto, conviene un proceso más ceremonioso, aunque adopte prácticas ágiles en
+lo técnico.

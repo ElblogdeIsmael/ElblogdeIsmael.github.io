@@ -1,0 +1,170 @@
+\chapter{Ingeniería de requisitos}
+
+\section{Introducción a la ingeniería de requisitos}
+
+Determinar qué debe hacer un sistema es más difícil que construirlo. El problema
+no es técnico: consiste en enunciar con precisión un problema complejo del que
+las personas implicadas tienen ideas distintas, a veces incompatibles y casi
+siempre incompletas.
+
+Un \textbf{requisito} es una condición o capacidad que el sistema debe satisfacer.
+La palabra se usa con dos niveles de detalle que conviene no mezclar
+\cite{sommerville2016}:
+
+\begin{itemize}
+    \item Los \textbf{requisitos de usuario} se enuncian en lenguaje natural,
+          desde el punto de vista de quien va a usar el sistema, y sirven para
+          acordar el alcance con el cliente.
+    \item Los \textbf{requisitos del sistema} detallan las funciones, servicios y
+          restricciones con la precisión necesaria para diseñar y contratar.
+\end{itemize}
+
+La distinción clásica es otra, y es transversal a la anterior:
+
+\begin{itemize}
+    \item \textbf{Requisitos funcionales}: lo que el sistema debe hacer.
+    \item \textbf{Requisitos no funcionales}: las restricciones sobre cómo debe
+          hacerlo —rendimiento, disponibilidad, seguridad, normativa aplicable—.
+\end{itemize}
+
+Los no funcionales suelen recibir menos atención y son los que más condicionan la
+arquitectura. Un requisito de tiempo de respuesta o de tolerancia a fallos afecta
+al sistema entero, mientras que un requisito funcional suele quedar confinado a
+un módulo. Además, incumplir un requisito no funcional puede inutilizar el sistema
+aunque todas sus funciones estén implementadas.
+
+\subsection*{Propiedades de un buen conjunto de requisitos}
+
+Un requisito bien escrito es \emph{necesario}, \emph{verificable}, \emph{no
+ambiguo} y \emph{consistente} con los demás. La verificabilidad es la propiedad
+que más se descuida: «el sistema debe ser rápido» no es un requisito, porque no
+existe prueba que decida si se cumple. «El sistema debe responder a una consulta
+de catálogo en menos de dos segundos con cien usuarios concurrentes» sí lo es.
+
+Al conjunto se le exige además que sea \emph{completo} y \emph{trazable}: que
+cubra todo lo necesario y que cada elemento del diseño y de las pruebas pueda
+remontarse al requisito que lo justifica. La completitud absoluta es inalcanzable
+en sistemas grandes, y esa es una de las razones por las que los procesos
+iterativos ganaron terreno.
+
+\subsection*{Delimitar lo que queda fuera}
+
+Tan importante como decir qué hace el sistema es dejar por escrito qué no hace. Un
+alcance que no se cierra crece durante el desarrollo sin que nadie lo decida, y
+ese crecimiento es una de las causas habituales de que un proyecto se desvíe en
+plazo y coste. La lista de exclusiones debe ser explícita y estar acordada.
+
+\section{Obtención de requisitos}
+
+La obtención —o elicitación— es la actividad de descubrir los requisitos hablando
+con las personas implicadas y observando cómo trabajan. Las dificultades son
+recurrentes: quienes van a usar el sistema describen su trabajo en términos de la
+herramienta que ya conocen, dan por supuesto lo que para ellos es evidente, y
+distintos grupos tienen objetivos que chocan.
+
+Las técnicas más usadas son:
+
+\begin{itemize}
+    \item \textbf{Entrevistas}, abiertas o estructuradas. Son el instrumento
+          principal. Las abiertas sirven para explorar; las estructuradas, para
+          confirmar y precisar.
+    \item \textbf{Observación} del trabajo real. Descubre lo que nadie menciona en
+          una entrevista porque lo hace de forma automática, y también los atajos
+          con los que se sortea el sistema actual.
+    \item \textbf{Talleres} con varios grupos a la vez, útiles para sacar a la luz
+          los conflictos entre ellos en vez de descubrirlos al final.
+    \item \textbf{Prototipos} y maquetas, que convierten una discusión abstracta
+          en una reacción concreta ante algo visible.
+    \item \textbf{Estudio de la documentación} existente y del sistema al que se
+          sustituye.
+\end{itemize}
+
+Identificar a los \emph{stakeholders} —toda persona u organización afectada por el
+sistema— forma parte de la actividad. Olvidar a un grupo es la vía más directa a
+un requisito descubierto tarde: los administradores del sistema, el personal de
+soporte y los responsables de cumplimiento normativo quedan fuera de la lista con
+frecuencia y aportan restricciones que luego resultan innegociables.
+
+\section{Modelado de casos de uso e historias de usuario}
+
+\subsection*{Casos de uso}
+
+Un caso de uso describe una interacción entre el sistema y un actor externo que
+produce un resultado con valor para ese actor. El \textbf{actor} es un rol, no una
+persona: el mismo empleado puede actuar como «cliente» y como «administrador» en
+casos distintos.
+
+El diagrama de casos de uso de UML solo aporta la vista general: qué actores hay y
+con qué casos se relacionan. El contenido está en la descripción textual de cada
+caso, que suele incluir el actor principal, las precondiciones, el flujo
+principal paso a paso, los flujos alternativos y la postcondición
+\cite{arlow2006,larman2006}.
+
+Las relaciones entre casos —\texttt{include} para el comportamiento común y
+\texttt{extend} para el opcional— conviene usarlas con moderación. Un modelo lleno
+de descomposiciones se vuelve ilegible y empieza a describir el diseño en vez del
+comportamiento observable, que es justo lo que un caso de uso debe evitar.
+
+El error más frecuente al modelar es escribir los casos desde dentro del sistema,
+en términos de pantallas y de operaciones sobre la base de datos. Un caso de uso
+debe poder leerlo el cliente y reconocer su trabajo en él.
+
+\subsection*{Historias de usuario}
+
+Las historias de usuario son la alternativa ágil: enunciados breves, en la forma
+«como \emph{rol} quiero \emph{acción} para \emph{beneficio}», acompañados de
+criterios de aceptación. No pretenden documentar el sistema, sino recordar una
+conversación pendiente con el cliente y servir de unidad de planificación.
+
+Frente a los casos de uso son más ligeras y más fáciles de reordenar por
+prioridad, pero dejan menos rastro. La elección entre unos y otras no es de moda:
+depende de si el cliente está disponible de forma continua —caso en el que la
+conversación sustituye al documento— o de si el acuerdo tiene que sostenerse por
+sí solo durante meses.
+
+\section{Especificación y análisis}
+
+\subsection*{Especificación}
+
+Especificar es dejar los requisitos por escrito de forma que sirvan de contrato
+técnico. El documento de especificación —el \emph{SRS}, por sus siglas en
+inglés— recoge la introducción y el alcance, la descripción general del sistema y
+su entorno, los requisitos funcionales, los no funcionales y las restricciones,
+más los apéndices con glosario y modelos.
+
+El estilo importa. Los requisitos se enuncian en frases cortas, una condición por
+requisito, con identificador propio y sin conjunciones que escondan dos
+exigencias en una. Las palabras que expresan obligación deben usarse con un
+significado acordado y constante, y conviene evitar los términos que no admiten
+prueba: «adecuado», «amigable», «eficiente», «si es posible».
+
+\subsection*{Análisis}
+
+El análisis transforma los requisitos en modelos que permiten razonar sobre ellos
+antes de diseñar. En un enfoque orientado a objetos, el resultado típico es el
+\textbf{modelo conceptual} o modelo del dominio: las clases del problema, sus
+atributos y las asociaciones entre ellas \cite{larman2006}.
+
+Ese modelo no es un diseño. Recoge los conceptos del dominio tal como existen para
+el cliente, sin métodos, sin decisiones de implementación y sin clases técnicas.
+Confundir ambas cosas produce un modelo del dominio contaminado de controladores y
+gestores, que ya no sirve para hablar con quien conoce el negocio.
+
+Junto al modelo conceptual se emplean los \textbf{diagramas de secuencia del
+sistema}, que muestran las operaciones que un actor invoca sobre el sistema visto
+como una caja negra, y los \textbf{contratos de operación}, que precisan el efecto
+de cada una en términos de precondiciones y postcondiciones.
+
+\subsection*{Validación y gestión de los requisitos}
+
+Validar los requisitos es comprobar que describen el sistema que el cliente quiere,
+frente a verificar, que es comprobar que el sistema construido cumple los
+requisitos. Las técnicas habituales son las revisiones formales con los
+implicados, la construcción de prototipos y la redacción anticipada de los casos
+de prueba: un requisito para el que no se sabe escribir una prueba está mal
+enunciado.
+
+Los requisitos cambian durante todo el proyecto, así que necesitan gestión: una
+línea base acordada, un procedimiento para proponer y aprobar cambios, y
+trazabilidad para saber qué se ve afectado por cada uno. Sin trazabilidad, el
+coste de un cambio se estima a ojo y siempre por debajo.

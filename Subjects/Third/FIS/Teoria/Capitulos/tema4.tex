@@ -1,0 +1,151 @@
+\chapter{Otros aspectos de la Ingeniería del Software}
+
+\section{Planificación y gestión de proyectos software}
+
+Gestionar un proyecto software consiste en conseguir que se entregue en plazo,
+dentro del presupuesto y con la calidad acordada. Es una actividad de ingeniería
+tanto como el diseño, y comparte con él la dificultad de decidir con información
+incompleta.
+
+Los proyectos software tienen rasgos que los distinguen de otros: el producto es
+intangible, así que el avance no se ve; no hay dos proyectos iguales, de modo que
+la experiencia previa se traslada mal; y el proceso cambia con la tecnología a un
+ritmo que envejece rápido los datos históricos \cite{sommerville2016}.
+
+\subsection*{Estimación}
+
+Estimar es predecir esfuerzo, plazo y coste. Los enfoques habituales son tres, y
+suelen combinarse:
+
+\begin{itemize}
+    \item \textbf{Juicio de expertos}, con varias personas estimando por separado
+          y contrastando después. Es barato y sorprendentemente robusto cuando el
+          equipo conoce el dominio.
+    \item \textbf{Estimación por analogía}, comparando con proyectos anteriores
+          medidos.
+    \item \textbf{Modelos algorítmicos}, como COCOMO, que calculan el esfuerzo a
+          partir de una medida del tamaño y de factores de ajuste.
+\end{itemize}
+
+Todos comparten el mismo punto débil: dependen de una estimación del tamaño que se
+hace cuando menos se sabe del sistema. De ahí la práctica de estimar por rangos,
+revisar la estimación en cada iteración y desconfiar de las cifras cerradas dadas
+antes de la especificación.
+
+Conviene recordar además que el esfuerzo y el plazo no son intercambiables.
+Añadir personas a un proyecto retrasado aumenta el coste de coordinación y suele
+retrasarlo más, observación que Brooks formuló hace medio siglo y que sigue
+describiendo bien lo que ocurre.
+
+\subsection*{Planificación y riesgos}
+
+La planificación descompone el trabajo en tareas con dependencias, asigna
+recursos y fija hitos. Los hitos deben corresponder a entregables verificables;
+un hito que se declara cumplido porque «está casi terminado» no informa de nada.
+
+La gestión de riesgos es la parte de la planificación que se salta con más
+frecuencia y la que más pronto se echa en falta. Consiste en identificar lo que
+puede salir mal, estimar su probabilidad y su impacto, decidir qué hacer con cada
+riesgo —evitarlo, mitigarlo, transferirlo o aceptarlo— y revisar la lista de forma
+periódica. Los riesgos habituales en software son la rotación del personal, el
+cambio de requisitos, la subestimación del tamaño y la dependencia de tecnología
+o proveedores no probados.
+
+\subsection*{Calidad y métricas}
+
+La gestión de la calidad establece qué se entiende por calidad en el proyecto y
+cómo se comprueba: estándares de producto, estándares de proceso, revisiones e
+inspecciones. Las métricas —tamaño, complejidad, densidad de defectos, cobertura
+de pruebas— sirven para tomar decisiones, no para evaluar personas. Usadas como
+objetivo, dejan de medir lo que medían, porque el equipo optimiza el indicador y
+no la propiedad que representaba.
+
+\section{Validación y verificación de software}
+
+Verificar es comprobar que el sistema se construye conforme a su especificación;
+validar es comprobar que la especificación describe lo que el cliente necesita. La
+distinción clásica lo resume bien: la verificación pregunta si se está
+construyendo el producto correctamente, y la validación, si se está construyendo
+el producto correcto.
+
+\subsection*{Pruebas}
+
+Las pruebas ejecutan el sistema con la intención de encontrar defectos. Un
+resultado sin fallos no demuestra que no los haya: las pruebas muestran la
+presencia de errores, nunca su ausencia. Se organizan en niveles:
+
+\begin{itemize}
+    \item \textbf{Unitarias}, sobre componentes aislados, escritas normalmente por
+          quien los implementa y automatizadas.
+    \item \textbf{De integración}, sobre las interacciones entre componentes, donde
+          aparecen los fallos de interfaz que las unitarias no ven.
+    \item \textbf{De sistema}, sobre el producto completo, incluidos los requisitos
+          no funcionales: carga, seguridad, recuperación.
+    \item \textbf{De aceptación}, ejecutadas con el cliente o en sus términos, y
+          que pertenecen a la validación más que a la verificación.
+\end{itemize}
+
+El diseño de los casos de prueba puede partir de la especificación —prueba de caja
+negra, con técnicas como las clases de equivalencia y el análisis de valores
+límite— o de la estructura interna —prueba de caja blanca, guiada por criterios de
+cobertura—. Ninguno de los dos basta por sí solo: la caja negra no llega a los
+caminos no previstos y la caja blanca no detecta lo que falta implementar
+\cite{pfleeger2002}.
+
+La \textbf{prueba de regresión} es la que se vuelve a pasar tras cada cambio para
+comprobar que no se ha roto lo que funcionaba. Solo es viable si está
+automatizada, y por eso la automatización de pruebas es una decisión de proceso
+más que una preferencia técnica. En la programación extrema se lleva al extremo
+escribiendo la prueba antes que el código \cite{beck2002}.
+
+\subsection*{Revisiones e inspecciones}
+
+No toda verificación requiere ejecutar. Las revisiones e inspecciones examinan
+documentos y código con una lista de comprobación, y encuentran defectos que las
+pruebas no alcanzan, entre ellos los de la propia especificación. Su ventaja es
+que actúan antes: un defecto detectado en la revisión de requisitos cuesta una
+fracción de lo que cuesta corregido en producción.
+
+\section{Mantenimiento de software}
+
+El mantenimiento es todo el trabajo que se hace sobre el sistema después de la
+entrega, y es la fase más larga y más cara del ciclo de vida. Se clasifica en
+cuatro tipos:
+
+\begin{itemize}
+    \item \textbf{Correctivo}, para reparar defectos.
+    \item \textbf{Adaptativo}, para acomodar cambios del entorno: sistema
+          operativo, normativa, sistemas con los que se integra.
+    \item \textbf{Perfectivo}, para añadir funcionalidad o mejorar el rendimiento a
+          petición del usuario.
+    \item \textbf{Preventivo}, para facilitar el mantenimiento futuro sin cambiar
+          el comportamiento observable.
+\end{itemize}
+
+Contra la intuición, el correctivo es la parte menor. La mayoría del esfuerzo se
+va en perfectivo y adaptativo, es decir, en hacer evolucionar un sistema que
+funciona \cite{sommerville2016}.
+
+\subsection*{Evolución y deterioro}
+
+Las leyes de Lehman describen lo que le ocurre a un sistema en uso: si no cambia,
+deja de resultar útil, porque el entorno sí cambia; y a medida que cambia, su
+complejidad crece salvo que se dedique trabajo explícito a contenerla. De ahí que
+el mantenimiento preventivo —refactorizar, actualizar dependencias, recuperar la
+documentación— no sea un lujo, sino la condición para que los otros tres tipos
+sigan siendo asequibles.
+
+La \textbf{deuda técnica} nombra ese fenómeno desde el lado económico: cada
+decisión tomada por rapidez en lugar de por calidad genera un interés que se paga
+en cada cambio posterior. Es legítimo contraerla de forma consciente y con un plan
+para devolverla; el problema aparece cuando se contrae sin registrarla, porque
+entonces nadie decide cuándo se paga.
+
+\subsection*{Reingeniería}
+
+Cuando el coste de mantener supera al de rehacer, cabe la reingeniería: reconstruir
+el sistema conservando su funcionalidad. Es menos arriesgada que un desarrollo
+desde cero, porque el sistema existente documenta el comportamiento esperado,
+incluido el que nadie llegó a escribir en ningún requisito. La alternativa de
+reescribir de cero pierde ese conocimiento y suele reintroducir defectos que ya
+estaban resueltos.
