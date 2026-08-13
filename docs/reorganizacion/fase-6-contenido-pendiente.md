@@ -724,6 +724,64 @@ Tres cosas más de esa revisión:
   es del profesorado y solo el comportamiento del agente es propio. El párrafo dice ahora
   dónde está en el repositorio.
 
+## El cajón de `build/`, el 2026-08-13
+
+El inventario de PDF solo lista ficheros **versionados**, así que hay una clase entera que
+no puede ver: documentos propios que existen únicamente como salida en `build/` sin
+`git add`. El `.gitignore` los permite —`!Subjects/**/build/*.pdf`— pero nadie los añadió.
+
+Medido: bajo `Subjects/` había **851 ficheros sin versionar, 74 MB**. De ellos **818 los
+ignora `.gitignore`** —`.aux`, `.log`, `.class`— y **33 no**. Esos 33 no eran homogéneos:
+
+| Qué eran | Nº | Qué se hizo |
+| --- | ---: | --- |
+| Propios, sin publicar y reconstruibles | 5 | **Publicados** |
+| Recompilaciones de lo que la web ya sirve desde otra ruta | 16 | Borrados |
+| Muertos | 5 | Borrados |
+| Propios pero sin fuente | 3 | Respaldados, no publicados |
+| Otros (un `.gitignore` suelto, plantillas) | 4 | Borrados |
+
+Los cinco publicados: dos colecciones de preguntas de examen resueltas de FR, la criba de
+Eratóstenes con MPI y la demostración de un algoritmo de exclusión mutua de SCD, y el
+**parcial extra de SCD**, cuyo PDF anterior se retiró el 2026-08-08 por llevar el DNI. Este
+se recompiló desde la fuente ya limpia y se verificó que no lo lleva.
+
+**Los cinco muertos son la huella de una retirada bien hecha.**
+`FBD/Practica/build/Temario.pdf` eran **0 bytes** desde mayo de 2025. Y las prácticas de FR,
+la teoría de ECO y las diapositivas de ISE se habían quedado en tres páginas de portada e
+índice: lo que llevaban dentro no era suyo y las fases anteriores lo retiraron. La de ISE,
+además, era un `\includepdf` de las transparencias del profesorado con portada propia —lo
+mismo que ECO Prácticas—, y su `.fls` lo delata.
+
+**Los tres sin fuente no se publican.** `PDOO/…/Visibilidad.pdf`, `Herencia…` e
+`ISE/…/Libro.pdf` son propios y limpios, pero su `.fls` apunta a rutas del árbol antiguo
+(`Asignaturas/Tercer Año/`) que ya no existen. Publicar un documento que no se puede
+reconstruir es justo lo que el barrido de builds vino a impedir. Respaldados en
+`~/backups/builds-huerfanos-2026-08-13`.
+
+**`git status` pasa de 33 entradas `??` a ninguna.** Y una advertencia: `git clean -d` no
+sirve para esto. Barrería también `Subjects/Fifth/`, `EM/src/t7/`, `FBD/Practica/images/` y
+las carpetas de datos de Grafana, que están vacías pero no son basura declarada. Hay que
+borrar por lista explícita.
+
+### El temario de FIS
+
+`FIS/Teoria/Temario.tex` producía 9 páginas: portada, licencia, índice y **dos aperturas de
+capítulo escritas para presentar las transparencias del profesorado**, que una fase anterior
+había comentado. Lo que quedaba parafraseaba la guía docente. Y su bibliografía eran dos
+entradas con la misma clave `Referencia1`: «Transparencias de la Asignatura…» y una autocita.
+
+Reescrito con el criterio de EM, siguiendo la
+[guía docente oficial 216113B](https://grados.ugr.es/informatica-ade/docencia/plan-estudios/fundamentos-ingenieria-del-software/guia-docente):
+un capítulo por tema y sus apartados en el orden de la guía —el producto software y su ciclo
+de vida, ingeniería de requisitos, diseño, y gestión de proyectos, verificación y
+mantenimiento—. **De 9 páginas a 21**, en impersonal, con la bibliografía fundamental de la
+asignatura citada donde el texto se apoya en ella y cero citas sin resolver.
+
+**Aquí la bibliografía no va en un `.bib`.** El documento tiene preámbulo propio con
+`\usepackage{cite}` y `thebibliography`, no biblatex. Añadirle biblatex por seguir la
+convención de cuarto habría sido cambiar su cadena para no ganar nada.
+
 ## Criterio de hecho
 
 Esta fase no se cierra: se cierra cada asignatura por separado. El progreso se lleva en la
