@@ -104,6 +104,16 @@ export default {
                   href: "/Subjects/Third/PDOO/Teoria/RelacionesEjercicios/Solt3/ETSIIT/build/solt3.pdf",
                   kind: "PDF",
                 },
+                {
+                  name: "Atributos y métodos",
+                  href: "/Subjects/Third/PDOO/Teoria/otros/relacionEjercicios/relacionAtributo_metodos_PDOO.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Métodos de instancia y de clase en Java y Ruby",
+                  href: "/Subjects/Third/PDOO/Teoria/otros/extraINfo/diferenciasEntremetodosJAVAruby.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
@@ -154,6 +164,16 @@ export default {
                   name: "Archivos Modelo Econométrico",
                   href: "https://github.com/Ismael-Sallami/econometric-model",
                   kind: "WEB",
+                },
+              ],
+            },
+            {
+              label: "Teoría",
+              resources: [
+                {
+                  name: "Formulario y resumen",
+                  href: "/Subjects/Third/ECO/Formulario/FCCEE/build/Formulario.pdf",
+                  kind: "PDF",
                 },
               ],
             },
@@ -351,6 +371,11 @@ export default {
                   name: "Tema 1",
                   href: "/viewer/?file=Subjects/Third/SCD/Teoria/Tema1/RelacionEjerciciosTema1.md",
                   kind: "MD",
+                },
+                {
+                  name: "Tema 1 · en PDF",
+                  href: "/Subjects/Third/SCD/Teoria/Tema1/RelacionEjerciciosTema1.pdf",
+                  kind: "PDF",
                 },
                 {
                   name: "Tema 2",
@@ -582,6 +607,11 @@ export default {
                   kind: "PDF",
                 },
                 {
+                  name: "Temario de Prácticas",
+                  href: "/Subjects/Third/FBD/Practica/Temario.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Ejercicios-Controles SQL",
                   href: "/Subjects/Third/FBD/Practica/2parte/Practicas/Ejercicios.sql",
                   kind: "SQL",
@@ -663,8 +693,18 @@ export default {
               label: "Ejercicios-Controles y Controles",
               resources: [
                 {
+                  name: "Ejercicio 2 · Diagrama de casos de uso",
+                  href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Ejercicios/ej2.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Ejercicio 3 · Modelo conceptual",
                   href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Ejercicio3/Ejercicio3/main.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Apuntes Control 1",
+                  href: "/Subjects/Third/FIS/Teoria/Ejercicios-Controles/Controles/control1.pdf",
                   kind: "PDF",
                 },
                 {
@@ -701,6 +741,11 @@ export default {
                 {
                   name: "Práctica 1 · Notas",
                   href: "/Subjects/Third/IA/Practicas/Practicas/Practica1/notas.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Práctica 1 · Apuntes de clase",
+                  href: "/Subjects/Third/IA/Practicas/Practicas/Practica1/apuntesClase.pdf",
                   kind: "PDF",
                 },
                 {
