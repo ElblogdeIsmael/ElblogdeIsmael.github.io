@@ -13,10 +13,9 @@ historial** · **Rama:** se ejecuta sobre `main` ya fusionado
 > ([trampa 4](#si-algo-sale-mal)): **las 238 rutas purgadas dan 0 commits**, y
 > `npm run check` sale verde con sus 181 enlaces.
 >
-> Queda una cosa, y no depende de nosotros: **14 de las 15 `refs/pull` siguen conteniendo el
-> material**. Son de solo lectura y solo GitHub Support puede borrarlas. Un `git clone`
-> normal no las trae —comprobado, 0 commits—, pero un `git fetch origin '+refs/pull/*'`
-> sí. Ver «Lo que queda pendiente» al final.
+> **Cerrada del todo el 2026-08-11**, cuando GitHub Support borró las 15 `refs/pull` que
+> conservaban el material purgado. Eran de solo lectura y no había forma de tocarlas desde
+> aquí. Verificación al final, en «El cierre del ticket».
 
 ---
 
@@ -108,9 +107,9 @@ según la API). El único modo de perder commits es que alguno quede vacío al p
    repositorio solo tiene `push` y `triage`. Se hace desde la web como `ElblogdeIsmael`:
    `Settings` → `General` → `Default branch` → renombrar `main` a `reindex-tmp`, esperar y
    renombrarla de vuelta.
-2. **Ticket a GitHub Support** pidiendo `gc` del repositorio y el borrado de las
-   `refs/pull`. Sin él, GitHub no reempaqueta —el tamaño que muestra no baja— y las catorce
-   referencias de PR siguen conservando el material. Es la recomendación oficial de GitHub
+2. ~~**Ticket a GitHub Support**~~ **Hecho: ticket #4622497, cerrado el 2026-08-11.** Se
+   pidió el `gc` del repositorio y el borrado de las `refs/pull`. Sin él, las quince
+   referencias de PR seguían conservando el material. Es la recomendación oficial de GitHub
    para retirar contenido de un historial.
 
    **Se pide como retirada de datos sensibles, que es lo que fue: había tres claves SSH
@@ -123,8 +122,60 @@ según la API). El único modo de perder commits es que alguno quede vacío al p
    **Coste que hay que aceptar antes de pedirlo:** las 15 pull requests se quedan sin diffs
    ni commits. La conversación sobrevive, «Files changed» no, y los enlaces a commits
    viejos desde issues o comentarios dejan de resolver.
-3. **Copiar `~/backups/` a un disco externo.** Hoy están en el mismo `/dev/nvme0n1p4` que el
-   repositorio, así que un fallo de disco se lleva el respaldo y el original a la vez.
+3. **Copiar `~/backups/` a un disco externo.** Hoy están en el mismo disco que el
+   repositorio, así que un fallo se lleva el respaldo y el original a la vez.
+
+## El cierre del ticket, el 2026-08-11
+
+Support borró las quince referencias, pasó el `gc` y limpió la caché del repositorio. Lo
+hizo **como excepción a su política escrita**, y lo dejó dicho: no van a tramitar peticiones
+parecidas sobre credenciales en el futuro. Lo que abrió la excepción no fueron las claves
+—que se pueden rotar, y su respuesta del 3 de agosto decía justo eso— sino los **238
+ficheros con copyright**, que no se pueden rotar.
+
+Verificado desde un clon bare limpio, que es lo único que vale:
+
+| Comprobación | Resultado |
+| --- | --- |
+| `refs/pull` recuperables con `git fetch origin '+refs/pull/*'` | **7**, de la #24 a la #30, todas posteriores a la reescritura |
+| Las quince del ticket: #1, #2 y de la #11 a la #23 | **borradas** |
+| Rutas del inventario de material ajeno alcanzables | **0** de 238 |
+| Ficheros que casan los patrones de clave | **0** de 12 |
+| Objetos del pack con `BEGIN … PRIVATE KEY` **por contenido** | 5, y las cinco son esta misma documentación describiendo el hallazgo |
+
+```bash
+git clone --bare git@github.com:ElblogdeIsmael/ElblogdeIsmael.github.io.git /tmp/verif
+cd /tmp/verif && git fetch origin '+refs/pull/*:refs/pull/*'
+git for-each-ref --format='%(refname)' 'refs/pull/**'
+git cat-file --batch-all-objects --batch | grep -ac 'BEGIN .*PRIVATE KEY'
+```
+
+**El patrón lleva dos asteriscos a propósito.** `git for-each-ref 'refs/pull/*'` devuelve
+**cero aunque las referencias existan**, porque su `*` no cruza barras y las refs son
+`refs/pull/<n>/head`. Con el patrón corto, un remoto intacto pasa por limpio.
+
+Con esto se pudo borrar `~/backups/blog-pre-fase3-2026-08-01.git`, 1,4 GB, que era el único
+deshacer de esta fase y lo único que seguía esperando al ticket.
+
+### Lo que el cierre deja claro sobre el peso
+
+**El `size-pack` no bajó ni un byte**: 418,77 MiB antes y después del `gc` de Support. Las
+referencias no eran lo que lo sostenía. Medido sobre el clon limpio:
+
+| | Peso |
+| --- | ---: |
+| Blobs de rutas que **ya no existen** en `HEAD` | **358 MB** |
+| Blobs de rutas vivas | 257 MB |
+| Del total del historial, en `.pdf` | 443 MB |
+
+Es material que las fases 2 y 5 borraron del árbol y sigue ocupando el historial: seis de
+los diez PDF más pesados —`DAE/mapa_conceptual.pdf` solo, 50,9 MB— no están en `HEAD`.
+
+Una tercera pasada de `filter-repo` dejaría el repositorio por debajo de los 300 MB del
+objetivo. **Antes de plantearla, dos cosas:** las siete `refs/pull` vivas volverían a
+anclar el historial viejo, y Support ya ha dicho que esta excepción no se repite. Como aquí
+no queda nada sensible —solo peso— eso no es un problema de seguridad, pero sí significa
+que el resultado sería visiblemente incompleto y sin nadie a quien pedirle el remate.
 
 ## Ensayo del 2026-08-01, con números
 
@@ -150,7 +201,10 @@ Reproducir el ensayo:
 git clone --mirror . ~/backups/elblogdeismael-pre-fase3.git
 cp -a ~/backups/elblogdeismael-pre-fase3.git ~/backups/ensayo-fase3.git
 cd ~/backups/ensayo-fase3.git
-for r in $(git for-each-ref --format='%(refname)' 'refs/pull/*' 'refs/replace/*'); do
+# Dos asteriscos en refs/pull: las refs son refs/pull/<n>/head y el * no cruza barras,
+# asi que 'refs/pull/*' no casa ninguna y el bucle se queda sin hacer nada. En
+# refs/replace, que son de un solo nivel, uno basta.
+for r in $(git for-each-ref --format='%(refname)' 'refs/pull/**' 'refs/replace/*'); do
   git update-ref -d "$r"
 done
 awk -F'\t' '$1=="PURGABLE"{print $3}' \
@@ -328,20 +382,23 @@ copias, pero el clon actual conserva los objetos del historial viejo hasta que s
 
 ### 7 · Limpieza
 
-- [ ] Conservar `~/backups/elblogdeismael-*.git` **un mes** desde el despliegue correcto.
-      No borrarlo antes.
-- [ ] Anotar en [DECISIONES.md](DECISIONES.md) el tamaño final y cualquier ruta que se
+- [x] Conservar el espejo hasta que cierre el ticket de Support, no un mes fijo. **Borrado
+      el 2026-08-11**, diez días después del despliegue y el mismo día del cierre.
+- [x] Anotar en [DECISIONES.md](DECISIONES.md) el tamaño final y cualquier ruta que se
       decidiera conservar.
 
 ---
 
 ## Criterio de hecho
 
-- `git count-objects -vH` → `size-pack` **< 300 MB**.
-- `git log --all --name-only | grep id_rsa` no devuelve nada.
-- Ninguna copia local apunta al historial viejo.
-- El sitio publicado funciona y `npm run check` pasa.
-- La copia espejo existe y está guardada.
+- ~~`git count-objects -vH` → `size-pack` **< 300 MB**~~. **No se cumple, y el criterio
+  estaba mal formulado**: 418,77 MiB, que no dependen de esta fase sino de cuántos PDF se
+  versionan. Ver «Lo que el cierre deja claro sobre el peso».
+- `git log --all --name-only | grep id_rsa` no devuelve nada. **Sí.**
+- Ninguna copia local apunta al historial viejo. **Sí.**
+- El sitio publicado funciona y `npm run check` pasa. **Sí**, 189 enlaces.
+- ~~La copia espejo existe y está guardada~~. Existió hasta el 2026-08-11, que era su
+  condición. **A partir de aquí esta fase no tiene vuelta atrás.**
 
 ## Verificación
 
@@ -363,14 +420,18 @@ Antes del `push --force`, basta con volver al respaldo:
 git reset --hard backup/pre-fase-3
 ```
 
-Después del `push --force`, se restaura desde la copia espejo:
+Después del `push --force`, se restauraba desde la copia espejo:
 
 ```bash
 cd ~/backups/elblogdeismael-<fecha>.git
 git push --force --mirror git@github.com:ElblogdeIsmael/ElblogdeIsmael.github.io.git
 ```
 
-Por eso el espejo no se borra hasta pasado un mes.
+> **Esto ya no se puede hacer.** El espejo se borró el 2026-08-11, que era la condición con
+> la que se guardaba: el cierre del ticket de Support. Si esta receta se reutiliza en otro
+> repositorio, el espejo se conserva **hasta que Support confirme el borrado de las
+> `refs/pull`**, no un mes fijo; mientras las referencias siguen vivas, la reescritura no
+> está terminada y el deshacer hace falta.
 
 ---
 
