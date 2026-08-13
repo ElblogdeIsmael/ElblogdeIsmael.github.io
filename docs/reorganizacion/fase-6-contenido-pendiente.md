@@ -645,6 +645,64 @@ entregado convierte cada recompilación en una mentira sobre la fecha.**
 Barrido de procedencia sobre las 20: cero marcas de descarga, cero nombres del profesorado,
 y los 19 `.tex` firman todos igual.
 
+### Las 58 restantes, el mismo día
+
+Medidas una a una, **la mayoría no eran candidatas**. El criterio: comparar el texto de cada
+una contra la **unión de todo lo que su asignatura ya publica**, no contra un documento
+suelto. Comparando solo contra uno, `FIS/…/ej3.pdf` parecía aportar 106 palabras de 174;
+contra todo lo publicado son **8**, porque es el «Ejercicio 3» que la ficha ya sirve.
+
+| Estado | Nº |
+| --- | ---: |
+| Ya salen dentro de otro PDF que la web sirve | 16 |
+| Ya publicadas como fichero propio en otra ruta | 6 |
+| Duplicado interno o versión peor que la publicada | 9 |
+| Figuras y plantillas en blanco | 6 |
+| Enunciado incrustado, no se indexan tal cual | 4 |
+| Retiradas por decisión previa (MAC) | 3 |
+| Carcasas vacías o punteros | 2 |
+| **Indexadas** | **7** |
+
+Las siete: `FIS/…/ej2.pdf` y `control1.pdf`, `FBD/Practica/Temario.pdf`,
+`SCD/…/RelacionEjerciciosTema1.pdf`, `IA/…/apuntesClase.pdf` y las dos de PDOO.
+
+**Con esto el inventario queda cerrado**: las 78 líneas llevan decisión escrita en su nota,
+26 indexadas y 52 no.
+
+### El formulario de Econometría, 47 páginas, que el inventario no podía ver
+
+`ECO/Formulario/FCCEE/build/Formulario.pdf` existía solo en disco, **sin `git add`**, y sin
+enlazar. No salía en el inventario porque **el inventario solo lista PDF versionados**. Son
+47 páginas propias —2.308 palabras que no están en nada de lo que ECO publicaba—, compilan
+desde fuentes versionadas y la ficha de ECO no tenía teoría de ningún tipo. Versionado y
+publicado.
+
+Para buscar más de esa clase:
+
+```bash
+comm -13 <(git -c core.quotepath=false ls-files '*.pdf' | sort -u) \
+         <(find Subjects -name '*.pdf' | sort -u)
+```
+
+**El `core.quotepath=false` no es opcional.** Sin él, `git ls-files` escapa los acentos
+—`Pr\303\241cticas`— y las rutas con tilde salen como si no estuvieran versionadas. Con el
+patrón corto llegué a creer que la web publicaba un PDF de 115 páginas que no estaba en git.
+
+Los otros 32 que salen del barrido son salida de `build/` de la tanda del 2026-08-09 y
+reconstruyen documentos ya publicados.
+
+### Dos defectos que aparecieron al abrirlos
+
+- **`IA/Teoria/Temario.pdf` es una carcasa vacía.** Su `Temario.tex` lleva **todos** los
+  `\input{Capitulos/…}` comentados, así que salen 5 páginas con portada, índice vacío y una
+  bibliografía que se cita a sí misma. Y lo comentado existe: **886 líneas escritas** en
+  `Capitulos/` —Tema 1, Tema 2, Tema 3, la relación 1 y el problema del mono y el plátano—
+  que no llegan a ningún sitio. Es el mismo patrón que EM. Queda pendiente.
+- **`SCD/Practicas/ETSIIT/Practicas.pdf` pasó de 317 páginas a 8** en la recompilación del
+  2026-08-09 que quitó lo ajeno, y lo que queda son punteros al repositorio
+  `concurrency-mpi` que la ficha ya enlaza directamente. No se indexa, pero **el inventario
+  seguía diciendo 317**: los recuentos envejecen igual que las clasificaciones.
+
 ## Criterio de hecho
 
 Esta fase no se cierra: se cierra cada asignatura por separado. El progreso se lleva en la
