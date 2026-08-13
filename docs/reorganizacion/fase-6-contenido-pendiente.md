@@ -281,7 +281,11 @@ que su explicación se ha pasado a `explicacion.md` y el PDF se ha retirado a
 `~/backups/dni-scd-2026-08-08`.
 
 **Sin tocar el historial**: el dato sigue siendo alcanzable con `git log`. Reescribir los
-272 commits otra vez no compensa mientras el ticket #4622497 siga abierto.
+313 commits otra vez no compensa, y desde el 2026-08-11 el motivo es otro que cuando se
+escribió esto. Entonces era que el ticket #4622497 seguía abierto. Ahora está cerrado, y lo
+que desaconseja una tercera pasada es que **las siete `refs/pull` vivas volverían a anclar
+el historial viejo** y Support ya ha dicho por escrito que la excepción no se repite. Un
+DNI en un commit de hace meses no justifica quedarse sin forma de rematarlo.
 
 ### Lo que quedaba del inventario
 
@@ -290,11 +294,12 @@ Los **9 `ESCANEO`**, que se cerraron al día siguiente. Ver la sección de abajo
 Barrido de control sobre todos los PDF versionados buscando marca de descarga: solo salieron
 los 7 de CF1, ya retirados. Por esa señal no queda nada.
 
-**Un defecto que se ve y no se toca:** `FBD/Teoria/Temario.tex` hace
-`\includepdf{../../../../licencia.pdf}` y el fichero está en `extraFiles/licencia.pdf`, así
-que su compilación falla. El mismo error tenía FIS y ahí se arregló, porque hacía falta para
-verificar este trabajo. En FBD se deja: arreglarlo cambia un PDF que la web publica y eso es
-una decisión de contenido, no de esta tanda.
+**Un defecto que se veía y no se tocó**, y que la tanda de builds del día siguiente sí
+arregló: `FBD/Teoria/Temario.tex` hacía `\includepdf{../../../../licencia.pdf}` cuando el
+fichero está en `extraFiles/licencia.pdf`, así que su compilación fallaba. Se dejó porque
+arreglarlo cambiaba un PDF que la web publica. Cambió, y a mejor: **19 páginas a 25**, seis
+de relación 3 que llevaban escritas desde que la ruta se rompió. Está más abajo, en «Los
+PDF publicados».
 
 ---
 
