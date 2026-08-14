@@ -158,7 +158,7 @@ es futuro. Se rellena sobre la marcha.
 
 ## D-10 · Códigos de asignatura duplicados
 
-**Fecha:** 2026-07-26 · **Estado:** pendiente de aplicar (fase 6)
+**Fecha:** 2026-07-26 · **Estado:** **aplicada** el 2026-08-14, en la primera tanda de la fase 6
 
 Dos códigos se repiten entre cursos:
 
