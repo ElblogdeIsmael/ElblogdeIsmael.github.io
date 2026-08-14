@@ -88,6 +88,51 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/fundamentos-fisicos-y-tecnologicos/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/FFT/build/FFT.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Fundamentos de electromagnetismo",
+                  href: "/viewer/?file=Subjects/First/FFT/src/01_electromagnetismo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Teoría de circuitos. Corriente continua",
+                  href: "/viewer/?file=Subjects/First/FFT/src/02_continua.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Teoría de circuitos. Corriente alterna",
+                  href: "/viewer/?file=Subjects/First/FFT/src/03_alterna.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Dispositivos electrónicos",
+                  href: "/viewer/?file=Subjects/First/FFT/src/04_dispositivos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Fundamentos de electrónica digital",
+                  href: "/viewer/?file=Subjects/First/FFT/src/05_digital.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Circuitos electrónicos básicos",
+                  href: "/viewer/?file=Subjects/First/FFT/src/06_circuitos_basicos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/First/FFT/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
