@@ -56,8 +56,10 @@ export default {
             {
               resources: [
                 {
-                  name: "Guía docente",
-                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/estructura-datos/guia-docente",
+                  // La UGR no publica subpagina de guia docente para esta
+                  // asignatura: /guia-docente devuelve 404. Se enlaza su ficha.
+                  name: "Ficha de la asignatura",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/estructura-datos",
                   kind: "GUIA",
                 },
               ],
@@ -122,8 +124,9 @@ export default {
             {
               resources: [
                 {
-                  name: "Guía docente (no disponible)",
-                  note: true,
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/introduccion-al-marketing/guia-docente",
+                  kind: "GUIA",
                 },
               ],
             },
@@ -143,7 +146,9 @@ export default {
           ],
         },
         {
-          code: "MAC",
+          // MACRO, no MAC: en cuarto MAC es Modelos Avanzados de Computacion y
+          // la insignia de la ficha quedaba ambigua. Ver D-10.
+          code: "MACRO",
           name: "Macroeconomía",
           blocks: [
             {
@@ -282,8 +287,9 @@ export default {
             {
               resources: [
                 {
-                  name: "Guía docente (no disponible)",
-                  note: true,
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/arquitectura-computadores/guia-docente",
+                  kind: "GUIA",
                 },
               ],
             },
@@ -303,7 +309,8 @@ export default {
           ],
         },
         {
-          code: "CG",
+          // CGRAL, no CG: en cuarto CG es Contabilidad de Gestion. Ver D-10.
+          code: "CGRAL",
           name: "Contabilidad General",
           blocks: [
             {

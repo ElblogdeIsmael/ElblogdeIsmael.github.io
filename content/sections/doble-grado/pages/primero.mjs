@@ -165,7 +165,7 @@ export default {
               resources: [
                 {
                   name: "Guía docente",
-                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/estructura-computadores/guia-docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/tecnologia-y-organizacion-computadores/guia-docente",
                   kind: "GUIA",
                 },
               ],
@@ -226,8 +226,9 @@ export default {
             {
               resources: [
                 {
-                  name: "Guía docente (no disponible)",
-                  note: true,
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/historia-del-desarrollo-economico-mundial-contemporaneo/guia-docente",
+                  kind: "GUIA",
                 },
               ],
             },
@@ -305,8 +306,10 @@ export default {
             {
               resources: [
                 {
-                  name: "Guía docente",
-                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/metodologia-la-programacion/guia-docente",
+                  // La UGR no publica subpagina de guia docente para esta
+                  // asignatura: /guia-docente devuelve 404. Se enlaza su ficha.
+                  name: "Ficha de la asignatura",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/metodologia-la-programacion",
                   kind: "GUIA",
                 },
               ],
