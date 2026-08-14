@@ -17,6 +17,7 @@ const STATIC_URLS = [
   { path: "/historia/", changefreq: "monthly", priority: "0.5" },
   { path: "/md2html/", changefreq: "monthly", priority: "0.9" },
   { path: "/pdf2md/", changefreq: "monthly", priority: "0.9" },
+  { path: "/diffchecker/", changefreq: "monthly", priority: "0.9" },
 ];
 
 /**

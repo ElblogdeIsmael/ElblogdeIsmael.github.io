@@ -18,7 +18,7 @@ export default {
   blurb:
     "Pequeñas apps que funcionan al 100% en tu navegador: sin instalar nada y " +
     "sin que tus archivos salgan de tu equipo.",
-  summary: "2 herramientas · sin servidor · código abierto",
+  summary: "3 herramientas · sin servidor · código abierto",
   pages: [],
   links: [
     {
@@ -39,6 +39,11 @@ export default {
     {
       name: "pdf2md · código fuente",
       href: "https://github.com/Ismael-Sallami/pdf-to-md",
+      kind: "WEB",
+    },
+    {
+      name: "diffchecker — comparar dos textos y mezclarlos",
+      href: "/diffchecker/",
       kind: "WEB",
     },
   ],
