@@ -32,6 +32,51 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/estructura-computadores/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/EC/build/EC.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción",
+                  href: "/viewer/?file=Subjects/Second/EC/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Representación de programas a nivel máquina",
+                  href: "/viewer/?file=Subjects/Second/EC/src/02_nivel_maquina.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Unidad de control",
+                  href: "/viewer/?file=Subjects/Second/EC/src/03_unidad_control.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Segmentación de cauce",
+                  href: "/viewer/?file=Subjects/Second/EC/src/04_segmentacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Entrada/Salida",
+                  href: "/viewer/?file=Subjects/Second/EC/src/05_entrada_salida.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Memoria",
+                  href: "/viewer/?file=Subjects/Second/EC/src/06_memoria.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/EC/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
