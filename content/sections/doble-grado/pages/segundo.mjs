@@ -196,6 +196,51 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/sistemas-operativos/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/SO/build/SO.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Estructuras de sistemas operativos",
+                  href: "/viewer/?file=Subjects/Second/SO/src/01_estructuras.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Procesos e hilos",
+                  href: "/viewer/?file=Subjects/Second/SO/src/02_procesos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Gestión de memoria",
+                  href: "/viewer/?file=Subjects/Second/SO/src/03_memoria.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Gestión de archivos",
+                  href: "/viewer/?file=Subjects/Second/SO/src/04_archivos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Gestión de entradas y salidas",
+                  href: "/viewer/?file=Subjects/Second/SO/src/05_entrada_salida.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Mecanismos de seguridad",
+                  href: "/viewer/?file=Subjects/Second/SO/src/06_seguridad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/SO/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
