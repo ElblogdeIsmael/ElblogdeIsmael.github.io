@@ -140,6 +140,51 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/fundamentos-programacion/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/FP/build/FP.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Programación en C++: fundamentos",
+                  href: "/viewer/?file=Subjects/First/FP/src/01_fundamentos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Estructuras de control",
+                  href: "/viewer/?file=Subjects/First/FP/src/02_control.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Funciones",
+                  href: "/viewer/?file=Subjects/First/FP/src/03_funciones.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Registros, vectores y matrices",
+                  href: "/viewer/?file=Subjects/First/FP/src/04_datos_compuestos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Clases",
+                  href: "/viewer/?file=Subjects/First/FP/src/05_clases.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Recursividad",
+                  href: "/viewer/?file=Subjects/First/FP/src/06_recursividad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/First/FP/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
