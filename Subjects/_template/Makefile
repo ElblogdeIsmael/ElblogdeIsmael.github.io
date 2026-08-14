@@ -24,7 +24,9 @@ METADATA = $(TEMPLATE_DIR)/preambulos_oficiales/metadata.yaml
 export TEXINPUTS := .:$(TEMPLATE_DIR)//:$(TEXINPUTS)
 
 # Sorted so the chapters come out in the order their filenames say.
-SRC = $(shell find src -name '*.md' | sort)
+# src/tex/ is pruned: its README.md is documentation for whoever writes the
+# subject, not a chapter, and without the prune it lands in the PDF.
+SRC = $(shell find src -path src/tex -prune -o -name '*.md' -print | sort)
 
 # The .tex files the markdown pulls in with \input. They are prerequisites and
 # not pandoc arguments: LaTeX resolves them at compile time, pandoc never sees
@@ -68,10 +70,15 @@ $(TEX): $(SRC) $(TEXSRC) $(MEDIA) $(TEX_TEMPLATE) $(METADATA)
 		--top-level-division=chapter \
 		-o $(TEX)
 
+# The second find sweeps the subject directory, where latexmk drops stray
+# auxiliary files. referencias.bib is excluded on purpose: it lives here
+# because biber resolves it from the root document, and without the exclusion
+# `make clean` deleted the bibliography source.
 clean:
 	@echo "Borrando lo generado en build/ y demás archivos temporales..."
 	find build -type f ! -name '*.pdf' ! -name '*.tex' -exec rm -f {} +
-	find . -maxdepth 1 -type f ! -name 'Makefile' ! -name '*.pdf' ! -name '*.tex' -exec rm -f {} +
+	find . -maxdepth 1 -type f ! -name 'Makefile' ! -name '*.bib' \
+		! -name '*.pdf' ! -name '*.tex' ! -name '*.md' -exec rm -f {} +
 	rm -rf _minted*
 
 clean-all: clean

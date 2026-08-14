@@ -98,9 +98,9 @@ Dos códigos se repiten entre cursos y la insignia de la ficha queda ambigua
 | `MAC` | Macroeconomía | Modelos Avanzados de Computación | **`MACRO`** |
 | `CG` | Contabilidad General | Contabilidad de Gestión | **`CGRAL`** |
 
-- [ ] Cambiar `code: "MAC"` → `code: "MACRO"` en `segundo.mjs`.
-- [ ] Cambiar `code: "CG"` → `code: "CGRAL"` en `segundo.mjs`.
-- [ ] Usar esos códigos para las carpetas. La carpeta existente ya se llama
+- [x] Cambiar `code: "MAC"` → `code: "MACRO"` en `segundo.mjs`.
+- [x] Cambiar `code: "CG"` → `code: "CGRAL"` en `segundo.mjs`.
+- [x] Usar esos códigos para las carpetas. La carpeta existente ya se llama
       `Subjects/Second/MACRO`, así que el cambio es coherente con lo que hay.
 
 ---
@@ -111,9 +111,9 @@ Dos códigos se repiten entre cursos y la insignia de la ficha queda ambigua
 
 - [ ] **CAL** · Cálculo
 - [ ] **EP** · Economía Política
-- [ ] **FFT** · Fundamentos Físicos y Tecnológicos
+- [x] **FFT** · Fundamentos Físicos y Tecnológicos — 45 páginas, con circuitos en circuitikz
 - [ ] **FDAE** · Fundamentos de Dirección y Administración de Empresas
-- [ ] **FP** · Fundamentos de Programación
+- [x] **FP** · Fundamentos de Programación — 49 páginas
 - [ ] **TOC** · Tecnología y Organización de Computadores
 
 ### Segundo semestre
@@ -122,7 +122,7 @@ Dos códigos se repiten entre cursos y la insignia de la ficha queda ambigua
 - [ ] **HDM** · Historia del Desarrollo Económico Mundial Contemporáneo
 - [ ] **ID** · Introducción al Derecho
 - [ ] **ME** · Matemáticas Empresariales
-- [ ] **MP** · Metodología de la Programación
+- [x] **MP** · Metodología de la Programación — 41 páginas
 - [ ] **MIC** · Microeconomía
 - [ ] **ALG** · Álgebra Lineal y Estructuras Matemáticas
 
@@ -132,18 +132,18 @@ Dos códigos se repiten entre cursos y la insignia de la ficha queda ambigua
 
 ### Primer semestre
 
-- [ ] **EC** · Estructura de Computadores
+- [x] **EC** · Estructura de Computadores — 45 páginas
 - [ ] **ED** · Estructura de Datos — ya enlaza `image-adt`; falta el temario
 - [ ] **IOF** · Introducción a las Operaciones Financieras
 - [ ] **IM** · Introducción al Márketing
 - [ ] **MACRO** · Macroeconomía — ya existe `Ejercicios_macroeconomia.pdf`; falta el temario
-- [ ] **SO** · Sistemas Operativos
+- [x] **SO** · Sistemas Operativos — 55 páginas
 - [ ] **TC1** · Técnicas Cuantitativas I
 
 ### Segundo semestre
 
-- [ ] **ALGO** · Algorítmica
-- [ ] **AC** · Arquitectura de Computadores
+- [x] **ALGO** · Algorítmica — 41 páginas
+- [x] **AC** · Arquitectura de Computadores — 45 páginas
 - [ ] **CGRAL** · Contabilidad General
 - [ ] **DC** · Dirección Comercial
 - [ ] **LMD** · Lógica y Métodos Discretos
@@ -782,6 +782,93 @@ asignatura citada donde el texto se apoya en ella y cero citas sin resolver.
 `\usepackage{cite}` y `thebibliography`, no biblatex. Añadirle biblatex por seguir la
 convención de cuarto habría sido cambiar su cadena para no ganar nada.
 
+## La primera tanda escrita, el 2026-08-14
+
+Siete asignaturas de las 26, escritas con la plantilla de la fase 4. El contador
+de progreso pasa de **1 a 8**: las siete más el `MACRO` que ya tenía sus
+ejercicios.
+
+| Asignatura | Código | Páginas | Obras citadas |
+| --- | --- | ---: | ---: |
+| SO · Sistemas Operativos | 2161127 | 55 | 11 |
+| EC · Estructura de Computadores | 2161126 | 45 | 9 |
+| AC · Arquitectura de Computadores | 216112D | 45 | 8 |
+| FP · Fundamentos de Programación | 2161115 | 49 | 9 |
+| MP · Metodología de la Programación | 216111B | 41 | 8 |
+| ALGO · Algorítmica | 216112C | 41 | 9 |
+| FFT · Fundamentos Físicos y Tecnológicos | 2161116 | 45 | 8 |
+
+Todas siguen el mismo patrón: **un capítulo por tema de la guía docente, en su
+orden**, más el temario práctico como último capítulo, escrito desde el programa
+oficial y no desde los manuales. La bibliografía es la de la guía, citada donde el
+texto se apoya en ella.
+
+La web pasa de **223 enlaces a 280**. `Subjects/First/` no existía y ahora tiene
+tres asignaturas.
+
+### Cinco defectos que aparecieron, y no estaban documentados
+
+**Cuatro enlaces rotos que `npm run check` no puede ver**, porque comprueba que
+los locales existan y **no pide los externos**:
+
+| Ficha | Qué pasaba |
+| --- | --- |
+| TOC | servía `estructura-computadores/guia-docente`, la guía de EC, otra asignatura |
+| MP | `metodologia-la-programacion/guia-docente` daba **404** |
+| ED | `estructura-datos/guia-docente` daba **404** |
+| HDM, IM y AC | «Guía docente (no disponible)» con `note: true`, y las tres existen |
+
+Los dos 404 tienen arreglo y no era la ficha: **la guía firmada sí está
+publicada**, en `guias-firmadas/<curso>/<codigo>.pdf`. El código no lo dice ninguna
+de las dos páginas, así que se encontró barriendo el rango: MP es 216111B y ED,
+2161125.
+
+Barridos los 26 slugs con `curl`, los 26 dan 200.
+
+**Tres defectos de la plantilla**, los tres visibles solo abriendo el PDF:
+
+1. `SRC = $(shell find src -name '*.md')` **entraba en `src/tex/`**, así que el
+   README de esa carpeta salía impreso como un capítulo más. Lo habrían heredado
+   las seis asignaturas siguientes.
+2. `make clean` barría el directorio de la asignatura y **borraba
+   `referencias.bib`**, que vive ahí porque biber lo resuelve desde el documento
+   raíz.
+3. Un título de sección largo desbordaba la cabecera y pisaba el número de página.
+
+### Lo que se aprendió escribiéndolas
+
+- **`check-latex-builds` no ve las asignaturas de flujo pandoc.** Recorre
+  documentos raíz `.tex` **versionados**, y el de una asignatura de plantilla se
+  genera en `build/`, que está ignorado. Le pasa igual a las de cuarto. Lo que
+  vale aquí es compilar desde un clon limpio.
+- **Los caracteres de dibujo de cajas abortan la compilación.** `└` y su familia
+  no tienen `\DeclareUnicodeCharacter`, y tampoco `Ω`. Se redibuja en ASCII o se
+  escribe en modo matemático; añadir declaraciones al preámbulo que cargan los 104
+  documentos es desproporcionado para un símbolo.
+- **El contador de progreso de este documento estaba mal.** `cut -d/ -f3` sobre
+  `"/Subjects/First/FP/..."` devuelve `First`, es decir el curso: contaba dos
+  cuando había ocho asignaturas. Es `-f4`. Corregido abajo.
+- **Un diagrama hay que mirarlo renderizado.** El inversor CMOS compilaba sin una
+  queja y salía con la línea de puerta atravesando hasta la salida.
+
+### El gancho `header-includes`
+
+FFT son circuitos, y el preámbulo compartido no carga `circuitikz`. En vez de
+añadirlo para los 104 documentos, `estilo.latex` gana un bloque
+`$if(header-includes)$`, guardado igual que el de `$highlighting-macros$` que
+tiene justo encima. Una asignatura pide lo que necesite desde el YAML de su propia
+portada:
+
+```yaml
+header-includes: |
+  \usepackage{circuitikz}
+```
+
+Es un no-op para toda asignatura que no declare nada. Verificado con el barrido
+completo: **104 de 104 salen enteros, 0 no compilan, 0 con huecos**.
+
+---
+
 ## Criterio de hecho
 
 Esta fase no se cierra: se cierra cada asignatura por separado. El progreso se lleva en la
@@ -792,8 +879,8 @@ tabla de arriba y en la issue de la fase 6.
 Por cada asignatura terminada:
 
 ```bash
-make -C Subjects/Second/<CODIGO>              # compila
-git ls-files Subjects/Second/<CODIGO>/build   # el PDF está versionado
+make -C Subjects/<Curso>/<CODIGO>              # compila
+git ls-files Subjects/<Curso>/<CODIGO>/build   # el PDF está versionado
 npm run build && npm run check                # la web lo enlaza y no hay rotos
 ```
 
@@ -802,7 +889,7 @@ Contador de progreso:
 ```bash
 # asignaturas de 1º y 2º con al menos un enlace propio (no de grados.ugr.es)
 grep -rhoE 'href: "/Subjects/(First|Second)/[^"]*"' content/sections/doble-grado/pages/{primero,segundo}.mjs \
-  | cut -d/ -f3 | sort -u | wc -l      # objetivo: 26
+  | cut -d/ -f4 | sort -u | wc -l      # objetivo: 26
 ```
 
 ---

@@ -88,6 +88,51 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/fundamentos-fisicos-y-tecnologicos/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/FFT/build/FFT.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Fundamentos de electromagnetismo",
+                  href: "/viewer/?file=Subjects/First/FFT/src/01_electromagnetismo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Teoría de circuitos. Corriente continua",
+                  href: "/viewer/?file=Subjects/First/FFT/src/02_continua.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Teoría de circuitos. Corriente alterna",
+                  href: "/viewer/?file=Subjects/First/FFT/src/03_alterna.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Dispositivos electrónicos",
+                  href: "/viewer/?file=Subjects/First/FFT/src/04_dispositivos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Fundamentos de electrónica digital",
+                  href: "/viewer/?file=Subjects/First/FFT/src/05_digital.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Circuitos electrónicos básicos",
+                  href: "/viewer/?file=Subjects/First/FFT/src/06_circuitos_basicos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/First/FFT/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
@@ -140,6 +185,51 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/fundamentos-programacion/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/FP/build/FP.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Programación en C++: fundamentos",
+                  href: "/viewer/?file=Subjects/First/FP/src/01_fundamentos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Estructuras de control",
+                  href: "/viewer/?file=Subjects/First/FP/src/02_control.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Funciones",
+                  href: "/viewer/?file=Subjects/First/FP/src/03_funciones.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Registros, vectores y matrices",
+                  href: "/viewer/?file=Subjects/First/FP/src/04_datos_compuestos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Clases",
+                  href: "/viewer/?file=Subjects/First/FP/src/05_clases.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Recursividad",
+                  href: "/viewer/?file=Subjects/First/FP/src/06_recursividad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/First/FP/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
@@ -165,7 +255,7 @@ export default {
               resources: [
                 {
                   name: "Guía docente",
-                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/estructura-computadores/guia-docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/tecnologia-y-organizacion-computadores/guia-docente",
                   kind: "GUIA",
                 },
               ],
@@ -226,8 +316,9 @@ export default {
             {
               resources: [
                 {
-                  name: "Guía docente (no disponible)",
-                  note: true,
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/historia-del-desarrollo-economico-mundial-contemporaneo/guia-docente",
+                  kind: "GUIA",
                 },
               ],
             },
@@ -305,9 +396,52 @@ export default {
             {
               resources: [
                 {
-                  name: "Guía docente",
-                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/metodologia-la-programacion/guia-docente",
+                  // La pagina /guia-docente de esta asignatura devuelve 404,
+                  // pero la guia firmada si esta publicada. 216111B es su
+                  // codigo.
+                  name: "Guía docente (216111B)",
+                  href: "https://grados.ugr.es/sites/grados/default/public/guias-firmadas/2025-2026/216111B.pdf",
                   kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/MP/build/MP.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Punteros y memoria dinámica",
+                  href: "/viewer/?file=Subjects/First/MP/src/01_punteros.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Funciones",
+                  href: "/viewer/?file=Subjects/First/MP/src/02_funciones.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Tipos de datos abstractos: clases",
+                  href: "/viewer/?file=Subjects/First/MP/src/03_clases.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Gestión de E/S. Ficheros",
+                  href: "/viewer/?file=Subjects/First/MP/src/04_ficheros.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Seminarios",
+                  href: "/viewer/?file=Subjects/First/MP/src/05_seminarios.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/First/MP/src/06_practicas.md",
+                  kind: "MD",
                 },
               ],
             },

@@ -32,6 +32,51 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/estructura-computadores/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/EC/build/EC.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción",
+                  href: "/viewer/?file=Subjects/Second/EC/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Representación de programas a nivel máquina",
+                  href: "/viewer/?file=Subjects/Second/EC/src/02_nivel_maquina.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Unidad de control",
+                  href: "/viewer/?file=Subjects/Second/EC/src/03_unidad_control.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Segmentación de cauce",
+                  href: "/viewer/?file=Subjects/Second/EC/src/04_segmentacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Entrada/Salida",
+                  href: "/viewer/?file=Subjects/Second/EC/src/05_entrada_salida.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Memoria",
+                  href: "/viewer/?file=Subjects/Second/EC/src/06_memoria.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/EC/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
@@ -56,8 +101,11 @@ export default {
             {
               resources: [
                 {
-                  name: "Guía docente",
-                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/estructura-datos/guia-docente",
+                  // La pagina /guia-docente de esta asignatura devuelve 404,
+                  // pero la guia firmada si esta publicada. 2161125 es su
+                  // codigo.
+                  name: "Guía docente (2161125)",
+                  href: "https://grados.ugr.es/sites/grados/default/public/guias-firmadas/2025-2026/2161125.pdf",
                   kind: "GUIA",
                 },
               ],
@@ -122,8 +170,9 @@ export default {
             {
               resources: [
                 {
-                  name: "Guía docente (no disponible)",
-                  note: true,
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/introduccion-al-marketing/guia-docente",
+                  kind: "GUIA",
                 },
               ],
             },
@@ -143,7 +192,9 @@ export default {
           ],
         },
         {
-          code: "MAC",
+          // MACRO, no MAC: en cuarto MAC es Modelos Avanzados de Computacion y
+          // la insignia de la ficha quedaba ambigua. Ver D-10.
+          code: "MACRO",
           name: "Macroeconomía",
           blocks: [
             {
@@ -190,6 +241,51 @@ export default {
                   name: "Guía docente",
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/sistemas-operativos/guia-docente",
                   kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/SO/build/SO.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Estructuras de sistemas operativos",
+                  href: "/viewer/?file=Subjects/Second/SO/src/01_estructuras.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Procesos e hilos",
+                  href: "/viewer/?file=Subjects/Second/SO/src/02_procesos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Gestión de memoria",
+                  href: "/viewer/?file=Subjects/Second/SO/src/03_memoria.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Gestión de archivos",
+                  href: "/viewer/?file=Subjects/Second/SO/src/04_archivos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Gestión de entradas y salidas",
+                  href: "/viewer/?file=Subjects/Second/SO/src/05_entrada_salida.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Mecanismos de seguridad",
+                  href: "/viewer/?file=Subjects/Second/SO/src/06_seguridad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/SO/src/07_practicas.md",
+                  kind: "MD",
                 },
               ],
             },
@@ -254,9 +350,49 @@ export default {
                   kind: "GUIA",
                 },
                 {
+                  name: "Temario",
+                  href: "/Subjects/Second/ALGO/build/ALGO.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Prácticas",
                   href: "https://github.com/Ismael-Sallami/algorithm-design-techniques",
                   kind: "WEB",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · La eficiencia de los algoritmos",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/01_eficiencia.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Divide y vencerás",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/02_divide_venceras.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Algoritmos voraces",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/03_voraces.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Exploración de grafos",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/04_grafos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Programación dinámica",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/05_programacion_dinamica.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/06_practicas.md",
+                  kind: "MD",
                 },
               ],
             },
@@ -282,8 +418,54 @@ export default {
             {
               resources: [
                 {
-                  name: "Guía docente (no disponible)",
-                  note: true,
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/arquitectura-computadores/guia-docente",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/AC/build/AC.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Arquitecturas paralelas: clasificación y prestaciones",
+                  href: "/viewer/?file=Subjects/Second/AC/src/01_arquitecturas_paralelas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Programación paralela",
+                  href: "/viewer/?file=Subjects/Second/AC/src/02_programacion_paralela.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Paralelismo a nivel de hebra",
+                  href: "/viewer/?file=Subjects/Second/AC/src/03_tlp.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Paralelismo a nivel de instrucción",
+                  href: "/viewer/?file=Subjects/Second/AC/src/04_ilp.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Paralelismo de datos",
+                  href: "/viewer/?file=Subjects/Second/AC/src/05_dlp.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Problemas resueltos",
+                  href: "/viewer/?file=Subjects/Second/AC/src/06_problemas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/AC/src/07_practicas.md",
+                  kind: "MD",
                 },
               ],
             },
@@ -303,7 +485,8 @@ export default {
           ],
         },
         {
-          code: "CG",
+          // CGRAL, no CG: en cuarto CG es Contabilidad de Gestion. Ver D-10.
+          code: "CGRAL",
           name: "Contabilidad General",
           blocks: [
             {
