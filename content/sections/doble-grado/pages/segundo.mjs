@@ -350,9 +350,49 @@ export default {
                   kind: "GUIA",
                 },
                 {
+                  name: "Temario",
+                  href: "/Subjects/Second/ALGO/build/ALGO.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Prácticas",
                   href: "https://github.com/Ismael-Sallami/algorithm-design-techniques",
                   kind: "WEB",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · La eficiencia de los algoritmos",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/01_eficiencia.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Divide y vencerás",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/02_divide_venceras.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Algoritmos voraces",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/03_voraces.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Exploración de grafos",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/04_grafos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Programación dinámica",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/05_programacion_dinamica.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/ALGO/src/06_practicas.md",
+                  kind: "MD",
                 },
               ],
             },

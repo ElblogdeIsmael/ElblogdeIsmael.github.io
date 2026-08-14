@@ -29,6 +29,21 @@ $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
 
+% Per-subject preamble additions. A subject that needs a package the shared
+% preamble does not load declares it in the YAML of its own src/00_portada.md:
+%
+%   header-includes: |
+%     \usepackage{circuitikz}
+%
+% Guarded the same way, so it is a no-op for every subject that declares
+% nothing. This exists so one subject can pull in a package without adding it
+% to the preamble that all the documents of the tree load.
+$if(header-includes)$
+$for(header-includes)$
+$header-includes$
+$endfor$
+$endif$
+
 % ========================
 % Configuración índice y listas
 % ========================
