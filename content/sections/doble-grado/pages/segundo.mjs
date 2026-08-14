@@ -381,6 +381,51 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/arquitectura-computadores/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/AC/build/AC.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Arquitecturas paralelas: clasificación y prestaciones",
+                  href: "/viewer/?file=Subjects/Second/AC/src/01_arquitecturas_paralelas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Programación paralela",
+                  href: "/viewer/?file=Subjects/Second/AC/src/02_programacion_paralela.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Paralelismo a nivel de hebra",
+                  href: "/viewer/?file=Subjects/Second/AC/src/03_tlp.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Paralelismo a nivel de instrucción",
+                  href: "/viewer/?file=Subjects/Second/AC/src/04_ilp.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Paralelismo de datos",
+                  href: "/viewer/?file=Subjects/Second/AC/src/05_dlp.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Problemas resueltos",
+                  href: "/viewer/?file=Subjects/Second/AC/src/06_problemas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/AC/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
