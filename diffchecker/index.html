@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>diffchecker · Comparar dos textos y mezclarlos | El Blog de Ismael</title>
+  <meta name="description" content="Compara dos textos o dos ficheros línea a línea, con las diferencias resaltadas palabra a palabra, y construye una versión final quedándote con el lado que quieras de cada bloque. Funciona entero en tu navegador: nada se sube a ningún sitio." />
+  <meta name="keywords" content="comparar textos, diff online, diferencias entre dos archivos, mezclar textos, merge de texto, comparador de ficheros, diff en el navegador" />
+  <meta name="author" content="Ismael Sallami" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://elblogdeismael.github.io/diffchecker/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:url" content="https://elblogdeismael.github.io/diffchecker/" />
+  <meta property="og:title" content="diffchecker · Comparar dos textos y mezclarlos" />
+  <meta property="og:description" content="Las diferencias resaltadas palabra a palabra y un botón por bloque para quedarte con la versión que quieras. Gratis y en tu navegador." />
+  <meta property="og:image" content="https://elblogdeismael.github.io/diffchecker/assets/og-image.svg" />
+  <meta property="og:site_name" content="El Blog de Ismael" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="diffchecker · Comparar dos textos y mezclarlos" />
+  <meta name="twitter:description" content="Compara dos textos, mézclalos bloque a bloque y descarga el resultado. Sin subir nada a ningún servidor." />
+  <meta name="twitter:image" content="https://elblogdeismael.github.io/diffchecker/assets/og-image.svg" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- Google Analytics (mismo dominio del blog) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5W0LVJ83W7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5W0LVJ83W7');
+  </script>
+
+  <!-- JSON-LD: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "diffchecker — Comparar y mezclar dos textos",
+    "url": "https://elblogdeismael.github.io/diffchecker/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any (navegador web)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "inLanguage": "es",
+    "author": { "@type": "Person", "name": "Ismael Sallami" },
+    "description": "Compara dos textos o ficheros línea a línea, resalta las diferencias palabra a palabra y permite construir una versión final eligiendo bloque a bloque con qué lado quedarse. Todo el proceso ocurre en el navegador."
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/assets/css/tool.css" />
+</head>
+<body class="light">
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#app">Saltar al comparador</a>
+
+  <header class="site-header">
+    <a class="brand" href="https://elblogdeismael.github.io/">
+      <span class="brand-mark">&lt;/&gt;</span>
+      <span>El Blog de Ismael</span>
+    </a>
+    <nav class="header-links">
+      <a href="https://elblogdeismael.github.io/">Inicio</a>
+      <a href="https://elblogdeismael.github.io/tools/">Herramientas</a>
+      <button id="theme-toggle" class="ghost-btn" title="Cambiar tema de la página">🌙</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge">100% en tu navegador · sin subir nada · gratis</div>
+    <h1>Compara dos textos y <span class="grad">quédate</span> con <span class="grad2">lo mejor de cada uno</span></h1>
+    <p class="hero-sub">
+      Pega o arrastra dos versiones de lo que sea —un apunte, un <code>.tex</code>, un
+      fichero de código— y verás en qué se diferencian, línea a línea y palabra a palabra.
+      Después, con <code>◀</code> y <code>▶</code>, decides bloque a bloque con qué lado te
+      quedas y te llevas el resultado.
+    </p>
+  </section>
+
+  <main class="diff-app" id="app">
+    <div class="diff-bar">
+      <div class="segmented" role="group" aria-label="Vista">
+        <button class="seg-btn" id="view-edit" aria-pressed="true">Editar</button>
+        <button class="seg-btn" id="view-diff" aria-pressed="false">Diferencias</button>
+        <button class="seg-btn" id="view-result" aria-pressed="false">Resultado</button>
+      </div>
+
+      <button class="ghost-btn small" id="prev-change" title="Cambio anterior (Alt + flecha arriba)" aria-label="Ir al cambio anterior">‹</button>
+      <button class="ghost-btn small" id="next-change" title="Cambio siguiente (Alt + flecha abajo)" aria-label="Ir al cambio siguiente">›</button>
+
+      <p class="dstat" id="stats" aria-hidden="true">
+        <span class="is-same">Pega algo en los dos lados</span>
+      </p>
+
+      <span class="spacer"></span>
+
+      <div class="segmented" role="group" aria-label="Disposición">
+        <button class="seg-btn" id="layout-split" aria-pressed="true">Lado a lado</button>
+        <button class="seg-btn" id="layout-unified" aria-pressed="false">Unificada</button>
+      </div>
+
+      <button class="ghost-btn small" id="all-left" title="Quedarme con la izquierda en todos los bloques">◀ Todo</button>
+      <button class="ghost-btn small" id="all-right" title="Quedarme con la derecha en todos los bloques">Todo ▶</button>
+      <button class="ghost-btn small" id="reset-choices" title="Volver a la elección inicial">↺</button>
+
+      <span class="bar-break"></span>
+
+      <label class="switch"><input type="checkbox" id="opt-ws" /> Ignorar espacios</label>
+      <label class="switch"><input type="checkbox" id="opt-case" /> Ignorar mayúsculas</label>
+      <label class="switch"><input type="checkbox" id="opt-trim" /> Recortar líneas</label>
+
+      <span class="spacer"></span>
+
+      <button class="ghost-btn small" id="swap">⇄ Intercambiar</button>
+      <button class="ghost-btn small" id="example">Ejemplo</button>
+      <button class="ghost-btn small" id="clear-all">Limpiar</button>
+    </div>
+
+    <p class="note" id="notice" hidden></p>
+
+    <!-- Vista: editar -->
+    <section class="editor-grid" id="panel-edit">
+      <div class="editor">
+        <div class="editor-head">
+          <h2>Original</h2>
+          <span class="fname" id="name-left">texto pegado</span>
+        </div>
+        <label class="visually-hidden" for="text-left">Texto original</label>
+        <textarea id="text-left" spellcheck="false" autocomplete="off"
+          placeholder="Pega aquí la primera versión, o arrastra un fichero sobre la zona de abajo."></textarea>
+        <div class="dropzone" id="drop-left" tabindex="0" role="button"
+          aria-label="Cargar un fichero en el lado original">
+          <p class="dz-or">Arrastra un fichero o <span class="link">búscalo en tu equipo</span></p>
+          <p class="dz-formats">.txt .md .tex .csv .json y cualquier otro fichero de texto</p>
+          <input type="file" id="file-left" hidden />
+        </div>
+      </div>
+
+      <div class="editor">
+        <div class="editor-head">
+          <h2>Modificado</h2>
+          <span class="fname" id="name-right">texto pegado</span>
+        </div>
+        <label class="visually-hidden" for="text-right">Texto modificado</label>
+        <textarea id="text-right" spellcheck="false" autocomplete="off"
+          placeholder="Y aquí la segunda. La comparación se actualiza sola mientras escribes."></textarea>
+        <div class="dropzone" id="drop-right" tabindex="0" role="button"
+          aria-label="Cargar un fichero en el lado modificado">
+          <p class="dz-or">Arrastra un fichero o <span class="link">búscalo en tu equipo</span></p>
+          <p class="dz-formats">.txt .md .tex .csv .json y cualquier otro fichero de texto</p>
+          <input type="file" id="file-right" hidden />
+        </div>
+      </div>
+    </section>
+
+    <!-- Vista: diferencias -->
+    <section id="panel-diff" hidden>
+      <div class="diff-grid" id="grid"></div>
+    </section>
+
+    <!-- Vista: resultado -->
+    <section id="panel-result" hidden>
+      <div class="actions">
+        <button class="primary-btn" id="copy-result">Copiar resultado</button>
+        <button class="secondary-btn" id="download-result">Descargar</button>
+      </div>
+      <div class="result-pane">
+        <pre id="result-text"></pre>
+      </div>
+    </section>
+
+    <p class="visually-hidden" id="announce" aria-live="polite"></p>
+  </main>
+
+  <section class="howto">
+    <h2>Cómo se usa</h2>
+    <div class="howto-grid">
+      <div class="card">
+        <h3>Comparar</h3>
+        <p>
+          Pega las dos versiones o arrastra un fichero a cada lado. La comparación se
+          recalcula sola. Dentro de una línea que cambia se marca solo lo que cambia,
+          no la línea entera.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Mezclar</h3>
+        <p>
+          El resultado <strong>parte del lado original</strong>. Cada bloque en conflicto
+          trae tres botones: <code>◀</code> se queda con el original, <code>▶</code> con
+          el modificado y <code>◀▶</code> con los dos, uno detrás de otro. Cuando lo tengas,
+          la pestaña <em>Resultado</em> lo copia o lo descarga.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Atajos</h3>
+        <ul>
+          <li><code>Alt</code> + <code>↓</code> / <code>↑</code> — cambio siguiente o anterior</li>
+          <li><code>Alt</code> + <code>←</code> / <code>→</code> — quedarme con ese lado</li>
+          <li>Un clic en <code>··· líneas iguales ···</code> despliega el tramo</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Lo que conviene saber</h3>
+        <ul>
+          <li>Los ficheros no salen de tu equipo: todo ocurre en el navegador.</li>
+          <li>Los finales de línea se normalizan a <code>LF</code> al descargar.</li>
+          <li>Al ignorar espacios o mayúsculas, las líneas que solo se distinguen en eso
+            salen con subrayado de puntos: el resultado conserva la del original.</li>
+          <li>Tope de 5&nbsp;MB por fichero y de 30.000 líneas entre los dos.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>
+      Hecho por <a href="https://github.com/Ismael-Sallami" target="_blank" rel="noopener">Ismael Sallami</a> ·
+      Parte de <a href="https://elblogdeismael.github.io/">El Blog de Ismael</a>
+    </p>
+  </footer>
+
+  <script src="js/diff.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

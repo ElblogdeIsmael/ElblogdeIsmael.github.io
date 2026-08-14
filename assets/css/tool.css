@@ -238,9 +238,11 @@ a {
 
 /* ============================================================
    TOOL LAYER
-   Shared chrome for the standalone browser apps (md2html, pdf2md).
-   Both were generated from the same template, so they use the same
-   class names and can share one stylesheet.
+   Shared chrome for the standalone browser apps (md2html, pdf2md
+   and diffchecker). The first two were generated from the same
+   template, so they use the same class names and can share one
+   stylesheet; diffchecker reuses that chrome and adds its own
+   section at the end of this file.
 
    Selectors are kept exactly as the apps' JavaScript expects them:
    `light` on <body>, `dragover` on the drop zone, `active` on chips
@@ -1022,5 +1024,470 @@ code {
   }
   .theme-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   DIFFCHECKER
+   Everything below belongs to /diffchecker/ only. It reuses the
+   chrome above (header, hero, buttons, drop zone, footer) and adds
+   the two things that tool needs and the others do not: a pair of
+   editors and the diff grid with its merge controls.
+
+   The grid is one row template repeated, not two scrolling panes.
+   That is what keeps both sides aligned line by line without a
+   scroll sync, which is where these tools usually break.
+   ============================================================ */
+
+:root {
+  /* Added and removed keep the site's own accents: lime for what comes
+     in, the danger red for what goes out. No GitHub green anywhere. */
+  --diff-add-bg: rgba(79, 179, 31, 0.16);
+  --diff-add-ink: #2f7a0f;
+  --diff-add-mark: rgba(79, 179, 31, 0.42);
+  --diff-del-bg: rgba(255, 93, 108, 0.15);
+  --diff-del-ink: #c22436;
+  --diff-del-mark: rgba(255, 93, 108, 0.42);
+  --diff-rule: rgba(0, 0, 0, 0.14);
+  /* Solo el valor de partida: el script mide la cabecera de verdad y lo
+     reescribe, porque su altura depende de la tipografia y del ancho. */
+  --header-h: 62px;
+}
+
+body:not(.light) {
+  --diff-add-bg: rgba(184, 255, 60, 0.14);
+  --diff-add-ink: #b8ff3c;
+  --diff-add-mark: rgba(184, 255, 60, 0.34);
+  --diff-del-bg: rgba(255, 93, 108, 0.18);
+  --diff-del-ink: #ff8d97;
+  --diff-del-mark: rgba(255, 93, 108, 0.42);
+  --diff-rule: rgba(244, 247, 245, 0.16);
+}
+
+/* ---------- Shell ---------- */
+
+.diff-app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(12px, 4vw, 40px);
+}
+
+/* ---------- Toolbar ---------- */
+
+.diff-bar {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+  margin-bottom: var(--gap-sm);
+}
+
+.diff-bar .spacer {
+  flex: 1 1 auto;
+}
+
+/* Forces the rest of the toolbar onto a second line: the view switch and the
+   merge controls on top, the options and the housekeeping below. */
+.bar-break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.diff-bar .switch {
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+.diff-bar .switch input {
+  width: 15px;
+  height: 15px;
+}
+
+/* Segmented view switch. One frame, dividers between the options. */
+.segmented {
+  display: flex;
+  border: var(--line) solid var(--ink);
+}
+
+.seg-btn {
+  background: transparent;
+  border: none;
+  border-left: var(--line) solid var(--ink);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition:
+    background var(--base) ease,
+    color var(--base) ease;
+}
+.seg-btn:first-child {
+  border-left: none;
+}
+.seg-btn:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.seg-btn[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+.seg-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---------- Change counter ---------- */
+
+.dstat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.dstat b {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+.dstat .is-add {
+  color: var(--diff-add-ink);
+}
+.dstat .is-del {
+  color: var(--diff-del-ink);
+}
+.dstat .is-same {
+  color: var(--muted);
+}
+
+/* ---------- Editors ---------- */
+
+.editor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap-sm);
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--surface);
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+}
+
+.editor-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: var(--line) solid var(--ink);
+  background: var(--surface-2);
+}
+
+.editor-head h2 {
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.editor-head .fname {
+  color: var(--muted);
+  font-size: 0.74rem;
+  margin-left: auto;
+}
+
+.editor textarea {
+  flex: 1;
+  min-height: 320px;
+  resize: vertical;
+  border: none;
+  border-bottom: var(--line) solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  padding: 14px;
+  tab-size: 4;
+}
+.editor textarea:focus {
+  outline: none;
+  background: var(--surface-2);
+}
+.editor textarea::placeholder {
+  color: var(--muted);
+}
+
+/* Inside an editor the drop zone is a strip under the text, so it drops the
+   dashed frame and keeps only the rule that separates it. */
+.editor .dropzone {
+  border: none;
+  padding: 12px 14px;
+}
+.editor .dropzone .dz-or {
+  margin: 0 0 4px;
+}
+
+/* ---------- Diff grid ---------- */
+
+.diff-grid {
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.drow {
+  display: grid;
+  grid-template-columns:
+    3.2rem 1.1rem minmax(0, 1fr)
+    7.2rem
+    3.2rem 1.1rem minmax(0, 1fr);
+  border-bottom: var(--line-hair) solid var(--diff-rule);
+}
+.drow:last-child {
+  border-bottom: none;
+}
+
+/* Unified keeps both line numbers and moves the merge controls to the end,
+   since there is no middle any more. */
+.diff-grid.unified .drow {
+  grid-template-columns: 3.2rem 3.2rem 1.1rem minmax(0, 1fr) 7.2rem;
+}
+
+.dnum {
+  padding: 2px 8px 2px 0;
+  text-align: right;
+  color: var(--muted);
+  font-size: 0.74rem;
+  user-select: none;
+  border-right: var(--line-hair) solid var(--diff-rule);
+}
+
+.dsign {
+  text-align: center;
+  user-select: none;
+  font-weight: 700;
+}
+
+.dtext {
+  padding: 2px 10px;
+  /* Long lines wrap instead of scrolling: there is no horizontal scroll
+     anywhere in this view, so the two sides can never drift apart. */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.dtext:empty::after {
+  content: "";
+}
+
+/* Tinting goes on the cells, not the row: in a change block the left
+   side is what leaves and the right side is what arrives. */
+.drow.change .side-l:not(.dpad),
+.drow.remove .side-l:not(.dpad) {
+  background: var(--diff-del-bg);
+}
+.drow.change .side-r:not(.dpad),
+.drow.add .side-r:not(.dpad) {
+  background: var(--diff-add-bg);
+}
+.drow.remove .side-l.dsign,
+.drow.change .side-l.dsign {
+  color: var(--diff-del-ink);
+}
+.drow.add .side-r.dsign,
+.drow.change .side-r.dsign {
+  color: var(--diff-add-ink);
+}
+
+/* Padding cell: that side has no line at all here, so it must read as
+   absent and never pick up the tint of the block it sits in. */
+.drow .dpad {
+  background: var(--surface-2);
+}
+
+mark.wdel,
+mark.wadd {
+  color: inherit;
+  padding: 0 1px;
+}
+mark.wdel {
+  background: var(--diff-del-mark);
+}
+mark.wadd {
+  background: var(--diff-add-mark);
+}
+
+/* Equal for the comparison, different in the file: only happens with the
+   ignore options on. Flagged so the download is never a surprise. */
+.drow.soft .dtext {
+  border-bottom: var(--line-hair) dotted var(--muted);
+}
+
+/* The block the keyboard navigation is standing on. */
+.drow.current .dnum {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ---------- Merge controls ---------- */
+
+.dmerge {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  padding: 2px;
+  border-left: var(--line-hair) solid var(--diff-rule);
+  border-right: var(--line-hair) solid var(--diff-rule);
+}
+
+.hunk-btn {
+  background: var(--surface-2);
+  border: var(--line-hair) solid var(--ink);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  padding: 3px 4px;
+  min-width: 1.6rem;
+  cursor: pointer;
+  transition:
+    background var(--fast) ease,
+    color var(--fast) ease;
+}
+/* Dos triangulos necesitan mas sitio que uno o quedan pegados. */
+.hunk-btn[data-choice="both"] {
+  min-width: 2.3rem;
+}
+.hunk-btn:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.hunk-btn[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* The side that lost the choice stays readable but clearly out. */
+.drow[data-choice="right"] .side-l,
+.drow[data-choice="left"] .side-r {
+  opacity: 0.34;
+}
+
+/* ---------- Folded runs ---------- */
+
+.dfold {
+  display: block;
+  width: 100%;
+  background: var(--surface-2);
+  border: none;
+  border-bottom: var(--line-hair) solid var(--diff-rule);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  text-align: center;
+  cursor: pointer;
+}
+.dfold:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* ---------- Result ---------- */
+
+.result-pane {
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+  background: var(--surface);
+}
+
+.result-pane pre {
+  margin: 0;
+  padding: 16px;
+  max-height: 70vh;
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Empty state ---------- */
+
+.diff-empty {
+  border: var(--line) dashed var(--ink);
+  padding: clamp(40px, 8vw, 80px) 20px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.diff-empty strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .editor-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Wrapped onto several lines, the toolbar would eat most of a phone
+     screen if it stayed stuck to the top. */
+  .diff-bar {
+    position: static;
+  }
+  .diff-grid {
+    font-size: 0.78rem;
+  }
+  /* Side by side needs width it does not have here. The script forces the
+     unified view below this breakpoint and disables the switch; these are
+     its columns, tightened. */
+  .diff-grid.unified .drow {
+    grid-template-columns: 2.6rem 2.6rem 0.9rem minmax(0, 1fr) 6.4rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .diff-bar {
+    gap: 8px;
+  }
+  .seg-btn {
+    padding: 7px 10px;
+    font-size: 0.7rem;
+  }
+  .diff-grid.unified .drow {
+    grid-template-columns: 2.4rem 2.4rem 0.9rem minmax(0, 1fr) 5.6rem;
   }
 }
