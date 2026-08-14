@@ -101,10 +101,11 @@ export default {
             {
               resources: [
                 {
-                  // La UGR no publica subpagina de guia docente para esta
-                  // asignatura: /guia-docente devuelve 404. Se enlaza su ficha.
-                  name: "Ficha de la asignatura",
-                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/estructura-datos",
+                  // La pagina /guia-docente de esta asignatura devuelve 404,
+                  // pero la guia firmada si esta publicada. 2161125 es su
+                  // codigo.
+                  name: "Guía docente (2161125)",
+                  href: "https://grados.ugr.es/sites/grados/default/public/guias-firmadas/2025-2026/2161125.pdf",
                   kind: "GUIA",
                 },
               ],
