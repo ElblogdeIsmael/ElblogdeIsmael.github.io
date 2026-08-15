@@ -292,17 +292,65 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/fundamentos-del-software/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/FS/build/FS.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Sistema de cómputo",
+                  href: "/viewer/?file=Subjects/First/FS/src/01_sistema_computo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Introducción a los sistemas operativos",
+                  href: "/viewer/?file=Subjects/First/FS/src/02_sistemas_operativos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Compilación y enlazado de programas",
+                  href: "/viewer/?file=Subjects/First/FS/src/03_compilacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Sistemas de archivos y bases de datos",
+                  href: "/viewer/?file=Subjects/First/FS/src/04_archivos_bd.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Generación y depuración de aplicaciones",
+                  href: "/viewer/?file=Subjects/First/FS/src/05_generacion_depuracion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/First/FS/src/06_practicas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Las dos obras que habia aqui (Sommerville y el Pragmatic
+              // Programmer) no estan en la guia docente de esta asignatura:
+              // son de ingenieria del software. Sustituidas por la
+              // bibliografia fundamental que la guia si lista.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Software Engineering — Ian Sommerville",
+                  name: "Operating Systems: Internals and Design Principles — Stallings",
                   note: true,
                 },
                 {
-                  name: "The Pragmatic Programmer — Hunt & Thomas",
+                  name: "Introducción a la Informática — Prieto, Lloris & Torres",
+                  note: true,
+                },
+                {
+                  name: "Learning the bash Shell — Newham & Rosenblatt",
                   note: true,
                 },
               ],
