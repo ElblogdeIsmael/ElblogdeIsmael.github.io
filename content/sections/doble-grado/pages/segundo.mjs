@@ -730,17 +730,69 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/tecnicas-cuantitativas-ii/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/TC2/build/TC2.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Modelos continuos, muestra y estadísticos",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Estimación puntual de parámetros",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/02_estimacion_puntual.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temas 3 y 4 · Distribuciones de los estadísticos muestrales",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/03_distribuciones_muestrales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temas 5 y 6 · Intervalos de confianza",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/04_intervalos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Contraste de hipótesis",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/05_contrastes.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · Tests no paramétricos",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/06_no_parametricos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/07_practicas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Las dos obras que habia aqui son de investigacion operativa y
+              // programacion matematica, no de inferencia estadistica, y no
+              // estan en la guia docente. Sustituidas por las que si lista.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Operations Research: Applications and Algorithms — Winston",
+                  name: "Técnicas cuantitativas para la inferencia — Herrerías et al.",
                   note: true,
                 },
                 {
-                  name: "Model Building in Mathematical Programming — Williams",
+                  name: "Probabilidad y estadística: aplicaciones y métodos — Canavos",
+                  note: true,
+                },
+                {
+                  name: "Estadística aplicada a los negocios y la economía — Lind et al.",
                   note: true,
                 },
               ],
