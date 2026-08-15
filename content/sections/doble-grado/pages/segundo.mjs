@@ -355,17 +355,75 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/tecnicas-cuantitativas-i/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/TC1/build/TC1.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Variables estadísticas unidimensionales",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/01_unidimensionales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Variables estadísticas bidimensionales",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/02_bidimensionales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Números índices",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/03_indices.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Series cronológicas",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/04_series.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Probabilidad",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/05_probabilidad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Variables aleatorias",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/06_variables_aleatorias.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Distribuciones discretas",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/07_discretas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/08_practicas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Las dos obras que habia aqui son de investigacion operativa y
+              // metodos cuantitativos para la gestion, no de estadistica
+              // descriptiva y probabilidad, y no estan en la guia docente.
+              // Sustituidas por la bibliografia fundamental que si lista.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Introducción a la Investigación Operativa — Hillier & Lieberman",
+                  name: "Técnicas Cuantitativas I — Amor Pulido",
                   note: true,
                 },
                 {
-                  name: "Quantitative Methods for Business — Anderson et al.",
+                  name: "Estadística descriptiva y cálculo de probabilidades — Castillo & Guijarro",
+                  note: true,
+                },
+                {
+                  name: "Estadística para administración y economía — Newbold & Carlson",
                   note: true,
                 },
               ],
