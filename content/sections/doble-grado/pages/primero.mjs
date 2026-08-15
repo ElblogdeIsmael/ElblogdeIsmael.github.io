@@ -689,17 +689,70 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/microeconomia/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/MIC/build/MIC.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Capítulo 1 · El consumidor",
+                  href: "/viewer/?file=Subjects/First/MIC/src/01_consumidor.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 2 · La demanda individual y del mercado",
+                  href: "/viewer/?file=Subjects/First/MIC/src/02_demanda.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 3 · La producción",
+                  href: "/viewer/?file=Subjects/First/MIC/src/03_produccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 4 · Costes y maximización del beneficio",
+                  href: "/viewer/?file=Subjects/First/MIC/src/04_costes.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 5 · La competencia perfecta",
+                  href: "/viewer/?file=Subjects/First/MIC/src/05_competencia_perfecta.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 6 · El monopolio",
+                  href: "/viewer/?file=Subjects/First/MIC/src/06_monopolio.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 7 · Competencia monopolística y oligopolio",
+                  href: "/viewer/?file=Subjects/First/MIC/src/07_oligopolio.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 8 · Los mercados de factores",
+                  href: "/viewer/?file=Subjects/First/MIC/src/08_factores.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Varian y Nicholson no estan en la guia docente de esta
+              // asignatura. Sustituidos por su bibliografia fundamental.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Microeconomía — Varian",
+                  name: "Microeconomía — Pindyck & Rubinfeld",
                   note: true,
                 },
                 {
-                  name: "Microeconomía intermedia — Nicholson & Snyder",
+                  name: "Microeconomía — Krugman & Wells",
+                  note: true,
                   note: true,
                 },
               ],
