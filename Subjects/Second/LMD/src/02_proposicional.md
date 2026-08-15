@@ -157,7 +157,7 @@ $S = \{\{p,q\},\ \{\neg p, r\},\ \{\neg q, r\},\ \{\neg r\}\}$.
 La cláusula $\{\neg r\}$ es unitaria: $r$ es falso. Propagando, $\{\neg p, r\}$ pasa a
 $\{\neg p\}$ y $\{\neg q, r\}$ a $\{\neg q\}$. Ahora $\{\neg p\}$ es unitaria: $p$ es
 falso, y $\{p,q\}$ pasa a $\{q\}$. Pero $\{\neg q\}$ obliga a $q$ falso y $\{q\}$ a $q$
-cierto: se produce la cláusula vacía. **El conjunto es insatisfacible.**
+cierto: se produce la cláusula vacía. \textbf{El conjunto es insatisfacible.}
 \end{ejemplo}
 ```
 

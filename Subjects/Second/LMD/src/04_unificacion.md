@@ -95,7 +95,7 @@ no concreta lo que no hace falta.
 \begin{ejemplo}
 $P(x, x)$ y $P(a, b)$ con $a \ne b$ constantes: la primera discrepancia da $\{x/a\}$, y
 entonces las expresiones son $P(a,a)$ y $P(a,b)$, cuya discrepancia enfrenta dos
-constantes distintas. **No son unificables.**
+constantes distintas. \textbf{No son unificables.}
 \end{ejemplo}
 ```
 

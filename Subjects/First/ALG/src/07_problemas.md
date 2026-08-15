@@ -207,7 +207,7 @@ está generada por $(1,2,3)$, y el núcleo tiene dimensión 2, dado por $x+2y+3z
 \medskip
 El polinomio característico es $-\lambda^2(\lambda - 14)$, con $\lambda=0$ de
 multiplicidad algebraica 2 y $\lambda=14$ simple. La multiplicidad geométrica del 0 es
-$\dim\Nuc A = 2$, que coincide, y la del 14 es 1. Por tanto **sí es diagonalizable**,
+$\dim\Nuc A = 2$, que coincide, y la del 14 es 1. Por tanto \textbf{sí es diagonalizable},
 semejante a $\operatorname{diag}(0,0,14)$.
 \end{solucion}
 

@@ -236,7 +236,7 @@ una. El ANOVA da $F=4{,}2$ con 2 y 27 grados de libertad, y el valor crítico al
 \end{ejercicio}
 
 \begin{solucion}
-$4{,}2 > 3{,}35$, así que se rechaza $H_0$: hay evidencia de que **no todas** las medias
+$4{,}2 > 3{,}35$, así que se rechaza $H_0$: hay evidencia de que \textbf{no todas} las medias
 son iguales. El contraste no dice cuáles difieren; para eso hacen falta comparaciones
 múltiples, que ajustan el nivel para que la probabilidad global de falso positivo siga
 siendo el 5\,\%.
