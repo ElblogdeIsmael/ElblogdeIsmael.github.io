@@ -82,7 +82,11 @@ $endif$
 %=======================
 % fancy with parameters
 %=======================
-%\fancyfoot[L]{\scriptsize\itshape $if(subject)$$subject$$endif$}
+% Never put a template variable inside a comment line here. Pandoc expands it
+% and then wraps its output at column 72, so a long value splits in two and
+% only the first half stays commented: the rest lands before \begin{document}
+% and the build dies with "Missing \begin{document}". It bit the subject named
+% "Tecnologia y Organizacion de Computadores", 41 characters.
 \fancyfoot[L]{\normalsize $subject$} % pie de página izquierdo con tamaño normal
 
 \setcounter{tocdepth}{1} % Muestra solo hasta subsecciones en el índice

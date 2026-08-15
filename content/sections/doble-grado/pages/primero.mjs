@@ -258,13 +258,65 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/tecnologia-y-organizacion-computadores/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/TOC/build/TOC.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción",
+                  href: "/viewer/?file=Subjects/First/TOC/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Unidades funcionales de un computador",
+                  href: "/viewer/?file=Subjects/First/TOC/src/02_unidades_funcionales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Estudio de sistemas combinacionales",
+                  href: "/viewer/?file=Subjects/First/TOC/src/03_combinacionales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Estudio de sistemas secuenciales",
+                  href: "/viewer/?file=Subjects/First/TOC/src/04_secuenciales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Nivel de transferencia entre registros",
+                  href: "/viewer/?file=Subjects/First/TOC/src/05_rtl.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Seminarios y prácticas",
+                  href: "/viewer/?file=Subjects/First/TOC/src/06_practicas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Patterson y Hennessy no esta en la guia docente de esta
+              // asignatura. Sustituido por la bibliografia fundamental que la
+              // guia si lista; Tanenbaum se queda, que si aparece entre la
+              // complementaria.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Computer Organization and Design — Patterson & Hennessy",
+                  name: "Fundamentos de diseño lógico y de computadores — Mano & Kime",
+                  note: true,
+                },
+                {
+                  name: "Computer Organization and Architecture — Stallings",
+                  note: true,
+                },
+                {
+                  name: "Conceptos de Informática. Problemas — Prieto & Prieto",
                   note: true,
                 },
                 {
