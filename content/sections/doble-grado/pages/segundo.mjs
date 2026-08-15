@@ -108,6 +108,46 @@ export default {
                   href: "https://grados.ugr.es/sites/grados/default/public/guias-firmadas/2025-2026/2161125.pdf",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/ED/build/ED.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción a la eficiencia de los algoritmos",
+                  href: "/viewer/?file=Subjects/Second/ED/src/01_eficiencia.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Abstracción de datos",
+                  href: "/viewer/?file=Subjects/Second/ED/src/02_abstraccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Tipos de datos contenedores básicos",
+                  href: "/viewer/?file=Subjects/Second/ED/src/03_contenedores_basicos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Tipos de datos contenedores complejos",
+                  href: "/viewer/?file=Subjects/Second/ED/src/04_contenedores_complejos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Seminarios",
+                  href: "/viewer/?file=Subjects/Second/ED/src/05_seminarios.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/ED/src/06_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
