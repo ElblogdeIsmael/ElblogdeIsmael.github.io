@@ -592,17 +592,69 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/logica-y-metodos-discretos/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/LMD/build/LMD.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Bloque 1 · Álgebras de Boole y funciones booleanas",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/01_booleanas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 2 · Lógica proposicional",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/02_proposicional.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 3 · Lenguajes de primer orden",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/03_primer_orden.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 4 · Unificación y resolución",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/04_unificacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 5 · Inducción y recurrencia",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/05_induccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 6 · Grafos y árboles",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/06_grafos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Relación de problemas",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/07_problemas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Las dos entradas que habia aqui eran el mismo libro de Rosen
+              // repetido en dos idiomas. Sustituidas por la bibliografia
+              // fundamental de la guia.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Discrete Mathematics and Its Applications — Rosen",
+                  name: "Lógica para informáticos — García Miranda",
                   note: true,
                 },
                 {
-                  name: "Matemáticas Discretas — Kenneth Rosen (en español)",
+                  name: "Matemática discreta — Biggs",
+                  note: true,
+                },
+                {
+                  name: "Matemática discreta y sus aplicaciones — Rosen",
                   note: true,
                 },
               ],
