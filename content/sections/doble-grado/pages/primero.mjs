@@ -528,13 +528,69 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/matematicas-empresariales/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/ME/build/ME.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Conjuntos en Rⁿ y funciones de varias variables",
+                  href: "/viewer/?file=Subjects/First/ME/src/01_conjuntos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Optimización: el método gráfico",
+                  href: "/viewer/?file=Subjects/First/ME/src/02_optimizacion_grafica.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Cálculo diferencial en varias variables",
+                  href: "/viewer/?file=Subjects/First/ME/src/03_diferencial.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Optimización sin restricciones",
+                  href: "/viewer/?file=Subjects/First/ME/src/04_sin_restricciones.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Optimización con restricciones de igualdad",
+                  href: "/viewer/?file=Subjects/First/ME/src/05_lagrange.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Cálculo integral en varias variables",
+                  href: "/viewer/?file=Subjects/First/ME/src/06_integral.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Prácticas de ordenador",
+                  href: "/viewer/?file=Subjects/First/ME/src/07_practicas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // La obra que habia aqui no esta en la guia docente y su titulo
+              // no corresponde a ninguna edicion real. Sustituida por la
+              // bibliografia fundamental que la guia lista.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Matemáticas Financieras · Modelo Cuantitativo — Downey",
+                  name: "Matemáticas II para Economía y Empresa — García Cabello",
+                  note: true,
+                },
+                {
+                  name: "Optimización. Cuestiones, ejercicios y aplicaciones — Barbolla et al.",
+                  note: true,
+                },
+                {
+                  name: "Matemáticas para el análisis económico — Sydsaeter & Hammond",
                   note: true,
                 },
               ],
