@@ -32,17 +32,69 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/calculo/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/CAL/build/CAL.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Números reales y aritmética de ordenador",
+                  href: "/viewer/?file=Subjects/First/CAL/src/01_reales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Sucesiones y series",
+                  href: "/viewer/?file=Subjects/First/CAL/src/02_sucesiones.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Continuidad y derivabilidad",
+                  href: "/viewer/?file=Subjects/First/CAL/src/03_continuidad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Integrabilidad",
+                  href: "/viewer/?file=Subjects/First/CAL/src/04_integrabilidad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Interpolación numérica",
+                  href: "/viewer/?file=Subjects/First/CAL/src/05_interpolacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Resolución de sistemas de ecuaciones",
+                  href: "/viewer/?file=Subjects/First/CAL/src/06_sistemas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Prácticas con Maxima",
+                  href: "/viewer/?file=Subjects/First/CAL/src/07_practicas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Las dos obras que habia aqui no estan en la guia docente de la
+              // asignatura, y la segunda ni siquiera existe con ese autor.
+              // Sustituidas por la bibliografia que la guia si lista.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Thomas' Calculus — George B. Thomas",
+                  name: "Cálculo. Una variable — Jon Rogawski",
                   note: true,
                 },
                 {
-                  name: "Cálculo infinitesimal — Jerónimo García‑Moro",
+                  name: "Cálculo de una variable — James Stewart",
+                  note: true,
+                },
+                {
+                  name: "Análisis Numérico — Burden & Faires",
                   note: true,
                 },
               ],
