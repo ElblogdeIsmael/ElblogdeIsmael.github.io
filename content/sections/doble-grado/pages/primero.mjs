@@ -661,17 +661,69 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/algebra-lineal-y-estructuras-matematicas/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/ALG/build/ALG.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Bloque 1 · Aritmética entera y modular",
+                  href: "/viewer/?file=Subjects/First/ALG/src/01_aritmetica.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 2 · Combinatoria",
+                  href: "/viewer/?file=Subjects/First/ALG/src/02_combinatoria.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 3 · Sistemas de ecuaciones lineales y matrices",
+                  href: "/viewer/?file=Subjects/First/ALG/src/03_sistemas_matrices.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 4 · Espacios vectoriales",
+                  href: "/viewer/?file=Subjects/First/ALG/src/04_espacios_vectoriales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 5 · Aplicaciones lineales y diagonalización",
+                  href: "/viewer/?file=Subjects/First/ALG/src/05_aplicaciones_lineales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Seminario · Conjuntos, aplicaciones y relaciones",
+                  href: "/viewer/?file=Subjects/First/ALG/src/06_seminario.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Relación de problemas",
+                  href: "/viewer/?file=Subjects/First/ALG/src/07_problemas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Lay no esta en la guia docente de la asignatura. Sustituido por
+              // la bibliografia fundamental que la guia si lista; Strang se
+              // queda, con el titulo con el que aparece alli.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Linear Algebra — Strang",
+                  name: "Álgebra lineal con métodos elementales — Merino & Santos",
                   note: true,
                 },
                 {
-                  name: "Álgebra Lineal y sus Aplicaciones — Lay",
+                  name: "Álgebra lineal y sus aplicaciones — Strang",
+                  note: true,
+                },
+                {
+                  name: "Matemáticas discreta y combinatoria — Grimaldi",
                   note: true,
                 },
               ],
