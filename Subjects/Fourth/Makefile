@@ -8,7 +8,7 @@
 # Careful with CG, DO-1, EM and MC: their Makefile writes build/<CODE>.pdf from
 # src/*.md, but the site publishes TEX/<CODE>.pdf, which is written by hand and
 # is the longer document. Building them here does not touch what is published.
-SUBJECTS = AA AEF CG DDSI DO-1 DRH1 EE EM IG MAC MC
+SUBJECTS = AA AEF CG DDSI DO-1 DRH1 EE EM IG MAC MC MH
 
 .PHONY: all clean $(SUBJECTS) $(addprefix clean-,$(SUBJECTS))
 

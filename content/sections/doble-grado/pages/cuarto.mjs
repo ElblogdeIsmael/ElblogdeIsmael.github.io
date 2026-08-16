@@ -498,10 +498,73 @@ export default {
           blocks: [
             {
               resources: [
+                // La guia no esta bajo informatica-ade: Metaheuristicas es
+                // optativa de la especialidad de Computacion y Sistemas
+                // Inteligentes, asi que cuelga del grado de Informatica.
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica/docencia/plan-estudios/metaheuristicas-especialidad-computacion-y-sistemas-inteligentes/guia-docente",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/MH/build/MH.pdf",
+                  kind: "PDF",
+                },
                 {
                   name: "Repositorio GitHub de Prácticas",
                   href: "https://github.com/Ismael-Sallami/metaheuristics",
                   kind: "WEB",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción a las metaheurísticas",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Optimización y búsqueda en inteligencia artificial",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/02_optimizacion_busqueda.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Metaheurísticas basadas en poblaciones",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/03_poblaciones.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Algoritmos meméticos",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/04_memeticos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Metaheurísticas basadas en trayectorias",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/05_trayectorias.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Metaheurísticas basadas en adaptación social",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/06_adaptacion_social.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Aspectos avanzados en metaheurísticas",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/07_avanzados.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · Aprendizaje evolutivo",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/08_aprendizaje_evolutivo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Prácticas y seminarios",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/09_practicas.md",
+                  kind: "MD",
                 },
               ],
             },
