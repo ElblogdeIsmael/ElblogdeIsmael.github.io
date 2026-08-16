@@ -235,9 +235,54 @@ export default {
               label: "Teoría",
               resources: [
                 {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/econometria/guia-docente",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Third/ECO/Temario/build/ECO.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Formulario y resumen",
                   href: "/Subjects/Third/ECO/Formulario/FCCEE/build/Formulario.pdf",
                   kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción a la econometría",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · El modelo lineal I",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/02_modelo_lineal_1.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · El modelo lineal II",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/03_modelo_lineal_2.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Multicolinealidad",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/04_multicolinealidad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Heteroscedasticidad",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/05_heteroscedasticidad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Autocorrelación",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/06_autocorrelacion.md",
+                  kind: "MD",
                 },
               ],
             },
