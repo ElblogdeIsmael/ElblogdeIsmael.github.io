@@ -659,17 +659,92 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/introduccion-al-derecho/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/ID/build/ID.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · El ordenamiento jurídico y las fuentes del Derecho",
+                  href: "/viewer/?file=Subjects/First/ID/src/01_ordenamiento.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Representación y negociación colectivas",
+                  href: "/viewer/?file=Subjects/First/ID/src/02_representacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · El trabajador y el empleador",
+                  href: "/viewer/?file=Subjects/First/ID/src/03_trabajador_empleador.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · El contrato de trabajo y el sistema de contratación",
+                  href: "/viewer/?file=Subjects/First/ID/src/04_contrato.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · El régimen de retribución",
+                  href: "/viewer/?file=Subjects/First/ID/src/05_salario.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Suspensión y extinción del contrato de trabajo",
+                  href: "/viewer/?file=Subjects/First/ID/src/06_extincion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · El sistema de Seguridad Social",
+                  href: "/viewer/?file=Subjects/First/ID/src/07_seguridad_social.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · El Derecho mercantil, la empresa y el empresario",
+                  href: "/viewer/?file=Subjects/First/ID/src/08_mercantil_empresario.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 9 · El empresario social: las sociedades mercantiles",
+                  href: "/viewer/?file=Subjects/First/ID/src/09_sociedades.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 10 · La sociedad anónima y la sociedad de responsabilidad limitada",
+                  href: "/viewer/?file=Subjects/First/ID/src/10_anonima_limitada.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
+              // Los dos titulos que habia aqui, de Garcia Grau y de Enrique
+              // Jose Salvador, no aparecen en la guia docente oficial. La
+              // bibliografia fundamental de la guia es la de abajo.
               resources: [
                 {
-                  name: "Introducción al Derecho — García Grau",
+                  name: "Manual de Derecho del Trabajo — Monereo Pérez y otros, Comares",
                   note: true,
                 },
                 {
-                  name: "Teoría General del Derecho — Enrique José Salvador",
+                  name: "Manual de Seguridad Social — Monereo Pérez y otros, Tecnos",
+                  note: true,
+                },
+                {
+                  name: "Derecho mercantil para Relaciones Laborales y RR. HH. y para ADE — Pérez-Serrabona González (dir.), Avicam",
+                  note: true,
+                },
+                {
+                  name: "Manual de Derecho mercantil — Broseta Pont y Martínez Sanz, Tecnos",
+                  note: true,
+                },
+                {
+                  name: "Apuntes de Derecho mercantil — Bercovitz Rodríguez-Cano, Thomson-Aranzadi",
                   note: true,
                 },
               ],
