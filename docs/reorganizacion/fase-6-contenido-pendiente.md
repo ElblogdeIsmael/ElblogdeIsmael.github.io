@@ -109,22 +109,22 @@ Dos códigos se repiten entre cursos y la insignia de la ficha queda ambigua
 
 ### Primer semestre
 
-- [ ] **CAL** · Cálculo
-- [ ] **EP** · Economía Política
+- [x] **CAL** · Cálculo — 47 páginas
+- [x] **EP** · Economía Política — 49 páginas
 - [x] **FFT** · Fundamentos Físicos y Tecnológicos — 45 páginas, con circuitos en circuitikz
-- [ ] **FDAE** · Fundamentos de Dirección y Administración de Empresas
+- [x] **FDAE** · Fundamentos de Dirección y Administración de Empresas — 43 páginas
 - [x] **FP** · Fundamentos de Programación — 49 páginas
-- [ ] **TOC** · Tecnología y Organización de Computadores
+- [x] **TOC** · Tecnología y Organización de Computadores — 45 páginas
 
 ### Segundo semestre
 
-- [ ] **FS** · Fundamentos del Software
-- [ ] **HDM** · Historia del Desarrollo Económico Mundial Contemporáneo
-- [ ] **ID** · Introducción al Derecho
-- [ ] **ME** · Matemáticas Empresariales
+- [x] **FS** · Fundamentos del Software — 43 páginas
+- [x] **HDM** · Historia del Desarrollo Económico Mundial Contemporáneo — 59 páginas
+- [x] **ID** · Introducción al Derecho — 71 páginas
+- [x] **ME** · Matemáticas Empresariales — 41 páginas
 - [x] **MP** · Metodología de la Programación — 41 páginas
-- [ ] **MIC** · Microeconomía
-- [ ] **ALG** · Álgebra Lineal y Estructuras Matemáticas
+- [x] **MIC** · Microeconomía — 45 páginas
+- [x] **ALG** · Álgebra Lineal y Estructuras Matemáticas — 41 páginas
 
 ---
 
@@ -133,21 +133,21 @@ Dos códigos se repiten entre cursos y la insignia de la ficha queda ambigua
 ### Primer semestre
 
 - [x] **EC** · Estructura de Computadores — 45 páginas
-- [ ] **ED** · Estructura de Datos — ya enlaza `image-adt`; falta el temario
-- [ ] **IOF** · Introducción a las Operaciones Financieras
-- [ ] **IM** · Introducción al Márketing
-- [ ] **MACRO** · Macroeconomía — ya existe `Ejercicios_macroeconomia.pdf`; falta el temario
+- [x] **ED** · Estructura de Datos — 43 páginas (el temario que le faltaba junto a `image-adt`)
+- [x] **IOF** · Introducción a las Operaciones Financieras — 43 páginas
+- [x] **IM** · Introducción al Márketing — 47 páginas
+- [x] **MACRO** · Macroeconomía — 51 páginas (el temario que le faltaba junto a los ejercicios)
 - [x] **SO** · Sistemas Operativos — 55 páginas
-- [ ] **TC1** · Técnicas Cuantitativas I
+- [x] **TC1** · Técnicas Cuantitativas I — 47 páginas
 
 ### Segundo semestre
 
 - [x] **ALGO** · Algorítmica — 41 páginas
 - [x] **AC** · Arquitectura de Computadores — 45 páginas
-- [ ] **CGRAL** · Contabilidad General
-- [ ] **DC** · Dirección Comercial
-- [ ] **LMD** · Lógica y Métodos Discretos
-- [ ] **TC2** · Técnicas Cuantitativas II
+- [x] **CGRAL** · Contabilidad General — 41 páginas
+- [x] **DC** · Dirección Comercial — 51 páginas
+- [x] **LMD** · Lógica y Métodos Discretos — 45 páginas
+- [x] **TC2** · Técnicas Cuantitativas II — 43 páginas
 
 ---
 
@@ -866,6 +866,123 @@ header-includes: |
 
 Es un no-op para toda asignatura que no declare nada. Verificado con el barrido
 completo: **104 de 104 salen enteros, 0 no compilan, 0 con huecos**.
+
+---
+
+## La segunda tanda, el 2026-08-16: las dieciocho que quedaban
+
+Con ella **el contador pasa de 8 a 26 y la fase 6 queda escrita entera**. Son
+diecinueve documentos —las dieciocho pendientes más el temario de MACRO, que solo
+tenía sus ejercicios— y **895 páginas**.
+
+| Asignatura | Páginas |
+| --- | ---: |
+| ED · Estructura de Datos | 43 |
+| FS · Fundamentos del Software | 43 |
+| TOC · Tecnología y Organización de Computadores | 45 |
+| CAL · Cálculo | 47 |
+| ALG · Álgebra Lineal y Estructuras Matemáticas | 41 |
+| LMD · Lógica y Métodos Discretos | 45 |
+| ME · Matemáticas Empresariales | 41 |
+| TC1 · Técnicas Cuantitativas I | 47 |
+| TC2 · Técnicas Cuantitativas II | 43 |
+| EP · Economía Política | 49 |
+| FDAE · Fundamentos de Dirección y Administración de Empresas | 43 |
+| MIC · Microeconomía | 45 |
+| MACRO · Macroeconomía | 51 |
+| IOF · Introducción a las Operaciones Financieras | 43 |
+| IM · Introducción al Márketing | 47 |
+| CGRAL · Contabilidad General | 41 |
+| DC · Dirección Comercial | 51 |
+| HDM · Historia del Desarrollo Económico Mundial Contemporáneo | 59 |
+| ID · Introducción al Derecho | 71 |
+
+Mismo patrón que la primera tanda: un capítulo por tema de la guía docente en su
+orden, el temario práctico como último capítulo, y en las asignaturas cuyo
+«práctico» de la guía es solo «resolución de problemas» ese capítulo es una
+relación de problemas resueltos con `ejercicio` y `solucion`.
+
+La web pasa de **280 enlaces a 435**.
+
+### La maquinaria del preámbulo, estrenada
+
+Las de matemáticas usan los entornos que `estilos.tex` y `comandos.tex` definían y
+**nadie había usado nunca**: `teorema`, `definicion`, `ejemplo`, `proposicion`,
+`corolario`, `demostracion`, `anotacion`, `ejercicio`, `solucion`. Y `pgfplots`
+para las gráficas —convergencia, regiones factibles, densidades y regiones de
+rechazo— con `tikz` para lo que no es una función: diagramas de Hasse y grafos en
+LMD, la pirámide normativa y los árboles de contratos y de causas de extinción
+en ID.
+
+### Lo que abortó la compilación, y cómo se detecta
+
+| Síntoma | Causa | Arreglo |
+| --- | --- | --- |
+| «Incompatible glue units» | `\%` dentro de `$…$`: babel-spanish redefine `\%` | el porcentaje va fuera del modo matemático |
+| Fila de tabla partida | una barra vertical de valor absoluto dentro de una tabla markdown | `\lvert … \rvert` |
+| «extra }» | `\foreach` con `\pgfmathsetmacro` dentro de un `axis` de pgfplots | coordenadas escritas a mano |
+| Coordenada no reconocida | la sintaxis de proyección de tikz con un número suelto a la izquierda | coordenadas explícitas |
+| Carácter no declarado | `→` (U+2192) en IM | `$\to$` |
+
+Los tres primeros no señalan la línea culpable, así que el barrido previo sale más
+barato que leer el log:
+
+```bash
+grep -oP '\$[^$]*\\%[^$]*\$' src/*.md        # \% en modo matematico
+grep -oP '[^\x00-\x7FáéíóúÁÉÍÓÚñÑüÜ¿¡«»…—–·º°ª]' src/*.md | sort -u
+```
+
+Los operadores en español —`\sen`, `\tg`, `\mcd`, `\rg`— se declaran en el
+`header-includes` de la portada de cada asignatura, con el gancho que abrió FFT, y
+nunca en el preámbulo compartido que cargan los 104 documentos.
+
+### Siete figuras que compilaban sin una queja y estaban mal
+
+Ninguna la habría visto el log. Todas salieron de renderizar la página con
+`pdftoppm -f N -l N -r 100 -png` y **mirarla**:
+
+| Figura | Qué pasaba |
+| --- | --- |
+| IOF, préstamos | las barras apiladas llegaban al `ymax` automático y la leyenda las tapaba |
+| IM, mapa de posicionamiento | la caja de «hueco» casi tocaba el punto C |
+| IM, declaración de posicionamiento | la fórmula salía sin espacios: el modo matemático ignora los saltos de línea |
+| IM, ciclo de vida del producto | el `xlabel` del eje chocaba con las etiquetas de las etapas |
+| DC, curva de demanda | la etiqueta «mínimo de mercado» se montaba sobre el eje |
+| HDM, gráfica de la depresión | las marcas del eje x salían como «1,929» |
+| ID, pirámide normativa | el rótulo de tratados y Derecho de la UE se salía de su caja |
+
+La de HDM se arregla con `scaled x ticks=false` y
+`x tick label style={/pgf/number format/1000 sep=}`; el resto, moviendo o
+partiendo la etiqueta.
+
+### Dieciséis fichas citaban bibliografía que no está en su guía docente
+
+No es un defecto de esta tanda: venía de antes y se ve al abrir la guía para
+escribir el temario. Los casos son de tres tipos, y cada corrección lleva en
+`primero.mjs` o `segundo.mjs` un comentario que dice qué había y por qué se
+cambia:
+
+- **Obras de otra asignatura.** FS citaba Sommerville y el *Pragmatic Programmer*,
+  que son de ingeniería del software; TC1 y TC2 citaban investigación operativa y
+  programación matemática, no estadística.
+- **Obras que la guía no recoge**, aunque sean del tema: Patterson y Hennessy en
+  TOC, Varian y Nicholson en MIC, Lay en ALG, Brigham & Houston y Brealey & Myers
+  en IOF, Maddison y O'Brien & Hunt en HDM.
+- **Títulos que no corresponden a ninguna edición real**, y uno que ni siquiera
+  existe con ese autor.
+
+También había **una entrada duplicada**: las dos de LMD eran el mismo libro de
+Rosen.
+
+### Un error de cuentas que ningún script ve
+
+El supuesto global de CGRAL daba «otros gastos de explotación» 22 200 cuando sus
+tres componentes suman 23 200. Arrastraba toda la cascada: resultado de
+explotación, resultado antes de impuestos, impuesto, resultado del ejercicio,
+patrimonio neto, Hacienda Pública acreedora y fondo de maniobra. **Un documento
+compila igual de bien con las cuentas mal.** La comprobación es rehacer la suma,
+y el arreglo se hizo con un script que exige una única coincidencia por
+sustitución, para que ninguna cifra se cambie en el sitio equivocado.
 
 ---
 
