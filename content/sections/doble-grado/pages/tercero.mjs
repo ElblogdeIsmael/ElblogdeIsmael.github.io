@@ -26,6 +26,55 @@ export default {
           name: "Fundamentos de Redes",
           blocks: [
             {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/fundamentos-redes/guia-docente",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Third/FR/Temario/build/FR.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción a los fundamentos de redes",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Capa de red",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/02_capa_de_red.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Capa de transporte",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/03_capa_de_transporte.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Seguridad en redes",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/04_seguridad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Capa de aplicación",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/05_capa_de_aplicacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Seminarios y prácticas de laboratorio",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/06_practicas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
               label: "Preguntas de Examen",
               resources: [
                 {
