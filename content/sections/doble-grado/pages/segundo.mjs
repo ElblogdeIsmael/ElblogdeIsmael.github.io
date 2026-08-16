@@ -257,17 +257,73 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/introduccion-al-marketing/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/IM/build/IM.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Definición y procesos de marketing",
+                  href: "/viewer/?file=Subjects/Second/IM/src/01_definicion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · El análisis del entorno y la competencia",
+                  href: "/viewer/?file=Subjects/Second/IM/src/02_entorno.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Fundamentos de investigación comercial",
+                  href: "/viewer/?file=Subjects/Second/IM/src/03_investigacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · El comportamiento del consumidor",
+                  href: "/viewer/?file=Subjects/Second/IM/src/04_consumidor.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Segmentación y posicionamiento",
+                  href: "/viewer/?file=Subjects/Second/IM/src/05_segmentacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Políticas de marketing",
+                  href: "/viewer/?file=Subjects/Second/IM/src/06_politicas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/IM/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
+              // La guia docente oficial no recoge ni a Lamb, Hair & McDaniel ni
+              // el Marketing Management de Kotler & Keller en ingles. Su
+              // bibliografia fundamental es la que queda aqui.
               resources: [
                 {
-                  name: "Marketing Management — Kotler & Keller",
+                  name: "Introducción al marketing — Alonso Dos Santos (coord.)",
                   note: true,
                 },
                 {
-                  name: "Introducción al Marketing — Lamb, Hair & McDaniel",
+                  name: "Principios de marketing — Kotler & Armstrong",
+                  note: true,
+                },
+                {
+                  name: "Dirección de marketing — Kotler & Keller",
+                  note: true,
+                },
+                {
+                  name: "Fundamentos de marketing — Santesmases et al.",
                   note: true,
                 },
               ],
