@@ -267,11 +267,55 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/fundamentos-direccion-y-administracion-empresas/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/FDAE/build/FDAE.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Temas 1 y 2 · La empresa y las teorías de la empresa",
+                  href: "/viewer/?file=Subjects/First/FDAE/src/01_empresa.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · El empresario, la dirección y el gobierno",
+                  href: "/viewer/?file=Subjects/First/FDAE/src/02_empresario_direccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temas 4 y 5 · El entorno y la dirección estratégica",
+                  href: "/viewer/?file=Subjects/First/FDAE/src/03_entorno_estrategia.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temas 6 y 7 · Objetivos, planificación, control y organización",
+                  href: "/viewer/?file=Subjects/First/FDAE/src/04_objetivos_organizacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temas 8 y 9 · Dirección de la producción y financiera",
+                  href: "/viewer/?file=Subjects/First/FDAE/src/05_produccion_finanzas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temas 10 y 11 · Recursos humanos y marketing",
+                  href: "/viewer/?file=Subjects/First/FDAE/src/06_rrhh_marketing.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
               resources: [
+                {
+                  name: "Fundamentos de Dirección y Administración de Empresas — Fuentes & Cordón",
+                  note: true,
+                },
                 {
                   name: "Fundamentos de Economía y Administración de Empresas — Agote et al.",
                   note: true,
