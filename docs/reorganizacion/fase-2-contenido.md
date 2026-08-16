@@ -5,13 +5,22 @@ copiarlo) · **Rama:** `reorg/fase-2-contenido`
 
 ---
 
-## Estado: primera pasada hecha, la destructiva pendiente
+## Estado: cerrada
 
-La pasada del 2026-07-31 hizo **la parte C, la parte D de cuarto y las prácticas de
-grupo**. La parte A y la B —mover el material ajeno— siguen pendientes, a propósito:
-**`git rm` no baja ni un byte del `size-pack`**, porque el peso vive en el historial y
-solo la [fase 3](fase-3-historial.md) lo reescribe. Lo que sí queda es el inventario
-medido en `.inventario-material-ajeno.txt`: **217 ficheros, 972 MB**.
+**La pasada del 2026-07-31** hizo la parte C, la parte D de cuarto y las prácticas de
+grupo. **La parte A y la B —mover el material ajeno— se hicieron después**, y no como
+las describía este documento: el material fue a copia local en `~/backups/`, y quien
+bajó el peso de verdad fue la [fase 3](fase-3-historial.md) reescribiendo el historial,
+porque **`git rm` no baja ni un byte del `size-pack`**. El inventario que se usó está
+en `.inventario-material-ajeno.txt`: **217 ficheros, 972 MB**.
+
+Las retiradas siguieron hasta el 2026-08-09, ya desde la
+[fase 6](fase-6-contenido-pendiente.md), al descubrirse que la clasificación por
+metadatos había dejado 39 ficheros del profesorado en la clase «propio».
+
+**Las casillas sin marcar de más abajo son el procedimiento que este documento
+proponía, no trabajo pendiente.** Se conservan porque describen el plan original y
+en qué se equivocaba.
 
 Decisiones tomadas en esa pasada:
 

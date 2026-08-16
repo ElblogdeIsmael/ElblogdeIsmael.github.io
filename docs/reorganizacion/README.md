@@ -4,8 +4,10 @@ Plan de trabajo para separar el sitio web, los apuntes, el material ajeno y el c
 prácticas, y para dejar los repositorios de `Ismael-Sallami` en condiciones de servir como
 portfolio.
 
-> **Estado: seis fases cerradas, queda la 6.** Las fases 4 y 5 se cerraron del todo el
-> 2026-08-02, con los puntos que habían dejado pendientes resueltos.
+> **Estado: las siete fases están cerradas.** La última fue la 6, el 2026-08-16, con
+> las 26 asignaturas de primero y segundo escritas. Lo que queda de contenido no es
+> una fase y está al final de este documento, en
+> [Después de la reorganización](#después-de-la-reorganización).
 >
 > Seguimiento en GitHub: milestone [Reorganización 2026](https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/milestone/1)
 > e issue paraguas [#10](https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/issues/10).
@@ -121,5 +123,42 @@ No está en el CI: compilar cien documentos LaTeX en cada push no cabe en un run
 
 Al cerrar una fase: marcar su checklist, cerrar su issue y actualizar la columna «Estado»
 de la tabla de arriba.
+
+**Las casillas `- [ ]` que quedan en los documentos de fase no son trabajo pendiente.**
+Son los pasos del procedimiento de fases ya cerradas, y se conservan porque describen
+cómo se hizo. El estado real de cada fase está en la tabla de arriba, no en sus
+casillas.
+
+## Después de la reorganización
+
+Terminada la fase 6, el sitio publica material propio de las 26 asignaturas de primero
+y segundo, de las 13 de tercero y de las 11 de cuarto. **Lo que sigue faltando es
+contenido, no estructura**, así que no hay fase nueva: se escribe asignatura a
+asignatura con el patrón de la fase 6 —`Subjects/_template`, un capítulo por tema de la
+guía docente, bibliografía de la guía citada donde el texto se apoya en ella— con un
+commit y una ficha por asignatura.
+
+Comprobado ficha a ficha el 2026-08-16:
+
+| Asignatura | Lo que hay | Lo que falta |
+| --- | --- | --- |
+| **OE** · Organización de Empresas (4º) | el informe de CaixaBank y tres tests | el temario entero: `Subjects/Fourth/OE/` solo tiene `practicas/` y `test/` |
+| **MH** · Metaheurísticas (4º) | nada propio en la ficha; el código está en el repositorio `metaheuristics` | el temario, y enlazar ese repositorio desde la ficha |
+| **ECO** · Econometría (3º) | prácticas y formulario | el temario |
+| **FR** · Fundamentos de Redes (3º) | resúmenes de los temas 1 a 5, preguntas resueltas y tres tests | un temario de teoría |
+| **CF1** · Contabilidad Financiera I (3º) | teoría de los temas 1 a 3, resúmenes de los seis, ejercicios de los temas 2 a 6 y nueve tests | la teoría de los temas 4, 5 y 6 |
+
+Dos avisos, que salen de lo aprendido en las fases 5 y 6:
+
+- **Los `Teoria.tex` de FR y de ECO no son borradores.** Son el cascarón que quedó al
+  retirar el material del profesorado que envolvían: el de ECO tiene una sola sección,
+  «Referencias», y el de FR dos, «Teoria» y «Fuente». Un documento que se queda en
+  portada e índice se borra; antes de reutilizarlo, mirar su `.fls` (`grep INPUT`)
+  para ver qué incluía de verdad.
+- **CF1 es media asignatura, no una entera.** Los temas 1 a 3 ya están publicados y
+  hay que continuar su formato.
+
+**Quinto queda fuera**: sus siete fichas están vacías a propósito y `Subjects/Fifth/`
+no tiene ni un fichero, porque es un curso que todavía no se ha cursado.
 
 @author Ismael Sallami Moreno

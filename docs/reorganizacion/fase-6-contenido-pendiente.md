@@ -1,7 +1,13 @@
 # Fase 6 — Contenido pendiente
 
-**Duración:** continua, sin fecha de cierre · **Destructiva:** no ·
-**Rama:** una por asignatura, `contenido/<codigo>`
+**Estado:** **cerrada el 2026-08-16**, con **26 de 26** asignaturas de primero y
+segundo escritas · **Destructiva:** no ·
+**Rama:** una por tanda, `contenido/<lo que cubra>`
+
+Lo que quedó fuera de esta fase y sigue faltando —OE y MH de cuarto, ECO, FR y la
+mitad de CF1 de tercero— está en
+[Después de la reorganización](README.md#después-de-la-reorganización). No es una fase
+nueva: se escribe con el mismo procedimiento que hay aquí.
 
 ---
 
