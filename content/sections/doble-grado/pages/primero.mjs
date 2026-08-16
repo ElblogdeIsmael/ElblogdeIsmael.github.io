@@ -570,17 +570,78 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/historia-del-desarrollo-economico-mundial-contemporaneo/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/HDM/build/HDM.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Historia económica, desarrollo y progreso",
+                  href: "/viewer/?file=Subjects/First/HDM/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · El origen del crecimiento moderno",
+                  href: "/viewer/?file=Subjects/First/HDM/src/02_origen.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · La revolución industrial y su difusión",
+                  href: "/viewer/?file=Subjects/First/HDM/src/03_revolucion_industrial.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · La economía del periodo de entreguerras",
+                  href: "/viewer/?file=Subjects/First/HDM/src/04_entreguerras.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · La economía internacional tras la Segunda Guerra Mundial",
+                  href: "/viewer/?file=Subjects/First/HDM/src/05_posguerra.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · De la crisis del petróleo hasta la actualidad",
+                  href: "/viewer/?file=Subjects/First/HDM/src/06_crisis_actualidad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Países ex-comunistas, emergentes y subdesarrollados",
+                  href: "/viewer/?file=Subjects/First/HDM/src/07_excomunistas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · ¿Y España qué?",
+                  href: "/viewer/?file=Subjects/First/HDM/src/08_espana.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Seminarios y práctica de campo",
+                  href: "/viewer/?file=Subjects/First/HDM/src/09_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
+              // La guia docente oficial no recoge ni a Maddison ni a O'Brien &
+              // Hunt. Su bibliografia fundamental es la que queda aqui.
               resources: [
                 {
-                  name: "A Brief Economic History of the World — Angus Maddison",
+                  name: "Cambio y crecimiento económico — Caruana et al.",
                   note: true,
                 },
                 {
-                  name: "Historia Económica Mundial — O'Brien & Hunt",
+                  name: "Los fundamentos de las grandes crisis económicas — Morilla y Reyes",
+                  note: true,
+                },
+                {
+                  name: "How the World Became Rich — Koyama & Rubin",
                   note: true,
                 },
               ],
