@@ -186,17 +186,60 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/introduccion-las-operaciones-financieras/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/IOF/build/IOF.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Conceptos básicos",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/01_conceptos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Leyes simples",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/02_leyes_simples.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Operaciones a corto plazo",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/03_corto_plazo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Leyes compuestas y continuas",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/04_leyes_compuestas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Valoración de rentas",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/05_rentas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Préstamos",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/06_prestamos.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
+              // La guia docente oficial solo recoge el manual de Frias-Aceituno,
+              // en sus ediciones espanola e inglesa. Los dos titulos que habia
+              // aqui, Brigham & Houston y Brealey & Myers, no aparecen en ella.
               resources: [
                 {
-                  name: "Fundamentals of Financial Management — Brigham & Houston",
+                  name: "Introducción a las Operaciones Financieras — Frías‑Aceituno",
                   note: true,
                 },
                 {
-                  name: "Principles of Corporate Finance — Brealey, Myers & Allen",
+                  name: "Introduction to Financial Operations — Frías‑Aceituno",
                   note: true,
                 },
               ],
