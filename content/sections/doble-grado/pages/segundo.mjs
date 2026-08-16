@@ -244,17 +244,74 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/macroeconomia/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/MACRO/build/MACRO.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · El sector real en una economía cerrada",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/02_sector_real.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Los mercados financieros",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/03_mercados_financieros.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · El modelo IS-LM",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/04_islm.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · La economía abierta y Mundell-Fleming",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/05_economia_abierta.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Mercado de trabajo y oferta agregada",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/06_mercado_trabajo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Oferta y demanda agregadas. Curva de Phillips",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/07_oferta_demanda.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · El crecimiento económico",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/08_crecimiento.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Blanchard esta en la guia, con la edicion espanola; Mankiw
+              // solo en la complementaria. Se anaden Dornbusch, que es la otra
+              // obra de teoria fundamental, y el cuaderno de ejercicios.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Macroeconomics — Olivier Blanchard",
+                  name: "Macroeconomía — Blanchard",
                   note: true,
                 },
                 {
-                  name: "Macroeconomía — Mankiw",
+                  name: "Macroeconomía — Dornbusch, Fischer & Startz",
+                  note: true,
+                },
+                {
+                  name: "Macroeconomía. Cuestiones y ejercicios — Sánchez Campillo (coord.)",
                   note: true,
                 },
               ],
