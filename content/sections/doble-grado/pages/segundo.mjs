@@ -108,6 +108,46 @@ export default {
                   href: "https://grados.ugr.es/sites/grados/default/public/guias-firmadas/2025-2026/2161125.pdf",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/ED/build/ED.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción a la eficiencia de los algoritmos",
+                  href: "/viewer/?file=Subjects/Second/ED/src/01_eficiencia.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Abstracción de datos",
+                  href: "/viewer/?file=Subjects/Second/ED/src/02_abstraccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Tipos de datos contenedores básicos",
+                  href: "/viewer/?file=Subjects/Second/ED/src/03_contenedores_basicos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Tipos de datos contenedores complejos",
+                  href: "/viewer/?file=Subjects/Second/ED/src/04_contenedores_complejos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Seminarios",
+                  href: "/viewer/?file=Subjects/Second/ED/src/05_seminarios.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/ED/src/06_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
@@ -146,17 +186,60 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/introduccion-las-operaciones-financieras/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/IOF/build/IOF.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Conceptos básicos",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/01_conceptos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Leyes simples",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/02_leyes_simples.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Operaciones a corto plazo",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/03_corto_plazo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Leyes compuestas y continuas",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/04_leyes_compuestas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Valoración de rentas",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/05_rentas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Préstamos",
+                  href: "/viewer/?file=Subjects/Second/IOF/src/06_prestamos.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
+              // La guia docente oficial solo recoge el manual de Frias-Aceituno,
+              // en sus ediciones espanola e inglesa. Los dos titulos que habia
+              // aqui, Brigham & Houston y Brealey & Myers, no aparecen en ella.
               resources: [
                 {
-                  name: "Fundamentals of Financial Management — Brigham & Houston",
+                  name: "Introducción a las Operaciones Financieras — Frías‑Aceituno",
                   note: true,
                 },
                 {
-                  name: "Principles of Corporate Finance — Brealey, Myers & Allen",
+                  name: "Introduction to Financial Operations — Frías‑Aceituno",
                   note: true,
                 },
               ],
@@ -174,17 +257,73 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/introduccion-al-marketing/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/IM/build/IM.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Definición y procesos de marketing",
+                  href: "/viewer/?file=Subjects/Second/IM/src/01_definicion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · El análisis del entorno y la competencia",
+                  href: "/viewer/?file=Subjects/Second/IM/src/02_entorno.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Fundamentos de investigación comercial",
+                  href: "/viewer/?file=Subjects/Second/IM/src/03_investigacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · El comportamiento del consumidor",
+                  href: "/viewer/?file=Subjects/Second/IM/src/04_consumidor.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Segmentación y posicionamiento",
+                  href: "/viewer/?file=Subjects/Second/IM/src/05_segmentacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Políticas de marketing",
+                  href: "/viewer/?file=Subjects/Second/IM/src/06_politicas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/IM/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
+              // La guia docente oficial no recoge ni a Lamb, Hair & McDaniel ni
+              // el Marketing Management de Kotler & Keller en ingles. Su
+              // bibliografia fundamental es la que queda aqui.
               resources: [
                 {
-                  name: "Marketing Management — Kotler & Keller",
+                  name: "Introducción al marketing — Alonso Dos Santos (coord.)",
                   note: true,
                 },
                 {
-                  name: "Introducción al Marketing — Lamb, Hair & McDaniel",
+                  name: "Principios de marketing — Kotler & Armstrong",
+                  note: true,
+                },
+                {
+                  name: "Dirección de marketing — Kotler & Keller",
+                  note: true,
+                },
+                {
+                  name: "Fundamentos de marketing — Santesmases et al.",
                   note: true,
                 },
               ],
@@ -204,17 +343,74 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/macroeconomia/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/MACRO/build/MACRO.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · El sector real en una economía cerrada",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/02_sector_real.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Los mercados financieros",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/03_mercados_financieros.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · El modelo IS-LM",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/04_islm.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · La economía abierta y Mundell-Fleming",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/05_economia_abierta.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Mercado de trabajo y oferta agregada",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/06_mercado_trabajo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Oferta y demanda agregadas. Curva de Phillips",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/07_oferta_demanda.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · El crecimiento económico",
+                  href: "/viewer/?file=Subjects/Second/MACRO/src/08_crecimiento.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Blanchard esta en la guia, con la edicion espanola; Mankiw
+              // solo en la complementaria. Se anaden Dornbusch, que es la otra
+              // obra de teoria fundamental, y el cuaderno de ejercicios.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Macroeconomics — Olivier Blanchard",
+                  name: "Macroeconomía — Blanchard",
                   note: true,
                 },
                 {
-                  name: "Macroeconomía — Mankiw",
+                  name: "Macroeconomía — Dornbusch, Fischer & Startz",
+                  note: true,
+                },
+                {
+                  name: "Macroeconomía. Cuestiones y ejercicios — Sánchez Campillo (coord.)",
                   note: true,
                 },
               ],
@@ -315,17 +511,75 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/tecnicas-cuantitativas-i/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/TC1/build/TC1.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Variables estadísticas unidimensionales",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/01_unidimensionales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Variables estadísticas bidimensionales",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/02_bidimensionales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Números índices",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/03_indices.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Series cronológicas",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/04_series.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Probabilidad",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/05_probabilidad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Variables aleatorias",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/06_variables_aleatorias.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Distribuciones discretas",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/07_discretas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/TC1/src/08_practicas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Las dos obras que habia aqui son de investigacion operativa y
+              // metodos cuantitativos para la gestion, no de estadistica
+              // descriptiva y probabilidad, y no estan en la guia docente.
+              // Sustituidas por la bibliografia fundamental que si lista.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Introducción a la Investigación Operativa — Hillier & Lieberman",
+                  name: "Técnicas Cuantitativas I — Amor Pulido",
                   note: true,
                 },
                 {
-                  name: "Quantitative Methods for Business — Anderson et al.",
+                  name: "Estadística descriptiva y cálculo de probabilidades — Castillo & Guijarro",
+                  note: true,
+                },
+                {
+                  name: "Estadística para administración y economía — Newbold & Carlson",
                   note: true,
                 },
               ],
@@ -496,17 +750,55 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/contabilidad-general/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/CGRAL/build/CGRAL.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · La contabilidad",
+                  href: "/viewer/?file=Subjects/Second/CGRAL/src/01_contabilidad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · La representación contable",
+                  href: "/viewer/?file=Subjects/Second/CGRAL/src/02_representacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · El ciclo contable",
+                  href: "/viewer/?file=Subjects/Second/CGRAL/src/03_ciclo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Normalización y regulación contable en España",
+                  href: "/viewer/?file=Subjects/Second/CGRAL/src/04_normalizacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/CGRAL/src/05_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
+              // La guia docente oficial no recoge ni a Valencia Gradilla ni a
+              // Libby & Short. Su bibliografia fundamental es el manual de
+              // teoria y el libro de practicas de Rodriguez Ariza y otras.
               resources: [
                 {
-                  name: "Contabilidad Financiera — Valencia Gradilla",
+                  name: "Introducción a la Contabilidad. Manual de teoría — Rodríguez Ariza, López Pérez y Pérez López",
                   note: true,
                 },
                 {
-                  name: "Financial Accounting — Libby, Libby & Short",
+                  name: "Introducción a la Contabilidad. Libro de prácticas — Rodríguez Ariza, López Pérez y Pérez López",
                   note: true,
                 },
               ],
@@ -524,17 +816,73 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-comercial/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/DC/build/DC.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Mercado y demanda",
+                  href: "/viewer/?file=Subjects/Second/DC/src/01_mercado.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Decisiones sobre producto",
+                  href: "/viewer/?file=Subjects/Second/DC/src/02_producto.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Decisiones sobre precio",
+                  href: "/viewer/?file=Subjects/Second/DC/src/03_precio.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Decisiones sobre distribución",
+                  href: "/viewer/?file=Subjects/Second/DC/src/04_distribucion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Decisiones sobre comunicación",
+                  href: "/viewer/?file=Subjects/Second/DC/src/05_comunicacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Proceso de planificación de marketing",
+                  href: "/viewer/?file=Subjects/Second/DC/src/06_planificacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/DC/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
+              // La guia docente oficial no recoge a Walker, Mullins & Boyd, y
+              // los manuales de Kotler figuran en su edicion espanola. Esta es
+              // su bibliografia fundamental.
               resources: [
                 {
-                  name: "Marketing Strategy — Walker, Mullins & Boyd",
+                  name: "Principios de marketing — Kotler & Armstrong",
                   note: true,
                 },
                 {
-                  name: "Principles of Marketing — Kotler & Armstrong",
+                  name: "Dirección de marketing — Kotler & Keller",
+                  note: true,
+                },
+                {
+                  name: "Principios de marketing — Esteban Talaya",
+                  note: true,
+                },
+                {
+                  name: "Introducción al marketing — Alonso Dos Santos",
                   note: true,
                 },
               ],
@@ -552,17 +900,69 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/logica-y-metodos-discretos/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/LMD/build/LMD.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Bloque 1 · Álgebras de Boole y funciones booleanas",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/01_booleanas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 2 · Lógica proposicional",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/02_proposicional.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 3 · Lenguajes de primer orden",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/03_primer_orden.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 4 · Unificación y resolución",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/04_unificacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 5 · Inducción y recurrencia",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/05_induccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Bloque 6 · Grafos y árboles",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/06_grafos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Relación de problemas",
+                  href: "/viewer/?file=Subjects/Second/LMD/src/07_problemas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Las dos entradas que habia aqui eran el mismo libro de Rosen
+              // repetido en dos idiomas. Sustituidas por la bibliografia
+              // fundamental de la guia.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Discrete Mathematics and Its Applications — Rosen",
+                  name: "Lógica para informáticos — García Miranda",
                   note: true,
                 },
                 {
-                  name: "Matemáticas Discretas — Kenneth Rosen (en español)",
+                  name: "Matemática discreta — Biggs",
+                  note: true,
+                },
+                {
+                  name: "Matemática discreta y sus aplicaciones — Rosen",
                   note: true,
                 },
               ],
@@ -580,17 +980,69 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/tecnicas-cuantitativas-ii/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/TC2/build/TC2.pdf",
+                  kind: "PDF",
+                },
               ],
             },
             {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Modelos continuos, muestra y estadísticos",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Estimación puntual de parámetros",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/02_estimacion_puntual.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temas 3 y 4 · Distribuciones de los estadísticos muestrales",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/03_distribuciones_muestrales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temas 5 y 6 · Intervalos de confianza",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/04_intervalos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Contraste de hipótesis",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/05_contrastes.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · Tests no paramétricos",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/06_no_parametricos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/TC2/src/07_practicas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              // Las dos obras que habia aqui son de investigacion operativa y
+              // programacion matematica, no de inferencia estadistica, y no
+              // estan en la guia docente. Sustituidas por las que si lista.
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Operations Research: Applications and Algorithms — Winston",
+                  name: "Técnicas cuantitativas para la inferencia — Herrerías et al.",
                   note: true,
                 },
                 {
-                  name: "Model Building in Mathematical Programming — Williams",
+                  name: "Probabilidad y estadística: aplicaciones y métodos — Canavos",
+                  note: true,
+                },
+                {
+                  name: "Estadística aplicada a los negocios y la economía — Lind et al.",
                   note: true,
                 },
               ],

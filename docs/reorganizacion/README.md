@@ -44,11 +44,11 @@ GitHub Pages.
 | [3 — Historial](fase-3-historial.md) | `git filter-repo` para purgar el material ajeno del historial | **sí, reescribe historial** | **hecha** el 2026-08-01: 1,34 GiB → 442,78 MiB, 255 commits intactos |
 | [4 — Plantillas](fase-4-plantillas.md) | Arregla la plantilla compartida y pasa los tests a md2html. La migración de tercero se descartó ([D-15](DECISIONES.md)) | no | **cerrada** el 2026-08-02. 34 tests con fuente Markdown, más la plantilla de asignatura y el arreglo que encargaba la [D-12](DECISIONES.md) |
 | [5 — Indexado](fase-5-indexado.md) | Enlaza los repos nuevos y arregla lo no indexado. La sección Proyectos se retiró ([D-13](DECISIONES.md)) | no | **cerrada** el 2026-08-02 (PR #24 y cierre posterior). Cero enlaces al propio repo, y 37 PDF del profesorado retirados |
-| [6 — Contenido pendiente](fase-6-contenido-pendiente.md) | Apuntes de las 26 asignaturas de 1º y 2º. Tercero salió el 2026-08-02 ([D-15](DECISIONES.md)) | no | continua. **8 de 26** desde el 2026-08-14: la primera tanda escribió SO, EC, AC, FP, MP, ALGO y FFT |
+| [6 — Contenido pendiente](fase-6-contenido-pendiente.md) | Apuntes de las 26 asignaturas de 1º y 2º. Tercero salió el 2026-08-02 ([D-15](DECISIONES.md)) | no | **cerrada** el 2026-08-16. **26 de 26**: la primera tanda escribió siete asignaturas el 2026-08-14 y la segunda las diecinueve restantes, 895 páginas |
 
 Orden obligatorio: **0 → 1 → 2 → 3**. Las cuatro están hechas desde el 2026-08-01. **Las
-fases 4 y 5 se cerraron del todo el 2026-08-02**, con lo que habían dejado pendiente
-resuelto. **Queda solo la 6**, que no se termina: se va tachando asignatura a asignatura.
+fases 4 y 5 se cerraron del todo el 2026-08-02**, y **la 6 el 2026-08-16**, con las 26
+asignaturas de primero y segundo escritas. **Las siete fases están cerradas.**
 
 Aviso para quien retome la 6: **los documentos de fase envejecen, y ya han fallado tres
 veces**. El de la fase 5 daba por pendientes cosas ya hechas, citaba un repositorio con su
