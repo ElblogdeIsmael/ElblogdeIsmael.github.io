@@ -750,17 +750,55 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/contabilidad-general/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/CGRAL/build/CGRAL.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · La contabilidad",
+                  href: "/viewer/?file=Subjects/Second/CGRAL/src/01_contabilidad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · La representación contable",
+                  href: "/viewer/?file=Subjects/Second/CGRAL/src/02_representacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · El ciclo contable",
+                  href: "/viewer/?file=Subjects/Second/CGRAL/src/03_ciclo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Normalización y regulación contable en España",
+                  href: "/viewer/?file=Subjects/Second/CGRAL/src/04_normalizacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/CGRAL/src/05_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
+              // La guia docente oficial no recoge ni a Valencia Gradilla ni a
+              // Libby & Short. Su bibliografia fundamental es el manual de
+              // teoria y el libro de practicas de Rodriguez Ariza y otras.
               resources: [
                 {
-                  name: "Contabilidad Financiera — Valencia Gradilla",
+                  name: "Introducción a la Contabilidad. Manual de teoría — Rodríguez Ariza, López Pérez y Pérez López",
                   note: true,
                 },
                 {
-                  name: "Financial Accounting — Libby, Libby & Short",
+                  name: "Introducción a la Contabilidad. Libro de prácticas — Rodríguez Ariza, López Pérez y Pérez López",
                   note: true,
                 },
               ],
