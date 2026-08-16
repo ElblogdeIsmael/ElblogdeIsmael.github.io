@@ -112,17 +112,71 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/economia-politica/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/First/EP/build/EP.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Capítulo 1 · Principios básicos de la ciencia económica",
+                  href: "/viewer/?file=Subjects/First/EP/src/01_principios.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 2 · La oferta y la demanda",
+                  href: "/viewer/?file=Subjects/First/EP/src/02_oferta_demanda.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 3 · La empresa y los mercados de productos",
+                  href: "/viewer/?file=Subjects/First/EP/src/03_empresa_mercados.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 4 · La eficiencia, la equidad y el Estado",
+                  href: "/viewer/?file=Subjects/First/EP/src/04_estado.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 5 · La macroeconomía: visión global",
+                  href: "/viewer/?file=Subjects/First/EP/src/05_macroeconomia.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 6 · Demanda agregada y política fiscal",
+                  href: "/viewer/?file=Subjects/First/EP/src/06_demanda_fiscal.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 7 · El dinero y la política monetaria",
+                  href: "/viewer/?file=Subjects/First/EP/src/07_dinero.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Capítulo 8 · Equilibrio macroeconómico en economía abierta",
+                  href: "/viewer/?file=Subjects/First/EP/src/08_economia_abierta.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Principios de Economía — Mankiw",
+                  name: "Fundamentos de Economía — Krugman, Wells & Graddy",
                   note: true,
                 },
                 {
-                  name: "Economía Política — Samuelson & Nordhaus",
+                  name: "Economía — Mankiw & Taylor",
+                  note: true,
+                },
+                {
+                  name: "Economía — Samuelson & Nordhaus",
                   note: true,
                 },
               ],
