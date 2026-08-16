@@ -816,17 +816,73 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-comercial/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Second/DC/build/DC.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Mercado y demanda",
+                  href: "/viewer/?file=Subjects/Second/DC/src/01_mercado.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Decisiones sobre producto",
+                  href: "/viewer/?file=Subjects/Second/DC/src/02_producto.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Decisiones sobre precio",
+                  href: "/viewer/?file=Subjects/Second/DC/src/03_precio.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Decisiones sobre distribución",
+                  href: "/viewer/?file=Subjects/Second/DC/src/04_distribucion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Decisiones sobre comunicación",
+                  href: "/viewer/?file=Subjects/Second/DC/src/05_comunicacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Proceso de planificación de marketing",
+                  href: "/viewer/?file=Subjects/Second/DC/src/06_planificacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Temario práctico",
+                  href: "/viewer/?file=Subjects/Second/DC/src/07_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
               label: "Bibliografía",
+              // La guia docente oficial no recoge a Walker, Mullins & Boyd, y
+              // los manuales de Kotler figuran en su edicion espanola. Esta es
+              // su bibliografia fundamental.
               resources: [
                 {
-                  name: "Marketing Strategy — Walker, Mullins & Boyd",
+                  name: "Principios de marketing — Kotler & Armstrong",
                   note: true,
                 },
                 {
-                  name: "Principles of Marketing — Kotler & Armstrong",
+                  name: "Dirección de marketing — Kotler & Keller",
+                  note: true,
+                },
+                {
+                  name: "Principios de marketing — Esteban Talaya",
+                  note: true,
+                },
+                {
+                  name: "Introducción al marketing — Alonso Dos Santos",
                   note: true,
                 },
               ],
