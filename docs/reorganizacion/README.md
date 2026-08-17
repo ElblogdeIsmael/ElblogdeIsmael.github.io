@@ -132,31 +132,66 @@ casillas.
 ## Después de la reorganización
 
 Terminada la fase 6, el sitio publica material propio de las 26 asignaturas de primero
-y segundo, de las 13 de tercero y de las 11 de cuarto. **Lo que sigue faltando es
-contenido, no estructura**, así que no hay fase nueva: se escribe asignatura a
-asignatura con el patrón de la fase 6 —`Subjects/_template`, un capítulo por tema de la
-guía docente, bibliografía de la guía citada donde el texto se apoya en ella— con un
-commit y una ficha por asignatura.
+y segundo, de las 13 de tercero y de las 11 de cuarto. Lo que quedaba era **contenido,
+no estructura**, así que no hubo fase nueva: se escribió asignatura a asignatura con el
+patrón de la fase 6 —`Subjects/_template`, un capítulo por tema de la guía docente,
+bibliografía de la guía citada donde el texto se apoya en ella— con un commit y una
+ficha por asignatura. **Se cerró el 2026-08-16.**
 
-Comprobado ficha a ficha el 2026-08-16:
+### Escrito el 2026-08-16: las seis que faltaban
 
-| Asignatura | Lo que hay | Lo que falta |
-| --- | --- | --- |
-| **OE** · Organización de Empresas (4º) | el informe de CaixaBank y tres tests | el temario entero: `Subjects/Fourth/OE/` solo tiene `practicas/` y `test/` |
-| **MH** · Metaheurísticas (4º) | nada propio en la ficha; el código está en el repositorio `metaheuristics` | el temario, y enlazar ese repositorio desde la ficha |
-| **ECO** · Econometría (3º) | prácticas y formulario | el temario |
-| **FR** · Fundamentos de Redes (3º) | resúmenes de los temas 1 a 5, preguntas resueltas y tres tests | un temario de teoría |
-| **CF1** · Contabilidad Financiera I (3º) | teoría de los temas 1 a 3, resúmenes de los seis, ejercicios de los temas 2 a 6 y nueve tests | la teoría de los temas 4, 5 y 6 |
+**Ya no queda contenido pendiente en tercero ni en cuarto.** Se escribieron seis
+asignaturas, **306 páginas**, un commit por asignatura:
 
-Dos avisos, que salen de lo aprendido en las fases 5 y 6:
+| Asignatura | Páginas | Qué se hizo |
+| --- | ---: | --- |
+| **MH** · Metaheurísticas (4º) | 53 | los ocho temas de la guía más un capítulo de prácticas y seminarios |
+| **OE** · Organización de Empresas (4º) | 67 | los catorce temas, del concepto de organización a las seis configuraciones |
+| **FR** · Fundamentos de Redes (3º) | 41 | los cinco temas más los seminarios y las tres prácticas |
+| **ECO** · Econometría (3º) | 39 | los seis temas: el modelo lineal y sus tres diagnósticos |
+| **MC** · Métodos Cuantitativos (3º) | 63 | los ocho temas más los diez ejercicios rescatados |
+| **CF1** · Contabilidad Financiera I (3º) | 43 | los **seis** temas, no solo los tres que faltaban |
 
-- **Los `Teoria.tex` de FR y de ECO no son borradores.** Son el cascarón que quedó al
-  retirar el material del profesorado que envolvían: el de ECO tiene una sola sección,
-  «Referencias», y el de FR dos, «Teoria» y «Fuente». Un documento que se queda en
-  portada e índice se borra; antes de reutilizarlo, mirar su `.fls` (`grep INPUT`)
-  para ver qué incluía de verdad.
-- **CF1 es media asignatura, no una entera.** Los temas 1 a 3 ya están publicados y
-  hay que continuar su formato.
+La web pasa de **435 enlaces a 494**. Y tercero y cuarto tienen ya guía docente en la
+ficha, que no tenían: `grep -c 'kind: "GUIA"'` daba 13, 13, **0**, **0** y 0.
+
+**MC no estaba en la lista y debería haber estado.** Su ficha servía
+`Teoria/build/Teoria.pdf` como «Apuntes Teoría», y esas 15 páginas no eran teoría: el
+único `\input` de su `Teoria.tex` era `Capitulos/tema3.tex`, 674 líneas con diez
+ejercicios resueltos bajo un encabezado de capítulo, y su bibliografía se citaba a sí
+misma. **Ningún recuento la señalaba porque su ficha sí enlazaba un PDF propio**: es
+la trampa 22 otra vez, «la web lo enlaza» no es «la web publica lo que dice
+publicar». El barrido que la habría encontrado es mirar los `Teoria*.pdf` por páginas
+y abrir los que se quedan cortos.
+
+**Y CF1 no era media asignatura: era una entera con material ajeno dentro.** Al abrir
+los PDF publicados para continuar su formato, las seis figuras de `Tema2` resultaron
+ser fotografías del *Manual de Contabilidad financiera Vol. I* —la bibliografía
+fundamental de la guía—, numeradas como sus Figuras 3, 8, 11, 13, 14 y 15, con la
+marca de CamScanner y un dedo en el encuadre. `Tema3.pdf` lleva al menos cuatro más y
+**no tiene fuente versionada**. Los tres PDF se retiraron y los seis temas se
+escribieron de cero. Respaldo en `~/backups/material-ajeno-2026-08-16`.
+
+Los cuatro cascarones —`Teoria.tex` de FR, de ECO y de MC, y el `main.tex` de CF1—
+se borraron, así que `check-latex-builds` pasa de 104 documentos a **100, y salen 100
+de 100**.
+
+Lo que se aprendió por el camino:
+
+- **Un problema de programación lineal puede tener vértices y ser no acotado.** El
+  ejercicio 4 a) de MC llevaba años pasando por resuelto: evaluando el objetivo en
+  todos sus vértices sale un máximo aparente de 10, y la dirección $(5,4,0)$ mejora
+  sin límite cumpliendo las dos restricciones. Enumerar vértices no basta; hay que
+  buscar la dirección de recesión.
+- **Los operadores y las bibliotecas que el preámbulo compartido no trae van en el
+  `header-includes` de la portada**, como hizo FFT con `circuitikz`. Aquí lo pidieron
+  ECO y MC —`\Var`, `\Cov`, `\argmin`— y CF1 —`decorations.pathreplacing`—.
+- **Las pirámides y los diagramas de cajas desbordan sus rótulos sin decir nada.** La
+  normativa de CF1 repitió exactamente el fallo de la de ID, y el logotipo de
+  Mintzberg en OE, la matriz de OE y el flujo de correo de FR también. Se ven
+  renderizando con `pdftoppm` y mirando.
+- **`└`, `├` y `²` abortan la compilación incluso dentro de una valla de código.** Los
+  diagramas de URL y de prefijo de FR se dibujan en ASCII.
 
 **Quinto queda fuera**: sus siete fichas están vacías a propósito y `Subjects/Fifth/`
 no tiene ni un fichero, porque es un curso que todavía no se ha cursado.
