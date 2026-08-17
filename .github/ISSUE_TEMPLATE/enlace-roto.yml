@@ -1,0 +1,46 @@
+name: Enlace roto o guía movida
+description: Un enlace que da 404, un PDF que no abre o una guía docente que ha cambiado de sitio
+labels: ["enlaces"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        `npm run check` comprueba los enlaces locales en cada push, pero **no
+        pide los externos**. Las guías docentes de la UGR cambian de URL de un
+        curso a otro y nada avisa, así que este aviso vale.
+
+  - type: input
+    id: donde
+    attributes:
+      label: En qué página del sitio está
+      placeholder: https://elblogdeismael.github.io/doble-grado/tercero/
+    validations:
+      required: true
+
+  - type: input
+    id: enlace
+    attributes:
+      label: El enlace que falla
+      placeholder: https://grados.ugr.es/informatica-ade/...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: que-pasa
+    attributes:
+      label: Qué pasa al abrirlo
+      options:
+        - Da 404
+        - Lleva a otra asignatura
+        - El PDF abre pero está vacío o incompleto
+        - Otra cosa
+    validations:
+      required: true
+
+  - type: input
+    id: nueva
+    attributes:
+      label: La URL nueva, si la has encontrado
+      description: >
+        Cuando la página `/guia-docente` da 404, la guía firmada suele existir
+        en `grados.ugr.es/sites/grados/default/public/guias-firmadas/<curso>/<codigo>.pdf`.

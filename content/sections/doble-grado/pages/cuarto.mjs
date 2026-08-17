@@ -28,6 +28,11 @@ export default {
             {
               resources: [
                 {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/contabilidad-gestion/guia-docente",
+                  kind: "GUIA",
+                },
+                {
                   name: "Temario",
                   href: "/Subjects/Fourth/CG/TEX/CG.pdf",
                   kind: "PDF",
@@ -58,6 +63,11 @@ export default {
             {
               resources: [
                 {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-operaciones-i/guia-docente",
+                  kind: "GUIA",
+                },
+                {
                   name: "Tests",
                   href: "/Subjects/Fourth/DO-1/test/test.html",
                   kind: "HTML",
@@ -78,6 +88,11 @@ export default {
             {
               resources: [
                 {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/diseno-y-desarrollo-sistemas-informacion/guia-docente",
+                  kind: "GUIA",
+                },
+                {
                   name: "Temario",
                   href: "/Subjects/Fourth/DDSI/build/DDSI.pdf",
                   kind: "PDF",
@@ -97,6 +112,11 @@ export default {
           blocks: [
             {
               resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/economia-mundial/guia-docente",
+                  kind: "GUIA",
+                },
                 {
                   name: "Temario",
                   href: "/Subjects/Fourth/EM/TEX/EM.pdf",
@@ -233,6 +253,11 @@ export default {
             {
               resources: [
                 {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/informatica-grafica/guia-docente",
+                  kind: "GUIA",
+                },
+                {
                   name: "Temario",
                   href: "/Subjects/Fourth/IG/build/IG.pdf",
                   kind: "PDF",
@@ -252,6 +277,11 @@ export default {
           blocks: [
             {
               resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/modelos-computacion/guia-docente",
+                  kind: "GUIA",
+                },
                 {
                   name: "Temario",
                   href: "/Subjects/Fourth/MC/TEX/MC.pdf",
@@ -273,6 +303,11 @@ export default {
           blocks: [
             {
               resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/analisis-los-estados-financieros/guia-docente",
+                  kind: "GUIA",
+                },
                 {
                   name: "Temario",
                   href: "/Subjects/Fourth/AEF/AEF.pdf",
@@ -313,6 +348,11 @@ export default {
           blocks: [
             {
               resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-recursos-humanos-i/guia-docente",
+                  kind: "GUIA",
+                },
                 {
                   name: "Temario",
                   href: "/Subjects/Fourth/DRH1/DRH1.pdf",
@@ -373,6 +413,11 @@ export default {
           blocks: [
             {
               resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/economia-espanola/guia-docente",
+                  kind: "GUIA",
+                },
                 {
                   name: "Tests",
                   href: "/Subjects/Fourth/EE/test/test.html",
@@ -528,6 +573,14 @@ export default {
           blocks: [
             {
               resources: [
+                // Como Metaheuristicas, Aprendizaje Automatico es optativa de
+                // la especialidad de Computacion y Sistemas Inteligentes, asi
+                // que su guia cuelga del grado de Informatica.
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica/docencia/plan-estudios/aprendizaje-automatico-especialidad-computacion-y-sistemas-inteligentes/guia-docente",
+                  kind: "GUIA",
+                },
                 {
                   name: "Test ordinaria",
                   href: "/Subjects/Fourth/AA/test/test.html",
@@ -553,6 +606,14 @@ export default {
           blocks: [
             {
               resources: [
+                // La pagina /guia-docente de MAC da 404 en el grado de
+                // Informatica, del que cuelga por ser optativa de Computacion y
+                // Sistemas Inteligentes. La guia firmada si existe: 296113D.
+                {
+                  name: "Guía docente (296113D)",
+                  href: "https://grados.ugr.es/sites/grados/default/public/guias-firmadas/2025-2026/296113D.pdf",
+                  kind: "GUIA",
+                },
                 {
                   name: "Temario",
                   href: "/Subjects/Fourth/MAC/MAC.pdf",

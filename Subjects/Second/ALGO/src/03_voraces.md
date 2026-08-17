@@ -138,6 +138,12 @@ Compresión sin pérdida: los símbolos frecuentes reciben códigos cortos.
 
 Con frecuencias A:45, B:13, C:12, D:16, E:9, F:5:
 
+<!--
+El separador de los rotulos va en modo matematico a proposito. Un `·` de texto
+a tamano \tiny pide la fuente tcrm0500, que el TeX del visor no trae, y ahi la
+figura se queda cargando para siempre sin decir por que. En el PDF sale igual.
+-->
+
 ```{=latex}
 \begin{center}
 \begin{tikzpicture}[
@@ -148,23 +154,23 @@ Con frecuencias A:45, B:13, C:12, D:16, E:9, F:5:
   every node/.style={draw, circle, inner sep=1.4pt, font=\scriptsize}
 ]
 \node {100}
-  child { node[label={below:{\tiny A · 0}}] {45}
+  child { node[label={below:{\tiny A $\cdot$ 0}}] {45}
           edge from parent node[draw=none,left,font=\tiny] {0} }
   child { node {55}
     child { node {25}
-      child { node[label={below:{\tiny C · 100}}] {12}
+      child { node[label={below:{\tiny C $\cdot$ 100}}] {12}
               edge from parent node[draw=none,left,font=\tiny] {0} }
-      child { node[label={below:{\tiny B · 101}}] {13}
+      child { node[label={[xshift=-3mm]below:{\tiny B $\cdot$ 101}}] {13}
               edge from parent node[draw=none,right,font=\tiny] {1} }
       edge from parent node[draw=none,left,font=\tiny] {0} }
     child { node {30}
       child { node {14}
-        child { node[label={below:{\tiny F · 1100}}] {5}
+        child { node[label={below:{\tiny F $\cdot$ 1100}}] {5}
                 edge from parent node[draw=none,left,font=\tiny] {0} }
-        child { node[label={below:{\tiny E · 1101}}] {9}
+        child { node[label={below:{\tiny E $\cdot$ 1101}}] {9}
                 edge from parent node[draw=none,right,font=\tiny] {1} }
         edge from parent node[draw=none,left,font=\tiny] {0} }
-      child { node[label={below:{\tiny D · 111}}] {16}
+      child { node[label={below:{\tiny D $\cdot$ 111}}] {16}
               edge from parent node[draw=none,right,font=\tiny] {1} }
       edge from parent node[draw=none,right,font=\tiny] {1} }
     edge from parent node[draw=none,right,font=\tiny] {1} };

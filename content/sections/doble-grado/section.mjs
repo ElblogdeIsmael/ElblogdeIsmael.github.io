@@ -22,8 +22,8 @@ export default {
   titleOutline: "Grado",
   blurb:
     "Cinco cursos de Ingeniería Informática y ADE en la Universidad de Granada. " +
-    "Los dos primeros son sobre todo bibliografía y guías docentes; a partir de " +
-    "tercero el material ya es propio.",
+    "Los cuatro cursados tienen temario propio, escrito siguiendo la guía docente " +
+    "de cada asignatura; quinto todavía está por cursar.",
   summary: "5 cursos · 59 asignaturas",
   pages: [primero, segundo, tercero, cuarto, quinto],
 };

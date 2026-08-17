@@ -223,9 +223,12 @@
    */
   function tabularAMarkdown(cuerpo, citas) {
     // La especificacion de columnas del \\begin{tabular}{lcr} no aporta nada
-    // aqui: markdown no la necesita.
+    // aqui: markdown no la necesita. Admite un nivel de anidamiento porque el
+    // `@{}` de booktabs lleva sus propias llaves: con `[^{}]*` la
+    // especificacion no casaba y salia impresa dentro de la primera celda,
+    // «{@{}ccc@{}} Q_1 Q_0», en catorce de los apuntes enlazados.
     var filas = cuerpo
-      .replace(/^\s*(\[[^\]]*\])?\s*\{[^{}]*\}/, "")
+      .replace(/^\s*(\[[^\]]*\])?\s*\{(?:[^{}]|\{[^{}]*\})*\}/, "")
       .replace(/\\(top|mid|bottom)rule\b/g, "")
       .replace(/\\cmidrule\b(\([^)]*\))?(\{[^}]*\})?/g, "")
       .replace(/\\hline\b/g, "")
@@ -475,7 +478,7 @@
     "arrows.meta", "positioning", "calc", "trees", "shapes.geometric",
     "shapes.misc", "fit", "matrix", "patterns", "backgrounds", "chains",
     "decorations.pathreplacing", "decorations.markings", "decorations.pathmorphing",
-    "intersections", "through", "quotes", "angles", "babel"
+    "intersections", "through", "quotes", "angles", "babel", "automata"
   ];
 
   var PREAMBULO_FIGURAS =
@@ -733,6 +736,16 @@
    * literal o es de KaTeX.
    */
   function normalizarLatex(texto) {
+    // Los comentarios HTML se quitan antes de partir por vallas. Con
+    // `html: false` markdown-it los escapa y salen impresos: la relacion del
+    // tema 2 de SCD publicaba cuatro bloques comentados con sus `<!--` a la
+    // vista. Van antes del split a proposito, porque ahi los comentarios
+    // envuelven vallas enteras y trocearlos primero los partiria por la mitad;
+    // es lo mismo que hace CommonMark con un comentario de bloque. Comprobado
+    // que ninguno de los 245 apuntes enlazados lleva un `<!--` dentro de una
+    // valla, que es el unico caso en el que esto se llevaria algo por delante.
+    texto = texto.replace(/<!--[\s\S]*?-->/g, "");
+
     var partes = texto.split(/(```[\s\S]*?```|\$\$[\s\S]*?\$\$)/);
     for (var p = 0; p < partes.length; p++) {
       if (p % 2 === 1) continue;          // los impares son valla o matematica

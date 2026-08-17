@@ -141,6 +141,15 @@ export default {
           name: "Programación y Diseño Orientado a Objetos",
           blocks: [
             {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/programacion-y-diseno-orientado-objetos/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+            {
               label: "Prácticas · Proyecto Irrgarten",
               resources: [
                 {
@@ -468,6 +477,15 @@ export default {
           name: "Dirección y Administración de Empresas",
           blocks: [
             {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-y-administracion-empresas/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+            {
               label: "Prácticas",
               resources: [
                 {
@@ -492,6 +510,15 @@ export default {
           code: "SCD",
           name: "Sistemas Concurrentes y Distribuidos",
           blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/sistemas-concurrentes-y-distribuidos/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
             {
               label: "Prácticas",
               resources: [
@@ -620,6 +647,15 @@ export default {
           name: "Contabilidad Financiera II",
           blocks: [
             {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/contabilidad-financiera-ii/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+            {
               label: "Prácticas",
               resources: [
                 {
@@ -691,6 +727,15 @@ export default {
           name: "Análisis de Operaciones Financieras",
           blocks: [
             {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/analisis-las-operaciones-financieras/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+            {
               label: "Teoría",
               resources: [
                 {
@@ -711,6 +756,18 @@ export default {
           code: "FBD",
           name: "Fundamentos de Base de Datos",
           blocks: [
+            {
+              // La pagina /guia-docente de FBD da 404. La guia firmada si
+              // existe, y su codigo no aparece en ninguna pagina del grado:
+              // sale barriendo el rango 21611 3x contra el texto del PDF.
+              resources: [
+                {
+                  name: "Guía docente (216113D)",
+                  href: "https://grados.ugr.es/sites/grados/default/public/guias-firmadas/2025-2026/216113D.pdf",
+                  kind: "GUIA",
+                },
+              ],
+            },
             {
               label: "Teoría · Prácticas",
               resources: [
@@ -792,6 +849,15 @@ export default {
           code: "FIS",
           name: "Fundamentos de Ingeniería del Software",
           blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/fundamentos-ingenieria-del-software/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
             {
               label: "Prácticas",
               resources: [
@@ -899,6 +965,15 @@ export default {
           name: "Inteligencia Artificial",
           blocks: [
             {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/inteligencia-artificial/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+            {
               label: "Prácticas",
               resources: [
                 {
@@ -954,6 +1029,15 @@ export default {
           code: "ISE",
           name: "Ingeniería de Servidores",
           blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/ingenieria-servidores/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
             {
               label: "Prácticas",
               resources: [
