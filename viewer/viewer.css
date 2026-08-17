@@ -346,6 +346,79 @@ body {
 .md-content .katex { font-size: 1.05em; }
 .md-content .katex-display { overflow-x: auto; overflow-y: hidden; padding: .35rem 0; }
 
+/* ===================== LaTeX CRUDO ===================== */
+/* Lo que viewer.js compone a partir del LaTeX de los apuntes: los entornos
+   del preámbulo compartido, las figuras de TikZ y las citas. Todo con las
+   variables de tema, para que valga en los tres. */
+
+/* --- Entornos: teorema, definición, ejercicio, nota… --- */
+.md-content .md-thm {
+  margin: 1.4em 0;
+  padding: .8em 1.1em;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  background: var(--surface);
+}
+.md-content .md-thm-cab {
+  margin: 0 0 .5em;
+  font-family: var(--font-display);
+  letter-spacing: .01em;
+}
+.md-content .md-thm-nombre { color: var(--accent); font-weight: 700; }
+.md-content .md-thm-nota { color: var(--muted); font-weight: 500; }
+.md-content .md-thm-cuerpo > :first-child { margin-top: 0; }
+.md-content .md-thm-cuerpo > :last-child { margin-bottom: 0; }
+
+/* La solución va pegada a su ejercicio y en tono menor: son un par. */
+.md-content .md-thm-solucion {
+  margin-top: -.6em;
+  border-left-color: var(--quote-bar);
+  background: transparent;
+}
+.md-content .md-thm-solucion .md-thm-nombre { color: var(--muted); }
+
+/* La nota es un apunte al margen, no un enunciado. */
+.md-content .md-thm-anotacion {
+  border-left-color: var(--accent-2, var(--quote-bar));
+  font-size: .96em;
+}
+
+/* --- Figuras de TikZ --- */
+.md-content .md-fig {
+  margin: 1.6em 0;
+  text-align: center;
+  overflow-x: auto;
+}
+/* Los colores del tema oscuro los resuelve el propio motor, que lee
+   `data-color-scheme` en <html> y aclara cada color conservando su tono.
+   Aquí no se invierte nada: hacerlo además invertiría dos veces. */
+.md-content .md-fig svg { max-width: 100%; height: auto; }
+
+/* Mientras el motor compone, el <script> no ocupa nada: se reserva un hueco
+   para que el texto no salte cuando aparezca la figura. */
+.md-content .md-fig > script[type="text/tikz"] {
+  display: block;
+  min-height: 2.5em;
+}
+
+.md-content .md-fig-aviso {
+  display: inline-block;
+  padding: .7em 1em;
+  border: 1px dashed var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: .93em;
+  text-align: left;
+}
+.md-content .md-fig-aviso a { color: var(--link); }
+
+/* --- Citas resueltas contra el .bib --- */
+.md-content .md-cite {
+  color: var(--muted);
+  font-size: .95em;
+  white-space: nowrap;
+}
+
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 640px) {
   .viewer-topbar { flex-wrap: wrap; gap: 10px; padding: 10px 14px; }
