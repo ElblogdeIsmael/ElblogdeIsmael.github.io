@@ -552,6 +552,31 @@
     return "/" + encodeURI(dir.join("/") + "/referencias.bib");
   }
 
+  // La portada declara los operadores en español de la asignatura en su gancho
+  // header-includes. Se leen de ahi y no de una lista escrita aqui, que es lo
+  // mismo que se hace con la bibliografia: el sitio de donde lo lee el PDF.
+  function rutaPortada(file) {
+    var dir = dirDelApunte(file);
+    if (!dir.length) return "";
+    return "/" + encodeURI(dir.join("/") + "/src/00_portada.md");
+  }
+
+  /*
+   * Saca las macros para KaTeX de los \DeclareMathOperator de la portada.
+   * Sin esto, un \sen o un \rg en la prosa sale en rojo, que es como KaTeX
+   * avisa de un comando que no conoce: son treinta operadores distintos en el
+   * arbol, y \rg aparece treinta y dos veces.
+   */
+  function macrosDeLaPortada(texto) {
+    var macros = {};
+    var re = /\\DeclareMathOperator(\*?)\s*\{\\([a-zA-Z]+)\}\s*\{([^}]*)\}/g;
+    var m;
+    while ((m = re.exec(texto)) !== null) {
+      macros["\\" + m[2]] = "\\operatorname" + (m[1] ? "*" : "") + "{" + m[3] + "}";
+    }
+    return macros;
+  }
+
   function dirDelApunte(file) {
     var partes = file.split("/");
     var i = partes.lastIndexOf("src");
@@ -724,7 +749,11 @@
       md.use(window.texmath, {
         engine: window.katex,
         delimiters: "dollars",
-        katexOptions: { throwOnError: false, errorColor: "#ff6b6b" }
+        katexOptions: {
+          throwOnError: false,
+          errorColor: "#ff6b6b",
+          macros: ctx.macros || {}
+        }
       });
     }
     instalarReglasLatex(md, ctx);
@@ -732,8 +761,10 @@
   }
 
   /* ---------- Render ---------- */
-  function render(file, texto, citas) {
-    var ctx = { file: file, citas: citas || {}, hayFiguras: false };
+  function render(file, texto, citas, macros) {
+    var ctx = {
+      file: file, citas: citas || {}, macros: macros || {}, hayFiguras: false
+    };
     // El propio md renderiza los cuerpos de los entornos, asi que el contexto
     // se lo pasa a si mismo.
     ctx.md = crearMd(ctx);
@@ -793,14 +824,22 @@
         return resp.text();
       })
       .then(function (texto) {
-        // El render es sincrono, asi que la bibliografia tiene que estar antes.
-        // Solo se pide si el apunte cita algo, y esta al lado del documento:
-        // <dir>/referencias.bib, igual que el .bib que biber lee al compilar.
-        if (texto.indexOf("\\cite{") === -1) return render(file, texto, {});
-        return fetch(rutaBib(file))
-          .then(function (r) { return r.ok ? r.text() : ""; })
-          .catch(function () { return ""; })
-          .then(function (bib) { render(file, texto, parsearBib(bib)); });
+        // El render es sincrono, asi que lo que necesita tiene que estar antes:
+        // la bibliografia para las citas y la portada para los operadores en
+        // español. Los dos ficheros son pequeños y van en paralelo, y si
+        // cualquiera falla se renderiza igual, solo que sin resolverlos.
+        var pide = function (ruta, cond) {
+          if (!cond) return Promise.resolve("");
+          return fetch(ruta)
+            .then(function (r) { return r.ok ? r.text() : ""; })
+            .catch(function () { return ""; });
+        };
+        return Promise.all([
+          pide(rutaBib(file), texto.indexOf("\\cite{") !== -1),
+          pide(rutaPortada(file), texto.indexOf("$") !== -1)
+        ]).then(function (res) {
+          render(file, texto, parsearBib(res[0]), macrosDeLaPortada(res[1]));
+        });
       })
       .catch(function (err) {
         showError(
