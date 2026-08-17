@@ -293,22 +293,51 @@ export default {
           name: "Contabilidad Financiera I",
           blocks: [
             {
-              label: "Teoría",
               resources: [
                 {
-                  name: "Tema 1 · Normalización Contable y PGC",
-                  href: "/Subjects/Third/CF1/Teoria/Tema1/FCCEE/build/Tema1.pdf",
-                  kind: "PDF",
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/contabilidad-financiera-i/guia-docente",
+                  kind: "GUIA",
                 },
                 {
-                  name: "Tema 2 · Existencias: Compras y Ventas",
-                  href: "/Subjects/Third/CF1/Teoria/Tema2/FCCEE/build/Tema2.pdf",
+                  name: "Temario",
+                  href: "/Subjects/Third/CF1/Temario/build/CF1.pdf",
                   kind: "PDF",
                 },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
                 {
-                  name: "Tema 3 · Deudores y Acreedores de la Actividad Habitual",
-                  href: "/Subjects/Third/CF1/Teoria/Tema3/FCCEE/build/Tema3.pdf",
-                  kind: "PDF",
+                  name: "Tema 1 · Normalización contable y PGC",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/01_normalizacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Existencias: compras y ventas",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/02_existencias.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Deudores y acreedores de la actividad habitual",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/03_deudores_acreedores.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Otras operaciones de la actividad corriente",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/04_actividad_corriente.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Inmovilizado material",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/05_inmovilizado_material.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Inmovilizado intangible",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/06_inmovilizado_intangible.md",
+                  kind: "MD",
                 },
               ],
             },
