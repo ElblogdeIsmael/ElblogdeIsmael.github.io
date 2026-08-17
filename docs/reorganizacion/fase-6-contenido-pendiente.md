@@ -24,8 +24,9 @@ migración se descartó: el material ya está publicado y funciona, uniformarlo 
 recompilarlo arriesga publicar menos de lo que hay. El inventario de lo que tiene cada una
 sigue abajo, como información, no como lista de tareas.
 
-**OE, de cuarto, queda fuera por decisión de Ismael**: se queda con sus tres tests y sus
-prácticas.
+**OE, de cuarto, quedó fuera de esta fase** y se quedaba con sus tres tests y sus
+prácticas. Esa decisión se revocó el 2026-08-16, al cerrar el temario de todo lo que
+faltaba: OE tiene ya sus catorce temas escritos.
 
 No es una fase que se «termine»: se va tachando asignatura a asignatura, al ritmo que dé.
 

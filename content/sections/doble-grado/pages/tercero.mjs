@@ -26,6 +26,55 @@ export default {
           name: "Fundamentos de Redes",
           blocks: [
             {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/fundamentos-redes/guia-docente",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Third/FR/Temario/build/FR.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción a los fundamentos de redes",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Capa de red",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/02_capa_de_red.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Capa de transporte",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/03_capa_de_transporte.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Seguridad en redes",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/04_seguridad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Capa de aplicación",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/05_capa_de_aplicacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Seminarios y prácticas de laboratorio",
+                  href: "/viewer/?file=Subjects/Third/FR/Temario/src/06_practicas.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
               label: "Preguntas de Examen",
               resources: [
                 {
@@ -186,9 +235,54 @@ export default {
               label: "Teoría",
               resources: [
                 {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/econometria/guia-docente",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Third/ECO/Temario/build/ECO.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Formulario y resumen",
                   href: "/Subjects/Third/ECO/Formulario/FCCEE/build/Formulario.pdf",
                   kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción a la econometría",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · El modelo lineal I",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/02_modelo_lineal_1.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · El modelo lineal II",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/03_modelo_lineal_2.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Multicolinealidad",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/04_multicolinealidad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Heteroscedasticidad",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/05_heteroscedasticidad.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Autocorrelación",
+                  href: "/viewer/?file=Subjects/Third/ECO/Temario/src/06_autocorrelacion.md",
+                  kind: "MD",
                 },
               ],
             },
@@ -199,22 +293,51 @@ export default {
           name: "Contabilidad Financiera I",
           blocks: [
             {
-              label: "Teoría",
               resources: [
                 {
-                  name: "Tema 1 · Normalización Contable y PGC",
-                  href: "/Subjects/Third/CF1/Teoria/Tema1/FCCEE/build/Tema1.pdf",
-                  kind: "PDF",
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/contabilidad-financiera-i/guia-docente",
+                  kind: "GUIA",
                 },
                 {
-                  name: "Tema 2 · Existencias: Compras y Ventas",
-                  href: "/Subjects/Third/CF1/Teoria/Tema2/FCCEE/build/Tema2.pdf",
+                  name: "Temario",
+                  href: "/Subjects/Third/CF1/Temario/build/CF1.pdf",
                   kind: "PDF",
                 },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
                 {
-                  name: "Tema 3 · Deudores y Acreedores de la Actividad Habitual",
-                  href: "/Subjects/Third/CF1/Teoria/Tema3/FCCEE/build/Tema3.pdf",
-                  kind: "PDF",
+                  name: "Tema 1 · Normalización contable y PGC",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/01_normalizacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Existencias: compras y ventas",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/02_existencias.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Deudores y acreedores de la actividad habitual",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/03_deudores_acreedores.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Otras operaciones de la actividad corriente",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/04_actividad_corriente.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Inmovilizado material",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/05_inmovilizado_material.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Inmovilizado intangible",
+                  href: "/viewer/?file=Subjects/Third/CF1/Temario/src/06_inmovilizado_intangible.md",
+                  kind: "MD",
                 },
               ],
             },
@@ -903,12 +1026,71 @@ export default {
           name: "Métodos Cuantitativos",
           blocks: [
             {
-              label: "Teoría",
               resources: [
                 {
-                  name: "Apuntes Teoría",
-                  href: "/Subjects/Third/MC/Teoria/build/Teoria.pdf",
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/metodos-cuantitativos/guia-docente",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Third/MC/Temario/build/MC.pdf",
                   kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Parte 1 · Optimización",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Introducción a la programación lineal",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/02_programacion_lineal.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Símplex, dualidad, sensibilidad y programación entera",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/03_simplex.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Optimización no lineal",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/04_no_lineal.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              label: "Parte 2 · Decisión",
+              resources: [
+                {
+                  name: "Tema 5 · Teoría de la decisión",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/05_teoria_decision.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Decisiones multicriterio",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/06_multicriterio.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Teoría de juegos",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/07_teoria_juegos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · Programación multiobjetivo",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/08_multiobjetivo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Relación de ejercicios resueltos",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/09_ejercicios.md",
+                  kind: "MD",
                 },
               ],
             },

@@ -399,9 +399,104 @@ export default {
             {
               resources: [
                 {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/organizacion-empresas/guia-docente",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/OE/build/OE.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Informe-diagnóstico CaixaBank (trabajo en grupo)",
                   href: "/Subjects/Fourth/OE/practicas/informe-caixabank.pdf",
                   kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · La organización. Conceptos básicos",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/01_la_organizacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Mecanismos de coordinación y partes de la organización",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/02_coordinacion_partes.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · La organización como un sistema de flujos",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/03_sistema_de_flujos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Diseño de puestos",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/04_diseno_de_puestos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Diseño de la superestructura",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/05_superestructura.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Diseño de vínculos laterales",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/06_vinculos_laterales.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Diseño del sistema decisor",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/07_sistema_decisor.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · Los factores de contingencia",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/08_factores_contingencia.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              label: "Configuraciones",
+              resources: [
+                {
+                  name: "Tema 9 · La estructura simple",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/09_estructura_simple.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 10 · La burocracia maquinal",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/10_burocracia_maquinal.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 11 · La burocracia profesional",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/11_burocracia_profesional.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 12 · La organización misionaria",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/12_organizacion_misionaria.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 13 · La forma divisional",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/13_forma_divisional.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 14 · La adhocracia",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/14_adhocracia.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Prácticas y trabajo final",
+                  href: "/viewer/?file=Subjects/Fourth/OE/src/15_practicas.md",
+                  kind: "MD",
                 },
               ],
             },
@@ -498,10 +593,73 @@ export default {
           blocks: [
             {
               resources: [
+                // La guia no esta bajo informatica-ade: Metaheuristicas es
+                // optativa de la especialidad de Computacion y Sistemas
+                // Inteligentes, asi que cuelga del grado de Informatica.
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica/docencia/plan-estudios/metaheuristicas-especialidad-computacion-y-sistemas-inteligentes/guia-docente",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Fourth/MH/build/MH.pdf",
+                  kind: "PDF",
+                },
                 {
                   name: "Repositorio GitHub de Prácticas",
                   href: "https://github.com/Ismael-Sallami/metaheuristics",
                   kind: "WEB",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción a las metaheurísticas",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Optimización y búsqueda en inteligencia artificial",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/02_optimizacion_busqueda.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Metaheurísticas basadas en poblaciones",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/03_poblaciones.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Algoritmos meméticos",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/04_memeticos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Metaheurísticas basadas en trayectorias",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/05_trayectorias.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Metaheurísticas basadas en adaptación social",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/06_adaptacion_social.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Aspectos avanzados en metaheurísticas",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/07_avanzados.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · Aprendizaje evolutivo",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/08_aprendizaje_evolutivo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Prácticas y seminarios",
+                  href: "/viewer/?file=Subjects/Fourth/MH/src/09_practicas.md",
+                  kind: "MD",
                 },
               ],
             },
