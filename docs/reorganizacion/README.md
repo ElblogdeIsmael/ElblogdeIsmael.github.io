@@ -72,6 +72,8 @@ que volver a hacerlo cuando se borre lo que aquellas dos mueven.
 | [REGLAS.md](REGLAS.md) | Las 11 reglas de trabajo. Se aplican en todas las fases |
 | [DECISIONES.md](DECISIONES.md) | Qué se decidió, qué se descartó y por qué |
 | [ESTANDAR-REPOS.md](ESTANDAR-REPOS.md) | Plantilla de README y estructura interna obligatoria |
+| [extra-modificaciones.md](extra-modificaciones.md) | Los encargos sueltos de Ismael que no eran de ninguna fase. Sus cuatro puntos abiertos se cerraron como D-11 a D-14 |
+| [practicas-en-repos-de-grupo.md](practicas-en-repos-de-grupo.md) | De dónde salieron las prácticas de EE, DRH1 y OE, que viven en repositorios privados de grupo |
 
 ## Vocabulario del sitio
 
