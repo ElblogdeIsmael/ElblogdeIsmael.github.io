@@ -997,12 +997,71 @@ export default {
           name: "Métodos Cuantitativos",
           blocks: [
             {
-              label: "Teoría",
               resources: [
                 {
-                  name: "Apuntes Teoría",
-                  href: "/Subjects/Third/MC/Teoria/build/Teoria.pdf",
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/metodos-cuantitativos/guia-docente",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Third/MC/Temario/build/MC.pdf",
                   kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Parte 1 · Optimización",
+              resources: [
+                {
+                  name: "Tema 1 · Introducción",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/01_introduccion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Introducción a la programación lineal",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/02_programacion_lineal.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Símplex, dualidad, sensibilidad y programación entera",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/03_simplex.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Optimización no lineal",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/04_no_lineal.md",
+                  kind: "MD",
+                },
+              ],
+            },
+            {
+              label: "Parte 2 · Decisión",
+              resources: [
+                {
+                  name: "Tema 5 · Teoría de la decisión",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/05_teoria_decision.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Decisiones multicriterio",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/06_multicriterio.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Teoría de juegos",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/07_teoria_juegos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · Programación multiobjetivo",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/08_multiobjetivo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Relación de ejercicios resueltos",
+                  href: "/viewer/?file=Subjects/Third/MC/Temario/src/09_ejercicios.md",
+                  kind: "MD",
                 },
               ],
             },
