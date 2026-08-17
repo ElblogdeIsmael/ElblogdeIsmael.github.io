@@ -38,6 +38,12 @@
       "data-color-scheme", CLARIDAD[theme] || "dark");
     try { localStorage.setItem("viewer-theme", theme); } catch (e) {}
   }
+  // Se aplica al arrancar y no solo al cambiar de tema: `data-theme` ya lo deja
+  // puesto el script en linea de index.html, pero `data-color-scheme` no, y sin
+  // el las figuras de la primera visita saldrian con los colores del tema
+  // contrario.
+  applyTheme(currentTheme());
+
   if (themeSelect) {
     themeSelect.value = currentTheme();
     themeSelect.addEventListener("change", function () {
