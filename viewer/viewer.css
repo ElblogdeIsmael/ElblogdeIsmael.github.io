@@ -394,11 +394,21 @@ body {
    Aquí no se invierte nada: hacerlo además invertiría dos veces. */
 .md-content .md-fig svg { max-width: 100%; height: auto; }
 
-/* Mientras el motor compone, el <script> no ocupa nada: se reserva un hueco
-   para que el texto no salte cuando aparezca la figura. */
+/* Mientras el motor compone, el <script> no ocupa nada y la figura tarda:
+   una gráfica de funciones son cientos de evaluaciones dentro de un TeX en
+   WebAssembly. Se reserva el hueco y se avisa, para que el texto no salte y
+   para que no parezca que no pasa nada. */
 .md-content .md-fig > script[type="text/tikz"] {
   display: block;
-  min-height: 2.5em;
+  min-height: 3.2em;
+}
+.md-content .md-fig > script[type="text/tikz"]::after {
+  content: "Componiendo la figura…";
+  display: block;
+  padding: .9em 0;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: .9em;
 }
 
 .md-content .md-fig-aviso {

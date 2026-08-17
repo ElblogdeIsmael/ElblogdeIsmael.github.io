@@ -598,6 +598,16 @@
 
   function cargarTikz(ctx) {
     if (document.getElementById("tikzjax-css")) return;
+
+    // El limite por defecto son 30 s por figura, y una grafica de funciones
+    // con `samples=100` son cientos de evaluaciones de exp o de ln dentro de
+    // un TeX sobre WebAssembly: es lenta, y al agotarse el plazo el motor deja
+    // el icono de imagen rota. Se sube antes de cargarlo, que es cuando lee
+    // la configuracion.
+    window.TikzJaxOptions = window.TikzJaxOptions || {};
+    window.TikzJaxOptions.renderTimeout = 180000;
+    window.TikzJaxOptions.maxRetries = 2;
+
     var css = document.createElement("link");
     css.id = "tikzjax-css";
     css.rel = "stylesheet";
@@ -610,18 +620,25 @@
     document.head.appendChild(js);
 
     // Si el CDN no responde o el motor se atasca, la figura no puede quedarse
-    // en blanco sin decir nada: pasado el margen se remite al PDF.
-    window.setTimeout(function () { avisarFigurasSinPintar(ctx); }, 25000);
+    // en blanco sin decir nada: pasado el margen se remite al PDF. Va por
+    // encima del plazo del motor, o este aviso taparia figuras que aun se
+    // estaban componiendo.
+    window.setTimeout(function () { avisarFigurasSinPintar(ctx); }, 200000);
   }
 
-  // El motor sustituye cada <script> por un <svg>. Los que sigan siendo script
-  // es que no se han compuesto.
+  /*
+   * El motor sustituye cada <script> por un <svg>, y si se rinde deja su
+   * propio icono de imagen rota. En los dos casos en que no hay figura se
+   * remite al PDF, que es lo unico honesto que se puede decir.
+   */
   function avisarFigurasSinPintar(ctx) {
-    var pendientes = contentEl.querySelectorAll(
-      '.md-fig > script[type="text/tikz"]');
-    for (var i = 0; i < pendientes.length; i++) {
-      var caja = pendientes[i].parentNode;
-      if (caja.querySelector("svg")) continue;
+    var cajas = contentEl.querySelectorAll(".md-fig");
+    for (var i = 0; i < cajas.length; i++) {
+      var caja = cajas[i];
+      if (caja.querySelector("svg:not([data-tikzjax-broken])")) continue;
+      var rota = caja.querySelector('img, [src*="broken"]');
+      var pendiente = caja.querySelector('script[type="text/tikz"]');
+      if (!rota && !pendiente) continue;
       caja.innerHTML = '<p class="md-fig-aviso">' + avisoPdfHtml(ctx) + "</p>";
     }
   }
