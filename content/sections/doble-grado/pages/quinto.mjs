@@ -15,6 +15,7 @@ export default {
   meta: [
     "Grado en Ingeniería Informática · ADE",
     "7 asignaturas · 2 semestres",
+    "Curso por cursar: por ahora solo las guías docentes",
   ],
   groups: [
     {
@@ -24,22 +25,62 @@ export default {
         {
           code: "CE",
           name: "Creación de Empresas",
-          blocks: [],
+          blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/creacion-empresas/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+          ],
         },
         {
           code: "DF",
           name: "Derecho Fiscal",
-          blocks: [],
+          blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/derecho-fiscal/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+          ],
         },
         {
           code: "DEE1",
           name: "Dirección Estratégica de la Empresa I",
-          blocks: [],
+          blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-estrategica-la-empresa-i/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+          ],
         },
         {
           code: "DFIN",
           name: "Dirección Financiera",
-          blocks: [],
+          blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-financiera/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+          ],
         },
       ],
     },
@@ -50,17 +91,47 @@ export default {
         {
           code: "DEE2",
           name: "Dirección Estratégica de la Empresa II",
-          blocks: [],
+          blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-estrategica-la-empresa-ii/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+          ],
         },
         {
           code: "PFG",
           name: "Proyecto Fin de Grado",
-          blocks: [],
+          blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/proyecto-fin-grado/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+          ],
         },
         {
           code: "TFG",
           name: "Trabajo Fin de Grado",
-          blocks: [],
+          blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/trabajo-fin-grado/guia-docente",
+                  kind: "GUIA",
+                },
+              ],
+            },
+          ],
         },
       ],
     },
