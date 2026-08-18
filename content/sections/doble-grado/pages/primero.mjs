@@ -86,15 +86,15 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Cálculo. Una variable — Jon Rogawski",
+                  name: "Cálculo. Una variable · Jon Rogawski",
                   note: true,
                 },
                 {
-                  name: "Cálculo de una variable — James Stewart",
+                  name: "Cálculo de una variable · James Stewart",
                   note: true,
                 },
                 {
-                  name: "Análisis Numérico — Burden & Faires",
+                  name: "Análisis Numérico · Burden & Faires",
                   note: true,
                 },
               ],
@@ -168,15 +168,15 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Fundamentos de Economía — Krugman, Wells & Graddy",
+                  name: "Fundamentos de Economía · Krugman, Wells & Graddy",
                   note: true,
                 },
                 {
-                  name: "Economía — Mankiw & Taylor",
+                  name: "Economía · Mankiw & Taylor",
                   note: true,
                 },
                 {
-                  name: "Economía — Samuelson & Nordhaus",
+                  name: "Economía · Samuelson & Nordhaus",
                   note: true,
                 },
               ],
@@ -245,11 +245,11 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Fundamentos de Física — Alonso & Finn",
+                  name: "Fundamentos de Física · Alonso & Finn",
                   note: true,
                 },
                 {
-                  name: "Física Universitaria — Sears & Zemansky",
+                  name: "Física Universitaria · Sears & Zemansky",
                   note: true,
                 },
               ],
@@ -313,11 +313,11 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Fundamentos de Dirección y Administración de Empresas — Fuentes & Cordón",
+                  name: "Fundamentos de Dirección y Administración de Empresas · Fuentes & Cordón",
                   note: true,
                 },
                 {
-                  name: "Fundamentos de Economía y Administración de Empresas — Agote et al.",
+                  name: "Fundamentos de Economía y Administración de Empresas · Agote et al.",
                   note: true,
                 },
               ],
@@ -386,11 +386,11 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "How to Think Like a Computer Scientist — Downey et al.",
+                  name: "How to Think Like a Computer Scientist · Downey et al.",
                   note: true,
                 },
                 {
-                  name: "Introducción a la Programación con Python 3 — Marzal Varó et al.",
+                  name: "Introducción a la Programación con Python 3 · Marzal Varó et al.",
                   note: true,
                 },
               ],
@@ -458,19 +458,19 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Fundamentos de diseño lógico y de computadores — Mano & Kime",
+                  name: "Fundamentos de diseño lógico y de computadores · Mano & Kime",
                   note: true,
                 },
                 {
-                  name: "Computer Organization and Architecture — Stallings",
+                  name: "Computer Organization and Architecture · Stallings",
                   note: true,
                 },
                 {
-                  name: "Conceptos de Informática. Problemas — Prieto & Prieto",
+                  name: "Conceptos de Informática. Problemas · Prieto & Prieto",
                   note: true,
                 },
                 {
-                  name: "Arquitectura de Computadores — Tanenbaum",
+                  name: "Arquitectura de Computadores · Tanenbaum",
                   note: true,
                 },
               ],
@@ -544,15 +544,15 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Operating Systems: Internals and Design Principles — Stallings",
+                  name: "Operating Systems: Internals and Design Principles · Stallings",
                   note: true,
                 },
                 {
-                  name: "Introducción a la Informática — Prieto, Lloris & Torres",
+                  name: "Introducción a la Informática · Prieto, Lloris & Torres",
                   note: true,
                 },
                 {
-                  name: "Learning the bash Shell — Newham & Rosenblatt",
+                  name: "Learning the bash Shell · Newham & Rosenblatt",
                   note: true,
                 },
               ],
@@ -633,15 +633,15 @@ export default {
               // Hunt. Su bibliografia fundamental es la que queda aqui.
               resources: [
                 {
-                  name: "Cambio y crecimiento económico — Caruana et al.",
+                  name: "Cambio y crecimiento económico · Caruana et al.",
                   note: true,
                 },
                 {
-                  name: "Los fundamentos de las grandes crisis económicas — Morilla y Reyes",
+                  name: "Los fundamentos de las grandes crisis económicas · Morilla y Reyes",
                   note: true,
                 },
                 {
-                  name: "How the World Became Rich — Koyama & Rubin",
+                  name: "How the World Became Rich · Koyama & Rubin",
                   note: true,
                 },
               ],
@@ -728,23 +728,23 @@ export default {
               // bibliografia fundamental de la guia es la de abajo.
               resources: [
                 {
-                  name: "Manual de Derecho del Trabajo — Monereo Pérez y otros, Comares",
+                  name: "Manual de Derecho del Trabajo · Monereo Pérez y otros, Comares",
                   note: true,
                 },
                 {
-                  name: "Manual de Seguridad Social — Monereo Pérez y otros, Tecnos",
+                  name: "Manual de Seguridad Social · Monereo Pérez y otros, Tecnos",
                   note: true,
                 },
                 {
-                  name: "Derecho mercantil para Relaciones Laborales y RR. HH. y para ADE — Pérez-Serrabona González (dir.), Avicam",
+                  name: "Derecho mercantil para Relaciones Laborales y RR. HH. y para ADE · Pérez-Serrabona González (dir.), Avicam",
                   note: true,
                 },
                 {
-                  name: "Manual de Derecho mercantil — Broseta Pont y Martínez Sanz, Tecnos",
+                  name: "Manual de Derecho mercantil · Broseta Pont y Martínez Sanz, Tecnos",
                   note: true,
                 },
                 {
-                  name: "Apuntes de Derecho mercantil — Bercovitz Rodríguez-Cano, Thomson-Aranzadi",
+                  name: "Apuntes de Derecho mercantil · Bercovitz Rodríguez-Cano, Thomson-Aranzadi",
                   note: true,
                 },
               ],
@@ -816,15 +816,15 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Matemáticas II para Economía y Empresa — García Cabello",
+                  name: "Matemáticas II para Economía y Empresa · García Cabello",
                   note: true,
                 },
                 {
-                  name: "Optimización. Cuestiones, ejercicios y aplicaciones — Barbolla et al.",
+                  name: "Optimización. Cuestiones, ejercicios y aplicaciones · Barbolla et al.",
                   note: true,
                 },
                 {
-                  name: "Matemáticas para el análisis económico — Sydsaeter & Hammond",
+                  name: "Matemáticas para el análisis económico · Sydsaeter & Hammond",
                   note: true,
                 },
               ],
@@ -891,11 +891,11 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Clean Code — Robert C. Martin",
+                  name: "Clean Code · Robert C. Martin",
                   note: true,
                 },
                 {
-                  name: "The Art of Computer Programming — Donald Knuth",
+                  name: "The Art of Computer Programming · Donald Knuth",
                   note: true,
                 },
               ],
@@ -981,11 +981,11 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Microeconomía — Pindyck & Rubinfeld",
+                  name: "Microeconomía · Pindyck & Rubinfeld",
                   note: true,
                 },
                 {
-                  name: "Microeconomía — Krugman & Wells",
+                  name: "Microeconomía · Krugman & Wells",
                   note: true,
                   note: true,
                 },
@@ -1058,15 +1058,15 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Álgebra lineal con métodos elementales — Merino & Santos",
+                  name: "Álgebra lineal con métodos elementales · Merino & Santos",
                   note: true,
                 },
                 {
-                  name: "Álgebra lineal y sus aplicaciones — Strang",
+                  name: "Álgebra lineal y sus aplicaciones · Strang",
                   note: true,
                 },
                 {
-                  name: "Matemáticas discreta y combinatoria — Grimaldi",
+                  name: "Matemáticas discreta y combinatoria · Grimaldi",
                   note: true,
                 },
               ],

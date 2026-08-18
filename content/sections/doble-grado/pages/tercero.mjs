@@ -862,11 +862,11 @@ export default {
                   href: "/Subjects/Third/FBD/Teoria/build/Relacion3.pdf",
                   kind: "PDF",
                 },
-                // La «Relacion S1-S2» se retiro el 2026-08-18. Sus 37 paginas
-                // eran 30 fotografias de la hoja de enunciados del profesorado
-                // con los diagramas resueltos a mano encima: ni una linea del
-                // documento era propia. Vuelve cuando este escrita en LaTeX,
-                // como las relaciones 1 a 3.
+                {
+                  name: "Relación S1-S2",
+                  href: "/Subjects/Third/FBD/Teoria/build/RelacionS1-S2.pdf",
+                  kind: "PDF",
+                },
                 {
                   name: "Relación T4",
                   href: "/Subjects/Third/FBD/Practica/2parte/Entregables/RelacionT4.pdf",

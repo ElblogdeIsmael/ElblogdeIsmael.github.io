@@ -83,11 +83,11 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Computer Organization and Architecture — Stallings",
+                  name: "Computer Organization and Architecture · Stallings",
                   note: true,
                 },
                 {
-                  name: "Computer Systems: A Programmer's Perspective — Bryant & O'Hallaron",
+                  name: "Computer Systems: A Programmer's Perspective · Bryant & O'Hallaron",
                   note: true,
                 },
               ],
@@ -154,11 +154,11 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Estructuras de Datos en C++ — Rodriguez‑Sánchez et al.",
+                  name: "Estructuras de Datos en C++ · Rodriguez‑Sánchez et al.",
                   note: true,
                 },
                 {
-                  name: "Data Abstraction & Problem Solving with C++ — Carrano",
+                  name: "Data Abstraction & Problem Solving with C++ · Carrano",
                   note: true,
                 },
               ],
@@ -235,11 +235,11 @@ export default {
               // aqui, Brigham & Houston y Brealey & Myers, no aparecen en ella.
               resources: [
                 {
-                  name: "Introducción a las Operaciones Financieras — Frías‑Aceituno",
+                  name: "Introducción a las Operaciones Financieras · Frías‑Aceituno",
                   note: true,
                 },
                 {
-                  name: "Introduction to Financial Operations — Frías‑Aceituno",
+                  name: "Introduction to Financial Operations · Frías‑Aceituno",
                   note: true,
                 },
               ],
@@ -311,19 +311,19 @@ export default {
               // bibliografia fundamental es la que queda aqui.
               resources: [
                 {
-                  name: "Introducción al marketing — Alonso Dos Santos (coord.)",
+                  name: "Introducción al marketing · Alonso Dos Santos (coord.)",
                   note: true,
                 },
                 {
-                  name: "Principios de marketing — Kotler & Armstrong",
+                  name: "Principios de marketing · Kotler & Armstrong",
                   note: true,
                 },
                 {
-                  name: "Dirección de marketing — Kotler & Keller",
+                  name: "Dirección de marketing · Kotler & Keller",
                   note: true,
                 },
                 {
-                  name: "Fundamentos de marketing — Santesmases et al.",
+                  name: "Fundamentos de marketing · Santesmases et al.",
                   note: true,
                 },
               ],
@@ -402,15 +402,15 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Macroeconomía — Blanchard",
+                  name: "Macroeconomía · Blanchard",
                   note: true,
                 },
                 {
-                  name: "Macroeconomía — Dornbusch, Fischer & Startz",
+                  name: "Macroeconomía · Dornbusch, Fischer & Startz",
                   note: true,
                 },
                 {
-                  name: "Macroeconomía. Cuestiones y ejercicios — Sánchez Campillo (coord.)",
+                  name: "Macroeconomía. Cuestiones y ejercicios · Sánchez Campillo (coord.)",
                   note: true,
                 },
               ],
@@ -489,11 +489,11 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Operating System Concepts — Silberschatz, Galvin & Gagne",
+                  name: "Operating System Concepts · Silberschatz, Galvin & Gagne",
                   note: true,
                 },
                 {
-                  name: "Modern Operating Systems — Tanenbaum",
+                  name: "Modern Operating Systems · Tanenbaum",
                   note: true,
                 },
               ],
@@ -571,15 +571,15 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Técnicas Cuantitativas I — Amor Pulido",
+                  name: "Técnicas Cuantitativas I · Amor Pulido",
                   note: true,
                 },
                 {
-                  name: "Estadística descriptiva y cálculo de probabilidades — Castillo & Guijarro",
+                  name: "Estadística descriptiva y cálculo de probabilidades · Castillo & Guijarro",
                   note: true,
                 },
                 {
-                  name: "Estadística para administración y economía — Newbold & Carlson",
+                  name: "Estadística para administración y economía · Newbold & Carlson",
                   note: true,
                 },
               ],
@@ -654,11 +654,11 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Introduction to Algorithms — Cormen, Leiserson, Rivest, Stein",
+                  name: "Introduction to Algorithms · Cormen, Leiserson, Rivest, Stein",
                   note: true,
                 },
                 {
-                  name: "Algorithm Design — Kleinberg & Tardos",
+                  name: "Algorithm Design · Kleinberg & Tardos",
                   note: true,
                 },
               ],
@@ -727,11 +727,11 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Computer Organization and Design — Patterson & Hennessy",
+                  name: "Computer Organization and Design · Patterson & Hennessy",
                   note: true,
                 },
                 {
-                  name: "Structured Computer Organization — Tanenbaum",
+                  name: "Structured Computer Organization · Tanenbaum",
                   note: true,
                 },
               ],
@@ -794,11 +794,11 @@ export default {
               // teoria y el libro de practicas de Rodriguez Ariza y otras.
               resources: [
                 {
-                  name: "Introducción a la Contabilidad. Manual de teoría — Rodríguez Ariza, López Pérez y Pérez López",
+                  name: "Introducción a la Contabilidad. Manual de teoría · Rodríguez Ariza, López Pérez y Pérez López",
                   note: true,
                 },
                 {
-                  name: "Introducción a la Contabilidad. Libro de prácticas — Rodríguez Ariza, López Pérez y Pérez López",
+                  name: "Introducción a la Contabilidad. Libro de prácticas · Rodríguez Ariza, López Pérez y Pérez López",
                   note: true,
                 },
               ],
@@ -870,19 +870,19 @@ export default {
               // su bibliografia fundamental.
               resources: [
                 {
-                  name: "Principios de marketing — Kotler & Armstrong",
+                  name: "Principios de marketing · Kotler & Armstrong",
                   note: true,
                 },
                 {
-                  name: "Dirección de marketing — Kotler & Keller",
+                  name: "Dirección de marketing · Kotler & Keller",
                   note: true,
                 },
                 {
-                  name: "Principios de marketing — Esteban Talaya",
+                  name: "Principios de marketing · Esteban Talaya",
                   note: true,
                 },
                 {
-                  name: "Introducción al marketing — Alonso Dos Santos",
+                  name: "Introducción al marketing · Alonso Dos Santos",
                   note: true,
                 },
               ],
@@ -954,15 +954,15 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Lógica para informáticos — García Miranda",
+                  name: "Lógica para informáticos · García Miranda",
                   note: true,
                 },
                 {
-                  name: "Matemática discreta — Biggs",
+                  name: "Matemática discreta · Biggs",
                   note: true,
                 },
                 {
-                  name: "Matemática discreta y sus aplicaciones — Rosen",
+                  name: "Matemática discreta y sus aplicaciones · Rosen",
                   note: true,
                 },
               ],
@@ -1034,15 +1034,15 @@ export default {
               label: "Bibliografía",
               resources: [
                 {
-                  name: "Técnicas cuantitativas para la inferencia — Herrerías et al.",
+                  name: "Técnicas cuantitativas para la inferencia · Herrerías et al.",
                   note: true,
                 },
                 {
-                  name: "Probabilidad y estadística: aplicaciones y métodos — Canavos",
+                  name: "Probabilidad y estadística: aplicaciones y métodos · Canavos",
                   note: true,
                 },
                 {
-                  name: "Estadística aplicada a los negocios y la economía — Lind et al.",
+                  name: "Estadística aplicada a los negocios y la economía · Lind et al.",
                   note: true,
                 },
               ],

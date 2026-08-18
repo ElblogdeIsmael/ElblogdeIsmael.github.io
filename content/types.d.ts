@@ -50,6 +50,12 @@ export interface Resource {
    */
   note?: boolean;
   /**
+   * One line under the name, for the tools index. Kept apart from `name`
+   * instead of encoded inside it: the template used to split the string on a
+   * separator, which is the kind of contract that breaks silently.
+   */
+  blurb?: string;
+  /**
    * Repository that holds the source, for the browser tools. It is painted as
    * a small square inside the tile, next to the arrow, and is a link of its
    * own: the rest of the tile opens `href`.

@@ -22,19 +22,22 @@ export default {
   pages: [],
   links: [
     {
-      name: "md2html — apuntes Markdown a test HTML autocorregible",
+      name: "md2html",
+      blurb: "apuntes Markdown a test HTML autocorregible",
       href: "/md2html/",
       kind: "WEB",
       repo: "https://github.com/Ismael-Sallami/md2html-testGenerator",
     },
     {
-      name: "pdf2md — PDF, Word y Excel a Markdown",
+      name: "pdf2md",
+      blurb: "PDF, Word y Excel a Markdown",
       href: "/pdf2md/",
       kind: "WEB",
       repo: "https://github.com/Ismael-Sallami/pdf-to-md",
     },
     {
-      name: "diffchecker — comparar dos textos y mezclarlos",
+      name: "diffchecker",
+      blurb: "comparar dos textos y mezclarlos",
       href: "/diffchecker/",
       kind: "WEB",
       repo: "https://github.com/Ismael-Sallami/diffchecker",
