@@ -1,0 +1,926 @@
+% Relacion de ejercicios de los seminarios 1 y 2: modelo entidad-relacion y
+% paso a tablas. Antes esto eran 30 fotografias de la hoja de enunciados con
+% los diagramas resueltos a mano; la hoja es del profesorado, asi que el
+% enunciado va redactado de nuevo y los diagramas dibujados en tikz.
+%
+% Notacion del paso a tablas, la misma que se usa en clase:
+%   - la clave primaria va subrayada,
+%   - CE(n) marca una clave externa y n la relacion a la que apunta,
+%   - CC marca una clave candidata.
+
+% Estilo comun de los diagramas E/R. Es el mismo que usa seminario1.tex.
+\tikzset{
+    entidad/.style={rectangle, draw, minimum width=22mm, minimum height=8mm,
+                    align=center, font=\small},
+    debil/.style={rectangle, draw, double, double distance=2pt,
+                  minimum width=22mm, minimum height=8mm, align=center, font=\small},
+    relacion/.style={diamond, draw, aspect=1.9, inner sep=1pt,
+                     align=center, font=\footnotesize},
+    atributo/.style={ellipse, draw, inner sep=1pt, font=\scriptsize},
+    clave/.style={ellipse, draw, inner sep=1pt, font=\scriptsize,
+                  label={[font=\tiny]below:\underline{~}}},
+    enlace/.style={draw},
+    doble/.style={draw, double, double distance=2pt},
+    jerarquia/.style={draw, -{Triangle[open, length=3mm, width=4mm]}}
+}
+
+\subsection{Tarjetas de crédito, titulares y cuentas}
+
+\textbf{Enunciado.} Se maneja información de tarjetas de crédito, identificadas
+por un número y con un tipo; de sus titulares, de los que se conocen el DNI, el
+domicilio y el teléfono; y de cuentas corrientes, con código, saldo y fecha de
+apertura. Las restricciones son: una persona puede tener más de una tarjeta;
+cada tarjeta tiene un único titular; cada tarjeta está asociada a una única
+cuenta; se puede cargar más de una tarjeta a una misma cuenta; una cuenta puede
+tener asociada varios clientes; y una persona puede tener más de una cuenta.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=14mm and 20mm]
+    \node[entidad] (tar) {Tarjeta};
+    \node[relacion, right=of tar] (aso) {Asociada};
+    \node[entidad, right=of aso] (cc) {Cuenta};
+    \node[relacion, below=of aso] (vin) {Vinculada};
+    \node[relacion, below left=14mm and 8mm of tar] (tit) {Titular};
+    \node[entidad, below=28mm of aso] (per) {Persona};
+
+    \draw (tar) -- (aso);   \draw (aso) -- (cc);
+    \draw (cc)  -- (vin);   \draw (vin) -- (per);
+    \draw (tar) -- (tit);   \draw (tit) -- (per);
+
+    \node[atributo, above left=6mm and 0mm of tar] (n)  {número};
+    \node[atributo, above right=6mm and 0mm of tar] (t) {tipo};
+    \draw (tar) -- (n); \draw (tar) -- (t);
+
+    \node[atributo, above=6mm of cc] (cod) {código};
+    \node[atributo, right=5mm of cc] (sal) {saldo};
+    \node[atributo, below right=4mm and 3mm of cc] (fa) {fecha apertura};
+    \draw (cc) -- (cod); \draw (cc) -- (sal); \draw (cc) -- (fa);
+
+    \node[atributo, below left=5mm and 0mm of per] (dni) {DNI};
+    \node[atributo, below=5mm of per] (dom) {domicilio};
+    \node[atributo, below right=5mm and 0mm of per] (tel) {teléfono};
+    \draw (per) -- (dni); \draw (per) -- (dom); \draw (per) -- (tel);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 1.}
+\end{figure}
+
+\textbf{Paso a tablas.}
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{Persona(\underline{DNI}, domicilio, teléfono)}
+    \item \texttt{Cuenta(\underline{código}, saldo, fechaApertura)}
+    \item \texttt{Tarjeta(\underline{número}, tipo, DNI\textsuperscript{CE(Persona)},
+          código\textsuperscript{CE(Cuenta)})}
+    \item \texttt{Vinculada(\underline{código}\textsuperscript{CE(Cuenta)},
+          \underline{DNI}\textsuperscript{CE(Persona)})}
+\end{itemize}
+
+En \texttt{Tarjeta}, el DNI del titular no admite nulos —toda tarjeta tiene
+titular— y el código de cuenta tampoco, porque toda tarjeta está asociada a una.
+La relación \emph{vinculada} es de muchos a muchos y por eso necesita tabla
+propia.
+
+\subsubsection*{Otra forma}
+
+Si en vez de relacionar la tarjeta con la cuenta se relaciona el titular con la
+cuenta y la tarjeta cuelga de esa relación, el resultado es equivalente: la
+fusión de las tres relaciones en una deja el mismo esquema relacional. Conviene
+comprobarlo, porque es la comprobación que dice si dos diseños distintos
+guardan la misma información.
+
+\subsection{Biblioteca: libros, autores, temas y préstamos}
+
+\textbf{Enunciado.} Una biblioteca guarda información de libros, autores, temas,
+préstamos y usuarios, con los atributos habituales de cada uno. Restricciones:
+un libro puede estar escrito por más de un autor; un autor puede escribir más de
+un libro; un libro trata más de un tema; hay muchos libros de cada tema; no
+existe más que un ejemplar de cada libro; se registra cuándo un usuario toma
+prestado un libro y se elimina el registro cuando lo devuelve, guardando también
+la fecha del préstamo; y un usuario no puede tener prestado más de un libro
+simultáneamente.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=13mm and 18mm]
+    \node[entidad] (lib) {Libro};
+    \node[relacion, right=of lib] (esc) {Escribe};
+    \node[entidad, right=of esc] (aut) {Autor};
+    \node[relacion, below left=13mm and 4mm of lib] (tra) {Trata de};
+    \node[entidad, below=26mm of lib] (tem) {Tema};
+    \node[relacion, below=of lib.south east, xshift=18mm] (pre) {Préstamo};
+    \node[entidad, right=of pre] (usu) {Usuario};
+
+    \draw (lib) -- (esc); \draw (esc) -- (aut);
+    \draw (lib) -- (tra); \draw (tra) -- (tem);
+    \draw (lib) -- (pre); \draw (pre) -- (usu);
+
+    \node[atributo, above left=6mm and 0mm of lib] (at1) {título}; \draw (lib) -- (at1);
+    \node[atributo, above right=6mm and 0mm of lib] (at2) {ISBN}; \draw (lib) -- (at2);
+    \node[atributo, above=6mm of aut] (at3) {DNI}; \draw (aut) -- (at3);
+    \node[atributo, right=5mm of aut] (at4) {domicilio}; \draw (aut) -- (at4);
+    \node[atributo, left=5mm of tem] (at5) {nombre}; \draw (tem) -- (at5);
+    \node[atributo, below=5mm of pre] (at6) {fecha}; \draw (pre) -- (at6);
+    \node[atributo, below=5mm of usu] (at7) {DNI}; \draw (usu) -- (at7);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 2.}
+\end{figure}
+
+\textbf{Paso a tablas.}
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{Libro(\underline{ISBN}, título, \dots)}
+    \item \texttt{Autor(\underline{DNI}, domicilio, \dots)}
+    \item \texttt{Tema(\underline{nombre})}
+    \item \texttt{Usuario(\underline{DNI}, nombre)}
+    \item \texttt{Escribe(\underline{ISBN}\textsuperscript{CE(Libro)},
+          \underline{DNI}\textsuperscript{CE(Autor)})}
+    \item \texttt{TrataDe(\underline{ISBN}\textsuperscript{CE(Libro)},
+          \underline{nombre}\textsuperscript{CE(Tema)})}
+    \item \texttt{Préstamo(\underline{ISBN}\textsuperscript{CE(Libro)}, fecha,
+          DNI\textsuperscript{CE(Usuario)})} con \texttt{DNI} como clave
+          candidata
+\end{itemize}
+
+El DNI del usuario es clave candidata de \texttt{Préstamo} porque un usuario no
+puede tener más de un libro a la vez: si pudiera, el par tendría que formar
+parte de la clave.
+
+\subsubsection*{Fusión}
+
+Como la relación es de uno a uno por los dos lados y no existe más que un
+ejemplar de cada libro, \texttt{Libro} y \texttt{Préstamo} se pueden fusionar:
+
+\begin{center}
+\texttt{LibroPréstamo(\underline{ISBN}, título, DNI\textsuperscript{CE(Usuario)}, fecha)}
+\end{center}
+
+con \texttt{DNI} como clave candidata. Si en un examen hay que elegir, esta es
+la mejor opción, porque es la que menos tablas deja. Deja de valer en cuanto la
+clave primaria de las dos entidades no coincide: entonces
+\texttt{Préstamo(\underline{fecha, DNI}, \dots)} necesita tabla propia.
+
+\subsection{Biblioteca con ejemplares e histórico de préstamos}
+
+\textbf{Enunciado.} Como el anterior, pero ahora existen varios ejemplares de
+cada libro y se guarda el histórico: en el histórico de préstamos se registra una
+entrada por cada día que permanece prestada una copia; una misma copia no puede
+estar prestada a varios usuarios el mismo día; y un usuario sí puede tener
+prestados varios ejemplares al mismo tiempo. Se pide el diagrama y, además,
+cómo habría que modificarlo para volver a la restricción de un solo ejemplar por
+usuario y día.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=13mm and 18mm]
+    \node[entidad] (lib) {Libro};
+    \node[relacion, right=of lib] (esc) {Escribe};
+    \node[entidad, right=of esc] (aut) {Autor};
+    \node[debil, below=of lib] (ej) {Ejemplar};
+    \node[relacion, below=of ej] (pre) {Préstamo};
+    \node[entidad, right=26mm of pre] (usu) {Usuario};
+    \node[relacion, left=22mm of ej] (tra) {Trata de};
+    \node[entidad, below=of tra] (tem) {Tema};
+
+    \draw (lib) -- (esc); \draw (esc) -- (aut);
+    \draw[doble] (lib) -- (ej);
+    \draw[doble] (ej) -- (pre);
+    \draw (pre) -- (usu);
+    \draw (lib) -- (tra); \draw (tra) -- (tem);
+
+    \node[atributo, above=6mm of lib] (at8) {ISBN}; \draw (lib) -- (at8);
+    \node[atributo, right=4mm of ej] (at9) {número}; \draw (ej) -- (at9);
+    \node[atributo, left=4mm of pre] (at10) {fecha}; \draw (pre) -- (at10);
+    \node[atributo, below=5mm of usu] (at11) {DNI}; \draw (usu) -- (at11);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 3. El ejemplar es entidad débil del libro.}
+\end{figure}
+
+\textbf{Paso a tablas.}
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{Libro(\underline{ISBN}, título, \dots)}
+    \item \texttt{Autor(\underline{DNI}, domicilio, \dots)}
+    \item \texttt{Tema(\underline{nombre})}
+    \item \texttt{Usuario(\underline{DNI}, nombre)}
+    \item \texttt{Escribe(\underline{ISBN}\textsuperscript{CE(Libro)},
+          \underline{DNI}\textsuperscript{CE(Autor)})}
+    \item \texttt{TrataDe(\underline{ISBN}\textsuperscript{CE(Libro)},
+          \underline{nombre}\textsuperscript{CE(Tema)})}
+    \item \texttt{Copia(\underline{ISBN}\textsuperscript{CE(Libro)},
+          \underline{numCopia})}
+    \item \texttt{Préstamo(\underline{DNI}\textsuperscript{CE(Usuario)},
+          \underline{fecha}, \underline{ISBN}, \underline{numCopia})}, donde el
+          par \texttt{(ISBN, numCopia)} es clave externa a \texttt{Copia}
+\end{itemize}
+
+Al ser \texttt{Ejemplar} una entidad débil, su clave la forman la del libro más
+un discriminante, y esa clave compuesta viaja entera al préstamo. La clave del
+préstamo tiene que incluir la fecha porque se registra una entrada por día.
+
+\textbf{Apartado b.} Para volver a un solo ejemplar prestado por usuario y día,
+basta con cambiar la cardinalidad de \emph{Usuario} en la relación de préstamo:
+de muchos a uno. En el esquema relacional se traduce en sacar el ejemplar de la
+clave y dejar \texttt{Préstamo(\underline{DNI, fecha}, ISBN, numCopia)}.
+
+\subsection{Piezas simples y compuestas}
+
+\textbf{Enunciado.} Una empresa mecánica quiere calcular el precio de las piezas
+instaladas en un coche, sabiendo que algunas piezas pueden tener varios
+componentes: un motor es batería más ventilador más circuito de arranque. De cada
+tipo de pieza se registra un código y una denominación. Hay dos tipos, simple y
+compuesta; el precio de una pieza simple consiste en el valor de dicha pieza; el
+de una compuesta se corresponde con el precio de montaje sin incluir el de los
+tipos de pieza que la componen; para las compuestas se registra el número de
+unidades de cada tipo de pieza que la compone; y un tipo de pieza es componente
+de un único tipo de pieza compuesta.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=13mm and 16mm]
+    \node[entidad] (pz) {Pieza};
+    \node[relacion, below=of pz] (esun) {Es un};
+    \node[entidad, below left=14mm and 6mm of esun] (sim) {Simple};
+    \node[entidad, below right=14mm and 6mm of esun] (com) {Compuesta};
+    \node[relacion, right=30mm of pz] (form) {Formada};
+
+    \draw (pz) -- (esun);
+    \draw[jerarquia] (sim) -- (esun);
+    \draw[jerarquia] (com) -- (esun);
+    \draw (pz.east) -- (form.west);
+    \draw (form.south) |- (com.east);
+
+    \node[atributo, above left=5mm and 0mm of pz] (at12) {código}; \draw (pz) -- (at12);
+    \node[atributo, above right=5mm and 0mm of pz] (at13) {denominación}; \draw (pz) -- (at13);
+    \node[atributo, left=4mm of sim] (at14) {precio}; \draw (sim) -- (at14);
+    \node[atributo, below=5mm of com] (at15) {precio montaje}; \draw (com) -- (at15);
+    \node[atributo, above=5mm of form] (at16) {n.º unidades}; \draw (form) -- (at16);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 4. La jerarquía es total y disjunta: una
+pieza no puede ser simple y compuesta a la vez.}
+\end{figure}
+
+\textbf{Paso a tablas.}
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{TipoPieza(\underline{código}, denominación, stock)}
+    \item \texttt{PiezaSimple(\underline{código}\textsuperscript{CE(TipoPieza)},
+          precio)}
+    \item \texttt{PiezaCompuesta(\underline{código}\textsuperscript{CE(TipoPieza)},
+          precioMontaje, precioTotal)}
+    \item \texttt{Formada(\underline{codTipo}\textsuperscript{CE(TipoPieza)},
+          codCompuesta\textsuperscript{CE(PiezaCompuesta)}, numUnidades)}
+\end{itemize}
+
+La clave de \texttt{Formada} es solo el tipo de pieza componente, porque cada
+tipo forma parte de una única compuesta. Y una advertencia que conviene tener
+presente: \textbf{cuando se usa herencia no tiene sentido fusionar}, porque las
+tablas hijas existen precisamente para guardar los atributos que no comparten.
+
+\subsection{Videoclub}
+
+\textbf{Enunciado.} Un videoclub trabaja con películas —título, año de estreno,
+actores principales y tema—, cintas —código de cinta y sistema de
+reproducción—, préstamos con su fecha y clientes con DNI, nombre, dirección y
+teléfono. Un cliente puede alquilar varias cintas el mismo día; puede haber
+distintas cintas de la misma película; puede haber películas distintas con el
+mismo nombre —versiones—, pero de distinto año; y las películas con el mismo
+título son del mismo tema.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=13mm and 18mm]
+    \node[entidad] (pel) {Película};
+    \node[entidad, right=32mm of pel] (cin) {Cinta};
+    \node[relacion, below=of pel] (tra) {Tratan};
+    \node[entidad, below=of tra] (tem) {Temas};
+    \node[relacion, right=8mm of tra] (act) {Actúan};
+    \node[entidad, below=of act] (ac) {Actores};
+    \node[relacion, below=of cin] (alq) {Alquile};
+    \node[entidad, below=of alq] (cli) {Clientes};
+
+    \draw (pel) -- (cin);
+    \draw (pel) -- (tra); \draw (tra) -- (tem);
+    \draw (pel) -- (act); \draw (act) -- (ac);
+    \draw (cin) -- (alq); \draw[jerarquia] (alq) -- (cli);
+
+    \node[atributo, above left=5mm and 0mm of pel] (at17) {título}; \draw (pel) -- (at17);
+    \node[atributo, above right=5mm and 0mm of pel] (at18) {año}; \draw (pel) -- (at18);
+    \node[atributo, above=5mm of cin] (at19) {código}; \draw (cin) -- (at19);
+    \node[atributo, right=5mm of cin] (at20) {sist. reproducción}; \draw (cin) -- (at20);
+    \node[atributo, right=5mm of alq] (at21) {fecha inicio}; \draw (alq) -- (at21);
+    \node[atributo, below right=4mm and 2mm of alq] (at22) {fecha fin}; \draw (alq) -- (at22);
+    \node[atributo, below=5mm of cli] (at23) {DNI}; \draw (cli) -- (at23);
+    \node[atributo, left=4mm of tem] (at24) {código}; \draw (tem) -- (at24);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 5.}
+\end{figure}
+
+\subsubsection*{Otra versión}
+
+La restricción de que dos películas con el mismo título sean de distinto año se
+puede garantizar en el propio diagrama sacando el título a una entidad
+\texttt{Título} y el año a otra, unidas por una relación \emph{versiones}: así
+la clave de la película es el par y la restricción queda impuesta por el modelo
+en vez de por una comprobación externa.
+
+\textbf{Paso a tablas.}
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{Cliente(\underline{DNI}, nombre, dirección, teléfono)}
+    \item \texttt{Tema(\underline{numTema})}
+    \item \texttt{Título(\underline{numTítulo})}
+    \item \texttt{Año(\underline{numAño})}
+    \item \texttt{Cinta(\underline{numTítulo}, numAño, numCinta, tipo)}
+    \item \texttt{Película(\underline{numTítulo}\textsuperscript{CE(Título)},
+          \underline{año}\textsuperscript{CE(Año)}, reparto)}
+    \item \texttt{Tratan(\underline{numTítulo}\textsuperscript{CE(Título)},
+          numTema\textsuperscript{CE(Tema)})}
+    \item \texttt{Préstamo(\underline{DNI}\textsuperscript{CE(Cliente)},
+          \underline{fecha}, \underline{numTítulo}, \underline{año},
+          \underline{numCinta})}
+\end{itemize}
+
+\texttt{Título} y \texttt{Tratan} se pueden fusionar, porque la relación es de
+uno a uno y obligatoria por el lado del título.
+
+\subsection{Modelo de factura}
+
+\textbf{Enunciado.} Realizar el diagrama E/R que permita generar la información
+de una factura: emisor y destinatario con nombre, dirección y CIF; número y
+fecha de factura; y una línea por artículo con cantidad, descripción, precio
+unitario, IVA y el importe resultante.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=13mm and 18mm]
+    \node[entidad] (emi) {Emisor};
+    \node[relacion, right=of emi] (fac) {Factura};
+    \node[entidad, right=of fac] (des) {Destinatario};
+    \node[relacion, below=20mm of fac] (tie) {Tiene};
+    \node[entidad, below=of tie] (art) {Artículos};
+
+    \draw (emi) -- (fac); \draw (fac) -- (des);
+    \draw[jerarquia] (tie) -- (fac);
+    \draw (tie) -- (art);
+
+    \node[atributo, above=5mm of fac] (at25) {fecha}; \draw (fac) -- (at25);
+    \node[atributo, below left=6mm and 0mm of emi] (at26) {CIF}; \draw (emi) -- (at26);
+    \node[atributo, above=6mm of des] (at27) {CIF}; \draw (des) -- (at27);
+    \node[atributo, right=5mm of tie] (at28) {cantidad}; \draw (tie) -- (at28);
+    \node[atributo, below right=4mm and 2mm of tie] (at29) {importe}; \draw (tie) -- (at29);
+    \node[atributo, below=5mm of art] (at30) {precio}; \draw (art) -- (at30);
+    \node[atributo, right=5mm of art] (at31) {IVA}; \draw (art) -- (at31);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 6, primera solución.}
+\end{figure}
+
+Esta solución solo distingue emisores y receptores. Cuando las mismas empresas
+son unas veces emisor y otras cliente, duplica información, y esa es la razón de
+la versión optimizada: una única entidad \texttt{Empresa} y dos relaciones,
+\emph{emite} y \emph{recibe}, hacia ella.
+
+\textbf{Paso a tablas} de la versión optimizada:
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{Empresa(\underline{NIF}, nombre, dirección)}
+    \item \texttt{Artículo(\underline{numArt}, descripción, precioVenta, IVA)}
+    \item \texttt{Factura(\underline{numFactura}, fecha, baseImponible, IVA,
+          total)}
+    \item \texttt{Emite(\underline{numFactura}\textsuperscript{CE(Factura)},
+          NIF\textsuperscript{CE(Empresa)})}
+    \item \texttt{Recibe(\underline{numFactura}\textsuperscript{CE(Factura)},
+          NIF\textsuperscript{CE(Empresa)})}
+    \item \texttt{Línea(\underline{numLínea},
+          \underline{numFactura}\textsuperscript{CE(Factura)})}
+    \item \texttt{Incluye(\underline{numLínea}, \underline{numFactura},
+          numArt\textsuperscript{CE(Artículo)}, cantidad)}
+\end{itemize}
+
+Los importes de la factura —base imponible, IVA y total— son atributos
+calculados: dependen del precio y del IVA de cada artículo y de la cantidad.
+Guardarlos es una decisión de diseño, no una necesidad del modelo.
+
+\subsubsection*{Fusiones}
+
+\texttt{Factura}, \texttt{Emite} y \texttt{Recibe} se pueden fusionar en una
+sola tabla con los dos NIF, y \texttt{Línea} con \texttt{Incluye}. Esta segunda
+fusión es obligatoria, no opcional, porque la relación es obligatoria por el
+lado de la línea: una línea de factura sin artículo no existe.
+
+\subsection{Tienda de productos informáticos}
+
+\textbf{Enunciado.} En la base de datos de una tienda de productos informáticos,
+los tipos de producto se registran con un número de referencia, un fabricante y
+un precio de venta al público. De los artículos estrella —impresoras,
+ordenadores personales y portátiles— se registran además sus características
+específicas: color, resolución y tipo en las impresoras; procesador, velocidad,
+RAM y capacidad de disco en los PC; y lo mismo más el tamaño de pantalla en los
+portátiles.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=14mm and 10mm]
+    \node[entidad] (pro) {Producto};
+    \node[relacion, below=of pro] (esun) {Es un};
+    \node[entidad, below left=16mm and 14mm of esun] (imp) {Impresora};
+    \node[entidad, below=16mm of esun] (pc) {PC};
+    \node[entidad, below right=16mm and 14mm of esun] (por) {Portátil};
+
+    \draw (pro) -- (esun);
+    \draw[jerarquia] (imp) -- (esun);
+    \draw[jerarquia] (pc)  -- (esun);
+    \draw[jerarquia] (por) -- (esun);
+
+    \node[atributo, above=5mm of pro] (at32) {n.º referencia}; \draw (pro) -- (at32);
+    \node[atributo, left=5mm of pro] (at33) {fabricante}; \draw (pro) -- (at33);
+    \node[atributo, right=5mm of pro] (at34) {PVP}; \draw (pro) -- (at34);
+    \node[atributo, below=5mm of imp] (at35) {color, resolución, tipo}; \draw (imp) -- (at35);
+    \node[atributo, below=5mm of pc] (at36) {procesador, RAM\dots}; \draw (pc) -- (at36);
+    \node[atributo, below=5mm of por] (at37) {\dots\ tamaño pantalla}; \draw (por) -- (at37);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 7. Jerarquía parcial: hay productos que no
+son de ninguno de los tres tipos.}
+\end{figure}
+
+La jerarquía es \emph{parcial} porque la tienda vende más cosas que impresoras,
+PC y portátiles, y \emph{disjunta} porque un producto no puede ser de dos tipos
+a la vez. En el paso a tablas, cada hija lleva la clave del padre como clave
+primaria y clave externa a la vez.
+
+\subsection{Cine, salas y proyecciones}
+
+\textbf{Enunciado.} Un cine tiene varias salas donde se proyectan películas en
+una hora y fecha determinadas. Las salas se componen de asientos identificados
+por fila y número, y hay que saber si en cada proyección un asiento está libre u
+ocupado. El cine compra una o varias copias de una película para poder
+proyectarla en distintas salas. Restricciones: cada sala tiene un número
+determinado de asientos; una película se identifica por un código y se describe
+por título y duración; una película puede tener varias copias; una proyección se
+identifica por la sala, la copia, la fecha y la hora; en una sala no pueden
+proyectarse el mismo día y a la misma hora dos cintas distintas; cada entrada
+identifica la sala, la película, la fecha, la hora de comienzo de la proyección,
+la fila y el asiento; y no pueden venderse entradas que supongan la ocupación
+del mismo asiento a la vez.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=13mm and 18mm]
+    \node[entidad] (sala) {Sala};
+    \node[relacion, right=26mm of sala] (proy) {Proyecta};
+    \node[entidad, right=of proy] (cop) {Copias};
+    \node[entidad, below=of cop] (pel) {Película};
+    \node[debil, below=of sala] (asi) {Asiento};
+    \node[relacion, below right=16mm and 4mm of asi] (vta) {Venta de entradas};
+
+    \draw (sala) -- (proy); \draw (proy) -- (cop);
+    \draw[doble] (cop) -- (pel);
+    \draw[doble] (sala) -- (asi);
+    \draw[doble] (asi) -- (vta);
+    \draw (vta) -- (proy);
+
+    \node[atributo, above left=5mm and 0mm of sala] (at38) {núm. sala}; \draw (sala) -- (at38);
+    \node[atributo, above right=5mm and 0mm of sala] (at39) {n.º asientos}; \draw (sala) -- (at39);
+    \node[atributo, below left=5mm and 0mm of proy] (at40) {fecha}; \draw (proy) -- (at40);
+    \node[atributo, below right=5mm and 0mm of proy] (at41) {hora}; \draw (proy) -- (at41);
+    \node[atributo, above=5mm of cop] (at42) {n.º copia}; \draw (cop) -- (at42);
+    \node[atributo, right=5mm of pel] (at43) {título, duración, código}; \draw (pel) -- (at43);
+    \node[atributo, below left=5mm and 0mm of asi] (at44) {fila}; \draw (asi) -- (at44);
+    \node[atributo, below right=9mm and 4mm of asi] (at45) {columna}; \draw (asi) -- (at45);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 8.}
+\end{figure}
+
+\textbf{Apartado b.} El diseño no garantiza por sí solo que no se solapen en el
+tiempo dos proyecciones distintas en una misma sala: la clave de la proyección
+incluye la copia, así que dos copias distintas pueden compartir sala, fecha y
+hora. Para impedirlo hay que sacar la copia de la clave y dejarla como atributo,
+de forma que la clave sea \texttt{(sala, fecha, hora)}. Con eso el propio modelo
+impone la restricción, en vez de dejarla a un disparador.
+
+\subsection{Registro de llamadas}
+
+\textbf{Enunciado.} Expresar mediante un diagrama E/R el registro de llamadas
+entre dos teléfonos, con fecha y hora de inicio y de finalización. Un teléfono
+se identifica por un número y hay dos tipos: fijo y móvil. No se contemplan
+llamadas en las que participen más de dos teléfonos.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=14mm and 26mm]
+    \node[entidad] (tel) {Teléfono};
+    \node[relacion, right=of tel] (lla) {Llamada};
+
+    \draw (tel.north) to[out=60, in=150] node[above, font=\scriptsize] {llama} (lla.north west);
+    \draw (tel.south) to[out=-60, in=-150] node[below, font=\scriptsize] {recibe} (lla.south west);
+
+    \node[atributo, above=6mm of lla] (at46) {fecha}; \draw (lla) -- (at46);
+    \node[atributo, right=5mm of lla] (at47) {hora inicio}; \draw (lla) -- (at47);
+    \node[atributo, below=6mm of lla] (at48) {hora fin}; \draw (lla) -- (at48);
+    \node[atributo, left=5mm of tel] (at49) {número}; \draw (tel) -- (at49);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 9. La relación es reflexiva: el mismo
+conjunto de entidades participa con dos papeles distintos.}
+\end{figure}
+
+Lo que hace especial a este ejercicio es que la relación es \emph{reflexiva} y
+hay que etiquetar los dos papeles, porque «llama» y «recibe» no son
+intercambiables. En el paso a tablas la llamada necesita los dos números como
+claves externas al mismo teléfono, con nombres distintos.
+
+\subsection{Recetas de cocina}
+
+\textbf{Enunciado.} Una receta se describe mediante una serie de ingredientes y
+de pasos de ejecución. Las recetas tienen código, nombre, tipo —primero,
+segundo o postre— y dificultad —alto, medio o bajo—. Los ingredientes tienen
+código, nombre, tipo —grano, polvo, troceado u otro— y precio. Realizar el
+diagrama para almacenar las recetas completas.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=14mm and 20mm]
+    \node[entidad] (rec) {Receta};
+    \node[entidad, right=36mm of rec] (ing) {Ingrediente};
+    \node[relacion, below=of rec] (cre) {Crean};
+    \node[relacion, below=of ing] (usa) {Usan};
+    \node[debil, below right=14mm and 2mm of cre] (pas) {Pasos};
+
+    \draw (rec) -- (cre); \draw[doble] (cre) -- (pas);
+    \draw (ing) -- (usa); \draw (usa) -- (pas);
+
+    \node[atributo, above left=5mm and 0mm of rec] (at50) {CODR}; \draw (rec) -- (at50);
+    \node[atributo, above right=5mm and 0mm of rec] (at51) {tipo, dificultad}; \draw (rec) -- (at51);
+    \node[atributo, above=5mm of ing] (at52) {CODI}; \draw (ing) -- (at52);
+    \node[atributo, right=5mm of ing] (at53) {tipo, precio}; \draw (ing) -- (at53);
+    \node[atributo, left=5mm of cre] (at54) {n.º pasos}; \draw (cre) -- (at54);
+    \node[atributo, right=5mm of usa] (at55) {cantidad}; \draw (usa) -- (at55);
+    \node[atributo, below=5mm of pas] (at56) {descripción}; \draw (pas) -- (at56);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 10.}
+\end{figure}
+
+El paso es entidad débil de la receta: fuera de ella no tiene sentido, y su
+identificador es el número de orden dentro de la receta. La cantidad va en la
+relación \emph{usan} y no en el ingrediente, porque depende del par.
+
+\subsection{Artículos científicos en revistas}
+
+\textbf{Enunciado.} Se quiere gestionar la publicación de artículos científicos.
+Una revista se identifica por su ISSN y tiene nombre y editorial. Durante un año
+publica uno o varios números, que recogen los artículos aceptados; el número
+identifica a cada publicación de la revista y se recoge también el año. Cada
+número contiene varios artículos. Un artículo se identifica por el título y por
+el número de la revista en que se ha publicado, y se almacena la página de
+inicio y de fin en ese número. Cada autor se identifica por un código y se
+caracteriza por su nombre y nacionalidad; un artículo puede estar escrito por
+varios autores y un autor puede escribir varios artículos; y un artículo puede
+hacer referencia a otros artículos y puede ser citado en otros.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=14mm and 20mm]
+    \node[entidad] (rev) {Revista};
+    \node[debil, below=of rev] (num) {Números};
+    \node[debil, below=of num] (art) {Artículo};
+    \node[relacion, right=of art] (esc) {Escribe};
+    \node[entidad, right=of esc] (aut) {Autor};
+    \node[relacion, left=18mm of art] (ref) {Referencia};
+
+    \draw[doble] (rev) -- (num);
+    \draw[doble] (num) -- (art);
+    \draw (art) -- (esc); \draw (esc) -- (aut);
+    \draw (art.west) to[out=170, in=30] node[above, font=\scriptsize, pos=0.3] {cita} (ref.north east);
+    \draw (art.south west) to[out=200, in=-30] node[below, font=\scriptsize, pos=0.3] {citado} (ref.south east);
+
+    \node[atributo, above=5mm of rev] (at57) {ISSN}; \draw (rev) -- (at57);
+    \node[atributo, right=5mm of rev] (at58) {nombre, editorial}; \draw (rev) -- (at58);
+    \node[atributo, right=5mm of num] (at59) {n.º, año}; \draw (num) -- (at59);
+    \node[atributo, below=5mm of art] (at60) {título, pág. ini, pág. fin}; \draw (art) -- (at60);
+    \node[atributo, below=5mm of aut] (at61) {cód., nombre, nacionalidad}; \draw (aut) -- (at61);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 11.}
+\end{figure}
+
+\textbf{Paso a tablas.}
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{Revista(\underline{ISSN}, nombre, editorial)}
+    \item \texttt{Autor(\underline{numAutor}, nombre, nacionalidad)}
+    \item \texttt{Número(\underline{numRevista}, \underline{año},
+          ISSN\textsuperscript{CE(Revista)})}
+    \item \texttt{Artículo(\underline{ISSN}, \underline{num}, \underline{año},
+          \underline{título}, págIni, págFin)}
+    \item \texttt{Escribe(\underline{numAutor}\textsuperscript{CE(Autor)},
+          \underline{ISSN}, \underline{num}, \underline{año},
+          \underline{título})}
+    \item \texttt{Referencia(\underline{ISSN\_c}, \underline{num\_c},
+          \underline{año\_c}, \underline{título\_c}, \dots\ el citado)}
+\end{itemize}
+
+En \texttt{Referencia}, el sufijo distingue el artículo que cita del citado: la
+tabla lleva dos veces la misma clave compuesta con nombres distintos, igual que
+en el ejercicio de las llamadas. Y no se puede fusionar nada aquí, porque todas
+las relaciones son de muchos a muchos.
+
+\subsection{Reservas de vuelos}
+
+\textbf{Enunciado.} Se organiza la gestión de reservas de vuelos. En la tarjeta
+de embarque figuran el pasajero, la fecha y hora de emisión, el asiento que le
+corresponde, el avión, la fecha y hora de salida y el destino —ciudad de partida
+y de llegada—. Restricciones: hay aviones diferentes cuyos números de asiento
+pueden coincidir; cada avión tiene una capacidad máxima; un destino aéreo viene
+identificado por un número y puede incluir varios trayectos especificados por la
+ciudad de salida y la de llegada; un vuelo es la realización de un trayecto
+mediante un avión, con una fecha y hora de partida determinadas; un avión puede
+participar en diferentes vuelos; una tarjeta de embarque corresponde a un
+asiento concreto, de un avión concreto, en un vuelo concreto y para un pasajero
+concreto; se emiten varias tarjetas de embarque para cada vuelo; y en un vuelo,
+un asiento no puede estar ocupado por más de un pasajero.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=13mm and 16mm]
+    \node[entidad] (tar) {Tarjeta de\\embarque};
+    \node[relacion, right=of tar] (cor) {Corresponde};
+    \node[debil, right=of cor] (asi) {Asiento};
+    \node[relacion, below=of asi] (tie) {Tiene};
+    \node[entidad, below=of tie] (avi) {Avión};
+    \node[relacion, left=of avi] (rea) {Realiza};
+    \node[entidad, left=of rea] (vue) {Vuelo};
+    \node[relacion, below=of vue] (inc) {Incluye};
+    \node[entidad, right=of inc] (des) {Destino aéreo};
+    \node[entidad, below=of tar] (pas) {Pasajero};
+
+    \draw (tar) -- (cor); \draw (cor) -- (asi);
+    \draw[doble] (asi) -- (tie); \draw[doble] (tie) -- (avi);
+    \draw (avi) -- (rea); \draw (rea) -- (vue);
+    \draw (vue) -- (inc); \draw (inc) -- (des);
+    \draw (tar) -- (pas);
+    \draw (vue.north) |- (tar.west);
+
+    \node[atributo, above=5mm of tar] (at62) {cód., fecha y hora emisión}; \draw (tar) -- (at62);
+    \node[atributo, below=5mm of pas] (at63) {DNI}; \draw (pas) -- (at63);
+    \node[atributo, right=5mm of avi] (at64) {cód., modelo, capacidad}; \draw (avi) -- (at64);
+    \node[atributo, above=5mm of vue] (at65) {fecha, hora salida}; \draw (vue) -- (at65);
+    \node[atributo, below=5mm of des] (at66) {ciudad salida, ciudad llegada}; \draw (des) -- (at66);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 12.}
+\end{figure}
+
+\textbf{Apartado b.} Un vuelo se identifica por el avión, el destino, la ciudad
+de llegada y la ciudad de salida. Esa información se recoge en las relaciones
+\emph{realiza} e \emph{incluye}, y por tanto la clave del vuelo la forman las
+claves externas a \texttt{Avión} y a \texttt{Destino} más la fecha y la hora.
+
+La capacidad máxima del avión está como atributo, así que \textbf{sí} se pueden
+emitir más tarjetas de embarque que asientos disponibles: nada en el modelo lo
+impide. Para impedirlo habría que contar las tarjetas emitidas del vuelo y
+compararlas con la capacidad, y eso es una restricción que el diagrama E/R no
+expresa.
+
+\subsection{Programación de canales de televisión}
+
+\textbf{Enunciado.} Se modela la programación que ofrecen los canales de TV.
+Presentadores con DNI, nombre y especialidad; canales con nombre, empresa y
+tipo; y programas con código, nombre, duración y tipo. Existen tres tipos de
+programa: películas, de las que hay que conocer título, tema y año; concursos; e
+informativos. Un programa solo puede emitirse por un canal un determinado día a
+una determinada hora. Los concursos solo pueden ser presentados por un
+presentador, pero un presentador puede serlo de varios concursos. Los
+informativos pueden ser presentados por varios presentadores y un presentador
+puede serlo de varios también.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=13mm and 16mm]
+    \node[entidad] (pre) {Presentadores};
+    \node[relacion, right=26mm of pre] (emi) {Emite};
+    \node[entidad, right=of emi] (pro) {Programas};
+    \node[relacion, below=of pro] (esun) {Es un};
+    \node[entidad, below left=15mm and 10mm of esun] (pel) {Película};
+    \node[entidad, below=15mm of esun] (con) {Concursos};
+    \node[entidad, below right=15mm and 10mm of esun] (inf) {Informativos};
+    \node[entidad, below=30mm of pre] (can) {Canales};
+    \node[relacion, below=18mm of can] (pst) {Presentan};
+
+    \draw (pro) -- (emi); \draw (emi) -- (can);
+    \draw (pro) -- (esun);
+    \draw[jerarquia] (pel) -- (esun);
+    \draw[jerarquia] (con) -- (esun);
+    \draw[jerarquia] (inf) -- (esun);
+    \draw (pre) -- (pst);
+    \draw (pst) -- (con); \draw (pst) -- (inf);
+
+    \node[atributo, above=5mm of pre] (at67) {DNI, nombre, especialidad}; \draw (pre) -- (at67);
+    \node[atributo, above=5mm of pro] (at68) {cód., nombre, duración, tipo}; \draw (pro) -- (at68);
+    \node[atributo, below left=5mm and 0mm of emi] (at69) {día}; \draw (emi) -- (at69);
+    \node[atributo, below right=5mm and 0mm of emi] (at70) {hora}; \draw (emi) -- (at70);
+    \node[atributo, left=5mm of can] (at71) {nombre, empresa, tipo}; \draw (can) -- (at71);
+    \node[atributo, below left=7mm and 0mm of pel] (at72) {título, tema, año}; \draw (pel) -- (at72);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 13.}
+\end{figure}
+
+La jerarquía vuelve a ser total y disjunta. La diferencia entre concursos e
+informativos está en la cardinalidad de \emph{presentan}: uno a muchos para los
+concursos, muchos a muchos para los informativos, y por eso no se puede
+dibujar una sola relación desde el programa genérico.
+
+\subsection{Comisarías de policía}
+
+\textbf{Enunciado.} Se diseña la base de datos de las comisarías de una ciudad,
+que registra delincuentes —identificados por su DNI, con nombre y apellidos,
+fecha de nacimiento, domicilio y nacionalidad—, delitos —con un código, y de los
+que hay que registrar nombre, tipo y penas máxima y mínima—, agentes
+—identificados por su número de placa, con DNI, nombre y apellidos, domicilio y
+fecha de ingreso en el cuerpo— y comisarías —con nombre y localización—.
+Restricciones: existen dos tipos de agente, oficiales y policías, y de los
+oficiales se conoce la especialización y los años de experiencia; un oficial es
+responsable de un grupo de policías, pero cada policía solo depende de un
+oficial; cada comisaría la dirige un oficial; cuando se detiene a un delincuente
+hay que registrar el lugar, la fecha y la hora de la detención y qué agentes han
+participado; y de los delitos cometidos hay que conocer el lugar, la fecha y la
+hora, así como los delincuentes que han participado.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=13mm and 15mm]
+    \node[entidad] (del) {Delincuente};
+    \node[relacion, right=16mm of del] (com) {Comete};
+    \node[entidad, right=16mm of com] (dl) {Delitos};
+
+    \node[relacion, below=16mm of del] (det) {Detiene};
+    \node[entidad, below=16mm of det] (ag) {Agente};
+    \node[relacion, right=16mm of ag] (par) {Pertenece};
+    \node[entidad, right=16mm of par] (cm) {Comisaría};
+
+    \node[relacion, below=16mm of ag] (esun) {Es un};
+    \node[entidad, below left=15mm and 2mm of esun] (ofi) {Oficial};
+    \node[entidad, below right=15mm and 2mm of esun] (pol) {Policía};
+    \node[relacion, below=15mm of ofi] (resp) {Responsable};
+    \node[relacion, below=15mm of cm] (dir) {Dirige};
+
+    \draw (del) -- (com); \draw (com) -- (dl);
+    \draw (del) -- (det); \draw (det) -- (ag);
+    \draw (dl.south) to[out=-90, in=0] (det.east);
+    \draw (ag) -- (par); \draw (par) -- (cm);
+    \draw (cm) -- (dir); \draw (dir.south) -- ++(0,-26mm) -| (ofi.south);
+    \draw (ag) -- (esun);
+    \draw[jerarquia] (ofi) -- (esun);
+    \draw[jerarquia] (pol) -- (esun);
+    \draw (ofi) -- (resp); \draw (resp.east) -| (pol.south);
+
+    \node[atributo, above=5mm of del] (ap1) {DNI, nombre, nacionalidad}; \draw (del) -- (ap1);
+    \node[atributo, above=5mm of dl] (ap2) {código, tipo, penas}; \draw (dl) -- (ap2);
+    \node[atributo, below=5mm of com] (ap3) {lugar, fecha, hora}; \draw (com) -- (ap3);
+    \node[atributo, left=5mm of det] (ap4) {lugar, fecha, hora}; \draw (det) -- (ap4);
+    \node[atributo, left=5mm of ag] (ap5) {n.º placa, DNI}; \draw (ag) -- (ap5);
+    \node[atributo, above=5mm of cm] (ap6) {nombre, localización}; \draw (cm) -- (ap6);
+    \node[atributo, left=5mm of ofi] (ap7) {especialización}; \draw (ofi) -- (ap7);
+    \end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 14, que es el típico de examen.}
+\end{figure}
+
+\textbf{Paso a tablas.}
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{Delincuente(\underline{DNI\_D}, \dots)}
+    \item \texttt{Delito(\underline{codDel}, \dots)}
+    \item \texttt{Agente(\underline{DNI\_A}, \dots)}
+    \item \texttt{Oficial(\underline{DNI\_O}\textsuperscript{CE(Agente)},
+          especialización, años)}
+    \item \texttt{Policía(\underline{DNI\_P}\textsuperscript{CE(Agente)})}
+    \item \texttt{Comisaría(\underline{codCom}, \dots)}
+    \item \texttt{Comete(\underline{DNI\_D}\textsuperscript{CE(Delincuente)},
+          \underline{codDel}\textsuperscript{CE(Delito)}, \underline{fecha},
+          \underline{hora})}
+    \item \texttt{Detiene(\underline{DNI\_A}\textsuperscript{CE(Agente)},
+          \underline{DNI\_D}, \underline{codDel}, \underline{fecha},
+          \underline{hora}, fechaDet, horaDet)}
+    \item \texttt{Responsable(\underline{DNI\_P}\textsuperscript{CE(Policía)},
+          DNI\_O\textsuperscript{CE(Oficial)})}
+    \item \texttt{Dirige(\underline{codCom}\textsuperscript{CE(Comisaría)},
+          DNI\_O\textsuperscript{CE(Oficial)})} con \texttt{DNI\_O} como clave
+          candidata
+\end{itemize}
+
+\subsubsection*{Fusiones}
+
+\texttt{Policía} y \texttt{Responsable} se pueden fusionar, porque cada policía
+depende de un solo oficial; y \texttt{Comisaría} con \texttt{Dirige}, por lo
+mismo. En el segundo caso el DNI del oficial se queda además como clave
+candidata, porque cada oficial dirige como mucho una comisaría.
+
+Dos cosas que el enunciado no cierra y hay que decidir. La primera es si el lugar
+del delito se pone como atributo de la relación o como entidad propia: siendo un
+dato que se repite en muchos delitos, una entidad ahorra espacio, y complica el
+esquema sin necesidad si nadie consulta por él. La segunda es cuándo un
+delincuente pasa a serlo; si se registra a alguien antes de imputarle un delito,
+su participación en \emph{comete} no puede ser obligatoria.
+
+\subsection{Empresa de alquiler de inmuebles}
+
+\textbf{Enunciado.} De cada inmueble se desea conocer su número de registro
+—único—, el tipo, los metros cuadrados y la dirección. Hay dos tipos: pisos y
+locales comerciales. De los pisos interesan el número de habitaciones, el de
+baños, la planta y, para cada habitación, su tipo y tamaño. De los locales, si
+está a estrenar o no y qué tipo de negocios o instalaciones ha tenido
+previamente, con tipo de instalación, negocio y costos. De los clientes, el DNI,
+el nombre, el teléfono y el número de cuenta. Restricciones: los clientes
+alquilan los inmuebles por periodos de tiempo, y durante ese periodo el inmueble
+solo puede estar alquilado a un inquilino; el precio del alquiler puede variar
+por periodos o inquilinos; y los locales pueden haber tenido instalados
+diferentes negocios en diferentes fechas.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=13mm and 16mm]
+    \node[entidad] (inm) {Inmueble};
+    \node[relacion, right=of inm] (alq) {Alquilan};
+    \node[entidad, right=of alq] (cli) {Clientes};
+    \node[relacion, below=of inm] (esun) {Es un};
+    \node[entidad, below left=15mm and 2mm of esun] (pis) {Pisos};
+    \node[entidad, below right=15mm and 2mm of esun] (loc) {Locales};
+    \node[debil, below=of pis] (hab) {Habitación};
+    \node[relacion, right=of loc] (ins) {Instalan};
+    \node[entidad, right=of ins] (neg) {Negocio};
+
+    \draw (inm) -- (alq); \draw (alq) -- (cli);
+    \draw (inm) -- (esun);
+    \draw[jerarquia] (pis) -- (esun);
+    \draw[jerarquia] (loc) -- (esun);
+    \draw[doble] (pis) -- (hab);
+    \draw (loc) -- (ins); \draw (ins) -- (neg);
+
+    \node[atributo, above left=5mm and 0mm of inm] (at80) {n.º registro}; \draw (inm) -- (at80);
+    \node[atributo, above=5mm of alq] (at81) {periodo, precio}; \draw (alq) -- (at81);
+    \node[atributo, below=5mm of cli] (at82) {DNI, teléfono, cuenta}; \draw (cli) -- (at82);
+    \node[atributo, below=5mm of hab] (at83) {tipo, tamaño}; \draw (hab) -- (at83);
+    \node[atributo, left=5mm of loc] (at84) {a estrenar}; \draw (loc) -- (at84);
+    \node[atributo, above=5mm of ins] (at85) {fecha}; \draw (ins) -- (at85);
+\end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 15.}
+\end{figure}
+
+La jerarquía aquí es \emph{parcial y disjunta}: el enunciado dice que se
+consideran inmuebles de dos tipos, así que un inmueble no puede ser piso y local
+a la vez, pero nada obliga a que todo inmueble sea uno de los dos. El periodo va
+como atributo de la relación de alquiler y forma parte de su clave: sin él, un
+mismo inmueble no podría alquilarse dos veces al mismo cliente.
+
+\subsection{Objetos astronómicos}
+
+\textbf{Enunciado.} Cada objeto astronómico se identifica por un código y
+registra la fecha y el observatorio donde se hizo el descubrimiento. Se
+clasifican en dos: de baja emisión de luz —planetas y satélites— y de alta
+emisión —estrellas—. De los planetas se almacena el tipo, de los satélites el
+tipo de satélite, y de las estrellas el tipo y el subtipo. Además: un satélite
+gira alrededor de un planeta y se almacena a cuántos años luz se encuentran entre
+sí; alrededor de un planeta pueden girar diferentes satélites; un planeta, junto
+con sus satélites, gira alrededor de una estrella, y se almacena a cuántos años
+luz distan entre sí; alrededor de una estrella pueden girar diferentes planetas;
+un grupo de estrellas forma una constelación, cada estrella puede estar en varias
+constelaciones, y de la constelación interesan el código y el nombre.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=12mm and 14mm]
+    \node[entidad] (obj) {Objeto\\astronómico};
+    \node[relacion, below=of obj] (e1) {Es un};
+    \node[entidad, below left=14mm and 4mm of e1] (baja) {Baja emisión};
+    \node[entidad, below right=14mm and 4mm of e1] (alta) {Alta emisión};
+    \node[relacion, below=16mm of baja] (e2) {Es un};
+    \node[entidad, below left=13mm and 0mm of e2] (pla) {Planeta};
+    \node[entidad, below right=13mm and 0mm of e2] (sat) {Satélite};
+    \node[entidad, right=18mm of alta] (est) {Estrella};
+    \node[relacion, below=14mm of est] (for) {Forman};
+    \node[entidad, below=14mm of for] (con) {Constelación};
+    \node[relacion, below=14mm of alta] (gir) {Giran};
+    \node[relacion, below=16mm of sat] (alr) {Gira alrededor};
+
+    \draw (obj) -- (e1);
+    \draw[jerarquia] (baja) -- (e1);
+    \draw[jerarquia] (alta) -- (e1);
+    \draw (baja) -- (e2);
+    \draw[jerarquia] (pla) -- (e2);
+    \draw[jerarquia] (sat) -- (e2);
+    \draw (alta) -- (est);
+    \draw (est) -- (for); \draw (for) -- (con);
+    \draw (est.south) to[out=-90, in=0] (gir.east);
+    \draw (gir.west) -| (pla.north);
+    \draw (sat) -- (alr); \draw (alr.west) -| (pla.south);
+
+    \node[atributo, above=5mm of obj] (as1) {código, fecha, observatorio}; \draw (obj) -- (as1);
+    \node[atributo, above=5mm of est] (as2) {tipo, subtipo}; \draw (est) -- (as2);
+    \node[atributo, below=5mm of gir] (as3) {años luz}; \draw (gir) -- (as3);
+    \node[atributo, right=5mm of alr] (as4) {años luz}; \draw (alr) -- (as4);
+    \node[atributo, below=5mm of con] (as5) {código, nombre}; \draw (con) -- (as5);
+    \end{tikzpicture}
+\caption{Diagrama E/R del ejercicio 16, con dos niveles de jerarquía.}
+\end{figure}
+
+Es el ejercicio que más jerarquías encadena: la primera separa por emisión de
+luz y la segunda, dentro de la baja, separa planetas de satélites. Las dos son
+totales y disjuntas. Las dos relaciones de giro llevan el mismo atributo con el
+mismo significado y aun así no se pueden unir, porque relacionan pares de
+entidades distintos.
