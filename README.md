@@ -1,8 +1,16 @@
 # El blog de Ismael Sallami
 
+[![Deploy to GitHub Pages](https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/actions/workflows/deploy.yml)
+
 Apuntes, prácticas y material del Doble Grado en Ingeniería Informática y ADE
 de la Universidad de Granada. Publicado en
 [elblogdeismael.github.io](https://elblogdeismael.github.io).
+
+**Es un archivo personal, no un proyecto abierto.** No se buscan colaboradores y
+no hay guía de contribución: lo que se publica aquí lo escribe una persona. Si
+encuentras una errata o un enlace movido, hay dos formularios de issue; si lo que
+encuentras es material que no debería estar publicado, mira
+[«Avisos»](#avisos) antes de abrir nada.
 
 ## Cómo funciona
 
@@ -41,6 +49,12 @@ node build/scripts/check-latex-builds.mjs --only FBD   # solo lo tocado
 
 Necesita Node 20 o superior. No hay que instalar nada.
 
+**Al tocar un `.tex`, el barrido no basta: hay que abrir el PDF y mirarlo.** Una
+figura mal dibujada compila sin una sola queja —leyendas encima de las barras,
+rótulos que se salen de su caja, un eje pisado—, y eso solo se ve renderizando la
+página con `pdftoppm -f N -l N -r 100 -png`. Lo mismo con las cuentas de un
+ejemplo numérico: un documento compila igual de bien con las sumas mal.
+
 **El HTML generado se versiona.** Después de tocar `content/` hay que ejecutar
 `npm run build` o el sitio no cambia, y el CI falla con `npm run check`.
 
@@ -56,6 +70,35 @@ buena: eso se barre a mano con `curl`.
 
 **Una asignatura** — añade un objeto `{ code, name, blocks }` al semestre que
 toque, en el mismo fichero.
+
+**La guía docente de una asignatura**, que es el primer recurso de toda ficha:
+
+```
+https://grados.ugr.es/informatica-ade/docencia/plan-estudios/<slug>/guia-docente
+```
+
+El *slug* sale del índice del plan de estudios. Dos avisos que han costado tiempo
+dos veces:
+
+- **Las optativas de Computación y Sistemas Inteligentes cuelgan del grado de
+  Informática**, no del doble grado: es el caso de MH y de AA, con
+  `grados.ugr.es/informatica/…` y otro slug.
+- **Cuando esa página da 404, la guía firmada sí existe** en
+  `guias-firmadas/<curso>/<codigo>.pdf`. El código **no aparece en ninguna
+  página**: se encuentra barriendo el rango y leyendo la primera página del PDF
+  con `pdftotext`. Así salieron FBD (`216113D`) y MAC (`296113D`).
+
+Si de verdad no hay guía, el modelo tiene `note: true` para eso. **Nunca
+`href: "#"`.**
+
+**Un apunte que se lea en el navegador** — enlázalo con `/viewer/?file=<ruta>`,
+nunca con una ruta relativa al `.md`. Así se sirven 245 recursos: el visor
+descarga el markdown y lo renderiza en la página, con las figuras de tikz
+compiladas al vuelo.
+
+**Un test autocorregible** — `test/*.md` es la fuente y `test/*.html` el
+artefacto que genera md2html. Los dos se versionan, porque Pages sirve el HTML
+directamente, pero **solo se edita el `.md`**.
 
 **Los apuntes de una asignatura**, que es escribir un PDF nuevo:
 
@@ -143,7 +186,7 @@ Las que se escriben a mano:
 | `Subjects/` | El material en sí: PDF, LaTeX, Markdown, tests y prácticas |
 | `md2html/`, `pdf2md/`, `diffchecker/`, `viewer/` | Cuatro apps que funcionan enteras en el navegador. Las tres primeras se ofrecen en Herramientas; al visor se entra desde los recursos `.md` de las fichas |
 | `extraFiles/preambulos_oficiales/` | La plantilla LaTeX compartida. **Está viva**: ver abajo |
-| `docs/reorganizacion/` | El plan de la reorganización, por fases. Cerrado el 16 de agosto de 2026 |
+| `docs/` | La documentación del propio repositorio. Hoy solo tiene `reorganizacion/`: el plan por fases, cerrado el 16 de agosto de 2026, con las reglas y las decisiones que siguen valiendo |
 
 Las que **genera el build** y no se editan a mano:
 
@@ -176,6 +219,18 @@ Si encuentras una clave, un dato personal o material con derechos de autor
 publicado aquí, **no se avisa en una issue pública**: cómo hacerlo está en
 [`.github/SECURITY.md`](.github/SECURITY.md). Para una errata o un enlace
 movido hay dos formularios de issue.
+
+## Licencia
+
+El **código** —el generador, las plantillas, el sistema de diseño y las tres apps
+del navegador— va bajo MIT, en [`LICENSE`](LICENSE).
+
+Los **apuntes** son material propio, escritos siguiendo la guía docente de cada
+asignatura y con su bibliografía citada donde el texto se apoya en ella. Si los
+reutilizas, cita de dónde salen. Y lo que no está aquí y no va a estar: material
+del profesorado, guiones, transparencias y capítulos de manual, **tampoco
+incrustados como imagen dentro de un documento propio**, que es por donde se
+coló tres veces.
 
 ## Contacto
 
