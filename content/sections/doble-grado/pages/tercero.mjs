@@ -483,6 +483,81 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-y-administracion-empresas/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Temario",
+                  href: "/Subjects/Third/DAE/Temario/build/DAE.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Temas",
+              resources: [
+                {
+                  name: "Tema 1 · Administración de empresas y su evolución",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/01_administracion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 2 · Cultura organizacional",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/02_cultura.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 3 · Cambio organizacional",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/03_cambio.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 4 · Toma de decisiones",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/04_decisiones.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 5 · Planificación",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/05_planificacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 6 · Motivación",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/06_motivacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 7 · Liderazgo",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/07_liderazgo.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 8 · Grupos de trabajo",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/08_grupos.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 9 · Comunicación y sistemas de información",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/09_comunicacion.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 10 · Conflicto y negociación",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/10_conflicto.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 11 · Control",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/11_control.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Tema 12 · Ética y responsabilidad social",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/12_etica.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Prácticas · las nueve actividades y el método de casos",
+                  href: "/viewer/?file=Subjects/Third/DAE/Temario/src/13_practicas.md",
+                  kind: "MD",
+                },
               ],
             },
             {
@@ -492,15 +567,6 @@ export default {
                   name: "Apuntes Prácticas",
                   href: "/Subjects/Third/DAE/PracticasDAE/FCCEE/build/Practicas.pdf",
                   kind: "PDF",
-                },
-              ],
-            },
-            {
-              label: "Teoría",
-              resources: [
-                {
-                  name: "Temario propio pendiente de escribir",
-                  note: true,
                 },
               ],
             },
