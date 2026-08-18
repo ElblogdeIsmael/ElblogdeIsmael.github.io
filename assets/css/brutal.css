@@ -297,9 +297,125 @@ a {
   color: var(--accent);
 }
 
+/* The brand and the repository button are one group, so they share a flex box.
+   The bar is justify-content: space-between and counts on two children; a third
+   one would drift to the middle. */
+.topbar-left {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+}
+
 .topbar-right {
   display: flex;
   align-items: stretch;
+}
+
+/* ---- Repository button --------------------------------------------------
+   Opens the source of the site. Three things move and none of them changes
+   the size of the cell: a lime block sweeps across it twice on load, the mark
+   turns once on hover, and the word flips for the one stacked under it.
+
+   Nothing is lifted with a translate here, unlike the tiles. The bar is
+   sticky, so moving a cell would pull its border out of line with the ones
+   next to it. The motion is fill and flip instead. */
+.topbar-repo {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 0 20px;
+  border-right: var(--line) solid var(--ink);
+  white-space: nowrap;
+  transition:
+    background var(--base) ease,
+    color var(--base) ease;
+}
+
+/* The sweep. Two passes and it is done: this bar is on every page, so a loop
+   would be noise rather than a cue. It ends off screen because the animation
+   has no fill mode, which leaves the cell exactly as it started.
+
+   Linear, like the marquee, and for the same reason. Something crossing a
+   distance moves at a constant speed; `--ease` is for a control settling into
+   place, and it would send the block 93% of the way in the first half of the
+   run and then crawl. */
+.topbar-repo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-2);
+  transform: translateX(-100%);
+  animation: repo-sweep 0.75s linear 0.35s 2;
+}
+
+@keyframes repo-sweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Above the sweep, so the label stays readable while it passes. */
+.repo-mark,
+.repo-words {
+  position: relative;
+  z-index: 1;
+}
+
+.repo-mark {
+  display: grid;
+  place-items: center;
+  transition: transform var(--slow) var(--ease);
+}
+
+/* One cell, two words, and the cell clips. That is what keeps the width fixed
+   through the flip. */
+.repo-words {
+  display: grid;
+  overflow: hidden;
+}
+
+.repo-word {
+  grid-area: 1 / 1;
+  transition: transform var(--base) var(--ease);
+}
+
+.repo-word-alt {
+  transform: translateY(110%);
+}
+
+.topbar-repo:hover,
+.topbar-repo:focus-visible {
+  background: var(--accent-2);
+  color: var(--accent-ink);
+}
+.topbar-repo:hover .repo-mark,
+.topbar-repo:focus-visible .repo-mark {
+  transform: rotate(360deg);
+}
+.topbar-repo:hover .repo-word,
+.topbar-repo:focus-visible .repo-word {
+  transform: translateY(-110%);
+}
+.topbar-repo:hover .repo-word-alt,
+.topbar-repo:focus-visible .repo-word-alt {
+  transform: translateY(0);
+}
+
+/* Motion off: the sweep never runs and the flip is not needed, so the second
+   word stays out of the way and only the fill answers the pointer. */
+@media (prefers-reduced-motion: reduce) {
+  .topbar-repo::before {
+    content: none;
+  }
 }
 
 .topbar-link {
@@ -527,6 +643,10 @@ a {
   .topbar-toggle {
     padding: 0 16px;
   }
+  .topbar-repo {
+    padding: 0 14px;
+    font-size: 0.7rem;
+  }
   .ttl-stroke {
     -webkit-text-stroke-width: 1.5px;
   }
@@ -536,6 +656,14 @@ a {
   /* Drop secondary nav links; the brand and the theme switch stay. */
   .topbar-link[data-optional] {
     display: none;
+  }
+  /* The repository button loses its label and keeps the mark, which is still
+     a target and still says where it goes through its aria-label. */
+  .topbar-repo .repo-words {
+    display: none;
+  }
+  .topbar-repo {
+    padding: 0 16px;
   }
 }
 
