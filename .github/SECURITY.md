@@ -1,49 +1,41 @@
-# Avisos de seguridad y de material publicado por error
+# Avisos
 
-Este repositorio no es software con usuarios: es un archivo de apuntes. Aun
-así, tres veces ha publicado sin querer algo que no debía, y ese es el aviso
-que sí urge.
+Esto es un archivo de apuntes, no software con usuarios: no hay versiones que
+parchear ni releases que sostener. Se mantiene lo que haya publicado en `main`.
+
+Lo que sí interesa saber es si algo de lo publicado no debería estarlo.
 
 ## Qué avisar
 
-- **Credenciales o claves.** Han aparecido tres claves SSH privadas de un
-  laboratorio y las credenciales de una base de datos de la universidad.
-- **Datos personales.** Un DNI llegó a estar en seis cabeceras de código y en
-  dos PDF, y uno de ellos lo servía la web.
-- **Material con derechos.** Transparencias del profesorado, guiones de
-  prácticas, capítulos de manual. También cuando entra **como imagen** dentro de
-  un documento propio, que es como se colaron seis páginas fotografiadas de un
-  libro.
+- Una clave, un token o una credencial de cualquier tipo.
+- Datos personales, del autor o de cualquiera que salga en el material.
+- Material con derechos: transparencias, guiones de prácticas, capítulos de
+  manual. Cuenta igual cuando va incrustado **como imagen** dentro de un
+  documento propio, que es la forma más fácil de que pase inadvertido.
 
 ## Cómo
 
-**No abras una issue pública** para nada de lo anterior: una issue deja el
-hallazgo indexado mientras se arregla.
+**Para esto no se abre una issue.** Una issue pública deja el hallazgo indexado
+justo mientras se está arreglando, que es lo contrario de lo que hace falta.
 
-- Usa el aviso privado de GitHub, en la pestaña **Security → Report a
-  vulnerability** de este repositorio.
-- Si prefieres el correo, escribe a la dirección pública del perfil
-  [@ElblogdeIsmael](https://github.com/ElblogdeIsmael).
+Hay dos vías privadas:
 
-Dime qué fichero es y, si puedes, en qué línea o página. Con eso basta.
+- La pestaña **Security → Report a vulnerability** de este repositorio.
+- El correo del perfil, [@ElblogdeIsmael](https://github.com/ElblogdeIsmael).
+
+Con el fichero basta. Si además cabe la línea o la página, mejor.
 
 ## Qué pasa después
 
-Un secreto filtrado no se arregla borrando el fichero: sigue en el historial y
-sigue siendo alcanzable. El procedimiento que se ha seguido aquí es rotar la
-credencial primero, reescribir el historial con `git filter-repo` después, y
-mover también las etiquetas, porque mantienen vivo lo purgado.
+Borrar el fichero no resuelve nada: sigue en el historial y sigue siendo
+alcanzable. El procedimiento es rotar primero la credencial, si la hay,
+reescribir el historial con `git filter-repo` después, y **mover también las
+etiquetas**, porque apuntan al historial viejo y lo mantienen vivo.
 
-Las `refs/pull` que GitHub crea por cada pull request son de solo lectura y
-conservan el historial anterior a cualquier reescritura. **Solo el soporte de
-GitHub puede borrarlas**, y en este repositorio lo hizo una vez avisando de que
-no repetiría la excepción. Así que lo purgado antes de agosto de 2026 está
-limpio, y una reescritura futura no lo estaría del todo.
+El material con derechos se retira del árbol y del historial. Se guarda una
+copia local fuera del repositorio, con las rutas originales, para poder
+responder de qué se retiró y de dónde salía.
 
-El material con derechos se retira del árbol y del historial, y se guarda una
-copia local fuera del repositorio con sus rutas originales.
-
-## Versiones
-
-Se mantiene lo que hay publicado en `main`. No hay releases ni versiones
-anteriores que sostener.
+Para erratas, enlaces movidos y cualquier otra cosa que no sea de esta página,
+[las issues](https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io/issues/new/choose)
+tienen dos formularios.
