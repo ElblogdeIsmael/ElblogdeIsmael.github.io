@@ -170,16 +170,12 @@ Al buscar quién usa un fichero hay que grepear **también los Makefile**, no
 solo el HTML y el JS: la nota que este README tuvo durante meses daba las dos
 carpetas por muertas porque solo miró los `.html`, `.css`, `.mjs` y `.js`.
 
-## Contribuir
+## Avisos
 
-Es un archivo personal y no busca colaboradores de código, pero las
-correcciones son bienvenidas: una errata, un enlace roto, una guía docente que
-ha cambiado de sitio. Lo que entra, lo que no y qué se ejecuta antes de mandar
-nada está en [CONTRIBUTING.md](CONTRIBUTING.md).
-
-Si lo que has encontrado es una clave, un dato personal o material con derechos
-de autor, **no se avisa en una issue pública**: mira
-[`.github/SECURITY.md`](.github/SECURITY.md).
+Si encuentras una clave, un dato personal o material con derechos de autor
+publicado aquí, **no se avisa en una issue pública**: cómo hacerlo está en
+[`.github/SECURITY.md`](.github/SECURITY.md). Para una errata o un enlace
+movido hay dos formularios de issue.
 
 ## Contacto
 
