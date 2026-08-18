@@ -49,6 +49,12 @@ export interface Resource {
    * and for material that exists but is not published here.
    */
   note?: boolean;
+  /**
+   * Repository that holds the source, for the browser tools. It is painted as
+   * a small square inside the tile, next to the arrow, and is a link of its
+   * own: the rest of the tile opens `href`.
+   */
+  repo?: string;
 }
 
 /**

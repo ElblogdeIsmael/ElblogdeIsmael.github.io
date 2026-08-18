@@ -830,6 +830,64 @@ a {
   color: var(--accent);
 }
 
+/* ---- Tarjeta con dos destinos ------------------------------------------
+   Las herramientas abren la app y ademas ofrecen su repositorio. Dos enlaces
+   en la misma tarjeta no pueden anidarse, asi que la tarjeta es un <div>: el
+   principal se estira con un ::after y el cuadrado queda por encima. */
+
+.tile-dual {
+  grid-template-columns: 1fr auto auto;
+}
+
+.tile-main {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--gap);
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Esto es lo que mantiene clicable toda la tarjeta con un solo enlace. */
+.tile-main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/* El cuadrado del codigo. Va por encima del ::after de arriba, que si no se
+   lo tragaria. */
+.tile-src {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: var(--accent-2);
+  color: var(--accent-ink);
+  border: var(--line) solid var(--ink);
+  box-shadow: 4px 4px 0 var(--shadow-col);
+  transition:
+    transform var(--base) var(--ease),
+    box-shadow var(--base) var(--ease);
+}
+.tile-src:hover,
+.tile-src:focus-visible {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--shadow-col);
+}
+
+/* El foco del enlace principal tiene que verse en la tarjeta entera, no en un
+   rectangulo de altura cero. */
+.tile-main:focus-visible {
+  outline: none;
+}
+.tile:has(.tile-main:focus-visible) {
+  outline: var(--line) solid var(--accent);
+  outline-offset: 4px;
+}
+
 /* ===================== SLAB ===================== */
 
 /* Generic bordered block. The base for anything that is not a card. */

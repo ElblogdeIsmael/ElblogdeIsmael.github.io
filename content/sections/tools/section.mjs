@@ -25,26 +25,19 @@ export default {
       name: "md2html — apuntes Markdown a test HTML autocorregible",
       href: "/md2html/",
       kind: "WEB",
-    },
-    {
-      name: "md2html · código fuente",
-      href: "https://github.com/Ismael-Sallami/md2html-testGenerator",
-      kind: "WEB",
+      repo: "https://github.com/Ismael-Sallami/md2html-testGenerator",
     },
     {
       name: "pdf2md — PDF, Word y Excel a Markdown",
       href: "/pdf2md/",
       kind: "WEB",
-    },
-    {
-      name: "pdf2md · código fuente",
-      href: "https://github.com/Ismael-Sallami/pdf-to-md",
-      kind: "WEB",
+      repo: "https://github.com/Ismael-Sallami/pdf-to-md",
     },
     {
       name: "diffchecker — comparar dos textos y mezclarlos",
       href: "/diffchecker/",
       kind: "WEB",
+      repo: "https://github.com/Ismael-Sallami/diffchecker",
     },
   ],
 };
