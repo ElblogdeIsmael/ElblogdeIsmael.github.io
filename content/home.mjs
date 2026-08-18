@@ -46,7 +46,7 @@ export const home = {
       "de Granada. Esta web reúne lo que voy aprendiendo por el camino, con la " +
       "intención de que le sirva a quien venga detrás.",
     place: "Granada",
-    period: "UGR · 2021—hoy",
+    period: "UGR · 2021 a hoy",
     /* Cuatro entradas: la rejilla es de dos columnas y un número par la deja
        cuadrada, sin huecos. */
     areas: [

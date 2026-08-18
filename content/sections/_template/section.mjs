@@ -52,6 +52,6 @@ export default {
    * Optional. A section that only points elsewhere (like Herramientas) sets
    * `links` instead of `pages` and renders as a link list.
    *
-   * links: [{ name: "Nombre — descripción corta", href: "/ruta/", kind: "WEB" }],
+   * links: [{ name: "Nombre", blurb: "descripción corta", href: "/ruta/", kind: "WEB" }],
    */
 };

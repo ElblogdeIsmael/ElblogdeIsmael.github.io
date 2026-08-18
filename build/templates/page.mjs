@@ -58,7 +58,7 @@ function entryCard(entry, index) {
   ]);
 
   const list = rows.filter(Boolean).join("\n");
-  const body = list || `                <li class="res-empty">— sin material —</li>`;
+  const body = list || `                <li class="res-empty">sin material</li>`;
 
   return `            <article class="entry-card reveal" style="--i:${index}">
               <header class="entry-head">

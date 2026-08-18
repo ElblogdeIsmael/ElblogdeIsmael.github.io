@@ -50,8 +50,8 @@ node build/scripts/check-latex-builds.mjs --only FBD   # solo lo tocado
 Necesita Node 20 o superior. No hay que instalar nada.
 
 **Al tocar un `.tex`, el barrido no basta: hay que abrir el PDF y mirarlo.** Una
-figura mal dibujada compila sin una sola queja —leyendas encima de las barras,
-rótulos que se salen de su caja, un eje pisado—, y eso solo se ve renderizando la
+figura mal dibujada compila sin una sola queja (leyendas encima de las barras,
+rótulos que se salen de su caja, un eje pisado), y eso solo se ve renderizando la
 página con `pdftoppm -f N -l N -r 100 -png`. Lo mismo con las cuentas de un
 ejemplo numérico: un documento compila igual de bien con las sumas mal.
 
@@ -64,11 +64,11 @@ buena: eso se barre a mano con `curl`.
 
 ## Añadir contenido
 
-**Un recurso a una asignatura** — abre el curso en
+**Un recurso a una asignatura.** Abre el curso en
 `content/sections/doble-grado/pages/` y añade una entrada a la lista
 `resources` de esa asignatura. Después `npm run build`.
 
-**Una asignatura** — añade un objeto `{ code, name, blocks }` al semestre que
+**Una asignatura.** Añade un objeto `{ code, name, blocks }` al semestre que
 toque, en el mismo fichero.
 
 **La guía docente de una asignatura**, que es el primer recurso de toda ficha:
@@ -91,12 +91,12 @@ dos veces:
 Si de verdad no hay guía, el modelo tiene `note: true` para eso. **Nunca
 `href: "#"`.**
 
-**Un apunte que se lea en el navegador** — enlázalo con `/viewer/?file=<ruta>`,
+**Un apunte que se lea en el navegador.** Enlázalo con `/viewer/?file=<ruta>`,
 nunca con una ruta relativa al `.md`. Así se sirven 245 recursos: el visor
 descarga el markdown y lo renderiza en la página, con las figuras de tikz
 compiladas al vuelo.
 
-**Un test autocorregible** — `test/*.md` es la fuente y `test/*.html` el
+**Un test autocorregible.** El `test/*.md` es la fuente y el `test/*.html` el
 artefacto que genera md2html. Los dos se versionan, porque Pages sirve el HTML
 directamente, pero **solo se edita el `.md`**.
 
@@ -130,7 +130,7 @@ sección, las migas de pan, los enlaces de anterior y siguiente, y el sitemap.
 Aparece sola en la portada, con su índice en `/investigacion/`, una página por
 entrada y sus filas en el sitemap. No hay que tocar plantillas ni CSS.
 
-**Una herramienta** — las apps del navegador son el caso de sección **sin
+**Una herramienta.** Las apps del navegador son el caso de sección **sin
 páginas**: `content/sections/tools/section.mjs` tiene `pages: []` y un array
 `links`, y el generador pinta una lista de enlaces en vez de una rejilla
 siempre que `links` esté puesto. Así que:
@@ -198,7 +198,7 @@ Las que **genera el build** y no se editan a mano:
 | `courses/` | Las URLs antiguas, que redirigen a su sitio nuevo |
 
 `doble-grado` es el *slug* de la sección, así que da nombre a la URL y a la
-carpeta generada. Una sección nueva —investigación, proyectos, lo que sea—
+carpeta generada. Una sección nueva (investigación, proyectos, lo que sea)
 aparece igual con solo registrarla: ver «Añadir contenido».
 
 **`extraFiles/` y `htmlFiles/` no se borran**, aunque el generador no los
@@ -222,8 +222,8 @@ movido hay dos formularios de issue.
 
 ## Licencia
 
-El **código** —el generador, las plantillas, el sistema de diseño y las tres apps
-del navegador— va bajo MIT, en [`LICENSE`](LICENSE).
+El **código** (el generador, las plantillas, el sistema de diseño y las tres apps
+del navegador) va bajo MIT, en [`LICENSE`](LICENSE).
 
 Los **apuntes** son material propio, escritos siguiendo la guía docente de cada
 asignatura y con su bibliografía citada donde el texto se apoya en ella. Si los

@@ -68,7 +68,7 @@ export default {
                 },
                 {
                   /** `note` renders plain text: material that is not published here. */
-                  name: "Un libro recomendado — Autor",
+                  name: "Un libro recomendado · Autor",
                   note: true,
                 },
               ],

@@ -56,7 +56,8 @@ const GITHUB_MARK = `<svg viewBox="0 0 16 16" width="20" height="20" fill="curre
  */
 function linkTile(link, index) {
   const external = isExternal(link.href) ? ' target="_blank" rel="noopener"' : "";
-  const [name, blurb] = link.name.split(" — ");
+  const name = link.name;
+  const blurb = link.blurb;
   const num = String(index + 1).padStart(2, "0");
   const body = `          <span class="tile-num">${num}</span>
           <span>
