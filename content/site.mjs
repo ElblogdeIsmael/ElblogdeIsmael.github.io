@@ -37,6 +37,13 @@ export const site = {
   /** Where the contact form posts. */
   contactEndpoint: "https://formsubmit.co/ismEngineer23@gmail.com",
 
+  /**
+   * The repository this site is generated from. It is not the same as the
+   * GitHub account below: that one is the person, this one is the code.
+   * The top bar links to it, next to the brand.
+   */
+  repo: "https://github.com/ElblogdeIsmael/ElblogdeIsmael.github.io",
+
   social: [
     { label: "GitHub", href: "https://github.com/ismael-sallami" },
     { label: "Web personal", href: "https://ismael-sallami.github.io/" },

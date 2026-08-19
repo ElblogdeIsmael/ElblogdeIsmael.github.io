@@ -6,6 +6,7 @@
  */
 
 import { escape, each, join, isExternal } from "../lib/html.mjs";
+import { GITHUB_MARK } from "../lib/icons.mjs";
 import site from "../../content/site.mjs";
 
 /**
@@ -52,6 +53,34 @@ const ICON_SUN = `<svg class="ico-sun" ${ICON_ATTRS}>
       <circle cx="12" cy="12" r="4"/>
       <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
     </svg>`;
+
+/**
+ * Button that opens the repository this site is built from. It sits next to the
+ * brand because that is what it belongs to: the site and its source.
+ *
+ * The two words are stacked in one grid cell and the cell clips them, so the
+ * hover flip swaps them without the button ever changing width. Same trick as
+ * the theme switch, and for the same reason: the top bar is sticky and anything
+ * that resizes there drags the whole row with it.
+ *
+ * The words carry `aria-hidden` because the link already states its purpose in
+ * `aria-label`; without it a screen reader would read both halves of the flip.
+ *
+ * @returns {string} the button, or nothing when no repository is configured
+ */
+function repoButton() {
+  if (!site.repo) return "";
+
+  return `    <a class="topbar-repo" href="${escape(site.repo)}"
+       target="_blank" rel="noopener"
+       aria-label="Ver el código de este sitio en GitHub">
+      <span class="repo-mark" aria-hidden="true">${GITHUB_MARK}</span>
+      <span class="repo-words" aria-hidden="true">
+        <span class="repo-word">Código</span>
+        <span class="repo-word repo-word-alt">GitHub</span>
+      </span>
+    </a>`;
+}
 
 /**
  * @typedef {object} NavLink
@@ -194,7 +223,10 @@ ${thirdParty(options)}
   <a class="skip-link" href="#main">Saltar al contenido</a>
 
   <header class="topbar">
-    <a class="topbar-brand" href="/">${BRAND_MARK}<span class="brand-long">${escape(site.name)}</span></a>
+    <div class="topbar-left">
+      <a class="topbar-brand" href="/">${BRAND_MARK}<span class="brand-long">${escape(site.name)}</span></a>
+${repoButton()}
+    </div>
     <div class="topbar-right">
 ${navLinks(options.nav ?? [])}
       <button class="topbar-toggle" type="button" data-theme-toggle
