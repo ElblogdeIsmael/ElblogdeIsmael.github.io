@@ -194,7 +194,7 @@ Las que se escriben a mano:
 | `build/` | El generador y sus plantillas |
 | `assets/css/brutal/` | El sistema de diseño, en cinco capas |
 | `Subjects/` | El material en sí: PDF, LaTeX, Markdown, tests y prácticas |
-| `md2html/`, `pdf2md/`, `diffchecker/`, `viewer/` | Cuatro apps que funcionan enteras en el navegador. Las tres primeras se ofrecen en Herramientas; al visor se entra desde los recursos `.md` de las fichas |
+| `md2html/`, `pdf2md/`, `diffchecker/`, `gittomd/`, `viewer/` | Cinco apps que funcionan enteras en el navegador. Las cuatro primeras se ofrecen en Herramientas; al visor se entra desde los recursos `.md` de las fichas |
 | `extraFiles/preambulos_oficiales/` | La plantilla LaTeX compartida. **Está viva**: ver abajo |
 | `docs/` | La documentación del propio repositorio. Hoy solo tiene `reorganizacion/`: el plan por fases, cerrado el 16 de agosto de 2026, con las reglas y las decisiones que siguen valiendo |
 
@@ -233,7 +233,7 @@ hay dos formularios de issue.
 
 ## Licencia
 
-El **código** (el generador, las plantillas, el sistema de diseño y las tres
+El **código** (el generador, las plantillas, el sistema de diseño y las
 apps del navegador) va bajo MIT, en [`LICENSE`](LICENSE).
 
 Los **apuntes** son material propio, escritos siguiendo la guía docente de cada

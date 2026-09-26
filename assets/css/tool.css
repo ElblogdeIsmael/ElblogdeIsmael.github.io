@@ -238,11 +238,11 @@ a {
 
 /* ============================================================
    TOOL LAYER
-   Shared chrome for the standalone browser apps (md2html, pdf2md
-   and diffchecker). The first two were generated from the same
+   Shared chrome for the standalone browser apps (md2html, pdf2md,
+   diffchecker and gittomd). The first two were generated from the same
    template, so they use the same class names and can share one
-   stylesheet; diffchecker reuses that chrome and adds its own
-   section at the end of this file.
+   stylesheet; diffchecker and gittomd reuse that chrome and add
+   their own sections at the end of this file.
 
    Selectors are kept exactly as the apps' JavaScript expects them:
    `light` on <body>, `dragover` on the drop zone, `active` on chips
@@ -1490,4 +1490,161 @@ mark.wadd {
   .diff-grid.unified .drow {
     grid-template-columns: 2.4rem 2.4rem 0.9rem minmax(0, 1fr) 5.6rem;
   }
+}
+
+/* ===================== GITTOMD ===================== */
+
+/* gittomd reuses the md2html layout: options on the left, result on the
+   right. What it adds is the file list, the progress bar and a plain text
+   preview of the generated Markdown. */
+
+.gtm-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.gtm-textarea,
+.gtm-select {
+  background: var(--bg);
+  border: var(--line) solid var(--ink);
+  color: var(--ink);
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  border-radius: 0;
+}
+.gtm-textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+.gtm-textarea:focus,
+.gtm-select:focus,
+.gtm-filter:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 3px 3px 0 var(--accent);
+}
+
+.gtm-private {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-color: var(--accent);
+}
+.gtm-private p {
+  margin: 0;
+}
+
+.note.gtm-error {
+  border-color: var(--danger);
+  color: var(--ink);
+}
+
+.gtm-files {
+  display: flex;
+  flex-direction: column;
+}
+.gtm-files-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: var(--line) solid var(--ink);
+  font-size: 0.82rem;
+}
+.gtm-files-head .spacer {
+  flex: 1;
+}
+
+.gtm-filter {
+  margin: 10px 12px 0;
+  background: var(--bg);
+  border: var(--line) solid var(--ink);
+  color: var(--ink);
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 0.85rem;
+  border-radius: 0;
+}
+
+.gtm-file-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0 12px;
+  max-height: 320px;
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+}
+.gtm-file-list li + li {
+  border-top: var(--line-hair) solid var(--bg-grid);
+}
+.gtm-file-list label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  cursor: pointer;
+}
+.gtm-file-list input {
+  accent-color: var(--accent);
+  flex: 0 0 auto;
+}
+.gtm-path {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gtm-size {
+  color: var(--muted);
+  flex: 0 0 auto;
+}
+
+.gtm-skipped {
+  margin: 10px 12px 12px;
+}
+
+.gtm-progress {
+  height: 10px;
+  border: var(--line) solid var(--ink);
+  background: var(--surface-2);
+}
+.gtm-progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width var(--fast) linear;
+}
+
+.gtm-output {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  min-width: 0;
+}
+.gtm-stats {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.gtm-pre {
+  margin: 0;
+  background: var(--bg);
+  border: var(--line) solid var(--ink);
+  padding: 14px;
+  max-height: 70vh;
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
