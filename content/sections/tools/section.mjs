@@ -18,7 +18,7 @@ export default {
   blurb:
     "Pequeñas apps que funcionan al 100% en tu navegador: sin instalar nada y " +
     "sin que tus archivos salgan de tu equipo.",
-  summary: "3 herramientas · sin servidor · código abierto",
+  summary: "4 herramientas · sin servidor · código abierto",
   pages: [],
   links: [
     {
@@ -41,6 +41,13 @@ export default {
       href: "/diffchecker/",
       kind: "WEB",
       repo: "https://github.com/Ismael-Sallami/diffchecker",
+    },
+    {
+      name: "gittomd",
+      blurb: "un repositorio de GitHub en un Markdown para tu IA",
+      href: "/gittomd/",
+      kind: "WEB",
+      repo: "https://github.com/Ismael-Sallami/gittomd",
     },
   ],
 };

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>gittomd: repositorio de GitHub a Markdown | El Blog de Ismael</title>
+  <meta name="description" content="Convierte un repositorio de GitHub en un solo fichero Markdown con el resumen, el árbol de carpetas y el contenido de cada fichero, listo para pasárselo a una IA. Funciona con repos públicos y privados, en tu navegador." />
+  <meta name="keywords" content="repositorio a markdown, github a markdown, contexto para ia, repo to prompt, gitingest, repomix, llm, chatgpt, claude" />
+  <meta name="author" content="Ismael Sallami" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://elblogdeismael.github.io/gittomd/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:url" content="https://elblogdeismael.github.io/gittomd/" />
+  <meta property="og:title" content="gittomd: repositorio de GitHub a Markdown" />
+  <meta property="og:description" content="Un repositorio entero en un solo Markdown para dárselo a una IA y que te lo explique. Gratis y en tu navegador." />
+  <meta property="og:image" content="https://elblogdeismael.github.io/gittomd/assets/og-image.svg" />
+  <meta property="og:site_name" content="El Blog de Ismael" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="gittomd: repositorio de GitHub a Markdown" />
+  <meta name="twitter:description" content="Resumen, estructura y todos los ficheros de un repo en un solo Markdown, listo para una IA." />
+  <meta name="twitter:image" content="https://elblogdeismael.github.io/gittomd/assets/og-image.svg" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- Google Analytics (mismo dominio del blog) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5W0LVJ83W7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5W0LVJ83W7');
+  </script>
+
+  <!-- JSON-LD: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "gittomd: repositorio de GitHub a Markdown",
+    "url": "https://elblogdeismael.github.io/gittomd/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any (navegador web)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "inLanguage": "es",
+    "author": { "@type": "Person", "name": "Ismael Sallami" },
+    "description": "Convierte un repositorio de GitHub, público o privado, en un único fichero Markdown con el resumen, la estructura de carpetas y el contenido de cada fichero, pensado para usarlo como contexto en una IA."
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/assets/css/tool.css" />
+</head>
+<body class="light">
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#app">Saltar al conversor</a>
+
+  <header class="site-header">
+    <a class="brand" href="https://elblogdeismael.github.io/">
+      <span class="brand-mark">&lt;/&gt;</span>
+      <span>El Blog de Ismael</span>
+    </a>
+    <nav class="header-links">
+      <a href="https://elblogdeismael.github.io/">Inicio</a>
+      <a href="https://elblogdeismael.github.io/tools/">Herramientas</a>
+      <button id="theme-toggle" class="ghost-btn" title="Cambiar tema de la página">🌙</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge">En tu navegador, sin servidor, gratis</div>
+    <h1>Un repositorio entero en <span class="grad">un solo</span> <span class="grad2">Markdown</span></h1>
+    <p class="hero-sub">
+      Pega la dirección de un repositorio de GitHub y te devuelvo un único fichero
+      <code>.md</code> con el resumen, el árbol de carpetas y el contenido de cada fichero.
+      Se lo pasas a una IA y te explica el proyecto, lo revisa o te ayuda a cambiarlo.
+      También funciona con repos privados.
+    </p>
+  </section>
+
+  <main class="app gtm-app" id="app">
+    <!-- Columna izquierda: repositorio y opciones -->
+    <section class="panel controls" aria-label="Repositorio y opciones">
+      <form id="repo-form" class="gtm-form" novalidate>
+        <label class="field" for="repo-input">Repositorio
+          <input id="repo-input" type="text" inputmode="url" autocomplete="off" spellcheck="false"
+            placeholder="https://github.com/owner/repo  u  owner/repo" required />
+        </label>
+        <label class="field" for="ref-input">Rama, tag o commit (opcional)
+          <input id="ref-input" type="text" autocomplete="off" spellcheck="false" placeholder="la rama principal" />
+        </label>
+        <button class="primary-btn" id="load-btn" type="submit">Cargar repositorio</button>
+      </form>
+
+      <div class="note gtm-private" id="private-box" hidden>
+        <p id="private-text"><strong>No encuentro ese repositorio.</strong> Si es privado, pega un token de GitHub
+          con permiso de solo lectura y lo vuelvo a intentar.</p>
+        <label class="field" for="token-input">Token de GitHub
+          <input id="token-input" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_..." />
+        </label>
+        <p class="hint">
+          <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Crea uno aquí</a>:
+          en <em>Repository access</em> elige el repo y en <em>Permissions</em> da
+          <em>Contents: Read-only</em>. El token solo se envía a <code>api.github.com</code>
+          y se guarda en esta pestaña hasta que la cierres.
+        </p>
+        <div class="actions">
+          <button class="primary-btn" id="token-btn" type="button">Probar con el token</button>
+          <button class="secondary-btn" id="token-cancel" type="button">Es público</button>
+        </div>
+      </div>
+
+      <p class="note" id="notice" hidden></p>
+
+      <details class="group" id="options">
+        <summary>Opciones</summary>
+        <div class="group-body">
+          <label class="field" for="include-input">Incluir solo (globs separados por comas)
+            <input id="include-input" type="text" autocomplete="off" spellcheck="false" placeholder="src/**, *.md" />
+          </label>
+          <label class="field" for="exclude-input">Excluir (globs separados por comas)
+            <input id="exclude-input" type="text" autocomplete="off" spellcheck="false" placeholder="tests/, *.test.js" />
+          </label>
+          <label class="field" for="subdir-input">Solo esta carpeta
+            <input id="subdir-input" type="text" autocomplete="off" spellcheck="false" placeholder="docs" />
+          </label>
+          <label class="field" for="maxsize-input">Tamaño máximo por fichero (KB)
+            <input id="maxsize-input" type="number" min="1" step="1" value="512" />
+          </label>
+          <label class="switch"><input type="checkbox" id="opt-gitignore" checked /> Aplicar <code>.gitignore</code></label>
+          <label class="switch"><input type="checkbox" id="opt-lockfiles" /> Incluir ficheros de bloqueo</label>
+          <label class="switch"><input type="checkbox" id="opt-minified" /> Incluir ficheros minificados</label>
+          <label class="switch"><input type="checkbox" id="opt-tree" checked /> Incluir el árbol de carpetas</label>
+          <label class="switch"><input type="checkbox" id="opt-prompt" checked /> Añadir instrucciones para la IA</label>
+          <label class="field" for="prompt-input">Instrucciones (vacío para usar las de siempre)
+            <textarea id="prompt-input" class="gtm-textarea" rows="3" spellcheck="false"
+              placeholder="Explícame qué hace el proyecto, cómo está organizado..."></textarea>
+          </label>
+          <label class="field" for="lang-select">Idioma del documento
+            <select id="lang-select" class="gtm-select">
+              <option value="es" selected>Español</option>
+              <option value="en">English</option>
+            </select>
+          </label>
+        </div>
+      </details>
+
+      <div class="group gtm-files" id="files-box" hidden>
+        <div class="gtm-files-head">
+          <strong id="files-count">0 ficheros</strong>
+          <span class="spacer"></span>
+          <button class="ghost-btn small" id="select-all" type="button">Todos</button>
+          <button class="ghost-btn small" id="select-none" type="button">Ninguno</button>
+        </div>
+        <label class="visually-hidden" for="files-filter">Filtrar ficheros</label>
+        <input id="files-filter" class="gtm-filter" type="search" placeholder="Filtrar por ruta" autocomplete="off" spellcheck="false" />
+        <ul class="gtm-file-list" id="file-list"></ul>
+        <p class="hint gtm-skipped" id="skipped-line"></p>
+      </div>
+
+      <button class="primary-btn" id="build-btn" type="button" disabled>Generar Markdown</button>
+      <div class="gtm-progress" id="progress" hidden><span id="progress-bar"></span></div>
+      <p class="toast" id="progress-text" aria-live="polite"></p>
+    </section>
+
+    <!-- Columna derecha: resultado -->
+    <section class="panel preview" aria-label="Resultado">
+      <div class="preview-bar">
+        <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <span class="preview-title" id="out-title">resultado.md</span>
+      </div>
+      <div class="preview-empty" id="out-empty">
+        <p class="pe-icon" aria-hidden="true">&lt;/&gt;</p>
+        <p><strong>Aquí aparecerá el Markdown.</strong></p>
+        <p class="pe-sub">Carga un repositorio, revisa qué ficheros entran y pulsa Generar.</p>
+      </div>
+      <div class="gtm-output" id="out-box" hidden>
+        <p class="gtm-stats" id="out-stats"></p>
+        <div class="actions">
+          <button class="primary-btn" id="copy-btn" type="button">Copiar</button>
+          <button class="secondary-btn" id="download-btn" type="button">Descargar .md</button>
+        </div>
+        <p class="note" id="out-warning" hidden></p>
+        <pre class="gtm-pre" id="out-text"></pre>
+      </div>
+    </section>
+
+    <p class="visually-hidden" id="announce" aria-live="polite"></p>
+  </main>
+
+  <section class="howto">
+    <h2>Cómo se usa</h2>
+    <div class="howto-grid">
+      <div class="card">
+        <h3>En la web</h3>
+        <p>
+          Pega la dirección del repositorio y pulsa <em>Cargar</em>. Verás la lista de
+          ficheros que van a entrar: desmarca los que no quieras y pulsa <em>Generar</em>.
+          Después copias el Markdown o lo descargas y se lo das a tu IA.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>En la terminal</h3>
+        <p>Se instala con un solo comando (necesita Node.js 18 o superior):</p>
+        <pre><code>curl -fsSL https://raw.githubusercontent.com/Ismael-Sallami/gittomd/main/install.sh | bash</code></pre>
+        <p>
+          Y se usa así: <code>gittomd owner/repo</code>. Si el repo es privado te pregunta
+          y te deja iniciar sesión con GitHub. También convierte carpetas locales:
+          <code>gittomd .</code>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Qué se deja fuera</h3>
+        <ul>
+          <li>Binarios: imágenes, PDFs, fuentes, comprimidos y parecidos.</li>
+          <li>Ficheros de bloqueo como <code>package-lock.json</code> y ficheros minificados.</li>
+          <li>Carpetas como <code>node_modules</code> y lo que marque <code>.gitignore</code>.</li>
+          <li>Ficheros de más de 512 KB. Todo esto se puede cambiar en <em>Opciones</em>.</li>
+        </ul>
+        <p>Lo omitido sigue apareciendo en el árbol, así la IA sabe que existe.</p>
+      </div>
+
+      <div class="card">
+        <h3>Lo que conviene saber</h3>
+        <ul>
+          <li>No hay servidor: el navegador habla directamente con GitHub.</li>
+          <li>Sin token, GitHub permite unas 60 consultas por hora. Cada repo gasta tres.</li>
+          <li>Para repos privados, cada fichero cuenta como una consulta (hasta 5000 por hora).</li>
+          <li>Los tokens se cuentan de forma aproximada, a unos cuatro caracteres por token.</li>
+          <li>Crea también un fichero <code>.gittomdignore</code> en el repo para excluir rutas siempre.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>
+      Hecho por <a href="https://github.com/Ismael-Sallami" target="_blank" rel="noopener">Ismael Sallami</a>.
+      Parte de <a href="https://elblogdeismael.github.io/">El Blog de Ismael</a>.
+      <a href="https://github.com/Ismael-Sallami/gittomd" target="_blank" rel="noopener">Código</a>
+    </p>
+  </footer>
+
+  <script src="js/gittomd-core.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
