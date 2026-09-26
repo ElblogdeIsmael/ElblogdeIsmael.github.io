@@ -126,7 +126,6 @@
       includeLockfiles: $("opt-lockfiles").checked,
       includeMinified: $("opt-minified").checked,
       tree: $("opt-tree").checked,
-      prompt: $("opt-prompt").checked ? ($("prompt-input").value.trim() || true) : false,
       lang: $("lang-select").value,
     };
   }
@@ -382,7 +381,6 @@
       title: title,
       rootName: subdir ? subdir.split("/").pop() : info.name,
       lang: opts.lang,
-      prompt: opts.prompt,
       tree: opts.tree,
       meta: {
         source: info.html_url + (subdir ? "/tree/" + state.ref + "/" + subdir : ""),
