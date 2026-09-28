@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>GitVanguard · Controlador Git TUI de Alto Rendimiento para Linux</title>
-  <meta name="description" content="Controlador de Git en terminal de alto rendimiento desarrollado en Rust para Linux. Supera a Lazygit con Time Machine de reflog, Sentinel Shield anti-fugas de secretos y gestión nativa de worktrees." />
-  <meta name="keywords" content="git, lazygit, gitui, tui, rust, ratatui, terminal, git vanguard, linux, git controller, devtools, reflog time machine, sentinel" />
+  <meta name="description" content="Controlador de Git en terminal de alto rendimiento desarrollado en Rust para Linux, con Time Machine de reflog, Sentinel Shield anti-fugas de secretos y gestión nativa de worktrees." />
+  <meta name="keywords" content="git, tui, rust, ratatui, terminal, git vanguard, linux, git controller, devtools, reflog time machine, sentinel" />
   <meta name="author" content="Ismael Sallami Moreno" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://elblogdeismael.github.io/vanguard/" />
@@ -339,7 +339,7 @@
         Git<span class="ttl-stroke">Vanguard</span>
       </h1>
       <p class="lead" style="margin-top:16px; font-size:1.18rem; max-width:780px;">
-        Controlador Git TUI de alto rendimiento para Linux. Diseñado para superar a <em>Lazygit</em> eliminando las pausas de recolección de basura e introduciendo <strong>Sentinel Shield</strong> (escáner anti-fugas de credenciales), <strong>Time Machine</strong> (explorador visual del reflog con restauración en 1 tecla) y soporte integral de <strong>Git Worktrees</strong>.
+        Controlador Git TUI de alto rendimiento para Linux. Desarrollado en Rust para máxima velocidad de respuesta sin sobrecargas de recolección de basura, integrando <strong>Sentinel Shield</strong> (escáner anti-fugas de credenciales), <strong>Time Machine</strong> (explorador visual del reflog con restauración en 1 tecla) y soporte integral de <strong>Git Worktrees</strong>.
       </p>
 
       <!-- Caja de Instalación Rápida -->
@@ -437,56 +437,49 @@
         </div>
       </div>
 
-      <!-- Tabla Comparativa Técnica -->
+      <!-- Tabla de Especificaciones Técnicas y Arquitectura -->
       <h2 class="display" style="font-size:1.8rem; margin: 56px 0 20px;">
-        Comparativa Técnica: GitVanguard vs. Lazygit vs. GitUI
+        Especificaciones Técnicas y Arquitectura
       </h2>
       <div class="comp-table-wrap">
         <table class="comp-table">
           <thead>
             <tr>
               <th>Criterio Técnico</th>
-              <th>Lazygit (Go)</th>
-              <th>GitUI (Rust)</th>
-              <th style="color:var(--vg-accent)">GitVanguard (Rust)</th>
+              <th style="color:var(--vg-accent)">Implementación en GitVanguard</th>
+              <th>Beneficio Operativo para el Desarrollador</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>Tiempo de Frame & GC</strong></td>
-              <td>Lag y pausas de Garbage Collector en repositorios masivos (+50k commits).</td>
-              <td>Rápido (< 10 ms).</td>
-              <td><strong>Ultra-rápido (< 5 ms)</strong> sin pausas de runtime.</td>
+              <td><strong>Tiempo de Frame & Latencia</strong></td>
+              <td><strong>Ultra-rápido (< 5 ms)</strong> sin pausas de runtime ni recolección de basura.</td>
+              <td>Fluidez inmediata incluso en repositorios masivos con decenas de miles de commits.</td>
             </tr>
             <tr>
               <td><strong>Prevención de Fugas de Secretos</strong></td>
-              <td>No disponible. Permite commitear credenciales sin advertencia.</td>
-              <td>No disponible.</td>
-              <td><strong>Sentinel Shield nativo</strong> con inspección de patrones y ficheros críticos.</td>
+              <td><strong>Sentinel Shield nativo</strong> con inspección estricta de entropía y firmas criptográficas.</td>
+              <td>Detección previa al commit de claves AWS, OpenAI, GitHub tokens y variables sensibles.</td>
             </tr>
             <tr>
-              <td><strong>Navegación Visual de Reflog</strong></td>
-              <td>Listado plano sin previsualización de diferencias.</td>
-              <td>Básico o no integrado.</td>
-              <td><strong>Time Machine</strong> con diff en tiempo real y <em>Undo</em> en 1 tecla.</td>
+              <td><strong>Navegación Histórica de Reflog</strong></td>
+              <td><strong>Time Machine</strong> con previsualización de diffs y <em>Undo</em> en 1 tecla.</td>
+              <td>Recuperación instantánea de ramas eliminadas, rebases fallidos o resets accidentales.</td>
             </tr>
             <tr>
               <td><strong>Soporte Git Worktrees</strong></td>
-              <td>Limitado en menús secundarios.</td>
-              <td>No soportado.</td>
-              <td><strong>Panel centralizado</strong> de alta visibilidad para crear, listar y desvincular.</td>
+              <td><strong>Centro de mando nativo</strong> con vista dedicada para crear, vincular y desvincular.</td>
+              <td>Trabajo paralelo en múltiples ramas sin necesidad de stashes ni cambios de contexto disruptivos.</td>
             </tr>
             <tr>
               <td><strong>Asistente Conventional Commits</strong></td>
-              <td>Requiere configuración de scripts externos.</td>
-              <td>Solo texto plano.</td>
-              <td><strong>Wizard semántico integrado</strong> con contador 50/72 caracteres.</td>
+              <td><strong>Wizard semántico guiado</strong> con contador estándar de 50/72 caracteres.</td>
+              <td>Historial de git limpio, ordenado y compatible con generadores automáticos de changelog.</td>
             </tr>
             <tr>
-              <td><strong>Portapapeles en Linux</strong></td>
-              <td>Configuración heterogénea.</td>
-              <td>Soporte básico.</td>
-              <td><strong>Detección nativa</strong> Wayland (<code>wl-copy</code>), X11 (<code>xclip</code>) y OSC 52.</td>
+              <td><strong>Integración con el Sistema Linux</strong></td>
+              <td><strong>Soporte nativo</strong> para Wayland (<code>wl-copy</code>), X11 (<code>xclip</code>) y terminales OSC 52.</td>
+              <td>Copia directa de hashes, mensajes y rutas sin dependencias gráficas externas.</td>
             </tr>
           </tbody>
         </table>
