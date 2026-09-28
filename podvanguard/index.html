@@ -387,7 +387,7 @@
       }
     }
 
-    /* Terminal Mockup */
+    /* Terminal Mockup & TUI Layout */
     .terminal-window {
       background: var(--pv-term-bg);
       border: 3px solid var(--pv-card-border);
@@ -401,21 +401,23 @@
 
     .term-titlebar {
       background: #141720;
-      padding: 8px 14px;
+      padding: 10px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 2px solid #222836;
+      gap: 12px;
     }
 
     .term-dots {
       display: flex;
       gap: 6px;
+      flex-shrink: 0;
     }
 
     .term-dot {
-      width: 12px;
-      height: 12px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       border: 1px solid rgba(0, 0, 0, 0.4);
     }
@@ -431,14 +433,16 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      flex: 1;
     }
 
-    .term-body {
-      padding: 18px;
-      font-size: 0.86rem;
-      line-height: 1.5;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+    .term-live-tag {
+      font-size: 0.72rem;
+      color: var(--pv-success);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .t-accent { color: var(--pv-accent); }
@@ -447,6 +451,245 @@
     .t-amber { color: var(--pv-warning); }
     .t-muted { color: #8e95a5; }
     .t-bold { font-weight: bold; }
+
+    /* Layout TUI Semántico */
+    .term-tui-layout {
+      display: flex;
+      flex-direction: column;
+      background: var(--pv-term-bg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84rem;
+      color: var(--pv-term-text);
+      line-height: 1.5;
+    }
+
+    .tui-strip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 16px;
+      background: #0d1017;
+      border-bottom: 1px solid #222836;
+      font-size: 0.8rem;
+    }
+
+    .tui-strip-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tui-meters-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .tui-mini-meter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+    }
+
+    .meter-bar {
+      width: 70px;
+      height: 7px;
+      background: #1b202c;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .meter-fill {
+      height: 100%;
+      background: var(--pv-accent);
+      border-radius: 2px;
+    }
+
+    .tui-main-grid {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      border-bottom: 1px solid #222836;
+      min-height: 260px;
+    }
+
+    @media (max-width: 768px) {
+      .tui-main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tui-sidebar {
+      background: #0a0d13;
+      border-right: 1px solid #222836;
+      padding: 12px 0;
+    }
+
+    @media (max-width: 768px) {
+      .tui-sidebar {
+        display: none;
+      }
+    }
+
+    .tui-section-header {
+      padding: 6px 14px 8px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #8e95a5;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .tui-nav-list {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+    }
+
+    .tui-nav-item {
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      color: #9aa2b4;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tui-nav-item.active {
+      background: rgba(255, 85, 0, 0.12);
+      color: #fff;
+      font-weight: 700;
+      border-left: 3px solid var(--pv-accent);
+    }
+
+    .tui-content {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      overflow-x: auto;
+    }
+
+    .tui-sub-section {
+      padding: 12px 16px;
+    }
+
+    .tui-sub-section:not(:last-child) {
+      border-bottom: 1px solid #222836;
+    }
+
+    .tui-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 8px;
+    }
+
+    .tui-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .tui-table th {
+      color: #64748b;
+      font-weight: 600;
+      padding: 6px 10px;
+      font-size: 0.72rem;
+      border-bottom: 1px solid #1e2430;
+    }
+
+    .tui-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .text-light {
+      color: #f1f5f9;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 2px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .status-pill.green {
+      background: rgba(0, 229, 117, 0.12);
+      color: var(--pv-success);
+    }
+
+    .status-pill.amber {
+      background: rgba(255, 176, 0, 0.12);
+      color: var(--pv-warning);
+    }
+
+    .sentinel-score {
+      color: var(--pv-success);
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .sentinel-findings {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .finding-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 0.78rem;
+      padding: 6px 10px;
+      border-radius: 3px;
+      background: #090c12;
+      border-left: 3px solid transparent;
+    }
+
+    .finding-item.green {
+      border-left-color: var(--pv-success);
+      color: #cbd5e1;
+    }
+
+    .finding-item.green .finding-icon,
+    .finding-item.green .finding-code {
+      color: var(--pv-success);
+      font-weight: 700;
+    }
+
+    .finding-item.warning {
+      border-left-color: var(--pv-warning);
+      color: #cbd5e1;
+    }
+
+    .finding-item.warning .finding-icon,
+    .finding-item.warning .finding-code {
+      color: var(--pv-warning);
+      font-weight: 700;
+    }
+
+    .tui-bottom-bar {
+      padding: 10px 16px;
+      background: #0c0f16;
+      border-top: 1px solid #222836;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.76rem;
+      color: #8e95a5;
+    }
 
     /* Features Grid */
     .features-grid {
@@ -580,19 +823,19 @@
     }
 
     /* Scrollbars elegantes en táctil para bloques horizontales */
-    .term-body::-webkit-scrollbar,
+    .tui-table-wrap::-webkit-scrollbar,
     .install-cmd::-webkit-scrollbar,
     .architecture-box pre::-webkit-scrollbar,
     .cli-box::-webkit-scrollbar {
-      height: 5px;
+      height: 4px;
     }
-    .term-body::-webkit-scrollbar-track,
+    .tui-table-wrap::-webkit-scrollbar-track,
     .install-cmd::-webkit-scrollbar-track,
     .architecture-box pre::-webkit-scrollbar-track,
     .cli-box::-webkit-scrollbar-track {
       background: rgba(0, 0, 0, 0.2);
     }
-    .term-body::-webkit-scrollbar-thumb,
+    .tui-table-wrap::-webkit-scrollbar-thumb,
     .install-cmd::-webkit-scrollbar-thumb,
     .architecture-box pre::-webkit-scrollbar-thumb,
     .cli-box::-webkit-scrollbar-thumb {
@@ -690,20 +933,128 @@
           <div class="term-title">PodVanguard Hardware Dashboard — http://127.0.0.1:9090 (Linux x86_64)</div>
           <div></div>
         </div>
-        <pre class="term-body"><code>╭────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ <span class="t-accent t-bold">PODVANGUARD // R1</span> │ <span class="t-green t-bold">[●] DOCKER: /var/run/docker.sock</span> │ <span class="t-cyan t-bold">[●] K8S: minikube</span> │ CPU [████░░░░░░] 38% │ RAM [██████░░░░] 58% │
-├──────────────────────────┬─────────────────────────────────────────────────────────────────────────────┤
-│ <span class="t-bold">Módulos de Sistema</span>       │ <span class="t-bold">Contenedores en Ejecución Reciente [Activos: 4]</span>                             │
-│ <span class="t-accent">[01] Resumen General</span>     │ <span class="t-green">[●] RUNNING</span>  api-gateway     <span class="t-cyan">a9f1b2c3d4e5</span>  80:8080/tcp    nginx:alpine         │
-│ <span class="t-muted">[02] Contenedores</span>        │ <span class="t-green">[●] RUNNING</span>  auth-service    <span class="t-cyan">3c4d5e6f7a8b</span>  3000:3000/tcp  node:22-alpine       │
-│ <span class="t-muted">[03] Kubernetes Pods</span>     │ <span class="t-green">[●] RUNNING</span>  cache-redis     <span class="t-cyan">8e9f0a1b2c3d</span>  127.0.0.1:6379 redis:7-alpine       │
-│ <span class="t-muted">[04] Terminal PTY</span>        │ <span class="t-amber">[●] PAUSED</span>   worker-queue    <span class="t-cyan">5d6e7f8a9b0c</span>  -              python:3.12-slim     │
-│ <span class="t-muted">[05] Logs en Vivo</span>        ├─────────────────────────────────────────────────────────────────────────────┤
-│ <span class="t-muted">[06] Topología Red</span>       │ <span class="t-bold">Vanguard Sentinel Shield // Postura de Seguridad: <span class="t-green">95/100</span></span>                   │
-│ <span class="t-muted">[07] Sentinel Shield</span>     │ <span class="t-green">✓ SEC-001/005</span> Cero claves privadas o secretos detectados en texto plano     │
-│ <span class="t-muted">[08] Poda de Disco</span>       │ <span class="t-amber">! SEC-OOM</span>     El contenedor 'worker-queue' no tiene límite estricto de memoria│
-╰──────────────────────────┴─────────────────────────────────────────────────────────────────────────────╯
-  <span class="t-accent">Ctrl+K:</span> Command Palette │ <span class="t-accent">01-10:</span> Salto Directo │ <span class="t-accent">Esc:</span> Cerrar Modales │ <span class="t-accent">R:</span> Refrescar Telemetría</code></pre>
+        <div class="term-tui-layout">
+          <!-- Top Telemetry Strip -->
+          <div class="tui-strip">
+            <div class="tui-strip-item">
+              <span class="t-accent t-bold">PODVANGUARD // R1</span>
+              <span class="t-muted">│</span>
+              <span class="t-green t-bold">[●] DOCKER: /var/run/docker.sock</span>
+              <span class="t-muted">│</span>
+              <span class="t-cyan t-bold">[●] K8S: minikube</span>
+            </div>
+            <div class="tui-meters-wrap">
+              <div class="tui-mini-meter">
+                <span class="t-muted">CPU</span>
+                <div class="meter-bar"><div class="meter-fill" style="width: 38%;"></div></div>
+                <span class="t-bold text-light">38%</span>
+              </div>
+              <div class="tui-mini-meter">
+                <span class="t-muted">RAM</span>
+                <div class="meter-bar"><div class="meter-fill" style="width: 58%; background: #00e575;"></div></div>
+                <span class="t-bold text-light">58%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Grid: Sidebar + Content -->
+          <div class="tui-main-grid">
+            <aside class="tui-sidebar">
+              <div class="tui-section-header">Módulos de Sistema</div>
+              <ul class="tui-nav-list">
+                <li class="tui-nav-item active"><span class="t-accent">[01]</span> Resumen General</li>
+                <li class="tui-nav-item"><span class="t-muted">[02]</span> Contenedores</li>
+                <li class="tui-nav-item"><span class="t-muted">[03]</span> Kubernetes Pods</li>
+                <li class="tui-nav-item"><span class="t-muted">[04]</span> Terminal PTY</li>
+                <li class="tui-nav-item"><span class="t-muted">[05]</span> Logs en Vivo</li>
+                <li class="tui-nav-item"><span class="t-muted">[06]</span> Topología Red</li>
+                <li class="tui-nav-item"><span class="t-muted">[07]</span> Sentinel Shield</li>
+                <li class="tui-nav-item"><span class="t-muted">[08]</span> Poda de Disco</li>
+              </ul>
+            </aside>
+
+            <main class="tui-content">
+              <!-- Sub-sección Contenedores -->
+              <div class="tui-sub-section">
+                <div class="tui-section-header">
+                  <span>Contenedores en Ejecución Reciente</span>
+                  <span class="status-pill green">Activos: 4</span>
+                </div>
+                <div class="tui-table-wrap">
+                  <table class="tui-table">
+                    <thead>
+                      <tr>
+                        <th>ESTADO</th>
+                        <th>NOMBRE</th>
+                        <th>ID</th>
+                        <th>PUERTOS</th>
+                        <th>IMAGEN</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="status-pill green">● RUNNING</span></td>
+                        <td class="text-light t-bold">api-gateway</td>
+                        <td class="t-cyan">a9f1b2c3d4e5</td>
+                        <td>80:8080/tcp</td>
+                        <td class="t-muted">nginx:alpine</td>
+                      </tr>
+                      <tr>
+                        <td><span class="status-pill green">● RUNNING</span></td>
+                        <td class="text-light t-bold">auth-service</td>
+                        <td class="t-cyan">3c4d5e6f7a8b</td>
+                        <td>3000:3000/tcp</td>
+                        <td class="t-muted">node:22-alpine</td>
+                      </tr>
+                      <tr>
+                        <td><span class="status-pill green">● RUNNING</span></td>
+                        <td class="text-light t-bold">cache-redis</td>
+                        <td class="t-cyan">8e9f0a1b2c3d</td>
+                        <td>127.0.0.1:6379</td>
+                        <td class="t-muted">redis:7-alpine</td>
+                      </tr>
+                      <tr>
+                        <td><span class="status-pill amber">● PAUSED</span></td>
+                        <td class="text-light t-bold">worker-queue</td>
+                        <td class="t-cyan">5d6e7f8a9b0c</td>
+                        <td>-</td>
+                        <td class="t-muted">python:3.12-slim</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Sub-sección Sentinel Shield -->
+              <div class="tui-sub-section">
+                <div class="tui-section-header">
+                  <span>Vanguard Sentinel Shield // Postura de Seguridad</span>
+                  <span class="sentinel-score">95 / 100</span>
+                </div>
+                <div class="sentinel-findings">
+                  <div class="finding-item green">
+                    <span class="finding-icon">✓</span>
+                    <span class="finding-code">SEC-001/005</span>
+                    <span>Cero claves privadas o secretos detectados en variables de entorno en texto plano.</span>
+                  </div>
+                  <div class="finding-item warning">
+                    <span class="finding-icon">!</span>
+                    <span class="finding-code">SEC-OOM</span>
+                    <span>El contenedor 'worker-queue' no cuenta con límite estricto de memoria asignado.</span>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+
+          <!-- Bottom Hotkeys Bar -->
+          <div class="tui-bottom-bar">
+            <span><strong class="t-accent">Ctrl+K:</strong> Command Palette</span>
+            <span><strong class="t-accent">01-10:</strong> Salto Directo</span>
+            <span><strong class="t-accent">Esc:</strong> Cerrar Modales</span>
+            <span><strong class="t-accent">R:</strong> Refrescar Telemetría</span>
+          </div>
+        </div>
       </div>
 
       <!-- Pilares e Innovaciones -->
