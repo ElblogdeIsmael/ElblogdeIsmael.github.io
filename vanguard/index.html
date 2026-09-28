@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>GitVanguard · Controlador Git TUI de Alto Rendimiento para Linux</title>
+  <meta name="description" content="Controlador de Git en terminal de alto rendimiento desarrollado en Rust para Linux. Supera a Lazygit con Time Machine de reflog, Sentinel Shield anti-fugas de secretos y gestión nativa de worktrees." />
+  <meta name="keywords" content="git, lazygit, gitui, tui, rust, ratatui, terminal, git vanguard, linux, git controller, devtools, reflog time machine, sentinel" />
+  <meta name="author" content="Ismael Sallami Moreno" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://elblogdeismael.github.io/vanguard/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:url" content="https://elblogdeismael.github.io/vanguard/" />
+  <meta property="og:title" content="GitVanguard · La Terminal de Control Git Definitiva para Linux" />
+  <meta property="og:description" content="Rendimiento nativo en Rust (<5 ms por frame), prevención activa de fugas de secretos Sentinel Shield, Time Machine de reflog y gestión integral de worktrees." />
+  <meta property="og:site_name" content="El Blog de Ismael" />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/images/libros2.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+  <link rel="stylesheet" href="/assets/css/brutal.css" />
+
+  <!-- Estilos especializados para la landing de GitVanguard -->
+  <style>
+    :root {
+      --vg-accent: #06b6d4;
+      --vg-accent-glow: rgba(6, 182, 212, 0.15);
+      --vg-success: #10b981;
+      --vg-danger: #ef4444;
+      --vg-warning: #f59e0b;
+      --vg-card-bg: var(--bg-surface, #ffffff);
+      --vg-card-border: var(--border, #1f2937);
+      --vg-term-bg: #0f172a;
+      --vg-term-text: #f8fafc;
+    }
+
+    [data-theme="dark"] {
+      --vg-card-bg: #111827;
+      --vg-card-border: #374151;
+      --vg-term-bg: #090d16;
+    }
+
+    .vg-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 2px solid currentColor;
+      background: var(--vg-accent-glow);
+      color: var(--vg-accent);
+      margin-bottom: 20px;
+    }
+
+    .install-box {
+      background: var(--vg-term-bg);
+      border: 3px solid var(--vg-card-border);
+      box-shadow: 6px 6px 0px 0px var(--text-color, #000);
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin: 28px 0 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .install-box {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .install-cmd {
+      font-family: 'JetBrains Mono', monospace;
+      color: #38bdf8;
+      font-size: 0.95rem;
+      overflow-x: auto;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .install-cmd::before {
+      content: "$";
+      color: #94a3b8;
+      font-weight: bold;
+    }
+
+    .copy-btn {
+      background: var(--vg-accent);
+      color: #0f172a;
+      border: 2px solid #000;
+      font-weight: 800;
+      padding: 10px 18px;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: transform 0.1s, box-shadow 0.1s;
+      box-shadow: 3px 3px 0px #000;
+    }
+
+    .copy-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px #000;
+    }
+
+    .copy-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    /* Terminal Mockup */
+    .terminal-window {
+      background: var(--vg-term-bg);
+      border: 3px solid var(--vg-card-border);
+      box-shadow: 8px 8px 0px 0px var(--text-color, #000);
+      border-radius: 6px;
+      margin: 32px 0 60px;
+      overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--vg-term-text);
+    }
+
+    .term-titlebar {
+      background: #1e293b;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #334155;
+    }
+
+    .term-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .term-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+    }
+
+    .term-dot.red { background: #ef4444; }
+    .term-dot.yellow { background: #f59e0b; }
+    .term-dot.green { background: #10b981; }
+
+    .term-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+
+    .term-body {
+      padding: 18px;
+      font-size: 0.86rem;
+      line-height: 1.5;
+      overflow-x: auto;
+    }
+
+    .t-accent { color: var(--vg-accent); }
+    .t-green { color: var(--vg-success); }
+    .t-red { color: var(--vg-danger); }
+    .t-amber { color: var(--vg-warning); }
+    .t-muted { color: #64748b; }
+    .t-bold { font-weight: bold; }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin: 40px 0;
+    }
+
+    @media (min-width: 768px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .feature-card {
+      background: var(--vg-card-bg);
+      border: 2px solid var(--vg-card-border);
+      box-shadow: 4px 4px 0px 0px var(--text-color, #000);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feature-icon {
+      font-size: 1.8rem;
+    }
+
+    .feature-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .feature-desc {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text-muted, #4b5563);
+      margin: 0;
+    }
+
+    /* Comparison Table */
+    .comp-table-wrap {
+      overflow-x: auto;
+      margin: 30px 0;
+      border: 2px solid var(--vg-card-border);
+      box-shadow: 5px 5px 0px 0px var(--text-color, #000);
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+      background: var(--vg-card-bg);
+    }
+
+    .comp-table th, .comp-table td {
+      padding: 14px 18px;
+      border: 1px solid var(--vg-card-border);
+    }
+
+    .comp-table th {
+      background: #0f172a;
+      color: #fff;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+    }
+
+    .comp-table tr:hover td {
+      background: var(--vg-accent-glow);
+    }
+
+    /* Keybindings Sheet */
+    .key-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 20px 0;
+    }
+
+    .key-table td {
+      padding: 10px 14px;
+      border-bottom: 1px dashed var(--vg-card-border);
+    }
+
+    .kbd {
+      display: inline-block;
+      padding: 3px 8px;
+      background: #1e293b;
+      color: #38bdf8;
+      border: 1px solid #475569;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: bold;
+    }
+  </style>
+
+  <script>(function(){try{var s=localStorage.getItem("course-theme");if(s)document.documentElement.setAttribute("data-theme",s)}catch(e){}})();</script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <a class="topbar-brand" href="/">
+        <svg class="brand-mark" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 3 23 8l-11 5L1 8z"/>
+          <path d="M5 10.5V15c0 1.7 3.1 3 7 3s7-1.3 7-3v-4.5"/>
+          <path d="M23 8v6"/>
+        </svg>
+        <span class="brand-long">Recursos GIIADE</span>
+      </a>
+      <a class="topbar-repo" href="https://github.com/Ismael-Sallami/git-vanguard" target="_blank" rel="noopener" aria-label="Ver el código de GitVanguard en GitHub">
+        <span class="repo-mark" aria-hidden="true"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></span>
+        <span class="repo-words" aria-hidden="true">
+          <span class="repo-word">Código</span>
+          <span class="repo-word repo-word-alt">GitHub</span>
+        </span>
+      </a>
+    </div>
+    <div class="topbar-right">
+      <a class="topbar-link" href="/tools/">← Herramientas</a>
+      <button class="topbar-toggle" type="button" data-theme-toggle aria-label="Cambiar tema claro u oscuro" title="Cambiar tema">
+        <svg class="ico-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="ico-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page">
+      <nav class="crumbs" aria-label="Ruta">
+        <a href="/">Inicio</a>
+        <span class="crumbs-sep" aria-hidden="true">/</span>
+        <a href="/tools/">Herramientas</a>
+        <span class="crumbs-sep" aria-hidden="true">/</span>
+        <span aria-current="page">GitVanguard</span>
+      </nav>
+
+      <div class="vg-badge">Exclusivo para Linux · Rust Nativo · Zero-Lag</div>
+
+      <h1 class="page-title display">
+        <span class="ttl-index">05 //</span><br>
+        Git<span class="ttl-stroke">Vanguard</span>
+      </h1>
+      <p class="lead" style="margin-top:16px; font-size:1.18rem; max-width:780px;">
+        Controlador Git TUI de alto rendimiento para Linux. Diseñado para superar a <em>Lazygit</em> eliminando las pausas de recolección de basura e introduciendo <strong>Sentinel Shield</strong> (escáner anti-fugas de credenciales), <strong>Time Machine</strong> (explorador visual del reflog con restauración en 1 tecla) y soporte integral de <strong>Git Worktrees</strong>.
+      </p>
+
+      <!-- Caja de Instalación Rápida -->
+      <div class="install-box">
+        <div class="install-cmd" id="installCmd">
+          curl -fsSL https://raw.githubusercontent.com/Ismael-Sallami/git-vanguard/main/install.sh | bash
+        </div>
+        <button class="copy-btn" id="copyBtn" onclick="copyInstallCommand()">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <span id="copyBtnText">Copiar comando</span>
+        </button>
+      </div>
+
+      <!-- Mockup de la Terminal -->
+      <div class="terminal-window">
+        <div class="term-titlebar">
+          <div class="term-dots">
+            <span class="term-dot red"></span>
+            <span class="term-dot yellow"></span>
+            <span class="term-dot green"></span>
+          </div>
+          <div class="term-title">vanguard — ~/Escritorio/GitHub/proyecto (Linux x86_64)</div>
+          <div></div>
+        </div>
+        <pre class="term-body"><code>╭────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ <span class="t-accent t-bold">󰊢 GITVANGUARD v0.1</span> │ <span class="t-accent t-bold">[1. Archivos]</span> │ 2. Ramas │ 3. Historial │ 4. Worktrees │ 5. Stash │ 6. Time Machine │
+├──────────────────────────────────────────┬─────────────────────────────────────────────────────────────┤
+│ <span class="t-bold">Cambios de Trabajo [Unstaged: 2]</span>         │ <span class="t-bold">Inspección de Diferencias (Diff)</span>                            │
+│ <span class="t-accent">▶</span> <span class="t-accent">[M]</span> src/main.rs                        │    1 │ <span class="t-accent">diff --git a/src/main.rs b/src/main.rs</span>                  │
+│   <span class="t-amber">[?]</span> .env.local                         │    2 │ <span class="t-muted">--- a/src/main.rs</span>                                       │
+│                                          │    3 │ <span class="t-muted">+++ b/src/main.rs</span>                                       │
+├──────────────────────────────────────────┤    4 │ <span class="t-amber">@@ -45,3 +45,9 @@</span>                                       │
+│ <span class="t-bold">Cambios Preparados [Staged: 1]</span>           │    5 │  <span class="t-muted">// Sentinel Shield: verificación activa de seguridad</span>    │
+│   <span class="t-green">[M]</span> src/sentinel.rs                    │    6 │ <span class="t-green">+pub fn scan_diff(diff: &str) -> Vec<SecretFinding></span>     │
+│                                          │    7 │ <span class="t-green">+    let compiled = get_compiled_rules();</span>               │
+╰──────────────────────────────────────────┴─────────────────────────────────────────────────────────────╯
+  <span class="t-accent">Tab:</span> Cambiar Panel │ <span class="t-accent">Space:</span> Stage/Checkout │ <span class="t-accent">c:</span> Commit │ <span class="t-accent">C:</span> Conv. Commit │ <span class="t-accent">U:</span> Undo Reflog │ <span class="t-accent">q:</span> Salir</code></pre>
+      </div>
+
+      <!-- Pilares e Innovaciones -->
+      <h2 class="display" style="font-size:1.8rem; margin: 48px 0 20px;">
+        Ingeniería Superior para Desarrolladores Linux
+      </h2>
+      <p class="section-intro">
+        Construido pensando en flujos de trabajo profesionales donde la velocidad, la seguridad del código fuente y la ergonomía del teclado son fundamentales.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🛡️</span>
+          <h3 class="feature-title">Sentinel Shield</h3>
+          <p class="feature-desc">
+            Escáner heurístico pre-commit que inspecciona en tiempo real diffs preparados para interceptar claves OpenAI, AWS, GitHub PATs, llaves RSA y ficheros <code>.env</code> antes de que salgan a la luz.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">⏳</span>
+          <h3 class="feature-title">Time Machine (Reflog)</h3>
+          <p class="feature-desc">
+            Navega por la historia completa de operaciones de Git (rebases fallidos, resets o merges). Previsualiza el diff exacto de cada salto en el tiempo y rebobina el repositorio con la tecla <span class="kbd">U</span>.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🌿</span>
+          <h3 class="feature-title">Worktrees Command Hub</h3>
+          <p class="feature-desc">
+            Gestión de primera clase para Git Worktrees. Crea árboles de trabajo paralelos para revisar PRs o probar ramas sin perder tu estado de trabajo local en la terminal activa.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">⚡</span>
+          <h3 class="feature-title">Rendimiento en Rust</h3>
+          <p class="feature-desc">
+            Desarrollado sobre <code>ratatui</code> y <code>crossterm</code>. Renderiza frames en menos de 5 ms, inicia en frío en &lt;10 ms y consume una fracción de memoria en repositorios con decenas de miles de commits.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">📝</span>
+          <h3 class="feature-title">Conventional Commits</h3>
+          <p class="feature-desc">
+            Asistente modal guiado paso a paso para tipos estándar (<code>feat</code>, <code>fix</code>, <code>perf</code>, <code>refactor</code>), ámbitos contextuales y contador de caracteres con aviso de la regla 50/72.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🧹</span>
+          <h3 class="feature-title">Zombie Branch Pruner</h3>
+          <p class="feature-desc">
+            Detecta automáticamente qué ramas locales ya han sido fusionadas e incorporadas en <code>main</code> o <code>master</code>, permitiendo purgarlas en lote con confirmación protegida.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tabla Comparativa Técnica -->
+      <h2 class="display" style="font-size:1.8rem; margin: 56px 0 20px;">
+        Comparativa Técnica: GitVanguard vs. Lazygit vs. GitUI
+      </h2>
+      <div class="comp-table-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Criterio Técnico</th>
+              <th>Lazygit (Go)</th>
+              <th>GitUI (Rust)</th>
+              <th style="color:var(--vg-accent)">GitVanguard (Rust)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tiempo de Frame & GC</strong></td>
+              <td>Lag y pausas de Garbage Collector en repositorios masivos (+50k commits).</td>
+              <td>Rápido (< 10 ms).</td>
+              <td><strong>Ultra-rápido (< 5 ms)</strong> sin pausas de runtime.</td>
+            </tr>
+            <tr>
+              <td><strong>Prevención de Fugas de Secretos</strong></td>
+              <td>❌ Inexistente. Permite commitear credenciales sin advertencia.</td>
+              <td>❌ Inexistente.</td>
+              <td><strong>🛡️ Sentinel Shield nativo</strong> con inspección de patrones y ficheros críticos.</td>
+            </tr>
+            <tr>
+              <td><strong>Navegación Visual de Reflog</strong></td>
+              <td>Listado plano sin previsualización de diferencias.</td>
+              <td>❌ Básico o no integrado.</td>
+              <td><strong>⏳ Time Machine</strong> con diff en tiempo real y <em>Undo</em> en 1 tecla.</td>
+            </tr>
+            <tr>
+              <td><strong>Soporte Git Worktrees</strong></td>
+              <td>Limitado en menús secundarios.</td>
+              <td>❌ No soportado.</td>
+              <td><strong>🌿 Panel centralizado</strong> de alta visibilidad para crear, listar y desvincular.</td>
+            </tr>
+            <tr>
+              <td><strong>Asistente Conventional Commits</strong></td>
+              <td>Requiere configuración de scripts externos.</td>
+              <td>❌ Solo texto plano.</td>
+              <td><strong>📝 Wizard semántico integrado</strong> con contador 50/72 caracteres.</td>
+            </tr>
+            <tr>
+              <td><strong>Portapapeles en Linux</strong></td>
+              <td>Configuración heterogénea.</td>
+              <td>Soporte básico.</td>
+              <td><strong>Detección nativa</strong> Wayland (<code>wl-copy</code>), X11 (<code>xclip</code>) y OSC 52.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Tabla de Atajos de Teclado -->
+      <h2 class="display" style="font-size:1.8rem; margin: 56px 0 20px;">
+        Hoja de Referencia de Atajos (Cheat Sheet)
+      </h2>
+      <table class="key-table">
+        <tbody>
+          <tr>
+            <td style="width:28%"><span class="kbd">Tab</span> / <span class="kbd">1</span> .. <span class="kbd">6</span></td>
+            <td>Cambiar entre las 6 pestañas principales (Archivos, Ramas, Commits, Worktrees, Stash, Time Machine)</td>
+          </tr>
+          <tr>
+            <td><span class="kbd">j</span> / <span class="kbd">k</span> (o <span class="kbd">↓</span> / <span class="kbd">↑</span>)</td>
+            <td>Mover el cursor verticalmente por la lista de elementos activos</td>
+          </tr>
+          <tr>
+            <td><span class="kbd">h</span> / <span class="kbd">l</span></td>
+            <td>Alternar foco entre cambios <em>Unstaged</em> y <em>Staged</em> en el panel de Archivos</td>
+          </tr>
+          <tr>
+            <td><span class="kbd">Space</span></td>
+            <td>Preparar o despreparar archivo (Stage/Unstage) o cambiar de rama activa (Checkout)</td>
+          </tr>
+          <tr>
+            <td><span class="kbd">a</span> / <span class="kbd">u</span></td>
+            <td>Preparar todos los cambios (<code>git add -A</code>) o despreparar todos (<code>git reset</code>)</td>
+          </tr>
+          <tr>
+            <td><span class="kbd">c</span> / <span class="kbd">C</span></td>
+            <td>Commit rápido estándar / Asistente guiado <em>Conventional Commits</em></td>
+          </tr>
+          <tr>
+            <td><span class="kbd">p</span> / <span class="kbd">P</span></td>
+            <td>Ejecutar <code>git pull</code> / <code>git push</code></td>
+          </tr>
+          <tr>
+            <td><span class="kbd">f</span></td>
+            <td>Sincronizar remotos en segundo plano (<code>git fetch --all --prune</code>)</td>
+          </tr>
+          <tr>
+            <td><span class="kbd">z</span></td>
+            <td><em>Zombie Branch Pruner</em>: detectar y purgar ramas locales ya integradas</td>
+          </tr>
+          <tr>
+            <td><span class="kbd">U</span></td>
+            <td><strong>Time Machine Restore:</strong> rebobinar el repositorio al registro seleccionado del reflog</td>
+          </tr>
+          <tr>
+            <td><span class="kbd">?</span> / <span class="kbd">q</span></td>
+            <td>Abrir modal de ayuda contextual / Salir de GitVanguard restaurando la terminal</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Documentación y Arquitectura -->
+      <div style="background:var(--vg-card-bg); border:2px solid var(--vg-card-border); padding:28px; margin:40px 0; box-shadow:4px 4px 0 var(--text-color, #000);">
+        <h3 style="font-family:'Bricolage Grotesque', sans-serif; font-size:1.4rem; margin-top:0;">Compilación Manual y Filosofía Técnica</h3>
+        <p style="font-size:0.95rem; line-height:1.6; margin-bottom:16px;">
+          GitVanguard prescinde de librerías intermedias que reimplementan Git parcialmente (como libgit2), comunicándose de manera asíncrona mediante subprocesos POSIX optimizados directamente con el binario <code>git</code> de tu distribución Linux. Esto asegura compatibilidad al 100% con tus llaves SSH, claves criptográficas GPG de firma de commits, filtros Git LFS y configuraciones de <code>~/.gitconfig</code>.
+        </p>
+        <pre style="background:#0f172a; color:#f8fafc; padding:14px; border-radius:4px; font-family:'JetBrains Mono', monospace; font-size:0.85rem; overflow-x:auto;"><code># Compilación nativa desde el código fuente
+git clone https://github.com/Ismael-Sallami/git-vanguard.git
+cd git-vanguard
+cargo build --release
+cp target/release/vanguard ~/.local/bin/
+ln -sf ~/.local/bin/vanguard ~/.local/bin/gv</code></pre>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <a class="topbar-brand topbar-brand-plain" href="/">
+        <svg class="brand-mark" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 3 23 8l-11 5L1 8z"/><path d="M5 10.5V15c0 1.7 3.1 3 7 3s7-1.3 7-3v-4.5"/><path d="M23 8v6"/></svg>
+        <span>Recursos GIIADE</span>
+      </a>
+      <ul class="site-footer-nav">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/tools/">Herramientas</a></li>
+        <li><a href="https://github.com/Ismael-Sallami/git-vanguard" target="_blank" rel="noopener">GitHub Repo</a></li>
+        <li><a href="https://ismael-sallami.github.io/" target="_blank" rel="noopener">Web personal</a></li>
+      </ul>
+      <p class="site-footer-legal">
+        © 2026 Ismael Sallami Moreno · Doble Grado en Ingeniería Informática y ADE · Universidad de Granada
+      </p>
+    </div>
+  </footer>
+
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/reveal.js" defer></script>
+  <script>
+    function copyInstallCommand() {
+      const cmdText = document.getElementById("installCmd").innerText.trim();
+      navigator.clipboard.writeText(cmdText).then(() => {
+        const btnText = document.getElementById("copyBtnText");
+        const originalText = btnText.innerText;
+        btnText.innerText = "¡Copiado!";
+        setTimeout(() => {
+          btnText.innerText = originalText;
+        }, 2200);
+      });
+    }
+  </script>
+</body>
+
+</html>
