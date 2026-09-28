@@ -16,9 +16,8 @@ export default {
   title: "Herra",
   titleOutline: "mientas",
   blurb:
-    "Pequeñas apps que funcionan al 100% en tu navegador: sin instalar nada y " +
-    "sin que tus archivos salgan de tu equipo.",
-  summary: "5 herramientas · sin servidor y CLI nativo · código abierto",
+    "Pequeñas apps que funcionan al 100% en tu navegador y utilidades nativas de alto rendimiento: sin que tus archivos salgan de tu equipo.",
+  summary: "6 herramientas · CLI y Web nativos · código abierto",
   pages: [],
   links: [
     {
@@ -56,9 +55,12 @@ export default {
       kind: "CLI",
       repo: "https://github.com/Ismael-Sallami/git-vanguard",
     },
+    {
+      name: "PodVanguard",
+      blurb: "centro de mando web para contenedores Docker y Kubernetes pods",
+      href: "/podvanguard/",
+      kind: "WEB",
+      repo: "https://github.com/Ismael-Sallami/pod-vanguard",
+    },
   ],
 };
-
-// El visor de apuntes (/viewer/) no se lista aqui a proposito. Sigue
-// funcionando porque ocho recursos de tercero y cuarto abren sus .md a traves
-// de el; simplemente no se ofrece como herramienta suelta.
