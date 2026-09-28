@@ -15,14 +15,14 @@ BOLD='\033[1m'
 NC='\033[0m' # Sin color
 
 echo -e "${CYAN}${BOLD}"
-echo "    󰊢  G I T   V A N G U A R D"
+echo "    G I T   V A N G U A R D"
 echo "    Controlador Git TUI de Alto Rendimiento para Linux"
 echo -e "${NC}"
 
 # 1. Comprobación estricta de entorno Linux
 OS="$(uname -s)"
 if [ "$OS" != "Linux" ]; then
-    echo -e "${RED}${BOLD}✖ Error de compatibilidad:${NC}"
+    echo -e "${RED}${BOLD}Error de compatibilidad:${NC}"
     echo "GitVanguard ha sido diseñado exclusivamente para sistemas Linux con arquitectura POSIX nativa."
     echo "Sistema detectado: $OS"
     exit 1
@@ -50,60 +50,97 @@ BIN_TARGET="$INSTALL_DIR/vanguard"
 echo -e "${CYAN}▶ Sistema:${NC} Linux ($TARGET_ARCH)"
 echo -e "${CYAN}▶ Destino:${NC} $BIN_TARGET"
 
-# 3. Instalación del binario
-INSTALLED=0
+# Asegurar que el entorno de Cargo esté cargado si ya existía en el usuario
+if [ -f "$HOME/.cargo/env" ]; then
+    # shellcheck disable=SC1091
+    source "$HOME/.cargo/env"
+fi
 
-# Si se ejecuta desde el repositorio local compilado
+INSTALLED=0
+REPO="Ismael-Sallami/git-vanguard"
+
+# Método A: Binario local compilado
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd || echo "")"
 if [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/target/release/vanguard" ]; then
-    echo -e "${GREEN}✔ Se ha encontrado el binario optimizado local en target/release/vanguard.${NC}"
-    cp "$SCRIPT_DIR/target/release/vanguard" "$BIN_TARGET"
-    chmod +x "$BIN_TARGET"
-    INSTALLED=1
-elif [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/Cargo.toml" ] && command -v cargo >/dev/null 2>&1; then
-    echo -e "${YELLOW}Compilando versión optimizada con Cargo desde el repositorio local...${NC}"
-    (cd "$SCRIPT_DIR" && cargo build --release)
+    echo -e "${GREEN}Se ha encontrado el binario optimizado local en target/release/vanguard.${NC}"
     cp "$SCRIPT_DIR/target/release/vanguard" "$BIN_TARGET"
     chmod +x "$BIN_TARGET"
     INSTALLED=1
 fi
 
-# Si no está local, intentar descarga desde GitHub Releases
+# Método B: Descarga directa desde GitHub Releases
 if [ "$INSTALLED" -eq 0 ]; then
-    REPO="Ismael-Sallami/git-vanguard"
-    RELEASE_URL="https://github.com/$REPO/releases/latest/download/vanguard-linux-$TARGET_ARCH"
-    
-    echo -e "${CYAN}Descargando binario precompilado desde GitHub Releases...${NC}"
-    if curl -fsSL "$RELEASE_URL" -o "$BIN_TARGET" 2>/dev/null; then
+    RELEASE_URL="https://github.com/$REPO/releases/download/v0.1.0/vanguard-linux-$TARGET_ARCH"
+    LATEST_URL="https://github.com/$REPO/releases/latest/download/vanguard-linux-$TARGET_ARCH"
+
+    echo -e "${CYAN}Intentando descargar binario precompilado desde GitHub Releases...${NC}"
+    if curl -fL --progress-bar "$RELEASE_URL" -o "$BIN_TARGET" 2>/dev/null || curl -fL --progress-bar "$LATEST_URL" -o "$BIN_TARGET" 2>/dev/null; then
         chmod +x "$BIN_TARGET"
+        echo -e "${GREEN}Binario descargado e instalado correctamente.${NC}"
         INSTALLED=1
-    elif command -v cargo >/dev/null 2>&1; then
-        echo -e "${YELLOW}Binario no publicado aún en releases. Instalando vía Cargo desde git...${NC}"
-        cargo install --git "https://github.com/$REPO.git" --bin vanguard --root "$HOME/.local"
-        INSTALLED=1
+    else
+        echo -e "${YELLOW}No se pudo obtener el binario precompilado para tu arquitectura o la versión aún no está en assets.${NC}"
+    fi
+fi
+
+# Método C: Compilación desde código fuente mediante Cargo (instalando Rust si no existe)
+if [ "$INSTALLED" -eq 0 ]; then
+    echo -e "${CYAN}Preparando compilación con Rust...${NC}"
+
+    if ! command -v cargo >/dev/null 2>&1; then
+        echo -e "${YELLOW}Rust/Cargo no está presente en tu sistema.${NC}"
+        echo -e "${CYAN}Instalando Rust automáticamente mediante rustup oficial...${NC}"
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        if [ -f "$HOME/.cargo/env" ]; then
+            # shellcheck disable=SC1091
+            source "$HOME/.cargo/env"
+        fi
+    fi
+
+    if command -v cargo >/dev/null 2>&1; then
+        echo -e "${GREEN}Rust/Cargo detectado. Compilando GitVanguard desde el código fuente...${NC}"
+        
+        # Si estamos dentro del repo fuente
+        if [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/Cargo.toml" ]; then
+            (cd "$SCRIPT_DIR" && cargo build --release)
+            cp "$SCRIPT_DIR/target/release/vanguard" "$BIN_TARGET"
+            chmod +x "$BIN_TARGET"
+            INSTALLED=1
+        else
+            # Clonar en directorio temporal y compilar
+            BUILD_TMP="$(mktemp -d)"
+            echo -e "${CYAN}Clonando repositorio en directorio temporal para compilar...${NC}"
+            git clone --depth 1 "https://github.com/$REPO.git" "$BUILD_TMP"
+            (cd "$BUILD_TMP" && cargo build --release)
+            cp "$BUILD_TMP/target/release/vanguard" "$BIN_TARGET"
+            chmod +x "$BIN_TARGET"
+            rm -rf "$BUILD_TMP"
+            INSTALLED=1
+        fi
     fi
 fi
 
 if [ "$INSTALLED" -eq 0 ]; then
-    echo -e "${RED}✖ No se pudo completar la instalación. Asegúrate de tener conexión a Internet o Rust/Cargo instalado.${NC}"
+    echo -e "${RED}Error: No fue posible completar la instalación de GitVanguard.${NC}"
     exit 1
 fi
 
-# 4. Crear enlace simbólico o alias 'gv'
+# 4. Crear enlace simbólico para alias 'gv'
 ln -sf "$BIN_TARGET" "$INSTALL_DIR/gv"
 
 # 5. Verificación de la variable de entorno PATH
 if [[ ":$PATH:" != *":$INSTALL_DIR:"* ]]; then
-    echo -e "${YELLOW}Nota: '$INSTALL_DIR' no parece estar en tu variable PATH.${NC}"
-    echo "Puedes añadirlo agregando la siguiente línea a tu ~/.bashrc o ~/.zshrc:"
+    echo ""
+    echo -e "${YELLOW}Nota: '$INSTALL_DIR' no está en tu variable PATH actual.${NC}"
+    echo "Para poder invocar 'vanguard' o 'gv' directamente, añade esto a tu ~/.bashrc o ~/.zshrc:"
     echo -e "    ${BOLD}export PATH=\"\$HOME/.local/bin:\$PATH\"${NC}"
 fi
 
 echo ""
-echo -e "${GREEN}${BOLD}✔ ¡GitVanguard se ha instalado correctamente!${NC}"
+echo -e "${GREEN}${BOLD}GitVanguard se ha instalado correctamente.${NC}"
 echo -e "Comandos disponibles:"
 echo -e "  - ${BOLD}vanguard${NC}  (comando principal)"
-echo -e "  - ${BOLD}gv${NC}        (alias ultrarrápido)"
+echo -e "  - ${BOLD}gv${NC}        (alias rápido)"
 echo ""
 
 # 6. Lanzamiento opcional

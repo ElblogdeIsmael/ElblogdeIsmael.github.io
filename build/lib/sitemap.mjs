@@ -19,6 +19,7 @@ const STATIC_URLS = [
   { path: "/pdf2md/", changefreq: "monthly", priority: "0.9" },
   { path: "/diffchecker/", changefreq: "monthly", priority: "0.9" },
   { path: "/gittomd/", changefreq: "monthly", priority: "0.9" },
+  { path: "/vanguard/", changefreq: "monthly", priority: "0.9" },
 ];
 
 /**

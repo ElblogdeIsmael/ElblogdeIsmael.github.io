@@ -18,7 +18,7 @@ export default {
   blurb:
     "Pequeñas apps que funcionan al 100% en tu navegador: sin instalar nada y " +
     "sin que tus archivos salgan de tu equipo.",
-  summary: "4 herramientas · sin servidor · código abierto",
+  summary: "5 herramientas · sin servidor y CLI nativo · código abierto",
   pages: [],
   links: [
     {
@@ -48,6 +48,13 @@ export default {
       href: "/gittomd/",
       kind: "WEB",
       repo: "https://github.com/Ismael-Sallami/gittomd",
+    },
+    {
+      name: "GitVanguard",
+      blurb: "controlador Git TUI de alto rendimiento para Linux",
+      href: "/vanguard/",
+      kind: "CLI",
+      repo: "https://github.com/Ismael-Sallami/git-vanguard",
     },
   ],
 };
