@@ -30,6 +30,12 @@
   <link rel="stylesheet" href="../assets/css/brutal.css" />
 
   <style>
+    /* Prevención global de desbordamiento horizontal */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     /* Reset seguro para enlaces de cabecera en entornos locales y GitHub Pages */
     .topbar a, .topbar a:visited {
       text-decoration: none !important;
@@ -42,10 +48,13 @@
       border-bottom: 2px solid var(--pv-card-border, #1f2937);
       background: var(--bg-surface, #ffffff);
       min-height: 52px;
+      width: 100%;
+      box-sizing: border-box;
     }
     .topbar-left, .topbar-right {
       display: flex;
       align-items: stretch;
+      min-height: 52px;
     }
     .topbar-brand {
       display: flex;
@@ -56,6 +65,7 @@
       padding: 0 18px;
       border-right: 2px solid var(--pv-card-border, #1f2937);
       text-transform: uppercase;
+      white-space: nowrap;
     }
     .topbar-repo {
       display: flex;
@@ -65,6 +75,7 @@
       font-size: 0.85rem;
       font-weight: 600;
       border-right: 2px solid var(--pv-card-border, #1f2937);
+      white-space: nowrap;
     }
     .topbar-link {
       display: flex;
@@ -73,6 +84,7 @@
       font-size: 0.85rem;
       font-weight: 600;
       border-left: 2px solid var(--pv-card-border, #1f2937);
+      white-space: nowrap;
     }
     .topbar-toggle {
       display: flex;
@@ -83,6 +95,70 @@
       background: transparent;
       cursor: pointer;
       border-left: 2px solid var(--pv-card-border, #1f2937);
+    }
+
+    /* Adaptabilidad Responsive de Topbar para Móviles */
+    @media (max-width: 768px) {
+      .topbar {
+        min-height: 48px;
+      }
+      .topbar-left, .topbar-right {
+        min-height: 48px;
+      }
+      .topbar-brand {
+        padding: 0 12px;
+        font-size: 0.82rem;
+      }
+      .topbar-repo {
+        padding: 0 12px;
+        font-size: 0.8rem;
+      }
+      .topbar-link {
+        padding: 0 12px;
+        font-size: 0.8rem;
+      }
+      .topbar-toggle {
+        padding: 0 12px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .topbar-repo .repo-words {
+        display: none !important;
+      }
+      .topbar-repo {
+        padding: 0 12px;
+      }
+      .topbar-brand {
+        padding: 0 10px;
+        font-size: 0.8rem;
+      }
+      .topbar-link {
+        padding: 0 10px;
+        font-size: 0.78rem;
+      }
+      .topbar-toggle {
+        padding: 0 10px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .topbar-brand .brand-long {
+        display: none !important;
+      }
+      .topbar-brand {
+        padding: 0 8px;
+      }
+      .topbar-repo {
+        padding: 0 8px;
+      }
+      .topbar-link {
+        padding: 0 8px;
+        font-size: 0.75rem;
+      }
+      .topbar-toggle {
+        padding: 0 8px;
+      }
     }
 
     :root {
@@ -107,16 +183,37 @@
     .pv-badge {
       display: inline-flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 6px;
       padding: 6px 14px;
       font-size: 0.82rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       border: 2px solid currentColor;
       background: var(--pv-accent-glow);
       color: var(--pv-accent);
       margin-bottom: 20px;
+      max-width: 100%;
+      word-break: break-word;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 560px) {
+      .pv-badge {
+        font-size: 0.72rem;
+        padding: 5px 10px;
+        letter-spacing: 0.03em;
+        margin-bottom: 14px;
+      }
+      .page-title.display {
+        font-size: clamp(2.2rem, 10vw, 3.2rem) !important;
+        line-height: 1.05 !important;
+      }
+      .lead {
+        font-size: 1.02rem !important;
+        line-height: 1.6 !important;
+      }
     }
 
     .install-box {
@@ -139,6 +236,14 @@
       }
     }
 
+    @media (max-width: 767px) {
+      .install-box {
+        padding: 14px 16px;
+        margin: 20px 0 32px;
+        box-shadow: 4px 4px 0px 0px var(--text-color, #000);
+      }
+    }
+
     .install-cmd {
       font-family: 'JetBrains Mono', monospace;
       color: #ffaa80;
@@ -148,6 +253,14 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @media (max-width: 560px) {
+      .install-cmd {
+        font-size: 0.82rem;
+        padding-bottom: 4px;
+      }
     }
 
     .install-cmd::before {
@@ -172,6 +285,15 @@
       box-shadow: 3px 3px 0px #000;
     }
 
+    @media (max-width: 767px) {
+      .copy-btn {
+        width: 100%;
+        justify-content: center;
+        min-height: 44px;
+        font-size: 0.9rem;
+      }
+    }
+
     .copy-btn:hover {
       transform: translate(-1px, -1px);
       box-shadow: 4px 4px 0px #000;
@@ -180,6 +302,89 @@
     .copy-btn:active {
       transform: translate(2px, 2px);
       box-shadow: 1px 1px 0px #000;
+    }
+
+    /* Showcase de la Interfaz Hardware / Synth UI */
+    .preview-showcase {
+      background: var(--pv-card-bg);
+      border: 3px solid var(--pv-card-border);
+      box-shadow: 8px 8px 0px 0px var(--text-color, #000);
+      border-radius: 6px;
+      margin: 32px 0 50px;
+      overflow: hidden;
+    }
+
+    .showcase-header {
+      background: #141720;
+      color: #ededed;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--pv-card-border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      gap: 8px;
+    }
+
+    .showcase-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--pv-success);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .showcase-status::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--pv-success);
+      box-shadow: 0 0 8px var(--pv-success);
+    }
+
+    .showcase-media {
+      background: #101318;
+      display: block;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .showcase-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .showcase-caption {
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text-muted, #4b5563);
+      border-top: 2px solid var(--pv-card-border);
+      background: var(--pv-card-bg);
+    }
+
+    @media (max-width: 640px) {
+      .preview-showcase {
+        box-shadow: 4px 4px 0px 0px var(--text-color, #000);
+        margin: 24px 0 36px;
+      }
+      .showcase-header {
+        padding: 8px 12px;
+        font-size: 0.74rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .showcase-caption {
+        padding: 12px 14px;
+        font-size: 0.82rem;
+      }
     }
 
     /* Terminal Mockup */
@@ -223,6 +428,9 @@
       font-size: 0.8rem;
       font-weight: 600;
       color: #8e95a5;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .term-body {
@@ -230,6 +438,7 @@
       font-size: 0.86rem;
       line-height: 1.5;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .t-accent { color: var(--pv-accent); }
@@ -259,6 +468,13 @@
       }
     }
 
+    @media (max-width: 767px) {
+      .features-grid {
+        gap: 16px;
+        margin: 28px 0 44px;
+      }
+    }
+
     .feature-card {
       background: var(--pv-card-bg);
       border: 2px solid var(--pv-card-border);
@@ -267,6 +483,13 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+    }
+
+    @media (max-width: 767px) {
+      .feature-card {
+        padding: 18px 16px;
+        box-shadow: 3px 3px 0px 0px var(--text-color, #000);
+      }
     }
 
     .feature-title {
@@ -298,6 +521,83 @@
       overflow-x: auto;
       color: #00c2ff;
       line-height: 1.45;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Ajustes específicos para móviles en bloques de código y diagramas */
+    @media (max-width: 768px) {
+      .terminal-window {
+        box-shadow: 5px 5px 0px 0px var(--text-color, #000);
+        margin: 24px 0 40px;
+      }
+      .term-body {
+        padding: 12px;
+        font-size: 0.72rem;
+        line-height: 1.4;
+      }
+      .architecture-box {
+        padding: 16px 14px;
+        margin: 28px 0;
+        box-shadow: 4px 4px 0px 0px var(--text-color, #000);
+      }
+      .architecture-box pre {
+        font-size: 0.68rem;
+        line-height: 1.35;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .term-body {
+        font-size: 0.62rem;
+        padding: 10px 8px;
+      }
+      .architecture-box pre {
+        font-size: 0.54rem;
+        line-height: 1.3;
+      }
+    }
+
+    /* Caja de Comandos CLI */
+    .cli-box {
+      background: var(--pv-card-bg);
+      border: 2px solid var(--pv-card-border);
+      box-shadow: 4px 4px 0px 0px var(--text-color, #000);
+      border-radius: 4px;
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @media (max-width: 640px) {
+      .cli-box {
+        padding: 14px 16px;
+        font-size: 0.78rem;
+        box-shadow: 3px 3px 0px 0px var(--text-color, #000);
+      }
+    }
+
+    /* Scrollbars elegantes en táctil para bloques horizontales */
+    .term-body::-webkit-scrollbar,
+    .install-cmd::-webkit-scrollbar,
+    .architecture-box pre::-webkit-scrollbar,
+    .cli-box::-webkit-scrollbar {
+      height: 5px;
+    }
+    .term-body::-webkit-scrollbar-track,
+    .install-cmd::-webkit-scrollbar-track,
+    .architecture-box pre::-webkit-scrollbar-track,
+    .cli-box::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .term-body::-webkit-scrollbar-thumb,
+    .install-cmd::-webkit-scrollbar-thumb,
+    .architecture-box pre::-webkit-scrollbar-thumb,
+    .cli-box::-webkit-scrollbar-thumb {
+      background: var(--pv-accent);
+      border-radius: 2px;
     }
   </style>
 
@@ -363,6 +663,20 @@
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
           <span id="copyBtnText">Copiar comando</span>
         </button>
+      </div>
+
+      <!-- Showcase Visual: Interfaz Hardware Teenage Engineering + CAD Topology -->
+      <div class="preview-showcase">
+        <div class="showcase-header">
+          <span style="font-weight: 700; color: #ffaa80;">PODVANGUARD HARDWARE SYNTH UI // REACT 19</span>
+          <span class="showcase-status">En vivo · 60 FPS Canvas · Socket UNIX</span>
+        </div>
+        <div class="showcase-media">
+          <img src="assets/preview.png" alt="PodVanguard - Interfaz estilo Teenage Engineering con monitor de topología CAD y audiospectro" loading="lazy" width="1280" height="720" />
+        </div>
+        <div class="showcase-caption">
+          Panel de control reactivo embebido en el binario estático de Rust. Estética de hardware suizo con perillas rotatorias de afinación de frecuencia, vúmetro de carga de 8 núcleos, terminal interactiva WebSockets y grafo vectorial de relaciones de red en tiempo real.
+        </div>
       </div>
 
       <!-- Mockup del Centro de Mando -->
@@ -492,7 +806,7 @@
         Opciones de Línea de Comandos
       </h2>
 
-      <div style="background: var(--pv-card-bg); border: 2px solid var(--pv-card-border); box-shadow: 4px 4px 0px 0px var(--text-color, #000); border-radius: 4px; padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 1.6;">
+      <div class="cli-box">
         <p><strong># Ejecución en el puerto por defecto (9090):</strong><br>pod-vanguard<br><br>
         <strong># Utilizando el alias corto:</strong><br>pv<br><br>
         <strong># Abrir automáticamente el navegador predeterminado:</strong><br>pod-vanguard -p 8080 --open<br><br>
