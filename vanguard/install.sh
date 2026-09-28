@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # GitVanguard - Script de Instalación Universal para Linux
-# Desarrollado por Ismael Sallami Moreno <ismEngineer23@gmail.com>
+# Desarrollado por Ismael Sallami Moreno
 # ==============================================================================
 
 set -e
