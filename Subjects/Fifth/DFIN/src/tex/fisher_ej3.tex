@@ -1,0 +1,48 @@
+\begin{tikzpicture}[scale=0.72, >=latex]
+  % Ejes
+  \draw[->, thick] (0,0) -- (15.5,0) node[below] {$C_0$ (€)};
+  \draw[->, thick] (0,0) -- (0,15.5) node[left] {$C_1$ (€)};
+
+  % Marcas numéricas en eje horizontal
+  \draw (8,0.15) -- (8,-0.15) node[below=3pt, font=\scriptsize] {$8.000$};
+  \draw (12,0.15) -- (12,-0.15) node[below=3pt, font=\scriptsize] {$12.000$};
+  \draw (14,0.15) -- (14,-0.15) node[below=3pt, font=\scriptsize, text=red!80!black] {$14.000$};
+
+  % Marcas numéricas en eje vertical
+  \draw (0.15,6.24) -- (-0.15,6.24) node[left=3pt, font=\scriptsize] {$6.240$};
+  \draw (0.15,12.48) -- (-0.15,12.48) node[left=3pt, font=\scriptsize] {$12.480$};
+  \draw (0.15,14.56) -- (-0.15,14.56) node[left=3pt, font=\scriptsize, text=red!80!black] {$14.560$};
+
+  % Dotación inicial
+  \fill (12,0) circle (2.2pt);
+  \node[above=4pt, font=\scriptsize] at (12,0) {$W_0$};
+
+  % Curva de producción real
+  \draw[thick, blue!80!black] (12,0) to[out=115, in=0] (8,6.24) to[out=180, in=60] (3.5,4.2);
+  \node[blue!80!black, font=\scriptsize, align=center] at (4.5, 3.0) {Frontera de\\producción real};
+  \draw[->, blue!60!black, shorten >=2pt] (4.5, 3.6) to[bend left=15] (5.2, 4.8);
+
+  % Punto óptimo de producción P* = (8000, 6240)
+  \coordinate (P) at (8, 6.24);
+  \fill[red!80!black] (P) circle (2.5pt);
+  \node[above right=4pt, text=red!80!black, font=\scriptsize] at (P) {$P^* (8.000,\, 6.240)$};
+
+  % Líneas punteadas al punto P
+  \draw[dotted, gray] (8,0) -- (8,6.24);
+  \draw[dotted, gray] (0,6.24) -- (8,6.24);
+
+  % Recta de mercado sin inversión en activos reales
+  \draw[thick, dashed, gray!80!black] (0, 12.48) -- (12, 0);
+  \node[gray!90!black, font=\scriptsize, align=left, fill=white, inner sep=2pt] at (3.0, 9.8) {Sin inversión:\\$C_1 = 12.480 - 1,04\,C_0$};
+
+  % Recta de mercado con inversión
+  \draw[thick, red!85!black] (0, 14.56) -- (14, 0);
+  \node[red!85!black, font=\scriptsize, align=left, fill=white, inner sep=2pt] at (6.5, 12.0) {Con inversión óptima:\\$C_1 = 14.560 - 1,04\,C_0$};
+
+  % Cota vertical delta W1 en x = -1.2 (con fondo limpio)
+  \draw[<->, red!80!black, thick] (-1.2, 12.48) -- (-1.2, 14.56) node[midway, left=1pt, font=\scriptsize] {$\Delta W_1 = 2.080$ €};
+
+  % Cotas horizontales en el eje C0
+  \draw[<->, blue!80!black, thick] (12,-1.0) -- (14,-1.0) node[midway, below=1pt, font=\scriptsize] {$\Delta W_0 = \text{VAN} = 2.000$ €};
+  \draw[<->, black!70] (8,-1.8) -- (12,-1.8) node[midway, below=1pt, font=\scriptsize] {$I_0 = 4.000$ €};
+\end{tikzpicture}
