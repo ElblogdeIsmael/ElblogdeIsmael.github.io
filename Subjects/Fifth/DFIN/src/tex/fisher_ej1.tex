@@ -1,0 +1,42 @@
+\begin{tikzpicture}[scale=0.85, >=latex]
+  % Ejes
+  \draw[->, thick] (0,0) -- (10.5,0) node[below] {$C_0$ (consumo actual)};
+  \draw[->, thick] (0,0) -- (0,8.5) node[left] {$C_1$ (consumo futuro)};
+
+  % Dotación inicial
+  \coordinate (W) at (8,0);
+  \fill (W) circle (2pt) node[below=3pt] {$W_0$};
+
+  % Curva cóncava de oportunidades de inversión real
+  \draw[thick, blue!80!black] (8,0) to[out=115, in=0] (4.2,5.6) to[out=180, in=55] (1.2,3.2);
+  \node[blue!80!black, font=\scriptsize, align=left] at (1.5, 2.2) {Frontera de\\producción real};
+  \draw[->, blue!60!black, shorten >=2pt] (1.6, 2.7) to[bend left=15] (2.2, 3.6);
+
+  % Tangencia inicial con r1 (más empinada)
+  \coordinate (P1) at (5.4, 5.05);
+  \fill[black] (P1) circle (2.2pt);
+  \node[above right=3pt, font=\footnotesize, text=black] at (5.4, 5.05) {$P_1$ ($r_1$)};
+
+  % Recta de mercado 1 (pendiente -(1+r1))
+  \draw[thick, dashed, black!70] (2.2, 8.2) -- (8.6, 1.8) node[above right=1pt, font=\footnotesize] {LMC ($r_1$)};
+
+  % Tangencia con r2 < r1 (más plana, menor pendiente en valor absoluto)
+  \coordinate (P2) at (3.6, 5.55);
+  \fill[red!80!black] (P2) circle (2.2pt);
+  \node[above left=3pt, font=\footnotesize, text=red!80!black] at (3.6, 5.55) {$P_2$ ($r_2 < r_1$)};
+
+  % Recta de mercado 2 (más plana)
+  \draw[thick, red!85!black] (0.8, 7.3) -- (9.8, 1.2) node[below right=1pt, font=\footnotesize, text=red!80!black] {LMC ($r_2$)};
+
+  % Proyecciones en el eje horizontal
+  \draw[dotted, black!70] (P1) -- (5.4,0) node[below=3pt, font=\footnotesize] {$C_0(P_1)$};
+  \draw[dotted, red!70!black] (P2) -- (3.6,0) node[below=3pt, font=\footnotesize, text=red!80!black] {$C_0(P_2)$};
+
+  % Cotas de inversión claramente separadas verticalmente de los ticks
+  \draw[<->, black!70] (5.4,-0.85) -- (8,-0.85) node[midway, below=1pt, font=\scriptsize] {$I_0(r_1)$};
+  \draw[<->, red!80!black] (3.6,-1.6) -- (8,-1.6) node[midway, below=1pt, font=\scriptsize] {$I_0(r_2) > I_0(r_1)$};
+
+  % Regiones de inversores en zonas totalmente despejadas
+  \node[align=center, font=\scriptsize, draw, rounded corners, fill=green!10] at (1.8, 7.6) {Prestamista ($C_1$)\\Empeora su consumo};
+  \node[align=center, font=\scriptsize, draw, rounded corners, fill=orange!10] at (8.5, 4.0) {Prestatario ($C_0$)\\Mejora su consumo};
+\end{tikzpicture}

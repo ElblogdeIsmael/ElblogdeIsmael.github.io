@@ -1,0 +1,37 @@
+\begin{tikzpicture}[scale=0.82, >=latex]
+  % Eje temporal
+  \draw[->, thick] (0,0) -- (12.0,0) node[right, font=\small] {Tiempo ($t$)};
+
+  % Marcas temporales
+  \foreach \t/\x in {0/0, 1/2.6, 2/5.2, 3/7.8, 4/10.4} {
+    \draw[thick] (\x,0.15) -- (\x,-0.15) node[below=2pt, font=\small] {$t=\t$};
+  }
+
+  % Actividad base Trigo (estrato superior y=3.7)
+  \node[blue!80!black, font=\scriptsize, align=center] at (5.2, 3.7)
+    {Actividad base (Trigo): Beneficio estable $4,5\text{ M€/año} \implies P_0^{\text{base}} = \frac{4,50}{0,10} = 45\text{ €/acción}$};
+
+  % Proyecto Avena: Flujos positivos (estrato y=1.2)
+  \draw[->, green!60!black, thick] (5.2, 0.2) -- (5.2, 1.2) 
+    node[above, font=\scriptsize] {$+400.000$ €};
+
+  \draw[->, green!60!black, thick] (7.8, 0.2) -- (7.8, 1.2) 
+    node[above, font=\scriptsize] {$+500.000$ €};
+
+  \draw[->, green!60!black, thick] (10.4, 0.2) -- (10.4, 1.2) 
+    node[above, font=\scriptsize] {$+500.000$ €};
+  \draw[->, green!60!black, dashed] (10.4, 1.2) -- (11.6, 1.2) node[right, font=\scriptsize] {$\dots$ perp.};
+
+  % Proyecto Avena: Inversión en t=1 abajo (comenzando bajo la marca t=1 para no cortarla)
+  \draw[->, red!80!black, thick] (2.6, -0.65) -- (2.6, -1.6) 
+    node[below=1pt, font=\scriptsize, align=center] {Inversión inicial $I_1$\\$-1.000.000$ €};
+
+  % Cuadro VAN en t=1 (estrato intermedio y=2.0, compacto)
+  \node[draw, rounded corners, fill=teal!10, text=teal!80!black, font=\scriptsize, align=center] (van1) at (5.2, 2.0)
+    {$VAN_1 = 3,91\text{ M€}$};
+
+  % Descuento a t=0 (arco holgado que sobrevuela con rótulo compacto en su cúspide a y=2.9)
+  \draw[->, purple, thick, dashed] (5.2, 2.3) to[out=140, in=45] (0, 0.5);
+  \node[above, font=\scriptsize, text=purple!90!black, fill=white, inner sep=2pt] at (2.6, 2.9)
+    {$VAOC = 3,55\text{ €/acción}$};
+\end{tikzpicture}

@@ -15,7 +15,6 @@ export default {
   meta: [
     "Grado en Ingeniería Informática · ADE",
     "7 asignaturas · 2 semestres",
-    "Curso por cursar: por ahora solo las guías docentes",
   ],
   groups: [
     {
@@ -77,6 +76,11 @@ export default {
                   name: "Guía docente",
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-financiera/guia-docente",
                   kind: "GUIA",
+                },
+                {
+                  name: "Relación de Problemas",
+                  href: "/Subjects/Fifth/DFIN/build/DFIN.pdf",
+                  kind: "PDF",
                 },
               ],
             },

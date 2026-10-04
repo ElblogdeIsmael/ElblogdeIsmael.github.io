@@ -1,0 +1,36 @@
+\begin{tikzpicture}[scale=0.76, >=latex]
+  % Eje temporal
+  \draw[->, thick] (0,0) -- (13.0,0) node[right, font=\small] {Tiempo ($t$)};
+
+  % Marcas temporales
+  \foreach \t/\x in {0/0, 1/1.8, 2/3.6, 3/5.4, 4/7.2, 5/9.0, 6/10.8} {
+    \draw[thick] (\x,0.15) -- (\x,-0.15) node[below=2pt, font=\small] {$t=\t$};
+  }
+
+  % Barra superior de la fase 1 (crecimiento)
+  \draw[thick, blue!70!black] (1.8, 2.5) -- (9.0, 2.5);
+  \node[blue!80!black, font=\scriptsize, align=center] at (5.4, 2.9) 
+    {Fase de reinversión ($g=6\%$, pay-out $40\%$): $Div_t = 25 \times 0,40 \times (1,06)^{t-1}$};
+
+  % Flechas de dividendos
+  \draw[->, blue!70!black] (1.8, 0.2) -- (1.8, 1.4) node[above, font=\scriptsize] {$10,00$ €};
+  \draw[->, blue!70!black] (3.6, 0.2) -- (3.6, 1.4) node[above, font=\scriptsize] {$10,60$ €};
+  \draw[->, blue!70!black] (5.4, 0.2) -- (5.4, 1.4) node[above, font=\scriptsize] {$11,24$ €};
+  \draw[->, blue!70!black] (7.2, 0.2) -- (7.2, 1.4) node[above, font=\scriptsize] {$11,91$ €};
+  \draw[->, blue!70!black] (9.0, 0.2) -- (9.0, 1.4) node[above, font=\scriptsize] {$12,62$ €};
+
+  % Salto a perpetuidad en t=6
+  \draw[->, red!80!black, thick] (10.8, 0.2) -- (10.8, 1.4) 
+    node[above, font=\scriptsize, text=red!80!black, align=center] {$Div_6$\\$33,46$ €};
+  \draw[->, red!80!black, dashed] (11.6, 1.0) -- (12.6, 1.0) 
+    node[right, font=\scriptsize] {$\dots$ perp. ($100\%$ pay-out)};
+
+  % Valor terminal en t=5 (holgura limpia bajo t=5)
+  \node[draw, rounded corners, fill=red!10, text=red!80!black, font=\scriptsize, align=center] (vt5) at (9.0, -1.8)
+    {Valor terminal:\\$P_5 = \frac{33,46}{0,09} = 371,78$ €};
+
+  % Descuento hacia t=0 (llegada despejada bajo t=0 sin comba descendente)
+  \draw[->, purple!80!black, thick, dashed] (vt5.west) to[out=155, in=-90] (0, -0.9);
+  \node[purple!90!black, font=\scriptsize, align=center] at (3.5, -2.6)
+    {Descuento conjunto al $r=9\%$:\\$P_0 = 285,04\text{ €/acción}$};
+\end{tikzpicture}
