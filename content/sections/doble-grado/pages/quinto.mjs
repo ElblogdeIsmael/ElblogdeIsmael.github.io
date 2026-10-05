@@ -67,10 +67,16 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-estrategica-la-empresa-i/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Actividades Prácticas y Casos de Debate",
+                  href: "/Subjects/Fifth/DE-1/build/DE-1.pdf",
+                  kind: "PDF",
+                },
               ],
             },
           ],
         },
+
         {
           code: "DFIN",
           name: "Dirección Financiera",
