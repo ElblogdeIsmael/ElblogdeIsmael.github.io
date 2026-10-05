@@ -47,6 +47,11 @@ export default {
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/derecho-fiscal/guia-docente",
                   kind: "GUIA",
                 },
+                {
+                  name: "Apuntes y Casos Prácticos",
+                  href: "/Subjects/Fifth/FIS/build/FIS.pdf",
+                  kind: "PDF",
+                },
               ],
             },
           ],
