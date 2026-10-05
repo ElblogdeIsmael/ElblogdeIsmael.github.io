@@ -1,3 +1,5 @@
+\part{Prácticas}
+
 # Supuestos Prácticos: IRPF
 
 Este capítulo reúne la resolución técnica, jurídica y analítica de los supuestos prácticos de clase correspondientes al Impuesto sobre la Renta de las Personas Físicas (IRPF) de la asignatura Derecho Fiscal (Facultad de Ciencias Económicas y Empresariales, Universidad de Granada).
@@ -5,18 +7,7 @@ Este capítulo reúne la resolución técnica, jurídica y analítica de los sup
 Cada supuesto incluye su enunciado oficial, los preceptos normativos aplicables de la Ley 35/2006 (LIRPF), el Real Decreto 439/2007 (RIRPF), el Estatuto de los Trabajadores (TRLET) y la Ley del Impuesto sobre Sucesiones y Donaciones (LISD), junto con la deducción paso a paso y la liquidación cuantitativa de las rentas.
 
 
-## Práctica 1: Residencia y Condición de Contribuyente
-
-### Enunciado
-
-Determinar la condición o no de contribuyentes en el IRPF de las siguientes personas, según cada una de sus situaciones personales:
-
-a) D. José, español, soltero, con vivienda habitual en Madrid, trabaja para una sucursal de una empresa colombiana en España. Durante el ejercicio 2026 ha realizado varios viajes a Colombia, por un total de 290 días. Dispone de copias de los billetes de avión, visados en el pasaporte y contrato de alquiler de una vivienda en Bogotá, donde residió durante sus estancias en Colombia.
-
-b) D. Antonio, natural de Granada, trabaja y reside habitualmente en Alemania desde hace 2 años. Su mujer e hijos siguen viviendo en Granada. D. Antonio aporta como prueba su contrato de trabajo con la empresa alemana y un contrato de arrendamiento de una vivienda en ese país.
-
-c) Un deportista profesional español pasa un total de 100 días en España. El resto viaja y entrena según los diferentes torneos en los que participa. Se sabe que sus padres residen habitualmente en España y que tiene una vivienda en nuestro país.
-
+## Práctica 1: Residencia y Condición de Contribuyente {.unnumbered .unlisted}
 
 ### Fundamentación jurídica y normativa aplicable
 
@@ -28,17 +19,24 @@ La determinación de la condición de contribuyente en el IRPF se fundamenta en 
 4. **Convenios de Doble Imposición (CDI):** En supuestos transfronterizos prevalecen los criterios de desempate del artículo 4 del Modelo de Convenio de la OCDE incorporados en los convenios suscritos por España (CDI España-Colombia y CDI España-Alemania).
 
 
-### Resolución analítica
+### Caso a: D. José (Estancias de 290 días en Colombia)
 
-#### Caso a: D. José (Estancias de 290 días en Colombia)
+**Enunciado:**
+D. José, español, soltero, con vivienda habitual en Madrid, trabaja para una sucursal de una empresa colombiana en España. Durante el ejercicio 2026 ha realizado varios viajes a Colombia, por un total de 290 días. Dispone de copias de los billetes de avión, visados en el pasaporte y contrato de alquiler de una vivienda en Bogotá, donde residió durante sus estancias en Colombia.
 
+**Resolución:**
 - *Análisis de permanencia física:* En el año natural de 2026, D. José permanece en Colombia 290 días y en España únicamente $365 - 290 = 75$ días. Por tanto, no cumple la condición objetiva de permanencia de más de 183 días en territorio español.
 - *Descarte de ausencias esporádicas:* El artículo 9.1.a de la LIRPF computa las ausencias esporádicas salvo que el interesado justifique su residencia en otro Estado. D. José aporta pruebas documentales plenas de su permanencia continuada en Bogotá: billetes nominativos, sellos migratorios y visados en pasaporte, así como contrato formal de arrendamiento de vivienda en Colombia donde residió de forma efectiva.
 - *Núcleo de intereses económicos y personales:* Aunque está empleado por la sucursal española de una empresa colombiana y mantiene una vivienda en Madrid, su trabajo se ha ejecutado físicamente en Colombia durante diez meses. Además, al ser soltero y sin cargas familiares directas, no opera la presunción familiar.
 - *Conclusión:* Si D. José aporta el correspondiente **certificado de residencia fiscal expedido por la DIAN (autoridad tributaria de Colombia)** conforme al artículo 4 del CDI España-Colombia, **NO es contribuyente del IRPF** en el ejercicio 2026. Sus rentas de fuente española quedarán sometidas, en su caso, al Impuesto sobre la Renta de No Residentes (IRNR).
 
-#### Caso b: D. Antonio (Trabajo en Alemania con familia en Granada)
 
+### Caso b: D. Antonio (Trabajo en Alemania con familia en Granada)
+
+**Enunciado:**
+D. Antonio, natural de Granada, trabaja y reside habitualmente en Alemania desde hace 2 años. Su mujer e hijos siguen viviendo en Granada. D. Antonio aporta como prueba su contrato de trabajo con la empresa alemana y un contrato de arrendamiento de una vivienda en ese país.
+
+**Resolución:**
 - *Análisis de permanencia física:* D. Antonio reside y trabaja en Alemania desde hace dos años, superando ampliamente los 183 días fuera de España. Acredita contrato de trabajo por cuenta ajena con empleador alemán y contrato de arrendamiento en Alemania.
 - *Activación de la presunción familiar del artículo 9.1.b LIRPF:* Su cónyuge no separado legalmente y sus hijos residen de forma permanente en Granada. El legislador presume que quien tiene a su familia nuclear en España es residente fiscal español.
 - *Destrucción de la presunción:* Al tratarse de una presunción que admite prueba en contrario (*iuris tantum*), D. Antonio puede desvirtuarla aportando un **certificado de residencia fiscal emitido por el Finanzamt (administración tributaria alemana)** al amparo del Convenio de Doble Imposición hispano-alemán.
@@ -47,8 +45,13 @@ La determinación de la condición de contribuyente en el IRPF se fundamenta en 
   2. Su centro de intereses vitales se halla dividido: el núcleo afectivo/familiar en España y el económico/laboral en Alemania. La jurisprudencia del Tribunal Supremo (STS de 12 de junio de 2023) exige ponderar conjuntamente ambas esferas; no obstante, si acredita que su presencia y vida económica ordinaria se concentra en Alemania, prevalece la residencia alemana.
 - *Conclusión:* En tanto no aporte el certificado fiscal emitido por la autoridad alemana, la Administración española le considerará **contribuyente del IRPF por presunción legal**. Una vez presentado dicho certificado formal, quedará acreditada su residencia en Alemania, tributando en España únicamente como no residente (IRNR) por las rentas o bienes situados en territorio español.
 
-#### Caso c: Deportista profesional itinerante
 
+### Caso c: Deportista profesional itinerante
+
+**Enunciado:**
+Un deportista profesional español pasa un total de 100 días en España. El resto viaja y entrena según los diferentes torneos en los que participa. Se sabe que sus padres residen habitualmente en España y que tiene una vivienda en nuestro país.
+
+**Resolución:**
 - *Análisis de permanencia física:* Pasa 100 días en España y los restantes 265 días viajando y compitiendo en distintos países en función de los torneos.
 - *Cómputo de ausencias esporádicas:* Los 265 días transcurridos en el extranjero no suponen el establecimiento de residencia en ningún tercer Estado. Al no acreditar residencia fiscal en ningún otro país mediante certificado tributario formal, **esos 265 días se computan por imperativo legal como ausencias esporádicas** (art. 9.1.a LIRPF), sumando a efectos de cómputo:
   $$\text{Días computables} = 100 \text{ (presencia real)} + 265 \text{ (ausencias esporádicas)} = 365 \text{ días}$$
@@ -56,14 +59,7 @@ La determinación de la condición de contribuyente en el IRPF se fundamenta en 
 - *Conclusión:* El deportista **SÍ tiene la condición de contribuyente del IRPF** en 2026, debiendo tributar en España por su **renta mundial**, con derecho a aplicar las deducciones por doble imposición internacional (art. 80 LIRPF) por los impuestos directos soportados en el extranjero por premios o competiciones.
 
 
-## Práctica 2: Indemnizaciones por Despido y Cese
-
-### Enunciado
-
-1. El Sr. López ve extinguida su relación laboral como consecuencia de su cese por causas económicas y en virtud de un expediente de regulación de empleo autorizado el día 15 de mayo de 2026. Su salario en la empresa hasta esa fecha era de 45 €/día y ha trabajado en ella durante 7 años. Recibe una indemnización de 19.000 €. Qué ocurriría si el Sr. López recibe 45 días de salario por año de servicio en virtud de su contrato, siendo la causa del cese una modificación sustancial de su horario de trabajo que redunda en su perjuicio.
-
-2. En mayo de 2026, el Sr. Gálvez recibió una indemnización por despido, reconocido como improcedente ante el Servicio de Mediación, Arbitraje y Conciliación (SMAC) por importe de 100.000 €. Igualmente percibió dos indemnizaciones de 2.000 €, respectivamente, por vulneración de derechos fundamentales satisfechas por la empresa y por su jefe, constando en el acta de conciliación del Área de Mediación de la Comunidad de Madrid.
-
+## Práctica 2: Indemnizaciones por Despido y Cese {.unnumbered .unlisted}
 
 ### Fundamentación jurídica y normativa aplicable
 
@@ -74,10 +70,12 @@ La determinación de la condición de contribuyente en el IRPF se fundamenta en 
 5. **Indemnizaciones por daños morales y derechos fundamentales (art. 7.d LIRPF):** Exige que la cuantía haya sido fijada legal o judicialmente.
 
 
-### Resolución analítica
+### Caso 1.1: Sr. López (Despido Colectivo por ERE Económico)
 
-#### Caso 1.1: Sr. López (Despido Colectivo por ERE Económico)
+**Enunciado:**
+El Sr. López ve extinguida su relación laboral como consecuencia de su cese por causas económicas y en virtud de un expediente de regulación de empleo autorizado el día 15 de mayo de 2026. Su salario en la empresa hasta esa fecha era de 45 €/día y ha trabajado en ella durante 7 años. Recibe una indemnización de 19.000 €. 
 
+**Resolución:**
 - *Parámetros laborales:*
   - Salario diario: $45\ \text{€/día}$.
   - Antigüedad: $7\ \text{años}$ completos.
@@ -98,8 +96,13 @@ La determinación de la condición de contribuyente en el IRPF se fundamenta en 
     $$\text{Reducción por irregularidad} = 8.605 \times 0,30 = 2.581,50\ \text{€}$$
     $$\text{Rendimiento Neto del Trabajo computable} = 8.605 - 2.581,50 = 6.023,50\ \text{€}$$
 
-#### Caso 1.2: Sr. López (Rescisión por Modificación Sustancial de Condiciones)
 
+### Caso 1.2: Sr. López (Rescisión por Modificación Sustancial de Condiciones)
+
+**Enunciado:**
+Qué ocurriría si el Sr. López (mismas condiciones y salario de 45 €/día) recibe 45 días de salario por año de servicio en virtud de su contrato, siendo la causa del cese una modificación sustancial de su horario de trabajo que redunda en su perjuicio.
+
+**Resolución:**
 - *Causa del cese:* Modificación sustancial de las condiciones de trabajo (horario) ex artículo 41.3 del Estatuto de los Trabajadores.
 - *Cuantía legal preceptiva (art. 41.3 ET):* 20 días por año de servicio con un máximo de 9 mensualidades (270 días):
   $$\text{Días legales obligatorios} = 7 \text{ años} \times 20 \text{ días/año} = 140 \text{ días}$$
@@ -115,8 +118,13 @@ La determinación de la condición de contribuyente en el IRPF se fundamenta en 
   - Reducción del 30% por irregularidad (art. 18.2 LIRPF): $7.875 \times 0,30 = 2.362,50\ \text{€}$.
   - Rendimiento neto integrable en la base imponible general: $5.512,50\ \text{€}$.
 
-#### Caso 2: Sr. Gálvez (Despido improcedente en SMAC e indemnizaciones por derechos fundamentales)
 
+### Caso 2: Sr. Gálvez (Despido improcedente en SMAC e indemnizaciones por derechos fundamentales)
+
+**Enunciado:**
+En mayo de 2026, el Sr. Gálvez recibió una indemnización por despido, reconocido como improcedente ante el Servicio de Mediación, Arbitraje y Conciliación (SMAC) por importe de 100.000 €. Igualmente percibió dos indemnizaciones de 2.000 €, respectivamente, por vulneración de derechos fundamentales satisfecha una por la empresa y la otra por su jefe, constando en el acta de conciliación del Área de Mediación de la Comunidad de Madrid.
+
+**Resolución:**
 - *Indemnización por despido improcedente (100.000 € en acta del SMAC):*
   - Al haberse reconocido la improcedencia en el acto formal de conciliación laboral ante el SMAC, cumple la condición de procedencia del artículo 7.e de la LIRPF y del artículo 1 del RIRPF.
   - La indemnización queda **exenta** hasta la cuantía legal obligatoria del Estatuto de los Trabajadores (33 días por año trabajado con tope de 24 mensualidades y límite absoluto de 180.000 €).
@@ -129,12 +137,7 @@ La determinación de la condición de contribuyente en el IRPF se fundamenta en 
     - La satisfecha por el jefe individualmente como tercero (2.000 €) califica como **Ganancia Patrimonial** integrable en la base imponible general (art. 33.1 y 48 LIRPF), al no derivar de la relación contractual laboral directa.
 
 
-## Práctica 3: Accidente de Tráfico y Seguros de Vida
-
-### Enunciado
-
-Como consecuencia de un accidente de automóvil en el que viajaban el Sr. Martínez y el Sr. López, el primero resultó muerto y el segundo con distintos daños físicos. En el juicio se condenó a la parte contraria a indemnizar a los herederos del Sr. Martínez con 150.000 € y al Sr. López con 75.000 €. Además, la viuda del Sr. Martínez recibe una prestación de 250.000 €, derivada de un contrato de seguro de vida con primas a cargo de la sociedad de gananciales.
-
+## Práctica 3: Accidente de Tráfico y Seguros de Vida {.unnumbered .unlisted}
 
 ### Fundamentación jurídica y normativa aplicable
 
@@ -142,6 +145,10 @@ Como consecuencia de un accidente de automóvil en el que viajaban el Sr. Martí
 2. **Delimitación negativa entre IRPF e ISD (art. 6.4 LIRPF y art. 3.1.c LISD):** Las rentas sujetas al Impuesto sobre Sucesiones y Donaciones no tributan en el IRPF.
 3. **Seguros de vida contratados en régimen de gananciales (art. 39 RISD y art. 25.3.a LIRPF):** Cuando el cónyuge superviviente es el beneficiario de un seguro contratado sobre la vida del causante con primas abonadas con fondos gananciales, concurre una doble tributación complementaria por mitades.
 
+
+### Enunciado General
+
+Como consecuencia de un accidente de automóvil en el que viajaban el Sr. Martínez y el Sr. López, el primero resultó muerto y el segundo con distintos daños físicos. En el juicio se condenó a la parte contraria a indemnizar a los herederos del Sr. Martínez con 150.000 € y al Sr. López con 75.000 €. Además, la viuda del Sr. Martínez recibe una prestación de 250.000 €, derivada de un contrato de seguro de vida con primas a cargo de la sociedad de gananciales.
 
 ### Resolución analítica
 
@@ -180,12 +187,7 @@ Como consecuencia de un accidente de automóvil en el que viajaban el Sr. Martí
   Este rendimiento se integra en la **Base Imponible del Ahorro** del IRPF de la viuda, tributando en la escala del ahorro (arts. 49 y 66 LIRPF).
 
 
-## Práctica 4: Becas de Estudio e Investigación
-
-### Enunciado
-
-Sara García, licenciada en Medicina, está escribiendo su tesis doctoral en el CSIC. Esta institución le ha concedido una beca para personal investigador por importe de 1.000 € al mes. Su hermana, María, es estudiante de 4º curso de Derecho. La Universidad Internacional de Andalucía (UNIA) le concede una beca de investigación para realizar un curso sobre "Tributación de las entidades sin fines lucrativos". La beca exime del pago de la matrícula y del alojamiento (600 euros en total). Dicho curso cubre 3 créditos y 30 horas lectivas. ¿Cuál es el tratamiento en el IRPF de las becas recibidas?
-
+## Práctica 4: Becas de Estudio e Investigación {.unnumbered .unlisted}
 
 ### Fundamentación jurídica y normativa aplicable
 
@@ -194,17 +196,24 @@ Sara García, licenciada en Medicina, está escribiendo su tesis doctoral en el 
 3. **Requisitos de becas de estudio (art. 2.1 RIRPF):** Exige que los estudios cursados formen parte de la oferta oficial reglada de títulos universitarios oficiales (grados, másteres universitarios o programas oficiales).
 
 
-### Resolución analítica
+### Caso 1: Beca de Sara García (Tesis doctoral en el CSIC)
 
-#### 1. Beca de Sara García (Tesis doctoral en el CSIC, 1.000 €/mes)
+**Enunciado:**
+Sara García, licenciada en Medicina, está escribiendo su tesis doctoral en el CSIC. Esta institución le ha concedido una beca para personal investigador por importe de 1.000 € al mes.
 
+**Resolución:**
 - *Entidad concedente:* Consejo Superior de Investigaciones Científicas (CSIC), Agencia Estatal y Organismo Público de Investigación (OPI).
 - *Finalidad:* Formación investigadora predoctoral para la elaboración de la tesis doctoral en Medicina al amparo del Real Decreto 103/2019 (Estatuto del Personal Investigador Predoctoral en Formación).
 - *Verificación de límites económicos:* La cuantía de 1.000 € mensuales (12.000 € al año) se sitúa por debajo de los topes fijados reglamentariamente en el artículo 2.2 del RIRPF.
 - *Conclusión:* La beca percibida por Sara está **TOTALMENTE EXENTA de IRPF** (art. 7.j LIRPF). No se computa como ingreso ni soporta retención a cuenta.
 
-#### 2. Beca de María (Curso de extensión en la UNIA, 600 €)
 
+### Caso 2: Beca de María (Curso de extensión en la UNIA)
+
+**Enunciado:**
+Su hermana, María, es estudiante de 4º curso de Derecho. La Universidad Internacional de Andalucía (UNIA) le concede una beca de investigación para realizar un curso sobre "Tributación de las entidades sin fines lucrativos". La beca exime del pago de la matrícula y del alojamiento (600 euros en total). Dicho curso cubre 3 créditos y 30 horas lectivas. 
+
+**Resolución:**
 - *Entidad concedente:* Universidad Internacional de Andalucía (institución universitaria pública).
 - *Naturaleza de los estudios:* Curso específico sobre "Tributación de entidades sin fines lucrativos" de 30 horas lectivas y 3 créditos ECTS.
 - *Examen de la condición de estudio reglado:*
@@ -214,13 +223,7 @@ Sara García, licenciada en Medicina, está escribiendo su tesis doctoral en el 
 - *Conclusión:* La beca de María **NO ESTÁ EXENTA**. La cuantía de 600 euros (que incluye la matrícula y el alojamiento en especie) califica tributariamente como **Rendimiento Íntegro del Trabajo** conforme al artículo 17.2.h de la LIRPF ("Las becas, sin perjuicio de lo dispuesto en el artículo 7 de esta ley"). Se integrará en la base imponible general de María si supera los umbrales de la obligación de declarar (art. 96 LIRPF).
 
 
-## Práctica 5: Pago Único por Desempleo
-
-### Enunciado
-
-El Sr. Sánchez, en situación legal de desempleo, ha constituido una sociedad laboral con un grupo de compañeros de trabajo en su misma situación legal, optando por recibir las prestaciones en la modalidad de pago único establecida en el Real Decreto 1044/1985, de 19 de junio, habiendo percibido en 2026, 30.000 € por tal concepto.
-Piense cómo tributaría la prestación si no se cobrase en la modalidad de pago único.
-
+## Práctica 5: Pago Único por Desempleo {.unnumbered .unlisted}
 
 ### Fundamentación jurídica y normativa aplicable
 
@@ -229,10 +232,12 @@ Piense cómo tributaría la prestación si no se cobrase en la modalidad de pago
 3. **Régimen general del desempleo periódico (art. 17.1.b LIRPF):** Las prestaciones por desempleo periódicas ordinarias son rendimientos íntegros del trabajo personal.
 
 
-### Resolución analítica
+### Caso 1: Régimen de tributación en modalidad de pago único (30.000 €)
 
-#### 1. Régimen de tributación en modalidad de pago único (30.000 €)
+**Enunciado:**
+El Sr. Sánchez, en situación legal de desempleo, ha constituido una sociedad laboral con un grupo de compañeros de trabajo en su misma situación legal, optando por recibir las prestaciones en la modalidad de pago único establecida en el Real Decreto 1044/1985, de 19 de junio, habiendo percibido en 2026, 30.000 € por tal concepto.
 
+**Resolución:**
 - El Sr. Sánchez cumple todos los requisitos sustantivos exigidos por la norma:
   1. Situación legal de desempleo debidamente reconocida por el Servicio Público de Empleo Estatal (SEPE).
   2. Destino directo del importe íntegro (30.000 €) a la suscripción de participaciones sociales en la constitución de una nueva **sociedad laboral** en calidad de socio trabajador.
@@ -241,17 +246,34 @@ Piense cómo tributaría la prestación si no se cobrase en la modalidad de pago
   - El Sr. Sánchez está legalmente obligado a **mantener su condición de socio trabajador en la sociedad laboral durante al menos 5 años**.
   - Si transmitiera sus participaciones o abandonara la sociedad antes de expirar dicho plazo quinquenal (salvo por causas de fuerza mayor o incapacidad sobrevenida), la exención quedaría sin efecto, estando obligado a presentar una declaración complementaria con inclusión de los intereses de demora en el plazo de un mes desde el incumplimiento.
 
-#### 2. Tributación si la prestación se percibiera de forma periódica ordinaria
 
+### Caso 2: Tributación si la prestación se percibiera de forma periódica ordinaria
+
+**Enunciado:**
+Piense cómo tributaría la prestación si no se cobrase en la modalidad de pago único.
+
+**Resolución:**
 - Si el Sr. Sánchez no hubiera capitalizado la prestación y la percibiera mes a mes:
   - Los 30.000 euros calificarían de forma inequívoca como **Rendimiento Íntegro del Trabajo** conforme al artículo 17.1.b de la LIRPF.
   - Se integrarían en la **Base Imponible General** del ejercicio en que fueran devengados periódicamente.
   - En la medida en que el SEPE actúa como pagador independiente, si en el mismo ejercicio el contribuyente hubiera percibido salarios de su anterior empleo, la existencia de dos pagadores reduciría el umbral de no sujeción a la obligación de declarar de 22.000 € a 15.876 € anuales (artículo 96.3 LIRPF), obligándole preceptivamente a presentar declaración de la renta.
 
 
-## Práctica 6: Componentes de Renta e Imposición Directa
+## Práctica 6: Componentes de Renta e Imposición Directa {.unnumbered .unlisted}
 
-### Enunciado
+### Fundamentación jurídica y normativa aplicable
+
+1. **Rendimientos del trabajo (art. 17 LIRPF).**
+2. **Rendimientos de actividades económicas (art. 27 LIRPF y art. 30 LIRPF).**
+3. **Exclusión de vivienda habitual en imputación de rentas (art. 85 LIRPF).**
+4. **Rendimientos del capital mobiliario e imputación temporal (arts. 14.1.a y 25.1 LIRPF).**
+5. **Ganancias y pérdidas patrimoniales (arts. 33 a 36 LIRPF).**
+6. **No sujeción por ISD (art. 6.4 LIRPF y art. 3.1.a LISD).**
+7. **Gravamen Especial de Loterías (Disposición Adicional 33ª LIRPF).**
+8. **Anualidades por alimentos a hijos (art. 7.k LIRPF).**
+
+
+### Enunciado General
 
 Dña. Francisca Guzmán, abogada de profesión, está empleada por el Bufete "HH, S.L" como abogada, percibiendo 4.500 € mensuales, más una paga extraordinaria. En el año 2025, decidió dedicarse al ejercicio libre de su profesión, haciéndose autónoma y llevando algunos temas. Este año 2026, sólo ha percibido unos ingresos de 3.000 €. Sus gastos han sido de 3.100 €.
 
@@ -268,18 +290,6 @@ Por último, se sabe también que resultó premiada en el Sorteo de Lotería de 
 Dña. Francisca está divorciada y tiene dos hijos de un matrimonio anterior, de los que tiene la guardia y custodia, por los que recibe una pensión por alimentos de 6.500 € anuales.
 
 Se pide: Determinar los distintos componentes de la renta obtenida por Dña. Francisca en 2026 y precisar qué impuestos directos podrían gravar a Dña. Francisca en ese mismo ejercicio 2026.
-
-
-### Fundamentación jurídica y normativa aplicable
-
-1. **Rendimientos del trabajo (art. 17 LIRPF).**
-2. **Rendimientos de actividades económicas (art. 27 LIRPF y art. 30 LIRPF).**
-3. **Exclusión de vivienda habitual en imputación de rentas (art. 85 LIRPF).**
-4. **Rendimientos del capital mobiliario e imputación temporal (arts. 14.1.a y 25.1 LIRPF).**
-5. **Ganancias y pérdidas patrimoniales (arts. 33 a 36 LIRPF).**
-6. **No sujeción por ISD (art. 6.4 LIRPF y art. 3.1.a LISD).**
-7. **Gravamen Especial de Loterías (Disposición Adicional 33ª LIRPF).**
-8. **Anualidades por alimentos a hijos (art. 7.k LIRPF).**
 
 
 ### Resolución analítica y calificación por componentes
@@ -355,12 +365,7 @@ Se pide: Determinar los distintos componentes de la renta obtenida por Dña. Fra
 
 \newpage
 
-## Práctica 7: Cesión Gratuita de Vivienda a Parientes
-
-### Enunciado
-
-D. Braulio, de 29 años de edad, vive en un piso (valor catastral 50.000 €) cuyo propietario es su padre que no le cobra ningún tipo de alquiler, no existiendo tampoco ningún tipo de contrato entre ambos que ampare la cesión de la vivienda. El alquiler de mercado de una vivienda de similares características en la zona donde se encuentra la que ocupa D. Braulio es de 800 € mensuales.
-
+## Práctica 7: Cesión Gratuita de Vivienda a Parientes {.unnumbered .unlisted}
 
 ### Fundamentación jurídica y normativa aplicable
 
@@ -369,6 +374,10 @@ D. Braulio, de 29 años de edad, vive en un piso (valor catastral 50.000 €) cu
 3. **Regla de imputación de rentas inmobiliarias (art. 85 LIRPF):** Se aplica el **2%** sobre el valor catastral del inmueble, o el **1,1%** si el valor catastral ha sido revisado en el periodo impositivo o en los diez periodos anteriores.
 4. **Inaplicabilidad del valor de mercado:** La ley tributaria no faculta a la Administración para tasar la operación por el valor de mercado entre particulares cuando existe una regla específica de valoración legal entre parientes (art. 24 LIRPF).
 
+
+### Enunciado General
+
+D. Braulio, de 29 años de edad, vive en un piso (valor catastral 50.000 €) cuyo propietario es su padre que no le cobra ningún tipo de alquiler, no existiendo tampoco ningún tipo de contrato entre ambos que ampare la cesión de la vivienda. El alquiler de mercado de una vivienda de similares características en la zona donde se encuentra la que ocupa D. Braulio es de 800 € mensuales.
 
 ### Resolución analítica
 
