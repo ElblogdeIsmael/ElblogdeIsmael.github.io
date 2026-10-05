@@ -1,6 +1,6 @@
-# Supuestos Prácticos: IRPF (Prácticas 1 a 7)
+# Supuestos Prácticos: IRPF
 
-Este capítulo reúne la resolución técnica, jurídica y analítica de la primera batería de supuestos prácticos de clase (Prácticas 1 a 7, correspondientes a los bloques de Sujetos Contribuyentes, Delimitación del Hecho Imponible, Exenciones e Imputación Temporal) de la asignatura Derecho Fiscal (Facultad de Ciencias Económicas y Empresariales, Universidad de Granada).
+Este capítulo reúne la resolución técnica, jurídica y analítica de los supuestos prácticos de clase correspondientes al Impuesto sobre la Renta de las Personas Físicas (IRPF) de la asignatura Derecho Fiscal (Facultad de Ciencias Económicas y Empresariales, Universidad de Granada).
 
 Cada supuesto incluye su enunciado oficial, los preceptos normativos aplicables de la Ley 35/2006 (LIRPF), el Real Decreto 439/2007 (RIRPF), el Estatuto de los Trabajadores (TRLET) y la Ley del Impuesto sobre Sucesiones y Donaciones (LISD), junto con la deducción paso a paso y la liquidación cuantitativa de las rentas.
 
