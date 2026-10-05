@@ -20,7 +20,7 @@ import site from "../../content/site.mjs";
  * @returns {string} a complete HTML document
  */
 export function renderRedirect(redirect) {
-  const target = site.url + redirect.to;
+  const target = redirect.to.startsWith("http") ? redirect.to : site.url + redirect.to;
 
   return `<!DOCTYPE html>
 <html lang="${site.lang}">

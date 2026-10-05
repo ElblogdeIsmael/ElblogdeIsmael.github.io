@@ -20,6 +20,12 @@ export const REDIRECTS = [
   { from: "courses/fifth.html", to: "/doble-grado/quinto/" },
   { from: "historia.html", to: "/historia/" },
   { from: "herramientas/index.html", to: "/tools/" },
+  { from: "diffchecker/index.html", to: "https://ismael-sallami.github.io/diffchecker/" },
+  { from: "gittomd/index.html", to: "https://ismael-sallami.github.io/gittomd/" },
+  { from: "md2html/index.html", to: "https://ismael-sallami.github.io/md2html/" },
+  { from: "pdf2md/index.html", to: "https://ismael-sallami.github.io/pdf2md/" },
+  { from: "vanguard/index.html", to: "https://ismael-sallami.github.io/git-vanguard/" },
+  { from: "podvanguard/index.html", to: "https://ismael-sallami.github.io/pod-vanguard/" },
 ];
 
 export default REDIRECTS;
