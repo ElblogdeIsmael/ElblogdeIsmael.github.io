@@ -1,3 +1,5 @@
+\part{Teoría}
+
 # Fundamentos del Derecho Tributario y Estructura del Tributo
 
 Este primer capítulo establece el marco conceptual y positivo sobre el que descansa todo el sistema tributario español. Se analiza la naturaleza de la actividad financiera pública, los principios constitucionales que limitan el poder impositivo del Estado, la delimitación estricta de las tres categorías tributarias reconocidas en nuestro ordenamiento (impuestos, tasas y contribuciones especiales), el régimen jurídico de las obligaciones y obligados tributarios, las reglas de cuantificación y extinción de la deuda tributaria y una batería de casos prácticos de calificación habituales en la práctica económica.
