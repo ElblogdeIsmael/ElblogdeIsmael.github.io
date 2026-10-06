@@ -1,21 +1,25 @@
-# Cuestiones Teóricas: Fundamentos y Estructura del Tributo
+# Cuestiones Teóricas
+
+## Tema 1: Fundamentos y Estructura del Tributo
 
 Este capítulo recoge la resolución analítica, dogmática y jurisprudencial de las dieciséis cuestiones de autoevaluación teórica del Tema 1 (Fundamentos del Derecho Tributario y Estructura del Tributo) correspondientes al programa docente de la asignatura Derecho Fiscal en la Facultad de Ciencias Económicas y Empresariales de la Universidad de Granada.
 
 Cada respuesta se fundamenta directamente en los preceptos de la Ley 58/2003, de 17 de diciembre, General Tributaria (LGT), la Ley Orgánica 8/1980 de Financiación de las Comunidades Autónomas (LOFCA), la Ley 22/2009 del sistema de financiación autonómica de régimen común, las leyes reguladoras de los tributos estatales e ilustrativa doctrina del Tribunal Constitucional y del Tribunal Supremo.
 
 
-## Cuestión 1: Categorías tributarias y sus diferencias
+<br>
 
-### Pregunta
+**CUESTIÓN 1: Categorías tributarias y sus diferencias**
+
+*Pregunta:*
 
 Enumerar las distintas categorías tributarias y establecer las diferencias entre cada una de ellas.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
 El artículo 2.2 de la Ley General Tributaria clasifica los tributos en tres categorías jurídicas taxativas: **tasas**, **contribuciones especiales** e **impuestos**. El criterio científico de distinción reside en la presencia o ausencia de actividad administrativa y en el grado de beneficio o provocación individualizada que dicha actividad genera en el obligado tributario.
 
-#### 1. Tasas (art. 2.2.a LGT)
+- **1. Tasas (art. 2.2.a LGT)**
 
 Tributos cuyo hecho imponible consiste en:
 1. La utilización privativa o el aprovechamiento especial del dominio público (por ejemplo, instalación de terrazas de hostelería en la vía pública o vado permanente).
@@ -25,7 +29,7 @@ Tributos cuyo hecho imponible consiste en:
 
 La cuantía de la tasa no puede superar en ningún caso el coste real del servicio prestado (principio de equivalencia del art. 7 de la Ley de Tasas y Precios Públicos). Si el servicio fuera prestado voluntariamente por la iniciativa privada en régimen de libre concurrencia, el ingreso tendría naturaleza de precio público (art. 24 LTPP) o de tarifa contractual privada, no de tasa.
 
-#### 2. Contribuciones especiales (art. 2.2.b LGT)
+- **2. Contribuciones especiales (art. 2.2.b LGT)**
 
 Tributos cuyo hecho imponible consiste en la obtención por el obligado tributario de un beneficio singular o de un aumento de valor de sus bienes (plusvalía) como consecuencia directa de la realización de obras públicas o del establecimiento o ampliación de servicios públicos.
 
@@ -34,7 +38,7 @@ Presentan tres notas distintivas:
 - El rendimiento recaudatorio está legalmente afectado de forma íntegra a financiar la obra o el servicio que motiva su exacción.
 - La base imponible global a repartir entre los vecinos beneficiados no puede exceder del 90% del coste total de la obra soportado por la Administración (art. 31 del Texto Refundido de la Ley Reguladora de las Haciendas Locales).
 
-#### 3. Impuestos (art. 2.2.c LGT)
+- **3. Impuestos (art. 2.2.c LGT)**
 
 Tributos exigidos **sin contraprestación**, cuyo hecho imponible está constituido por negocios, actos o hechos que ponen de manifiesto la capacidad económica del contribuyente.
 
@@ -50,13 +54,15 @@ Se caracterizan por:
 | **Límite cuantitativo** | Coste real del servicio prestado | Máximo 90% del coste de la obra pública | Capacidad contributiva y no confiscatoriedad |
 
 
-## Cuestión 2: Fines no fiscales de la imposición sobre la renta
+<br>
 
-### Pregunta
+**CUESTIÓN 2: Fines no fiscales de la imposición sobre la renta**
+
+*Pregunta:*
 
 Determinar algunos de los fines no fiscales que se persiguen con los impuestos que integran la imposición personal sobre la renta en el sistema impositivo estatal.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
 El artículo 31.1 de la Constitución consagra el deber de contribuir al sostenimiento de los gastos públicos, mientras que el artículo 2.1 de la LGT explicita que los tributos, además de ser medios para obtener recursos financieros, pueden "servir como instrumentos de la política económica general y atender a la realización de los principios y fines contenidos en la Constitución".
 
@@ -71,20 +77,22 @@ La jurisprudencia del Tribunal Constitucional (STC 37/1987 y STC 19/2012) recono
 7. **Emprendimiento e innovación empresarial (art. 38 CE):** La deducción del 50% por inversión en la suscripción de participaciones en empresas de nueva o reciente creación (*business angels*, art. 68.1 LIRPF) facilita la financiación de startups tecnológicas.
 
 
-## Cuestión 3: Impuestos subjetivos vs. objetivos e IP
+<br>
 
-### Pregunta
+**CUESTIÓN 3: Impuestos subjetivos vs. objetivos e IP**
+
+*Pregunta:*
 
 Determinar las diferencias entre impuestos subjetivos y objetivos. Indicar cuál de estas características sería aplicable al Impuesto sobre el Patrimonio.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
 La clasificación entre impuestos subjetivos y objetivos atiende al grado en que el legislador toma en cuenta las circunstancias individuales de la persona gravada a la hora de estructurar el hecho imponible y cuantificar la carga tributaria:
 
 * **Impuesto subjetivo:** Es aquel en el que la determinación del hecho imponible, la base liquidable o la cuota tributaria toma en consideración las circunstancias personales, familiares, físicas o de nivel de renta global del sujeto pasivo (edad, grado de discapacidad, número de hijos o dependientes a cargo, o capacidad económica global). El tributo se amolda a la situación singular de cada persona física.
 * **Impuesto objetivo:** Es aquel en el que el hecho imponible y la cuantificación del gravamen se delimitan con absoluta abstracción de las condiciones individuales y familiares de quien realiza el hecho imponible. Grava un negocio, un acto de consumo o una operación en sí misma considerada, de idéntica manera con independencia de quién sea el titular. El IVA, el Impuesto sobre Transmisiones Patrimoniales Onerosas (ITP) o los Impuestos Especiales sobre Hidrocarburos son prototipos de impuestos objetivos.
 
-#### Naturaleza del Impuesto sobre el Patrimonio (Ley 19/1991)
+- **Naturaleza del Impuesto sobre el Patrimonio (Ley 19/1991)**
 
 El Impuesto sobre el Patrimonio es indiscutiblemente un **impuesto subjetivo** (además de personal y directo), debido a los siguientes elementos técnicos de su régimen:
 
@@ -94,13 +102,15 @@ El Impuesto sobre el Patrimonio es indiscutiblemente un **impuesto subjetivo** (
 4. **Límite conjunto IRPF-Patrimonio (art. 31 Ley 19/1991):** Para evitar la confiscatoriedad y vincular el impuesto a la capacidad contributiva real del sujeto, la cuota del Impuesto sobre el Patrimonio, sumada a la del IRPF, no puede exceder del 60% de la suma de las bases imponibles del IRPF. Si supera ese umbral, la cuota del patrimonio se reduce hasta en un 80%.
 
 
-## Cuestión 4: Impuestos indirectos del sistema estatal
+<br>
 
-### Pregunta
+**CUESTIÓN 4: Impuestos indirectos del sistema estatal**
+
+*Pregunta:*
 
 Enumerar los impuestos indirectos que integran el sistema impositivo estatal.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
 Los impuestos indirectos gravan manifestaciones mediatas o indirectas de la capacidad económica, manifestadas mediante el gasto, el consumo de bienes y servicios o la circulación y transmisión del tráfico patrimonial.
 
@@ -129,15 +139,17 @@ En el sistema tributario estatal español, el bloque de impuestos indirectos est
    - Impuesto sobre Determinados Servicios Digitales (Ley 4/2020).
 
 
-## Cuestión 5: Hecho imponible, delimitación negativa e ISD
+<br>
 
-### Pregunta
+**CUESTIÓN 5: Hecho imponible, delimitación negativa e ISD**
+
+*Pregunta:*
 
 Definir el hecho imponible. Concepto y delimitación negativa. ¿Cuál sería el hecho imponible del Impuesto sobre Sucesiones y Donaciones?
 
-### Respuesta razonada
+*Respuesta razonada:*
 
-#### 1. Concepto legal de hecho imponible
+- **1. Concepto legal de hecho imponible**
 
 El artículo 20.1 de la LGT define el hecho imponible como:
 > "El presupuesto fijado por la ley para configurar cada tributo y cuya realización origina el nacimiento de la obligación tributaria principal."
@@ -146,14 +158,14 @@ Constituye el núcleo del principio de legalidad tributaria (art. 8.a LGT). Todo
 - **Elemento objetivo:** Aspecto material (riqueza gravada), espacial (territorio de aplicación), temporal (momento del devengo) y cuantitativo (medida del hecho imponible).
 - **Elemento subjetivo:** Relación o nexo de imputación que vincula el hecho fáctico con una persona determinada, erigiéndola en sujeto pasivo contribuyente.
 
-#### 2. Delimitación negativa del hecho imponible
+- **2. Delimitación negativa del hecho imponible**
 
 La ley acota el alcance del tributo delimitándolo negativamente por dos vías técnicas de efectos jurídicos distintos:
 
 * **Supuestos de no sujeción (art. 20.2 LGT):** Aquellos actos, hechos o negocios que quedan fuera de la órbita de definición del tributo. La norma los menciona con finalidad meramente aclaratoria para precisar la frontera legal. En ellos el hecho imponible **no llega a nacer**, no surge la obligación de pago ni se generan obligaciones tributarias formales inherentes al tributo.
 * **Exenciones tributarias (art. 22 LGT):** Supuestos en los que el hecho imponible **sí se realiza de forma íntegra** (nace formalmente la obligación tributaria principal), pero una norma legal expresa dispensa total o parcialmente del pago de la cuota por motivos de justicia, política social o protección de mínimos vitales. Requieren reserva de ley absoluta (art. 8.a LGT).
 
-#### 3. Hecho imponible del Impuesto sobre Sucesiones y Donaciones (ISD)
+- **3. Hecho imponible del Impuesto sobre Sucesiones y Donaciones (ISD)**
 
 Regulado en el artículo 3.1 de la Ley 29/1987 (LISD), constituye el hecho imponible la obtención de incrementos patrimoniales a título lucrativo (*mortis causa* o *inter vivos*) por personas físicas:
 
@@ -162,22 +174,24 @@ Regulado en el artículo 3.1 de la Ley 29/1987 (LISD), constituye el hecho impon
 3. **Percepción de cantidades por beneficiarios de contratos de seguros de vida (art. 3.1.c LISD):** Cuando el contratante sea persona distinta del beneficiario y el seguro se hubiese contratado para el caso de muerte del asegurado (siempre que la prima no proceda de fondos propios o gananciales que exijan tributación por IRPF).
 
 
-## Cuestión 6: Obligados tributarios en la LGT
+<br>
 
-### Pregunta
+**CUESTIÓN 6: Obligados tributarios en la LGT**
+
+*Pregunta:*
 
 Definición y delimitación de los obligados tributarios en la Ley General Tributaria.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
-#### 1. Definición legal
+- **1. Definición legal**
 
 El artículo 35.1 de la LGT define a los obligados tributarios como:
 > "Las personas físicas o jurídicas y las entidades a las que la normativa tributaria impone el cumplimiento de obligaciones tributarias."
 
 La categoría de obligado tributario es un concepto omnicomprensivo, más amplio que el de sujeto pasivo, ya que abarca tanto a deudores principales como a obligados al pago anticipado, a responsables y a sujetos gravados con meros deberes formales o de información.
 
-#### 2. Delimitación y catálogo sistemático (art. 35.2 y 35.4 LGT)
+- **2. Delimitación y catálogo sistemático (art. 35.2 y 35.4 LGT)**
 
 El artículo 35.2 clasifica a los obligados tributarios en los siguientes órdenes:
 
@@ -197,15 +211,17 @@ El artículo 35.2 clasifica a los obligados tributarios en los siguientes órden
 6. **Entes sin personalidad jurídica (art. 35.4 LGT):** Las herencias yacentes, comunidades de bienes y demás entidades que, careciendo de personalidad jurídica, constituyan una unidad económica o un patrimonio separado susceptible de imposición.
 
 
-## Cuestión 7: Pagos a cuenta: tipos, función y condición
+<br>
 
-### Pregunta
+**CUESTIÓN 7: Pagos a cuenta: tipos, función y condición**
+
+*Pregunta:*
 
 Determinar las diferentes categorías de pagos a cuenta. Explicar la función de los obligados a realizar estos pagos a cuenta. Determinar si son contribuyentes.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
-#### 1. Categorías de pagos a cuenta (art. 23 LGT)
+- **1. Categorías de pagos a cuenta (art. 23 LGT)**
 
 El artículo 23 de la LGT reconoce tres modalidades diferenciadas de pagos a cuenta:
 
@@ -213,14 +229,14 @@ El artículo 23 de la LGT reconoce tres modalidades diferenciadas de pagos a cue
 2. **Retenciones a cuenta (art. 23.2 LGT):** Detracciones de dinero que un pagador legalmente obligado (empleador, entidad financiera, arrendatario profesional) descuenta del importe satisfecho al perceptor e ingresa directamente en el Tesoro Público (por ejemplo, retención sobre nóminas del modelo 111).
 3. **Ingresos a cuenta (art. 23.2 LGT):** Importes que el pagador de una retribución satisfecha en especie está obligado a ingresar en el Tesoro, calculados sobre el valor de la retribución no dineraria, al ser inviable la detracción monetaria directa.
 
-#### 2. Función de los obligados a realizar pagos a cuenta
+- **2. Función de los obligados a realizar pagos a cuenta**
 
 La exigencia de pagos a cuenta cumple tres funciones estructurales para la Hacienda Pública:
 - **Función recaudadora y de tesorería continua:** Garantiza un flujo constante y predecible de recursos líquidos a las arcas públicas mes a mes o trimestre a trimestre, evitando que el Estado deba esperar al cierre del año natural para financiar el gasto público.
 - **Función de control del fraude fiscal:** La figura del retenedor y del pagador opera como una vía de fiscalización cruzada (*terceros informantes*). Al declarar a la Administración las rentas pagadas y los perceptores (mediante resúmenes anuales como el modelo 190), Hacienda dispone de la información fáctica con la que verificar la autoliquidación final de cada ciudadano.
 - **Función facilitadora para el contribuyente (*Pay as you earn*):** Fracciona el pago del impuesto a lo largo del tiempo, diluyendo la carga financiera del desembolso final de la cuota anual.
 
-#### 3. ¿Son contribuyentes los obligados a realizar pagos a cuenta?
+- **3. ¿Son contribuyentes los obligados a realizar pagos a cuenta?**
 
 **No, como regla general no son contribuyentes.**
 El artículo 37 de la LGT delimita a los obligados a retener y a ingresar a cuenta como obligados tributarios específicos y autónomos. **No son contribuyentes** respecto de esas cantidades porque ellos no realizan el hecho imponible generador de la renta; el contribuyente es la persona que obtiene el rendimiento dinerario o en especie (trabajador, ahorrador o arrendador).
@@ -228,15 +244,17 @@ El artículo 37 de la LGT delimita a los obligados a retener y a ingresar a cuen
 La única singularidad se produce en los **pagos fraccionados**, donde el sujeto obligado a liquidar el anticipo sí ostenta la condición de contribuyente, pero satisface el pago como obligado a cuenta sobre su propia deuda impositiva futura.
 
 
-## Cuestión 8: Devengo y exigibilidad de los tributos
+<br>
 
-### Pregunta
+**CUESTIÓN 8: Devengo y exigibilidad de los tributos**
+
+*Pregunta:*
 
 Definir el devengo y determinar si el devengo y la exigibilidad de los tributos coinciden necesariamente.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
-#### 1. Definición legal de devengo
+- **1. Definición legal de devengo**
 
 El artículo 21.1 de la LGT define el devengo en los siguientes términos:
 > "El devengo es el momento en el que se entiende realizado el hecho imponible y en el que se produce el nacimiento de la obligación tributaria principal."
@@ -246,11 +264,11 @@ El devengo es una institución jurídica fijada por ley (art. 8.a LGT) que desem
 - Determina las circunstancias personales, familiares y patrimoniales relevantes del sujeto pasivo.
 - Concreta el momento de consolidación del hecho imponible.
 
-#### 2. Concepto de exigibilidad
+- **2. Concepto de exigibilidad**
 
 La exigibilidad es el momento o plazo fijado por la norma en el que la Administración tributaria puede reclamar válidamente el pago efectivo de la deuda y en el que el obligado debe realizar el ingreso en período voluntario.
 
-#### 3. ¿Coinciden necesariamente devengo y exigibilidad?
+- **3. ¿Coinciden necesariamente devengo y exigibilidad?**
 
 **No, devengo y exigibilidad no coinciden necesariamente.**
 La regla general en la mayoría de las figuras impositivas es la **disociación temporal** entre ambos momentos:
@@ -260,15 +278,17 @@ La regla general en la mayoría de las figuras impositivas es la **disociación 
 * **Tributos instantáneos (ISD e ITP):** En el Impuesto sobre Sucesiones, el devengo se produce en el instante exacto de la muerte del causante (art. 24 LISD), mientras que la exigibilidad se dilata legalmente a un plazo voluntario de seis meses a contar desde el fallecimiento.
 
 
-## Cuestión 9: Cuantificación y concepto de deuda tributaria
+<br>
 
-### Pregunta
+**CUESTIÓN 9: Cuantificación y concepto de deuda tributaria**
+
+*Pregunta:*
 
 Enumerar los elementos de cuantificación de la obligación tributaria. Determinar el concepto de deuda tributaria.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
-#### 1. Elementos de cuantificación (arts. 49 a 57 LGT)
+- **1. Elementos de cuantificación (arts. 49 a 57 LGT)**
 
 Los elementos de cuantificación articulan el procedimiento técnico de liquidación tributaria que transforma el hecho imponible en una suma líquida a ingresar:
 
@@ -282,7 +302,7 @@ Los elementos de cuantificación articulan el procedimiento técnico de liquidac
 5. **Cuota líquida (art. 56.5 LGT):** Importe resultante de aplicar sobre la cuota íntegra las deducciones, bonificaciones o coeficientes de corrección legalmente previstos.
 6. **Cuota diferencial (art. 56.6 LGT):** Cantidad que resta tras minorar la cuota líquida en el importe de los pagos a cuenta, retenciones e ingresos a cuenta ya soportados.
 
-#### 2. Concepto de deuda tributaria (art. 58 LGT)
+- **2. Concepto de deuda tributaria (art. 58 LGT)**
 
 La deuda tributaria está constituida por la **cuota o cantidad a ingresar** derivada de la obligación tributaria principal o de las obligaciones de realizar pagos a cuenta.
 
@@ -293,29 +313,31 @@ Asimismo, forman parte indiscutible de la deuda tributaria (art. 58.2 LGT):
 - Los recargos legalmente exigibles sobre bases o cuotas a favor de otros entes públicos.
 
 
-## Cuestión 10: Métodos de determinación de la base tributaria
+<br>
 
-### Pregunta
+**CUESTIÓN 10: Métodos de determinación de la base tributaria**
+
+*Pregunta:*
 
 Identificar los distintos métodos de determinación de la base tributaria y comentar la función que cumple cada uno de ellos.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
 El artículo 50.2 de la LGT contempla tres métodos para cuantificar la base imponible:
 
-#### 1. Estimación Directa (art. 51 LGT)
+- **1. Estimación Directa (art. 51 LGT)**
 
 * **Régimen de aplicación:** Es el método general y preferente del ordenamiento tributario.
 * **Mecánica de determinación:** Se apoya en las declaraciones y autoliquidaciones del sujeto, los documentos contables y los libros registros fiscalmente comprobados, reflejando las operaciones y transacciones reales efectivamente acontecidas. Admite dos modalidades reglamentarias: normal y simplificada.
 * **Función del método:** Medir con la máxima exactitud y fidelidad la capacidad económica real del contribuyente. Asegura la justicia tributaria individual al calcular los rendimientos mediante la confrontación directa de ingresos íntegros reales y gastos fiscalmente justificados.
 
-#### 2. Estimación Objetiva (art. 52 LGT)
+- **2. Estimación Objetiva (art. 52 LGT)**
 
 * **Régimen de aplicación:** Método potestativo y voluntario para el contribuyente. Solo procede cuando la ley propia de cada tributo lo prevea de forma expresa (por ejemplo, régimen de módulos en IRPF e IVA).
 * **Mecánica de determinación:** Prescinde del rendimiento contable real y cuantifica la base imponible aplicando índices, módulos o magnitudes objetivas predeterminadas por el legislador (número de empleados, superficie del local, potencia eléctrica instalada, número de mesas o vehículos afectos).
 * **Función del método:** Simplificación contable y administrativa radical para pequeñas empresas, autónomos y microempresas, aliviando drásticamente sus obligaciones formales y proporcionando a la Administración una vía de recaudación ágil y predecible.
 
-#### 3. Estimación Indirecta (art. 53 LGT)
+- **3. Estimación Indirecta (art. 53 LGT)**
 
 * **Régimen de aplicación:** Método subsidiario y extraordinario. Solo puede aplicarlo la Inspección de Tributos cuando no resulte viable acudir a la estimación directa u objetiva debido a anomalías graves imputables al contribuyente:
   - Falta de presentación de declaraciones o presentación incompleta.
@@ -326,21 +348,23 @@ El artículo 50.2 de la LGT contempla tres métodos para cuantificar la base imp
 * **Función del método:** Actuar como mecanismo de cierre de seguridad del sistema tributario. Impide que la ocultación contable dolosa o la rebeldía probatoria del obligado desemboquen en impunidad fiscal.
 
 
-## Cuestión 11: Extinción tributaria y régimen de prescripción
+<br>
 
-### Pregunta
+**CUESTIÓN 11: Extinción tributaria y régimen de prescripción**
+
+*Pregunta:*
 
 Comentar la forma normal de extinción de la obligación tributaria. Determinar cómo actúa la prescripción como forma de extinción de la obligación tributaria.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
-#### 1. Forma normal de extinción de la obligación tributaria
+- **1. Forma normal de extinción de la obligación tributaria**
 
 El **pago** es la forma ordinaria, normal y natural de extinción de la obligación tributaria (art. 59.1 LGT). Consiste en la entrega a la Administración de la suma pecuniaria debida en dinero de curso legal, efectos timbrados o medios bancarios homologados (pudiendo admitirse el pago en especie de bienes del Patrimonio Histórico Español cuando una norma con rango de ley lo autorice).
 
 Otras vías extintivas contempladas en la LGT son la prescripción, la compensación de créditos tributarios, la condonación (restringida a supuestos legalmente previstos) y la baja provisional por insolvencia.
 
-#### 2. Régimen y actuación de la prescripción tributaria (arts. 66 a 70 LGT)
+- **2. Régimen y actuación de la prescripción tributaria (arts. 66 a 70 LGT)**
 
 La prescripción tributaria es la institución jurídica que extingue derechos y facultades de la Administración y de los obligados tributarios por el transcurso continuado del tiempo unido a la inacción de su titular:
 
@@ -359,28 +383,30 @@ La prescripción tributaria es la institución jurídica que extingue derechos y
 * **Especialidad de la comprobación de créditos y bases negativas (art. 66 bis LGT):** El derecho de la Administración a comprobar las bases o cuotas compensadas o pendientes de compensación prescribe a los **diez años**.
 
 
-## Cuestión 12: Concepto y régimen de la autoliquidación
+<br>
 
-### Pregunta
+**CUESTIÓN 12: Concepto y régimen de la autoliquidación**
+
+*Pregunta:*
 
 ¿En qué consiste la autoliquidación? Poner un ejemplo de impuesto autoliquidable.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
-#### 1. Concepto y naturaleza de la autoliquidación
+- **1. Concepto y naturaleza de la autoliquidación**
 
 El artículo 120.1 de la LGT define las autoliquidaciones como:
 > "Declaraciones en las que los obligados tributarios comunican a la Administración los datos necesarios para la liquidación del tributo y realizan por sí mismos las operaciones de calificación y cuantificación necesarias para determinar e ingresar el importe de la deuda tributaria o, en su caso, determinar la cantidad que resulte a devolver o a compensar."
 
 La autoliquidación representa una transformación en la gestión tributaria contemporánea: el contribuyente ya no se limita a poner en conocimiento de la Administración los hechos acaecidos (mera declaración), sino que asume activamente el deber de calificar jurídicamente las rentas o actos, aplicar la normativa sustantiva, calcular las bases y tipos, y liquidar la cifra final exigible.
 
-#### 2. Régimen de revisión y rectificación
+- **2. Régimen de revisión y rectificación**
 
 Las autoliquidaciones son provisionales en tanto no prescriba el derecho de la Administración a comprobarlas:
 - Si el obligado detecta un error que perjudica a la Hacienda Pública (ingreso de cuota inferior), debe presentar una **autoliquidación complementaria** (art. 122 LGT).
 - Si el error perjudica los intereses legítimos del propio obligado (ingreso excesivo o deducción omitida), debe presentar una **solicitud de rectificación de autoliquidación** y de devolución de ingresos indebidos (art. 120.3 LGT).
 
-#### 3. Ejemplo prototípico: El IRPF (Modelo 100)
+- **3. Ejemplo prototípico: El IRPF (Modelo 100)**
 
 El ejemplo más representativo del sistema impositivo es el **Impuesto sobre la Renta de las Personas Físicas (IRPF)** gestionado mediante el **Modelo 100**:
 - El contribuyente cumplimenta sus rendimientos (trabajo, actividades, capital mobiliario e inmobiliario) y ganancias patrimoniales.
@@ -392,17 +418,19 @@ El ejemplo más representativo del sistema impositivo es el **Impuesto sobre la 
 Otros ejemplos de tributos autoliquidables son el Impuesto sobre el Valor Añadido (modelo 303 trimestral) y el Impuesto sobre Sociedades (modelo 200).
 
 
-## Cuestión 13: Obligaciones formales frente a materiales
+<br>
 
-### Pregunta
+**CUESTIÓN 13: Obligaciones formales frente a materiales**
+
+*Pregunta:*
 
 Determinar cuáles son las obligaciones formales y en qué se diferencian de las materiales.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
 El ordenamiento tributario articula la relación jurídica entre el ciudadano y la Hacienda Pública mediante dos grandes familias de obligaciones:
 
-#### 1. Obligaciones tributarias materiales (arts. 17 a 28 LGT)
+- **1. Obligaciones tributarias materiales (arts. 17 a 28 LGT)**
 
 Tienen por objeto una prestación pecuniaria de dar (pago de una suma dineraria al Tesoro). Integran este grupo:
 - La **obligación tributaria principal** (art. 19 LGT): pago de la cuota tributaria derivada de la realización del hecho imponible.
@@ -410,7 +438,7 @@ Tienen por objeto una prestación pecuniaria de dar (pago de una suma dineraria 
 - Las **obligaciones entre particulares derivadas del tributo** (art. 24 LGT): repercutir la cuota impositiva (IVA) o soportar la retención legalmente practicada.
 - Las **obligaciones tributarias accesorias** (art. 25 LGT): intereses de demora y recargos.
 
-#### 2. Obligaciones tributarias formales (art. 29 LGT)
+- **2. Obligaciones tributarias formales (art. 29 LGT)**
 
 Son deberes impuestos por la normativa tributaria que **no tienen carácter pecuniario**, consistiendo en obligaciones de hacer, no hacer o tolerar. Su finalidad primordial es permitir, facilitar y fiscalizar la correcta gestión y comprobación de las obligaciones materiales.
 
@@ -422,7 +450,7 @@ El artículo 29.2 de la LGT recoge el catálogo de obligaciones formales:
 5. Obligación de expedir, entregar y conservar facturas o documentos justificativos de las operaciones mercantiles.
 6. Obligación de aportar datos, informes y justificantes requeridos por la Inspección y facilitar la práctica de comprobaciones tributarias.
 
-#### 3. Diferencias estructurales
+- **3. Diferencias estructurales**
 
 | Criterio de distinción | Obligaciones materiales | Obligaciones formales |
 | :--- | :--- | :--- |
@@ -432,22 +460,24 @@ El artículo 29.2 de la LGT recoge el catálogo de obligaciones formales:
 | **Independencia** | Depende de la capacidad económica | Subsiste incluso con cuota cero o bases negativas |
 
 
-## Cuestión 14: Tratamiento de sanciones y deuda tributaria
+<br>
 
-### Pregunta
+**CUESTIÓN 14: Tratamiento de sanciones y deuda tributaria**
+
+*Pregunta:*
 
 Determinar si las sanciones forman parte de la deuda tributaria o no.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
 **NO, las sanciones tributarias no forman parte de la deuda tributaria.**
 
-#### Fundamento legal expreso
+- **Fundamento legal expreso**
 
 El artículo 58.3 de la Ley General Tributaria establece de manera categórica:
 > "Las sanciones tributarias que puedan imponerse de acuerdo con lo dispuesto en el título IV de esta ley no formarán parte de la deuda tributaria, pero en su recaudación se aplicarán las normas incluidas en el capítulo V del título III de esta ley sobre recaudación tributaria."
 
-#### Fundamentación dogmática y constitucional
+- **Fundamentación dogmática y constitucional**
 
 La exclusión de las sanciones del perímetro de la deuda tributaria responde a principios constitucionales asentados:
 
@@ -458,22 +488,24 @@ La exclusión de las sanciones del perímetro de la deuda tributaria responde a 
 3. **Régimen de recaudación común:** Aunque no integran la deuda tributaria en sentido material, el legislador remite su cobro ejecutivo a las normas de recaudación tributaria por razones de economía procesal y eficacia administrativa.
 
 
-## Cuestión 15: Obligaciones accesorias en la LGT
+<br>
 
-### Pregunta
+**CUESTIÓN 15: Obligaciones accesorias en la LGT**
+
+*Pregunta:*
 
 Enumerar las obligaciones accesorias.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
-#### Concepto legal de obligación accesoria
+- **Concepto legal de obligación accesoria**
 
 El artículo 25.1 de la LGT define las obligaciones accesorias como:
 > "Aquellas obligaciones distintas de las demás reguladas en esta sección que consisten en prestaciones pecuniarias que se deben satisfacer a la Administración tributaria y cuya exigencia se fundamenta en otra obligación tributaria."
 
 Se caracterizan por su naturaleza pecuniaria y por su estricta accesoriedad: no pueden existir de manera autónoma, sino que nacen ligadas al incumplimiento, retraso o aplazamiento de una obligación tributaria previa.
 
-#### Catálogo taxativo de obligaciones accesorias (art. 25 y 58.2 LGT)
+- **Catálogo taxativo de obligaciones accesorias (art. 25 y 58.2 LGT)**
 
 El ordenamiento tributario reconoce exclusivamente tres obligaciones accesorias:
 
@@ -487,19 +519,21 @@ El ordenamiento tributario reconoce exclusivamente tres obligaciones accesorias:
    - *Recargo de apremio ordinario (20%):* Procede cuando no se realiza el ingreso en el plazo de la providencia de apremio. Es compatible y exigible conjuntamente con los intereses de demora devengados y con las costas del procedimiento ejecutivo de apremio.
 
 
-## Cuestión 16: Impuestos directos cedidos a las CCAA
+<br>
 
-### Pregunta
+**CUESTIÓN 16: Impuestos directos cedidos a las CCAA**
+
+*Pregunta:*
 
 Determine qué Impuestos Directos, dentro del sistema impositivo estatal, están cedidos a las CCAA de régimen común.
 
-### Respuesta razonada
+*Respuesta razonada:*
 
 El régimen de cesión tributaria se fundamenta en los artículos 156 y 157.1.a de la Constitución, en la Ley Orgánica 8/1980 de Financiación de las Comunidades Autónomas (LOFCA) y en la **Ley 22/2009**, por la que se regula el sistema de financiación de las Comunidades Autónomas de régimen común.
 
 En el bloque de la imposición directa estatal, los impuestos cedidos a las comunidades autónomas de régimen común son:
 
-#### 1. Impuesto sobre la Renta de las Personas Físicas (IRPF)
+- **1. Impuesto sobre la Renta de las Personas Físicas (IRPF)**
 
 * **Alcance de la cesión de recaudación:** Cesión parcial del **50% del rendimiento** derivado de las retenciones y cuota líquida autonómica producida en el territorio de la comunidad.
 * **Competencias normativas cedidas (art. 46 Ley 22/2009):**
@@ -507,7 +541,7 @@ En el bloque de la imposición directa estatal, los impuestos cedidos a las comu
   - Modulación de las cuantías del mínimo personal y familiar (hasta un margen del $\pm 10\%$).
   - Aprobación de deducciones autonómicas sobre la cuota íntegra (por circunstancias familiares, gastos educativos, nacimiento de hijos o alquiler de vivienda habitual).
 
-#### 2. Impuesto sobre el Patrimonio (IP)
+- **2. Impuesto sobre el Patrimonio (IP)**
 
 * **Alcance de la cesión:** Cesión total del **100% del rendimiento recaudatorio**.
 * **Competencias normativas cedidas (art. 47 Ley 22/2009):**
@@ -515,7 +549,7 @@ En el bloque de la imposición directa estatal, los impuestos cedidos a las comu
   - Aprobación de la tarifa o escala de gravamen autonómica.
   - Regulación de deducciones y bonificaciones en la cuota (lo que habilita a comunidades como Andalucía o Madrid a establecer una bonificación general del 100% de la cuota).
 
-#### 3. Impuesto sobre Sucesiones y Donaciones (ISD)
+- **3. Impuesto sobre Sucesiones y Donaciones (ISD)**
 
 * **Alcance de la cesión:** Cesión total del **100% del rendimiento recaudatorio**.
 * **Competencias normativas cedidas (art. 48 Ley 22/2009):**
@@ -524,11 +558,11 @@ En el bloque de la imposición directa estatal, los impuestos cedidos a las comu
   - Coeficientes multiplicadores en función del patrimonio preexistente del heredero.
   - Aprobación de bonificaciones sobre la cuota tributaria (como la bonificación del 99% para cónyuges y descendientes en Andalucía).
 
-#### 4. Impuesto sobre el depósito de residuos en vertederos, la incineración y la coincineración
+- **4. Impuesto sobre el depósito de residuos en vertederos, la incineración y la coincineración**
 
 * Tributo medioambiental directo de titularidad estatal creado por la Ley 7/2022, cedido a las comunidades autónomas junto con la gestión y recaudación en su territorio.
 
-#### Delimitación: Impuestos directos estatales NO cedidos
+- **Delimitación: Impuestos directos estatales NO cedidos**
 
 Para contrastar el marco competencial, permanecen bajo la competencia exclusiva del Estado y **no están cedidos** a las CCAA de régimen común:
 - El **Impuesto sobre Sociedades (IS)**, tributo directo que grava la renta de las personas jurídicas con caja única estatal.
