@@ -1,48 +1,49 @@
-\begin{tikzpicture}[scale=0.72, >=latex]
+\begin{tikzpicture}[scale=0.9, >=latex]
   % Ejes
-  \draw[->, thick] (0,0) -- (15.5,0) node[below] {$C_0$ (€)};
-  \draw[->, thick] (0,0) -- (0,15.5) node[left] {$C_1$ (€)};
+  \draw[->, thick] (0,0) -- (11,0) node[below] {u.m.(t=0)};
+  \draw[->, thick] (0,0) -- (0,9) node[left] {u.m.(t=1)};
 
-  % Marcas numéricas en eje horizontal
-  \draw (8,0.15) -- (8,-0.15) node[below=3pt, font=\scriptsize] {$8.000$};
-  \draw (12,0.15) -- (12,-0.15) node[below=3pt, font=\scriptsize] {$12.000$};
-  \draw (14,0.15) -- (14,-0.15) node[below=3pt, font=\scriptsize, text=red!80!black] {$14.000$};
+  % Puntos X
+  \coordinate (X8) at (4.5,0);
+  \coordinate (X12) at (6.5,0);
+  \coordinate (X14) at (8.5,0);
 
-  % Marcas numéricas en eje vertical
-  \draw (0.15,6.24) -- (-0.15,6.24) node[left=3pt, font=\scriptsize] {$6.240$};
-  \draw (0.15,12.48) -- (-0.15,12.48) node[left=3pt, font=\scriptsize] {$12.480$};
-  \draw (0.15,14.56) -- (-0.15,14.56) node[left=3pt, font=\scriptsize, text=red!80!black] {$14.560$};
+  % Puntos Y
+  \coordinate (Y6) at (0,3.5);
+  \coordinate (Y12) at (0,6.0);
+  \coordinate (Y14) at (0,8.0);
 
-  % Dotación inicial
-  \fill (12,0) circle (2.2pt);
-  \node[above=4pt, font=\scriptsize] at (12,0) {$W_0$};
+  % Curva
+  \draw[thick] (6.5,0) to[out=110, in=-40] (4.5,3.5) to[out=140, in=-70] (0, 5.0);
 
-  % Curva de producción real
-  \draw[thick, blue!80!black] (12,0) to[out=115, in=0] (8,6.24) to[out=180, in=60] (3.5,4.2);
-  \node[blue!80!black, font=\scriptsize, align=center] at (4.5, 3.0) {Frontera de\\producción real};
-  \draw[->, blue!60!black, shorten >=2pt] (4.5, 3.6) to[bend left=15] (5.2, 4.8);
+  % Recta superior (VAN max)
+  \draw[thick] (0,8.0) -- (8.5,0);
+  \node[left] at (0,8.0) {14.560};
+  \node[left] at (0,6.0) {12.480};
+  \node[left] at (0,3.5) {6.240};
+  
+  \node[left] at (0,8.5) {M};
+  \node[left] at (0,6.5) {L};
+  \node[left] at (0,5.0) {H};
+  \node[left] at (0,4.0) {G};
+  
+  % Recta intermedia (Sin proyecto)
+  \draw[thick] (0,6.0) -- (6.5,0);
 
-  % Punto óptimo de producción P* = (8000, 6240)
-  \coordinate (P) at (8, 6.24);
-  \fill[red!80!black] (P) circle (2.5pt);
-  \node[above right=4pt, text=red!80!black, font=\scriptsize] at (P) {$P^* (8.000,\, 6.240)$};
+  % Dotted lines
+  \draw[dashed, thick] (4.5,3.5) -- (4.5,0);
+  \draw[dashed, thick] (4.5,3.5) -- (0,3.5);
 
-  % Líneas punteadas al punto P
-  \draw[dotted, gray] (8,0) -- (8,6.24);
-  \draw[dotted, gray] (0,6.24) -- (8,6.24);
+  \node[below] at (X8) {8.000};
+  \node[below] at (X12) {12.000};
+  \node[below] at (X14) {14.000};
 
-  % Recta de mercado sin inversión en activos reales
-  \draw[thick, dashed, gray!80!black] (0, 12.48) -- (12, 0);
-  \node[gray!90!black, font=\scriptsize, align=left, fill=white, inner sep=2pt] at (3.0, 9.8) {Sin inversión:\\$C_1 = 12.480 - 1,04\,C_0$};
+  % Cotas
+  \draw[<->, thick] (4.5, -0.6) -- (6.5, -0.6) node[midway, below] {C$_0$ = 4.000};
+  \draw[<->, thick] (6.5, -0.6) -- (8.5, -0.6) node[midway, below] {VAN = 2.000};
+  \draw[<->, thick] (4.5, -1.3) -- (8.5, -1.3) node[midway, below] {VA = 6.000};
 
-  % Recta de mercado con inversión
-  \draw[thick, red!85!black] (0, 14.56) -- (14, 0);
-  \node[red!85!black, font=\scriptsize, align=left, fill=white, inner sep=2pt] at (6.5, 12.0) {Con inversión óptima:\\$C_1 = 14.560 - 1,04\,C_0$};
+  % Bracket Y
+  \draw[thick, decorate, decoration={brace, amplitude=5pt}] (-1, 8.0) -- (-1, 6.0) node[midway, left=8pt] {2.080};
 
-  % Cota vertical delta W1 en x = -1.2 (con fondo limpio)
-  \draw[<->, red!80!black, thick] (-1.2, 12.48) -- (-1.2, 14.56) node[midway, left=1pt, font=\scriptsize] {$\Delta W_1 = 2.080$ €};
-
-  % Cotas horizontales en el eje C0
-  \draw[<->, blue!80!black, thick] (12,-1.0) -- (14,-1.0) node[midway, below=1pt, font=\scriptsize] {$\Delta W_0 = \text{VAN} = 2.000$ €};
-  \draw[<->, black!70] (8,-1.8) -- (12,-1.8) node[midway, below=1pt, font=\scriptsize] {$I_0 = 4.000$ €};
 \end{tikzpicture}

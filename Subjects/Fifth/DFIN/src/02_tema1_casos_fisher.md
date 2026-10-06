@@ -40,7 +40,7 @@ A partir de ese punto óptimo de producción física, cada accionista utiliza el
 
 Si el tipo de interés pasa de $r_1$ a un valor menor $r_2$ ($r_2 < r_1$):
 
-1. **Aumento de la inversión óptima:** La pendiente de la línea de mercado $(1 + r)$ se reduce, volviendo la recta más plana. En la curva cóncava de oportunidades reales, la nueva tangencia con una pendiente menor exige situarse más a la izquierda en consumo presente, es decir, realizar un mayor volumen de inversión inicial en activos reales ($I_0(r_2) > I_0(r_1)$). Proyectos que antes se descartaban porque su rendimiento marginal no alcanzaba $r_1$ pasan a tener VAN positivo bajo $r_2$.
+1. **Aumento de la inversión óptima:** La pendiente de la línea de mercado $(1 + r)$ se reduce, volviendo la recta más plana. En la curva cóncava de oportunidades reales, la nueva tangencia con una pendiente menor exige situarse más a la izquierda en consumo presente, es decir, realizar un mayor volumen de inversión inicial en activos reales ($C_0' > C_0$). Proyectos que antes se descartaban porque su rendimiento marginal no alcanzaba la tasa anterior pasan a tener VAN positivo.
 
 2. **Impacto sobre los inversores según su perfil de consumo:**
    - **Inversor con preferencia por consumo futuro (prestamista):** Ahorra hoy para consumir en $t=1$. Al bajar el tipo de interés, cada euro prestado genera menos intereses. La línea de mercado pivota hacia abajo en el cuadrante de ahorro, reduciendo su consumo futuro alcanzable. Su bienestar empeora.
@@ -97,7 +97,7 @@ Al maximizar el valor de la empresa:
 \begin{figure}[H]
   \centering
   \input{src/tex/fisher_ej2.tex}
-  \caption{Quiebre de la línea de mercado cuando $r_d > r_p$ y divergencia en el volumen de inversión óptimo ($I_{0,p} \ne I_{0,d}$).}
+  \caption{Quiebre de la línea de mercado cuando $r_d > r_p$ y divergencia en el volumen de inversión óptimo ($C_0' \ne C_0$).}
 \end{figure}
 
 Al no coincidir la tasa de descuento relevante para unos y otros ($r_p \ne r_d$), los accionistas no se ponen de acuerdo en el presupuesto de inversión óptimo. El criterio de maximización del VAN deja de ser unívoco y se quiebra la separación entre propiedad y dirección.
