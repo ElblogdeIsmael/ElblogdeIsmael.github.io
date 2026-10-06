@@ -1,5 +1,8 @@
 # Tema 4: Riesgo y Rentabilidad (Teoría de Carteras y CAPM)
 
+> [!IMPORTANT]
+> **Nota:** Este bloque temático es especialmente importante para comprender el núcleo de las finanzas corporativas modernas y la resolución de los casos avanzados de la asignatura.
+
 ## 4.1 El binomio rentabilidad-riesgo
 
 En las finanzas, la rentabilidad y el riesgo son dos caras de la misma moneda. Los inversores son racionales y tienen aversión al riesgo: exigen una mayor rentabilidad esperada como compensación por asumir una mayor incertidumbre sobre los rendimientos futuros.
