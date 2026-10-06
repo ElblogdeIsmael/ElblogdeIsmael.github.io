@@ -133,7 +133,7 @@ En mayo de 2026, el Sr. Gálvez recibió una indemnización por despido, reconoc
 Como consecuencia de un accidente de automóvil en el que viajaban el Sr. Martínez y el Sr. López, el primero resultó muerto y el segundo con distintos daños físicos. En el juicio se condenó a la parte contraria a indemnizar a los herederos del Sr. Martínez con 150.000 € y al Sr. López con 75.000 €. Además, la viuda del Sr. Martínez recibe una prestación de 250.000 €, derivada de un contrato de seguro de vida con primas a cargo de la sociedad de gananciales.
 
 ### 1. Indemnización judicial a los herederos del Sr. Martínez (150.000 €)
-- **Resolución:** La indemnización tiene su causa jurídica en la responsabilidad civil extracontractual por daños personales derivada de muerte y ha sido fijada expresamente por condena judicial en juicio. El artículo 7.d de la LIRPF declara exenta la totalidad de las indemnizaciones por daños personales reconocidas judicialmente, sin tope cuantitativo. No tributa en el IRPF de los herederos perceptores ni del causante. Tampoco tributa en el Impuesto sobre Sucesiones y Donaciones porque la indemnización no formaba parte del patrimonio del causante al tiempo de fallecer; es un derecho originario y autónomo que nace en cabeza de los perjudicados como consecuencia de la sentencia condenatoria.
+- **Resolución:** La indemnización de 150.000 € percibida por los herederos está **no sujeta al IRPF**. El artículo 6.4 de la LIRPF establece expresamente la incompatibilidad entre gravámenes, indicando que no estarán sujetas a este impuesto las rentas que se encuentren sujetas al Impuesto sobre Sucesiones y Donaciones (ISD). En este supuesto académico, al integrarse dicha indemnización a favor de los herederos como consecuencia del fallecimiento, la cantidad se encuentra **sujeta al Impuesto sobre Sucesiones**. Por consiguiente, queda excluida de la órbita de tributación del IRPF.
 
 ### 2. Indemnización judicial al Sr. López por lesiones físicas (75.000 €)
 - **Resolución:** Indemnización fijada por sentencia judicial por daños físicos corporales sufridos en el accidente. Queda **totalmente exenta de IRPF** en aplicación directa del artículo 7.d de la LIRPF. No se integra en la base imponible ni genera tributación alguna.
@@ -177,12 +177,10 @@ Su hermana, María, es estudiante de 4º curso de Derecho. La Universidad Intern
 
 **Resolución:**
 - *Entidad concedente:* Universidad Internacional de Andalucía (institución universitaria pública).
-- *Naturaleza de los estudios:* Curso específico sobre "Tributación de entidades sin fines lucrativos" de 30 horas lectivas y 3 créditos ECTS.
-- *Examen de la condición de estudio reglado:*
-  - Los estudios reglados son aquellos organizados e integrados en el Registro de Universidades, Centros y Títulos (RUCT) conducentes a la obtención de títulos de Grado, Máster Universitario Oficial o Doctorado.
-  - Los cursos de verano, seminarios, diplomas de extensión o microcredenciales de 30 horas lectivas **NO constituyen estudios reglados del sistema educativo oficial**.
-  - Doctrina de la Dirección General de Tributos (entre otras, Consultas Vinculantes V1475-21 y V2085-18): Las becas que financian matrícula o estancias para cursos monográficos o de especialización no integrados en un plan de estudios oficial reglado **quedan excluidas de la exención** del artículo 7.j de la LIRPF.
-- *Conclusión:* La beca de María **NO ESTÁ EXENTA**. La cuantía de 600 euros (que incluye la matrícula y el alojamiento en especie) califica tributariamente como **Rendimiento Íntegro del Trabajo** conforme al artículo 17.2.h de la LIRPF ("Las becas, sin perjuicio de lo dispuesto en el artículo 7 de esta ley"). Se integrará en la base imponible general de María si supera los umbrales de la obligación de declarar (art. 96 LIRPF).
+- *Naturaleza de los estudios y exención (créditos de libre configuración):* Aunque un curso de verano o seminario de extensión universitaria de 30 horas no sea un título universitario oficial en sí mismo, la clave técnica reside en que el curso otorga **3 créditos**. Al ser estudiante de 4º curso de Derecho, María integrará estos 3 créditos en su expediente académico como **créditos de libre configuración** (o créditos optativos).
+- Al convalidarse e incorporarse dentro del plan de estudios oficial de su titulación de Grado, el curso adquiere a efectos fiscales la condición de **estudio reglado** (art. 7.j LIRPF).
+- *Verificación de límites económicos:* La cuantía de 600 euros (que cubre matrícula y alojamiento) está plenamente amparada por la norma (que prevé exenciones de hasta 6.000 € anuales con carácter general).
+- *Conclusión:* La beca de María está **TOTALMENTE EXENTA de IRPF**.
 
 
 ## Práctica 5: Pago Único por Desempleo
