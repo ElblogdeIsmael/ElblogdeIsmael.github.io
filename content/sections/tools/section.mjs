@@ -17,7 +17,7 @@ export default {
   titleOutline: "mientas",
   blurb:
     "Pequeñas apps que funcionan al 100% en tu navegador y utilidades nativas de alto rendimiento: sin que tus archivos salgan de tu equipo.",
-  summary: "6 herramientas · CLI y Web nativos · código abierto",
+  summary: "7 herramientas · CLI y Web nativos · código abierto",
   pages: [],
   links: [
     {
@@ -47,6 +47,13 @@ export default {
       href: "https://ismael-sallami.github.io/gittomd/",
       kind: "WEB",
       repo: "https://github.com/Ismael-Sallami/gittomd",
+    },
+    {
+      name: "contribmeter",
+      blurb: "quién aporta cuánto en un repo u organización de GitHub",
+      href: "https://ismael-sallami.github.io/contribmeter/",
+      kind: "CLI",
+      repo: "https://github.com/Ismael-Sallami/contribmeter",
     },
     {
       name: "GitVanguard",
