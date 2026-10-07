@@ -97,6 +97,26 @@ export default {
             },
           ],
         },
+        {
+          code: "VC",
+          name: "Visión por Computador",
+          blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica/pages/docencia/guias-docentes",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Cuestiones y Problemas de Examen",
+                  href: "/Subjects/Fifth/VC/build/VC.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
     {
