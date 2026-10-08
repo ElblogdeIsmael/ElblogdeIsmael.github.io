@@ -20,6 +20,12 @@ Las siguientes cuestiones corresponden a los ejercicios propuestos en las diapos
 
 ¿Es la convolución equivariante frente a la rotación y frente al escalado?
 
+*Respuesta breve:*
+
+La convolución estándar **no** es equivariante a la rotación ni al escalado; únicamente lo es ante traslaciones. Para la rotación requeriría un kernel estrictamente isotrópico (como una Gaussiana circular), y para el escalado una adaptación dinámica del tamaño del filtro o el uso de pirámides multiescala.
+
+\vspace{0.3cm}
+
 *Resolución analítica:*
 
 Un operador o transformación $T$ es equivariante respecto a un grupo de transformaciones $g \in G$ si aplicar la transformación a la entrada y luego operar produce exactamente el mismo resultado que operar primero sobre la entrada y transformar posteriormente la salida:
@@ -104,6 +110,12 @@ Por tanto, con máscaras fijas, la convolución estándar **no es equivariante a
 
 $$rotate180(Correlation(I, K)) == Convolution(I, K)?$$
 
+*Respuesta breve:*
+
+**No**. Rotar la salida invierte todo el marco de coordenadas de la imagen resultante, lo que equivale a convolucionar la imagen original invertida. Para que la correlación sea idéntica a la convolución, lo que debe rotarse $180^\circ$ es el **kernel** antes de operar ($I * K = I \otimes \text{rot}_{180}(K)$).
+
+\vspace{0.3cm}
+
 *Resolución analítica:*
 
 La respuesta matemática es **no**. Rotar la salida tras haber calculado la correlación no equivale a convolucionar la imagen original.
@@ -157,6 +169,12 @@ Rotar la imagen resultante de la correlación equivale a haber convolucionado la
 *Enunciado:*
 
 ¿Puede implementarse el umbralizado mediante un filtro lineal? Dicho de otro modo, ¿es el umbralizado una operación lineal?
+
+*Respuesta breve:*
+
+**No**. El umbralizado es una operación estrictamente no lineal (función escalón de Heaviside). Viola tanto la homogeneidad ($T(\alpha I) \neq \alpha T(I)$) como la aditividad ($T(I_1 + I_2) \neq T(I_1) + T(I_2)$) del principio de superposición, por lo que no puede implementarse como un filtro lineal ni mediante convolución.
+
+\vspace{0.3cm}
 
 *Resolución analítica:*
 
@@ -218,6 +236,12 @@ El umbralizado modela una función escalón de Heaviside desplazada, cuya deriva
 (b) \, \begin{bmatrix} -1 & -2 & -1 \\ 0 & 0 & 0 \\ 1 & 2 & 2 \end{bmatrix} \qquad
 (c) \, \begin{bmatrix} 0 & -1 & 0 \\ -1 & 4 & -1 \\ 0 & -1 & 0 \end{bmatrix}
 \end{equation*}
+
+*Respuesta breve:*
+
+El filtro correcto es el **(c)** (con centro $+4$ y los cuatro vecinos ortogonales con peso $-1$). Su respuesta es $4(I_c - \bar{I}_{adj})$, estrictamente positiva si y solo si el centro supera la media de los vecinos. Corresponde al Laplaciano discreto negativo ($-\nabla^2$), que actúa como detector de máximos locales y picos de contraste.
+
+\vspace{0.3cm}
 
 *Resolución analítica:*
 
@@ -283,6 +307,12 @@ Imaginemos un kernel Gaussiano bidimensional de tamaño $9 \times 9$.
 
 ¿Cuál sería el valor equivalente de $\sigma$, asumiendo que $k$ debe ser el entero más pequeño mayor o igual que $3\sigma$?
 
+*Respuesta breve:*
+
+Para un kernel $9 \times 9$, el radio es $k = 4$. Al cumplirse $k = \lceil 3\sigma \rceil = 4$, el rango admisible es $1 < \sigma \le 4/3$, resultando en el límite exacto de diseño que cubre el soporte $[-3\sigma, +3\sigma]$ el valor $\boldsymbol{\sigma = 4/3 \approx 1,333}$.
+
+\vspace{0.3cm}
+
 *Resolución:*
 
 Un kernel digital bidimensional simétrico centrado en el origen posee dimensiones impares $N \times N$, donde $N = 2k + 1$ y $k$ denota el radio espacial o semiancho del filtro en píxeles (las coordenadas recorren el intervalo $[-k, +k]$ tanto en $x$ como en $y$).
@@ -315,6 +345,12 @@ Si quisiéramos aplicar este mismo kernel de $9 \times 9$ un total de 3 veces co
 
 *Nota incluida en la diapositiva:* Al aplicar el mismo kernel de tamaño $N$ un total de $k_{rep}$ veces, el tamaño del filtro equivalente viene dado por $N_{eq} = N + (k_{rep} - 1)(N - 1)$.
 
+*Respuesta breve:*
+
+Por la regla del soporte algebraico discreto $N_{eq} = N + (k_{rep} - 1)(N - 1)$, aplicando el filtro de tamaño $N = 9$ tres veces consecutivas ($k_{rep} = 3$), el tamaño del kernel discreto equivalente resultante es $9 + 2 \times 8 = \mathbf{25 \times 25}$.
+
+\vspace{0.3cm}
+
 *Resolución:*
 
 La fórmula suministrada proviene de la propiedad del soporte algebraico de la convolución discreta. Si convolucionamos dos señales discretas de soportes finitos $L_1$ y $L_2$, la longitud del soporte resultante es $L_1 + L_2 - 1$.
@@ -338,6 +374,12 @@ El kernel discreto resultante equivalente que sintetiza las tres etapas en una s
 *Pregunta:*
 
 Si quisiéramos aplicar este mismo kernel de $9 \times 9$ un total de 3 veces consecutivas, ¿cuál sería el tamaño del kernel equivalente utilizando la propiedad de que la Gaussiana es cerrada bajo la convolución (es decir, convolucionar $N_{rep}$ veces consecutivas con desviación $\sigma$ equivale a una única convolución con una Gaussiana de desviación $\sigma \sqrt{N_{rep}}$)? En este caso, buscamos el filtro que proporcione el efecto de desenfoque (*blurring*) equivalente.
+
+*Respuesta breve:*
+
+Por la propiedad reproductiva de adición de varianzas Gaussianas, $\sigma_{eq} = \sigma\sqrt{3} = \frac{4}{\sqrt{3}} \approx 2,309$. Aplicando la regla $k_{eq} = \lceil 3\sigma_{eq} \rceil = \lceil 4\sqrt{3} \rceil = 7$, el tamaño de filtro con desenfoque equivalente es $2(7) + 1 = \mathbf{15 \times 15}$.
+
+\vspace{0.3cm}
 
 *Resolución:*
 
@@ -397,6 +439,12 @@ d) Teorema de la Convolución
 
 *Respuesta correcta:* **a) Asociativa**
 
+*Respuesta breve:*
+
+Opción **a) Asociativa**. Permite componer y preconvolucionar filtros en cascada ($K = K_1 * K_2$) antes de aplicarlos a la imagen en una sola pasada, base matemática que permite derivar analíticamente la Gaussiana ($\frac{\partial}{\partial x}(I * G) = I * \frac{\partial G}{\partial x}$).
+
+\vspace{0.3cm}
+
 *Justificación analítica:*
 
 La propiedad asociativa establece que, dadas una imagen $I$ y dos filtros espaciales $K_1$ y $K_2$:
@@ -438,6 +486,12 @@ d) Ninguna de las anteriores
 
 *Respuesta correcta:* **c) Sharpening**
 
+*Respuesta breve:*
+
+Opción **c) Sharpening**. El filtro descompone en Identidad más Laplaciano negativo ($I - \nabla^2 I$, máscara de desenfoque). Sus pesos suman 1 para no alterar el brillo en zonas homogéneas, mientras que su centro dominante 5 frente a vecinos $-1$ realza las altas frecuencias (bordes).
+
+\vspace{0.3cm}
+
 *Justificación analítica:*
 
 Descomponemos matricialmente el kernel dado $K$:
@@ -473,6 +527,12 @@ c) $3\sqrt{\sigma}$
 d) Ninguna de las anteriores  
 
 *Respuesta correcta:* **a) $\sigma\sqrt{3}$**
+
+*Respuesta breve:*
+
+Opción **a) $\boldsymbol{\sigma\sqrt{3}}$**. La convolución continua de filtros Gaussianos suma algebraicamente sus varianzas ($\sigma_{eq}^2 = \sigma^2 + \sigma^2 + \sigma^2 = 3\sigma^2$), lo que proporciona una desviación estándar equivalente resultante de $\sigma_{eq} = \sqrt{3\sigma^2} = \sigma\sqrt{3}$.
+
+\vspace{0.3cm}
 
 *Justificación analítica:*
 
@@ -513,6 +573,12 @@ c) En el algoritmo de Canny obtendremos bordes más discontinuos/fragmentados si
 d) Las tres respuestas anteriores son erróneas.  
 
 *Respuesta correcta:* **d) Las tres respuestas anteriores son erróneas**
+
+*Respuesta breve:*
+
+Opción **d) Las tres respuestas anteriores son erróneas**. Canny no es lineal (incorpora supresión de no máximos e histéresis); Otsu maximiza la varianza inter-clase (no la minimiza); y reducir el umbral bajo en Canny genera bordes más continuos y conectados, no más fragmentados.
+
+\vspace{0.3cm}
 
 *Justificación analítica:*
 
@@ -571,6 +637,12 @@ d) Ninguna de las anteriores es correcta.
 
 *Respuesta correcta:* **d) Ninguna de las anteriores es correcta**
 
+*Respuesta breve:*
+
+Opción **d) Ninguna de las anteriores es correcta**. Las derivadas en $X$ detectan bordes verticales (no horizontales); la magnitud euclídea del gradiente es una norma no negativa ($\|\nabla I\| \ge 0$); y en zonas planas el gradiente es nulo, alcanzando su máximo en los bordes.
+
+\vspace{0.3cm}
+
 *Justificación analítica:*
 
 Examinamos la falsedad de las opciones planteadas:
@@ -614,6 +686,12 @@ d) Todas las anteriores son correctas.
 
 *Respuesta correcta:* **d) Todas las anteriores son correctas**
 
+*Respuesta breve:*
+
+Opción **d) Todas las anteriores son correctas**. La convolución espacial es equivariante ante traslaciones, pero no lo es ante escalados (el filtro tiene tamaño fijo en píxeles) ni ante rotaciones (los kernels direccionales no giran con la imagen).
+
+\vspace{0.3cm}
+
 *Justificación analítica:*
 
 Esta cuestión sintetiza los fundamentos matemáticos demostrados en la Cuestión 1 del Bloque I:
@@ -640,6 +718,12 @@ c) Un kernel de segundas derivadas.
 d) Ninguno de los anteriores.  
 
 *Respuesta correcta:* **a) Un kernel de suavizado Gaussiano**
+
+*Respuesta breve:*
+
+Opción **a) Un kernel de suavizado Gaussiano**. La función es simétrica par, estrictamente no negativa en todo el intervalo $[-7, 7]$, con un único valor máximo unitario en $x = 0$ y decaimiento exponencial asintótico a cero en las colas.
+
+\vspace{0.3cm}
 
 *Justificación analítica:*
 
