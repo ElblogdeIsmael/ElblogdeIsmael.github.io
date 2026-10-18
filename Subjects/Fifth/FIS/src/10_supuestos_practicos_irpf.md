@@ -829,3 +829,1560 @@ Una empleada de hogar, dada de alta en el régimen correspondiente de la Segurid
 
 
 - **Resolución:** Aunque sus rendimientos (20.000 €) son inferiores al límite general de 22.000 €, las rentas satisfechas por el empleador cabeza de familia no están sometidas a retención (el cabeza de familia no actúa como retenedor). Por ello, aplica el límite reducido del art. 96.3.c de la LIRPF (15.876 euros en 2026). Dado que $20.000 > 15.876$, la empleada **SÍ ESTÁ OBLIGADA** a presentar la declaración de la Renta.
+
+
+\vspace{0.6cm}
+
+## Bloque 3: Rendimientos del Capital Inmobiliario e Imputación de Rentas
+
+\vspace{0.4cm}
+
+**PRÁCTICA 13: Rendimientos del Capital Inmobiliario e Imputación de Rentas**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Rendimientos íntegros del capital inmobiliario (art. 22 LIRPF):** Comprenden el importe que por todos los conceptos se reciba del arrendatario, subarrendatario o cesionario, incluido el importe de los bienes muebles cedidos conjuntamente y los tributos o gastos repercutidos legal o contractualmente.
+
+2. **Gastos deducibles y límite de gastos financieros (art. 23.1 LIRPF y art. 13 RIRPF):** Son deducibles los tributos no estatales (IBI, tasas), gastos de comunidad, conservación, reparación y la amortización del 3% anual sobre el mayor valor entre el coste de adquisición satisfecho y el valor catastral, excluido en ambos casos el valor del suelo.
+
+3. **Rendimiento computable en caso de parentesco (art. 24 LIRPF):** Cuando el arrendatario o cesionario sea el cónyuge o un pariente, incluidos afines, hasta el tercer grado inclusive, el rendimiento neto total no puede ser inferior al que resulte de las reglas de imputación de rentas del artículo 85 de la LIRPF (1,1% o 2% del valor catastral).
+
+4. **Imputación de rentas inmobiliarias (art. 85 LIRPF):** Procede respecto de inmuebles urbanos que no generen rendimientos de capital, no estén afectos a actividades económicas y no constituyan la vivienda habitual del contribuyente. El porcentaje es del 1,1% si el valor catastral ha sido revisado en el período o en los diez anteriores, y del 2% en los restantes casos.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+D. Juan, residente en Barcelona, posee tres inmuebles:
+
+a. Un piso en Granada, adquirido en 1993 por 70.000 € y un valor catastral revisado de 90.000 € (valor del suelo 40.000 €).
+
+b. Un piso en Madrid, heredado de sus padres, y cuya propiedad comparte con su hermana al 50%. Su adquisición fue valorada en 150.000 € y su valor catastral revisado es de 200.000 € (valor del suelo 80.000 €). Está arrendado al hijo (39 años) de su hermana por 500 € mensuales. Los gastos de comunidad son 2.100 € anuales y el IBI 600 €, que pagan los propietarios.
+
+c. Un local comercial alquilado a una Compañía de Seguros por 1.200 €/mes. Los gastos de comunidad son 25 €/mes y el IBI 800 € anuales, ambos a cargo del inquilino. El valor de adquisición fue de 300.000 € en el año 2000 y su valor catastral revisado de 190.000 € (valor del suelo 90.000 €). Por acuerdo de arrendador y arrendatario, se rescinde el contrato el 30 de junio de 2026, siendo los gastos jurídicos de la rescisión del contrato de 100 €. D. Juan no encuentra nuevo arrendatario hasta febrero de 2027, cobrándose 1.300 € al mes desde el día 1 de dicho mes.
+
+Calcular estos rendimientos a efectos del IRPF.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Piso en Granada (Inmueble a disposición)**
+
+El inmueble se encuentra desocupado a disposición de su propietario, no está arrendado, no está afecto a actividades económicas y no constituye su residencia habitual. Corresponde liquidar una **imputación de rentas inmobiliarias** conforme al artículo 85 de la LIRPF:
+
+- Valor catastral revisado: 90.000 €.
+
+- Porcentaje aplicable: 1,1% (al haber sido objeto de revisión catastral).
+
+$$\text{Renta Imputada} = 1,1\% \times 90.000 \text{ €} = 990 \text{ €}$$
+
+Esta cuantía se integra directamente en la **Base Imponible General**. No se admite la deducción de ningún gasto (ni IBI, ni comunidad, ni reparaciones).
+
+\vspace{0.4cm}
+
+**2. Piso en Madrid (Arrendamiento a pariente en tercer grado)**
+
+D. Juan es copropietario al 50% junto con su hermana. El arrendatario es su sobrino (hijo de su hermana, 39 años), pariente colateral en **tercer grado**, lo que activa el control imperativo del artículo 24 de la LIRPF.
+
+*A. Liquidación ordinaria del rendimiento (50% de D. Juan):*
+
+- **Ingresos íntegros anuales (50%):**
+  $$\text{Ingresos} = (12 \text{ meses} \times 500 \text{ €}) \times 50\% = 6.000 \text{ €} \times 50\% = 3.000 \text{ €}$$
+
+- **Gastos deducibles (50%):**
+  - Gastos de comunidad: $2.100 \times 50\% = 1.050 \text{ €}$.
+  - IBI: $600 \times 50\% = 300 \text{ €}$.
+  - Amortización del inmueble (art. 23.1.b LIRPF y art. 14 RIRPF):
+    - Proporción de la construcción en el valor catastral:
+      $$\frac{\text{VC construcción}}{\text{VC total}} = \frac{200.000 - 80.000}{200.000} = \frac{120.000}{200.000} = 60\%$$
+    - Comparación de valores computables de la construcción:
+      - Valor catastral construcción: 120.000 €.
+      - Valor de adquisición construcción: $150.000 \times 60\% = 90.000 \text{ €}$.
+      - Tomamos el mayor de ambos: **120.000 €**.
+    - Cuota anual de amortización total: $3\% \times 120.000 = 3.600 \text{ €}$.
+    - Cuota imputable a D. Juan (50%): $3.600 \times 50\% = 1.800 \text{ €}$.
+  - Total gastos deducibles: $1.050 + 300 + 1.800 = 3.150 \text{ €}$.
+
+- **Rendimiento neto previo según reglas generales:**
+  $$\text{Rendimiento Neto Previo} = 3.000 - 3.150 = -150 \text{ €}$$
+
+*B. Aplicación de la regla de parentesco (art. 24 LIRPF):*
+
+El artículo 24 prohíbe que el rendimiento neto computable sea inferior a la imputación de rentas que correspondería si el inmueble no estuviese alquilado:
+
+$$\text{Rendimiento Mínimo} = 1,1\% \times \text{VC total} \times 50\% = 1,1\% \times 200.000 \times 50\% = 1.100 \text{ €}$$
+
+Al resultar el rendimiento ordinario negativo ($-150 \text{ €}$), opera obligatoriamente el suelo legal mínimo de **1.100 €**. Sobre este importe mínimo legal no procede aplicar la reducción por arrendamiento de vivienda del artículo 23.2 de la LIRPF. Se integra en la **Base Imponible General**.
+
+\vspace{0.4cm}
+
+**3. Local comercial (Arrendamiento 6 meses + Desocupación 6 meses)**
+
+Durante 2026 el local presenta dos situaciones jurídicas sucesivas:
+
+*A. Período arrendado (1 de enero a 30 de junio: 6 meses):*
+
+- **Ingresos íntegros (art. 22 LIRPF):**
+  - Rentas pactadas: $6 \text{ meses} \times 1.200 \text{ €/mes} = 7.200 \text{ €}$.
+  - Gastos repercutidos al inquilino (forman parte del ingreso íntegro):
+    - Comunidad repercutida: $6 \text{ meses} \times 25 \text{ €/mes} = 150 \text{ €}$.
+    - IBI repercutido: $800 \times (6/12) = 400 \text{ €}$.
+  - Total ingresos íntegros: $7.200 + 150 + 400 = 7.750 \text{ €}$.
+
+- **Gastos deducibles (art. 23 LIRPF):**
+  - Comunidad soportada (6 meses): 150 €.
+  - IBI soportado (6 meses): 400 €.
+  - Gastos jurídicos de rescisión del contrato: 100 € (deducibles como servicios de defensa y asesoramiento legal).
+  - Amortización computable (6 meses):
+    - Proporción de la construcción según catastro:
+      $$\frac{190.000 - 90.000}{190.000} = \frac{100.000}{190.000} \approx 52,63\%$$
+    - Valor de adquisición construcción: $300.000 \times \frac{100.000}{190.000} = 157.894,74 \text{ €}$.
+    - Mayor valor (157.894,74 € frente a 100.000 € de VC construcción): 157.894,74 €.
+    - Amortización anual: $3\% \times 157.894,74 = 4.736,84 \text{ €}$.
+    - Amortización por 6 meses: $4.736,84 \times \frac{6}{12} = 2.368,42 \text{ €}$.
+  - Total gastos deducibles: $150 + 400 + 100 + 2.368,42 = 3.018,42 \text{ €}$.
+
+- **Rendimiento neto del capital inmobiliario:**
+  $$\text{Rendimiento Neto RCI} = 7.750 - 3.018,42 = 4.731,58 \text{ €}$$
+  (No cabe reducción del art. 23.2 LIRPF al tratarse de un local de negocio).
+
+*B. Período a disposición del titular (1 de julio a 31 de diciembre: 6 meses):*
+
+- **Imputación de rentas inmobiliarias (art. 85 LIRPF):**
+  $$\text{Imputación} = 1,1\% \times 190.000 \times \frac{6}{12} = 1.045 \text{ €}$$
+
+\vspace{0.4cm}
+
+**Resumen de integración de rentas para D. Juan en el ejercicio 2026:**
+
+- Imputación de rentas piso Granada: 990 €.
+- Rendimiento neto piso Madrid (suelo legal art. 24): 1.100 €.
+- Rendimiento neto local comercial (arrendado): 4.731,58 €.
+- Imputación de rentas local comercial (desocupado): 1.045 €.
+- **Total a integrar en la Base Imponible General:** $990 + 1.100 + 4.731,58 + 1.045 = \mathbf{7.866,58 \text{ €}}$.
+
+\vspace{0.4cm}
+
+**PRÁCTICA 14: Arrendamiento de Local de Negocio y Traspaso**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Rendimientos de capital inmobiliario en locales (art. 22 LIRPF):** El arrendamiento de bienes inmuebles urbanos con destino a uso comercial genera rendimientos de capital inmobiliario sujetos a IRPF. El IVA repercutido por imperativo de la Ley del IVA (al 21%) no forma parte de los rendimientos íntegros del IRPF ni el IVA deducible constituye gasto.
+
+2. **Consecuencias fiscales del traspaso para el propietario (art. 22.1 y art. 32 LAU):** La Ley de Arrendamientos Urbanos faculta al arrendador a elevar la renta un 15% en caso de cesión total del contrato sin necesidad de contar con su consentimiento. Si en el contrato de arrendamiento o por pacto se hubiese convenido una participación del arrendador en el precio del traspaso, dicha suma constituiría un rendimiento de capital inmobiliario (con reducción del 30% por irregularidad del art. 23.3 LIRPF). Si el precio del traspaso es percibido en exclusiva por el arrendatario saliente, la incidencia para el propietario radica en la elevación forzosa de la renta periódica.
+
+3. **Consecuencias para la arrendataria cedente (art. 33.1 LIRPF):** La cesión de la posición contractual del derecho de arrendamiento a cambio de un precio genera en la arrendataria que traspasa una alteración patrimonial calificada como **ganancia patrimonial** a integrar en la Base Imponible del Ahorro.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+El Sr. Álvarez tiene un local de negocio arrendado (valor de adquisición 500.000 € y valor del suelo 200.000 €) desde el 1-Enero por el que cobra al mes la cantidad de 1.250 € más el correspondiente IVA. El 1-Agosto la arrendataria traspasa el derecho de arrendamiento a otra persona por 50.000 €, quien continúa pagando la mensualidad al Sr. Álvarez incrementada en un 15 por ciento. El IBI correspondiente al ejercicio es de 750 €.
+
+Calcular la incidencia de dicha operación en el IRPF.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Incidencia en el arrendador (Sr. Álvarez)**
+
+El Sr. Álvarez no percibe el precio del traspaso (el cual es satisfecho entre la arrendataria cedente y el nuevo cesionario), sino que ejercita su derecho a la elevación de la renta en un 15% al amparo del artículo 32 de la LAU a partir del 1 de agosto.
+
+- **Ingresos íntegros del ejercicio:**
+  - Período 1 de enero a 31 de julio (7 meses):
+    $$7 \text{ meses} \times 1.250 \text{ €/mes} = 8.750 \text{ €}$$
+  - Período 1 de agosto a 31 de diciembre (5 meses a renta incrementada en 15%):
+    $$\text{Renta mensual incrementada} = 1.250 \times 1,15 = 1.437,50 \text{ €}$$
+    $$5 \text{ meses} \times 1.437,50 \text{ €/mes} = 7.187,50 \text{ €}$$
+  - Total ingresos íntegros: $8.750 + 7.187,50 = 15.937,50 \text{ €}$.
+
+- **Gastos deducibles:**
+  - IBI del ejercicio: 750 €.
+  - Amortización del inmueble:
+    - Valor de adquisición de la construcción: $500.000 - 200.000 = 300.000 \text{ €}$.
+    - Cuota de amortización anual (3%): $3\% \times 300.000 = 9.000 \text{ €}$.
+  - Total gastos deducibles: $750 + 9.000 = 9.750 \text{ €}$.
+
+- **Rendimiento neto del capital inmobiliario:**
+  $$\text{Rendimiento Neto} = 15.937,50 - 9.750 = \mathbf{6.187,50 \text{ €}}$$
+
+Este rendimiento neto se integra en la **Base Imponible General** del Sr. Álvarez. No procede reducción alguna por arrendamiento de vivienda ni por irregularidad.
+
+\vspace{0.4cm}
+
+**2. Incidencia en la arrendataria que traspasa**
+
+La arrendataria obtiene una contraprestación dineraria de 50.000 € por la transmisión de su derecho de arrendamiento. Esta operación origina en su IRPF una **ganancia patrimonial**:
+
+$$\begin{aligned}
+\text{Ganancia Patrimonial} &= \text{Valor de traspaso (50.000 €)} \\
+&\quad - \text{Coste del derecho no amortizado y gastos}
+\end{aligned}$$
+
+Dicha ganancia patrimonial se integra en la **Base Imponible del Ahorro** de la arrendataria cedente.
+
+\vspace{0.4cm}
+
+**PRÁCTICA 15: Arrendamiento Rústico con Pago en Especie y Apartamento Turístico**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Retribuciones en especie en el capital inmobiliario (arts. 22 y 43 LIRPF):** Cuando el precio del arrendamiento se satisface mediante entrega de bienes, la renta se valora por el valor normal de mercado en el momento de la entrega.
+
+2. **Rentas plurianuales e irregulares (art. 23.3 LIRPF):** Los rendimientos íntegros que tengan un período de generación superior a dos años y se imputen en un único período impositivo se reducen en un 30% (hasta una base máxima de 300.000 €), siempre que no se perciban de forma recurrente.
+
+3. **Prorrateo temporal en arrendamientos de temporada (art. 23 y art. 85 LIRPF):** En inmuebles alternativamente alquilados y a disposición del titular, los gastos comunes y las amortizaciones sólo son deducibles en proporción a los días en que el inmueble estuvo efectivamente arrendado. Durante los días restantes procede la imputación de rentas inmobiliarias.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+La Sra. D posee:
+
+- Una finca de pastos que arrienda en 2022 a un ganadero durante cinco años. Se establece como precio que se entregarán diez vacas adultas al fin del contrato. En 2026, se entregan las vacas, valoradas en 1.500 € cada una.
+
+- Un apartamento en la playa (Valor catastral revisado 80.000 €, correspondiendo al suelo un 30%; valor de adquisición 90.000 €) que ha arrendado los meses de julio y agosto, por lo que ha obtenido 3.000 euros, disfrutando del apartamento el resto del año. De esta forma obtienen recursos para hacer frente a los gastos que consisten en 1.200 euros de intereses por un préstamo solicitado para su compra, el recibo del IBI anual de 380 euros, el seguro por 400 euros y los gastos de mantenimiento que ese año han sido de 1.780 euros, ya que han tenido que pintarlo. Además, y para evitar los problemas de gestión en la búsqueda de inquilino se ha servido de la ayuda de una plataforma online que le ha cobrado 60 €.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Finca de pastos (Cobro en especie a término de contrato plurianual)**
+
+- **Calificación y valoración:** Rendimiento íntegro de capital inmobiliario en especie cuantificado según su valor de mercado:
+  $$\text{Rendimiento Íntegro} = 10 \text{ vacas} \times 1.500 \text{ €} = 15.000 \text{ €}$$
+
+- **Imputación temporal (art. 14.1.a y 14.2.a LIRPF):** El devengo y la exigibilidad de la renta se concentran de común acuerdo al término del contrato en 2026.
+
+- **Reducción por generación plurianual (art. 23.3 LIRPF):**
+  La renta se ha generado a lo largo de un período de 5 años (2022 a 2026). Al superar los dos años y devengarse en un único ejercicio, opera la reducción del 30%:
+  $$\text{Reducción del 30\%} = 30\% \times 15.000 = 4.500 \text{ €}$$
+  $$\text{Rendimiento Neto Reducido} = 15.000 - 4.500 = \mathbf{10.500 \text{ €}}$$
+  (Se integra en la Base Imponible General).
+
+\vspace{0.4cm}
+
+**2. Apartamento en la playa (Arrendamiento estival e imputación de rentas)**
+
+*A. Rendimiento de Capital Inmobiliario (Julio y Agosto: 2 meses = 62 días = 2/12 del año):*
+
+- **Ingresos íntegros:** 3.000 €.
+
+- **Gastos deducibles específicos:**
+  - Comisión de plataforma digital de alquiler: 60 € (100% deducible por estar vinculada íntegramente al arrendamiento).
+
+- **Gastos anuales prorrateados por el período arrendado (2/12):**
+  - Intereses del préstamo: $1.200 \times \frac{2}{12} = 200 \text{ €}$.
+  - Gastos de mantenimiento y pintura: $1.780 \times \frac{2}{12} = 296,67 \text{ €}$.
+  - Comprobación del límite conjunto de intereses y reparación (art. 23.1.a LIRPF):
+    $$\text{Total intereses y conservación} = 200 + 296,67 = 496,67 \text{ €} \le 3.000 \text{ €}$$
+    (No opera limitación; son íntegramente deducibles en el ejercicio).
+  - IBI prorrateado: $380 \times \frac{2}{12} = 63,33 \text{ €}$.
+  - Seguro prorrateado: $400 \times \frac{2}{12} = 66,67 \text{ €}$.
+  - Amortización del inmueble:
+    - Valor catastral de la construcción (70%): $80.000 \times 70\% = 56.000 \text{ €}$.
+    - Valor de adquisición de la construcción (70%): $90.000 \times 70\% = 63.000 \text{ €}$.
+    - Mayor valor: 63.000 €.
+    - Amortización anual: $3\% \times 63.000 = 1.890 \text{ €}$.
+    - Amortización proporcional computable (2/12): $1.890 \times \frac{2}{12} = 315 \text{ €}$.
+
+- **Total gastos deducibles:**
+  $$\text{Total Gastos} = 60 + 200 + 296,67 + 63,33 + 66,67 + 315 = 1.001,67 \text{ €}$$
+
+- **Rendimiento neto:**
+  $$\text{Rendimiento Neto} = 3.000 - 1.001,67 = \mathbf{1.998,33 \text{ €}}$$
+  (No procede reducción del art. 23.2 LIRPF al no destinarse el arrendamiento a vivienda habitual del inquilino sino a estancia vacacional).
+
+*B. Imputación de Rentas Inmobiliarias (Resto del año: 10 meses = 10/12):*
+
+$$\text{Renta Imputada} = 1,1\% \times 80.000 \times \frac{10}{12} = \mathbf{733,33 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**PRÁCTICA 16: Usufructo Vitalicio y Nueva Reducción en Zona Tensionada**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Usufructo sobre vivienda habitual (art. 85.1 LIRPF):** El disfrute de la vivienda habitual por parte del titular del derecho real de usufructo está expresamente exento de imputación de rentas inmobiliarias. Los gastos de mantenimiento e impuestos no son deducibles al constituir gastos de la esfera privada particular.
+
+2. **Amortización de derechos reales de uso y disfrute (art. 14.3 RIRPF):** En el caso de usufructos sobre inmuebles, la amortización deducible es del **3% del coste de adquisición satisfecho** (o valor liquidado en el ISD si fue por herencia) por el propio derecho de usufructo. Respecto al mobiliario cedido conjuntamente, se amortiza a razón del 10% anual.
+
+3. **Incentivos fiscales por alquiler de vivienda en zona tensionada (art. 23.2.a LIRPF, tras Ley 12/2023):** En contratos de arrendamiento de vivienda formalizados o renovados a partir del 1 de enero de 2024, el rendimiento neto positivo goza de una **reducción del 90%** cuando el inmueble se ubique en una zona de mercado residencial tensionado y la nueva renta pactada se haya rebajado en más de un 5% respecto de la renta que constaba en el contrato anterior.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+La Sra. Gómez adquirió el usufructo vitalicio, por la herencia de su marido, de dos viviendas:
+
+a) Una vivienda cuyo valor de adquisición es de 60.000 € (VC 120.000 €, valor suelo 30.000 €) destinada a su vivienda habitual. Ha pagado las siguientes cantidades en relación a la vivienda:
+- Gastos de Comunidad: 900 €.
+- IBI: 470 €.
+- Pintura de la vivienda: 625 €.
+
+b) Un apartamento amueblado en una zona céntrica de la capital calificada como situada en zona de mercado residencial tensionado que tiene alquilado y por el que cobra una renta anual de 7.200 € (VC 120.000 €, valor suelo 30.000 €). Al vencimiento del contrato, el 30 de junio de 2025, renegocia las condiciones con el inquilino, pasando a cobrarle una renta de 6.800 €. La renta percibida hasta el vencimiento del contrato fue la proporcional al contrato anterior. Ha pagado las siguientes cantidades en relación a la vivienda:
+- Gastos de Comunidad: 700 €.
+- IBI: 370 €.
+- Mobiliario: 2.000 €.
+
+Liquidar dichos rendimientos en el IRPF.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Vivienda destinada a residencia habitual**
+
+- Al constituir la residencia permanente de la usufructuaria, **no genera imputación de rentas inmobiliarias** (art. 85.1 LIRPF).
+
+- Los desembolsos soportados (900 € de comunidad, 470 € de IBI y 625 € de pintura) no son deducibles al corresponder a consumos de carácter personal y no existir correlación con ningún ingreso sujeto.
+
+- Impacto fiscal: **0 €**.
+
+\vspace{0.4cm}
+
+**2. Apartamento amueblado en zona tensionada con bajada de renta**
+
+Liquidamos el ejercicio 2026, año en el que ya está vigente la nueva renta anual pactada:
+
+- **Ingresos íntegros anuales:** 6.800 €.
+
+- **Gastos deducibles:**
+  - Comunidad: 700 €.
+  - IBI: 370 €.
+  - Amortización del derecho real de usufructo (art. 14.3 RIRPF):
+    Tomando el valor comprobado de adquisición del usufructo para este inmueble de 60.000 €:
+    $$\text{Amortización del usufructo} = 3\% \times 60.000 = 1.800 \text{ €}$$
+  - Amortización del mobiliario cedido (art. 14.1.b RIRPF):
+    $$\text{Amortización mobiliario} = 10\% \times 2.000 = 200 \text{ €}$$
+  - Total gastos deducibles: $700 + 370 + 1.800 + 200 = 3.070 \text{ €}$.
+
+- **Rendimiento neto previo:**
+  $$\text{Rendimiento Neto Previo} = 6.800 - 3.070 = 3.730 \text{ €}$$
+
+- **Aplicación del régimen de reducción por arrendamiento de vivienda (Ley 12/2023):**
+  - Verificación de requisitos:
+    1. Vivienda situada en zona de mercado residencial tensionado declarada oficialmente.
+    2. Rebaja efectiva de la renta contractual anterior:
+       $$\text{Porcentaje de rebaja} = \frac{7.200 - 6.800}{7.200} = \frac{400}{7.200} \approx 5,56\%$$
+       Al ser $5,56\% > 5\%$, concurren todos los presupuestos para aplicar la **reducción reforzada del 90%** prevista en el artículo 23.2.a de la LIRPF.
+  - Cálculo de la reducción:
+    $$\text{Reducción del 90\%} = 90\% \times 3.730 = 3.357 \text{ €}$$
+
+- **Rendimiento neto reducido computable:**
+  $$\text{Rendimiento Neto Reducido} = 3.730 - 3.357 = \mathbf{373 \text{ €}}$$
+
+Este rendimiento se integra en la **Base Imponible General**. La ventaja fiscal es notable: de un beneficio neto real de 3.730 €, la Sra. Gómez solo somete a tributación el 10% (373 €).
+
+
+\vspace{0.6cm}
+
+## Bloque 4: Rendimientos del Capital Mobiliario
+
+\vspace{0.4cm}
+
+**PRÁCTICA 17: Delimitación de Rendimientos del Capital Mobiliario, Ganancias y Arrendamiento de Negocio**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Rendimientos del capital mobiliario integrables en la Base del Ahorro (art. 25.1, 2 y 3 LIRPF):**
+   - *Participación en fondos propios (art. 25.1):* Dividendos y primas de asistencia a juntas. Se computan íntegros y son deducibles los gastos de administración y custodia de valores negociables (art. 26.1.a LIRPF).
+   - *Cesión a terceros de capitales propios (art. 25.2):* Intereses de cuentas, certificados de depósito, y los rendimientos implícitos o explícitos de letras, pagarés y bonos (diferencia entre el valor de reembolso o venta y el valor de adquisición).
+   - *Rentas vitalicias o temporales (art. 25.3):* Derivadas de seguros de vida o contratos de imposición.
+
+2. **Rendimientos del capital mobiliario integrables en la Base General (art. 25.4 LIRPF):**
+   - Comprende la propiedad intelectual de terceros, propiedad industrial, asistencia técnica, cesión de derechos de imagen y el **arrendamiento de bienes muebles, negocios o minas** (art. 25.4.c LIRPF).
+   - En el arrendamiento de negocio o industria, el objeto arrendado es una unidad económica en funcionamiento dotada de los elementos materiales indispensables para el ejercicio de la actividad.
+   - Son deducibles los gastos necesarios para su obtención y la amortización de los bienes conforme a las normas de actividades económicas (art. 26.1.b LIRPF).
+
+3. **Delimitación frente a ganancias patrimoniales (art. 33.1 LIRPF):** La enajenación de acciones o participaciones en entidades jurídicas no genera rendimiento de capital mobiliario, sino una ganancia o pérdida patrimonial por alteración en el valor del patrimonio.
+
+4. **Retribuciones en especie del capital mobiliario (art. 43.1.f LIRPF):** La entrega de bienes promocionales por parte de entidades financieras por la imposición a plazo fijo se valora por el coste de adquisición para el pagador incrementado en un 20%, más el ingreso a cuenta que debe practicar el banco si no es repercutido al cliente.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+Dª. Lourdes Huertas, viuda de 67 años ha obtenido los siguientes rendimientos:
+
+1. Es propietaria de 4 certificados de depósito de 5.000 € cada uno, por los que el Banco le ha pagado en concepto de intereses 400 € íntegros.
+
+2. Adquirió el 1-2-2024 una letra de cambio con vencimiento el 1-2-2026 y nominal de 10.000 €. El precio de adquisición fue 8.000 € y lo ha mantenido hasta su vencimiento.
+
+3. El 1-6-2019 adquirió un pagaré de Telefónica por 3.500 €, que ha vendido en bolsa por 4.000 € el 10-3-2026. La comisión y corretaje de esta venta fue de 120 €.
+
+4. Posee 300 acciones de Acciona S.A. que han pagado este año un dividendo íntegro de 2 € por acción, habiendo descontado el Banco por gastos de administración y depósito un total de 75 €. En noviembre vendió 50 de esas acciones por un total de 20.000 € y se sabe que las había adquirido por 10.000 €. Las acciones cotizan en bolsa y ambos valores se corresponden con el de cotización en la fecha de adquisición y de venta.
+
+5. En noviembre de 2026, ha realizado una imposición a plazo fijo de 15.000 €. Al abrir la cuenta el Banco le ha entregado gratuitamente una tablet, que ha costado al Banco 200 €. El valor de mercado de la tablet es de 300 €.
+
+6. Es propietaria de un salón de belleza totalmente instalado que explota en régimen de arrendamiento. Por el alquiler de 2026, ha recibido 18.000 € más el IVA correspondiente que repercute al arrendatario. Ha tenido en este año los siguientes gastos:
+   - Leasing maquinaria: 4.500 €.
+   - Amortizaciones: 1.500 € (según tablas).
+   - Tributos locales: 800 €.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Certificados de depósito (art. 25.2 LIRPF)**
+
+- Intereses explícitos percibidos: **400 €**.
+- Rendimiento neto de capital mobiliario a integrar en la **Base Imponible del Ahorro**: **400 €**.
+- Retención soportada en origen (19%): $19\% \times 400 = 76 \text{ €}$.
+
+\vspace{0.4cm}
+
+**2. Letra de cambio mantenida hasta el vencimiento (art. 25.2 LIRPF)**
+
+- Rendimiento implícito derivado de la cesión de capitales:
+  $$\text{Rendimiento Íntegro} = 10.000 \text{ € (reembolso)} - 8.000 \text{ € (adquisición)} = \mathbf{2.000 \text{ €}}$$
+- Se integra en la **Base Imponible del Ahorro**.
+
+\vspace{0.4cm}
+
+**3. Pagaré de Telefónica enajenado en bolsa (art. 25.2 LIRPF)**
+
+- Enajenación de activos financieros con rendimiento implícito en mercado secundario:
+  $$\text{Valor neto de transmisión} = 4.000 \text{ €} - 120 \text{ € (corretaje)} = 3.880 \text{ €}$$
+  $$\text{Rendimiento Íntegro} = 3.880 \text{ €} - 3.500 \text{ €} = \mathbf{380 \text{ €}}$$
+- Se integra en la **Base Imponible del Ahorro**.
+
+\vspace{0.4cm}
+
+**4. Cartera de acciones de Acciona S.A.**
+
+*A. Dividendos percibidos (art. 25.1.a y 26.1.a LIRPF):*
+
+- Rendimiento íntegro: $300 \text{ acciones} \times 2 \text{ €} = 600 \text{ €}$.
+- Gasto deducible: Gastos de administración y custodia cobrados por la entidad depositaria: 75 €.
+- Rendimiento neto de capital mobiliario:
+  $$600 - 75 = \mathbf{525 \text{ €}}$$
+  (Se integra en la Base Imponible del Ahorro).
+
+*B. Transmisión de 50 acciones cotizadas:*
+
+- No genera rendimiento de capital mobiliario, sino una **ganancia patrimonial** (art. 33 LIRPF):
+  $$\text{Ganancia Patrimonial} = 20.000 \text{ € (transmisión)} - 10.000 \text{ € (adquisición)} = \mathbf{10.000 \text{ €}}$$
+- Se integra en el compartimento de ganancias y pérdidas patrimoniales de la **Base Imponible del Ahorro**.
+
+\vspace{0.4cm}
+
+**5. Imposición a plazo fijo con entrega de tablet (Renta en especie)**
+
+- Calificación: Rendimiento del capital mobiliario en especie por cesión de capitales (art. 25.2 y 43 LIRPF).
+- Valoración fiscal (art. 43.1.f LIRPF):
+  $$\text{Valoración} = \text{Coste para la entidad} \times 1,20 = 200 \times 1,20 = 240 \text{ €}$$
+- Ingreso a cuenta (19%):
+  $$\text{Ingreso a cuenta} = 19\% \times 240 = 45,60 \text{ €}$$
+- Rendimiento íntegro computable (asumiendo que el banco no repercute el ingreso a cuenta a la clienta):
+  $$\text{Rendimiento Íntegro} = 240 + 45,60 = \mathbf{285,60 \text{ €}}$$
+- Se integra en la **Base Imponible del Ahorro**. El ingreso a cuenta de 45,60 € actúa como pago a cuenta deducible de la cuota.
+
+\vspace{0.4cm}
+
+**6. Arrendamiento de negocio o industria (Salón de belleza equipado)**
+
+- Calificación: Al arrendarse el local junto con la maquinaria, utillaje y mobiliario necesarios para constituir una unidad económica y explotación comercial en funcionamiento, encaja en el **artículo 25.4.c de la LIRPF** (arrendamiento de bienes muebles, negocios o minas).
+
+- **Destino de integración:** A diferencia de los rendimientos anteriores, los rendimientos del art. 25.4 de la LIRPF **se integran obligatoriamente en la Base Imponible General**.
+
+- Rendimiento íntegro: 18.000 € (el IVA repercutido queda al margen del IRPF).
+
+- Gastos deducibles (art. 26.1.b LIRPF):
+  - Cuotas de leasing de la maquinaria: 4.500 €.
+  - Amortizaciones reglamentarias del inmovilizado según tablas: 1.500 €.
+  - Tributos locales no estatales: 800 €.
+  - Total gastos deducibles: $4.500 + 1.500 + 800 = 6.800 \text{ €}$.
+
+- Rendimiento neto de capital mobiliario general:
+  $$\text{Rendimiento Neto} = 18.000 - 6.800 = \mathbf{11.200 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**Cuadro resumen de liquidación para Dª. Lourdes Huertas:**
+
+1. **Base Imponible General:**
+   - Rendimiento neto arrendamiento de negocio (art. 25.4.c): **11.200 €**.
+
+2. **Base Imponible del Ahorro:**
+   - Rendimientos del capital mobiliario (arts. 25.1 y 25.2):
+     - Certificados de depósito: 400 €.
+     - Letra de cambio: 2.000 €.
+     - Pagaré de Telefónica: 380 €.
+     - Dividendos Acciona netos: 525 €.
+     - Retribución en especie tablet: 285,60 €.
+     - **Subtotal RCM del Ahorro:** $400 + 2.000 + 380 + 525 + 285,60 = \mathbf{3.590,60 \text{ €}}$.
+   - Ganancias patrimoniales derivadas de transmisiones:
+     - Ganancia por venta de acciones de Acciona: **10.000 €**.
+   - **Total Base Imponible del Ahorro:** $3.590,60 + 10.000 = \mathbf{13.590,60 \text{ €}}$.
+
+\vspace{0.6cm}
+
+## Bloque 5: Rendimientos de Actividades Económicas
+
+\vspace{0.4cm}
+
+**PRÁCTICA 18: Régimen de Estimación Directa Simplificada (Médico Radiólogo)**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Concepto de rendimientos de actividades económicas (art. 27 LIRPF):** Rentas procedentes del trabajo personal y del capital conjuntamente, o de uno solo de estos factores, que impliquen la ordenación por cuenta propia de medios de producción y de recursos humanos con la finalidad de intervenir en la producción o distribución de bienes o servicios.
+
+2. **Ámbito de la Estimación Directa Simplificada (art. 30 LIRPF y arts. 28-31 RIRPF):**
+   - Aplica a empresarios y profesionales cuyo importe neto de la cifra de negocios para el conjunto de sus actividades no supere 600.000 € en el año anterior y no hayan renunciado al régimen.
+   - Las amortizaciones del inmovilizado material se practican de forma lineal según la tabla simplificada aprobada por el Ministerio de Hacienda.
+   - Las provisiones deducibles y los gastos de difícil justificación se cuantifican mediante un porcentaje a tanto alzado del **5% sobre el rendimiento neto previo**, con un **límite máximo legal de 2.000 euros anuales**.
+
+3. **Gastos no deducibles y reglas con familiares (art. 30.2 LIRPF):**
+   - Las retribuciones satisfechas al cónyuge o a hijos menores son deducibles únicamente cuando se justifique la existencia de un contrato laboral formal, la efectiva prestación de los servicios y el alta en el régimen correspondiente de la Seguridad Social, sin que el salario pactado supere el precio de mercado.
+   - Las pérdidas patrimoniales y ganancias derivadas de elementos afectos (inmuebles, maquinaria) no se integran en el rendimiento neto de la actividad económica, sino que se cuantifican con arreglo a las normas de las ganancias y pérdidas patrimoniales (art. 28.2 LIRPF) y se integran en la Base Imponible del Ahorro.
+   - Los dividendos de acciones no son rendimientos de la actividad profesional (los valores mobiliarios no son elementos afectos, art. 29.1.c LIRPF).
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+D. JLP casado con Doña ESM en régimen de gananciales, es médico radiólogo y ejerce dicha actividad en una consulta privada situada en un local adquirido por el matrimonio. Para la determinación de sus rendimientos utiliza el régimen de Estimación Directa Simplificada y el criterio de devengo. Según los datos que constan en sus libros registros, los ingresos y gastos correspondientes son los siguientes:
+
+INGRESOS:
+- Honorarios por prestación de servicios: 115.000 €
+- Conferencias y publicaciones: 10.000 €
+- Dividendos por acciones adquiridas con beneficios de su actividad: 1.000 €
+
+GASTOS:
+- Sueldos y salarios: 40.000 €
+- Seguridad Social empleados: 6.500 €
+- Compras material radiológico y sanitario: 23.000 €
+- Gastos financieros: 1.000 €
+- Amortizaciones (según tablas de amortización simplificada): 8.500 €
+- IVA soportado en gastos corrientes: 1.750 €
+- Tributos no estatales: 1.400 €
+- Asistencia congreso radiológico: 2.500 €
+- Adquisición de libros y revistas médicas: 700 €
+- Energía, agua y teléfono: 6.000 €
+- Reparaciones y conservación: 850 €
+- Recibo de comunidad del local: 1.320 €
+
+PARTIDAS EXTRAORDINARIAS:
+- Incremento Patrimonio venta local consulta: 120.000 €
+- Disminución patrimonio venta equipo rayos X: 7.000 €
+
+Otros datos de interés: En sueldos y salarios figuran 1.200 € entregados a su esposa por los servicios prestados como auxiliar administrativo en la clínica en el mes de Julio durante las vacaciones del personal.
+
+Determinar el rendimiento neto de la actividad de acuerdo con el método de estimación directa simplificada, sabiendo que D. JLP no renunció al mismo en los plazos oportunos.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Calificación y depuración de los Ingresos íntegros computables**
+
+- **Honorarios por servicios médicos:** 115.000 €. Son ingresos íntegros de la actividad profesional.
+- **Conferencias y publicaciones:** 10.000 €. Al estar directamente vinculadas a la actividad médica del profesional y gestionarse con sus medios, se computan como ingresos de la actividad económica.
+- **Dividendos de acciones (1.000 €):** Los valores mobiliarios no pueden afectarse a actividades económicas (art. 29.1.c LIRPF). Constituyen rendimientos del capital mobiliario a integrar en la Base Imponible del Ahorro, por lo que **no computan aquí**.
+- **Partidas extraordinarias (venta de local y equipo de rayos X):** Por expresa disposición del artículo 28.2 de la LIRPF, las ganancias o pérdidas patrimoniales derivadas de elementos del inmovilizado afectos no forman parte del rendimiento de la actividad, sino que se integran como ganancias y pérdidas patrimoniales en la Base del Ahorro.
+- **Total ingresos íntegros computables:**
+  $$\text{Total Ingresos} = 115.000 + 10.000 = \mathbf{125.000 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**2. Calificación y depuración de los Gastos deducibles**
+
+- **Sueldos y salarios y retribución a la cónyuge:**
+  - El total de nóminas asciende a 40.000 €, que incluye 1.200 € abonados a la cónyuge.
+  - Conforme al artículo 30.2.2ª de la LIRPF, para que el sueldo al cónyuge sea deducible se exige contrato formal y afiliación en el régimen correspondiente de la Seguridad Social. Al tratarse de una colaboración ocasional durante un mes en régimen de gananciales sin contrato laboral por cuenta ajena ni alta formal, los 1.200 € carecen de deducibilidad fiscal.
+  - Sueldos y salarios deducibles: $40.000 - 1.200 = \mathbf{38.800 \text{ €}}$.
+- **Seguridad Social de los empleados:** **6.500 €**.
+- **Material radiológico y sanitario consumible:** **23.000 €**.
+- **Gastos financieros:** **1.000 €**.
+- **Amortizaciones:** **8.500 €** (calculadas según las tablas simplificadas).
+- **IVA soportado (1.750 €):** Los servicios médicos de diagnóstico y tratamiento están exentos de IVA conforme al artículo 20.Uno.3º de la Ley del IVA. El profesional médico no presenta declaraciones de IVA ni tiene derecho a deducción en dicho impuesto, de modo que el IVA soportado no deducible es **mayor importe deducible como gasto en el IRPF**.
+- **Tributos no estatales (IBI, tasas locales):** **1.400 €**.
+- **Congresos médicos y publicaciones científicas:** $2.500 + 700 = \mathbf{3.200 \text{ €}}$ (gastos correlacionados con la formación continua profesional).
+- **Suministros del local exclusivo de consulta:** **6.000 €**.
+- **Reparaciones y comunidad del local ganancial afecto:**
+  - El local pertenece al matrimonio en régimen de gananciales y está afecto en su totalidad al ejercicio de la consulta profesional. Los gastos de mantenimiento y comunidad son 100% deducibles de la actividad:
+    $$850 + 1.320 = \mathbf{2.170 \text{ €}}$$
+
+- **Total gastos ordinarios deducibles:**
+  $$\begin{aligned}
+\text{Gastos Ordinarios} &= 38.800 + 6.500 + 23.000 + 1.000 + 8.500 \\
+&\quad + 1.750 + 1.400 + 3.200 + 6.000 + 2.170 = \mathbf{92.320 \text{ €}}
+\end{aligned}$$
+
+\vspace{0.4cm}
+
+**3. Determinación del Rendimiento Neto Previo**
+
+$$\text{Rendimiento Neto Previo} = 125.000 - 92.320 = \mathbf{32.680 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**4. Provisiones deducibles y gastos de difícil justificación (art. 30.2.4ª LIRPF)**
+
+En Estimación Directa Simplificada se deduce el 5% del rendimiento neto previo positivo, con un tope anual de 2.000 €:
+
+$$\text{Cálculo del 5\%} = 5\% \times 32.680 = 1.634 \text{ €}$$
+
+Al ser $1.634 \text{ €} \le 2.000 \text{ €}$, se deduce íntegramente la cantidad de **1.634 €**.
+
+\vspace{0.4cm}
+
+**5. Rendimiento Neto de la Actividad Económica**
+
+$$\text{Rendimiento Neto Final} = 32.680 - 1.634 = \mathbf{31.046 \text{ €}}$$
+
+Este rendimiento se integra en la **Base Imponible General** de D. JLP.
+
+*(Nota: Las alteraciones patrimoniales por la venta del local, con ganancia de 120.000 €, y la pérdida del equipo de rayos X de 7.000 €, arrojan un saldo neto positivo de 113.000 € que se integrará en la Base Imponible del Ahorro).*
+
+\vspace{0.4cm}
+
+**PRÁCTICA 19: Estimación Objetiva frente a Estimación Directa: Concurrencia y Renuncia**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Límites de exclusión de la Estimación Objetiva (art. 31 LIRPF y Orden HFP de Módulos):**
+   - Límite cuantitativo general por volumen de rendimientos íntegros: 250.000 € anuales (manteniéndose el régimen transitorio prorrogado legalmente).
+   - Límite por volumen de compras en bienes y servicios: 250.000 € anuales.
+   - La superación de estos límites determina la exclusión obligatoria del régimen de estimación objetiva y la inclusión en estimación directa simplificada a partir del ejercicio inmediato siguiente.
+
+2. **Diferencias de mecánica liquidadora:**
+   - La *Estimación Objetiva* prescinde de los ingresos y gastos reales y determina la base a partir de magnitudes objetivas (personal, superficie, potencia eléctrica).
+   - La *Estimación Directa* grava el beneficio real efectivo (ingresos computables menos gastos deducibles y amortizaciones). Si los costes operativos superan los ingresos, el rendimiento neto es negativo (pérdidas), no generándose cuota tributaria.
+
+3. **Plazos y efectos de la renuncia a módulos (art. 33 RIRPF):**
+   - La renuncia debe formularse durante el mes de **diciembre anterior** al inicio del año natural en que deba surtir efecto, o bien mediante la presentación en plazo del pago fraccionado del primer trimestre (modelo 130) en estimación directa.
+   - La renuncia tiene efectos vinculantes por un período mínimo de **tres años**.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+D. José tiene una tienda de muebles de electrodomésticos y muebles de cocina desde 2015 (Epígrafe IAE 653.2). Los ingresos netos de la actividad en 2026 han sido de 200.000 € y las compras 125.000 € y el personal asalariado de 3 trabajadores. El consumo de energía ha sido de 15.000 KW. Y el negocio se desarrolla en un local de 30 m2.
+
+En 2025, los ingresos netos de la actividad fueron 100.000 € y las compras 50.000 € y el personal asalariado de 2 personas a tiempo completo.
+
+Dentro del inmovilizado de la empresa encontramos:
+- Maquinaria de corte de madera, adquirida en 2024 por 50.000 €.
+- Local adquirido en 2020 por 150.000 € siendo el valor del suelo el 30%.
+- Herramientas nuevas de 2026: 10 unidades a 250 € euros.
+
+Se sabe que se viene amortizando a coeficientes máximos y que en concepto de salarios ha pagado 90.000 €. Las cantidades por precio de adquisición de los elementos mencionados son sin IVA.
+
+- Calcular el rendimiento de la actividad económica de la forma más ventajosa fiscalmente.
+- Si está en estimación objetiva, ¿cuándo puede proceder a su renuncia si quiere pasar a estimación directa?
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Análisis de exclusión de la Estimación Objetiva**
+
+- Volumen de ingresos 2025: 100.000 € $\le 250.000 \text{ €}$.
+- Volumen de compras 2025: 50.000 € $\le 250.000 \text{ €}$.
+- En 2026 sus ingresos son 200.000 € y compras 125.000 €, manteniéndose dentro de los umbrales de exclusión de módulos. D. José puede permanecer legalmente en estimación objetiva en 2026 si no hubiese renunciado.
+
+\vspace{0.4cm}
+
+**2. Comparación técnica de los regímenes en el ejercicio 2026**
+
+*A. Liquidación en Estimación Directa Simplificada (Rendimiento Real):*
+
+- **Ingresos íntegros:** 200.000 €.
+- **Gastos operativos deducibles:**
+  - Compras de mercancías: 125.000 €.
+  - Gastos de personal (salarios): 90.000 €.
+  - Subtotal gastos corrientes inmediatos: $125.000 + 90.000 = 215.000 \text{ €}$.
+- **Amortizaciones deducibles a coeficientes máximos:**
+  - Maquinaria de corte (50.000 € al coeficiente máximo de tabla, ej. 12%): 6.000 €.
+  - Local comercial (construcción: $150.000 \times 70\% = 105.000 \text{ €}$ al 3%): 3.150 €.
+  - Herramientas de 2026 (10 unidades a 250 €): Al tratarse de elementos con un valor unitario inferior a 300 €, gozan de la libertad de amortización para bienes de escaso valor (art. 12.3 LIS): $10 \times 250 = 2.500 \text{ €}$ deducibles íntegramente en el año de adquisición.
+  - Total amortizaciones: $6.000 + 3.150 + 2.500 = 11.650 \text{ €}$.
+
+- **Rendimiento neto en Estimación Directa:**
+  $$\text{Rendimiento Neto} = 200.000 - 215.000 - 11.650 = -\mathbf{26.650 \text{ €}}$$
+
+En Estimación Directa la actividad arroja **pérdidas fiscales de 26.650 €**. Por tanto, la base imponible procedente de la actividad es **cero** y, además, ese saldo negativo compensa otros rendimientos del contribuyente o genera bases liquidables generales negativas a compensar en los 4 ejercicios siguientes.
+
+*B. Liquidación en Estimación Objetiva (Módulos):*
+
+En módulos el rendimiento se fija sobre magnitudes fijas independientemente de los resultados reales de explotación (personal, metros cuadrados y kilovatios consumidos). Aunque el comerciante esté en pérdidas económicas reales, la Orden ministerial le imputa un rendimiento neto positivo predeterminado que le obligará a pagar cuota en el IRPF.
+
+*Conclusión sobre la opción más ventajosa:*
+
+La modalidad **más ventajosa fiscalmente es la Estimación Directa Simplificada**, ya que reconoce la realidad económica del negocio en un ejercicio con elevados costes salariales y de compras, evitando tributar por beneficios ficticios.
+
+\vspace{0.4cm}
+
+**3. Plazo y forma de renuncia a la Estimación Objetiva**
+
+Para pasar a tributar en Estimación Directa:
+
+- **Renuncia expresa:** Debe presentarse mediante declaración censal (modelo 036 o 037) durante el **mes de diciembre anterior** al ejercicio en que deba surtir efecto (para 2026, durante diciembre de 2025).
+
+- **Renuncia tácita:** Presentando en plazo hábil la declaración del pago fraccionado del primer trimestre del ejercicio en el **modelo 130** propio del régimen de estimación directa.
+
+- **Efectos temporales:** La renuncia obliga a permanecer en estimación directa durante un período obligatorio mínimo de **tres años**.
+
+\vspace{0.4cm}
+
+**PRÁCTICA 20: Cálculo del Rendimiento Neto en Estimación Objetiva (Hostal)**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Orden de Módulos para actividades hosteleras (Epígrafe IAE 682):** Los hostales y pensiones computan como módulos el personal no asalariado, el personal asalariado, las plazas autorizadas y la superficie del local.
+
+2. **Reglas específicas de cuantificación de unidades de módulo:**
+   - *Personal no asalariado (titular):* El empresario que trabaje en la actividad computa como 1 unidad (1.800 horas anuales).
+   - *Personal asalariado familiar:* Los familiares que convivan con el titular (hijos menores de 19 años) que tengan contrato y alta en Seguridad Social gozan de una **reducción del 50%** en el cómputo de la unidad de personal asalariado.
+   - *Trabajadores a tiempo parcial:* Las unidades se calculan por el cociente entre las horas efectivas pactadas al año y 1.800 horas.
+
+3. **Amortizaciones en módulos y libertad de amortización:** La amortización del inmovilizado material se deduce del rendimiento de los módulos aplicando la tabla de amortización específica de la Orden ministerial. Los bienes de valor inferior a 300 € pueden amortizarse íntegramente en el año de adquisición (libertad de amortización).
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+D. Antonio tiene un pequeño hostal en el centro de Granada (Epígrafe IAE 682) abierto desde 2012. Los ingresos netos de la actividad en 2025 fueron 88.000 €, las compras de 12.000 € y el personal asalariado fue de 0,5 trabajadores. D. Antonio trabaja personalmente en el hostal y, en 2026, tiene además como personal con contrato laboral y alta en la seguridad social a uno de sus hijos de 18 años, que trabaja a tiempo completo, y a un sobrino de 25 años que trabaja en la actividad a tiempo parcial 500 horas.
+
+El hostal tiene cabida para 20 personas, con un total de 10 habitaciones. El hostal tiene 180 m2 y se adquirió en 2010 por 150.000 €. Se sabe también que D. Antonio compró en 2020 una furgoneta necesaria para el desarrollo de la actividad, de segunda mano con 15 CVF, cuyo valor de adquisición fue 6.000 €. En 2026 se ha adquirido una impresora por 200 €. Se viene amortizando al máximo de lo permitido fiscalmente.
+
+Calcular los rendimientos de la actividad en estimación objetiva del IRPF.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Verificación de exclusión de módulos**
+
+- Ingresos de 2025: 88.000 € (inferior a 250.000 €).
+- Compras de 2025: 12.000 € (inferior a 250.000 €).
+- Personal asalariado: 0,5 personas (no supera el límite de personal asalariado fijado en la Orden para hostelería, que es de 10 personas).
+- La actividad puede tributar en estimación objetiva en 2026.
+
+\vspace{0.4cm}
+
+**2. Cuantificación de las Unidades de Módulo en 2026**
+
+- **Módulo 1: Personal no asalariado:**
+  D. Antonio trabaja a tiempo completo en el hostal = **1,00 persona**.
+
+- **Módulo 2: Personal asalariado:**
+  - *Hijo de 18 años:* Trabaja a tiempo completo con contrato y alta en Seguridad Social. Al tener 18 años (menor de 19 años), se le aplica la reducción del 50%:
+    $$\text{Unidades hijo} = 1 \times 50\% = 0,50 \text{ personas}$$
+  - *Sobrino de 25 años:* Trabaja a tiempo parcial 500 horas al año:
+    $$\text{Unidades sobrino} = \frac{500 \text{ horas}}{1.800 \text{ horas/año}} = 0,28 \text{ personas}$$
+  - Total personal asalariado = $0,50 + 0,28 = \mathbf{0,78 \text{ personas}}$.
+
+- **Módulo 3: Plazas autorizadas:**
+  Capacidad para 20 huéspedes = **20 plazas**.
+
+- **Módulo 4: Superficie del local:**
+  Superficie de 180 m2 = **180 m2**.
+
+\vspace{0.4cm}
+
+**3. Determinación de las Amortizaciones Deducibles**
+
+D. Antonio amortiza al coeficiente máximo lineal permitido en la tabla de estimación objetiva:
+
+- **Inmueble del hostal (adquirido en 2010 por 150.000 €):**
+  - Valor atribuible a la construcción (70%): $150.000 \times 70\% = 105.000 \text{ €}$.
+  - Coeficiente máximo en tablas de módulos (construcciones): 3% anual.
+  - Amortización anual: $3\% \times 105.000 = \mathbf{3.150 \text{ €}}$.
+
+- **Furgoneta usada (adquirida en 2020 por 6.000 €):**
+  - Coeficiente máximo en tablas de módulos (vehículos): 16% anual.
+  - Al tratarse de un elemento adquirido usado de segunda mano, la normativa permite aplicar hasta el **doble del coeficiente máximo**: $16\% \times 2 = 32\%$.
+  - Amortización anual: $32\% \times 6.000 = \mathbf{1.920 \text{ €}}$.
+
+- **Impresora de 2026 (adquirida por 200 €):**
+  - Por su importe inferior a 300 €, aplica la libertad de amortización para bienes de escaso valor en el ejercicio de entrada en funcionamiento: **200 €**.
+
+- **Total amortizaciones deducibles:**
+  $$\text{Total Amortizaciones} = 3.150 + 1.920 + 200 = \mathbf{5.270 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**4. Esquema de cuantificación del Rendimiento Neto de Módulos**
+
+1. **Rendimiento neto previo:** Suma del producto de las unidades de cada módulo por su valor unitario oficial según la Orden ministerial de módulos (personal asalariado, no asalariado, plazas y superficie).
+2. **Minoraciones por incentivos al empleo e inversión:** Deducción por incremento de plantilla y amortizaciones deducibles ($5.270 \text{ €}$).
+3. **Rendimiento neto minorado:** Rendimiento previo menos minoraciones y amortizaciones.
+4. **Índices correctores:** Aplicación del índice corrector para empresas de pequeña dimensión y municipios de reducida población.
+5. **Reducción general de la Orden de Módulos:** Aplicación de la reducción general del rendimiento neto de módulos aprobada en la Orden del ejercicio.
+
+
+\vspace{0.6cm}
+
+## Bloque 6: Ganancias y Pérdidas Patrimoniales
+
+\vspace{0.4cm}
+
+**PRÁCTICA 21: Transmisión de Inmuebles Afectos y Desafectados y Régimen de Mejoras**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Determinación del valor de adquisición y transmisión (arts. 34 y 35 LIRPF):**
+   - El *valor de adquisición* está formado por el importe real de la adquisición satisfecho, más el coste de las inversiones y mejoras efectuadas, y los gastos y tributos inherentes a la adquisición satisfechos por el adquirente. De esta suma se descuentan las amortizaciones que hubiesen sido fiscalmente deducibles.
+   - El *valor de transmisión* es el importe real de enajenación menos los gastos y tributos satisfechos por el transmitente (como el impuesto municipal sobre plusvalía, IIVTNU).
+
+2. **Inmuebles desafectados de actividades económicas (art. 28.3 y art. 40 RIRPF):**
+   - La desafectación de bienes de una actividad económica no genera por sí misma ganancia o pérdida patrimonial en el momento en que se produce.
+   - Al transmitirse el bien con posterioridad, para calcular la ganancia patrimonial se computa como valor de adquisición el valor contable resultante al tiempo de la desafectación (precio de compra original más gastos menos amortizaciones fiscalmente practicadas durante la afectación), adicionando las mejoras posteriores y deduciendo las amortizaciones del período de desafectación si hubiese estado arrendado.
+
+3. **Distinción entre mejoras y gastos de conservación:** Las obras que suponen una ampliación del edificio o la incorporación de nuevos elementos estructurales o instalaciones fijas permanentes (piscinas, climatización integral, cerramientos) se consideran inversiones y mejoras y se suman al valor de adquisición.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+D. Juan Pérez, abogado en ejercicio transmite dos inmuebles en 2026:
+
+- Un piso adquirido el 1 de enero de 2017 para su despacho profesional con un valor de adquisición de 150.000 € (valor catastral 140.000 €). Dado el bajo rendimiento de su actividad decide ejercer la misma en su propio domicilio (el 1 de enero de 2018) y procede en 2026 a vender dicho inmueble por 175.000 €. Los gastos de adquisición fueron de 5.000 € y los de enajenación a cargo de D. Juan de 2.000 €. En 2019 realizó mejoras por valor de 7.000 € correspondientes a un sistema de aire acondicionado y contraventanas.
+
+- Adquirió el 10/10/2015 un chalet por el precio de 200.000 € (valor catastral 190.000 €) más 4.000 € en concepto de Impuesto sobre Transmisiones Patrimoniales. Los restantes desembolsos efectuados con motivo de la adquisición fueron 800 € en concepto de notaría y registro. En Abril de 2016 contrató la construcción de una piscina así como la remodelación del interior del chalet. Dichas obras se efectuaron durante los meses de Mayo y Junio y su importe, en cada caso, ascendió a 5.000 € (total de 10.000 euros). El día 4/11/2026 vendió el chalet por 270.000 €, abonando en concepto de Impuesto Incremento Valor de los Terrenos la cantidad de 6.000 €.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Despacho profesional desafectado y posterior venta en 2026**
+
+- **Valor neto de transmisión:**
+  $$\text{VT} = 175.000 \text{ € (precio de venta)} - 2.000 \text{ € (gastos de enajenación)} = \mathbf{173.000 \text{ €}}$$
+
+- **Valor de adquisición computable:**
+  - Precio de compra: 150.000 €.
+  - Gastos inherentes a la adquisición: 5.000 €.
+  - Inversiones y mejoras de 2019: 7.000 € (el aire acondicionado y cerramientos aumentan de forma permanente la capacidad y valor del inmueble).
+  - Amortizaciones deducidas durante el período de afectación a la actividad profesional:
+    - Estuvo afecto durante 1 año natural (2017).
+    - Asumiendo la proporción ordinaria de catastro (70% construcción):
+      $$\text{Construcción amortizable} = (150.000 + 5.000) \times 70\% = 108.500 \text{ €}$$
+      $$\text{Amortización del año 2017} = 3\% \times 108.500 = 3.255 \text{ €}$$
+    - Durante los años 2018 a 2026 el inmueble permaneció desafectado sin estar arrendado, por lo que no genera amortización deducible en esos ejercicios.
+  - Valor de adquisición neto:
+    $$\text{VA} = 150.000 + 5.000 + 7.000 - 3.255 = \mathbf{158.745 \text{ €}}$$
+
+- **Ganancia patrimonial:**
+  $$\text{Ganancia Patrimonial} = \text{VT} - \text{VA} = 173.000 - 158.745 = \mathbf{14.255 \text{ €}}$$
+  (Se integra en la Base Imponible del Ahorro).
+
+\vspace{0.4cm}
+
+**2. Chalet con obras de mejora y venta en 2026**
+
+- **Valor neto de transmisión:**
+  $$\text{VT} = 270.000 \text{ €} - 6.000 \text{ € (plusvalía municipal IIVTNU)} = \mathbf{264.000 \text{ €}}$$
+
+- **Valor de adquisición computable:**
+  - Precio de adquisición: 200.000 €.
+  - Tributos satisfechos (ITP): 4.000 €.
+  - Notaría y registro: 800 €.
+  - Inversiones y mejoras de 2016 (piscina y reforma integral): $5.000 + 5.000 = 10.000 \text{ €}$.
+  - Total valor de adquisición:
+    $$\text{VA} = 200.000 + 4.000 + 800 + 10.000 = \mathbf{214.800 \text{ €}}$$
+
+- **Ganancia patrimonial:**
+  $$\text{Ganancia Patrimonial} = \text{VT} - \text{VA} = 264.000 - 214.800 = \mathbf{49.200 \text{ €}}$$
+  (Se integra en la Base Imponible del Ahorro).
+
+\vspace{0.4cm}
+
+**Saldo conjunto de ganancias patrimoniales de D. Juan Pérez en 2026:**
+$$\text{Total Ganancias BIA} = 14.255 + 49.200 = \mathbf{63.455 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**PRÁCTICA 22: Tratamiento Fiscal de Donaciones, Premios, Inmuebles y Pérdidas por Estafa**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Donaciones inter vivos de bienes (art. 33.1 y 33.5.c LIRPF):**
+   - La donación genera en el donante una ganancia patrimonial por la diferencia entre el valor de mercado al tiempo de la transmisión lucrativa y el valor de adquisición.
+   - Si de la donación resulta una diferencia negativa (valor de transmisión inferior al de adquisición), el artículo 33.5.c de la LIRPF prohíbe de forma taxativa computar pérdidas patrimoniales derivadas de transmisiones lucrativas inter vivos (*regla anti-liberalidades*). La pérdida es nula fiscalmente.
+
+2. **Premios y sueldos vitalicios (art. 33.1 y art. 25.3 LIRPF):**
+   - El reconocimiento del derecho a percibir una renta periódica sin contraprestación se califica en el momento de la concesión como ganancia patrimonial no derivada de transmisión a integrar en la Base Imponible General.
+   - Las cuotas periódicas percibidas a partir de dicho reconocimiento tributan como rendimientos de capital mobiliario procedentes de rentas vitalicias.
+
+3. **Pérdidas derivadas de estafas informáticas (art. 33.1 y art. 14.2.k LIRPF):**
+   - La sustracción patrimonial derivada de ciberdelitos, denunciada ante las autoridades judiciales o policiales y con crédito no cobrado o insolvencia acreditada, da lugar a una pérdida patrimonial que no deriva de la transmisión de elementos patrimoniales.
+   - Se integra en la Base Imponible General del IRPF.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+Determine las consecuencias fiscales de las siguientes situaciones:
+
+- Doña Elena adquirió en bolsa el día 1/12/2017 un paquete de acciones de la S.A. "V" por importe de 5.000 €. El día 30/10/2026 las donó a su hijo con motivo de su vigésimo cumpleaños. La valoración de estas acciones en la citada fecha, según su cotización, ascendió a 7.000 €, cantidad que el hijo declaró como valor de las mismas a efectos del Impuesto Sucesiones y Donaciones. Considerar el mismo supuesto pero con un valor en el momento de la transmisión de 3.000 €.
+
+- D. Luis recibe un premio de una reconocida marca de café de "sueldo para toda la vida" consistente en 2.000 € al mes. Comienza a percibirlo el 1 de mayo de 2026.
+
+- En enero de 2026, D. Antonio regala a su hijo un piso adquirido hace 15 años por 135.000 € más 3.400 € en concepto del Impuesto de Transmisiones onerosas. Se sabe que el piso se valora en 200.000 € en el ISyD.
+
+- En febrero de 2025, Dña. Ana fue objeto de una estafa por internet, denunciando los hechos a la Guardia Civil y una reclamación al banco que finalmente no han tenido resultados. El importe de la estafa fue de 6.000 €.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Donación de acciones por Doña Elena a su hijo**
+
+- **Caso general (valor de cotización de 7.000 €):**
+  - Para el donatario (hijo): tributa en el Impuesto sobre Sucesiones y Donaciones (ISD) por la adquisición lucrativa (7.000 €).
+  - Para la donante (Elena): en el IRPF se genera una **ganancia patrimonial**:
+    $$\text{Ganancia Patrimonial} = 7.000 \text{ € (donación)} - 5.000 \text{ € (compra)} = \mathbf{2.000 \text{ €}}$$
+    Se integra en la **Base Imponible del Ahorro** de Doña Elena.
+
+- **Variante con valor de mercado de 3.000 €:**
+  - La diferencia matemática arroja una pérdida: $3.000 - 5.000 = -2.000 \text{ €}$.
+  - El artículo 33.5.c de la LIRPF determina que **no se computarán como pérdidas patrimoniales las debidas a transmisiones lucrativas por actos ínter vivos**.
+  - Consecuencia fiscal: **Pérdida computable de 0 €**. Doña Elena no puede integrar ni compensar esta cuantía negativa en su declaración.
+
+\vspace{0.4cm}
+
+**2. Premio concedido a D. Luis ("Sueldo para toda la vida")**
+
+La Dirección General de Tributos establece una tributación diferenciada en dos planos temporales:
+
+- **En el momento de la concesión (año 2026):**
+  El valor de rescate actuarial o prima única abonada por la marca a una entidad aseguradora para garantizar el pago vitalicio constituye una **ganancia patrimonial no derivada de la transmisión de elementos patrimoniales**. Se integra en la **Base Imponible General** sujeta a retención del 19%.
+
+- **En la percepción de las mensualidades (2.000 €/mes desde mayo = 8 meses = 16.000 €):**
+  Las mensualidades periódicas tributan como **rendimientos del capital mobiliario** procedentes de rentas vitalicias (art. 25.3.a LIRPF), sometidas al porcentaje legal de integración según la edad del beneficiario e integrables en la Base Imponible del Ahorro.
+
+\vspace{0.4cm}
+
+**3. Donación de inmueble por D. Antonio a su hijo**
+
+- Valor de adquisición para el padre donante:
+  $$\text{VA} = \text{Precio de compra (135.000 €)} + \text{ITP (3.400 €)} = 138.400 \text{ €}$$
+
+- Valor de transmisión lucrativa (determinado según las normas del ISD): 200.000 €.
+
+- Ganancia patrimonial gravada en el IRPF de D. Antonio:
+  $$\text{Ganancia Patrimonial} = 200.000 - 138.400 = \mathbf{61.600 \text{ €}}$$
+  Se integra en la **Base Imponible del Ahorro** del padre. Al haberse adquirido en 2011 (después de 1994), no proceden coeficientes de abatimiento. El hijo tributará en el ISD por la adquisición lucrativa del inmueble.
+
+\vspace{0.4cm}
+
+**4. Estafa bancaria por internet de 6.000 € sufrida por Dña. Ana**
+
+- Conforme al artículo 33.1 y a la regla especial del artículo 14.2.k de la LIRPF, cuando la pérdida de fondos derive de un ilícito penal formalmente denunciado y el cobro devenga inviable o infructuoso, se reconoce una **pérdida patrimonial no derivada de la transmisión de elementos patrimoniales**.
+
+- **Integración y compensación:** Se integra en la **Base Imponible General** (art. 48 LIRPF). Se compensa en primer término con las ganancias patrimoniales de la base general del ejercicio; de no existir saldo suficiente, el remanente compensa hasta el **25% del saldo positivo de los restantes rendimientos e imputaciones generales**, pudiendo arrastrarse los saldos no absorbidos a los cuatro años inmediatos siguientes.
+
+\vspace{0.6cm}
+
+## Bloque 7: Liquidación, Integración y Compensación de Rentas
+
+\vspace{0.4cm}
+
+**PRÁCTICA 23: Determinación de la Base Imponible General y de la Base Imponible del Ahorro**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Composición de la Base Imponible General (art. 48 LIRPF):**
+   - Integración de los rendimientos netos del trabajo, actividades económicas, capital inmobiliario, imputaciones de rentas inmobiliarias y otros rendimientos de capital mobiliario del art. 25.4.
+   - Integración separada del saldo neto de ganancias y pérdidas patrimoniales que no deriven de transmisiones patrimoniales.
+
+2. **Composición de la Base Imponible del Ahorro (art. 49 LIRPF):**
+   - *Compartimento A:* Saldo neto de rendimientos del capital mobiliario procedentes de la participación en fondos propios (dividendos), cesión de capitales (intereses, pagarés, depósitos) y rentas de seguros (arts. 25.1, 2 y 3).
+   - *Compartimento B:* Saldo neto de ganancias y pérdidas patrimoniales derivadas de la transmisión de elementos patrimoniales (cualquiera que sea su plazo de permanencia).
+
+3. **Reglas de compensación en el ahorro (art. 49.1 LIRPF):**
+   - Si el saldo de uno de los dos compartimentos es negativo, se compensa con el saldo positivo del otro compartimento con el **límite máximo del 25%** de dicho saldo positivo.
+   - El saldo negativo remanente se compensará en los cuatro ejercicios inmediatos siguientes.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+Durante 2026 un contribuyente ha obtenido las siguientes rentas:
+
+(1) Rendim. neto trabajo: 18.000 €
+
+(2) Rendim. neto capital mobiliario (LIRPF art. 25.1): 12.000 €
+
+(3) Rendim. neto actividades económicas: 11.000 €
+
+(4) Imputación rentas inmobiliarias: 4.800 €
+
+(5) Ganancia patrimonial de un fondo de inversión adquirido hace dos años: 18.000 €
+
+(6) Pérdida patrimonial de acciones adquiridas hace tres años: 28.000 €
+
+(7) Ganancia patrimonial de acciones adquiridas hace seis meses: 18.000 €
+
+(8) Pérdida patrimonial de un fondo de inversión adquirido hace nueve meses: 30.000 €
+
+Determinar la base imponible general y la base imponible del ahorro.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Determinación de la Base Imponible General (BIG)**
+
+Integración de rendimientos e imputaciones de renta al amparo del artículo 48 de la LIRPF:
+
+- Rendimiento neto del trabajo: 18.000 €.
+- Rendimiento neto de actividades económicas: 11.000 €.
+- Imputación de rentas inmobiliarias: 4.800 €.
+- Saldo neto de rendimientos e imputaciones:
+  $$\text{Saldo} = 18.000 + 11.000 + 4.800 = \mathbf{33.800 \text{ €}}$$
+- Ganancias y pérdidas patrimoniales no derivadas de transmisiones: 0 €.
+
+$$\text{\textbf{Base Imponible General (BIG)}} = \mathbf{33.800 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**2. Determinación de la Base Imponible del Ahorro (BIA)**
+
+*Compartimento 1: Rendimientos del Capital Mobiliario del Ahorro (art. 25.1 LIRPF):*
+
+- Partida (2): Rendimiento neto de capital mobiliario = **+12.000 €**.
+
+*Compartimento 2: Ganancias y pérdidas patrimoniales derivadas de transmisiones:*
+
+Desde la reforma fiscal de 2015, todas las ganancias y pérdidas patrimoniales procedentes de transmisiones patrimoniales se integran en la Base del Ahorro, con absoluta independencia del plazo de permanencia o generación:
+
+- Ganancia fondo inversión (> 2 años): +18.000 €.
+- Pérdida acciones (> 3 años): -28.000 €.
+- Ganancia acciones (< 1 año, 6 meses): +18.000 €.
+- Pérdida fondo inversión (< 1 año, 9 meses): -30.000 €.
+- Saldo del compartimento de ganancias y pérdidas:
+  $$\text{Total ganancias} = 18.000 + 18.000 = +36.000 \text{ €}$$
+  $$\text{Total pérdidas} = -28.000 - 30.000 = -58.000 \text{ €}$$
+  $$\text{Saldo neto} = 36.000 - 58.000 = -\mathbf{22.000 \text{ €}}$$
+
+*Compensación interna en la Base del Ahorro (art. 49 LIRPF):*
+
+El saldo negativo de ganancias y pérdidas (-22.000 €) puede compensarse con el saldo positivo de rendimientos de capital mobiliario (+12.000 €), con el **límite del 25%** de este último:
+
+$$\text{Límite de compensación del 25\%} = 25\% \times 12.000 = \mathbf{3.000 \text{ €}}$$
+
+- Saldo de ganancias y pérdidas compensado en 2026: 3.000 €.
+- **Base Imponible del Ahorro liquidada en 2026:**
+  $$\text{\textbf{Base Imponible del Ahorro (BIA)}} = 12.000 - 3.000 = \mathbf{9.000 \text{ €}}$$
+- **Saldo negativo pendiente de compensar:**
+  $$\text{Remanente de pérdidas} = 22.000 - 3.000 = \mathbf{19.000 \text{ €}}$$
+  Este saldo negativo de 19.000 € se compensará en los cuatro ejercicios siguientes (2027 a 2030) con arreglo a las mismas reglas y límites.
+
+\vspace{0.4cm}
+
+**PRÁCTICA 24: Liquidación Completa del IRPF: Reducciones, Mínimos y Cuotas**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Pensión compensatoria a favor del cónyuge (art. 55 LIRPF):** Las pensiones compensatorias fijadas judicialmente a favor del ex cónyuge y las anualidades por alimentos (salvo las satisfechas en favor de los hijos) reducen la Base Imponible General, sin que puedan generar base liquidable negativa.
+
+2. **Límite de reducción por aportaciones a planes de pensiones (arts. 51 y 52 LIRPF):** Tras la reforma introducida por la Ley 12/2022, el límite de reducción por aportaciones individuales es la menor entre el 30% de la suma de rendimientos netos del trabajo y de actividades económicas percibidos individualmente, y el límite cuantitativo máximo absoluto de **1.500 euros anuales**. El exceso no reducido puede trasladarse a los cinco ejercicios siguientes.
+
+3. **Mínimo personal y familiar (arts. 56 a 61 LIRPF):**
+   - Mínimo del contribuyente: 5.550 € con carácter general.
+   - Mínimo por discapacidad del contribuyente: 9.000 € para grado igual o superior al 65% (más 3.000 € si se acreditan gastos de asistencia o ayuda de terceras personas).
+   - Mínimo por ascendientes (art. 59 LIRPF): Exige que el ascendiente sea mayor de 65 años o discapacitado, conviva con el contribuyente al menos la mitad del año y no haya obtenido rentas anuales superiores a 8.000 € (excluidas las rentas exentas).
+
+4. **Deducción por donativos a entidades de mecenazgo (Ley 49/2002):** Porcentaje del 80% sobre los primeros 250 € donados, y 40% sobre el exceso (o 45% por reiteración).
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+Calcular la cuota íntegra IRPF del Sr. García, teniendo en cuenta los siguientes datos:
+
+Tiene 56 años y una minusvalía del 70%, está separado sin hijos y convive con su madre de 76 años que recibe una pensión de viudedad de 12.500 € anuales. Paga una pensión de alimentos a su ex cónyuge de 5.000 € establecida por sentencia judicial.
+
+Rendimientos:
+- Rendimiento neto del trabajo: 30.000 €
+- Imputación de rentas inmobiliarias: 250 €
+- Rendimientos capital mobiliario (dividendos): 1.950 €
+- Ganancias patrimoniales por venta de acciones: 1.500 €
+
+Realiza una aportación a un plan de pensiones de 10.500 €. Y realiza donaciones trimestrales a Médicos Sin Fronteras por importe de 150 € (al trimestre).
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Determinación de Bases Imponibles**
+
+- **Base Imponible General (BIG):**
+  $$\text{BIG} = \text{RNT (30.000 €)} + \text{Imputación rentas inmobiliarias (250 €)} = \mathbf{30.250 \text{ €}}$$
+
+- **Base Imponible del Ahorro (BIA):**
+  $$\text{BIA} = \text{Dividendos (1.950 €)} + \text{Ganancia patrimonial acciones (1.500 €)} = \mathbf{3.450 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**2. Reducciones de la Base Imponible General**
+
+- **Pensión de alimentos/compensatoria judicial a la ex cónyuge (art. 55 LIRPF):**
+  Reduce la Base Imponible General en su cuantía íntegra: **5.000 €**.
+
+- **Aportaciones a sistemas de previsión social (arts. 51 y 52 LIRPF):**
+  - Aportación real desembolsada: 10.500 €.
+  - Límite relativo: $30\% \times 30.000 = 9.000 \text{ €}$.
+  - Límite legal cuantitativo máximo: **1.500 € anuales**.
+  - Reducción admisible en el ejercicio: **1.500 €**.
+  - Remanente pendiente de reducir en los 5 ejercicios siguientes: $10.500 - 1.500 = 9.000 \text{ €}$.
+
+- **Base Liquidable General (BLG):**
+  $$\mathbf{BLG} = 30.250 - 5.000 - 1.500 = \mathbf{23.750 \text{ €}}$$
+
+- **Base Liquidable del Ahorro (BLA):**
+  $$\mathbf{BLA} = \mathbf{3.450 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**3. Determinación del Mínimo Personal y Familiar**
+
+- **Mínimo del contribuyente (art. 57 LIRPF):** 5.550 €.
+- **Mínimo por discapacidad del contribuyente (art. 60 LIRPF):**
+  Grado de discapacidad del 70% ($\ge 65\%$): **9.000 €** (más 3.000 € por asistencia si precisa ayuda o movilidad reducida = 12.000 €; tomamos el estándar legal básico de 9.000 €).
+- **Ascendiente (madre de 76 años):**
+  La madre percibe una pensión de viudedad anual de 12.500 €. Al superar holgadamente el límite legal de 8.000 € anuales de rentas, **NO da derecho a la aplicación del mínimo por ascendientes**.
+- **Total Mínimo Personal y Familiar:**
+  $$\text{Mínimo Personal y Familiar} = 5.550 + 9.000 = \mathbf{14.550 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**4. Liquidación de la Cuota Íntegra**
+
+*A. Gravamen sobre la Base Liquidable General (23.750 €) y sobre el Mínimo (14.550 €):*
+
+Aplicando la tarifa combinada (estatal y autonómica estándar):
+
+1. **Cuota íntegra sobre la BLG (23.750 €):**
+   - Hasta 20.200 €: cuota acumulada de 4.356,50 €.
+   - Resto (23.750 - 20.200 = 3.550 €) al tipo marginal del 30%: $3.550 \times 30\% = 1.065 \text{ €}$.
+   - Cuota sobre BLG = $4.356,50 + 1.065 = 5.421,50 \text{ €}$.
+
+2. **Cuota correspondiente al Mínimo Personal y Familiar (14.550 €):**
+   - Hasta 12.450 €: cuota acumulada de 2.365,50 €.
+   - Resto (14.550 - 12.450 = 2.100 €) al 24%: $2.100 \times 24\% = 504 \text{ €}$.
+   - Cuota sobre Mínimo = $2.365,50 + 504 = 2.869,50 \text{ €}$.
+
+3. **Cuota Íntegra General:**
+   $$\text{Cuota Íntegra General} = 5.421,50 - 2.869,50 = \mathbf{2.552 \text{ €}}$$
+
+*B. Gravamen sobre la Base Liquidable del Ahorro (3.450 €):*
+
+La escala del ahorro grava los primeros 6.000 € al tipo conjunto del 19%:
+$$\text{Cuota Íntegra del Ahorro} = 19\% \times 3.450 = \mathbf{655,50 \text{ €}}$$
+
+*C. Cuota Íntegra Total:*
+$$\text{Cuota Íntegra Total} = 2.552 + 655,50 = \mathbf{3.207,50 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**5. Deducción por Donativos (Ley 49/2002)**
+
+Donaciones a Médicos Sin Fronteras: $4 \text{ trimestres} \times 150 \text{ €} = 600 \text{ €}$ anuales.
+
+- Tramo prioritario (primeros 250 € al 80%): $250 \times 80\% = 200 \text{ €}$.
+- Tramo restante (350 € al 40%): $350 \times 40\% = 140 \text{ €}$.
+- Deducción total por mecenazgo = $200 + 140 = \mathbf{340 \text{ €}}$.
+
+\vspace{0.4cm}
+
+**6. Cuota Líquida Resultante**
+
+$$\text{\textbf{Cuota Líquida}} = 3.207,50 - 340 = \mathbf{2.867,50 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**PRÁCTICA 25: Liquidación Matrimonial en Tributación Individual**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Supresión de la deducción por inversión en vivienda habitual (DT 18ª LIRPF):** La deducción general por adquisición de vivienda habitual quedó suprimida para viviendas adquiridas a partir del 1 de enero de 2013. Una vivienda adquirida en 2024 carece por imperativo legal de cualquier deducción estatal por este concepto.
+
+2. **Exención de las prestaciones por maternidad y paternidad (art. 7.h LIRPF):** Las prestaciones públicas por maternidad o paternidad satisfechas por la Seguridad Social están exentas de gravamen en el IRPF.
+
+3. **Mínimo por descendientes en declaración individual (art. 58 y 61 LIRPF):** Por el primer descendiente corresponde un mínimo de 2.400 € anuales, al que se añade un incremento de 2.800 € anuales cuando el hijo sea menor de tres años. Cuando los progenitores optan por tributación individual y conviven con el menor, dicho importe se reparte a partes iguales (50% cada uno).
+
+4. **Deducción por maternidad (art. 81 LIRPF):** Las mujeres que realicen una actividad laboral por cuenta ajena y tengan hijos menores de tres años con derecho a mínimo por descendientes pueden aplicar una deducción en cuota de hasta 100 € mensuales (1.200 € anuales) a partir del mes de nacimiento.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+Una pareja de recién casados, Ángel y Pilar, decidieron adquirir una vivienda el 1/02/2024 para establecer su domicilio conyugal. Su valor de adquisición fue de 150.000 € y tiene un valor catastral de 110.000 € (valor del suelo 40.000). La adquisición de la vivienda la financian con 30.000 € al contado, y el resto con un préstamo hipotecario.
+
+Pilar es administrativa en una empresa y gana un salario anual bruto de 30.000 € (Seguridad Social 500 €, tipo de retención 21%). Ángel se quedó en el paro en 2025 y en 2026 continúa sin trabajo. Tan sólo ha percibido unos dividendos de 1.000 € de unas acciones adquiridas en 2015. Han sido padres en mayo y Pilar ha cobrado la prestación por maternidad por un importe de 3.000 €.
+
+Determinar la liquidación del matrimonio en tributación individual.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Análisis previo de operaciones e ingresos del matrimonio**
+
+- **Adquisición de la vivienda conyugal en 2024:**
+  Al haberse adquirido el 1 de febrero de 2024, la operación **no da derecho a deducción por inversión en vivienda habitual** en el IRPF estatal. Asimismo, por tratarse de la vivienda habitual de la pareja, no genera imputación de rentas inmobiliarias.
+- **Prestación por maternidad de 3.000 € percibida por Pilar:**
+  Declarada expresamente **exenta de gravamen** conforme al artículo 7.h de la LIRPF. No se integra en sus rendimientos del trabajo.
+
+\vspace{0.4cm}
+
+**2. Liquidación individual de Pilar**
+
+- **Rendimientos íntegros del trabajo:** 30.000 €.
+- **Gastos deducibles:**
+  - Cotizaciones a la Seguridad Social: 500 €.
+  - Gastos generales y otros (art. 19.2.f LIRPF): 2.000 €.
+  - Total gastos deducibles: $500 + 2.000 = 2.500 \text{ €}$.
+- **Rendimiento neto del trabajo:**
+  $$\text{RNT} = 30.000 - 2.500 = 27.500 \text{ €}$$
+- **Reducción por obtención de rendimientos del trabajo (art. 20 LIRPF):** No aplica al ser el rendimiento neto superior a 19.747,50 €.
+- **Base Liquidable General de Pilar:** **27.500 €**.
+- **Mínimo Personal y Familiar de Pilar:**
+  - Mínimo de la contribuyente: 5.550 €.
+  - Mínimo por descendientes (primer hijo nacido en mayo):
+    - Mínimo base (primer descendiente): 2.400 €.
+    - Incremento por menor de 3 años: 2.800 €.
+    - Mínimo total por el hijo = $2.400 + 2.800 = 5.200 \text{ €}$.
+    - Al tributar en individual, se distribuye al 50% entre ambos progenitores:
+      $$\text{Mínimo hijo para Pilar} = 50\% \times 5.200 = 2.600 \text{ €}$$
+  - Total Mínimo Personal y Familiar de Pilar: $5.550 + 2.600 = \mathbf{8.150 \text{ €}}$.
+- **Cuota Íntegra General de Pilar:**
+  - Sobre BLG (27.500 €): cuota acumulada hasta 20.200 € = 4.356,50 €; exceso (7.300 € al 30%) = 2.190 €. Total = 6.546,50 €.
+  - Sobre Mínimo (8.150 € al 19%): $8.150 \times 19\% = 1.548,50 \text{ €}$.
+  - Cuota Íntegra = $6.546,50 - 1.548,50 = \mathbf{4.998 \text{ €}}$.
+- **Deducción por maternidad (art. 81 LIRPF):**
+  Pilar es trabajadora en activo dada de alta en Seguridad Social y ha sido madre en mayo:
+  $$\text{Deducción} = 8 \text{ meses (mayo a diciembre)} \times 100 \text{ €/mes} = \mathbf{800 \text{ €}}$$
+- **Cuota Líquida de Pilar:**
+  $$\text{Cuota Líquida} = 4.998 - 800 = \mathbf{4.198 \text{ €}}$$
+- **Retenciones soportadas en nómina:** $21\% \times 30.000 = \mathbf{6.300 \text{ €}}$.
+- **Resultado de la declaración (Cuota Diferencial):**
+  $$\text{Cuota Diferencial} = 4.198 - 6.300 = -\mathbf{2.102 \text{ €}}$$
+  **A devolver a Pilar: 2.102 €**.
+
+\vspace{0.4cm}
+
+**3. Liquidación individual de Ángel**
+
+- **Rendimientos:**
+  - No percibe rentas de trabajo ni de actividades económicas (BIG = 0 €).
+  - Dividendos percibidos de acciones: 1.000 € (RCM de la Base del Ahorro).
+  - BIA de Ángel: **1.000 €**.
+- **Mínimo Personal y Familiar de Ángel:**
+  - Mínimo del contribuyente: 5.550 €.
+  - Mínimo por el hijo al 50%: 2.600 €.
+  - Total Mínimo = $5.550 + 2.600 = \mathbf{8.150 \text{ €}}$.
+- **Cuota Íntegra de Ángel:**
+  - Al gravar la BIA (1.000 € al 19% = 190 €) y aplicar el mínimo disponible que excede ampliamente los 1.000 €, la **Cuota Íntegra resulta 0 €**.
+- **Retenciones soportadas sobre dividendos:** $19\% \times 1.000 = 190 \text{ €}$.
+- **Resultado de la declaración de Ángel:**
+  $$\text{Cuota Diferencial} = 0 - 190 = -\mathbf{190 \text{ €}}$$
+  **A devolver a Ángel: 190 €**.
+
+\vspace{0.4cm}
+
+**PRÁCTICA 26: Determinación de la Cuota Diferencial de Dña. Ana**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Imputación de rentas en períodos inferiores al año (art. 85 LIRPF):** Cuando la titularidad del inmueble a disposición no coincida con el año natural, la imputación de rentas inmobiliarias se prorratea por el número de días o meses de titularidad efectiva.
+
+2. **Ganancia patrimonial por transmisión lucrativa previa (arts. 34 y 36 LIRPF):** Al vender un inmueble adquirido por herencia, el valor de adquisición es el importe comprobado o consignado a efectos del Impuesto sobre Sucesiones y Donaciones (sin exceder del valor de mercado), sumando las inversiones, mejoras y gastos inherentes satisfechos por el adquirente.
+
+3. **Requisitos de la reducción por aportaciones a planes de pensiones (art. 51 LIRPF):** Las aportaciones a planes de pensiones solo reducen la Base Imponible cuando el partícipe obtenga rendimientos netos del trabajo o de actividades económicas en el ejercicio, estableciendo un límite financiero y fiscal de 1.500 € condicionado a la existencia previa de tales rentas activas.
+
+4. **Deducción por descendiente con discapacidad a cargo (art. 81 bis LIRPF):** Otorga un derecho de deducción en cuota de 1.200 € anuales por descendiente con discapacidad igual o superior al 33%.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+Dª. Ana es ama de casa, está casada, tiene 56 años, un hijo minusválido (65%) de 15 años y no obtiene ningún tipo de renta. En 2005 heredó un apartamento en Salobreña, que usa en sus vacaciones y fines de semana, valorada su adquisición (ISyD) en 90.000 € (siendo su valor catastral de 90.000 € también), y que vende el 1 de mayo de 2026 por 150.000 €.
+
+El dinero obtenido lo invierte en un plan de pensiones (25.000 €), Letras del Tesoro (25.000 €) y el resto lo deposita en una cuenta corriente, a la espera de posibles inversiones. Determinar la cuota diferencial de Dña. Ana.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Calificación de rentas obtenidas en 2026**
+
+- **Imputación de rentas inmobiliarias del apartamento de Salobreña (1 enero a 30 abril: 4 meses):**
+  Durante los cuatro primeros meses de 2026 el inmueble se mantuvo a su disposición personal:
+  $$\text{Renta Imputada} = 1,1\% \times 90.000 \times \frac{4}{12} = \mathbf{330 \text{ €}}$$
+  (Se integra en la **Base Imponible General**).
+
+- **Ganancia patrimonial por la enajenación del inmueble el 1 de mayo:**
+  - Valor de transmisión: 150.000 €.
+  - Valor de adquisición histórico (declarado en el ISD en 2005): 90.000 €.
+  - Ganancia patrimonial:
+    $$\text{Ganancia Patrimonial} = 150.000 - 90.000 = \mathbf{60.000 \text{ €}}$$
+  (Se integra en la **Base Imponible del Ahorro**).
+
+- **Aportación a plan de pensiones de 25.000 €:**
+  El artículo 51 de la LIRPF supedita la reducción de la base a la obtención previa de rendimientos netos del trabajo o de actividades económicas. Al ser Dña. Ana ama de casa y carecer de rendimientos del trabajo o profesionales, **su límite legal de reducción fiscal es CERO**. No puede aplicar deducción alguna en su base por esta aportación.
+
+- **Inversión en Letras del Tesoro y depósito bancario:**
+  No generan rendimiento en 2026 en el momento de la compra; generarán rendimientos en el ejercicio en que venzan o abonen intereses.
+
+\vspace{0.4cm}
+
+**2. Bases Liquidables y Mínimo Personal y Familiar**
+
+- **Base Liquidable General (BLG):** 330 €.
+- **Base Liquidable del Ahorro (BLA):** 60.000 €.
+- **Mínimo Personal y Familiar aplicable en tributación individual (50% en cargas familiares):**
+  - Mínimo de la contribuyente: 5.550 €.
+  - Mínimo por descendiente (hijo de 15 años al 50%): $2.400 \times 50\% = 1.200 \text{ €}$.
+  - Mínimo por discapacidad del hijo (grado 65% al 50%): $9.000 \times 50\% = 4.500 \text{ €}$.
+  - Total Mínimo Personal y Familiar:
+    $$\text{Mínimo Total} = 5.550 + 1.200 + 4.500 = \mathbf{11.250 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**3. Liquidación de Cuotas**
+
+*A. Base General:*
+La Base Liquidable General (330 €) queda totalmente absorbida por el Mínimo Personal y Familiar. Cuota general = **0 €**.
+
+*B. Absorción del remanente de mínimo en el Ahorro (art. 56.2 LIRPF):*
+- Remanente de mínimo no absorbido en la base general:
+  $$\text{Remanente de Mínimo} = 11.250 - 330 = \mathbf{10.920 \text{ €}}$$
+
+*C. Cuota íntegra sobre la Base del Ahorro:*
+1. Cuota sobre la BLA de 60.000 €:
+   - Primeros 6.000 € al 19%: 1.140 €.
+   - De 6.000 € a 50.000 € (44.000 € al 21%): 9.240 €.
+   - De 50.000 € a 60.000 € (10.000 € al 23%): 2.300 €.
+   - Subtotal cuota ahorro = $1.140 + 9.240 + 2.300 = 12.680 \text{ €}$.
+
+2. Cuota correspondiente al Remanente de Mínimo (10.920 €):
+   - Primeros 6.000 € al 19%: 1.140 €.
+   - Exceso (10.920 - 6.000 = 4.920 € al 21%): 1.033,20 €.
+   - Cuota mínimo ahorro = $1.140 + 1.033,20 = 2.173,20 \text{ €}$.
+
+3. **Cuota Íntegra del Ahorro:**
+   $$\text{Cuota Íntegra} = 12.680 - 2.173,20 = \mathbf{10.506,80 \text{ €}}$$
+
+*D. Deducción por descendiente con discapacidad a cargo (art. 81 bis LIRPF):*
+La deducción legal es de 1.200 € anuales. Al prorratearse entre los cónyuges:
+$$\text{Deducción cuota} = 1.200 \times 50\% = \mathbf{600 \text{ €}}$$
+
+*E. Cuota Diferencial:*
+$$\text{\textbf{Cuota Diferencial}} = 10.506,80 - 600 = \mathbf{9.906,80 \text{ €}}$$
+
+Dña. Ana debe ingresar **9.906,80 €** en su autoliquidación del IRPF.
+
+
+\vspace{0.6cm}
+
+## Bloque 8: Unidad Familiar y Tributación Conjunta
+
+\vspace{0.4cm}
+
+**PRÁCTICA 27: Parejas de Hecho y Configuración de Unidades Familiares**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Definición taxativa de unidad familiar (art. 82.1 LIRPF):**
+   - *Modalidad biparental matrimonial:* Los cónyuges no separados legalmente y los hijos menores de edad (salvo emancipados con consentimiento) o mayores judicialmente incapacitados sujetos a patria potestad prorrogada o rehabilitada.
+   - *Modalidad monoparental:* En supuestos de separación legal o inexistencia de vínculo matrimonial, el padre o la madre y todos los hijos menores que convivan con uno u otra.
+
+2. **Inadmisibilidad de unidad familiar conjunta en parejas de hecho:**
+   - La doctrina consolidada del Tribunal Constitucional (STC 184/1990) y de la Dirección General de Tributos (consultas vinculantes V1848-18 y V2214-20) establece que las uniones de hecho carecen de cobertura legal para constituir una unidad familiar de carácter biparental a efectos del IRPF.
+   - Los miembros de una pareja de hecho no pueden presentar declaración conjunta entre sí en ningún caso.
+
+3. **Incompatibilidad de pertenencia a múltiples unidades familiares (art. 82.2 LIRPF):** Nadie puede formar parte de dos unidades familiares distintas en el mismo período impositivo.
+
+4. **Reducción por tributación conjunta monoparental y regla de no convivencia (art. 84.2.4º LIRPF):**
+   - En la modalidad monoparental la reducción general de base imponible es de 2.150 € anuales.
+   - No obstante, la ley prohíbe aplicar esta reducción cuando el progenitor conviva con el padre o la madre de alguno de los hijos que forman parte de dicha unidad familiar.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+El Sr. A forma pareja de hecho con la Sra. B, y tiene dos hijos de 10 y 5 años de un matrimonio anterior que conviven con ellos. La Sra. B, por su parte tiene un hijo de 4 años de un matrimonio anterior que también convive con ellos. Determine qué unidades familiares se pueden formar. ¿Y si además ambos tienen un hijo común de 1 año?
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Supuesto 1: Convivencia con hijos no comunes de relaciones anteriores**
+
+Al no existir vínculo matrimonial formal, el Sr. A y la Sra. B **no pueden presentar una declaración conjunta común**. Las configuraciones jurídicamente admisibles son:
+
+- **Unidades familiares susceptibles de formarse:**
+  1. *Unidad Familiar A (Monoparental):* Integrada por el Sr. A y sus dos hijos propios (10 y 5 años).
+  2. *Unidad Familiar B (Monoparental):* Integrada por la Sra. B y su hijo propio (4 años).
+
+- **Opciones de tributación aplicables:**
+  - *Opción 1:* Ambos progenitores optan por tributación conjunta monoparental, cada uno con sus respectivos hijos. En este caso, al no convivir ninguno de ellos con el otro progenitor de sus hijos biológicos (los ex cónyuges), ambos tienen derecho a aplicar la **reducción de 2.150 €** en la base imponible de sus respectivas declaraciones conjuntas.
+  - *Opción 2:* Uno de ellos opta por tributación conjunta monoparental con sus hijos y el otro tributa en régimen de declaración individual.
+  - *Opción 3:* Ambos tributan en declaración individual ordinaria, computando cada uno el mínimo por descendientes íntegro (100%) correspondiente a sus respectivos hijos.
+
+\vspace{0.4cm}
+
+**2. Supuesto 2: Existencia añadida de un hijo común de 1 año**
+
+El nacimiento de un hijo común añade un vínculo de filiación compartido entre ambos convivientes:
+
+- **Prohibición de duplicidad (art. 82.2 LIRPF):**
+  El hijo común no puede integrarse en dos unidades familiares a la vez en el mismo ejercicio. En consecuencia, debe adscribirse a la unidad familiar de uno de los progenitores o tributar de forma individual.
+
+- **Configuraciones de unidades familiares disponibles:**
+  - *Alternativa 1:* El Sr. A forma unidad familiar con sus dos hijos previos y con el hijo común (tres descendientes). La Sra. B formará unidad familiar con su hijo de 4 años o tributará en régimen individual.
+  - *Alternativa 2:* La Sra. B forma unidad familiar con su hijo de 4 años y con el hijo común (dos descendientes). El Sr. A formará unidad familiar con sus dos hijos previos o tributará en régimen individual.
+  - *Alternativa 3:* Ninguno de los progenitores incluye al hijo común en tributación conjunta monoparental, declarando cada uno en conjunta con sus hijos no comunes o ambos en individual.
+
+- **Incidencia en la reducción por tributación monoparental (art. 84.2.4º LIRPF):**
+  - Si el progenitor que opta por declaración conjunta incluye en su unidad familiar al hijo común, **pierde el derecho a la reducción de 2.150 €** en la base imponible, ya que la ley veta expresamente este beneficio cuando exista convivencia en el mismo hogar con el otro progenitor del menor.
+  - Si, por el contrario, el progenitor forma unidad familiar exclusivamente con sus hijos del matrimonio anterior (sin incorporar al hijo común), mantiene el derecho a la reducción de 2.150 €, puesto que no convive con el padre o madre de esos hijos.
+
+- **Régimen de mínimos por descendientes en declaración individual:**
+  Si ambos tributan de forma individual:
+  - El Sr. A aplica el 100% del mínimo por sus dos hijos no comunes (2.400 € por el primero y 2.700 € por el segundo).
+  - La Sra. B aplica el 100% del mínimo por su hijo de 4 años (2.400 €).
+  - Por el hijo común de 1 año, al convivir con ambos progenitores, el mínimo por descendiente ($2.400 \text{ €} + 2.800 \text{ € por menor de tres años} = 5.200 \text{ €}$) **se distribuye al 50% entre ambos** (2.600 € para el Sr. A y 2.600 € para la Sra. B).
+
+\vspace{0.4cm}
+
+**PRÁCTICA 28: Liquidación en Tributación Conjunta del Matrimonio Marín**
+
+*Fundamentación jurídica y normativa aplicable:*
+
+1. **Delimitación de la unidad familiar matrimonial (art. 82.1.1ª LIRPF):**
+   - Integrada exclusivamente por los cónyuges.
+   - Los hijos que hayan alcanzado la mayoría de edad (18 años o más) quedan excluidos por imperativo legal de la unidad familiar a efectos de tributación conjunta.
+   - Reducción general por tributación conjunta matrimonial: **3.400 euros anuales** en la base imponible (art. 84.2.2ª LIRPF).
+
+2. **Mínimo por descendientes en tributación conjunta (art. 58 y 84 LIRPF):**
+   - Los hijos mayores de edad que convivan y no perciban rentas superiores a 8.000 € anuales no forman parte de la unidad familiar para tributar conjuntamente, pero sí otorgan derecho a aplicar el mínimo por descendientes en la declaración del matrimonio.
+   - Los descendientes de grado ulterior (nietos) dan derecho al mínimo cuando convivan con los abuelos y los progenitores carezcan de rentas anuales superiores a 8.000 €.
+
+3. **Mínimo por ascendientes (art. 59 LIRPF):**
+   - Requiere que el ascendiente sea mayor de 65 años (o discapacitado en grado $\ge 33\%$), conviva con el contribuyente **al menos la mitad del período impositivo** (más de 6 meses) y no obtenga rentas anuales superiores a 8.000 €.
+   - El ascendiente que convive únicamente 5 meses no cumple el requisito temporal de permanencia ni el límite de rentas si percibe pensiones que superen los 8.000 €.
+
+4. **Deducción por adquisición de vehículos eléctricos enchufables (Disp. Adic. 58ª LIRPF):**
+   - Deducción del **15% del valor de adquisición** de vehículos eléctricos nuevos destinados al uso particular, sobre una base máxima de 20.000 euros.
+   - Importe máximo de la deducción: $15\% \times 20.000 = 3.000 \text{ €}$ deducibles en cuota estatal.
+
+\vspace{0.4cm}
+
+**Enunciado:**
+
+El matrimonio Marín tiene dos hijos de 18 y 19 años y un nieto de un año que convive con ellos. El mayor vive en Barcelona donde está estudiando y no obtiene rendimientos. La menor vive en Granada con sus padres y ni estudia ni trabaja. Convive con ellos, durante 5 meses al año, el abuelo materno, de 85 años, con una pensión de 750 € mensuales. También convive con el matrimonio la abuela paterna, de 79 años, con una minusvalía de 70% y unas rentas de 500 €/mes. Presentan declaración conjunta.
+
+Sabiendo que la Renta general del Sr. Marín es de 28.000 € y que la Sra. Marín tiene una renta general de 30.000 € y una renta del ahorro de 4.500 €, y que las retenciones e ingresos a cuenta del ejercicio suman un total de 7.500 €. Se sabe también que en octubre de 2025, el matrimonio adquirió un vehículo eléctrico por 29.000 €.
+
+Con los datos anteriores, calcular la cuota del IRPF en tributación conjunta para 2025.
+
+\vspace{0.4cm}
+
+**Resolución:**
+
+**1. Determinación de la Unidad Familiar y Reducción por Declaración Conjunta**
+
+- La unidad familiar está integrada exclusivamente por el **Sr. y la Sra. Marín**.
+- Los hijos de 18 y 19 años son mayores de edad y no pueden formar parte de la unidad familiar a efectos de tributación conjunta.
+- **Reducción por declaración conjunta matrimonial (art. 84.2.2ª LIRPF):**
+  $$\text{Reducción por conjunta} = \mathbf{3.400 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**2. Determinación de las Bases Imponibles y Liquidables Conjuntas**
+
+- **Base Imponible General conjunta:**
+  $$\text{BIG} = 28.000 \text{ € (Sr. Marín)} + 30.000 \text{ € (Sra. Marín)} = \mathbf{58.000 \text{ €}}$$
+
+- **Base Liquidable General conjunta (BLG):**
+  $$\text{BLG} = 58.000 - 3.400 \text{ (reducción conjunta)} = \mathbf{54.600 \text{ €}}$$
+
+- **Base Liquidable del Ahorro conjunta (BLA):**
+  $$\text{BLA} = \mathbf{4.500 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**3. Determinación del Mínimo Personal y Familiar**
+
+- **Mínimo del contribuyente (art. 57 LIRPF):**
+  En tributación conjunta se aplica el mínimo individual: **5.550 €**.
+
+- **Mínimo por descendientes (art. 58 LIRPF):**
+  - *Hijo de 19 años:* Menor de 25 años, depende económicamente de los padres (los estudios fuera no interrumpen la convivencia fiscal) y carece de rentas. Primer descendiente: **2.400 €**.
+  - *Hija de 18 años:* Menor de 25 años, convive en Granada, sin rentas. Segundo descendiente: **2.700 €**.
+  - *Nieto de 1 año:* Convive en el hogar familiar con sus abuelos y su madre carece de rentas. Al no superar la progenitora los límites legales, los abuelos asumen el cómputo del nieto como descendiente por orden de edad (tercer descendiente):
+    - Mínimo base (tercer descendiente): 4.000 €.
+    - Incremento por descendiente menor de tres años: 2.800 €.
+    - Mínimo total por el nieto: $4.000 + 2.800 = 6.800 \text{ €}$.
+  - Subtotal descendientes: $2.400 + 2.700 + 6.800 = \mathbf{11.900 \text{ €}}$.
+
+- **Mínimo por ascendientes (art. 59 LIRPF):**
+  - *Abuelo materno (85 años):* Convive únicamente durante 5 meses al año. Al no residir en el domicilio al menos la mitad del período impositivo (más de 6 meses) y superar sus ingresos anuales ($12 \times 750 = 9.000 \text{ €}$) el límite de 8.000 €, **NO da derecho a mínimo**.
+  - *Abuela paterna (79 años):* Convive todo el año y sus rentas ($12 \times 500 = 6.000 \text{ €}$) son inferiores a 8.000 €. Da derecho a:
+    - Mínimo básico ascendiente mayor de 65 años: 1.150 €.
+    - Incremento por ser mayor de 75 años: 1.400 €.
+    - Mínimo por discapacidad de ascendiente (grado 70% $\ge 65\%$): 9.000 €.
+    - Subtotal ascendiente abuela: $1.150 + 1.400 + 9.000 = \mathbf{11.550 \text{ €}}$.
+
+- **Total Mínimo Personal y Familiar computable:**
+  $$\text{Mínimo Total} = 5.550 + 11.900 + 11.550 = \mathbf{29.000 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**4. Liquidación de la Cuota Íntegra Conjunta**
+
+*A. Gravamen sobre la Base Liquidable General (54.600 €) y Mínimo (29.000 €):*
+
+Aplicando la tarifa combinada general (estatal y autonómica):
+
+1. **Cuota sobre la BLG (54.600 €):**
+   - Hasta 35.200 €: cuota fija acumulada de 8.856,50 €.
+   - Resto (54.600 - 35.200 = 19.400 €) al tipo marginal del 37%: $19.400 \times 37\% = 7.178 \text{ €}$.
+   - Cuota sobre BLG = $8.856,50 + 7.178 = 16.034,50 \text{ €}$.
+
+2. **Cuota sobre el Mínimo Personal y Familiar (29.000 €):**
+   - Hasta 20.200 €: cuota acumulada de 4.356,50 €.
+   - Resto (29.000 - 20.200 = 8.800 €) al tipo marginal del 30%: $8.800 \times 30\% = 2.640 \text{ €}$.
+   - Cuota sobre Mínimo = $4.356,50 + 2.640 = 6.996,50 \text{ €}$.
+
+3. **Cuota Íntegra General:**
+   $$\text{Cuota Íntegra General} = 16.034,50 - 6.996,50 = \mathbf{9.038 \text{ €}}$$
+
+*B. Gravamen sobre la Base Liquidable del Ahorro (4.500 €):*
+$$\text{Cuota Íntegra del Ahorro} = 19\% \times 4.500 = \mathbf{855 \text{ €}}$$
+
+*C. Cuota Íntegra Total Conjunta:*
+$$\text{Cuota Íntegra Total} = 9.038 + 855 = \mathbf{9.893 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**5. Deducción por Adquisición de Vehículo Eléctrico (Disp. Adic. 58ª LIRPF)**
+
+- Coste de compra del vehículo nuevo: 29.000 €.
+- Base máxima de deducción: 20.000 €.
+- Deducción aplicable en la cuota íntegra estatal:
+  $$\text{Deducción Vehículo Eléctrico} = 15\% \times 20.000 = \mathbf{3.000 \text{ €}}$$
+
+\vspace{0.4cm}
+
+**6. Cuota Líquida y Cuota Diferencial**
+
+- **Cuota Líquida Conjunta:**
+  $$\text{Cuota Líquida} = 9.893 - 3.000 = \mathbf{6.893 \text{ €}}$$
+
+- **Retenciones e ingresos a cuenta soportados:** 7.500 €.
+
+- **Cuota Diferencial:**
+  $$\text{\textbf{Cuota Diferencial}} = 6.893 - 7.500 = -\mathbf{607 \text{ €}}$$
+
+El resultado final de la declaración conjunta del matrimonio Marín es **a devolver por importe de 607 euros**.
