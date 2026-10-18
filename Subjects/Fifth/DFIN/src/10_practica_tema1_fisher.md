@@ -1,6 +1,8 @@
+\part{Práctica}
+
 # Separación de Fisher y Decisiones de Inversión
 
-Este bloque reúne los problemas relativos a las decisiones de consumo e inversión intertemporal, la función de los mercados de capitales y el Teorema de Separación de Irving Fisher.
+Este bloque práctico reúne los problemas relativos a las decisiones de consumo e inversión intertemporal, la función asignativa de los mercados de capitales y la validez y límites del Teorema de Separación de Irving Fisher correspondientes a la relación oficial de la asignatura.
 
 
 ## Ejercicio 1
@@ -24,7 +26,7 @@ d) Provocaría una reducción de la inversión inicial necesaria para maximizar 
 
 #### 1. Fundamento teórico: El Teorema de Separación de Fisher
 
-El modelo intertemporal de Irving Fisher (analizado en el capítulo 2 de Brealey, Myers y Allen, 2023) parte de una dotación inicial de riqueza $W_0$ en el momento actual ($t=0$). La empresa se enfrenta a una curva de oportunidades de inversión real que exhibe rendimientos marginales decrecientes: a medida que se acometen más proyectos, la rentabilidad del último euro invertido (la tasa interna de rendimiento marginal, $\text{TIR}_{\text{mg}}$) disminuye.
+El modelo intertemporal de Irving Fisher (analizado en el capítulo 2 de Brealey, Myers, Allen y Edmans, 2023) parte de una dotación inicial de riqueza $W_0$ en el momento actual ($t=0$). La empresa se enfrenta a una curva de oportunidades de inversión real que exhibe rendimientos marginales decrecientes: a medida que se acometen más proyectos, la rentabilidad del último euro invertido (la tasa interna de rendimiento marginal, $\text{TIR}_{\text{mg}}$) disminuye.
 
 El mercado de capitales ofrece a la empresa y a los inversores la posibilidad de prestar o pedir prestado a un tipo de interés libre de riesgo $r$. La línea de mercado de capitales (LMC) tiene como pendiente en valor absoluto:
 
@@ -85,7 +87,7 @@ Bajo esta condición:
 - Para quien presta, el coste de oportunidad del dinero es $r_p$. Su línea de mercado tiene pendiente en valor absoluto $1 + r_p$.
 - Para quien pide prestado, el coste financiero del dinero es $r_d$. Su línea de mercado tiene pendiente en valor absoluto $1 + r_d$.
 
-Como $1 + r_d > 1 + r_p$, la línea de quien se endeuda es más inclinada que la de quien presta (lo que invalida de inmediato la opción c).
+Como $1 + r_d > 1 + r_p$, la línea de quien se endeuda es más inclinada que la de quien presta (lo que invalida la opción c).
 
 #### 2. Discrepancia en la decisión de inversión de la empresa
 
@@ -100,7 +102,7 @@ Al maximizar el valor de la empresa:
   \caption{Quiebre de la línea de mercado cuando $r_d > r_p$ y divergencia en el volumen de inversión óptimo ($C_0' \ne C_0$).}
 \end{figure}
 
-Al no coincidir la tasa de descuento relevante para unos y otros ($r_p \ne r_d$), los accionistas no se ponen de acuerdo en el presupuesto de inversión óptimo. El criterio de maximización del VAN deja de ser unívoco y se quiebra la separación entre propiedad y dirección.
+Al no coincidir la tasa de descuento relevante para unos y otros ($r_p \ne r_d$), los accionistas discrepan en el presupuesto de inversión óptimo. El criterio de maximización del VAN deja de ser unívoco y se quiebra la separación entre propiedad y dirección.
 
 
 ## Ejercicio 3
@@ -177,7 +179,7 @@ El proyecto en activos reales devuelve **6.240 €** al cabo de un año.
 
 #### Apartado c) Incremento de riqueza con total preferencia por el consumo futuro
 
-Si el inversor prefiere trasladar toda su riqueza a $t=1$, comparamos las dos alternativas posibles:
+Si el inversor traslada toda su riqueza a $t=1$, comparamos las dos alternativas posibles:
 
 1. **Sin acometer la inversión en activos reales:**
    Colocaría sus 12.000 € íntegros en el mercado financiero al 4%:
@@ -210,6 +212,6 @@ Si el inversor desea consumir todo lo posible hoy ($t=0$):
    El consumo actual total alcanzable es:
    $$C_0(\text{con proyecto}) = 8.000 + 6.000 = 14.000\text{ €}$$
 
-El incremento de riqueza en el momento presente equivale exactamente al Valor Actual Neto generado:
+El incremento de riqueza en el momento presente equivale al Valor Actual Neto generado:
 
 $$\Delta W_0 = 14.000 - 12.000 = 2.000\text{ €} = \text{VAN}$$
