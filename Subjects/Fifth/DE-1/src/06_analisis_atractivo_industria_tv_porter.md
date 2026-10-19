@@ -138,3 +138,73 @@ La integración de las cinco fuerzas de Porter y las fuerzas ampliadas permite r
    El atractivo global de la industria de la televisión no puede evaluarse con una respuesta única. El segmento de **televisión lineal en abierto** muestra un atractivo en declive, atrapado entre una audiencia envejecida, ingresos publicitarios presionados a la baja por la publicidad digital y fuertes restricciones legales. Por el contrario, el segmento de **servicios OTT y televisión bajo demanda** presenta un atractivo dinámico elevado, fundamentado en el crecimiento continuado de la demanda de ocio a la carta, si bien la inflación en los costes de adquisición de contenidos empieza a estrechar los márgenes operativos de las plataformas.
 2. **Naturaleza dinámica de la ventaja competitiva:**
    El análisis del entorno sectorial no constituye una fotografía permanente, sino un instrumento de monitorización continua. La convergencia entre plataformas de *streaming*, telecomunicaciones y redes sociales de vídeo interactivo obliga a las empresas audiovisuales a revisar con periodicidad sus modelos de negocio, combinando modelos por suscripción con fórmulas gratuitas sostenidas por publicidad segmentada (*FAST channels* y planes AVOD) para sostener su rentabilidad en el tiempo.
+
+## Preguntas para el debate y análisis estratégico
+
+### Cuestión 1. Fuerza de Porter con mayor impacto sobre la rentabilidad actual
+
+> ¿Qué fuerza de Porter tiene actualmente mayor impacto sobre la rentabilidad de las empresas de televisión? Justifique por qué es más determinante que las otras cuatro utilizando factores concretos del caso.
+
+La fuerza que ejerce un impacto más directo y demoledor sobre la rentabilidad actual de las empresas de televisión es la **rivalidad entre los competidores establecidos (inter e intra-segmentos)**.
+
+Para fundamentar por qué esta fuerza resulta más determinante que las otras cuatro en el momento presente, conviene confrontarla de forma sistemática:
+
+* **Frente a la amenaza de nuevos competidores:** las barreras de entrada tradicionales siguen operando con eficacia disuasoria. En la televisión en abierto, la necesidad de una licencia gubernamental y la saturación del espectro radioeléctrico bloquean la entrada de nuevas cadenas. En el *streaming*, las brutales necesidades de capital para adquirir catálogos y producir ficción de prestigio (entre 10 y 13 millones de euros por capítulo) impiden que operadores pequeños o medianos accedan al mercado. La amenaza de entrada es una variable contenida, mientras que la rivalidad interna entre los operadores ya instalados drena los márgenes día a día.
+* **Frente al poder de negociación de los clientes:** los millones de espectadores se encuentran atomizados y dispersos. Aunque sus costes de cambio son nulos, no disponen de capacidad asociativa para negociar colectivamente tarifas a la baja. El cliente influye como receptor final de la oferta, pero no impone precios contractuales de forma directa a las cadenas o plataformas.
+* **Frente al poder de negociación de los proveedores:** con la excepción de los titulares de grandes derechos deportivos (fútbol de primera división) o franquicias de éxito mundial, la inmensa mayoría de productoras audiovisuales independientes y profesionales técnicos están fragmentados y compiten entre sí por colocar sus formatos en las parrillas, careciendo de poder negociador frente a las cadenas.
+* **Frente a los productos sustitutivos:** aunque plataformas como YouTube y Twitch capturan cuotas crecientes de atención en franjas jóvenes, en el corto plazo la batalla financiera por los cerca de 2.000 millones de euros del mercado publicitario español y por las cuotas mensuales de suscripción doméstica se disputa en el ring de los operadores de televisión y plataformas OTT consolidadas.
+
+**Por qué la rivalidad es la fuerza decisiva en la actualidad:**
+La concurrencia simultánea de Atresmedia, Mediaset y RTVE en el abierto, de Movistar+, Vodafone y Orange en el pago, y de Netflix, Prime Video, HBO Max y Disney+ en el *streaming* ha desatado una guerra de desgaste por una tarta de ingresos que no crece al mismo ritmo que la oferta. En la televisión lineal publicitaria, el juego de suma cero es despiadado: la pérdida de unas décimas de cuota de pantalla reduce de forma instantánea la tarifa que los anunciantes están dispuestos a pagar por cada pase comercial (*coste por mil*, CPM).
+
+Al mismo tiempo, la necesidad de defenderse ante el avance del *streaming* ha forzado a los operadores tradicionales a realizar desembolsos extraordinarios en desarrollar y mantener sus propias plataformas tecnológicas (como Atresplayer Premium o Mitele Plus), soportando costes de software y catálogo que deprimen su rentabilidad histórica sin garantizarles el liderazgo frente a multinacionales con economías de escala globales.
+
+### Cuestión 2. Preocupación directiva a futuro y estrategias en la televisión tradicional
+
+> Si fuerais los directivos de una empresa de televisión tradicional, ¿qué fuerza os preocuparía más de cara al futuro y qué estrategia adoptaríais para reducir su impacto?
+
+Distinguir el corto plazo de la evolución futura resulta crucial para la dirección estratégica de una cadena generalista:
+
+* **La fuerza más amenazante de cara al futuro: la amenaza de productos sustitutivos interactivos y digitales (YouTube, Twitch, redes sociales de vídeo y videojuegos).**
+  A medio y largo plazo, el mayor riesgo no proviene de si Telecinco le quita un punto de audiencia a Antena 3, sino de la **ruptura generacional en los hábitos de consumo**. La edad media del espectador de televisión lineal en España supera los 57 años. Las generaciones más jóvenes (menores de 30 años) han desconectado estructuralmente de la televisión tradicional: no consumen contenidos bajo una programación fija impuesta por terceros ni toleran bloques publicitarios de 12 minutos.
+  
+  Los datos de Barlovento Comunicación (2021) confirman que el público adulto ya dedica más de 37 minutos diarios a YouTube (el 10% del tiempo audiovisual), mientras que emisiones en Twitch de creadores independientes superan con holgura el millón de espectadores en directo. Cuando esta masa de población sustitutiva pase a constituir el grueso de los hogares y del poder de compra del país, la televisión tradicional lineal corre el riesgo de sufrir una obsolescencia terminal si no reconfigura su propuesta de valor.
+
+**Estrategia integral para mitigar el impacto futuro:**
+Para neutralizar esta amenaza y sostener la viabilidad del negocio, la dirección de una cadena tradicional debe desplegar tres ejes estratégicos coordinados:
+
+1. **Transformación hacia un modelo híbrido digital (*Broadcast-to-Broadband*):**
+   * Superar la dependencia exclusiva de la antena de TDT y consolidar una plataforma OTT propia de primer nivel tecnológico (como ha hecho Atresmedia con Atresplayer), aplicando una política de **estreno escalonado inverso (*windowing*)**: preestrenar series y ficciones prémium en la plataforma bajo suscripción de pago antes de emitirlas en abierto en el canal lineal.
+   * Implantar publicidad digital segmentada en el televisor conectado mediante el estándar HbbTV (*Addressable TV*), ofreciendo a los anunciantes la posibilidad de segmentar anuncios por código postal o perfil sociodemográfico en la televisión abierta, recuperando valor publicitario frente a Google y Meta.
+2. **Reenfoque del canal lineal hacia el directo, la información y el evento social:**
+   * Abandonar la pugna frontal en ficción de época o series de gran presupuesto contra multinacionales globales que invierten 10 millones de euros por capítulo.
+   * Concentrar la programación en directo en las áreas donde la televisión lineal mantiene una ventaja diferencial insustituible frente a los catálogos enlatados: **información en tiempo real, grandes coberturas de actualidad política y social, programas de entretenimiento familiar participativo y grandes acontecimientos deportivos en abierto**.
+3. **Estrategia de cooptación y presencia en las plataformas sustitutivas:**
+   * En lugar de percibir a YouTube, Twitch o TikTok como enemigos lejanos a los que ignorar, utilizarlos como canales de distribución secundaria y embudos de captación de audiencia joven.
+   * Producir contenidos nativos derivados (resúmenes, debates entre bastidores, programas satélite) emitidos en estas plataformas con talentos nativos digitales para construir notoriedad de marca y derivar tráfico hacia los contenidos de la cadena matriz.
+
+### Cuestión 3. Evaluación del atractivo global de la industria: ¿SÍ, NO o DEPENDE?
+
+> A partir del análisis de las cinco fuerzas de Porter y de su ampliación, ¿consideras que la industria de la televisión en España es una industria atractiva para competir? Justifique su posición explicando la interacción de las fuerzas.
+
+La respuesta estratégica más rigurosa y fundada es **DEPENDE del segmento específico de la industria y del modelo de negocio adoptado**.
+
+El atractivo de una industria mide el potencial de las empresas que compiten en ella para obtener tasas de rentabilidad sobre el capital superiores al coste de sus recursos (Porter, 1980, 2008). En la televisión española actual no existe una rentabilidad homogénea, puesto que las fuerzas competitivas interactúan con intensidades radicalmente opuestas según el segmento:
+
+* **1. Segmento de Televisión Lineal en Abierto (TDT): INDUSTRIA POCO ATRACTIVA.**
+  La interacción de fuerzas en este estrato asfixia las expectativas de rentabilidad futura:
+  * *Rivalidad extrema en un mercado maduro:* estancamiento estructural de los ingresos publicitarios globales de televisión.
+  * *Poder de clientes al alza:* anunciantes con alternativas digitales programáticas que presionan las tarifas a la baja.
+  * *Sustitutivos destructivos:* fuga permanente de las audiencias jóvenes hacia YouTube, Twitch y redes de vídeo corto.
+  * *Presión de agentes de frontera:* fuerte carga regulatoria (límites horarios de publicidad, exigencias de producción de cine europeo y cuotas lingüísticas) que eleva los costes fijos de cumplimiento normativo frente a operadores digitales desregulados.
+  Aunque las barreras de entrada por licencias protegen a los operadores instalados (Atresmedia y Mediaset), su negocio principal defiende posiciones en un entorno declinante. Para un nuevo inversor, este segmento carece de atractivo.
+
+* **2. Segmento de Televisión de Pago Codificada: ATRACTIVO MODERADO Y VULNERABLE.**
+  * *Dependencia de complementarios:* el negocio se encuentra casi por completo supeditado a las estrategias de empaquetamiento convergente de las operadoras de telecomunicaciones (Telefónica, Orange, Vodafone).
+  * *Poder de proveedores asfixiante:* los derechos de retransmisión deportiva exclusiva (fútbol profesional) exigen desembolsos tan desproporcionados que la televisión de pago rara vez genera márgenes operativos elevados por sí misma, utilizándose como un producto gancho para retener contratos de fibra y telefonía móvil de alto valor.
+
+* **3. Segmento de Plataformas OTT y Streaming (SVOD / AVOD): INDUSTRIA ATRACTIVA PERO EN FASE DE SELECCIÓN COMPETITIVA.**
+  * *Factores de alto atractivo:* crecimiento estructural sostenido de la demanda, penetración acelerada en los hogares, menores restricciones regulatorias y posibilidad de beneficiarse de suscripciones múltiples sin expulsión forzosa del rival.
+  * *Riesgos y presiones competitivas:* la intensidad de la rivalidad entre multinacionales globales (guerra del *streaming*) y el incremento desorbitado de los costes de producción han puesto fin a la etapa de crecimiento ilimitado a pérdidas. El atractivo actual exige masa crítica global para amortizar catálogos y transitar hacia modelos híbridos con publicidad (*AVOD* y canales *FAST*) que equilibren las cuentas de explotación.
+
+En conclusión, la industria de la televisión en España no es intrínsecamente atractiva ni repulsiva: el atractivo ha migrado desde la explotación tradicional de frecuencias lineales hacia la distribución digital a la carta y la gestión de comunidades interactivas. Quien compita atado en exclusiva a la antena tradicional afrontará márgenes menguantes; quien opere con catálogos escalables y flexibilidad de monetización encontrará un mercado con notables oportunidades de generación de valor.
