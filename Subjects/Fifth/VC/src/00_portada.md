@@ -7,5 +7,5 @@ subject: "Visión por Computador"
 type: info
 
 # Una línea bajo el título. «Apuntes de la asignatura», «Temario», «Prácticas».
-about: "Temario y Cuestiones de Examen — Temas 1 y 2"
+about: "Temario y Cuestiones de Examen — Temas 1, 2 y 3"
 ---

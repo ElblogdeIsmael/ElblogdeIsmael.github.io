@@ -109,7 +109,7 @@ export default {
                   kind: "GUIA",
                 },
                 {
-                  name: "Temario y Cuestiones de Examen (Temas 1 y 2)",
+                  name: "Temario y Cuestiones de Examen (Temas 1, 2 y 3)",
                   href: "/Subjects/Fifth/VC/build/VC.pdf",
                   kind: "PDF",
                 },
