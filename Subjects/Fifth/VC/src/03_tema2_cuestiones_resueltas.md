@@ -717,29 +717,39 @@ b) Un kernel de primeras derivadas.
 c) Un kernel de segundas derivadas.  
 d) Ninguno de los anteriores.  
 
-*Respuesta correcta:* **a) Un kernel de suavizado Gaussiano**
+*Respuesta correcta:* **d) Ninguno de los anteriores**
 
 *Respuesta breve:*
 
-Opción **a) Un kernel de suavizado Gaussiano**. La función es simétrica par, estrictamente no negativa en todo el intervalo $[-7, 7]$, con un único valor máximo unitario en $x = 0$ y decaimiento exponencial asintótico a cero en las colas.
+Opción **d) Ninguno de los anteriores**. Aunque el perfil muestra una campana simétrica positiva, no corresponde a un kernel de suavizado Gaussiano operativo porque **no está normalizado** (la suma de sus coeficientes supera con creces la unidad, $\sum K[n] \approx 6,32 \gg 1$, lo que multiplicaría la energía y saturaría la imagen) y porque en el origen $x = 0$ presenta una **cúspide puntiaguda no suave** en lugar de la tangente horizontal plana ($g'(0) = 0$) propia de una campana de Gauss.
 
 \vspace{0.3cm}
 
 *Justificación analítica:*
 
-Analizamos la estructura funcional de la señal representada:
+El análisis detallado de la gráfica revela por qué no encaja con ninguna de las tres primeras categorías:
 
-1. **Simetría par:** $f(x) = f(-x)$, simétrica respecto al eje de ordenadas $x = 0$.
-2. **No negatividad:** $f(x) \ge 0$ para todo $x \in [-7, 7]$. Todos los pesos son positivos, lo que define una operación de promedio ponderado local (filtro paso bajo).
-3. **Monotonía y concavidad:** Presenta un único máximo central en $x = 0$ ($f(0) = 1,0$), con puntos de inflexión característicos a una distancia proporcional a $\sigma$ y decaimiento exponencial hacia cero en las colas.
+\vspace{0.3cm}
 
-Esta función reproduce de forma exacta la campana de Gauss unidimensional sin normalizar:
+1. **Ausencia de normalización para filtrado de suavizado:**
+   Todo kernel de suavizado (filtro paso bajo) debe estar estrictamente normalizado para conservar el nivel medio de gris y la energía lumínica de la escena: $\sum_{n=-k}^{k} K[n] = 1$ (o $\int_{-\infty}^{\infty} K(x) \, dx = 1$ en continuo).
+   En la gráfica observamos que el valor máximo central es $K[0] = 1,0$ y los valores adyacentes son marcadamente positivos ($K[\pm 1] \approx 0,93$, $K[\pm 2] \approx 0,73$, $K[\pm 3] \approx 0,50$, etc.), sumando aproximadamente:
+   $$\sum_{n=-7}^{7} K[n] \approx 1,0 + 2(0,93 + 0,73 + 0,50 + 0,28 + 0,13 + 0,05 + 0,02) \approx 6,28$$
+   Si se aplicase este filtro sobre una imagen digital, multiplicaría las intensidades de los píxeles por más de seis, quemando las altas luces y provocando una saturación total. Un filtro Gaussiano real de suavizado discretizado escala su amplitud dividiendo entre la suma total de sus coeficientes (o incorpora el factor analítico $\frac{1}{\sqrt{2\pi}\sigma}$), por lo que el valor central $K[0]$ en una ventana de radio 7 suele situarse en torno a $0,15 - 0,25$, jamás en $1,0$.
 
-$$g(x) = \exp\left(-\frac{x^2}{2\sigma^2}\right)$$
+2. **Geometría del vértice en el origen (cúspide frente a derivada nula):**
+   La función Gaussiana continua $g(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{x^2}{2\sigma^2}}$ es de clase $C^\infty$ (infinitamente diferenciable y suave). Su primera derivada analítica se anula idénticamente en el origen:
+   $$\frac{d}{dx} g(x) = -\frac{x}{\sigma^2} g(x) \implies \left. \frac{d}{dx} g(x) \right|_{x=0} = 0$$
+   Esto exige que el vértice de cualquier campana de Gauss presente una tangente horizontal perfectamente plana en su cumbre. Al examinar con detalle la ampliación de la diapositiva 89, la curva converge hacia $x = 0$ con una pendiente finita no nula a ambos lados, formando una cúspide o vértice anguloso (perfil característico de distribuciones exponenciales bilaterales tipo Laplace $e^{-|x|/\lambda}$ o funciones triangulares), no la curvatura cóncava diferenciable de una Gaussiana.
 
-Observando los valores del gráfico: en $x = \pm 3$, el valor es aproximadamente $0,55$; en $x = \pm 7$, desciende por debajo de $0,05$. Ajustando la ecuación $\exp(-3^2 / (2\sigma^2)) \approx 0,55$, obtenemos $\sigma \approx 2,75$, plenamente compatible con el decaimiento observado en la ventana $[-7, 7]$.
+3. **Incompatibilidad con operadores derivados:**
+   - **Primeras derivadas (opción b):** Un operador de gradiente o primera derivada es una función **impar y antisimétrica** ($K(-x) = -K(x)$), con un lóbulo positivo y otro negativo cuya suma neta debe ser idénticamente cero para no responder ante regiones planas uniformes. La gráfica es estrictamente par y positiva.
+   - **Segundas derivadas (opción c):** Un operador de segunda derivada (como el Laplaciano o la Laplaciana de Gaussiana, LoG) presenta una morfología de sombrero mexicano (*Mexican hat*), con un pico central flanqueado por lóbulos laterales de signo opuesto cuya integral global se anula ($\sum K[n] = 0$).
 
-*Análisis de las opciones incorrectas:*
+Al no tratarse de un kernel de derivadas ni cumplir los requisitos matemáticos ni de normalización de un kernel de suavizado Gaussiano, la opción rigurosa y correcta es la **d**.
 
-- **b) Kernel de primeras derivadas:** Una primera derivada (como la derivada de una Gaussiana $\frac{d}{dx} G(x) = -\frac{x}{\sigma^2} G(x)$) es una función **impar y antisimétrica** ($f(-x) = -f(x)$). Debe presentar obligatoriamente un lóbulo positivo y un lóbulo negativo que sumen cero.
-- **c) Kernel de segundas derivadas:** Una segunda derivada (como el Laplaciano de la Gaussiana $\frac{d^2}{dx^2} G(x) = \frac{x^2 - \sigma^2}{\sigma^4} G(x)$) presenta perfil de sombrero mexicano (*Mexican hat*): un pico central positivo (o negativo) flanqueado por dos lóbulos laterales de signo opuesto, con integral total nula.
+*Análisis de las opciones descartadas:*
+
+- **a) Kernel de suavizado Gaussiano:** Falsa por carecer de normalización unitaria (amplificaría la energía por más de 6) y por presentar un vértice puntiagudo sin tangente horizontal nula en el origen.
+- **b) Kernel de primeras derivadas:** Falsa porque las primeras derivadas son antisimétricas impares y suman cero.
+- **c) Kernel de segundas derivadas:** Falsa porque las segundas derivadas requieren lóbulos negativos de compensación con integral nula.
