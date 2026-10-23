@@ -98,6 +98,26 @@ export default {
           ],
         },
         {
+          code: "PL",
+          name: "Procesadores de Lenguajes",
+          blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://grados.ugr.es/informatica/pages/docencia/guias-docentes",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Temario y Fundamentos de Compilación (Temas 1 al 6)",
+                  href: "/Subjects/Fifth/PL/build/PL.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+          ],
+        },
+        {
           code: "VC",
           name: "Visión por Computador",
           blocks: [
