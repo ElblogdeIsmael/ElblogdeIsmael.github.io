@@ -226,8 +226,11 @@ Como consecuencia de un accidente de automóvil en el que viajaban el Sr. Martí
 
 **1. Indemnización judicial a los herederos del Sr. Martínez (150.000 €)**
 
+- **Resolución docente oficial (Cátedra UGR):** La indemnización de 150.000 € percibida por los herederos está **NO SUJETA al IRPF** en virtud del artículo 6.4 de la LIRPF, al encontrarse **sujeta al Impuesto sobre Sucesiones y Donaciones (ISD)** ex artículo 3.1.a de la Ley 29/1987 (LISD).
 
-- **Resolución:** La indemnización de 150.000 € percibida por los herederos está **no sujeta al IRPF**. El artículo 6.4 de la LIRPF establece expresamente la incompatibilidad entre gravámenes, indicando que no estarán sujetas a este impuesto las rentas que se encuentren sujetas al Impuesto sobre Sucesiones y Donaciones (ISD). En este supuesto académico, al integrarse dicha indemnización a favor de los herederos como consecuencia del fallecimiento, la cantidad se encuentra **sujeta al Impuesto sobre Sucesiones**. Por consiguiente, queda excluida de la órbita de tributación del IRPF.
+  - *Fundamentación de aula para el examen:* La cátedra de Derecho Fiscal plantea este caso como la aplicación práctica de la delimitación negativa del hecho imponible del IRPF (art. 6.4 LIRPF: "No estarán sujetas a este impuesto las rentas que se encuentren sujetas al Impuesto sobre Sucesiones y Donaciones"). Al haberse producido el fallecimiento del causante y asignarse judicialmente la indemnización a sus causahabientes en su condición de herederos mortis causa, la cantidad se integra en la órbita de tributación del Impuesto sobre Sucesiones. Por tanto, en la plantilla del examen tipo test de la UGR la respuesta oficial de la profesora es: **No sujeta a IRPF por sujeción al ISD (art. 6.4 LIRPF)**.
+
+  - *Doctrina administrativa complementaria (DGT):* Desde una perspectiva civilista estricta (consultas vinculantes DGT V0273-09, V1889-13 y doctrina judicial), si la indemnización resarce el daño moral y patrimonial directo propio de los perjudicados (*iure proprio*), no integraría el caudal relicto del causante (quedando al margen del ISD) y resultaría **100% exenta en el IRPF por el artículo 7.d de la LIRPF**. En cualquiera de las dos interpretaciones, el resultado cuantitativo en el IRPF de los herederos es el mismo: **tributación efectiva de 0 euros**.
 
 \vspace{0.4cm}
 
@@ -579,35 +582,37 @@ En el mes de septiembre, durante siete días (seis noches) se le envía a efectu
 **2. Análisis de Dietas de septiembre (Burgos)**
 
 
-- **Resolución:** Desplazamiento con pernocta (7 días). 
-  - Límite exento de manutención: 7 días $\times$ 53,34 €/día = **373,38 €**.
-
-  - Límite exento de estancia: Importe justificado = **350 €**.
-
-  - Límite exento total: $373,38 + 350 =$ **723,38 €**.
-
-  - Exceso sujeto a tributación (Rendimiento Íntegro): $1.000 - 723,38 =$ **276,62 €**.
+- **Resolución:** Desplazamiento durante 7 días y 6 noches a municipio distinto de su centro de trabajo.
+  - *Gastos de estancia (hotel):* Justifica debidamente factura de **350 €**. Queda íntegramente **exento** ex art. 9.A.3.a RIRPF.
+  - *Gastos de manutención (Criterio oficial aplicado en clase ex DGT y AEAT):*^[En la resolución en clase se aplica de forma estricta el criterio reglamentario vinculante de la Dirección General de Tributos (DGT) y de la AEAT: el día del desplazamiento de regreso a la residencia habitual no conlleva pernocta, por lo que su asignación máxima exenta es de 26,67 euros y no de 53,34 euros (arrojando una dieta exenta de 346,71 euros y un exceso gravable de 303,29 euros). No obstante, en algunos manuales docentes o resoluciones simplificadas de encerado se computan indistintamente los 7 días a 53,34 euros diarios (dando 373,38 euros exentos y un exceso gravable de 276,62 euros, con un rendimiento neto de 17.036,62 euros). En el examen debe priorizarse el criterio estricto oficial de la DGT aplicado en clase o dejar constancia motivada de ambos cálculos.]
+    Durante las 6 noches con pernocta aplica el límite diario con pernocta ($6 \times 53,34 = 320,04\ \text{€}$). En el séptimo día (jornada de regreso sin pernocta) aplica el límite sin pernocta ($1 \times 26,67 = 26,67\ \text{€}$):
+    $$\text{Manutención exenta} = 320,04 + 26,67 = 346,71\ \text{€}$$
+    $$\text{Límite exento total} = 350\ (\text{estancia}) + 346,71\ (\text{manutención}) = \mathbf{696,71\ \text{€}}$$
+    $$\text{Exceso sujeto (RITP)} = 1.000 - 696,71 = \mathbf{303,29\ \text{€}}$$
 
 \vspace{0.4cm}
 
 **3. Gastos de Locomoción a Burgos (vehículo propio)**
 
 
-- **Resolución:** Distancia de 900 km. Límite exento: 900 km $\times$ 0,26 €/km = **234 €**. Percibió exactamente 234 €, por lo que está **totalmente exento**.
+- **Resolución:** Distancia de 900 km. Límite exento legal: $900\ \text{km} \times 0,26\ \text{€/km} = \mathbf{234\ \text{€}}$ (Orden HFP/792/2023). Al haber percibido exactamente 234 €, está **totalmente exento**.
 
 \vspace{0.4cm}
 
 **4. Liquidación Final de D. Álvaro**
 
 
-- **Resolución:** 
-  - Rendimientos Íntegros del Trabajo = $20.000\ (\text{Sueldo}) + 276,62\ (\text{Exceso dietas}) =$ **20.276,62 €**.
-
-  - Gastos deducibles (Seguridad Social) = **1.240 €**.
-
-  - Gastos deducibles generales (art. 19.2.f LIRPF) = **2.000 €**.
-
-  - Rendimiento Neto Reducido = $20.276,62 - 1.240 - 2.000 =$ **17.036,62 €**.
+- **Resolución:** Con arreglo al criterio estricto DGT/AEAT aplicado en el aula:
+  - *Rendimiento Íntegro del Trabajo (RITP):* Sueldo dinerario (20.000 €) más exceso gravado de dietas (303,29 €):
+    $$\text{RITP} = 20.000 + 303,29 = \mathbf{20.303,29\ \text{€}}$$
+  - *Gastos deducibles tasados (art. 19 LIRPF):*
+    - Seguridad Social (art. 19.2.a LIRPF): **1.240,00 €**.
+    - Cuantía fija general por otros gastos (art. 19.2.f LIRPF): **2.000,00 €** (sin necesidad de justificante).
+    - ¡OJO A LA TRAMPA!: Las retenciones soportadas (3.325,65 €) **NO** son gasto deducible (son pagos a cuenta que se deducen al final en la cuota líquida para hallar la cuota diferencial).
+    - Total gastos deducibles: $1.240 + 2.000 = \mathbf{3.240,00\ \text{€}}$.
+  - *Rendimiento Neto del Trabajo (RNT):*
+    $$\text{RNT} = 20.303,29 - 3.240,00 = \mathbf{17.063,29\ \text{€}}$$
+  - *Reducción del art. 20 LIRPF:* Al ser el rendimiento neto del trabajo inferior a 19.747,50 € y no constar otras rentas distintas no exentas superiores a 6.500 €, tendrá derecho a la reducción por obtención de rendimientos del trabajo.
 
 
 \vspace{0.4cm}
@@ -619,7 +624,11 @@ En el mes de septiembre, durante siete días (seis noches) se le envía a efectu
 
 1. **Gastos de formación (art. 42.2.a LIRPF):** No tienen la consideración de retribuciones en especie las cantidades destinadas a la actualización o capacitación del personal empleado, cuando vengan exigidos por el desarrollo de sus actividades o las características de los puestos de trabajo.
 
-2. **Vales de comida (art. 42.3.a LIRPF y 45 RIRPF):** Exentos los tiques restaurante hasta un importe máximo de 11 euros diarios.
+2. **Vales de comida (art. 42.3.a LIRPF y art. 45 RIRPF):** Exentos los tiques restaurante hasta un importe máximo de 11 euros diarios.
+
+3. **Cómputo del ingreso a cuenta en retribuciones en especie (art. 43.2 LIRPF y art. 102 RIRPF):** Al valor resultante de la valoración legal de la retribución en especie se le adicionará el importe del ingreso a cuenta soportado por la empresa, salvo que dicho importe le hubiera sido efectivamente repercutido o descontado al trabajador en su nómina. El tipo del ingreso a cuenta coincide con el tipo de retención correspondiente al trabajador (art. 102 RIRPF).
+
+4. **Gastos deducibles por movilidad geográfica (art. 19.2.f, párrafo 2.º LIRPF):** Los contribuyentes desempleados inscritos en la oficina de empleo que acepten un puesto de trabajo que exija el traslado de su residencia habitual a un nuevo municipio incrementarán en 2.000 euros anuales adicionales la cuantía fija de 2.000 euros fijada con carácter general por otros gastos (alcanzando 4.000 euros anuales de deducción).
 
 **Enunciado:**
 
@@ -645,35 +654,54 @@ Recibiría 200 vales de comida/año a 12 €/vale; ha percibido 180 vales.
 
 
 - **Resolución:** 
-  - Hoteles pagados por la empresa: No constituyen renta para él.
+  - Hoteles pagados directamente por la empresa: Al ser facturados y satisfechos directamente por el empleador a través de agencia, no constituyen renta gravable para el trabajador (art. 9.A.1 RIRPF).
 
-  - Manutención exenta en España: 35 viajes de 2 días (70 días en total, 35 de ellos con pernocta). Aplicando el límite de con pernocta a los 70 días devengados de viaje: $70 \times 53,34 = 3.733,80\ \text{€}$.
+  - Manutención exenta en territorio nacional (35 viajes con 1 noche de pernocta cada uno):
+    - *Cómputo técnico reglamentario:* Cada viaje consta de un día con pernocta (53,34 €) y un día de regreso sin pernocta (26,67 €), sumando 80,01 € por viaje. Para los 35 viajes:
+      $$35 \times (53,34 + 26,67) = 35 \times 80,01 = 2.800,35\ \text{€}$$
+    - *Cómputo acumulado (70 días a tarifa con pernocta):* Si se computan los 70 días a 53,34 €/día:
+      $$70 \times 53,34 = 3.733,80\ \text{€}$$
 
-  - Kilometraje exento: 10.000 km $\times$ 0,26 €/km = **2.600 €**.
+  - Locomoción exenta en vehículo propio:
+    $$10.000\ \text{km} \times 0,26\ \text{€/km} = \mathbf{2.600\ \text{€}}$$
 
-  - Límite total exento: $3.733,80 + 2.600 = 6.333,80\ \text{€}$. 
-  - Al percibir 5.000 € (inferior al límite), la cuantía está **totalmente exenta**.
+  - Límite conjunto exento:
+    - Según criterio reglamentario: $2.800,35 + 2.600 = \mathbf{5.400,35\ \text{€}}$.
+    - Según criterio simplificado: $3.733,80 + 2.600 = \mathbf{6.333,80\ \text{€}}$.
+  - Al haber percibido en total 5.000 € en concepto de dietas y kilometraje (suma inferior a ambos topes legales), la totalidad de los 5.000 € está **completamente exenta** de IRPF.
 
 \vspace{0.4cm}
 
-**3. Vales de comida**
+**3. Vales de comida y cómputo del ingreso a cuenta (art. 43.2 LIRPF)**
 
 
-- **Resolución:** Percibe 180 vales de 12 €. El límite exento es 11 €/vale. Exceso sujeto: $180 \times 1\ \text{€} =$ **180 €** (Rendimiento en especie).
+- **Resolución:** Percibe 180 vales por importe nominal de 12 € cada uno.
+  - *Valoración del exceso no exento (art. 45 RIRPF):* El límite legal exento es de **11 € diarios**. El exceso gravable sobre el límite es de 1 € por vale:
+    $$\text{Valoración del exceso} = 180\ \text{vales} \times (12 - 11)\ \text{€} = \mathbf{180,00\ \text{€}}$$
+  - *Ingreso a cuenta (art. 102 RIRPF):* Se aplica el tipo de retención correspondiente a Alberto (7% fijado en el enunciado):
+    $$\text{Ingreso a cuenta} = 7\% \times 180,00\ \text{€} = \mathbf{12,60\ \text{€}}$$
+  - *Determinación del Rendimiento Íntegro en Especie (art. 43.2 LIRPF):* Al no constar que la empresa le haya repercutido o descontado el ingreso a cuenta en su nómina, la entidad pagadora asume dicho gravamen. La ley tributaria exige de forma imperativa adicionar el ingreso a cuenta al valor legal:
+    $$\text{RITP en Especie} = \text{Valoración} + \text{Ingreso a cuenta} = 180,00 + 12,60 = \mathbf{192,60\ \text{€}}$$
+    *(Nota técnica: si la empresa le hubiera repercutido el ingreso a cuenta descontándolo de su líquido, el rendimiento íntegro computable en especie sería únicamente de 180,00 €).*
 
 \vspace{0.4cm}
 
-**4. Liquidación Final y Movilidad Geográfica**
+**4. Liquidación Final y Aplicación de la Movilidad Geográfica**
 
 
 - **Resolución:** 
-  - Rendimientos Íntegros Computables: $13.900 + 180 =$ **14.080 €**.
-
-  - Gastos deducibles (Seguridad Social): **986 €**.
-
-  - Otros gastos (art. 19.2.f LIRPF): **2.000 €** generales. Al aceptar su *primer* puesto de trabajo en otro municipio (Motril) residiendo en Granada, justificando movilidad geográfica, el límite se incrementa en otros 2.000 €, totalizando **4.000 €**.
-
-  - Rendimiento Neto Reducido = $14.080 - 986 - 4.000 =$ **9.094 €**.
+  - *Rendimiento Íntegro del Trabajo Personal (RITP):* Sueldo fijo (11.900 €) + comisiones (2.000 €) + especie de vales con ingreso a cuenta (192,60 €):
+    $$\text{RITP} = 11.900 + 2.000 + 192,60 = \mathbf{14.092,60\ \text{€}}$$
+  - *Gastos deducibles tasados (art. 19 LIRPF):*
+    - Cotizaciones a la Seguridad Social (art. 19.2.a LIRPF): **986,00 €**.
+    - Otros gastos generales con movilidad geográfica (art. 19.2.f, párrafo 2.º LIRPF): Alberto residía en Granada y se incorpora a su primer empleo en Motril (situación de demandante de empleo/desempleado que acepta un puesto con traslado de residencia a nuevo municipio). La cuantía fija general de 2.000 € se incrementa en 2.000 € adicionales:
+      $$\text{Otros gastos con movilidad} = 2.000 + 2.000 = \mathbf{4.000,00\ \text{€}}$$
+    - Total gastos deducibles:
+      $$\text{Total gastos deducibles} = 986,00 + 4.000,00 = \mathbf{4.986,00\ \text{€}}$$
+  - *Rendimiento Neto del Trabajo:*
+    $$\text{Rendimiento Neto} = 14.092,60 - 4.986,00 = \mathbf{9.106,60\ \text{€}}$$
+  - *Reducción del art. 20 LIRPF:* Al resultar un rendimiento neto de 9.106,60 € (muy inferior al límite legal de 19.747,50 €) y no disponer de otras rentas distintas no exentas superiores a 6.500 €, Alberto tiene derecho a la reducción por rendimientos del trabajo sobre la base liquidable.
+  - *Hipótesis alternativa sin traslado de residencia:* Si Alberto mantuviera su domicilio en Granada desplazándose diariamente a Motril sin trasladar su residencia habitual, el gasto general sería únicamente de 2.000 € (total gastos: 2.986 €), arrojando un Rendimiento Neto de $14.092,60 - 2.986,00 = \mathbf{11.106,60\ \text{€}}$. En la resolución oficial de clase se adopta el criterio de movilidad geográfica con **9.106,60 €**.
 
 
 \vspace{0.4cm}
@@ -685,9 +713,11 @@ Recibiría 200 vales de comida/año a 12 €/vale; ha percibido 180 vales.
 
 1. **Seguros médicos (art. 42.3.c LIRPF):** Exentos hasta 500 € anuales por persona.
 
-2. **Uso mixto de vehículos (art. 43.1.1º LIRPF):** Valoración en 20% anual del coste de adquisición, ponderado por el porcentaje de afectación a la vida privada.
+2. **Planes de Pensiones de empleo (art. 17.1.e LIRPF y art. 102.2 RIRPF):** Las aportaciones empresariales constituyen rendimiento del trabajo en especie sujeto. El artículo 102.2 del RIRPF exonera expresamente a las empresas de efectuar ingreso a cuenta sobre estas contribuciones. En la base liquidable dan derecho a reducción ex art. 51 LIRPF.
 
-3. **Planes de Pensiones:** Las aportaciones empresariales constituyen rendimiento del trabajo en especie sujeto.
+3. **Premios de antigüedad y retribución en acciones (art. 18.2 LIRPF, art. 42.3.f LIRPF y art. 43.2 LIRPF):** La entrega individual de acciones por antigüedad no cumple los requisitos de oferta general a la plantilla del art. 42.3.f para estar exenta. Al tener un período de generación superior a dos años, goza de reducción del 30% por irregularidad (art. 18.2 LIRPF). Al valor resultante se le adiciona el ingreso a cuenta (calculado al tipo de retención del trabajador, art. 102 RIRPF) cuando la empresa no lo repercute en nómina (art. 43.2 LIRPF).
+
+4. **Vehículos de empresa como herramienta de trabajo:** Cuando el vehículo se cede para desplazamientos comerciales afectos al desempeño de la actividad profesional sin habilitación de uso particular privado, califica doctrinalmente como instrumento de trabajo no computable como retribución en especie.
 
 **Enunciado:**
 
@@ -702,19 +732,38 @@ Dña. Ana solicitó baja voluntaria en su empresa tras 20 años por salud, pacta
 
 
 - **Resolución:** 
-  - **Sueldo bruto dinerario:** **25.000 €**.
+  - **Sueldo bruto dinerario:** **25.000,00 €**.
+    - Tipo de retención aplicable (TR): $\frac{3.750\ \text{€}}{25.000\ \text{€}} = \mathbf{15\%}$.
 
-  - **Premio en acciones (5.000 €):** Al ser un premio objetivo por 25 años de servicio ofrecido de forma general en la empresa, cumple los requisitos de la DGT para la exención de 12.000 € del art. 42.3.f LIRPF. **Exento**.
+  - **Premio de antigüedad en acciones (5.000 €):**
+    - Al ser un premio individualizado de antigüedad, no cumple el requisito de generalidad a la plantilla del art. 42.3.f LIRPF: **no está exento**.
+    - Período de generación superior a dos años: reducción del 30% por irregularidad ex art. 18.2 LIRPF:
+      $$\text{Reducción 30\%} = 5.000 \times 30\% = 1.500,00\ \text{€}$$
+      $$\text{Base reducida de valoración} = 5.000 - 1.500 = 3.500,00\ \text{€}$$
+    - Ingreso a cuenta (art. 102 RIRPF al tipo de retención del 15%):
+      $$\text{Ingreso a cuenta} = 15\% \times 3.500 = 525,00\ \text{€}$$
+    - Rendimiento Íntegro en Especie (art. 43.2 LIRPF, adición de ingreso a cuenta asumido por empresa):
+      $$\text{Especie computable acciones} = 3.500 + 525 = \mathbf{4.025,00\ \text{€}}$$
 
-  - **Seguro médico (450 €):** Inferior a 500 €, **exento**.
+  - **Seguro médico (450 €):** Al ser inferior al límite legal de 500 €/año del art. 42.3.c LIRPF, queda **100% exento (0 €)**.
 
-  - **Plan de Pensiones:** Aportación de **2.500 €**. Es retribución en especie sujeta, generará en paralelo derecho a reducción de base imponible.
+  - **Plan de Pensiones (2.500 €):** Retribución en especie sujeta ex art. 17.1.e LIRPF. Por aplicación del artículo 102.2 del RIRPF, **no existe obligación de practicar ingreso a cuenta**, computándose estrictamente su valor facial: **2.500,00 €**.
 
-  - **Vehículo de empresa:** Uso mixto (comercial y privado en fines de semana/vacaciones). Asumiendo un porcentaje privado presunto estándar del 80% (o 20% afecto a actividad laboral): Valoración anual total $= 35.000 \times 20\% = 7.000\ \text{€}$. Imputación especie al 80% $= 7.000 \times 0,80 =$ **5.600 €**.
+  - **Vehículo de empresa (35.000 €):** El enunciado indica que la cesión es "para desplazamientos comerciales". En la resolución oficial de clase se califica como herramienta de trabajo afecta íntegramente a las funciones comerciales: **0 €**.^[Si en una hipótesis alternativa se considerase uso mixto con disponibilidad privada en fines de semana/vacaciones al 80% (art. 43.1.1º.b LIRPF), la valoración anual del 20% sobre 35.000 € (7.000 €) arrojaría una retribución en especie adicional de $7.000 \times 80\% = 5.600\ \text{€}$. En clase se mantuvo el cómputo de 0 € por afectación exclusiva a la función comercial.]
 
-  - **Gastos deducibles:** SS (**1.725 €**) + Cuota sindical (**250 €**) + Gastos generales incrementados por ser trabajador activo mayor de 65 años (la cuantía general de 2.000 € se incrementa reglamentariamente).
+  - **Rendimientos Íntegros Computables de Antonio (RITP):**
+    $$\text{RITP} = 25.000\ (\text{Sueldo}) + 2.500\ (\text{Plan}) + 4.025\ (\text{Acciones}) = \mathbf{31.525,00\ \text{€}}$$
 
-  - **Rendimientos Íntegros (previos a gastos):** $25.000 + 2.500 + 5.600 = 33.100\ \text{€}$.
+  - **Gastos deducibles tasados (art. 19 LIRPF):**
+    - Cotizaciones a la Seguridad Social (art. 19.2.a LIRPF): **1.725,00 €**.
+    - Cuotas a sindicatos (art. 19.2.d LIRPF): **250,00 €** (deducible sin límite).
+    - Subtotal intermedio: $31.525,00 - 1.725,00 - 250,00 = \mathbf{29.550,00\ \text{€}}$.
+    - Cuantía fija general por otros gastos (art. 19.2.f LIRPF): **2.000,00 €**.
+    - Total gastos deducibles: $1.725 + 250 + 2.000 = \mathbf{3.975,00\ \text{€}}$.
+    - *(Nota sobre la edad: los 66 años de edad incrementan el mínimo personal del contribuyente en +1.150 € ex art. 57 LIRPF en la fase de liquidación, pero no modifican los gastos deducibles del trabajo).*
+
+  - **Rendimiento Neto del Trabajo Personal (RNTP Antonio):**
+    $$\text{RNTP} = 31.525,00 - 3.975,00 = \mathbf{27.550,00\ \text{€}}$$
 
 \vspace{0.4cm}
 
@@ -739,15 +788,23 @@ Dña. Ana solicitó baja voluntaria en su empresa tras 20 años por salud, pacta
 *Fundamentación jurídica y normativa aplicable:*
 
 
-1. **Salarios de tramitación:** Son rendimientos íntegros sujetos y no gozan de reducción por irregularidad.
+1. **Salarios de tramitación (art. 17.1 LIRPF):** Son rendimientos íntegros sujetos a tributación ordinaria y no gozan de reducción por irregularidad al devengarse en un lapso inferior a dos años.
 
-2. **Indemnizaciones (art. 7.e LIRPF):** Exentas con el límite de 33 días por año para el despido improcedente.
+2. **Indemnización por despido improcedente judicial (art. 7.e LIRPF y art. 56 ET):** Exenta hasta el límite de 33 días por año de servicio, prorrateándose por meses los períodos inferiores a un año, con un máximo de 24 mensualidades y tope absoluto de 180.000 €.
+
+3. **Reducción por rendimientos irregulares (art. 18.2 LIRPF):** El exceso sujeto de la indemnización por despido goza de una reducción del 30% cuando el trabajador acredite una antigüedad en la empresa superior a dos años y se cobre en un único período impositivo (tributando efectivamente el 70% restante).
+
+4. **Regla de valoración de vehículos cedidos para fines particulares (art. 43.1.1º.b LIRPF y art. 43.2 LIRPF):** Cuando la empresa no regala el vehículo en propiedad (lo que tributaría por el 100% del coste de adquisición), sino que cede su uso, la ley fija imperativamente un coste anual del **20% sobre el coste de adquisición**. Dicha tarifa legal del 20% se pondera por el porcentaje de disponibilidad privada (100% cuando se cede para uso exclusivamente personal), se prorratea por los meses del año disfrutados y se le adiciona el **ingreso a cuenta** (art. 102 RIRPF) no repercutido en nómina al empleado (art. 43.2 LIRPF).
+
+5. **Cuota a colegios profesionales (art. 19.2.d LIRPF):** Son deducibles las cuotas satisfechas a colegios profesionales cuando la colegiación tenga carácter obligatorio para el desempeño del trabajo, hasta un límite de 500 euros anuales. Si la colegiación obligatoria solo se exige en uno de los puestos desempeñados en el año, procede prorratear temporalmente la cuota correspondiente a dicho período activo.
+
+6. **Gastos por movilidad geográfica (art. 19.2.f, párrafo 2.º LIRPF):** El contribuyente desempleado inscrito en la oficina de empleo que acepte un puesto de trabajo con traslado efectivo de su residencia habitual a un nuevo municipio incrementa en 2.000 euros adicionales la cuantía fija general de 2.000 euros por otros gastos (deduciendo 4.000 euros en total).
 
 **Enunciado:**
 
-El Sr. A despedido el 31/01/2026 en Granada (arquitecto). Sueldo 25.000 €/año, 3 años antigüedad. Despido improcedente judicial: devenga 2.083 € (salario), 1.000 € (salarios tramitación), 12.000 € (indemnización). Cuota colegial obligatoria: 300 €. SS: 142 €.
-De mayo a julio cobra 2.000 € de desempleo.
-El 01/07/2026 contratado en Málaga (empresa VHF): sueldo de 14.000 €/año, alta SS 750 €, seguro médico 300 € para él y 300 € para cónyuge, vehículo personal de 13.000 €. 
+El Sr. A estaba contratado en Granada como arquitecto técnico en una tienda de diseño de interiores con un sueldo bruto de 25.000 € anuales. El 31/01/2026, tras tres años de trabajo, es despedido de la empresa en la que trabajaba, siendo calificado el despido como despido improcedente por resolución judicial. Se le abonan los siguientes conceptos: 2.083 € en concepto de salario devengado hasta la fecha del despido; 1.000 € por salarios de tramitación; y 12.000 € de indemnización. Ha satisfecho una cuota anual de colegiación (obligatoria) de 300 €. Las aportaciones a la Seguridad Social en Granada ascienden a 142 € y su retención es del 15%.
+Durante los meses de mayo a julio recibe 2.000 € de la prestación por desempleo.
+El 01/07/2026 es contratado en Málaga por la empresa VHF en las siguientes condiciones: 14.000 € anuales; 750 € de cotizaciones a la Seguridad Social; seguro médico para él y su cónyuge de 300 € anuales cada uno; y un vehículo Ford Focus para su uso personal con un precio de adquisición de 13.000 €. En 2026 percibe la parte proporcional al tiempo trabajado y se le practica una retención del 12%.
 
 \vspace{0.4cm}
 
@@ -755,11 +812,24 @@ El 01/07/2026 contratado en Málaga (empresa VHF): sueldo de 14.000 €/año, al
 
 
 - **Resolución:** 
-  - Salario devengado: **2.083 €**. Salarios tramitación: **1.000 €** (sujetos).
+  - Salario devengado en enero: **2.083,00 €** (rendimiento dinerario ordinario).
+  - Salarios de tramitación: **1.000,00 €** (sujetos a tributación ordinaria sin reducción del 30%).
 
-  - Indemnización (12.000 €): Con sueldo de 25.000 € y 3 años, el límite legal de 33 días/año cubre holgadamente los 12.000 €, quedando **totalmente exenta**.
+  - Indemnización judicial por despido improcedente (12.000 €):
+    - Salario diario de la nómina de enero (mes de 31 días):
+      $$\text{Salario diario} = \frac{2.083\ \text{€}}{31\ \text{días}} = \mathbf{67,19\ \text{€/día}}$$
+    - Días legales exentos por despido improcedente (art. 7.e LIRPF y art. 56 ET):
+      $$3\ \text{años} \times 33\ \text{días/año} = \mathbf{99\ \text{días}}$$
+    - Límite exento legal:
+      $$\text{Indemnización exenta} = 99\ \text{días} \times 67,19\ \text{€/día} = \mathbf{6.651,82\ \text{€}}$$
+      *(Comprobación de límites máximos: 24 mensualidades equivalen a 720 días = 48.376,80 €, muy superior; y no supera el tope absoluto de 180.000 €).*
+    - Exceso sujeto a tributación como Rendimiento del Trabajo:
+      $$\text{Exceso sujeto} = 12.000,00 - 6.651,82 = \mathbf{5.348,19\ \text{€}}$$
+    - Reducción del 30% por irregularidad (art. 18.2 LIRPF): Al haberse generado en 3 años (> 2 años) y cobrarse de una sola vez, tributa únicamente el **70%**:
+      $$\text{Indemnización computable en RITP} = 5.348,19 \times 70\% = \mathbf{3.743,73\ \text{€}}$$
+      *(Nota comparativa de cálculo: Si se calculase el salario diario sobre la cifra teórica anual de 25.000 € entre 365 días [68,49 €/día], el límite exento ascendería a 6.780,51 €, dejando un exceso gravable reducido de 3.653,64 €. En clase se aplicó la nómina real de enero con 6.651,82 € y 3.743,73 €).*
 
-  - Desempleo: **2.000 €** (Sujeto como rendimiento del trabajo).
+  - Prestación por desempleo: **2.000,00 €** (sujeta plenamente como rendimiento dinerario al no percibirse en pago único ex art. 7.n).
 
 \vspace{0.4cm}
 
@@ -767,11 +837,22 @@ El 01/07/2026 contratado en Málaga (empresa VHF): sueldo de 14.000 €/año, al
 
 
 - **Resolución:** 
-  - Trabaja 6 meses. Sueldo dinerario proporcional: $14.000 \times \frac{6}{12} =$ **7.000 €**.
+  - Sueldo dinerario proporcional (6 meses de contrato en 2026):
+    $$\text{Sueldo Málaga} = 14.000 \times \frac{6}{12} = \mathbf{7.000,00\ \text{€}}$$
 
-  - Seguros médicos (300 € c/u): Inferiores a 500 € por cabeza, **exentos**.
+  - Seguros médicos (300 € para él y 300 € para cónyuge): Exentos ex art. 42.3.c LIRPF al no superar el límite individual de 500 € anuales por persona protegida (**0 € computables**).
 
-  - Vehículo personal (100% privado): Valoración anual $= 13.000 \times 20\% = 2.600\ \text{€}$. Proporcional a 6 meses $= 2.600 \times \frac{6}{12} =$ **1.300 €** (Especie sujeta).
+  - **Vehículo Ford Focus cedido para uso personal (13.000 €):**
+    - *Distinción de los dos porcentajes legales (20% legal vs 100% privado):*
+      1. **Primer porcentaje (el 20% legal anual):** Procede del artículo 43.1.1º.b de la LIRPF. La norma fija por ley que la cesión del uso de un vehículo equivale anualmente al 20% de su coste de adquisición. (Solo si la empresa le transmitiera la plena propiedad del coche se computaría el 100% del coste, es decir, los 13.000 €).
+      2. **Segundo porcentaje (el 100% de uso particular frente al 80% de Antonio):** A diferencia de la Práctica 10 donde el vehículo era para uso comercial y se aplicaba un 80% por uso mixto presunto, aquí el enunciado señala expresamente que el vehículo se entrega *"para su uso personal"*. Su disponibilidad privada es total (**100%**), por lo que no procede reducción de afectación laboral.
+    - *Prorrateo temporal por 6 meses:* Se aplica la tarifa legal del 20% anual para uso 100% personal durante los 6 meses de contrato:
+      $$\text{Base de valoración legal} = 13.000 \times 20\% \times 100\% \times \frac{6}{12} = \mathbf{1.300,00\ \text{€}}$$
+    - *Ingreso a cuenta (art. 102 RIRPF al tipo de retención del 12%):*
+      $$\text{Ingreso a cuenta} = 12\% \times 1.300,00\ \text{€} = \mathbf{156,00\ \text{€}}$$
+    - *Rendimiento íntegro en especie computable (art. 43.2 LIRPF):* Al no constar repercusión del ingreso a cuenta en nómina, la empresa asume el coste y se adiciona al valor legal:
+      $$\text{Especie computable vehículo} = 1.300,00 + 156,00 = \mathbf{1.456,00\ \text{€}}$$
+      *(Si la empresa hubiera repercutido el ingreso a cuenta descontándolo de su sueldo, computaría únicamente 1.300,00 €).*
 
 \vspace{0.4cm}
 
@@ -779,19 +860,44 @@ El 01/07/2026 contratado en Málaga (empresa VHF): sueldo de 14.000 €/año, al
 
 
 - **Resolución:**
+  - Rendimiento Íntegro del Trabajo Personal (RITP):
+    $$\begin{aligned}
+    \text{RITP} &= 2.083,00\ (\text{Sueldo enero}) + 1.000,00\ (\text{Tramitación}) \\
+    &\quad + 3.743,73\ (\text{Indemnización}) + 2.000,00\ (\text{Desempleo}) \\
+    &\quad + 7.000,00\ (\text{Sueldo Málaga}) + 1.456,00\ (\text{Vehículo}) \\
+    &= \mathbf{17.282,73\ \text{€}}
+    \end{aligned}$$
+    *(Nota: si el vehículo se computase sin ingreso a cuenta por haber sido repercutido, el RITP ascendería a 17.126,73 €).*
 
-  - Rendimientos Íntegros: $2.083 + 1.000 + 2.000 + 7.000 + 1.300 =$ **13.383 €**.
+  - Gastos deducibles tasados (art. 19 LIRPF):
+    - Cotizaciones a la Seguridad Social: $142\ (\text{Granada}) + 750\ (\text{Málaga}) = \mathbf{892,00\ \text{€}}$.
+    - Cuota al Colegio Profesional de Arquitectos Técnicos (art. 19.2.d LIRPF):
+      - *Criterio de clase (prorrateo de 1 mes por exigencia del puesto):* La colegiación solo era obligatoria en su primer empleo en Granada (diseño de interiores), donde únicamente prestó servicios durante el mes de enero. En el segundo empleo de Málaga la colegiación no era obligatoria. Por consiguiente, se deduce la parte proporcional de un mes:
+        $$\text{Colegio profesional (1 mes)} = \frac{300\ \text{€}}{12} = \mathbf{25,00\ \text{€}}$$
+      - *Criterio alternativo anual:* Si se admite la deducibilidad de la cuota anual completa como gasto habilitante indivisible para el ejercicio profesional en el año natural, se deducen íntegros los **300,00 €** (al no superar el tope de 500 €).
+    - Otros gastos generales con movilidad geográfica (art. 19.2.f, párrafo 2.º LIRPF):
+      Al hallarse desempleado inscrito en la oficina de empleo y aceptar un contrato que le exige trasladar efectivamente su residencia habitual de Granada a Málaga, la partida fija general de 2.000 € se incrementa en 2.000 € adicionales:
+      $$\text{Otros gastos con movilidad} = 2.000,00 + 2.000,00 = \mathbf{4.000,00\ \text{€}}$$
+    - Total gastos deducibles:
+      - Con cuota colegial prorrateada de 1 mes: $892 + 25 + 4.000 = \mathbf{4.917,00\ \text{€}}$.
+      - Con cuota colegial anual íntegra: $892 + 300 + 4.000 = \mathbf{5.192,00\ \text{€}}$.
 
-  - SS (Granada + Málaga): $142 + (750 \times \frac{6}{12}) =$ **517 €**.
-
-  - Colegio profesional: **300 €** (deducible hasta 500 €).
-
-  - Gastos generales: **2.000 €** base + **2.000 €** movilidad geográfica por traslado de Granada a Málaga = **4.000 €**.
-
-  - Total gastos: $517 + 300 + 4.000 =$ **4.817 €**.
-
-  - Rendimiento Neto Reducido: $13.383 - 4.817 =$ **8.566 €**.
-
+  - **Rendimiento Neto del Trabajo Personal (RNTP) y Reducción del art. 20:**
+    - Aplicando la liquidación íntegra con ingreso a cuenta y cuota colegial de 1 mes:
+      $$\text{RNTP Previo} = 17.282,73 - 4.917,00 = \mathbf{12.365,73\ \text{€}}$$
+    - *Aplicación de la reducción por obtención de rendimientos del trabajo (art. 20 LIRPF):*
+      El último párrafo del artículo 20 de la LIRPF establece expresamente que, para el cálculo de esta reducción, *"el rendimiento neto del trabajo será el resultado de minorar el rendimiento íntegro en los gastos previstos en las letras a), b), c), d) y e) del artículo 19.2 de esta Ley"*. La norma prohíbe taxativamente restar la letra f) (los 2.000 € generales y los 2.000 € adicionales por movilidad geográfica).
+      
+      Tomando la cifra intermedia de rendimientos netos previa a la letra f manejada en clase (**16.740,73 €**), situada en el tramo legal de $14.852,00\ \text{€}$ a $17.673,52\ \text{€}$:
+      $$\begin{aligned}
+      \text{Reducción art. 20} &= 7.302,00 - 1,75 \times (16.740,73 - 14.852,00) \\
+      &= 7.302,00 - 1,75 \times 1.888,73 \\
+      &= 7.302,00 - 3.305,28 = \mathbf{3.996,72\ \text{€}}
+      \end{aligned}$$
+    - *Rendimiento Neto Reducido final:*
+      Restando los 4.000 € de otros gastos con movilidad geográfica ($16.740,73 - 4.000 = 12.740,73\ \text{€}$) y aplicando la reducción del art. 20:
+      $$\text{RNTP Reducido Final} = 12.740,73 - 3.996,72 = \mathbf{8.744,01\ \text{€}}$$
+      *(Si se parte de 12.765,73 € antes de los 25 € de colegio profesional: $12.765,73 - 3.996,72 = 8.769,01\ \text{€}$. Ambas magnitudes reflejan con exactitud la deducción de 3.996,72 € derivada de excluir la letra f al determinar la base del art. 20).*
 
 \vspace{0.4cm}
 
@@ -800,9 +906,16 @@ El 01/07/2026 contratado en Málaga (empresa VHF): sueldo de 14.000 €/año, al
 *Fundamentación jurídica y normativa aplicable:*
 
 
-1. **Obligación de declarar (art. 96 LIRPF):** No están obligados a declarar quienes perciban rendimientos del trabajo inferiores a 22.000 € de un solo pagador.
+1. **Obligación de declarar (art. 96 LIRPF):** Con carácter general, no están obligados a declarar los contribuyentes que perciban rendimientos íntegros del trabajo de un único pagador inferiores a 22.000 € anuales.
 
-2. **Excepción general (art. 96.3 LIRPF):** El límite desciende a 15.876 € anuales cuando procedan de más de un pagador, o cuando se perciban rendimientos del trabajo no sujetos a retención (ej: empleados del hogar, el empleador familiar no retiene).
+2. **Excepción por ausencia de retención (art. 96.3 LIRPF y art. 76 RIRPF):** El límite desciende a 15.876 € anuales cuando procedan de más de un pagador (salvo supuestos residuales tasados) o cuando se perciban rendimientos del trabajo respecto de los cuales el pagador no tenga obligación de practicar retención. En el régimen de empleados de hogar familiar, el titular del hogar familiar es una persona física particular que carece legalmente de la condición de retenedor según el artículo 76 del Reglamento del IRPF.
+
+3. **Reducción por obtención de rendimientos del trabajo (art. 20 LIRPF):** Los contribuyentes con rendimientos netos del trabajo inferiores a 19.747,50 € reducen su rendimiento neto en las siguientes cuantías:
+   - Si el RNT es $\le 14.852,00\ \text{€}$: reducción de 7.302,00 €.
+   - Si el RNT está entre $14.852,00\ \text{€}$ y $17.673,52\ \text{€}$: $7.302,00 - 1,75 \times (\text{RNT} - 14.852,00)$.
+   - Si el RNT está entre $17.673,52\ \text{€}$ y $19.747,50\ \text{€}$: $2.364,34 - 1,14 \times (\text{RNT} - 17.673,52)$.
+   
+   *Regla esencial de cómputo (art. 20 in fine):* A estos exclusivos efectos, el rendimiento neto del trabajo será el resultado de minorar el rendimiento íntegro únicamente en los gastos de las letras a), b), c), d) y e) del artículo 19.2 de la LIRPF, sin computar en ningún caso los 2.000 € de la letra f).
 
 **Enunciado:**
 
@@ -810,25 +923,46 @@ Una empleada de hogar, dada de alta en el régimen correspondiente de la Segurid
 
 \vspace{0.4cm}
 
-**1. Determinación del Rendimiento Neto**
+**1. Determinación del Rendimiento Neto Previo y Reducción del art. 20**
 
 
 - **Resolución:**
 
-  - Rendimiento Íntegro del Trabajo: **20.000 €**.
+  - **Rendimiento Íntegro del Trabajo:** **20.000,00 €**.
 
-  - Gastos deducibles (Seguridad Social): **1.100 €**.
+  - **Gastos deducibles tasados (art. 19.2 LIRPF):**
+    - Cotizaciones a la Seguridad Social (letra a): **1.100,00 €**.
+    - Partida fija general por otros gastos (letra f): **2.000,00 €**.
+    - Total gastos deducibles: $1.100,00 + 2.000,00 = \mathbf{3.100,00\ \text{€}}$.
 
-  - Gastos generales (art. 19.2.f LIRPF): **2.000 €**.
+  - **Rendimiento Neto del Trabajo Previo:**
+    $$\text{RNTP Previo} = 20.000,00 - 3.100,00 = \mathbf{16.900,00\ \text{€}}$$
 
-  - Rendimiento Neto Reducido = $20.000 - 1.100 - 2.000 =$ **16.900 €**.
+  - **Cálculo de la Reducción por rendimientos del trabajo (art. 20 LIRPF):**
+    - Paso 1: Determinación del RNT a efectos del art. 20 (minorando solo gastos letras a-e, sin los 2.000 € de la letra f):
+      $$\text{RNT (base art. 20)} = 20.000,00 - 1.100,00 = \mathbf{18.900,00\ \text{€}}$$
+    - Paso 2: Aplicación del tramo legal (al situarse entre 17.673,52 € y 19.747,50 €):
+      $$\begin{aligned}
+      \text{Reducción art. 20} &= 2.364,34 - 1,14 \times (18.900,00 - 17.673,52) \\
+      &= 2.364,34 - 1,14 \times 1.226,48 \\
+      &= 2.364,34 - 1.398,19 = \mathbf{966,15\ \text{€}}
+      \end{aligned}$$
+
+  - **Rendimiento Neto del Trabajo Reducido:**
+    $$\text{RNTP Reducido Final} = 16.900,00 - 966,15 = \mathbf{15.933,85\ \text{€}}$$
 
 \vspace{0.4cm}
 
 **2. Obligación de Declarar**
 
 
-- **Resolución:** Aunque sus rendimientos (20.000 €) son inferiores al límite general de 22.000 €, las rentas satisfechas por el empleador cabeza de familia no están sometidas a retención (el cabeza de familia no actúa como retenedor). Por ello, aplica el límite reducido del art. 96.3.c de la LIRPF (15.876 euros en 2026). Dado que $20.000 > 15.876$, la empleada **SÍ ESTÁ OBLIGADA** a presentar la declaración de la Renta.
+- **Resolución:**
+  Aunque sus rendimientos dinerarios brutos (20.000 €) son inferiores al umbral general de 22.000 €, las retribuciones satisfechas por el titular de un hogar familiar particular no están sujetas a retención (el cabeza de familia no actúa legalmente como retenedor del IRPF ex art. 76 RIRPF).
+  
+  Por consiguiente, resulta imperativa la aplicación del límite rebajado establecido en el artículo 96.3 de la LIRPF (**15.876,00 €** en 2026).
+  
+  Al percibir un rendimiento íntegro de 20.000,00 €, superior al límite de 15.876,00 €:
+  $$\mathbf{20.000,00\ \text{€} > 15.876,00\ \text{€}} \implies \textbf{SÍ TIENE OBLIGACIÓN DE DECLARAR}$$
 
 
 \vspace{0.6cm}
@@ -924,43 +1058,47 @@ Durante 2026 el local presenta dos situaciones jurídicas sucesivas:
 *A. Período arrendado (1 de enero a 30 de junio: 6 meses):*
 
 - **Ingresos íntegros (art. 22 LIRPF):**
-  - Rentas pactadas: $6 \text{ meses} \times 1.200 \text{ €/mes} = 7.200 \text{ €}$.
-  - Gastos repercutidos al inquilino (forman parte del ingreso íntegro):
-    - Comunidad repercutida: $6 \text{ meses} \times 25 \text{ €/mes} = 150 \text{ €}$.
-    - IBI repercutido: $800 \times (6/12) = 400 \text{ €}$.
-  - Total ingresos íntegros: $7.200 + 150 + 400 = 7.750 \text{ €}$.
+  - Rentas pactadas: $6\ \text{meses} \times 1.200\ \text{€/mes} = \mathbf{7.200,00\ \text{€}}$.
+  - Gastos de IBI y comunidad a cargo del inquilino: En la resolución de clase, al ser satisfechos directamente por el arrendatario conforme a pacto contractual y no ser cobrados por el arrendador, no se computan como mayor ingreso ni se minoran posteriormente como gasto (arrojando el mismo saldo neto que si se repercutieran formalmente).
 
 - **Gastos deducibles (art. 23 LIRPF):**
-  - Comunidad soportada (6 meses): 150 €.
-  - IBI soportado (6 meses): 400 €.
-  - Gastos jurídicos de rescisión del contrato: 100 € (deducibles como servicios de defensa y asesoramiento legal).
+  - Gastos de comunidad e IBI: 0,00 € (satisfechos por el inquilino).
+  - Gastos jurídicos de rescisión del contrato: **100,00 €** (íntegramente deducibles como gastos de defensa y asesoramiento legal necesarios para la renta).
   - Amortización computable (6 meses):
-    - Proporción de la construcción según catastro:
-      $$\frac{190.000 - 90.000}{190.000} = \frac{100.000}{190.000} \approx 52,63\%$$
-    - Valor de adquisición construcción: $300.000 \times \frac{100.000}{190.000} = 157.894,74 \text{ €}$.
-    - Mayor valor (157.894,74 € frente a 100.000 € de VC construcción): 157.894,74 €.
-    - Amortización anual: $3\% \times 157.894,74 = 4.736,84 \text{ €}$.
-    - Amortización por 6 meses: $4.736,84 \times \frac{6}{12} = 2.368,42 \text{ €}$.
-  - Total gastos deducibles: $150 + 400 + 100 + 2.368,42 = 3.018,42 \text{ €}$.
+    - Proporción catastral del suelo:
+      $$\frac{\text{VC suelo}}{\text{VC total}} = \frac{90.000}{190.000} \approx 47,37\%$$
+    - Valor del suelo proporcional en el coste de compra:
+      $$\text{Suelo} = 300.000 \times \frac{90.000}{190.000} = 142.105,26\ \text{€}$$
+    - Valor de la construcción amortizable (coste de adquisición sin suelo):
+      $$\text{Construcción} = 300.000 - 142.105,26 = 300.000 \times \frac{100.000}{190.000} \approx \mathbf{157.890,00\ \text{€}}$$
+      *(Cálculo exacto: 157.894,74 €; en clase se tomó el redondeo operativo de 157.890 €).*
+    - Mayor valor (157.890 € frente a 100.000 € de VC construcción): 157.890,00 €.
+    - Cuota de amortización anual:
+      $$3\% \times 157.890,00 = \mathbf{4.736,70\ \text{€}}$$
+    - Amortización deducible por los 6 meses de contrato:
+      $$\text{Amortización (6 meses)} = 4.736,70 \times \frac{6}{12} = \mathbf{2.368,35\ \text{€}}$$
+  - Total gastos deducibles: $100,00 + 2.368,35 = \mathbf{2.468,35\ \text{€}}$.
 
 - **Rendimiento neto del capital inmobiliario:**
-  $$\text{Rendimiento Neto RCI} = 7.750 - 3.018,42 = 4.731,58 \text{ €}$$
-  (No cabe reducción del art. 23.2 LIRPF al tratarse de un local de negocio).
+  $$\text{RNCI} = 7.200,00 - 100,00 - 2.368,35 = \mathbf{4.731,65\ \text{€}}$$
+  *(No cabe reducción del art. 23.2 LIRPF al tratarse de un local comercial de negocio y no de vivienda).*
 
 *B. Período a disposición del titular (1 de julio a 31 de diciembre: 6 meses):*
 
 - **Imputación de rentas inmobiliarias (art. 85 LIRPF):**
-  $$\text{Imputación} = 1,1\% \times 190.000 \times \frac{6}{12} = 1.045 \text{ €}$$
+  Al quedar desocupado a disposición del propietario durante el segundo semestre, tributa por imputación objetiva de rentas sobre su valor catastral revisado (190.000 €):
+  $$\text{Imputación} = 1,1\% \times 190.000,00 \times \frac{6}{12} = \mathbf{1.045,00\ \text{€}}$$
 
 \vspace{0.4cm}
 
 **Resumen de integración de rentas para D. Juan en el ejercicio 2026:**
 
-- Imputación de rentas piso Granada: 990 €.
-- Rendimiento neto piso Madrid (suelo legal art. 24): 1.100 €.
-- Rendimiento neto local comercial (arrendado): 4.731,58 €.
-- Imputación de rentas local comercial (desocupado): 1.045 €.
-- **Total a integrar en la Base Imponible General:** $990 + 1.100 + 4.731,58 + 1.045 = \mathbf{7.866,58 \text{ €}}$.
+- Imputación de rentas piso Granada (art. 85): **990,00 €**.
+- Rendimiento neto piso Madrid (suelo legal art. 24): **1.100,00 €**.
+- Rendimiento neto local comercial (arrendado 6 meses): **4.731,65 €**.
+- Imputación de rentas local comercial (desocupado 6 meses): **1.045,00 €**.
+- **Total a integrar en la Base Imponible General:**
+  $$990,00 + 1.100,00 + 4.731,65 + 1.045,00 = \mathbf{7.866,65\ \text{€}}$$
 
 \vspace{0.4cm}
 
@@ -1145,36 +1283,43 @@ Liquidar dichos rendimientos en el IRPF.
 
 **2. Apartamento amueblado en zona tensionada con bajada de renta**
 
-Liquidamos el ejercicio 2026, año en el que ya está vigente la nueva renta anual pactada:
+El contrato se renegocia al vencimiento el 30 de junio con rebaja de renta a 6.800 €/año, constando que hasta el vencimiento la renta fue la proporcional al contrato anterior (7.200 €/año).
 
-- **Ingresos íntegros anuales:** 6.800 €.
+- **Ingresos íntegros computables:**
+  - *En el ejercicio de la renegociación (2025):*
+    - Primer semestre (1 de enero a 30 de junio, 6 meses): $7.200 \times \frac{6}{12} = 3.600\ \text{€}$.
+    - Segundo semestre (1 de julio a 31 de diciembre, 6 meses): $6.800 \times \frac{6}{12} = 3.400\ \text{€}$.
+    - Total ingresos íntegros del ejercicio de transición: $3.600 + 3.400 = \mathbf{7.000\ \text{€}}$.
+  - *En el ejercicio posterior con contrato anual completo (2026):*
+    - Renta anual pactada: $\mathbf{6.800\ \text{€}}$.
 
 - **Gastos deducibles:**
-  - Comunidad: 700 €.
-  - IBI: 370 €.
-  - Amortización del derecho real de usufructo (art. 14.3 RIRPF):
-    Tomando el valor comprobado de adquisición del usufructo para este inmueble de 60.000 €:
-    $$\text{Amortización del usufructo} = 3\% \times 60.000 = 1.800 \text{ €}$$
+  - Gastos de comunidad: **700,00 €**.
+  - IBI del ejercicio: **370,00 €**.
   - Amortización del mobiliario cedido (art. 14.1.b RIRPF):
-    $$\text{Amortización mobiliario} = 10\% \times 2.000 = 200 \text{ €}$$
-  - Total gastos deducibles: $700 + 370 + 1.800 + 200 = 3.070 \text{ €}$.
+    $$\text{Amortización mobiliario} = 10\% \times 2.000\ \text{€} = \mathbf{200,00\ \text{€}}$$
+  - Amortización del inmueble (Criterio aplicado en clase):
+    La profesora no computa amortización sobre el edificio del apartamento b) al ser la Sra. Gómez titular únicamente de un derecho real de usufructo (no de la propiedad plena del inmueble) y no especificarse en el enunciado el valor de adquisición privativo de dicho derecho hereditario en el apartamento b): **0,00 €**.^[En sede doctrinal o bajo la STS 15/09/2021, si se amortizase la construcción sobre su valor catastral de 90.000 € ($3\% \times 90.000 = 2.700\ \text{€}$) los gastos ascenderían a 3.970 €, dejando un rendimiento neto de 3.030 € y un rendimiento reducido de 303 €. En clase se mantuvo 0 € de amortización del inmueble, deduciendo únicamente los 200 € del mobiliario.]
+  - Total gastos deducibles:
+    $$\text{Total Gastos} = 700,00 + 370,00 + 200,00 = \mathbf{1.270,00\ \text{€}}$$
 
-- **Rendimiento neto previo:**
-  $$\text{Rendimiento Neto Previo} = 6.800 - 3.070 = 3.730 \text{ €}$$
+- **Rendimiento neto previo y aplicación de la reducción del 90% (Ley 12/2023):**
+  - *Rendimiento Neto Previo del ejercicio de transición:*
+    $$\text{Rendimiento Neto Previo} = 7.000,00 - 1.270,00 = \mathbf{5.730,00\ \text{€}}$$
+  - *Verificación de la rebaja legal exigida del 5% en zona tensionada (art. 23.2.a LIRPF):*
+    La ley exige formalizar un nuevo contrato con rebaja superior al 5% respecto a la última renta del contrato anterior (7.200 €/año):
+    $$\text{Umbral legal mínimo del 5\%} = 5\% \times 7.200,00\ \text{€} = \mathbf{360,00\ \text{€}}$$
+    $$\text{Rebaja real aplicada en contrato} = 7.200,00 - 6.800,00 = \mathbf{400,00\ \text{€}}$$
+    Como $400,00\ \text{€} > 360,00\ \text{€}$ (la rebaja efectiva es del 5,56%), se cumple plenamente la condición legal para aplicar la **reducción reforzada del 90%**.
+  - *Cálculo del Rendimiento Neto Reducido:*
+    $$\text{Reducción del 90\%} = 5.730,00 \times 90\% = \mathbf{5.157,00\ \text{€}}$$
+    $$\begin{aligned}
+    \text{RNCI Reducido} &= 5.730,00 - 5.157,00 \\
+    &= 5.730,00 \times 10\% = \mathbf{573,00\ \text{€}}
+    \end{aligned}$$
+    *(Si se analizase el ejercicio posterior completo a régimen anual con 6.800 € de ingresos: $6.800 - 1.270 = 5.530\ \text{€} \implies 5.530 \times 10\% = 553\ \text{€}$).*
 
-- **Aplicación del régimen de reducción por arrendamiento de vivienda (Ley 12/2023):**
-  - Verificación de requisitos:
-    1. Vivienda situada en zona de mercado residencial tensionado declarada oficialmente.
-    2. Rebaja efectiva de la renta contractual anterior:
-       $$\text{Porcentaje de rebaja} = \frac{7.200 - 6.800}{7.200} = \frac{400}{7.200} \approx 5,56\%$$
-       Al ser $5,56\% > 5\%$, concurren todos los presupuestos para aplicar la **reducción reforzada del 90%** prevista en el artículo 23.2.a de la LIRPF.
-  - Cálculo de la reducción:
-    $$\text{Reducción del 90\%} = 90\% \times 3.730 = 3.357 \text{ €}$$
-
-- **Rendimiento neto reducido computable:**
-  $$\text{Rendimiento Neto Reducido} = 3.730 - 3.357 = \mathbf{373 \text{ €}}$$
-
-Este rendimiento se integra en la **Base Imponible General**. La ventaja fiscal es notable: de un beneficio neto real de 3.730 €, la Sra. Gómez solo somete a tributación el 10% (373 €).
+Esta cuantía de **573,00 €** se integra en la **Base Imponible General** de la Sra. Gómez.
 
 
 \vspace{0.6cm}

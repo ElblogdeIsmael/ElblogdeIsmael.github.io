@@ -157,3 +157,140 @@ La cuantificación final de la renta del trabajo personal culmina con la aplicac
 4. **Rendimiento Neto Previo:** Saldo resultante tras minorar los gastos deducibles.
 5. **Reducción del artículo 20 LIRPF:** Aplicable a contribuyentes con rendimientos netos del trabajo inferiores a 19.747,50 euros (siempre que no tengan rentas, excluidas las exentas, distintas de las del trabajo superiores a 6.500 euros), alcanzando una reducción máxima de hasta 7.302 euros anuales para rendimientos netos iguales o inferiores a 14.047,50 euros.
 6. **Rendimiento Neto Reducido del Trabajo:** Magnitud final que se integra directamente en la Base Imponible General del IRPF para someterse a la escala de gravamen combinada estatal y autonómica.
+
+\vspace{0.6cm}
+
+## Supuestos de Encerado y Casos de Examen de Aula
+
+En el desarrollo de las sesiones presenciales de la asignatura en la Facultad de Ciencias Económicas y Empresariales de la UGR, la cátedra resolvió tres casos numéricos de encerado de especial relevancia práctica para fijar los criterios de liquidación de rendimientos dinerarios, dietas de locomoción/manutención nacional e internacional y retribuciones complejas en especie.
+
+\vspace{0.4cm}
+
+### Supuesto de Encerado 1: Estructura Salarial con Pagas Múltiples y Gastos Deducibles (Don P.A.)
+
+**Enunciado:**
+El trabajador Don P.A. percibe a lo largo del año un salario base estructurado en 15 pagas (12 mensualidades ordinarias más 3 pagas extraordinarias de idéntica cuantía), ascendiendo la retribución íntegra bruta a 30.000 euros. La empresa le ha practicado unas retenciones a cuenta del IRPF de 7.200 euros y le ha descontado 1.800 euros en concepto de cotizaciones a la Seguridad Social a cargo del trabajador. Se solicita determinar el Rendimiento Neto del Trabajo y analizar la procedencia de la reducción por obtención de rendimientos del trabajo.
+
+**Resolución técnica:**
+
+1. **Rendimiento Íntegro del Trabajo Personal (RITP):**
+   $$\text{RITP} = 30.000\ \text{€}$$
+   Las retenciones a cuenta (7.200 €) no minoran el rendimiento íntegro ni constituyen gasto deducible; son un pago anticipado que se deducirá exclusivamente al final de la liquidación, en la cuota líquida, para obtener la cuota diferencial.
+
+2. **Determinación de los Gastos Deducibles (art. 19.2 LIRPF):**
+   - Cotizaciones a la Seguridad Social a cargo del trabajador: $1.800\ \text{€}$.
+   - Otros gastos generales (art. 19.2.f LIRPF): Partida fija general de $2.000\ \text{€}$ que se aplica de oficio sin necesidad de justificación formal.
+   $$\text{Total Gastos Deducibles} = 1.800 + 2.000 = 3.800\ \text{€}$$
+
+3. **Liquidación del Rendimiento Neto Previo:**
+   $$\text{Rendimiento Neto} = 30.000 - 3.800 = 26.200\ \text{€}$$
+
+4. **Análisis de la reducción del artículo 20 LIRPF:**
+   La reducción por rendimientos del trabajo se reserva a contribuyentes con rendimientos netos inferiores al umbral legal de $19.747,50\ \text{€}$. Al situarse el rendimiento neto de Don P.A. en $26.200\ \text{€}$ ($26.200 > 19.747,50$), la reducción aplicable es exactamente **0 euros**.
+   Por tanto, el **Rendimiento Neto Reducido computable en la Base General asciende a 26.200 euros**.
+
+\vspace{0.4cm}
+
+### Supuesto de Encerado 2: Dietas de Locomoción y Desplazamientos a Madrid y Barcelona (Don L.G.)
+
+**Enunciado:**
+Don L.G. percibe un sueldo fijo bruto de 40.000 euros. Para el desempeño de sus funciones realiza desplazamientos fuera de su centro habitual de trabajo con las siguientes compensaciones satisfechas por su empleador:
+
+1. Realiza 800 kilómetros en su vehículo particular, percibiendo una compensación de 240 euros (a razón de 0,30 €/km).
+2. Pasa 5 días en **Madrid** por motivos laborales pernoctando en hotel. La empresa abona directamente la factura del hotel (2.500 €) y le entrega al empleado 525 euros para manutención y comidas.
+3. Pasa 4 días en **Barcelona** pernoctando en hotel (factura de 1.500 € pagada por la empresa), percibiendo 300 euros para manutención, sin aportar tickets de restaurante.
+Las cotizaciones a la Seguridad Social soportadas ascienden a 2.100 euros. Determinar el Rendimiento Neto del Trabajo.
+
+**Resolución técnica:**
+
+1. **Locomoción en vehículo particular (800 km):**
+   - Límite reglamentario exento: De conformidad con la Orden HFP/792/2023, de 12 de julio, el límite legal de exención se sitúa en **0,26 €/km** (frente a los 0,19 €/km de la normativa anterior):
+     $$\text{Límite legal exento} = 800 \text{ km} \times 0,26 \text{ €/km} = 208\ \text{€}$$
+   - Importe percibido: $240\ \text{€}$.
+   - Exceso sujeto a tributación como RITP:
+     $$\text{Exceso de locomoción} = 240 - 208 = 32\ \text{€}$$
+
+2. **Estancia y manutención en Madrid (5 días con pernocta):**
+   - Gastos de estancia (hotel): La cuantía de 2.500 € satisfecha contra factura justificada está **100% exenta** (art. 9.A.3.a RIRPF).
+   - Manutención con pernocta en municipio español distinto del habitual: El límite exento es de **53,34 €/día**:
+     $$\text{Límite exento manutención} = 5 \text{ días} \times 53,34 \text{ €/día} = 266,70\ \text{€}$$
+   - Importe percibido: $525\ \text{€}$.
+   - Exceso computable en el trabajo:
+     $$\text{Exceso Madrid} = 525 - 266,70 = 258,30\ \text{€}$$
+
+3. **Estancia y manutención en Barcelona (4 días con pernocta):**
+   - Gastos de estancia (hotel 1.500 €): Totalmente exentos con factura.
+   - Manutención: Límite exento tasado de 53,34 €/día:
+     $$\text{Límite exento manutención} = 4 \text{ días} \times 53,34 \text{ €/día} = 213,36\ \text{€}$$
+   - *Regla procesal de aula:* El contribuyente NO necesita justificar las facturas de comidas ni restaurantes en desplazamientos con pernocta; basta acreditar documentalmente la realidad del desplazamiento y la estancia hotelera.
+   - Importe percibido: $300\ \text{€}$.
+   - Exceso computable:
+     $$\text{Exceso Barcelona} = 300 - 213,36 = 86,64\ \text{€}$$
+
+4. **Liquidación del Rendimiento Neto:**
+   - Rendimiento Íntegro del Trabajo:
+     $$\text{RITP} = 40.000\text{ (sueldo)} + 32\text{ (locomoción)} + 258,30\text{ (Madrid)} + 86,64\text{ (Barcelona)} = 40.376,94\ \text{€}$$
+   - Gastos deducibles (art. 19 LIRPF):
+     $$\text{Seguridad Social (2.100 €)} + \text{Otros gastos (2.000 €)} = 4.100\ \text{€}$$
+   - Rendimiento Neto computable:
+     $$\text{RNT} = 40.376,94 - 4.100 = \mathbf{36.276,94\ \text{€}}$$
+
+\vspace{0.4cm}
+
+### Supuesto de Encerado 3: Retribuciones Mixtas, Desplazamiento Internacional a Tokio y Beca Empresarial
+
+**Enunciado:**
+Un directivo percibe las siguientes contraprestaciones en el ejercicio fiscal:
+
+1. Sueldo base dinerario de 30.000 € y comisiones por volumen de 10.000 €.
+2. La empresa le entrega un reloj de oro valorado en 15.000 € con motivo de haber cumplido 25 años de servicio ininterrumpido en la entidad.
+3. La empresa realiza una contribución de 8.000 € a un plan de pensiones de empleo a favor del directivo.
+4. Seguro de enfermedad satisfecho por la empresa para cubrir al directivo, por un coste de 350 € anuales.
+5. Realiza un viaje de negocios a **Tokio (Japón)** durante 10 días, abonando la empresa el billete de avión (2.500 €) y el hotel (2.200 €). Percibe para dietas de manutención en el extranjero 1.200 €.
+6. Realiza 10 viajes a **Salamanca** (3 días por viaje con 2 pernoctas c/u) utilizando su vehículo propio (1.000 km por viaje), compensándole la empresa a 0,26 €/km y pagando íntegramente las facturas de hotel. Percibe en total 1.800 € para comidas.
+7. Una fundación privada sin fines lucrativos constituida por la empresa empleadora concede una beca de estudios de 9.000 € al hijo universitario del directivo.
+8. La empresa sufraga unas vacaciones familiares en Sierra Nevada por importe de 2.500 €.
+
+**Resolución analítica paso a paso:**
+
+1. **Rendimientos dinerarios directos:**
+   - Sueldo base: $30.000\ \text{€}$.
+   - Comisiones: $10.000\ \text{€}$.
+
+2. **Reloj conmemorativo de 25 años (15.000 €):**
+   - No goza de exención fiscal. No constituye un servicio social de carácter general ni reúne los requisitos de las entregas gratuitas de acciones del artículo 42.3.f de la LIRPF.
+   - Califica como **retribución en especie sujeta** que debe valorarse por su valor normal de mercado más el ingreso a cuenta correspondiente si no le hubiera sido repercutido.
+
+3. **Aportación a Plan de Pensiones de Empleo (8.000 €):**
+   - Constituye una **retribución en especie del trabajo** que debe integrarse en el RITP.
+   - *Especialidad procesal:* Por mandato expreso del artículo 102.2 del RIRPF, las contribuciones empresariales a planes de pensiones están exoneradas de la obligación de practicar ingreso a cuenta.
+   - *Neutralidad en la base:* El directivo reduce posteriormente esa misma cantidad en la Base Imponible General por aportaciones a sistemas de previsión social (art. 51 LIRPF, dentro del límite legal de 8.500 € para aportaciones empresariales).
+
+4. **Seguro de enfermedad (350 €):**
+   - **Totalmente EXENTO** ex artículo 42.3.c de la LIRPF, al ser inferior al límite legal de 500 euros anuales por asegurado.
+
+5. **Viaje internacional a Tokio (10 días con pernocta):**
+   - Billete de avión y facturas de hotel: Totalmente exentos con justificante documental.
+   - Manutención en el extranjero: El artículo 9.A.3.a del RIRPF fija el límite legal exento en **91,35 €/día** para desplazamientos con pernocta fuera del territorio nacional:
+     $$\text{Límite exento Tokio} = 10 \text{ días} \times 91,35 \text{ €/día} = 913,50\ \text{€}$$
+   - Importe percibido: $1.200\ \text{€}$.
+   - Exceso sujeto como rendimiento del trabajo:
+     $$\text{Exceso Tokio} = 1.200 - 913,50 = 286,50\ \text{€}$$
+
+6. **Diez viajes a Salamanca (1.000 km y 2 pernoctas por viaje):**
+   - Locomoción: Se satisfacen 10.000 km a 0,26 €/km ($2.600\ \text{€}$ percibidos). Al coincidir exactamente con el límite legal de 0,26 €/km, la cuantía queda **100% exenta**.
+   - Manutención (10 viajes $\times$ 3 días $= 30\ \text{días}$ en total):
+     - Para los 2 días con pernocta de cada viaje (20 días en total): $20 \times 53,34 = 1.066,80\ \text{€}$ exentos.
+     - Para el día de regreso sin pernocta de cada viaje (10 días en total): $10 \times 26,67 = 266,70\ \text{€}$ exentos.
+     - Límite exento total: $1.066,80 + 266,70 = 1.333,50\ \text{€}$.
+   - Dietas percibidas para comidas: $1.800\ \text{€}$.
+   - Exceso computable:
+     $$\text{Exceso Salamanca} = 1.800 - 1.333,50 = 466,50\ \text{€}$$
+     *(Nota de examen: Si se aplicara el criterio simplificado de aula de 30 días íntegros con pernocta a 53,34 €, el límite exento ascendería a $1.600,20\ \text{€}$, resultando un exceso de $199,80\ \text{€}$)*.
+
+7. **Beca de estudios concedida por la Fundación de la empresa (9.000 €):**
+   - *Criterio docente de encerado:* En la explicación de clase, la profesora consideró la beca exenta al concederse formalmente por una fundación sin fines lucrativos acogida a la Ley 49/2002.
+   - *Criterio reglamentario estricto de la Agencia Tributaria (art. 2.1.b RIRPF):* El reglamento tributario establece expresamente que NO gozan de exención las becas concedidas por fundaciones o entidades cuando la condición de beneficiario esté reservada o dirigida preferentemente a los trabajadores de la empresa fundadora o a sus familiares directos. Bajo el rigor reglamentario, la cantidad de 9.000 € califica como **retribución en especie del trabajo del directivo**.
+
+8. **Vacaciones familiares en Sierra Nevada (2.500 €):**
+   - Constituye una **retribución en especie del trabajo** en toda regla, sujeta e integrable por el coste íntegro satisfecho por la empresa empleadora ($2.500\ \text{€}$ más su correspondiente ingreso a cuenta).
