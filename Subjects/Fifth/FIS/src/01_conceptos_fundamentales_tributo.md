@@ -577,3 +577,229 @@ Minoración de la cuota líquida por el volumen de pagos a cuenta y retenciones 
 $$\text{CD} = \text{CL} - \text{Retenciones Soportadas} = 5.265,50 - 3.800,00 = +1.465,50\ \text{€}$$
 
 El signo positivo de la cuota diferencial ($+1.465,50\ \text{€}$) determina que la autoliquidación resulta **a ingresar**, debiendo el obligado tributario desembolsar dicha cuantía en la entidad colaboradora de la Agencia Tributaria en los plazos fijados por la normativa.
+
+\vspace{0.6cm}
+
+## Batería Sistemática de Calificación Tributaria (Supuestos Clave de Aula)
+
+En la práctica docente y en las pruebas de evaluación objetiva de la Facultad de Ciencias Económicas y Empresariales (UGR), se plantean con frecuencia supuestos breves de subsunción y delimitación impositiva. Esta batería reúne los 26 casos esenciales analizados en el aula para dominar la interacción entre el IRPF, el IVA, el ITPAJD, el ISD y la imposición local.
+
+\vspace{0.4cm}
+
+### 1. Compraventa de vehículo de segunda mano
+
+- **Adquisición a un particular:** Operación no sujeta a IVA al no actuar el transmitente como empresario o profesional (art. 4 LIVA). Queda sujeta a la modalidad de **Transmisiones Patrimoniales Onerosas (TPO)** del ITPAJD, tributando a cargo del adquirente al tipo autonómico (entre el 4% y el 8% según la Comunidad Autónoma) sobre el valor real o las tablas de precios medios del Ministerio de Hacienda. En el vendedor particular se genera una alteración patrimonial en el IRPF, si bien la pérdida por depreciación de consumo no resulta computable (art. 33.5.b LIRPF).
+
+- **Adquisición a un concesionario o compraventa mercantil:** Operación sujeta y no exenta de **IVA** (régimen general al 21% o Régimen Especial de Bienes Usados - REBU). Por aplicación del principio de incompatibilidad entre IVA y TPO (art. 7.5 TRLITPAJD), queda no sujeta a TPO.
+
+\vspace{0.3cm}
+
+### 2. Repostaje de combustible en una estación de servicio
+
+El repostaje de gasolina o gasóleo activa una cadena impositiva acumulativa de cuatro niveles:
+
+1. **Renta de Aduanas (Arancel Exterior Común):** Grava la importación del petróleo crudo procedente de países no miembros de la Unión Europea en la frontera aduanera exterior.
+
+2. **Impuesto Especial sobre Hidrocarburos (IIEE):** Impuesto indirecto de fabricación estatal que grava la obtención y puesta a consumo del carburante refinado (Ley 38/1992).
+
+3. **Tipo impositivo autonómico del Impuesto sobre Hidrocarburos:** Tramo especial integrado en la estructura del impuesto de fabricación, cedido a las Comunidades Autónomas.
+
+4. **Impuesto sobre el Valor Añadido (IVA):** Tipo general del 21% que se aplica sobre el precio final acumulado, formando parte de su base imponible los impuestos especiales devengados con anterioridad (art. 78.Dos.4º LIVA).
+
+\vspace{0.3cm}
+
+### 3. Seguro de vida percibido tras el fallecimiento del tomador
+
+Cuando los beneficiarios son personas distintas del contratante fallecido (por ejemplo, los hijos o herederos):
+
+- **Tributación aplicable:** Queda exclusivamente sujeto al **Impuesto sobre Sucesiones y Donaciones (ISD)** en su modalidad de adquisiciones mortis causa (art. 3.1.c de la Ley 29/1987).
+
+- **Incompatibilidad con IRPF:** El artículo 6.4 de la LIRPF declara que no están sujetas a IRPF las rentas sometidas al ISD, garantizando la interdicción de la doble imposición directa.
+
+\vspace{0.3cm}
+
+### 4. Ejercicio de la medicina (Asalariado vs Consulta privada)
+
+- **Médico asalariado en un hospital:** La retribución fija o variable se califica como **Rendimiento del Trabajo Personal** en el IRPF (art. 17.1 LIRPF). No se produce el alta ni tributación en el Impuesto sobre Actividades Económicas (IAE).
+
+- **Médico con consulta privada por cuenta propia:** Se convierte en sujeto pasivo del **IAE** (declaración censal de alta, si bien goza de exención objetiva por ser persona física ex art. 82.1.c TRLRHL). En el IRPF, sus ingresos netos tributan como **Rendimiento de Actividades Económicas (RAE)** con base en el artículo 27 de la LIRPF. En el IVA, los servicios de asistencia médica, diagnóstico y tratamiento prestados por profesionales colegiados están **exentos de IVA** (art. 20.Uno.3º LIVA).
+
+\vspace{0.3cm}
+
+### 5. Indemnización por despido improcedente
+
+- **Tratamiento en IRPF:** Califica como rendimiento del trabajo personal, pero goza de **exención tributaria** ex artículo 7.e de la LIRPF hasta el importe obligatorio fijado en el Estatuto de los Trabajadores (33 días por año trabajado, máximo de 24 mensualidades y tope absoluto de 180.000 €).
+
+- **Requisito formal:** La exención exige preceptivamente que el despido se reconozca formalmente ante el Servicio de Mediación, Arbitraje y Conciliación (SMAC) o en sede judicial. El exceso no amparado por el límite del ET tributa como Rendimiento Íntegro del Trabajo, pudiendo beneficiarse de la reducción del 30% por irregularidad si el periodo de generación superó los dos años (art. 18.2 LIRPF).
+
+\vspace{0.3cm}
+
+### 6. Intereses devengados por una imposición a plazo fijo (Depósito bancario)
+
+- **En sede del titular persona física:** Califica como **Rendimiento del Capital Mobiliario** derivado de la cesión a terceros de capitales propios (art. 25.2 LIRPF). Se integra en la Base Imponible del Ahorro y soporta retención a cuenta del 19%.
+
+- **En sede de la entidad bancaria depositaria:** Constituye un gasto deducible en el Impuesto sobre Sociedades y queda sujeto al Impuesto sobre los Depósitos en las Entidades de Crédito (IDEC).
+
+\vspace{0.3cm}
+
+### 7. Constitución de sociedad mercantil de capital (SA o SL)
+
+- **Modalidad Operaciones Societarias (OS):** Constituye hecho imponible de la modalidad OS del ITPAJD, pero se encuentra formalmente **EXENTA** de tributación por imperativo del artículo 45.I.B.11 del TRLITPAJD (modificación introducida por el Real Decreto-ley 13/2010 para fomentar la creación de empresas).
+
+- **Incompatibilidad con AJD:** Al quedar la operación formalmente sujeta (aunque exenta) a la modalidad de Operaciones Societarias, la escritura notarial de constitución queda no sujeta a la cuota gradual de Actos Jurídicos Documentados (AJD), evitando sobrecostes fiscales.
+
+\vspace{0.3cm}
+
+### 8. Disolución y liquidación de sociedad con reparto de cuota a socios
+
+- **Modalidad Operaciones Societarias (OS):** Queda **sujeta al 1%** sobre el valor de los bienes o derechos entregados a los socios (arts. 19.1.1º y 26 TRLITPAJD). En este supuesto no opera la exención del RDL 13/2010.
+
+- **En sede de los socios personas físicas:** La diferencia entre el valor de los bienes recibidos y el valor de adquisición originario de sus participaciones sociales genera una **ganancia o pérdida patrimonial** que se liquida en la Base Imponible del Ahorro del IRPF (art. 37.1.e LIRPF).
+
+\vspace{0.3cm}
+
+### 9. Comunidad de bienes que explota un negocio mercantil
+
+- **Régimen de atribución de rentas (arts. 8.3 LIRPF y 35.4 LGT):** Las comunidades de bienes sin personalidad jurídica societaria no son sujetos pasivos del Impuesto sobre Sociedades.
+
+- **Mecánica fiscal:** El rendimiento neto de la actividad económica obtenido por la entidad se determina con arreglo a las normas del IRPF o del IS a nivel de la entidad, pero se atribuye e imputa de forma directa e inmediata a cada uno de los comuneros en proporción a su cuota de participación, declarándolo en sus respectivos IRPF.
+
+\vspace{0.3cm}
+
+### 10. Importación de mercancías de China vs compra en Ceuta o Melilla
+
+- **Importación de calzado desde China (tercer país no comunitario):** Queda sujeta a la liquidación del arancel aduanero exterior común y al **IVA a la Importación** formalizado mediante el Documento Único Administrativo (DUA) en la aduana marítima o aérea.
+
+- **Compra a una empresa ubicada en Ceuta o Melilla:** Aunque ambas ciudades forman parte del territorio español, se encuentran estatutariamente excluidas de la Unión Aduanera comunitaria y del territorio de aplicación del IVA peninsular. En consecuencia, la entrada física de la mercancía en la Península tributa como importación respecto del IVA peninsular y exige despacho aduanero.
+
+\vspace{0.3cm}
+
+### 11. Compra intracomunitaria de mobiliario a Francia
+
+- **Comprador empresa o autónomo en España:** Constituye una **Adquisición Intracomunitaria de Bienes (AIB)** sujeta a IVA en España (art. 13 LIVA). La entrega en Francia goza de exención en origen y la empresa española autorrepercute y deduce simultáneamente el IVA español mediante el mecanismo de inversión del sujeto pasivo.
+
+- **Comprador particular consumidor final:** La operación queda sujeta al IVA francés en origen, salvo que el proveedor galo supere los umbrales comunitarios de ventas a distancia (régimen OSS/Ventanilla Única), en cuyo caso debe repercutir e ingresar el IVA español.
+
+\vspace{0.3cm}
+
+### 12. Compraventa de inmuebles: Vivienda nueva de promotora vs usada entre particulares
+
+- **Vivienda nueva (primera entrega por el promotor):** Operación sujeta y no exenta de **IVA al tipo reducido del 10%** (art. 91.Uno.1.7º LIVA). Simultáneamente, la primera copia de la escritura pública notarial tributa por la cuota gradual de **Actos Jurídicos Documentados (AJD)** al tipo autonómico (entre el 0,5% y el 1,5%).
+
+- **Vivienda usada (segunda o ulterior transmisión):** Operación exenta de IVA y sujeta obligatoriamente a la modalidad de **Transmisiones Patrimoniales Onerosas (TPO)** del ITPAJD a cargo del comprador (tipo autonómico del 6% al 10%). En el vendedor se devenga el **IIVTNU (plusvalía municipal)** por el incremento de valor del suelo y una **ganancia o pérdida patrimonial en el IRPF** (Base del Ahorro).
+
+\vspace{0.3cm}
+
+### 13. Arrendamiento de local comercial vs vivienda para uso habitual
+
+- **Arrendamiento de local comercial o para uso distinto de vivienda:** Operación sujeta y no exenta de **IVA al 21%** repercutido por el arrendador. En el IRPF del arrendador califica como Rendimiento del Capital Inmobiliario (RCI) sin reducciones de vivienda, y el inquilino que actúa como empresario debe practicar preceptivamente **retención a cuenta del 19%** (art. 75.2.e RIRPF).
+
+- **Arrendamiento de vivienda para uso habitual y permanente:** Operación sujeta pero legalmente **exenta de IVA** (art. 20.Uno.23º LIVA). El arrendador liquida RCI en el IRPF con derecho a las reducciones por alquiler residencial (art. 23.2 LIRPF) y el arrendatario particular no practica retención fiscal.
+
+\vspace{0.3cm}
+
+### 14. Transmisión mortis causa de cartera de valores ("Plusvalía del muerto")
+
+- **En sede del causante (fallecido):** El artículo 33.3.b de la LIRPF establece que no existe ganancia o pérdida patrimonial con ocasión de transmisiones lucrativas por causa de muerte del contribuyente. La plusvalía latente acumulada en vida queda jurídicamente no sujeta / exenta en su IRPF.
+
+- **En sede de los herederos:** Los valores se integran en la masa hereditaria sujeta al **Impuesto sobre Sucesiones y Donaciones (ISD)**. A efectos de futuras ventas en el IRPF de los herederos, el valor de adquisición fiscal de los títulos será el consignado a efectos del ISD (actualización fiscal del coste ex art. 36 LIRPF).
+
+\vspace{0.3cm}
+
+### 15. Rehabilitación de un título nobiliario o grandeza
+
+- **Tributación aplicable:** Queda sujeta al Impuesto sobre Transmisiones Patrimoniales y Actos Jurídicos Documentados, específicamente en su modalidad de **Actos Jurídicos Documentados (AJD), subtipo Documentos Administrativos** (art. 43 TRLITPAJD), liquidándose una cuota fija graduada en función de la jerarquía nobiliaria rehabilitada o transmitida.
+
+\vspace{0.3cm}
+
+### 16. Amortización o reembolso de Letras del Tesoro
+
+- **Calificación en IRPF:** Por mandato legal imperativo del artículo 25.2 de la LIRPF, los rendimientos obtenidos en la amortización, reembolso o transmisión de las Letras del Tesoro tributan como **Rendimiento del Capital Mobiliario** derivado de la cesión a terceros de capitales propios en la Base Imponible del Ahorro.
+
+- **Pregunta trampa de examen:** No constituyen alteración patrimonial ni ganancia patrimonial. Asimismo, gozan de una especialidad procedimental: están expresamente exoneradas de retención en la fuente ex artículo 75.3.e del RIRPF.
+
+\vspace{0.3cm}
+
+### 17. Libramiento y giro de una letra de cambio
+
+- **Tributación aplicable:** Devenga la modalidad de **Actos Jurídicos Documentados (AJD), subtipo Documentos Mercantiles** (art. 36 TRLITPAJD). El impuesto se satisface obligatoriamente mediante el empleo de efectos timbrados del Estado con arreglo a una escala de gravamen progresiva según la cuantía del giro.
+
+\vspace{0.3cm}
+
+### 18. Transmisión de acciones cotizadas en mercados oficiales
+
+- **Imposición indirecta:** La transmisión de valores está exenta de IVA y no sujeta a TPO en virtud del artículo 314 del Texto Refundido de la Ley del Mercado de Valores, garantizando la libre circulación de capitales financieros.
+
+- **Imposición directa (IRPF):** Para una persona física genera una **ganancia o pérdida patrimonial** integrable en la Base Imponible del Ahorro. Si se transmiten acciones homogéneas adquiridas en distintas fechas, la ley exige la aplicación forzosa del método **FIFO (First-In, First-Out)**, considerándose transmitidas en primer lugar las más antiguas (art. 37.1.a LIRPF).
+
+\vspace{0.3cm}
+
+### 19. Premios obtenidos en juegos de suerte, envite o azar
+
+- **Juego en Casino o salas de Bingo:** La entidad organizadora tributa por la Tasa Fiscal sobre los Juegos (tributo cedido a las CCAA). Para el jugador individual, el premio obtenido se califica como **Ganancia Patrimonial** integrable en la **Base Imponible General** del IRPF. Desde 2013, se permite minorar las ganancias acreditadas con las pérdidas justificadas habidas en el juego durante el mismo año natural, sin que el saldo computado pueda ser inferior a cero (art. 33.5.d LIRPF).
+
+- **Loterías del Estado, Cruz Roja y ONCE:** No se integran en la base imponible del IRPF. Soportan un **Gravamen Especial sobre Premios de Loterías** del 20% sobre la cuantía que exceda de 40.000 euros exentos por décimo o cupón (Disposición Adicional 33.ª LIRPF).
+
+\vspace{0.3cm}
+
+### 20. Cuadro de competencias normativas y de recaudación interterritorial
+
+| Figura Tributaria | Titularidad / Regulación | Gestión y Recaudación | Cesión de Rendimiento a CCAA |
+| :--- | :--- | :--- | :--- |
+| **Renta de Aduanas (Aranceles)** | Unión Europea | Estado (AEAT) | 0% (Recurso propio comunitario) |
+| **Impuesto sobre Sociedades / IRNR** | Estado | Estado (AEAT) | 0% (No cedido) |
+| **Impuestos Locales (IBI, IAE, ICIO)** | Estado (TRLRHL) y Ayuntamientos | Ayuntamientos | Tributos propios municipales |
+| **Impuesto sobre el Patrimonio** | Estado (Ley 19/1991) | Comunidades Autónomas | 100% cedido con potestad normativa |
+| **Impuesto sobre Sucesiones (ISD)** | Estado (Ley 29/1987) | Comunidades Autónomas | 100% cedido con potestad normativa |
+| **ITP y AJD (TRLITPAJD)** | Estado | Comunidades Autónomas | 100% cedido con potestad normativa |
+| **IRPF (Ley 35/2006)** | Estado | Estado (AEAT) | 50% cedido (escala y deducción autonómica) |
+| **IVA (Ley 37/1992)** | Estado (Directiva UE) | Estado (AEAT) | 50% cedido (sin potestad normativa) |
+| **Impuestos Especiales Fabricación** | Estado | Estado (AEAT) | 58% cedido (sin potestad normativa) |
+
+\vspace{0.3cm}
+
+### 21. Donación de un piso de padres a hijos
+
+- **En el donatario (hijo adquirente):** Tributa en el **Impuesto sobre Sucesiones y Donaciones (ISD)** en la modalidad de donaciones inter vivos sobre el valor real del inmueble. Asimismo, se devenga el **IIVTNU (plusvalía municipal)** a cargo del hijo adquirente.
+
+- **En el donante (padres transmitentes):** En el IRPF se genera una **ganancia patrimonial** teórica si el valor de donación supera al coste histórico de adquisición (art. 33.1 LIRPF). Si por el contrario el valor del piso hubiera caído, el artículo 33.5.c de la LIRPF prohíbe taxativamente computar las pérdidas debidas a transmisiones lucrativas por actos inter vivos.
+
+\vspace{0.3cm}
+
+### 22. Transmisión mortis causa de una empresa familiar
+
+- **En el causante:** La plusvalía acumulada en el negocio queda totalmente exenta de IRPF ex artículo 33.3.c de la LIRPF.
+
+- **En los herederos continuadores:** Disfrutan de una **reducción del 95% o 99%** en la base imponible del ISD estatal o autonómico (art. 20.2.c LISD), siempre que el causante ejerciera habitualmente funciones de dirección y la participación societaria se mantenga durante un plazo de 5 o 10 años.
+
+\vspace{0.3cm}
+
+### 23. Indemnización satisfecha por una compañía aseguradora por siniestro de incendio
+
+- **En una sociedad mercantil o empresario individual:** La indemnización percibida genera una **ganancia de patrimonio** en IRPF o un mayor ingreso contable en el Impuesto sobre Sociedades por la diferencia positiva entre el capital percibido del seguro y el valor contable neto del bien destruido.
+
+- **Exención por reinversión:** El artículo 38 de la LIRPF y el artículo 42 de la LIS declaran exenta la ganancia patrimonial si el importe total de la indemnización se reinvierte en la reposición o reconstrucción de elementos patrimoniales con idéntica finalidad en el plazo legalmente establecido.
+
+\vspace{0.3cm}
+
+### 24. Pensión compensatoria entre cónyuges vs anualidad por alimentos a hijos
+
+- **Pensión compensatoria a favor del ex cónyuge (art. 97 Código Civil):** El pagador reduce directamente su Base Imponible General en el IRPF hasta el límite legalmente previsto (art. 55 LIRPF). El cónyuge perceptor la tributa íntegramente como **Rendimiento del Trabajo Personal** (art. 17.2.f LIRPF), no estando sometida a retención en origen.
+
+- **Anualidad por alimentos a favor de los hijos:** Para los hijos perceptores está legalmente **EXENTA** de IRPF (art. 7.k LIRPF). Para el progenitor que las abona, no reducen su base imponible general; en su lugar, la ley aplica un mecanismo de atenuación de la progresividad calculando la escala de gravamen de forma separada sobre las anualidades y sobre el resto de la base liquidable (arts. 64 y 75 LIRPF).
+
+\vspace{0.3cm}
+
+### 25. Intereses de demora satisfechos por la AEAT en devoluciones de ingresos indebidos
+
+- **Criterio jurisprudencial consolidado (STS de 12 de enero de 2023):** Los intereses de demora abonados por la Agencia Tributaria al devolver cantidades cobradas indebidamente al contribuyente tienen naturaleza estrictamente resarcitoria y de restitución de la legalidad patrimonial. 
+
+- **Efecto en IRPF:** Están **no sujetos a IRPF**, al no constituir una renta computable ni ganancia gravable sujeta a imposición.
+
+\vspace{0.3cm}
+
+### 26. Venta de un bien de inversión afecto a una actividad económica
+
+- **Calificación en IRPF:** La transmisión onerosa de un bien afecto a la actividad (como un local comercial, maquinaria o una furgoneta de transporte) **NO genera rendimiento de la actividad económica (RAE)**.
+
+- **Mandato legal (art. 28.2 LIRPF):** Se califica imperativamente como **Ganancia o Pérdida Patrimonial** derivada de la transmisión de elementos patrimoniales, integrándose y compensándose de forma separada en la **Base Imponible del Ahorro** con arreglo a los artículos 33 y 49 de la LIRPF.

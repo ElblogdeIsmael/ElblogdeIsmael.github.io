@@ -4,7 +4,7 @@ type: ade
 about: "Apuntes y Casos Prácticos"
 header-includes:
   - \raggedbottom
-  - \AtBeginDocument{\setlength{\headheight}{24pt}}
+  - \AtBeginDocument{\setlength{\headheight}{30pt}}
 ---
 
 # Alcance de estos apuntes {.unnumbered}

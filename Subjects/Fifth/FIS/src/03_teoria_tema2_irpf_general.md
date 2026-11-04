@@ -182,3 +182,113 @@ Aunque el IRPF se fundamenta en la imposición individual, el artículo 82 de la
 - La opción por la tributación conjunta debe abarcar a todos los componentes de la unidad familiar.
 - No vincula para períodos impositivos sucesivos: se puede optar por conjunta un año e individual al ejercicio siguiente.
 - En la modalidad conjunta se aplican reducciones específicas en la base imponible general (art. 84 LIRPF: 3.400 euros anuales para la modalidad biparental y 2.150 euros para la monoparental), acumulándose la totalidad de las rentas obtenidas por todos los integrantes de la unidad.
+
+\vspace{0.6cm}
+
+## Casos Prácticos de Autoevaluación y Preguntas Directas de Test de Aula
+
+Esta sección recopila los diez casos analíticos de examen planteados directamente por la cátedra para evaluar los aspectos estructurales del Tema 2 (residencia, devengo, unidad familiar, autoconsumo y delimitación de rentas).
+
+\vspace{0.4cm}
+
+### Caso 1: Promotor inmobiliario que destina un piso de la promoción a su vivienda habitual
+
+- **Cuestión planteada:** Un promotor inmobiliario decide quedarse con uno de los pisos que ha edificado para establecer en él su residencia habitual. ¿Tributa en el IRPF y cómo se valora?
+
+- **Resolución técnica:** Se produce un supuesto de **autoconsumo interno** dentro de los Rendimientos de Actividades Económicas (art. 28.4 LIRPF). El promotor retira un bien que formaba parte de sus existencias empresariales para destinarlo al patrimonio personal. La ley exige imperativamente valorar esta operación a **valor normal de mercado**, debiendo integrar en la base imponible general la diferencia positiva entre dicho valor de mercado y el coste de construcción del inmueble.
+
+\vspace{0.3cm}
+
+### Caso 2: Pareja de hecho con hijos comunes frente a matrimonio
+
+- **Cuestión planteada:** Una pareja de hecho convive de forma estable y tiene dos hijos menores comunes. ¿Pueden presentar declaración conjunta los cuatro miembros?
+
+- **Resolución técnica:** **NO**. El artículo 82.1 de la LIRPF reserva la unidad familiar biparental exclusivamente a los cónyuges unidos por vínculo matrimonial. Las parejas de hecho no constituyen unidad familiar a efectos de tributación conjunta. 
+
+- **Alternativa legal permitida:** Uno de los dos progenitores puede optar por tributar de forma conjunta con los dos hijos menores bajo la modalidad de **unidad familiar monoparental** (art. 82.1.2ª LIRPF, aplicando la reducción de 2.150 €), debiendo el otro miembro de la pareja presentar declaración individual preceptiva. En ningún caso pueden los dos progenitores presentar declaración conjunta con los mismos hijos.
+
+\vspace{0.3cm}
+
+### Caso 3: Residente fiscal en Francia con rentas en España y Francia
+
+- **Cuestión planteada:** Un contribuyente reside habitualmente en París (más de 183 días) y obtiene rentas por dividendos en Francia y por el alquiler de un local comercial en Madrid. ¿Cómo tributa en España?
+
+- **Resolución técnica:** Al mantener su residencia fiscal en Francia, en España **NO es contribuyente del IRPF**. Queda sometido al **Impuesto sobre la Renta de No Residentes (IRNR)** por obligación real, tributando únicamente por las rentas de fuente territorial española (el alquiler del local). La tributación final y la eliminación de la doble imposición se resuelven conforme al Convenio de Doble Imposición (CDI) hispano-francés, tributando en Francia por su renta mundial con derecho a deducir el impuesto soportado en España.
+
+\vspace{0.3cm}
+
+### Caso 4: Competencias y elementos del IRPF que varían por Comunidad Autónoma
+
+- **Cuestión planteada:** ¿Qué elementos de la cuota y de la base del IRPF pueden diferir entre un contribuyente residente en Andalucía y otro residente en Madrid?
+
+- **Resolución técnica:** Al estar el IRPF cedido parcialmente al 50% a las Comunidades Autónomas de régimen común, varían:
+
+  1. **La escala autonómica de gravamen (art. 74 LIRPF):** Los tipos impositivos marginales y los tramos de base liquidable fijados por cada asamblea legislativa regional.
+
+  2. **Las deducciones autonómicas sobre la cuota:** Beneficios fiscales específicos por alquiler de vivienda, nacimiento de hijos, familias numerosas o inversiones ecológicas.
+
+  3. **Los importes del mínimo del contribuyente y de los mínimos por descendientes, ascendientes y discapacidad (art. 56.3 LIRPF):** Las CCAA pueden incrementar o disminuir hasta en un 10% los importes fijados por la normativa estatal.
+
+\vspace{0.3cm}
+
+### Caso 5: Pensión de jubilación frente a incapacidad permanente
+
+- **Cuestión planteada:** Diferencia tributaria entre percibir una pensión contributiva de jubilación y una pensión de la Seguridad Social por incapacidad laboral.
+
+- **Resolución técnica:**
+
+  - *Jubilación, Incapacidad Permanente Parcial e Incapacidad Permanente Total:* Constituyen **Rendimientos del Trabajo Personal sujetos y no exentos** (art. 17.2.a LIRPF), sometidos a la tabla general de retenciones del trabajo.
+
+  - *Incapacidad Permanente Absoluta y Gran Invalidez:* Gozan de **EXENCIÓN PLENA** ex artículo 7.f de la LIRPF. No se integran en la base imponible ni soportan retención alguna.
+
+\vspace{0.3cm}
+
+### Caso 6: El régimen de autoconsumo en el IRPF
+
+- **Cuestión planteada:** ¿Existe autoconsumo computable en los rendimientos del capital inmobiliario cuando el propietario disfruta de su propia vivienda?
+
+- **Resolución técnica:** **NO**. En sede de capital inmobiliario no existe la figura del autoconsumo valorado a precio de mercado. Cuando un propietario mantiene un inmueble urbano a su propia disposición (vivienda secundaria o vacacional), la ley aplica el régimen tasado de **Imputación de Rentas Inmobiliarias del artículo 85 de la LIRPF** (1,1% o 2% del valor catastral). El autoconsumo valorado a mercado queda circunscrito exclusivamente a las actividades económicas (art. 28.4 LIRPF).
+
+\vspace{0.3cm}
+
+### Caso 7: Trabajador de nacionalidad marroquí que labora 8 meses en España
+
+- **Cuestión planteada:** Un ciudadano de Marruecos trabaja en una campaña agrícola y de servicios en Almería durante 8 meses en el año 2026. El resto del año reside en su país de origen. ¿Es contribuyente del IRPF?
+
+- **Resolución técnica:** **SÍ**. Ocho meses de permanencia equivalen a aproximadamente 240 días de estancia física en España. Al rebasar el umbral objetivo de **más de 183 días naturales** en el año natural (art. 9.1.a LIRPF), adquiere automáticamente la condición de contribuyente residente fiscal en España, debiendo tributar en el IRPF por su **renta mundial**, con independencia de su nacionalidad.
+
+\vspace{0.3cm}
+
+### Caso 8: Fallecimiento el 3 de abril con cónyuge superviviente y dos hijos menores
+
+- **Cuestión planteada:** El Sr. X fallece el 3 de abril de 2026. Deja a su cónyuge viuda y dos hijos menores de edad. ¿Cómo se liquidan sus IRPF?
+
+- **Resolución técnica:**
+
+  - *En el causante (fallecido):* Opera la regla del artículo 13.2 de la LIRPF: período impositivo abreviado del 1 de enero al 3 de abril, devengándose el impuesto en la fecha de la muerte. Sus herederos deben presentar autoliquidación en régimen **individual preceptivo**, declarando únicamente las rentas generadas hasta el 3 de abril.
+
+  - *En la viuda e hijos supervivientes:* Su período impositivo es el ordinario anual (devengo a 31 de diciembre). Pueden optar voluntariamente por tributar de forma individual cada uno o presentar declaración conjunta en la modalidad de **unidad familiar monoparental** (art. 82.1.2ª LIRPF), con reducción de 2.150 € en la base general.
+
+\vspace{0.3cm}
+
+### Caso 9: Régimen de custodia compartida tras divorcio
+
+- **Cuestión planteada:** Tras su separación, los progenitores ostentan la custodia compartida de sus dos hijos al 50%. ¿Pueden ambos presentar declaración conjunta con los hijos?
+
+- **Resolución técnica:**
+
+  - *Opción de tributación conjunta:* **NO simultáneamente**. El artículo 82 de la LIRPF prohíbe que una persona forme parte de dos unidades familiares a la vez. En consecuencia, solo uno de los progenitores (por mutuo acuerdo o, en su defecto, el que conviva con los hijos el día 31 de diciembre) puede optar por la declaración conjunta monoparental; el otro progenitor debe declarar forzosamente de manera individual. Pueden alternarse los años fiscales de común acuerdo.
+
+  - *Mínimo por descendientes (art. 58 LIRPF):* Con independencia de qué progenitor ejercite la opción conjunta, el mínimo por descendientes **se prorratea imperativamente al 50% entre ambos padres**, ya que ambos sostienen e incurren en las cargas de manutención y custodia.
+
+\vspace{0.3cm}
+
+### Caso 10: Pensión compensatoria al cónyuge frente a anualidades por alimentos a hijos
+
+- **Cuestión planteada:** Contraste fiscal entre el pago de una pensión compensatoria a favor del ex cónyuge y el abono de una pensión de alimentos a favor de los hijos.
+
+- **Resolución técnica:**
+
+  - *Pensión compensatoria al ex cónyuge (art. 97 Código Civil):* En el progenitor pagador, **reduce la Base Imponible General** (art. 55 LIRPF) hasta el límite de la propia base general. En el cónyuge perceptor, tributa como **Rendimiento Íntegro del Trabajo Personal** (art. 17.2.f LIRPF).
+
+  - *Anualidades por alimentos a los hijos:* En los hijos perceptores están **totalmente EXENTAS de IRPF** (art. 7.k LIRPF). En el progenitor pagador, **NO reducen su base imponible general**; en su lugar, la ley aplica el sistema de atenuación de la progresividad previsto en los artículos 64 y 75 de la LIRPF: la escala de gravamen se calcula de forma separada sobre la cuantía de los alimentos y sobre el resto de la base liquidable general, aplicando la tarifa reducida resultante. Este beneficio exige que el pagador no tenga derecho a aplicar el mínimo por descendientes por esos hijos.
