@@ -54,6 +54,21 @@ export default {
                 },
               ],
             },
+            {
+              label: "Exámenes",
+              resources: [
+                {
+                  name: "Test de teoría Parcial 1",
+                  href: "/Subjects/Fifth/FIS/test/test-teoria-primer-parcial.html",
+                  kind: "HTML",
+                },
+                {
+                  name: "Casos prácticos tipo test Parcial 1",
+                  href: "/Subjects/Fifth/FIS/test/casos-practicos-primer-parcial.html",
+                  kind: "HTML",
+                },
+              ],
+            },
           ],
         },
         {

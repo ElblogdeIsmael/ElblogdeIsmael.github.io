@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Derecho Fiscal — Test de teoría (primer parcial)</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+      :root {
+        --bg-color: #f0f2f5;
+        --text-color: #333;
+        --card-bg: #fff;
+        --border-color: #ddd;
+        --primary-color: #007bff;
+        --hover-color: #0056b3;
+      }
+
+      body {
+        font-family: "Segoe UI", "Palatino Linotype", serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        padding: 20px;
+        font-size: 18px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+      
+      h2 {
+        color: var(--primary-color);
+        margin-top: 40px;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+      }
+
+      .author {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-style: italic;
+        color: #666;
+      }
+      
+      .question {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+        overflow-wrap: break-word; 
+      }
+      .question:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .correct { border-color: #28a745; background-color: #d4edda; }
+      .partial { border-color: #ffc107; background-color: #fff3cd; }
+      .incorrect { border-color: #dc3545; background-color: #f8d7da; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+      
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+      
+      .opcion-linea, .opcion-bloque {
+        display: block;      
+        padding-left: 35px;  
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;   
+      }
+
+      .opcion-linea input[type="checkbox"], 
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 2px;
+        transform: scale(1.3);
+        margin: 0;
+        cursor: pointer;
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline; 
+      }
+
+      mjx-container { font-size: 110% !important; }
+      
+      img { max-width: 100%; height: auto; border-radius: 4px; }
+      table { border-collapse: collapse; width: 100%; margin: 10px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+      th { background-color: #f8f9fa; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 6px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 12px 16px;
+        border-left: 4px solid var(--primary-color);
+        background-color: rgba(0, 123, 255, 0.07);
+        border-radius: 4px;
+        font-size: 0.96em;
+      }
+      .dark-mode .btn-explicacion {
+        color: #93c5fd;
+        border-color: #93c5fd;
+      }
+      .dark-mode .btn-explicacion:hover {
+        background-color: #93c5fd;
+        color: #121212;
+      }
+      .dark-mode .explicacion {
+        background-color: rgba(147, 197, 253, 0.1);
+        border-left-color: #93c5fd;
+      }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: #555;
+      }
+      .instrucciones-extra li {
+        margin-bottom: 5px;
+      }
+
+      body.dark-mode {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --card-bg: #1e1e1e;
+        --border-color: #444;
+        --primary-color: #374151;
+        --hover-color: #4b5563;
+      }
+      .dark-mode .author { color: #aaa; }
+      .dark-mode th { background-color: #333; }
+      .dark-mode .correct { background-color: #064e3b !important; border-color: #059669; }
+      .dark-mode .partial { background-color: #451a03 !important; border-color: #d97706; }
+      .dark-mode .incorrect { background-color: #450a0a !important; border-color: #dc2626; }
+      .dark-mode .instrucciones-extra ul { color: #bbb; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; }
+        .question { page-break-inside: avoid; border: none; box-shadow: none; padding: 0; margin-bottom: 20px; }
+        .info-box, button, #extra-buttons { display: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Derecho Fiscal — Test de teoría (primer parcial)</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
+
+    <div class="info-box">
+      <p>Test de teoría para el primer parcial (9 de noviembre de 2026): nociones básicas tributarias (LGT), introducción al IRPF, rendimientos del trabajo, capital inmobiliario e imputación de rentas. Incluye preguntas de cálculo corto y una sección final de preguntas trampa.</p>
+      
+      <div class="instrucciones-extra">
+        
+      </div>
+      
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+      
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
+    </div>
+
+    <div id="questions-container">
+      <h2>Tema 1: Nociones básicas tributarias (LGT)</h2>
+<div class="question" id="q1" data-correct="1">
+  <div class="enunciado"><strong>1.</strong> ¿Cuál de estos impuestos está cedido al 100 % a las CCAA de régimen común?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> El Impuesto sobre Sociedades.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> El Impuesto sobre Sucesiones y Donaciones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> El Impuesto sobre la Renta de No Residentes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> El IVA.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q1')">Ver explicación</button>
+  <div class="explicacion" id="exp-q1" style="display:none">Están cedidos totalmente el IP, el ISD, el ITP-AJD y los tributos sobre el juego, entre otros (art. 11 LOFCA y Ley 22/2009). IS e IRNR no se ceden; el IVA se cede al 50 %.</div>
+</div>
+<div class="question" id="q2" data-correct="3">
+  <div class="enunciado"><strong>2.</strong> Un impuesto sobre los envases de plástico no reutilizables cuyo objetivo principal es reducir su consumo:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Es inconstitucional, porque los tributos solo pueden perseguir fines recaudatorios.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Solo puede establecerlo una Comunidad Autónoma, ya que el Estado no puede crear tributos extrafiscales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> No es un tributo sino un precio público, al no tener fin recaudatorio.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> Es admisible, porque los tributos pueden servir como instrumentos de política económica y atender a los fines de la Constitución.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q2')">Ver explicación</button>
+  <div class="explicacion" id="exp-q2" style="display:none">El art. 2.1, párrafo segundo, LGT admite que los tributos, además de obtener recursos, sirvan como instrumentos de política económica general y atiendan a los principios y fines constitucionales (finalidad extrafiscal).</div>
+</div>
+<div class="question" id="q3" data-correct="0">
+  <div class="enunciado"><strong>3.</strong> Según el art. 7 LGT, ¿qué normas se aplican con carácter supletorio en materia tributaria?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> Las disposiciones generales del Derecho administrativo y los preceptos del Derecho común.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> Las órdenes ministeriales interpretativas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> La doctrina de la Dirección General de Tributos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> Las ordenanzas fiscales de los municipios.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q3')">Ver explicación</button>
+  <div class="explicacion" id="exp-q3" style="display:none">Art. 7.2 LGT. Las fuentes principales son la Constitución, los tratados, el Derecho de la Unión Europea, la LGT y las leyes de cada tributo, y los reglamentos (art. 7.1).</div>
+</div>
+<div class="question" id="q4" data-correct="0">
+  <div class="enunciado"><strong>4.</strong> Los tributos propios de las Comunidades Autónomas (art. 6 LOFCA):</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> No pueden recaer sobre hechos imponibles gravados por el Estado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> Pueden recaer sobre cualquier hecho imponible si la ley autonómica lo motiva.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> Solo pueden ser tasas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> Requieren autorización previa del Consejo de Política Fiscal y Financiera para cada ejercicio.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q4')">Ver explicación</button>
+  <div class="explicacion" id="exp-q4" style="display:none">Art. 6.2 LOFCA: prohibición de doble imposición respecto de los tributos estatales. El art. 6.3 regula los hechos imponibles gravados por tributos locales.</div>
+</div>
+<div class="question" id="q5" data-correct="2">
+  <div class="enunciado"><strong>5.</strong> El País Vasco y Navarra:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> Pertenecen al régimen común con un porcentaje de cesión mayor.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> No pueden regular ningún impuesto directo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> Tienen un régimen foral (Concierto y Convenio Económico) amparado por la disposición adicional primera de la CE, y aportan al Estado un cupo o aportación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> Reciben del Estado una transferencia que cubre todos sus gastos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q5')">Ver explicación</button>
+  <div class="explicacion" id="exp-q5" style="display:none">Régimen foral (DA 1.ª CE; Concierto Económico con el País Vasco y Convenio Económico con Navarra). Regulan y recaudan la mayoría de los tributos y pagan un cupo por las competencias estatales no asumidas. El art. 4 LIRPF salvaguarda estos regímenes.</div>
+</div>
+<div class="question" id="q6" data-correct="2">
+  <div class="enunciado"><strong>6.</strong> Según el art. 8 LGT, ¿cuál de las siguientes materias NO está reservada a ley?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> La fijación del tipo de gravamen.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> El establecimiento de exenciones y bonificaciones.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> La aprobación del modelo oficial de autoliquidación de un impuesto.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> Los plazos de prescripción.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q6')">Ver explicación</button>
+  <div class="explicacion" id="exp-q6" style="display:none">El art. 8 LGT reserva a ley, entre otras materias, los elementos de la cuantía de la deuda (letra a), los beneficios fiscales (letra d) y los plazos de prescripción y caducidad (letra f). Los modelos de declaración se aprueban por orden ministerial.</div>
+</div>
+<div class="question" id="q7" data-correct="0">
+  <div class="enunciado"><strong>7.</strong> ¿Qué rasgo caracteriza a las contribuciones especiales (art. 2.2.b LGT)?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> Gravan el beneficio o aumento de valor de los bienes del obligado derivado de obras públicas o del establecimiento o ampliación de servicios públicos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> Gravan el uso privativo del dominio público.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> Se exigen sin contraprestación y gravan la renta del obligado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> Son ingresos de Derecho privado que fija libremente el ayuntamiento.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q7')">Ver explicación</button>
+  <div class="explicacion" id="exp-q7" style="display:none">Art. 2.2.b LGT. Lo que las distingue es el beneficio especial o la revalorización de los bienes de un grupo identificable de sujetos.</div>
+</div>
+<div class="question" id="q8" data-correct="1">
+  <div class="enunciado"><strong>8.</strong> Un ayuntamiento quiere crear, mediante ordenanza, un impuesto nuevo sobre las segundas residencias que no recoge ninguna ley estatal. ¿Puede hacerlo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> Sí, porque los municipios tienen potestad tributaria originaria.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> No: las entidades locales carecen de potestad legislativa y solo pueden exigir los tributos previstos en la ley (TRLRHL), regulándolos mediante ordenanzas dentro de sus márgenes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> Sí, si lo aprueba el Pleno por mayoría absoluta.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> No, porque los municipios no pueden exigir ningún impuesto, solo tasas.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q8')">Ver explicación</button>
+  <div class="explicacion" id="exp-q8" style="display:none">Las corporaciones locales tienen potestad derivada (art. 133.2 CE) y no pueden dictar leyes. Sus tributos son los previstos en el RDLeg. 2/2004 (TRLRHL), que desarrollan con ordenanzas fiscales.</div>
+</div>
+<div class="question" id="q9" data-correct="2">
+  <div class="enunciado"><strong>9.</strong> Un ayuntamiento cobra por un curso de natación en la piscina municipal, al que se apunta quien quiere y que también ofrecen varios gimnasios privados de la ciudad. Esa contraprestación es:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> Una tasa, porque la presta una Administración pública.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> Una contribución especial, porque beneficia a un grupo de vecinos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> Un precio público, porque el servicio es de solicitud voluntaria y se presta también por el sector privado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> Un impuesto municipal potestativo.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q9')">Ver explicación</button>
+  <div class="explicacion" id="exp-q9" style="display:none">Al ser voluntario y prestarse en concurrencia con el sector privado, no encaja en el art. 2.2.a LGT; es un precio público (art. 24 Ley 8/1989 y doctrina de la STC 185/1995).</div>
+</div>
+<div class="question" id="q10" data-correct="0">
+  <div class="enunciado"><strong>10.</strong> Según el art. 2.1 LGT, ¿cuál de los siguientes ingresos públicos NO es un tributo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> La multa impuesta por aparcar en zona prohibida.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> La cantidad que paga un comerciante por instalar un quiosco en la acera municipal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> La cuota del IBI que paga el propietario de un piso.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> La cantidad exigida a los vecinos cuyas fincas se revalorizan por la urbanización de su calle.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q10')">Ver explicación</button>
+  <div class="explicacion" id="exp-q10" style="display:none">El tributo nace de la realización del supuesto de hecho al que la ley vincula el deber de contribuir y tiene como fin primordial sostener el gasto público (art. 2.1 LGT). La multa tiene como causa una infracción y una finalidad represiva, no contributiva. El quiosco es una tasa, el IBI un impuesto y la urbanización una contribución especial.</div>
+</div>
+<div class="question" id="q11" data-correct="1">
+  <div class="enunciado"><strong>11.</strong> El hecho imponible de la tasa puede consistir en (art. 2.2.a LGT):</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> La obtención de un beneficio por la realización de obras públicas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> La utilización privativa o el aprovechamiento especial del dominio público.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="2"> Cualquier hecho que ponga de manifiesto capacidad económica, sin contraprestación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="3"> La prestación de cualquier servicio público, aunque sea de solicitud voluntaria y lo preste también el sector privado.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q11')">Ver explicación</button>
+  <div class="explicacion" id="exp-q11" style="display:none">Art. 2.2.a LGT: la tasa grava el uso privativo o aprovechamiento especial del dominio público, o la prestación de servicios en régimen de Derecho público que afecten al obligado de modo particular y que no sean de solicitud voluntaria o no los preste el sector privado. Si se cumplen ambas condiciones a la vez (voluntario y con concurrencia privada), no hay tasa.</div>
+</div>
+<div class="question" id="q12" data-correct="3">
+  <div class="enunciado"><strong>12.</strong> En el sistema de financiación de las CCAA de régimen común (Ley 22/2009), el IRPF y el IVA:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="0"> Están cedidos al 100 % y con plena capacidad normativa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="1"> No están cedidos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="2"> Están cedidos al 50 % y en ambos las CCAA pueden fijar el tipo de gravamen.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="3"> Están cedidos al 50 %; en el IRPF las CCAA tienen capacidad normativa (escala, mínimos y deducciones) y en el IVA no.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q12')">Ver explicación</button>
+  <div class="explicacion" id="exp-q12" style="display:none">Ley 22/2009 y art. 11 LOFCA: cesión del 50 % del IRPF (con competencias normativas sobre escala autonómica, mínimos y deducciones, art. 46 Ley 22/2009) y del 50 % del IVA (sin competencia normativa).</div>
+</div>
+<div class="question" id="q13" data-correct="2">
+  <div class="enunciado"><strong>13.</strong> ¿Cuál de los siguientes impuestos municipales es de establecimiento potestativo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="0"> Impuesto sobre Bienes Inmuebles.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="1"> Impuesto sobre Actividades Económicas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="2"> Impuesto sobre Construcciones, Instalaciones y Obras.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="3"> Impuesto sobre Vehículos de Tracción Mecánica.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q13')">Ver explicación</button>
+  <div class="explicacion" id="exp-q13" style="display:none">IBI, IAE e IVTM son obligatorios. ICIO e IIVTNU (plusvalía municipal) son potestativos (art. 59 TRLRHL).</div>
+</div>
+<div class="question" id="q14" data-correct="1">
+  <div class="enunciado"><strong>14.</strong> ¿Cuál de los siguientes principios NO aparece en el art. 31.1 CE?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="0"> Capacidad económica.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="1"> Reserva de ley.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="2"> No confiscatoriedad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="3"> Progresividad.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q14')">Ver explicación</button>
+  <div class="explicacion" id="exp-q14" style="display:none">El art. 31.1 CE recoge generalidad ("todos"), capacidad económica, igualdad, progresividad y no confiscatoriedad. La reserva de ley está en el art. 31.3 CE (y en el art. 133 CE).</div>
+</div>
+<div class="question" id="q15" data-correct="3">
+  <div class="enunciado"><strong>15.</strong> Conforme al art. 133 CE:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="0"> El Estado, las CCAA y las entidades locales tienen todos potestad originaria para establecer tributos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="1"> Los beneficios fiscales sobre tributos del Estado pueden establecerse por real decreto.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="2"> Las CCAA solo pueden gestionar tributos estatales, pero nunca crearlos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="3"> La potestad originaria corresponde exclusivamente al Estado mediante ley; CCAA y corporaciones locales pueden establecer y exigir tributos de acuerdo con la Constitución y las leyes.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q15')">Ver explicación</button>
+  <div class="explicacion" id="exp-q15" style="display:none">Art. 133.1 CE: potestad originaria del Estado por ley. Art. 133.2: potestad derivada de CCAA y corporaciones locales. Art. 133.3: los beneficios fiscales sobre tributos del Estado requieren ley.</div>
+</div>
+<div class="question" id="q16" data-correct="3">
+  <div class="enunciado"><strong>16.</strong> Los impuestos se definen en el art. 2.2.c LGT como tributos:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="0"> Que solo pueden establecer el Estado y las Comunidades Autónomas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="1"> Exigidos como contraprestación de un servicio público individualizado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="2"> Cuyo rendimiento está siempre afectado a una obra concreta.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="3"> Exigidos sin contraprestación, cuyo hecho imponible está constituido por negocios, actos o hechos que ponen de manifiesto la capacidad económica del contribuyente.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q16')">Ver explicación</button>
+  <div class="explicacion" id="exp-q16" style="display:none">Definición literal del art. 2.2.c LGT. "Sin contraprestación" significa que la obligación no está ligada a una actividad administrativa concreta referida al obligado.</div>
+</div>
+<h2>Tema 2: IRPF, introducción (arts. 1-14 LIRPF)</h2>
+<div class="question" id="q17" data-correct="3">
+  <div class="enunciado"><strong>17.</strong> Un residente fiscal en Granada cobra intereses de una cuenta en Alemania y alquila un piso en Lisboa. Según el art. 2 LIRPF:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="0"> Solo tributa en el IRPF por las rentas obtenidas en España.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="1"> Las rentas extranjeras tributan por el IRNR.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="2"> Las rentas extranjeras están exentas si han tributado en origen.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="3"> Tributa por la totalidad de su renta, con independencia del lugar donde se haya producido y de la residencia del pagador.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q17')">Ver explicación</button>
+  <div class="explicacion" id="exp-q17" style="display:none">Art. 2 LIRPF: principio de renta mundial. La doble imposición se corrige con convenios o con la deducción del art. 80, pero las rentas se integran.</div>
+</div>
+<div class="question" id="q18" data-correct="3">
+  <div class="enunciado"><strong>18.</strong> Según los arts. 12 y 13 LIRPF, con carácter general:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="0"> El período impositivo es de doce meses desde el alta del contribuyente y el impuesto se devenga el 30 de junio.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="1"> El período impositivo lo elige el contribuyente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="2"> El período impositivo coincide con el año natural y el impuesto se devenga el 1 de enero.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="3"> El período impositivo coincide con el año natural y el impuesto se devenga el 31 de diciembre.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q18')">Ver explicación</button>
+  <div class="explicacion" id="exp-q18" style="display:none">Arts. 12 y 13.1 LIRPF. La única excepción es el fallecimiento (art. 13.2).</div>
+</div>
+<div class="question" id="q19" data-correct="0">
+  <div class="enunciado"><strong>19.</strong> Para que una indemnización por despido improcedente quede exenta según el art. 7.e LIRPF:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="0"> Solo está exenta la cuantía obligatoria del Estatuto de los Trabajadores, sin superar 180.000 €; la improcedencia debe reconocerse en conciliación (SMAC) o por resolución judicial.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="1"> Queda exenta cualquier cantidad pactada en convenio colectivo, aunque supere el mínimo del Estatuto.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="2"> Basta con que la empresa la abone en un único pago.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="3"> Está exenta sin límite cuantitativo si el trabajador tiene más de 20 años de antigüedad.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q19')">Ver explicación</button>
+  <div class="explicacion" id="exp-q19" style="display:none">Art. 7.e LIRPF: exenta la cuantía obligatoria del ET (33 días por año con un máximo de 24 mensualidades), con un tope de 180.000 €. No se consideran obligatorias las cantidades de convenio, pacto o contrato. El acuerdo en el SMAC (servicio administrativo de conciliación) no se trata como pacto.</div>
+</div>
+<div class="question" id="q20" data-correct="1">
+  <div class="enunciado"><strong>20.</strong> Un trabajador despedido de forma improcedente, con la exención aplicada, vuelve a trabajar para una sociedad del mismo grupo dos años después. Según el art. 1 RIRPF:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="0"> No pasa nada; la exención es definitiva.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="1"> Se presume, salvo prueba en contrario, que no hubo efectiva desvinculación y debe regularizar la exención.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="2"> Solo pierde la exención si vuelve a la misma empresa en el plazo de un año.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="3"> La indemnización pasa a tributar como ganancia patrimonial.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q20')">Ver explicación</button>
+  <div class="explicacion" id="exp-q20" style="display:none">Art. 1 RIRPF: se presume que no hay desvinculación si en los tres años siguientes al despido el trabajador vuelve a prestar servicios a la misma empresa o a una vinculada.</div>
+</div>
+<div class="question" id="q21" data-correct="1">
+  <div class="enunciado"><strong>21.</strong> ¿Cuál de los siguientes NO es un componente de la renta del contribuyente a efectos del hecho imponible (art. 6.2 LIRPF)?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="0"> Los rendimientos de actividades económicas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="1"> Los bienes adquiridos por herencia.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="2"> Las imputaciones de renta establecidas por ley.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="3"> Las ganancias y pérdidas patrimoniales.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q21')">Ver explicación</button>
+  <div class="explicacion" id="exp-q21" style="display:none">Art. 6.2 LIRPF: trabajo, capital, actividades económicas, ganancias y pérdidas patrimoniales e imputaciones de renta. Lo adquirido por herencia está sujeto al ISD y, por tanto, no sujeto al IRPF (art. 6.4).</div>
+</div>
+<div class="question" id="q22" data-correct="0">
+  <div class="enunciado"><strong>22.</strong> Según el art. 1 LIRPF, el IRPF es un tributo:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="0"> Directo y personal, que grava la renta de las personas físicas según su naturaleza y sus circunstancias personales y familiares.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="1"> Indirecto y real.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="2"> Directo y objetivo, que no tiene en cuenta las circunstancias familiares.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="3"> Instantáneo, que se devenga cada vez que se obtiene una renta.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q22')">Ver explicación</button>
+  <div class="explicacion" id="exp-q22" style="display:none">Art. 1 LIRPF. Además es subjetivo (mínimo personal y familiar), progresivo y periódico.</div>
+</div>
+<div class="question" id="q23" data-correct="3">
+  <div class="enunciado"><strong>23.</strong> Para computar los 183 días, las ausencias esporádicas del territorio español:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="0"> No se computan nunca.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="1"> Solo se computan si superan 30 días seguidos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="2"> Se computan solo si el contribuyente tiene hijos en España.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="3"> Se computan, salvo que el contribuyente acredite su residencia fiscal en otro país.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q23')">Ver explicación</button>
+  <div class="explicacion" id="exp-q23" style="display:none">Art. 9.1.a LIRPF. La acreditación se hace normalmente con un certificado de residencia fiscal de la autoridad del otro Estado. Si es una jurisdicción no cooperativa, Hacienda puede exigir que pruebe la permanencia allí durante 183 días.</div>
+</div>
+<div class="question" id="q24" data-correct="1">
+  <div class="enunciado"><strong>24.</strong> El IRPF se aplica en todo el territorio español (art. 4 LIRPF):</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="0"> Sin excepción alguna.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="1"> Sin perjuicio de los regímenes forales de Concierto (País Vasco) y Convenio (Navarra) y de las especialidades de Canarias, Ceuta y Melilla.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="2"> Salvo en Andalucía, que tiene su propia ley del IRPF.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="3"> Solo en las CCAA que no hayan aprobado escala autonómica.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q24')">Ver explicación</button>
+  <div class="explicacion" id="exp-q24" style="display:none">Art. 4 LIRPF. Andalucía es de régimen común: aprueba su escala y sus deducciones (Ley 5/2021), pero dentro de la LIRPF.</div>
+</div>
+<div class="question" id="q25" data-correct="2">
+  <div class="enunciado"><strong>25.</strong> María sufre un atropello y el juzgado fija una indemnización de 40.000 € por las lesiones que sufrió. En su IRPF esta cantidad:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="0"> Tributa como ganancia patrimonial.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="1"> Tributa como rendimiento del trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="2"> Está exenta, por ser una indemnización por daños personales en la cuantía reconocida judicialmente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="3"> Solo está exenta hasta 18.000 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q25')">Ver explicación</button>
+  <div class="explicacion" id="exp-q25" style="display:none">Art. 7.d LIRPF: exentas las indemnizaciones por responsabilidad civil por daños personales en la cuantía legal o judicialmente reconocida. Los daños materiales no gozan de esta exención.</div>
+</div>
+<div class="question" id="q26" data-correct="3">
+  <div class="enunciado"><strong>26.</strong> Una beca para cursar un grado universitario concedida por el Ministerio de Educación según sus principios de publicidad, concurrencia y objetividad:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="0"> Está no sujeta por tributar en el ISD.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="1"> Es rendimiento del trabajo en todo caso.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="2"> Es ganancia patrimonial no derivada de transmisión.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="3"> Está exenta en los términos y límites del art. 7.j LIRPF y del art. 2 RIRPF.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q26')">Ver explicación</button>
+  <div class="explicacion" id="exp-q26" style="display:none">Art. 7.j LIRPF y art. 2 RIRPF: exentas las becas públicas (y las de entidades de la Ley 49/2002 y fundaciones bancarias) para estudios reglados, con los requisitos de publicidad, concurrencia y objetividad y los importes máximos reglamentarios.</div>
+</div>
+<div class="question" id="q27" data-correct="2">
+  <div class="enunciado"><strong>27.</strong> Un abogado asesora gratis durante todo el año a la empresa de un amigo. Según el art. 6.5 LIRPF:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="0"> No tributa por nada, porque no ha cobrado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="1"> Tributa obligatoriamente como imputación de renta del art. 85.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="2"> Se presume retribuido, salvo prueba en contrario, y se valora por su valor normal de mercado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="3"> Está exento por tratarse de una prestación entre particulares.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q27')">Ver explicación</button>
+  <div class="explicacion" id="exp-q27" style="display:none">Art. 6.5 LIRPF: presunción iuris tantum de onerosidad de las prestaciones de trabajo o de capital, valoradas a valor normal de mercado.</div>
+</div>
+<div class="question" id="q28" data-correct="0">
+  <div class="enunciado"><strong>28.</strong> Según el art. 9.1.a LIRPF, una persona es residente fiscal en España si:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="0"> Permanece más de 183 días durante el año natural en territorio español.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="1"> Permanece al menos 183 días en España en los últimos doce meses.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="2"> Es de nacionalidad española.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="3"> Tiene en España una vivienda en propiedad.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q28')">Ver explicación</button>
+  <div class="explicacion" id="exp-q28" style="display:none">Art. 9.1.a LIRPF: más de 183 días en el año natural. Los otros criterios son el núcleo principal de actividades o intereses económicos (art. 9.1.b) y la presunción familiar.</div>
+</div>
+<div class="question" id="q29" data-correct="1">
+  <div class="enunciado"><strong>29.</strong> Las anualidades por alimentos que un padre paga a sus hijos por decisión judicial:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="0"> Tributan como rendimiento del trabajo en los hijos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="1"> Están exentas para los hijos que las perciben.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="2"> Reducen la base imponible del padre, como la pensión compensatoria.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="3"> Son una imputación de renta del padre.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q29')">Ver explicación</button>
+  <div class="explicacion" id="exp-q29" style="display:none">Art. 7.k LIRPF: exentas para los hijos. El padre no reduce su base, pero aplica la escala por separado (arts. 64 y 75). La pensión compensatoria al excónyuge sí es rendimiento del trabajo para quien la cobra (art. 17.2.f) y reduce la base de quien la paga (art. 55).</div>
+</div>
+<div class="question" id="q30" data-correct="2">
+  <div class="enunciado"><strong>30.</strong> Un desempleado cobra su prestación en la modalidad de pago único para montar un negocio como autónomo. Esa prestación:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="0"> Tributa como rendimiento de actividades económicas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="1"> Tributa como rendimiento del trabajo con reducción del 30 %.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="2"> Está exenta si se cumplen los requisitos de la normativa (entre ellos, mantener la actividad durante cinco años).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="3"> Está exenta solo hasta 15.000 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q30')">Ver explicación</button>
+  <div class="explicacion" id="exp-q30" style="display:none">Art. 7.n LIRPF: exención de la prestación por desempleo en pago único, condicionada al mantenimiento durante cinco años de la acción o participación o de la actividad.</div>
+</div>
+<div class="question" id="q31" data-correct="1">
+  <div class="enunciado"><strong>31.</strong> Javier trabaja todo el año en Londres, pero su esposa (no separada legalmente) y sus dos hijos menores, que dependen de él, viven en Málaga. Según el art. 9.1 LIRPF:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="0"> No es residente, porque no pasa más de 183 días en España.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="1"> Se presume que es residente en España, salvo prueba en contrario.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="2"> Es residente sin posibilidad de prueba en contrario.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="3"> Es residente solo si su esposa trabaja en España.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q31')">Ver explicación</button>
+  <div class="explicacion" id="exp-q31" style="display:none">Art. 9.1, último párrafo, LIRPF: presunción iuris tantum de residencia cuando residan en España el cónyuge no separado legalmente y los hijos menores dependientes. Javier puede destruirla con un certificado de residencia fiscal británico.</div>
+</div>
+<div class="question" id="q32" data-correct="0">
+  <div class="enunciado"><strong>32.</strong> Un matrimonio en gananciales tiene un piso común alquilado. El marido trabaja por cuenta ajena y la esposa no tiene empleo. ¿Cómo se individualizan las rentas (art. 11 LIRPF)?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="0"> El sueldo corresponde íntegramente al marido y el alquiler al 50 % a cada cónyuge.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="1"> El sueldo y el alquiler se reparten al 50 % por ser gananciales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="2"> El sueldo y el alquiler corresponden íntegramente al marido.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="3"> El sueldo corresponde al 50 % y el alquiler a quien firmó el contrato.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q32')">Ver explicación</button>
+  <div class="explicacion" id="exp-q32" style="display:none">Art. 11.2 LIRPF: los rendimientos del trabajo corresponden a quien genera el derecho, con independencia del régimen económico. Art. 11.3: los del capital, a los titulares según las normas civiles; si el bien es ganancial, al 50 %.</div>
+</div>
+<div class="question" id="q33" data-correct="3">
+  <div class="enunciado"><strong>33.</strong> Un trabajador contratado en 2019 con un salario diario de 80 € es despedido en 2025; la improcedencia se reconoce en el SMAC y cobra 20.000 € tras 6 años de servicio. ¿Qué parte está exenta?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="0"> 20.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="1"> 0 €, porque se pactó en conciliación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="2"> 9.600 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="3"> 15.840 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q33')">Ver explicación</button>
+  <div class="explicacion" id="exp-q33" style="display:none">Límite del ET: 33 × 80 × 6 = 15.840 € (muy por debajo de 24 mensualidades y de 180.000 €). Exentos 15.840 € y sujetos los 4.160 € restantes como rendimiento del trabajo (art. 7.e LIRPF). Los 9.600 € corresponderían a 20 días por año (despido objetivo).</div>
+</div>
+<div class="question" id="q34" data-correct="2">
+  <div class="enunciado"><strong>34.</strong> Un español traslada su residencia en 2026 a un país calificado como jurisdicción no cooperativa. Según el art. 8.2 LIRPF:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="0"> Deja de ser contribuyente desde el día del traslado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="1"> Deja de ser contribuyente desde el 1 de enero de 2027.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="2"> Sigue siendo contribuyente en 2026 y en los cuatro períodos impositivos siguientes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="3"> Sigue siendo contribuyente durante diez años.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q34')">Ver explicación</button>
+  <div class="explicacion" id="exp-q34" style="display:none">Art. 8.2 LIRPF: la "cuarentena fiscal" abarca el período del cambio y los cuatro siguientes.</div>
+</div>
+<div class="question" id="q35" data-correct="0">
+  <div class="enunciado"><strong>35.</strong> ¿Cuál de las siguientes prestaciones de la Seguridad Social está exenta del IRPF?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="0"> La prestación por nacimiento y cuidado de menor (maternidad o paternidad).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="1"> La prestación por desempleo cobrada mensualmente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="2"> La prestación por incapacidad temporal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="3"> La pensión de jubilación.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q35')">Ver explicación</button>
+  <div class="explicacion" id="exp-q35" style="display:none">Art. 7.h LIRPF. La jubilación, el desempleo periódico y la incapacidad temporal son rendimientos del trabajo (art. 17.1.b y 17.2.a LIRPF).</div>
+</div>
+<h2>Tema 3: Rendimientos del trabajo</h2>
+<div class="question" id="q36" data-correct="1">
+  <div class="enunciado"><strong>36.</strong> Un ingeniero es destinado a una obra en otro municipio, donde permanece de forma continuada once meses, y la empresa le abona dietas de manutención y estancia:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="0"> Están exentas en los límites diarios durante todo el período.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="1"> No están exentas, porque la permanencia continuada supera nueve meses.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="2"> Están exentas solo los primeros 183 días.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="3"> Están exentas si se justifica la factura del alojamiento.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q36')">Ver explicación</button>
+  <div class="explicacion" id="exp-q36" style="display:none">Art. 9.A.3 RIRPF: la excepción de gravamen exige que la permanencia continuada en el mismo municipio no supere nueve meses.</div>
+</div>
+<div class="question" id="q37" data-correct="3">
+  <div class="enunciado"><strong>37.</strong> Un trabajador cobra en 2026 un bonus de 10.000 € generado durante tres años, sin carácter periódico ni recurrente, y no ha aplicado antes la reducción. ¿Qué rendimiento íntegro computa por el bonus?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="0"> 10.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="1"> 3.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="2"> 6.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="3"> 7.000 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q37')">Ver explicación</button>
+  <div class="explicacion" id="exp-q37" style="display:none">Art. 18.2 LIRPF: reducción del 30 % para rendimientos con período de generación superior a dos años, imputados en un único período y sin periodicidad, con un límite de 300.000 € anuales. 10.000 × 0,70 = 7.000 €.</div>
+</div>
+<div class="question" id="q38" data-correct="1">
+  <div class="enunciado"><strong>38.</strong> ¿Cuál de los siguientes gastos NO es deducible de los rendimientos del trabajo según el art. 19.2 LIRPF?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="0"> Las cuotas sindicales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="1"> Las retenciones a cuenta del IRPF practicadas en la nómina.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="2"> Los gastos de abogado en un litigio con la empresa, hasta 300 € anuales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="3"> Las cotizaciones a la Seguridad Social a cargo del trabajador.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q38')">Ver explicación</button>
+  <div class="explicacion" id="exp-q38" style="display:none">Las retenciones no son gasto: son pagos a cuenta que se restan de la cuota (cuota diferencial). Sí son deducibles las cotizaciones (art. 19.2.a), las cuotas sindicales (19.2.d) y la defensa jurídica hasta 300 € (19.2.e).</div>
+</div>
+<div class="question" id="q39" data-correct="2">
+  <div class="enunciado"><strong>39.</strong> La empresa ingresa en la cuenta del trabajador 300 € para que se compre un ordenador para uso personal. Esa cantidad es:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="0"> Una retribución en especie valorada por el coste para la empresa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="1"> Una renta exenta, si el ordenador se usa también para trabajar.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="2"> Un rendimiento del trabajo dinerario.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="3"> Una ganancia patrimonial.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q39')">Ver explicación</button>
+  <div class="explicacion" id="exp-q39" style="display:none">Art. 42.1 LIRPF: la renta en especie exige la entrega directa del bien o la prestación del servicio. Si se entrega dinero para adquirirlo, el rendimiento es dinerario.</div>
+</div>
+<div class="question" id="q40" data-correct="1">
+  <div class="enunciado"><strong>40.</strong> Una sociedad entrega gratuitamente acciones propias a sus trabajadores en activo, en las mismas condiciones para todos. ¿Hasta qué importe anual por trabajador no constituye renta en especie sujeta?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="0"> 6.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="1"> 12.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="2"> 30.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="3"> Sin límite, si se mantienen tres años.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q40')">Ver explicación</button>
+  <div class="explicacion" id="exp-q40" style="display:none">Art. 42.3 LIRPF y art. 43 RIRPF: límite general de 12.000 € anuales, con requisitos como ofrecerse en iguales condiciones a todos los trabajadores y mantener las acciones al menos tres años.</div>
+</div>
+<div class="question" id="q41" data-correct="3">
+  <div class="enunciado"><strong>41.</strong> Un trabajador tiene rendimientos íntegros de 20.500 € y cotiza 1.800 € a la Seguridad Social. No tiene otras rentas. ¿Qué reducción del art. 20 LIRPF le corresponde?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q41" value="0"> 7.302 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q41" value="1"> 4.068 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q41" value="2"> 0 €, porque sus rendimientos íntegros superan 19.747,50 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q41" value="3"> 1.194,15 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q41')">Ver explicación</button>
+  <div class="explicacion" id="exp-q41" style="display:none">El umbral se mide sobre el rendimiento neto (íntegros menos gastos de las letras a) a e) del art. 19.2), no sobre los íntegros: 20.500 − 1.800 = 18.700 €. Tramo c) del art. 20 LIRPF: 2.364,34 − 1,14 × (18.700 − 17.673,52) = 2.364,34 − 1.170,19 = 1.194,15 €. Los 4.068 € saldrían de restar también los 2.000 € de la letra f), lo que no procede.</div>
+</div>
+<div class="question" id="q42" data-correct="1">
+  <div class="enunciado"><strong>42.</strong> Un trabajador recorre 500 km con su coche particular por motivos laborales y la empresa le paga 0,30 €/km, más 18 € de peajes justificados. ¿Qué importe tributa como rendimiento del trabajo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q42" value="0"> 0 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q42" value="1"> 20 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q42" value="2"> 38 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q42" value="3"> 168 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q42')">Ver explicación</button>
+  <div class="explicacion" id="exp-q42" style="display:none">Art. 9.A.2 RIRPF: exento 0,26 €/km más peajes y aparcamientos justificados. Percibido por km: 150 €; exento: 500 × 0,26 = 130 €; exceso: 20 €. Los 18 € de peaje están exentos.</div>
+</div>
+<div class="question" id="q43" data-correct="2">
+  <div class="enunciado"><strong>43.</strong> La empresa cede a un directivo, durante todo el año, un coche que le costó 30.000 €; se acredita una disponibilidad privada del 50 %. El tipo de retención es del 15 % y el ingreso a cuenta no se le repercute. ¿Qué rendimiento íntegro en especie computa (sin aplicar la reducción por vehículos eficientes)?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q43" value="0"> 3.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q43" value="1"> 6.900 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q43" value="2"> 3.450 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q43" value="3"> 34.500 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q43')">Ver explicación</button>
+  <div class="explicacion" id="exp-q43" style="display:none">Art. 43.1.1.º b LIRPF: uso = 20 % × 30.000 = 6.000 €; por el 50 % de uso privado: 3.000 €. Ingreso a cuenta no repercutido (art. 43.2): 15 % × 3.000 = 450 €. Total: 3.450 €.</div>
+</div>
+<div class="question" id="q44" data-correct="0">
+  <div class="enunciado"><strong>44.</strong> Un técnico hace cuatro desplazamientos de ida y vuelta en el día a municipios distintos de su centro de trabajo y de su residencia, y cobra 30 € de manutención por cada uno. ¿Cuánto tributa?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q44" value="0"> 13,32 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q44" value="1"> 0 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q44" value="2"> 120 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q44" value="3"> 93,32 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q44')">Ver explicación</button>
+  <div class="explicacion" id="exp-q44" style="display:none">Sin pernocta en España, exentos 26,67 €/día (art. 9.A.3.a RIRPF): 4 × 26,67 = 106,68 €. Percibe 120 €; exceso: 13,32 €.</div>
+</div>
+<div class="question" id="q45" data-correct="0">
+  <div class="enunciado"><strong>45.</strong> Una empresa paga el seguro médico de un trabajador, de su cónyuge y de sus dos hijos, con una prima de 600 € anuales por persona (ninguno con discapacidad). ¿Qué importe es retribución en especie sujeta?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q45" value="0"> 400 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q45" value="1"> 100 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q45" value="2"> 0 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q45" value="3"> 2.400 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q45')">Ver explicación</button>
+  <div class="explicacion" id="exp-q45" style="display:none">Art. 42.3.c LIRPF: exentos 500 € anuales por persona asegurada (trabajador, cónyuge e hijos). Exento: 4 × 500 = 2.000 €; sujeto: 4 × 100 = 400 €.</div>
+</div>
+<div class="question" id="q46" data-correct="1">
+  <div class="enunciado"><strong>46.</strong> ¿Qué requisito adicional exige el art. 20 LIRPF para aplicar la reducción por obtención de rendimientos del trabajo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q46" value="0"> Que el contribuyente tenga menos de 35 años.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q46" value="1"> Que no tenga rentas distintas de las del trabajo, excluidas las exentas, superiores a 6.500 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q46" value="2"> Que tribute de forma conjunta.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q46" value="3"> Que sus rendimientos íntegros no superen 22.000 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q46')">Ver explicación</button>
+  <div class="explicacion" id="exp-q46" style="display:none">Art. 20 LIRPF. Además, la reducción no puede hacer negativo el rendimiento neto del trabajo.</div>
+</div>
+<div class="question" id="q47" data-correct="3">
+  <div class="enunciado"><strong>47.</strong> Las retribuciones de los miembros de un consejo de administración:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q47" value="0"> Son rendimientos de actividades económicas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q47" value="1"> Son rendimientos del capital mobiliario.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q47" value="2"> Están exentas si el consejero es también socio.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q47" value="3"> Son rendimientos del trabajo por expresa disposición legal.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q47')">Ver explicación</button>
+  <div class="explicacion" id="exp-q47" style="display:none">Art. 17.2.e LIRPF: se califican como rendimientos del trabajo aunque no haya relación laboral ordinaria.</div>
+</div>
+<div class="question" id="q48" data-correct="0">
+  <div class="enunciado"><strong>48.</strong> Una persona inscrita como desempleada acepta en 2026 un empleo que le obliga a trasladar su residencia habitual a otro municipio. ¿Cuánto puede deducir por "otros gastos" (art. 19.2.f LIRPF), sin discapacidad?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q48" value="0"> 4.000 € en 2026 y en 2027.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q48" value="1"> 2.000 € en 2026.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q48" value="2"> 4.000 € solo en 2026.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q48" value="3"> 5.500 € en 2026.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q48')">Ver explicación</button>
+  <div class="explicacion" id="exp-q48" style="display:none">Art. 19.2.f LIRPF: los 2.000 € generales se incrementan en 2.000 € adicionales en el período del cambio de residencia y en el siguiente.</div>
+</div>
+<div class="question" id="q49" data-correct="2">
+  <div class="enunciado"><strong>49.</strong> ¿Cuál de las siguientes rentas es un rendimiento íntegro del trabajo según el art. 17 LIRPF?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q49" value="0"> El alquiler de un piso a un compañero de trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q49" value="1"> Los intereses de una cuenta nómina.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q49" value="2"> La prestación por desempleo cobrada mensualmente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q49" value="3"> Los honorarios de un médico con consulta privada propia.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q49')">Ver explicación</button>
+  <div class="explicacion" id="exp-q49" style="display:none">Art. 17.1.b LIRPF. Los intereses son capital mobiliario; el alquiler, capital inmobiliario; la consulta propia, actividad económica (ordenación por cuenta propia de medios).</div>
+</div>
+<div class="question" id="q50" data-correct="3">
+  <div class="enunciado"><strong>50.</strong> Respecto de los gastos de estancia (hotel) en un desplazamiento por España, el art. 9 RIRPF establece que:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q50" value="0"> Están exentos hasta 53,34 € por noche.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q50" value="1"> Están exentos a tanto alzado, sin justificar, hasta 65,97 € por noche.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q50" value="2"> Nunca están exentos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q50" value="3"> Están exentos los importes que se justifiquen (factura).</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q50')">Ver explicación</button>
+  <div class="explicacion" id="exp-q50" style="display:none">Art. 9.A.3.a RIRPF: la estancia está exenta por el importe justificado. Las cuantías de 53,34 € y 26,67 € son de manutención, que se exime a tanto alzado sin necesidad de tiques.</div>
+</div>
+<div class="question" id="q51" data-correct="0">
+  <div class="enunciado"><strong>51.</strong> La aportación que la empresa hace a un plan de pensiones de empleo a favor de un trabajador:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q51" value="0"> Es rendimiento del trabajo del trabajador (art. 17.1.e LIRPF) en el año de la aportación, y este puede reducir su base imponible dentro de los límites legales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q51" value="1"> No tributa hasta que se cobre la prestación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q51" value="2"> Es un gasto deducible del trabajador.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q51" value="3"> Es rendimiento del capital mobiliario.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q51')">Ver explicación</button>
+  <div class="explicacion" id="exp-q51" style="display:none">Art. 17.1.e LIRPF (contribuciones empresariales imputadas) y art. 51 LIRPF (reducción en la base). Al cobrar la prestación, esta vuelve a ser rendimiento del trabajo (art. 17.2.a).</div>
+</div>
+<div class="question" id="q52" data-correct="3">
+  <div class="enunciado"><strong>52.</strong> La entrega de un abono de transporte público colectivo para ir de casa al trabajo:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q52" value="0"> Es siempre retribución en especie sujeta.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q52" value="1"> No tributa sin límite alguno.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q52" value="2"> No tributa con el límite de 11 € diarios.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q52" value="3"> No tributa con el límite de 1.500 € anuales por trabajador.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q52')">Ver explicación</button>
+  <div class="explicacion" id="exp-q52" style="display:none">Art. 42.3 LIRPF (servicio de transporte colectivo de viajeros) y art. 46 bis RIRPF: límite de 1.500 € anuales. Los 11 € diarios son el límite de los vales de comida.</div>
+</div>
+<div class="question" id="q53" data-correct="2">
+  <div class="enunciado"><strong>53.</strong> Una comercial de Granada viaja a Sevilla de lunes a miércoles, duerme dos noches en un hotel (factura pagada por la empresa) y regresa el miércoles por la tarde. La empresa le da 160 € para comidas. Con el criterio estricto de la DGT, ¿qué importe de la dieta de manutención tributa?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q53" value="0"> 0 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q53" value="1"> 0,02 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q53" value="2"> 26,65 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q53" value="3"> 80 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q53')">Ver explicación</button>
+  <div class="explicacion" id="exp-q53" style="display:none">Art. 9.A.3 RIRPF: dos días con pernocta (2 × 53,34 = 106,68 €) y el día de regreso sin pernocta (26,67 €); total exento: 133,35 €. Tributan 160 − 133,35 = 26,65 €. Si se computaran los tres días a 53,34 € (160,02 €), saldría 0 €, pero ese no es el criterio estricto.</div>
+</div>
+<div class="question" id="q54" data-correct="2">
+  <div class="enunciado"><strong>54.</strong> Un médico de un hospital público paga 650 € al año de cuota a su colegio profesional, de colegiación obligatoria para ejercer. ¿Cuánto puede deducir?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q54" value="0"> 0 €, porque trabaja por cuenta ajena.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q54" value="1"> 650 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q54" value="2"> 500 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q54" value="3"> 300 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q54')">Ver explicación</button>
+  <div class="explicacion" id="exp-q54" style="display:none">Art. 19.2.d LIRPF y art. 10 RIRPF: deducibles las cuotas a colegios profesionales cuando la colegiación es obligatoria, con un límite de 500 € anuales.</div>
+</div>
+<div class="question" id="q55" data-correct="0">
+  <div class="enunciado"><strong>55.</strong> Si en una retribución en especie la empresa descuenta al trabajador el ingreso a cuenta de su nómina:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q55" value="0"> El ingreso a cuenta no se suma a la valoración del rendimiento en especie.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q55" value="1"> El ingreso a cuenta se suma igualmente a la valoración.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q55" value="2"> La retribución en especie queda exenta.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q55" value="3"> El trabajador puede deducirlo como gasto del art. 19.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q55')">Ver explicación</button>
+  <div class="explicacion" id="exp-q55" style="display:none">Art. 43.2 LIRPF: el ingreso a cuenta solo se adiciona cuando no se repercute al trabajador.</div>
+</div>
+<h2>Tema 4.1: Capital inmobiliario e imputación de rentas</h2>
+<div class="question" id="q56" data-correct="2">
+  <div class="enunciado"><strong>56.</strong> En el régimen de imputación de rentas inmobiliarias (art. 85 LIRPF):</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q56" value="0"> Se deducen el IBI y los gastos de comunidad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q56" value="1"> Se deduce la amortización del 3 %.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q56" value="2"> No se deduce ningún gasto y la renta se integra en la base imponible general.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q56" value="3"> La renta se integra en la base imponible del ahorro.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q56')">Ver explicación</button>
+  <div class="explicacion" id="exp-q56" style="display:none">La renta imputada es una cifra estimada sobre el valor catastral, sin gastos, que se integra en la base general (art. 85 LIRPF y art. 45 LIRPF).</div>
+</div>
+<div class="question" id="q57" data-correct="3">
+  <div class="enunciado"><strong>57.</strong> Un propietario firma un nuevo contrato de alquiler de vivienda habitual en una zona de mercado residencial tensionado, rebajando la renta más de un 5 % respecto del contrato anterior sobre la misma vivienda. Según el art. 23.2 LIRPF (Ley 12/2023), la reducción sobre el rendimiento neto positivo es del:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q57" value="0"> 50 %.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q57" value="1"> 60 %.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q57" value="2"> 70 %.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q57" value="3"> 90 %.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q57')">Ver explicación</button>
+  <div class="explicacion" id="exp-q57" style="display:none">Art. 23.2 LIRPF en la redacción de la Ley 12/2023: el 90 % para un nuevo contrato en zona tensionada con una rebaja de más del 5 % sobre la renta anterior.</div>
+</div>
+<div class="question" id="q58" data-correct="1">
+  <div class="enunciado"><strong>58.</strong> Un inquilino deja de pagar. El propietario hizo la primera gestión de cobro el 15 de mayo y a 31 de diciembre no hay renovación del crédito ni concurso. ¿Puede deducir las rentas impagadas como saldo de dudoso cobro?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q58" value="0"> No, solo si el inquilino entra en concurso.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q58" value="1"> Sí, porque han pasado más de seis meses entre la primera gestión de cobro y el final del período.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q58" value="2"> No, hace falta que pase más de un año.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q58" value="3"> Sí, pero con el límite de los ingresos íntegros del inmueble.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q58')">Ver explicación</button>
+  <div class="explicacion" id="exp-q58" style="display:none">Art. 13.e RIRPF: el saldo es de dudoso cobro si el deudor está en concurso o si pasan más de seis meses desde la primera gestión de cobro hasta el fin del período sin renovación del crédito. No está sujeto al límite del art. 23.1.a.</div>
+</div>
+<div class="question" id="q59" data-correct="0">
+  <div class="enunciado"><strong>59.</strong> El arrendamiento de inmuebles se califica como actividad económica (art. 27.2 LIRPF) cuando:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q59" value="0"> Para ordenar la actividad se cuenta al menos con una persona empleada con contrato laboral y a jornada completa.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q59" value="1"> Los ingresos superan 100.000 € anuales.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q59" value="2"> El propietario alquila más de cinco inmuebles.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q59" value="3"> El propietario está dado de alta en el IAE, aunque no tenga empleados.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q59')">Ver explicación</button>
+  <div class="explicacion" id="exp-q59" style="display:none">Art. 27.2 LIRPF. Si no se cumple, las rentas son rendimientos del capital inmobiliario, cualquiera que sea el número de inmuebles.</div>
+</div>
+<div class="question" id="q60" data-correct="1">
+  <div class="enunciado"><strong>60.</strong> ¿En cuál de estos casos NO se aplica la reducción del art. 23.2 LIRPF?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q60" value="0"> Alquiler de un piso a una familia que vive en él de forma permanente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q60" value="1"> Alquiler de un local comercial a una cafetería.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q60" value="2"> Alquiler de vivienda a un joven de 28 años como residencia permanente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q60" value="3"> Alquiler de vivienda a una persona jubilada como residencia permanente.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q60')">Ver explicación</button>
+  <div class="explicacion" id="exp-q60" style="display:none">La reducción solo se aplica al arrendamiento de inmuebles destinados a vivienda permanente del inquilino. No se aplica a locales, despachos ni alquileres de temporada o vacacionales, ni a rendimientos netos negativos.</div>
+</div>
+<div class="question" id="q61" data-correct="1">
+  <div class="enunciado"><strong>61.</strong> Un piso con valor catastral de 80.000 €, revisado en 2019, estuvo alquilado de enero a marzo de 2026 y vacío y a disposición del propietario el resto del año. Prorrateando por meses, ¿qué renta imputa por los meses en que estuvo vacío?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q61" value="0"> 880 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q61" value="1"> 660 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q61" value="2"> 1.200 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q61" value="3"> 220 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q61')">Ver explicación</button>
+  <div class="explicacion" id="exp-q61" style="display:none">Art. 85.1 LIRPF: 1,1 % × 80.000 = 880 € anuales, multiplicado por 9/12 = 660 €. En los meses alquilado tributa por rendimientos del capital inmobiliario.</div>
+</div>
+<div class="question" id="q62" data-correct="0">
+  <div class="enunciado"><strong>62.</strong> El mobiliario y los electrodomésticos cedidos junto con una vivienda alquilada se amortizan:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q62" value="0"> Al 10 % anual sobre su coste de adquisición.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q62" value="1"> Al 3 % anual, como el inmueble.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q62" value="2"> Al 20 % anual, como los vehículos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q62" value="3"> No se amortizan.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q62')">Ver explicación</button>
+  <div class="explicacion" id="exp-q62" style="display:none">Art. 14 RIRPF: los bienes muebles cedidos con el inmueble se amortizan con los coeficientes de la tabla simplificada (10 % para mobiliario y enseres).</div>
+</div>
+<div class="question" id="q63" data-correct="2">
+  <div class="enunciado"><strong>63.</strong> Un particular alquila un local comercial a cambio de 1.000 € al mes más el 21 % de IVA, y repercute además al inquilino el IBI (600 € al año). ¿Cuál es el rendimiento íntegro anual del capital inmobiliario?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q63" value="0"> 12.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q63" value="1"> 14.520 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q63" value="2"> 12.600 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q63" value="3"> 15.120 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q63')">Ver explicación</button>
+  <div class="explicacion" id="exp-q63" style="display:none">Art. 22 LIRPF: se computa todo lo que se recibe del arrendatario (renta y gastos o tributos repercutidos), excluido el IVA. 12.000 + 600 = 12.600 €. El IBI será además gasto deducible si lo paga el propietario.</div>
+</div>
+<div class="question" id="q64" data-correct="3">
+  <div class="enunciado"><strong>64.</strong> El propietario de un piso alquilado sustituye la caldera averiada por otra equivalente y, además, construye una terraza cerrada que amplía la superficie. Fiscalmente:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q64" value="0"> Ambos gastos son reparación y conservación.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q64" value="1"> Ambos son mayor valor del inmueble amortizable.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q64" value="2"> Ninguno es deducible.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q64" value="3"> La caldera es reparación y conservación; la ampliación es mejora, que se amortiza como mayor valor de adquisición.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q64')">Ver explicación</button>
+  <div class="explicacion" id="exp-q64" style="display:none">Art. 23.1.a LIRPF y art. 13 RIRPF: la reparación mantiene el uso normal del bien; la ampliación o mejora no es reparación y se amortiza.</div>
+</div>
+<div class="question" id="q65" data-correct="2">
+  <div class="enunciado"><strong>65.</strong> Un piso alquilado todo el año se compró por 200.000 € (gastos incluidos). Su valor catastral es de 120.000 €, de los que 48.000 € corresponden al suelo. ¿Cuál es la amortización anual deducible del inmueble?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q65" value="0"> 2.160 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q65" value="1"> 1.440 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q65" value="2"> 3.600 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q65" value="3"> 6.000 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q65')">Ver explicación</button>
+  <div class="explicacion" id="exp-q65" style="display:none">Art. 23.1.b LIRPF y art. 14 RIRPF: 3 % sobre el mayor entre el coste de adquisición y el valor catastral, sin el suelo. Porcentaje de construcción: 72.000 / 120.000 = 60 %. Coste de la construcción: 200.000 × 60 % = 120.000 €, mayor que el catastral de la construcción (72.000 €). 120.000 × 3 % = 3.600 €.</div>
+</div>
+<div class="question" id="q66" data-correct="3">
+  <div class="enunciado"><strong>66.</strong> Un apartamento en la playa, que no está alquilado ni es la vivienda habitual, tiene un valor catastral de 60.000 € que no se ha revisado en los últimos diez años y ha estado a disposición del propietario todo el año. ¿Qué renta imputa?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q66" value="0"> 660 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q66" value="1"> 0 €, porque no ha obtenido ingresos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q66" value="2"> 600 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q66" value="3"> 1.200 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q66')">Ver explicación</button>
+  <div class="explicacion" id="exp-q66" style="display:none">Art. 85.1 LIRPF: 2 % del valor catastral con carácter general: 60.000 × 2 % = 1.200 €. El 1,1 % solo se aplica a valores revisados en el período o en los diez anteriores.</div>
+</div>
+<div class="question" id="q67" data-correct="0">
+  <div class="enunciado"><strong>67.</strong> Un piso alquilado genera 6.000 € de ingresos íntegros. Los gastos son: intereses del préstamo, 4.000 €; reparaciones, 3.000 €; IBI, 500 €; amortización, 2.000 €. ¿Cuál es el rendimiento neto del ejercicio?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q67" value="0"> −2.500 €, con 1.000 € de intereses y reparaciones deducibles en los cuatro años siguientes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q67" value="1"> −3.500 €, sin nada pendiente.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q67" value="2"> 0 €, porque los gastos no pueden superar los ingresos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q67" value="3"> −2.500 €, con 1.000 € perdidos definitivamente.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q67')">Ver explicación</button>
+  <div class="explicacion" id="exp-q67" style="display:none">Art. 23.1.a LIRPF: intereses y reparaciones (7.000 €) están limitados a los ingresos del inmueble (6.000 €); el exceso de 1.000 € se arrastra cuatro años. El IBI y la amortización no tienen ese límite: 6.000 − 6.000 − 500 − 2.000 = −2.500 €.</div>
+</div>
+<div class="question" id="q68" data-correct="2">
+  <div class="enunciado"><strong>68.</strong> Ana alquila a su hermano un piso por 100 € al mes. Los gastos deducibles del año suman 1.500 €. El valor catastral, revisado en 2019, es de 100.000 €. ¿Qué rendimiento neto computa en 2026?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q68" value="0"> −300 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q68" value="1"> 1.200 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q68" value="2"> 1.100 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q68" value="3"> 2.000 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q68')">Ver explicación</button>
+  <div class="explicacion" id="exp-q68" style="display:none">Rendimiento ordinario: 1.200 − 1.500 = −300 €. Al ser un pariente hasta el tercer grado (art. 24 LIRPF), el rendimiento neto no puede ser inferior al del art. 85: 1,1 % × 100.000 = 1.100 € (valor revisado dentro de los diez períodos anteriores).</div>
+</div>
+<h2>Preguntas trampa</h2>
+<div class="question" id="q69" data-correct="1">
+  <div class="enunciado"><strong>69.</strong> La empresa y un trabajador firman un acuerdo privado de extinción del contrato "por mutuo acuerdo" con una indemnización de 30.000 €, sin pasar por el SMAC ni por el juzgado. ¿Está exenta la indemnización?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q69" value="0"> Sí, en la cuantía de 33 días por año trabajado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q69" value="1"> No: la cantidad es pactada y no responde a una cuantía obligatoria reconocida en conciliación o en sentencia; tributa como rendimiento del trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q69" value="2"> Sí, en su totalidad, al no superar 180.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q69" value="3"> Solo están exentos los primeros 20.000 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q69')">Ver explicación</button>
+  <div class="explicacion" id="exp-q69" style="display:none">Art. 7.e LIRPF: no se consideran obligatorias las indemnizaciones de convenio, pacto o contrato. La exención del despido improcedente exige su reconocimiento en el acto de conciliación ante el servicio administrativo (SMAC) o por resolución judicial. El exceso pactado podría aplicar el 30 % del art. 18.2 si la generación supera dos años.</div>
+</div>
+<div class="question" id="q70" data-correct="0">
+  <div class="enunciado"><strong>70.</strong> Pedro gana 100.000 € con un décimo de la Lotería de Navidad. ¿Cómo tributa en el IRPF?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q70" value="0"> Los primeros 40.000 € están exentos; los 60.000 € restantes soportan un gravamen especial del 20 % (12.000 €), que se retiene y no se integra en la base imponible.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q70" value="1"> Los 100.000 € están exentos al ser un premio público.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q70" value="2"> Los 100.000 € se integran en la base imponible del ahorro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q70" value="3"> Los 60.000 € que exceden de 40.000 € se integran en la base general como ganancia patrimonial.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q70')">Ver explicación</button>
+  <div class="explicacion" id="exp-q70" style="display:none">DA 33.ª LIRPF: gravamen especial sobre premios de determinadas loterías y apuestas. Exentos 40.000 € por décimo; el exceso tributa al 20 % de forma autónoma, mediante retención, sin integrarse en la base imponible.</div>
+</div>
+<div class="question" id="q71" data-correct="3">
+  <div class="enunciado"><strong>71.</strong> Lucía cobra 150.000 € de un seguro de vida tras la muerte de su padre, que era el tomador. En el IRPF de Lucía, esta cantidad:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q71" value="0"> Está exenta por el art. 7 LIRPF.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q71" value="1"> Es ganancia patrimonial no derivada de transmisión.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q71" value="2"> Es rendimiento del capital mobiliario.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q71" value="3"> No está sujeta, porque tributa en el ISD.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q71')">Ver explicación</button>
+  <div class="explicacion" id="exp-q71" style="display:none">Art. 6.4 LIRPF: las rentas sujetas al ISD no están sujetas al IRPF. Es un caso de no sujeción, no de exención: la exención (art. 7) supone que la renta sí realiza el hecho imponible del IRPF pero la ley dispensa de tributar.</div>
+</div>
+<div class="question" id="q72" data-correct="3">
+  <div class="enunciado"><strong>72.</strong> Carlos deja a su sobrino vivir gratis todo el año en un piso de Madrid que no es su vivienda habitual (valor catastral revisado en 2018: 150.000 €). ¿Qué declara Carlos?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q72" value="0"> Nada, porque no cobra renta.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q72" value="1"> Un rendimiento del capital inmobiliario negativo por los gastos del piso.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q72" value="2"> 3.000 €, al 2 % por cederlo a un familiar.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q72" value="3"> Al menos 1.650 €, la cuantía del art. 85 (1,1 % del valor catastral), sin deducir gastos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q72')">Ver explicación</button>
+  <div class="explicacion" id="exp-q72" style="display:none">La cesión gratuita a un sobrino (tercer grado) no puede dar 0 €: el inmueble queda fuera de los rendimientos reales y tributa como mínimo por el art. 85 (1,1 % × 150.000 = 1.650 €); si hubiera una renta simbólica, el art. 24 LIRPF fija ese mismo suelo. El 2 % solo se aplicaría si el valor no estuviera revisado en los diez últimos períodos.</div>
+</div>
+<div class="question" id="q73" data-correct="3">
+  <div class="enunciado"><strong>73.</strong> Un ciudadano extranjero permanece en España exactamente 183 días en 2026, no tiene en España su núcleo de intereses económicos y su familia vive fuera. ¿Es residente fiscal en España?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q73" value="0"> Sí, porque alcanza los 183 días.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q73" value="1"> Depende de su nacionalidad.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q73" value="2"> Sí, porque se presume la residencia salvo certificado en contra.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q73" value="3"> No, porque el art. 9.1.a exige más de 183 días y no se cumple ningún otro criterio.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q73')">Ver explicación</button>
+  <div class="explicacion" id="exp-q73" style="display:none">Art. 9.1.a LIRPF: "más de 183 días". Con exactamente 183 no se cumple; tampoco el núcleo de intereses (9.1.b) ni la presunción familiar.</div>
+</div>
+<div class="question" id="q74" data-correct="2">
+  <div class="enunciado"><strong>74.</strong> Una empresa da a un empleado vales de comida de 15 € por cada uno de los 200 días laborables. ¿Qué importe es retribución en especie sujeta, antes de sumar el ingreso a cuenta?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q74" value="0"> 0 €, porque los vales de comida están exentos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q74" value="1"> 2.200 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q74" value="2"> 800 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q74" value="3"> 3.000 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q74')">Ver explicación</button>
+  <div class="explicacion" id="exp-q74" style="display:none">Art. 42.3.a LIRPF y art. 45 RIRPF: exentos hasta 11 € por día hábil. 200 × 11 = 2.200 € exentos; sujetos 200 × 4 = 800 €.</div>
+</div>
+<div class="question" id="q75" data-correct="2">
+  <div class="enunciado"><strong>75.</strong> Un apartamento con valor catastral revisado con efectos en 2013 está a disposición de su dueño todo 2026 (valor catastral: 100.000 €). ¿Qué porcentaje aplica?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q75" value="0"> 1,1 %, porque el valor está revisado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q75" value="1"> 1,1 % sobre el 50 % del valor catastral.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q75" value="2"> 2 %, porque la revisión no entró en vigor en el período ni en los diez anteriores.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q75" value="3"> 0 %, porque no genera rentas.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q75')">Ver explicación</button>
+  <div class="explicacion" id="exp-q75" style="display:none">Art. 85.1 LIRPF: el 1,1 % exige una revisión en vigor en el período o en los diez anteriores (para 2026, desde 2016). Una revisión de 2013 queda fuera: 2 % × 100.000 = 2.000 €.</div>
+</div>
+<div class="question" id="q76" data-correct="0">
+  <div class="enunciado"><strong>76.</strong> Un contribuyente se traslada a vivir a Portugal el 30 de junio de 2026 y otro fallece el 30 de junio de 2026. ¿En cuál de los dos casos el período impositivo del IRPF es inferior al año natural?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q76" value="0"> Solo en el del fallecimiento.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q76" value="1"> Solo en el del traslado a Portugal.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q76" value="2"> En los dos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q76" value="3"> En ninguno.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q76')">Ver explicación</button>
+  <div class="explicacion" id="exp-q76" style="display:none">Art. 13.2 LIRPF: el fallecimiento es el único supuesto en que el período impositivo es inferior al año natural, con devengo el día del fallecimiento. El cambio de residencia no fracciona el período: la residencia se determina para el año completo (art. 9).</div>
+</div>
+<div class="question" id="q77" data-correct="2">
+  <div class="enunciado"><strong>77.</strong> Dos pensionistas de la Seguridad Social cobran 1.500 € al mes cada uno: uno por incapacidad permanente total y otro por incapacidad permanente absoluta. En el IRPF:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q77" value="0"> Ambas pensiones están exentas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q77" value="1"> Ambas tributan como rendimiento del trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q77" value="2"> Solo está exenta la de incapacidad permanente absoluta; la de incapacidad permanente total tributa como rendimiento del trabajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q77" value="3"> Solo está exenta la de incapacidad permanente total, por ser compatible con otro trabajo.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q77')">Ver explicación</button>
+  <div class="explicacion" id="exp-q77" style="display:none">Art. 7.f LIRPF: solo están exentas la incapacidad permanente absoluta y la gran invalidez. La total y la parcial son rendimientos del trabajo (art. 17.2.a).</div>
+</div>
+<div class="question" id="q78" data-correct="1">
+  <div class="enunciado"><strong>78.</strong> Un trabajador de Granada pasa toda la jornada en otro barrio de Granada, en un cliente, y la empresa le paga 20 € de comida. ¿Está exenta esa dieta de manutención?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q78" value="0"> Sí, hasta 26,67 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q78" value="1"> No, porque la exención exige el desplazamiento a un municipio distinto del centro de trabajo habitual y de la residencia.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q78" value="2"> Sí, hasta 11 €, como un vale de comida.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q78" value="3"> Sí, si presenta el tique del restaurante.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q78')">Ver explicación</button>
+  <div class="explicacion" id="exp-q78" style="display:none">Art. 9.A.3.a RIRPF: las dietas de manutención solo se exceptúan en desplazamientos a un municipio distinto. Dentro del mismo municipio los 20 € son rendimiento del trabajo dinerario.</div>
+</div>
+<div class="question" id="q79" data-correct="0">
+  <div class="enunciado"><strong>79.</strong> Un trabajador tiene rendimientos íntegros de 16.500 €, cotiza 1.050 € a la Seguridad Social y no tiene otras rentas. ¿Qué reducción del art. 20 LIRPF le corresponde?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q79" value="0"> 6.255,50 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q79" value="1"> 7.302 €, porque tras restar los 2.000 € de la letra f) su rendimiento neto es 13.450 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q79" value="2"> 4.255,50 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q79" value="3"> 0 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q79')">Ver explicación</button>
+  <div class="explicacion" id="exp-q79" style="display:none">Para el art. 20, el rendimiento neto solo se minora en los gastos de las letras a) a e) del art. 19.2: 16.500 − 1.050 = 15.450 €. Tramo b): 7.302 − 1,75 × (15.450 − 14.852) = 7.302 − 1.046,50 = 6.255,50 €. Restar los 2.000 € de la letra f) para elegir el tramo es el error típico.</div>
+</div>
+<div class="question" id="q80" data-correct="1">
+  <div class="enunciado"><strong>80.</strong> Un contribuyente tiene: (a) una plaza de garaje en el mismo edificio que su vivienda habitual, comprada con ella en la misma escritura; y (b) un piso cedido gratis a su primo. A efectos del IRPF:</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q80" value="0"> La plaza (a) imputa renta del art. 85 y el piso (b) está sometido al suelo del art. 24.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q80" value="1"> La plaza (a) no imputa renta, porque se asimila a la vivienda habitual; el piso (b) imputa renta del art. 85, pero no por el art. 24, ya que el primo es pariente de cuarto grado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q80" value="2"> Ni (a) ni (b) tributan.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q80" value="3"> Ambos tributan por el art. 24.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q80')">Ver explicación</button>
+  <div class="explicacion" id="exp-q80" style="display:none">Las plazas de garaje adquiridas con la vivienda habitual (hasta dos) forman parte de ella y no imputan renta (criterio de la AEAT y la DGT sobre el art. 85 LIRPF). El art. 24 alcanza al cónyuge y a parientes hasta el tercer grado; el primo es de cuarto, pero el piso cedido gratis está a disposición sin generar rendimientos y entra en el art. 85.</div>
+</div>
+
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
+
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
+
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
+
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+        
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
+
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checked.length === 0) return;
+
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
+            } else {
+              q.classList.add("incorrect");
+            }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+        
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
+        }
+        
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
+
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+        
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+        
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+        
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+            
+            q.classList.remove("correct", "partial", "incorrect");
+            
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+        
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+        
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+        
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
+</html>

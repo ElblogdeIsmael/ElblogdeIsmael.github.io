@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Derecho Fiscal — Casos prácticos tipo test (primer parcial)</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: {
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+      :root {
+        --bg-color: #f0f2f5;
+        --text-color: #333;
+        --card-bg: #fff;
+        --border-color: #ddd;
+        --primary-color: #007bff;
+        --hover-color: #0056b3;
+      }
+
+      body {
+        font-family: "Segoe UI", "Palatino Linotype", serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        padding: 20px;
+        font-size: 18px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+      
+      h2 {
+        color: var(--primary-color);
+        margin-top: 40px;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+      }
+
+      .author {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-style: italic;
+        color: #666;
+      }
+      
+      .question {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+        overflow-wrap: break-word; 
+      }
+      .question:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .correct { border-color: #28a745; background-color: #d4edda; }
+      .partial { border-color: #ffc107; background-color: #fff3cd; }
+      .incorrect { border-color: #dc3545; background-color: #f8d7da; }
+
+      .enunciado { margin-bottom: 15px; }
+      .enunciado-bloque { display: flex; gap: 10px; margin-bottom: 15px; }
+      .enunciado-bloque .num { font-weight: bold; min-width: 25px; }
+      
+      ol { padding-left: 0; list-style: none; }
+      li { margin-bottom: 10px; position: relative; }
+      
+      .opcion-linea, .opcion-bloque {
+        display: block;      
+        padding-left: 35px;  
+        position: relative;
+        cursor: pointer;
+        min-height: 24px;   
+      }
+
+      .opcion-linea input[type="checkbox"], 
+      .opcion-bloque input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 2px;
+        transform: scale(1.3);
+        margin: 0;
+        cursor: pointer;
+      }
+
+      .opcion-linea label, .opcion-linea span, .opcion-bloque div {
+        display: inline; 
+      }
+
+      mjx-container { font-size: 110% !important; }
+      
+      img { max-width: 100%; height: auto; border-radius: 4px; }
+      table { border-collapse: collapse; width: 100%; margin: 10px 0; overflow-x: auto; display: block; }
+      th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+      th { background-color: #f8f9fa; }
+
+      .btn-explicacion {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 6px 12px;
+        margin: 10px 0 0 0;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .btn-explicacion:hover {
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+      .explicacion {
+        margin-top: 12px;
+        padding: 12px 16px;
+        border-left: 4px solid var(--primary-color);
+        background-color: rgba(0, 123, 255, 0.07);
+        border-radius: 4px;
+        font-size: 0.96em;
+      }
+      .dark-mode .btn-explicacion {
+        color: #93c5fd;
+        border-color: #93c5fd;
+      }
+      .dark-mode .btn-explicacion:hover {
+        background-color: #93c5fd;
+        color: #121212;
+      }
+      .dark-mode .explicacion {
+        background-color: rgba(147, 197, 253, 0.1);
+        border-left-color: #93c5fd;
+      }
+
+      .info-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s;
+      }
+      button:hover { background-color: var(--hover-color); }
+      .extra-buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      
+      .instrucciones-extra ul {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: 0.95em;
+        color: #555;
+      }
+      .instrucciones-extra li {
+        margin-bottom: 5px;
+      }
+
+      body.dark-mode {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --card-bg: #1e1e1e;
+        --border-color: #444;
+        --primary-color: #374151;
+        --hover-color: #4b5563;
+      }
+      .dark-mode .author { color: #aaa; }
+      .dark-mode th { background-color: #333; }
+      .dark-mode .correct { background-color: #064e3b !important; border-color: #059669; }
+      .dark-mode .partial { background-color: #451a03 !important; border-color: #d97706; }
+      .dark-mode .incorrect { background-color: #450a0a !important; border-color: #dc2626; }
+      .dark-mode .instrucciones-extra ul { color: #bbb; }
+
+      @media print {
+        body { background: white; color: black; max-width: 100%; padding: 0; }
+        .question { page-break-inside: avoid; border: none; box-shadow: none; padding: 0; margin-bottom: 20px; }
+        .info-box, button, #extra-buttons { display: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Derecho Fiscal — Casos prácticos tipo test (primer parcial)</h1>
+    <div class="author">Autor: Ismael Sallami Moreno | Doble Grado en Ingeniería Informática y ADE</div>
+
+    <div class="info-box">
+      <p>Diez supuestos prácticos de IRPF con 4 preguntas tipo test cada uno, para el primer parcial (9-nov-2026): residencia, exenciones, individualización, rendimientos del trabajo, capital inmobiliario e imputación de rentas. Incluye datos-trampa que hay que saber descartar. Ejercicio 2026; cifras de la LIRPF y del RIRPF vigentes.</p>
+      
+      <div class="instrucciones-extra">
+        
+      </div>
+      
+      <button id="toggleMenuBtn" onclick="toggleMenu()">Mostrar menú de opciones</button>
+      
+      <div id="extra-buttons" class="extra-buttons-grid" style="display: none">
+        <button onclick="shuffleQuestions()">Desordenar preguntas</button>
+        <button onclick="showCorrectAnswers()">Ver soluciones</button>
+        <button onclick="resetAnswers()">Reiniciar</button>
+        <button onclick="toggleModo()" id="modoBtn">Modo oscuro</button>
+        <button onclick="toggleMostrarIncorrectas()" id="toggleIncorrectasBtn">Mostrar fallos</button>
+        <button onclick="activarModoExamen()">Modo examen</button>
+        <button onclick="window.print()">Imprimir / PDF</button>
+      </div>
+    </div>
+
+    <div id="questions-container">
+      <h2>Caso 1: residencia fiscal y condición de contribuyente</h2>
+<div class="question" id="q1" data-correct="1">
+  <div class="enunciado"><strong>1.</strong> <strong>Caso 1 (residencia).</strong> Durante 2026 se plantean cuatro situaciones: (a) <strong>Dña. Marta Quesada</strong>, española, soltera y sin hijos, trabaja para una empresa chilena y ha pasado 230 días en Santiago de Chile y el resto en Granada, donde tiene un piso alquilado a terceros; aporta certificado de residencia fiscal expedido por la administración tributaria chilena (SII). (b) <strong>D. Héctor Lozano</strong> trabaja en Oporto 300 días al año; su esposa (no separada) y sus dos hijos menores viven en Jaén y dependen de él; no aporta certificado de residencia portugués. (c) <strong>D. Bruno Ferrer</strong>, de nacionalidad española, traslada en marzo de 2026 su residencia a Gibraltar (jurisdicción no cooperativa) y aporta certificado de residencia gibraltareño. (d) <strong>Dña. Elena Rius</strong> ha estado físicamente 170 días en España y los 195 restantes viajando por varios países por ocio, sin residir de forma estable en ninguno ni acreditar residencia fiscal en otro Estado. ¿Cómo tributa Dña. Marta Quesada en 2026?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="0"> Es contribuyente del IRPF por su renta mundial, porque tiene un piso en Granada.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="1"> No es contribuyente del IRPF; tributará por el IRNR solo por las rentas obtenidas en España (el alquiler del piso de Granada).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="2"> Es contribuyente del IRPF solo por el alquiler del piso de Granada.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q1" value="3"> No tributa en España por ningún impuesto, porque reside en Chile.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q1')">Ver explicación</button>
+  <div class="explicacion" id="exp-q1" style="display:none">Art. 9.1.a LIRPF: permanece en España 365 − 230 = 135 días, menos de 183, y las ausencias no se computan como esporádicas porque acredita residencia fiscal en Chile con el certificado del SII. No tiene cónyuge ni hijos en España, así que no juega la presunción familiar del art. 9.1 in fine. No es residente y, por tanto, no es contribuyente del IRPF (art. 8.1.a). Las rentas de fuente española, como el alquiler del piso de Granada, tributan en el Impuesto sobre la Renta de No Residentes.</div>
+</div>
+<div class="question" id="q2" data-correct="2">
+  <div class="enunciado"><strong>2.</strong> Caso 1 (residencia; D. Bruno Ferrer, español, se traslada en marzo de 2026 a Gibraltar, jurisdicción no cooperativa, con certificado de residencia). ¿Cuál es su situación en el IRPF?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="0"> Deja de ser contribuyente desde marzo de 2026, porque acredita su nueva residencia con certificado.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="1"> Es contribuyente solo por los meses de enero y febrero de 2026.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="2"> Sigue siendo contribuyente del IRPF en 2026 y en los cuatro periodos impositivos siguientes.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q2" value="3"> Sigue siendo contribuyente durante diez años, como ocurre con el valor catastral revisado.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q2')">Ver explicación</button>
+  <div class="explicacion" id="exp-q2" style="display:none">Art. 8.2 LIRPF: las personas de nacionalidad española que acrediten su nueva residencia fiscal en una jurisdicción no cooperativa (antes, paraíso fiscal) no pierden la condición de contribuyente en el periodo del cambio ni en los cuatro siguientes. El certificado de Gibraltar no le sirve para salir del IRPF en 2026-2030. Además, el IRPF no se fracciona por meses por un cambio de residencia, porque el periodo impositivo es el año natural (arts. 12 y 13).</div>
+</div>
+<div class="question" id="q3" data-correct="3">
+  <div class="enunciado"><strong>3.</strong> Caso 1 (residencia; D. Héctor Lozano trabaja 300 días en Oporto, esposa e hijos menores en Jaén, sin certificado portugués). ¿Es contribuyente del IRPF en 2026?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="0"> No, porque pasa más de 183 días fuera de España.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="1"> Sí, por una presunción <em>iuris et de iure</em> que no admite prueba en contrario.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="2"> No, porque el centro de sus intereses económicos está en Portugal y eso prevalece siempre.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q3" value="3"> Sí, por la presunción <em>iuris tantum</em> de residencia familiar del art. 9.1 LIRPF, que podría destruir aportando un certificado de residencia fiscal portugués.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q3')">Ver explicación</button>
+  <div class="explicacion" id="exp-q3" style="display:none">Art. 9.1, último párrafo, LIRPF: se presume, salvo prueba en contrario, que el contribuyente tiene su residencia habitual en España cuando residan en España su cónyuge no separado legalmente y sus hijos menores de edad que dependan de él. Es una presunción <em>iuris tantum</em>. Mientras D. Héctor no presente el certificado de residencia fiscal de Portugal (CDI España-Portugal), es contribuyente del IRPF y tributa por su renta mundial.</div>
+</div>
+<div class="question" id="q4" data-correct="3">
+  <div class="enunciado"><strong>4.</strong> Caso 1 (residencia; Dña. Elena Rius: 170 días en España y 195 días de viajes de ocio por varios países, sin acreditar residencia fiscal en ninguno). ¿Cuántos días de permanencia en España se le computan y cuál es la conclusión?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="0"> 170 días; no es contribuyente porque no supera los 183 días.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="1"> 170 días; es contribuyente solo si su familia reside en España.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="2"> 195 días; es contribuyente porque estuvo más tiempo fuera que dentro.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q4" value="3"> 365 días; es contribuyente porque las ausencias esporádicas se suman a la permanencia y superan los 183 días.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q4')">Ver explicación</button>
+  <div class="explicacion" id="exp-q4" style="display:none">Art. 9.1.a LIRPF: para el cómputo de los 183 días se suman las ausencias esporádicas, salvo que el contribuyente acredite su residencia fiscal en otro país. Como Elena no acredita residencia en ningún Estado, se computan 170 + 195 = 365 días &gt; 183, así que es residente y contribuyente por su renta mundial.</div>
+</div>
+<h2>Caso 2: despido improcedente, límites y despido sin conciliación</h2>
+<div class="question" id="q5" data-correct="2">
+  <div class="enunciado"><strong>5.</strong> <strong>Caso 2 (Sr. Ortega, despido).</strong> D. Rafael Ortega trabajaba en una empresa de logística desde el 1-3-2015 (relación laboral común). Es despedido con efectos 31-8-2026 y la empresa reconoce la improcedencia del despido en el acto de conciliación ante el servicio administrativo de mediación (CMAC). Su salario anual era de 32.850 € (salario diario 90 €). Percibe una indemnización de 42.000 €. Además cobra en el finiquito 1.200 € por vacaciones no disfrutadas. No vuelve a trabajar para la empresa ni para entidades vinculadas. ¿Qué parte de la indemnización está exenta?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="0"> 32.670,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="1"> 20.700,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="2"> 34.155,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q5" value="3"> 42.000,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q5')">Ver explicación</button>
+  <div class="explicacion" id="exp-q5" style="display:none">Art. 7.e LIRPF y art. 56 ET: está exenta la cuantía obligatoria del despido improcedente, que son 33 días por año de servicio, prorrateando por meses los periodos inferiores al año, con un máximo de 24 mensualidades y de 180.000 €. Antigüedad: del 1-3-2015 al 31-8-2026 hay 11 años y 6 meses, es decir, 11,5 años. Días exentos: 33 × 11,5 = 379,5 días. Exención: 379,5 × 90 = 34.155,00 €. Tope de 24 mensualidades: 720 × 90 = 64.800 €, que no se alcanza, y tampoco el de 180.000 €. Error típico: 32.670 € sale de no prorratear los 6 meses (33 × 11 × 90), y 20.700 € de aplicar los 20 días del despido objetivo (20 × 11,5 × 90).</div>
+</div>
+<div class="question" id="q6" data-correct="3">
+  <div class="enunciado"><strong>6.</strong> Caso 2 (Sr. Ortega). Supón ahora que <strong>no hubo acto de conciliación ni sentencia</strong>: la empresa le entregó una carta de despido y le pagó los 42.000 € por pacto privado. ¿Qué importe de la indemnización se integra como rendimiento del trabajo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="0"> 5.491,50 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="1"> 7.845,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="2"> 42.000,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q6" value="3"> 29.400,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q6')">Ver explicación</button>
+  <div class="explicacion" id="exp-q6" style="display:none">La exención por despido improcedente exige que la improcedencia se reconozca en el acto de conciliación ante el servicio administrativo o en una resolución judicial. Una indemnización pactada por convenio, pacto o contrato no es la "cuantía obligatoria" del ET (art. 7.e LIRPF). Sin conciliación no hay exención, así que tributan los 42.000 €. Como se han generado en más de dos años, se aplica la reducción del 30 % (art. 18.2): 42.000 × 0,70 = 29.400,00 €.</div>
+</div>
+<div class="question" id="q7" data-correct="0">
+  <div class="enunciado"><strong>7.</strong> Caso 2 (variante). Una compañera del Sr. Ortega, jefa de proyecto con relación laboral común, salario diario de 600 € y 13 años de antigüedad (toda posterior a 2012), es despedida con improcedencia reconocida en CMAC y cobra 300.000 €. ¿Qué parte está exenta?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="0"> 180.000,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="1"> 257.400,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="2"> 300.000,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q7" value="3"> 432.000,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q7')">Ver explicación</button>
+  <div class="explicacion" id="exp-q7" style="display:none">La cuantía obligatoria es 33 × 13 = 429 días × 600 = 257.400 €. El tope de 24 mensualidades (720 × 600 = 432.000 €) no limita, porque 429 días &lt; 720 días. Pero el art. 7.e LIRPF fija un límite absoluto de 180.000 €, que sí opera: exentos 180.000,00 €. El exceso (300.000 − 180.000 = 120.000 €) tributa como trabajo, con reducción del 30 % por irregularidad (art. 18.2).</div>
+</div>
+<div class="question" id="q8" data-correct="1">
+  <div class="enunciado"><strong>8.</strong> Caso 2 (Sr. Ortega: indemnización de 42.000 € por despido improcedente reconocido en CMAC; antigüedad de 11 años y 6 meses; salario diario de 90 €). ¿Qué importe de la indemnización se integra como rendimiento íntegro del trabajo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="0"> 7.845,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="1"> 5.491,50 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="2"> 2.353,50 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q8" value="3"> 0,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q8')">Ver explicación</button>
+  <div class="explicacion" id="exp-q8" style="display:none">Exceso no exento: 42.000 − 34.155 = 7.845 €. Como la indemnización se ha generado en más de dos años (11,5 años) y se cobra de una sola vez, se reduce un 30 % (art. 18.2 LIRPF): 7.845 × 0,30 = 2.353,50 €. Rendimiento computable: 7.845 − 2.353,50 = 5.491,50 €. Los 1.200 € de vacaciones no disfrutadas son salario ordinario: tributan íntegros y no forman parte de la indemnización ni gozan del 30 %.</div>
+</div>
+<h2>Caso 3: mapa de rentas con trampas (lotería, herencia, beca, indemnización, garajes)</h2>
+<div class="question" id="q9" data-correct="2">
+  <div class="enunciado"><strong>9.</strong> Caso 3 (Dña. Celia: garaje comprado con la vivienda habitual, VC 6.000 €; otro garaje comprado aparte, VC 8.000 € revisado en 2018; piso cedido gratis a una amiga, VC 70.000 € revisado en 2009). ¿Cuál es el total de imputación de rentas inmobiliarias?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="0"> 1.554,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="1"> 858,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="2"> 1.488,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q9" value="3"> 88,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q9')">Ver explicación</button>
+  <div class="explicacion" id="exp-q9" style="display:none">Art. 85 LIRPF. La plaza de garaje comprada junto con la vivienda habitual (hasta dos plazas) se considera parte de la vivienda habitual y no imputa nada. El garaje comprado aparte, que ni se usa ni se alquila, sí imputa, al 1,1 % porque el valor catastral se revisó dentro de los diez periodos anteriores: 8.000 × 1,1 % = 88 €. El piso cedido gratis a una amiga no genera rendimientos y está a disposición de un tercero sin contraprestación, así que también imputa, al 2 % porque la revisión de 2009 queda fuera de los diez años: 70.000 × 2 % = 1.400 €. Total: 88 + 1.400 = 1.488,00 €. Si se imputara también el garaje anexo (66 €) saldrían 1.554 €. Si se aplicara el 1,1 % al piso, 858 €.</div>
+</div>
+<div class="question" id="q10" data-correct="0">
+  <div class="enunciado"><strong>10.</strong> Caso 3 (Dña. Celia: sueldo de 28.000 € y beca pública de máster oficial con matrícula de 2.400 € y dotación de 7.500 €, sin transporte ni alojamiento). ¿Cuál es su rendimiento íntegro del trabajo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="0"> 29.500,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="1"> 28.000,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="2"> 35.500,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q10" value="3"> 37.900,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q10')">Ver explicación</button>
+  <div class="explicacion" id="exp-q10" style="display:none">Art. 7.j LIRPF y art. 2.2 RIRPF: la beca pública para estudios reglados está exenta en el coste de la matrícula más una dotación de hasta 6.000 € anuales. El tope sube a 18.000 € solo si la dotación cubre transporte y alojamiento, que no es el caso. Exento: 2.400 + 6.000 = 8.400 €. No exento: 7.500 − 6.000 = 1.500 €, que es rendimiento del trabajo (las becas no exentas se califican como tales en el art. 17.2 LIRPF). Rendimiento íntegro del trabajo: 28.000 + 1.500 = 29.500,00 €. La indemnización por lesiones y el premio no se suman.</div>
+</div>
+<div class="question" id="q11" data-correct="1">
+  <div class="enunciado"><strong>11.</strong> Caso 3 (Dña. Celia: hereda un piso de 140.000 €, cobra 18.000 € de indemnización por lesiones fijada por sentencia y recibe 4.800 € de alimentos para su hijo por resolución judicial). ¿Qué calificación es correcta?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="0"> La herencia es ganancia patrimonial en el IRPF; la indemnización y los alimentos están exentos.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="1"> La herencia no está sujeta al IRPF porque tributa en el ISD (art. 6.4 LIRPF); la indemnización está exenta (art. 7.d) y los alimentos son renta exenta del hijo (art. 7.k), no de Celia.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="2"> Las tres partidas son rendimientos del trabajo, porque no proceden de un patrimonio previo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q11" value="3"> La indemnización está exenta solo hasta 180.000 €; la herencia y los alimentos tributan en la base general.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q11')">Ver explicación</button>
+  <div class="explicacion" id="exp-q11" style="display:none">La herencia es hecho imponible del Impuesto sobre Sucesiones y Donaciones, y el art. 6.4 LIRPF deja fuera del IRPF las rentas sujetas al ISD (no sujeción). La indemnización por daños personales en la cuantía fijada judicialmente está exenta (art. 7.d). Las anualidades por alimentos fijadas por decisión judicial a favor de los hijos están exentas (art. 7.k); Celia solo las administra. El límite de 180.000 € es propio de la indemnización por despido (art. 7.e), no de la del art. 7.d.</div>
+</div>
+<div class="question" id="q12" data-correct="2">
+  <div class="enunciado"><strong>12.</strong> <strong>Caso 3 (Dña. Celia Montoro, mapa de rentas).</strong> En 2026, Dña. Celia: (1) cobra un sueldo de 28.000 €; (2) un décimo de la Lotería de Navidad le toca 100.000 €; (3) hereda de una tía un piso valorado en 140.000 €; (4) recibe una beca pública de la Universidad de Granada para un máster universitario oficial, que cubre la matrícula (2.400 €) más una dotación de 7.500 € (sin gastos de transporte ni de alojamiento); (5) cobra 18.000 € de indemnización por las lesiones de un accidente, fijada por sentencia judicial; (6) su exmarido le ingresa 4.800 € de pensión de alimentos para el hijo de ambos, por resolución judicial; (7) tiene una plaza de garaje comprada junto con su vivienda habitual, con un valor catastral de 6.000 €; (8) tiene otra plaza de garaje comprada por separado en 2022 en otro edificio (valor catastral de 8.000 €, revisado en 2018) que no usa ni alquila; (9) cede gratis todo el año un piso de su propiedad a una amiga (valor catastral de 70.000 €, revisado por última vez en 2009). ¿Cómo tributa el premio de lotería?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="0"> Se integran 60.000 € en la base imponible del ahorro como ganancia patrimonial.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="1"> Se integran 100.000 € en la base imponible general como ganancia patrimonial no derivada de transmisión.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="2"> Gravamen especial (DA 33.ª LIRPF): 20 % sobre 60.000 € = 12.000 €, que no se integra en ninguna base imponible.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q12" value="3"> Está totalmente exento, por ser un premio de Loterías y Apuestas del Estado.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q12')">Ver explicación</button>
+  <div class="explicacion" id="exp-q12" style="display:none">DA 33.ª LIRPF: los premios de Loterías y Apuestas del Estado están exentos en los primeros 40.000 € por décimo. El resto tributa en un gravamen especial del 20 %, que se recauda por retención en el momento del pago: (100.000 − 40.000) × 20 % = 12.000,00 €. Es un gravamen autónomo, así que el premio no se suma a la base general ni a la del ahorro.</div>
+</div>
+<h2>Caso 4: dietas con y sin pernocta, kilometraje y día de regreso</h2>
+<div class="question" id="q13" data-correct="3">
+  <div class="enunciado"><strong>13.</strong> Caso 4 (Dña. Pilar: exceso de 85,95 € en febrero, exceso de 79,97 € en Bilbao y plus de comida de 200 € por trabajar en Granada). ¿Qué importe total por estas asignaciones se suma a su rendimiento íntegro del trabajo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="0"> 165,92 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="1"> 200,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="2"> 0,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q13" value="3"> 365,92 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q13')">Ver explicación</button>
+  <div class="explicacion" id="exp-q13" style="display:none">El plus de comida por trabajar en el propio municipio del centro de trabajo no es una dieta exceptuada: el art. 9 RIRPF exige desplazamiento a un municipio distinto. Tampoco es un vale de comida del art. 42.3.a, porque se paga en dinero en nómina. Tributa íntegro: 200 €. Total sujeto: 85,95 + 79,97 + 200 = 365,92 €. Si se olvida el plus, salen 165,92 €.</div>
+</div>
+<div class="question" id="q14" data-correct="1">
+  <div class="enunciado"><strong>14.</strong> Caso 4 (Dña. Pilar: Bilbao 5 días y 4 noches, 800 € de dietas, hotel justificado de 480 €, avión pagado por la empresa). Según el criterio estricto de la DGT aplicado en clase, ¿qué exceso tributa?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="0"> 53,30 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="1"> 79,97 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="2"> 559,97 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q14" value="3"> 0,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q14')">Ver explicación</button>
+  <div class="explicacion" id="exp-q14" style="display:none">Art. 9.A.3 RIRPF. La estancia justificada está exenta: 480 €. Manutención con pernocta en España: 53,34 € por cada uno de los 4 días con noche. El quinto día, el de regreso, no hay pernocta y se aplican 26,67 €. Manutención exenta: 4 × 53,34 + 26,67 = 240,03 €. Límite total: 480 + 240,03 = 720,03 €. Exceso: 800 − 720,03 = 79,97 €. Si se calculan los 5 días a 53,34 € salen 53,30 €. Si se olvida que el hotel justificado está exento, 559,97 €. El avión que paga directamente la empresa no es renta del trabajador.</div>
+</div>
+<div class="question" id="q15" data-correct="0">
+  <div class="enunciado"><strong>15.</strong> Caso 4 (Dña. Pilar: sueldo de 24.000 €, asignaciones sujetas de 365,92 €, Seguridad Social de 1.550 € y retenciones de 3.900 €). ¿Cuál es su rendimiento neto del trabajo, antes de la reducción del art. 20?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="0"> 20.815,92 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="1"> 22.815,92 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="2"> 16.915,92 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q15" value="3"> 18.815,92 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q15')">Ver explicación</button>
+  <div class="explicacion" id="exp-q15" style="display:none">Rendimiento íntegro: 24.000 + 365,92 = 24.365,92 €. Gastos del art. 19.2: Seguridad Social, 1.550 € (letra a), más 2.000 € de otros gastos (letra f). Rendimiento neto: 24.365,92 − 1.550 − 2.000 = 20.815,92 €. Las retenciones no son gasto deducible: son pagos a cuenta que se restan de la cuota (con ellas saldría el distractor de 16.915,92 €). No hay reducción del art. 20, porque la base de esa reducción (24.365,92 − 1.550 = 22.815,92 €) supera los 19.747,50 €.</div>
+</div>
+<div class="question" id="q16" data-correct="2">
+  <div class="enunciado"><strong>16.</strong> <strong>Caso 4 (Dña. Pilar Esteve, dietas).</strong> Dña. Pilar es técnica de mantenimiento con centro de trabajo y domicilio en Granada. En 2026 cobra un sueldo de 24.000 € y su Seguridad Social es de 1.550 €. En febrero trabaja 15 días en una obra en Loja, yendo y volviendo cada día (sin pernoctar) en su coche: cobra 450 € de dieta de manutención y 270 € de kilometraje (900 km a 0,30 €/km). En junio viaja a Bilbao 5 días y 4 noches: cobra 800 € de dietas de manutención y estancia y justifica una factura de hotel de 480 €; el avión lo paga directamente la empresa a la agencia. Además, la empresa le paga en nómina un "plus de comida" de 200 € por los días que trabaja en la propia ciudad de Granada. Retenciones soportadas: 3.900 €. ¿Qué parte de las asignaciones de febrero (manutención más kilometraje) está sujeta a gravamen?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="0"> 36,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="1"> 49,95 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="2"> 85,95 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q16" value="3"> 270,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q16')">Ver explicación</button>
+  <div class="explicacion" id="exp-q16" style="display:none">Art. 17.1.d LIRPF y art. 9 RIRPF. Manutención sin pernocta en municipio distinto: 26,67 €/día × 15 = 400,05 € exentos; exceso 450 − 400,05 = 49,95 €. Locomoción en vehículo propio: 0,26 €/km × 900 = 234 € exentos; exceso 270 − 234 = 36 €. Sujeto: 49,95 + 36 = 85,95 €. Si se aplicaran por error 53,34 €/día, la manutención quedaría exenta y saldrían solo 36 €.</div>
+</div>
+<h2>Caso 5: retribuciones en especie (vehículo, tickets, seguro, transporte, acciones)</h2>
+<div class="question" id="q17" data-correct="1">
+  <div class="enunciado"><strong>17.</strong> <strong>Caso 5 (D. Gonzalo Ibarra, especie).</strong> D. Gonzalo trabaja en una consultora de Sevilla. Su sueldo es de 42.000 € y su tipo de retención, del 18 %. La empresa no le repercute los ingresos a cuenta. Desde el 1-4-2026 le cede un turismo de gasolina (sin reducción por eficiencia energética) que la empresa compró por 30.000 €, con una disponibilidad para fines particulares del 50 %. Recibe 200 tickets restaurante de 14 € cada uno, usados en días laborables. La empresa paga un seguro médico de 600 € por persona para él, su esposa y sus dos hijos. También le paga una tarjeta de transporte público de 1.200 € anuales y, dentro de una oferta general a toda la plantilla, le entrega acciones de la empresa por valor de 9.000 € (su participación, sumada a la de su familia, no llega al 5 %). ¿Por qué importe computa el uso del vehículo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="0"> 2.250,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="1"> 2.655,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="2"> 5.310,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q17" value="3"> 3.540,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q17')">Ver explicación</button>
+  <div class="explicacion" id="exp-q17" style="display:none">Art. 43.1.1.º.b LIRPF: el uso de un vehículo propiedad del pagador se valora en el 20 % anual de su coste de adquisición, ponderado por la disponibilidad particular y prorrateado por meses. 30.000 × 20 % × 50 % × 9/12 = 2.250 €. Ingreso a cuenta no repercutido (art. 43.2 LIRPF y art. 102 RIRPF): 2.250 × 18 % = 405 €. Valor computable: 2.250 + 405 = 2.655,00 €. Sin ponderar el 50 % saldrían 5.310 €; sin prorratear los 9 meses, 3.540 €; sin el ingreso a cuenta, 2.250 €.</div>
+</div>
+<div class="question" id="q18" data-correct="3">
+  <div class="enunciado"><strong>18.</strong> Caso 5 (D. Gonzalo: vehículo 2.655 €; 200 tickets de 14 €; seguro médico de 600 € por persona para 4 personas; transporte 1.200 €; acciones en oferta general 9.000 €; retención del 18 % no repercutida). ¿Cuál es el total de retribución en especie que integra?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="0"> 3.250,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="1"> 6.431,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="2"> 14.455,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q18" value="3"> 3.835,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q18')">Ver explicación</button>
+  <div class="explicacion" id="exp-q18" style="display:none">Tickets (art. 42.3.a LIRPF y art. 45 RIRPF): exentos hasta 11 €/día; exceso 200 × (14 − 11) = 600 € + 18 % de ingreso a cuenta (108 €) = 708 €. Seguro médico (art. 42.3.c): exento hasta 500 € por persona (contribuyente, cónyuge e hijos); exceso 4 × 100 = 400 € + 72 € de ingreso a cuenta = 472 €. Transporte (1.200 € ≤ 1.500 €) y acciones en oferta general (9.000 € ≤ 12.000 €): exentos. Total: 2.655 + 708 + 472 = 3.835,00 €. Sin ingresos a cuenta saldrían 3.250 €. Si se computa el ticket entero, 6.431 €.</div>
+</div>
+<div class="question" id="q19" data-correct="2">
+  <div class="enunciado"><strong>19.</strong> Caso 5 (D. Gonzalo). ¿Cuál de estas partidas está exenta en su totalidad?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="0"> El seguro médico, porque las primas por enfermedad están siempre exentas.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="1"> Los tickets restaurante, porque se usan en días laborables.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="2"> La tarjeta de transporte público (1.200 €) y las acciones entregadas en oferta general (9.000 €).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q19" value="3"> El vehículo, porque también se usa para trabajar.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q19')">Ver explicación</button>
+  <div class="explicacion" id="exp-q19" style="display:none">Art. 42.3 LIRPF. El servicio de transporte colectivo está exento hasta 1.500 € anuales, y la entrega de acciones a trabajadores en activo dentro de una oferta general, hasta 12.000 € anuales. Ambas cumplen. El seguro está exento solo hasta 500 € por persona. Los tickets, solo hasta 11 €/día. El vehículo no está exento: el uso profesional solo rebaja el valor mediante la ponderación del 50 %.</div>
+</div>
+<div class="question" id="q20" data-correct="1">
+  <div class="enunciado"><strong>20.</strong> Caso 5 (D. Gonzalo). Si la empresa <strong>sí le hubiera descontado en nómina</strong> todos los ingresos a cuenta, ¿cuál sería el total de retribución en especie computable?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="0"> 3.835,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="1"> 3.250,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="2"> 2.250,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q20" value="3"> 3.250,00 € más 585,00 € de gasto deducible</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q20')">Ver explicación</button>
+  <div class="explicacion" id="exp-q20" style="display:none">Art. 43.2 LIRPF: el ingreso a cuenta solo se suma al valor de la especie cuando no se repercute al trabajador. Si se repercute, se computa el valor legal: vehículo 2.250 + tickets 600 + seguro 400 = 3.250,00 €. Los 585 € repercutidos (405 + 108 + 72) no son un gasto deducible del art. 19: el contribuyente se los deduce como pago a cuenta en la cuota.</div>
+</div>
+<h2>Caso 6: irregulares, gastos art. 19, reducción art. 20 y obligación de declarar</h2>
+<div class="question" id="q21" data-correct="1">
+  <div class="enunciado"><strong>21.</strong> Caso 6 (Dña. Rocío: rendimiento íntegro de 17.600 €, gastos de las letras a)-e) de 1.449 € y letra f) de 4.000 €). ¿Cuál es la reducción del art. 20 LIRPF?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="0"> 7.302,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="1"> 5.028,75 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="2"> 3.978,75 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q21" value="3"> 2.273,25 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q21')">Ver explicación</button>
+  <div class="explicacion" id="exp-q21" style="display:none">Art. 20, último párrafo, LIRPF: la base de la reducción es el rendimiento íntegro menos los gastos de las letras a) a e), sin restar la letra f): 17.600 − 1.449 = 16.151 €. Está en el tramo de 14.852 € a 17.673,52 €: 7.302 − 1,75 × (16.151 − 14.852) = 7.302 − 1,75 × 1.299 = 7.302 − 2.273,25 = 5.028,75 €. Error típico: restar la letra f) da 12.151 € ≤ 14.852 € y una reducción de 7.302 €. Sin el 30 % la base sería 16.751 € y la reducción, 3.978,75 €. No tiene otras rentas que superen los 6.500 €, así que la reducción procede.</div>
+</div>
+<div class="question" id="q22" data-correct="2">
+  <div class="enunciado"><strong>22.</strong> <strong>Caso 6 (Dña. Rocío Valverde).</strong> Dña. Rocío trabaja de enero a junio de 2026 en la empresa A, en Almería: cobra 7.800 € de sueldo y cotiza 495 € a la Seguridad Social. Al cesar, la empresa A le paga un premio de permanencia de 2.000 € generado durante 5 años. Queda en paro, se inscribe como demandante de empleo y acepta un puesto en la empresa B, en Huelva, que la obliga a trasladar allí su residencia habitual. De julio a diciembre cobra 8.400 € y cotiza 534 €. Paga 120 € de cuota sindical y 450 € de abogado por un pleito laboral con la empresa A. No tiene otras rentas. ¿Cuál es su rendimiento neto del trabajo antes de la reducción del art. 20?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="0"> 14.151,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="1"> 12.751,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="2"> 12.151,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q22" value="3"> 12.001,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q22')">Ver explicación</button>
+  <div class="explicacion" id="exp-q22" style="display:none">Rendimiento íntegro: 7.800 + 8.400 + premio irregular reducido un 30 % (art. 18.2 LIRPF: 2.000 × 0,70 = 1.400) = 17.600 €. Gastos de las letras a) a e) del art. 19.2: Seguridad Social 495 + 534 = 1.029 €, sindicato 120 € y defensa jurídica 300 € (limitada a 300 €/año aunque pagara 450 €), en total 1.449 €. Letra f): 2.000 € generales + 2.000 € por movilidad geográfica, porque estaba desempleada e inscrita y acepta un puesto con cambio de residencia; en total 4.000 €. Rendimiento neto: 17.600 − 1.449 − 4.000 = 12.151,00 €. Sin movilidad saldrían 14.151 €; sin el 30 %, 12.751 €; deduciendo los 450 € de abogado completos, 12.001 €.</div>
+</div>
+<div class="question" id="q23" data-correct="0">
+  <div class="enunciado"><strong>23.</strong> Caso 6 (Dña. Rocío). ¿Cuál es su rendimiento neto reducido del trabajo?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="0"> 7.122,25 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="1"> 4.849,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="2"> 12.151,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q23" value="3"> 9.122,25 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q23')">Ver explicación</button>
+  <div class="explicacion" id="exp-q23" style="display:none">Rendimiento neto reducido = rendimiento neto − reducción del art. 20: 12.151 − 5.028,75 = 7.122,25 €. Con la reducción mal calculada (7.302 €) saldrían 4.849 €. Si se olvida el incremento por movilidad geográfica, se restaría la reducción a 14.151 € y saldrían 9.122,25 €.</div>
+</div>
+<div class="question" id="q24" data-correct="3">
+  <div class="enunciado"><strong>24.</strong> Caso 6 (Dña. Rocío: rendimientos íntegros del trabajo de 7.800 € + 2.000 € de la empresa A y 8.400 € de la empresa B; no tiene otras rentas). ¿Está obligada a declarar?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="0"> No, porque sus rendimientos del trabajo no llegan a 22.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="1"> No, porque el rendimiento neto reducido (7.122,25 €) es muy bajo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="2"> Sí, porque todo trabajador con dos pagadores declara siempre, sea cual sea el importe.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q24" value="3"> Sí, porque tiene dos pagadores, el segundo le paga más de 1.500 € y sus rendimientos íntegros superan los 15.876 €.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q24')">Ver explicación</button>
+  <div class="explicacion" id="exp-q24" style="display:none">Art. 96.3 LIRPF: el límite general de 22.000 € baja a 15.876 € cuando hay más de un pagador y la suma de lo cobrado del segundo y siguientes supera 1.500 €. La empresa B le paga 8.400 €, y sus rendimientos del trabajo (18.200 € brutos, o 17.600 € tras el 30 %) superan los 15.876 €, así que está obligada. El umbral se compara con los rendimientos íntegros, no con el neto reducido. Dos pagadores no obligan siempre: por debajo de 15.876 € no habría obligación.</div>
+</div>
+<h2>Caso 7: individualización en gananciales, privativo arrendado, donación</h2>
+<div class="question" id="q25" data-correct="3">
+  <div class="enunciado"><strong>25.</strong> Caso 7 (matrimonio Molina-Cuevas). Si Sofía tributa individualmente, ¿qué importe total de rentas inmobiliarias (rendimiento del piso privativo más imputación) integra en su base general?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="0"> 1.375,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="1"> 2.750,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="2"> 4.895,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q25" value="3"> 2.255,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q25')">Ver explicación</button>
+  <div class="explicacion" id="exp-q25" style="display:none">Los rendimientos de un bien privativo se atribuyen solo a su titular (art. 11.3 LIRPF), aunque en Derecho civil los frutos de los privativos sean gananciales: la norma fiscal sigue la titularidad del bien que produce la renta. Sofía integra el piso entero, 1.760 €, más su mitad de la imputación del apartamento, 495 €: en total 2.255,00 €. Repartir el piso al 50 % da 1.375 €; imputarle los 990 € enteros, 2.750 €; olvidar la reducción, 4.895 €. Los sueldos se atribuyen a quien los genera (art. 11.2).</div>
+</div>
+<div class="question" id="q26" data-correct="0">
+  <div class="enunciado"><strong>26.</strong> Caso 7 (D. Andrés recibe una donación de 20.000 € de su madre). ¿Cómo tributa en el IRPF?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="0"> No está sujeta al IRPF, porque tributa en el Impuesto sobre Sucesiones y Donaciones (art. 6.4 LIRPF).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="1"> Es una ganancia patrimonial no derivada de transmisión que se integra en la base general.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="2"> Está exenta por el art. 7 LIRPF hasta 40.000 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q26" value="3"> Es ganancial, así que cada cónyuge integra 10.000 € en la base del ahorro.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q26')">Ver explicación</button>
+  <div class="explicacion" id="exp-q26" style="display:none">Art. 6.4 LIRPF: no están sujetas al IRPF las rentas sujetas al ISD, y la donación es hecho imponible del ISD para el donatario (art. 3.1.b LISD). Es un supuesto de no sujeción, no de exención. Los 40.000 € son el mínimo exento de los premios de lotería (DA 33.ª), sin relación con este caso.</div>
+</div>
+<div class="question" id="q27" data-correct="2">
+  <div class="enunciado"><strong>27.</strong> Caso 7 (Dña. Sofía: piso privativo alquilado por 600 €/mes como vivienda habitual del inquilino, contrato de 2021; IBI 400 €; comunidad 600 €; valor de adquisición de 100.000 €; VC de 80.000 € con un 40 % de suelo). ¿Cuál es el rendimiento neto reducido del piso?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="0"> 4.400,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="1"> 2.200,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="2"> 1.760,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q27" value="3"> 1.904,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q27')">Ver explicación</button>
+  <div class="explicacion" id="exp-q27" style="display:none">Ingresos: 600 × 12 = 7.200 €. Amortización (art. 23.1.b LIRPF y art. 14 RIRPF): el 3 % sobre el mayor entre el coste de adquisición y el valor catastral, excluido el suelo. Construcción por coste: 100.000 × 60 % = 60.000 €; por valor catastral: 80.000 × 60 % = 48.000 €; se toma el mayor, 60.000 € × 3 % = 1.800 €. Rendimiento neto: 7.200 − 400 − 600 − 1.800 = 4.400 €. Como el contrato es anterior a la reforma de la Ley 12/2023, se aplica el régimen transitorio del 60 % (art. 23.2 LIRPF en la redacción anterior): 4.400 × 40 % = 1.760,00 €. Con un 50 % saldrían 2.200 €. Amortizando sobre el valor catastral, 1.904 €.</div>
+</div>
+<div class="question" id="q28" data-correct="1">
+  <div class="enunciado"><strong>28.</strong> <strong>Caso 7 (matrimonio Molina-Cuevas, individualización).</strong> D. Andrés Molina y Dña. Sofía Cuevas están casados en gananciales. Él cobra un sueldo de 30.000 € y ella, de 18.000 €. Tienen un apartamento ganancial en Almuñécar, a su disposición todo el año (valor catastral de 90.000 €, revisado en 2020). Sofía tiene un piso privativo heredado en Granada (valor de adquisición, el declarado en el ISD: 100.000 €; valor catastral de 80.000 €, del que el suelo es el 40 %), alquilado todo el año a un tercero sin parentesco como vivienda habitual, por 600 €/mes y con contrato firmado en 2021. Gastos del piso: IBI 400 € y comunidad 600 €. Además, la madre de Andrés le dona 20.000 €. ¿Cómo se atribuye la imputación de rentas del apartamento de Almuñécar?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="0"> 990 € a quien figure primero en la escritura.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="1"> 495 € a cada cónyuge (1,1 % × 90.000 € = 990 €, por mitades).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="2"> 900 € a cada cónyuge (2 % × 90.000 €, por mitades).</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q28" value="3"> No se imputa nada, porque es segunda residencia de un matrimonio.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q28')">Ver explicación</button>
+  <div class="explicacion" id="exp-q28" style="display:none">Art. 11.3 LIRPF: las rentas del capital y las imputaciones se atribuyen a los titulares según las normas sobre titularidad jurídica; en gananciales, por mitad. Art. 85: es urbano, no está arrendado, no está afecto a una actividad y no es vivienda habitual, así que imputa. Valor catastral revisado en 2020, dentro de los diez periodos anteriores, por lo que se aplica el 1,1 %: 90.000 × 1,1 % = 990 €, es decir, 495 € para cada cónyuge.</div>
+</div>
+<h2>Caso 8: límite intereses+reparación, arrastre, amortización con gastos de adquisición, mobiliario</h2>
+<div class="question" id="q29" data-correct="2">
+  <div class="enunciado"><strong>29.</strong> Caso 8 (D. Fermín). Teniendo en cuenta además el IBI (420 €), la comunidad (720 €), el seguro (260 €), la amortización del inmueble (2.673 €) y la del mobiliario, ¿cuál es el rendimiento neto del capital inmobiliario de 2026?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="0"> −5.073,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="1"> −4.373,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="2"> −4.673,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q29" value="3"> 0,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q29')">Ver explicación</button>
+  <div class="explicacion" id="exp-q29" style="display:none">Mobiliario: 10 % × 6.000 = 600 € (art. 14 RIRPF). Gastos no limitados: 420 + 720 + 260 + 2.673 + 600 = 4.673 €. Rendimiento neto: 11.400 − 11.400 (intereses y reparación, hasta el límite) − 4.673 = −4.673,00 €. El límite solo afecta a intereses y reparaciones, así que el resto de gastos puede dar un rendimiento negativo, que se integra en la base general. Sin límite saldrían −5.073 €; sin los 700 € de 2025, −4.373 €.</div>
+</div>
+<div class="question" id="q30" data-correct="3">
+  <div class="enunciado"><strong>30.</strong> Caso 8 (D. Fermín: rendimiento neto de −4.673 €; contrato de vivienda habitual de 2024 fuera de zona tensionada). ¿Qué reducción del art. 23.2 LIRPF se aplica?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="0"> El 50 %: −2.336,50 €.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="1"> El 60 %, por el régimen transitorio.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="2"> El 90 %, porque es vivienda habitual del inquilino.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q30" value="3"> Ninguna, porque la reducción solo se aplica sobre rendimientos netos positivos.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q30')">Ver explicación</button>
+  <div class="explicacion" id="exp-q30" style="display:none">Art. 23.2 LIRPF: la reducción por arrendamiento de vivienda opera solo sobre el rendimiento neto positivo. Con −4.673 € no se aplica, y el rendimiento negativo se integra completo. Si fuera positivo, al contrato de 2024 fuera de zona tensionada, sin inquilino joven ni rehabilitación, le correspondería el 50 % general de la Ley 12/2023. El 60 % es para contratos anteriores a esa ley.</div>
+</div>
+<div class="question" id="q31" data-correct="3">
+  <div class="enunciado"><strong>31.</strong> <strong>Caso 8 (D. Fermín Arjona, piso alquilado).</strong> D. Fermín compró en 2019 un piso en Córdoba por 150.000 €, más 12.000 € de gastos y tributos de la compra. El valor catastral de 2026 es de 95.000 €, del que el suelo es el 45 %. Está alquilado todo 2026 a una familia sin parentesco como vivienda habitual, con contrato firmado en febrero de 2024 fuera de zona tensionada, por 950 €/mes. Gastos de 2026: intereses de la hipoteca 3.900 €; reparación del tejado 7.200 €; IBI 420 €; comunidad 720 €; seguro del hogar 260 €. El mobiliario, comprado en 2024 por 6.000 €, se cede con la vivienda. De 2025 le quedan 700 € de intereses y reparaciones pendientes por haber superado el límite. ¿Cuál es la amortización deducible del inmueble (sin el mobiliario)?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="0"> 4.860,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="1"> 2.475,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="2"> 1.567,50 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q31" value="3"> 2.673,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q31')">Ver explicación</button>
+  <div class="explicacion" id="exp-q31" style="display:none">Art. 23.1.b LIRPF y art. 14 RIRPF: el 3 % sobre el mayor entre el coste de adquisición satisfecho (precio + gastos y tributos inherentes) y el valor catastral, excluido en ambos el suelo. Coste: 162.000 × 55 % = 89.100 €. Valor catastral de la construcción: 95.000 × 55 % = 52.250 €. Mayor: 89.100 € × 3 % = 2.673,00 €. Sin excluir el suelo saldrían 4.860 €; sin los gastos de compra, 2.475 €; tomando el valor catastral, 1.567,50 €.</div>
+</div>
+<div class="question" id="q32" data-correct="1">
+  <div class="enunciado"><strong>32.</strong> Caso 8 (D. Fermín: ingresos de 11.400 €; intereses de 3.900 €; reparación de 7.200 €; 700 € pendientes de 2025). ¿Cuánto puede deducir en 2026 por intereses y reparación, y qué ocurre con el resto?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="0"> 11.800 €, porque los intereses y la reparación no tienen límite.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="1"> 11.400 €; los 400 € restantes se podrán deducir en los cuatro años siguientes, con el mismo límite.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="2"> 11.100 €; los 700 € de 2025 se pierden.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q32" value="3"> 11.400 €; los 400 € restantes se pierden, porque el exceso no se arrastra.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q32')">Ver explicación</button>
+  <div class="explicacion" id="exp-q32" style="display:none">Art. 23.1.a LIRPF y art. 13 RIRPF: los intereses de capitales ajenos y los gastos de reparación y conservación, sumados, no pueden superar los ingresos íntegros del inmueble. El exceso se deduce en los cuatro años siguientes, con el mismo límite. Total que se quiere deducir: 3.900 + 7.200 + 700 = 11.800 € &gt; 11.400 €. Se deducen 11.400 € y quedan 400 € pendientes para 2027-2030. Los 700 € de 2025 siguen dentro de su plazo de cuatro años.</div>
+</div>
+<h2>Caso 9: art. 24 (sobrina vs amiga vs primo), alquiler de temporada e imputación prorrateada, garaje anexo</h2>
+<div class="question" id="q33" data-correct="0">
+  <div class="enunciado"><strong>33.</strong> Caso 9 (Dña. Amparo: apartamento de Mojácar alquilado 2 meses por 2.600 €; gastos anuales IBI 600 €, comunidad 900 €, intereses 1.200 €; comisión de agencia de 150 €; coste de 150.000 € con un 30 % de suelo; VC de 120.000 €). ¿Cuál es el rendimiento neto del alquiler de verano?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="0"> 1.475,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="1"> −3.400,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="2"> 1.580,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q33" value="3"> 1.325,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q33')">Ver explicación</button>
+  <div class="explicacion" id="exp-q33" style="display:none">En los inmuebles alquilados solo parte del año, los gastos anuales y la amortización se deducen en proporción al tiempo arrendado (2/12, criterio de la práctica de clase). La comisión de la agencia, ligada solo al alquiler, se deduce entera. Amortización anual: el mayor entre coste de la construcción (150.000 × 70 % = 105.000 €) y valor catastral de la construcción (84.000 €), es decir, 105.000 € × 3 % = 3.150 €. Prorrateo: (600 + 900 + 1.200 + 3.150) × 2/12 = 975 €. Intereses prorrateados (200 €) ≤ ingresos, así que no opera el límite. Gastos: 975 + 150 = 1.125 €. Neto: 2.600 − 1.125 = 1.475,00 €, sin reducción del art. 23.2 por ser alquiler vacacional. Sin prorratear saldrían −3.400 €; amortizando sobre el valor catastral, 1.580 €.</div>
+</div>
+<div class="question" id="q34" data-correct="3">
+  <div class="enunciado"><strong>34.</strong> <strong>Caso 9 (Dña. Amparo Rosales).</strong> Dña. Amparo es propietaria de: (a) un piso en Jaén alquilado todo 2026 a su sobrina (hija de su hermano) por 200 €/mes; se compró en 2010 por 70.000 €, su valor catastral es de 75.000 € (revisado en 2021, con un 40 % de suelo), y paga IBI de 350 € y comunidad de 480 €; (b) un piso idéntico en el mismo edificio, con los mismos datos, alquilado todo el año a una amiga por 200 €/mes mediante un contrato de temporada (la amiga trabaja allí unos meses), no como vivienda habitual; (c) un apartamento en Mojácar (valor catastral de 120.000 €, sin revisar desde 2008; coste de 150.000 €, con un 30 % de suelo) alquilado en julio y agosto por 2.600 € y a su disposición el resto del año, con gastos anuales de IBI 600 €, comunidad 900 € e intereses 1.200 €, más 150 € de comisión de la agencia por el alquiler de verano; (d) la plaza de garaje comprada junto con su vivienda habitual (valor catastral de 9.000 €). ¿Qué rendimiento computa por el piso alquilado a la sobrina?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="0"> 220,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="1"> 1.500,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="2"> 2.400,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q34" value="3"> 825,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q34')">Ver explicación</button>
+  <div class="explicacion" id="exp-q34" style="display:none">Rendimiento neto ordinario: ingresos 2.400 €. Amortización: construcción por coste 70.000 × 60 % = 42.000 €; por valor catastral 75.000 × 60 % = 45.000 €; mayor, 45.000 € × 3 % = 1.350 €. Neto: 2.400 − 350 − 480 − 1.350 = 220 €. Art. 24 LIRPF: la sobrina es pariente colateral de tercer grado, así que el rendimiento neto no puede ser inferior al que daría el art. 85: 75.000 × 1,1 % (revisado en 2021) = 825 €. Como 220 € &lt; 825 €, computa 825,00 €. Con el 2 % saldrían 1.500 €.</div>
+</div>
+<div class="question" id="q35" data-correct="1">
+  <div class="enunciado"><strong>35.</strong> Caso 9 (Dña. Amparo: piso idéntico al de la sobrina, alquilado a una amiga por 200 €/mes con contrato de temporada; rendimiento neto ordinario de 220 €). ¿Qué computa por este piso? ¿Y si el inquilino del piso (a) fuera un primo en lugar de la sobrina?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="0"> 825 € por la amiga, porque el art. 24 se aplica a cualquier renta inferior a la de mercado; 825 € también por el primo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="1"> 220 € por la amiga; con un primo serían también 220 €, porque es pariente de cuarto grado y el art. 24 solo llega al tercero.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="2"> 88 € por la amiga, tras la reducción del 60 %; 825 € por el primo.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q35" value="3"> 0 € por la amiga, porque una renta tan baja hace presumir la gratuidad; 825 € por el primo.</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q35')">Ver explicación</button>
+  <div class="explicacion" id="exp-q35" style="display:none">El art. 24 LIRPF solo se aplica si el arrendatario es el cónyuge o un pariente, incluidos los afines, hasta el tercer grado inclusive. Una amiga no lo es, y un primo está en cuarto grado colateral. En ambos casos se computa el rendimiento neto ordinario de 220 €, sin suelo. Para la amiga tampoco hay reducción del art. 23.2, porque el contrato de temporada no cubre una necesidad permanente de vivienda. La renta baja pero real no convierte la cesión en gratuita.</div>
+</div>
+<div class="question" id="q36" data-correct="2">
+  <div class="enunciado"><strong>36.</strong> Caso 9 (Dña. Amparo: apartamento de Mojácar, VC de 120.000 € sin revisar desde 2008, a su disposición 10 meses; garaje comprado con la vivienda habitual, VC de 9.000 €). ¿Qué imputación de rentas inmobiliarias corresponde?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="0"> 1.100,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="1"> 2.400,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="2"> 2.000,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q36" value="3"> 2.180,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q36')">Ver explicación</button>
+  <div class="explicacion" id="exp-q36" style="display:none">Art. 85 LIRPF: el apartamento está a su disposición los 10 meses en que no está alquilado. Como el valor catastral no se ha revisado en los diez periodos anteriores, se aplica el 2 %: 120.000 × 2 % × 10/12 = 2.000,00 €. La plaza de garaje comprada con la vivienda habitual (hasta dos plazas) forma parte de la vivienda habitual y no imputa. Con el 1,1 % saldrían 1.100 €; sin prorratear, 2.400 €; imputando el garaje (9.000 × 2 % = 180 €), 2.180 €.</div>
+</div>
+<h2>Caso 10: zona tensionada (Ley 12/2023, 90 %), periodo vacío, mobiliario</h2>
+<div class="question" id="q37" data-correct="2">
+  <div class="enunciado"><strong>37.</strong> Caso 10 (Dña. Leonor: ingresos de 9 × 1.000 = 9.000 €; gastos prorrateados IBI 600 €, comunidad 900 € y seguro 225 €; caldera 450 €; inmobiliaria 500 €; amortizaciones 2.325 €). ¿Cuál es el rendimiento neto reducido que integra?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="0"> 4.000,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="1"> 2.000,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="2"> 400,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q37" value="3"> 1.200,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q37')">Ver explicación</button>
+  <div class="explicacion" id="exp-q37" style="display:none">Gastos: 600 + 900 + 225 + 450 + 500 + 2.325 = 5.000 € (intereses y reparación: 450 € ≤ 9.000 €, sin límite). Neto: 9.000 − 5.000 = 4.000 €. Art. 23.2.a LIRPF (Ley 12/2023): nuevo contrato en zona tensionada con una renta inicial rebajada en más del 5 % frente a la última del contrato anterior. Rebaja: (1.100 − 1.000) / 1.100 = 9,09 % &gt; 5 %, así que la reducción es del 90 %. Integra 4.000 × 10 % = 400,00 €. Con el 50 % general saldrían 2.000 €; con el 70 % (no aplicable, porque el inquilino no tiene entre 18 y 35 años), 1.200 €.</div>
+</div>
+<div class="question" id="q38" data-correct="3">
+  <div class="enunciado"><strong>38.</strong> <strong>Caso 10 (Dña. Leonor Baena, zona tensionada).</strong> Dña. Leonor tiene un piso en una zona de mercado residencial tensionado declarada. Lo tuvo alquilado hasta el 31-12-2025 por 1.100 €/mes (ya actualizada la renta). El piso estuvo vacío y a su disposición de enero a marzo de 2026. El 1-4-2026 firma un nuevo contrato de vivienda habitual con un inquilino de 45 años por 1.000 €/mes. Valor catastral de 160.000 €, revisado en 2019, con un 50 % de suelo; coste de adquisición de 180.000 € en 2012. El 1-4-2026 compra mobiliario por 4.000 € para cederlo con el piso. Gastos de 2026: IBI anual de 800 €, comunidad anual de 1.200 €, seguro anual de 300 €, reparación de la caldera en septiembre por 450 € y comisión de la inmobiliaria por el nuevo contrato de 500 €. ¿Qué imputación de rentas le corresponde por el periodo en que estuvo vacío?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="0"> 0,00 €, porque el piso estuvo alquilado en 2026.</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="1"> 800,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="2"> 1.760,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q38" value="3"> 440,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q38')">Ver explicación</button>
+  <div class="explicacion" id="exp-q38" style="display:none">Art. 85 LIRPF: mientras está vacío y a disposición del titular, el piso imputa renta en proporción al tiempo. Valor catastral revisado en 2019, dentro de los diez años, así que se aplica el 1,1 %: 160.000 × 1,1 % × 3/12 = 440,00 €. Con el 2 % saldrían 800 €; sin prorratear, 1.760 €. Haber estado alquilado parte del año no evita la imputación del resto.</div>
+</div>
+<div class="question" id="q39" data-correct="3">
+  <div class="enunciado"><strong>39.</strong> Caso 10 (Dña. Leonor). Si la nueva renta hubiera sido de <strong>1.060 €/mes</strong> (resto de datos igual, gastos de 5.000 €), ¿qué rendimiento neto reducido integraría?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="0"> 454,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="1"> 1.362,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="2"> 4.540,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q39" value="3"> 2.270,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q39')">Ver explicación</button>
+  <div class="explicacion" id="exp-q39" style="display:none">Ingresos: 9 × 1.060 = 9.540 €; neto: 9.540 − 5.000 = 4.540 €. Rebaja: (1.100 − 1.060) / 1.100 = 3,64 %, que no supera el 5 % y no da derecho al 90 %. No hay inquilino joven ni rehabilitación, así que se aplica la reducción general del 50 % para contratos posteriores a la Ley 12/2023 (art. 23.2 LIRPF): 4.540 × 50 % = 2.270,00 €. Con el 90 % saldrían 454 €; con el 70 %, 1.362 €.</div>
+</div>
+<div class="question" id="q40" data-correct="1">
+  <div class="enunciado"><strong>40.</strong> Caso 10 (Dña. Leonor: alquilado de abril a diciembre; coste de 180.000 € y VC de 160.000 €, ambos con un 50 % de suelo; mobiliario de 4.000 € comprado el 1-4-2026). ¿Cuál es la amortización total deducible en 2026 (inmueble más mobiliario)?</div>
+  <ol type="a">
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="0"> 3.100,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="1"> 2.325,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="2"> 2.100,00 €</label></li>
+    <li><label class="opcion-linea"><input type="checkbox" name="q40" value="3"> 2.025,00 €</label></li>
+  </ol>
+  <button class="btn-explicacion" onclick="toggleExplicacion('q40')">Ver explicación</button>
+  <div class="explicacion" id="exp-q40" style="display:none">Inmueble (art. 14 RIRPF): construcción por coste 180.000 × 50 % = 90.000 €; por valor catastral 160.000 × 50 % = 80.000 €; mayor, 90.000 € × 3 % = 2.700 € anuales × 9/12 = 2.025 €. Mobiliario: 4.000 × 10 % × 9/12 = 300 €. Total: 2.025 + 300 = 2.325,00 €. Sin prorratear saldrían 3.100 €; con el valor catastral, 2.100 €; olvidando el mobiliario, 2.025 €.</div>
+</div>
+
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("extra-buttons");
+        const btn = document.getElementById("toggleMenuBtn");
+        if (menu.style.display === "none") {
+          menu.style.display = "flex";
+          btn.textContent = "Ocultar menú";
+        } else {
+          menu.style.display = "none";
+          btn.textContent = "Mostrar menú de opciones";
+        }
+      }
+
+      function toggleExplicacion(id) {
+        const exp = document.getElementById("exp-" + id);
+        if (!exp) return;
+        const btn = exp.previousElementSibling;
+        if (exp.style.display === "none") {
+          exp.style.display = "block";
+          if (btn) btn.textContent = "Ocultar explicación";
+        } else {
+          exp.style.display = "none";
+          if (btn) btn.textContent = "Ver explicación";
+        }
+      }
+
+      function toggleModo() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("modoBtn");
+        btn.textContent = document.body.classList.contains("dark-mode") ? "Modo claro" : "Modo oscuro";
+      }
+
+      document.querySelectorAll(".question").forEach((q) => {
+        const correct = q.dataset.correct.split(",").map(Number);
+        const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+        
+        checkboxes.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            if (document.body.classList.contains('modo-examen')) return;
+
+            const checked = Array.from(checkboxes).map((c, i) => (c.checked ? i : null)).filter((i) => i !== null);
+            q.classList.remove("correct", "partial", "incorrect");
+
+            if (checked.length === 0) return;
+
+            const allCorrect = correct.every((i) => checked.includes(i));
+            const onlyCorrect = checked.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+              q.classList.add("correct");
+            } else if (checked.some((i) => correct.includes(i)) && onlyCorrect) {
+              q.classList.add("partial");
+            } else {
+              q.classList.add("incorrect");
+            }
+          });
+        });
+      });
+
+      function shuffleQuestions() {
+        const container = document.getElementById("questions-container");
+        const questions = Array.from(container.children);
+        const realQuestions = questions.filter(el => el.classList.contains('question'));
+        
+        if(document.querySelector('h2')) {
+            alert("Atención: Al desordenar con secciones activas, las preguntas se mezclarán entre todas las secciones visualmente.");
+        }
+        
+        for (let i = questions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          container.appendChild(questions[j]);
+        }
+      }
+
+      function showCorrectAnswers() {
+        if (document.body.classList.contains('modo-examen')) return;
+        document.querySelectorAll(".question").forEach((q) => {
+          const correct = q.dataset.correct.split(",").map(Number);
+          const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((cb, i) => {
+            cb.checked = correct.includes(i);
+          });
+          q.classList.remove("partial", "incorrect");
+          q.classList.add("correct");
+          const exp = q.querySelector(".explicacion");
+          if (exp) {
+            exp.style.display = "block";
+            const btn = exp.previousElementSibling;
+            if (btn) btn.textContent = "Ocultar explicación";
+          }
+        });
+      }
+
+      function resetAnswers() {
+        document.querySelectorAll('.question').forEach(q => {
+          q.querySelectorAll('input').forEach(cb => cb.checked = false);
+          q.classList.remove('correct', 'partial', 'incorrect');
+        });
+        const resumen = document.getElementById('resumen-examen');
+        if(resumen) resumen.remove();
+        document.body.classList.remove('modo-examen');
+        const btnExam = document.getElementById('btn-corregir-examen');
+        if(btnExam) btnExam.remove();
+      }
+
+      let showingIncorrect = false;
+      function toggleMostrarIncorrectas() {
+        const btn = document.getElementById('toggleIncorrectasBtn');
+        const preguntas = document.querySelectorAll('.question');
+        
+        const hayCorregidas = Array.from(preguntas).some(q => q.classList.contains('incorrect') || q.classList.contains('correct'));
+        if(!hayCorregidas) {
+            alert("Responde y corrige algunas preguntas primero.");
+            return;
+        }
+
+        if (!showingIncorrect) {
+          preguntas.forEach(q => {
+            if (!q.classList.contains('incorrect') && !q.classList.contains('partial')) {
+              q.style.display = 'none';
+            }
+          });
+          btn.textContent = 'Mostrar todas';
+        } else {
+          preguntas.forEach(q => q.style.display = 'block');
+          btn.textContent = 'Mostrar fallos';
+        }
+        showingIncorrect = !showingIncorrect;
+      }
+
+      function activarModoExamen() {
+        resetAnswers();
+        document.body.classList.add('modo-examen');
+        alert("Modo Examen activo. Las respuestas no se validarán hasta finalizar.");
+        
+        if(!document.getElementById('btn-corregir-examen')){
+            const btn = document.createElement('button');
+            btn.id = 'btn-corregir-examen';
+            btn.textContent = "Finalizar y Corregir Examen";
+            btn.style.display = "block";
+            btn.style.margin = "30px auto";
+            btn.style.fontSize = "1.2em";
+            btn.onclick = finalizarExamen;
+            document.getElementById('questions-container').after(btn);
+        }
+      }
+
+      function finalizarExamen() {
+        let correctas = 0, incorrectas = 0, parciales = 0, sin_responder = 0;
+        const preguntas = document.querySelectorAll('.question');
+        
+        preguntas.forEach(q => {
+            const correct = q.dataset.correct.split(",").map(Number);
+            const checkboxes = Array.from(q.querySelectorAll('input[type="checkbox"]'));
+            const checkedIdx = checkboxes.map((cb, i) => cb.checked ? i : null).filter(i => i !== null);
+            
+            q.classList.remove("correct", "partial", "incorrect");
+            
+            if (checkedIdx.length === 0) {
+                sin_responder++;
+                return;
+            }
+
+            const allCorrect = correct.every((i) => checkedIdx.includes(i));
+            const onlyCorrect = checkedIdx.every((i) => correct.includes(i));
+
+            if (allCorrect && onlyCorrect) {
+                q.classList.add("correct");
+                correctas++;
+            } else if (checkedIdx.some((i) => correct.includes(i)) && onlyCorrect) {
+                q.classList.add("partial");
+                parciales++;
+            } else {
+                q.classList.add("incorrect");
+                incorrectas++;
+            }
+        });
+
+        const total = preguntas.length;
+        const nota = total > 0 ? ((correctas + (parciales * 0.5)) / total) * 10 : 0;
+        
+        const resumenHTML = `
+            <div id="resumen-examen" class="info-box" style="margin-top:20px; border-color: var(--primary-color);">
+                <h3>Resultados del examen</h3>
+                <p><strong>Nota: ${nota.toFixed(2)} / 10</strong></p>
+                <ul>
+                    <li>Correctas: ${correctas}</li>
+                    <li>Parciales: ${parciales}</li>
+                    <li>Incorrectas: ${incorrectas}</li>
+                    <li>Sin responder: ${sin_responder}</li>
+                </ul>
+            </div>
+        `;
+        
+        const oldResumen = document.getElementById('resumen-examen');
+        if(oldResumen) oldResumen.remove();
+        
+        document.getElementById('questions-container').insertAdjacentHTML('beforebegin', resumenHTML);
+        document.body.classList.remove('modo-examen');
+        document.getElementById('btn-corregir-examen').remove();
+        window.scrollTo(0,0);
+      }
+    </script>
+  </body>
+</html>
