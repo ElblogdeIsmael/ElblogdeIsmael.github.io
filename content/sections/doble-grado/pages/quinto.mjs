@@ -55,6 +55,21 @@ export default {
               ],
             },
             {
+              label: "Guías del Parcial 1",
+              resources: [
+                {
+                  name: "Guía de estudio (temas 1 a 4.1 y prácticas 1 a 16)",
+                  href: "/Subjects/Fifth/FIS/guias/guia-estudio-primer-parcial.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Hoja de ruta para subrayar la LIRPF y el RIRPF",
+                  href: "/Subjects/Fifth/FIS/guias/hoja-de-ruta-codigo-primer-parcial.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
               label: "Exámenes",
               resources: [
                 {
