@@ -82,6 +82,11 @@ export default {
                   href: "/Subjects/Fifth/FIS/test/casos-practicos-primer-parcial.html",
                   kind: "HTML",
                 },
+                {
+                  name: "Banco de tests de Wuolah Parcial 1",
+                  href: "/Subjects/Fifth/FIS/test/test-parcial1-wuolah.html",
+                  kind: "HTML",
+                },
               ],
             },
           ],
