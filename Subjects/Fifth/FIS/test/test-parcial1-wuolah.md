@@ -1,7 +1,7 @@
 # Banco de Exámenes Tipo Test - Primer Parcial de Derecho Fiscal (UGR)
 
 * **Autor:** Grado en ADE / Doble Grado en Derecho y ADE - Universidad de Granada
-* **Descripción:** Batería de 85 preguntas tipo test de exámenes reales recopilados en Wuolah (profesores Clotilde Martín Pascual, Cecilio, etc.) correspondientes a la materia del Primer Parcial: Tema 1 (Nociones Básicas, LGT, LOFCA y Sistema Tributario Español), Tema 2 (El IRPF - Naturaleza, Hecho Imponible, Exenciones y Unidad Familiar), Tema 3 (Rendimientos del Trabajo Personal - RNTP) y Tema 4.1 (Rendimientos del Capital Inmobiliario - RNCI e Imputación de Rentas Inmobiliarias). Enunciados y opciones cotejados con los PDFs originales, sin duplicados, con las erratas de Wuolah corregidas y los cálculos actualizados a la normativa vigente (LGT, LOFCA, Ley 22/2009, LIRPF, RIRPF y TRLHL).
+* **Descripción:** Batería de 85 preguntas tipo test de exámenes reales recopilados en Wuolah (profesores Clotilde Martín Pascual, Cecilio, etc.) correspondientes a la materia del Primer Parcial: Tema 1 (Nociones Básicas, LGT, LOFCA y Sistema Tributario Español), Tema 2 (El IRPF - Naturaleza, Hecho Imponible, Exenciones y Unidad Familiar), Tema 3 (Rendimientos del Trabajo Personal - RNTP) y Tema 4.1 (Rendimientos del Capital Inmobiliario - RNCI e Imputación de Rentas Inmobiliarias). Enunciados y opciones cotejados con los PDFs originales, sin duplicados, con las respuestas mal marcadas en Wuolah corregidas. Las cifras son las del examen original; en la justificación se indica, cuando cambia, el resultado con la normativa vigente (LGT, LOFCA, Ley 22/2009, LIRPF, RIRPF y TRLHL).
 * **Titulación:** Doble Grado en Derecho y ADE / Grado en ADE - Facultad de Ciencias Económicas y Empresariales
 
 <!-- Tema 1: Nociones Básicas, LGT, LOFCA y Sistema Tributario Español -->
@@ -233,18 +233,19 @@
     > Arts. 8.1.b y 10.1.e LIRPF: los funcionarios en activo que ejercen en el extranjero un cargo o empleo oficial tienen su residencia habitual fuera de España, pero la ley los sigue considerando contribuyentes del IRPF. No es que sean residentes, sino que son contribuyentes a pesar de no serlo, por eso la c) es imprecisa.
 
 33. El Sr. A, de nacionalidad italiana, pero que viene residiendo en España habitualmente desde hace 5 años, ha permanecido en España 160 días durante el ejercicio. El resto del año lo ha pasado en Italia (visitando a sus familiares) 60 días; Suiza, 80 días (visitando a su hija), donde además tiene la mayor parte de su patrimonio y el núcleo principal de intereses económicos; Perú (en una misión de voluntariado), 30 días; y Méjico (en el domicilio de su novia), 36 días. El Sr. A no puede probar que su residencia fiscal esté en Suiza, Italia, Perú ni Méjico. ¿Es contribuyente por el IRPF?
+    - ( ) No contesto.
     - ( ) No, no tributa por el IRPF; es residente en Italia, puesto que es de nacionalidad italiana.
     - ( ) No, no tributa por el IRPF, ya que es residente en Suiza, que es donde el núcleo principal de sus intereses económicos y patrimoniales.
     - ( ) Sí, es residente en territorio español a efectos del IRPF porque en España ha pasado mayor número de días durante el ejercicio.
     - (x) Sí, es residente en territorio español a efectos del IRPF porque ha pasado en España más de 183 días, ya que sus ausencias temporales se computan.
-    > Art. 9.1.a LIRPF: las ausencias esporádicas se suman a la permanencia en España salvo que se acredite la residencia fiscal en otro país. 160 + 206 días de ausencias = 366 días, más de 183. La opción "No contesto" del examen original se ha suprimido.
+    > Art. 9.1.a LIRPF: las ausencias esporádicas se suman a la permanencia en España salvo que se acredite la residencia fiscal en otro país. 160 + 206 días de ausencias = 366 días, más de 183.
 
-34. La Comunidad Autónoma de Extremadura se ha propuesto modificar el importe mínimo del contribuyente del artículo 57 LIRPF, fijándolo en 5.650 €, en lugar de 5.550 €, que es la cantidad fijada en la citada norma. Esa modificación que pretende realizar esa Comunidad Autónoma ¿Es conforme a derecho?
+34. La Comunidad Autónoma de Extremadura se ha propuesto modificar el importe mínimo del contribuyente del artículo 56 LIRPF, fijándolo en 5.650 €, en lugar de 5.550 €, que es la cantidad fijada en la citada norma. Esa modificación que pretende realizar esa Comunidad Autónoma ¿Es conforme a derecho?
     - ( ) No puede al tratarse de una materia reservada al Estado central.
     - ( ) Sí puede, pero con autorización del Senado.
     - (x) Sí puede, legalmente está autorizado a ello.
     - ( ) No puede, ya que las comunidades autónomas de régimen común como la de Extremadura, no tienen competencias en la materia.
-    > El art. 46.1.a Ley 22/2009 permite a las CCAA aumentar o disminuir los mínimos personal y familiar (arts. 57 a 61 LIRPF) hasta un 10% para el tramo autonómico. 5.650 € está dentro de ese margen (máximo 6.105 €). El enunciado original citaba el art. 56; el mínimo del contribuyente está en el art. 57 LIRPF.
+    > El art. 46.1.a Ley 22/2009 permite a las CCAA aumentar o disminuir los mínimos personal y familiar (arts. 57 a 61 LIRPF) hasta un 10% para el tramo autonómico. 5.650 € está dentro de ese margen (máximo 6.105 €). Nota: el enunciado cita el art. 56, pero el mínimo del contribuyente está regulado en el art. 57 LIRPF.
 
 35. Para calcular la cuantía de los distintos componentes de la base imponible del IRPF ¿Qué métodos se utilizan?
     - ( ) Con carácter general, la estimación directa, aunque en los rendimientos del trabajo y los de actividades económicas se admite la estimación directa (normal y simplificada) y la estimación objetiva, según los casos.
@@ -278,24 +279,25 @@
     - (x) La de la Seguridad Social está exenta, la que recibe de su empresa, tributa como rendimiento del trabajo.
     - ( ) La de la Seguridad Social está exenta, la que recibe de su empresa, tributa como rendimiento del capital.
     - ( ) Ambas están exentas.
+    - ( ) No contesto.
     - ( ) Ambas tributan como ganancias patrimoniales.
-    > El art. 7.f LIRPF sólo exime las prestaciones por incapacidad permanente absoluta o gran invalidez de la Seguridad Social (o de mutualidades alternativas). El complemento de la empresa es rendimiento del trabajo sujeto (art. 17.1 LIRPF). La opción "No contesto" del examen original se ha suprimido.
+    > El art. 7.f LIRPF sólo exime las prestaciones por incapacidad permanente absoluta o gran invalidez de la Seguridad Social (o de mutualidades alternativas). El complemento de la empresa es rendimiento del trabajo sujeto (art. 17.1 LIRPF).
 
 <!-- Tema 3: Rendimientos del Trabajo Personal (RNTP) -->
 
 40. Las dietas por gastos de locomoción:
     - ( ) Son en su integridad rendimientos del trabajo.
-    - (x) Son rendimientos del trabajo, pero está exento el gasto, si el transporte se realiza en un medio público o, en otro caso, 0,26 euros por Km recorrido.
+    - (x) Son rendimientos del trabajo, pero está exento el gasto, si el transporte se realiza en un medio público o, en otro caso, 0’26 euros por Km recorrido.
     - ( ) Son rendimientos de trabajo, pero está exento todo el gasto que se justifique.
-    - ( ) Son rendimientos del trabajo, pero están exentos 0,19 euros por Km recorrido.
-    > Art. 9.A.2 RIRPF: queda exento el importe justificado del transporte público o, si se usa vehículo propio, 0,26 €/km más peajes y aparcamiento justificados. La cifra de 0,26 €/km rige desde la Orden HFP/792/2023 (17-7-2023); los exámenes anteriores usaban 0,19 €/km, que hoy es una cuantía derogada.
+    - ( ) Son rendimientos del trabajo, pero están exentos 0’19 euros por Km recorrido.
+    > Art. 9.A.2 RIRPF: queda exento el importe justificado del transporte público o, si se usa vehículo propio, 0,26 €/km más peajes y aparcamiento justificados. Ojo: en otras versiones del examen la opción correcta dice 0,19 €/km, que era la cuantía antes de la Orden HFP/792/2023 (desde el 17-7-2023 es 0,26 €/km).
 
 41. ¿Cuál será la reducción que sobre el rendimiento neto habrá de practicar un trabajador, cuando el importe del mismo es de 13.000 €?
-    - ( ) 7.302 euros, menos el resultado de multiplicar por 1,75 la diferencia entre 14.852 y 13.000 euros.
-    - ( ) 7.302 euros, menos el resultado de multiplicar por 1,75 la diferencia entre el rendimiento del trabajo y 14.852 euros.
+    - ( ) 5.565 euros, menos el resultado de multiplicar por 1’5 la diferencia entre 13.115 y 13.000 euros.
+    - ( ) 5.565 euros, menos el resultado de multiplicar por 1’5 la diferencia entre el rendimiento del trabajo y 13.115 euros.
     - ( ) Dependerá del número de hijos que formen parte de la unidad familiar.
-    - (x) 7.302 euros.
-    > Tabla del art. 20 LIRPF vigente (RDL 4/2024): si el rendimiento neto es igual o inferior a 14.852 €, la reducción es fija de 7.302 €. Entre 14.852 € y 17.673,52 € se resta 1,75 × (RN − 14.852), y entre 17.673,52 € y 19.747,50 €, 2.364,34 − 1,14 × (RN − 17.673,52). El examen original (ejercicio 2022) usaba la tabla derogada (5.565 €, umbral de 13.115 € y coeficiente 1,5). Las cifras se han actualizado manteniendo la misma estructura de opciones.
+    - (x) 5.565 euros.
+    > Con la tabla del art. 20 LIRPF aplicable al examen (ejercicio 2022), si el rendimiento neto no supera 13.115 € la reducción es fija: 5.565 €, sin aplicar ninguna fórmula. Normativa vigente (RDL 4/2024): la reducción fija es de 7.302 € para rendimientos netos de hasta 14.852 €, y entre 14.852 € y 17.673,52 € se resta 1,75 × (RN − 14.852).
 
 42. ¿Cuál es el rendimiento íntegro del trabajo que corresponde a la entrega gratuita de un vehículo no eficiente energéticamente a un trabajador cuyo coste de adquisición para la empresa ascendió a 20.000 euros, si el tipo de retención aplicable es del 10%?
     - ( ) 16.000 euros.
@@ -382,25 +384,25 @@
     > Art. 14.2.a LIRPF: si la renta está pendiente de resolución judicial, se imputa al período en que la resolución adquiere firmeza, que es el 1-1-2022.
 
 54. Dña. Estefanía, soltera, de 35 años de edad y con discapacidad del 50%, trabaja en el Ayuntamiento de Granada. Ha percibido un sueldo bruto de 16.000 € y las cuotas a la Seguridad Social han ascendido a 2.160 €. ¿Cuál es el importe del rendimiento neto reducido del trabajo personal que se integra en la base imponible del IRPF?:
-    - (x) 1.038 €.
+    - (x) 2.775 €.
     - ( ) 11.840 €.
     - ( ) 3.862,5 €.
-    - ( ) 8.340 €.
-    > Gastos del art. 19.2 LIRPF: Seguridad Social 2.160 € + otros gastos 2.000 € + incremento por trabajador activo con discapacidad entre el 33% y el 65% 3.500 € = 7.660 €. Rendimiento neto: 16.000 − 7.660 = 8.340 €. Reducción del art. 20 vigente (RN ≤ 14.852 €): 7.302 €. Rendimiento neto reducido: 1.038 €. Actualización: con la tabla de 2022 del examen original (5.565 €) salían 2.775 €. En el PDF la opción d) repetía 11.840 €, y se ha sustituido por el rendimiento neto previo (8.340 €).
+    - ( ) 11.840.
+    > Gastos del art. 19.2 LIRPF: Seguridad Social 2.160 € + otros gastos 2.000 € + incremento por trabajador activo con discapacidad entre el 33% y el 65% 3.500 € = 7.660 €. Rendimiento neto: 16.000 − 7.660 = 8.340 €. Reducción del art. 20 (tabla de 2022, RN ≤ 13.115 €): 5.565 €. Rendimiento neto reducido: 2.775 €. Con la tabla vigente (7.302 €) serían 1.038 €. Las opciones b) y d) están repetidas en el examen original.
 
 55. Dña. Paula, de 23 años, trabaja para el Corte Inglés como dependienta. Percibe un sueldo bruto anual de 13.000 €. Además, el Corte Inglés le aporta a un Plan de Pensiones la cantidad de 1.100 € anuales. El tipo de retención es del 15%. Las cuotas a la Seguridad Social ascienden a 1.020 € anuales. ¿Cuál es el importe del rendimiento neto reducido del trabajo?:
     - ( ) 13.080 €.
-    - (x) 3.778 €.
+    - (x) 5.515 €.
     - ( ) 14.100 €.
     - ( ) 11.080 €.
-    > Corrección: la versión anterior había cambiado el enunciado a "antes de reducción". Íntegro: 13.000 € + 1.100 € de contribución imputada (art. 17.1.e LIRPF, sin ingreso a cuenta) = 14.100 €. Gastos: 1.020 € + 2.000 € = 3.020 €. Rendimiento neto: 11.080 €. Reducción del art. 20 vigente: 7.302 €. Rendimiento neto reducido: 3.778 €. Con la tabla de 2022 del examen (5.565 €) el resultado era 5.515 €.
+    > Íntegro: 13.000 € + 1.100 € de contribución imputada (art. 17.1.e LIRPF, sin ingreso a cuenta) = 14.100 €. Gastos: 1.020 € + 2.000 € = 3.020 €. Rendimiento neto: 11.080 €. Reducción del art. 20 (tabla de 2022): 5.565 €. Rendimiento neto reducido: 5.515 €. Con la tabla vigente (7.302 €) serían 3.778 €.
 
 56. Por motivos de trabajo, D. José se ha desplazado a Madrid durante 7 días, percibiendo unas dietas de 1.400 €. Ha justificado de alojamiento 600 € y para el desplazamiento ha utilizado su propio vehículo (1.000 km en total). También se ha tenido que desplazar a Londres durante 9 días. La dieta que ha percibido de la empresa para este viaje ha sido de 3.600 €. El billete de avión le ha costado 400 €, que justifica mediante factura, y el hotel ha importado 1.280 €, que también justifica mediante la correspondiente factura. ¿A cuánto asciende el importe de la dieta que se ha de gravar en el IRPF por estos viajes?
-    - ( ) 1.404,41 €.
+    - ( ) 1404,41 €.
     - ( ) 263,29 €.
     - ( ) 1.141,12 €.
-    - (x) 1.264,47 €.
-    > Madrid: 1.400 − (600 € de hotel + 7 × 53,34 = 373,38 € de manutención + 1.000 km × 0,26 = 260 €) = 166,62 €. Londres: 3.600 − (400 € de avión + 1.280 € de hotel + 9 × 91,35 = 822,15 €) = 1.097,85 €. Total gravado: 1.264,47 € (art. 9.A RIRPF). Actualización: con los 0,19 €/km del examen original salían 1.334,47 €.
+    - (x) 1.334,47 €.
+    > Madrid: 1.400 − (600 € de hotel + 7 × 53,34 = 373,38 € de manutención + 1.000 km × 0,19 = 190 €) = 236,62 €. Londres: 3.600 − (400 € de avión + 1.280 € de hotel + 9 × 91,35 = 822,15 €) = 1.097,85 €. Total gravado: 1.334,47 € (art. 9.A RIRPF), con los 0,19 €/km vigentes en el ejercicio del examen. Con los 0,26 €/km actuales serían 1.264,47 €.
 
 57. Dña. María, funcionaria de la Diputación de Granada, obtiene en el año 2022 un sueldo bruto de 36.000 €. El tipo de retención es del 20%. El importe de la Seguridad Social es de 2.200 €. Está afiliada a UGT abonando una cuota sindical de 600 € anuales. Para sufragar los desplazamientos desde su residencia a su puesto de trabajo, la Diputación le abona un plus de transporte de 500 € mensuales. Por motivos laborales se ha desplazado a Motril y Guadix a lo largo del año 2022, una vez al mes a cada uno de ellos. En todos esos desplazamientos ha utilizado vehículo de empresa y se realizan sin pernocta. En compensación de estos gastos la Diputación le abona 586,74 €. ¿Cuál es el importe del rendimiento neto del trabajo personal que se integra en la base imponible?:
     - (x) 37.200,00 €.
@@ -461,9 +463,9 @@
 65. D. Julio, soltero, de 32 años, trabaja como director de marketing para el hotel Granada Center. El sueldo bruto anual asciende a 48.000 €. Con motivo de su trabajo ha de desplazarse por todo el territorio nacional varias veces al año. En el año 2022 ha percibido en concepto de dietas un total de 10.000 €. En concepto de alojamiento ha justificado con factura un total de 3.800 €. Y por desplazamientos, en billetes de avión ha justificado 1.000 € y puede aplicar un kilometraje de 1.000 km. Los días que ha pernoctado en territorio español han ascendido a 20 y en territorio extranjero a 10. Y sin pernocta, 3 días en territorio español y 2 días en territorio extranjero. También ha percibido en el año 2022, 5.000 € por un premio de antigüedad por permanencia durante cinco años en la empresa. Las cuotas a la Seguridad Social importan 2.160 €. ¿Cuál es el importe del rendimiento neto reducido del trabajo que ha de ser llevado a la base?:
     - ( ) 51.041,53 €.
     - ( ) 48.188 €.
-    - (x) 50.123,53 €.
+    - (x) 50.193,53 €.
     - ( ) 49.041,53 €.
-    > Dietas exentas: 3.800 € de alojamiento + 1.000 € de avión + 1.000 km × 0,26 = 260 € + manutención (20 × 53,34 + 10 × 91,35 + 3 × 26,67 + 2 × 48,08 = 2.156,47 €) = 7.216,47 €. Dieta gravada: 2.783,53 €. El premio, generado en cinco años, se reduce un 30% (art. 18.2 LIRPF): 3.500 €. Íntegro: 48.000 + 2.783,53 + 3.500 = 54.283,53 €. Gastos: 2.160 € + 2.000 € = 4.160 €. Neto: 50.123,53 €, sin reducción del art. 20. Actualización: con 0,19 €/km el examen daba 50.193,53 €.
+    > Dietas exentas: 3.800 € de alojamiento + 1.000 € de avión + 1.000 km × 0,19 = 190 € + manutención (20 × 53,34 + 10 × 91,35 + 3 × 26,67 + 2 × 48,08 = 2.156,47 €) = 7.146,47 €. Dieta gravada: 2.853,53 €. El premio, generado en cinco años, se reduce un 30% (art. 18.2 LIRPF): 3.500 €. Íntegro: 48.000 + 2.853,53 + 3.500 = 54.353,53 €. Gastos: 2.160 € + 2.000 € = 4.160 €. Neto: 50.193,53 €, sin reducción del art. 20. Con los 0,26 €/km actuales serían 50.123,53 €.
 
 66. D. Manuel, de 68 años, viudo y con una minusvalía del 70%, trabaja para la empresa Marketing Soluciones S.L. como responsable del departamento de creación de diseños. Percibe un sueldo bruto de 20.000 €. El importe de la Seguridad Social asciende a 1.200 €. ¿Cuál es el importe del rendimiento neto del trabajo?:
     - (x) 9.050 €.
@@ -541,7 +543,7 @@
     - ( ) 3.352,00 €.
     - ( ) 0,00 €.
     - (x) 2.200,00 €.
-    > Errata de Wuolah: varios PDFs marcan 0 €. Cálculo ordinario: 9.600 − (120 + 2.400 + 7.000 + 300 + 3% × 272.000 = 8.160) = −8.380 €. Pero el sobrino es pariente de tercer grado, y el art. 24 LIRPF impide que el rendimiento neto total sea inferior a la imputación del art. 85: 1,1% × 200.000 = 2.200 €. El examen original sólo tiene tres opciones.
+    > Errata de Wuolah: varios PDFs marcan 0 €. Cálculo ordinario: 9.600 − (120 + 2.400 + 7.000 + 300 + 3% × 272.000 = 8.160) = −8.380 €. Pero el sobrino es pariente de tercer grado, y el art. 24 LIRPF impide que el rendimiento neto total sea inferior a la imputación del art. 85: 1,1% × 200.000 = 2.200 €.
 
 77. D. Sebastián, soltero de 55 años, es titular de dos inmuebles. Un apartamento en Sierra Nevada, que lo adquirió el 1 de abril del año 2001 y un local comercial, situado en Churriana de la Vega, que lo adquirió el 1 de septiembre de 2003. Por el apartamento percibe un alquiler anual de 12.000 € y por el local el alquiler asciende a 24.000 €. Los gastos del apartamento son: gastos de conservación y reparación, 3.000 €; otros gastos, incluida la amortización, 4.000 €. Los gastos del local comercial: intereses, 17.000 €; gastos de reparación y conservación, 11.000 €; otros gastos, incluida la amortización, 15.000 €. ¿Cuál es el importe del rendimiento del capital inmobiliario que obtiene D. Sebastián?
     - ( ) -13.000 €.
@@ -599,9 +601,9 @@
     - (x) Es rendimiento del capital si el bien no está afecto a una actividad económica.
     > Art. 21.1 LIRPF: son rendimientos del capital los que proceden de elementos patrimoniales del contribuyente no afectos a actividades económicas. Si están afectos, el rendimiento es de actividad (art. 27 LIRPF).
 
-85. Doña María vendió el 1 de abril una finca rústica heredada de su padre en 2013, con un valor catastral revisado de 23.000 € (20% suelo), que ha permanecido improductiva todo este tiempo. La finca rústica:
+85. (Datos del caso: el 1 de abril, Doña María vendió una finca rústica heredada de su padre en 2013, con valor catastral revisado de 23.000 € (20% suelo), que ha estado todo este tiempo improductiva). La finca rústica:
     - (x) No genera rentas hasta su venta.
     - ( ) Genera una imputación de rentas inmobiliarias por 253 €.
     - ( ) Genera una imputación de rentas inmobiliarias por 63,25 €.
     - ( ) Tributa en el Impuesto de Sucesiones y Donaciones por su transmisión.
-    > El art. 85 LIRPF sólo imputa renta a los inmuebles urbanos (y a las construcciones en suelo rústico) que no generen rendimientos, no estén afectos ni sean vivienda habitual. Una finca rústica improductiva no genera imputación. La venta producirá una ganancia o pérdida patrimonial, no ISD. Los 253 € (1,1% × 23.000) y 63,25 € (3/12 de esa cantidad) son las trampas de cálculo. Pregunta del examen de 2019 con el enunciado del caso resumido.
+    > El art. 85 LIRPF sólo imputa renta a los inmuebles urbanos (y a las construcciones en suelo rústico) que no generen rendimientos, no estén afectos ni sean vivienda habitual. Una finca rústica improductiva no genera imputación. La venta producirá una ganancia o pérdida patrimonial, no ISD. Los 253 € (1,1% × 23.000) y 63,25 € (3/12 de esa cantidad) son las trampas de cálculo. Pregunta del examen de 2019; entre paréntesis, los datos del caso necesarios para responderla.
