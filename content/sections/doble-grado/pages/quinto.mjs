@@ -63,6 +63,11 @@ export default {
                   kind: "PDF",
                 },
                 {
+                  name: "Repaso express y qué subrayar (4 páginas)",
+                  href: "/Subjects/Fifth/FIS/guias/repaso-express-primer-parcial.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Hoja de ruta para subrayar la LIRPF y el RIRPF",
                   href: "/Subjects/Fifth/FIS/guias/hoja-de-ruta-codigo-primer-parcial.pdf",
                   kind: "PDF",
