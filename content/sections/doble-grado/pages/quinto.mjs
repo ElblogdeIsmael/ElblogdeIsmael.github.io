@@ -83,8 +83,8 @@ export default {
                   kind: "HTML",
                 },
                 {
-                  name: "Banco de tests de Wuolah Parcial 1",
-                  href: "/Subjects/Fifth/FIS/test/test-parcial1-wuolah.html",
+                  name: "Banco de preguntas tipo test Parcial 1",
+                  href: "/Subjects/Fifth/FIS/test/banco-test-primer-parcial.html",
                   kind: "HTML",
                 },
               ],

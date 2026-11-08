@@ -1,7 +1,7 @@
-# Banco de Exámenes Tipo Test - Primer Parcial de Derecho Fiscal (UGR)
+# Banco de Preguntas Tipo Test - Primer Parcial de Derecho Fiscal (UGR)
 
 * **Autor:** Grado en ADE / Doble Grado en Derecho y ADE - Universidad de Granada
-* **Descripción:** Batería de 85 preguntas tipo test de exámenes reales recopilados en Wuolah (profesores Clotilde Martín Pascual, Cecilio, etc.) correspondientes a la materia del Primer Parcial: Tema 1 (Nociones Básicas, LGT, LOFCA y Sistema Tributario Español), Tema 2 (El IRPF - Naturaleza, Hecho Imponible, Exenciones y Unidad Familiar), Tema 3 (Rendimientos del Trabajo Personal - RNTP) y Tema 4.1 (Rendimientos del Capital Inmobiliario - RNCI e Imputación de Rentas Inmobiliarias). Enunciados y opciones cotejados con los PDFs originales, sin duplicados, con las respuestas mal marcadas en Wuolah corregidas. Las cifras son las del examen original; en la justificación se indica, cuando cambia, el resultado con la normativa vigente (LGT, LOFCA, Ley 22/2009, LIRPF, RIRPF y TRLHL).
+* **Descripción:** Batería de 85 preguntas tipo test de exámenes de convocatorias anteriores correspondientes a la materia del Primer Parcial: Tema 1 (Nociones Básicas, LGT, LOFCA y Sistema Tributario Español), Tema 2 (El IRPF - Naturaleza, Hecho Imponible, Exenciones y Unidad Familiar), Tema 3 (Rendimientos del Trabajo Personal - RNTP) y Tema 4.1 (Rendimientos del Capital Inmobiliario - RNCI e Imputación de Rentas Inmobiliarias). Las respuestas se han revisado y, cuando la solución que suele circular es incorrecta, se indica en la explicación. Las cifras son las del enunciado; cuando la normativa vigente da otro resultado, también se indica.
 * **Titulación:** Doble Grado en Derecho y ADE / Grado en ADE - Facultad de Ciencias Económicas y Empresariales
 
 <!-- Tema 1: Nociones Básicas, LGT, LOFCA y Sistema Tributario Español -->
@@ -46,7 +46,7 @@
     - (x) Se determinan en la ley 22/2009.
     - ( ) Se determinan en la ley reguladora del citado tributo.
     - ( ) Ninguna es correcta.
-    > RESPUESTA CORREGIDA respecto a Wuolah. el test de Cecilio y el recopilatorio marcan la a). La LOFCA (art. 19.2) sólo fija el marco general; el alcance concreto de las competencias normativas sobre cada tributo cedido lo determina la Ley 22/2009 (arts. 46 a 52).
+    > Respuesta corregida: es habitual ver marcada la a), pero no es correcta. La LOFCA (art. 19.2) sólo fija el marco general; el alcance concreto de las competencias normativas sobre cada tributo cedido lo determina la Ley 22/2009 (arts. 46 a 52).
 
 7. El IRPF:
     - ( ) Grava la renta obtenida en España por una persona física.
@@ -81,7 +81,7 @@
     - ( ) Una prestación patrimonial debida al Estado, nacida de la ley, con la finalidad de contribuir al sostenimiento de los gastos públicos.
     - ( ) Es una prestación pecuniaria debida a un ente público, de origen legal o contractual, para hacer efectivo el deber de contribuir al sostenimiento de los gastos públicos.
     - (x) Una prestación patrimonial debida a un ente público, en virtud de ley, para hacer efectivo el deber de contribuir al sostenimiento de los gastos públicos.
-    > RESPUESTA CORREGIDA respecto a Wuolah. el test de Cecilio y el recopilatorio marcan la b). La b) es incorrecta porque el tributo no se debe sólo al Estado, sino también a las CCAA y a las corporaciones locales. La c) también falla, porque el tributo nunca tiene origen contractual (arts. 2.1 LGT y 31.3 CE).
+    > Respuesta corregida: es habitual ver marcada la b), pero no es correcta. La b) es incorrecta porque el tributo no se debe sólo al Estado, sino también a las CCAA y a las corporaciones locales. La c) también falla, porque el tributo nunca tiene origen contractual (arts. 2.1 LGT y 31.3 CE).
 
 12. Señale la respuesta más completa de las que sean correctas:
     - ( ) Hay tres tipos de impuestos: Impuestos, contribuciones especiales y tasas.
@@ -102,14 +102,14 @@
     - (x) Una tasa por utilización del dominio público.
     - ( ) Una contribución especial.
     - ( ) Un precio público.
-    > RESPUESTA CORREGIDA respecto a Wuolah. varios tests marcan la d). Lo que se paga no es un servicio prestado en libre concurrencia, sino la ocupación privativa de un local universitario, que es un bien de dominio público. Es el hecho imponible de la tasa por utilización privativa o aprovechamiento especial del dominio público (art. 2.2.a LGT y art. 6 Ley 8/1989). Los propios apuntes de la cátedra ponen el "local universitario de copistería" como ejemplo de esta tasa.
+    > Respuesta corregida: es habitual ver marcada la d), pero no es correcta. Lo que se paga no es un servicio prestado en libre concurrencia, sino la ocupación privativa de un local universitario, que es un bien de dominio público. Es el hecho imponible de la tasa por utilización privativa o aprovechamiento especial del dominio público (art. 2.2.a LGT y art. 6 Ley 8/1989).
 
 15. El Ayuntamiento de Granada se plantea establecer un Impuesto sobre las viviendas desocupadas, ¿puede hacerlo?:
     - ( ) Sí porque la Constitución atribuye poder tributario a las Corporaciones Locales.
     - ( ) No porque las Corporaciones Locales no pueden dictar leyes y éstas son necesarias para establecer tributos.
     - (x) Sí porque lo permite la Ley de Haciendas Locales.
     - ( ) No porque únicamente el Estado puede establecer nuevos impuestos.
-    > Respuesta de la clave oficial (test de Cecilio y recopilatorio). El ayuntamiento no puede crear un impuesto nuevo, pero el TRLHL le permite gravar las viviendas vacías mediante el recargo del IBI sobre inmuebles de uso residencial desocupados con carácter permanente (art. 72.4 TRLHL, hasta el 150% tras la Ley 12/2023), aprobado por ordenanza fiscal. La b) es falsa: si así fuera, los municipios no podrían establecer ningún tributo, y sí pueden cuando una ley los habilita (art. 59 TRLHL).
+    > El ayuntamiento no puede crear un impuesto nuevo, pero el TRLHL le permite gravar las viviendas vacías mediante el recargo del IBI sobre inmuebles de uso residencial desocupados con carácter permanente (art. 72.4 TRLHL, hasta el 150% tras la Ley 12/2023), aprobado por ordenanza fiscal. La b) es falsa: si así fuera, los municipios no podrían establecer ningún tributo, y sí pueden cuando una ley los habilita (art. 59 TRLHL).
 
 16. La Junta de Andalucía se plantea establecer un recargo sobre el Impuesto de Sociedades, ¿puede hacerlo?
     - (x) No porque el Impuesto de Sociedades no puede ser cedido a las Comunidades Autónomas.
@@ -195,7 +195,7 @@
     - ( ) Es renta exenta para el que la cobra y da derecho al que la paga a reducir su base imponible.
     - ( ) Ninguna de las anteriores es correcta.
     - (x) Es renta no exenta para el que la cobra y da derecho a reducir la base imponible del que la paga.
-    > RESPUESTA CORREGIDA respecto a Wuolah. la clave del recopilatorio marca la c). La pensión compensatoria fijada por resolución judicial es rendimiento del trabajo no exento para el perceptor (art. 17.2.f LIRPF) y reduce la base imponible del pagador (art. 55 LIRPF).
+    > Respuesta corregida: es habitual ver marcada la c) ("Ninguna"), pero la d) es exacta. La pensión compensatoria fijada por resolución judicial es rendimiento del trabajo no exento para el perceptor (art. 17.2.f LIRPF) y reduce la base imponible del pagador (art. 55 LIRPF).
 
 28. El IRPF es:
     - ( ) Un impuesto personal, frente a un impuesto sobre el patrimonio que es real.
@@ -233,7 +233,6 @@
     > Arts. 8.1.b y 10.1.e LIRPF: los funcionarios en activo que ejercen en el extranjero un cargo o empleo oficial tienen su residencia habitual fuera de España, pero la ley los sigue considerando contribuyentes del IRPF. No es que sean residentes, sino que son contribuyentes a pesar de no serlo, por eso la c) es imprecisa.
 
 33. El Sr. A, de nacionalidad italiana, pero que viene residiendo en España habitualmente desde hace 5 años, ha permanecido en España 160 días durante el ejercicio. El resto del año lo ha pasado en Italia (visitando a sus familiares) 60 días; Suiza, 80 días (visitando a su hija), donde además tiene la mayor parte de su patrimonio y el núcleo principal de intereses económicos; Perú (en una misión de voluntariado), 30 días; y Méjico (en el domicilio de su novia), 36 días. El Sr. A no puede probar que su residencia fiscal esté en Suiza, Italia, Perú ni Méjico. ¿Es contribuyente por el IRPF?
-    - ( ) No contesto.
     - ( ) No, no tributa por el IRPF; es residente en Italia, puesto que es de nacionalidad italiana.
     - ( ) No, no tributa por el IRPF, ya que es residente en Suiza, que es donde el núcleo principal de sus intereses económicos y patrimoniales.
     - ( ) Sí, es residente en territorio español a efectos del IRPF porque en España ha pasado mayor número de días durante el ejercicio.
@@ -279,7 +278,6 @@
     - (x) La de la Seguridad Social está exenta, la que recibe de su empresa, tributa como rendimiento del trabajo.
     - ( ) La de la Seguridad Social está exenta, la que recibe de su empresa, tributa como rendimiento del capital.
     - ( ) Ambas están exentas.
-    - ( ) No contesto.
     - ( ) Ambas tributan como ganancias patrimoniales.
     > El art. 7.f LIRPF sólo exime las prestaciones por incapacidad permanente absoluta o gran invalidez de la Seguridad Social (o de mutualidades alternativas). El complemento de la empresa es rendimiento del trabajo sujeto (art. 17.1 LIRPF).
 
@@ -290,7 +288,7 @@
     - (x) Son rendimientos del trabajo, pero está exento el gasto, si el transporte se realiza en un medio público o, en otro caso, 0’26 euros por Km recorrido.
     - ( ) Son rendimientos de trabajo, pero está exento todo el gasto que se justifique.
     - ( ) Son rendimientos del trabajo, pero están exentos 0’19 euros por Km recorrido.
-    > Art. 9.A.2 RIRPF: queda exento el importe justificado del transporte público o, si se usa vehículo propio, 0,26 €/km más peajes y aparcamiento justificados. Ojo: en otras versiones del examen la opción correcta dice 0,19 €/km, que era la cuantía antes de la Orden HFP/792/2023 (desde el 17-7-2023 es 0,26 €/km).
+    > Art. 9.A.2 RIRPF: queda exento el importe justificado del transporte público o, si se usa vehículo propio, 0,26 €/km más peajes y aparcamiento justificados. Ojo: también puede aparecer con 0,19 €/km, la cuantía anterior a la Orden HFP/792/2023 (desde el 17-7-2023 es 0,26 €/km).
 
 41. ¿Cuál será la reducción que sobre el rendimiento neto habrá de practicar un trabajador, cuando el importe del mismo es de 13.000 €?
     - ( ) 5.565 euros, menos el resultado de multiplicar por 1’5 la diferencia entre 13.115 y 13.000 euros.
@@ -374,7 +372,7 @@
     - (x) 3.586,80 €.
     - ( ) 3.557,40 €.
     - ( ) 3.498,60 €.
-    > RESPUESTA CORREGIDA respecto a Wuolah. la justificación del PDF da 3.557,40 €. La cesión de uso de un vehículo propiedad de la empresa se valora en el 20% anual de su coste (art. 43.1.1º.b LIRPF): 2.940 €. Ingreso a cuenta no repercutido: 22% × 2.940 = 646,80 €. Total: 3.586,80 €.
+    > Respuesta corregida: es habitual ver resuelta como 3.557,40 €, pero ese importe no cuadra con el cálculo. La cesión de uso de un vehículo propiedad de la empresa se valora en el 20% anual de su coste (art. 43.1.1º.b LIRPF): 2.940 €. Ingreso a cuenta no repercutido: 22% × 2.940 = 646,80 €. Total: 3.586,80 €.
 
 53. Dña. María, casada en régimen de gananciales, de 38 años de edad, cumplió el 1 de octubre de 2019 veinte años de antigüedad en la empresa en la que trabaja. Por tal motivo debía percibir un premio por antigüedad de 5.000 €, según su contrato laboral. Sin embargo, el empresario entiende que no le correspondía ese premio hasta el año siguiente (2020) por haber estado de baja por maternidad durante un período de cuatro meses el año 2019. Dña. María interpuso la correspondiente demanda que se resuelve el 1 de diciembre de 2021 en la que se le confirma ese derecho y la obligación de pagar al empresario. La sentencia adquiere firmeza el 1 de enero de 2022, pero hasta el 1 de febrero de 2022 no percibe ese importe. ¿En qué período impositivo ha de declarar ese premio de antigüedad?:
     - (x) 2022.
@@ -387,8 +385,8 @@
     - (x) 2.775 €.
     - ( ) 11.840 €.
     - ( ) 3.862,5 €.
-    - ( ) 11.840.
-    > Gastos del art. 19.2 LIRPF: Seguridad Social 2.160 € + otros gastos 2.000 € + incremento por trabajador activo con discapacidad entre el 33% y el 65% 3.500 € = 7.660 €. Rendimiento neto: 16.000 − 7.660 = 8.340 €. Reducción del art. 20 (tabla de 2022, RN ≤ 13.115 €): 5.565 €. Rendimiento neto reducido: 2.775 €. Con la tabla vigente (7.302 €) serían 1.038 €. Las opciones b) y d) están repetidas en el examen original.
+    - ( ) 8.340 €.
+    > Gastos del art. 19.2 LIRPF: Seguridad Social 2.160 € + otros gastos 2.000 € + incremento por trabajador activo con discapacidad entre el 33% y el 65% 3.500 € = 7.660 €. Rendimiento neto: 16.000 − 7.660 = 8.340 €. Reducción del art. 20 (tabla de 2022, RN ≤ 13.115 €): 5.565 €. Rendimiento neto reducido: 2.775 €. Con la tabla vigente (7.302 €) serían 1.038 €. La opción d) (8.340 €) es el rendimiento neto antes de aplicar la reducción.
 
 55. Dña. Paula, de 23 años, trabaja para el Corte Inglés como dependienta. Percibe un sueldo bruto anual de 13.000 €. Además, el Corte Inglés le aporta a un Plan de Pensiones la cantidad de 1.100 € anuales. El tipo de retención es del 15%. Las cuotas a la Seguridad Social ascienden a 1.020 € anuales. ¿Cuál es el importe del rendimiento neto reducido del trabajo?:
     - ( ) 13.080 €.
@@ -409,7 +407,7 @@
     - ( ) 36.786,74 €.
     - ( ) 36.548,00 €.
     - ( ) 35.134,74 €.
-    > RESPUESTA CORREGIDA respecto a Wuolah. La resolución del PDF da 37.786,74 €, que ni siquiera figura entre las opciones, porque suma como renta los 586,74 € de dietas, que están exentos. El plus de transporte de casa al trabajo no es dieta exenta y tributa entero (6.000 €). Los 586,74 € por los 24 viajes sin pernocta en España están exentos porque no superan 24 × 26,67 = 640,08 € (art. 9.A.3.b RIRPF). Íntegro: 42.000 €. Gastos: 2.200 € de Seguridad Social + 600 € de cuota sindical (deducible sin límite, art. 19.2.c LIRPF) + 2.000 € = 4.800 €. Neto: 37.200 €, sin reducción del art. 20.
+    > Respuesta corregida: es habitual verla resuelta como 37.786,74 €, importe que ni siquiera figura entre las opciones, porque suma como renta los 586,74 € de dietas, que están exentos. El plus de transporte de casa al trabajo no es dieta exenta y tributa entero (6.000 €). Los 586,74 € por los 24 viajes sin pernocta en España están exentos porque no superan 24 × 26,67 = 640,08 € (art. 9.A.3.b RIRPF). Íntegro: 42.000 €. Gastos: 2.200 € de Seguridad Social + 600 € de cuota sindical (deducible sin límite, art. 19.2.c LIRPF) + 2.000 € = 4.800 €. Neto: 37.200 €, sin reducción del art. 20.
 
 58. La diferencia entre un rendimiento del trabajo y uno de actividad está en que:
     - ( ) El rendimiento del trabajo es el que deriva del ejercicio de una profesión y el de actividad del desarrollo de una empresa.
@@ -479,14 +477,14 @@
     - (x) 28.600 €.
     - ( ) 31.548 €.
     - ( ) 30.548 €.
-    > RESPUESTA CORREGIDA respecto a Wuolah. la resolución del PDF da 30.548 €. Seguro: 3 × (1.000 − 500) = 1.500 € sujetos (art. 42.3.c LIRPF). Transporte público: 2.000 − 1.500 = 500 € sujetos (art. 42.3.e LIRPF). Ingreso a cuenta no repercutido: 20% × 2.000 = 400 €. Íntegro: 32.400 €. Gastos: 1.800 € + 2.000 € = 3.800 €. Neto: 28.600 €, sin reducción del art. 20 por superar 19.747,50 €.
+    > Respuesta corregida: es habitual ver marcada la d) (30.548 €), pero no es correcta. Seguro: 3 × (1.000 − 500) = 1.500 € sujetos (art. 42.3.c LIRPF). Transporte público: 2.000 − 1.500 = 500 € sujetos (art. 42.3.e LIRPF). Ingreso a cuenta no repercutido: 20% × 2.000 = 400 €. Íntegro: 32.400 €. Gastos: 1.800 € + 2.000 € = 3.800 €. Neto: 28.600 €, sin reducción del art. 20 por superar 19.747,50 €.
 
 68. D. Fernando ha recibido durante el año 2022 de su empresa 20.000 € brutos en concepto de rendimientos dinerarios del trabajo, pero también disfruta gratuitamente de una vivienda propiedad de la empresa para la que trabaja. El valor catastral revisado de la misma es de 50.000 €. ¿Cuál es la valoración de esta vivienda, que ha de integrar D. Fernando como retribución en especie del trabajo, a la que habría que sumar el ingreso a cuenta?:
     - ( ) 4.000 €.
     - ( ) 5.000 €.
     - ( ) 2.500 €.
     - (x) 2.000 €.
-    > RESPUESTA CORREGIDA respecto a Wuolah. el PDF aplica el 10% y marca 5.000 €. Con valor catastral revisado se aplica el 5% (art. 43.1.1º.a LIRPF): 2.500 €. Además, la valoración no puede superar el 10% de las restantes contraprestaciones del trabajo (10% × 20.000 = 2.000 €). Valoración: 2.000 €.
+    > Respuesta corregida: es habitual ver marcada la b) (5.000 €), que aplica el 10%, pero no es correcta. Con valor catastral revisado se aplica el 5% (art. 43.1.1º.a LIRPF): 2.500 €. Además, la valoración no puede superar el 10% de las restantes contraprestaciones del trabajo (10% × 20.000 = 2.000 €). Valoración: 2.000 €.
 
 <!-- Tema 4.1: Rendimientos del Capital Inmobiliario e Imputación de Rentas Inmobiliarias -->
 
@@ -495,7 +493,7 @@
     - ( ) Al tributar el beneficio en el impuesto del arrendatario, lo que percibe el arrendador está exento.
     - ( ) Como rendimiento del capital mobiliario.
     - ( ) Como rendimiento de actividad.
-    > RESPUESTA CORREGIDA respecto a Wuolah. la clave del recopilatorio marca la c). Al cesar en la explotación y arrendar el inmueble, la renta procede de un bien inmueble no afecto (art. 22.1 LIRPF). Sólo sería actividad económica con al menos una persona empleada con contrato laboral a jornada completa para gestionar el arrendamiento (art. 27.2 LIRPF). Arrendar el negocio en funcionamiento (industria) sería capital mobiliario (art. 25.4.c), pero aquí se arrienda el local.
+    > Respuesta corregida: es habitual ver marcada la c), pero no es correcta. Al cesar en la explotación y arrendar el inmueble, la renta procede de un bien inmueble no afecto (art. 22.1 LIRPF). Sólo sería actividad económica con al menos una persona empleada con contrato laboral a jornada completa para gestionar el arrendamiento (art. 27.2 LIRPF). Arrendar el negocio en funcionamiento (industria) sería capital mobiliario (art. 25.4.c), pero aquí se arrienda el local.
 
 70. Para la determinación del rendimiento neto del capital inmobiliario, los gastos de ampliación o mejora:
     - ( ) Son gastos deducibles.
@@ -543,14 +541,14 @@
     - ( ) 3.352,00 €.
     - ( ) 0,00 €.
     - (x) 2.200,00 €.
-    > RESPUESTA CORREGIDA respecto a Wuolah. varios PDFs marcan 0 €. Cálculo ordinario: 9.600 − (120 + 2.400 + 7.000 + 300 + 3% × 272.000 = 8.160) = −8.380 €. Pero el sobrino es pariente de tercer grado, y el art. 24 LIRPF impide que el rendimiento neto total sea inferior a la imputación del art. 85: 1,1% × 200.000 = 2.200 €.
+    > Respuesta corregida: es habitual ver marcada la b) (0 €), pero no es correcta. Cálculo ordinario: 9.600 − (120 + 2.400 + 7.000 + 300 + 3% × 272.000 = 8.160) = −8.380 €. Pero el sobrino es pariente de tercer grado, y el art. 24 LIRPF impide que el rendimiento neto total sea inferior a la imputación del art. 85: 1,1% × 200.000 = 2.200 €.
 
 77. D. Sebastián, soltero de 55 años, es titular de dos inmuebles. Un apartamento en Sierra Nevada, que lo adquirió el 1 de abril del año 2001 y un local comercial, situado en Churriana de la Vega, que lo adquirió el 1 de septiembre de 2003. Por el apartamento percibe un alquiler anual de 12.000 € y por el local el alquiler asciende a 24.000 €. Los gastos del apartamento son: gastos de conservación y reparación, 3.000 €; otros gastos, incluida la amortización, 4.000 €. Los gastos del local comercial: intereses, 17.000 €; gastos de reparación y conservación, 11.000 €; otros gastos, incluida la amortización, 15.000 €. ¿Cuál es el importe del rendimiento del capital inmobiliario que obtiene D. Sebastián?
     - ( ) -13.000 €.
     - (x) -10.000 €.
     - ( ) -5.600 €.
     - ( ) -14.000 €.
-    > RESPUESTA CORREGIDA respecto a Wuolah. la mayoría marca −14.000 €, que no aplica el límite legal. Apartamento: 12.000 − 3.000 − 4.000 = 5.000 €. Local: intereses más conservación (28.000 €) se limitan, por inmueble, a sus ingresos (24.000 €), y los 4.000 € de exceso se arrastran 4 años (art. 23.1.a LIRPF). Local: 24.000 − 24.000 − 15.000 = −15.000 €. Total: −10.000 €. Un apartamento de esquí es un alquiler de temporada, sin reducción del art. 23.2. Si fuese vivienda permanente con reducción del 60%, saldrían −13.000 €.
+    > Respuesta corregida: es habitual ver marcada la d) (−14.000 €), que no aplica el límite legal. Apartamento: 12.000 − 3.000 − 4.000 = 5.000 €. Local: intereses más conservación (28.000 €) se limitan, por inmueble, a sus ingresos (24.000 €), y los 4.000 € de exceso se arrastran 4 años (art. 23.1.a LIRPF). Local: 24.000 − 24.000 − 15.000 = −15.000 €. Total: −10.000 €. Un apartamento de esquí es un alquiler de temporada, sin reducción del art. 23.2. Si fuese vivienda permanente con reducción del 60%, saldrían −13.000 €.
 
 78. Si al arrendador de un inmueble, el arrendatario le adeuda la cuota del mes de septiembre, ¿qué consideración tiene dicha cuota?
     - ( ) No tiene ninguna repercusión de cara al cálculo del rendimiento del capital.
@@ -564,14 +562,14 @@
     - ( ) No tiene ninguna repercusión de cara al cálculo del rendimiento de capital.
     - (x) Será un ingreso y un gasto.
     - ( ) Será un gasto.
-    > RESPUESTA CORREGIDA respecto a Wuolah. varios PDFs marcan la a). La cuota devengada es ingreso (art. 14.1.a LIRPF). Como entre la gestión de cobro (febrero/marzo) y el 31 de diciembre pasan más de seis meses, es también gasto deducible por saldo de dudoso cobro (art. 13.e RIRPF). La pregunta contrasta con la anterior precisamente por esa regla de los seis meses.
+    > Respuesta corregida: es habitual ver marcada la a), pero no es correcta. La cuota devengada es ingreso (art. 14.1.a LIRPF). Como entre la gestión de cobro (febrero/marzo) y el 31 de diciembre pasan más de seis meses, es también gasto deducible por saldo de dudoso cobro (art. 13.e RIRPF). La pregunta contrasta con la anterior precisamente por esa regla de los seis meses.
 
 80. D. Juan es titular de un local comercial que lo tiene arrendado por 2.000 € mensuales. El 30 de junio del ejercicio se traspasa el local, percibiendo D. Juan 10.000 €. El nuevo arrendatario abona desde entonces 2.500 € mensuales de alquiler. Los gastos fiscalmente deducibles ascienden a 6.800 €. ¿Qué importe ha de integrar en la Base Imponible D. Juan como RCI?:
     - ( ) 30.200 €.
     - ( ) 26.200 €.
     - (x) 27.200 €.
     - ( ) 20.200 €.
-    > RESPUESTA CORREGIDA respecto a Wuolah. la mayoría marca 30.200 € y olvida la irregularidad. Rentas: 6 × 2.000 + 6 × 2.500 = 27.000 €. Participación en el traspaso: 10.000 € (art. 22.2 LIRPF). Menos 6.800 € de gastos: 30.200 €. El importe del traspaso es un rendimiento obtenido de forma notoriamente irregular (art. 15.1.a RIRPF) y se reduce un 30% (art. 23.3 LIRPF): 30.200 − 3.000 = 27.200 €.
+    > Respuesta corregida: es habitual ver marcada la a) (30.200 €), que olvida la irregularidad. Rentas: 6 × 2.000 + 6 × 2.500 = 27.000 €. Participación en el traspaso: 10.000 € (art. 22.2 LIRPF). Menos 6.800 € de gastos: 30.200 €. El importe del traspaso es un rendimiento obtenido de forma notoriamente irregular (art. 15.1.a RIRPF) y se reduce un 30% (art. 23.3 LIRPF): 30.200 − 3.000 = 27.200 €.
 
 81. ¿Cuál es el coeficiente máximo para la amortización de un inmueble a efectos de determinar el rendimiento del capital inmobiliario por él producido?
     - ( ) El que se corresponda con el tiempo que el bien esté arrendado.
@@ -585,7 +583,7 @@
     - ( ) 250 €.
     - (x) 1.100 €.
     - ( ) 200 €.
-    > RESPUESTA CORREGIDA respecto a Wuolah. varios PDFs marcan 500 €. El cálculo ordinario da 500 €, pero el hermano es pariente de segundo grado y el art. 24 LIRPF obliga a un mínimo igual a la imputación del art. 85: 1,1% × 100.000 = 1.100 €.
+    > Respuesta corregida: es habitual ver marcada la a) (500 €), pero no es correcta. El cálculo ordinario da 500 €, pero el hermano es pariente de segundo grado y el art. 24 LIRPF obliga a un mínimo igual a la imputación del art. 85: 1,1% × 100.000 = 1.100 €.
 
 83. En el caso de un inmueble, cuyo precio de adquisición es de 120.000 euros y el valor catastral total de 50.000, de los cuales 40.000 corresponden a la edificación, ¿cuál será la base de la amortización, a efectos de la determinación del rendimiento del capital inmobiliario?
     - (x) 96.000.
@@ -606,4 +604,4 @@
     - ( ) Genera una imputación de rentas inmobiliarias por 253 €.
     - ( ) Genera una imputación de rentas inmobiliarias por 63,25 €.
     - ( ) Tributa en el Impuesto de Sucesiones y Donaciones por su transmisión.
-    > El art. 85 LIRPF sólo imputa renta a los inmuebles urbanos (y a las construcciones en suelo rústico) que no generen rendimientos, no estén afectos ni sean vivienda habitual. Una finca rústica improductiva no genera imputación. La venta producirá una ganancia o pérdida patrimonial, no ISD. Los 253 € (1,1% × 23.000) y 63,25 € (3/12 de esa cantidad) son las trampas de cálculo. Pregunta del examen de 2019; entre paréntesis, los datos del caso necesarios para responderla.
+    > El art. 85 LIRPF sólo imputa renta a los inmuebles urbanos (y a las construcciones en suelo rústico) que no generen rendimientos, no estén afectos ni sean vivienda habitual. Una finca rústica improductiva no genera imputación. La venta producirá una ganancia o pérdida patrimonial, no ISD. Los 253 € (1,1% × 23.000) y 63,25 € (3/12 de esa cantidad) son las trampas de cálculo.
