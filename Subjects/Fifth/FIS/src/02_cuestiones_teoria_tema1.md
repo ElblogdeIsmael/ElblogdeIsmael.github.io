@@ -727,9 +727,7 @@ En el bloque de la imposición directa estatal, los impuestos cedidos a las comu
   - Aprobación de bonificaciones sobre la cuota tributaria (como la bonificación del 99% para cónyuges y descendientes en Andalucía).
 
 
-- **4. Impuesto sobre el depósito de residuos en vertederos, la incineración y la coincineración**
-
-* Tributo medioambiental directo de titularidad estatal creado por la Ley 7/2022, cedido a las comunidades autónomas junto con la gestión y recaudación en su territorio.
+- **Nota:** el Impuesto sobre el depósito de residuos en vertederos, la incineración y la coincineración de residuos (Ley 7/2022) también está cedido al 100%, pero es un impuesto **indirecto**, así que no entra en esta lista.
 
 
 - **Delimitación: Impuestos directos estatales NO cedidos**
