@@ -176,10 +176,12 @@ En el ordenamiento español coexisten dos regímenes netamente diferenciados:
 1. **Régimen Común:** Aplicable a quince Comunidades Autónomas. Sus ingresos tributarios se articulan a través de tres vías:
    - *Tributos propios:* Creados por ley del parlamento autonómico sobre materias imponibles no gravadas previamente por el Estado ni por las entidades locales (art. 6 y 9 LOFCA), frecuentemente con finalidad medioambiental (gravámenes sobre vertidos o bolsas plásticas).
    - *Tributos cedidos por el Estado:* Tributos de titularidad estatal cuyo rendimiento, competencias normativas y/o facultades de gestión se ceden total o parcialmente a la Comunidad Autónoma.
-     - *Cesión total del rendimiento:* Impuesto sobre el Patrimonio (IP), Impuesto sobre Sucesiones y Donaciones (ISD), Impuesto sobre Transmisiones Patrimoniales y Actos Jurídicos Documentados (ITP-AJD) y Tributos sobre el Juego.
-     - *Cesión parcial del rendimiento:* IRPF (50% de la recaudación líquida), IVA (50%) e Impuestos Especiales de Fabricación (58% sobre alcohol, tabaco e hidrocarburos).
+     - *Cesión total del rendimiento (100%):* Impuesto sobre el Patrimonio (IP), Impuesto sobre Sucesiones y Donaciones (ISD), Impuesto sobre Transmisiones Patrimoniales y Actos Jurídicos Documentados (ITP-AJD), Tributos sobre el Juego, Impuesto sobre la Electricidad, Impuesto Especial sobre Determinados Medios de Transporte (matriculación), tipo estatal especial del Impuesto sobre Hidrocarburos e Impuesto sobre el depósito de residuos en vertederos, la incineración y la coincineración de residuos (Ley 7/2022).
+     - *Cesión parcial del rendimiento:* IRPF (50%), IVA (50%) y los Impuestos Especiales de Fabricación al 58%: Cerveza, Vino y Bebidas Fermentadas, Productos Intermedios, Alcohol y Bebidas Derivadas, Labores del Tabaco e Hidrocarburos (este último, sólo el tipo estatal general).
+     - *Dónde está:* la lista de tributos cedibles y los porcentajes máximos, en el art. 11 LOFCA; el alcance concreto de la cesión, en la Ley 22/2009; las competencias normativas, en sus arts. 46 a 55 (IRPF, art. 46).
+     - *No susceptibles de cesión:* Impuesto sobre Sociedades, Impuesto sobre la Renta de No Residentes e Impuesto sobre las Primas de Seguros (no figuran en el art. 11 LOFCA).
      - *Capacidad normativa autonómica:* En los tributos cedidos con competencia regulatoria (como IRPF, ISD e ITP-AJD), las CCAA pueden aprobar escalas autonómicas de gravamen, deducciones de la cuota o tipos reducidos adaptados a su territorio.
-   - *Recargos sobre impuestos estatales:* Posibilidad legal de fijar recargos sobre figuras estatales no cedidas, siempre que no desvirtúen la naturaleza del impuesto.
+   - *Recargos sobre impuestos estatales (art. 12 LOFCA):* Las CCAA pueden establecer recargos sobre los tributos del Estado **susceptibles de cesión**, nunca sobre los que no lo son (por eso no cabe un recargo autonómico sobre el Impuesto sobre Sociedades). Sobre el IVA y los Impuestos Especiales de Fabricación sólo podrán establecerlos cuando tengan competencia normativa sobre sus tipos, y hoy no la tienen.
 
 2. **Régimen Foral (País Vasco y Navarra):** Amparado por la Disposición Adicional Primera de la Constitución. Los territorios históricos del País Vasco (mediante el Concierto Económico) y la Comunidad Foral de Navarra (mediante el Convenio Económico) gozan de potestad tributaria casi plena para regular, liquidar y recaudar la totalidad de las figuras impositivas directas e indirectas en su territorio. Como contrapartida, aportan anualmente al Estado una suma convenida ("el cupo" o "aportación") para costear las competencias exclusivas estatales no asumidas (defensa exterior, aduanas, relaciones diplomáticas y corona).
 
@@ -212,7 +214,7 @@ El siguiente cuadro sinóptico resume la clasificación sistemática de las prin
 | **ISD** | Directo, personal, subjetivo, instantáneo | Incrementos patrimoniales gratuitos (herencias y donaciones) | Sí (100% recaudación + capacidad normativa) | Agencia Tributaria Autonómica |
 | **IVA** | Indirecto, real, objetivo, instantáneo | Consumo y entregas de bienes/servicios empresariales | Sí (50% recaudación, sin capacidad normativa) | AEAT |
 | **ITP-AJD** | Indirecto, real, objetivo, instantáneo | Tráfico patrimonial civil, operaciones societarias y actos notariales | Sí (100% recaudación + capacidad normativa de tipos) | Agencia Tributaria Autonómica |
-| **IIEE** | Indirecto, real, objetivo, instantáneo | Consumos específicos (hidrocarburos, alcohol, tabaco, electricidad) | Sí (58% de fabricación en régimen común) | AEAT |
+| **IIEE** | Indirecto, real, objetivo, instantáneo | Consumos específicos (hidrocarburos, alcohol, tabaco, electricidad) | Sí: 58% (alcohol, cerveza, vino, productos intermedios, tabaco e hidrocarburos tipo general); 100% electricidad y tipo especial de hidrocarburos; sin capacidad normativa | AEAT |
 
 
 ## La Relación Jurídico-Tributaria y las Obligaciones Tributarias
@@ -602,7 +604,7 @@ El repostaje de gasolina o gasóleo activa una cadena impositiva acumulativa de 
 
 2. **Impuesto Especial sobre Hidrocarburos (IIEE):** Impuesto indirecto de fabricación estatal que grava la obtención y puesta a consumo del carburante refinado (Ley 38/1992).
 
-3. **Tipo impositivo autonómico del Impuesto sobre Hidrocarburos:** Tramo especial integrado en la estructura del impuesto de fabricación, cedido a las Comunidades Autónomas.
+3. **Tipo estatal especial del Impuesto sobre Hidrocarburos:** Desde 2013 sustituye al antiguo tramo autonómico (que se integró en el impuesto). Su recaudación está cedida al 100% a las CCAA, que además pueden fijar un tipo autonómico adicional dentro de los límites legales.
 
 4. **Impuesto sobre el Valor Añadido (IVA):** Tipo general del 21% que se aplica sobre el precio final acumulado, formando parte de su base imponible los impuestos especiales devengados con anterioridad (art. 78.Dos.4º LIVA).
 
@@ -754,7 +756,12 @@ Cuando los beneficiarios son personas distintas del contratante fallecido (por e
 | **ITP y AJD (TRLITPAJD)** | Estado | Comunidades Autónomas | 100% cedido con potestad normativa |
 | **IRPF (Ley 35/2006)** | Estado | Estado (AEAT) | 50% cedido (escala y deducción autonómica) |
 | **IVA (Ley 37/1992)** | Estado (Directiva UE) | Estado (AEAT) | 50% cedido (sin potestad normativa) |
-| **Impuestos Especiales Fabricación** | Estado | Estado (AEAT) | 58% cedido (sin potestad normativa) |
+| **Impuestos Especiales Fabricación** | Estado | Estado (AEAT) | 58% cedido (sin potestad normativa); tipo especial de hidrocarburos, 100% |
+| **Impuesto sobre la Electricidad** | Estado | Estado (AEAT) | 100% cedido (sin potestad normativa) |
+| **Impuesto Especial sobre Determinados Medios de Transporte** | Estado | Comunidades Autónomas | 100% cedido con potestad normativa (tipos) |
+| **Tributos sobre el Juego** | Estado | Comunidades Autónomas | 100% cedido con potestad normativa |
+| **Impuesto sobre el depósito de residuos (Ley 7/2022)** | Estado | Comunidades Autónomas | 100% cedido |
+| **Impuesto sobre las Primas de Seguros** | Estado | Estado (AEAT) | 0% (no susceptible de cesión) |
 
 \vspace{0.3cm}
 
