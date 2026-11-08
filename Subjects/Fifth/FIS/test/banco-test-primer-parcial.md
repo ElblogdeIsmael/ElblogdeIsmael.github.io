@@ -1,7 +1,7 @@
 # Banco de Preguntas Tipo Test - Primer Parcial de Derecho Fiscal (UGR)
 
 * **Autor:** Grado en ADE / Doble Grado en Derecho y ADE - Universidad de Granada
-* **Descripción:** Batería de 102 preguntas tipo test de exámenes de convocatorias anteriores correspondientes a la materia del Primer Parcial: Tema 1 (Nociones Básicas, LGT, LOFCA y Sistema Tributario Español), Tema 2 (El IRPF - Naturaleza, Hecho Imponible, Exenciones y Unidad Familiar), Tema 3 (Rendimientos del Trabajo Personal - RNTP) y Tema 4.1 (Rendimientos del Capital Inmobiliario - RNCI e Imputación de Rentas Inmobiliarias). Al final hay una sección con preguntas de exámenes sobre un caso práctico, con los datos del caso en cada enunciado. Las respuestas se han revisado y, cuando la solución que suele circular es incorrecta, se indica en la explicación. Las cifras son las del enunciado; cuando la normativa vigente da otro resultado, también se indica.
+* **Descripción:** Batería de 102 preguntas tipo test de exámenes de convocatorias anteriores correspondientes a la materia del Primer Parcial: Tema 1 (Nociones Básicas, LGT, LOFCA y Sistema Tributario Español), Tema 2 (El IRPF - Naturaleza, Hecho Imponible, Exenciones y Unidad Familiar), Tema 3 (Rendimientos del Trabajo Personal - RNTP) y Tema 4.1 (Rendimientos del Capital Inmobiliario - RNCI e Imputación de Rentas Inmobiliarias). Al final hay una sección con preguntas de exámenes sobre un caso práctico, con los datos del caso en cada enunciado. Las respuestas se han revisado y, cuando la solución que suele circular es incorrecta, se indica en la explicación. Las cifras están actualizadas a la normativa vigente (reducción del art. 20, 0,26 €/km, interés legal), y la explicación indica el resultado antiguo cuando cambia.
 * **Titulación:** Doble Grado en Derecho y ADE / Grado en ADE - Facultad de Ciencias Económicas y Empresariales
 
 <!-- Tema 1: Nociones Básicas, LGT, LOFCA y Sistema Tributario Español -->
@@ -305,9 +305,9 @@
 43. El Sr. A ha prestado, sin pactar interés, a su primo, el 1 de enero, 10.000 €, a devolver el 31 de diciembre. La operación no se documentó de ninguna forma. ¿Qué repercusiones tiene ello en la declaración de IRPF del Sr. A?
     - ( ) La devolución del capital prestado el 31 de diciembre genera para el Sr. A una ganancia patrimonial por importe de 10.000 euros.
     - ( ) La devolución del capital prestado el 31 de diciembre generará una ganancia patrimonial por importe de 10.000 euros, y 300 euros de intereses (capital mobiliario).
-    - (x) Si a el Sr. A no le es posible probar que el préstamo es sin interés deberá darse como renta estimada el 3% anual del capital prestado.
+    - (x) Si a el Sr. A no le es posible probar que el préstamo es sin interés deberá darse como renta estimada el 3,25% anual del capital prestado.
     - ( ) No tiene ninguna consecuencia siempre que el Sr. A manifieste que él no ha cobrado intereses.
-    > Art. 6.5 LIRPF: la cesión de capitales se presume retribuida salvo prueba en contrario, y se valora por su valor normal de mercado, que en los préstamos es el interés legal del dinero (art. 40 LIRPF). Esa renta es rendimiento del capital mobiliario (art. 25.2). La devolución del principal no es renta. El 3% era el interés legal en el año del examen; hoy es del 3,25%.
+    > Art. 6.5 LIRPF: la cesión de capitales se presume retribuida salvo prueba en contrario, y se valora por su valor normal de mercado, que en los préstamos es el interés legal del dinero (art. 40 LIRPF). Esa renta es rendimiento del capital mobiliario (art. 25.2). La devolución del principal no es renta. El 3,25% es el interés legal del dinero vigente (en exámenes antiguos aparece el 3%, que era el de entonces).
 
 <!-- Tema 3: Rendimientos del Trabajo Personal (RNTP) -->
 
@@ -316,14 +316,14 @@
     - (x) Son rendimientos del trabajo, pero está exento el gasto, si el transporte se realiza en un medio público o, en otro caso, 0’26 euros por Km recorrido.
     - ( ) Son rendimientos de trabajo, pero está exento todo el gasto que se justifique.
     - ( ) Son rendimientos del trabajo, pero están exentos 0’19 euros por Km recorrido.
-    > Art. 9.A.2 RIRPF: queda exento el importe justificado del transporte público o, si se usa vehículo propio, 0,26 €/km más peajes y aparcamiento justificados. Ojo: también puede aparecer con 0,19 €/km, la cuantía anterior a la Orden HFP/792/2023 (desde el 17-7-2023 es 0,26 €/km).
+    > Art. 9.A.2 RIRPF: queda exento el importe justificado del transporte público o, si se usa vehículo propio, 0,26 €/km más peajes y aparcamiento justificados. Ojo: el texto del art. 9 RIRPF sigue diciendo 0,19 €/km, pero la Orden HFP/792/2023 la elevó a 0,26 €/km desde el 17-7-2023, y es la que se aplica.
 
 45. ¿Cuál será la reducción que sobre el rendimiento neto habrá de practicar un trabajador, cuando el importe del mismo es de 13.000 €?
-    - ( ) 5.565 euros, menos el resultado de multiplicar por 1’5 la diferencia entre 13.115 y 13.000 euros.
-    - ( ) 5.565 euros, menos el resultado de multiplicar por 1’5 la diferencia entre el rendimiento del trabajo y 13.115 euros.
+    - ( ) 7.302 euros, menos el resultado de multiplicar por 1,75 la diferencia entre 14.852 y 13.000 euros.
+    - ( ) 7.302 euros, menos el resultado de multiplicar por 1,75 la diferencia entre el rendimiento del trabajo y 14.852 euros.
     - ( ) Dependerá del número de hijos que formen parte de la unidad familiar.
-    - (x) 5.565 euros.
-    > Con la tabla del art. 20 LIRPF aplicable al examen (ejercicio 2022), si el rendimiento neto no supera 13.115 € la reducción es fija: 5.565 €, sin aplicar ninguna fórmula. Normativa vigente (RDL 4/2024): la reducción fija es de 7.302 € para rendimientos netos de hasta 14.852 €, y entre 14.852 € y 17.673,52 € se resta 1,75 × (RN − 14.852).
+    - (x) 7.302 euros.
+    > Art. 20 LIRPF vigente: si el rendimiento neto no supera 14.852 € la reducción es fija, 7.302 €, sin aplicar ninguna fórmula. Entre 14.852 € y 17.673,52 € se resta 1,75 × (RN − 14.852), y entre 17.673,52 € y 19.747,50 €, 2.364,34 − 1,14 × (RN − 17.673,52). Por encima de 19.747,50 € no hay reducción. (En exámenes antiguos aparece la tabla derogada: 5.565 €, 13.115 € y 1,5).
 
 46. ¿Cuál es el rendimiento íntegro del trabajo que corresponde a la entrega gratuita de un vehículo no eficiente energéticamente a un trabajador cuyo coste de adquisición para la empresa ascendió a 20.000 euros, si el tipo de retención aplicable es del 10%?
     - ( ) 16.000 euros.
@@ -410,25 +410,25 @@
     > Art. 14.2.a LIRPF: si la renta está pendiente de resolución judicial, se imputa al período en que la resolución adquiere firmeza, que es el 1-1-2022.
 
 58. Dña. Estefanía, soltera, de 35 años de edad y con discapacidad del 50%, trabaja en el Ayuntamiento de Granada. Ha percibido un sueldo bruto de 16.000 € y las cuotas a la Seguridad Social han ascendido a 2.160 €. ¿Cuál es el importe del rendimiento neto reducido del trabajo personal que se integra en la base imponible del IRPF?:
-    - (x) 2.775 €.
+    - (x) 1.038 €.
     - ( ) 11.840 €.
     - ( ) 3.862,5 €.
     - ( ) 8.340 €.
-    > Gastos del art. 19.2 LIRPF: Seguridad Social 2.160 € + otros gastos 2.000 € + incremento por trabajador activo con discapacidad entre el 33% y el 65% 3.500 € = 7.660 €. Rendimiento neto: 16.000 − 7.660 = 8.340 €. Reducción del art. 20 (tabla de 2022, RN ≤ 13.115 €): 5.565 €. Rendimiento neto reducido: 2.775 €. Con la tabla vigente (7.302 €) serían 1.038 €. La opción d) (8.340 €) es el rendimiento neto antes de aplicar la reducción.
+    > Gastos del art. 19.2 LIRPF: Seguridad Social 2.160 € + otros gastos 2.000 € + incremento por trabajador activo con discapacidad entre el 33% y el 65% 3.500 € = 7.660 €. Rendimiento neto: 16.000 − 7.660 = 8.340 €. Reducción del art. 20 (RN ≤ 14.852 €): 7.302 €. Rendimiento neto reducido: 1.038 €. (Con la tabla antigua de 5.565 € salían 2.775 €). La opción d) (8.340 €) es el rendimiento neto antes de aplicar la reducción.
 
 59. Dña. Paula, de 23 años, trabaja para el Corte Inglés como dependienta. Percibe un sueldo bruto anual de 13.000 €. Además, el Corte Inglés le aporta a un Plan de Pensiones la cantidad de 1.100 € anuales. El tipo de retención es del 15%. Las cuotas a la Seguridad Social ascienden a 1.020 € anuales. ¿Cuál es el importe del rendimiento neto reducido del trabajo?:
     - ( ) 13.080 €.
-    - (x) 5.515 €.
+    - (x) 3.778 €.
     - ( ) 14.100 €.
     - ( ) 11.080 €.
-    > Íntegro: 13.000 € + 1.100 € de contribución imputada (art. 17.1.e LIRPF, sin ingreso a cuenta) = 14.100 €. Gastos: 1.020 € + 2.000 € = 3.020 €. Rendimiento neto: 11.080 €. Reducción del art. 20 (tabla de 2022): 5.565 €. Rendimiento neto reducido: 5.515 €. Con la tabla vigente (7.302 €) serían 3.778 €.
+    > Íntegro: 13.000 € + 1.100 € de contribución imputada (art. 17.1.e LIRPF, sin ingreso a cuenta) = 14.100 €. Gastos: 1.020 € + 2.000 € = 3.020 €. Rendimiento neto: 11.080 €. Reducción del art. 20 (RN ≤ 14.852 €): 7.302 €. Rendimiento neto reducido: 3.778 €. (Con la tabla antigua de 5.565 € salían 5.515 €).
 
 60. Por motivos de trabajo, D. José se ha desplazado a Madrid durante 7 días, percibiendo unas dietas de 1.400 €. Ha justificado de alojamiento 600 € y para el desplazamiento ha utilizado su propio vehículo (1.000 km en total). También se ha tenido que desplazar a Londres durante 9 días. La dieta que ha percibido de la empresa para este viaje ha sido de 3.600 €. El billete de avión le ha costado 400 €, que justifica mediante factura, y el hotel ha importado 1.280 €, que también justifica mediante la correspondiente factura. ¿A cuánto asciende el importe de la dieta que se ha de gravar en el IRPF por estos viajes?
     - ( ) 1404,41 €.
     - ( ) 263,29 €.
     - ( ) 1.141,12 €.
-    - (x) 1.334,47 €.
-    > Madrid: 1.400 − (600 € de hotel + 7 × 53,34 = 373,38 € de manutención + 1.000 km × 0,19 = 190 €) = 236,62 €. Londres: 3.600 − (400 € de avión + 1.280 € de hotel + 9 × 91,35 = 822,15 €) = 1.097,85 €. Total gravado: 1.334,47 € (art. 9.A RIRPF), con los 0,19 €/km vigentes en el ejercicio del examen. Con los 0,26 €/km actuales serían 1.264,47 €.
+    - (x) 1.264,47 €.
+    > Madrid: 1.400 − (600 € de hotel + 7 × 53,34 = 373,38 € de manutención + 1.000 km × 0,26 = 260 €) = 166,62 €. Londres: 3.600 − (400 € de avión + 1.280 € de hotel + 9 × 91,35 = 822,15 €) = 1.097,85 €. Total gravado: 1.264,47 € (art. 9.A RIRPF, con los 0,26 €/km vigentes). (Con los antiguos 0,19 €/km salían 1.334,47 €).
 
 61. Dña. María, funcionaria de la Diputación de Granada, obtiene en el año 2022 un sueldo bruto de 36.000 €. El tipo de retención es del 20%. El importe de la Seguridad Social es de 2.200 €. Está afiliada a UGT abonando una cuota sindical de 600 € anuales. Para sufragar los desplazamientos desde su residencia a su puesto de trabajo, la Diputación le abona un plus de transporte de 500 € mensuales. Por motivos laborales se ha desplazado a Motril y Guadix a lo largo del año 2022, una vez al mes a cada uno de ellos. En todos esos desplazamientos ha utilizado vehículo de empresa y se realizan sin pernocta. En compensación de estos gastos la Diputación le abona 586,74 €. ¿Cuál es el importe del rendimiento neto del trabajo personal que se integra en la base imponible?:
     - (x) 37.200,00 €.
@@ -489,9 +489,9 @@
 69. D. Julio, soltero, de 32 años, trabaja como director de marketing para el hotel Granada Center. El sueldo bruto anual asciende a 48.000 €. Con motivo de su trabajo ha de desplazarse por todo el territorio nacional varias veces al año. En el año 2022 ha percibido en concepto de dietas un total de 10.000 €. En concepto de alojamiento ha justificado con factura un total de 3.800 €. Y por desplazamientos, en billetes de avión ha justificado 1.000 € y puede aplicar un kilometraje de 1.000 km. Los días que ha pernoctado en territorio español han ascendido a 20 y en territorio extranjero a 10. Y sin pernocta, 3 días en territorio español y 2 días en territorio extranjero. También ha percibido en el año 2022, 5.000 € por un premio de antigüedad por permanencia durante cinco años en la empresa. Las cuotas a la Seguridad Social importan 2.160 €. ¿Cuál es el importe del rendimiento neto reducido del trabajo que ha de ser llevado a la base?:
     - ( ) 51.041,53 €.
     - ( ) 48.188 €.
-    - (x) 50.193,53 €.
+    - (x) 50.123,53 €.
     - ( ) 49.041,53 €.
-    > Dietas exentas: 3.800 € de alojamiento + 1.000 € de avión + 1.000 km × 0,19 = 190 € + manutención (20 × 53,34 + 10 × 91,35 + 3 × 26,67 + 2 × 48,08 = 2.156,47 €) = 7.146,47 €. Dieta gravada: 2.853,53 €. El premio, generado en cinco años, se reduce un 30% (art. 18.2 LIRPF): 3.500 €. Íntegro: 48.000 + 2.853,53 + 3.500 = 54.353,53 €. Gastos: 2.160 € + 2.000 € = 4.160 €. Neto: 50.193,53 €, sin reducción del art. 20. Con los 0,26 €/km actuales serían 50.123,53 €.
+    > Dietas exentas: 3.800 € de alojamiento + 1.000 € de avión + 1.000 km × 0,26 = 260 € + manutención (20 × 53,34 + 10 × 91,35 + 3 × 26,67 + 2 × 48,08 = 2.156,47 €) = 7.216,47 €. Dieta gravada: 2.783,53 €. El premio, generado en cinco años, se reduce un 30% (art. 18.2 LIRPF): 3.500 €. Íntegro: 48.000 + 2.783,53 + 3.500 = 54.283,53 €. Gastos: 2.160 € + 2.000 € = 4.160 €. Neto: 50.123,53 €, sin reducción del art. 20. (Con los antiguos 0,19 €/km salían 50.193,53 €).
 
 70. D. Manuel, de 68 años, viudo y con una minusvalía del 70%, trabaja para la empresa Marketing Soluciones S.L. como responsable del departamento de creación de diseños. Percibe un sueldo bruto de 20.000 €. El importe de la Seguridad Social asciende a 1.200 €. ¿Cuál es el importe del rendimiento neto del trabajo?:
     - (x) 9.050 €.
@@ -718,7 +718,7 @@
     - ( ) Tributaría como ganancia de capital al 19%.
     - ( ) Tributaría como rendimiento del trabajo personal del hijo.
     - (x) Estaría exento.
-    > DA 33.ª LIRPF: los premios de la ONCE están sujetos a un gravamen especial del 20%, pero con una parte exenta (20.000 € en 2019; 40.000 € desde 2020). 2.300 € quedan por debajo, así que está exento.
+    > DA 33.ª LIRPF: los premios de la ONCE están sujetos a un gravamen especial del 20%, pero con una parte exenta (hoy, 40.000 €; en 2019 eran 20.000 €). 2.300 € quedan por debajo, así que está exento.
 
 102. Caso Dña. Dolores. Dña. Dolores explota un pequeño restaurante. La transmisión lucrativa del restaurante por fallecimiento de Dña. Dolores a sus hijos:
     - ( ) Constituiría una ganancia exenta para Dña. Dolores y una ganancia sujeta para sus hijos en el IRPF, respectivamente.
