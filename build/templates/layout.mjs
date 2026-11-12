@@ -6,7 +6,13 @@
  */
 
 import { escape, each, join, isExternal } from "../lib/html.mjs";
-import { GITHUB_MARK } from "../lib/icons.mjs";
+import {
+  GITHUB_MARK,
+  STAR_ICON,
+  USER_ICON,
+  WHATSAPP_ICON,
+  COPY_ICON,
+} from "../lib/icons.mjs";
 import site from "../../content/site.mjs";
 
 /**
@@ -80,6 +86,82 @@ function repoButton() {
         <span class="repo-word repo-word-alt">GitHub</span>
       </span>
     </a>`;
+}
+
+/**
+ * Floating prompt that invites readers to support the project with a GitHub star,
+ * follow the author, share with classmates or report erratas.
+ *
+ * @returns {string} the prompt element, or nothing when no repo is configured
+ */
+function starPrompt() {
+  if (!site.repo) return "";
+
+  const whatsappText = encodeURIComponent(
+    "¡Mira esta web con apuntes, prácticas y exámenes resueltos de Informática y ADE (UGR)! 📚 https://elblogdeismael.github.io/",
+  );
+  const whatsappUrl = `https://api.whatsapp.com/send?text=${whatsappText}`;
+  const authorGithub = "https://github.com/ismael-sallami";
+
+  return `  <aside class="star-prompt" id="star-prompt" role="dialog" aria-labelledby="star-prompt-title" aria-describedby="star-prompt-desc" aria-hidden="true" hidden>
+    <div class="star-prompt-inner">
+      <div class="star-prompt-head">
+        <div class="star-prompt-title-wrap">
+          <span class="star-prompt-badge" aria-hidden="true">${STAR_ICON} Recursos GIIADE · UGR</span>
+          <h2 id="star-prompt-title" class="star-prompt-title">¿Te sirven los apuntes?</h2>
+        </div>
+        <button type="button" class="star-prompt-close" id="star-prompt-close" aria-label="Cerrar notificación" title="Cerrar">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <p class="star-prompt-text" id="star-prompt-desc">
+        Plataforma abierta y sin anuncios invasivos. Si te ayuda en el grado, apóyala en un clic:
+      </p>
+
+      <div class="star-prompt-actions">
+        <a class="btn btn-solid star-prompt-btn" id="star-prompt-link" href="${escape(site.repo)}" target="_blank" rel="noopener" title="Dar estrella al repositorio en GitHub">
+          ${STAR_ICON}
+          <span>Estrella</span>
+          <span class="star-prompt-count" id="star-prompt-count" hidden></span>
+        </a>
+
+        <a class="btn btn-ghost star-prompt-btn" id="star-prompt-follow" href="${escape(authorGithub)}" target="_blank" rel="noopener" title="Seguir a Ismael en GitHub">
+          ${USER_ICON}
+          <span>Seguir</span>
+        </a>
+      </div>
+
+      <div class="star-prompt-strip">
+        <span class="star-prompt-strip-label">O difunde entre compañeros:</span>
+        <div class="star-prompt-chips">
+          <a class="chip-btn chip-wa" href="${whatsappUrl}" target="_blank" rel="noopener" title="Compartir en WhatsApp">
+            ${WHATSAPP_ICON}
+            <span>WhatsApp</span>
+          </a>
+          <button type="button" class="chip-btn" id="star-prompt-copy" title="Copiar enlace del blog">
+            ${COPY_ICON}
+            <span id="star-prompt-copy-text">Copiar link</span>
+          </button>
+          <a class="chip-btn" href="/#contacto" title="Aportar apuntes o reportar errata">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <span>Erratas</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="star-prompt-foot">
+        <button type="button" class="star-prompt-dismiss" id="star-prompt-dismiss">
+          Ahora no, gracias
+        </button>
+      </div>
+    </div>
+  </aside>`;
 }
 
 /**
@@ -241,9 +323,11 @@ ${options.body}
   </main>
 
 ${footer()}
+${starPrompt()}
 
   <script src="/assets/js/theme.js" defer></script>
   <script src="/assets/js/reveal.js" defer></script>
+  <script src="/assets/js/star-prompt.js" defer></script>
 </body>
 
 </html>

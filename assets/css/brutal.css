@@ -1200,6 +1200,264 @@ textarea.field-input {
   }
 }
 
+/* ===================== STAR PROMPT TOAST ===================== */
+
+.star-prompt {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 900;
+  max-width: 380px;
+  width: calc(100vw - 32px);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  transition:
+    opacity var(--base) var(--ease),
+    transform var(--base) var(--ease);
+}
+
+.star-prompt.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.star-prompt.is-hiding {
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  pointer-events: none;
+}
+
+.star-prompt-inner {
+  background: var(--surface);
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.star-prompt-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.star-prompt-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.star-prompt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.star-prompt-badge svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.star-prompt-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0;
+}
+
+.star-prompt-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: var(--line-hair) solid transparent;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 2px;
+  transition:
+    color var(--fast) ease,
+    background var(--fast) ease,
+    transform var(--fast) ease;
+}
+
+.star-prompt-close:hover {
+  color: var(--ink);
+  background: var(--surface-2);
+}
+
+.star-prompt-text {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0;
+}
+
+.star-prompt-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.star-prompt-btn {
+  justify-content: center;
+  padding: 10px 12px;
+  font-size: 0.76rem;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.star-prompt-btn svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+.star-prompt-count {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 999px;
+  margin-left: 2px;
+}
+
+[data-theme="dark"] .star-prompt-count {
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--accent-ink);
+}
+
+/* Secondary dissemination strip */
+.star-prompt-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: var(--line-hair) solid var(--ink);
+  margin-top: 2px;
+}
+
+.star-prompt-strip-label {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.star-prompt-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 9px;
+  border: var(--line-hair) solid var(--ink);
+  background: var(--surface-2);
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background var(--fast) ease,
+    color var(--fast) ease,
+    border-color var(--fast) ease;
+}
+
+.chip-btn svg {
+  flex: none;
+}
+
+.chip-btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.chip-btn.chip-wa:hover {
+  background: #25d366;
+  color: #ffffff;
+  border-color: #25d366;
+}
+
+.chip-btn.is-copied {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+
+.star-prompt-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2px;
+}
+
+.star-prompt-dismiss {
+  padding: 4px 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  border: none;
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color var(--fast) ease;
+}
+
+.star-prompt-dismiss:hover {
+  color: var(--ink);
+  background: transparent;
+}
+
+/* Without JavaScript, hide the prompt entirely */
+.no-js .star-prompt {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-prompt {
+    transition: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .star-prompt {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-width: none;
+  }
+}
+
 /* ===================== RESPONSIVE ===================== */
 
 @media (max-width: 768px) {
