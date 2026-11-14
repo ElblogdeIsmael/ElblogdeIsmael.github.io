@@ -38,18 +38,23 @@
   text-transform: uppercase;
 }
 
+/* Multi-column masonry so each subject card hugs its own resources instead
+   of stretching to match a taller neighbor in the same grid row. Margins leave
+   room inside each column box so offset shadows and hover lifts never clip. */
 .entry-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: var(--gap);
+  columns: 340px;
+  column-gap: calc(var(--gap) - 10px);
 }
 
 /* ===================== ENTRY CARD ===================== */
 
 .entry-card {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
+  width: calc(100% - 14px);
+  margin: 4px 10px calc(var(--gap) - 4px) 4px;
+  vertical-align: top;
+  break-inside: avoid;
   background: var(--surface);
   border: var(--line) solid var(--ink);
   box-shadow: var(--shadow) var(--shadow) 0 var(--shadow-col);
@@ -787,8 +792,11 @@ textarea.field-input {
 
 @media (max-width: 768px) {
   .entry-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    columns: 1;
+  }
+  .entry-card {
+    width: calc(100% - 10px);
+    margin: 4px 8px 16px 2px;
   }
   .tile {
     grid-template-columns: auto 1fr;
