@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="paper">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Visor de Notebooks (.ipynb) · El Blog de Ismael</title>
+  <meta name="description" content="Visor interactivo en tu navegador para cuadernos Jupyter (.ipynb) con código Python, LaTeX y gráficas, en tres temas visuales." />
+  <meta name="robots" content="noindex, follow" />
+
+  <!-- Mismo selector de tema persistente que /viewer/ para evitar flash al cargar -->
+  <script>
+    (function () {
+      try {
+        document.documentElement.setAttribute(
+          "data-theme", localStorage.getItem("viewer-theme") || "paper");
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- KaTeX: render de fórmulas LaTeX ($…$ / $$…$$) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <link rel="stylesheet" href="ipynb.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="viewer-topbar">
+    <a class="vt-brand" href="/">← El Blog de Ismael</a>
+
+    <div class="vt-actions">
+      <input id="file-input" type="file" accept=".ipynb,application/json" hidden />
+      <button id="open-btn" class="vt-btn" type="button">+ Abrir .ipynb</button>
+      <button id="toc-toggle" class="vt-btn" type="button" hidden>Índice</button>
+      <button id="code-toggle" class="vt-btn" type="button" hidden>Ocultar código</button>
+      <button id="outputs-toggle" class="vt-btn" type="button" hidden>Plegar salidas</button>
+
+      <label class="vt-theme">
+        <span class="vt-theme-label">Tema</span>
+        <select id="theme-select" aria-label="Elegir tema del visor">
+          <option value="brand">Marca (oscuro)</option>
+          <option value="paper">Papel (claro)</option>
+          <option value="obsidian">Obsidian (morado)</option>
+        </select>
+      </label>
+      <a id="gh-link" class="vt-gh" href="#" target="_blank" rel="noopener" hidden>Ver en GitHub ↗</a>
+    </div>
+  </header>
+
+  <div class="nb-shell">
+    <aside id="nb-toc" class="nb-toc" aria-label="Índice del cuaderno" hidden>
+      <div class="nb-toc-head">
+        <span>Índice</span>
+        <button id="toc-close" class="nb-toc-close" type="button" aria-label="Cerrar índice">×</button>
+      </div>
+      <nav id="nb-toc-list" class="nb-toc-list"></nav>
+    </aside>
+
+    <main class="viewer-main">
+      <article id="nb-content" class="nb-content" aria-live="polite">
+        <div class="nb-loading">Iniciando visor de notebooks…</div>
+      </article>
+    </main>
+  </div>
+
+  <footer class="viewer-footer">
+    <p>Cuadernos de <a href="/">Ismael Sallami</a> · procesados íntegramente en tu navegador, sin servidor.</p>
+  </footer>
+
+  <!-- Motor Markdown + matemáticas (KaTeX + texmath) + resaltado de sintaxis (highlight.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath@1.0.0/texmath.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/highlight.min.js"></script>
+  <script src="ipynb.js"></script>
+</body>
+</html>

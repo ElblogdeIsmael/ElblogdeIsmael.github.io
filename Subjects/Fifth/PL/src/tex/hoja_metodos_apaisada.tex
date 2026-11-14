@@ -1,0 +1,277 @@
+% Lámina apaisada en 3 columnas para la hoja esquemática de métodos de análisis sintáctico (Temas 4-6)
+\newgeometry{margin=0.85cm}
+\begin{landscape}
+\thispagestyle{empty}
+\begingroup
+\fontsize{8.2pt}{9.6pt}\selectfont
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.5pt}
+\setlength{\columnsep}{0.4cm}
+\setlength{\columnseprule}{0.35pt}
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.05}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+\let\olditemize\itemize
+\def\itemize{\olditemize\setlength{\itemsep}{0.5pt}\setlength{\parskip}{0pt}\setlength{\topsep}{1.5pt}\setlength{\partopsep}{0pt}}
+\let\oldenumerate\enumerate
+\def\enumerate{\oldenumerate\setlength{\itemsep}{0.5pt}\setlength{\parskip}{0pt}\setlength{\topsep}{1.5pt}\setlength{\partopsep}{0pt}}
+\newcommand{\hsec}[1]{\par\vspace{4pt}\noindent{\fontsize{9.4pt}{11pt}\bfseries #1}\par\vspace{2pt}}
+\makeatletter
+\renewcommand{\subsection}{\@ifstar\hsec\hsec}
+\makeatother
+
+\begin{center}
+{\large\bfseries Procesadores de Lenguajes · Hoja Esquemática de Métodos de Análisis Sintáctico}\\[1pt]
+{\scriptsize Condiciones, conjuntos, algoritmos y resolución de conflictos de los Temas 4, 5 y 6.}
+\end{center}
+\vspace{-4pt}
+
+\begin{multicols*}{3}
+
+\subsection*{0. Mapa de métodos}
+\begin{tabular}{@{}llp{4.3cm}@{}}
+\toprule
+\textbf{Método} & \textbf{Tipo} & \textbf{Qué se calcula}\\
+\midrule
+LL(1) & descendente & $\mathrm{INI}$, $\mathrm{SIG}$, tabla $M[A,a]$\\
+Prec.\ operador & ascendente & $\mathrm{PRIMERO}$, $\mathrm{ULTIMO}$ (terminales); rel.\ entre terminales\\
+Prec.\ simple & ascendente & $\mathrm{PRIMERO}^+$, $\mathrm{ULTIMO}^+$ (todos los símbolos)\\
+LR(0) & ascendente & ítems LR(0); reducir en toda fila\\
+SLR(1) & ascendente & ítems LR(0); reducir solo en $\mathrm{SIG}$\\
+LR(1) & ascendente & ítems con símbolo de anticipación\\
+LALR(1) & ascendente & LR(1) con núcleos fusionados\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\textbf{No confundir:}
+\begin{itemize}
+\item $\mathrm{INI}/\mathrm{SIG}$: solo terminales (y $\$$ en $\mathrm{SIG}$); se usan en LL(1), SLR y LR(1).
+\item $\mathrm{PRIMERO}/\mathrm{ULTIMO}$: primer/último \textbf{terminal}, admitiendo un no terminal delante/detrás. Solo precedencia de operador.
+\item $\mathrm{PRIMERO}^+/\mathrm{ULTIMO}^+$: primer/último \textbf{símbolo cualquiera} ($V_N\cup V_T$). Solo precedencia simple.
+\end{itemize}
+
+\subsection*{1. Iniciales y seguidores (Tema 4)}
+\[
+\mathrm{INI}(\alpha)=\{a\in V_T\mid\alpha\Rightarrow^*a\beta\}\cup\{\varepsilon\text{ si }\alpha\Rightarrow^*\varepsilon\}
+\]
+\[
+\mathrm{SIG}(A)=\{a\in V_T\cup\{\$\}\mid S\Rightarrow^*\gamma Aa\delta\}
+\]
+\textbf{Cálculo de $\mathrm{INI}$} (repetir hasta punto fijo):
+\begin{enumerate}
+\item $a$ terminal: $\mathrm{INI}(a)=\{a\}$.
+\item $X\to\varepsilon$: $\varepsilon\in\mathrm{INI}(X)$.
+\item $X\to Y_1Y_2\cdots Y_k$: añadir $\mathrm{INI}(Y_1)-\{\varepsilon\}$; si $Y_1\Rightarrow^*\varepsilon$, añadir $\mathrm{INI}(Y_2)-\{\varepsilon\}$, y así sucesivamente. Si todos son anulables, añadir $\varepsilon$.
+\end{enumerate}
+\textbf{Cálculo de $\mathrm{SIG}$} (repetir hasta punto fijo):
+\begin{enumerate}
+\item $\$\in\mathrm{SIG}(S)$ (axioma).
+\item $A\to\alpha B\beta$: $\mathrm{INI}(\beta)-\{\varepsilon\}\subseteq\mathrm{SIG}(B)$.
+\item $A\to\alpha B$, o $A\to\alpha B\beta$ con $\varepsilon\in\mathrm{INI}(\beta)$: $\mathrm{SIG}(A)\subseteq\mathrm{SIG}(B)$.
+\end{enumerate}
+\emph{Nunca} entra $\varepsilon$ en $\mathrm{SIG}$. Hay que revisar \emph{todas} las apariciones de $B$ en las partes derechas.
+
+\columnbreak
+
+\subsection*{2. Análisis LL(1) (Tema 4)}
+\textbf{Requisitos previos:} sin recursividad por la izquierda (directa ni indirecta) y factorizada por la izquierda.
+\begin{itemize}
+\item Rec.\ izq.: $A\to A\alpha\mid\beta\;\Rightarrow\;A\to\beta A'$, $A'\to\alpha A'\mid\varepsilon$.
+\item Factorización: $A\to\alpha\beta_1\mid\alpha\beta_2\;\Rightarrow\;A\to\alpha A'$, $A'\to\beta_1\mid\beta_2$.
+\end{itemize}
+\textbf{Tabla $M$:} para cada producción $A\to\alpha$:
+\begin{itemize}
+\item $M[A,a]=A\to\alpha$ para todo $a\in\mathrm{INI}(\alpha)$;
+\item si $\varepsilon\in\mathrm{INI}(\alpha)$: $M[A,b]=A\to\alpha$ para todo $b\in\mathrm{SIG}(A)$.
+\end{itemize}
+\textbf{Condición LL(1):} ninguna casilla con dos producciones. Para $A\to\alpha\mid\beta$:
+\[
+\mathrm{INI}(\alpha)\cap\mathrm{INI}(\beta)=\emptyset
+\]
+y si $\beta\Rightarrow^*\varepsilon$, además $\mathrm{INI}(\alpha)\cap\mathrm{SIG}(A)=\emptyset$.
+\textbf{Pila y traza:} empezar con $\$S$. Cima terminal igual a la entrada: emparejar. Cima no terminal $X$: sustituir por la parte derecha de $M[X,a]$ en orden inverso. Casilla vacía: error.
+
+\subsection*{3. Desplazamiento-reducción (Tema 5)}
+Acciones del analizador: \textbf{desplazar} el siguiente token a la pila, \textbf{reducir} sustituyendo el pivote por la parte izquierda, \textbf{aceptar} y \textbf{error}.\\
+Conflictos posibles: \textbf{d/r} (desplazar frente a reducir) y \textbf{r/r} (duda entre dos reducciones).
+
+\subsection*{4. Precedencia de operador (Floyd, Tema 5)}
+\textbf{Condiciones:} (1) sin dos no terminales consecutivos en ninguna parte derecha; (2) sin $\varepsilon$-producciones; (3) relaciones disjuntas.
+
+\textbf{Conjuntos} ($X\in V_N$, $a\in V_T$):
+\[
+\mathrm{PRIM}(A)=\{a\mid A\Rightarrow^+a\cdots\text{ o }A\Rightarrow^+Xa\cdots\}
+\]
+\[
+\mathrm{ULT}(A)=\{a\mid A\Rightarrow^+\cdots a\text{ o }A\Rightarrow^+\cdots aX\}
+\]
+\textbf{Relaciones} (solo entre terminales y $\$$):
+\begin{itemize}
+\item $a\doteq b$ si $A\to\alpha a\beta b\gamma$ con $\beta\in V_N$ o $\beta=\varepsilon$.
+\item $a\lessdot b$ si $A\to\alpha aB\beta$ y $b\in\mathrm{PRIM}(B)$.
+\item $a\gtrdot b$ si $A\to\alpha Bb\beta$ y $a\in\mathrm{ULT}(B)$.
+\item $\$\lessdot b$ para $b\in\mathrm{PRIM}(S)$; $a\gtrdot\$$ para $a\in\mathrm{ULT}(S)$.
+\end{itemize}
+\textbf{Algoritmo} ($a$ = terminal más alto en pila, $b$ = entrada):
+\begin{itemize}
+\item $a\lessdot b$ o $a\doteq b$: desplazar $b$.
+\item $a\gtrdot b$: reducir sacando hasta que el nuevo terminal en cima cumpla $\lessdot$ respecto al último extraído.
+\end{itemize}
+\textbf{Limitaciones:} no admite doble precedencia (menos unario frente a binario) y puede aceptar cadenas erróneas (\texttt{id++id}) al no validar la parte derecha al reducir.
+
+\columnbreak
+
+\subsection*{5. Precedencia simple (Wirth--Weber, Tema 5)}
+\textbf{Condiciones:} (1) sin dos producciones con la misma parte derecha; (2) sin $\varepsilon$-producciones; (3) relaciones disjuntas en $V\times V$.
+
+\textbf{Conjuntos} ($Y\in V_N\cup V_T$):
+\[
+\mathrm{PRIM}^+(A)=\{Y\mid A\Rightarrow^+Y\cdots\}
+\]
+\[
+\mathrm{ULT}^+(A)=\{Y\mid A\Rightarrow^+\cdots Y\}
+\]
+\textbf{Relaciones} para cada par adyacente $XY$ en una parte derecha:
+\begin{itemize}
+\item $X\doteq Y$.
+\item si $Y\in V_N$: $X\lessdot Z$ para todo $Z\in\mathrm{PRIM}^+(Y)$.
+\item si $X\in V_N$: $Z\gtrdot b$ para todo $Z\in\mathrm{ULT}^+(X)$ y todo terminal $b\in\{Y\}\cup\mathrm{PRIM}^+(Y)$.
+\item $\$\lessdot Z$ para $Z\in\mathrm{PRIM}^+(S)$; $Z\gtrdot\$$ para $Z\in\mathrm{ULT}^+(S)$.
+\end{itemize}
+\textbf{Pivote:} subcadena delimitada entre $\lessdot$ y el primer $\gtrdot$ posterior. Se reduce por la producción cuya parte derecha coincide exactamente.\\
+\textbf{Errores:} de precedencia (casilla vacía) y de reducción (el pivote aislado no coincide con ninguna parte derecha).
+
+\smallskip
+\begin{tabular}{@{}lp{2.85cm}p{3.45cm}@{}}
+\toprule
+ & \textbf{Operador} & \textbf{Simple}\\
+\midrule
+Tabla & terminales y $\$$ & $V_N\cup V_T$ y $\$$\\
+Conjuntos & $\mathrm{PRIM}$, $\mathrm{ULT}$ & $\mathrm{PRIM}^+$, $\mathrm{ULT}^+$\\
+Prohíbe & $\varepsilon$; dos $V_N$ seguidos & $\varepsilon$; partes der.\ iguales\\
+Reducción & ignora parte derecha & pivote = parte der.\ exacta\\
+\bottomrule
+\end{tabular}
+
+\end{multicols*}
+
+\newpage
+\thispagestyle{empty}
+
+\begin{center}
+{\large\bfseries Procesadores de Lenguajes · Hoja Esquemática (Análisis LR y YACC)}\\[1pt]
+{\scriptsize Construcción de colecciones, fusión LALR(1), resolución de conflictos y recuperación de errores.}
+\end{center}
+\vspace{-4pt}
+
+\begin{multicols*}{3}
+
+\subsection*{6. Análisis LR: núcleo común (Tema 6)}
+\textbf{Pila:} $s_0X_1s_1\cdots X_ms_m$. Con estado $s$ en cima y entrada $a$, se consulta $\mathrm{Acci\acute{o}n}[s,a]$:
+\begin{itemize}
+\item $d_j$: apilar $a$ y $j$; avanzar entrada.
+\item $r_k$ ($A\to\beta$): desapilar $2|\beta|$ elementos; con estado $t$ debajo, apilar $A$ y $\mathrm{Ir\_a}[t,A]$.
+\item $\mathrm{acc}$: aceptar. Casilla vacía: error.
+\end{itemize}
+\textbf{Gramática aumentada:} $(0)\; S'\to S$.\\
+\textbf{Ítem LR(0):} $A\to\alpha\mathbin{\boldsymbol{\cdot}}\beta$. Si $\beta=\varepsilon$, es ítem de reducción ($A\to\varepsilon$ da $A\to\mathbin{\boldsymbol{\cdot}}$).\\
+\textbf{Clausura:} si $A\to\alpha\mathbin{\boldsymbol{\cdot}} B\beta\in I$ y $B\to\gamma$, añadir $B\to\mathbin{\boldsymbol{\cdot}}\gamma$ hasta punto fijo.\\
+\textbf{Ir\_a (Goto):} $\mathrm{goto}(I,X)=\mathrm{clausura}(\{A\to\alpha X\mathbin{\boldsymbol{\cdot}}\beta\mid A\to\alpha\mathbin{\boldsymbol{\cdot}} X\beta\in I\})$.\\
+\textbf{Relleno común de la tabla:}
+\begin{itemize}
+\item $\mathrm{goto}(I_i,a)=I_j$, $a\in V_T\;\Rightarrow\;\mathrm{Acci\acute{o}n}[i,a]=d_j$.
+\item $\mathrm{goto}(I_i,A)=I_j$, $A\in V_N\;\Rightarrow\;\mathrm{Ir\_a}[i,A]=j$.
+\item $S'\to S\mathbin{\boldsymbol{\cdot}}\in I_i\;\Rightarrow\;\mathrm{Acci\acute{o}n}[i,\$]=\mathrm{acc}$.
+\end{itemize}
+
+\subsection*{7. LR(0) y SLR(1) (Tema 6)}
+\begin{tabular}{@{}lp{7.1cm}@{}}
+\toprule
+\textbf{LR(0)} & $A\to\alpha\mathbin{\boldsymbol{\cdot}}\in I_i$: $r_k$ en \textbf{todas} las columnas de Acción.\\
+\textbf{SLR(1)} & $A\to\alpha\mathbin{\boldsymbol{\cdot}}\in I_i$, $A\ne S'$: $r_k$ en $\mathrm{Acci\acute{o}n}[i,a]$ $\forall a\in\mathrm{SIG}(A)$.\\
+\bottomrule
+\end{tabular}
+
+\textbf{Conflictos en SLR(1)} dentro de un estado $I$:
+\begin{itemize}
+\item \textbf{d/r:} $A\to\alpha\mathbin{\boldsymbol{\cdot}} a\beta\in I$ y $B\to\gamma\mathbin{\boldsymbol{\cdot}}\in I$ con $a\in\mathrm{SIG}(B)$.
+\item \textbf{r/r:} $A\to\alpha\mathbin{\boldsymbol{\cdot}}\in I$ y $B\to\beta\mathbin{\boldsymbol{\cdot}}\in I$ con $\mathrm{SIG}(A)\cap\mathrm{SIG}(B)\ne\emptyset$.
+\end{itemize}
+En \textbf{LR(0)} estricto, todo estado con un ítem de reducción debe contener únicamente ese ítem.
+
+\columnbreak
+
+\subsection*{8. LR(1) canónico (Tema 6)}
+\textbf{Ítem:} $[A\to\alpha\mathbin{\boldsymbol{\cdot}}\beta,\,a]$ con $a\in V_T\cup\{\$\}$.\\
+$I_0=\mathrm{clausura}(\{[S'\to\mathbin{\boldsymbol{\cdot}} S,\,\$]\})$.
+
+\textbf{Clausura LR(1):} si $[A\to\alpha\mathbin{\boldsymbol{\cdot}} B\beta,\,a]\in I$ y $B\to\eta$, añadir $[B\to\mathbin{\boldsymbol{\cdot}}\eta,\,b]$ para todo $b\in\mathrm{INI}(\beta a)$:
+\begin{itemize}
+\item $\beta$ no anulable: $b\in\mathrm{INI}(\beta)$ (no pasa $a$).
+\item $\beta=\varepsilon$: $b=a$ (la anticipación se hereda).
+\item $\beta$ anulable: $b\in(\mathrm{INI}(\beta)-\{\varepsilon\})\cup\{a\}$.
+\end{itemize}
+\textbf{Ir\_a (Goto):} avanza el punto y \textbf{copia} las anticipaciones.\\
+Dos estados coinciden solo si son iguales tanto los ítems como sus anticipaciones.\\
+\textbf{Reducción:} $[A\to\alpha\mathbin{\boldsymbol{\cdot}},\,a]\in I_i$ ($A\ne S'$): $\mathrm{Acci\acute{o}n}[i,a]=r_k$.
+
+\subsection*{9. LALR(1) (Tema 6)}
+\begin{enumerate}
+\item Construir la colección LR(1).
+\item Fusionar los estados con idéntico \textbf{núcleo} (mismos ítems LR(0)) uniendo sus conjuntos de anticipación ($I_{i,j}$).
+\item Actualizar destinos de $\mathrm{goto}$ sobre los estados fusionados.
+\end{enumerate}
+\textbf{Teorema:} la fusión LALR nunca crea conflictos d/r nuevos, pero \textbf{puede introducir conflictos r/r}. Número de estados = número de estados de SLR.
+
+\subsection*{10. Jerarquía y comparación LR}
+\begin{tabular}{@{}lllp{1.3cm}@{}}
+\toprule
+ & \textbf{Ítems} & \textbf{Col.\ de $r_k$} & \textbf{Estados}\\
+\midrule
+LR(0) & sin anticip. & todas & $n$\\
+SLR & sin anticip. & $\mathrm{SIG}(A)$ & $n$\\
+LALR & fusionados & unión de ant. & $n$\\
+LR(1) & con anticip. & solo $a$ & $\ge n$\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+$\mathrm{LR}(0)\subset\mathrm{SLR}(1)\subset\mathrm{LALR}(1)\subset\mathrm{LR}(1)$, y $\mathrm{LL}(1)\subset\mathrm{LR}(1)$.\\
+\emph{Ojo:} $\mathrm{LL}(1)$ \textbf{no} está contenida en $\mathrm{SLR}(1)$ ni en $\mathrm{LALR}(1)$. Ninguna gramática ambigua es $\mathrm{LL}(k)$ ni $\mathrm{LR}(k)$.
+
+\columnbreak
+
+\subsection*{11. Resolución de conflictos y YACC}
+Estado con $[E\to E\,\theta_1\,E\mathbin{\boldsymbol{\cdot}}]$ y entrada $\theta_2$:
+
+\smallskip
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Situación} & \textbf{Acción}\\
+\midrule
+$\theta_2$ tiene mayor precedencia & desplazar\\
+$\theta_2$ tiene menor precedencia & reducir\\
+igual precedencia, asoc.\ izquierda & reducir\\
+igual precedencia, asoc.\ derecha & desplazar\\
+\texttt{\%nonassoc} & error\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\textbf{Dangling else:} ante d/r con \texttt{else}, se elige \textbf{desplazar} para asociar cada \texttt{else} con el \texttt{if} más cercano.\\
+\textbf{Conflictos r/r:} suelen deberse a producciones redundantes; se eliminan las reglas equivalentes.\\
+\textbf{YACC:} genera analizadores LALR(1). Por defecto resuelve \textbf{d/r $\to$ desplazar} y \textbf{r/r $\to$ primera regla}. Las directivas \texttt{\%left}, \texttt{\%right}, \texttt{\%nonassoc} dan mayor precedencia cuanto más abajo aparecen; \texttt{\%prec} asigna precedencia explícita a una producción (por ejemplo, menos unario).
+
+\subsection*{12. Recuperación de errores}
+\textbf{LL(1):} modo pánico usando $\mathrm{SIG}(A)$ como conjunto de sincronización (sacar no terminal en \texttt{sinc}, descartar entrada en casilla vacía).\\
+\textbf{LR:} rutinas específicas en casillas vacías; método de Graham--Rhodes (condensación del contexto y corrección).\\
+\textbf{YACC:} regla \texttt{A : error w}. Saca estados hasta encontrar uno con $A\to\mathbin{\boldsymbol{\cdot}}\,\texttt{error}\,w$, desplaza \texttt{error}, descarta entrada hasta el token de sincronización $w$ (o un símbolo de $\mathrm{SIG}(A)$ si $w=\varepsilon$) y reduce a $A$. \texttt{yyerrok} reactiva la emisión inmediata de errores; \texttt{yyclearin} descarta el lookahead actual.
+
+\end{multicols*}
+\endgroup
+\end{landscape}
+\restoregeometry

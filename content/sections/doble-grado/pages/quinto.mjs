@@ -101,6 +101,7 @@ export default {
           name: "Dirección Estratégica de la Empresa I",
           blocks: [
             {
+              label: "Material general",
               resources: [
                 {
                   name: "Guía docente",
@@ -110,6 +111,86 @@ export default {
                 {
                   name: "Actividades Prácticas y Casos de Debate",
                   href: "/Subjects/Fifth/DE-1/build/DE-1.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Hackathon Puleva Health · Diagnóstico Estratégico y Ventajas Competitivas",
+                  href: "/Subjects/Fifth/DE-1/practicas/hackathon-puleva-health.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Caso 1 · Honda",
+              resources: [
+                {
+                  name: "Enunciado oficial del caso Honda",
+                  href: "/Subjects/Fifth/DE-1/practicas/01-honda.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Resumen del caso (guía de estudio)",
+                  href: "/viewer/?file=Subjects/Fifth/DE-1/practicas/casos/01-honda/resumen.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Respuestas trabajadas (Markdown)",
+                  href: "/viewer/?file=Subjects/Fifth/DE-1/practicas/casos/01-honda/respuestas.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Respuestas entregadas (PDF)",
+                  href: "/Subjects/Fifth/DE-1/practicas/01-honda-respuestas.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Notas adicionales en PDF",
+                  href: "/Subjects/Fifth/DE-1/practicas/01-honda-notas.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Caso 2 · Unilever",
+              resources: [
+                {
+                  name: "Enunciado oficial del caso Unilever",
+                  href: "/Subjects/Fifth/DE-1/practicas/02-unilever.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Resumen y análisis del caso (Markdown)",
+                  href: "/viewer/?file=Subjects/Fifth/DE-1/practicas/casos/02-unilever/resumen.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Ideas clave del debate (Markdown)",
+                  href: "/viewer/?file=Subjects/Fifth/DE-1/practicas/casos/02-unilever/ideas-clave.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Respuestas del grupo (PDF)",
+                  href: "/Subjects/Fifth/DE-1/practicas/02-unilever-respuestas.pdf",
+                  kind: "PDF",
+                },
+              ],
+            },
+            {
+              label: "Caso 3 · LEGO",
+              resources: [
+                {
+                  name: "Resumen del caso LEGO (Markdown)",
+                  href: "/viewer/?file=Subjects/Fifth/DE-1/practicas/casos/03-lego/resumen.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Ideas clave y análisis estratégico (Markdown)",
+                  href: "/viewer/?file=Subjects/Fifth/DE-1/practicas/casos/03-lego/ideas-clave.md",
+                  kind: "MD",
+                },
+                {
+                  name: "Respuestas entregadas (PDF)",
+                  href: "/Subjects/Fifth/DE-1/practicas/03-lego-respuestas.pdf",
                   kind: "PDF",
                 },
               ],
@@ -169,7 +250,7 @@ export default {
                   kind: "GUIA",
                 },
                 {
-                  name: "Temario y Fundamentos de Compilación (Temas 1 al 6)",
+                  name: "Temario, Hoja de Métodos, Relaciones y Ejercicios de Examen (Temas 1 al 6)",
                   href: "/Subjects/Fifth/PL/build/PL.pdf",
                   kind: "PDF",
                 },
@@ -192,6 +273,16 @@ export default {
                   name: "Temario y Cuestiones de Examen (Temas 1, 2 y 3)",
                   href: "/Subjects/Fifth/VC/build/VC.pdf",
                   kind: "PDF",
+                },
+                {
+                  name: "Práctica 1 · Filtrado espacial, derivadas y pirámides (Notebook)",
+                  href: "/ipynb/?file=Subjects/Fifth/VC/practicas/practica1.ipynb",
+                  kind: "IPYNB",
+                },
+                {
+                  name: "Práctica 2 · Descriptores locales, RANSAC y panoramas (Notebook)",
+                  href: "/ipynb/?file=Subjects/Fifth/VC/practicas/practica2.ipynb",
+                  kind: "IPYNB",
                 },
               ],
             },

@@ -27,6 +27,7 @@ export type ResourceKind =
   | "PDF"
   | "HTML"
   | "MD"
+  | "IPYNB"
   | "WEB"
   | "ZIP"
   | "GUIA"
