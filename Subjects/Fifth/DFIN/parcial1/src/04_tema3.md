@@ -38,6 +38,13 @@ $$-C_0 + \sum_{t=1}^{n}\frac{C_t}{(1+TIR)^t} = 0 \qquad \text{Aceptar si } TIR >
 
 Para un proyecto **simple** (desembolso inicial y después todo cobros) evaluado **aisladamente**, VAN y TIR coinciden en la decisión. La TIR es el punto en que el **perfil del VAN** (VAN en función de $r$) corta el eje horizontal. En el ejemplo de la diapositiva, $-350.000$ y $+400.000$ dan $TIR = 14{,}29\,\text{\%}$.
 
+\begin{figure}[H]
+\centering
+\input{src/tex/van_simple.tex}
+\caption{Perfil del VAN del proyecto $-350.000$ / $+400.000$: corta el eje en la TIR.}
+\end{figure}
+
+
 ## Defectos de la TIR (los cuatro de las diapositivas)
 
 **1. Préstamo frente a inversión.** Para que la TIR funcione, el VAN tiene que **aumentar al disminuir la tasa de descuento**.
@@ -51,7 +58,21 @@ Para un proyecto **simple** (desembolso inicial y después todo cobros) evaluado
 
 A es una **financiación**: quien se endeuda quiere hacerlo a la tasa **más baja** posible, así que el criterio de la TIR **se invierte** (aceptar si $TIR < r$). En una financiación, el perfil del VAN es creciente.
 
+\begin{figure}[H]
+\centering
+\input{src/tex/van_financiacion.tex}
+\caption{Proyecto de financiación ($+100$ / $-150$): el VAN crece con $r$, así que la regla de la TIR se invierte.}
+\end{figure}
+
+
 **2. Múltiples cambios de signo.** Con los flujos $-22, 15, 15, 15, 15, -40$ hay dos cambios de signo y **dos TIR**: aproximadamente **5,6 % y 27,8 %**, calculadas resolviendo el polinomio. El VAN solo es positivo entre ambas. La TIR **no tiene sentido económico**. Por la regla de Descartes, puede haber tantas TIR como cambios de signo, o ninguna.
+
+\begin{figure}[H]
+\centering
+\input{src/tex/van_multiples.tex}
+\caption{Flujos $-22, 15, 15, 15, 15, -40$: dos TIR y VAN positivo solo entre ellas.}
+\end{figure}
+
 
 **3. Proyectos mutuamente excluyentes con el mismo desembolso pero distinta distribución temporal.**
 
@@ -64,6 +85,13 @@ La TIR prefiere A, pero el VAN prefiere B. Los perfiles del VAN se cruzan en la 
 
 - Si $r < 12{,}26\,\text{\%}$, B tiene más VAN.
 - Si $r > 12{,}26\,\text{\%}$, A tiene más VAN.
+
+\begin{figure}[H]
+\centering
+\input{src/tex/van_fisher.tex}
+\caption{Perfiles del VAN de A y B: se cruzan en la tasa de Fisher (12,26\,\%).}
+\end{figure}
+
 
 **4. Proyectos mutuamente excluyentes con desembolsos distintos (escala).** La TIR es un porcentaje y no mide euros. Ejemplo: $-10 \to +25$ (TIR 150 %) frente a $-100.000 \to +140.000$ (TIR 40 %). Al 10 %, el VAN del primero es 12,73 € y el del segundo 27.272,73 €.
 

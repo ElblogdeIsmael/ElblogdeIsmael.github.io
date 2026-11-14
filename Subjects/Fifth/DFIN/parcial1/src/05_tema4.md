@@ -130,6 +130,13 @@ Si dos máquinas hacen lo mismo pero duran distinto y se van a **reponer indefin
 
 $$VA(\text{costes}) = CAE \times a_{\overline{n}|r} \qquad\Rightarrow\qquad CAE = \frac{VA(\text{costes})}{a_{\overline{n}|r}} \qquad \text{Elegir el menor CAE}$$
 
+\begin{figure}[H]
+\centering
+\input{src/tex/cae.tex}
+\caption{El CAE es la anualidad que tiene el mismo valor actual que los costes del equipo.}
+\end{figure}
+
+
 Ejemplo de las diapositivas ($r$ real = 6 %): la máquina A cuesta 15 más 5/año durante 3 años; la B cuesta 10 más 6/año durante 2 años.
 
 - $VA_A = 28{,}37$ y $VA_B = 21{,}00$. Por VA parecería mejor B, **pero dura un año menos**.
