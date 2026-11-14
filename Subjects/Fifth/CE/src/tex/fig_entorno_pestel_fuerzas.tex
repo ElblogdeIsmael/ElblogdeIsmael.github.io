@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+  font=\sffamily,
+  ring/.style={rounded corners=6pt, line width=1pt},
+  pill/.style={rectangle, rounded corners=2.5pt, draw=cemuted, fill=white, font=\sffamily\scriptsize, text width=2.45cm, align=center, inner sep=4pt}
+]
+  % Anillo exterior: Macroentorno PESTEL + Entorno Canvas
+  \fill[cepanel] (-6.8, -3.5) rectangle (6.8, 3.6);
+  \draw[ceindigo, ring] (-6.8, -3.5) rectangle (6.8, 3.6);
+  \node[font=\sffamily\bfseries\footnotesize, ceindigo] at (0, 3.22)
+    {MACROENTORNO PESTEL (Fuerzas estructurales no controlables)};
+
+  % 6 nodos PESTEL arriba
+  \node[pill, draw=ceindigo, text width=1.82cm, font=\sffamily\fontsize{6.3}{7.5}\selectfont] (p)  at (-5.45, 2.3) {\textbf{Político}\\Estabilidad, ayudas};
+  \node[pill, draw=ceindigo, text width=1.82cm, font=\sffamily\fontsize{6.3}{7.5}\selectfont] (e)  at (-3.27, 2.3) {\textbf{Económico}\\Tipos, inflación, ciclo};
+  \node[pill, draw=ceindigo, text width=1.82cm, font=\sffamily\fontsize{6.3}{7.5}\selectfont] (s)  at (-1.09, 2.3) {\textbf{Sociocultural}\\Demografía, valores};
+  \node[pill, draw=ceindigo, text width=1.82cm, font=\sffamily\fontsize{6.3}{7.5}\selectfont] (t)  at (1.09, 2.3)  {\textbf{Tecnológico}\\IA, nube, costes I+D};
+  \node[pill, draw=ceindigo, text width=1.82cm, font=\sffamily\fontsize{6.3}{7.5}\selectfont] (ec) at (3.27, 2.3)  {\textbf{Ecológico}\\Huella, circularidad};
+  \node[pill, draw=ceindigo, text width=1.82cm, font=\sffamily\fontsize{6.3}{7.5}\selectfont] (l)  at (5.45, 2.3)  {\textbf{Legal}\\RGPD, Verifactu};
+
+  % Anillo intermedio: Fuerzas de Mercado e Industria (Osterwalder)
+  \fill[cepanelteal] (-5.7, -2.95) rectangle (5.7, 1.35);
+  \draw[ceteal, ring] (-5.7, -2.95) rectangle (5.7, 1.35);
+  \node[font=\sffamily\bfseries\footnotesize, ceteal!90!black] at (0, 0.98)
+    {ENTORNO COMPETITIVO Y DE MERCADO (Osterwalder / Porter)};
+
+  \node[pill, draw=ceteal, text width=3.1cm] (f1) at (-3.7, -0.1)
+    {\textbf{Fuerzas del mercado}\\Dolores emergentes y poder adquisitivo};
+  \node[pill, draw=ceteal, text width=3.1cm] (f2) at (3.7, -0.1)
+    {\textbf{Fuerzas de la industria}\\Rivales, nuevos entrantes y sustitutos};
+  \node[pill, draw=ceamber, text width=3.1cm] (f3) at (-3.7, -2.1)
+    {\textbf{Tendencias clave}\\Regulación, estándares abiertos};
+  \node[pill, draw=ceamber, text width=3.1cm] (f4) at (3.7, -2.1)
+    {\textbf{Fuerzas macro}\\Acceso a crédito y talento};
+
+  % Centro: El Canvas de la Empresa
+  \node[rectangle, rounded corners=5pt, fill=ceindigo, text=white, text width=2.8cm, align=center, inner sep=8pt, font=\sffamily\bfseries\footnotesize] (core) at (0, -1.1)
+    {MODELO DE\\NEGOCIO\\(Canvas propio)};
+
+  \draw[<->, >=Stealth, thick, ceslate] (f1.east) -- (core.north west);
+  \draw[<->, >=Stealth, thick, ceslate] (f2.west) -- (core.north east);
+  \draw[<->, >=Stealth, thick, ceslate] (f3.east) -- (core.south west);
+  \draw[<->, >=Stealth, thick, ceslate] (f4.west) -- (core.south east);
+\end{tikzpicture}

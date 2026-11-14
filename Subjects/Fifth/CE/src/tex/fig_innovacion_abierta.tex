@@ -1,0 +1,39 @@
+\begin{tikzpicture}[font=\sffamily]
+  % Embudo poroso de Innovación Abierta (Henry Chesbrough)
+  \node[font=\sffamily\bfseries\small, ceindigo] at (5.4, 3.75)
+    {PATRÓN DE INNOVACIÓN ABIERTA (HENRY CHESBROUGH)};
+
+  % Líneas discontinuas del embudo (frontera permeable de la empresa)
+  \draw[dashed, line width=1.4pt, ceindigo] (0, 2.75) -- (5.5, 1.75) -- (10.5, 1.75);
+  \draw[dashed, line width=1.4pt, ceindigo] (0, -1.75) -- (5.5, -0.75) -- (10.5, -0.75);
+
+  % Etiquetas de fases
+  \node[font=\sffamily\bfseries\scriptsize, ceslate] at (2.2, 2.95) {INVESTIGACIÓN};
+  \node[font=\sffamily\bfseries\scriptsize, ceslate] at (6.8, 2.2) {DESARROLLO};
+  \node[font=\sffamily\bfseries\scriptsize, ceslate] at (9.5, 2.2) {MERCADO};
+
+  % Bolas de ideas internas
+  \fill[ceindigo] (0.7, 1.2) circle (6pt);
+  \fill[ceindigo] (1.6, 0.1) circle (6pt);
+  \fill[ceindigo] (2.8, 0.7) circle (6pt);
+  \fill[ceindigo] (4.3, 0.3) circle (6pt);
+  \fill[ceteal] (7.2, 0.5) circle (7pt);
+  \draw[->, >=Stealth, line width=1.4pt, ceindigo] (4.7, 0.4) -- (6.8, 0.5);
+  \draw[->, >=Stealth, line width=1.4pt, ceteal] (7.6, 0.5) -- (10.3, 0.5)
+    node[above left, font=\sffamily\bfseries\scriptsize, ceteal!90!black] {Producto propio};
+
+  % Flujo 1: Outside-In (de fuera hacia dentro)
+  \node[rectangle, rounded corners=3pt, draw=ceteal, fill=cepanelteal, text width=3.2cm, align=center, inner sep=5pt, font=\sffamily\scriptsize] (extin) at (2.4, -2.55)
+    {\textbf{Outside-In (Adquisición)}\\Licenciar patentes, M\&A o APIs de startups externas.};
+  \draw[->, >=Stealth, line width=1.3pt, ceteal] (extin.north) to[out=90, in=-130] (4.9, -0.1);
+
+  % Flujo 2: Inside-Out (de dentro hacia fuera)
+  \node[rectangle, rounded corners=3pt, draw=cecrimson, fill=cepanelcrimson, text width=3.4cm, align=center, inner sep=5pt, font=\sffamily\scriptsize] (inext) at (6.9, 3.05)
+    {\textbf{Inside-Out (Monetización)}\\Licenciar IP no usada o lanzar \textit{spin-off} a mercados ajenos.};
+  \draw[->, >=Stealth, line width=1.3pt, cecrimson] (4.1, 1.1) to[out=55, in=-160] (inext.west);
+
+  % Flujo 3: Spin-off / Mercado secundario abajo
+  \node[rectangle, rounded corners=3pt, draw=ceamber, fill=cepanelamber, text width=3.2cm, align=center, inner sep=5pt, font=\sffamily\scriptsize] (lic) at (8.8, -2.55)
+    {\textbf{Nuevos mercados}\\Acuerdos de licencia y ecosistemas (P\&G Connect+Develop).};
+  \draw[->, >=Stealth, line width=1.3pt, ceamber] (6.4, -0.3) to[out=-45, in=120] (lic.north);
+\end{tikzpicture}

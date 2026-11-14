@@ -28,6 +28,11 @@ export default {
             {
               resources: [
                 {
+                  name: "Libro teórico-práctico de Creación de Empresas (Temas 1–10)",
+                  href: "/Subjects/Fifth/CE/build/CE.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Guía docente",
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/creacion-empresas/guia-docente",
                   kind: "GUIA",

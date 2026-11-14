@@ -1,0 +1,39 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=12.6cm,
+    height=6.2cm,
+    domain=0.18:10,
+    samples=160,
+    xmin=0, xmax=10.5,
+    ymin=0, ymax=6.2,
+    axis lines=left,
+    xlabel={Productos ordenados por popularidad (de mayor a menor demanda)},
+    ylabel={Volumen de ventas por producto},
+    xlabel style={font=\sffamily\footnotesize, color=ceslate},
+    ylabel style={font=\sffamily\footnotesize, color=ceslate},
+    xtick=\empty, ytick=\empty,
+    clip=false
+  ]
+    % Zona cabeza (Superventas / Hits)
+    \addplot[fill=cecrimson!22, draw=none, domain=0.18:1.6] {1/x} \closedcycle;
+    % Zona Larga Cola (Nichos)
+    \addplot[fill=ceteal!25, draw=none, domain=1.6:10] {1/x} \closedcycle;
+    % Curva potencia principal
+    \addplot[line width=1.6pt, ceindigo, domain=0.18:10] {1/x};
+
+    % Línea divisoria entre Cabeza y Cola
+    \draw[dashed, thick, cecrimson] (axis cs:1.6, 0) -- (axis cs:1.6, 6.0);
+
+    % Anotaciones limpias
+    \node[font=\sffamily\bfseries\scriptsize, cecrimson, align=center] at (axis cs:0.86, 5.45)
+      {CABEZA\\(\textit{Hits})};
+    \node[font=\sffamily\scriptsize, ceslate, align=left, anchor=west] at (axis cs:2.05, 4.75)
+      {\textbf{Modelo tradicional (tiendas físicas):}\\Espacio en estantería limitado.\\Solo es rentable vender la cabeza.};
+
+    \node[font=\sffamily\bfseries\footnotesize, ceteal!90!black, align=center] at (axis cs:6.0, 1.38)
+      {LARGA COLA (\textit{Long Tail}) · Miles de nichos};
+    \node[font=\sffamily\scriptsize, ceslate, align=center] at (axis cs:6.0, 2.55)
+      {\textbf{Regla de Chris Anderson:} el área acumulada de los nichos\\iguala o supera al área de los superventas cuando el coste\\de catálogo y distribución tiende a cero (Amazon, Netflix, Lulu).};
+    \draw[->, >=Stealth, thick, ceteal] (axis cs:6.0, 1.08) -- (axis cs:6.0, 0.35);
+  \end{axis}
+\end{tikzpicture}

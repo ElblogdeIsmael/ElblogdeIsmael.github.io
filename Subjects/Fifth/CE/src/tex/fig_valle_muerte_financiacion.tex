@@ -1,0 +1,47 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=12.8cm,
+    height=6.5cm,
+    xmin=0, xmax=42,
+    ymin=-85, ymax=135,
+    xlabel={Tiempo desde el inicio del proyecto (meses)},
+    ylabel={Flujo de caja neto acumulado ($\text{k€}$)},
+    xlabel style={font=\sffamily\footnotesize, color=ceslate},
+    ylabel style={font=\sffamily\footnotesize, color=ceslate},
+    xtick={0, 6, 12, 18, 24, 30, 36, 42},
+    xticklabel style={font=\sffamily\scriptsize, color=ceslate},
+    yticklabel style={font=\sffamily\scriptsize, color=ceslate},
+    ymajorgrids=true,
+    grid style={dashed, cemuted!45},
+    axis lines=left,
+    clip=false
+  ]
+    % Zona Valle de la Muerte (debajo de 0 entre mes 0 y mes 25)
+    \addplot[name path=curva, line width=1.9pt, ceindigo, smooth] coordinates {
+      (0, 0) (3, -15) (7, -42) (11, -68) (15, -72) (19, -54) (23, -22) (26, 0) (31, 38) (36, 82) (42, 125)
+    };
+    \addplot[name path=zero, draw=none, domain=0:26] {0};
+    \addplot[fill=cecrimson!16] fill between[of=curva and zero, soft clip={domain=0:26}];
+
+    \draw[dashed, thick, ceslate] (axis cs:0, 0) -- (axis cs:42, 0);
+
+    % Hitos de financiación sobre cada etapa
+    \node[font=\sffamily\bfseries\fontsize{6.3}{7.5}\selectfont, text=cecrimson, align=center, text width=2.7cm] at (axis cs:12.4, -27)
+      {VALLE DE LA MUERTE\\(Gastos previos a caja positiva)};
+
+    \node[rectangle, rounded corners=2pt, draw=ceamber, fill=cepanelamber, font=\sffamily\scriptsize, align=center, inner sep=3.5pt]
+      at (axis cs:4.2, 28) {\textbf{Etapa Semilla}\\FFF, Bootstrapping\\y CADE / Ayudas};
+    \draw[->, >=Stealth, thick, ceamber] (axis cs:3.8, 11) -- (axis cs:3.5, -18);
+
+    \node[rectangle, rounded corners=2pt, draw=ceindigo, fill=cepanel, font=\sffamily\scriptsize, align=center, inner sep=3.5pt]
+      at (axis cs:20.2, 44) {\textbf{Tracción temprana}\\Business Angels,\\ENISA y CDTI};
+    \draw[->, >=Stealth, thick, ceindigo] (axis cs:19.6, 27) -- (axis cs:18.6, -55);
+
+    \node[rectangle, rounded corners=2pt, draw=ceteal, fill=cepanelteal, font=\sffamily\scriptsize, align=center, inner sep=3.5pt]
+      at (axis cs:32, 102) {\textbf{Crecimiento y Escalado}\\Venture Capital, Banca\\y Autofinanciación};
+
+    \fill[ceteal] (axis cs:26, 0) circle (3pt);
+    \node[font=\sffamily\bfseries\scriptsize, ceteal!90!black, anchor=north west] at (axis cs:26.2, -4)
+      {Equilibrio de caja};
+  \end{axis}
+\end{tikzpicture}

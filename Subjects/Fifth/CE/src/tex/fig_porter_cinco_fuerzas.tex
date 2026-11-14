@@ -1,0 +1,45 @@
+\begin{tikzpicture}[
+  font=\sffamily,
+  force/.style={
+    rectangle, rounded corners=4pt, draw=ceindigo, line width=0.95pt,
+    fill=cepanel, text width=3.9cm, align=center, inner sep=6pt, minimum height=1.55cm,
+    font=\sffamily\scriptsize
+  },
+  arr/.style={->, >=Stealth, line width=1.4pt, ceindigo}
+]
+  % Fuerza central: Rivalidad
+  \node[rectangle, rounded corners=5pt, draw=cecrimson, line width=1.3pt, fill=cepanelcrimson,
+        text width=4.3cm, align=center, inner sep=8pt, minimum height=1.95cm, font=\sffamily\scriptsize] (c) at (0, 0) {
+    \textcolor{cecrimson}{\bfseries\footnotesize RIVALIDAD ENTRE COMPETIDORES ACTUALES}\\[3pt]
+    \color{ceslate} Número de rivales, crecimiento del sector, diferenciación y barreras de salida.
+  };
+
+  % Arriba: Nuevos entrantes
+  \node[force, above=0.95cm of c] (top) {
+    \textcolor{ceindigo}{\bfseries\footnotesize AMENAZA DE NUEVOS ENTRANTES}\\[2pt]
+    \color{ceslate} Economías de escala, capital inicial, patentes, efectos de red y regulación.
+  };
+
+  % Abajo: Sustitutos
+  \node[force, below=0.95cm of c] (bot) {
+    \textcolor{ceindigo}{\bfseries\footnotesize PRODUCTOS O SERVICIOS SUSTITUTIVOS}\\[2pt]
+    \color{ceslate} Alternativas de otra categoría que cumplen el mismo trabajo a menor coste o fricción.
+  };
+
+  % Izquierda: Proveedores
+  \node[force, draw=ceteal, fill=cepanelteal, left=1.15cm of c] (left) {
+    \textcolor{ceteal!90!black}{\bfseries\footnotesize PODER DE PROVEEDORES}\\[2pt]
+    \color{ceslate} Concentración de suministros, coste de cambio técnico (cloud, hardware, IP).
+  };
+
+  % Derecha: Compradores
+  \node[force, draw=ceamber, fill=cepanelamber, right=1.15cm of c] (right) {
+    \textcolor{ceamber!90!black}{\bfseries\footnotesize PODER DE CLIENTES}\\[2pt]
+    \color{ceslate} Sensibilidad al precio, concentración de compras e información comparable.
+  };
+
+  \draw[arr] (top.south) -- (c.north);
+  \draw[arr] (bot.north) -- (c.south);
+  \draw[arr, ceteal] (left.east) -- (c.west);
+  \draw[arr, ceamber] (right.west) -- (c.east);
+\end{tikzpicture}

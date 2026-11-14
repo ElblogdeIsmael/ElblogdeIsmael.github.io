@@ -1,0 +1,39 @@
+\begin{tikzpicture}[
+  font=\sffamily,
+  side/.style={
+    rectangle, rounded corners=4pt, line width=1pt,
+    text width=3.55cm, align=center, inner sep=7pt, minimum height=2.6cm, font=\sffamily\scriptsize
+  }
+]
+  \node[side, draw=ceindigo, fill=cepanel] (a) at (0, 0) {
+    \textcolor{ceindigo}{\bfseries\footnotesize LADO A · SUBVENCIONADO}\\[3pt]
+    \textbf{Usuarios / Compradores}\\[3pt]
+    \color{ceslate} A menudo acceso gratuito o muy barato para acelerar la adopción inicial.\\[3pt]
+    \textit{Ej.: conductores Waze, buscadores Google, compradores eBay.}
+  };
+
+  \node[rectangle, rounded corners=6pt, draw=cecrimson, line width=1.2pt, fill=cepanelcrimson,
+        text width=3.65cm, align=center, inner sep=8pt, minimum height=2.85cm, font=\sffamily\scriptsize] (core) at (5.4, 0) {
+    \textcolor{cecrimson}{\bfseries\footnotesize NÚCLEO DE PLATAFORMA}\\[3pt]
+    \textbf{Infraestructura y Emparejamiento}\\[4pt]
+    \color{ceslate} Reduce costes de búsqueda, genera confianza (pagos, reputación) y captura comisiones o datos.\\[3pt]
+    \textbf{Reto:} huevo y gallina.
+  };
+
+  \node[side, draw=ceteal, fill=cepanelteal] (b) at (10.8, 0) {
+    \textcolor{ceteal!90!black}{\bfseries\footnotesize LADO B · MONETIZADOR}\\[3pt]
+    \textbf{Proveedores / Anunciantes}\\[3pt]
+    \color{ceslate} Pagan por acceder a la liquidez del Lado A o por visibilidad segmentada.\\[3pt]
+    \textit{Ej.: desarrolladores iOS, anunciantes, restaurantes Glovo.}
+  };
+
+  % Flechas de efectos de red cruzados por encima y por debajo
+  \draw[->, >=Stealth, line width=1.2pt, ceindigo] (a.north east) to[out=25, in=155]
+    node[midway, above=3pt, font=\sffamily\bfseries\scriptsize, ceindigo] {Más usuarios atraen al Lado B} (b.north west);
+
+  \draw[->, >=Stealth, line width=1.2pt, ceteal] (b.south west) to[out=-155, in=-25]
+    node[midway, below=3pt, font=\sffamily\bfseries\scriptsize, ceteal!90!black] {Más oferta atrae a más usuarios} (a.south east);
+
+  \draw[<->, >=Stealth, thick, ceslate] (a.east) -- (core.west);
+  \draw[<->, >=Stealth, thick, ceslate] (core.east) -- (b.west);
+\end{tikzpicture}

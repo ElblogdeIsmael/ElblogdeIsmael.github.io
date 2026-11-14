@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+  font=\sffamily,
+  viab/.style={
+    rectangle, rounded corners=4pt, line width=1pt,
+    text width=5.65cm, align=left, inner sep=7pt, minimum height=2.45cm, font=\sffamily\scriptsize
+  }
+]
+  \node[font=\sffamily\bfseries\small, ceindigo] at (0, 3.65)
+    {LAS CUATRO VIABILIDADES DEL PROYECTO EMPRESARIAL (MODELO UGR)};
+
+  % Fila superior
+  \node[viab, draw=ceteal, fill=cepanelteal] (vc) at (-3.65, 1.55) {
+    \textcolor{ceteal!90!black}{\bfseries\footnotesize 1. VIABILIDAD COMERCIAL (¿Se venderá?)}\\[3pt]
+    \textbf{Vínculo Canvas:} hemisferio derecho (Segmentos, Propuesta, Canales, Relación).\\[2pt]
+    \color{ceslate} Demuestra que existe demanda real dispuesta a pagar un precio rentable por el producto o servicio frente a alternativas actuales.
+  };
+
+  \node[viab, draw=ceindigo, fill=cepanel] (vt) at (3.65, 1.55) {
+    \textcolor{ceindigo}{\bfseries\footnotesize 2. VIABILIDAD TÉCNICA (¿Sabemos hacerlo?)}\\[3pt]
+    \textbf{Vínculo Canvas:} hemisferio izquierdo (Recursos, Actividades, Asociaciones).\\[2pt]
+    \color{ceslate} Prueba que disponemos de tecnología, capacidad productiva, talento, proveedores y permisos legales para entregar lo prometido.
+  };
+
+  % Fila inferior
+  \node[viab, draw=ceamber, fill=cepanelamber] (ve) at (-3.65, -1.55) {
+    \textcolor{ceamber!90!black}{\bfseries\footnotesize 3. VIABILIDAD ECONÓMICA (¿Da beneficio?)}\\[3pt]
+    \textbf{Criterio contable (Devengo):} $\text{Ingresos} > \text{Gastos}$.\\[2pt]
+    \color{ceslate} Verifica en la Cuenta de Pérdidas y Ganancias que la actividad alcanza el punto muerto y remunera los recursos consumidos y amortizaciones.
+  };
+
+  \node[viab, draw=cecrimson, fill=cepanelcrimson] (vf) at (3.65, -1.55) {
+    \textcolor{cecrimson}{\bfseries\footnotesize 4. VIABILIDAD FINANCIERA (¿Habrá caja?)}\\[3pt]
+    \textbf{Criterio de liquidez (Caja):} $\text{Cobros} \ge \text{Pagos}$ en todo mes.\\[2pt]
+    \color{ceslate} Garantiza solvencia diaria para pagar nóminas, Hacienda, proveedores y cuotas de deuda sin quebrar en tesorería ("morir de éxito").
+  };
+
+  % Conexiones lógicas cruzadas
+  \draw[<->, >=Stealth, thick, ceslate] (vc.east) -- (vt.west);
+  \draw[->, >=Stealth, thick, ceteal]   (vc.south) -- (ve.north);
+  \draw[->, >=Stealth, thick, ceindigo] (vt.south) -- (vf.north);
+  \draw[<->, >=Stealth, thick, cecrimson] (ve.east) -- (vf.west)
+    node[midway, fill=white, inner sep=2pt, font=\sffamily\bfseries\tiny, align=center, cecrimson] {NO son\\idénticas};
+\end{tikzpicture}

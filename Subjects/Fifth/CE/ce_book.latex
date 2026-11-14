@@ -1,0 +1,500 @@
+% ==============================================================================
+% ce_book.latex — Plantilla editorial para el libro de Creación de Empresas
+% ==============================================================================
+\documentclass[10pt,a4paper,oneside]{book}
+
+% --- Motores tipográficos (XeLaTeX) ---
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{spanish}
+\usepackage{csquotes}
+
+% --- Tipografía Editorial: TeX Gyre Pagella (cuerpo) + Lato (títulos/cajas) + DejaVu Sans Mono ---
+\setmainfont{TeX Gyre Pagella}[
+  Ligatures=TeX,
+  Numbers=Proportional
+]
+\setsansfont{Lato}[
+  Scale=MatchLowercase,
+  Ligatures=TeX
+]
+\setmonofont{DejaVu Sans Mono}[
+  Scale=0.84
+]
+
+% --- Matemáticas limpias ---
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{unicode-math}
+\setmathfont{TeX Gyre Pagella Math}
+
+% --- Geometría editorial equilibrada ---
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  top=2.35cm,
+  bottom=2.35cm,
+  left=2.35cm,
+  right=2.15cm,
+  headheight=22pt,
+  headsep=16pt,
+  footskip=26pt
+}
+
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.16}
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
+\raggedbottom
+
+% --- Paleta cromática editorial ---
+\usepackage{xcolor}
+\definecolor{ceindigo}{RGB}{18, 49, 82}      % Azul pizarra dominante
+\definecolor{cedeep}{RGB}{12, 34, 58}        % Azul noche profundo
+\definecolor{cecrimson}{RGB}{178, 34, 52}    % Carmesí institucional / alertas
+\definecolor{ceteal}{RGB}{15, 118, 110}      % Verde esmeralda operaciones/casos
+\definecolor{ceamber}{RGB}{194, 110, 14}     % Ámbar dorado clase/foco
+\definecolor{ceviolet}{RGB}{91, 66, 138}     % Púrpura pizarra TI+ADE
+\definecolor{ceslate}{RGB}{71, 85, 105}      % Gris pizarra texto secundario
+\definecolor{cemuted}{RGB}{148, 163, 184}    % Gris claro reglas
+\definecolor{cecream}{RGB}{250, 249, 246}    % Papel tintado cálido
+\definecolor{cepanel}{RGB}{243, 246, 250}    % Fondo azulado suave
+\definecolor{cepanelteal}{RGB}{240, 250, 248}
+\definecolor{cepanelamber}{RGB}{254, 249, 240}
+\definecolor{cepanelcrimson}{RGB}{253, 243, 244}
+\definecolor{cepanelviolet}{RGB}{246, 244, 252}
+
+% --- Gráficos, TikZ, pgfplots y tablas ---
+\usepackage{graphicx}
+\graphicspath{{media/}{src/tex/}}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{
+  calc, positioning, shapes, shapes.geometric, shapes.misc,
+  arrows.meta, shadows.blur, backgrounds, fit, decorations.pathreplacing,
+  decorations.markings, patterns
+}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{etoolbox}
+\usepackage{eurosym}
+
+% Estilo uniforme para tablas Markdown (longtable) y LaTeX (tabular/tabularx)
+\AtBeginEnvironment{longtable}{%
+  \sffamily\small
+  \rowcolors{2}{cepanel!55}{white}%
+  \renewcommand{\arraystretch}{1.28}%
+}
+\AtBeginEnvironment{tabularx}{%
+  \sffamily\small
+  \rowcolors{2}{cepanel!55}{white}%
+  \renewcommand{\arraystretch}{1.25}%
+}
+\AtBeginEnvironment{tabular}{%
+  \sffamily\small
+  \renewcommand{\arraystretch}{1.25}%
+}
+
+% --- Pies de figura y tabla ---
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{
+  font={small,sf},
+  labelfont={bf,color=ceindigo},
+  textfont={color=ceslate},
+  labelsep=period,
+  justification=centering,
+  skip=8pt
+}
+
+% --- Listas limpias ---
+\usepackage{enumitem}
+\setlist{topsep=3pt, itemsep=2.5pt, parsep=1pt}
+\setlist[itemize,1]{label=\textcolor{ceteal}{\textbullet}, leftmargin=1.4em}
+\setlist[itemize,2]{label=\textcolor{ceamber}{\textendash}, leftmargin=1.2em}
+\setlist[enumerate,1]{label=\textcolor{ceindigo}{\sffamily\bfseries\arabic*.}, leftmargin=1.6em}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{2pt}\setlength{\parskip}{0pt}%
+}
+
+% --- Cajas editoriales (tcolorbox) ---
+\usepackage[most]{tcolorbox}
+
+% 1. Concepto / Marco Teórico
+\newtcolorbox{concepto}[1]{
+  enhanced, breakable,
+  colback=cepanel,
+  colframe=ceindigo,
+  borderline west={3.2pt}{0pt}{ceindigo},
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{ceindigo},
+  colbacktitle=cepanel,
+  attach boxed title to top left={yshift=-2mm, xshift=10pt},
+  boxed title style={colback=cepanel, boxrule=0pt, frame hidden, left=3pt, right=3pt},
+  title={MARCO TEÓRICO · #1}
+}
+
+% 2. Enfoque UGR / Clave de Examen
+\newtcolorbox{claseugr}[1]{
+  enhanced, breakable,
+  colback=cepanelamber,
+  colframe=ceamber,
+  borderline west={3.2pt}{0pt}{ceamber},
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{ceamber!90!black},
+  colbacktitle=cepanelamber,
+  attach boxed title to top left={yshift=-2mm, xshift=10pt},
+  boxed title style={colback=cepanelamber, boxrule=0pt, frame hidden, left=3pt, right=3pt},
+  title={ENFOQUE DE AULA UGR · #1}
+}
+
+% 3. Caso de Estudio Real
+\newtcolorbox{casoreal}[1]{
+  enhanced, breakable,
+  colback=cepanelteal,
+  colframe=ceteal,
+  borderline west={3.2pt}{0pt}{ceteal},
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{ceteal!90!black},
+  colbacktitle=cepanelteal,
+  attach boxed title to top left={yshift=-2mm, xshift=10pt},
+  boxed title style={colback=cepanelteal, boxrule=0pt, frame hidden, left=3pt, right=3pt},
+  title={CASO DE ESTUDIO · #1}
+}
+
+% 4. Trampa Frecuente de Examen
+\newtcolorbox{trampa}[1]{
+  enhanced, breakable,
+  colback=cepanelcrimson,
+  colframe=cecrimson,
+  borderline west={3.2pt}{0pt}{cecrimson},
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{cecrimson},
+  colbacktitle=cepanelcrimson,
+  attach boxed title to top left={yshift=-2mm, xshift=10pt},
+  boxed title style={colback=cepanelcrimson, boxrule=0pt, frame hidden, left=3pt, right=3pt},
+  title={ATENCIÓN / ERROR FRECUENTE · #1}
+}
+
+% 5. Puente Ingeniería Informática + ADE
+\newtcolorbox{enfoqueti}[1]{
+  enhanced, breakable,
+  colback=cepanelviolet,
+  colframe=ceviolet,
+  borderline west={3.2pt}{0pt}{ceviolet},
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{ceviolet},
+  colbacktitle=cepanelviolet,
+  attach boxed title to top left={yshift=-2mm, xshift=10pt},
+  boxed title style={colback=cepanelviolet, boxrule=0pt, frame hidden, left=3pt, right=3pt},
+  title={PUENTE INFORMÁTICA + ADE · #1}
+}
+
+% 6. Fórmulas y Análisis Cuantitativo
+\newtcolorbox{formula}[1]{
+  enhanced, breakable,
+  colback=cecream,
+  colframe=ceslate,
+  borderline north={2pt}{0pt}{ceindigo},
+  boxrule=0.5pt,
+  arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{white},
+  colbacktitle=ceindigo,
+  title={ANÁLISIS CUANTITATIVO · #1}
+}
+
+% 7. Hoja de Ruta del Capítulo
+\newtcolorbox{hojaruta}{
+  enhanced,
+  colback=cecream,
+  colframe=cemuted,
+  borderline west={2.5pt}{0pt}{ceteal},
+  boxrule=0.4pt,
+  arc=2pt,
+  left=11pt, right=11pt, top=9pt, bottom=9pt,
+  before skip=6pt, after skip=14pt,
+  fonttitle=\sffamily\bfseries\footnotesize\color{ceteal},
+  colbacktitle=cecream,
+  title={MAPA DEL CAPÍTULO}
+}
+
+% 8. Síntesis de Repaso al Cierre
+\newtcolorbox{sintesis}{
+  enhanced, breakable,
+  colback=cepanel,
+  colframe=ceindigo!60,
+  borderline west={3pt}{0pt}{ceamber},
+  boxrule=0.4pt,
+  arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  before skip=12pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{ceindigo},
+  colbacktitle=cepanel,
+  title={LISTA DE VERIFICACIÓN Y SÍNTESIS DEL CAPÍTULO}
+}
+
+% Epígrafe de capítulo
+\newcommand{\epigrafe}[2]{%
+  \begin{flushright}
+  \begin{minipage}{0.78\textwidth}
+  \raggedleft\itshape\color{ceslate}\small
+  ``#1''\\[3pt]
+  \normalfont\sffamily\footnotesize\bfseries\color{ceindigo} --- #2
+  \end{minipage}
+  \end{flushright}
+  \vspace{6pt}
+}
+
+% Portadilla de Parte con ilustración editorial
+\newcommand{\parteLibro}[4]{%
+  \cleardoublepage
+  \thispagestyle{empty}
+  \refstepcounter{part}
+  \addcontentsline{toc}{part}{Parte \thepart. #2}
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[cecream] (current page.south west) rectangle (current page.north east);
+    \fill[ceindigo] (current page.north west) rectangle ($$(current page.south west)+(1.1cm,0)$$);
+    \fill[cecrimson] ($$(current page.north west)+(1.1cm,0)$$) rectangle ($$(current page.south west)+(1.28cm,0)$$);
+  \end{tikzpicture}
+  \vspace*{0.4cm}
+  \hspace*{0.8cm}\begin{minipage}{0.88\textwidth}
+    {\sffamily\bfseries\small\color{cecrimson}\MakeUppercase{PARTE \thepart}\par}
+    \vspace{0.3cm}
+    {\sffamily\bfseries\fontsize{26}{30}\selectfont\color{ceindigo}#2\par}
+    \vspace{0.25cm}
+    {\Large\itshape\color{ceslate}#3\par}
+    \vspace{0.5cm}
+    {\color{ceteal}\rule{4.5cm}{2pt}}
+    \vspace{0.55cm}
+    \begin{center}
+      \fcolorbox{cemuted!60}{white}{\includegraphics[width=0.90\linewidth,height=9.0cm,keepaspectratio]{#1}}
+    \end{center}
+    \vspace{0.5cm}
+    \begin{tcolorbox}[
+      enhanced, colback=white, colframe=cemuted!60,
+      borderline west={3pt}{0pt}{ceamber}, boxrule=0.4pt, arc=2pt,
+      left=10pt, right=10pt, top=8pt, bottom=8pt
+    ]
+      {\sffamily\bfseries\footnotesize\color{ceindigo} CONTENIDOS DE ESTA PARTE\par}
+      \vspace{4pt}
+      {\small\color{cedeep!90}#4}
+    \end{tcolorbox}
+  \end{minipage}
+  \newpage
+}
+
+% --- Títulos de Capítulos y Secciones (titlesec) ---
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily}
+  {\begin{tikzpicture}[baseline=(num.base)]
+    \node[fill=ceindigo, text=white, font=\sffamily\bfseries\footnotesize, inner xsep=8pt, inner ysep=4pt, rounded corners=1.5pt] (lbl) {\MakeUppercase{\chaptertitlename}};
+    \node[right=6pt of lbl, font=\sffamily\bfseries\fontsize{36}{38}\selectfont, text=cecrimson] (num) {\thechapter};
+  \end{tikzpicture}}
+  {6pt}
+  {\sffamily\bfseries\fontsize{22}{26}\selectfont\color{ceindigo}\raggedright}
+  [\vspace{6pt}{\makebox[0pt][l]{\color{ceteal}\rule[-0.4pt]{3.2cm}{2.4pt}}{\color{ceindigo}\rule{\linewidth}{1.2pt}}}]
+
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\sffamily}
+  {}
+  {0pt}
+  {\sffamily\bfseries\fontsize{22}{26}\selectfont\color{ceindigo}\raggedright}
+  [\vspace{6pt}{\color{ceindigo}\rule{\linewidth}{1.2pt}}]
+
+\titlespacing*{\chapter}{0pt}{4pt}{16pt}
+
+\titleformat{\section}
+  {\sffamily\Large\bfseries\color{ceindigo}}
+  {\colorbox{cepanel}{\color{cecrimson}\thesection}}{0.7em}{}
+\titlespacing*{\section}{0pt}{16pt}{6pt}
+
+\titleformat{\subsection}
+  {\sffamily\large\bfseries\color{ceteal!85!black}}
+  {\thesubsection}{0.7em}{}
+\titlespacing*{\subsection}{0pt}{12pt}{4pt}
+
+\titleformat{\subsubsection}
+  {\sffamily\normalsize\bfseries\color{ceslate}}
+  {\thesubsubsection}{0.6em}{}
+\titlespacing*{\subsubsection}{0pt}{8pt}{3pt}
+
+% --- Encabezados y Pies de Página (fancyhdr) ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\footnotesize\color{ceslate}\nouppercase{\leftmark}}
+\fancyhead[R]{%
+  \begin{tikzpicture}[baseline=(p.base)]
+    \node[fill=ceindigo, text=white, font=\sffamily\bfseries\footnotesize, inner xsep=6pt, inner ysep=3pt, rounded corners=1.5pt] (p) {\thepage};
+  \end{tikzpicture}%
+}
+\fancyfoot[L]{\sffamily\scriptsize\color{ceslate} $subject$}
+\fancyfoot[R]{\sffamily\scriptsize\color{ceslate} $author$}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{cemuted}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{cemuted}\leaders\hrule height \footrulewidth\hfill}}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{%
+    \begin{tikzpicture}[baseline=(p.base)]
+      \node[fill=cepanel, draw=cemuted, text=ceindigo, font=\sffamily\bfseries\footnotesize, inner xsep=6pt, inner ysep=2.5pt, rounded corners=1.5pt] (p) {\thepage};
+    \end{tikzpicture}%
+  }
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% --- Tabla de Contenidos estilizada (tocloft) ---
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\sffamily\bfseries\color{ceindigo}}
+\renewcommand{\cftchappagefont}{\sffamily\bfseries\color{cecrimson}}
+\renewcommand{\cftsecfont}{\sffamily\small\color{cedeep}}
+\renewcommand{\cftsecpagefont}{\sffamily\small\color{ceslate}}
+\renewcommand{\cftsubsecfont}{\sffamily\footnotesize\color{ceslate}}
+\renewcommand{\cftsubsecpagefont}{\sffamily\footnotesize\color{ceslate}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforechapskip}{8pt}
+\setlength{\cftbeforesecskip}{2.5pt}
+\setcounter{tocdepth}{1}
+
+% --- Numeración ---
+\numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+
+% --- Hipervínculos ---
+\usepackage[plainpages=false,pdfpagelabels]{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=ceindigo,
+  citecolor=ceteal,
+  urlcolor=cecrimson,
+  pdftitle={$subject$},
+  pdfauthor={$author$},
+  pdfsubject={Creación de Empresas · UGR},
+  pdfcreator={XeLaTeX}
+}
+
+% --- Macros de Pandoc para bloques de código ---
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+$if(header-includes)$
+$for(header-includes)$
+$header-includes$
+$endfor$
+$endif$
+
+% ==============================================================================
+% INICIO DEL DOCUMENTO
+% ==============================================================================
+\begin{document}
+
+% --- PORTADA EDITORIAL ---
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+  \newgeometry{top=2.2cm, bottom=2.0cm, left=2.4cm, right=2.4cm}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[inner sep=0pt] at (current page.center)
+      {\includegraphics[width=\paperwidth,height=\paperheight]{cover_ce.jpg}};
+    \fill[ceamber] ($$(current page.north west)+(2.4cm,-2.1cm)$$) rectangle ($$(current page.north west)+(5.8cm,-2.22cm)$$);
+  \end{tikzpicture}
+
+  \vspace*{0.9cm}
+  {\sffamily\bfseries\footnotesize\color{ceamber!85!white}\MakeUppercase{$degree$}\par}
+  \vspace{0.6cm}
+  {\sffamily\bfseries\fontsize{34}{38}\selectfont\color{white}$subject$\par}
+  \vspace{0.45cm}
+  {\sffamily\Large\color{white!88!cepanel}$about$\par}
+  \vspace{0.55cm}
+  {\color{ceteal!85!white}\rule{6.5cm}{1.8pt}}
+
+  \vspace{1.0cm}
+  \begin{minipage}{0.82\textwidth}
+    \sffamily\small\color{white!80!cepanel}
+    Manual teórico-práctico integral adaptado a la Guía Docente oficial (2161153): emprendedor y efectuación, modelado Canvas y propuesta de valor, patrones de negocio, diseño estratégico, experimentación Lean, plan de empresa, las cuatro viabilidades, marco jurídico-laboral, finanzas y arquitectura TI.
+  \end{minipage}
+
+  \vfill
+  \begin{tcolorbox}[
+    enhanced,
+    width=0.72\textwidth,
+    colback=cedeep!92!ceindigo,
+    opacityback=0.92,
+    colframe=ceamber!80,
+    boxrule=0.6pt,
+    arc=3pt,
+    left=11pt, right=11pt, top=7pt, bottom=7pt
+  ]
+    \begin{tabular}{@{}ll@{}}
+      \sffamily\bfseries\footnotesize\color{ceamber!90!white} AUTOR &
+      \sffamily\small\color{white} $author$ \\
+      \sffamily\bfseries\footnotesize\color{ceamber!90!white} UNIVERSIDAD &
+      \sffamily\small\color{white} Universidad de Granada · 5.º Curso (GII + ADE) \\
+      \sffamily\bfseries\footnotesize\color{ceamber!90!white} EDICIÓN &
+      \sffamily\small\color{white} Curso 2026/2027 \\
+    \end{tabular}
+  \end{tcolorbox}
+  \restoregeometry
+\end{titlepage}
+\hypersetup{pageanchor=true}
+\frontmatter
+
+% --- PÁGINA DE CRÉDITOS Y MAPA EDITORIAL ---
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{tcolorbox}[
+  enhanced, colback=cecream, colframe=cemuted!60,
+  borderline west={3pt}{0pt}{ceindigo}, boxrule=0.4pt, arc=2pt,
+  left=12pt, right=12pt, top=10pt, bottom=10pt
+]
+  {\sffamily\bfseries\small\color{ceindigo} CREACIÓN DE EMPRESAS · MANUAL INTEGRAL DE LA ASIGNATURA\par}
+  \vspace{6pt}
+  {\small\color{cedeep}
+  Documento de estudio elaborado para el 5.º curso del Doble Grado en Ingeniería Informática y Administración y Dirección de Empresas de la Universidad de Granada (Guía Docente 2161153).\\[6pt]
+  \textbf{Eje doctrinal y bibliográfico:} integra los contenidos de los Temas 1 a 10 de la guía docente oficial junto con las obras de referencia internacional: Osterwalder y Pigneur (\textit{Business Model Generation}), Osterwalder et al. (\textit{Value Proposition Design}), Eric Ries (\textit{The Lean Startup}), Steve Blank y Bob Dorf (\textit{The Startup Owner's Manual}), Saras Sarasvathy (\textit{Effectuation}), Ash Maurya (\textit{Running Lean}), Bill Aulet (\textit{Disciplined Entrepreneurship}), Geoffrey Moore (\textit{Crossing the Chasm}), Peter Thiel (\textit{Zero to One}), Kim y Mauborgne (\textit{La estrategia del océano azul}), Hisrich, Peters y Shepherd (\textit{Entrepreneurship}), Gómez Gras et al., Barringer e Ireland, Weill y Vitale, y la normativa mercantil, fiscal y laboral española vigente (Ley 18/2022 Crea y Crece, Ley 28/2022 de Startups y cotizaciones 2026).}
+\end{tcolorbox}
+\vspace{0.5cm}
+
+% --- ÍNDICE GENERAL ---
+\tableofcontents
+\listoffigures
+\clearpage
+
+% --- CUERPO PRINCIPAL ---
+\mainmatter
+$body$
+
+\end{document}
