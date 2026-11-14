@@ -1,5 +1,7 @@
 \part{Teoría condensada}
 
+\input{src/tex/estilo_ejes.tex}
+
 # Tema 1. La empresa y el director financiero
 
 Tema corto y casi solo teórico. En el examen cae como pregunta tipo test o como frase de justificación dentro de un problema («¿por qué maximizar el VAN?»). Hay que dominar cinco ideas.
@@ -17,6 +19,13 @@ El director financiero es el **intermediario entre los mercados financieros y la
 2. Tesorería invertida en la empresa (compra de activos reales).
 3. Tesorería generada por las operaciones.
 4. Destino de esa tesorería: **(4a)** se reinvierte en la empresa, o **(4b)** se restituye a los inversores (intereses, devolución de deuda, dividendos, recompras).
+
+\begin{figure}[H]
+\centering
+\input{src/tex/circuito.tex}
+\caption{Circuito de la tesorería entre los mercados financieros y la empresa.}
+\end{figure}
+
 
 Dentro de la dirección financiera se distinguen el **tesorero** (bancos, gestión de tesorería, obtención de financiación, créditos, dividendos, seguros, pensiones) y el **jefe de control de gestión o *controller*** (contabilidad, estados financieros, auditoría interna, nóminas, presupuestos, impuestos).
 

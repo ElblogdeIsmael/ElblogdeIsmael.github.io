@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+\begin{axis}[dfinejes, xlabel={Tipo de interés del mercado (\%)}, ylabel={Precio del bono (€)},
+  xmin=0, xmax=12, ymin=400, ymax=2800, scaled ticks=false, legend pos=north east]
+  \addplot[domain=0:12, samples=61, very thick, blue!70!black]
+    {x==0 ? 1165 : 55*(1-(1+x/100)^(-3))/(x/100) + 1000/(1+x/100)^3};
+  \addlegendentry{Bono a 3 años}
+  \addplot[domain=0:12, samples=61, very thick, red!70!black]
+    {x==0 ? 2650 : 55*(1-(1+x/100)^(-30))/(x/100) + 1000/(1+x/100)^30};
+  \addlegendentry{Bono a 30 años}
+  \draw[dashed, gray] (axis cs:5.5,400) -- (axis cs:5.5,2800);
+  \node[anchor=north east, font=\footnotesize, gray!60!black, align=right] at (axis cs:5.4,2750) {cupón $5{,}5\,\text{\%}$:\\precio $=1.000$};
+\end{axis}
+\end{tikzpicture}

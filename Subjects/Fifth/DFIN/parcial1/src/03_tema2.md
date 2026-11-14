@@ -46,6 +46,13 @@ Notación de las diapositivas: riqueza inicial $D$; se invierte el tramo $JD$ en
 
 **Inversión óptima.** Es la que **maximiza el VAN**: se invierte mientras la rentabilidad marginal supere al tipo de interés, hasta la **tangencia** entre la curva de inversión y la línea del mercado ($r' = r$).
 
+\begin{figure}[H]
+\centering
+\input{src/tex/fisher_optimo.tex}
+\caption{Gráfico de Fisher: la inversión $JD$ que maximiza el VAN ($DK$) es la de la tangencia entre la curva de inversión y la línea del mercado.}
+\end{figure}
+
+
 - **Si se invierte menos ($ND < JD$):** ambos tipos de inversor mejoran respecto a no invertir, pero **menos** que con $JD$ ($P < K$, $M' < M$).
 - **Si se invierte más:** los últimos proyectos rinden $r' < r$, tienen VAN negativo y la riqueza también cae.
 
@@ -68,6 +75,13 @@ Si $r_{\text{endeudamiento}} > r_{\text{préstamo}}$, la línea se quiebra en do
 - Para **quien se endeuda**, la recta tiene pendiente $-(1+r_d)$, **más inclinada**.
 
 Cada uno alcanza la tangencia en un punto distinto, así que **prestamista y prestatario no están de acuerdo** sobre la inversión que maximiza el VAN. **Se rompe la separación de Fisher**: es la respuesta **b** del problema 2 de la relación.
+
+\begin{figure}[H]
+\centering
+\input{src/tex/fisher_dos_tipos.tex}
+\caption{Con tipo de endeudamiento mayor que el de préstamo, prestamista y prestatario quieren invertir cantidades distintas.}
+\end{figure}
+
 
 ### Problema numérico tipo (relación, problema 3)
 
@@ -127,6 +141,13 @@ Total cobrado: $40.533{,}20$ €.
 c) **Rentabilidad de la compraventa:**
 $$1.019{,}70 = \frac{11 + 1.013{,}33}{1+r} \Rightarrow r \approx 0{,}45\,\text{\%}$$
 Es menor que el 0,6 % porque los tipos subieron.
+
+
+\begin{figure}[H]
+\centering
+\input{src/tex/bonos_plazo.tex}
+\caption{Precio de un bono con cupón del 5,5\,\% y nominal 1.000 €: el de 30 años es mucho más sensible al tipo de interés.}
+\end{figure}
 
 **Riesgo de tipo de interés.** Es mayor cuanto:
 
@@ -253,6 +274,13 @@ Las diapositivas insisten: **«se recomienda usar siempre el análisis de las re
 5. **Comprobación:** $P_0 = BPA_1/r + VAOC$.
 
 **Ejemplo 1 de las diapositivas.** $BPA_1 = 40$ y $r = 10\,\text{\%}$. En $t=2$ se reinvierte el 50 % con $ROE = 25\,\text{\%}$ a perpetuidad; en $t=5$ se reinvierte el 60 % con $ROE = 20\,\text{\%}$ a perpetuidad.
+
+\begin{figure}[H]
+\centering
+\input{src/tex/reinversiones.tex}
+\caption{Ejemplo 1: reinversiones en $t=2$ y $t=5$ con sus flujos perpetuos.}
+\end{figure}
+
 
 - **Reinversión 1:** capital $0{,}5 \times 40 = 20$, flujo $5$/año desde $t=3$, $VAN_2 = -20 + 5/0{,}1 = 30$.
 - **Reinversión 2:** capital $0{,}6 \times 45 = 27$, flujo $5{,}40$/año desde $t=6$, $VAN_5 = -27 + 5{,}4/0{,}1 = 27$.
