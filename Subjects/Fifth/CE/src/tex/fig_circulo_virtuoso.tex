@@ -1,0 +1,36 @@
+\begin{tikzpicture}[
+  font=\sffamily,
+  stepbox/.style={
+    rectangle, rounded corners=4pt, line width=0.9pt,
+    text width=3.55cm, align=center, inner sep=5pt, font=\sffamily\scriptsize
+  }
+]
+  % Ciclo superior-central: El Círculo Virtuoso (enfoque clase UGR)
+  \node[circle, draw=ceindigo, line width=1.4pt, fill=cecream, minimum size=2.65cm, align=center, font=\sffamily\bfseries\footnotesize, text=ceindigo] (core) at (0, 0)
+    {CÍRCULO\\VIRTUOSO\\DE VALOR};
+
+  % 4 cuadrantes alrededor del núcleo
+  \node[stepbox, draw=cecrimson, fill=cepanelcrimson] (n1) at (0, 2.75)
+    {\textcolor{cecrimson}{\bfseries 1. Segmento y Dolor}\\¿Quién sufre el problema y cuánto le cuesta hoy?};
+  \node[stepbox, draw=ceteal, fill=cepanelteal] (n2) at (4.55, 0)
+    {\textcolor{ceteal!90!black}{\bfseries 2. Propuesta y Canal}\\¿Qué valor entregamos y cómo llega sin fricción?};
+  \node[stepbox, draw=ceindigo, fill=cepanel] (n3) at (0, -2.75)
+    {\textcolor{ceindigo}{\bfseries 3. Captura e Ingresos}\\¿Cómo monetizamos y fidelizamos la relación?};
+  \node[stepbox, draw=ceamber, fill=cepanelamber] (n4) at (-4.55, 0)
+    {\textcolor{ceamber!90!black}{\bfseries 4. Motor Operativo}\\Recursos, actividades y socios que sostienen el coste.};
+
+  % Flechas curvas del bucle exterior
+  \draw[->, >=Stealth, line width=1.4pt, cecrimson] (n1.east) to[out=0, in=90] (n2.north);
+  \draw[->, >=Stealth, line width=1.4pt, ceteal]    (n2.south) to[out=-90, in=0] (n3.east);
+  \draw[->, >=Stealth, line width=1.4pt, ceindigo]  (n3.west) to[out=180, in=-90] (n4.south);
+  \draw[->, >=Stealth, line width=1.4pt, ceamber]   (n4.north) to[out=90, in=180] (n1.west);
+
+  % Retroalimentación hacia el centro
+  \draw[dashed, ->, >=Stealth, thick, ceslate] (n1.south) -- (core.north);
+  \draw[dashed, ->, >=Stealth, thick, ceslate] (n2.west) -- (core.east);
+  \draw[dashed, ->, >=Stealth, thick, ceslate] (n3.north) -- (core.south);
+  \draw[dashed, ->, >=Stealth, thick, ceslate] (n4.east) -- (core.west);
+
+  \node[font=\sffamily\itshape\scriptsize, ceslate, align=center] at (0, -3.75)
+    {Cualquier cambio en un bloque exige recalibrar los tres restantes hasta cerrar la coherencia del sistema.};
+\end{tikzpicture}

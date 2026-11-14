@@ -1,0 +1,39 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=13.0cm,
+    height=6.2cm,
+    domain=-3.2:3.2,
+    samples=160,
+    xmin=-3.2, xmax=3.2,
+    ymin=0, ymax=0.50,
+    axis lines=left,
+    xtick={-2.3, -1.25, 0, 1.25, 2.3},
+    xticklabels={{Innovadores\\(2,5\%)}, {Primeros\\adoptantes (13,5\%)}, {Mayoría\\temprana (34\%)}, {Mayoría\\tardía (34\%)}, {Rezagados\\(16\%)}},
+    xticklabel style={font=\sffamily\scriptsize, align=center, text width=2.2cm},
+    ytick=\empty,
+    ylabel={Adopción acumulada / Cuota de tramo},
+    ylabel style={font=\sffamily\footnotesize, color=ceslate},
+    clip=false
+  ]
+    % Relleno áreas bajo la campana normal
+    \addplot[fill=ceteal!20, draw=none, domain=-3.2:-0.88] {0.4*exp(-0.5*x^2)} \closedcycle;
+    \addplot[fill=ceindigo!22, draw=none, domain=-0.65:3.2] {0.4*exp(-0.5*x^2)} \closedcycle;
+
+    % Campana completa
+    \addplot[line width=1.6pt, ceindigo, domain=-3.2:3.2] {0.4*exp(-0.5*x^2)};
+
+    % Franja del Abismo (The Chasm) entre x=-0.88 y x=-0.65
+    \fill[cecrimson!22] (axis cs:-0.90, 0) rectangle (axis cs:-0.62, 0.36);
+    \draw[line width=1.3pt, cecrimson, dashed] (axis cs:-0.90, 0) -- (axis cs:-0.90, 0.44);
+    \draw[line width=1.3pt, cecrimson, dashed] (axis cs:-0.62, 0) -- (axis cs:-0.62, 0.44);
+
+    % Etiqueta del Abismo
+    \node[rectangle, rounded corners=2pt, fill=cecrimson, text=white, font=\sffamily\bfseries\scriptsize, inner sep=4pt, align=center]
+      at (axis cs:-0.76, 0.44) {EL ABISMO\\(Moore, 1991)};
+
+    \node[font=\sffamily\scriptsize, ceteal!90!black, align=center] at (axis cs:-2.0, 0.25)
+      {\textbf{Mercado temprano}\\Visionarios (buscan ruptura)};
+    \node[font=\sffamily\scriptsize, ceindigo, align=center, fill=white, fill opacity=0.88, text opacity=1, inner sep=2pt, rounded corners=2pt] at (axis cs:1.85, 0.30)
+      {\textbf{Mercado principal (\textit{Mainstream})}\\Pragmáticos (buscan referencias\\y \textit{producto completo} en nicho)};
+  \end{axis}
+\end{tikzpicture}

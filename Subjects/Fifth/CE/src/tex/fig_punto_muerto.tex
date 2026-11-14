@@ -1,0 +1,47 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=12.4cm,
+    height=6.6cm,
+    xmin=0, xmax=120,
+    ymin=0, ymax=135,
+    axis lines=left,
+    xlabel={Unidades vendidas / clientes ($Q$)},
+    ylabel={Miles de euros ($\text{k€}$)},
+    xlabel style={font=\sffamily\footnotesize, color=ceslate},
+    ylabel style={font=\sffamily\footnotesize, color=ceslate},
+    grid=major,
+    grid style={dashed, cemuted!45},
+    legend style={at={(0.03,0.97)}, anchor=north west, font=\sffamily\scriptsize, fill=white, draw=cemuted},
+    clip=false
+  ]
+    % Zona de pérdidas (entre Q=0 y Q*=50): CF=40, CVu=0.4, p=1.2 => Q*=40/(1.2-0.4)=50, IT*=60
+    \addplot[name path=ITloss, draw=none, domain=0:50] {1.2*x};
+    \addplot[name path=CTloss, draw=none, domain=0:50] {40 + 0.4*x};
+    \addplot[fill=cecrimson!16] fill between[of=CTloss and ITloss];
+
+    % Zona de beneficios (entre Q=50 y Q=115)
+    \addplot[name path=ITwin, draw=none, domain=50:115] {1.2*x};
+    \addplot[name path=CTwin, draw=none, domain=50:115] {40 + 0.4*x};
+    \addplot[fill=ceteal!18] fill between[of=ITwin and CTwin];
+
+    % Rectas principales
+    \addplot[line width=1.2pt, ceslate, dashed, domain=0:115] {40};
+    \addlegendentry{Costes Fijos ($CF$)}
+
+    \addplot[line width=1.6pt, cecrimson, domain=0:115] {40 + 0.4*x};
+    \addlegendentry{Costes Totales ($CT = CF + CV_u \cdot Q$)}
+
+    \addplot[line width=1.8pt, ceteal!90!black, domain=0:112] {1.2*x};
+    \addlegendentry{Ingresos Totales ($IT = p \cdot Q$)}
+
+    % Punto muerto marcado
+    \fill[ceindigo] (axis cs:50, 60) circle (3.2pt);
+    \draw[dotted, thick, ceindigo] (axis cs:50, 0) -- (axis cs:50, 60) -- (axis cs:0, 60);
+    \node[font=\sffamily\bfseries\scriptsize, ceindigo, fill=white, draw=ceindigo!60, rounded corners=2pt, inner sep=2.5pt] at (axis cs:50, 18) {$Q^* = \frac{CF}{p - CV_u}$};
+    \node[font=\sffamily\bfseries\scriptsize, ceindigo, anchor=south east] at (axis cs:49, 63) {Punto Muerto ($IT = CT$)};
+
+    % Etiquetas de regiones
+    \node[font=\sffamily\bfseries\scriptsize, cecrimson] at (axis cs:15, 32) {PÉRDIDAS};
+    \node[font=\sffamily\bfseries\scriptsize, ceteal!90!black] at (axis cs:92, 95) {BENEFICIOS};
+  \end{axis}
+\end{tikzpicture}

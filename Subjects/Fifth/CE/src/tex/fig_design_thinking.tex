@@ -1,0 +1,52 @@
+\begin{tikzpicture}[
+  font=\sffamily,
+  stepbox/.style={
+    rectangle, rounded corners=4pt, draw=ceindigo, line width=0.9pt,
+    fill=white, text width=2.35cm, align=center, minimum height=2.2cm, inner sep=5pt
+  },
+  arr/.style={->, >=Stealth, line width=1.2pt, ceindigo}
+]
+  % Fases Design Thinking (Stanford)
+  \node[stepbox, fill=cepanel] (s1) at (0, 0) {
+    \colorbox{ceindigo}{\color{white}\bfseries\scriptsize 1}\\[3pt]
+    \textbf{\footnotesize Empatizar}\\[3pt]
+    \scriptsize\color{ceslate} Observación en contexto real y escucha sin sesgos.
+  };
+  \node[stepbox, fill=cepanelteal, draw=ceteal] (s2) at (2.85, 0) {
+    \colorbox{ceteal}{\color{white}\bfseries\scriptsize 2}\\[3pt]
+    \textbf{\footnotesize Definir}\\[3pt]
+    \scriptsize\color{ceslate} Síntesis del problema central (\textit{Point of View}).
+  };
+  \node[stepbox, fill=cepanelamber, draw=ceamber] (s3) at (5.70, 0) {
+    \colorbox{ceamber}{\color{white}\bfseries\scriptsize 3}\\[3pt]
+    \textbf{\footnotesize Idear}\\[3pt]
+    \scriptsize\color{ceslate} Divergencia creativa masiva antes de filtrar.
+  };
+  \node[stepbox, fill=cepanelviolet, draw=ceviolet] (s4) at (8.55, 0) {
+    \colorbox{ceviolet}{\color{white}\bfseries\scriptsize 4}\\[3pt]
+    \textbf{\footnotesize Prototipar}\\[3pt]
+    \scriptsize\color{ceslate} Maquetas rápidas y baratas para tocar la idea.
+  };
+  \node[stepbox, fill=cepanelcrimson, draw=cecrimson] (s5) at (11.40, 0) {
+    \colorbox{cecrimson}{\color{white}\bfseries\scriptsize 5}\\[3pt]
+    \textbf{\footnotesize Testear}\\[3pt]
+    \scriptsize\color{ceslate} Validación con usuarios reales y aprendizaje.
+  };
+
+  \draw[arr] (s1.east) -- (s2.west);
+  \draw[arr] (s2.east) -- (s3.west);
+  \draw[arr] (s3.east) -- (s4.west);
+  \draw[arr] (s4.east) -- (s5.west);
+
+  % Bucles iterativos (parte superior e inferior)
+  \draw[->, >=Stealth, dashed, thick, cecrimson] (s5.north) to[out=135, in=45]
+    node[midway, above, font=\sffamily\scriptsize\bfseries, cecrimson] {Iterar definición o ideación tras el feedback} (s2.north);
+  \draw[->, >=Stealth, dashed, thick, ceteal] (s4.south) to[out=-155, in=-25]
+    node[midway, below=3pt, fill=white, inner sep=1.5pt, font=\sffamily\scriptsize, text=ceteal!90!black] {Ajuste rápido del prototipo} (s3.south);
+
+  % Etiquetas Doble Diamante
+  \draw[decorate, decoration={brace, amplitude=5pt}, thick, ceslate] (-1.2, -2.30) -- (4.05, -2.30)
+    node[midway, below=6pt, font=\sffamily\scriptsize\bfseries, ceslate] {Espacio del Problema (¿Qué resolver?)};
+  \draw[decorate, decoration={brace, amplitude=5pt}, thick, ceindigo] (4.5, -2.30) -- (12.6, -2.30)
+    node[midway, below=6pt, font=\sffamily\scriptsize\bfseries, ceindigo] {Espacio de la Solución (¿Cómo resolverlo?)};
+\end{tikzpicture}

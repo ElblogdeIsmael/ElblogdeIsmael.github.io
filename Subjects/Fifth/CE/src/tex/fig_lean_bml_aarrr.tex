@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+  font=\sffamily,
+  stepbox/.style={
+    rectangle, rounded corners=4pt, draw=ceindigo, line width=1pt,
+    fill=cepanel, text width=3.1cm, align=center, inner sep=6pt, minimum height=1.5cm, font=\sffamily\scriptsize
+  },
+  funnel/.style={
+    rectangle, rounded corners=2.5pt, draw=ceteal, line width=0.8pt,
+    fill=white, text width=2.25cm, align=center, inner sep=4pt, minimum height=1.35cm, font=\sffamily\scriptsize
+  }
+]
+  % Parte superior: Bucle Construir-Medir-Aprender (Eric Ries)
+  \node[font=\sffamily\bfseries\small, ceindigo] at (0, 3.85)
+    {MOTOR LEAN STARTUP: CONSTRUIR -- MEDIR -- APRENDER (ERIC RIES)};
+
+  \node[stepbox, draw=cecrimson, fill=cepanelcrimson] (ideas) at (-4.3, 2.2)
+    {\textcolor{cecrimson}{\bfseries 1. CONSTRUIR}\\Convertir hipótesis de riesgo en un MVP mínimo.};
+  \node[stepbox, draw=ceindigo, fill=cepanel] (prod) at (0, 2.2)
+    {\textcolor{ceindigo}{\bfseries 2. MEDIR}\\Recoger conducta real y cohortes accionables.};
+  \node[stepbox, draw=ceteal, fill=cepanelteal] (data) at (4.3, 2.2)
+    {\textcolor{ceteal!90!black}{\bfseries 3. APRENDER}\\Decisión binaria: \textbf{Perseverar} o \textbf{Pivotar}.};
+
+  \draw[->, >=Stealth, line width=1.4pt, cecrimson] (ideas.east) -- (prod.west);
+  \draw[->, >=Stealth, line width=1.4pt, ceindigo] (prod.east) -- (data.west);
+  \draw[->, >=Stealth, line width=1.2pt, ceteal, dashed] (data.south) to[out=-158, in=-22]
+    node[midway, below=1pt, font=\sffamily\bfseries\scriptsize, ceslate] {Minimizar tiempo total de vuelta (Iterar sin desperdicio)} (ideas.south);
+
+  % Parte inferior: Métricas Pirata AARRR (Dave McClure)
+  \draw[dashed, cemuted] (-6.4, -0.05) -- (6.4, -0.05);
+  \node[font=\sffamily\bfseries\small, ceteal!90!black] at (0, -0.52)
+    {EMBUDO DE MÉTRICAS ACCIONABLES: MODELO PIRATA AARRR (DAVE MCCLURE)};
+
+  \node[funnel] (m1) at (-5.2, -1.75) {\textcolor{ceindigo}{\bfseries Adquisición}\\¿Cómo nos encuentran?};
+  \node[funnel] (m2) at (-2.6, -1.75) {\textcolor{ceindigo}{\bfseries Activación}\\¿Viven el primer valor?};
+  \node[funnel] (m3) at (0, -1.75)    {\textcolor{ceteal!90!black}{\bfseries Retención}\\¿Vuelven con frecuencia?};
+  \node[funnel] (m4) at (2.6, -1.75)  {\textcolor{ceamber!90!black}{\bfseries Ingresos (\textit{Rev.})}\\¿Cuánto y cómo pagan?};
+  \node[funnel] (m5) at (5.2, -1.75)  {\textcolor{cecrimson}{\bfseries Referencia}\\¿Nos recomiendan?};
+
+  \draw[->, >=Stealth, thick, ceteal] (m1) -- (m2);
+  \draw[->, >=Stealth, thick, ceteal] (m2) -- (m3);
+  \draw[->, >=Stealth, thick, ceteal] (m3) -- (m4);
+  \draw[->, >=Stealth, thick, ceteal] (m4) -- (m5);
+\end{tikzpicture}

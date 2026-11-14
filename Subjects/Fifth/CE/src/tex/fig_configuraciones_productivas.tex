@@ -1,0 +1,44 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=12.6cm,
+    height=6.3cm,
+    xmin=0, xmax=10.5,
+    ymin=0, ymax=10.5,
+    axis lines=left,
+    xlabel={Volumen de producción y estandarización creciente $\longrightarrow$},
+    ylabel={Variedad / personalización de producto $\longrightarrow$},
+    xlabel style={font=\sffamily\footnotesize, color=ceslate},
+    ylabel style={font=\sffamily\footnotesize, color=ceslate},
+    xtick={2, 5, 8.5},
+    xticklabels={Bajo (unitario), Medio (lotes), Muy alto (masivo)},
+    ytick={2, 5, 8.5},
+    yticklabels={Nula (estándar), Media, Muy alta (a medida)},
+    tick label style={font=\sffamily\scriptsize, color=ceslate},
+    grid=major,
+    grid style={dashed, cemuted!45},
+    clip=false
+  ]
+    % Banda diagonal de ajuste proceso-producto (Hayes & Wheelwright)
+    \fill[cepanelteal, opacity=0.6] (axis cs:0.8, 9.8) -- (axis cs:9.8, 2.2) -- (axis cs:9.8, 0.6) -- (axis cs:0.8, 7.6) -- cycle;
+    \draw[dashed, thick, ceteal] (axis cs:1.5, 8.7) -- (axis cs:9.0, 1.4);
+
+    % 4 configuraciones sobre la diagonal
+    \node[rectangle, rounded corners=3pt, draw=ceindigo, fill=white, text width=3.0cm, align=center, inner sep=4pt, font=\sffamily\scriptsize]
+      at (axis cs:2.1, 8.6) {\textcolor{ceindigo}{\bfseries 1. Por proyecto}\\Software a medida, obra civil, consultoría singular.};
+
+    \node[rectangle, rounded corners=3pt, draw=ceteal, fill=white, text width=2.9cm, align=center, inner sep=4pt, font=\sffamily\scriptsize]
+      at (axis cs:4.1, 6.2) {\textcolor{ceteal!90!black}{\bfseries 2. Taller / Lotes}\\Imprenta bajo pedido, catering, líneas versátiles.};
+
+    \node[rectangle, rounded corners=3pt, draw=ceamber, fill=white, text width=2.9cm, align=center, inner sep=4pt, font=\sffamily\scriptsize]
+      at (axis cs:6.5, 3.8) {\textcolor{ceamber!90!black}{\bfseries 3. Línea ensamblaje}\\Automóviles, electrónica de consumo modular.};
+
+    \node[rectangle, rounded corners=3pt, draw=cecrimson, fill=white, text width=2.9cm, align=center, inner sep=4pt, font=\sffamily\scriptsize]
+      at (axis cs:8.7, 1.55) {\textcolor{cecrimson}{\bfseries 4. Flujo continuo}\\SaaS multi-inquilino, energía, refino, química.};
+
+    % Zonas ineficientes fuera de la diagonal
+    \node[font=\sffamily\itshape\scriptsize, cecrimson!80, align=center] at (axis cs:8.2, 8.5)
+      {Zona de sobrecoste por\\rigidez imposible};
+    \node[font=\sffamily\itshape\scriptsize, ceslate, align=center] at (axis cs:2.2, 2.0)
+      {Zona de desperdicio\\de escala};
+  \end{axis}
+\end{tikzpicture}

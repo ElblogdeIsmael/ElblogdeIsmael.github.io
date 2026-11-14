@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=12.6cm,
+    height=6.4cm,
+    xmin=1, xmax=8,
+    ymin=-45, ymax=65,
+    xtick={1,2,3,4,5,6,7,8},
+    xticklabels={Mes 1, Mes 2, Mes 3, Mes 4, Mes 5, Mes 6, Mes 7, Mes 8},
+    xticklabel style={font=\sffamily\scriptsize, color=ceslate},
+    yticklabel style={font=\sffamily\scriptsize, color=ceslate},
+    ylabel={Miles de euros acumulados ($\text{k€}$)},
+    ylabel style={font=\sffamily\footnotesize, color=ceslate},
+    ymajorgrids=true,
+    grid style={dashed, cemuted!45},
+    legend style={at={(0.03,0.97)}, anchor=north west, font=\sffamily\scriptsize, fill=white, draw=cemuted},
+    axis lines=left,
+    clip=false
+  ]
+    % Línea de cero crítico (insolvencia de caja)
+    \draw[line width=1.1pt, cecrimson!70, dashed] (axis cs:1, 0) -- (axis cs:8, 0);
+
+    % Beneficio Contable Acumulado (Devengo: crece con ventas facturadas a 90 días)
+    \addplot[line width=1.8pt, ceteal!90!black, mark=*] coordinates {
+      (1, -2) (2, 4) (3, 12) (4, 21) (5, 31) (6, 42) (7, 52) (8, 60)
+    };
+    \addlegendentry{Beneficio contable acumulado (Devengo)}
+
+    % Tesorería Acumulada (Caja real: paga nóminas y proveedores al mes; cobra clientes a 90 días)
+    \addplot[line width=1.8pt, cecrimson, mark=square*] coordinates {
+      (1, -18) (2, -29) (3, -38) (4, -34) (5, -21) (6, -6) (7, 11) (8, 30)
+    };
+    \addlegendentry{Tesorería neta acumulada (Caja real)}
+
+    \node[rectangle, rounded corners=3pt, fill=cepanelcrimson, draw=cecrimson, text width=4.45cm, align=center, inner sep=4pt, font=\sffamily\scriptsize] (zona)
+      at (axis cs:6.3, -24) {\textcolor{cecrimson}{\bfseries Zona de "Morir de éxito":}\\Beneficio contable positivo ($+12\text{k}$), pero ruptura de caja ($-38\text{k}$) si no hay línea de circulante.};
+    \draw[->, >=Stealth, thick, cecrimson] (zona.west) -- (axis cs:3.2, -37);
+  \end{axis}
+\end{tikzpicture}
