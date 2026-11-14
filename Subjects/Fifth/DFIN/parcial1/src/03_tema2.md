@@ -58,7 +58,7 @@ Si **baja** $r$, la línea del mercado se aplana y la tangencia se desplaza: **a
 - El inversor que prefiere **consumo actual** (prestatario) **mejora**: se endeuda más barato.
 - El inversor que prefiere **consumo futuro** (prestamista) **empeora**: sus préstamos rinden menos.
 
-Esta es la respuesta **a** del problema 1 de la relación. La he comprobado numéricamente con una función de producción cóncava: al bajar $r$ del 10 % al 5 %, la riqueza en $t=0$ sube y la riqueza en $t=1$ baja.
+Esta es la respuesta **a** del problema 1 de la relación. Comprobación numérica con una función de producción cóncava: al bajar $r$ del 10 % al 5 %, la riqueza en $t=0$ sube y la riqueza en $t=1$ baja.
 
 ### Mercado imperfecto: tipo de endeudamiento mayor que tipo de préstamo
 

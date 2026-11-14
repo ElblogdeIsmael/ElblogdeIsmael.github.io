@@ -1,6 +1,6 @@
 # Exámenes de convocatorias anteriores
 
-He analizado 158 PDFs de Wuolah, todos de la UGR. Los más útiles son los **parciales y ordinarias de GADE** (tu asignatura) y los **exámenes antiguos con la plantilla de Rayo Cantón** (2000-2012, «Dirección Financiera I»). Dos de ellos llevan su nombre en la cabecera. Los exámenes de **FICO «Dirección Financiera I»** tienen el mismo contenido con otra numeración de temas.
+Análisis de exámenes y recopilaciones de la UGR de convocatorias anteriores. Los más útiles son los **parciales y ordinarias de GADE** (Dirección Financiera de ADE y de los dobles grados) y los **exámenes antiguos con la plantilla de Rayo Cantón** (2000-2012, «Dirección Financiera I»); dos de ellos llevan su nombre en la cabecera. Los exámenes de **FICO «Dirección Financiera I»** tienen el mismo contenido con otra numeración de temas.
 
 ## Formato probable del parcial
 
@@ -32,7 +32,7 @@ Ni ETTI, ni tipos *forward*, ni TIRM aparecen como problema en ningún examen; s
 
 ## Problemas de examen resueltos (verificados)
 
-Las cifras están recalculadas. Cuando difieren de la resolución que trae el documento, lo indico.
+Las cifras están recalculadas. Cuando difieren de la resolución que trae el documento original, se indica.
 
 ### A1. Parcial 1, noviembre de 2025: dos reinversiones temporales
 
@@ -135,7 +135,7 @@ Supuesto: las inversiones se hacen al final de los años 1 a 5.
 
 Esquema: VAOC $=$ VA de los beneficios futuros de la concesión $-$ VA de las inversiones en construcción, por acción; $P_0 = BPA/r + VAOC$.
 
-- **Saycea:** 103 M€ y 5 M de acciones, luego 20,60 €/acción. Contrato en $t=1$; se invierte **todo** el beneficio en los años 2 a 5; desde el año 6 se suman 200 M€/año (40 €/acción) hasta el año 16 (15 años desde la firma). $P_0 = \mathbf{207{,}77}$ €, el resultado de la academia. Con fin en el año 15 sale 202,86; el 210,3 del otro documento no lo reproduzco.
+- **Saycea:** 103 M€ y 5 M de acciones, luego 20,60 €/acción. Contrato en $t=1$; se invierte **todo** el beneficio en los años 2 a 5; desde el año 6 se suman 200 M€/año (40 €/acción) hasta el año 16 (15 años desde la firma). $P_0 = \mathbf{207{,}77}$ €, el resultado de la academia. Con fin en el año 15 sale 202,86; con ninguna de las dos lecturas sale el 210,3 que da el otro documento.
 - **Carretera (grupo B):** $BPA = 14$; inversiones de $0{,}08\times14 = 1{,}12$ €/acción en los años 3, 4 y 5; beneficio de $3/5 = 0{,}60$ €/acción desde el año 6 hasta el final de la concesión. $VAOC = \mathbf{0{,}19}$ € y $P_0 = 100{,}19$ €. Casi neutro: la concesión apenas crea valor al 14 %.
 
 ### Bonos (FICO, octubre de 2018, grupo B)
