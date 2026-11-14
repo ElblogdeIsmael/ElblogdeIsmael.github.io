@@ -18,15 +18,9 @@
   var SAMPLE_NOTEBOOKS = [
     {
       tag: "Visión por Computador · P1",
-      name: "Práctica 1: Filtrado espacial y pirámides",
-      meta: "Convolución 2D separable, derivadas gaussianas, pirámides gaussiana/laplaciana y detección de bordes.",
+      name: "Práctica 1: Introducción a OpenCV y Procesado de Imagen",
+      meta: "Análisis crítico de fuentes, filtros de suavizado, ruido gaussiano/sal y pimienta, derivadas y detección de bordes.",
       file: "Subjects/Fifth/VC/practicas/practica1.ipynb"
-    },
-    {
-      tag: "Visión por Computador · P2",
-      name: "Práctica 2: Descriptores, homografías y panoramas",
-      meta: "Puntos clave AKAZE/SIFT, emparejamiento BF/FLANN, RANSAC, estimación de homografía y mosaico.",
-      file: "Subjects/Fifth/VC/practicas/practica2.ipynb"
     }
   ];
 

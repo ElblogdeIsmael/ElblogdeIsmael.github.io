@@ -14,7 +14,7 @@ import html
 import os
 import re
 import sys
-from urllib.parse import unquote, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
 
 ROOT = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else ".")
 THRESHOLD = int(sys.argv[2]) if len(sys.argv) > 2 else 1_048_576  # 1 MB
@@ -36,21 +36,30 @@ def walk(root):
             yield os.path.join(dirpath, f)
 
 
+def add_target(path_str, htmlpath):
+    """Registra una ruta local normalizada respecto a ROOT o al HTML origen."""
+    decoded = unquote(path_str.strip())
+    if not decoded:
+        return
+    if decoded.startswith("/"):
+        target = os.path.join(ROOT, decoded.lstrip("/"))
+    else:
+        target = os.path.join(os.path.dirname(htmlpath), decoded)
+    referenced.add(os.path.normpath(target))
+
+
 def add_ref(raw, htmlpath):
     raw = html.unescape(raw.strip())
     if not raw or raw.startswith(
         ("http://", "https://", "//", "mailto:", "data:", "javascript:", "#", "tel:")
     ):
         return
-    raw = urlsplit(raw).path  # descarta ?query y #fragment
-    if not raw:
-        return
-    raw = unquote(raw)  # decodifica %20, acentos, etc.
-    if raw.startswith("/"):
-        target = os.path.join(ROOT, raw.lstrip("/"))
-    else:
-        target = os.path.join(os.path.dirname(htmlpath), raw)
-    referenced.add(os.path.normpath(target))
+    parts = urlsplit(raw)
+    if parts.path:
+        add_target(parts.path, htmlpath)
+    # Visores (/viewer/?file=... y /ipynb/?file=...) referencian el recurso en query.
+    for target_file in parse_qs(parts.query).get("file", []):
+        add_target("/" + target_file.lstrip("/"), htmlpath)
 
 
 # 1) Reunir todo lo referenciado por HTML (incluye HTML anidados p.ej. test.html).
