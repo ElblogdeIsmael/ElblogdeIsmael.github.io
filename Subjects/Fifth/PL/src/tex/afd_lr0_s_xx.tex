@@ -1,0 +1,21 @@
+\begin{center}
+\begin{tikzpicture}[->,>=Stealth,line width=0.8pt,every state/.style={circle,draw,minimum size=7mm,inner sep=1pt,font=\scriptsize,fill=white},initial text={},font=\scriptsize,x=1.4cm,y=1.15cm]
+\node[state,initial] (0) at (0,0) {$I_0$};
+\node[state] (1) at (2,1.2) {$I_1$};
+\node[state] (2) at (2,0) {$I_2$};
+\node[state] (5) at (4,0) {$I_5$};
+\node[state] (3) at (2,-1.5) {$I_3$};
+\node[state] (4) at (4.2,-1.5) {$I_4$};
+\node[state] (6) at (2,-2.65) {$I_6$};
+\path (0) edge node[above left]{$S$} (1)
+      (0) edge node[above]{$X$} (2)
+      (0) edge node[above right,pos=0.55]{$a$} (3)
+      (0) edge[out=-95,in=-120,looseness=1.25] node[below]{$b$} (4)
+      (2) edge node[above]{$X$} (5)
+      (2) edge node[left]{$a$} (3)
+      (2) edge node[above right]{$b$} (4)
+      (3) edge node[above]{$b$} (4)
+      (3) edge node[left]{$X$} (6)
+      (3) edge[loop left] node{$a$} (3);
+\end{tikzpicture}
+\end{center}

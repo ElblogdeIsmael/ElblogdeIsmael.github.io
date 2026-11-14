@@ -2,127 +2,172 @@
 
 ## 1. Fundamentos y Definición Formal de la Traducción
 
-Un procesador de lenguajes es cualquier sistema software encargado de recibir un texto escrito en un lenguaje origen y transformarlo, estructurarlo o ejecutarlo en un entorno computacional determinado. Cuando el lenguaje de especificación de un programa se sitúa a un nivel de abstracción superior al código máquina nativo del procesador, la traducción se convierte en un requisito físico para hacer viable la computación. Todo lenguaje de programación de alto nivel define, en última instancia, una máquina virtual con su propio modelo de memoria y control de ejecución.
+Un procesador de lenguajes es un sistema software que procesa texto estructurado escrito en un lenguaje origen para transformarlo, interpretarlo o adaptarlo a un entorno ejecutable de destino. Cuando el nivel de abstracción del lenguaje fuente supera la capacidad de procesamiento directo del hardware, la traducción actúa como el mecanismo puente que materializa la computación. Todo lenguaje formal de programación implanta, en su base, una máquina abstracta con normas propias de estado y control.
 
-Desde una perspectiva teórica rigurosa, la traducción no se limita a un mero reemplazo de cadenas de caracteres, sino que articula un puente entre dos modelos semánticos formales. Siguiendo el marco matemático de la teoría de compiladores, un modelo semántico se define formalmente como la terna:
+La teoría de compiladores descarta la idea de que traducir sea una simple sustitución de cadenas de texto. El proceso establece una correspondencia estricta entre dos marcos semánticos formales. Siguiendo la formalización de la cátedra, un modelo semántico queda definido unívocamente por la terna:
 
 $$M = (L, D, I)$$
 
 \vspace{0.3cm}
 
-- **Lenguaje ($L$):** Conjunto estructurado de construcciones simbólicas formadas por secuencias válidas de símbolos pertenecientes a un alfabeto $\Sigma$. En informática se especifica formalmente mediante una gramática formal $G$, verificándose que $L = L(G)$.
-- **Dominio semántico ($D$):** Conjunto de entidades, estados de memoria, valores elementales y estructurados sobre los que operan las instrucciones del programa.
-- **Interpretación ($I$):** Función matemática $I: L(G) \to D$ que asigna a cada construcción sintáctica válida de $L$ un significado operativo o valor exacto en el dominio semántico $D$.
+- **Lenguaje ($L$):** Conjunto estructurado de construcciones simbólicas formadas a partir de secuencias finitas de símbolos tomados de un alfabeto $\Sigma$. Puede definirse por extensión (listando sus secuencias, viable solo en casos triviales) o por comprensión mediante una gramática formal $G$, cumpliéndose que $L = L(G)$.
+- **Dominio semántico ($D$):** Conjunto estructurado de valores, objetos computacionales y transiciones de estado sobre los que cobran sentido las sentencias. Comprende valores semánticos elementales (enteros, booleanos, caracteres, punteros) y valores estructurados (registros, vectores, objetos en memoria y contextos de activación).
+- **Interpretación ($I$):** Función matemática $I: L(G) \to D$ que asigna a cada construcción sintáctica válida de $L$ su significado operativo exacto en el dominio semántico $D$.
 
 \vspace{0.4cm}
 
-### Requisitos y Esquema de Traducción
+### Requisitos Formales de la Traducción y Preservación Semántica
 
-Dados dos modelos semánticos $M_1 = (L_1, D_1, I_1)$ para el lenguaje fuente y $M_2 = (L_2, D_2, I_2)$ para el lenguaje objeto, la construcción de un traductor viable exige dos condiciones de partida:
+Sean dos modelos semánticos $M_1 = (L_1, D_1, I_1)$ para el lenguaje fuente y $M_2 = (L_2, D_2, I_2)$ para el lenguaje objeto. La viabilidad técnica de un traductor exige el cumplimiento de dos propiedades algebraicas:
 
 \vspace{0.3cm}
 
-1. **Inclusión de dominios semánticos:** El dominio destino debe ser capaz de representar todas las operaciones y valores del origen, lo que se formaliza algebraicamente como $D_1 \subseteq D_2$.
-2. **Esquema de traducción ($T$):** Es una aplicación computable $T: L_1 \to L_2$ que debe preservar estrictamente el significado original. Para todo programa fuente $p \in L_1$, debe satisfacerse la propiedad de equivalencia semántica:
+1. **Inclusión de dominios semánticos:** $D_1 \subseteq D_2$. El dominio destino debe tener la capacidad representacional necesaria para modelar todos los valores, tipos y efectos laterales del origen. Si existiera un concepto en $L_1$ carente de homólogo o codificación en $D_2$, la traducción directa resultaría imposible sin recurrir a capas pesadas de emulación.
+2. **Esquema de traducción ($T$):** Es una aplicación computable $T: L_1 \to L_2$ que preserva rigurosamente el significado original de los programas. Para cualquier programa fuente $p \in L_1$, debe satisfacerse la conmutatividad del diagrama semántico:
 
 $$I_2(T(p)) = I_1(p)$$
 
+\vspace{0.3cm}
+
+Si un traductor produce un programa cuya ejecución en la máquina destino discrepa del comportamiento prescrito por $I_1$ para cualquier entrada, el traductor no es correcto.
+
 \vspace{0.4cm}
 
-## 2. Aplicaciones de los Procesadores de Lenguajes
+## 2. Ámbitos de Aplicación de los Traductores
 
-La tecnología de traducción trasciende los compiladores comerciales clásicos de sistemas como C, C++ o Rust. Los procesadores de lenguajes se aplican en diversos campos de la ingeniería informática:
+La ingeniería de compiladores abarca múltiples áreas de software aplicado:
 
 \vspace{0.3cm}
 
-- **Lenguajes orientados al dominio (*Domain-Specific Languages*, DSL):** Lenguajes concebidos para resolver problemas de un área de negocio concreta (por ejemplo, gestión de inventarios, automatización industrial o modelado financiero). Permiten formular instrucciones cercanas a la jerga del usuario que se traducen automáticamente a código de propósito general de tercera o cuarta generación.
-- **Macroensambladores y preprocesadores:** Transforman secuencias de macros parametrizadas en instrucciones ensamblador canónicas antes del ensamblado final.
-- **Motores de bases de datos y analizadores de consultas:** Convierten sentencias declarativas de alto nivel (como SQL) en árboles algebraicos relacionales optimizados que invocan rutinas directas del motor de almacenamiento.
+- **Lenguajes de programación de propósito general:** Traductores de lenguajes como C, C++, Rust o Ada a código binario ejecutable. En estos entornos, el dominio semántico del lenguaje de programación se mapea sobre el dominio semántico del procesador físico (registros, memoria direccionable, saltos condicionales).
+- **Lenguajes orientados al dominio (*Domain-Specific Languages*, DSL):** Lenguajes diseñados para expresar de forma directa problemas de una disciplina técnica o de negocio (consultas relacionales con SQL, maquetación tipográfica con LaTeX, configuración de infraestructuras o reglas financieras). Permiten redactar instrucciones empleando la jerga del usuario, transformándolas luego en código fuente de tercera o cuarta generación.
+- **Macroensambladores y preprocesadores:** Convierten plantillas, directivas de sustitución y macros parametrizadas en código plano antes del ensamblado final.
+- **Motores de ejecución de bases de datos:** Analizan secuencias declarativas, construyen árboles de operadores relacionales, los optimizan mediante heurísticas de coste y sintetizan rutinas internas de acceso a disco.
 
 \vspace{0.4cm}
 
-## 3. Estructura General de un Traductor: Fases de Análisis y Síntesis
+## 3. Anatomía de un Compilador: Front-End y Back-End
 
-Para mantener la modularidad y simplificar el mantenimiento, la arquitectura clásica de un compilador se divide en dos grandes etapas: el extremo inicial (*Front-End* o fase de análisis) y el extremo final (*Back-End* o fase de síntesis).
+Para evitar el acoplamiento directo entre la sintaxis de un lenguaje fuente y la arquitectura física de una CPU, los compiladores adoptan una estructura desacoplada en dos bloques principales: el extremo inicial (*Front-End*) y el extremo final (*Back-End*). Esta separación permite reutilizar el mismo generador de código objeto para distintos lenguajes fuente o compilar un mismo lenguaje para múltiples arquitecturas hardware mediante una representación intermedia compartida.
 
 \vspace{0.4cm}
 
 ### Fase de Análisis (*Front-End*)
 
-Depende exclusivamente de las reglas del lenguaje fuente y se descompone en tres verificaciones sucesivas:
+Se orienta a comprender y validar el texto fuente conforme a las normas del lenguaje $L_1$. Se estructura en tres etapas sucesivas:
 
 \vspace{0.3cm}
 
-1. **Análisis Léxico:** Escanea el flujo continuo de caracteres del fichero fuente y los agrupa en componentes léxicos (*tokens*). Su función consiste en abstraer los caracteres individuales, eliminar espacios en blanco o comentarios y detectar secuencias no conformes con el alfabeto del lenguaje.
-2. **Análisis Sintáctico:** Verifica si la secuencia de tokens suministrada por el analizador léxico respeta las reglas jerárquicas de una gramática libre de contexto (tipo 2 de Chomsky). Genera la estructura en árbol que describe la composición de sentencias y expresiones.
-3. **Análisis Semántico:** Inspecciona el árbol sintáctico para comprobar restricciones contextuales que escapan a la gramática formal: concordancia de tipos en asignaciones y operaciones aritméticas, comprobación de identificadores declarados previamente y gestión de visibilidad de variables (*scopes*). Produce como resultado una representación en código intermedio.
+1. **Análisis Léxico:** Recorre el flujo de caracteres del código fuente, elimina espacios en blanco y comentarios, y agrupa los caracteres en unidades elementales llamadas componentes léxicos (*tokens*).
+2. **Análisis Sintáctico:** Verifica si la secuencia de tokens se ajusta a la estructura jerárquica dictada por una gramática libre de contexto ($G \in \text{Tipo 2}$). Genera el árbol de análisis sintáctico (o árbol de sintaxis abstracta, AST).
+3. **Análisis Semántico:** Revisa restricciones contextuales que la gramática sintáctica no puede comprobar, como la compatibilidad de tipos en asignaciones, la comprobación de variables no declaradas o la coherencia de llamadas a funciones. Como salida, genera una representación en código intermedio independiente del hardware.
 
 \vspace{0.4cm}
 
 ### Fase de Síntesis (*Back-End*)
 
-Toma el código intermedio generado en el análisis y lo adapta a la arquitectura física objetivo:
+Adapta la representación intermedia generada por el Front-End a los condicionantes físicos del procesador destino:
 
 \vspace{0.3cm}
 
-1. **Optimización de Código:** Transforma el código intermedio y las secuencias de instrucciones máquina para mejorar la velocidad de cómputo, reducir accesos a memoria principal o minimizar el tamaño del binario resultante, garantizando siempre la equivalencia semántica.
-2. **Generación de Código Objeto:** Traduce la representación intermedia optimizada a instrucciones ensamblador o binario nativo, gestionando la asignación eficiente de registros del procesador y el direccionamiento en memoria.
+1. **Optimización de Código:** Aplica transformaciones sobre el código intermedio (propagación de constantes, eliminación de subexpresiones comunes, desenrollado de bucles) y sobre las instrucciones destino para reducir el tiempo de cálculo o la memoria requerida, sin alterar la semántica original.
+2. **Generación de Código Objeto:** Transforma el código intermedio en instrucciones nativas de la máquina destino, planificando el uso óptimo de registros hardware y organizando los marcos de pila en memoria.
 
 \vspace{0.4cm}
 
-### Estructuras Transversales
+### Componentes Transversales del Compilador
 
-Existen dos componentes que interactúan de forma permanente con todas las fases del procesador:
+Dos módulos permanecen operativos de forma simultánea a lo largo de todo el proceso de compilación:
 
 \vspace{0.3cm}
 
-- **Tabla de Símbolos:** Estructura de datos central que almacena el nombre, tipo, ámbito, dirección de memoria y atributos asociados a cada identificador detectado en el programa. Se crea en el análisis léxico, se puebla en el sintáctico y semántico, y se consulta en la generación de código.
-- **Manejador de Errores:** Registra, localiza y reporta cualquier anomalía sintáctica o semántica, coordinando mecanismos de sincronización para que el compilador no aborte en el primer fallo y continúe procesando el resto del archivo.
+- **Tabla de Símbolos:** Estructura de datos que indexa cada identificador junto con sus atributos (tipo de dato, tamaño en bytes, dirección de memoria relativa, ámbito de visibilidad y número de línea). El analizador léxico localiza el lexema, los analizadores sintáctico y semántico completan sus propiedades lógicas, y el generador de código consulta su ubicación física para emitir los accesos a memoria.
+- **Gestor de Errores:** Centraliza la detección y el informe de fallos en cualquiera de las fases. Su cometido principal es coordinar estrategias de recuperación (como el modo pánico) para que el compilador sea capaz de seguir analizando el resto del texto sin abortar tras el primer fallo detectado.
 
 \vspace{0.4cm}
 
-## 4. Compiladores frente a Intérpretes
+## 4. Estrategias de Ejecución: Compilación, Interpretación y Modelos Híbridos
 
-La ejecución de un lenguaje de alto nivel puede abordarse mediante dos estrategias de procesamiento divergentes:
+La ejecución de programas escritos en lenguajes de alto nivel se aborda desde distintas filosofías de diseño:
 
 \vspace{0.3cm}
 
-- **Compilador:** Traduce la totalidad del código fuente antes de comenzar la ejecución, produciendo un archivo binario autónomo para la máquina destino.
-  - *Rendimiento:* La ejecución posterior es directa a velocidad de hardware nativo.
-  - *Protección:* Distribuye binarios cerrados sin exponer el código fuente original.
-  - *Inconvenientes:* Proceso de compilación costoso en tiempo y fuerte dependencia de la arquitectura física.
-- **Intérprete:** Lee, traduce y ejecuta las instrucciones del código fuente paso a paso en tiempo real.
-  - *Flexibilidad:* Máxima portabilidad y ciclo de depuración inmediato, idóneo para desarrollo interactivo.
-  - *Inconvenientes:* Rendimiento notablemente inferior, ya que las sentencias contenidas en bucles deben ser analizadas y traducidas en cada iteración.
-- **Modelos Mixtos y Máquinas Virtuales:** Plataformas como Java o .NET combinan ambos mundos. Un compilador traduce el código fuente a un lenguaje intermedio portable (*bytecode*), que posteriormente es ejecutado por una máquina virtual encargada de interpretarlo o de compilarlo en caliente a código nativo mediante técnicas *Just-In-Time* (JIT).
+- **Compilación pura:** El código fuente se traduce en su totalidad a código binario antes de la ejecución. Genera binarios rápidos y optimizados para una CPU concreta, protegiendo el código fuente original, pero exige recompilar de forma específica para cada arquitectura destino.
+- **Interpretación pura:** Un programa intérprete lee directamente el código fuente y ejecuta las acciones instrucción a instrucción en tiempo de ejecución. Aporta portabilidad inmediata y depuración interactiva, a costa de un rendimiento sensiblemente menor provocado por el reanálisis constante de bucles y funciones.
+- **Modelos híbridos con máquina virtual:** Sistemas como la máquina virtual de Java (JVM) o el CLR de .NET compilan primero el texto fuente a un lenguaje intermedio tipado (*bytecode*). La máquina virtual interpreta este código o lo compila dinámicamente a lenguaje máquina nativo mediante un compilador *Just-In-Time* (JIT) en las regiones críticas de ejecución.
 
 \vspace{0.4cm}
 
-## 5. Diagramas en T y Técnicas de Bootstrapping
+## 5. Diagramas en T de Watt y Arquitectura de Traductores
 
-Para formalizar las dependencias de implementación y soporte de los compiladores, D. A. Watt propuso en 1993 la representación mediante diagramas en T (*Tombstone Diagrams*).
-
-\vspace{0.4cm}
-
-### Componentes de un Diagrama en T
-
-Un compilador involucra tres lenguajes distintos:
-- Lenguaje fuente ($S$, *Source*), situado en el brazo izquierdo de la T.
-- Lenguaje objeto ($T$, *Target*), situado en el brazo derecho de la T.
-- Lenguaje de implementación ($L$, *Language*), situado en la base de la T.
-
-Para que un compilador pueda ejecutarse, el lenguaje de su base $L$ debe coincidir exactamente con el código máquina que ejecuta la máquina anfitriona $M$.
+Para modelar de forma rigurosa las relaciones entre el lenguaje que se compila, el código resultante y el entorno en que se ejecuta el propio compilador, D. A. Watt introdujo en 1993 los diagramas en T (*Tombstone Diagrams*).
 
 \vspace{0.4cm}
 
-### Compilación Cruzada y Half-Bootstrap
+### Elementos Básicos de Notación
 
-La compilación cruzada (*Cross-Compilation*) se define como el proceso en el que un compilador se ejecuta sobre una máquina $M_1$ para generar código ejecutable destinado a una máquina distinta $M_2$. Resulta indispensable cuando se programa para hardware embebido o arquitecturas con recursos limitados.
-
-Cuando se dispone de un compilador de un lenguaje $L$ para una máquina $M_1$ y se desea portarlo a $M_2$, se aplica la técnica de *Half-Bootstrap*:
+Un procesador de lenguajes involucra tres lenguajes distintos:
 
 \vspace{0.3cm}
 
-1. Se reescribe únicamente el generador de código del compilador para que emita instrucciones de la máquina destino $M_2$.
-2. Se compila este nuevo compilador en la máquina original $M_1$. El resultado es un compilador cruzado que corre en $M_1$ y produce ejecutables para $M_2$.
-3. Utilizando este compilador cruzado, se compila el código fuente del compilador a sí mismo. El binario resultante corre de forma autónoma en la nueva máquina $M_2$.
+- **Brazo izquierdo de la T:** Lenguaje fuente ($S$, *Source*), que el compilador acepta como entrada.
+- **Brazo derecho de la T:** Lenguaje objeto ($T$, *Target*), generado como salida.
+- **Base inferior de la T:** Lenguaje de implementación ($L$, *Language*), en el que está escrito o codificado el propio ejecutable del compilador.
+
+\vspace{0.3cm}
+
+Un compilador solo puede ejecutarse de manera directa sobre una máquina física $M$ si el lenguaje de su base coincide con el código máquina nativo de dicha máquina ($L = M$). Gráficamente, el bloque del compilador se encaja sobre el bloque soporte de la máquina $M$.
+
+\vspace{0.4cm}
+
+### Compilación Cruzada (*Cross-Compilation*)
+
+Se habla de compilación cruzada cuando un compilador se ejecuta físicamente sobre una máquina origen $M_1$, pero produce código binario destinado a una arquitectura física distinta $M_2$. Este método es indispensable para programar microcontroladores, consolas o dispositivos embebidos que carecen de recursos de cálculo o memoria para ejecutar un compilador completo en su propio hardware.
+
+\vspace{0.4cm}
+
+### Procedimiento Sistemático de Half-Bootstrap
+
+Cuando se dispone del código fuente de un compilador de un lenguaje $L$ implementado en el propio lenguaje $L$, y se tiene ya un ejecutable de dicho compilador sobre una máquina $M_1$, el método de *Half-Bootstrap* permite trasladarlo a una nueva máquina $M_2$ mediante tres pasos estrictos:
+
+\vspace{0.3cm}
+
+1. **Reescritura del generador de código:** Se modifica únicamente el módulo final del compilador fuente para que emita instrucciones de la nueva arquitectura $M_2$. El nuevo compilador sigue escrito en lenguaje $L$, pero su salida pasa a ser código para $M_2$.
+2. **Generación del compilador cruzado:** Se compila el nuevo código fuente en la máquina original $M_1$ empleando el compilador binario existente. El resultado es un ejecutable que corre sobre $M_1$ y genera código para $M_2$ (un compilador cruzado de $L$ a $M_2$ sobre base $M_1$).
+3. **Autocompilación y binario nativo:** Se vuelve a compilar el código fuente modificado en la máquina $M_1$, pero haciéndolo pasar ahora a través del compilador cruzado obtenido en el paso anterior. La salida resultante es un binario del compilador de $L$ a $M_2$ cuya base de ejecución es el código máquina nativo de $M_2$, completando la portabilidad sin necesidad de herramientas externas en la máquina destino.
+
+\vspace{0.4cm}
+
+### Bootstrapping (Arranque Progresivo de Compiladores)
+
+El concepto de *bootstrapping* describe el proceso por el cual un lenguaje complejo se compila a sí mismo partiendo de un núcleo mínimo o de un lenguaje intermedio más elemental. El procedimiento clásico arranca escribiendo a mano un subconjunto simplificado del lenguaje en ensamblador; con este primer compilador rudimentario se compila una versión más rica del lenguaje, iterando hasta disponer del compilador completo autoalojado (*self-hosting*).
+
+\vspace{0.4cm}
+
+## 6. Cuestiones de Examen Resueltas con Rigor
+
+Las siguientes preguntas recogen cuestiones conceptuales habituales en las pruebas escritas de la ETSIIT:
+
+\vspace{0.4cm}
+
+### Cuestión 1: Condición de Inclusión de Dominios Semánticos
+
+**Pregunta:** Justifique formalmente por qué la condición $D_1 \subseteq D_2$ es necesaria para que exista un esquema de traducción $T: L_1 \to L_2$ válido entre dos modelos semánticos $M_1 = (L_1, D_1, I_1)$ y $M_2 = (L_2, D_2, I_2)$.
+
+**Respuesta Técnica:**
+Para que un esquema de traducción $T$ sea correcto debe preservar el significado exacto de cualquier programa $p \in L_1$, lo que impone la condición de conmutatividad semántica:
+
+$$I_2(T(p)) = I_1(p)$$
+
+Si el dominio semántico destino $D_2$ no contiene al dominio semántico origen $D_1$ ($D_1 \not\subseteq D_2$), existirá al menos un estado computacional, tipo de dato o valor $v \in D_1$ tal que $v \notin D_2$. Por tanto, para cualquier programa $p$ cuya interpretación produzca dicho valor ($I_1(p) = v$), la función de interpretación destino $I_2$ jamás podrá alcanzar $v$, al no pertenecer a su codominio ($v \notin \text{Im}(I_2) \subseteq D_2$). En consecuencia, no existirá ningún programa objeto $T(p) \in L_2$ que cumpla $I_2(T(p)) = v$, haciendo imposible la preservación semántica sin incorporar capas externas de interpretación.
+
+\vspace{0.4cm}
+
+### Cuestión 2: Análisis de Pasos en Half-Bootstrap
+
+**Pregunta:** Explique la diferencia conceptual entre el paso 2 y el paso 3 de la técnica de *Half-Bootstrap* empleando la notación de Watt.
+
+**Respuesta Técnica:**
+En el paso 2, el compilador modificado (fuente $L$, destino $M_2$, escrito en $L$) es procesado por el compilador original que corre en $M_1$ (fuente $L$, destino $M_1$, base $M_1$). Por ello, el ejecutable resultante tiene base $M_1$: se trata de un compilador cruzado que se ejecuta en la máquina de origen $M_1$.
+
+En el paso 3, el mismo código fuente del compilador modificado es procesado, pero esta vez por el compilador cruzado obtenido en el paso 2 (fuente $L$, destino $M_2$, base $M_1$). Como este compilador emite código para la arquitectura $M_2$, el binario resultante tiene base $M_2$. Deja de ser un compilador cruzado para convertirse en el compilador nativo final que corre de forma autónoma en la máquina de destino $M_2$.

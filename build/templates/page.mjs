@@ -16,6 +16,7 @@ const KIND_LABELS = {
   PDF: "PDF",
   HTML: "HTML",
   MD: "MD",
+  IPYNB: "IPYNB",
   WEB: "WEB",
   ZIP: "ZIP",
   GUIA: "GUÍA",

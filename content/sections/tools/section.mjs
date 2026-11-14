@@ -17,7 +17,7 @@ export default {
   titleOutline: "mientas",
   blurb:
     "Pequeñas apps que funcionan al 100% en tu navegador y utilidades nativas de alto rendimiento: sin que tus archivos salgan de tu equipo.",
-  summary: "7 herramientas · CLI y Web nativos · código abierto",
+  summary: "8 herramientas · CLI y Web nativos · código abierto",
   pages: [],
   links: [
     {
@@ -68,6 +68,12 @@ export default {
       href: "https://ismael-sallami.github.io/pod-vanguard/",
       kind: "WEB",
       repo: "https://github.com/Ismael-Sallami/pod-vanguard",
+    },
+    {
+      name: "Visor de Notebooks (.ipynb)",
+      blurb: "renderizado en navegador de cuadernos Jupyter con Python, LaTeX y figuras",
+      href: "/ipynb/",
+      kind: "IPYNB",
     },
   ],
 };
