@@ -216,6 +216,26 @@ export default {
                 },
               ],
             },
+            {
+              label: "Parcial 1 (Temas 1-4)",
+              resources: [
+                {
+                  name: "Apuntes del Parcial 1: teoría, problemas y exámenes resueltos",
+                  href: "/Subjects/Fifth/DFIN/parcial1/build/DFIN_Parcial1.pdf",
+                  kind: "PDF",
+                },
+                {
+                  name: "Test Parcial 1: preguntas repetidas en exámenes",
+                  href: "/Subjects/Fifth/DFIN/test/test-parcial1-repetidas.html",
+                  kind: "HTML",
+                },
+                {
+                  name: "Test Parcial 1: banco completo",
+                  href: "/Subjects/Fifth/DFIN/test/test-parcial1.html",
+                  kind: "HTML",
+                },
+              ],
+            },
           ],
         },
         {
