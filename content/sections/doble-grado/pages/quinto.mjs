@@ -275,13 +275,8 @@ export default {
                   kind: "PDF",
                 },
                 {
-                  name: "Práctica 1 · Filtrado espacial, derivadas y pirámides (Notebook)",
+                  name: "Práctica 1 · OpenCV, filtros, gradientes y kernels gaussianos 1D (Notebook)",
                   href: "/ipynb/?file=Subjects/Fifth/VC/practicas/practica1.ipynb",
-                  kind: "IPYNB",
-                },
-                {
-                  name: "Práctica 2 · Descriptores locales, RANSAC y panoramas (Notebook)",
-                  href: "/ipynb/?file=Subjects/Fifth/VC/practicas/practica2.ipynb",
                   kind: "IPYNB",
                 },
               ],
