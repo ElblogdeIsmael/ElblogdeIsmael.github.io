@@ -17,7 +17,7 @@ export default {
   titleOutline: "mientas",
   blurb:
     "Pequeñas apps que funcionan al 100% en tu navegador y utilidades nativas de alto rendimiento: sin que tus archivos salgan de tu equipo.",
-  summary: "8 herramientas · CLI y Web nativos · código abierto",
+  summary: "12 herramientas · CLI y Web nativos · código abierto",
   pages: [],
   links: [
     {
@@ -74,6 +74,34 @@ export default {
       blurb: "renderizado en navegador de cuadernos Jupyter con Python, LaTeX y figuras",
       href: "/ipynb/",
       kind: "IPYNB",
+    },
+    {
+      name: "Simulador Aptis ESOL C1",
+      blurb: "simulador completo de Aptis C1: Core, Reading, Listening, Writing y Speaking",
+      href: "https://ismael-sallami.github.io/english-c1-suite/aptis/",
+      kind: "WEB",
+      repo: "https://github.com/Ismael-Sallami/english-c1-suite",
+    },
+    {
+      name: "Biblioteca de Writings · ISE Digital",
+      blurb: "writings oficiales de Trinity y modelos C1 anotados con traducción y comparador",
+      href: "https://ismael-sallami.github.io/english-c1-suite/writing-library/",
+      kind: "WEB",
+      repo: "https://github.com/Ismael-Sallami/english-c1-suite",
+    },
+    {
+      name: "Chuleta Writing C1 · ISE Digital",
+      blurb: "hoja esquemática A4 imprimible con esqueletos, inversiones, conectores y checklist",
+      href: "https://ismael-sallami.github.io/english-c1-suite/writing-cheatsheet/",
+      kind: "WEB",
+      repo: "https://github.com/Ismael-Sallami/english-c1-suite",
+    },
+    {
+      name: "English C1 Suite · Guías y Hub",
+      blurb: "portada unificada con guías tácticas de Aptis C1, banco real y Topic oral de Trinity",
+      href: "https://ismael-sallami.github.io/english-c1-suite/",
+      kind: "WEB",
+      repo: "https://github.com/Ismael-Sallami/english-c1-suite",
     },
   ],
 };
