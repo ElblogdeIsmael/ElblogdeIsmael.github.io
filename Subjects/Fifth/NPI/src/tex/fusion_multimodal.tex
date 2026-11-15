@@ -1,0 +1,40 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  mod/.style={draw=npiCobalt, thick, rounded corners=2.5pt, fill=npiCobaltLight, minimum width=2.2cm, minimum height=0.8cm, align=center, font=\sffamily\scriptsize},
+  proc/.style={draw=npiNavy, thick, rounded corners=2.5pt, fill=npiPaper, minimum width=2.3cm, minimum height=0.85cm, align=center, font=\sffamily\scriptsize},
+  fus/.style={draw=npiTeal, very thick, rounded corners=3pt, fill=npiTealLight, minimum width=2.5cm, minimum height=1.15cm, align=center, font=\sffamily\scriptsize\bfseries\color{npiTeal}},
+  arr/.style={->, thick, color=npiNavy}
+]
+  % A. Fusión temprana
+  \node[font=\sffamily\bfseries\small\color{npiNavy}] at (3.6, 3.8) {A. Fusión temprana (nivel de características)};
+  \node[mod] (ea1) at (0.6, 2.8) {Canal A\\(ej. audio MFCC)};
+  \node[mod] (ea2) at (0.6, 1.4) {Canal B\\(ej. esqueleto 3D)};
+  \node[fus] (efus) at (3.9, 2.1) {Concatenación /\\fusión conjunta\\$[\mathbf{x}_A(t), \mathbf{x}_B(t)]$};
+  \node[proc] (ecls) at (7.0, 2.1) {Clasificador\\único};
+  \draw[arr] (ea1.east) -- (efus.west);
+  \draw[arr] (ea2.east) -- (efus.west);
+  \draw[arr] (efus) -- (ecls);
+  \node[font=\sffamily\scriptsize\color{npiSlate}, align=center] at (3.9, 0.55) {Exige sincronización estricta; captura correlaciones finas};
+
+  % Separador
+  \draw[dashed, color=npiRule, thick] (8.55, 0.1) -- (8.55, 4.1);
+
+  % B. Fusión tardía
+  \node[font=\sffamily\bfseries\small\color{npiTeal}] at (13.0, 3.8) {B. Fusión tardía (nivel semántico)};
+  \node[mod] (la1) at (9.9, 2.8) {Voz\\("¿qué es esto?")};
+  \node[mod] (la2) at (9.9, 1.4) {Gesto / Táctil\\(coord. $(x,y)$)};
+  \node[proc] (lr1) at (12.7, 2.8) {ASR + NLU\\(intención)};
+  \node[proc] (lr2) at (12.7, 1.4) {Detector\\deíctico};
+  \node[fus, draw=npiPlum, fill=npiPlumLight, text=npiPlum] (lfus) at (15.7, 2.1) {Unificador\\semántico\\(ventana $\Delta t$)};
+  \draw[arr] (la1) -- (lr1);
+  \draw[arr] (la2) -- (lr2);
+  \draw[arr] (lr1.east) -- (lfus.west);
+  \draw[arr] (lr2.east) -- (lfus.west);
+  \node[font=\sffamily\scriptsize\color{npiSlate}, align=center] at (13.0, 0.55) {Modular, asíncrona y robusta ante ruido parcial};
+\end{tikzpicture}%
+}
+\caption{Arquitecturas de fusión multimodal temprana frente a fusión semántica tardía \parencite{lopezcozar2005spoken,oviatt1999ten}.}
+\label{fig:fusion_multimodal}
+\end{figure}

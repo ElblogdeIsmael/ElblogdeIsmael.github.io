@@ -1,0 +1,31 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  box/.style={draw=npiNavy, thick, rounded corners=3pt, minimum width=3.1cm, minimum height=1.3cm, align=center, font=\sffamily\scriptsize}
+]
+  % Banda superior: Realidad Mixta (RM)
+  \draw[decorate, decoration={brace, amplitude=6pt}, thick, color=npiPlum] (3.3, 2.55) -- (10.7, 2.55)
+    node[midway, above=8pt, font=\sffamily\bfseries\small\color{npiPlum}] {Realidad Mixta (RM)};
+
+  % Barra de gradiente continuo
+  \shade[left color=npiAmberLight, right color=npiCobaltLight] (0, 0.1) rectangle (14.0, 0.55);
+  \draw[thick, color=npiNavy] (0, 0.1) rectangle (14.0, 0.55);
+  \draw[<->, very thick, color=npiNavy] (-0.2, -0.3) -- (14.2, -0.3)
+    node[midway, below=3pt, font=\sffamily\footnotesize\bfseries\color{npiNavy}] {Continuo Realidad--Virtualidad (Milgram y Kishino, 1994)};
+
+  % Los 4 nodos sobre el continuo
+  \node[box, draw=npiAmber, fill=npiAmberLight] (re) at (1.5, 1.6) {\textbf{\color{npiAmber}Entorno Real}\\Objetos físicos\\y luz natural};
+  \node[box, draw=npiTeal, fill=npiTealLight] (ar) at (5.1, 1.6) {\textbf{\color{npiTeal}Realidad Aumentada (RA)}\\Mundo real + capas\\virtuales registradas};
+  \node[box, draw=npiPlum, fill=npiPlumLight] (av) at (8.9, 1.6) {\textbf{\color{npiPlum}Virtualidad Aumentada}\\Mundo virtual + elementos\\reales capturados};
+  \node[box, draw=npiCobalt, fill=npiCobaltLight] (vr) at (12.5, 1.6) {\textbf{\color{npiCobalt}Realidad Virtual (RV)}\\Entorno sintético\\totalmente inmersivo};
+
+  \foreach \n/\x in {re/1.5, ar/5.1, av/8.9, vr/12.5} {
+    \draw[thick, color=npiSlate] (\n.south) -- (\x, 0.55);
+    \fill[npiNavy] (\x, 0.325) circle (2.5pt);
+  }
+\end{tikzpicture}%
+}
+\caption{El continuo Realidad-Virtualidad propuesto por \textcite{milgram1994taxonomy}, situando la Realidad Mixta entre ambos extremos.}
+\label{fig:milgram_kishino}
+\end{figure}

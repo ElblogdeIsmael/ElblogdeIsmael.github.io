@@ -1,0 +1,52 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  arr/.style={->, thick}
+]
+  % A. Ray-Casting vs Go-Go
+  \node[font=\sffamily\bfseries\small\color{npiNavy}] at (3.2, 3.6) {A. Metáfora \textit{Ray-Casting} y extensión \textit{Go-Go}};
+  % Usuario
+  \fill[npiNavy] (0.7, 1.4) circle (0.28cm);
+  \draw[thick, color=npiNavy] (0.7, 1.1) -- (0.7, 0.2);
+  \node[font=\sffamily\tiny\color{npiSlate}] at (0.7, -0.1) {Usuario};
+
+  % Zona lineal D
+  \draw[dashed, color=npiTeal, thick] (2.4, 0.0) -- (2.4, 3.0);
+  \node[font=\sffamily\tiny\bfseries\color{npiTeal}] at (2.4, 3.2) {Umbral $D$};
+  \draw[<->, color=npiTeal] (0.7, 0.4) -- (2.4, 0.4) node[midway, below, font=\sffamily\tiny] {$R_r < D$ (1:1)};
+
+  % Ray-casting desde la mano
+  \draw[very thick, color=npiCobalt, ->] (1.3, 1.55) -- (5.2, 2.55) node[right, font=\sffamily\scriptsize\bfseries\color{npiCobalt}] {Rayo virtual};
+  \fill[npiCobalt] (5.3, 2.58) circle (0.16cm);
+
+  % Mano virtual no lineal Go-Go
+  \draw[very thick, color=npiAmber, ->, densely dashed] (1.3, 1.25) .. controls (2.8, 1.25) and (3.9, 0.9) .. (5.2, 0.9)
+    node[right, font=\sffamily\scriptsize\bfseries\color{npiAmber}] {Mano Go-Go};
+  \fill[npiAmber] (5.3, 0.9) circle (0.16cm);
+
+  % Separador
+  \draw[dashed, color=npiRule, thick] (7.85, -0.2) -- (7.85, 3.8);
+
+  % B. Curva Go-Go R_v vs R_r
+  \begin{axis}[
+    at={(9.65cm, -0.1cm)},
+    width=6.4cm, height=4.1cm,
+    axis lines=left,
+    xlabel={\sffamily\scriptsize Distancia real mano-torso $R_r$},
+    ylabel={\sffamily\scriptsize Alcance virtual $R_v$},
+    title={\sffamily\bfseries\footnotesize Función de mapeo Go-Go},
+    xmin=0, xmax=1.0, ymin=0, ymax=2.2,
+    xtick={0,0.5,1.0}, xticklabels={0,$D$,$L_{max}$},
+    ytick={0,0.5,1.5}, yticklabels={0,$D$,$3D$},
+    grid=major, grid style={dashed, color=npiRule!60}
+  ]
+    \addplot[domain=0:0.5, samples=20, thick, color=npiTeal] {x};
+    \addplot[domain=0.5:1.0, samples=40, very thick, color=npiAmber] {x + 4.8*(x-0.5)^2};
+    \addplot[domain=0:1.0, samples=10, dashed, color=npiSlate] {x};
+  \end{axis}
+\end{tikzpicture}%
+}
+\caption{Selección y manipulación 3D mediante rayo virtual (\textit{ray-casting}) y técnica no lineal \textit{Go-Go} \parencite{bowman2004user}.}
+\label{fig:interaccion_3d_gogo}
+\end{figure}

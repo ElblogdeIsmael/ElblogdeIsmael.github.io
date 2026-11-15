@@ -1,0 +1,50 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  stage/.style={draw=npiNavy, thick, rounded corners=3pt, fill=npiPaper, minimum width=2.45cm, minimum height=1.25cm, align=center, font=\sffamily\scriptsize},
+  dm/.style={draw=npiTeal, very thick, rounded corners=3pt, fill=npiTealLight, minimum width=2.7cm, minimum height=1.35cm, align=center, font=\sffamily\scriptsize\bfseries, text=npiTeal},
+  aux/.style={draw=npiCobalt, thick, rounded corners=2.5pt, fill=npiCobaltLight, minimum width=2.4cm, minimum height=0.85cm, align=center, font=\sffamily\scriptsize, text=npiNavy},
+  arr/.style={->, thick, color=npiNavy},
+  darr/.style={<->, thick, dashed, color=npiCobalt}
+]
+  % Entrada usuario
+  \node[font=\sffamily\bfseries\scriptsize\color{npiNavy}, align=center] (usr) at (-2.2, 2.3) {Usuario\\(Voz + VAD)};
+
+  % Fila superior: comprensión
+  \node[stage] (asr) at (0.6, 2.3) {\textbf{ASR}\\Reconocimiento\\acústico-lingüístico\\{\tiny Audio $\to$ hipótesis}};
+  \node[stage] (nlu) at (4.9, 2.3) {\textbf{NLU}\\Comprensión\\intención y \textit{slots}\\{\tiny Marco semántico}};
+
+  % Centro derecho: DM
+  \node[dm] (dm) at (8.7, 1.1) {\textbf{Gestor de Diálogo}\\(\textit{Dialogue Manager})\\Estado, iniciativa\\y política de turno};
+
+  % Fila inferior: generación
+  \node[stage] (nlg) at (4.9, -0.1) {\textbf{NLG}\\Generación de\\lenguaje natural\\{\tiny Acto $\to$ texto + SSML}};
+  \node[stage] (tts) at (0.6, -0.1) {\textbf{TTS}\\Síntesis de habla\\neural / concatenativa\\{\tiny Texto $\to$ audio}};
+
+  % Salida audio
+  \node[font=\sffamily\bfseries\scriptsize\color{npiTeal}, align=center] (spk) at (-2.2, -0.1) {Audio\\(\textit{barge-in}\\activo)};
+
+  % Bases de conocimiento / contexto
+  \node[aux] (dst) at (8.7, 3.1) {Historial y \textit{Context}\\(\textit{Dialogue State Tracking})};
+  \node[aux, draw=npiAmber, fill=npiAmberLight] (kb) at (8.7, -1.0) {Base de conocimiento /\\APIs (horarios, aulas, mapas)};
+
+  % Conexiones principales
+  \draw[arr] (usr) -- (asr);
+  \draw[arr] (asr) -- node[above, font=\sffamily\tiny\color{npiSlate}] {$N$-best + conf.} (nlu);
+  \draw[arr] (nlu.east) -| (dm.north west);
+  \draw[arr] (dm.south west) |- (nlg.east);
+  \draw[arr] (nlg) -- node[above, font=\sffamily\tiny\color{npiSlate}] {Texto/SSML} (tts);
+  \draw[arr] (tts) -- (spk);
+
+  % Conexiones auxiliares
+  \draw[darr] (dm.north) -- (dst.south);
+  \draw[darr, color=npiAmber] (dm.south) -- (kb.north);
+
+  % Bucle de barge-in
+  \draw[->, thick, dotted, color=npiRose] (spk.north) -- node[left, font=\sffamily\tiny\color{npiRose}, align=center] {Interrupción} (usr.south);
+\end{tikzpicture}%
+}
+\caption{Arquitectura clásica en bucle cerrado de un sistema de diálogo oral hablado (SDS) con realimentación contextual y soporte de \textit{barge-in} \parencite{lopezcozar2005spoken,mctear2016conversational}.}
+\label{fig:pipeline_dialogo}
+\end{figure}

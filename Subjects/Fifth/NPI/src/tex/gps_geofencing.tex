@@ -1,0 +1,56 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  lbl/.style={font=\sffamily\scriptsize, text=npiNavy},
+  box/.style={draw=npiNavy, thick, rounded corners=2.5pt, fill=npiPaper, align=center, font=\sffamily\scriptsize, inner sep=4pt}
+]
+  % --- Panel A: Trilateración GNSS (4 satélites) ---
+  \node[font=\sffamily\bfseries\small\color{npiNavy}] at (3.8, 5.2) {A. Trilateración GNSS (4 satélites y sesgo $\delta t_u$)};
+
+  % Tierra / horizonte suave
+  \draw[fill=npiPaper, draw=npiRule, thick] (0.3, 0.4) -- (7.3, 0.4) -- (7.3, 1.55) -- (0.3, 1.55) -- cycle;
+  \node[font=\sffamily\scriptsize\color{npiSlate}] at (1.5, 0.72) {Campus ETSIIT};
+
+  % Receptor usuario
+  \node[circle, fill=npiTeal, inner sep=2.5pt, label={[lbl, below=2pt]below:Receptor $(x,y,z,\delta t_u)$}] (user) at (3.8, 1.2) {};
+
+  % 4 Satélites
+  \foreach \idx/\x/\y/\name/\col in {1/1.1/4.3/SAT-1/npiCobalt, 2/2.9/4.6/SAT-2/npiCobalt, 3/5.1/4.5/SAT-3/npiCobalt, 4/6.7/4.0/SAT-4 ($\delta t_u$)/npiAmber} {
+    \node[draw=\col, fill=white, thick, rounded corners=2pt, font=\sffamily\tiny\bfseries, text=\col, minimum width=1.1cm] (s\idx) at (\x,\y) {\name};
+    \draw[dashed, color=\col, thick] (s\idx.south) -- (user);
+  }
+  \node[font=\sffamily\scriptsize\color{npiCobalt}, fill=white, inner sep=1.5pt] at (2.4, 2.9) {$\rho_i = \|\mathbf{p}_i - \mathbf{u}\| + c\,\delta t_u$};
+  \node[box, fill=npiCobaltLight, draw=npiCobalt] at (3.8, -0.35) {Ecuación mínima: 4 incógnitas $(x,y,z,\delta t_u)$ $\Rightarrow$ 4 pseudodistancias};
+
+  % Separador vertical
+  \draw[dashed, color=npiRule, thick] (8.1, -0.8) -- (8.1, 5.4);
+
+  % --- Panel B: Geofencing con histéresis espacial y temporal ---
+  \node[font=\sffamily\bfseries\small\color{npiTeal}] at (12.8, 5.2) {B. Geofence con histéresis espacial y \textit{dwell time}};
+
+  % Zona exterior, anillo histéresis, núcleo
+  \draw[fill=npiAmberLight, draw=npiAmber, dashed, thick] (12.8, 2.55) circle (2.05cm);
+  \draw[fill=npiTealLight, draw=npiTeal, very thick] (12.8, 2.55) circle (1.35cm);
+  \node[circle, fill=npiTeal, inner sep=2.5pt] (center) at (12.8, 2.55) {};
+  \node[font=\sffamily\tiny\bfseries\color{npiTeal}] at (12.8, 2.15) {POI Entrada};
+
+  % Radios anotados
+  \draw[<->, thick, color=npiTeal] (center) -- node[below, sloped, font=\sffamily\tiny\bfseries\color{npiTeal}] {$R_{\mathrm{in}}$} (11.85, 1.60);
+  \draw[<->, thick, color=npiAmber] (14.15, 2.55) -- node[above, font=\sffamily\tiny\bfseries\color{npiAmber}] {$\Delta R$} (14.85, 2.55);
+
+  % Trayectoria con eventos
+  \draw[->, very thick, color=npiNavy] (9.1, 1.3) .. controls (10.1, 1.8) and (11.1, 2.5) .. (12.3, 3.0)
+    node[pos=0.18, circle, fill=npiSlate, inner sep=1.5pt, label={[font=\sffamily\tiny, below]below:Exterior}] {}
+    node[pos=0.58, circle, fill=npiCobalt, inner sep=2pt, label={[font=\sffamily\tiny\bfseries\color{npiCobalt}, above left=1pt]above left:ENTER}] {}
+    node[pos=0.95, circle, fill=npiPlum, inner sep=2pt, label={[font=\sffamily\tiny\bfseries\color{npiPlum}, above]above:DWELL ($\ge\tau_d$)}] {};
+
+  \draw[->, very thick, color=npiRose] (13.3, 3.0) .. controls (14.3, 3.2) and (15.1, 2.9) .. (15.7, 1.7)
+    node[pos=0.72, circle, fill=npiRose, inner sep=2pt, label={[font=\sffamily\tiny\bfseries\color{npiRose}, right=2pt]right:EXIT}] {};
+
+  \node[box, fill=npiTealLight, draw=npiTeal] at (12.8, -0.35) {Anillo $[R_{\mathrm{in}}, R_{\mathrm{in}}+\Delta R]$ + ventana $\tau_d$ evita rebotes GPS (\textit{ping-pong})};
+\end{tikzpicture}%
+}
+\caption{Principio de trilateración GNSS con cuatro pseudodistancias para resolver el sesgo de reloj del receptor (izquierda) y diseño de una geocerca (\textit{geofence}) con zona de histéresis radial $\Delta R$ y retardo de permanencia $\tau_d$ (derecha) \parencite{krumm2018ubiquitous}.}
+\label{fig:gps_geofencing}
+\end{figure}

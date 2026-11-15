@@ -1,0 +1,36 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  proc/.style={draw=npiNavy, thick, rounded corners=3pt, fill=npiPaper, minimum width=3.1cm, minimum height=1.25cm, align=center, font=\sffamily\footnotesize},
+  mem/.style={draw=npiAmber, thick, rounded corners=2pt, fill=npiAmberLight, minimum width=2.85cm, minimum height=0.95cm, align=center, font=\sffamily\scriptsize},
+  arr/.style={->, thick, color=npiNavy}
+]
+  \node[mem] (vis) at (-3.1, 2.8) {\textbf{Almacén visual}\\$\delta \approx 200\text{ ms}$};
+  \node[mem] (aud) at (-3.1, 1.5) {\textbf{Almacén auditivo}\\$\delta \approx 1500\text{ ms}$};
+
+  \node[proc, draw=npiTeal, fill=npiTealLight] (perc) at (0.3, 2.15) {\textbf{Procesador perceptual}\\$\tau_P \approx 100\text{ ms}$};
+
+  \node[mem, draw=npiCobalt, fill=npiCobaltLight] (wm) at (4.1, 2.15) {\textbf{Memoria de trabajo}\\$\mu \approx 7 \pm 2$ ítems, $\delta \approx 7\text{ s}$};
+  \node[mem, draw=npiPlum, fill=npiPlumLight] (ltm) at (8.0, 2.15) {\textbf{Memoria a largo plazo}\\$\delta \approx \infty$};
+
+  \node[proc, draw=npiCobalt, fill=npiCobaltLight] (cog) at (4.1, 0.25) {\textbf{Procesador cognitivo}\\$\tau_C \approx 70\text{ ms}$};
+  \node[proc, draw=npiAmber, fill=npiAmberLight] (mot) at (8.0, 0.25) {\textbf{Procesador motor}\\$\tau_M \approx 70\text{ ms}$};
+
+  \node[font=\sffamily\scriptsize\bfseries\color{npiSlate}] (stim) at (-5.4, 2.15) {Estímulos};
+  \node[font=\sffamily\scriptsize\bfseries\color{npiSlate}] (resp) at (10.4, 0.25) {Acción};
+
+  \draw[arr] (stim) -- (vis.west);
+  \draw[arr] (stim) -- (aud.west);
+  \draw[arr] (vis.east) -- (perc.west);
+  \draw[arr] (aud.east) -- (perc.west);
+  \draw[arr] (perc) -- (wm);
+  \draw[<->, thick, color=npiNavy] (wm) -- (ltm);
+  \draw[<->, thick, color=npiCobalt] (wm) -- (cog);
+  \draw[arr, color=npiCobalt] (cog) -- (mot);
+  \draw[arr, color=npiAmber] (mot) -- (resp);
+\end{tikzpicture}%
+}
+\caption{Modelo del Procesador Humano de Información (MHP) con sus tiempos de ciclo y capacidades de memoria \parencite{card1983psychology}.}
+\label{fig:procesador_humano}
+\end{figure}
