@@ -1,0 +1,276 @@
+% Formulario esquemático del Parcial 1 de Dirección Financiera (temas 1-4).
+% Documento independiente: A4 apaisado, tres columnas, una caja por bloque.
+\documentclass[9pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[a4paper,landscape,margin=0.9cm,top=1.1cm,bottom=1cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{lmodern}
+\usepackage{fancyhdr}
+
+\setlength{\columnsep}{0.45cm}
+\setlength{\columnseprule}{0.2pt}
+\setlength{\parindent}{0pt}
+\setlist{nosep, leftmargin=1em, label=\textbullet}
+\setlength{\abovedisplayskip}{2pt}\setlength{\belowdisplayskip}{2pt}
+\setlength{\abovedisplayshortskip}{1pt}\setlength{\belowdisplayshortskip}{1pt}
+
+\definecolor{t0}{HTML}{455A64}
+\definecolor{t1}{HTML}{1565C0}
+\definecolor{t2}{HTML}{2E7D32}
+\definecolor{t3}{HTML}{C62828}
+\definecolor{t4}{HTML}{6A1B9A}
+
+\newtcolorbox{bloque}[2]{enhanced, breakable, colback=#1!4, colframe=#1, coltitle=white,
+  fonttitle=\bfseries\small, title={#2}, boxrule=0.6pt, arc=2pt,
+  left=3pt, right=3pt, top=2pt, bottom=2pt, before skip=3pt, after skip=3pt}
+\newcommand{\sub}[1]{\par\smallskip{\color{black!75}\bfseries\footnotesize #1}\par}
+\newcommand{\ojo}[1]{\par{\color{t3}\footnotesize\textbf{Ojo:} #1}\par}
+\newcommand{\an}[2]{a_{\overline{#1}\rvert #2}}
+
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\scriptsize Dirección Financiera · Formulario del Parcial 1 (temas 1-4)}
+\fancyfoot[R]{\scriptsize \thepage}
+
+\begin{document}
+\footnotesize
+\begin{center}
+{\large\bfseries Dirección Financiera · Formulario del Parcial 1}\quad
+{\small Temas 1-4 · Notación: $r$ coste de oportunidad, $C_0$ desembolso, $t_c$ impuesto, $b$ retención, $\an{n}{r}$ factor de anualidad}
+\end{center}
+\vspace{-2pt}
+\begin{multicols*}{3}
+
+% =========================================================
+\begin{bloque}{t0}{Matemática financiera}
+\[VF = VA(1+r)^n \qquad VA = \frac{VF}{(1+r)^n}\]
+\[\an{n}{r} = \frac{1-(1+r)^{-n}}{r} = \frac1r - \frac{1}{r(1+r)^n}\qquad s_{\overline{n}\rvert r} = \frac{(1+r)^n-1}{r}\]
+\sub{Rentas (valor actual)}
+\begin{itemize}
+\item Pospagable: $C\,\an{n}{r}$ \quad Prepagable: $C\,\an{n}{r}(1+r)$
+\item Diferida $d$ años: $C\,\an{n}{r}/(1+r)^d$
+\item Perpetua: $C/r$ \quad Perpetua desde $T+1$: $\dfrac{C/r}{(1+r)^T}$
+\item Perpetua creciente: $\dfrac{C_1}{r-g}$ \;($r>g$)
+\item Creciente temporal: $C_1\dfrac{1-\left(\frac{1+g}{1+r}\right)^n}{r-g}$
+\end{itemize}
+\sub{Tipos e inflación}
+\[(1+i_m)^m = 1+i \qquad TAE = \left(1+\tfrac{j_m}{m}\right)^m - 1\]
+\[1+r_{nom} = (1+r_{real})(1+\pi) \qquad C^{nom}_t = C^{real}_t(1+\pi)^t\]
+\ojo{nominal con nominal, real con real.}
+\sub{Interpolación (TIR)}
+\[TIR \approx r_1 + (r_2-r_1)\frac{VAN_1}{VAN_1-VAN_2}\]
+\end{bloque}
+
+% =========================================================
+\begin{bloque}{t1}{T1 · Empresa y director financiero}
+\begin{itemize}
+\item Decisiones: \textbf{inversión} (activos reales) y \textbf{financiación} (activos financieros).
+\item Circuito: (1) captar de inversores $\to$ (2) invertir $\to$ (3) generar $\to$ (4a) reinvertir / (4b) devolver.
+\item Objetivo: \textbf{maximizar el valor de mercado de las acciones} $\iff$ aceptar todo VAN $>0$. No el beneficio: ignora tiempo, riesgo y es manipulable.
+\item Agencia: principal (accionista) vs.\ agente (directivo). Mecanismos: planes de compensación, consejo, absorciones, especialistas.
+\item Mercado primario (financia) vs.\ secundario (liquidez).
+\end{itemize}
+\end{bloque}
+
+% =========================================================
+\begin{bloque}{t2}{T2 · Valor actual y Fisher}
+\[VAN = -C_0 + \sum_{t=1}^{n}\frac{C_t}{(1+r)^t}\qquad \frac{C_1-C_0}{C_0} > r \iff VAN>0\]
+\ojo{$r$ depende del \textbf{riesgo del proyecto}, no de cómo se financie.}
+\sub{Modelo de Fisher (2 periodos)}
+\begin{itemize}
+\item Sin invertir: $D = B + \frac{F}{1+r}$; \; $H = F + B(1+r)$
+\item Línea de mercado: pendiente $-(1+r)$; curva de inversión: $-(1+r')$
+\item Riqueza: $W = W_0 - I + \frac{F_1}{1+r} = W_0 + VAN$
+\item Máx.\ hoy: $W_0+VAN$ \; Máx.\ mañana: $(W_0+VAN)(1+r)$
+\item $\Delta$riqueza: $VAN$ (en $t=0$) o $VAN(1+r)$ (en $t=1$)
+\item Óptimo: $f'(I)=1+r \iff r'=r$ (tangencia). $JD=C_0$, $JK=VA$, $DK=VAN$
+\item Separación: inversión óptima independiente de las preferencias ($\rho=r$).
+\item Baja $r$ $\Rightarrow$ más inversión; prestatario mejora, prestamista empeora.
+\item $r_d>r_p$: dos tangencias $\Rightarrow$ no hay unanimidad.
+\end{itemize}
+\end{bloque}
+
+% =========================================================
+\begin{bloque}{t2}{T2 · Obligaciones}
+\[P_0 = C\,\an{n}{r} + \frac{VN}{(1+r)^n}\qquad \text{cupón cero: } P_0=\frac{VN}{(1+r)^n}\]
+\begin{itemize}
+\item Rentabilidad actual: $C/P_0$ (ignora ganancia de capital)
+\item Al vencimiento: $y$ tal que $P_0 = C\,\an{n}{y} + \frac{VN}{(1+y)^n}$
+\item Del periodo: $\dfrac{C+P_1-P_0}{P_0}$ \quad Venta en $k$: $P_k = C\,\an{n-k}{r_k} + \frac{VN}{(1+r_k)^{n-k}}$
+\item $r=$cupón: a la par · $r<$cupón: sobre la par · $r>$cupón: bajo la par
+\item Más plazo y menos cupón $\Rightarrow$ más sensible a $r$
+\item Duración: $D=\frac{1}{P_0}\sum t\frac{C_t}{(1+y)^t}$; \; $D^*=\frac{D}{1+y}$; \; $\frac{\Delta P}{P}\approx -D^*\Delta y$
+\item ETTI: $(1+r_t)^t=(1+r_{t-1})^{t-1}(1+f_{t-1,t})$; \; $P_0=\sum\frac{C}{(1+r_t)^t}$
+\item Prima de riesgo: $y_{empresa}-y_{Estado}$
+\end{itemize}
+\end{bloque}
+
+% =========================================================
+\begin{bloque}{t2}{T2 · Acciones (descuento de dividendos)}
+\[r=\frac{DIV_1}{P_0}+\frac{P_1-P_0}{P_0}\qquad P_0=\frac{DIV_1+P_1}{1+r}=\sum_{t=1}^{\infty}\frac{DIV_t}{(1+r)^t}\]
+\begin{itemize}
+\item Sin crecimiento: $P_0=\frac{DIV_1}{r}$
+\item Gordon: $P_0=\dfrac{DIV_1}{r-g}$; \; $r=\dfrac{DIV_1}{P_0}+g$; \; $DIV_1=DIV_0(1+g)$
+\item Fases: $P_0=\sum_{1}^{T}\frac{DIV_t}{(1+r)^t}+\frac{P_T}{(1+r)^T}$, \; $P_T=\frac{DIV_{T+1}}{r-g_2}$
+\item Si desde $T+1$ se reparte un BPA constante: $P_T=BPA/r$
+\end{itemize}
+\sub{Crecimiento}
+\[g=b\cdot ROE\qquad b=1-\tfrac{DIV}{BPA}\qquad ROE=\frac{BPA}{VC_{acción}}\]
+\[DIV_t=(1-b_t)BPA_t\]
+\[VC_t=VC_{t-1}+b\,BPA_t\qquad BPA_{t+1}=BPA_t(1+b_t\,ROE)\]
+\ojo{«la ROE desciende» afecta solo a las \textbf{nuevas} reinversiones.}
+\end{bloque}
+
+% =========================================================
+\begin{bloque}{t2}{T2 · VAOC y PER}
+\[P_0=\frac{BPA_1}{r}+VAOC\qquad VAOC=P_0-\frac{BPA_1}{r}=\sum_t\frac{VAN_t}{(1+r)^t}\]
+\sub{Tabla de reinversiones (método del profesor)}
+\begin{itemize}
+\item Capital: $I_t=b_t\,BPA_t$ \; Flujo: $F=ROE\cdot I_t$
+\item Perpetua: $VAN_t=-I_t+\frac{ROE\,I_t}{r}=I_t\left(\frac{ROE}{r}-1\right)$
+\item $n$ años: $VAN_t=-I_t+ROE\,I_t\,\an{n}{r}$ \; (¡puede ser $<0$ con $ROE>r$!)
+\item BPA$_{t+1}$ = BPA$_t$ + flujos vivos; DIV = reparto $\times$ BPA
+\item Comprobar: $P_0^{DDM}=BPA_1/r+VAOC$
+\end{itemize}
+\sub{Con Gordon}
+\[VAOC=\frac{BPA_1\,b\,(ROE-r)}{r(r-g)}\]
+\[PER=\frac{P_0}{BPA_1}=\frac{1-b}{r-g}=\frac1r+\frac{VAOC}{BPA_1}\]
+\[\frac{BPA_1}{P_0}=r\left(1-\frac{VAOC}{P_0}\right)\]
+\begin{itemize}
+\item $ROE>r$: VAN$>0$, VAOC$>0$, $BPA/P<r$ \;$\Rightarrow$ \textbf{de crecimiento}
+\item $ROE=r$: VAOC$=0$, $BPA/P=r$, $PER=1/r$ (aunque $g>0$)
+\item $ROE<r$: VAOC$<0$: reinvertir destruye valor
+\end{itemize}
+\end{bloque}
+
+% =========================================================
+\begin{bloque}{t3}{T3 · Criterios de inversión}
+\begin{itemize}
+\item VAN $>0$ \;·\; $IR=\frac{VA}{C_0}=1+\frac{VAN}{C_0}>1$
+\item PR: $\sum_1^{PR}C_t=C_0$; constante: $C_0/C$; interpolado: $(k-1)+\frac{C_0-\sum_1^{k-1}C_t}{C_k}$
+\item PR descontado: $\sum_1^{PRD}\frac{C_t}{(1+r)^t}=C_0$ (ignora flujos posteriores)
+\item TIR: $-C_0+\sum\frac{C_t}{(1+TIR)^t}=0$. Inversión: $TIR>r$. \textbf{Financiación: $TIR<r$}
+\end{itemize}
+\sub{TIR directa}
+\begin{itemize}
+\item 1 periodo: $\frac{C_1}{C_0}-1$ \; Perpetua: $\frac{C}{C_0}$ \; Creciente: $\frac{C_1}{C_0}+g$
+\item 2 periodos ($x=\frac{1}{1+TIR}$): $x=\dfrac{-C_1+\sqrt{C_1^2+4C_0C_2}}{2C_2}$
+\item Constante: $\an{n}{TIR}=C_0/C$
+\end{itemize}
+\sub{Defectos de la TIR}
+\begin{itemize}
+\item Financiación (regla invertida) · varias TIR (nº $\le$ cambios de signo)
+\item Escala (desembolsos distintos) · perfil temporal distinto
+\item Reinversión implícita a la TIR (el VAN reinvierte a $r$)
+\end{itemize}
+\sub{Excluyentes}
+\begin{itemize}
+\item Incremental: $TIR_{B-A}>r\Rightarrow B$ \; Tasa de Fisher: $VAN_A=VAN_B\iff TIR_{B-A}$
+\item TIRM: $C_0=\frac{\sum C_t(1+r)^{n-t}}{(1+TIRM)^n}$
+\item Momento óptimo: máx.\ $\frac{VAN_t}{(1+r)^t}$
+\item Distinta duración: mayor $AE=\frac{VAN}{\an{n}{r}}$ o menor CAE
+\end{itemize}
+\end{bloque}
+
+% =========================================================
+\begin{bloque}{t0}{Otros temas que salen en enunciados}
+\[k_e=\frac{DIV_1}{P_0}+g\qquad k_e=r_f+\beta(r_m-r_f)\]
+\[CMPC=\tfrac{E}{E+D}k_e+\tfrac{D}{E+D}k_d(1-t_c)\]
+\[VAN=-C_0+\frac{p\,VAN_{éxito}+(1-p)\,VAN_{fracaso}}{(1+r)^T}\]
+\end{bloque}
+
+% =========================================================
+\begin{bloque}{t4}{T4 · Flujos de caja del proyecto}
+\[VAN=-C_0^{di}+\sum_{i=1}^{n}\frac{Q_i^{di}}{(1+r)^i}+\frac{VR_n^{di}}{(1+r)^n}\]
+\sub{Inversión inicial}
+\[C_0^{di}=\text{activo}+\text{instalación}+FM_0+G_0(1-t_c)+\text{coste de oportunidad}\]
+\begin{itemize}
+\item Fuera: \textbf{costes hundidos}. Dentro: costes de oportunidad, canibalización
+\item Renovación: $-\big[P_{venta}-(P_{venta}-VNC)t_c\big]$ del viejo
+\end{itemize}
+\sub{Operaciones}
+\[CAF=\frac{V_0-VR_{cont}}{n}\qquad Q^{ai}=\text{Ingresos}-\text{costes con pago}\]
+\[\boxed{Q_i^{di}=Q_i^{ai}(1-t_c)+CAF_i\,t_c-\Delta FM_i}\]
+\[Q_i^{di}=BAIT_i(1-t_c)+CAF_i-\Delta FM_i\]
+\begin{itemize}
+\item General: $-I^*t_c+G^*t_c$ (subvenciones / deterioros)
+\item Costes fijos con amortización dentro: quitarla
+\item \textbf{Intereses y devolución de deuda: NO entran}
+\end{itemize}
+\sub{Fondo de maniobra}
+\[FM=E+\text{Clientes}-\text{Prov.}\qquad \Delta FM_t=FM_t-FM_{t-1}\;(>0:\text{salida})\]
+\[\text{Cobros}=\text{Ventas}-\Delta Cl\qquad \text{Pagos}=\text{Compras}-\Delta Pr\]
+\[\text{Consumo}=\text{Compras}+E_{t-1}-E_t\]
+\sub{Valor residual}
+\[VR^{di}(AF)=P_{venta}-(P_{venta}-VNC_n)\,t_c\qquad VNC_n=V_0-\textstyle\sum CAF\]
+\begin{itemize}
+\item Plusvalía paga impuesto; minusvalía ahorra impuesto
+\item FM al $\beta$: $\beta FM_n+(1-\beta)FM_n t_c$; a su valor contable: $FM_n$
+\item Terreno por su coste: sin impuesto
+\end{itemize}
+\sub{Cuenta de resultados}
+\begin{itemize}
+\item $BAIT=I-C-CAF$ (año final: $\pm$ venta del activo, $-$ pérdida del FM)
+\item $BAT=BAIT-\text{intereses}$ \; $BN=BAT(1-t_c)$ \; $DIV=p\cdot BN$
+\end{itemize}
+\end{bloque}
+
+% =========================================================
+\begin{bloque}{t4}{T4 · CAE y elección de equipos}
+\[VA(\text{costes})=C_0+\textstyle\sum\frac{\text{Coste}_t}{(1+r)^t}-\frac{VR_n}{(1+r)^n}\qquad CAE=\frac{VA(\text{costes})}{\an{n}{r}}\]
+\begin{itemize}
+\item Se elige el \textbf{menor CAE}. Constante sin VR: $CAE=\frac{C_0}{\an{n}{r}}+\text{Coste}$
+\item Mejor en términos \textbf{reales}; CAE nominal $=CAE^{real}(1+\pi)^t$ (no constante)
+\item Cambio tecnológico $c$: $VA=\sum_{k=1}^{n}\frac{CAE_1(1-c)^{k-1}}{(1+r)^k}$
+\item Reemplazo: coste un año más $=\text{Coste op.}_{t+1}+VR_t(1+r)-VR_{t+1}$ vs.\ CAE nuevo
+\item Estacional (vida indefinida): $VA=\text{Inversión}+\frac{\text{coste anual}}{r}$; nueva a plena carga
+\end{itemize}
+\sub{Punto muerto del VAN}
+\[Q^*=\frac{\frac{C_0}{\an{n}{r}}+CF(1-t_c)-CAF\,t_c}{(p-cv)(1-t_c)}\]
+\end{bloque}
+
+
+
+% =========================================================
+\begin{bloque}{t1}{Ideas clave}
+\begin{enumerate}[label=\arabic*., leftmargin=1.3em]
+\item Objetivo: valor de mercado de las acciones $\iff$ VAN $>0$.
+\item Fisher: la inversión óptima no depende de las preferencias; con $r_d>r_p$ se rompe.
+\item $r$ refleja el riesgo del proyecto, no su financiación.
+\item Precio del bono y $r$ en sentido contrario; largo plazo y cupón bajo, más sensibles.
+\item Rentabilidad actual $=$ rentabilidad al vencimiento solo a la par.
+\item Crecimiento $= b\times ROE$: hacen falta las dos cosas.
+\item Acción de crecimiento: reinvierte \textbf{y} $ROE>r$. Con $ROE=r$, VAOC $=0$.
+\item $BPA/P$ estima $r$ solo si VAOC $=0$.
+\item Excluyentes: VAN. Duraciones distintas: CAE o anualidad equivalente.
+\item Flujos: incrementales, después de impuestos, sin hundidos, con costes de oportunidad, sin intereses, con $\Delta FM$.
+\end{enumerate}
+\end{bloque}
+
+\columnbreak
+% =========================================================
+\begin{bloque}{t3}{Trampas típicas del test}
+\begin{itemize}
+\item «Maximizar el beneficio» como objetivo: \textbf{falso}.
+\item El mercado secundario financia a la empresa: \textbf{falso}.
+\item Baja $r$: el prestamista (consumo futuro) \textbf{empeora}.
+\item $g$ depende «exclusivamente» de $b$ o del ROE: \textbf{falso}.
+\item Gordon sirve con crecimientos muy altos: \textbf{falso} (usar fases).
+\item Proyecto de $n$ años con $ROE>r$ siempre crea valor: \textbf{falso} ($VAN_t$ puede ser $<0$).
+\item TIR válida con desembolsos distintos: \textbf{falso}. VAN válido con igual horizonte: \textbf{verdadero}.
+\item PR descontado tiene en cuenta todos los flujos: \textbf{falso}.
+\item En renovación, la venta del viejo \textbf{reduce} el desembolso incremental.
+\item Cambiar la amortización del inmovilizado cambia BAIT y FNC; cambiar la de la deuda \textbf{no} cambia el BAIT, sí el BN.
+\item CAE: mejor en términos \textbf{reales}; con duraciones \textbf{distintas}.
+\item Test con penalización de 1/4: si descartas una opción, contesta.
+\end{itemize}
+\end{bloque}
+
+\end{multicols*}
+\end{document}
