@@ -1,0 +1,27 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  st/.style={draw=npiNavy, thick, rounded corners=3pt, fill=npiPaper, minimum width=2.7cm, minimum height=1.0cm, align=center, font=\sffamily\scriptsize},
+  arr/.style={->, thick, color=npiNavy}
+]
+  \node[st] (idle) at (0, 1.4) {\textbf{Reposo}\\Mano fuera\\de zona};
+  \node[st, draw=npiCobalt, fill=npiCobaltLight] (hover) at (4.1, 1.4) {\textbf{Seguimiento (\textit{Hover})}\\Cursor filtrado\\(1€ Filter)};
+  \node[st, draw=npiAmber, fill=npiAmberLight] (arm) at (8.3, 1.4) {\textbf{Pre-activación}\\Anillo de progreso\\($t < T_{\text{dwell}}$ o $v_z$)};
+  \node[st, draw=npiTeal, fill=npiTealLight] (click) at (12.5, 1.4) {\textbf{Selección confirmada}\\Evento \textit{Click} +\\bloqueo refractario};
+
+  \draw[arr, color=npiCobalt] (idle) -- (hover) node[midway, above, font=\sffamily\tiny] {Mano entra};
+  \draw[arr, color=npiAmber] (hover) -- (arm) node[midway, above, font=\sffamily\tiny] {Sobre botón};
+  \draw[arr, color=npiTeal] (arm) -- (click) node[midway, above, font=\sffamily\tiny] {$t \ge T_{\text{dwell}}$ / \textit{push}};
+
+  \draw[arr, color=npiRose] (arm.south) .. controls +(0,-0.9) and +(0,-0.9) .. (hover.south)
+    node[midway, below, font=\sffamily\tiny] {Sale de zona de histéresis};
+  \draw[arr, color=npiSlate] (click.north) .. controls +(0,1.25) and +(0,1.25) .. (hover.north)
+    node[midway, above, font=\sffamily\tiny] {Retorno tras tiempo refractario ($\sim 300\text{ ms}$)};
+  \draw[arr, color=npiSlate] (hover.south) .. controls +(0,-0.9) and +(0,-0.9) .. (idle.south)
+    node[midway, below, font=\sffamily\tiny] {Pérdida $>250\text{ ms}$};
+\end{tikzpicture}%
+}
+\caption{Máquina de estados para selección aérea sin contacto (arquitectura tipo TouchFree) con histéresis espacial y periodo refractario.}
+\label{fig:touchfree_estados}
+\end{figure}

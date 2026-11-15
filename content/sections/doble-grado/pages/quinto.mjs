@@ -1,7 +1,7 @@
 /**
  * Quinto Curso - Doble Grado en Ingenieria Informatica y ADE.
  *
- * 7 subjects across 2 semesters.
+ * 10 subjects across 2 semesters.
  * Add a subject by pushing an entry into the matching group.
  *
  * @author Ismael Sallami Moreno
@@ -14,7 +14,7 @@ export default {
   titleOutline: "Curso",
   meta: [
     "Grado en Ingeniería Informática · ADE",
-    "7 asignaturas · 2 semestres",
+    "10 asignaturas · 2 semestres",
   ],
   groups: [
     {
@@ -238,6 +238,26 @@ export default {
                   name: "Test Parcial 1: banco completo",
                   href: "/Subjects/Fifth/DFIN/test/test-parcial1.html",
                   kind: "HTML",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          code: "NPI",
+          name: "Nuevos Paradigmas de Interacción",
+          blocks: [
+            {
+              resources: [
+                {
+                  name: "Guía docente",
+                  href: "https://www.ugr.es/estudiantes/grados/grado-ingenieria-informatica/nuevos-paradigmas-interaccion-ecompsist/guia-docente",
+                  kind: "GUIA",
+                },
+                {
+                  name: "Libro de teoría: fundamentos IHM, multimodalidad, RV/RA, gestos, computación ubicua y diálogo oral",
+                  href: "/Subjects/Fifth/NPI/build/NPI.pdf",
+                  kind: "PDF",
                 },
               ],
             },

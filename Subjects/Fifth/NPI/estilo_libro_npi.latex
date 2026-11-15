@@ -1,0 +1,626 @@
+% ==============================================================================
+% Plantilla editorial de libro: Nuevos Paradigmas de Interacción
+% Inspirada en monografías académicas modernas (MIT Press / Kaobook)
+% ==============================================================================
+
+\documentclass[11pt,a4paper,twoside,openany]{book}
+
+% --- Codificación, idioma y tipografía ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{csquotes}
+
+% Palatino para prosa y matemática + Cabin para jerarquía editorial + Inconsolata para código
+\usepackage{newpxtext}
+\usepackage{newpxmath}
+\usepackage[scaled=0.94]{cabin}
+\usepackage[scaled=0.90]{inconsolata}
+\usepackage{microtype}
+
+% --- Geometría asimétrica editorial (texto legible + margen exterior para notas) ---
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  inner=2.2cm,
+  outer=3.8cm,
+  top=2.6cm,
+  bottom=2.5cm,
+  marginparwidth=2.65cm,
+  marginparsep=0.45cm,
+  headheight=28pt,
+  footskip=26pt
+}
+
+% --- Espaciado y listas ---
+\usepackage{setspace}
+\setstretch{1.18}
+\setlength{\parskip}{0.45em}
+\setlength{\parindent}{0pt}
+
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=1.5em}
+\setlist[itemize]{label=\textcolor{npiTeal}{\textbullet}}
+\setlist[enumerate]{label=\textcolor{npiNavy}{\bfseries\arabic*.}}
+
+% --- Colores y tablas ---
+\usepackage[table]{xcolor}
+\definecolor{npiNavy}{HTML}{0F172A}
+\definecolor{npiNavyDeep}{HTML}{091022}
+\definecolor{npiNavyMid}{HTML}{1E293B}
+\definecolor{npiSlate}{HTML}{475569}
+\definecolor{npiMuted}{HTML}{64748B}
+\definecolor{npiRule}{HTML}{CBD5E1}
+\definecolor{npiPaper}{HTML}{F8FAFC}
+
+\definecolor{npiTeal}{HTML}{0F766E}
+\definecolor{npiTealBright}{HTML}{14B8A6}
+\definecolor{npiTealLight}{HTML}{F0FDFA}
+
+\definecolor{npiCobalt}{HTML}{1D4ED8}
+\definecolor{npiCobaltLight}{HTML}{EFF6FF}
+
+\definecolor{npiAmber}{HTML}{B45309}
+\definecolor{npiAmberBright}{HTML}{F59E0B}
+\definecolor{npiAmberLight}{HTML}{FFFBEB}
+
+\definecolor{npiPlum}{HTML}{6D28D9}
+\definecolor{npiPlumLight}{HTML}{F5F3FF}
+
+\definecolor{npiRose}{HTML}{BE123C}
+\definecolor{npiRoseLight}{HTML}{FFF1F2}
+
+% --- Gráficos, figuras y tablas ---
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{etoolbox}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\captionsetup{
+  font={small},
+  labelfont={bf,sf,color=npiTeal},
+  textfont={it,color=npiSlate},
+  justification=raggedright,
+  singlelinecheck=true,
+  skip=8pt
+}
+
+\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{10pt plus 2pt minus 2pt}
+
+% Tablas con aire editorial
+\renewcommand{\arraystretch}{1.28}
+\AtBeginEnvironment{longtable}{\small\sffamily}
+\AtBeginEnvironment{tabular}{\small\sffamily}
+
+% --- Física, unidades y matemática adicional ---
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+
+% --- TikZ y pgfplots ---
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{
+  calc,
+  positioning,
+  shapes.geometric,
+  arrows.meta,
+  backgrounds,
+  fit,
+  decorations.pathreplacing,
+  patterns,
+  automata
+}
+\tikzset{>=Stealth}
+
+% --- Cajas editoriales (tcolorbox) ---
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{fontawesome5}
+
+\newtcolorbox{definicion}[1][Definición]{
+  enhanced,
+  breakable,
+  colback=npiCobaltLight,
+  colframe=npiCobalt,
+  boxrule=0pt,
+  leftrule=3.5pt,
+  arc=2pt,
+  top=8pt, bottom=8pt, left=10pt, right=10pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{npiCobalt},
+  attach boxed title to top left={yshift=-2pt},
+  boxed title style={empty, size=minimal, top=4pt, bottom=2pt, left=10pt},
+  title={\faBookmark\hspace{0.5em}#1}
+}
+
+\newtcolorbox{ley}[1][Principio formal]{
+  enhanced,
+  breakable,
+  colback=npiPaper,
+  colframe=npiNavy,
+  boxrule=0.6pt,
+  toprule=2.5pt,
+  arc=2pt,
+  top=8pt, bottom=8pt, left=11pt, right=11pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{npiNavy},
+  colbacktitle=npiPaper,
+  title={\faCompass\hspace{0.5em}#1}
+}
+
+\newtcolorbox{ejemplo}[1][Caso de estudio]{
+  enhanced,
+  breakable,
+  colback=npiTealLight,
+  colframe=npiTeal,
+  boxrule=0pt,
+  leftrule=3.5pt,
+  arc=2pt,
+  top=8pt, bottom=8pt, left=10pt, right=10pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{npiTeal},
+  attach boxed title to top left={yshift=-2pt},
+  boxed title style={empty, size=minimal, top=4pt, bottom=2pt, left=10pt},
+  title={\faFlask\hspace{0.5em}#1}
+}
+
+\newtcolorbox{alerta}[1][Trampa de diseño / Limitación]{
+  enhanced,
+  breakable,
+  colback=npiAmberLight,
+  colframe=npiAmber,
+  boxrule=0pt,
+  leftrule=3.5pt,
+  arc=2pt,
+  top=8pt, bottom=8pt, left=10pt, right=10pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{npiAmber},
+  attach boxed title to top left={yshift=-2pt},
+  boxed title style={empty, size=minimal, top=4pt, bottom=2pt, left=10pt},
+  title={\faExclamationTriangle\hspace{0.5em}#1}
+}
+
+\newtcolorbox{practica}[1][Conexión con el proyecto ETSIIT]{
+  enhanced,
+  breakable,
+  colback=npiPlumLight,
+  colframe=npiPlum,
+  boxrule=0pt,
+  leftrule=3.5pt,
+  arc=2pt,
+  top=8pt, bottom=8pt, left=10pt, right=10pt,
+  before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries\small\color{npiPlum},
+  attach boxed title to top left={yshift=-2pt},
+  boxed title style={empty, size=minimal, top=4pt, bottom=2pt, left=10pt},
+  title={\faCogs\hspace{0.5em}#1}
+}
+
+\newtcolorbox{objetivos}[1][Mapa del capítulo]{
+  enhanced,
+  breakable,
+  colback=white,
+  colframe=npiRule,
+  boxrule=0.8pt,
+  leftrule=3pt,
+  borderline west={3pt}{0pt}{npiTeal},
+  arc=3pt,
+  top=8pt, bottom=8pt, left=12pt, right=12pt,
+  before skip=8pt, after skip=14pt,
+  fonttitle=\sffamily\bfseries\small\color{npiNavy},
+  colbacktitle=npiPaper,
+  title={\faMapSigns\hspace{0.5em}#1}
+}
+
+% --- Epígrafes, capitulares y notas al margen ---
+\usepackage{lettrine}
+\renewcommand{\LettrineFontHook}{\color{npiTeal}\bfseries}
+\newcommand{\inicial}[2]{\lettrine[lines=2, lhang=0.1, nindent=0.2em]{#1}{#2}}
+
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.78\textwidth}
+\setlength{\epigraphrule}{0.6pt}
+\renewcommand{\epigraphflush}{flushright}
+\renewcommand{\textflush}{flushepinormal}
+
+\usepackage{marginnote}
+\newcommand{\mnota}[1]{%
+  \marginnote{\raggedright\sffamily\footnotesize\color{npiSlate}%
+    \textcolor{npiTeal}{\rule{1.2cm}{0.9pt}}\\[-0.2em]%
+    #1}%
+}
+
+% --- Pseudocódigo y algoritmos ---
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\floatname{algorithm}{Algoritmo}
+
+% --- Cabeceras de capítulo y secciones (titlesec + TikZ) ---
+\usepackage{titlesec}
+
+\newcommand{\chapband}[2]{%
+  \begin{tikzpicture}
+    \node[
+      fill=npiPaper,
+      draw=npiRule,
+      line width=0.6pt,
+      rounded corners=3pt,
+      inner sep=0pt,
+      minimum width=\dimexpr\textwidth-1pt\relax
+    ] (band) {%
+      \begin{minipage}{\dimexpr\textwidth-64pt\relax}
+        \vspace{12pt}
+        {\sffamily\bfseries\scriptsize\color{npiTeal}\MakeUppercase{#1}}\\[4pt]
+        {\Huge\bfseries\color{npiNavy}\raggedright #2\endgraf}
+        \vspace{10pt}
+      \end{minipage}
+      \hspace*{36pt}%
+    };
+    \fill[npiTeal] (band.north west) rectangle ([xshift=4pt]band.south west);
+    \node[
+      anchor=north east,
+      font=\sffamily\bfseries\fontsize{42}{42}\selectfont,
+      text=npiRule!50
+    ] at ([xshift=-12pt, yshift=-10pt]band.north east) {\thechapter};
+  \end{tikzpicture}%
+}
+
+\newcommand{\chapbandunnum}[1]{%
+  \begin{tikzpicture}
+    \node[
+      fill=npiPaper,
+      draw=npiRule,
+      line width=0.6pt,
+      rounded corners=3pt,
+      inner sep=0pt,
+      minimum width=\dimexpr\textwidth-1pt\relax
+    ] (band) {%
+      \begin{minipage}{\dimexpr\textwidth-28pt\relax}
+        \vspace{10pt}
+        {\Huge\bfseries\color{npiNavy}\raggedright #1\endgraf}
+        \vspace{8pt}
+      \end{minipage}
+    };
+    \fill[npiNavy] (band.north west) rectangle ([xshift=4pt]band.south west);
+  \end{tikzpicture}%
+}
+
+\titleformat{\chapter}[display]
+  {\normalfont}
+  {}
+  {0pt}
+  {\chapband{Capítulo \thechapter \quad\textperiodcentered\quad Nuevos Paradigmas de Interacción}}
+
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont}
+  {}
+  {0pt}
+  {\chapbandunnum}
+
+\titlespacing*{\chapter}{0pt}{-10pt}{16pt}
+
+\titleformat{\section}
+  {\Large\sffamily\bfseries\color{npiNavy}}
+  {\textcolor{npiTeal}{\thesection}}{0.8em}{}
+  [\vspace{2pt}{\color{npiRule}\titlerule[0.5pt]}]
+\titlespacing*{\section}{0pt}{16pt}{6pt}
+
+\titleformat{\subsection}
+  {\large\sffamily\bfseries\color{npiNavyMid}}
+  {\textcolor{npiCobalt}{\thesubsection}}{0.7em}{}
+\titlespacing*{\subsection}{0pt}{11pt}{4pt}
+
+\titleformat{\subsubsection}
+  {\normalsize\sffamily\bfseries\itshape\color{npiSlate}}
+  {\thesubsubsection}{0.6em}{}
+\titlespacing*{\subsubsection}{0pt}{8pt}{3pt}
+
+% --- Encabezados, pies y pestañas de capítulo (fancyhdr + TikZ) ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\newcommand{\chapterthumb}{%
+  \ifnum\value{chapter}>0%
+    \begin{tikzpicture}[remember picture, overlay]
+      \ifodd\value{page}
+        \node[
+          fill=npiTeal,
+          text=white,
+          font=\sffamily\bfseries\footnotesize,
+          minimum width=7mm,
+          minimum height=11mm,
+          anchor=east,
+          rounded corners=1.5pt
+        ] at ([yshift=-2.8cm-\value{chapter}*1.1cm]current page.north east) {\thechapter};
+      \else
+        \node[
+          fill=npiTeal,
+          text=white,
+          font=\sffamily\bfseries\footnotesize,
+          minimum width=7mm,
+          minimum height=11mm,
+          anchor=west,
+          rounded corners=1.5pt
+        ] at ([yshift=-2.8cm-\value{chapter}*1.1cm]current page.north west) {\thechapter};
+      \fi
+    \end{tikzpicture}%
+  \fi%
+}
+
+\fancyhead[LE]{%
+  \chapterthumb
+  \sffamily\footnotesize\bfseries\color{npiNavy}\thepage%
+  \hspace{1em}\textcolor{npiRule}{|}\hspace{1em}%
+  \normalfont\sffamily\footnotesize\color{npiSlate}\nouppercase{\leftmark}%
+}
+\fancyhead[RO]{%
+  \chapterthumb
+  \sffamily\footnotesize\color{npiSlate}\nouppercase{\rightmark}%
+  \hspace{1em}\textcolor{npiRule}{|}\hspace{1em}%
+  \bfseries\color{npiNavy}\thepage%
+}
+\fancyfoot[LE]{\sffamily\scriptsize\color{npiMuted} $subject$ \textperiodcentered\ UGR}
+\fancyfoot[RO]{\sffamily\scriptsize\color{npiMuted} $author$}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{npiRule}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\sffamily\footnotesize\color{npiSlate}\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% --- Índice de contenidos estilizado (tocloft) ---
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\sffamily\bfseries\color{npiNavy}}
+\renewcommand{\cftchappagefont}{\sffamily\bfseries\color{npiTeal}}
+\renewcommand{\cftsecfont}{\normalfont\small}
+\renewcommand{\cftsecpagefont}{\sffamily\small\color{npiSlate}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforechapskip}{8pt}
+\setlength{\cftbeforesecskip}{2pt}
+
+% --- Bibliografía ---
+\usepackage[backend=biber,style=apa,sorting=nyt]{biblatex}
+\addbibresource{referencias.bib}
+\DefineBibliographyStrings{spanish}{
+  references = {Bibliografía y fuentes},
+  bibliography = {Bibliografía y fuentes}
+}
+
+% --- Hipervínculos y referencias cruzadas ---
+\usepackage{eurosym}
+\usepackage[plainpages=false]{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=npiNavy,
+  citecolor=npiTeal,
+  urlcolor=npiCobalt,
+  pdftitle={$subject$},
+  pdfauthor={$author$},
+  pdfsubject={Nuevos Paradigmas de Interacción (296114C) - Universidad de Granada},
+  pdfstartview=FitH
+}
+\usepackage{cleveref}
+
+% --- Macros de Pandoc (highlighting UTF-8 seguro, listas y figuras) ---
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{2pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\pandocbounded}[1]{#1}
+
+% Mejora visual del entorno Shaded de Pandoc para bloques de código
+\AtBeginEnvironment{Shaded}{%
+  \vspace{4pt}%
+}
+
+$if(header-includes)$
+$for(header-includes)$
+$header-includes$
+$endfor$
+$endif$
+
+% Símbolos Unicode frecuentes en Markdown para pdfLaTeX
+\DeclareUnicodeCharacter{03B1}{\ensuremath{\alpha}}
+\DeclareUnicodeCharacter{03B2}{\ensuremath{\beta}}
+\DeclareUnicodeCharacter{03B3}{\ensuremath{\gamma}}
+\DeclareUnicodeCharacter{03B4}{\ensuremath{\delta}}
+\DeclareUnicodeCharacter{03B5}{\ensuremath{\varepsilon}}
+\DeclareUnicodeCharacter{03B8}{\ensuremath{\theta}}
+\DeclareUnicodeCharacter{03BA}{\ensuremath{\kappa}}
+\DeclareUnicodeCharacter{03BB}{\ensuremath{\lambda}}
+\DeclareUnicodeCharacter{03BC}{\ensuremath{\mu}}
+\DeclareUnicodeCharacter{03C0}{\ensuremath{\pi}}
+\DeclareUnicodeCharacter{03C3}{\ensuremath{\sigma}}
+\DeclareUnicodeCharacter{03C4}{\ensuremath{\tau}}
+\DeclareUnicodeCharacter{03C9}{\ensuremath{\omega}}
+\DeclareUnicodeCharacter{0394}{\ensuremath{\Delta}}
+\DeclareUnicodeCharacter{03A3}{\ensuremath{\Sigma}}
+\DeclareUnicodeCharacter{03A9}{\ensuremath{\Omega}}
+\DeclareUnicodeCharacter{2264}{\ensuremath{\leq}}
+\DeclareUnicodeCharacter{2265}{\ensuremath{\geq}}
+\DeclareUnicodeCharacter{2260}{\ensuremath{\neq}}
+\DeclareUnicodeCharacter{2248}{\ensuremath{\approx}}
+\DeclareUnicodeCharacter{00D7}{\ensuremath{\times}}
+\DeclareUnicodeCharacter{2208}{\ensuremath{\in}}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+\DeclareUnicodeCharacter{2190}{\ensuremath{\leftarrow}}
+\DeclareUnicodeCharacter{21D2}{\ensuremath{\Rightarrow}}
+\DeclareUnicodeCharacter{2013}{--}
+\DeclareUnicodeCharacter{2014}{---}
+\DeclareUnicodeCharacter{2026}{\ldots}
+\DeclareUnicodeCharacter{2019}{'}
+\DeclareUnicodeCharacter{201C}{``}
+\DeclareUnicodeCharacter{201D}{''}
+
+\AtBeginDocument{\shorthandoff{<>}}
+
+% ==============================================================================
+% INICIO DEL DOCUMENTO
+% ==============================================================================
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% PORTADA VECTORIAL EDITORIAL
+% ------------------------------------------------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture, overlay]
+  % Fondo degradado nocturno
+  \shade[top color=npiNavy, bottom color=npiNavyDeep]
+    (current page.south west) rectangle (current page.north east);
+
+  % Rejilla espacial sutil
+  \draw[step=1.2cm, color=white, opacity=0.04, line width=0.4pt]
+    (current page.south west) grid (current page.north east);
+
+  % Ondas concéntricas de interacción acústica / háptica / espacial
+  \coordinate (hub) at ([xshift=-2.8cm, yshift=3.4cm]current page.east);
+  \foreach \r/\op in {1.6/0.32, 2.8/0.24, 4.1/0.18, 5.5/0.12, 7.0/0.07, 8.6/0.04} {
+    \draw[color=npiTealBright, opacity=\op, line width=0.9pt] (hub) circle (\r cm);
+  }
+  \foreach \r/\op in {2.2/0.25, 3.5/0.16, 4.9/0.09} {
+    \draw[color=npiAmberBright, opacity=\op, line width=0.7pt, dashed] (hub) circle (\r cm);
+  }
+
+  % Red nodal geométrica
+  \coordinate (n1) at ([xshift=-6.8cm, yshift=6.8cm]current page.east);
+  \coordinate (n2) at ([xshift=-4.2cm, yshift=1.2cm]current page.east);
+  \coordinate (n3) at ([xshift=-8.0cm, yshift=2.2cm]current page.east);
+  \coordinate (n4) at ([xshift=-2.0cm, yshift=7.4cm]current page.east);
+  \draw[color=npiTealBright, opacity=0.35, line width=0.8pt]
+    (hub) -- (n1) -- (n3) -- (n2) -- (hub) -- (n4) -- (n1);
+  \foreach \pt/\col in {hub/npiAmberBright, n1/npiTealBright, n2/npiTealBright, n3/white, n4/npiAmberBright} {
+    \fill[\col, opacity=0.85] (\pt) circle (3.2pt);
+  }
+
+  % Franja lateral vertical acento
+  \fill[npiTealBright] (current page.north west) rectangle ([xshift=0.45cm]current page.south west);
+
+  % Bloque tipográfico superior
+  \node[anchor=north west, align=left] at ([xshift=2.4cm, yshift=-2.6cm]current page.north west) {%
+    {\sffamily\bfseries\footnotesize\color{npiTealBright}%
+      UNIVERSIDAD DE GRANADA \quad\textperiodcentered\quad ETSIIT \quad\textperiodcentered\quad CÓDIGO 296114C}\\[0.5cm]
+    {\sffamily\bfseries\scriptsize\color{npiRule}%
+      DOBLE GRADO EN INGENIERÍA INFORMÁTICA Y ADE}\\[1.6cm]
+    \begin{minipage}{14.5cm}
+      {\fontsize{34}{40}\selectfont\bfseries\color{white} Nuevos Paradigmas\\[0.18cm] de Interacción\par}
+      \vspace{0.7cm}
+      {\color{npiAmberBright}\rule{3.2cm}{2.5pt}}\\[0.6cm]
+      {\Large\sffamily\color{npiRule!90} $about$\par}
+    \end{minipage}
+  };
+
+  % Tarjetas temáticas inferiores
+  \node[anchor=south west] at ([xshift=2.4cm, yshift=3.8cm]current page.south west) {%
+    \begin{minipage}{15.5cm}
+      \sffamily\footnotesize\color{npiRule!80}
+      \textbf{\color{npiTealBright}I.} Fundamentos cognitivos y leyes formales \quad
+      \textbf{\color{npiTealBright}II.} Dispositivos y multimodalidad \quad
+      \textbf{\color{npiTealBright}III.} Entornos RV y RA \\[0.25em]
+      \textbf{\color{npiTealBright}IV.} Gestos y movimiento \quad
+      \textbf{\color{npiTealBright}V.} Computación ubicua y sensores \quad
+      \textbf{\color{npiTealBright}VI.} Sistemas de diálogo oral
+    \end{minipage}
+  };
+
+  % Pie de portada
+  \node[anchor=south west] at ([xshift=2.4cm, yshift=1.6cm]current page.south west) {%
+    \begin{minipage}{15.5cm}
+      {\color{white!25}\rule{\linewidth}{0.5pt}}\\[0.35cm]
+      {\sffamily\large\bfseries\color{white} $author$} \hfill
+      {\sffamily\small\color{npiTealBright} \href{https://elblogdeismael.github.io}{elblogdeismael.github.io}}
+    \end{minipage}
+  };
+\end{tikzpicture}
+\end{titlepage}
+
+% ------------------------------------------------------------------------------
+% COLOFÓN Y LICENCIA
+% ------------------------------------------------------------------------------
+\clearpage
+\pagenumbering{roman}
+\thispagestyle{empty}
+\vspace*{2cm}
+{\sffamily\LARGE\bfseries\color{npiNavy} $subject$}\\[0.3cm]
+{\sffamily\normalsize\color{npiSlate} $about$}
+
+\vspace{1.2cm}
+{\color{npiRule}\rule{\linewidth}{0.6pt}}
+\vspace{0.6cm}
+
+{\small\sffamily\color{npiSlate}
+\textbf{Autoría y edición:} $author$\\[0.25em]
+\textbf{Institución:} Escuela Técnica Superior de Ingenierías Informática y de Telecomunicación (ETSIIT), Universidad de Granada\\[0.25em]
+\textbf{Titulación:} Doble Grado en Ingeniería Informática y Administración y Dirección de Empresas (Especialidad en Computación y Sistemas Inteligentes)\\[0.25em]
+\textbf{Asignatura:} Nuevos Paradigmas de Interacción (296114C)\\[0.25em]
+\textbf{Archivo digital:} \href{https://elblogdeismael.github.io}{https://elblogdeismael.github.io}
+}
+
+\vfill
+
+\begin{tcolorbox}[
+  colback=npiPaper,
+  colframe=npiRule,
+  boxrule=0.6pt,
+  arc=3pt,
+  left=12pt, right=12pt, top=10pt, bottom=10pt
+]
+\begin{minipage}{0.74\linewidth}
+\sffamily\footnotesize\color{npiSlate}
+\textbf{\color{npiNavy}Licencia Creative Commons BY-NC-ND 4.0}\\[0.3em]
+Este manual está publicado bajo una \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Licencia Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional}. Se permite compartir y redistribuir el material citando al autor, sin fines comerciales ni obras derivadas.
+\end{minipage}\hfill
+\begin{minipage}{0.22\linewidth}
+\centering
+\includegraphics[width=0.95\linewidth]{img/by-nc-nd.png}
+\end{minipage}
+\end{tcolorbox}
+\clearpage
+
+% ------------------------------------------------------------------------------
+% ÍNDICES
+% ------------------------------------------------------------------------------
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
+
+% ------------------------------------------------------------------------------
+% CUERPO DEL LIBRO
+% ------------------------------------------------------------------------------
+\clearpage
+\pagenumbering{arabic}
+$body$
+
+% ------------------------------------------------------------------------------
+% BIBLIOGRAFÍA
+% ------------------------------------------------------------------------------
+\backmatter
+\printbibliography[heading=bibintoc,title={Bibliografía y fuentes}]
+
+\end{document}

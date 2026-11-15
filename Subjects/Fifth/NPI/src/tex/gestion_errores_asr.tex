@@ -1,0 +1,36 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  box/.style={draw=npiNavy, thick, rounded corners=2.5pt, fill=npiPaper, align=center, font=\sffamily\scriptsize, inner sep=4pt},
+  dec/.style={draw=npiTeal, thick, diamond, aspect=2.1, fill=npiTealLight, align=center, font=\sffamily\scriptsize\bfseries, text=npiTeal, inner sep=1pt},
+  act/.style={draw=npiCobalt, thick, rounded corners=3pt, fill=npiCobaltLight, align=center, font=\sffamily\scriptsize, inner sep=4pt},
+  warn/.style={draw=npiRose, thick, rounded corners=3pt, fill=npiRoseLight, align=center, font=\sffamily\scriptsize, inner sep=4pt},
+  arr/.style={->, thick, color=npiNavy}
+]
+  % Entrada ASR
+  \node[box] (in) at (0, 2.0) {Hipótesis ASR +\\confianza $c \in [0,1]$};
+  \node[dec] (d1) at (3.4, 2.0) {$c \ge \theta_{\mathrm{alta}}$?};
+  \node[dec, draw=npiAmber, fill=npiAmberLight, text=npiAmber] (d2) at (3.4, -0.3) {$c \ge \theta_{\mathrm{baja}}$?};
+
+  % Ramas de decisión
+  \node[act, draw=npiTeal, fill=npiTealLight] (ok) at (7.5, 2.8) {\textbf{Aceptación directa}\\+ confirmación implícita\\{\tiny Ej. ``Mostrando ruta al aula 2.4...''}};
+  \node[act] (conf) at (7.5, 0.85) {\textbf{Confirmación explícita}\\de baja carga cognitiva\\{\tiny Ej. ``¿Dijiste aula 2.4?''}};
+  \node[warn] (rep) at (7.5, -1.2) {\textbf{Recuperación escalonada}\\1) Repetición dirigida (\textit{reprompt})\\2) Cambio a menú / QR / táctil};
+
+  % Flechas
+  \draw[arr] (in) -- (d1);
+  \draw[arr] (d1) -- node[above, sloped, font=\sffamily\tiny\bfseries\color{npiTeal}] {Sí} (ok.west);
+  \draw[arr] (d1) -- node[left, font=\sffamily\tiny\bfseries\color{npiSlate}] {No} (d2);
+  \draw[arr] (d2) -- node[above, sloped, font=\sffamily\tiny\bfseries\color{npiCobalt}] {Sí (zona gris)} (conf.west);
+  \draw[arr] (d2) -- node[below, sloped, font=\sffamily\tiny\bfseries\color{npiRose}] {No (o \textit{timeout})} (rep.west);
+
+  % Nota lateral sobre costes de error
+  \node[box, draw=npiAmber, fill=npiAmberLight, align=left, text width=3.9cm] at (12.1, 0.85) {\textbf{Criterio adaptativo de umbrales:}\\Acciones irreversibles o caras suben $\theta_{\mathrm{alta}}$; tras 2 fallos seguidos (\textit{consec. no-match}), el sistema cambia de modalidad para no bloquear al usuario.};
+  \draw[dashed, color=npiAmber, thick] (ok.east) -| (10.1, 0.85);
+  \draw[dashed, color=npiAmber, thick] (rep.east) -| (10.1, 0.85);
+\end{tikzpicture}%
+}
+\caption{Política de doble umbral de confianza ($\theta_{\mathrm{baja}}, \theta_{\mathrm{alta}}$) para confirmación implícita, confirmación explícita y degradación elegante en sistemas comerciales de diálogo oral \parencite{suendermann2011advances,mctear2016conversational}.}
+\label{fig:gestion_errores_asr}
+\end{figure}

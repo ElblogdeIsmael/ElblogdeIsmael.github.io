@@ -1,0 +1,35 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  box/.style={draw=npiNavy, thick, rounded corners=3pt, fill=npiPaper, minimum width=2.9cm, minimum height=1.1cm, align=center, font=\sffamily\small},
+  io/.style={draw=npiCobalt, thick, rounded corners=2pt, fill=npiCobaltLight, minimum width=2.0cm, minimum height=0.8cm, align=center, font=\sffamily\footnotesize},
+  env/.style={draw=npiTeal, thick, rounded corners=3pt, fill=npiTealLight, minimum width=2.9cm, minimum height=1.0cm, align=center, font=\sffamily\footnotesize},
+  arr/.style={->, thick, color=npiNavy}
+]
+  \node[font=\sffamily\bfseries\small\color{npiNavy}] at (2.8, 2.7) {A. Computación algorítmica (Turing)};
+  \node[io] (tin) at (0, 1.4) {Entrada\\finita $x$};
+  \node[box] (tm) at (2.9, 1.4) {Máquina de\\Turing $M$};
+  \node[io] (tout) at (5.8, 1.4) {Salida $f(x)$\\y parada};
+  \draw[arr] (tin) -- (tm);
+  \draw[arr] (tm) -- (tout);
+  \node[font=\sffamily\scriptsize\color{npiSlate}, align=center] at (2.9, 0.2) {Mundo cerrado: sin entradas\\durante el cómputo};
+
+  \draw[dashed, color=npiRule, thick] (7.4, -0.4) -- (7.4, 3.0);
+
+  \node[font=\sffamily\bfseries\small\color{npiTeal}] at (10.9, 2.7) {B. Computación interactiva};
+  \node[box, draw=npiTeal] (im) at (10.9, 1.6) {Máquina de\\interacción ($S_t$)};
+  \node[env] (env) at (10.9, -0.1) {Entorno físico / Usuario\\(sensores, voz, red)};
+
+  \draw[->, thick, color=npiTeal] ([xshift=-0.8cm]env.north) -- ([xshift=-0.8cm]im.south)
+    node[midway, left, font=\sffamily\scriptsize\color{npiTeal}, align=right] {Flujo\\$i_1, i_2, \dots$};
+  \draw[->, thick, color=npiAmber] ([xshift=0.8cm]im.south) -- ([xshift=0.8cm]env.north)
+    node[midway, right, font=\sffamily\scriptsize\color{npiAmber}, align=left] {Acciones\\$o_1, o_2, \dots$};
+
+  \draw[->, thick, color=npiNavy] (im.east) .. controls +(0.9,0.6) and +(0.9,-0.6) .. (im.east)
+    node[midway, right, xshift=0.15cm, font=\sffamily\scriptsize\color{npiNavy}, align=left] {Estado\\$S_{t+1}$};
+\end{tikzpicture}%
+}
+\caption{Comparación estructural entre la máquina de Turing cerrada y una máquina de interacción con flujos continuos y estado persistente \parencite{goldin2006interactive}.}
+\label{fig:turing_vs_interaccion}
+\end{figure}

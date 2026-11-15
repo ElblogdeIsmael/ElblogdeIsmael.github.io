@@ -1,0 +1,48 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  layer/.style={draw=npiNavy, thick, rounded corners=3pt, fill=npiPaper, align=center, font=\sffamily\scriptsize, inner sep=4pt},
+  sens/.style={draw=npiCobalt, thick, rounded corners=2.5pt, fill=npiCobaltLight, minimum width=2.45cm, minimum height=0.95cm, align=center, font=\sffamily\scriptsize},
+  core/.style={draw=npiTeal, very thick, rounded corners=3pt, fill=npiTealLight, minimum width=2.9cm, minimum height=1.15cm, align=center, font=\sffamily\scriptsize\bfseries, text=npiTeal},
+  outb/.style={draw=npiPlum, thick, rounded corners=2.5pt, fill=npiPlumLight, minimum width=2.45cm, minimum height=0.95cm, align=center, font=\sffamily\scriptsize},
+  arr/.style={->, thick, color=npiNavy}
+]
+  % Columna izquierda: Capas de entrada / hardware
+  \node[font=\sffamily\bfseries\small\color{npiCobalt}] at (1.3, 4.9) {1. Entrada multimodal};
+  \node[sens] (s1) at (1.3, 3.85) {\textbf{TouchFree / Depth}\\Cámara IR + Leap\\(manos sin contacto)};
+  \node[sens] (s2) at (1.3, 2.55) {\textbf{Voz + VAD}\\Array micrófonos\\(ES / EN / FR)};
+  \node[sens] (s3) at (1.3, 1.25) {\textbf{Contexto móvil}\\Android GPS + BLE\\+ QR / NFC entrada};
+  \node[sens] (s4) at (1.3, -0.05) {\textbf{Sensores locales}\\Barómetro + IMU\\+ presencia};
+
+  % Columna central: Procesamiento y Fusión
+  \node[font=\sffamily\bfseries\small\color{npiTeal}] at (6.2, 4.9) {2. Fusión y Diálogo};
+  \node[layer, minimum width=3.1cm, minimum height=1.0cm] (norm) at (6.2, 3.45) {\textbf{Normalización temporal}\\Filtro 1\euro{} + DTW gestos\\+ ventana semántica $\Delta t$};
+  \node[core] (fus) at (6.2, 1.85) {\textbf{Motor Multimodal + DM}\\Fusión tardía (voz + deíxis)\\+ Gestor de estado e idioma};
+  \node[layer, draw=npiAmber, fill=npiAmberLight, minimum width=3.1cm, minimum height=1.0cm] (ctx) at (6.2, 0.25) {\textbf{Motor Contextual}\\Horarios UGR, aulas,\\comedor y emergencias};
+
+  % Columna derecha: Salida inclusiva
+  \node[font=\sffamily\bfseries\small\color{npiPlum}] at (11.1, 4.9) {3. Salida y Continuidad};
+  \node[outb] (o1) at (11.1, 3.65) {\textbf{Interfaz visual 2D/3D}\\Alto contraste, tipografía\\escalable y mapa ETSIIT};
+  \node[outb] (o2) at (11.1, 2.25) {\textbf{Audio + TTS SSML}\\Locución adaptativa y\\subtítulos sincronizados};
+  \node[outb] (o3) at (11.1, 0.85) {\textbf{Hand-off móvil}\\Deep-link QR / BLE hacia\\app Android en exteriores};
+  \node[outb, draw=npiRose, fill=npiRoseLight] (o4) at (11.1, -0.5) {\textbf{Degradación elegante}\\Fallback táctil/botón físico\\ante ruido o fallo de tracking};
+
+  % Conexiones izquierda -> centro
+  \draw[arr] (s1.east) -- (norm.west);
+  \draw[arr] (s2.east) -- (fus.west);
+  \draw[arr] (s3.east) -- (ctx.west);
+  \draw[arr] (s4.east) -- (ctx.west);
+  \draw[arr] (norm.south) -- (fus.north);
+  \draw[arr] (ctx.north) -- (fus.south);
+
+  % Conexiones centro -> derecha
+  \draw[arr] (fus.east) -- (o1.west);
+  \draw[arr] (fus.east) -- (o2.west);
+  \draw[arr] (fus.east) -- (o3.west);
+  \draw[arr, dashed, color=npiRose] (fus.east) -- (o4.west);
+\end{tikzpicture}%
+}
+\caption{Arquitectura integrada de un punto de información multimodal e inclusivo para la ETSIIT (UGR), articulando los cinco bloques de la asignatura en un flujo de fusión semántica tardía y continuidad móvil \parencite{lopezcozar2005spoken,dey2001understanding}.}
+\label{fig:arquitectura_etsiit}
+\end{figure}

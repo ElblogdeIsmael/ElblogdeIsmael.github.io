@@ -1,0 +1,39 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  box/.style={draw=npiNavy, thick, rounded corners=2.5pt, fill=npiPaper, minimum width=2.9cm, minimum height=0.8cm, align=center, font=\sffamily\scriptsize},
+  arr/.style={->, thick, color=npiNavy}
+]
+  % A. Ejes coordenados Android
+  \node[font=\sffamily\bfseries\small\color{npiNavy}] at (2.5, 4.45) {A. Sistema de coordenadas del móvil};
+  \draw[fill=npiPaper, draw=npiNavy, very thick, rounded corners=5pt] (1.4, 0.3) rectangle (3.3, 3.2);
+  \draw[fill=white, draw=npiRule] (1.55, 0.65) rectangle (3.15, 2.9);
+  \fill[npiNavy] (2.35, 1.75) circle (2.2pt);
+
+  \draw[->, very thick, color=npiRose] (2.35, 1.75) -- (4.1, 1.75) node[right, font=\sffamily\scriptsize\bfseries\color{npiRose}] {$+X$};
+  \draw[->, very thick, color=npiTeal] (2.35, 1.75) -- (2.35, 3.55) node[above, font=\sffamily\scriptsize\bfseries\color{npiTeal}] {$+Y$};
+  \draw[->, very thick, color=npiCobalt] (2.35, 1.75) -- (1.15, 1.0) node[left, font=\sffamily\scriptsize\bfseries\color{npiCobalt}] {$+Z$};
+  \node[font=\sffamily\tiny\color{npiSlate}, align=center] at (2.4, -0.1) {En reposo plano: $a_z \approx +9.81\text{ m/s}^2$};
+
+  % Separador
+  \draw[dashed, color=npiRule, thick] (5.2, -0.2) -- (5.2, 4.1);
+
+  % B. Arquitectura SensorManager y Geofencing
+  \node[font=\sffamily\bfseries\small\color{npiTeal}] at (10.3, 4.45) {B. Pila de sensores y contexto en Android};
+  \node[box, draw=npiAmber, fill=npiAmberLight] (hw) at (7.1, 2.8) {Hardware MEMS / RF\\(IMU, barómetro, BLE, GNSS)};
+  \node[box] (hal) at (7.1, 1.6) {Sensor HAL + Sensor Hub\\(FIFO hardware de bajo consumo)};
+  \node[box, draw=npiCobalt, fill=npiCobaltLight] (sm) at (7.1, 0.4) {\texttt{SensorManager} /\\ \texttt{FusedLocationProvider}};
+
+  \node[box, draw=npiTeal, fill=npiTealLight, minimum width=3.3cm] (app1) at (12.1, 2.5) {Detector de gestos\\(aceleración lineal + gyro)};
+  \node[box, draw=npiPlum, fill=npiPlumLight, minimum width=3.3cm] (app2) at (12.1, 1.2) {Geovalla ETSIIT\\(\texttt{ENTER} / \texttt{DWELL} / \texttt{EXIT})};
+
+  \draw[arr] (hw) -- (hal);
+  \draw[arr] (hal) -- (sm);
+  \draw[arr, color=npiTeal] (sm.east) -| (9.8, 2.5) -- (app1.west);
+  \draw[arr, color=npiPlum] (sm.east) -| (9.8, 1.2) -- (app2.west);
+\end{tikzpicture}%
+}
+\caption{Sistema de referencia físico de un terminal Android y flujo desde el hardware MEMS hasta la capa de aplicación mediante \texttt{SensorManager}.}
+\label{fig:android_sensormanager_ejes}
+\end{figure}

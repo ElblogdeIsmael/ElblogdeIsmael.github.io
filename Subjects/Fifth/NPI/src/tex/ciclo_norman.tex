@@ -1,0 +1,45 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  stage/.style={draw=npiNavy, thick, rounded corners=2.5pt, fill=white, minimum width=2.85cm, minimum height=0.68cm, align=center, font=\sffamily\scriptsize},
+  exec/.style={stage, draw=npiCobalt, fill=npiCobaltLight},
+  eval/.style={stage, draw=npiTeal, fill=npiTealLight},
+  arr/.style={->, thick, color=npiSlate}
+]
+  % Meta superior
+  \node[draw=npiNavy, thick, rounded corners=4pt, fill=npiPaper, minimum width=4.6cm, minimum height=0.8cm, align=center, font=\sffamily\small\bfseries\color{npiNavy}] (goal) at (0, 4.1) {1. Meta del usuario};
+
+  % Columna izquierda: Ejecución (bajada)
+  \node[exec] (e2) at (-3.1, 2.9) {2. Planificar acción};
+  \node[exec] (e3) at (-3.1, 1.85) {3. Especificar secuencia};
+  \node[exec] (e4) at (-3.1, 0.8) {4. Ejecutar físicamente};
+
+  % Columna derecha: Evaluación (subida)
+  \node[eval] (v7) at (3.1, 2.9) {7. Comparar con la meta};
+  \node[eval] (v6) at (3.1, 1.85) {6. Interpretar el estado};
+  \node[eval] (v5) at (3.1, 0.8) {5. Percibir el mundo};
+
+  % Sistema físico inferior
+  \node[draw=npiAmber, thick, rounded corners=4pt, fill=npiAmberLight, minimum width=6.4cm, minimum height=0.85cm, align=center, font=\sffamily\small\bfseries\color{npiAmber}] (world) at (0, -0.55) {Sistema interactivo y entorno físico};
+
+  % Flechas de flujo
+  \draw[arr, color=npiCobalt] (goal.west) -| (e2.north);
+  \draw[arr, color=npiCobalt] (e2) -- (e3);
+  \draw[arr, color=npiCobalt] (e3) -- (e4);
+  \draw[arr, color=npiCobalt] (e4.south) |- (world.west);
+
+  \draw[arr, color=npiTeal] (world.east) -| (v5.south);
+  \draw[arr, color=npiTeal] (v5) -- (v6);
+  \draw[arr, color=npiTeal] (v6) -- (v7);
+  \draw[arr, color=npiTeal] (v7.north) |- (goal.east);
+
+  % Golfos centrales con llaves claras
+  \draw[<->, thick, dashed, color=npiCobalt] (-1.35, 2.9) -- (-1.35, 0.8);
+  \node[fill=white, inner sep=2pt, font=\sffamily\scriptsize\bfseries\color{npiCobalt}, align=center] at (-0.8, 1.85) {Golfo de\\ejecución};
+
+  \draw[<->, thick, dashed, color=npiTeal] (1.35, 2.9) -- (1.35, 0.8);
+  \node[fill=white, inner sep=2pt, font=\sffamily\scriptsize\bfseries\color{npiTeal}, align=center] at (0.8, 1.85) {Golfo de\\evaluación};
+\end{tikzpicture}
+\caption{Las siete etapas de la acción y los golfos de ejecución y evaluación en el modelo de \textcite{norman2013design}.}
+\label{fig:ciclo_norman}
+\end{figure}

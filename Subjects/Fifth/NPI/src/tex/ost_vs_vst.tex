@@ -1,0 +1,40 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  comp/.style={draw=npiNavy, thick, rounded corners=2pt, fill=npiPaper, align=center, font=\sffamily\scriptsize},
+  arr/.style={->, thick}
+]
+  % A. Optical See-Through (OST)
+  \node[font=\sffamily\bfseries\small\color{npiTeal}] at (3.2, 3.6) {A. Optical See-Through (OST, guía de onda)};
+  \node[comp, minimum width=1.2cm, minimum height=1.2cm, fill=npiAmberLight, draw=npiAmber] (mundo1) at (0.6, 1.6) {Escena\\real};
+  \draw[very thick, color=npiCobalt, fill=npiCobaltLight, opacity=0.7] (2.6, 0.7) -- (3.5, 2.5) -- (3.7, 2.4) -- (2.8, 0.6) -- cycle;
+  \node[font=\sffamily\tiny\color{npiCobalt}, align=center] at (3.2, 0.25) {Combinador óptico\\(guía de onda)};
+  \node[comp, minimum width=1.6cm, minimum height=0.75cm, fill=npiTealLight, draw=npiTeal] (proj) at (3.2, 3.0) {Microproyector};
+  \node[comp, minimum width=1.1cm, minimum height=1.1cm] (ojo1) at (5.6, 1.6) {Ojo\\humano};
+
+  \draw[arr, color=npiAmber] (mundo1.east) -- (2.95, 1.6);
+  \draw[arr, color=npiAmber] (3.35, 1.6) -- (ojo1.west) node[midway, below, font=\sffamily\tiny] {Luz directa};
+  \draw[arr, color=npiTeal, dashed] (proj.south) -- (3.15, 1.75) -- ([yshift=4pt]ojo1.west);
+
+  % Separador
+  \draw[dashed, color=npiRule, thick] (6.8, 0.0) -- (6.8, 3.9);
+
+  % B. Video See-Through (VST)
+  \node[font=\sffamily\bfseries\small\color{npiPlum}] at (11.1, 3.6) {B. Video See-Through (VST, passthrough)};
+  \node[comp, minimum width=1.2cm, minimum height=1.2cm, fill=npiAmberLight, draw=npiAmber] (mundo2) at (7.8, 1.6) {Escena\\real};
+  \node[comp, minimum width=1.35cm, minimum height=0.85cm, fill=npiPlumLight, draw=npiPlum] (cam) at (9.6, 1.6) {Cámaras\\RGB};
+  \node[comp, minimum width=1.55cm, minimum height=1.1cm, fill=npiPaper] (gpu) at (11.55, 1.6) {Mezcla GPU\\(real + 3D)};
+  \node[comp, minimum width=1.2cm, minimum height=1.1cm, fill=npiCobaltLight, draw=npiCobalt] (disp) at (13.45, 1.6) {Pantalla\\OLED};
+  \node[comp, minimum width=1.0cm, minimum height=1.1cm] (ojo2) at (15.0, 1.6) {Ojo};
+
+  \draw[arr, color=npiAmber] (mundo2) -- (cam);
+  \draw[arr, color=npiPlum] (cam) -- (gpu);
+  \draw[arr, color=npiCobalt] (gpu) -- (disp);
+  \draw[arr, color=npiNavy] (disp) -- (ojo2);
+  \node[font=\sffamily\tiny\color{npiSlate}, align=center] at (11.55, 0.3) {Permite oclusión perfecta; introduce latencia de cámara};
+\end{tikzpicture}%
+}
+\caption{Comparación óptica y de procesamiento entre visores Optical See-Through (OST) y Video See-Through (VST) \parencite{azuma1997survey,hainich2009end}.}
+\label{fig:ost_vs_vst}
+\end{figure}

@@ -1,0 +1,42 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  st/.style={draw=npiNavy, thick, rounded corners=3pt, fill=npiPaper, minimum width=2.55cm, minimum height=0.85cm, align=center, font=\sffamily\scriptsize},
+  arr/.style={->, thick, color=npiNavy}
+]
+  % Izquierda: Rejilla capacitiva
+  \node[font=\sffamily\bfseries\small\color{npiNavy}] at (2.2, 4.35) {A. Matriz capacitiva proyectada};
+  \draw[fill=npiPaper, draw=npiRule, rounded corners=2pt] (0.2, 0.4) rectangle (4.2, 3.1);
+  \foreach \x in {0.7, 1.4, 2.1, 2.8, 3.5} {
+    \draw[color=npiCobalt, thick] (\x, 0.55) -- (\x, 2.95);
+  }
+  \foreach \y in {0.8, 1.35, 1.9, 2.45} {
+    \draw[color=npiTeal, thick] (0.35, \y) -- (4.05, \y);
+  }
+  \fill[npiAmber, opacity=0.45] (2.1, 1.9) circle (0.34cm);
+  \draw[npiAmber, very thick] (2.1, 1.9) circle (0.34cm);
+  \fill[npiPlum, opacity=0.35] (3.5, 1.35) circle (0.30cm);
+  \draw[npiPlum, very thick] (3.5, 1.35) circle (0.30cm);
+  \node[font=\sffamily\scriptsize\color{npiSlate}, align=center] at (2.2, 0.0) {Electrodos Tx/Rx: cada dedo altera\\la capacitancia mutua $C_m(x,y)$};
+
+  % Derecha: Máquina de estados MotionEvent en Android
+  \node[font=\sffamily\bfseries\small\color{npiTeal}] at (10.3, 4.35) {B. Ciclo de vida \texttt{MotionEvent} multitáctil};
+  \node[st] (idle) at (6.5, 2.1) {Sin contacto};
+  \node[st, draw=npiCobalt, fill=npiCobaltLight] (one) at (9.9, 2.1) {1 puntero activo\\(ID = 0)};
+  \node[st, draw=npiPlum, fill=npiPlumLight] (multi) at (13.6, 2.1) {$k \ge 2$ punteros\\(ID = $0,1,\dots$)};
+
+  \draw[arr, color=npiCobalt] (idle) -- (one) node[midway, above, font=\sffamily\tiny\bfseries] {ACTION\_DOWN};
+  \draw[arr, color=npiPlum] ([yshift=6pt]one.east) -- ([yshift=6pt]multi.west) node[midway, above, font=\sffamily\tiny\bfseries] {POINTER\_DOWN};
+  \draw[arr, color=npiSlate] ([yshift=-6pt]multi.west) -- ([yshift=-6pt]one.east) node[midway, below, font=\sffamily\tiny\bfseries] {POINTER\_UP};
+  \draw[arr, color=npiRose] (one.south) .. controls +(0,-1.0) and +(0,-1.0) .. (idle.south)
+    node[midway, below, font=\sffamily\tiny\bfseries] {ACTION\_UP / ACTION\_CANCEL};
+  \draw[arr, color=npiTeal] (one.north) .. controls +(0.4,0.8) and +(-0.4,0.8) .. (one.north)
+    node[midway, above, font=\sffamily\tiny] {ACTION\_MOVE};
+  \draw[arr, color=npiTeal] (multi.north) .. controls +(0.4,0.8) and +(-0.4,0.8) .. (multi.north)
+    node[midway, above, font=\sffamily\tiny] {ACTION\_MOVE ($k$ coords)};
+\end{tikzpicture}%
+}
+\caption{Principio físico de la pantalla capacitiva proyectada y máquina de estados multitáctil en Android (`MotionEvent`).}
+\label{fig:motionevent_multitouch}
+\end{figure}

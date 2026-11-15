@@ -1,0 +1,28 @@
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  era/.style={draw=npiNavy, thick, rounded corners=3pt, fill=npiPaper, minimum width=2.45cm, minimum height=1.55cm, align=center, font=\sffamily\scriptsize},
+  yr/.style={font=\sffamily\bfseries\scriptsize\color{npiTeal}}
+]
+  % Eje temporal principal
+  \draw[->, very thick, color=npiNavy] (-0.3, 0) -- (14.6, 0);
+
+  \foreach \x/\y/\tit/\sub/\col in {
+    1.1/1950s/{Lotes (Batch)}/{Tarjetas perforadas\\Sin bucle real}/npiSlate,
+    3.7/1960s--70s/{CLI / Texto}/{Teclado + terminal\\Sintaxis estricta}/npiCobalt,
+    6.3/1980s/{WIMP / GUI}/{Ratón y ventanas\\Manipulación 2D}/npiCobalt,
+    8.9/1990s--2000s/{Móvil y Ubicua}/{Táctil, GPS, IMU\\Sensible al contexto}/npiTeal,
+    11.5/2010s/{NUI y Espacial}/{Gestos 3D, RV/RA\\Sin intermediarios}/npiPlum,
+    14.0/2020s+/{Multimodal y Oral}/{Voz + mirada +\\agentes adaptativos}/npiAmber%
+  } {
+    \fill[\col] (\x, 0) circle (3.2pt);
+    \node[yr, color=\col] at (\x, -0.45) {\y};
+    \node[era, draw=\col, fill=white] (b) at (\x, 1.35) {\textbf{\color{\col}\tit}\\[3pt]\color{npiSlate}\sub};
+    \draw[thick, color=\col] (\x, 0.12) -- (b.south);
+  }
+\end{tikzpicture}%
+}
+\caption{Evolución de los paradigmas de interacción: del cálculo por lotes desconectado a la interacción natural, espacial y multimodal.}
+\label{fig:evolucion_paradigmas}
+\end{figure}
