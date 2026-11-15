@@ -1,0 +1,49 @@
+% Figura 9.3: Teoría del Orden Jerárquico (Pecking Order) de Myers y Majluf (1984) por asimetría informativa
+\begin{tikzpicture}[
+    font=\small\sffamily,
+    tier/.style={
+        rectangle, rounded corners=4pt, draw=#1, fill=#1!9,
+        line width=1.15pt, text width=11.4cm, minimum height=1.65cm,
+        align=left, font=\footnotesize\sffamily, text=dfinslate, inner sep=7pt
+    },
+    badge/.style={
+        circle, draw=#1, fill=#1, text=white,
+        font=\small\sffamily\bfseries, minimum size=0.82cm
+    }
+]
+
+\node[tier=dfinemerald] (p1) at (0, 5.2) {%
+    \hfill\begin{minipage}[c]{10.0cm}
+    \textbf{\color{dfinemerald}\large 1.\textsuperscript{er} Recurso: Autofinanciación interna (beneficios retenidos)}\\[2pt]
+    Cero costes de emisión y \textbf{cero selección adversa}: no revela información al mercado ni diluye al accionista actual cuando cree que la acción está infravalorada.
+    \end{minipage}
+};
+\node[badge=dfinemerald] at ([xshift=0.68cm]p1.west) {1};
+
+\node[tier=dfinnavy] (p2) at (0, 2.55) {%
+    \hfill\begin{minipage}[c]{10.0cm}
+    \textbf{\color{dfinnavy}\large 2.\textsuperscript{o} Recurso: Deuda externa (segura primero, luego híbrida)}\\[2pt]
+    Menor sensibilidad a la asimetría informativa sobre el valor de los activos; emite una \textbf{señal positiva} de solvencia al comprometer pagos fijos con escudo fiscal.
+    \end{minipage}
+};
+\node[badge=dfinnavy] at ([xshift=0.68cm]p2.west) {2};
+
+\node[tier=dfinburg] (p3) at (0, -0.15) {%
+    \hfill\begin{minipage}[c]{10.0cm}
+    \textbf{\color{dfinburg}\large 3.\textsuperscript{er} Recurso (última opción): Ampliación de capital (acciones nuevas)}\\[2pt]
+    Máxima asimetría informativa (\emph{Myers--Majluf}): el mercado deduce que los directivos emiten acciones cuando están \textbf{sobrevaloradas}, cayendo un $-2\%$ a $-4\%$.
+    \end{minipage}
+};
+\node[badge=dfinburg] at ([xshift=0.68cm]p3.west) {3};
+
+% Flechas laterales indicando dirección al agotarse cada fuente y aumento de asimetría
+\draw[->, >=Latex, line width=1.4pt, color=dfinslate] (-6.55, 6.0) -- (-6.55, -1.0)
+    node[midway, sloped, above=4pt, font=\scriptsize\sffamily\bfseries, color=dfinburg]
+    {Crece asimetría informativa y coste de señal};
+
+\draw[->, >=Latex, line width=1.1pt, color=dfinmuted] (p1.south) -- (p2.north)
+    node[midway, right=5pt, font=\scriptsize\sffamily, text=dfinmuted, fill=white, inner sep=1pt] {Si inversión supera caja retenida};
+\draw[->, >=Latex, line width=1.1pt, color=dfinmuted] (p2.south) -- (p3.north)
+    node[midway, right=5pt, font=\scriptsize\sffamily, text=dfinmuted, fill=white, inner sep=1pt] {Si capacidad de endeudamiento se agota};
+
+\end{tikzpicture}

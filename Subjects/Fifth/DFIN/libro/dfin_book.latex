@@ -1,0 +1,400 @@
+% ============================================================================
+% Plantilla Editorial para Libro / Monografia: Direccion Financiera (DFIN)
+% Compilar siempre con XeLaTeX via Pandoc (ver Makefile)
+% ============================================================================
+\documentclass[11pt,a4paper,oneside]{book}
+
+% --- Codificacion, fuentes e idioma ---
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{spanish}
+\usepackage{csquotes}
+
+% --- Matematicas avanzadas (antes de fontspec math) ---
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+
+% --- Tipografia editorial clasica financiera (Linux Libertine O + Lato) ---
+\setmainfont{Linux Libertine O}[
+  Ligatures=TeX,
+  Numbers=OldStyle
+]
+\setsansfont{Lato}[
+  Scale=MatchLowercase,
+  Ligatures=TeX
+]
+\setmonofont{DejaVu Sans Mono}[
+  Scale=0.84
+]
+\setmathfont{Latin Modern Math}
+
+% --- Geometria generosa y equilibrada ---
+\usepackage[
+  a4paper,
+  top=2.45cm,
+  bottom=2.45cm,
+  left=2.35cm,
+  right=2.35cm,
+  headheight=23pt,
+  headsep=18pt,
+  footskip=26pt
+]{geometry}
+
+% --- Microtipografia ---
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.15}
+\setlength{\parskip}{5.5pt}
+\setlength{\parindent}{0pt}
+
+% --- Paleta Editorial Finanzas Corporativas (Oxford Navy + Emerald + Copper + Burgundy) ---
+\usepackage[table,dvipsnames]{xcolor}
+\definecolor{dfinnavy}{HTML}{0B2545}
+\definecolor{dfinemerald}{HTML}{0F6B5B}
+\definecolor{dfincopper}{HTML}{B85D19}
+\definecolor{dfinburg}{HTML}{8B1E3F}
+\definecolor{dfinslate}{HTML}{334155}
+\definecolor{dfinmuted}{HTML}{64748B}
+\definecolor{dfinivory}{HTML}{FAF8F3}
+\definecolor{dfinpanelnavy}{HTML}{F1F5FA}
+\definecolor{dfinpanelemerald}{HTML}{EFF8F5}
+\definecolor{dfinpanelcopper}{HTML}{FDF5ED}
+\definecolor{dfinpanelburg}{HTML}{FCF1F4}
+\definecolor{dfinpanelivory}{HTML}{F7F4EC}
+
+% --- Tablas elegantes ---
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{colortbl}
+\renewcommand{\arraystretch}{1.28}
+
+% Rayado alterno solo en tablas de contenido (nunca en la tarjeta de portada)
+\AddToHook{env/longtable/before}{\rowcolors{2}{white}{dfinpanelivory}}
+\AddToHook{env/longtable/after}{\rowcolors{2}{}{}}
+\AddToHook{env/tabularx/before}{\rowcolors{2}{white}{dfinpanelivory}}
+\AddToHook{env/tabularx/after}{\rowcolors{2}{}{}}
+
+% Compatibilidad Pandoc
+\usepackage{calc}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{3pt}\setlength{\parskip}{0pt}}
+\newcounter{none}
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\small}
+
+% --- Graficos, ilustraciones y TikZ/PGFPlots ---
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[font={small,sf},labelfont={bf,color=dfinnavy},labelsep=period,justification=centering,margin=8pt]{caption}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween,statistics,groupplots}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,shapes.multipart,calc,fit,backgrounds,shadows.blur,decorations.pathreplacing,patterns}
+
+\graphicspath{{media/}{./}}
+
+% Helper para centrar e insertar figuras TikZ externas manteniendo legibilidad
+\newcommand{\includetikz}[2][0.95\linewidth]{%
+  \begin{center}
+    \resizebox{#1}{!}{\input{#2}}%
+  \end{center}%
+}
+
+% --- Listas limpias ---
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.35em, itemsep=3pt, topsep=4pt}
+\setlist[enumerate]{leftmargin=1.5em, itemsep=3pt, topsep=4pt}
+\setlist[itemize,1]{label=\textcolor{dfinemerald}{\small\textbullet}}
+\setlist[itemize,2]{label=\textcolor{dfincopper}{\footnotesize\ensuremath{\blacktriangleright}}}
+
+% --- Encabezados y pies editoriales ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\sffamily\color{dfinmuted}\nouppercase{\leftmark}}
+\fancyhead[R]{\footnotesize\sffamily\bfseries\colorbox{dfinnavy}{\textcolor{white}{\hspace{4pt}\thepage\hspace{4pt}}}}
+\fancyfoot[L]{\footnotesize\sffamily\color{dfinmuted}Dirección Financiera \textperiodcentered{} 5.\textsuperscript{o} Doble Grado Informática y ADE}
+\fancyfoot[R]{\footnotesize\sffamily\color{dfinmuted}Ismael Sallami Moreno}
+\renewcommand{\headrulewidth}{0.45pt}
+\renewcommand{\footrulewidth}{0.35pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{dfincopper!65}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{dfinmuted!45}\leaders\hrule height \footrulewidth\hfill}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[C]{\footnotesize\sffamily\color{dfinmuted}\fcolorbox{dfinmuted!45}{dfinivory}{\hspace{5pt}\thepage\hspace{5pt}}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% --- Titulos de capitulo y seccion arquitectonicos ---
+\usepackage{titlesec}
+\usepackage{titletoc}
+
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily}
+  {%
+    \makebox[0pt][l]{\colorbox{dfinnavy}{\textcolor{white}{\bfseries\scriptsize\hspace{8pt}CAPÍTULO\hspace{8pt}}}}%
+    \hspace{5.8em}{\color{dfincopper}\fontsize{28}{30}\selectfont\bfseries\thechapter}%
+  }
+  {8pt}
+  {\fontsize{21}{25}\selectfont\bfseries\color{dfinnavy}}
+  [\vspace{6pt}{\color{dfinemerald}\rule{2.8cm}{2.2pt}}{\color{dfinnavy!30}\rule{\dimexpr\textwidth-2.8cm\relax}{0.6pt}}]
+
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\sffamily}
+  {}
+  {0pt}
+  {\fontsize{21}{25}\selectfont\bfseries\color{dfinnavy}}
+  [\vspace{6pt}{\color{dfincopper}\rule{\textwidth}{0.9pt}}]
+
+\titlespacing*{\chapter}{0pt}{-14pt}{16pt}
+
+\titleformat{\section}
+  {\normalfont\sffamily\Large\bfseries\color{dfinnavy}}
+  {\colorbox{dfinpanelcopper}{\textcolor{dfincopper}{\thesection}}}
+  {0.65em}
+  {}
+\titlespacing*{\section}{0pt}{16pt}{6pt}
+
+\titleformat{\subsection}
+  {\normalfont\sffamily\large\bfseries\color{dfinemerald!90!black}}
+  {\thesubsection}
+  {0.55em}
+  {}
+\titlespacing*{\subsection}{0pt}{12pt}{4pt}
+
+\titleformat{\subsubsection}
+  {\normalfont\sffamily\normalsize\bfseries\color{dfinslate}}
+  {\thesubsubsection}
+  {0.5em}
+  {}
+
+% --- Pagina separadora de Parte editorial con ilustracion arquitectonica ---
+\newcommand{\parteLibro}[4]{%
+  \clearpage
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[dfinivory] (current page.south west) rectangle (current page.north east);
+    \fill[dfinnavy] (current page.north west) rectangle ($$(current page.north east)+(0,-1.0cm)$$);
+    \fill[dfincopper] ($$(current page.north west)+(0,-1.0cm)$$) rectangle ($$(current page.north east)+(0,-1.18cm)$$);
+    \fill[dfinnavy] (current page.south west) rectangle ($$(current page.south east)+(0,0.55cm)$$);
+  \end{tikzpicture}
+  \vspace*{0.4cm}
+  \begin{center}
+    {\sffamily\bfseries\small\color{dfincopper}\MakeUppercase{PARTE #1}}\\[8pt]
+    {\sffamily\bfseries\fontsize{25}{30}\selectfont\color{dfinnavy}#2}\\[8pt]
+    {\color{dfinemerald}\rule{4.5cm}{1.8pt}}\\[10pt]
+    \begin{minipage}{0.82\textwidth}
+      \centering\itshape\color{dfinslate}#3
+    \end{minipage}\\[16pt]
+    \fcolorbox{dfinnavy!25}{white}{\includegraphics[width=0.58\textwidth,height=0.58\textwidth,keepaspectratio]{#4}}
+  \end{center}
+  \addcontentsline{toc}{part}{Parte #1: #2}
+  \clearpage
+}
+
+% --- Cajas Pedagogicas con tcolorbox ---
+\usepackage[most]{tcolorbox}
+
+% 1. Axioma / Fundamento teorico y demostracion
+\newtcolorbox{axioma}[2][]{
+  enhanced, breakable,
+  colback=dfinpanelivory,
+  colframe=dfinnavy,
+  boxrule=0pt, borderline west={3.2pt}{0pt}{dfinnavy},
+  arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  fonttitle=\sffamily\bfseries\footnotesize\color{white},
+  colbacktitle=dfinnavy,
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0pt, top=2.5pt, bottom=2.5pt, left=7pt, right=7pt},
+  title={AXIOMA Y FUNDAMENTO \textperiodcentered{} #2},
+  #1
+}
+
+% 2. Enfoque / Convencion de Aula UGR
+\newtcolorbox{claseugr}[2][]{
+  enhanced, breakable,
+  colback=dfinpanelcopper,
+  colframe=dfincopper,
+  boxrule=0.6pt,
+  arc=3pt,
+  left=10pt, right=10pt, top=9pt, bottom=8pt,
+  fonttitle=\sffamily\bfseries\footnotesize\color{dfincopper!90!black},
+  colbacktitle=dfinivory,
+  attach boxed title to top left={yshift=-2.3mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0.5pt, colframe=dfincopper, top=1.5pt, bottom=1.5pt, left=6pt, right=6pt},
+  title={CONVENCIÓN UGR \textperiodcentered{} #2},
+  #1
+}
+
+% 3. Caso Corporativo / Examen Resuelto
+\newtcolorbox{casoreal}[2][]{
+  enhanced, breakable,
+  colback=dfinpanelemerald,
+  colframe=dfinemerald,
+  boxrule=0pt, borderline west={3.2pt}{0pt}{dfinemerald},
+  arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  fonttitle=\sffamily\bfseries\footnotesize\color{dfinemerald!95!black},
+  colbacktitle=white,
+  attach boxed title to top left={yshift=-2.2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0.5pt, colframe=dfinemerald, top=1.5pt, bottom=1.5pt, left=6pt, right=6pt},
+  title={CASO APLICADO \textperiodcentered{} #2},
+  #1
+}
+
+% 4. Paradoja y Error Frecuente de Examen
+\newtcolorbox{trampa}[2][]{
+  enhanced, breakable,
+  colback=dfinpanelburg,
+  colframe=dfinburg,
+  boxrule=0.6pt,
+  arc=3pt,
+  left=10pt, right=10pt, top=9pt, bottom=8pt,
+  fonttitle=\sffamily\bfseries\footnotesize\color{dfinburg},
+  colbacktitle=white,
+  attach boxed title to top left={yshift=-2.3mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0.5pt, colframe=dfinburg, top=1.5pt, bottom=1.5pt, left=6pt, right=6pt},
+  title={PARADOJA Y ERROR DE EXAMEN \textperiodcentered{} #2},
+  #1
+}
+
+% 5. Modelado Cuantitativo y Computacional (Puente Informatica + ADE)
+\newtcolorbox{puenteti}[2][]{
+  enhanced, breakable,
+  colback=dfinpanelnavy,
+  colframe=dfinnavy!80!dfinemerald,
+  boxrule=0pt, borderline west={3.2pt}{0pt}{dfinnavy!80!dfinemerald},
+  arc=2pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  fonttitle=\sffamily\bfseries\footnotesize\color{dfinnavy!85!black},
+  colbacktitle=white,
+  attach boxed title to top left={yshift=-2.2mm, xshift=4mm},
+  boxed title style={arc=2pt, boxrule=0.5pt, colframe=dfinnavy!70, top=1.5pt, bottom=1.5pt, left=6pt, right=6pt},
+  title={ALGORITMIA Y MODELADO FINANCIERO \textperiodcentered{} #2},
+  #1
+}
+
+% 6. Identidad / Formula Maestra
+\newtcolorbox{formula}[2][]{
+  enhanced, breakable,
+  colback=dfinivory,
+  colframe=dfinnavy,
+  boxrule=0.7pt,
+  arc=3pt,
+  left=10pt, right=10pt, top=7pt, bottom=7pt,
+  fonttitle=\sffamily\bfseries\footnotesize\color{white},
+  colbacktitle=dfinnavy,
+  title={IDENTIDAD MAESTRA \textperiodcentered{} #2},
+  #1
+}
+
+% 7. Epigrafe de inicio de capitulo y Mapa Conceptual
+\newenvironment{epigrafe}[2]{%
+  \begin{flushright}
+  \begin{minipage}{0.76\textwidth}
+  \raggedleft\itshape\color{dfinslate}
+  ``#1''\\[3pt]
+  \normalfont\sffamily\scriptsize\bfseries\color{dfinnavy} --- #2
+  \end{minipage}
+  \end{flushright}
+  \vspace{6pt}
+}{}
+
+\newtcolorbox{objetivos}{
+  enhanced, breakable,
+  colback=dfinpanelivory,
+  colframe=dfinmuted!45,
+  boxrule=0.5pt,
+  borderline west={3pt}{0pt}{dfincopper},
+  arc=2pt,
+  left=10pt, right=10pt, top=7pt, bottom=7pt,
+  fontupper=\small
+}
+
+% --- Hipervinculos ---
+\usepackage[
+  colorlinks=true,
+  linkcolor=dfinnavy,
+  citecolor=dfinemerald,
+  urlcolor=dfincopper,
+  bookmarksopen=true
+]{hyperref}
+
+\urlstyle{same}
+
+% --- Metadatos PDF ---
+$if(title)$
+\hypersetup{pdftitle={$title$}, pdfauthor={Ismael Sallami Moreno}}
+$endif$
+
+\begin{document}
+
+% Pagina 1: Portada completa editorial (sin pie ni folio repetido)
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture, overlay]
+    % Fondo marfil completo
+    \fill[dfinivory] (current page.south west) rectangle (current page.north east);
+    % Franja superior azul noche y liston cobre
+    \fill[dfinnavy] (current page.north west) rectangle ($$(current page.north east)+(0,-1.05cm)$$);
+    \fill[dfincopper] ($$(current page.north west)+(0,-1.05cm)$$) rectangle ($$(current page.north east)+(0,-1.25cm)$$);
+    % Franja lateral izquierda decorativa
+    \fill[dfinnavy] (current page.south west) rectangle ($$(current page.north west)+(0.45cm,0)$$);
+    \fill[dfinemerald] ($$(current page.south west)+(0.45cm,0)$$) rectangle ($$(current page.north west)+(0.56cm,0)$$);
+    % Ilustracion arquitectonica anclada en mitad inferior sin solaparse
+    \node[anchor=south, inner sep=0pt] at ($$(current page.south)+(0.28cm, 0.95cm)$$)
+      {\includegraphics[width=14.8cm,height=17.5cm,keepaspectratio]{cover_dfin.jpg}};
+    % Pie institucional inferior
+    \fill[dfinnavy] (current page.south west) rectangle ($$(current page.south east)+(0,0.85cm)$$);
+    \node[anchor=west, text=white, font=\sffamily\footnotesize] at ($$(current page.south west)+(1.1cm,0.425cm)$$)
+      {DOBLE GRADO EN INGENIERÍA INFORMÁTICA Y ADE \textperiodcentered{} UNIVERSIDAD DE GRANADA};
+    \node[anchor=east, text=dfincopper!75!white, font=\sffamily\bfseries\footnotesize] at ($$(current page.south east)+(-0.8cm,0.425cm)$$)
+      {CURSO 2026 / 2027};
+  \end{tikzpicture}
+
+  \vspace*{0.7cm}
+  \hspace*{0.35cm}\begin{minipage}[t]{0.92\textwidth}
+    {\sffamily\bfseries\footnotesize\color{dfincopper} TRATADO TEÓRICO-PRÁCTICO DE FINANZAS CORPORATIVAS}\\[10pt]
+    {\sffamily\bfseries\fontsize{33}{41}\selectfont\color{dfinnavy} DIRECCIÓN\\FINANCIERA}\\[8pt]
+    {\color{dfinemerald}\rule{3.8cm}{2.6pt}}\\[10pt]
+    {\sffamily\fontsize{12.5}{16}\selectfont\color{dfinslate}
+      Valoración de Activos, Decisiones de Inversión bajo Riesgo,\\
+      Estructura de Capital, Interrelación WACC--VAA, Opciones Reales\\
+      y Casos Cuantitativos Resueltos}\\[16pt]
+    \begin{tcolorbox}[
+      enhanced, width=12.4cm, colback=white, colframe=dfinnavy!25,
+      boxrule=0.6pt, borderline west={3pt}{0pt}{dfincopper}, arc=2pt,
+      left=9pt, right=9pt, top=6pt, bottom=6pt, opacityback=0.95
+    ]
+      \footnotesize\sffamily\color{dfinslate}
+      \begin{tabular}{@{}l@{\hspace{12pt}}l@{}}
+        \textbf{Autoría:} & Ismael Sallami Moreno \\
+        \textbf{Titulación:} & 5.\textsuperscript{o} Doble Grado Informática y ADE (UGR) \\
+        \textbf{Base académica:} & Temario oficial UGR (Temas 1--8), Relación 25/26, \\
+        & Brealey--Myers--Allen, Berk--DeMarzo y Ross--Westerfield--Jaffe
+      \end{tabular}
+    \end{tcolorbox}
+  \end{minipage}
+\end{titlepage}
+
+\frontmatter
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+
+\mainmatter
+$body$
+
+\end{document}

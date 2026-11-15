@@ -1,0 +1,72 @@
+% Figura 2.2: Ruptura del Teorema de Separación de Fisher con diferencial de tipos (r_D > r_A)
+\begin{tikzpicture}[
+    font=\small\sffamily,
+    lbl/.style={font=\scriptsize\sffamily, text=#1}
+]
+% Ejes
+\draw[->, >=Latex, line width=1pt, color=dfinslate] (0,0) -- (9.8,0)
+    node[right=4pt, font=\footnotesize\sffamily\bfseries, color=dfinnavy, align=left] {u.m.\\$(t=0)$};
+\draw[->, >=Latex, line width=1pt, color=dfinslate] (0,0) -- (0,6.8)
+    node[above=2pt, font=\footnotesize\sffamily\bfseries, color=dfinnavy] {Consumo futuro $(t=1)$};
+
+% Frontera productiva desde R0=(7.2, 0) hasta (1.8, 4.4)
+\coordinate (R0) at (7.2, 0);
+% Dos puntos de tangencia distintos sobre la curva:
+% 1) Tangencia de préstamo (prestamista, tipo bajo r_A -> recta más plana, pendiente -0.55) en JD_A = (3.4, 3.65)
+% 2) Tangencia de endeudamiento (prestatario, tipo alto r_D -> recta más empinada, pendiente -1.05) en JD_D = (5.45, 2.15)
+\coordinate (JDA) at (3.40, 3.65);
+\coordinate (JDD) at (5.45, 2.15);
+
+\draw[line width=1.65pt, color=dfinemerald]
+    (R0) .. controls (6.8, 0.90) and (6.1, 1.55) .. (JDD)
+         .. controls (4.8, 2.83) and (4.1, 3.30) .. (JDA)
+         .. controls (2.6, 4.09) and (2.0, 4.25) .. (1.5, 4.35);
+
+% Recta de ahorro/préstamo (pendiente suave -0.55 desde JDA hacia eje Y; no sigue abajo porque nadie puede prestar a ese tipo desde JD_D, pero la trazamos como frontera superior izquierda desde JDA)
+\draw[line width=1.25pt, color=dfinburg] (JDA) -- (0, 5.52);
+\draw[dashed, color=dfinburg!60, line width=0.8pt] (JDA) -- (8.8, 0.68);
+
+% Recta de endeudamiento (pendiente fuerte -1.05 desde JDD hacia eje X)
+\draw[line width=1.25pt, color=dfincopper] (JDD) -- (7.50, 0);
+\draw[dashed, color=dfincopper!60, line width=0.8pt] (JDD) -- (2.8, 4.93);
+
+% Zona intermedia de autarquía (sobre la propia curva cóncava entre JDA y JDD)
+\coordinate (Caut) at (4.48, 2.93);
+
+% Curvas de indiferencia de 3 inversores:
+% Inversor Paciente (presta a r_A)
+\coordinate (P1) at (1.95, 4.45);
+\draw[line width=1pt, color=dfinburg] (0.95, 5.45) .. controls (1.50, 4.75) and (1.75, 4.55) .. (P1) .. controls (2.40, 4.20) and (3.1, 4.0) .. (3.9, 3.9);
+\fill[dfinburg] (P1) circle (2.5pt);
+\node[above right=3pt, lbl=dfinburg, fill=white, inner sep=2pt, align=left] at (P1) {\textbf{Paciente}\\(presta al tipo $r_A$)};
+
+% Inversor Intermedio (elige punto sobre la curva real, autarquía)
+\draw[line width=1pt, color=dfinemerald] (3.4, 4.15) .. controls (3.95, 3.35) and (4.25, 3.12) .. (Caut) .. controls (4.75, 2.74) and (5.35, 2.55) .. (6.1, 2.45);
+\fill[dfinemerald] (Caut) circle (2.5pt);
+
+% Inversor Impaciente (toma prestado a r_D)
+\coordinate (P3) at (6.50, 1.05);
+\draw[line width=1pt, color=dfincopper] (5.7, 2.25) .. controls (6.1, 1.50) and (6.3, 1.25) .. (P3) .. controls (6.7, 0.85) and (7.3, 0.55) .. (8.2, 0.40);
+\fill[dfincopper] (P3) circle (2.5pt);
+\node[right=6pt, lbl=dfincopper, fill=white, inner sep=2pt, align=left] at (P3) {\textbf{Impaciente}\\(toma deuda al tipo $r_D$)};
+
+% Puntos JDA y JDD
+\fill[dfinburg] (JDA) circle (2.8pt);
+\fill[dfincopper] (JDD) circle (2.8pt);
+\fill[dfinnavy] (R0) circle (2.4pt);
+
+\node[below left=2pt, lbl=dfinburg, fill=white, inner sep=1.5pt] at (JDA) {$J_A^*$ (para prestamistas)};
+\node[below left=2pt, lbl=dfincopper, fill=white, inner sep=1.5pt] at (JDD) {$J_D^*$ (para prestatarios)};
+\node[below=4pt, lbl=dfinnavy] at (R0) {$R_0$};
+
+% Anotación de quiebra de la unanimidad
+\node[draw=dfinslate!40, fill=dfinpanelivory, rounded corners=3pt, inner sep=5pt,
+      font=\scriptsize\sffamily, text=dfinslate, align=left] at (7.3, 4.9) {%
+    \textbf{\color{dfinburg}Fricción de tipos ($r_D > r_A$)}\\[2pt]
+    Pendiente $A$: $-(1+r_A)$ (más plana)\\
+    Pendiente $D$: $-(1+r_D)$ (más vertical)\\
+    $\Rightarrow$ Cada grupo desea un plan $J^*$ distinto.\\
+    Entre $J_A^*$ y $J_D^*$ hay \textbf{autarquía financiera}.
+};
+
+\end{tikzpicture}

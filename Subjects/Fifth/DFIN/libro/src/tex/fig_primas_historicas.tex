@@ -1,0 +1,52 @@
+% Figura 6.1: Rentabilidades medias históricas anuales nominales, reales y prima de riesgo (Tema 5 UGR / Dimson-Marsh-Staunton / Ibbotson)
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    bar width=0.34cm,
+    width=12.6cm,
+    height=6.8cm,
+    ylabel={Rentabilidad media anual (\%)},
+    ymin=0, ymax=20.5,
+    symbolic x coords={Letras,Estado,Empresas,SP500,Pymes},
+    xtick=data,
+    xticklabels={
+        {Letras\\Tesoro},
+        {Obligaciones\\Estado},
+        {Obligaciones\\Empresas},
+        {Acciones\\S\&P 500},
+        {Acciones\\Pymes}
+    },
+    xticklabel style={font=\scriptsize\sffamily, align=center, color=dfinslate},
+    ytick={0, 5, 10, 15, 20},
+    yticklabels={{0\%}, {5\%}, {10\%}, {15\%}, {20\%}},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    grid=major,
+    ymajorgrids=true,
+    xmajorgrids=false,
+    grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    enlarge x limits=0.14,
+    legend style={at={(0.03,0.97)}, anchor=north west, font=\scriptsize\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt},
+    nodes near coords,
+    nodes near coords style={font=\tiny\sffamily\bfseries, rotate=90, anchor=west, color=dfinslate}
+]
+
+\addplot[fill=dfinnavy!85, draw=dfinnavy] coordinates {
+    (Letras, 3.90) (Estado, 5.70) (Empresas, 6.00) (SP500, 13.00) (Pymes, 17.30)
+};
+\addlegendentry{Rentabilidad nominal (\%)}
+
+\addplot[fill=dfinemerald!80, draw=dfinemerald] coordinates {
+    (Letras, 0.80) (Estado, 2.60) (Empresas, 2.90) (SP500, 9.90) (Pymes, 14.20)
+};
+\addlegendentry{Rentabilidad real ($\pi = 3{,}10\%$)}
+
+\addplot[fill=dfincopper!82, draw=dfincopper] coordinates {
+    (Letras, 0.00) (Estado, 1.80) (Empresas, 2.10) (SP500, 9.10) (Pymes, 13.40)
+};
+\addlegendentry{Prima sobre Letras ($R_i - r_f$)}
+
+\end{axis}
+\end{tikzpicture}

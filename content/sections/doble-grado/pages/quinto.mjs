@@ -210,6 +210,11 @@ export default {
             {
               resources: [
                 {
+                  name: "Libro teórico-práctico completo de Dirección Financiera (Temas 1–8 y ampliación)",
+                  href: "/Subjects/Fifth/DFIN/libro/build/DFIN_Libro.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Guía docente",
                   href: "https://grados.ugr.es/informatica-ade/docencia/plan-estudios/direccion-financiera/guia-docente",
                   kind: "GUIA",

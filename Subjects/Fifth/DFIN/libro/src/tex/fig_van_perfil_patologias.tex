@@ -1,0 +1,68 @@
+% Figura 4.1: Cuatro perfiles típicos de VAN(r) y patologías de la TIR (Tema 3 UGR)
+\begin{tikzpicture}
+\begin{groupplot}[
+    group style={group size=2 by 2, horizontal sep=1.45cm, vertical sep=1.75cm},
+    width=6.2cm, height=4.4cm,
+    axis x line=bottom, axis y line=left,
+    xlabel style={font=\scriptsize\sffamily, color=dfinslate},
+    ylabel style={font=\scriptsize\sffamily, color=dfinnavy},
+    tick label style={font=\tiny\sffamily, color=dfinslate},
+    title style={font=\scriptsize\sffamily\bfseries, color=dfinnavy},
+    grid=major, grid style={dotted, color=dfinmuted!40}
+]
+
+% Panel A: Inversión simple (F0 < 0, Fn > 0) -> VAN decreciente, TIR única
+\nextgroupplot[
+    title={(a) Proyecto normal: TIR única},
+    xmin=0, xmax=35, ymin=-400, ymax=900,
+    xlabel={$r$ (\%)}, ylabel={VAN},
+    xtick={0, 10, 20, 30}, xticklabels={{0\%}, {10\%}, {20\%}, {30\%}}
+]
+\addplot[domain=0:35, samples=2, color=dfinslate!55, line width=0.7pt] {0};
+\addplot[domain=0:34, samples=50, color=dfinnavy, line width=1.4pt]
+    {-1000 + 600/(1+x/100) + 800/(1+x/100)^2};
+\addplot[only marks, mark=*, mark size=2.2pt, color=dfinemerald] coordinates {(23.43, 0)};
+\node[font=\tiny\sffamily\bfseries, color=dfinemerald, anchor=south west, fill=white, inner sep=1pt] at (axis cs:23.4, 70) {$\text{TIR}=23{,}4\%$};
+
+% Panel B: Proyecto de financiación / préstamo (F0 > 0, Fn < 0) -> VAN creciente
+\nextgroupplot[
+    title={(b) Financiación: aceptar si $r > \text{TIR}$},
+    xmin=0, xmax=35, ymin=-600, ymax=450,
+    xlabel={$r$ (\%)}, ylabel={VAN},
+    xtick={0, 10, 20, 30}, xticklabels={{0\%}, {10\%}, {20\%}, {30\%}}
+]
+\addplot[domain=0:35, samples=2, color=dfinslate!55, line width=0.7pt] {0};
+\addplot[domain=0:34, samples=50, color=dfincopper, line width=1.4pt]
+    {1000 - 1200/(1+x/100)};
+\addplot[only marks, mark=*, mark size=2.2pt, color=dfinburg] coordinates {(20, 0)};
+\node[font=\tiny\sffamily\bfseries, color=dfinburg, anchor=north west, fill=white, inner sep=1pt] at (axis cs:18.5, -60) {$\text{TIR}=20\%$};
+\node[font=\tiny\sffamily, color=dfincopper, anchor=south east] at (axis cs:33, 100) {$\text{VAN}>0$};
+
+% Panel C: Múltiples TIR
+\nextgroupplot[
+    title={(c) Múltiples TIR (2 cambios de signo)},
+    xmin=0, xmax=35, ymin=-25, ymax=25,
+    xlabel={$r$ (\%)}, ylabel={VAN},
+    xtick={0, 10, 20, 30}, xticklabels={{0\%}, {10\%}, {20\%}, {30\%}}
+]
+\addplot[domain=0:35, samples=2, color=dfinslate!55, line width=0.7pt] {0};
+\addplot[domain=0:34, samples=70, color=dfinburg, line width=1.4pt]
+    {-1000 + 2300/(1+x/100) - 1320/(1+x/100)^2};
+\addplot[only marks, mark=*, mark size=2.2pt, color=dfinnavy] coordinates {(10, 0) (20, 0)};
+\node[font=\tiny\sffamily\bfseries, color=dfinnavy, anchor=south east] at (axis cs:9.5, 3) {$10\%$};
+\node[font=\tiny\sffamily\bfseries, color=dfinnavy, anchor=south west] at (axis cs:20.5, 3) {$20\%$};
+
+% Panel D: Sin TIR real
+\nextgroupplot[
+    title={(d) Ninguna TIR real ($\text{VAN}>0\ \forall r$)},
+    xmin=0, xmax=35, ymin=-100, ymax=650,
+    xlabel={$r$ (\%)}, ylabel={VAN},
+    xtick={0, 10, 20, 30}, xticklabels={{0\%}, {10\%}, {20\%}, {30\%}}
+]
+\addplot[domain=0:35, samples=2, color=dfinslate!55, line width=0.7pt] {0};
+\addplot[domain=0:34, samples=70, color=dfinemerald, line width=1.4pt]
+    {1000 - 3000/(1+x/100) + 2500/(1+x/100)^2};
+\node[font=\tiny\sffamily\bfseries, color=dfinemerald, anchor=south] at (axis cs:18, 280) {No corta al eje $r$};
+
+\end{groupplot}
+\end{tikzpicture}

@@ -1,0 +1,55 @@
+% Figura 12.1: Cronograma del Período Medio de Maduración Económico (PMMe) y Financiero (PMMf)
+\begin{tikzpicture}[
+    font=\small\sffamily,
+    hito/.style={circle, fill=#1, draw=white, line width=1pt, minimum size=7pt, inner sep=0pt},
+    fase/.style={rectangle, rounded corners=2.5pt, fill=#1!15, draw=#1, line width=0.9pt,
+                 minimum height=0.72cm, align=center, font=\scriptsize\sffamily\bfseries, text=#1}
+]
+
+% Línea temporal principal
+\draw[->, >=Latex, line width=1.2pt, color=dfinslate] (0, 0) -- (12.8, 0);
+
+% Hitos clave (coordenadas limpias: Compra=0.4, Entrada fab=2.6, Producto term=5.0, Venta=7.2, Cobro=11.4, Pago prov=4.4)
+\coordinate (h0) at (0.5, 0);
+\coordinate (h1) at (2.8, 0);
+\coordinate (h2) at (5.3, 0);
+\coordinate (h3) at (7.5, 0);
+\coordinate (h4) at (11.8, 0);
+\coordinate (hp) at (4.6, 0);
+
+% Fases superiores del PMM Económico
+\node[fase=dfinnavy, minimum width=2.2cm] (f_mp) at (1.65, 1.35) {$PM_a$\\[-1pt]{\tiny Almacén MP}};
+\node[fase=dfinnavy, minimum width=2.4cm] (f_fab) at (4.05, 1.35) {$PM_f$\\[-1pt]{\tiny Fabricación}};
+\node[fase=dfinnavy, minimum width=2.1cm] (f_pt) at (6.40, 1.35) {$PM_v$\\[-1pt]{\tiny Almacén PT}};
+\node[fase=dfincopper, minimum width=4.2cm] (f_cob) at (9.65, 1.35) {$PM_c$\\[-1pt]{\tiny Plazo cobro clientes}};
+
+% Barra global PMMe arriba
+\draw[<->, >=Latex, line width=1.2pt, color=dfinnavy] (0.5, 2.40) -- (11.8, 2.40)
+    node[midway, above=2pt, font=\footnotesize\sffamily\bfseries, color=dfinnavy]
+    {Período Medio de Maduración Económico ($PMM_e = PM_a + PM_f + PM_v + PM_c$)};
+
+% Financiación de proveedores debajo (desde compra h0 hasta pago hp)
+\node[fase=dfinemerald, minimum width=4.0cm] (f_prov) at (2.55, -1.35) {$PM_p$\\[-1pt]{\tiny Crédito de proveedores}};
+
+% Barra Ciclo de Conversión de Caja (PMMf) entre pago a proveedores y cobro de clientes
+\draw[<->, >=Latex, line width=1.4pt, color=dfinburg] (4.6, -2.40) -- (11.8, -2.40)
+    node[midway, below=3pt, font=\footnotesize\sffamily\bfseries, color=dfinburg]
+    {Período Medio de Maduración Financiero o Ciclo de Caja ($PMM_f = PMM_e - PM_p$)};
+
+% Líneas verticales de proyección
+\draw[dotted, color=dfinmuted, line width=0.8pt] (0.5, 2.50) -- (0.5, -1.75);
+\draw[dotted, color=dfinmuted, line width=0.8pt] (4.6, 0) -- (4.6, -2.55);
+\draw[dotted, color=dfinmuted, line width=0.8pt] (11.8, 2.50) -- (11.8, -2.55);
+
+% Puntos en el eje
+\foreach \p/\c in {h0/dfinnavy, h1/dfinnavy, h2/dfinnavy, h3/dfincopper, h4/dfinburg, hp/dfinemerald} {
+    \node[hito=\c] at (\p) {};
+}
+
+% Etiquetas breves sobre los hitos del eje
+\node[above=6pt, font=\tiny\sffamily\bfseries, text=dfinnavy, fill=white, inner sep=1pt, align=center] at (h0) {Compra\\MP};
+\node[above=6pt, font=\tiny\sffamily\bfseries, text=dfincopper, fill=white, inner sep=1pt, align=center] at (h3) {Venta};
+\node[above=6pt, font=\tiny\sffamily\bfseries, text=dfinburg, fill=white, inner sep=1pt, align=center] at (h4) {Cobro\\clientes};
+\node[below=6pt, font=\tiny\sffamily\bfseries, text=dfinemerald, fill=white, inner sep=1pt, align=center] at (hp) {Pago\\proveedores};
+
+\end{tikzpicture}

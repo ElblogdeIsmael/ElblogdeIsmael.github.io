@@ -1,0 +1,57 @@
+% Figura 7.1: Comparación lado a lado entre la CML (carteras eficientes vs riesgo total) y la SML del CAPM (todo activo vs beta)
+\begin{tikzpicture}
+\begin{groupplot}[
+    group style={group size=2 by 1, horizontal sep=1.6cm},
+    width=6.4cm, height=5.8cm,
+    ymin=0, ymax=19.5,
+    ytick={0, 4, 8, 12, 16},
+    yticklabels={{0\%}, {4\%}, {8\%}, {12\%}, {16\%}},
+    grid=major, grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    title style={font=\footnotesize\sffamily\bfseries, color=dfinnavy}
+]
+
+% Panel izquierdo: CML (Eje X = sigma_p)
+\nextgroupplot[
+    title={CML: Solo carteras eficientes},
+    xlabel={Riesgo total $\sigma_p$ (\%)},
+    ylabel={Rentabilidad esperada $\mathbb{E}[R]$ (\%)},
+    xmin=0, xmax=35,
+    xtick={0, 10, 20, 30},
+    xticklabels={{0\%}, {10\%}, {20\%}, {30\%}}
+]
+\addplot[domain=0:33, samples=2, color=dfinnavy, line width=1.5pt] {3.5 + 0.35*x};
+% Frontera cóncava debajo tangente en (20, 10.5)
+\addplot[domain=14:31, samples=50, color=dfinemerald, line width=1.2pt, dashed]
+    {10.5 + 0.35*(x-20) - 0.032*(x-20)^2};
+\addplot[only marks, mark=*, mark size=2.4pt, color=dfinnavy] coordinates {(0, 3.5) (20, 10.5)};
+\addplot[only marks, mark=*, mark size=2.4pt, color=dfincopper] coordinates {(25, 8.2)};
+
+\node[font=\scriptsize\sffamily, color=dfinnavy, anchor=north west] at (axis cs:1.2, 3.6) {$r_f$};
+\node[font=\scriptsize\sffamily\bfseries, color=dfinnavy, anchor=south east] at (axis cs:19.5, 11.2) {Mercado $M$};
+\node[font=\scriptsize\sffamily, color=dfincopper, anchor=north, align=center] at (axis cs:25, 7.6) {Acción individual\\[-1pt](bajo la CML)};
+
+% Panel derecho: SML del CAPM (Eje X = beta_i)
+\nextgroupplot[
+    title={SML (CAPM): Todo activo en equilibrio},
+    xlabel={Riesgo sistemático $\beta_i$},
+    ylabel={$\mathbb{E}[R_i]$ (\%)},
+    xmin=0, xmax=2.1,
+    xtick={0, 0.5, 1.0, 1.5, 2.0}
+]
+% rf = 3.5%, Rm = 10.5% -> prima = 7% => SML = 3.5 + 7*x
+\addplot[domain=0:2.0, samples=2, color=dfinburg, line width=1.55pt] {3.5 + 7*x};
+\addplot[only marks, mark=*, mark size=2.4pt, color=dfinnavy] coordinates {(0, 3.5) (1.0, 10.5)};
+% Activo infravalorado con alfa positivo (beta=1.3, E=15.0% vs SML=12.6%)
+\addplot[only marks, mark=triangle*, mark size=3pt, color=dfinemerald] coordinates {(1.3, 15.0)};
+\draw[<->, >=Latex, line width=1pt, color=dfinemerald] (axis cs:1.3, 12.6) -- (axis cs:1.3, 15.0);
+
+\node[font=\scriptsize\sffamily, color=dfinnavy, anchor=north west] at (axis cs:0.08, 3.6) {$r_f$};
+\node[font=\scriptsize\sffamily\bfseries, color=dfinnavy, anchor=north west] at (axis cs:1.05, 10.3) {$M\ (\beta=1)$};
+\node[font=\scriptsize\sffamily\bfseries, color=dfinemerald, anchor=south east, fill=white, inner sep=1pt, align=right]
+    at (axis cs:1.25, 15.1) {Infravalorado\\$\alpha_i > 0$};
+
+\end{groupplot}
+\end{tikzpicture}

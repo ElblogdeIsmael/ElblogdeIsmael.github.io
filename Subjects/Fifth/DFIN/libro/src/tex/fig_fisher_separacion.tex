@@ -1,0 +1,96 @@
+% Figura 2.1 (reemplazo con coordenadas geométricamente exactas): Teorema de Separación de Fisher
+% Nomenclatura de clase UGR: Ejes u.m.(t=0) y u.m.(t=1), puntos JD, JR, ND y valores del Problema 3
+\begin{tikzpicture}[
+    font=\small\sffamily,
+    lbl/.style={font=\scriptsize\sffamily, text=#1}
+]
+% Ejes cartesianos
+\draw[->, >=Latex, line width=1pt, color=dfinslate] (0,0) -- (10.2,0)
+    node[right=4pt, font=\footnotesize\sffamily\bfseries, color=dfinnavy, align=left] {u.m.\\$(t=0)$};
+\draw[->, >=Latex, line width=1pt, color=dfinslate] (0,0) -- (0,7.2)
+    node[above=2pt, font=\footnotesize\sffamily\bfseries, color=dfinnavy] {Consumo futuro en u.m. $(t=1)$};
+
+% Escala visual armónica:
+% R0 (dotación inicial) en x = 7.0 (12.000 u.m.)
+% Línea de mercado base (sin inversión real): de (0, 5.04) a (7.0, 0) -> pendiente = -0.72
+\coordinate (R0) at (7.0, 0);
+\coordinate (W1base) at (0, 5.04);
+\draw[dashed, color=dfinmuted, line width=0.95pt] (W1base) -- (R0);
+
+% Nueva línea de mercado óptima (con inversión real óptima J*): pendiente paralela -0.72!
+% Pasa por R0+VAN en x = 8.17 (14.000 u.m.) -> y_top = 8.17 * 0.72 = 5.88 (14.560 u.m.)
+% Punto J* sobre esa recta en x_J = 4.67 (8.000 u.m., tras invertir C0 = 4.000 u.m.)
+% y_J = (8.17 - 4.67) * 0.72 = 3.50 * 0.72 = 2.52 (equivale a C1 = 6.240 u.m.)
+\coordinate (W0opt) at (8.17, 0);
+\coordinate (W1opt) at (0, 5.88);
+\coordinate (Jstar) at (4.67, 2.52);
+
+% Curva de oportunidades de inversión productiva (cóncava partiendo de R0, tangente EXACTA en J* con pendiente -0.72)
+% Vector tangente desde J* hacia R0 es (2.33, -2.52); la recta tiene pendiente -0.72, es decir en x=4.67 dy/dx = -0.72.
+% Construimos Bézier desde R0(7.0,0) hasta Ptop(1.8, 3.85) pasando por J*(4.67, 2.52) con tangente exacta (-1, 0.72):
+\draw[line width=1.6pt, color=dfinemerald]
+    (R0) .. controls (6.75, 1.02) and (5.67, 1.80) .. (Jstar)
+         .. controls (3.67, 3.24) and (2.6, 3.65) .. (1.8, 3.88);
+
+% Recta de mercado tangente óptima (pendiente -(1+r))
+\draw[line width=1.25pt, color=dfinnavy] (W1opt) -- (W0opt);
+
+% Curva de indiferencia U1 de un accionista impaciente (tangente en C_imp sobre recta óptima)
+\coordinate (Cimp) at (6.45, 1.24);
+\draw[line width=1.15pt, color=dfincopper]
+    (5.1, 2.85) .. controls (5.8, 1.85) and (6.1, 1.49) .. (Cimp)
+                .. controls (6.8, 0.99) and (7.5, 0.72) .. (8.7, 0.50);
+
+% Curva de indiferencia U2 de un accionista paciente (tangente en C_pac sobre recta óptima)
+\coordinate (Cpac) at (2.45, 4.12);
+\draw[line width=1.15pt, color=dfinburg]
+    (1.25, 5.45) .. controls (1.75, 4.72) and (2.10, 4.37) .. (Cpac)
+                 .. controls (2.80, 3.87) and (3.65, 3.55) .. (5.05, 3.32);
+
+% Líneas auxiliares de proyección del Problema 3 (clase UGR)
+\draw[dotted, color=dfinmuted, line width=0.8pt] (4.67, 0) -- (Jstar) -- (0, 2.52);
+\draw[<->, >=Latex, line width=0.9pt, color=dfinemerald] (4.67, -0.35) -- (7.0, -0.35)
+    node[midway, below=2pt, lbl=dfinemerald] {$C_0 = 4.000$};
+\draw[<->, >=Latex, line width=1pt, color=dfinnavy] (7.0, -0.35) -- (8.17, -0.35)
+    node[midway, below=2pt, lbl=dfinnavy] {$\text{VAN}=2.000$};
+
+% Incremento de riqueza futura en eje Y
+\draw[<->, >=Latex, line width=0.95pt, color=dfinnavy] (-0.28, 5.04) -- (-0.28, 5.88)
+    node[midway, left=2pt, lbl=dfinnavy, align=right] {$\Delta W_1 = 2.080$};
+
+% Puntos destacados
+\fill[dfinnavy] (R0) circle (2.6pt);
+\fill[dfinnavy] (W0opt) circle (2.6pt);
+\fill[dfinemerald] (Jstar) circle (3pt);
+\fill[dfincopper] (Cimp) circle (2.6pt);
+\fill[dfinburg] (Cpac) circle (2.6pt);
+
+% Etiquetas limpias sin colisión
+\node[below left=2pt, yshift=-3pt, lbl=dfinnavy, fill=white, inner sep=1pt] at (6.95, 0.72) {$R_0 = 12.000$};
+\draw[dotted, color=dfinnavy!60, line width=0.7pt] (R0) -- (6.95, 0.55);
+\node[above right=2pt, lbl=dfinnavy, align=left] at (W0opt) {$W_0^* = 14.000$};
+\node[left=3pt, lbl=dfinmuted] at (W1base) {$12.480$};
+\node[left=3pt, lbl=dfinnavy] at (W1opt) {$14.560$};
+\node[left=3pt, lbl=dfinemerald] at (0, 2.52) {$C_1 = 6.240$};
+
+% Etiqueta punto óptimo J* (inversión óptima de clase UGR)
+\node[above right=4pt, lbl=dfinemerald, fill=white, inner sep=1.5pt, align=left] at (Jstar)
+    {\textbf{Óptimo real $J^*$}\\$(8.000;\, 6.240)$};
+
+% Etiquetas accionistas paciente / impaciente
+\node[above right=3pt, lbl=dfinburg, fill=white, inner sep=1.5pt, align=left] at (Cpac)
+    {\textbf{Paciente ($U_2$)}\\Presta en mercado};
+\node[above right=3pt, lbl=dfincopper, fill=white, inner sep=1.5pt, align=left] at (Cimp)
+    {\textbf{Impaciente ($U_1$)}\\Toma prestado en mercado};
+
+% Leyenda de pendiente
+\node[draw=dfinslate!40, fill=dfinpanelivory, rounded corners=3pt, inner sep=5pt,
+      font=\scriptsize\sffamily, text=dfinslate, align=left] at (7.85, 5.25) {%
+    \textbf{\color{dfinnavy}Regla de Fisher ($r = 4\%$)}\\
+    Pendiente recta: $-(1+r) = -1,04$\\
+    Óptimo productivo: $\text{TIR}_{\text{marg}}(J^*) = r$\\
+    Separación: decisión de inversión ($J^*$)\\
+    es unánime e independiente de $U_1, U_2$.
+};
+
+\end{tikzpicture}

@@ -1,0 +1,72 @@
+% Figura 1.2: Problemas de agencia y mecanismos de gobierno corporativo (Tema 1 UGR y Jensen-Meckling 1976)
+\begin{tikzpicture}[
+    node distance=1.3cm,
+    principal/.style={
+        rectangle, rounded corners=4pt, draw=dfinnavy, fill=dfinnavy!8,
+        line width=1.1pt, minimum width=3.15cm, minimum height=1.55cm,
+        align=center, font=\footnotesize\sffamily, text=dfinnavy
+    },
+    agente/.style={
+        rectangle, rounded corners=4pt, draw=dfincopper, fill=dfincopper!10,
+        line width=1.1pt, minimum width=3.2cm, minimum height=1.55cm,
+        align=center, font=\footnotesize\sffamily, text=dfincopper
+    },
+    acreedor/.style={
+        rectangle, rounded corners=4pt, draw=dfinemerald, fill=dfinemerald!8,
+        line width=1.1pt, minimum width=3.15cm, minimum height=1.55cm,
+        align=center, font=\footnotesize\sffamily, text=dfinemerald
+    },
+    mecanismo/.style={
+        rectangle, rounded corners=3pt, draw=dfinslate!60, fill=dfinpanelivory,
+        line width=0.8pt, text width=12.4cm, align=center,
+        font=\scriptsize\sffamily, inner sep=6pt, text=dfinslate
+    },
+    rel/.style={<->, >=Latex, line width=1pt, color=#1},
+    lbl/.style={font=\scriptsize\sffamily, align=center, text=#1}
+]
+
+\node[principal] (acc) at (-0.6, 2.55) {%
+    \textbf{Accionistas (Principal)}\\[2pt]
+    {\scriptsize\color{dfinslate}Objetivo: maximizar riqueza}\\
+    {\scriptsize\color{dfinslate}($P_0$ y valor de mercado $E$)}
+};
+
+\node[agente] (dir) at (6.0, 2.55) {%
+    \textbf{Directivos (Agente)}\\[2pt]
+    {\scriptsize\color{dfinslate}Objetivo: salario, poder,}\\
+    {\scriptsize\color{dfinslate}bajo esfuerzo y consolidación}
+};
+
+\node[acreedor] (acr) at (12.6, 2.55) {%
+    \textbf{Acreedores (Deuda)}\\[2pt]
+    {\scriptsize\color{dfinslate}Objetivo: cobro íntegro de}\\
+    {\scriptsize\color{dfinslate}intereses y principal ($D$)}
+};
+
+% Conflicto 1: Accionistas <-> Directivos
+\draw[rel=dfinburg] ([yshift=0.32cm]acc.east) -- ([yshift=0.32cm]dir.west)
+    node[midway, lbl=dfinburg, above=3pt] {Construcción de imperios\\[-1pt]y aversión al riesgo};
+
+% Conflicto 2: Directivos/Accionistas <-> Acreedores
+\draw[rel=dfincopper] ([yshift=0.32cm]dir.east) -- ([yshift=0.32cm]acr.west)
+    node[midway, lbl=dfincopper, above=3pt] {Sustitución de activos\\[-1pt]y dilución de deuda};
+
+% Costes de agencia abajo
+\draw[dashed, color=dfinmuted, line width=0.8pt] ([yshift=-0.32cm]acc.east) -- ([yshift=-0.32cm]dir.west)
+    node[midway, lbl=dfinmuted, below=3pt] {Supervisión + fianza\\[-1pt]+ pérdida residual};
+
+\draw[dashed, color=dfinmuted, line width=0.8pt] ([yshift=-0.32cm]dir.east) -- ([yshift=-0.32cm]acr.west)
+    node[midway, lbl=dfinmuted, below=3pt] {\emph{Covenants}\\[-1pt]+ prima de crédito};
+
+% Franja inferior de mecanismos alineadores
+\node[mecanismo] (gov) at (6.0, -0.35) {%
+    \textbf{\color{dfinnavy}Mecanismos de alineación y gobierno corporativo}\\[3pt]
+    \textbf{Internos:} Consejo de administración independiente, auditoría, remuneración vinculada a acciones/TSR, deuda disciplinante.\\
+    \textbf{Externos:} Mercado de control corporativo (OPAs hostiles), analistas financieros, agencias de rating y activismo institucional.
+};
+
+\draw[->, >=Latex, line width=0.9pt, color=dfinnavy] (gov.north -| acc) -- (acc.south);
+\draw[->, >=Latex, line width=0.9pt, color=dfinnavy] (gov.north) -- (dir.south);
+\draw[->, >=Latex, line width=0.9pt, color=dfinnavy] (gov.north -| acr) -- (acr.south);
+
+\end{tikzpicture}

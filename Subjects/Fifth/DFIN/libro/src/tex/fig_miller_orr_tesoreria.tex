@@ -1,0 +1,57 @@
+% Figura 12.2: Modelo estocástico de control de tesorería de Miller y Orr (1966)
+\begin{tikzpicture}
+\begin{axis}[
+    width=12.4cm,
+    height=6.5cm,
+    xlabel={Días hábiles de operación ($t$)},
+    ylabel={Saldo de tesorería en caja / banco (miles \texteuro)},
+    xmin=0, xmax=30,
+    ymin=0, ymax=128,
+    xtick={0, 6, 12, 18, 24, 30},
+    ytick={15, 45, 105},
+    yticklabels={{$L$ (Mínimo)}, {$Z^*$ (Retorno)}, {$H = 3Z^* - 2L$}},
+    grid=major,
+    xmajorgrids=false,
+    ymajorgrids=false,
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily\bfseries, color=dfinnavy},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    legend style={at={(0.98,0.97)}, anchor=north east, font=\scriptsize\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt}
+]
+
+% Bandas de control: L = 15, Z* = 45, H = 3*45 - 2*15 = 105
+\addplot[domain=0:30, samples=2, color=dfinburg, line width=1.25pt, dashed] {105};
+\addlegendentry{Límite superior $H$ (comprar Letras por $H - Z^*$)}
+
+\addplot[domain=0:30, samples=2, color=dfinemerald, line width=1.35pt] {45};
+\addlegendentry{Saldo óptimo de retorno $Z^* = L + \sqrt[3]{\frac{3 b \sigma^2}{4 i}}$}
+
+\addplot[domain=0:30, samples=2, color=dfinburg, line width=1.25pt, dotted] {15};
+\addlegendentry{Límite inferior de seguridad $L$ (vender Letras por $Z^* - L$)}
+
+% Trayectoria aleatoria realista de caja que choca en t=10 con H (salto a Z*) y en t=22 con L (salto a Z*)
+\addplot[color=dfinnavy, line width=1.25pt] coordinates {
+    (0, 45) (1, 53) (2, 48) (3, 61) (4, 72) (5, 67) (6, 80) (7, 89) (8, 95) (9, 99) (10, 105)
+};
+% Salto vertical instantáneo de ajuste al comprar Letras: (10, 105) -> (10, 45)
+\addplot[->, >=Latex, color=dfincopper, line width=1.2pt, dashed] coordinates { (10, 105) (10, 46) };
+
+\addplot[color=dfinnavy, line width=1.25pt] coordinates {
+    (10, 45) (11, 50) (12, 41) (13, 35) (14, 39) (15, 29) (16, 24) (17, 28) (18, 22) (19, 19) (20, 21) (21, 17) (22, 15)
+};
+% Salto vertical instantáneo de reposición al vender Letras: (22, 15) -> (22, 45)
+\addplot[->, >=Latex, color=dfinemerald, line width=1.2pt, dashed] coordinates { (22, 15) (22, 44) };
+
+\addplot[color=dfinnavy, line width=1.25pt] coordinates {
+    (22, 45) (23, 52) (24, 58) (25, 51) (26, 62) (27, 56) (28, 66) (29, 71) (30, 64)
+};
+
+% Anotaciones en los dos momentos de intervención
+\node[font=\scriptsize\sffamily\bfseries, text=dfincopper, anchor=east, fill=white, inner sep=1.5pt, align=right]
+    at (axis cs:9.6, 75) {Compra títulos\\[-1pt]por $H - Z^*$};
+\node[font=\scriptsize\sffamily\bfseries, text=dfinemerald, anchor=west, fill=white, inner sep=1.5pt, align=left]
+    at (axis cs:22.4, 28) {Vende títulos\\[-1pt]por $Z^* - L$};
+
+\end{axis}
+\end{tikzpicture}

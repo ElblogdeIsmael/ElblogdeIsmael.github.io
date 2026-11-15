@@ -1,0 +1,62 @@
+% Figura 9.1: Modigliani-Miller Proposición II sin impuestos frente a la Tesis Tradicional (Tema 7 UGR)
+\begin{tikzpicture}
+\begin{groupplot}[
+    group style={group size=2 by 1, horizontal sep=1.55cm},
+    width=6.35cm, height=6.0cm,
+    xlabel={Ratio de endeudamiento $D/E$ (valor de mercado)},
+    ylabel={Rentabilidad exigida / Coste (\%)},
+    xmin=0, xmax=2.2,
+    ymin=0, ymax=24,
+    xtick={0, 0.5, 1.0, 1.5, 2.0},
+    ytick={0, 4, 8, 12, 16, 20},
+    yticklabels={{0\%}, {4\%}, {8\%}, {12\%}, {16\%}, {20\%}},
+    grid=major, grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    title style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    legend style={at={(0.03,0.97)}, anchor=north west, font=\tiny\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt}
+]
+
+% Panel izquierdo: Modigliani-Miller sin impuestos (rA = 10% constante, rD = 4% con ligero repunte en riesgo extremo)
+\nextgroupplot[title={MM II (sin impuestos): WACC constante}]
+% rA = 10% constante
+\addplot[domain=0:2.1, samples=2, color=dfinnavy, line width=1.65pt] {10};
+\addlegendentry{Coste activos $r_A = \text{CMPC} = 10\%$}
+
+% rD crece suavemente al pasar D/E > 1.2 (deuda con riesgo), y rE compensa curvándose ligeramente hacia abajo
+% Definimos rD(x) = 4 + 1.8*(max(0, x-1.1))^1.5 ; rE(x) = 10 + (10 - rD(x))*x
+\addplot[domain=0:2.1, samples=55, color=dfincopper, line width=1.45pt]
+    { 10 + (10 - (4 + (x>1.1 ? 1.8*(x-1.1)^1.5 : 0))) * x };
+\addlegendentry{Coste acciones $r_E$}
+
+\addplot[domain=0:2.1, samples=55, color=dfinemerald, line width=1.35pt, dashed]
+    { 4 + (x>1.1 ? 1.8*(x-1.1)^1.5 : 0) };
+\addlegendentry{Coste deuda $r_D$}
+
+% Panel derecho: Tesis Tradicional (WACC en U con mínimo artificial)
+\nextgroupplot[title={Tesis Tradicional: mínimo en $(D/E)^*$}]
+% rE apenas sube al principio y luego se dispara
+\addplot[domain=0:2.1, samples=50, color=dfincopper, line width=1.45pt]
+    { 10 + 0.6*x + 2.4*x^2 };
+\addlegendentry{$r_E$ (sube lento al principio)}
+
+% rD sube progresivamente desde D/E = 0.8
+\addplot[domain=0:2.1, samples=50, color=dfinemerald, line width=1.35pt, dashed]
+    { 4 + 2.2*x^1.6 };
+\addlegendentry{$r_D$}
+
+% WACC ponderado: (1/(1+x))*rE + (x/(1+x))*rD -> dibuja forma de U clara alrededor de x=0.7
+\addplot[domain=0:2.1, samples=60, color=dfinnavy, line width=1.65pt]
+    { (1/(1+x))*(10 + 0.6*x + 2.4*x^2) + (x/(1+x))*(4 + 2.2*x^1.6) };
+\addlegendentry{CMPC en forma de U}
+
+% Marcar mínimo aproximado en x = 0.65 -> (1/1.65)*(10+0.39+1.01) + (0.65/1.65)*(4+1.10) = 6.91 + 2.01 = 8.92%
+\addplot[only marks, mark=*, mark size=2.6pt, color=dfinburg] coordinates {(0.65, 8.92)};
+\draw[dotted, color=dfinburg, line width=0.9pt] (axis cs:0.65, 0) -- (axis cs:0.65, 8.92);
+\node[font=\tiny\sffamily\bfseries, color=dfinburg, anchor=north, fill=white, inner sep=1pt]
+    at (axis cs:0.75, 6.2) {Óptimo $(D/E)^*$};
+
+\end{groupplot}
+\end{tikzpicture}

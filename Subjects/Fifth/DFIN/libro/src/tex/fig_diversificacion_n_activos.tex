@@ -1,0 +1,46 @@
+% Figura 6.2: Eliminación progresiva del riesgo específico mediante diversificación con N títulos
+\begin{tikzpicture}
+\begin{axis}[
+    width=12.4cm,
+    height=6.5cm,
+    xlabel={Número de acciones en la cartera equiponderada ($N$)},
+    ylabel={Desviación típica de la cartera $\sigma_p$ (\%)},
+    xmin=1, xmax=42,
+    ymin=0, ymax=55,
+    xtick={1, 5, 10, 15, 20, 30, 40},
+    ytick={0, 10, 20, 30, 40, 50},
+    yticklabels={{0\%}, {10\%}, {20\%}, {30\%}, {40\%}, {50\%}},
+    grid=major,
+    grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    legend style={at={(0.97,0.96)}, anchor=north east, font=\scriptsize\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt}
+]
+
+% Modelo equiponderado: sigma_p(N) = sqrt( var_indiv / N + ((N-1)/N)*cov )
+% Con var_indiv = 48^2 = 2304, cov = 19.5^2 = 380.25 => en N=1 da 48%, asintota en 19.5%
+\addplot[name path=riesgototal, domain=1:41, samples=80, color=dfinnavy, line width=1.65pt]
+    { sqrt( 2304/x + ((x-1)/x)*380.25 ) };
+\addlegendentry{Riesgo total de la cartera ($\sigma_p$)}
+
+\addplot[name path=riesgosist, domain=1:41, samples=2, color=dfinburg, line width=1.35pt, dashed]
+    { 19.5 };
+\addlegendentry{Riesgo sistemático o de mercado ($\bar{\sigma}_{ij}^{1/2} \approx 19{,}5\%$)}
+
+\addplot[name path=ejezero, domain=1:41, samples=2, draw=none] { 0 };
+
+% Sombreados elegantes
+\addplot[fill=dfincopper!18] fill between[of=riesgototal and riesgosist];
+\addplot[fill=dfinnavy!10] fill between[of=riesgosist and ejezero];
+
+% Etiquetas dentro de las áreas sin tocar las curvas
+\node[font=\scriptsize\sffamily\bfseries, color=dfincopper, align=left, fill=white, inner sep=2pt]
+    at (axis cs:12.5, 27.5) {Riesgo específico o diversificable\\[-1pt]{\normalfont Se diluye hacia cero al crecer $N$ ($\sigma_i^2/N$)}};
+
+\node[font=\scriptsize\sffamily\bfseries, color=dfinnavy, align=center]
+    at (axis cs:24, 9.5) {Riesgo sistemático / de mercado (no diversificable)\\[-1pt]{\normalfont Determinado por la covarianza media $\text{Cov}(R_i, R_j)$}};
+
+\end{axis}
+\end{tikzpicture}

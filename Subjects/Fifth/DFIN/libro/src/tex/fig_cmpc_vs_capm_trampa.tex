@@ -1,0 +1,51 @@
+% Figura 8.1: El error fatal de aplicar un CMPC corporativo único (línea horizontal) frente a la SML del CAPM
+\begin{tikzpicture}
+\begin{axis}[
+    width=12.4cm,
+    height=6.8cm,
+    xlabel={Beta del proyecto específico ($\beta_{\text{proy}}$)},
+    ylabel={Rentabilidad esperada / TIR del proyecto (\%)},
+    xmin=0, xmax=2.1,
+    ymin=0, ymax=19,
+    xtick={0, 0.5, 1.0, 1.5, 2.0},
+    ytick={0, 4, 8, 12, 16},
+    yticklabels={{0\%}, {4\%}, {8\%}, {12\%}, {16\%}},
+    grid=major,
+    grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    legend style={at={(0.03,0.97)}, anchor=north west, font=\scriptsize\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt}
+]
+
+% SML correcta del proyecto: rf = 3.5%, prima mercado = 6.5% => r(beta) = 3.5 + 6.5*beta
+\addplot[name path=sml, domain=0:2.05, samples=2, color=dfinnavy, line width=1.65pt] {3.5 + 6.5*x};
+\addlegendentry{Tasa exigida correcta por el mercado (SML: $r_f + \beta \cdot \text{PRM}$)}
+
+% CMPC corporativo medio constante (empresa con beta=1.0 -> CMPC = 10%)
+\addplot[name path=wacc, domain=0:2.05, samples=2, color=dfincopper, line width=1.4pt, dashed] {10.0};
+\addlegendentry{CMPC corporativo único erróneo ($10{,}0\%$ para todo proyecto)}
+
+% Zona de RECHAZO ERRÓNEO (beta < 1, entre SML y CMPC)
+\addplot[fill=dfinburg!14] fill between[of=wacc and sml, soft clip={domain=0:1.0}];
+% Zona de ACEPTACIÓN ERRÓNEA (beta > 1, entre CMPC y SML)
+\addplot[fill=dfinburg!14] fill between[of=sml and wacc, soft clip={domain=1.0:2.05}];
+
+% Punto A: Proyecto seguro (beta = 0.3, TIR = 8.0% > SML 5.45%, pero < CMPC 10%)
+\addplot[only marks, mark=*, mark size=2.8pt, color=dfinemerald] coordinates {(0.3, 8.0)};
+\node[font=\scriptsize\sffamily\bfseries, text=dfinemerald, anchor=west, fill=white, inner sep=1.5pt, align=left]
+    at (axis cs:0.12, 12.6) {\textbf{Proyecto $A$} ($\beta=0{,}3;\,\text{TIR}=8\%$)\\[-1pt]{\color{dfinburg}Rechazado por error} pese a $\text{VAN}>0$};
+\draw[->, >=Latex, line width=0.8pt, color=dfinemerald] (axis cs:0.42, 11.4) -- (axis cs:0.31, 8.3);
+
+% Punto B: Proyecto especulativo (beta = 1.7, TIR = 11.8% > CMPC 10%, pero < SML 14.55%)
+\addplot[only marks, mark=*, mark size=2.8pt, color=dfinburg] coordinates {(1.7, 11.8)};
+\node[font=\scriptsize\sffamily\bfseries, color=dfinburg, anchor=north, fill=white, inner sep=1.5pt, align=center]
+    at (axis cs:1.58, 6.8) {\textbf{Proyecto $B$} ($\beta=1{,}7;\,\text{TIR}=11{,}8\%$)\\[-1pt]Aceptado por error pese a $\text{VAN}<0$};
+\draw[->, >=Latex, line width=0.8pt, color=dfinburg] (axis cs:1.60, 7.1) -- (axis cs:1.7, 11.5);
+
+% Punto medio empresa beta=1.0
+\addplot[only marks, mark=diamond*, mark size=2.8pt, color=dfinnavy] coordinates {(1.0, 10.0)};
+
+\end{axis}
+\end{tikzpicture}

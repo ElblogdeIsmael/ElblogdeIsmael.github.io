@@ -1,0 +1,51 @@
+% Figura 3.2: Estructura Temporal de los Tipos de Interés (ETTI) con referencias Eurozona/España nov. 2026
+\begin{tikzpicture}
+\begin{axis}[
+    width=12.4cm,
+    height=6.8cm,
+    xlabel={Plazo al vencimiento $T$ (años)},
+    ylabel={Rentabilidad anual $y_T$ (\%)},
+    xmin=0, xmax=31,
+    ymin=1.8, ymax=5.2,
+    xtick={0.25, 2, 5, 10, 20, 30},
+    xticklabels={{3M}, {2A}, {5A}, {10A}, {20A}, {30A}},
+    ytick={2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0},
+    yticklabels={{2,0\%}, {2,5\%}, {3,0\%}, {3,5\%}, {4,0\%}, {4,5\%}, {5,0\%}},
+    grid=major,
+    grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    legend style={at={(0.98,0.18)}, anchor=south east, font=\scriptsize\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt}
+]
+
+% Curva Normal / Positiva (anclada en referencias observadas nov 2026: facilidad depósito BCE 2,50%, Euribor 12M ~3,29%, Bono España 10A ~3,94%)
+\addplot[smooth, mark=*, mark size=2pt, color=dfinnavy, line width=1.6pt] coordinates {
+    (0.25, 2.50) (1, 3.29) (2, 3.42) (5, 3.68) (10, 3.94) (20, 4.28) (30, 4.45)
+};
+\addlegendentry{Curva normal / ascendente (España/Eurozona nov. 2026)}
+
+% Curva Plana (ejemplo equilibrio expectativas estables)
+\addplot[smooth, dashed, color=dfinemerald, line width=1.25pt] coordinates {
+    (0.25, 3.15) (1, 3.18) (2, 3.20) (5, 3.22) (10, 3.24) (20, 3.25) (30, 3.25)
+};
+\addlegendentry{Curva plana (expectativas neutras)}
+
+% Curva Invertida (señal clásica de ciclo restrictivo / expectativa de recortes)
+\addplot[smooth, dash pattern=on 3pt off 2pt, color=dfinburg, line width=1.3pt] coordinates {
+    (0.25, 4.20) (1, 4.05) (2, 3.72) (5, 3.15) (10, 2.85) (20, 2.80) (30, 2.82)
+};
+\addlegendentry{Curva invertida ($y_{\text{corto}} > y_{\text{largo}}$)}
+
+% Etiquetas puntuales en curva real 2026
+\node[font=\scriptsize\sffamily, color=dfinnavy, anchor=north west, fill=white, inner sep=1.5pt]
+    at (axis cs:0.5, 2.48) {BCE dep. $2{,}50\%$};
+\node[font=\scriptsize\sffamily, color=dfinnavy, anchor=west, fill=white, inner sep=1.5pt]
+    at (axis cs:2.4, 2.75) {Euríbor 12M $\approx 3{,}29\%$};
+\draw[->, >=Latex, line width=0.7pt, color=dfinnavy] (axis cs:2.4, 2.80) -- (axis cs:1.15, 3.22);
+\node[font=\scriptsize\sffamily, color=dfinnavy, anchor=south, fill=white, inner sep=1.5pt]
+    at (axis cs:10, 4.10) {Bono 10A $\approx 3{,}94\%$};
+
+\end{axis}
+\end{tikzpicture}

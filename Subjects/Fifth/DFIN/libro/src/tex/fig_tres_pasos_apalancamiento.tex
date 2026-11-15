@@ -1,0 +1,40 @@
+% Figura 10.2: El algoritmo de los Tres Pasos para ajustar el WACC ante cambios de riesgo y endeudamiento (Tema 8 UGR)
+\begin{tikzpicture}[
+    font=\small\sffamily,
+    paso/.style={
+        rectangle, rounded corners=4pt, draw=#1, fill=#1!8,
+        line width=1.15pt, minimum width=11.4cm, minimum height=1.7cm,
+        align=left, font=\footnotesize\sffamily, text=dfinslate, inner sep=8pt
+    },
+    num/.style={
+        rectangle, rounded corners=3pt, draw=#1, fill=#1, text=white,
+        font=\footnotesize\sffamily\bfseries, minimum width=2.2cm, minimum height=0.95cm,
+        align=center
+    }
+]
+
+\node[paso=dfinnavy] (s1) at (0, 4.6) {%
+    \hspace{2.55cm}\textbf{\color{dfinnavy}Desapalancar hasta el coste de capital económico puro ($r_A$)}\\[2pt]
+    \hspace{2.55cm}Partiendo de $r_E$ y $r_D$ observados en una empresa o proyecto comparable con estructura $(D/V)$:\\
+    \hspace{2.55cm}$r_A = \dfrac{D}{V} r_D + \dfrac{E}{V} r_E \qquad \text{(o vía CAPM desapalancando } \beta_A = \dfrac{D}{V}\beta_D + \dfrac{E}{V}\beta_E\text{)}$
+};
+\node[num=dfinnavy] at ([xshift=1.35cm]s1.west) {PASO 1\\[-1pt]{\scriptsize Desapalancar}};
+
+\node[paso=dfincopper] (s2) at (0, 2.2) {%
+    \hspace{2.55cm}\textbf{\color{dfincopper}Reapalancar el coste de los fondos propios ($r_E'$) al nuevo endeudamiento $(D'/E')$}\\[2pt]
+    \hspace{2.55cm}Aplicando Proposición II de MM (sin ajuste fiscal directo sobre riesgo operativo de activos):\\
+    \hspace{2.55cm}$r_E' = r_A + \dfrac{D'}{E'}(r_A - r_D') \qquad \text{(o ajustando } \beta_E' = \beta_A + \dfrac{D'}{E'}(\beta_A - \beta_D')\text{)}$
+};
+\node[num=dfincopper] at ([xshift=1.35cm]s2.west) {PASO 2\\[-1pt]{\scriptsize Reapalancar}};
+
+\node[paso=dfinemerald] (s3) at (0, -0.2) {%
+    \hspace{2.55cm}\textbf{\color{dfinemerald}Calcular el nuevo WACC después de impuestos ($K_{mpc,di}'$) para descontar los FCL}\\[2pt]
+    \hspace{2.55cm}Incorporar el ahorro fiscal de la deuda ($\tau_c$) y obtener el VAN del proyecto:\\
+    \hspace{2.55cm}$K_{mpc,di}' = \dfrac{E'}{V'} r_E' + \dfrac{D'}{V'} r_D'(1 - \tau_c) \quad \Longrightarrow \quad \text{VAN} = -I_0 + \sum_{t=1}^{T}\dfrac{FCL_t}{(1 + K_{mpc,di}')^t}$
+};
+\node[num=dfinemerald] at ([xshift=1.35cm]s3.west) {PASO 3\\[-1pt]{\scriptsize Nuevo WACC}};
+
+\draw[->, >=Latex, line width=1.3pt, color=dfinnavy] (s1.south) -- (s2.north);
+\draw[->, >=Latex, line width=1.3pt, color=dfincopper] (s2.south) -- (s3.north);
+
+\end{tikzpicture}
