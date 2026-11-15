@@ -1,0 +1,44 @@
+% Figura 5.1: Cascada vertical de construcción del Flujo de Caja Libre (FCL) desde el BAIT hasta el flujo de inversión
+\begin{tikzpicture}[
+    font=\small\sffamily,
+    stepbox/.style={
+        rectangle, rounded corners=3pt, draw=#1, fill=#1!8,
+        line width=1pt, minimum width=7.2cm, minimum height=0.72cm,
+        align=left, font=\footnotesize\sffamily, text=dfinslate
+    },
+    resbox/.style={
+        rectangle, rounded corners=3pt, draw=#1, fill=#1,
+        text=white, minimum width=7.2cm, minimum height=0.78cm,
+        align=left, font=\footnotesize\sffamily\bfseries
+    },
+    note/.style={font=\scriptsize\sffamily, color=dfinslate, align=left, text width=4.6cm}
+]
+
+\node[resbox=dfinnavy] (bait) at (0, 6.4) {\makebox[5.2cm][l]{Beneficio Antes de Intereses e Impuestos} $\text{BAIT}_t$};
+\node[note, right=0.5cm of bait] {Ingresos operativos menos costes y amortización contable. \textbf{Sin intereses.}};
+
+\node[stepbox=dfinburg] (imp) at (0, 5.35) {\makebox[5.2cm][l]{$-$ Impuestos sobre el BAIT ($25\%$)} $-\tau_c \cdot \text{BAIT}_t$};
+\node[note, right=0.5cm of imp] {Impuesto hipotético de empresa no apalancada (el escudo fiscal va al WACC).};
+
+\node[resbox=dfinslate] (nopat) at (0, 4.3) {\makebox[5.2cm][l]{$=$ BAIT después de impuestos (NOPAT)} $\text{BAIT}_t(1-\tau_c)$};
+
+\node[stepbox=dfinemerald] (amort) at (0, 3.25) {\makebox[5.2cm][l]{$+$ Amortizaciones y provisiones} $+\text{Amort}_t$};
+\node[note, right=0.5cm of amort] {Gasto contable no desembolsado; genera ahorro fiscal $\tau_c \cdot \text{Amort}_t$.};
+
+\node[resbox=dfinemerald] (fco) at (0, 2.2) {\makebox[5.2cm][l]{$=$ Flujo de Caja Operativo (FCO)} $\text{FCO}_t$};
+
+\node[stepbox=dfincopper] (nof) at (0, 1.15) {\makebox[5.2cm][l]{$-\ \Delta \text{NOF}_t$ (variación circulante neto)} $-\Delta \text{NOF}_t$};
+\node[note, right=0.5cm of nof] {Aumentos de existencias y clientes netos de proveedores inmovilizan caja; al final se recupera.};
+
+\node[stepbox=dfincopper] (capex) at (0, 0.1) {\makebox[5.2cm][l]{$-$ Inversión en Activo Fijo $+$ VR neto} $-\text{CAPEX}_t + \text{VR}_{\text{neto},T}$};
+\node[note, right=0.5cm of capex] {$\text{VR}_{\text{neto}} = \text{VR} - \tau_c(\text{VR} - \text{VNC})$. Se suma en el año de liquidación $T$.};
+
+\node[resbox=dfinnavy] (fcl) at (0, -0.98) {\makebox[5.2cm][l]{$=$ FLUJO DE CAJA LIBRE (FCL)} $\text{FCL}_t$};
+\node[note, right=0.5cm of fcl] {\textbf{\color{dfinnavy}Flujo incremental disponible} para remunerar a deuda y acciones.};
+
+% Conectores verticales discretos
+\foreach \a/\b in {bait/imp, imp/nopat, nopat/amort, amort/fco, fco/nof, nof/capex, capex/fcl} {
+    \draw[->, >=Latex, line width=0.8pt, color=dfinmuted] (\a.south) -- (\b.north);
+}
+
+\end{tikzpicture}

@@ -1,0 +1,44 @@
+% Figura 5.2: Dinámica intertemporal de las Necesidades Operativas de Fondos (NOF), variaciones y recuperación final
+\begin{tikzpicture}
+\begin{axis}[
+    width=12.2cm,
+    height=6.2cm,
+    xlabel={Horizonte temporal del proyecto ($t$)},
+    ylabel={Saldo de NOF y flujo $\Delta \text{NOF}$ (miles \texteuro)},
+    xmin=-0.5, xmax=5.8,
+    ymin=-26, ymax=44,
+    axis x line=bottom,
+    axis y line=left,
+    xtick={0, 1, 2, 3, 4, 5},
+    xticklabels={{$t=0$}, {$t=1$}, {$t=2$}, {$t=3$}, {$t=4$}, {$t=5$ (Cierre)}},
+    ytick={-15, 0, 15, 30},
+    grid=major,
+    grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    legend style={at={(0.03,0.97)}, anchor=north west, font=\scriptsize\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt}
+]
+
+\addplot[forget plot, domain=-0.5:5.8, samples=2, color=dfinslate!55, line width=0.75pt] {0};
+\addplot[const plot, color=dfinnavy, line width=1.6pt, mark=*, mark size=2pt] coordinates {
+    (0, 15) (1, 25) (2, 30) (3, 30) (4, 30) (5, 0)
+};
+\addlegendentry{Stock acumulado $\text{NOF}_t$ en balance}
+
+% Flujo de caja por variación de NOF (-Delta NOF_t) en barras verticales
+\addplot[ybar, bar width=0.28cm, fill=dfincopper!75, draw=dfincopper] coordinates {
+    (0, -15) (1, -10) (2, -5) (3, 0) (4, 0) (5, 30)
+};
+\addlegendentry{Impacto en $\text{FCL}_t$: $-\Delta \text{NOF}_t$}
+
+% Etiquetas sobre las barras
+\node[font=\scriptsize\sffamily\bfseries, color=dfincopper, below=2pt] at (axis cs:0, -15) {$-15$};
+\node[font=\scriptsize\sffamily\bfseries, color=dfincopper, below=2pt] at (axis cs:1, -10) {$-10$};
+\node[font=\scriptsize\sffamily\bfseries, color=dfincopper, below=2pt] at (axis cs:2, -5) {$-5$};
+\node[font=\scriptsize\sffamily\bfseries, color=dfinemerald, anchor=south east, fill=white, inner sep=1pt]
+    at (axis cs:5.55, 31.5) {$+30$ (Recup.)};
+
+\end{axis}
+\end{tikzpicture}

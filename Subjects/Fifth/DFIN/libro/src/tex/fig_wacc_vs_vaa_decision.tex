@@ -1,0 +1,62 @@
+% Figura 10.1: Matriz de decisión entre los tres métodos de valoración corporativa (CMPC/WACC, VAA/APV y FTE)
+\begin{tikzpicture}[
+    font=\small\sffamily,
+    qbox/.style={
+        rectangle, rounded corners=4pt, draw=dfinnavy, fill=dfinnavy,
+        text=white, minimum width=8.6cm, minimum height=1.15cm,
+        align=center, font=\footnotesize\sffamily\bfseries
+    },
+    mbox/.style={
+        rectangle, rounded corners=4pt, draw=#1, fill=#1!8,
+        line width=1.15pt, text width=4.35cm, minimum height=4.4cm,
+        align=left, font=\scriptsize\sffamily, text=dfinslate, inner sep=7pt
+    },
+    arr/.style={->, >=Latex, line width=1.15pt, color=#1}
+]
+
+\node[qbox] (root) at (0, 4.1) {%
+    ¿Cómo gestiona el proyecto su endeudamiento a lo largo del tiempo?
+};
+
+% Tres cajas de método abajo
+\node[mbox=dfinemerald] (wacc) at (-5.1, 0.2) {%
+    \centering\textbf{\color{dfinemerald}\small 1. Método CMPC / WACC}\\[4pt]
+    \raggedright\textbf{Cuándo usarlo:}\\
+    La empresa mantiene un \textbf{ratio objetivo constante $D/V$} cada año (rebalanceo periódico).\\[4pt]
+    \textbf{Flujo descontado:}\\
+    $FCL_t$ (flujo puro sin deuda).\\[4pt]
+    \textbf{Tasa de descuento:}\\
+    $K_{mpc,di} = \frac{E}{V}r_E + \frac{D}{V}r_D(1-\tau_c)$.
+};
+
+\node[mbox=dfinnavy] (vaa) at (0, 0.2) {%
+    \centering\textbf{\color{dfinnavy}\small 2. Método VAA / APV}\\[4pt]
+    \raggedright\textbf{Cuándo usarlo:}\\
+    La deuda está fijada en \textbf{euros absolutos} ($D_t$ conocida), cambia por calendario, hay préstamos subvencionados o costes de emisión.\\[4pt]
+    \textbf{Descomposición aditiva:}\\
+    $\text{VAA} = \text{VAN}_{\text{base}}(r_A) + \text{VA}(\text{Emisión}) + \text{VA}(\text{Escudo}) - \text{VA}(\text{Insolv.})$.
+};
+
+\node[mbox=dfincopper] (fte) at (5.1, 0.2) {%
+    \centering\textbf{\color{dfincopper}\small 3. Método FTE (Accionista)}\\[4pt]
+    \raggedright\textbf{Cuándo usarlo:}\\
+    Valoración de entidades financieras, \emph{project finance} o adquisiciones apalancadas (\emph{LBO}) con $D/E$ extremo y calendario explícito de caja.\\[4pt]
+    \textbf{Flujo descontado:}\\
+    $\text{FCA}_t = FCL_t - I_t(1-\tau_c) + \Delta D_t$.\\[4pt]
+    \textbf{Tasa de descuento:}\\
+    $r_E$ (rentabilidad apalancada).
+};
+
+\draw[arr=dfinemerald] (root.south) -| (wacc.north)
+    node[pos=0.72, fill=white, inner sep=1.5pt, font=\scriptsize\sffamily\bfseries, text=dfinemerald]
+    {Ratio $D/V$ constante};
+
+\draw[arr=dfinnavy] (root.south) -- (vaa.north)
+    node[midway, fill=white, inner sep=2pt, font=\scriptsize\sffamily\bfseries, text=dfinnavy, align=center]
+    {Calendario fijo de deuda $D_t$\\[-1pt]o fricciones explícitas};
+
+\draw[arr=dfincopper] (root.south) -| (fte.north)
+    node[pos=0.72, fill=white, inner sep=1.5pt, font=\scriptsize\sffamily\bfseries, text=dfincopper]
+    {Caja directa del socio};
+
+\end{tikzpicture}

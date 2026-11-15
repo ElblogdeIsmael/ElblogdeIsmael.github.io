@@ -1,0 +1,58 @@
+% Figura 9.2: Teoría del Trade-Off (Equilibrio): Valor MM con impuestos menos costes de insolvencia y agencia
+\begin{tikzpicture}
+\begin{axis}[
+    width=12.4cm,
+    height=7.0cm,
+    xlabel={Nivel de endeudamiento ($D$ en unidades monetarias / ratio $D/V$)},
+    ylabel={Valor total de la empresa ($V_L$)},
+    xmin=0, xmax=10,
+    ymin=80, ymax=152,
+    xtick={0, 4.8, 9},
+    xticklabels={{$D=0$ (Sin deuda)}, {$D^*$ (Estructura óptima)}, {Sobreendeudamiento}},
+    ytick={100},
+    yticklabels={{$V_U$}},
+    grid=major,
+    grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    legend style={at={(0.03,0.97)}, anchor=north west, font=\scriptsize\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt}
+]
+
+% Valor empresa no apalancada V_U = 100
+\addplot[domain=0:9.8, samples=2, color=dfinmuted, line width=1.2pt, dashed] {100};
+\addlegendentry{Empresa sin deuda ($V_U$)}
+
+% MM con impuestos: V_U + tau_c * D -> recta ascendente 100 + 4.8*x
+\addplot[name path=mmtax, domain=0:9.8, samples=2, color=dfinemerald, line width=1.55pt] {100 + 4.8*x};
+\addlegendentry{MM con impuestos ($V_U + \text{VA}(\text{Escudo Fiscal}) = V_U + \tau_c D$)}
+
+% Trade-Off real: V_L = 100 + 4.8*x - 0.50*x^2 (máximo exacto en x* = 4.8 -> V_max = 100 + 23.04 - 11.52 = 111.52)
+% Hagamos una función cúbica suave para que los costes de insolvencia sean casi 0 al inicio y exploten luego:
+% V_L(x) = 100 + 4.8*x - 0.058*x^3 -> derivada = 4.8 - 0.174*x^2 = 0 => x* = sqrt(27.586) = 5.25 -> V_max = 100 + 25.20 - 8.40 = 116.80
+\addplot[name path=tradeoff, domain=0:9.6, samples=70, color=dfinnavy, line width=1.8pt]
+    {100 + 4.8*x - 0.058*x^3};
+\addlegendentry{Valor real (\emph{Trade-Off}): $V_U + \text{VA}(\text{Escudo}) - \text{VA}(\text{Insolvencia})$}
+
+% Sombrear pérdida por costes de dificultades financieras entre recta MM y curva real
+\addplot[fill=dfinburg!15] fill between[of=mmtax and tradeoff];
+
+% Punto máximo óptimo
+\addplot[only marks, mark=*, mark size=3pt, color=dfincopper] coordinates {(5.25, 116.80)};
+\draw[dotted, color=dfincopper, line width=1pt] (axis cs:5.25, 80) -- (axis cs:5.25, 116.80);
+
+% Flechas explicativas de escudo fiscal y costes de insolvencia en x=8.2 (MMtax=139.36, Tradeoff=107.37)
+\draw[<->, >=Latex, line width=1pt, color=dfinemerald] (axis cs:3.0, 100) -- (axis cs:3.0, 114.4);
+\node[font=\scriptsize\sffamily\bfseries, color=dfinemerald, anchor=east, fill=white, inner sep=1.5pt]
+    at (axis cs:2.85, 107.2) {$+\text{VA}(\text{Escudo Fiscal})$};
+
+\draw[<->, >=Latex, line width=1pt, color=dfinburg] (axis cs:8.2, 107.37) -- (axis cs:8.2, 139.36);
+\node[font=\scriptsize\sffamily\bfseries, color=dfinburg, anchor=east, fill=white, inner sep=1.5pt, align=right]
+    at (axis cs:8.0, 127.0) {$-\text{VA}(\text{Insolvencia}$\\[-1pt]$\text{y Agencia})$};
+
+\node[font=\scriptsize\sffamily\bfseries, color=dfincopper, anchor=south, fill=white, inner sep=1.5pt]
+    at (axis cs:5.25, 118.4) {Valor máximo $V_L^*$};
+
+\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,36 @@
+% Figura 8.3: Método de los Equivalentes Ciertos (EC_t) frente a la Tasa de Descuento Ajustada al Riesgo (TDAR)
+\begin{tikzpicture}
+\begin{axis}[
+    width=12.4cm,
+    height=6.2cm,
+    xlabel={Horizonte temporal del flujo ($t$, años)},
+    ylabel={Coeficiente equivalente $\alpha_t = \dfrac{(1+r_f)^t}{(1+k)^t}$},
+    xmin=0, xmax=10.5,
+    ymin=0.25, ymax=1.12,
+    xtick={0, 2, 4, 6, 8, 10},
+    ytick={0.3, 0.5, 0.7, 0.9, 1.0},
+    grid=major,
+    grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    legend style={at={(0.97,0.96)}, anchor=north east, font=\scriptsize\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt}
+]
+
+% Decaimiento implícito de una TDAR constante (rf=3.5%, k=11% -> alpha_t = (1.035/1.11)^t)
+\addplot[domain=0:10, samples=50, color=dfinnavy, line width=1.6pt]
+    { (1.035/1.11)^x };
+\addlegendentry{Peso implícito en TDAR constante ($\alpha_t = [(1+r_f)/(1+k)]^t$)}
+
+% Trayectoria donde el riesgo se concentra al inicio y luego cae (resolución temprana de incertidumbre -> método EC)
+\addplot[smooth, mark=*, mark size=2pt, color=dfinemerald, line width=1.5pt, dashed] coordinates {
+    (0, 1.00) (1, 0.80) (2, 0.74) (4, 0.70) (6, 0.68) (8, 0.67) (10, 0.66)
+};
+\addlegendentry{Trayectoria flexible $EC_t$: riesgo concentrado en $t=1\text{--}2$}
+
+\node[font=\scriptsize\sffamily, text=dfinemerald, anchor=north east, fill=white, inner sep=1.5pt, align=left]
+    at (axis cs:6.2, 0.50) {La TDAR constante castiga en exceso\\flujos tardíos si el riesgo ya se resolvió};
+
+\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,76 @@
+% Figura 11.2: Árbol binomial en dos pasos para valorar una opción Call / proyecto real con probabilidad neutral al riesgo p
+\begin{tikzpicture}[
+    font=\small\sffamily,
+    nodo/.style={
+        rectangle, rounded corners=3.5pt, draw=#1, fill=#1!8,
+        line width=1.05pt, minimum width=2.85cm, minimum height=1.15cm,
+        align=center, font=\scriptsize\sffamily, text=dfinslate
+    },
+    hoja/.style={
+        rectangle, rounded corners=3.5pt, draw=#1, fill=#1!12,
+        line width=1.05pt, minimum width=3.15cm, minimum height=1.15cm,
+        align=center, font=\scriptsize\sffamily, text=dfinslate
+    },
+    edge/.style={->, >=Latex, line width=1.05pt, color=#1}
+]
+
+% Ejemplo numérico exacto: S0 = 100, u = 1.25, d = 0.80, rf = 5%, E = 110
+% p = (1.05 - 0.80)/(1.25 - 0.80) = 0.25 / 0.45 = 5/9 = 0.5556 ; 1-p = 4/9 = 0.4444
+% t=2: Suu = 156.25 -> Cuu = 46.25 ; Sud = 100 -> Cud = 0 ; Sdd = 64 -> Cdd = 0
+% t=1: Su = 125 -> Cu = (5/9*46.25 + 4/9*0)/1.05 = 25.694 / 1.05 = 24.47
+%      Sd = 80  -> Cd = (5/9*0 + 4/9*0)/1.05 = 0
+% t=0: C0 = (5/9*24.47 + 4/9*0)/1.05 = 13.595 / 1.05 = 12.95
+
+% Cabeceras de tiempo
+\node[font=\footnotesize\sffamily\bfseries, color=dfinnavy] at (-0.6, 3.6) {$t=0$};
+\node[font=\footnotesize\sffamily\bfseries, color=dfinnavy] at (5.2, 3.6) {$t=1$};
+\node[font=\footnotesize\sffamily\bfseries, color=dfinnavy] at (10.4, 3.6) {$t=2$ (Vencimiento $E=110$)};
+
+% t=0
+\node[nodo=dfinnavy] (s0) at (-0.6, 0) {%
+    \textbf{\color{dfinnavy}$S_0 = 100{,}00$}\\[2pt]
+    \textbf{\color{dfinemerald}$C_0 = 12{,}95$}
+};
+
+% t=1
+\node[nodo=dfinemerald] (su) at (5.2, 1.55) {%
+    \textbf{$S_u = 125{,}00$}\\[2pt]
+    \textbf{\color{dfinemerald}$C_u = 24{,}47$}
+};
+\node[nodo=dfincopper] (sd) at (5.2, -1.55) {%
+    \textbf{$S_d = 80{,}00$}\\[2pt]
+    $C_d = 0{,}00$
+};
+
+% t=2
+\node[hoja=dfinemerald] (suu) at (10.4, 2.55) {%
+    \textbf{$S_{uu} = 156{,}25$}\\[2pt]
+    $\text{Payoff: } \mathbf{46{,}25}$
+};
+\node[hoja=dfinmuted] (sud) at (10.4, 0) {%
+    \textbf{$S_{ud} = 100{,}00$}\\[2pt]
+    $\text{Payoff: } 0{,}00$
+};
+\node[hoja=dfinburg] (sdd) at (10.4, -2.55) {%
+    \textbf{$S_{dd} = 64{,}00$}\\[2pt]
+    $\text{Payoff: } 0{,}00$
+};
+
+% Ramas con probabilidades p y 1-p
+\draw[edge=dfinemerald] (s0.east) -- (su.west)
+    node[midway, above=3pt, sloped, font=\scriptsize\sffamily, color=dfinemerald] {$u=1{,}25\ (p=5/9)$};
+\draw[edge=dfincopper] (s0.east) -- (sd.west)
+    node[midway, below=3pt, sloped, font=\scriptsize\sffamily, color=dfincopper] {$d=0{,}80\ (1-p=4/9)$};
+
+\draw[edge=dfinemerald] (su.east) -- (suu.west) node[midway, above=2pt, font=\scriptsize\sffamily, color=dfinemerald] {$p$};
+\draw[edge=dfinmuted] (su.east) -- (sud.west) node[midway, above=2pt, font=\scriptsize\sffamily, color=dfinmuted] {$1-p$};
+\draw[edge=dfinmuted] (sd.east) -- (sud.west) node[midway, below=2pt, font=\scriptsize\sffamily, color=dfinmuted] {$p$};
+\draw[edge=dfinburg] (sd.east) -- (sdd.west) node[midway, below=2pt, font=\scriptsize\sffamily, color=dfinburg] {$1-p$};
+
+% Fórmulas resumen al pie
+\node[draw=dfinnavy!35, fill=dfinpanelivory, rounded corners=3pt, inner sep=5pt,
+      font=\scriptsize\sffamily, text=dfinslate, align=center] at (4.7, -3.7) {%
+    Probabilidad neutral al riesgo ($r_f = 5\%$): $p = \dfrac{(1+r_f) - d}{u - d} = \dfrac{1{,}05 - 0{,}80}{1{,}25 - 0{,}80} = \dfrac{5}{9}$ \quad $\cdot$ \quad Inducción inversa: $C = \dfrac{p\,C_u + (1-p)\,C_d}{1 + r_f}$
+};
+
+\end{tikzpicture}

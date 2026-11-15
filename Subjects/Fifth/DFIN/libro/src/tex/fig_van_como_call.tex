@@ -1,0 +1,74 @@
+% Figura 11.3: Analogía estructural de opciones reales: VAN estático vs Opción Call de diferimiento (Caso Telefónica UGR)
+\begin{tikzpicture}[
+    font=\small\sffamily,
+    col/.style={
+        rectangle, rounded corners=4pt, draw=#1, fill=#1!8,
+        line width=1.1pt, minimum width=5.2cm, minimum height=0.82cm,
+        align=center, font=\footnotesize\sffamily, text=dfinslate
+    }
+]
+
+% Cabeceras de correspondencia financiera vs real
+\node[rectangle, rounded corners=3pt, fill=dfinnavy, text=white, minimum width=5.2cm, minimum height=0.82cm,
+      font=\footnotesize\sffamily\bfseries] (h1) at (-3.4, 5.2) {Opción Call Financiera ($C_0$)};
+\node[rectangle, rounded corners=3pt, fill=dfinemerald, text=white, minimum width=5.2cm, minimum height=0.82cm,
+      font=\footnotesize\sffamily\bfseries] (h2) at (3.4, 5.2) {Opción Real de Inversión (Caso Telefónica)};
+
+% 5 Filas pareadas de Black-Scholes / Opciones Reales
+\node[col=dfinnavy] (f1) at (-3.4, 4.0) {\textbf{$S_0$:} Precio actual de la acción};
+\node[col=dfinemerald] (r1) at (3.4, 4.0) {\textbf{$\text{VA}_0$:} Valor actual de flujos del proyecto};
+
+\node[col=dfinnavy] (f2) at (-3.4, 2.95) {\textbf{$E$:} Precio de ejercicio pactado};
+\node[col=dfinemerald] (r2) at (3.4, 2.95) {\textbf{$I_0$:} Desembolso necesario para desplegarlo};
+
+\node[col=dfinnavy] (f3) at (-3.4, 1.9) {\textbf{$T$:} Tiempo hasta el vencimiento};
+\node[col=dfinemerald] (r3) at (3.4, 1.9) {\textbf{$T$:} Horizonte antes de perder la licencia/ventaja};
+
+\node[col=dfinnavy] (f4) at (-3.4, 0.85) {\textbf{$\sigma$:} Volatilidad del subyacente};
+\node[col=dfinemerald] (r4) at (3.4, 0.85) {\textbf{$\sigma$:} Incertidumbre de la demanda o tecnología};
+
+\node[col=dfinnavy] (f5) at (-3.4, -0.2) {\textbf{$r_f$:} Tipo de interés libre de riesgo};
+\node[col=dfinemerald] (r5) at (3.4, -0.2) {\textbf{$r_f$:} Coste del dinero sin riesgo en el plazo $T$};
+
+% Flechas dobles de isomorfismo
+\foreach \i in {1,2,3,4,5} {
+    \draw[<->, >=Latex, line width=1pt, color=dfincopper] (f\i.east) -- (r\i.west);
+}
+
+% Mini gráfica inferior comparando VAN rígido (S - E, recta negativa si S < E) vs Opción Real (max(S-E,0) + valor temporal)
+\begin{axis}[
+    at={(-5.4cm, -5.2cm)},
+    width=11.4cm, height=5.0cm,
+    xlabel={Valor presente de los flujos operativos ($S = \text{VA}_{\text{flujos}}$)},
+    ylabel={Valor neto hoy},
+    xmin=40, xmax=160, ymin=-45, ymax=105,
+    axis x line=bottom, axis y line=left,
+    xtick={60, 100, 140},
+    xticklabels={{60}, {$I_0 = E = 100$}, {140}},
+    ytick={-30, 0, 30, 60, 90},
+    grid=major, grid style={dotted, color=dfinmuted!40},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\scriptsize\sffamily\bfseries, color=dfinnavy},
+    legend style={at={(0.03,0.97)}, anchor=north west, font=\scriptsize\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt}
+]
+\addplot[forget plot, domain=40:160, samples=2, color=dfinslate!55, line width=0.7pt] {0};
+% VAN estático rígido (decisión irreversible hoy sin esperar): S - 100
+\addplot[domain=55:155, samples=2, color=dfinburg, line width=1.3pt, dashed] {x - 100};
+\addlegendentry{VAN rígido hoy ($S - I_0$, sin flexibilidad)}
+
+% Payoff intrínseco en T: max(S - 100, 0)
+\addplot[domain=45:155, samples=80, color=dfinnavy, line width=1.45pt] {max(x - 100, 0)};
+\addlegendentry{Valor intrínseco $\max(S - E,\ 0)$}
+
+% Valor vivo de la opción real con flexibilidad de esperar
+\addplot[domain=45:155, samples=80, color=dfinemerald, line width=1.65pt]
+    { 0.5*((x-100) + sqrt((x-100)^2 + 324)) };
+\addlegendentry{VAN estratégico = VAN básico $+$ Valor de la Opción Real}
+
+\node[font=\scriptsize\sffamily\bfseries, text=dfinemerald, anchor=south east, fill=white, inner sep=1.5pt, align=right]
+    at (axis cs:97, 8) {Valor temporal de esperar\\[-1pt]($>0$ aunque $S < I_0$)};
+
+\end{axis}
+
+\end{tikzpicture}

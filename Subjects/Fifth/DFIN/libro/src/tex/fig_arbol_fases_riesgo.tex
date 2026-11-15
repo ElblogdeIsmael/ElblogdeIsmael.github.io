@@ -1,0 +1,58 @@
+% Figura 8.2: Proyectos multifase con resolución progresiva del riesgo (Caso farmacéutico / apertura piloto UGR)
+\begin{tikzpicture}[
+    font=\small\sffamily,
+    fase/.style={
+        rectangle, rounded corners=4pt, draw=#1, fill=#1!8,
+        line width=1.1pt, minimum width=3.5cm, minimum height=1.35cm,
+        align=center, font=\footnotesize\sffamily, text=dfinslate
+    },
+    hoja/.style={
+        rectangle, rounded corners=3pt, draw=#1, fill=#1!10,
+        line width=0.9pt, minimum width=4.0cm, minimum height=1.05cm,
+        align=center, font=\scriptsize\sffamily, text=dfinslate
+    },
+    lbl/.style={font=\scriptsize\sffamily, fill=white, inner sep=1.5pt, text=#1}
+]
+
+% Nodo t=0: Fase I Piloto / I+D
+\node[fase=dfincopper] (t0) at (0, 0) {%
+    \textbf{\color{dfincopper}Fase I: Piloto / I+D ($t=0$)}\\[2pt]
+    Desembolso inicial $-I_0$\\
+    Tasa riesgo alto ($k_1$)
+};
+
+% Bifurcación en t=1 (resolución incertidumbre técnica)
+\node[fase=dfinemerald] (exito) at (5.4, 1.75) {%
+    \textbf{\color{dfinemerald}Éxito técnico ($t=1$)}\\[2pt]
+    Probabilidad $p$\\
+    Invierte $-I_1$ (expansión)
+};
+
+\node[hoja=dfinburg] (fracaso) at (5.4, -1.75) {%
+    \textbf{\color{dfinburg}Fracaso / Abandono ($t=1$)}\\[2pt]
+    Probabilidad $1-p$\\
+    Flujo posterior $= 0$ (no invierte $I_1$)
+};
+
+% Fase II Explotación estable t=2..T
+\node[hoja=dfinnavy] (explot) at (10.8, 1.75) {%
+    \textbf{\color{dfinnavy}Fase II: Explotación ($t=2\dots T$)}\\[2pt]
+    Flujos operativos $FCL_t$\\
+    Descuento de régimen normal ($k_2 < k_1$)
+};
+
+% Conexiones con probabilidades y explicación de valoración inversa
+\draw[->, >=Latex, line width=1.2pt, color=dfinemerald] (t0.east) to[out=22, in=180]
+    node[lbl=dfinemerald, above=3pt] {$p$ (éxito)} (exito.west);
+
+\draw[->, >=Latex, line width=1.2pt, color=dfinburg] (t0.east) to[out=-22, in=180]
+    node[lbl=dfinburg, below=3pt] {$1-p$ (fracaso)} (fracaso.west);
+
+\draw[->, >=Latex, line width=1.2pt, color=dfinnavy] (exito.east) -- (explot.west)
+    node[midway, lbl=dfinnavy, above=2pt] {Despliegue};
+
+% Fórmula de inducción hacia atrás debajo
+\node[draw=dfinslate!35, fill=dfinnavy!5, rounded corners=3pt, inner sep=4pt, font=\scriptsize\sffamily, text=dfinnavy]
+    at (5.4, -3.1) {$\longleftarrow$ Valoración por inducción hacia atrás: $\text{VAN}_0 = -I_0 + \dfrac{p \cdot \max\bigl(0,\ -I_1 + \text{VA}_1(\text{Fase II a } k_2)\bigr)}{1 + k_1}$};
+
+\end{tikzpicture}

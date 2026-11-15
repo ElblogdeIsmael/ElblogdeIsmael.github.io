@@ -1,0 +1,72 @@
+% Figura 1.1: El circuito de flujos de caja entre la empresa, los activos reales y los mercados financieros
+% Adaptado del diagrama canónico de Brealey, Myers y Allen (cap. 1) y Tema 1 UGR
+\begin{tikzpicture}[
+    node distance=1.4cm,
+    box/.style={
+        rectangle, rounded corners=4pt, draw=#1, fill=#1!7,
+        line width=1.1pt, minimum width=3.4cm, minimum height=1.65cm,
+        align=center, font=\small\sffamily, text=dfinslate
+    },
+    actor/.style={
+        rectangle, rounded corners=4pt, draw=dfinnavy, fill=dfinnavy,
+        text=white, minimum width=3.4cm, minimum height=1.55cm,
+        align=center, font=\small\sffamily\bfseries
+    },
+    flow/.style={->, >=Latex, line width=1.2pt, color=#1},
+    lbl/.style={font=\scriptsize\sffamily, fill=white, inner sep=2pt, align=center, text=#1}
+]
+
+% Nodos principales en triángulo / circuito horizontal amplio
+\node[box=dfinemerald] (activos) at (0, 0) {%
+    \textbf{\color{dfinemerald}Activos Reales}\\[2pt]
+    Fábricas, patentes,\\[-1pt]
+    software y capital circulante
+};
+
+\node[actor] (dirfin) at (5.6, 0) {%
+    Dirección Financiera\\[2pt]
+    {\scriptsize\normalfont Decisiones de inversión}\\
+    {\scriptsize\normalfont y financiación}
+};
+
+\node[box=dfincopper] (mercados) at (11.2, 0) {%
+    \textbf{\color{dfincopper}Mercados Financieros}\\[2pt]
+    Inversores en acciones\\[-1pt]
+    y acreedores de deuda
+};
+
+% Nodo superior de Hacienda Pública (Estado) y reinversión
+\node[box=dfinburg, minimum height=1.15cm, minimum width=3.1cm] (estado) at (5.6, 2.75) {%
+    \textbf{\color{dfinburg}Hacienda Pública}\\[1pt]
+    Impuestos y escudos fiscales
+};
+
+% Flecha 1: Mercados -> DirFin (Captación de fondos: emisión de títulos)
+\draw[flow=dfinnavy] ([yshift=0.45cm]mercados.west) to[out=162, in=18]
+    node[lbl=dfinnavy, above=3pt] {(1) Fondos captados\\[-1pt]Emisión de deuda y acciones}
+    ([yshift=0.45cm]dirfin.east);
+
+% Flecha 2: DirFin -> Activos Reales (Inversión real)
+\draw[flow=dfinemerald] ([yshift=0.45cm]dirfin.west) to[out=162, in=18]
+    node[lbl=dfinemerald, above=3pt] {(2) Presupuesto de capital\\[-1pt]Inversión en activos}
+    ([yshift=0.45cm]activos.east);
+
+% Flecha 3: Activos Reales -> DirFin (Generación de caja operativa)
+\draw[flow=dfinemerald] ([yshift=-0.45cm]activos.east) to[out=-18, in=-162]
+    node[lbl=dfinemerald, below=3pt] {(3) Flujo de caja generado\\[-1pt]por las operaciones ($FCL$)}
+    ([yshift=-0.45cm]dirfin.west);
+
+% Flecha 4a: Reinversión interna (bucle inferior bajo Dirección Financiera y Activos)
+\draw[flow=dfinslate, dashed] (dirfin.south) to[out=-115, in=-65, looseness=1.1]
+    node[lbl=dfinslate, below=2pt] {(4a) Reinversión de beneficios retenidos}
+    ([xshift=0.8cm]activos.south);
+
+% Flecha 4b: DirFin -> Mercados (Devolución: dividendos, intereses y principal)
+\draw[flow=dfincopper] ([yshift=-0.45cm]dirfin.east) to[out=-18, in=-162]
+    node[lbl=dfincopper, below=3pt] {(4b) Remuneración y devolución\\[-1pt]Dividendos, cupones y amortización}
+    ([yshift=-0.45cm]mercados.west);
+
+% Flecha 5: Impuestos hacia el Estado
+\draw[flow=dfinburg] (dirfin.north) -- node[lbl=dfinburg, right=4pt, align=left] {(5) Impuesto de\\[-1pt]Sociedades ($\tau_c$)} (estado.south);
+
+\end{tikzpicture}

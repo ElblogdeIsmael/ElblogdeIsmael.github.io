@@ -1,0 +1,48 @@
+% Figura 11.1: Payoffs al vencimiento (línea continua) y beneficio neto tras prima (discontinua) de Call y Put
+\begin{tikzpicture}
+\begin{groupplot}[
+    group style={group size=2 by 2, horizontal sep=1.45cm, vertical sep=1.75cm},
+    width=6.2cm, height=4.4cm,
+    xmin=20, xmax=80, ymin=-22, ymax=32,
+    axis x line=bottom, axis y line=left,
+    xtick={30, 50, 70},
+    xticklabels={{30}, {$E=50$}, {70}},
+    ytick={-15, 0, 15, 30},
+    xlabel style={font=\tiny\sffamily, color=dfinslate},
+    ylabel style={font=\tiny\sffamily, color=dfinnavy},
+    tick label style={font=\tiny\sffamily, color=dfinslate},
+    title style={font=\scriptsize\sffamily\bfseries, color=dfinnavy},
+    grid=major, grid style={dotted, color=dfinmuted!40}
+]
+
+% (a) Comprador Call (prima c = 6, E = 50)
+\nextgroupplot[title={(a) Compra de Call ($\max(S_T-E,0)$)}, xlabel={$S_T$}, ylabel={Resultado}]
+\addplot[domain=20:80, samples=2, color=dfinslate!55, line width=0.7pt] {0};
+\addplot[domain=20:80, samples=80, color=dfinnavy, line width=1.45pt] {max(x-50, 0)};
+\addplot[domain=20:80, samples=80, color=dfinemerald, line width=1.15pt, dashed] {max(x-50, 0) - 6};
+\node[font=\tiny\sffamily, text=dfinnavy, anchor=north west] at (axis cs:22, 29) {Payoff bruto};
+\node[font=\tiny\sffamily, text=dfinemerald, anchor=north west] at (axis cs:22, 21) {Beneficio neto ($-c$)};
+
+% (b) Vendedor Call
+\nextgroupplot[title={(b) Venta de Call ($-\max(S_T-E,0)$)}, xlabel={$S_T$}, ylabel={Resultado}]
+\addplot[domain=20:80, samples=2, color=dfinslate!55, line width=0.7pt] {0};
+\addplot[domain=20:80, samples=80, color=dfinburg, line width=1.45pt] {-max(x-50, 0)};
+\addplot[domain=20:80, samples=80, color=dfincopper, line width=1.15pt, dashed] {-max(x-50, 0) + 6};
+\node[font=\tiny\sffamily, text=dfincopper, anchor=south west] at (axis cs:22, 9) {Prima $+c$};
+
+% (c) Comprador Put (prima p = 5, E = 50)
+\nextgroupplot[title={(c) Compra de Put ($\max(E-S_T,0)$)}, xlabel={$S_T$}, ylabel={Resultado}]
+\addplot[domain=20:80, samples=2, color=dfinslate!55, line width=0.7pt] {0};
+\addplot[domain=20:80, samples=80, color=dfinnavy, line width=1.45pt] {max(50-x, 0)};
+\addplot[domain=20:80, samples=80, color=dfinemerald, line width=1.15pt, dashed] {max(50-x, 0) - 5};
+\node[font=\tiny\sffamily, text=dfinemerald, anchor=north east] at (axis cs:78, -7) {Pérdida máx. $-p$};
+
+% (d) Vendedor Put
+\nextgroupplot[title={(d) Venta de Put ($-\max(E-S_T,0)$)}, xlabel={$S_T$}, ylabel={Resultado}]
+\addplot[domain=20:80, samples=2, color=dfinslate!55, line width=0.7pt] {0};
+\addplot[domain=20:80, samples=80, color=dfinburg, line width=1.45pt] {-max(50-x, 0)};
+\addplot[domain=20:80, samples=80, color=dfincopper, line width=1.15pt, dashed] {-max(50-x, 0) + 5};
+\node[font=\tiny\sffamily, text=dfincopper, anchor=south east] at (axis cs:78, 8) {Ganancia máx. $+p$};
+
+\end{groupplot}
+\end{tikzpicture}

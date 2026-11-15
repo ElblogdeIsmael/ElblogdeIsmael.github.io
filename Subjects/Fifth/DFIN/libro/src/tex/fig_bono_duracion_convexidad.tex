@@ -1,0 +1,54 @@
+% Figura 3.1: Relación precio-TIR del bono, tangente lineal (Duración) y error por Convexidad
+\begin{tikzpicture}
+\begin{axis}[
+    width=12.4cm,
+    height=7.0cm,
+    xlabel={TIR de mercado $r$ (\%)},
+    ylabel={Precio del bono $P(r)$ (\% sobre nominal)},
+    xmin=1, xmax=10,
+    ymin=55, ymax=138,
+    xtick={2, 4, 5, 6, 8, 10},
+    xticklabels={{2\%}, {4\%}, {$r_0=5\%$}, {6\%}, {8\%}, {10\%}},
+    ytick={70, 80, 90, 100, 110, 120, 130},
+    grid=major,
+    grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    legend style={at={(0.97,0.96)}, anchor=north east, font=\scriptsize\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt, align=left}
+]
+
+% Bono ilustrativo a 10 años, cupón anual 5%, nominal 100:
+% P(r) = sum_{t=1}^{10} 5/(1+r)^t + 100/(1+r)^{10}
+% En r0 = 5%: P = 100. Duración Macaulay D = 8.1078, D_mod = 8.1078/1.05 = 7.7217
+% Recta tangente en r0=5%: P_lin(r) = 100 - 7.7217 * (x - 5)
+\addplot[domain=1.2:9.8, samples=80, color=dfinnavy, line width=1.6pt]
+    { 5 * ((1 - 1/((1 + x/100)^10))/(x/100)) + 100 / ((1 + x/100)^10) };
+\addlegendentry{Precio exacto $P(r)$ (convexo)}
+
+\addplot[domain=1.2:9.8, samples=2, color=dfincopper, line width=1.3pt, dashed]
+    { 100 - 7.7217 * (x - 5) };
+\addlegendentry{Aproximación lineal (Duración $D^*$)}
+
+% Punto de tangencia (r0=5%, P=100)
+\addplot[only marks, mark=*, mark size=2.6pt, color=dfinemerald] coordinates {(5, 100)};
+
+% Sombreado del sesgo de convexidad en extremos (subestimación tanto al subir como al bajar r)
+% Flecha de error positivo en r = 2% (P(2) = 126.95, P_lin(2) = 123.17)
+\draw[<->, >=Latex, line width=1pt, color=dfinemerald]
+    (axis cs:2, 123.17) -- (axis cs:2, 126.95);
+\node[font=\scriptsize\sffamily, color=dfinemerald, anchor=south west, fill=white, inner sep=1.5pt]
+    at (axis cs:2.1, 127.5) {Ganancia adicional por convexidad ($+C$)};
+
+% Flecha de error positivo en r = 9% (P(9) = 74.33, P_lin(9) = 69.11)
+\draw[<->, >=Latex, line width=1pt, color=dfinemerald]
+    (axis cs:9, 69.11) -- (axis cs:9, 74.33);
+\node[font=\scriptsize\sffamily, color=dfinemerald, anchor=north east, fill=white, inner sep=1.5pt, align=right]
+    at (axis cs:8.85, 67.5) {Menor pérdida real\\que la estimada linealmente};
+
+\node[font=\scriptsize\sffamily, color=dfinnavy, fill=white, inner sep=1.5pt, anchor=south west]
+    at (axis cs:5.15, 101.2) {$(r_0 = 5\%,\, P_0 = 100)$};
+
+\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,56 @@
+% Figura 4.2: Conflicto VAN vs TIR en proyectos mutuamente excluyentes y Tasa de Cruce de Fisher (r_F)
+\begin{tikzpicture}
+\begin{axis}[
+    width=12.4cm,
+    height=6.8cm,
+    xlabel={Tasa de descuento $r$ (\%)},
+    ylabel={Valor Actual Neto (u.m.)},
+    xmin=0, xmax=33,
+    ymin=-220, ymax=850,
+    axis x line=bottom,
+    axis y line=left,
+    xtick={0, 5, 10, 15, 20, 25, 30},
+    xticklabels={{0\%}, {5\%}, {10\%}, {15\%}, {20\%}, {25\%}, {30\%}},
+    ytick={-200, 0, 200, 400, 600, 800},
+    grid=major,
+    grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy},
+    legend style={at={(0.98,0.97)}, anchor=north east, font=\scriptsize\sffamily,
+                  fill=white, draw=dfinslate!35, rounded corners=2pt, align=left}
+]
+
+\addplot[forget plot, domain=0:33, samples=2, color=dfinslate!55, line width=0.75pt] {0};
+\addplot[domain=0:31.5, samples=70, color=dfinnavy, line width=1.6pt]
+    {-1000 + 100/(1+x/100) + 1450/(1+x/100)^2};
+\addlegendentry{Proyecto $A$ (largo plazo: $\text{TIR}_A = 25{,}5\%$)}
+
+\addplot[domain=0:31.5, samples=70, color=dfincopper, line width=1.6pt, dashed]
+    {-1000 + 1200/(1+x/100) + 150/(1+x/100)^2};
+\addlegendentry{Proyecto $B$ (corto plazo: $\text{TIR}_B = 31{,}4\%$)}
+
+% Punto de cruce de Fisher exacto: r_F = 18.18%, VAN = 122.97
+\addplot[only marks, mark=*, mark size=3pt, color=dfinemerald] coordinates {(18.18, 122.97)};
+\draw[dotted, color=dfinemerald, line width=1pt] (axis cs:18.18, 0) -- (axis cs:18.18, 122.97);
+\node[font=\scriptsize\sffamily\bfseries, color=dfinemerald, fill=white, inner sep=1.5pt, anchor=south west]
+    at (axis cs:18.5, 165) {Tasa de Fisher $r_F = 18{,}18\%$};
+
+% Zona de conflicto (r < r_F): TIR prefiere B, pero VAN(A) > VAN(B)
+\draw[<->, >=Latex, line width=1pt, color=dfinburg] (axis cs:0.8, 720) -- (axis cs:17.2, 720);
+\node[font=\scriptsize\sffamily\bfseries, color=dfinburg, fill=white, inner sep=2pt, align=center]
+    at (axis cs:8.8, 720) {Conflicto ($r < r_F$):\\[-1pt]$\text{VAN}_A > \text{VAN}_B$, $\text{TIR}_B > \text{TIR}_A$};
+
+% Zona de acuerdo (r_F < r < TIR_A)
+\draw[<->, >=Latex, line width=1pt, color=dfinemerald] (axis cs:18.4, 340) -- (axis cs:25.5, 340);
+\node[font=\scriptsize\sffamily, color=dfinemerald, fill=white, inner sep=1.5pt, anchor=south, align=center]
+    at (axis cs:22.0, 355) {Acuerdo: gana $B$};
+
+% Puntos TIR en el eje X
+\addplot[only marks, mark=*, mark size=2.3pt, color=dfinnavy] coordinates {(25.5, 0)};
+\addplot[only marks, mark=*, mark size=2.3pt, color=dfincopper] coordinates {(31.38, 0)};
+\node[font=\scriptsize\sffamily\bfseries, color=dfinnavy, anchor=north east] at (axis cs:25.3, -25) {$\text{TIR}_A$};
+\node[font=\scriptsize\sffamily\bfseries, color=dfincopper, anchor=south] at (axis cs:31.0, 28) {$\text{TIR}_B$};
+
+\end{axis}
+\end{tikzpicture}

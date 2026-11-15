@@ -1,0 +1,59 @@
+% Figura 7.2: Recta característica de un título: estimación de beta, alfa de Jensen y descomposición de residuos
+\begin{tikzpicture}
+\begin{axis}[
+    width=12.4cm,
+    height=6.8cm,
+    xlabel={Exceso de rentabilidad del mercado $(R_m - r_f)$ (\%)},
+    ylabel={Exceso de rentabilidad del activo $(R_i - r_f)$ (\%)},
+    xmin=-18, xmax=22,
+    ymin=-24, ymax=30,
+    axis x line=bottom,
+    axis y line=left,
+    xtick={-15, -10, -5, 0, 5, 10, 15, 20},
+    ytick={-20, -10, 0, 10, 20},
+    grid=major,
+    grid style={dotted, color=dfinmuted!45},
+    axis line style={color=dfinslate, line width=0.9pt},
+    tick label style={font=\scriptsize\sffamily, color=dfinslate},
+    label style={font=\footnotesize\sffamily\bfseries, color=dfinnavy}
+]
+
+% Ejes de referencia en cero
+\addplot[domain=-18:22, samples=2, color=dfinslate!45, line width=0.65pt, dashed] {0};
+\draw[dashed, color=dfinslate!45, line width=0.65pt] (axis cs:0, -24) -- (axis cs:0, 30);
+
+% Nube de observaciones históricas simuladas alrededor de y = 1.5 + 1.25*x
+\addplot[only marks, mark=*, mark size=2pt, color=dfinmuted!85] coordinates {
+    (-14, -14.5) (-11, -13.8) (-9, -7.2) (-6, -8.5) (-4, -1.8)
+    (-2, -3.5) (1, 4.2) (3, 3.1) (5, 9.8) (7, 7.6)
+    (9, 14.5) (11, 12.1) (13, 19.8) (15, 17.5) (18, 25.0)
+    (-7, -9.8) (4, 6.2) (12, 16.0)
+};
+
+% Recta de regresión MCO: y = 1.8 + 1.22*x
+\addplot[domain=-16:20, samples=2, color=dfinnavy, line width=1.6pt] {1.8 + 1.22*x};
+
+% Resaltar alfa en el corte con el eje vertical (x=0, y=1.8)
+\addplot[only marks, mark=*, mark size=2.6pt, color=dfinemerald] coordinates {(0, 1.8)};
+\node[font=\scriptsize\sffamily\bfseries, text=dfinemerald, anchor=south east, fill=white, inner sep=1.5pt]
+    at (axis cs:-0.6, 3.2) {Ordenada $\alpha_i > 0$};
+
+% Triángulo visual de la pendiente beta_i entre x=5 (y=7.9) y x=15 (y=20.1)
+\draw[dashed, color=dfincopper, line width=1pt] (axis cs:5, 7.9) -- (axis cs:15, 7.9) -- (axis cs:15, 20.1);
+\node[font=\scriptsize\sffamily\bfseries, text=dfincopper, fill=white, inner sep=1.5pt]
+    at (axis cs:10, 4.8) {$\Delta(R_m - r_f) = 10\%$};
+\node[font=\scriptsize\sffamily\bfseries, text=dfincopper, anchor=west, fill=white, inner sep=1.5pt, align=left]
+    at (axis cs:15.3, 13.8) {$\Delta = 12{,}2\%$\\$\implies \beta_i = 1{,}22$};
+
+% Residuo específico ejemplo en x=13 (punto en 19.8, recta en 17.66)
+\draw[<->, >=Latex, line width=0.9pt, color=dfinburg] (axis cs:13, 17.66) -- (axis cs:13, 19.8);
+\node[font=\scriptsize\sffamily\bfseries, text=dfinburg, anchor=south east, fill=white, inner sep=1.5pt]
+    at (axis cs:12.6, 20.5) {Residuo específico $\varepsilon_{i,t}$};
+
+% Ecuación recuadrada (IMPORTANTE: usar text=dfinslate para no rellenar toda la caja)
+\node[draw=dfinnavy!40, fill=dfinpanelivory, rounded corners=2pt, inner sep=5pt,
+      font=\scriptsize\sffamily, text=dfinslate, anchor=north west, align=left]
+    at (axis cs:-17.2, 28) {\textbf{\color{dfinnavy}Modelo de mercado:}\\$R_i - r_f = \alpha_i + \beta_i(R_m - r_f) + \varepsilon_i$\\$R^2 = \dfrac{\text{Var sistemática}}{\text{Var total}}$};
+
+\end{axis}
+\end{tikzpicture}
