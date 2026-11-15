@@ -1,7 +1,7 @@
-# Dirección Financiera · Parcial 1 (Temas 1-4) · Banco completo
+# Dirección Financiera · Parcial 1 (Temas 1-4) · Test
 
 * **Autor:** Ismael Sallami Moreno
-* **Descripción:** Todas las preguntas tipo test de exámenes y recopilaciones de la UGR de los temas 1 a 4, deduplicadas y con la respuesta verificada y explicada.
+* **Descripción:** Todas las preguntas tipo test de exámenes y recopilaciones de la UGR de los temas 1 a 4, deduplicadas y con la respuesta verificada y explicada. Primero las más repetidas (aparecen en dos o más fuentes) y después el resto.
 * **Titulación:** Doble Grado en Ingeniería Informática y ADE (UGR) · Dirección Financiera · Prof. Salvador Rayo Cantón
 
 ---
@@ -53,123 +53,6 @@
 
     > Correcta: d. El directivo debe buscar proyectos con VAN positivo; cada accionista ajusta su riesgo diversificando por su cuenta. El coste de capital es un coste de oportunidad (rentabilidad de inversiones de riesgo similar), no el interés bancario. El objetivo es maximizar el valor, no el beneficio. Repetida en 2 fuentes.
 
-1. Indique cuál de las siguientes afirmaciones es falsa:
-
-    - ( ) a) Los flujos de tesorería se descuentan por dos razones: primero, porque 1 u.m. hoy vale más que 1 u.m. mañana, y, segundo, porque 1 u.m. con riesgo vale menos que 1 u.m. sin riesgo.
-    - ( ) b) Para calcular el valor actual de un proyecto, es preciso descontar sus flujos de caja esperados a la tasa de rentabilidad ofrecida por inversiones comparables.
-    - ( ) c) Actualmente se considera que la maximización del beneficio no es el principal objetivo de la función financiera.
-    - (x) d) Es necesario que la empresa establezca su política de inversión en orden a obtener una secuencia de flujos de tesorería que coincida con las pautas temporales de consumo preferidas por los accionistas.
-
-    > Correcta: d. Por la separación de Fisher, con mercado de capitales perfecto cada accionista adapta sus flujos a su pauta de consumo prestando o endeudándose; la empresa solo debe maximizar el VAN. Las otras tres son ciertas.
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) Puesto que un directivo financiero debería actuar en interés de sus accionistas, debería elegir activos de alto o bajo riesgo, para respetar las preferencias de los accionistas.
-    - ( ) b) Puesto que un directivo financiero debería actuar en interés de sus accionistas, debería adaptar el plan de inversión de la empresa a las pautas temporales de consumo preferidas por los accionistas.
-    - (x) c) Las respuestas a y b son falsas.
-    - ( ) d) Las respuestas a y b son correctas.
-
-    > Correcta: c. El directivo actúa en interés de los accionistas maximizando el VAN; ni el riesgo ni la pauta de consumo de cada accionista condicionan la inversión, porque cada uno los ajusta en el mercado de capitales.
-
-1. ¿Cuál es el objetivo principal de la función financiera?
-
-    - ( ) a) Reducir los costes de la empresa.
-    - (x) b) Maximizar el valor para los accionistas.
-    - ( ) c) Incrementar las ventas.
-    - ( ) d) Controlar los gastos operativos.
-
-    > Correcta: b. El objetivo es maximizar el valor de mercado de las acciones; reducir costes o aumentar ventas solo son medios y no garantizan crear valor.
-
-1. ¿Qué decisión pertenece al ámbito del director financiero?
-
-    - ( ) a) La estrategia de marketing de productos.
-    - (x) b) La emisión de bonos para financiar una nueva planta.
-    - ( ) c) El diseño de nuevos productos.
-    - ( ) d) La contratación de personal.
-
-    > Correcta: b. Emitir bonos es una decisión de financiación, una de las dos decisiones financieras básicas. Marketing, diseño y personal son de otras áreas.
-
-1. ¿Cuál de las siguientes es una decisión financiera básica?
-
-    - ( ) a) Decisiones de marketing.
-    - (x) b) Decisiones de inversión.
-    - ( ) c) Decisiones operativas.
-    - ( ) d) Decisiones de personal.
-
-    > Correcta: b. Las dos decisiones financieras básicas son la de inversión (en qué activos reales invertir) y la de financiación (cómo obtener el dinero).
-
-1. El director financiero NO es responsable de:
-
-    - ( ) a) La gestión de la tesorería.
-    - ( ) b) La política de dividendos.
-    - (x) c) El marketing estratégico.
-    - ( ) d) Las relaciones con los mercados financieros.
-
-    > Correcta: c. Tesorería, dividendos y relación con los mercados financieros son funciones del tesorero y del área financiera; el marketing no.
-
-1. ¿Qué tipo de empresa tiene responsabilidad ilimitada?
-
-    - ( ) a) Sociedad anónima.
-    - ( ) b) Empresa pública.
-    - (x) c) Empresa individual.
-    - ( ) d) Cooperativa.
-
-    > Correcta: c. El empresario individual responde de las deudas con todo su patrimonio personal; en la sociedad anónima los accionistas solo arriesgan lo aportado.
-
-1. ¿Qué caracteriza una Sociedad Limitada (S.L.)?
-
-    - ( ) a) Acceso libre a los mercados financieros.
-    - (x) b) Responsabilidad limitada de los socios.
-    - ( ) c) Emisión obligatoria de acciones.
-    - ( ) d) Propiedad estatal.
-
-    > Correcta: b. Los socios responden solo con su aportación. La S.L. emite participaciones, no acciones, y no cotiza en bolsa.
-
-1. ¿Qué es una institución financiera?
-
-    - (x) a) Un intermediario entre ahorradores e inversores.
-    - ( ) b) Un mercado de renta variable.
-    - ( ) c) Una empresa que fabrica bienes de consumo.
-    - ( ) d) Una entidad gubernamental que regula los mercados.
-
-    > Correcta: a. Bancos, aseguradoras, fondos de inversión y de pensiones canalizan el ahorro hacia la inversión, agregando importes, transformando plazos y diversificando riesgos.
-
-1. ¿Qué tipo de mercado facilita la emisión de activos financieros?
-
-    - ( ) a) Mercado secundario.
-    - ( ) b) Mercado de derivados.
-    - (x) c) Mercado primario.
-    - ( ) d) Mercado de bienes de consumo.
-
-    > Correcta: c. En el mercado primario la empresa vende títulos nuevos y capta fondos; el secundario solo negocia títulos ya emitidos.
-
-1. ¿Qué mercados negocian activos ya emitidos?
-
-    - ( ) a) Mercados primarios.
-    - (x) b) Mercados secundarios.
-    - ( ) c) Mercados monetarios.
-    - ( ) d) Mercados futuros.
-
-    > Correcta: b. El secundario negocia títulos ya emitidos entre inversores; no financia a la empresa, pero da liquidez y precio. El monetario se define por el plazo (menos de un año), no por si el título es nuevo.
-
-1. ¿Qué función financiera busca garantizar liquidez diaria?
-
-    - ( ) a) La gestión de inversiones.
-    - (x) b) La gestión de la tesorería.
-    - ( ) c) La política de dividendos.
-    - ( ) d) La planificación estratégica.
-
-    > Correcta: b. La gestión de tesorería (función del tesorero) asegura que haya liquidez para atender los pagos del día a día.
-
-1. Indique cuál es correcta:
-
-    - ( ) a) El objetivo fundamental de la dirección financiera de la empresa es el de maximizar el beneficio neto obtenido por la empresa en cada periodo.
-    - ( ) b) Para calcular el valor actual de un proyecto de inversión, se descuentan los beneficios futuros esperados del mismo a la tasa de rentabilidad ofrecida por alternativas de inversión similares. Esta tasa se conoce como coste de oportunidad de capital.
-    - ( ) c) El directivo financiero debe actuar como intermediario entre las operaciones de la empresa y el mercado bursátil.
-    - (x) d) Ninguna es correcta.
-
-    > Correcta: d. Variante de una pregunta anterior con una trampa nueva: el director financiero hace de intermediario con los mercados financieros en general, no solo con la bolsa. La a confunde el objetivo con el beneficio y la b descuenta beneficios en lugar de flujos de caja.
-
 <!-- Tema 2 · Fundamentos del VAN (Fisher) -->
 
 1. Suponga que acaba de firmar un contrato de trabajo a dos años por el que se va a percibir un sueldo de 12.000 euros este año y de 12.600 el año próximo. Del dinero recibido en este año, decide invertir 10.000 euros en un proyecto de creación de una aplicación para móvil que le va a reportar un único flujo de caja de 13.000 euros el año próximo. El tipo de interés en el mercado de capitales es del 15%. Indique la afirmación correcta:
@@ -189,24 +72,6 @@
     - ( ) d) Ninguna es correcta.
 
     > Correcta: c. Es el teorema de separación de Fisher. En mercados perfectos cada accionista ajusta solo su consumo en el mercado (falla a); si el tipo de préstamo y el de endeudamiento difieren, prestamista y prestatario eligen inversiones óptimas distintas y la separación se rompe (falla b). Repetida en 2 fuentes.
-
-1. Una empresa tiene un presupuesto de tesorería disponible en el momento actual de 20.000 euros. Si decidiera invertir hoy el 25% de la tesorería en un proyecto empresarial a un año podría obtener un VAN máximo de 1.000 euros. El tipo de interés en el mercado de capitales es del 10%. ¿Cuál sería el flujo de caja del proyecto dentro de un año, si establece como objetivo tener un disponible que le aporte el mayor consumo posible en el momento actual? ¿A cuánto asciende dicho disponible para consumo actual?
-
-    - (x) a) Flujo de Caja dentro de un año de 6.600 euros / Disponible actual = 21.000 euros.
-    - ( ) b) Flujo de Caja dentro de un año de 6.000 euros / Disponible actual = 21.000 euros.
-    - ( ) c) Flujo de Caja dentro de un año de 5.000 euros / Disponible actual = 20.000 euros.
-    - ( ) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: a. Se invierten 0,25 x 20.000 = 5.000, así que VA = 5.000 + 1.000 = 6.000 y el flujo en t=1 es 6.000 x 1,10 = 6.600. El consumo actual máximo es 15.000 + 6.000 = 21.000 (o 20.000 + VAN). La b confunde el valor actual (6.000) con el flujo futuro.
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) Sólo es posible que exista acuerdo respecto al objetivo financiero si se suponen mercados no perfectos de capitales, ya que en otro caso no podría definirse la inversión óptima para maximizar el VAN, y de este modo, satisfacer los intereses de cualquier accionista.
-    - ( ) b) Nunca es posible que exista acuerdo respecto al objetivo financiero, puesto que tanto si se suponen mercados perfectos como imperfectos de capitales, dos accionistas con distintas pautas de consumo preferidas no coincidirían al definir la inversión óptima de maximizar el VAN.
-    - (x) c) Sólo es posible que exista acuerdo respecto al objetivo financiero si se suponen mercados perfectos de capitales, ya que en otro caso no podría definirse la inversión óptima para maximizar el VAN, y de este modo, satisfacer los intereses de cualquier accionista.
-    - ( ) d) Las respuestas a) b) c) son falsas.
-
-    > Correcta: c. Solo con mercado perfecto (mismo tipo para prestar y endeudarse) se cumple la separación de Fisher y todos los accionistas coinciden en la inversión que maximiza el VAN. En mercados imperfectos la recta se quiebra y cada tipo de inversor prefiere una inversión distinta.
 
 1. Una empresa está invirtiendo actualmente en activos reales el importe necesario para maximizar su VAN. Una disminución de la tasa de interés:
 
@@ -307,114 +172,6 @@
 
     > Correcta: b. TIR de A = 1.800/1.000 - 1 = 80 % y TIR de B = 1.000/500 - 1 = 100 %, así que B rinde más. Pero VAN A = -1.000 + 1.800/1,1 = 636,36 > VAN B = -500 + 1.000/1,1 = 409,09: con proyectos excluyentes manda el VAN y se elige A, por eso c es falsa. Repetida en 2 fuentes.
 
-1. Se depositan hoy en un banco 1.050 euros. El depósito contratado promete al cabo de 1 año un flujo de tesorería nominal de 1.105,125. La tasa de inflación esperada para el próximo año es del 2,5%. A la vista de esta información, indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) La rentabilidad nominal de este depósito es del 5,125%, y su rentabilidad real del 2,56%.
-    - ( ) b) La rentabilidad nominal de este depósito es del 5,125%, y su rentabilidad real del 2,625%.
-    - (x) c) La rentabilidad nominal de este depósito es del 5,25%, y su rentabilidad real del 2,68%.
-    - ( ) d) La rentabilidad nominal de este depósito es del 5,25%, y su rentabilidad real del 2,75%.
-
-    > Correcta: c. Nominal = 1.105,125/1.050 - 1 = 5,25 %. Real = 1,0525/1,025 - 1 = 2,68 % (la d resta sin más 5,25 - 2,5, que es solo la aproximación).
-
-1. Al valorar activos, el hecho de descontar los flujos de tesorería esperados viene motivado por:
-
-    - ( ) a) Exclusivamente porque una unidad monetaria hoy vale menos que una unidad monetaria mañana.
-    - (x) b) Primero, porque una unidad monetaria hoy vale más que una unidad monetaria mañana, y, segundo, porque una unidad monetaria con riesgo vale menos que una sin riesgo.
-    - ( ) c) Primero, porque una unidad monetaria hoy vale más que una unidad monetaria mañana, y, segundo, porque una unidad monetaria con riesgo vale más que una unidad monetaria sin riesgo.
-    - ( ) d) Primero, porque una unidad monetaria hoy vale menos que una unidad monetaria mañana, y, segundo, porque una unidad monetaria con riesgo vale menos que una sin riesgo.
-
-    > Correcta: b. Son los dos principios fundamentales de las finanzas: un euro hoy vale más que uno mañana y un euro seguro vale más que uno arriesgado. Las demás invierten alguno de los dos.
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) La existencia del mercado de capitales perfectos no permite que los inversores puedan adaptar sus percepciones de flujos de caja a sus pautas de consumo.
-    - ( ) b) Cuando se considera un mercado de capitales perfectamente competitivo, alguien que prefiera invertir y alguien que prefiera endeudarse no estarían de acuerdo en cuanto a la cantidad óptima a invertir para maximizar el VAN de la inversión en activos reales.
-    - ( ) c) Cuando se considera un mercado de capitales perfectamente competitivo, tanto el que tenga preferencia por el consumo actual como el que prefiera consumo futuro, otorgan un valor distinto a las inversiones de la empresa, ya que se enfrentan a distintas oportunidades de tomar prestado y prestar.
-    - (x) d) Ninguna es correcta.
-
-    > Correcta: d. El mercado de capitales permite justamente adaptar los flujos al consumo (a falsa) y, si es perfecto, todos prestan y se endeudan al mismo tipo, así que coinciden en la inversión óptima y en el valor de los proyectos (separación de Fisher): b y c son falsas.
-
-1. ¿Qué mide el coste de oportunidad del Capital?
-
-    - ( ) a) El coste de emitir bonos.
-    - (x) b) La rentabilidad mínima que exigen los inversores.
-    - ( ) c) Los gastos operativos de la empresa.
-    - ( ) d) La depreciación de los activos.
-
-    > Correcta: b. Es la rentabilidad que el inversor podría obtener en el mercado con una inversión de igual riesgo, luego la mínima que exige al proyecto. No depende de cómo se financie.
-
-1. ¿Qué es el coste de oportunidad?
-
-    - ( ) a) El coste de financiar un proyecto con deuda.
-    - (x) b) El rendimiento de la mejor alternativa no seleccionada.
-    - ( ) c) El coste de emitir acciones.
-    - ( ) d) Los gastos fijos de la empresa.
-
-    > Correcta: b. Es lo que se deja de ganar en la mejor alternativa a la que se renuncia; no es un coste de financiación (a, c) ni un gasto contable (d).
-
-1. ¿Qué representa el valor temporal del dinero?
-
-    - ( ) a) Que el dinero no pierde valor con el tiempo.
-    - (x) b) Que el dinero vale más hoy que mañana.
-    - ( ) c) Que el dinero tiene un valor constante en el tiempo.
-    - ( ) d) Que el dinero no genera intereses.
-
-    > Correcta: b. Un euro hoy vale más que un euro mañana porque se puede invertir y generar intereses.
-
-1. ¿Qué representa el Valor Residual?
-
-    - ( ) a) Los ingresos operativos del primer año.
-    - (x) b) El valor esperado de los activos al final de un proyecto.
-    - ( ) c) Los dividendos generados por las acciones.
-    - ( ) d) El coste de emitir bonos.
-
-    > Correcta: b. Es lo que se espera obtener por los activos (y el fondo de maniobra) al terminar el proyecto, y entra como flujo en el último año.
-
-1. Si el VAN de un proyecto es positivo, significa que:
-
-    - ( ) a) La inversión no es viable.
-    - ( ) b) El proyecto no genera valor.
-    - (x) c) El proyecto genera valor adicional para la empresa.
-    - ( ) d) Los flujos de caja son insuficientes.
-
-    > Correcta: c. VAN > 0 significa que el valor actual de los flujos supera al desembolso: aumenta la riqueza del accionista.
-
-1. ¿Qué criterio utiliza El Valor Actual Neto (VAN)?
-
-    - ( ) a) Los beneficios contables futuros.
-    - (x) b) Los flujos de caja futuros descontados.
-    - ( ) c) Los ingresos operativos.
-    - ( ) d) Las inversiones en capital circulante.
-
-    > Correcta: b. El VAN descuenta flujos de caja al coste de oportunidad del capital, no beneficios contables.
-
-1. ¿Qué representa la tasa de descuento VAN?
-
-    - ( ) a) Los costes operativos del proyecto.
-    - (x) b) El coste del capital de la empresa.
-    - ( ) c) Los flujos de caja esperados.
-    - ( ) d) El valor contable de los activos.
-
-    > Correcta: b. La tasa de descuento es el coste de oportunidad del capital (con rigor, el de un activo con el riesgo del proyecto). Las demás opciones no son tasas.
-
-1. ¿Qué sucede si se usa una tasa de descuento incorrecta en la valoración de un proyecto?
-
-    - (x) a) El VAN puede sobreestimarse o infraestimarse.
-    - ( ) b) Los flujos de caja del proyecto no cambian.
-    - ( ) c) La inversión inicial aumenta automáticamente.
-    - ( ) d) El proyecto se vuelve más viable.
-
-    > Correcta: a. Una tasa demasiado baja infla el VAN y una demasiado alta lo reduce, y se pueden aceptar o rechazar proyectos por error.
-
-1. ¿Qué ocurre si una empresa usa una tasa de descuento más alta de lo debido?
-
-    - ( ) a) Los proyectos serán más fácilmente aceptados.
-    - (x) b) El VAN de los proyectos será menor al real.
-    - ( ) c) La rentabilidad de los proyectos aumenta.
-    - ( ) d) El coste de capital se reduce.
-
-    > Correcta: b. El VAN es decreciente en r: con una tasa mayor, el VAN calculado es menor que el verdadero y se rechazarán proyectos buenos (a falsa).
-
 <!-- Tema 2 · Obligaciones y tipos de interés -->
 
 1. Indique la correcta:
@@ -479,123 +236,6 @@
     - (x) d) Ninguna de las anteriores.
 
     > Correcta: d. Si baja la rentabilidad del mercado, el precio del bono sube (relación inversa), así que a es falsa; el cupón y el nominal son fijos por contrato (b y c falsas). Repetida en 2 fuentes.
-
-1. Dada la siguiente información sobre tres obligaciones, indique cuál de las siguientes afirmaciones es correcta. Bono A: nominal 1.000 €, 3 años, tipos 2 % y 3 %, precio 928 €. Bono B: nominal 1.000 €, 2 años, tipos 2,5 % y 2,5 %, precio 1.001 €. Bono C: nominal 1.000 €, 4 años, tipos 3 % y 2 %, precio 1.034 €.
-
-    - ( ) a) La información sobre el bono A es correcta.
-    - ( ) b) La información sobre el bono B es correcta.
-    - ( ) c) La información sobre el bono C es correcta.
-    - (x) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: d. A: con cupón 2 % y mercado 3 % vale 971,71 (o 1.028,84 al revés), nunca 928. B: si cupón = tipo de mercado cotiza a la par, 1.000, no 1.001. C: vale 1.038,08 con mercado 2 % y cupón 3 % (o 962,83 al revés), no 1.034. Repetida 2 veces en el banco FICO.
-
-1. Si se consideran dos bonos del Estado a 5 años, uno con pago periódico de cupones y otro cupón cero, y con el mismo tipo de interés, indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) El bono menos sensible a cambios en los tipos de interés es el cupón cero.
-    - (x) b) El bono menos sensible a cambios en los tipos de interés es el que paga periódicamente cupones.
-    - ( ) c) Ambos bonos tienen la misma sensibilidad a cambios en los tipos de interés.
-    - ( ) d) Todas las respuestas anteriores son falsas.
-
-    > Correcta: b. A igual plazo, cuanto menor es el cupón mayor es el riesgo de tipo de interés: el cupón cero tiene una vida media más larga y es el más sensible. Repetida 2 veces en el banco FICO.
-
-1. Dada la siguiente información sobre dos bonos: Bono A: vencimiento 4 años, cupón 1,6 %, TIR 1,2 %, nominal 1.000 €. Bono B: vencimiento 4 años, cupón 0 %, TIR 1,2 %, nominal 1.000 €. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) Ante una subida del 0,3% en la rentabilidad del mercado, el precio del Bono B subiría más que el precio del Bono A.
-    - (x) b) Ante una subida del 0,3% en la rentabilidad del mercado, el precio del Bono B bajaría más que el precio del Bono A.
-    - ( ) c) Ante una bajada del 0,3% en la rentabilidad del mercado, la subida en el precio de los dos bonos será exactamente la misma.
-    - ( ) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: b. Si sube el tipo, los precios bajan (a falsa), y el cupón cero B, de vida media más larga, es más sensible y baja más; por la misma razón c es falsa.
-
-1. Hace cinco años una empresa emitió una obligación a 10 años. La rentabilidad a exigir hoy por los inversores para adquirir dicho bono será:
-
-    - ( ) a) La rentabilidad que están ofreciendo hoy los bonos del Estado a 5 años.
-    - ( ) b) La rentabilidad que están ofreciendo hoy las obligaciones del Estado a 10 años.
-    - (x) c) La rentabilidad que están ofreciendo hoy los bonos de empresas de la misma calificación crediticia a 5 años.
-    - ( ) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: c. Se usa el tipo de mercado de hoy para el plazo que queda (5 años) y con el mismo riesgo de impago: un bono de empresa exige la prima de fallido que no tiene el del Estado (a falsa).
-
-1. Dada la siguiente información sobre dos obligaciones: Obligación A: cupón 2,6 %, TIR 2,5 %, nominal 1.000 €. Obligación B: cupón 1,4 %, TIR 1,6 %, nominal 1.000 €. Si un inversor dispone hoy de 50.000 €, indique cuál de las afirmaciones es correcta:
-
-    - (x) a) Este inversor podrá adquirir al menos 50 obligaciones tipo B.
-    - ( ) b) Este inversor podrá adquirir al menos 50 obligaciones tipo A.
-    - ( ) c) No disponemos de información suficiente para saber cuántas obligaciones podría adquirir como mínimo.
-    - ( ) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: a. B tiene cupón < TIR, luego cotiza bajo la par (precio < 1.000) y con 50.000 € compra más de 50. A tiene cupón > TIR, cotiza sobre la par y no llega a 50; no hace falta conocer el plazo.
-
-1. Considere dos bonos del Estado a 5 años, ambos con el mismo valor nominal, con pago periódico de cupones y devolución del nominal al vencimiento. Uno de ellos paga cupones del 5% del valor nominal, y el otro, del 8%. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) El bono más sensible a cambios en los tipos de interés será el que paga cupones del 8%, ya que tiene una vida más larga que el que paga cupones periódicos.
-    - ( ) b) El tipo del cupón no tiene ninguna influencia sobre la sensibilidad del bono a cambios en los tipos de interés.
-    - ( ) c) El bono más sensible a cambios en los tipos de interés será el que paga cupones del 5%, ya que su vida es más larga que la del bono cupón cero.
-    - (x) d) Ninguna de las otras respuestas propuestas es correcta.
-
-    > Correcta: d. El más sensible es el del 5 % (menor cupón, vida media más larga), así que a y b son falsas; c acierta el bono pero da una razón falsa, porque no hay ningún cupón cero y un cupón cero tendría una vida media más larga, no más corta.
-
-1. Indique la respuesta correcta:
-
-    - ( ) a) Si los tipos de interés cambian, el precio de las obligaciones no se verá afectado, sea cual sea el signo de dicho cambio
-    - ( ) b) Si los tipos de interés cambian, el precio de las obligaciones se verá afectado sólo en el caso de una subida de los tipos
-    - ( ) c) Si los tipos de interés cambian, el precio de las obligaciones se verá afectado sólo en el caso de una bajada de los tipos
-    - (x) d) Si los tipos de interés cambian, el precio de las obligaciones se verá afectado, sea cual sea el signo de dicho cambio, siendo la relación entre precio y tipo de interés inversa
-
-    > Correcta: d. El precio es el valor actual de cupones y nominal al tipo de mercado: si el tipo sube el precio baja, y si baja el precio sube.
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) Los cambios en los tipos de interés no tienen influencia sobre el precio de las obligaciones
-    - (x) b) Un incremento en los tipos de interés provocaría una disminución en el precio de las obligaciones, lo que resulta lógico, ya que, cuanto mayor sea la tasa de interés demandada por los inversores, menos estarán dispuestos a pagar por la obligación
-    - ( ) c) Un incremento en los tipos de interés provocaría un incremento en el precio de las obligaciones, lo que resulta lógico, ya que, cuanto mayor sea la tasa de interés demandada por los inversores, más estarán dispuestos a pagar por la obligación
-    - ( ) d) Las respuestas a), b) y c) son falsas
-
-    > Correcta: b. Relación inversa precio-tipo: si los inversores exigen más rentabilidad, descuentan los mismos flujos a un tipo mayor y pagan menos.
-
-1. A 31/12 de cierto año un inversor se plantea la posibilidad de adquirir una obligación de nominal 1.000 euros que pagará un cupón anual del 4%, a la que le restan cinco años hasta su vencimiento. El precio a pagar por esta obligación será de 978,0501 euros, siendo sus flujos de caja esperados: C1=C2=C3=C4=40 euros, C5=1.040 euros. Con esta información, indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) La rentabilidad al vencimiento de esta obligación es del 4%.
-    - (x) b) La rentabilidad al vencimiento de esta obligación es del 4,5%.
-    - ( ) c) La rentabilidad al vencimiento de obligaciones similares en el mercado es del 5%.
-    - ( ) d) Las respuestas a) y c) son correctas.
-
-    > Correcta: b. 40 · a(5; 4,5 %) + 1.000/1,045^5 = 978,05. Al 4 % el precio sería 1.000 (a la par) y al 5 % sería 956,71; como el bono cotiza bajo la par, su TIR supera al cupón.
-
-1. Considere un bono a 5 años, emitido por una empresa privada con una baja calificación crediticia.
-
-    - ( ) a) Ninguna es correcta
-    - ( ) b) Este bono prometerá una rentabilidad inferior a la que podría obtenerse comprando un bono de idénticas características, pero emitido por el estado
-    - ( ) c) Este bono prometerá una rentabilidad igual a la que podría obtenerse comprando un bono de idénticas características, pero emitido por el estado
-    - (x) d) Este bono prometerá una rentabilidad superior a la que podría obtenerse comprando un bono de idénticas características, pero emitido por el estado.
-
-    > Correcta: d. Por su riesgo de impago debe ofrecer una prima de fallido sobre el bono del Estado equivalente.
-
-1. Hace dos años el Estado emitió un bono a 5 años. La rentabilidad a exigir hoy por los inversores para adquirir dicho bono será:
-
-    - ( ) a) La rentabilidad que está ofreciendo hoy las letras del tesoro a 1 año
-    - (x) b) La rentabilidad que están ofreciendo hoy los bonos del estado a 3 años
-    - ( ) c) Ninguna es correcta
-    - ( ) d) La rentabilidad que están ofreciendo hoy los bonos del estado a 5 años
-
-    > Correcta: b. Al bono le quedan 3 años, así que se valora con la rentabilidad actual de bonos del Estado con ese mismo plazo residual; la trampa es d, el plazo original.
-
-1. ¿Cómo se calcula el precio del bono?
-
-    - ( ) a) Sumando los cupones y el valor nominal.
-    - (x) b) Actualizando los cupones y el valor nominal a la tasa de interés del mercado.
-    - ( ) c) Dividiendo los cupones por el valor nominal.
-    - ( ) d) Multiplicando el valor nominal por la tasa de interés.
-
-    > Correcta: b. P = C · a(n; r) + VN/(1+r)^n, con r el tipo de mercado. Sumar sin descontar (a) ignora el valor temporal; c da el tipo del cupón y d el cupón.
-
-1. Indique cuál de los siguientes bonos es más sensible a los cambios en los tipos de interés. Los tres tienen tipo de mercado del 1,2 % y cupón del 0,5 %; vencimientos: A 4 años, B 2 años, C 5 años.
-
-    - ( ) a) Bono A.
-    - ( ) b) Bono B.
-    - (x) c) Bono C.
-    - ( ) d) No hay información suficiente para responder a la pregunta.
-
-    > Correcta: c. Con igual cupón y tipo, el riesgo de tipo de interés crece con el plazo: el de 5 años es el más sensible.
 
 <!-- Tema 2 · Valoración de acciones (DDM, Gordon, VAOC, PER) -->
 
@@ -1076,6 +716,776 @@
 
     > Correcta: d. Gordon no sirve con crecimientos muy altos (nadie crece así a perpetuidad: hay que usar fases), y g = b · ROE depende de las dos cosas a la vez, no de una «exclusivamente». Repetida en 2 fuentes.
 
+<!-- Tema 3 · Criterios de valoración de inversiones -->
+
+1. Si el VAN de un proyecto es positivo:
+
+    - ( ) a) Este proyecto debería aceptarse porque contribuye a la reducción del riesgo de la empresa.
+    - ( ) b) Este proyecto debería aceptarse siempre y cuando la empresa lo realice antes que la competencia.
+    - ( ) c) Este proyecto debería aceptarse sólo si se comprueba que la empresa que lo realiza tiene ventajas competitivas a largo plazo.
+    - (x) d) Ninguna de las anteriores es correcta.
+
+    > Correcta: d. Un VAN positivo se acepta porque aumenta el valor de la empresa (riqueza del accionista), no por reducir riesgo ni con condiciones adicionales sobre la competencia. Una fuente marcaba a, pero el VAN no dice nada de reducción de riesgo. Repetida en 3 fuentes.
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) La TIR de un proyecto de inversión es aquel valor de la tasa de descuento para el que el coste de oportunidad del capital se hace cero.
+    - (x) b) La TIR de un proyecto de inversión es aquel valor de la tasa de descuento para el que el VAN se hace igual a cero.
+    - ( ) c) La TIR de un proyecto de inversión es aquel valor de la tasa de descuento para el que el coste de oportunidad del capital alcanza un valor positivo.
+    - ( ) d) Todas las respuestas anteriores son falsas.
+
+    > Correcta: b. Por definición, la TIR anula el VAN; es el punto donde el perfil del VAN corta el eje. Tampoco es el coste de oportunidad del capital (variante de otra fuente): este viene dado por el mercado y la TIR se compara con él. Repetida en 5 fuentes.
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) El criterio del plazo de recuperación no tiene en cuenta todos los flujos de caja del proyecto que se producen antes del plazo de recuperación.
+    - (x) b) El criterio del plazo de recuperación no tiene en cuenta ningún flujo de caja que se produzca después de dicho plazo.
+    - ( ) c) El criterio del plazo de recuperación es preferible como método de selección de inversiones frente al VAN.
+    - ( ) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: b. El payback ignora los flujos posteriores al plazo. Los anteriores sí los tiene en cuenta todos (aunque les da el mismo peso), por eso la a es falsa. Nunca es preferible al VAN. Repetida en 3 fuentes.
+
+1. Indique la respuesta correcta:
+
+    - ( ) a) El criterio VAN no resulta apropiado para la selección de inversiones en la empresa, ya que no proporciona una idea sobre si dichas inversiones contribuyen al logro objetivo financiero.
+    - ( ) b) El criterio VAN no resulta apropiado para elegir entre dos proyectos de inversión mutuamente excluyentes que tengan la misma duración.
+    - (x) c) El criterio VAN, al representar la contribución neta al valor de la empresa que realiza una inversión, muestra en qué medida ésta contribuye al logro del objetivo financiero.
+    - ( ) d) El criterio VAN no es válido para evaluar proyectos de inversión arriesgados y de larga duración.
+
+    > Correcta: c. El VAN mide la contribución neta al valor de la empresa, que es justo el objetivo financiero. Con excluyentes de igual duración el VAN es el criterio adecuado, y el riesgo se recoge en la tasa de descuento. Repetida en 3 fuentes.
+
+1. Indique la respuesta correcta:
+
+    - ( ) a) En general, los criterios del VAN y la TIR son equivalentes; si la TIR es inferior al coste de oportunidad del capital, el VAN del proyecto será positivo y será aconsejable llevarlo a cabo.
+    - ( ) b) En general, los criterios del VAN y la TIR son equivalentes; si la TIR es superior al coste de oportunidad del capital, el VAN del proyecto será negativo y será aconsejable llevarlo a cabo.
+    - ( ) c) En general, los criterios del VAN y la TIR son equivalentes; si la TIR es superior al coste de oportunidad del capital, el VAN del proyecto será negativo y no será aconsejable llevarlo a cabo.
+    - (x) d) En general, los criterios del VAN y la TIR son equivalentes; si la TIR es superior al coste de oportunidad del capital, el VAN del proyecto será positivo y será aconsejable llevarlo a cabo.
+
+    > Correcta: d. En un proyecto simple de inversión, TIR > r implica VAN > 0 y se acepta; TIR < r implica VAN < 0. Las demás invierten algún signo. Repetida en 3 fuentes.
+
+1. Indique cuál de las siguientes afirmaciones es falsa:
+
+    - (x) a) El director financiero de una empresa tiene que realizar inversiones cuya generación de caja se ajuste a la preferencia temporal de consumo de sus accionistas.
+    - ( ) b) El director financiero de una empresa debe buscar proyectos de inversión de valor actualizado neto positivo para incrementar la riqueza de los accionistas.
+    - ( ) c) Si la rentabilidad que ofrece una inversión es menor al coste de oportunidad del capital, eso significa que esa inversión tendrá un valor actualizado neto negativo.
+    - ( ) d) Si existe discrepancia entre la decisión de inversión según los criterios del valor actualizado neto y de la tasa interna de rentabilidad, escogeremos en función del primer criterio.
+
+    > Correcta: a. Por la separación de Fisher, los accionistas ajustan su consumo en el mercado de capitales; el directivo solo debe maximizar el VAN. Las otras tres son ciertas (ante discrepancia manda el VAN). Repetida en 2 fuentes.
+
+1. Desde un punto de vista financiero, indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) Las empresas deben invertir en proyectos cuyos beneficios netos actualizados son superiores a la inversión inicial que requieren.
+    - ( ) b) Las empresas deben invertir en proyectos con VAN positivo o nulo.
+    - (x) c) Las empresas deben invertir en proyectos cuyos flujos netos de caja actualizados son superiores a la inversión inicial que requieren.
+    - ( ) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: c. Es la definición de VAN > 0 con flujos de caja. La a usa beneficios (trampa contable) y la b incluye el VAN nulo, que deja indiferente y no obliga a invertir. Existe una variante donde la c dice «igualen» (VAN = 0): entonces la respuesta pasa a ser d. Repetida en 2 fuentes.
+
+1. Señale la afirmación correcta.
+
+    - ( ) a) Si el VAN de un proyecto es positivo, esto indica que la empresa con sus cobros operativos cubre solamente sus pagos operativos.
+    - ( ) b) Si el VAN de un proyecto es positivo, esto indica que la empresa con sus cobros operativos cubre los pagos operativos y la recuperación del capital invertido.
+    - (x) c) Si el VAN de un proyecto es positivo, esto indica que la empresa con sus cobros operativos cubre los pagos operativos, la recuperación del capital invertido y la retribución del coste de oportunidad del capital.
+    - ( ) d) Ninguna de las anteriores es correcta.
+
+    > Correcta: c. Al descontar a la tasa r, un VAN positivo significa que los flujos cubren los pagos, devuelven la inversión, pagan el coste de oportunidad del capital y aún dejan un excedente. La b) describe un VAN nulo calculado sin descontar. Repetida en 2 fuentes.
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) El plazo de recuperación es el tiempo que tardaría en recuperarse la inversión inicial de un proyecto con sus flujos de caja esperados. Hay que tener en cuenta que para su cálculo no debe considerarse como parte de esa inversión inicial la variación inicial de fondo de maniobra imputable al proyecto.
+    - ( ) b) El plazo de recuperación es el tiempo que tardaría en recuperarse la inversión inicial de un proyecto con sus flujos de caja esperados. Hay que tener en cuenta que para su cálculo no deben considerarse en el cálculo de los flujos de caja esperados las variaciones anuales de fondo de maniobra imputables al proyecto.
+    - ( ) c) El plazo de recuperación es el tiempo que tardaría en recuperarse la inversión inicial de un proyecto con sus flujos de caja esperados. Hay que tener en cuenta que para su cálculo no deben considerarse las variaciones de FM imputables al proyecto – ni la inicial ni las variaciones interanuales esperadas-, ya que se trata de un criterio que no se define en términos de caja.
+    - (x) d) Todas las respuestas anteriores son incorrectas.
+
+    > Correcta: d. El plazo de recuperación usa los mismos flujos de caja que el VAN, así que incluye el FM inicial en el desembolso y las variaciones anuales en los flujos. Sí es un criterio en términos de caja (falla c). Repetida en 2 fuentes.
+
+<!-- Tema 4 · Flujos de caja, impuestos, FM y valor residual -->
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) Si en un período el saldo final de clientes es mayor que el saldo inicial (manteniéndose todo lo demás constante), entonces la variación del FM será positiva, y ello hará que se deba sumar al calcular el flujo neto de caja de dicho período.
+    - ( ) b) Si en un período el saldo final de clientes es mayor que el saldo inicial (manteniéndose todo lo demás constante), entonces la variación del FM será negativa, y ello hará que se deba restar al calcular el flujo neto de caja de dicho período.
+    - (x) c) Si en un período el saldo final de clientes es mayor que el saldo inicial (manteniéndose todo lo demás constante), entonces la variación del FM será positiva, y ello hará que se deba restar al calcular el flujo neto de caja de dicho período.
+    - ( ) d) Todas las respuestas anteriores son incorrectas.
+
+    > Correcta: c. Más clientes significa más activo circulante, luego el FM aumenta (variación positiva) y esa inversión se resta del flujo (Qdi = Qai(1−tc) + CAF·tc − ΔFM). Las fuentes discrepan (b, c y d), pero solo c es coherente con la fórmula. Repetida en 4 fuentes.
+
+1. En un determinado periodo el beneficio antes de intereses e impuestos (BAIT) de una empresa es de 100€, las amortizaciones fiscales son de 5€, los gastos financieros son de 10€, el tipo del impuesto de sociedades es del 25% y no hay variación en el fondo de maniobra. Calcule el flujo de caja después de impuestos de esta empresa a efectos de valoración de un proyecto de inversión:
+
+    - ( ) a) 76,25 euros.
+    - (x) b) 80 euros.
+    - ( ) c) 68,75 euros.
+    - ( ) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: b. Los intereses no entran en el flujo: FC = BAIT·(1−0,25) + amortización = 75 + 5 = 80. La a) vuelve a restar la amortización al BAIT ((100 − 5)·0,75 + 5 = 76,25) y la c) además resta los intereses ((100 − 10 − 5)·0,75 + 5 = 68,75). Repetida en 3 fuentes.
+
+1. Suponga que estamos calculando los flujos de caja de un proyecto de inversión. En el año 1 la empresa paga sus compras de existencias al contado. En el año 2 los proveedores conceden a la empresa un plazo de 60 días. Indique el efecto de este cambio sobre los flujos de caja del segundo periodo si todo lo demás permanece constante:
+
+    - ( ) a) El aumento en el plazo de pago supone un aumento del fondo de maniobra en el año 2 respecto del 1, que dará lugar a una reducción del flujo de caja.
+    - ( ) b) La disminución en el plazo de pago supone una disminución del fondo de maniobra en el año 2 respecto del 1, que dará lugar a una reducción del flujo de caja.
+    - (x) c) El aumento en el plazo de pago supone una disminución del fondo de maniobra en el año 2 respecto del 1, que dará lugar a un aumento del flujo de caja.
+    - ( ) d) Ninguna de las afirmaciones anteriores es correcta.
+
+    > Correcta: c. Aparecen proveedores (pasivo circulante), así que FM = AC − PC disminuye; una ΔFM negativa se resta con signo menos y aumenta el flujo. Repetida en 3 fuentes.
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) En el cálculo de los flujos netos de caja de explotación anuales de un proyecto de inversión habrá que considerar el ahorro fiscal por amortizaciones financieras.
+    - ( ) b) Para calcular el resultado neto anual de un proyecto de inversión habrá que considerar, restando, las amortizaciones financieras que correspondan a cada periodo.
+    - ( ) c) Para calcular el resultado neto anual de un proyecto de inversión habrá que considerar, sumando o restando, según corresponda, los valores residuales de inmovilizado y fondo de maniobra.
+    - (x) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: d. La amortización financiera (devolución del principal de la deuda) no es gasto ni es deducible, así que no genera ahorro fiscal ni se resta del resultado. Los valores residuales son flujos de caja, no partidas del resultado (en él solo aparece la plusvalía o minusvalía). Repetida en 3 fuentes.
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - (x) a) Si en un proyecto de inversión, de un período a otro, se produce una reducción del plazo de cobro a clientes, ceteris paribus el resto de activos y pasivos circulantes, el fondo de maniobra se reduce y el flujo de caja se incrementa.
+    - ( ) b) Si en un proyecto de inversión, de un período a otro, se produce una reducción del plazo de pago a proveedores, ceteris paribus el resto de activos y pasivos circulantes, el fondo de maniobra disminuye y el flujo de caja aumenta.
+    - ( ) c) Si en un proyecto de inversión, de un período a otro, se produce una reducción del plazo de pago a proveedores, ceteris paribus el resto de activos y pasivos circulantes, el fondo de maniobra aumenta y el flujo de caja aumenta.
+    - ( ) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: a. Cobrar antes reduce clientes, el FM baja y el flujo sube. Pagar antes a proveedores reduce el pasivo circulante: el FM aumenta y el flujo disminuye, por eso fallan b) y c). Repetida en 3 fuentes.
+
+1. La empresa Lauson S.A piensa invertir en una nueva planta de producción. Lauson S.A es propietaria de los terrenos, pero deberá demoler los edificios existentes, ¿cuál de los siguientes elementos debe considerarse como flujo de caja incremental?
+
+    - ( ) a) El valor de mercado del terreno y de los edificios, los costes de demolición y limpieza, el coste de la nueva ruta de acceso que se construyó el año anterior y los flujos de caja perdidos de otros proyectos debido al tiempo de ejecución a las nuevas instalaciones.
+    - ( ) b) El valor de mercado del terreno y de los edificios, los costes de demolición y limpieza, el coste de la nueva ruta de acceso que se construyó el año anterior y la amortización futura de la nueva planta.
+    - ( ) c) El valor de mercado del terreno y de los edificios, los costes de demolición y limpieza, el coste de la nueva ruta de acceso que se construyó el año anterior, los flujos de caja perdidos de otros proyectos debido al tiempo de ejecución dedicado a las nuevas instalaciones y la amortización futura de la nueva planta.
+    - (x) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: d. Todas incluyen la ruta de acceso construida el año anterior, que es un coste hundido. Sí cuentan el valor de mercado del terreno (coste de oportunidad), la demolición y los flujos perdidos de otros proyectos; la amortización no es un flujo (solo aporta CAF·tc). Repetida en 2 fuentes.
+
+1. Se han extraído los siguientes datos del Balance de una empresa (millones de euros): Activo no corriente: 145.347€; Activo corriente: 95.543€; Patrimonio neto: 84.471€; Pasivo no corriente: 43.583€. Indique a cuánto asciende el Fondo de Maniobra:
+
+    - ( ) a) 112.836€
+    - ( ) b) 101.764€
+    - (x) c) – 17.293€
+    - ( ) d) 51.960€
+
+    > Correcta: c. Pasivo corriente = (145.347 + 95.543) − 84.471 − 43.583 = 112.836, luego FM = 95.543 − 112.836 = −17.293 (igual a PN + PNC − ANC). La a) es el pasivo corriente, la trampa. Repetida en 2 fuentes.
+
+1. Uno de los criterios generalmente aceptados para la determinación de los flujos de caja es:
+
+    - ( ) a) No tener en cuenta las variaciones del Fondo de Maniobra causadas por el proyecto.
+    - ( ) b) Hay que tener en cuenta los gastos irrecuperables.
+    - ( ) c) Los flujos de caja deben estimarse siempre antes de impuestos.
+    - (x) d) Hay que ser coherente con el uso de la inflación en las magnitudes necesarias para la valoración.
+
+    > Correcta: d. Flujos nominales con tasa nominal y reales con tasa real. Las demás contradicen los criterios: la ΔFM sí cuenta, los costes hundidos se excluyen y los flujos van después de impuestos. Repetida en 2 fuentes.
+
+1. En la valoración de proyectos de inversión, si la diferencia entre el valor residual de un inmovilizado y su valor neto contable es positiva:
+
+    - ( ) a) Esta diferencia implica un gasto extraordinario por el que la empresa tiene que reflejar un ahorro fiscal en su tributación.
+    - ( ) b) En un proyecto de inversión esta diferencia no puede ser mayor que cero en ningún caso.
+    - (x) c) La diferencia supone un ingreso o plusvalía extraordinaria por la cual la empresa tiene que tributar.
+    - ( ) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: c. Precio de venta mayor que el VNC es una plusvalía que tributa: VRdi = precio − (precio − VNC)·tc. El ahorro fiscal de la a) corresponde a la minusvalía. Repetida en 2 fuentes.
+
+1. Seleccione cuál de las respuestas siguientes se ajusta a la determinación y cuantificación de la inversión inicial en un proyecto de inversión:
+
+    - ( ) a) Coste principal, materias primas, formación del personal y mano de obra.
+    - (x) b) Coste principal, coste secundario, formación del personal y variación inicial del fondo de maniobra.
+    - ( ) c) Coste principal, materias primas, mano de obra y gastos generales.
+    - ( ) d) Ninguna de las respuestas es correcta.
+
+    > Correcta: b. El desembolso en t=0 recoge el activo, los costes secundarios (instalación, transporte), el FM inicial y los gastos de puesta en marcha o formación (estos, netos de impuestos por ser deducibles). Materias primas, mano de obra y gastos generales son costes operativos de cada año. Repetida en 2 fuentes.
+
+1. Indique la respuesta correcta:
+
+    - ( ) a) Si de un periodo a otro se produce una disminución del activo circulante operativo de 100 € y un incremento del pasivo circulante operativo de 80 €, entonces el flujo neto de caja operativo se reduce en 20 € que debe tributar, ya que existe una reducción patrimonial en la empresa.
+    - (x) b) Si de un periodo a otro se produce una disminución del activo circulante operativo de 100 € y un incremento del pasivo circulante operativo de 80 €, entonces el flujo neto de caja operativo se incrementa en 180 €.
+    - ( ) c) Si de un periodo a otro se produce una disminución del activo circulante operativo de 100 € y un incremento del pasivo circulante operativo de 80 €, entonces el flujo neto de caja operativo se incrementa en 180 € que debe tributar, ya que existe un incremento patrimonial en la empresa.
+    - ( ) d) Si de un periodo a otro se produce una disminución del activo circulante operativo de 100 € y un incremento del pasivo circulante operativo de 80 €, entonces el flujo neto de caja operativo se reduce en 20 €.
+
+    > Correcta: b. ΔFM = ΔAC − ΔPC = −100 − 80 = −180, que al restarse suma 180 al flujo. Las variaciones del FM no tributan (no son ingresos ni gastos), por eso falla la c). Repetida en 3 fuentes.
+
+1. Indica cuál de las siguientes afirmaciones sobre el cálculo de los flujos netos de caja operativos (FNC) de un proyecto de inversión es correcta:
+
+    - ( ) a) Las cuotas de amortización técnica de los activos del proyecto solo tendrían que restarse en cálculo de los FNC cuando la empresa no amortice financieramente su deuda.
+    - ( ) b) Las cuotas de amortización financiera del proyecto de inversión sólo tendrían que restarse de los FNC cuando la empresa no amortice técnicamente sus activos.
+    - (x) c) La cuota de amortización técnica de los activos del proyecto se incluye en los FNC operativos incrementales a través del impuesto sobre beneficios.
+    - ( ) d) Los gastos financieros de la deuda que financia el proyecto solo tendrían que restarse en el cálculo de los FNC cuando no estén incluidos en el coste del capital.
+
+    > Correcta: c. La amortización no es un pago; solo entra por su ahorro fiscal, CAF·tc. La amortización financiera y los intereses nunca se restan de los FNC (separación inversión-financiación). Repetida en 2 fuentes.
+
+1. Determinada empresa posee una nave industrial que necesita ser utilizada para un nuevo proyecto de inversión que aumentará su producción. Teniendo en cuenta que las decisiones de la compra se adoptan en términos incrementales, indica cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) La inversión inicial incremental sería igual al valor de la nave.
+    - ( ) b) La inversión inicial incremental será igual a la inicial del nuevo proyecto menos el valor de la nave.
+    - ( ) c) La inversión inicial incremental sería igual a la inversión inicial del nuevo proyecto.
+    - (x) d) La inversión inicial incremental sería igual a la inversión inicial del nuevo proyecto más el valor de la nave.
+
+    > Correcta: d. Usar la nave propia supone renunciar a venderla o alquilarla: su valor es un coste de oportunidad que se suma a la inversión (como el terreno de 300.000 € de la teoría). El documento marcaba b, que resta un coste en lugar de sumarlo. Repetida en 2 fuentes.
+
+1. Suponiendo la no existencia de costes financieros, la determinación del Beneficio Neto y del Flujo Neto de Caja de un determinado ejercicio se diferencian en:
+
+    - ( ) a) En los FNC se consideran las necesidades del Fondo de Maniobra y las ganancias o pérdidas patrimoniales netas de impuestos, magnitudes no consideradas como tal en el cálculo del Beneficio Neto.
+    - ( ) b) En los FNC se consideran las necesidades del Fondo de Maniobra, las ganancias o pérdidas patrimoniales netas de impuestos, los valores residuales de los activos (corrientes y no corrientes) ligados al proyecto, y la cuota de amortización fiscal antes de impuestos, magnitudes no consideradas como tal en el cálculo del Beneficio Neto.
+    - (x) c) En los FNC se consideran las necesidades del Fondo de Maniobra, los valores residuales de los activos (corrientes y no corrientes) ligados al proyecto, y el ahorro fiscal procedente del proceso de amortización contable, magnitudes no consideradas como tal en el cálculo del Beneficio Neto.
+    - ( ) d) En los FNC se consideran las necesidades del Fondo de Maniobra, única magnitud no considerada en el cálculo del Beneficio Neto.
+
+    > Correcta: c. FNC = Qai(1−tc) + CAF·tc − ΔFM + VRdi: aparecen como tales la ΔFM, los valores residuales y el ahorro fiscal CAF·tc. Las plusvalías o minusvalías sí están en el beneficio neto, por eso fallan a) y b). Repetida en 2 fuentes.
+
+1. Señale la respuesta correcta:
+
+    - ( ) a) En la determinación de los flujos netos de caja, hemos de considerar los beneficios incrementales procedentes del proyecto, así como los costes de oportunidad, los gastos generales y las necesidades del fondo de maniobra, excluyendo los costes irrecuperables.
+    - ( ) b) En la determinación de los flujos netos de caja, hemos de considerar los beneficios incrementales procedentes del proyecto, así como los gastos generales y las necesidades del fondo de maniobra, excluyendo tanto los costes de oportunidad que no supongan salidas de efectivo, como los costes irrecuperables.
+    - (x) c) En la determinación de los flujos netos de caja, hemos de considerar los beneficios incrementales procedentes del proyecto, así como los costes de oportunidad y las necesidades del fondo de maniobra, excluyendo los costes irrecuperables y aquellos gastos generales cuya imputación no sea relevante para el proyecto.
+    - ( ) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: c. Solo se imputan los gastos generales extra que provoca el proyecto (la a) los incluye todos) y los costes de oportunidad siempre cuentan aunque no sean salidas de caja (falla la b). Repetida en 2 fuentes.
+
+1. Si consideramos el criterio del VAN, indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) Los costes irrecuperables pasados deben, de alguna forma, incluirse en los flujos de caja para tomar la decisión de aceptar o rechazar el proyecto.
+    - ( ) b) Al empresario no le interesa amortizar maquinarias de forma acelerada porque reduce los flujos de caja y por tanto también el VAN.
+    - ( ) c) Los flujos de caja operativos deben tener en cuenta los intereses pagados por el endeudamiento que financia el proyecto.
+    - (x) d) Ninguna es correcta.
+
+    > Correcta: d. Los costes hundidos se excluyen; la amortización acelerada adelanta el ahorro fiscal y aumenta el VAN; y los intereses no entran en los flujos porque el coste de financiación ya está en la tasa. Repetida en 2 fuentes.
+
+1. Determinada empresa compra hoy una máquina desembolsando un importe de 10.000 €. El sistema de amortización es lineal en 5 años, admitiendo, a efectos fiscales, un valor residual de 500 €. Se estima que la máquina podrá venderse dentro de 6 años por un valor residual de 450 €. La tasa impositiva es del 35%. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - (x) a) El valor residual (después de impuestos) derivado de la venta es de 467,50 €.
+    - ( ) b) El impuesto derivado de la venta es de 20,50 €.
+    - ( ) c) El beneficio después de impuestos derivado de la venta es 35,00 €.
+    - ( ) d) El importe de la inversión inicial asciende a 6.500 €.
+
+    > Correcta: a. CAF = 9.500/5 = 1.900, así que en el año 6 el VNC es 500. Venta por 450: minusvalía de 50 y ahorro fiscal de 50·0,35 = 17,5, luego VRdi = 450 + 17,5 = 467,5. No hay impuesto a pagar ni beneficio, y la inversión es 10.000. Repetida en 2 fuentes.
+
+1. Una empresa minera está explorando diversos depósitos minerales de plata en un área de interés geológico. Aproximadamente en un 70% de las exploraciones se encuentra ante un depósito explotable, en tanto que en el resto de los casos la explotación no es viable. Incluso cuando el depósito es explotable, existe incertidumbre sobre la cantidad de mineral que se obtendrá: el 50% de los depósitos en explotación producen 10 onzas de plata al día; y el otro 50% producen 50 onzas/día (los 365 días del año). El coste de extracción es de 15 €/onza y el precio de venta de 20 €/onza. En un contexto sin impuestos, estime los flujos de caja anuales esperados de realizar una de estas exploraciones.
+
+    - ( ) a) 7.665 €.
+    - (x) b) 38.325 €.
+    - ( ) c) 54.750 €.
+    - ( ) d) Ninguna es correcta.
+
+    > Correcta: b. Producción esperada si es explotable: 0,5·10 + 0,5·50 = 30 onzas/día. Flujo esperado = 0,7 · 30 · 365 · (20 − 15) = 38.325 €. La c) olvida la probabilidad del 70 %. Repetida en 2 fuentes.
+
+1. Los datos operativos en euros de determinada empresa para un año son los siguientes: (1) Ingresos por ventas = 1.000 €, (2) Coste de ventas = 300 €, (3) Saldo inicial de existencias = 0 €, (4) Saldo final de existencias = 100 €, (5) Saldo inicial de Cuentas a Cobrar = 200 €, (6) Saldo final de Cuentas a Cobrar = 0 €, (7) Saldo inicial de Cuentas a Pagar = 0 €, (8) Saldo final de Cuentas a Pagar = 400 €. Con esta información, y en un contexto sin impuestos, indique cuál de las siguientes afirmaciones es la correcta:
+
+    - (x) a) El flujo de caja operativo en términos de tesorería es de 1.200 €.
+    - ( ) b) La variación del fondo de maniobra es -100 €.
+    - ( ) c) La variación del fondo de maniobra es de 100 €.
+    - ( ) d) El flujo de caja operativo en términos de tesorería es de 700 €.
+
+    > Correcta: a. ΔFM = ΔExistencias + ΔClientes − ΔProveedores = 100 − 200 − 400 = −500. Flujo = (1.000 − 300) − (−500) = 1.200 (cobros 1.200, pagos 0). La d) es el resultado de devengo sin ajustar el FM. Repetida en 2 fuentes.
+
+1. Indique cuál de las siguientes afirmaciones sobre la valoración de inversiones con el criterio del VAN es falsa:
+
+    - ( ) a) Al calcular el desembolso inicial de un proyecto de inversión no habrá que incorporar el importe de los desembolsos pasados e irreversibles, aunque estos se efectuarán para posibilitar la realización del proyecto.
+    - (x) b) En una inversión de renovación, el importe percibido por la venta del equipo que se sustituye aumentará la cuantía del desembolso inicial incremental.
+    - ( ) c) En una inversión de renovación, el importe percibido por la venta del equipo que se sustituye reducirá la cuantía del desembolso inicial incremental.
+    - ( ) d) Ninguna de las anteriores es correcta.
+
+    > Correcta: b. La venta del equipo viejo es un cobro en t=0 que reduce el desembolso incremental; la a) es verdadera (costes hundidos fuera). Es el problema 14 de la relación. Repetida en 3 fuentes.
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) Si al finalizar la vida de un proyecto de inversión el FM imputable al mismo – que se estima que ascenderá a 12.500€ - no puede recuperarse, este hecho no supondrá ningún efecto fiscal y por tanto el valor residual del FM después de impuestos será cero.
+    - (x) b) Si al finalizar la vida de un proyecto de inversión el FM imputable al mismo – que se estima que ascenderá a 12.500€ - no puede recuperarse, este hecho supondrá un ahorro fiscal y por tanto el valor residual del FM después de impuestos será superior a cero.
+    - ( ) c) Si al finalizar la vida de un proyecto de inversión el FM imputable al mismo – que se estima que ascenderá a 12.500€ - no puede recuperarse, este hecho supondrá una pérdida que hará que el valor residual del FM después de impuestos sea negativo.
+    - ( ) d) Todas las respuestas anteriores son falsas.
+
+    > Correcta: b. No recuperar el FM es una pérdida deducible: VRdi(FM) = 0 + 12.500·tc > 0. Igual que las existencias recuperadas al 70 % del problema 20, donde la parte perdida genera ahorro fiscal. Repetida en 2 fuentes.
+
+1. Indique cuál de las siguientes afirmaciones es incorrecta:
+
+    - ( ) a) Si después de haber realizado las estimaciones correspondientes para valorar un proyecto de inversión se modificara el criterio de amortización del inmovilizado de dicho proyecto (estando el nuevo también admitido a efectos fiscales), habría un cambio en los BAITs calculados con las estimaciones iniciales.
+    - ( ) b) Si después de haber realizado las estimaciones correspondientes para valorar un proyecto de inversión se modificara el criterio de amortización del inmovilizado de dicho proyecto (estando el nuevo también admitido a efectos fiscales), habría un cambio en los flujos netos de caja calculados con las estimaciones iniciales.
+    - (x) c) Si después de haber realizado las estimaciones correspondientes para valorar un proyecto de inversión se modificara el criterio de amortización de la deuda que lo financia, habría un cambio en los BAITs del proyecto calculados con las estimaciones iniciales.
+    - ( ) d) Si después de haber realizado las estimaciones correspondientes para valorar un proyecto de inversión se modificara el criterio de amortización de la deuda que lo financia, habría un cambio en los resultados netos del proyecto calculados con las estimaciones iniciales.
+
+    > Correcta: c. El BAIT es antes de intereses, así que cambiar el calendario de la deuda no lo altera. Sí cambia los intereses de cada año y, por tanto, el resultado neto (la d es verdadera). Cambiar la amortización técnica altera el BAIT y, vía CAF·tc, los FNC. El documento marcaba d. Repetida en 2 fuentes.
+
+1. En la aplicación de la ley de la morosidad, una empresa reduce el plazo de cobro a clientes desde 75 días que se concedían en 2015 a 60 días que se conceden en 2016. En ambos ejercicios, las ventas fueron de 90.000 €, estando estas ventas repartidas uniformemente a lo largo de todo el año. ¿Qué efecto debió tener este cambio en la política de cobro sobre el flujo de tesorería de las operaciones de 2016 respecto de las de 2015? Suponga que el resto de las variables permanece constante y que el año son 360 días:
+
+    - ( ) a) Esto daría lugar a un aumento del Fondo de Maniobra en 2016 respecto de 2015 de 3.750 €, por lo que el flujo de caja de 2016 disminuye.
+    - ( ) b) Esto daría lugar a una disminución del Fondo de Maniobra en 2016 respecto de 2015 de 3.750 €, por lo que el flujo de caja de 2016 disminuye.
+    - ( ) c) Esto daría lugar a una disminución del Fondo de Maniobra en 2016 respecto de 2015 (que no es posible cuantificar con los datos del enunciado) por lo que el flujo de caja de 2016 aumenta.
+    - (x) d) Ninguna es correcta.
+
+    > Correcta: d. Clientes = 90.000·75/360 = 18.750 en 2015 y 90.000·60/360 = 15.000 en 2016: el FM baja 3.750 € y el flujo de caja aumenta 3.750 €. Sí es cuantificable (falla c) y el flujo no disminuye (fallan a y b). El documento marcaba c. Repetida en 2 fuentes.
+
+1. Una empresa se está planteando la conveniencia de ampliar su dimensión incorporando a las máquinas actuales nuevos equipos derivados de un nuevo modelo que se presenta en el mercado. Si desea calcular los flujos de caja incrementales (de ampliar la empresa frente a no ampliar y seguir con la estructura actual), indique cuál de las siguientes afirmaciones es la correcta:
+
+    - ( ) a) El coste inicial incremental de la ampliación debe tener en cuenta la posible venta de los equipos antiguos.
+    - ( ) b) El coste inicial incremental de la ampliación debe tener en cuenta la posible venta de los equipos actuales y el flujo de caja incremental solo debe considerar los flujos de caja proporcionados por los nuevos equipos.
+    - ( ) c) En este tipo de proyectos el coste inicial incremental no debe tener en cuenta la posible venta de los equipos actuales y el flujo de caja incremental solo debe considerar los flujos de caja proporcionados por los equipos actuales.
+    - (x) d) Las respuestas a), b) y c) son falsas
+
+    > Correcta: d. En una ampliación los equipos actuales se mantienen: no hay venta que restar y el flujo incremental es el de los equipos nuevos. La a) y la b) meten la venta (eso sería renovación) y la c) toma los flujos de los equipos actuales. Repetida en 2 fuentes (en una versión del banco la c) habla de «los nuevos»).
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) A la hora de calcular los flujos de tesorería a descontar para obtener el VAN de un proyecto de inversión, no habrá que incluir en dicho cálculo los efectos derivados de otras actividades que desarrolla la empresa, ya que sólo nos interesa el proyecto aisladamente considerado.
+    - ( ) b) A la hora de calcular los flujos de tesorería a descontar para obtener el VAN de un proyecto de inversión, no habrá que incluir en dicho cálculo los gastos generales en los que se puede incurrir, tales como alquileres, calefacción o electricidad, ya que al afectar a distintos proyectos no se pueden asignar a todos a la vez.
+    - (x) c) A la hora de calcular los flujos de tesorería a descontar para obtener el VAN de un proyecto de inversión, habrá que incluir en dicho cálculo los efectos que el mismo pueda tener sobre otras actividades que desarrolla la empresa, ya que al considerar el proyecto con el resto del negocio éste puede aportar valor a los accionistas.
+    - ( ) d) Las respuestas a), b) y c) son falsas
+
+    > Correcta: c. Hay que incluir todos los efectos del proyecto sobre el resto de la empresa (el tramo de ferrocarril, la canibalización, las sinergias). Los gastos generales extra que provoque sí se incluyen, por eso falla la b). Repetida en 2 fuentes.
+
+1. Indica la respuesta correcta:
+
+    - ( ) a) El flujo de caja libre es igual al beneficio después de pagar intereses e impuestos, menos la cuota de amortización técnica, menos la inversión en activos fijos y menos la inversión en capital circulante.
+    - (x) b) El flujo de caja libre es igual al beneficio operativo después de pagar impuestos, más la cuota de amortización técnica, menos la inversión en activos fijos y menos la inversión en capital circulante.
+    - ( ) c) El flujo de caja libre es igual al beneficio después de pagar intereses, pero antes de pagar impuestos, menos la cuota de amortización técnica, menos la inversión en activos fijos y menos la inversión en capital circulante.
+    - ( ) d) El flujo de caja libre es igual al beneficio antes de pagar intereses e impuestos, más la cuota de amortización técnica, menos la inversión en activos fijos y menos la inversión en capital circulante.
+
+    > Correcta: b. FCL = BAIT(1−tc) + amortización − inversión en activo fijo − ΔFM, que equivale a Qai(1−tc) + CAF·tc − ΔFM. La a) y la c) meten intereses y restan la amortización; la d) olvida los impuestos. Repetida en 2 fuentes.
+
+1. Indique la respuesta correcta:
+
+    - ( ) a) Si en la vida de un proyecto de inversión, de un período a otro, se produce una reducción del período de cobro, ceteris paribus, que da lugar a un aumento del fondo de maniobra, este incremento deberá restarse al calcular el flujo de caja del período correspondiente.
+    - ( ) b) Si en la vida de un proyecto de inversión, de un período a otro, ceteris paribus, se produce una reducción del período de cobro que da lugar a una disminución del fondo de maniobra, este decremento (en valor absoluto) deberá restarse al calcular el flujo de caja del período correspondiente.
+    - (x) c) Si en la vida de un proyecto de inversión, de un período a otro, ceteris paribus, se produce una reducción del período de cobro que da lugar a una disminución del fondo de maniobra, este decremento (en valor absoluto) deberá sumarse al calcular el flujo de caja del período correspondiente.
+    - ( ) d) Si en la vida de un proyecto de inversión, de un período a otro, se produce una reducción del período de cobro, ceteris paribus, que da lugar a un aumento del fondo de maniobra, este incremento deberá sumarse al calcular el flujo de caja del período correspondiente.
+
+    > Correcta: c. Cobrar antes reduce clientes y el FM; esa reducción libera caja y se suma al flujo. La a) y la d) parten de un aumento del FM, que no se produce. Repetida en 2 fuentes.
+
+1. Indique la respuesta correcta:
+
+    - ( ) a) Al calcular los flujos netos de caja de un proyecto, deberá deducirse el importe de los gastos financieros de la deuda que financia el proyecto siempre que los mismos se hagan efectivos en el año considerado.
+    - ( ) b) Al calcular los flujos netos de caja de un proyecto, deberá deducirse el importe de los gastos financieros de la deuda que financia el proyecto devengados en el año considerado, con independencia del momento en que tenga lugar su pago.
+    - ( ) c) Al calcular los flujos netos de caja de un proyecto, deberá deducirse, además de los gastos financieros efectivamente pagados, la parte amortización financiera correspondiente al período considerado.
+    - (x) d) Al calcular los flujos netos de caja de un proyecto, no deberá deducirse ni el importe de los gastos financieros devengados en ese período, ni la amortización financiera correspondiente al mismo.
+
+    > Correcta: d. Ni intereses ni devolución del principal entran en los flujos del VAN: la financiación se recoge en la tasa de descuento. Repetida en 2 fuentes.
+
+<!-- Tema 4 · CAE, inflación y elección entre equipos -->
+
+1. La empresa de edición de libros está considerando la posibilidad de reemplazar la prensa actual por otra nueva, siendo capaces ambas de fabricar el mismo número de libros al año. Sabemos que la demanda asciende a 500 libros mensuales desde abril hasta septiembre (ambos incluidos), y de 350 mensuales el resto del año, pudiendo venderse todos a 10€ por cada unidad. El coste de fabricación de un libro es de 3,5€ (prensa antigua) y 2,5€ (prensa nueva) por cada unidad. Además, el valor residual (hoy) de la prensa antigua es de 650€, y el precio de adquisición de la prensa nueva es de 30.000€. Por último, sabemos que, en 10 años, el modelo de negocio de las editoras de libros cambiará radicalmente, acabando con el uso de la práctica totalidad de las prensas (y, por tanto, careciendo todas de valor residual). ¿Cuál es la mejor alternativa para esta empresa, para una tasa de actualización del 10%?
+
+    - ( ) a) Comprar la máquina nueva (supone un ahorro de 1.337,29€ con respecto a continuar con la prensa antigua).
+    - (x) b) Comprar la máquina nueva (supone un ahorro de 1.987,29€ con respecto a continuar con la prensa antigua).
+    - ( ) c) Comprar la máquina nueva (supone un ahorro de 21.650€ con respecto a continuar con la prensa antigua).
+    - ( ) d) Comprar la máquina nueva (supone un ahorro de 47.169,48€ con respecto a continuar con la prensa antigua).
+
+    > Correcta: b. Producción anual = 6·500 + 6·350 = 5.100 libros; ahorro de 1 €/libro = 5.100 €/año durante 10 años: 5.100·a(10; 10 %) = 31.337,29. Ahorro neto = 31.337,29 − 30.000 + 650 (venta de la vieja) = 1.987,29. La a) resta los 650 en lugar de sumarlos. Repetida en 2 fuentes.
+
+1. La decisión sobre la conveniencia de renovar un equipo en funcionamiento al que aún le queda vida útil por otro de distinta duración que permitirá fabricar el mismo producto en la misma cantidad habría de tomarse basándose en:
+
+    - ( ) a) El VAN incremental.
+    - (x) b) El coste anual equivalente incremental.
+    - ( ) c) La TIR incremental.
+    - ( ) d) La comparación entre la vida útil de los dos equipos.
+
+    > Correcta: b. Con duraciones distintas y misma producción no se comparan VAN ni TIR: se compara el coste anual (equivalente) de cada opción, es decir, el coste de un año más con el viejo frente al CAE del nuevo. Repetida en 2 fuentes.
+
+1. Se depositan hoy en el banco 1.100 €. El depósito contratado promete al cabo de 1 año un flujo de tesorería nominal de 1.155 €. La tasa de inflación esperada para el próximo año se sitúa en el 1,5%. A la vista de la información, indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) La rentabilidad nominal de este depósito es del 5,125% y su rentabilidad real del 2,566%.
+    - (x) b) La rentabilidad nominal de este depósito es del 5% y su rentabilidad real del 3,448 %.
+    - ( ) c) La rentabilidad nominal de este depósito es del 5% y su rentabilidad real es del 4,926 %.
+    - ( ) d) La rentabilidad nominal de este depósito es del 5,125 % y su rentabilidad real del 2,625%.
+
+    > Correcta: b. Nominal = 1.155/1.100 − 1 = 5 %. Real = 1,05/1,015 − 1 = 3,448 % (la aproximación 5 − 1,5 = 3,5 % no es exacta). Repetida en 2 fuentes.
+
+1. Un inversor inmobiliario tiene arrendada una nave industrial. El año próximo prevé generar un flujo de caja nominal de 100.000 euros, neto de gastos de reparación y funcionamiento, que se incrementará anualmente con la inflación al 2%. Si se pudiese alquilar este edificio en tales condiciones a perpetuidad y el tipo de interés real es del 5%, ¿cuál es el valor actual de este edificio?
+
+    - ( ) a) Aproximadamente 2.262.881,69 euros.
+    - ( ) b) Aproximadamente 2.000.000 euros.
+    - (x) c) Aproximadamente 1.960.784,31 euros.
+    - ( ) d) Aproximadamente 3.400.000 euros.
+
+    > Correcta: c. Tasa nominal = 1,05·1,02 − 1 = 7,1 %, y VA = 100.000/(0,071 − 0,02) = 1.960.784,31. En real da lo mismo: 100.000/1,02 = 98.039,22 y 98.039,22/0,05. La b) mezcla flujo nominal con tasa real. Repetida en 2 fuentes.
+
+1. De una determinada inversión se espera obtener los siguientes flujos de tesorería en términos reales: C0 = -100, Q1 = 80, Q2 = 90, Q3 = 70 y Q4 = 100. Sabiendo que el coste de oportunidad del capital, expresado en términos nominales, es del 13,3%, y que la tasa de inflación prevista asciende al 3% anual, el VAN de esta inversión es de, aproximadamente:
+
+    - (x) a) 168 €.
+    - ( ) b) 149,50 €.
+    - ( ) c) 165 €.
+    - ( ) d) 268 €.
+
+    > Correcta: a. Tasa real = 1,133/1,03 − 1 = 10 %. VAN = −100 + 80/1,1 + 90/1,1^2 + 70/1,1^3 + 100/1,1^4 = 168,00. La d) es el VA sin restar la inversión; la b) descuenta flujos reales a la tasa nominal. Repetida en 2 fuentes.
+
+1. Indique cuál de las siguientes afirmaciones sobre el cálculo del coste anual equivalente es cierta:
+
+    - ( ) a) No resulta conveniente calcular el coste anual equivalente en anualidades reales porque puede proporcionar resultados incorrectos cuando las tasas de inflación son elevadas.
+    - ( ) b) Este cálculo solo es apropiado cuando estamos comparando proyectos de inversiones mutuamente excluyentes, pero de idéntica duración o estructura temporal.
+    - ( ) c) El criterio del VAN es más adecuado que el del coste anual equivalente en cualquier circunstancia. Si existe discrepancia entre ambos cálculos, siempre emplearemos el primer método de valoración.
+    - (x) d) Ninguna de las anteriores es correcta.
+
+    > Correcta: d. Se recomienda calcular el CAE en términos reales (el nominal no es constante); el CAE sirve precisamente para duraciones distintas; y con duraciones distintas el VAN no es preferible. Es el problema 23 de la relación. Repetida en 2 fuentes.
+
+1. El Cibercafé Granada, S.L., a fin de mantener y ampliar su servicio, necesita adquirir 20 nuevos ordenadores personales, dudando su directivo financiero entre dos modelos: el 500X cuesta 350.000 ptas., dura 3 años y tiene un mantenimiento anual (en términos reales) de 25.000 ptas.; el 700Y cuesta 450.000 ptas., dura 5 años y su mantenimiento es de 10.000 ptas. Teniendo en cuenta que el coste de oportunidad del capital en términos reales es del 10%, ¿qué modelo recomendaría comprar a esta empresa?
+
+    - ( ) a) El modelo 700Y porque tiene un valor actual de sus costes menor.
+    - ( ) b) El modelo 500X porque tiene un valor actual de sus costes menor.
+    - (x) c) El modelo 700Y porque tiene un coste anual equivalente menor.
+    - ( ) d) El modelo 500X porque tiene un coste anual equivalente menor.
+
+    > Correcta: c. VA(500X) = 350.000 + 25.000·a(3; 10 %) = 412.171 y CAE = 412.171/2,4869 = 165.740. VA(700Y) = 450.000 + 10.000·a(5; 10 %) = 487.908 y CAE = 487.908/3,7908 = 128.709. Por VA ganaría el 500X (b), pero con vidas distintas se usa el CAE. Repetida en 2 fuentes.
+
+<!-- Tema 1 · La empresa y el director financiero -->
+
+1. Indique cuál de las siguientes afirmaciones es falsa:
+
+    - ( ) a) Los flujos de tesorería se descuentan por dos razones: primero, porque 1 u.m. hoy vale más que 1 u.m. mañana, y, segundo, porque 1 u.m. con riesgo vale menos que 1 u.m. sin riesgo.
+    - ( ) b) Para calcular el valor actual de un proyecto, es preciso descontar sus flujos de caja esperados a la tasa de rentabilidad ofrecida por inversiones comparables.
+    - ( ) c) Actualmente se considera que la maximización del beneficio no es el principal objetivo de la función financiera.
+    - (x) d) Es necesario que la empresa establezca su política de inversión en orden a obtener una secuencia de flujos de tesorería que coincida con las pautas temporales de consumo preferidas por los accionistas.
+
+    > Correcta: d. Por la separación de Fisher, con mercado de capitales perfecto cada accionista adapta sus flujos a su pauta de consumo prestando o endeudándose; la empresa solo debe maximizar el VAN. Las otras tres son ciertas.
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) Puesto que un directivo financiero debería actuar en interés de sus accionistas, debería elegir activos de alto o bajo riesgo, para respetar las preferencias de los accionistas.
+    - ( ) b) Puesto que un directivo financiero debería actuar en interés de sus accionistas, debería adaptar el plan de inversión de la empresa a las pautas temporales de consumo preferidas por los accionistas.
+    - (x) c) Las respuestas a y b son falsas.
+    - ( ) d) Las respuestas a y b son correctas.
+
+    > Correcta: c. El directivo actúa en interés de los accionistas maximizando el VAN; ni el riesgo ni la pauta de consumo de cada accionista condicionan la inversión, porque cada uno los ajusta en el mercado de capitales.
+
+1. ¿Cuál es el objetivo principal de la función financiera?
+
+    - ( ) a) Reducir los costes de la empresa.
+    - (x) b) Maximizar el valor para los accionistas.
+    - ( ) c) Incrementar las ventas.
+    - ( ) d) Controlar los gastos operativos.
+
+    > Correcta: b. El objetivo es maximizar el valor de mercado de las acciones; reducir costes o aumentar ventas solo son medios y no garantizan crear valor.
+
+1. ¿Qué decisión pertenece al ámbito del director financiero?
+
+    - ( ) a) La estrategia de marketing de productos.
+    - (x) b) La emisión de bonos para financiar una nueva planta.
+    - ( ) c) El diseño de nuevos productos.
+    - ( ) d) La contratación de personal.
+
+    > Correcta: b. Emitir bonos es una decisión de financiación, una de las dos decisiones financieras básicas. Marketing, diseño y personal son de otras áreas.
+
+1. ¿Cuál de las siguientes es una decisión financiera básica?
+
+    - ( ) a) Decisiones de marketing.
+    - (x) b) Decisiones de inversión.
+    - ( ) c) Decisiones operativas.
+    - ( ) d) Decisiones de personal.
+
+    > Correcta: b. Las dos decisiones financieras básicas son la de inversión (en qué activos reales invertir) y la de financiación (cómo obtener el dinero).
+
+1. El director financiero NO es responsable de:
+
+    - ( ) a) La gestión de la tesorería.
+    - ( ) b) La política de dividendos.
+    - (x) c) El marketing estratégico.
+    - ( ) d) Las relaciones con los mercados financieros.
+
+    > Correcta: c. Tesorería, dividendos y relación con los mercados financieros son funciones del tesorero y del área financiera; el marketing no.
+
+1. ¿Qué tipo de empresa tiene responsabilidad ilimitada?
+
+    - ( ) a) Sociedad anónima.
+    - ( ) b) Empresa pública.
+    - (x) c) Empresa individual.
+    - ( ) d) Cooperativa.
+
+    > Correcta: c. El empresario individual responde de las deudas con todo su patrimonio personal; en la sociedad anónima los accionistas solo arriesgan lo aportado.
+
+1. ¿Qué caracteriza una Sociedad Limitada (S.L.)?
+
+    - ( ) a) Acceso libre a los mercados financieros.
+    - (x) b) Responsabilidad limitada de los socios.
+    - ( ) c) Emisión obligatoria de acciones.
+    - ( ) d) Propiedad estatal.
+
+    > Correcta: b. Los socios responden solo con su aportación. La S.L. emite participaciones, no acciones, y no cotiza en bolsa.
+
+1. ¿Qué es una institución financiera?
+
+    - (x) a) Un intermediario entre ahorradores e inversores.
+    - ( ) b) Un mercado de renta variable.
+    - ( ) c) Una empresa que fabrica bienes de consumo.
+    - ( ) d) Una entidad gubernamental que regula los mercados.
+
+    > Correcta: a. Bancos, aseguradoras, fondos de inversión y de pensiones canalizan el ahorro hacia la inversión, agregando importes, transformando plazos y diversificando riesgos.
+
+1. ¿Qué tipo de mercado facilita la emisión de activos financieros?
+
+    - ( ) a) Mercado secundario.
+    - ( ) b) Mercado de derivados.
+    - (x) c) Mercado primario.
+    - ( ) d) Mercado de bienes de consumo.
+
+    > Correcta: c. En el mercado primario la empresa vende títulos nuevos y capta fondos; el secundario solo negocia títulos ya emitidos.
+
+1. ¿Qué mercados negocian activos ya emitidos?
+
+    - ( ) a) Mercados primarios.
+    - (x) b) Mercados secundarios.
+    - ( ) c) Mercados monetarios.
+    - ( ) d) Mercados futuros.
+
+    > Correcta: b. El secundario negocia títulos ya emitidos entre inversores; no financia a la empresa, pero da liquidez y precio. El monetario se define por el plazo (menos de un año), no por si el título es nuevo.
+
+1. ¿Qué función financiera busca garantizar liquidez diaria?
+
+    - ( ) a) La gestión de inversiones.
+    - (x) b) La gestión de la tesorería.
+    - ( ) c) La política de dividendos.
+    - ( ) d) La planificación estratégica.
+
+    > Correcta: b. La gestión de tesorería (función del tesorero) asegura que haya liquidez para atender los pagos del día a día.
+
+1. Indique cuál es correcta:
+
+    - ( ) a) El objetivo fundamental de la dirección financiera de la empresa es el de maximizar el beneficio neto obtenido por la empresa en cada periodo.
+    - ( ) b) Para calcular el valor actual de un proyecto de inversión, se descuentan los beneficios futuros esperados del mismo a la tasa de rentabilidad ofrecida por alternativas de inversión similares. Esta tasa se conoce como coste de oportunidad de capital.
+    - ( ) c) El directivo financiero debe actuar como intermediario entre las operaciones de la empresa y el mercado bursátil.
+    - (x) d) Ninguna es correcta.
+
+    > Correcta: d. Variante de una pregunta anterior con una trampa nueva: el director financiero hace de intermediario con los mercados financieros en general, no solo con la bolsa. La a confunde el objetivo con el beneficio y la b descuenta beneficios en lugar de flujos de caja.
+
+<!-- Tema 2 · Fundamentos del VAN (Fisher) -->
+
+1. Una empresa tiene un presupuesto de tesorería disponible en el momento actual de 20.000 euros. Si decidiera invertir hoy el 25% de la tesorería en un proyecto empresarial a un año podría obtener un VAN máximo de 1.000 euros. El tipo de interés en el mercado de capitales es del 10%. ¿Cuál sería el flujo de caja del proyecto dentro de un año, si establece como objetivo tener un disponible que le aporte el mayor consumo posible en el momento actual? ¿A cuánto asciende dicho disponible para consumo actual?
+
+    - (x) a) Flujo de Caja dentro de un año de 6.600 euros / Disponible actual = 21.000 euros.
+    - ( ) b) Flujo de Caja dentro de un año de 6.000 euros / Disponible actual = 21.000 euros.
+    - ( ) c) Flujo de Caja dentro de un año de 5.000 euros / Disponible actual = 20.000 euros.
+    - ( ) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: a. Se invierten 0,25 x 20.000 = 5.000, así que VA = 5.000 + 1.000 = 6.000 y el flujo en t=1 es 6.000 x 1,10 = 6.600. El consumo actual máximo es 15.000 + 6.000 = 21.000 (o 20.000 + VAN). La b confunde el valor actual (6.000) con el flujo futuro.
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) Sólo es posible que exista acuerdo respecto al objetivo financiero si se suponen mercados no perfectos de capitales, ya que en otro caso no podría definirse la inversión óptima para maximizar el VAN, y de este modo, satisfacer los intereses de cualquier accionista.
+    - ( ) b) Nunca es posible que exista acuerdo respecto al objetivo financiero, puesto que tanto si se suponen mercados perfectos como imperfectos de capitales, dos accionistas con distintas pautas de consumo preferidas no coincidirían al definir la inversión óptima de maximizar el VAN.
+    - (x) c) Sólo es posible que exista acuerdo respecto al objetivo financiero si se suponen mercados perfectos de capitales, ya que en otro caso no podría definirse la inversión óptima para maximizar el VAN, y de este modo, satisfacer los intereses de cualquier accionista.
+    - ( ) d) Las respuestas a) b) c) son falsas.
+
+    > Correcta: c. Solo con mercado perfecto (mismo tipo para prestar y endeudarse) se cumple la separación de Fisher y todos los accionistas coinciden en la inversión que maximiza el VAN. En mercados imperfectos la recta se quiebra y cada tipo de inversor prefiere una inversión distinta.
+
+1. Se depositan hoy en un banco 1.050 euros. El depósito contratado promete al cabo de 1 año un flujo de tesorería nominal de 1.105,125. La tasa de inflación esperada para el próximo año es del 2,5%. A la vista de esta información, indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) La rentabilidad nominal de este depósito es del 5,125%, y su rentabilidad real del 2,56%.
+    - ( ) b) La rentabilidad nominal de este depósito es del 5,125%, y su rentabilidad real del 2,625%.
+    - (x) c) La rentabilidad nominal de este depósito es del 5,25%, y su rentabilidad real del 2,68%.
+    - ( ) d) La rentabilidad nominal de este depósito es del 5,25%, y su rentabilidad real del 2,75%.
+
+    > Correcta: c. Nominal = 1.105,125/1.050 - 1 = 5,25 %. Real = 1,0525/1,025 - 1 = 2,68 % (la d resta sin más 5,25 - 2,5, que es solo la aproximación).
+
+1. Al valorar activos, el hecho de descontar los flujos de tesorería esperados viene motivado por:
+
+    - ( ) a) Exclusivamente porque una unidad monetaria hoy vale menos que una unidad monetaria mañana.
+    - (x) b) Primero, porque una unidad monetaria hoy vale más que una unidad monetaria mañana, y, segundo, porque una unidad monetaria con riesgo vale menos que una sin riesgo.
+    - ( ) c) Primero, porque una unidad monetaria hoy vale más que una unidad monetaria mañana, y, segundo, porque una unidad monetaria con riesgo vale más que una unidad monetaria sin riesgo.
+    - ( ) d) Primero, porque una unidad monetaria hoy vale menos que una unidad monetaria mañana, y, segundo, porque una unidad monetaria con riesgo vale menos que una sin riesgo.
+
+    > Correcta: b. Son los dos principios fundamentales de las finanzas: un euro hoy vale más que uno mañana y un euro seguro vale más que uno arriesgado. Las demás invierten alguno de los dos.
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) La existencia del mercado de capitales perfectos no permite que los inversores puedan adaptar sus percepciones de flujos de caja a sus pautas de consumo.
+    - ( ) b) Cuando se considera un mercado de capitales perfectamente competitivo, alguien que prefiera invertir y alguien que prefiera endeudarse no estarían de acuerdo en cuanto a la cantidad óptima a invertir para maximizar el VAN de la inversión en activos reales.
+    - ( ) c) Cuando se considera un mercado de capitales perfectamente competitivo, tanto el que tenga preferencia por el consumo actual como el que prefiera consumo futuro, otorgan un valor distinto a las inversiones de la empresa, ya que se enfrentan a distintas oportunidades de tomar prestado y prestar.
+    - (x) d) Ninguna es correcta.
+
+    > Correcta: d. El mercado de capitales permite justamente adaptar los flujos al consumo (a falsa) y, si es perfecto, todos prestan y se endeudan al mismo tipo, así que coinciden en la inversión óptima y en el valor de los proyectos (separación de Fisher): b y c son falsas.
+
+1. ¿Qué mide el coste de oportunidad del Capital?
+
+    - ( ) a) El coste de emitir bonos.
+    - (x) b) La rentabilidad mínima que exigen los inversores.
+    - ( ) c) Los gastos operativos de la empresa.
+    - ( ) d) La depreciación de los activos.
+
+    > Correcta: b. Es la rentabilidad que el inversor podría obtener en el mercado con una inversión de igual riesgo, luego la mínima que exige al proyecto. No depende de cómo se financie.
+
+1. ¿Qué es el coste de oportunidad?
+
+    - ( ) a) El coste de financiar un proyecto con deuda.
+    - (x) b) El rendimiento de la mejor alternativa no seleccionada.
+    - ( ) c) El coste de emitir acciones.
+    - ( ) d) Los gastos fijos de la empresa.
+
+    > Correcta: b. Es lo que se deja de ganar en la mejor alternativa a la que se renuncia; no es un coste de financiación (a, c) ni un gasto contable (d).
+
+1. ¿Qué representa el valor temporal del dinero?
+
+    - ( ) a) Que el dinero no pierde valor con el tiempo.
+    - (x) b) Que el dinero vale más hoy que mañana.
+    - ( ) c) Que el dinero tiene un valor constante en el tiempo.
+    - ( ) d) Que el dinero no genera intereses.
+
+    > Correcta: b. Un euro hoy vale más que un euro mañana porque se puede invertir y generar intereses.
+
+1. ¿Qué representa el Valor Residual?
+
+    - ( ) a) Los ingresos operativos del primer año.
+    - (x) b) El valor esperado de los activos al final de un proyecto.
+    - ( ) c) Los dividendos generados por las acciones.
+    - ( ) d) El coste de emitir bonos.
+
+    > Correcta: b. Es lo que se espera obtener por los activos (y el fondo de maniobra) al terminar el proyecto, y entra como flujo en el último año.
+
+1. Si el VAN de un proyecto es positivo, significa que:
+
+    - ( ) a) La inversión no es viable.
+    - ( ) b) El proyecto no genera valor.
+    - (x) c) El proyecto genera valor adicional para la empresa.
+    - ( ) d) Los flujos de caja son insuficientes.
+
+    > Correcta: c. VAN > 0 significa que el valor actual de los flujos supera al desembolso: aumenta la riqueza del accionista.
+
+1. ¿Qué criterio utiliza El Valor Actual Neto (VAN)?
+
+    - ( ) a) Los beneficios contables futuros.
+    - (x) b) Los flujos de caja futuros descontados.
+    - ( ) c) Los ingresos operativos.
+    - ( ) d) Las inversiones en capital circulante.
+
+    > Correcta: b. El VAN descuenta flujos de caja al coste de oportunidad del capital, no beneficios contables.
+
+1. ¿Qué representa la tasa de descuento VAN?
+
+    - ( ) a) Los costes operativos del proyecto.
+    - (x) b) El coste del capital de la empresa.
+    - ( ) c) Los flujos de caja esperados.
+    - ( ) d) El valor contable de los activos.
+
+    > Correcta: b. La tasa de descuento es el coste de oportunidad del capital (con rigor, el de un activo con el riesgo del proyecto). Las demás opciones no son tasas.
+
+1. ¿Qué sucede si se usa una tasa de descuento incorrecta en la valoración de un proyecto?
+
+    - (x) a) El VAN puede sobreestimarse o infraestimarse.
+    - ( ) b) Los flujos de caja del proyecto no cambian.
+    - ( ) c) La inversión inicial aumenta automáticamente.
+    - ( ) d) El proyecto se vuelve más viable.
+
+    > Correcta: a. Una tasa demasiado baja infla el VAN y una demasiado alta lo reduce, y se pueden aceptar o rechazar proyectos por error.
+
+1. ¿Qué ocurre si una empresa usa una tasa de descuento más alta de lo debido?
+
+    - ( ) a) Los proyectos serán más fácilmente aceptados.
+    - (x) b) El VAN de los proyectos será menor al real.
+    - ( ) c) La rentabilidad de los proyectos aumenta.
+    - ( ) d) El coste de capital se reduce.
+
+    > Correcta: b. El VAN es decreciente en r: con una tasa mayor, el VAN calculado es menor que el verdadero y se rechazarán proyectos buenos (a falsa).
+
+<!-- Tema 2 · Obligaciones y tipos de interés -->
+
+1. Dada la siguiente información sobre tres obligaciones, indique cuál de las siguientes afirmaciones es correcta. Bono A: nominal 1.000 €, 3 años, tipos 2 % y 3 %, precio 928 €. Bono B: nominal 1.000 €, 2 años, tipos 2,5 % y 2,5 %, precio 1.001 €. Bono C: nominal 1.000 €, 4 años, tipos 3 % y 2 %, precio 1.034 €.
+
+    - ( ) a) La información sobre el bono A es correcta.
+    - ( ) b) La información sobre el bono B es correcta.
+    - ( ) c) La información sobre el bono C es correcta.
+    - (x) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: d. A: con cupón 2 % y mercado 3 % vale 971,71 (o 1.028,84 al revés), nunca 928. B: si cupón = tipo de mercado cotiza a la par, 1.000, no 1.001. C: vale 1.038,08 con mercado 2 % y cupón 3 % (o 962,83 al revés), no 1.034. Repetida 2 veces en el banco FICO.
+
+1. Si se consideran dos bonos del Estado a 5 años, uno con pago periódico de cupones y otro cupón cero, y con el mismo tipo de interés, indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) El bono menos sensible a cambios en los tipos de interés es el cupón cero.
+    - (x) b) El bono menos sensible a cambios en los tipos de interés es el que paga periódicamente cupones.
+    - ( ) c) Ambos bonos tienen la misma sensibilidad a cambios en los tipos de interés.
+    - ( ) d) Todas las respuestas anteriores son falsas.
+
+    > Correcta: b. A igual plazo, cuanto menor es el cupón mayor es el riesgo de tipo de interés: el cupón cero tiene una vida media más larga y es el más sensible. Repetida 2 veces en el banco FICO.
+
+1. Dada la siguiente información sobre dos bonos: Bono A: vencimiento 4 años, cupón 1,6 %, TIR 1,2 %, nominal 1.000 €. Bono B: vencimiento 4 años, cupón 0 %, TIR 1,2 %, nominal 1.000 €. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) Ante una subida del 0,3% en la rentabilidad del mercado, el precio del Bono B subiría más que el precio del Bono A.
+    - (x) b) Ante una subida del 0,3% en la rentabilidad del mercado, el precio del Bono B bajaría más que el precio del Bono A.
+    - ( ) c) Ante una bajada del 0,3% en la rentabilidad del mercado, la subida en el precio de los dos bonos será exactamente la misma.
+    - ( ) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: b. Si sube el tipo, los precios bajan (a falsa), y el cupón cero B, de vida media más larga, es más sensible y baja más; por la misma razón c es falsa.
+
+1. Hace cinco años una empresa emitió una obligación a 10 años. La rentabilidad a exigir hoy por los inversores para adquirir dicho bono será:
+
+    - ( ) a) La rentabilidad que están ofreciendo hoy los bonos del Estado a 5 años.
+    - ( ) b) La rentabilidad que están ofreciendo hoy las obligaciones del Estado a 10 años.
+    - (x) c) La rentabilidad que están ofreciendo hoy los bonos de empresas de la misma calificación crediticia a 5 años.
+    - ( ) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: c. Se usa el tipo de mercado de hoy para el plazo que queda (5 años) y con el mismo riesgo de impago: un bono de empresa exige la prima de fallido que no tiene el del Estado (a falsa).
+
+1. Dada la siguiente información sobre dos obligaciones: Obligación A: cupón 2,6 %, TIR 2,5 %, nominal 1.000 €. Obligación B: cupón 1,4 %, TIR 1,6 %, nominal 1.000 €. Si un inversor dispone hoy de 50.000 €, indique cuál de las afirmaciones es correcta:
+
+    - (x) a) Este inversor podrá adquirir al menos 50 obligaciones tipo B.
+    - ( ) b) Este inversor podrá adquirir al menos 50 obligaciones tipo A.
+    - ( ) c) No disponemos de información suficiente para saber cuántas obligaciones podría adquirir como mínimo.
+    - ( ) d) Ninguna de las respuestas anteriores es correcta.
+
+    > Correcta: a. B tiene cupón < TIR, luego cotiza bajo la par (precio < 1.000) y con 50.000 € compra más de 50. A tiene cupón > TIR, cotiza sobre la par y no llega a 50; no hace falta conocer el plazo.
+
+1. Considere dos bonos del Estado a 5 años, ambos con el mismo valor nominal, con pago periódico de cupones y devolución del nominal al vencimiento. Uno de ellos paga cupones del 5% del valor nominal, y el otro, del 8%. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) El bono más sensible a cambios en los tipos de interés será el que paga cupones del 8%, ya que tiene una vida más larga que el que paga cupones periódicos.
+    - ( ) b) El tipo del cupón no tiene ninguna influencia sobre la sensibilidad del bono a cambios en los tipos de interés.
+    - ( ) c) El bono más sensible a cambios en los tipos de interés será el que paga cupones del 5%, ya que su vida es más larga que la del bono cupón cero.
+    - (x) d) Ninguna de las otras respuestas propuestas es correcta.
+
+    > Correcta: d. El más sensible es el del 5 % (menor cupón, vida media más larga), así que a y b son falsas; c acierta el bono pero da una razón falsa, porque no hay ningún cupón cero y un cupón cero tendría una vida media más larga, no más corta.
+
+1. Indique la respuesta correcta:
+
+    - ( ) a) Si los tipos de interés cambian, el precio de las obligaciones no se verá afectado, sea cual sea el signo de dicho cambio
+    - ( ) b) Si los tipos de interés cambian, el precio de las obligaciones se verá afectado sólo en el caso de una subida de los tipos
+    - ( ) c) Si los tipos de interés cambian, el precio de las obligaciones se verá afectado sólo en el caso de una bajada de los tipos
+    - (x) d) Si los tipos de interés cambian, el precio de las obligaciones se verá afectado, sea cual sea el signo de dicho cambio, siendo la relación entre precio y tipo de interés inversa
+
+    > Correcta: d. El precio es el valor actual de cupones y nominal al tipo de mercado: si el tipo sube el precio baja, y si baja el precio sube.
+
+1. Indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) Los cambios en los tipos de interés no tienen influencia sobre el precio de las obligaciones
+    - (x) b) Un incremento en los tipos de interés provocaría una disminución en el precio de las obligaciones, lo que resulta lógico, ya que, cuanto mayor sea la tasa de interés demandada por los inversores, menos estarán dispuestos a pagar por la obligación
+    - ( ) c) Un incremento en los tipos de interés provocaría un incremento en el precio de las obligaciones, lo que resulta lógico, ya que, cuanto mayor sea la tasa de interés demandada por los inversores, más estarán dispuestos a pagar por la obligación
+    - ( ) d) Las respuestas a), b) y c) son falsas
+
+    > Correcta: b. Relación inversa precio-tipo: si los inversores exigen más rentabilidad, descuentan los mismos flujos a un tipo mayor y pagan menos.
+
+1. A 31/12 de cierto año un inversor se plantea la posibilidad de adquirir una obligación de nominal 1.000 euros que pagará un cupón anual del 4%, a la que le restan cinco años hasta su vencimiento. El precio a pagar por esta obligación será de 978,0501 euros, siendo sus flujos de caja esperados: C1=C2=C3=C4=40 euros, C5=1.040 euros. Con esta información, indique cuál de las siguientes afirmaciones es correcta:
+
+    - ( ) a) La rentabilidad al vencimiento de esta obligación es del 4%.
+    - (x) b) La rentabilidad al vencimiento de esta obligación es del 4,5%.
+    - ( ) c) La rentabilidad al vencimiento de obligaciones similares en el mercado es del 5%.
+    - ( ) d) Las respuestas a) y c) son correctas.
+
+    > Correcta: b. 40 · a(5; 4,5 %) + 1.000/1,045^5 = 978,05. Al 4 % el precio sería 1.000 (a la par) y al 5 % sería 956,71; como el bono cotiza bajo la par, su TIR supera al cupón.
+
+1. Considere un bono a 5 años, emitido por una empresa privada con una baja calificación crediticia.
+
+    - ( ) a) Ninguna es correcta
+    - ( ) b) Este bono prometerá una rentabilidad inferior a la que podría obtenerse comprando un bono de idénticas características, pero emitido por el estado
+    - ( ) c) Este bono prometerá una rentabilidad igual a la que podría obtenerse comprando un bono de idénticas características, pero emitido por el estado
+    - (x) d) Este bono prometerá una rentabilidad superior a la que podría obtenerse comprando un bono de idénticas características, pero emitido por el estado.
+
+    > Correcta: d. Por su riesgo de impago debe ofrecer una prima de fallido sobre el bono del Estado equivalente.
+
+1. Hace dos años el Estado emitió un bono a 5 años. La rentabilidad a exigir hoy por los inversores para adquirir dicho bono será:
+
+    - ( ) a) La rentabilidad que está ofreciendo hoy las letras del tesoro a 1 año
+    - (x) b) La rentabilidad que están ofreciendo hoy los bonos del estado a 3 años
+    - ( ) c) Ninguna es correcta
+    - ( ) d) La rentabilidad que están ofreciendo hoy los bonos del estado a 5 años
+
+    > Correcta: b. Al bono le quedan 3 años, así que se valora con la rentabilidad actual de bonos del Estado con ese mismo plazo residual; la trampa es d, el plazo original.
+
+1. ¿Cómo se calcula el precio del bono?
+
+    - ( ) a) Sumando los cupones y el valor nominal.
+    - (x) b) Actualizando los cupones y el valor nominal a la tasa de interés del mercado.
+    - ( ) c) Dividiendo los cupones por el valor nominal.
+    - ( ) d) Multiplicando el valor nominal por la tasa de interés.
+
+    > Correcta: b. P = C · a(n; r) + VN/(1+r)^n, con r el tipo de mercado. Sumar sin descontar (a) ignora el valor temporal; c da el tipo del cupón y d el cupón.
+
+1. Indique cuál de los siguientes bonos es más sensible a los cambios en los tipos de interés. Los tres tienen tipo de mercado del 1,2 % y cupón del 0,5 %; vencimientos: A 4 años, B 2 años, C 5 años.
+
+    - ( ) a) Bono A.
+    - ( ) b) Bono B.
+    - (x) c) Bono C.
+    - ( ) d) No hay información suficiente para responder a la pregunta.
+
+    > Correcta: c. Con igual cupón y tipo, el riesgo de tipo de interés crece con el plazo: el de 5 años es el más sensible.
+
+<!-- Tema 2 · Valoración de acciones (DDM, Gordon, VAOC, PER) -->
+
 1. ¿Cuál de las siguientes definiciones describe mejor el "Valor de Mercado" de una acción?
 
     - (x) a) La cantidad que los inversores están dispuestos a pagar basándose en los activos actuales y la capacidad de generar ganancias futuras.
@@ -1257,69 +1667,6 @@
     > Correcta: c. a y b intercambian las definiciones de valor contable y de liquidación. El valor de mercado suele superar a ambos por el valor de la empresa en funcionamiento (beneficios futuros y oportunidades de crecimiento).
 
 <!-- Tema 3 · Criterios de valoración de inversiones -->
-
-1. Si el VAN de un proyecto es positivo:
-
-    - ( ) a) Este proyecto debería aceptarse porque contribuye a la reducción del riesgo de la empresa.
-    - ( ) b) Este proyecto debería aceptarse siempre y cuando la empresa lo realice antes que la competencia.
-    - ( ) c) Este proyecto debería aceptarse sólo si se comprueba que la empresa que lo realiza tiene ventajas competitivas a largo plazo.
-    - (x) d) Ninguna de las anteriores es correcta.
-
-    > Correcta: d. Un VAN positivo se acepta porque aumenta el valor de la empresa (riqueza del accionista), no por reducir riesgo ni con condiciones adicionales sobre la competencia. Una fuente marcaba a, pero el VAN no dice nada de reducción de riesgo. Repetida en 3 fuentes.
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) La TIR de un proyecto de inversión es aquel valor de la tasa de descuento para el que el coste de oportunidad del capital se hace cero.
-    - (x) b) La TIR de un proyecto de inversión es aquel valor de la tasa de descuento para el que el VAN se hace igual a cero.
-    - ( ) c) La TIR de un proyecto de inversión es aquel valor de la tasa de descuento para el que el coste de oportunidad del capital alcanza un valor positivo.
-    - ( ) d) Todas las respuestas anteriores son falsas.
-
-    > Correcta: b. Por definición, la TIR anula el VAN; es el punto donde el perfil del VAN corta el eje. Tampoco es el coste de oportunidad del capital (variante de otra fuente): este viene dado por el mercado y la TIR se compara con él. Repetida en 5 fuentes.
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) El criterio del plazo de recuperación no tiene en cuenta todos los flujos de caja del proyecto que se producen antes del plazo de recuperación.
-    - (x) b) El criterio del plazo de recuperación no tiene en cuenta ningún flujo de caja que se produzca después de dicho plazo.
-    - ( ) c) El criterio del plazo de recuperación es preferible como método de selección de inversiones frente al VAN.
-    - ( ) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: b. El payback ignora los flujos posteriores al plazo. Los anteriores sí los tiene en cuenta todos (aunque les da el mismo peso), por eso la a es falsa. Nunca es preferible al VAN. Repetida en 3 fuentes.
-
-1. Indique la respuesta correcta:
-
-    - ( ) a) El criterio VAN no resulta apropiado para la selección de inversiones en la empresa, ya que no proporciona una idea sobre si dichas inversiones contribuyen al logro objetivo financiero.
-    - ( ) b) El criterio VAN no resulta apropiado para elegir entre dos proyectos de inversión mutuamente excluyentes que tengan la misma duración.
-    - (x) c) El criterio VAN, al representar la contribución neta al valor de la empresa que realiza una inversión, muestra en qué medida ésta contribuye al logro del objetivo financiero.
-    - ( ) d) El criterio VAN no es válido para evaluar proyectos de inversión arriesgados y de larga duración.
-
-    > Correcta: c. El VAN mide la contribución neta al valor de la empresa, que es justo el objetivo financiero. Con excluyentes de igual duración el VAN es el criterio adecuado, y el riesgo se recoge en la tasa de descuento. Repetida en 3 fuentes.
-
-1. Indique la respuesta correcta:
-
-    - ( ) a) En general, los criterios del VAN y la TIR son equivalentes; si la TIR es inferior al coste de oportunidad del capital, el VAN del proyecto será positivo y será aconsejable llevarlo a cabo.
-    - ( ) b) En general, los criterios del VAN y la TIR son equivalentes; si la TIR es superior al coste de oportunidad del capital, el VAN del proyecto será negativo y será aconsejable llevarlo a cabo.
-    - ( ) c) En general, los criterios del VAN y la TIR son equivalentes; si la TIR es superior al coste de oportunidad del capital, el VAN del proyecto será negativo y no será aconsejable llevarlo a cabo.
-    - (x) d) En general, los criterios del VAN y la TIR son equivalentes; si la TIR es superior al coste de oportunidad del capital, el VAN del proyecto será positivo y será aconsejable llevarlo a cabo.
-
-    > Correcta: d. En un proyecto simple de inversión, TIR > r implica VAN > 0 y se acepta; TIR < r implica VAN < 0. Las demás invierten algún signo. Repetida en 3 fuentes.
-
-1. Indique cuál de las siguientes afirmaciones es falsa:
-
-    - (x) a) El director financiero de una empresa tiene que realizar inversiones cuya generación de caja se ajuste a la preferencia temporal de consumo de sus accionistas.
-    - ( ) b) El director financiero de una empresa debe buscar proyectos de inversión de valor actualizado neto positivo para incrementar la riqueza de los accionistas.
-    - ( ) c) Si la rentabilidad que ofrece una inversión es menor al coste de oportunidad del capital, eso significa que esa inversión tendrá un valor actualizado neto negativo.
-    - ( ) d) Si existe discrepancia entre la decisión de inversión según los criterios del valor actualizado neto y de la tasa interna de rentabilidad, escogeremos en función del primer criterio.
-
-    > Correcta: a. Por la separación de Fisher, los accionistas ajustan su consumo en el mercado de capitales; el directivo solo debe maximizar el VAN. Las otras tres son ciertas (ante discrepancia manda el VAN). Repetida en 2 fuentes.
-
-1. Desde un punto de vista financiero, indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) Las empresas deben invertir en proyectos cuyos beneficios netos actualizados son superiores a la inversión inicial que requieren.
-    - ( ) b) Las empresas deben invertir en proyectos con VAN positivo o nulo.
-    - (x) c) Las empresas deben invertir en proyectos cuyos flujos netos de caja actualizados son superiores a la inversión inicial que requieren.
-    - ( ) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: c. Es la definición de VAN > 0 con flujos de caja. La a usa beneficios (trampa contable) y la b incluye el VAN nulo, que deja indiferente y no obliga a invertir. Existe una variante donde la c dice «igualen» (VAN = 0): entonces la respuesta pasa a ser d. Repetida en 2 fuentes.
 
 1. Indique cuál de las siguientes afirmaciones es correcta en relación con dos proyectos de inversión mutuamente excluyentes: el proyecto A tiene un desembolso inicial de 500.000 €, duración de 5 años, TIR del 2,5% y coste de oportunidad del capital del 4%; el proyecto B tiene un desembolso inicial de 500.000 €, duración de 5 años, TIR del 3,5% y coste de oportunidad del capital del 4%.
 
@@ -1537,24 +1884,6 @@
 
     > Correcta: b. Ignora todo lo que llega después del plazo. El simple no descuenta (falla c) y se usa mucho precisamente por su sencillez (falla d).
 
-1. Señale la afirmación correcta.
-
-    - ( ) a) Si el VAN de un proyecto es positivo, esto indica que la empresa con sus cobros operativos cubre solamente sus pagos operativos.
-    - ( ) b) Si el VAN de un proyecto es positivo, esto indica que la empresa con sus cobros operativos cubre los pagos operativos y la recuperación del capital invertido.
-    - (x) c) Si el VAN de un proyecto es positivo, esto indica que la empresa con sus cobros operativos cubre los pagos operativos, la recuperación del capital invertido y la retribución del coste de oportunidad del capital.
-    - ( ) d) Ninguna de las anteriores es correcta.
-
-    > Correcta: c. Al descontar a la tasa r, un VAN positivo significa que los flujos cubren los pagos, devuelven la inversión, pagan el coste de oportunidad del capital y aún dejan un excedente. La b) describe un VAN nulo calculado sin descontar. Repetida en 2 fuentes.
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) El plazo de recuperación es el tiempo que tardaría en recuperarse la inversión inicial de un proyecto con sus flujos de caja esperados. Hay que tener en cuenta que para su cálculo no debe considerarse como parte de esa inversión inicial la variación inicial de fondo de maniobra imputable al proyecto.
-    - ( ) b) El plazo de recuperación es el tiempo que tardaría en recuperarse la inversión inicial de un proyecto con sus flujos de caja esperados. Hay que tener en cuenta que para su cálculo no deben considerarse en el cálculo de los flujos de caja esperados las variaciones anuales de fondo de maniobra imputables al proyecto.
-    - ( ) c) El plazo de recuperación es el tiempo que tardaría en recuperarse la inversión inicial de un proyecto con sus flujos de caja esperados. Hay que tener en cuenta que para su cálculo no deben considerarse las variaciones de FM imputables al proyecto – ni la inicial ni las variaciones interanuales esperadas-, ya que se trata de un criterio que no se define en términos de caja.
-    - (x) d) Todas las respuestas anteriores son incorrectas.
-
-    > Correcta: d. El plazo de recuperación usa los mismos flujos de caja que el VAN, así que incluye el FM inicial en el desembolso y las variaciones anuales en los flujos. Sí es un criterio en términos de caja (falla c). Repetida en 2 fuentes.
-
 1. A una empresa se le plantean dos oportunidades de inversión mutuamente excluyentes, siendo el coste de oportunidad del 10%. La inversión A tiene un coste inicial de 1.000 € y genera un flujo de caja en el año 1 de 1.800€. La inversión B tiene un coste inicial de 500€ y genera un flujo de caja en el año 1 de 1.000 €. Si sólo se puede realizar una de estas dos inversiones, indique la afirmación correcta:
 
     - ( ) a) La inversión A tiene una tasa de rentabilidad esperada superior a la inversión B.
@@ -1565,213 +1894,6 @@
     > Correcta: b. TIR(A) = 1.800/1.000 − 1 = 80 % y TIR(B) = 1.000/500 − 1 = 100 %. Pero VAN(A) = −1.000 + 1.800/1,1 = 636,36 > VAN(B) = 409,09, así que debe elegirse A (falla c): es el problema de escala de la TIR.
 
 <!-- Tema 4 · Flujos de caja, impuestos, FM y valor residual -->
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) Si en un período el saldo final de clientes es mayor que el saldo inicial (manteniéndose todo lo demás constante), entonces la variación del FM será positiva, y ello hará que se deba sumar al calcular el flujo neto de caja de dicho período.
-    - ( ) b) Si en un período el saldo final de clientes es mayor que el saldo inicial (manteniéndose todo lo demás constante), entonces la variación del FM será negativa, y ello hará que se deba restar al calcular el flujo neto de caja de dicho período.
-    - (x) c) Si en un período el saldo final de clientes es mayor que el saldo inicial (manteniéndose todo lo demás constante), entonces la variación del FM será positiva, y ello hará que se deba restar al calcular el flujo neto de caja de dicho período.
-    - ( ) d) Todas las respuestas anteriores son incorrectas.
-
-    > Correcta: c. Más clientes significa más activo circulante, luego el FM aumenta (variación positiva) y esa inversión se resta del flujo (Qdi = Qai(1−tc) + CAF·tc − ΔFM). Las fuentes discrepan (b, c y d), pero solo c es coherente con la fórmula. Repetida en 4 fuentes.
-
-1. En un determinado periodo el beneficio antes de intereses e impuestos (BAIT) de una empresa es de 100€, las amortizaciones fiscales son de 5€, los gastos financieros son de 10€, el tipo del impuesto de sociedades es del 25% y no hay variación en el fondo de maniobra. Calcule el flujo de caja después de impuestos de esta empresa a efectos de valoración de un proyecto de inversión:
-
-    - ( ) a) 76,25 euros.
-    - (x) b) 80 euros.
-    - ( ) c) 68,75 euros.
-    - ( ) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: b. Los intereses no entran en el flujo: FC = BAIT·(1−0,25) + amortización = 75 + 5 = 80. La a) vuelve a restar la amortización al BAIT ((100 − 5)·0,75 + 5 = 76,25) y la c) además resta los intereses ((100 − 10 − 5)·0,75 + 5 = 68,75). Repetida en 3 fuentes.
-
-1. Suponga que estamos calculando los flujos de caja de un proyecto de inversión. En el año 1 la empresa paga sus compras de existencias al contado. En el año 2 los proveedores conceden a la empresa un plazo de 60 días. Indique el efecto de este cambio sobre los flujos de caja del segundo periodo si todo lo demás permanece constante:
-
-    - ( ) a) El aumento en el plazo de pago supone un aumento del fondo de maniobra en el año 2 respecto del 1, que dará lugar a una reducción del flujo de caja.
-    - ( ) b) La disminución en el plazo de pago supone una disminución del fondo de maniobra en el año 2 respecto del 1, que dará lugar a una reducción del flujo de caja.
-    - (x) c) El aumento en el plazo de pago supone una disminución del fondo de maniobra en el año 2 respecto del 1, que dará lugar a un aumento del flujo de caja.
-    - ( ) d) Ninguna de las afirmaciones anteriores es correcta.
-
-    > Correcta: c. Aparecen proveedores (pasivo circulante), así que FM = AC − PC disminuye; una ΔFM negativa se resta con signo menos y aumenta el flujo. Repetida en 3 fuentes.
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) En el cálculo de los flujos netos de caja de explotación anuales de un proyecto de inversión habrá que considerar el ahorro fiscal por amortizaciones financieras.
-    - ( ) b) Para calcular el resultado neto anual de un proyecto de inversión habrá que considerar, restando, las amortizaciones financieras que correspondan a cada periodo.
-    - ( ) c) Para calcular el resultado neto anual de un proyecto de inversión habrá que considerar, sumando o restando, según corresponda, los valores residuales de inmovilizado y fondo de maniobra.
-    - (x) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: d. La amortización financiera (devolución del principal de la deuda) no es gasto ni es deducible, así que no genera ahorro fiscal ni se resta del resultado. Los valores residuales son flujos de caja, no partidas del resultado (en él solo aparece la plusvalía o minusvalía). Repetida en 3 fuentes.
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - (x) a) Si en un proyecto de inversión, de un período a otro, se produce una reducción del plazo de cobro a clientes, ceteris paribus el resto de activos y pasivos circulantes, el fondo de maniobra se reduce y el flujo de caja se incrementa.
-    - ( ) b) Si en un proyecto de inversión, de un período a otro, se produce una reducción del plazo de pago a proveedores, ceteris paribus el resto de activos y pasivos circulantes, el fondo de maniobra disminuye y el flujo de caja aumenta.
-    - ( ) c) Si en un proyecto de inversión, de un período a otro, se produce una reducción del plazo de pago a proveedores, ceteris paribus el resto de activos y pasivos circulantes, el fondo de maniobra aumenta y el flujo de caja aumenta.
-    - ( ) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: a. Cobrar antes reduce clientes, el FM baja y el flujo sube. Pagar antes a proveedores reduce el pasivo circulante: el FM aumenta y el flujo disminuye, por eso fallan b) y c). Repetida en 3 fuentes.
-
-1. La empresa Lauson S.A piensa invertir en una nueva planta de producción. Lauson S.A es propietaria de los terrenos, pero deberá demoler los edificios existentes, ¿cuál de los siguientes elementos debe considerarse como flujo de caja incremental?
-
-    - ( ) a) El valor de mercado del terreno y de los edificios, los costes de demolición y limpieza, el coste de la nueva ruta de acceso que se construyó el año anterior y los flujos de caja perdidos de otros proyectos debido al tiempo de ejecución a las nuevas instalaciones.
-    - ( ) b) El valor de mercado del terreno y de los edificios, los costes de demolición y limpieza, el coste de la nueva ruta de acceso que se construyó el año anterior y la amortización futura de la nueva planta.
-    - ( ) c) El valor de mercado del terreno y de los edificios, los costes de demolición y limpieza, el coste de la nueva ruta de acceso que se construyó el año anterior, los flujos de caja perdidos de otros proyectos debido al tiempo de ejecución dedicado a las nuevas instalaciones y la amortización futura de la nueva planta.
-    - (x) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: d. Todas incluyen la ruta de acceso construida el año anterior, que es un coste hundido. Sí cuentan el valor de mercado del terreno (coste de oportunidad), la demolición y los flujos perdidos de otros proyectos; la amortización no es un flujo (solo aporta CAF·tc). Repetida en 2 fuentes.
-
-1. Se han extraído los siguientes datos del Balance de una empresa (millones de euros): Activo no corriente: 145.347€; Activo corriente: 95.543€; Patrimonio neto: 84.471€; Pasivo no corriente: 43.583€. Indique a cuánto asciende el Fondo de Maniobra:
-
-    - ( ) a) 112.836€
-    - ( ) b) 101.764€
-    - (x) c) – 17.293€
-    - ( ) d) 51.960€
-
-    > Correcta: c. Pasivo corriente = (145.347 + 95.543) − 84.471 − 43.583 = 112.836, luego FM = 95.543 − 112.836 = −17.293 (igual a PN + PNC − ANC). La a) es el pasivo corriente, la trampa. Repetida en 2 fuentes.
-
-1. Uno de los criterios generalmente aceptados para la determinación de los flujos de caja es:
-
-    - ( ) a) No tener en cuenta las variaciones del Fondo de Maniobra causadas por el proyecto.
-    - ( ) b) Hay que tener en cuenta los gastos irrecuperables.
-    - ( ) c) Los flujos de caja deben estimarse siempre antes de impuestos.
-    - (x) d) Hay que ser coherente con el uso de la inflación en las magnitudes necesarias para la valoración.
-
-    > Correcta: d. Flujos nominales con tasa nominal y reales con tasa real. Las demás contradicen los criterios: la ΔFM sí cuenta, los costes hundidos se excluyen y los flujos van después de impuestos. Repetida en 2 fuentes.
-
-1. En la valoración de proyectos de inversión, si la diferencia entre el valor residual de un inmovilizado y su valor neto contable es positiva:
-
-    - ( ) a) Esta diferencia implica un gasto extraordinario por el que la empresa tiene que reflejar un ahorro fiscal en su tributación.
-    - ( ) b) En un proyecto de inversión esta diferencia no puede ser mayor que cero en ningún caso.
-    - (x) c) La diferencia supone un ingreso o plusvalía extraordinaria por la cual la empresa tiene que tributar.
-    - ( ) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: c. Precio de venta mayor que el VNC es una plusvalía que tributa: VRdi = precio − (precio − VNC)·tc. El ahorro fiscal de la a) corresponde a la minusvalía. Repetida en 2 fuentes.
-
-1. Seleccione cuál de las respuestas siguientes se ajusta a la determinación y cuantificación de la inversión inicial en un proyecto de inversión:
-
-    - ( ) a) Coste principal, materias primas, formación del personal y mano de obra.
-    - (x) b) Coste principal, coste secundario, formación del personal y variación inicial del fondo de maniobra.
-    - ( ) c) Coste principal, materias primas, mano de obra y gastos generales.
-    - ( ) d) Ninguna de las respuestas es correcta.
-
-    > Correcta: b. El desembolso en t=0 recoge el activo, los costes secundarios (instalación, transporte), el FM inicial y los gastos de puesta en marcha o formación (estos, netos de impuestos por ser deducibles). Materias primas, mano de obra y gastos generales son costes operativos de cada año. Repetida en 2 fuentes.
-
-1. Indique la respuesta correcta:
-
-    - ( ) a) Si de un periodo a otro se produce una disminución del activo circulante operativo de 100 € y un incremento del pasivo circulante operativo de 80 €, entonces el flujo neto de caja operativo se reduce en 20 € que debe tributar, ya que existe una reducción patrimonial en la empresa.
-    - (x) b) Si de un periodo a otro se produce una disminución del activo circulante operativo de 100 € y un incremento del pasivo circulante operativo de 80 €, entonces el flujo neto de caja operativo se incrementa en 180 €.
-    - ( ) c) Si de un periodo a otro se produce una disminución del activo circulante operativo de 100 € y un incremento del pasivo circulante operativo de 80 €, entonces el flujo neto de caja operativo se incrementa en 180 € que debe tributar, ya que existe un incremento patrimonial en la empresa.
-    - ( ) d) Si de un periodo a otro se produce una disminución del activo circulante operativo de 100 € y un incremento del pasivo circulante operativo de 80 €, entonces el flujo neto de caja operativo se reduce en 20 €.
-
-    > Correcta: b. ΔFM = ΔAC − ΔPC = −100 − 80 = −180, que al restarse suma 180 al flujo. Las variaciones del FM no tributan (no son ingresos ni gastos), por eso falla la c). Repetida en 3 fuentes.
-
-1. Indica cuál de las siguientes afirmaciones sobre el cálculo de los flujos netos de caja operativos (FNC) de un proyecto de inversión es correcta:
-
-    - ( ) a) Las cuotas de amortización técnica de los activos del proyecto solo tendrían que restarse en cálculo de los FNC cuando la empresa no amortice financieramente su deuda.
-    - ( ) b) Las cuotas de amortización financiera del proyecto de inversión sólo tendrían que restarse de los FNC cuando la empresa no amortice técnicamente sus activos.
-    - (x) c) La cuota de amortización técnica de los activos del proyecto se incluye en los FNC operativos incrementales a través del impuesto sobre beneficios.
-    - ( ) d) Los gastos financieros de la deuda que financia el proyecto solo tendrían que restarse en el cálculo de los FNC cuando no estén incluidos en el coste del capital.
-
-    > Correcta: c. La amortización no es un pago; solo entra por su ahorro fiscal, CAF·tc. La amortización financiera y los intereses nunca se restan de los FNC (separación inversión-financiación). Repetida en 2 fuentes.
-
-1. Determinada empresa posee una nave industrial que necesita ser utilizada para un nuevo proyecto de inversión que aumentará su producción. Teniendo en cuenta que las decisiones de la compra se adoptan en términos incrementales, indica cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) La inversión inicial incremental sería igual al valor de la nave.
-    - ( ) b) La inversión inicial incremental será igual a la inicial del nuevo proyecto menos el valor de la nave.
-    - ( ) c) La inversión inicial incremental sería igual a la inversión inicial del nuevo proyecto.
-    - (x) d) La inversión inicial incremental sería igual a la inversión inicial del nuevo proyecto más el valor de la nave.
-
-    > Correcta: d. Usar la nave propia supone renunciar a venderla o alquilarla: su valor es un coste de oportunidad que se suma a la inversión (como el terreno de 300.000 € de la teoría). El documento marcaba b, que resta un coste en lugar de sumarlo. Repetida en 2 fuentes.
-
-1. Suponiendo la no existencia de costes financieros, la determinación del Beneficio Neto y del Flujo Neto de Caja de un determinado ejercicio se diferencian en:
-
-    - ( ) a) En los FNC se consideran las necesidades del Fondo de Maniobra y las ganancias o pérdidas patrimoniales netas de impuestos, magnitudes no consideradas como tal en el cálculo del Beneficio Neto.
-    - ( ) b) En los FNC se consideran las necesidades del Fondo de Maniobra, las ganancias o pérdidas patrimoniales netas de impuestos, los valores residuales de los activos (corrientes y no corrientes) ligados al proyecto, y la cuota de amortización fiscal antes de impuestos, magnitudes no consideradas como tal en el cálculo del Beneficio Neto.
-    - (x) c) En los FNC se consideran las necesidades del Fondo de Maniobra, los valores residuales de los activos (corrientes y no corrientes) ligados al proyecto, y el ahorro fiscal procedente del proceso de amortización contable, magnitudes no consideradas como tal en el cálculo del Beneficio Neto.
-    - ( ) d) En los FNC se consideran las necesidades del Fondo de Maniobra, única magnitud no considerada en el cálculo del Beneficio Neto.
-
-    > Correcta: c. FNC = Qai(1−tc) + CAF·tc − ΔFM + VRdi: aparecen como tales la ΔFM, los valores residuales y el ahorro fiscal CAF·tc. Las plusvalías o minusvalías sí están en el beneficio neto, por eso fallan a) y b). Repetida en 2 fuentes.
-
-1. Señale la respuesta correcta:
-
-    - ( ) a) En la determinación de los flujos netos de caja, hemos de considerar los beneficios incrementales procedentes del proyecto, así como los costes de oportunidad, los gastos generales y las necesidades del fondo de maniobra, excluyendo los costes irrecuperables.
-    - ( ) b) En la determinación de los flujos netos de caja, hemos de considerar los beneficios incrementales procedentes del proyecto, así como los gastos generales y las necesidades del fondo de maniobra, excluyendo tanto los costes de oportunidad que no supongan salidas de efectivo, como los costes irrecuperables.
-    - (x) c) En la determinación de los flujos netos de caja, hemos de considerar los beneficios incrementales procedentes del proyecto, así como los costes de oportunidad y las necesidades del fondo de maniobra, excluyendo los costes irrecuperables y aquellos gastos generales cuya imputación no sea relevante para el proyecto.
-    - ( ) d) Ninguna de las respuestas anteriores es correcta.
-
-    > Correcta: c. Solo se imputan los gastos generales extra que provoca el proyecto (la a) los incluye todos) y los costes de oportunidad siempre cuentan aunque no sean salidas de caja (falla la b). Repetida en 2 fuentes.
-
-1. Si consideramos el criterio del VAN, indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) Los costes irrecuperables pasados deben, de alguna forma, incluirse en los flujos de caja para tomar la decisión de aceptar o rechazar el proyecto.
-    - ( ) b) Al empresario no le interesa amortizar maquinarias de forma acelerada porque reduce los flujos de caja y por tanto también el VAN.
-    - ( ) c) Los flujos de caja operativos deben tener en cuenta los intereses pagados por el endeudamiento que financia el proyecto.
-    - (x) d) Ninguna es correcta.
-
-    > Correcta: d. Los costes hundidos se excluyen; la amortización acelerada adelanta el ahorro fiscal y aumenta el VAN; y los intereses no entran en los flujos porque el coste de financiación ya está en la tasa. Repetida en 2 fuentes.
-
-1. Determinada empresa compra hoy una máquina desembolsando un importe de 10.000 €. El sistema de amortización es lineal en 5 años, admitiendo, a efectos fiscales, un valor residual de 500 €. Se estima que la máquina podrá venderse dentro de 6 años por un valor residual de 450 €. La tasa impositiva es del 35%. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - (x) a) El valor residual (después de impuestos) derivado de la venta es de 467,50 €.
-    - ( ) b) El impuesto derivado de la venta es de 20,50 €.
-    - ( ) c) El beneficio después de impuestos derivado de la venta es 35,00 €.
-    - ( ) d) El importe de la inversión inicial asciende a 6.500 €.
-
-    > Correcta: a. CAF = 9.500/5 = 1.900, así que en el año 6 el VNC es 500. Venta por 450: minusvalía de 50 y ahorro fiscal de 50·0,35 = 17,5, luego VRdi = 450 + 17,5 = 467,5. No hay impuesto a pagar ni beneficio, y la inversión es 10.000. Repetida en 2 fuentes.
-
-1. Una empresa minera está explorando diversos depósitos minerales de plata en un área de interés geológico. Aproximadamente en un 70% de las exploraciones se encuentra ante un depósito explotable, en tanto que en el resto de los casos la explotación no es viable. Incluso cuando el depósito es explotable, existe incertidumbre sobre la cantidad de mineral que se obtendrá: el 50% de los depósitos en explotación producen 10 onzas de plata al día; y el otro 50% producen 50 onzas/día (los 365 días del año). El coste de extracción es de 15 €/onza y el precio de venta de 20 €/onza. En un contexto sin impuestos, estime los flujos de caja anuales esperados de realizar una de estas exploraciones.
-
-    - ( ) a) 7.665 €.
-    - (x) b) 38.325 €.
-    - ( ) c) 54.750 €.
-    - ( ) d) Ninguna es correcta.
-
-    > Correcta: b. Producción esperada si es explotable: 0,5·10 + 0,5·50 = 30 onzas/día. Flujo esperado = 0,7 · 30 · 365 · (20 − 15) = 38.325 €. La c) olvida la probabilidad del 70 %. Repetida en 2 fuentes.
-
-1. Los datos operativos en euros de determinada empresa para un año son los siguientes: (1) Ingresos por ventas = 1.000 €, (2) Coste de ventas = 300 €, (3) Saldo inicial de existencias = 0 €, (4) Saldo final de existencias = 100 €, (5) Saldo inicial de Cuentas a Cobrar = 200 €, (6) Saldo final de Cuentas a Cobrar = 0 €, (7) Saldo inicial de Cuentas a Pagar = 0 €, (8) Saldo final de Cuentas a Pagar = 400 €. Con esta información, y en un contexto sin impuestos, indique cuál de las siguientes afirmaciones es la correcta:
-
-    - (x) a) El flujo de caja operativo en términos de tesorería es de 1.200 €.
-    - ( ) b) La variación del fondo de maniobra es -100 €.
-    - ( ) c) La variación del fondo de maniobra es de 100 €.
-    - ( ) d) El flujo de caja operativo en términos de tesorería es de 700 €.
-
-    > Correcta: a. ΔFM = ΔExistencias + ΔClientes − ΔProveedores = 100 − 200 − 400 = −500. Flujo = (1.000 − 300) − (−500) = 1.200 (cobros 1.200, pagos 0). La d) es el resultado de devengo sin ajustar el FM. Repetida en 2 fuentes.
-
-1. Indique cuál de las siguientes afirmaciones sobre la valoración de inversiones con el criterio del VAN es falsa:
-
-    - ( ) a) Al calcular el desembolso inicial de un proyecto de inversión no habrá que incorporar el importe de los desembolsos pasados e irreversibles, aunque estos se efectuarán para posibilitar la realización del proyecto.
-    - (x) b) En una inversión de renovación, el importe percibido por la venta del equipo que se sustituye aumentará la cuantía del desembolso inicial incremental.
-    - ( ) c) En una inversión de renovación, el importe percibido por la venta del equipo que se sustituye reducirá la cuantía del desembolso inicial incremental.
-    - ( ) d) Ninguna de las anteriores es correcta.
-
-    > Correcta: b. La venta del equipo viejo es un cobro en t=0 que reduce el desembolso incremental; la a) es verdadera (costes hundidos fuera). Es el problema 14 de la relación. Repetida en 3 fuentes.
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) Si al finalizar la vida de un proyecto de inversión el FM imputable al mismo – que se estima que ascenderá a 12.500€ - no puede recuperarse, este hecho no supondrá ningún efecto fiscal y por tanto el valor residual del FM después de impuestos será cero.
-    - (x) b) Si al finalizar la vida de un proyecto de inversión el FM imputable al mismo – que se estima que ascenderá a 12.500€ - no puede recuperarse, este hecho supondrá un ahorro fiscal y por tanto el valor residual del FM después de impuestos será superior a cero.
-    - ( ) c) Si al finalizar la vida de un proyecto de inversión el FM imputable al mismo – que se estima que ascenderá a 12.500€ - no puede recuperarse, este hecho supondrá una pérdida que hará que el valor residual del FM después de impuestos sea negativo.
-    - ( ) d) Todas las respuestas anteriores son falsas.
-
-    > Correcta: b. No recuperar el FM es una pérdida deducible: VRdi(FM) = 0 + 12.500·tc > 0. Igual que las existencias recuperadas al 70 % del problema 20, donde la parte perdida genera ahorro fiscal. Repetida en 2 fuentes.
-
-1. Indique cuál de las siguientes afirmaciones es incorrecta:
-
-    - ( ) a) Si después de haber realizado las estimaciones correspondientes para valorar un proyecto de inversión se modificara el criterio de amortización del inmovilizado de dicho proyecto (estando el nuevo también admitido a efectos fiscales), habría un cambio en los BAITs calculados con las estimaciones iniciales.
-    - ( ) b) Si después de haber realizado las estimaciones correspondientes para valorar un proyecto de inversión se modificara el criterio de amortización del inmovilizado de dicho proyecto (estando el nuevo también admitido a efectos fiscales), habría un cambio en los flujos netos de caja calculados con las estimaciones iniciales.
-    - (x) c) Si después de haber realizado las estimaciones correspondientes para valorar un proyecto de inversión se modificara el criterio de amortización de la deuda que lo financia, habría un cambio en los BAITs del proyecto calculados con las estimaciones iniciales.
-    - ( ) d) Si después de haber realizado las estimaciones correspondientes para valorar un proyecto de inversión se modificara el criterio de amortización de la deuda que lo financia, habría un cambio en los resultados netos del proyecto calculados con las estimaciones iniciales.
-
-    > Correcta: c. El BAIT es antes de intereses, así que cambiar el calendario de la deuda no lo altera. Sí cambia los intereses de cada año y, por tanto, el resultado neto (la d es verdadera). Cambiar la amortización técnica altera el BAIT y, vía CAF·tc, los FNC. El documento marcaba d. Repetida en 2 fuentes.
-
-1. En la aplicación de la ley de la morosidad, una empresa reduce el plazo de cobro a clientes desde 75 días que se concedían en 2015 a 60 días que se conceden en 2016. En ambos ejercicios, las ventas fueron de 90.000 €, estando estas ventas repartidas uniformemente a lo largo de todo el año. ¿Qué efecto debió tener este cambio en la política de cobro sobre el flujo de tesorería de las operaciones de 2016 respecto de las de 2015? Suponga que el resto de las variables permanece constante y que el año son 360 días:
-
-    - ( ) a) Esto daría lugar a un aumento del Fondo de Maniobra en 2016 respecto de 2015 de 3.750 €, por lo que el flujo de caja de 2016 disminuye.
-    - ( ) b) Esto daría lugar a una disminución del Fondo de Maniobra en 2016 respecto de 2015 de 3.750 €, por lo que el flujo de caja de 2016 disminuye.
-    - ( ) c) Esto daría lugar a una disminución del Fondo de Maniobra en 2016 respecto de 2015 (que no es posible cuantificar con los datos del enunciado) por lo que el flujo de caja de 2016 aumenta.
-    - (x) d) Ninguna es correcta.
-
-    > Correcta: d. Clientes = 90.000·75/360 = 18.750 en 2015 y 90.000·60/360 = 15.000 en 2016: el FM baja 3.750 € y el flujo de caja aumenta 3.750 €. Sí es cuantificable (falla c) y el flujo no disminuye (fallan a y b). El documento marcaba c. Repetida en 2 fuentes.
 
 1. Indique cuál de las siguientes afirmaciones sobre el cálculo de los flujos netos de caja de un proyecto de inversión es correcta:
 
@@ -1809,15 +1931,6 @@
 
     > Correcta: d. VRdi = precio − (precio − VNC)·tc: la diferencia es respecto al valor neto contable (no al fondo de amortización ni al precio de compra) y se multiplica por el tipo impositivo (no por el coeficiente de amortización). Además, tc por la diferencia es el impuesto, no el valor residual.
 
-1. Una empresa se está planteando la conveniencia de ampliar su dimensión incorporando a las máquinas actuales nuevos equipos derivados de un nuevo modelo que se presenta en el mercado. Si desea calcular los flujos de caja incrementales (de ampliar la empresa frente a no ampliar y seguir con la estructura actual), indique cuál de las siguientes afirmaciones es la correcta:
-
-    - ( ) a) El coste inicial incremental de la ampliación debe tener en cuenta la posible venta de los equipos antiguos.
-    - ( ) b) El coste inicial incremental de la ampliación debe tener en cuenta la posible venta de los equipos actuales y el flujo de caja incremental solo debe considerar los flujos de caja proporcionados por los nuevos equipos.
-    - ( ) c) En este tipo de proyectos el coste inicial incremental no debe tener en cuenta la posible venta de los equipos actuales y el flujo de caja incremental solo debe considerar los flujos de caja proporcionados por los equipos actuales.
-    - (x) d) Las respuestas a), b) y c) son falsas
-
-    > Correcta: d. En una ampliación los equipos actuales se mantienen: no hay venta que restar y el flujo incremental es el de los equipos nuevos. La a) y la b) meten la venta (eso sería renovación) y la c) toma los flujos de los equipos actuales. Repetida en 2 fuentes (en una versión del banco la c) habla de «los nuevos»).
-
 1. Indique cuál de las siguientes afirmaciones sobre el cálculo de los flujos netos de caja de un proyecto de inversión para un determinado año es correcta:
 
     - ( ) a) Deberá deducirse el importe de los gastos financieros de la deuda que financia el proyecto siempre que los mismos se hagan efectivos en el año considerado.
@@ -1826,15 +1939,6 @@
     - ( ) d) Deberá deducirse, además de los gastos financieros efectivamente pagados, la parte amortización financiera correspondiente al periodo considerado.
 
     > Correcta: c. Separación entre inversión y financiación: el coste de la deuda ya está en la tasa de descuento, así que los intereses no se restan nunca, se paguen cuando se paguen.
-
-1. Indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) A la hora de calcular los flujos de tesorería a descontar para obtener el VAN de un proyecto de inversión, no habrá que incluir en dicho cálculo los efectos derivados de otras actividades que desarrolla la empresa, ya que sólo nos interesa el proyecto aisladamente considerado.
-    - ( ) b) A la hora de calcular los flujos de tesorería a descontar para obtener el VAN de un proyecto de inversión, no habrá que incluir en dicho cálculo los gastos generales en los que se puede incurrir, tales como alquileres, calefacción o electricidad, ya que al afectar a distintos proyectos no se pueden asignar a todos a la vez.
-    - (x) c) A la hora de calcular los flujos de tesorería a descontar para obtener el VAN de un proyecto de inversión, habrá que incluir en dicho cálculo los efectos que el mismo pueda tener sobre otras actividades que desarrolla la empresa, ya que al considerar el proyecto con el resto del negocio éste puede aportar valor a los accionistas.
-    - ( ) d) Las respuestas a), b) y c) son falsas
-
-    > Correcta: c. Hay que incluir todos los efectos del proyecto sobre el resto de la empresa (el tramo de ferrocarril, la canibalización, las sinergias). Los gastos generales extra que provoque sí se incluyen, por eso falla la b). Repetida en 2 fuentes.
 
 1. Indique cuál de las siguientes afirmaciones es correcta:
 
@@ -1871,15 +1975,6 @@
     - ( ) d) Ninguna de las anteriores cifras es correcta.
 
     > Correcta: b. Punto muerto en VAN (sin impuestos): el flujo anual debe ser 2.000.000/a(3; 10 %) = 804.230, y con 1.500 kg sale 2.254.230 − 1.000.000 − 450.000 = 804.230, VAN = 0. La a) es el punto muerto contable, (1.000.000 + 666.667)/1.202,82 = 1.386 kg, que ignora el coste de oportunidad del capital.
-
-1. Indica la respuesta correcta:
-
-    - ( ) a) El flujo de caja libre es igual al beneficio después de pagar intereses e impuestos, menos la cuota de amortización técnica, menos la inversión en activos fijos y menos la inversión en capital circulante.
-    - (x) b) El flujo de caja libre es igual al beneficio operativo después de pagar impuestos, más la cuota de amortización técnica, menos la inversión en activos fijos y menos la inversión en capital circulante.
-    - ( ) c) El flujo de caja libre es igual al beneficio después de pagar intereses, pero antes de pagar impuestos, menos la cuota de amortización técnica, menos la inversión en activos fijos y menos la inversión en capital circulante.
-    - ( ) d) El flujo de caja libre es igual al beneficio antes de pagar intereses e impuestos, más la cuota de amortización técnica, menos la inversión en activos fijos y menos la inversión en capital circulante.
-
-    > Correcta: b. FCL = BAIT(1−tc) + amortización − inversión en activo fijo − ΔFM, que equivale a Qai(1−tc) + CAF·tc − ΔFM. La a) y la c) meten intereses y restan la amortización; la d) olvida los impuestos. Repetida en 2 fuentes.
 
 1. Cuál de las siguientes afirmaciones es correcta:
 
@@ -2009,24 +2104,6 @@
 
 1. Indique la respuesta correcta:
 
-    - ( ) a) Si en la vida de un proyecto de inversión, de un período a otro, se produce una reducción del período de cobro, ceteris paribus, que da lugar a un aumento del fondo de maniobra, este incremento deberá restarse al calcular el flujo de caja del período correspondiente.
-    - ( ) b) Si en la vida de un proyecto de inversión, de un período a otro, ceteris paribus, se produce una reducción del período de cobro que da lugar a una disminución del fondo de maniobra, este decremento (en valor absoluto) deberá restarse al calcular el flujo de caja del período correspondiente.
-    - (x) c) Si en la vida de un proyecto de inversión, de un período a otro, ceteris paribus, se produce una reducción del período de cobro que da lugar a una disminución del fondo de maniobra, este decremento (en valor absoluto) deberá sumarse al calcular el flujo de caja del período correspondiente.
-    - ( ) d) Si en la vida de un proyecto de inversión, de un período a otro, se produce una reducción del período de cobro, ceteris paribus, que da lugar a un aumento del fondo de maniobra, este incremento deberá sumarse al calcular el flujo de caja del período correspondiente.
-
-    > Correcta: c. Cobrar antes reduce clientes y el FM; esa reducción libera caja y se suma al flujo. La a) y la d) parten de un aumento del FM, que no se produce. Repetida en 2 fuentes.
-
-1. Indique la respuesta correcta:
-
-    - ( ) a) Al calcular los flujos netos de caja de un proyecto, deberá deducirse el importe de los gastos financieros de la deuda que financia el proyecto siempre que los mismos se hagan efectivos en el año considerado.
-    - ( ) b) Al calcular los flujos netos de caja de un proyecto, deberá deducirse el importe de los gastos financieros de la deuda que financia el proyecto devengados en el año considerado, con independencia del momento en que tenga lugar su pago.
-    - ( ) c) Al calcular los flujos netos de caja de un proyecto, deberá deducirse, además de los gastos financieros efectivamente pagados, la parte amortización financiera correspondiente al período considerado.
-    - (x) d) Al calcular los flujos netos de caja de un proyecto, no deberá deducirse ni el importe de los gastos financieros devengados en ese período, ni la amortización financiera correspondiente al mismo.
-
-    > Correcta: d. Ni intereses ni devolución del principal entran en los flujos del VAN: la financiación se recoge en la tasa de descuento. Repetida en 2 fuentes.
-
-1. Indique la respuesta correcta:
-
     - ( ) a) En el cálculo del VAN de un proyecto de inversión se debe restar del coste inicial del mismo los fondos que provienen de la deuda que lo financia, ya que es un pasivo.
     - (x) b) En el cálculo del VAN de un proyecto de inversión no se debe restar del coste inicial del mismo los fondos que provienen de la deuda que lo financia, ya que las decisiones de inversión deben separarse de las decisiones de financiación.
     - ( ) c) En el cálculo del VAN de un proyecto de inversión se deben restar de los flujos de caja del mismo los fondos que provienen de la deuda que lo financia, así como los costes financieros, pues las decisiones de inversión deben estar integradas con las de financiación.
@@ -2054,60 +2131,6 @@
 
 <!-- Tema 4 · CAE, inflación y elección entre equipos -->
 
-1. La empresa de edición de libros está considerando la posibilidad de reemplazar la prensa actual por otra nueva, siendo capaces ambas de fabricar el mismo número de libros al año. Sabemos que la demanda asciende a 500 libros mensuales desde abril hasta septiembre (ambos incluidos), y de 350 mensuales el resto del año, pudiendo venderse todos a 10€ por cada unidad. El coste de fabricación de un libro es de 3,5€ (prensa antigua) y 2,5€ (prensa nueva) por cada unidad. Además, el valor residual (hoy) de la prensa antigua es de 650€, y el precio de adquisición de la prensa nueva es de 30.000€. Por último, sabemos que, en 10 años, el modelo de negocio de las editoras de libros cambiará radicalmente, acabando con el uso de la práctica totalidad de las prensas (y, por tanto, careciendo todas de valor residual). ¿Cuál es la mejor alternativa para esta empresa, para una tasa de actualización del 10%?
-
-    - ( ) a) Comprar la máquina nueva (supone un ahorro de 1.337,29€ con respecto a continuar con la prensa antigua).
-    - (x) b) Comprar la máquina nueva (supone un ahorro de 1.987,29€ con respecto a continuar con la prensa antigua).
-    - ( ) c) Comprar la máquina nueva (supone un ahorro de 21.650€ con respecto a continuar con la prensa antigua).
-    - ( ) d) Comprar la máquina nueva (supone un ahorro de 47.169,48€ con respecto a continuar con la prensa antigua).
-
-    > Correcta: b. Producción anual = 6·500 + 6·350 = 5.100 libros; ahorro de 1 €/libro = 5.100 €/año durante 10 años: 5.100·a(10; 10 %) = 31.337,29. Ahorro neto = 31.337,29 − 30.000 + 650 (venta de la vieja) = 1.987,29. La a) resta los 650 en lugar de sumarlos. Repetida en 2 fuentes.
-
-1. La decisión sobre la conveniencia de renovar un equipo en funcionamiento al que aún le queda vida útil por otro de distinta duración que permitirá fabricar el mismo producto en la misma cantidad habría de tomarse basándose en:
-
-    - ( ) a) El VAN incremental.
-    - (x) b) El coste anual equivalente incremental.
-    - ( ) c) La TIR incremental.
-    - ( ) d) La comparación entre la vida útil de los dos equipos.
-
-    > Correcta: b. Con duraciones distintas y misma producción no se comparan VAN ni TIR: se compara el coste anual (equivalente) de cada opción, es decir, el coste de un año más con el viejo frente al CAE del nuevo. Repetida en 2 fuentes.
-
-1. Se depositan hoy en el banco 1.100 €. El depósito contratado promete al cabo de 1 año un flujo de tesorería nominal de 1.155 €. La tasa de inflación esperada para el próximo año se sitúa en el 1,5%. A la vista de la información, indique cuál de las siguientes afirmaciones es correcta:
-
-    - ( ) a) La rentabilidad nominal de este depósito es del 5,125% y su rentabilidad real del 2,566%.
-    - (x) b) La rentabilidad nominal de este depósito es del 5% y su rentabilidad real del 3,448 %.
-    - ( ) c) La rentabilidad nominal de este depósito es del 5% y su rentabilidad real es del 4,926 %.
-    - ( ) d) La rentabilidad nominal de este depósito es del 5,125 % y su rentabilidad real del 2,625%.
-
-    > Correcta: b. Nominal = 1.155/1.100 − 1 = 5 %. Real = 1,05/1,015 − 1 = 3,448 % (la aproximación 5 − 1,5 = 3,5 % no es exacta). Repetida en 2 fuentes.
-
-1. Un inversor inmobiliario tiene arrendada una nave industrial. El año próximo prevé generar un flujo de caja nominal de 100.000 euros, neto de gastos de reparación y funcionamiento, que se incrementará anualmente con la inflación al 2%. Si se pudiese alquilar este edificio en tales condiciones a perpetuidad y el tipo de interés real es del 5%, ¿cuál es el valor actual de este edificio?
-
-    - ( ) a) Aproximadamente 2.262.881,69 euros.
-    - ( ) b) Aproximadamente 2.000.000 euros.
-    - (x) c) Aproximadamente 1.960.784,31 euros.
-    - ( ) d) Aproximadamente 3.400.000 euros.
-
-    > Correcta: c. Tasa nominal = 1,05·1,02 − 1 = 7,1 %, y VA = 100.000/(0,071 − 0,02) = 1.960.784,31. En real da lo mismo: 100.000/1,02 = 98.039,22 y 98.039,22/0,05. La b) mezcla flujo nominal con tasa real. Repetida en 2 fuentes.
-
-1. De una determinada inversión se espera obtener los siguientes flujos de tesorería en términos reales: C0 = -100, Q1 = 80, Q2 = 90, Q3 = 70 y Q4 = 100. Sabiendo que el coste de oportunidad del capital, expresado en términos nominales, es del 13,3%, y que la tasa de inflación prevista asciende al 3% anual, el VAN de esta inversión es de, aproximadamente:
-
-    - (x) a) 168 €.
-    - ( ) b) 149,50 €.
-    - ( ) c) 165 €.
-    - ( ) d) 268 €.
-
-    > Correcta: a. Tasa real = 1,133/1,03 − 1 = 10 %. VAN = −100 + 80/1,1 + 90/1,1^2 + 70/1,1^3 + 100/1,1^4 = 168,00. La d) es el VA sin restar la inversión; la b) descuenta flujos reales a la tasa nominal. Repetida en 2 fuentes.
-
-1. Indique cuál de las siguientes afirmaciones sobre el cálculo del coste anual equivalente es cierta:
-
-    - ( ) a) No resulta conveniente calcular el coste anual equivalente en anualidades reales porque puede proporcionar resultados incorrectos cuando las tasas de inflación son elevadas.
-    - ( ) b) Este cálculo solo es apropiado cuando estamos comparando proyectos de inversiones mutuamente excluyentes, pero de idéntica duración o estructura temporal.
-    - ( ) c) El criterio del VAN es más adecuado que el del coste anual equivalente en cualquier circunstancia. Si existe discrepancia entre ambos cálculos, siempre emplearemos el primer método de valoración.
-    - (x) d) Ninguna de las anteriores es correcta.
-
-    > Correcta: d. Se recomienda calcular el CAE en términos reales (el nominal no es constante); el CAE sirve precisamente para duraciones distintas; y con duraciones distintas el VAN no es preferible. Es el problema 23 de la relación. Repetida en 2 fuentes.
-
 1. Indique cuál de las siguientes afirmaciones sobre el cálculo del coste anual equivalente es falsa:
 
     - ( ) a) Resulta conveniente calcular el coste anual equivalente en anualidades reales.
@@ -2116,15 +2139,6 @@
     - ( ) d) Los CAE deben ajustarse en caso de que haya cambios tecnológicos.
 
     > Correcta: c. Con duraciones distintas el VA de los costes y el CAE pueden dar decisiones opuestas (máquinas A y B de las diapositivas: por VA gana B, por CAE gana A). Las demás son verdaderas.
-
-1. El Cibercafé Granada, S.L., a fin de mantener y ampliar su servicio, necesita adquirir 20 nuevos ordenadores personales, dudando su directivo financiero entre dos modelos: el 500X cuesta 350.000 ptas., dura 3 años y tiene un mantenimiento anual (en términos reales) de 25.000 ptas.; el 700Y cuesta 450.000 ptas., dura 5 años y su mantenimiento es de 10.000 ptas. Teniendo en cuenta que el coste de oportunidad del capital en términos reales es del 10%, ¿qué modelo recomendaría comprar a esta empresa?
-
-    - ( ) a) El modelo 700Y porque tiene un valor actual de sus costes menor.
-    - ( ) b) El modelo 500X porque tiene un valor actual de sus costes menor.
-    - (x) c) El modelo 700Y porque tiene un coste anual equivalente menor.
-    - ( ) d) El modelo 500X porque tiene un coste anual equivalente menor.
-
-    > Correcta: c. VA(500X) = 350.000 + 25.000·a(3; 10 %) = 412.171 y CAE = 412.171/2,4869 = 165.740. VA(700Y) = 450.000 + 10.000·a(5; 10 %) = 487.908 y CAE = 487.908/3,7908 = 128.709. Por VA ganaría el 500X (b), pero con vidas distintas se usa el CAE. Repetida en 2 fuentes.
 
 1. Dado el rápido avance tecnológico en el sector informático se estima que los ordenadores costarán cada año un 30% menos en términos reales. Determine en estas circunstancias cuál es el modelo de ordenador que preferiría adquirir Cibercafé Granada (datos de la pregunta anterior).
 

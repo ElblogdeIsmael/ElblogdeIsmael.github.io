@@ -230,12 +230,12 @@ export default {
                   kind: "PDF",
                 },
                 {
-                  name: "Test Parcial 1: preguntas repetidas en exámenes",
-                  href: "/Subjects/Fifth/DFIN/test/test-parcial1-repetidas.html",
-                  kind: "HTML",
+                  name: "Formulario del Parcial 1",
+                  href: "/Subjects/Fifth/DFIN/formulario1/build/DFIN_Formulario_Parcial1.pdf",
+                  kind: "PDF",
                 },
                 {
-                  name: "Test Parcial 1: banco completo",
+                  name: "Test Parcial 1 (más repetidas primero, 236 preguntas)",
                   href: "/Subjects/Fifth/DFIN/test/test-parcial1.html",
                   kind: "HTML",
                 },
