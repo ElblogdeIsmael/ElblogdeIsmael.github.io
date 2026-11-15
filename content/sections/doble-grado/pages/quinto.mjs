@@ -240,6 +240,11 @@ export default {
                   kind: "PDF",
                 },
                 {
+                  name: "Problemas tipo del Parcial 1: lo que cae siempre, resuelto paso a paso",
+                  href: "/Subjects/Fifth/DFIN/problemas1/build/DFIN_Problemas_Tipo_Parcial1.pdf",
+                  kind: "PDF",
+                },
+                {
                   name: "Test Parcial 1 (más repetidas primero, 236 preguntas)",
                   href: "/Subjects/Fifth/DFIN/test/test-parcial1.html",
                   kind: "HTML",

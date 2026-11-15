@@ -7,6 +7,8 @@ header-includes:
   - \AtBeginDocument{\setlength{\headheight}{28pt}}
 ---
 
+\decimalpoint
+
 # Cómo usar este documento {.unnumbered}
 
 Apuntes condensados para el **primer parcial de Dirección Financiera** (UGR, Dpto. de Economía Financiera y Contabilidad, prof. D. Salvador Rayo Cantón). Entran los **temas 1 a 4**:
