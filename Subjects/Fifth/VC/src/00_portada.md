@@ -4,6 +4,7 @@ subject: "Visión por Computador"
 
 # Elige el fondo de la portada: `info` para las de Informática, `ade` para las
 # de ADE. Son las dos imágenes de extraFiles/img/fondo_<type>.jpg.
+tema: editorial
 type: info
 
 # Una línea bajo el título. «Apuntes de la asignatura», «Temario», «Prácticas».

@@ -1,5 +1,6 @@
 ---
 subject: "Derecho Fiscal"
+tema: plano
 type: ade
 about: "Apuntes y Casos Prácticos"
 header-includes:

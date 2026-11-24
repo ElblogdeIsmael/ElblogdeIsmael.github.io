@@ -1,5 +1,6 @@
 ---
 subject: "Dirección Financiera — Parcial 1"
+tema: editorial
 type: ade
 about: "Temas 1 a 4: teoría condensada, problemas tipo de examen y formulario"
 header-includes:
