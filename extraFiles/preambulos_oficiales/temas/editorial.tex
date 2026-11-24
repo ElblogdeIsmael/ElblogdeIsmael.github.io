@@ -1,0 +1,50 @@
+% Tema «editorial»: libro de texto clásico. Papel crema, EB Garamond, acento
+% bermellón, número de capítulo enorme colgando en el margen.
+\input{preambulos_oficiales/temas/_comun.tex}
+\usepackage[osf]{ebgaramond}
+\definecolor{tepaper}{HTML}{F7F2E8}\definecolor{teink}{HTML}{1F1A17}\definecolor{teverm}{HTML}{C8361B}\definecolor{tetinta}{HTML}{6B5E52}
+\pagecolor{tepaper}\color{teink}
+\newgeometry{top=28mm,bottom=28mm,inner=26mm,outer=40mm,headsep=10mm}
+\setlength{\headheight}{18pt}
+% Cajas: un filete a la izquierda, sin fondo
+\tcbset{tefilete/.style={blanker,breakable,borderline west={#1}{-8pt}{teverm},before skip=10pt,after skip=10pt}}
+\temaenvolver{teorema,proposicion,corolario,propuesta}{tefilete=2.2pt}
+\temaenvolver{definicion,ejercicio,ejercicioresuelto}{tefilete=.8pt}
+\temaenvolver{ejemplo,solucion,demostracion}{blanker,breakable,borderline west={.4pt}{-8pt}{tetinta},before skip=10pt,after skip=10pt}
+\temaenvolver{anotacion,nota}{blanker,breakable,fontupper=\small\color{tetinta},left=12pt,right=12pt,before skip=8pt,after skip=8pt,
+  borderline north={.4pt}{0pt}{teverm!60},borderline south={.4pt}{0pt}{teverm!60}}
+\ifcsname Shaded\endcsname\renewenvironment{Shaded}{\begin{tcolorbox}[blanker,breakable,borderline north={.4pt}{0pt}{tetinta},borderline south={.4pt}{0pt}{tetinta},top=4pt,bottom=4pt]}{\end{tcolorbox}}\fi
+\captionsetup{font={small,it},labelfont={sc,up,color=teverm},labelsep=quad}
+\setlist[itemize]{label={\color{teverm}\textbullet},left=1.2em}
+% Capítulos y secciones
+\newcommand\tetitulo[1]{{\fontsize{30}{34}\selectfont\itshape\raggedright #1\par}\vspace{4mm}{\color{teverm}\rule{24mm}{1.2pt}}}
+\titleformat{\chapter}[display]{\normalfont}{%
+  \begin{tikzpicture}[overlay]\node[anchor=north east,font=\fontsize{130}{130}\selectfont\color{teverm}] at (\textwidth+28mm,24mm){\thechapter};\end{tikzpicture}%
+  {\scshape\color{tetinta}capítulo \thechapter}}{14mm}{\tetitulo}
+\titleformat{name=\chapter,numberless}[display]{\normalfont}{}{0pt}{\tetitulo}
+\titlespacing*{\chapter}{0pt}{12mm}{12mm}
+\titleformat{\section}{\Large\itshape}{\llap{\color{teverm}\normalfont\large\thesection\hspace{5mm}}}{0pt}{}
+\titleformat{\subsection}{\large\scshape}{\color{teverm}\thesubsection}{.6em}{}
+\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}
+\fancyhf{}
+\fancyhead[L]{\small\scshape\color{tetinta}\MakeLowercase{\asignatura}\enspace·\enspace{\itshape\nouppercase\leftmark}}
+\fancyhead[R]{\small\color{teverm}\thepage}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\color{teverm}\thepage}}
+% Portada: solo tipografía y un árbol en bermellón
+\newcommand\portadatema{\begin{titlepage}\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+ \node[anchor=north west,font=\small\scshape\color{tetinta},align=left] at ([xshift=24mm,yshift=-24mm]current page.north west) {apuntes de clase\\doble grado gii\,+\,ade · universidad de granada};
+ \node[anchor=north east,font=\small\color{tetinta},align=right] at ([xshift=-24mm,yshift=-24mm]current page.north east) {Quinto curso\\\itshape Ismael Sallami Moreno};
+ \draw[teverm,line width=.6pt] ([xshift=24mm,yshift=-42mm]current page.north west) -- ([xshift=-24mm,yshift=-42mm]current page.north east);
+ \begin{scope}[shift={([xshift=8mm,yshift=-40mm]current page.center)},teverm,line width=.5pt]
+  \foreach \d/\n in {0/1,1/2,2/4,3/8,4/16}{\pgfmathsetmacro\w{70/\n}
+   \foreach \k in {1,...,\n}{\pgfmathsetmacro\x{-70+(2*\k-1)*\w}
+    \fill (\x mm,-\d*12mm) circle (1.1pt);
+    \ifnum\d<4 \draw (\x mm,-\d*12mm) -- ({(\x-\w/2)*1mm},{-\d*12mm-12mm}); \draw (\x mm,-\d*12mm) -- ({(\x+\w/2)*1mm},{-\d*12mm-12mm});\fi}}
+ \end{scope}
+ \node[anchor=south west,font=\fontsize{44}{48}\selectfont\itshape,text width=165mm,align=left] at ([xshift=22mm,yshift=10mm]current page.west) {\asignatura};
+ \node[anchor=north west,font=\Large\color{tetinta},text width=150mm,align=left] at ([xshift=24mm,yshift=2mm]current page.west) {\descripcion};
+ \node[anchor=south west,font=\large\scshape] at ([xshift=24mm,yshift=26mm]current page.south west) {ismael sallami moreno};
+ \node[anchor=south west,font=\small\itshape\color{tetinta}] at ([xshift=24mm,yshift=20mm]current page.south west) {elblogdeismael.github.io};
+ \node[anchor=south east,font=\fontsize{64}{64}\selectfont\color{teverm}] at ([xshift=-24mm,yshift=16mm]current page.south east) {\S};
+\end{tikzpicture}\end{titlepage}}

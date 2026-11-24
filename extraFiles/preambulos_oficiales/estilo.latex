@@ -101,6 +101,19 @@ $endif$
 
 
 % ========================
+% Tema visual
+% ========================
+% Four looks share this template. With no `tema:` in the YAML of a subject's
+% src/00_portada.md the document keeps the classic look below. `tema: brutal`,
+% `tema: editorial` or `tema: plano` load temas/<name>.tex, which restyles
+% headings, boxes, headers and the cover without touching the markdown.
+\newcommand{\asignatura}{$subject$}
+\newcommand{\descripcion}{$about$}
+$if(tema)$
+\input{preambulos_oficiales/temas/$tema$.tex}
+$endif$
+
+% ========================
 % Inicio del documento
 % ========================
 \begin{document}
@@ -127,6 +140,7 @@ $endif$
 % PORTADA: ENTRADA MANUAL
 %==========================
 
+\ifdefined\portadatema\portadatema\else
 % portada.tex
 \begin{titlepage}
     \newgeometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm} % márgenes personalizados
@@ -172,6 +186,7 @@ $endif$
     
     \restoregeometry
 \end{titlepage}
+\fi
 
 
 %==========================

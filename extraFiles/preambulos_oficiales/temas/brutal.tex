@@ -1,0 +1,55 @@
+% Tema «brutal»: el sistema de la web llevado al papel. Papel #eef2ef con
+% rejilla, bordes gruesos, sombras duras sin difuminar, teal y lima.
+\input{preambulos_oficiales/temas/_comun.tex}
+\usepackage[sfdefault,light]{plex-sans}\usepackage[scale=.92]{plex-mono}
+\definecolor{tbpaper}{HTML}{EEF2EF}\definecolor{tbink}{HTML}{0D0F12}
+\definecolor{tbteal}{HTML}{0F9E86}\definecolor{tblima}{HTML}{B8FF3C}
+\pagecolor{tbpaper}
+\newcommand\tbdisp{\fontfamily{Montserrat-LF}\fontseries{black}\selectfont}
+\newcommand\tboutl[1]{\textpdfrender{TextRenderingMode=1,LineWidth=.8}{#1}}
+\AddToShipoutPictureBG{\begin{tikzpicture}[remember picture,overlay]
+ \draw[tbink!6,line width=.4pt,step=8.5mm] (current page.south west) grid (current page.north east);\end{tikzpicture}}
+% Cajas
+\tcbset{tbcaja/.style={enhanced,breakable,sharp corners,boxrule=1.6pt,colframe=tbink,colback=#1,
+  shadow={5pt}{-5pt}{0pt}{fill=tbink,opacity=1},left=8pt,right=8pt,top=6pt,bottom=6pt,before skip=12pt,after skip=12pt}}
+\temaenvolver{definicion,teorema,proposicion,corolario,propuesta}{tbcaja=white,borderline west={5pt}{0pt}{tbteal}}
+\temaenvolver{ejercicio,ejercicioresuelto}{tbcaja=white,borderline west={5pt}{0pt}{tblima!80!tbink}}
+\temaenvolver{ejemplo,solucion,demostracion}{tbcaja=tbpaper!40!white}
+\temaenvolver{anotacion,nota}{enhanced,breakable,sharp corners,boxrule=0pt,leftrule=5pt,colframe=tbteal,colback=tbteal!10,left=8pt,before skip=10pt,after skip=10pt}
+\ifcsname Shaded\endcsname\renewenvironment{Shaded}{\begin{tcolorbox}[tbcaja=white,top=2pt,bottom=2pt]}{\end{tcolorbox}}\fi
+\captionsetup{labelfont={bf,color=tbteal},labelsep=endash}
+\setlist[itemize]{label={\color{tbteal}\rule[.2ex]{.55em}{.55em}},left=1.2em}
+% Capítulos y secciones
+\renewcommand\temaprimera[1]{\MakeUppercase{#1}}
+\renewcommand\temaresto[1]{\\\tboutl{\MakeUppercase{#1}}}
+\newcommand\tbtitulo[1]{{\tbdisp\fontsize{26}{29}\selectfont\raggedright\temapartir#1 \relax\par}\vspace{3mm}{\color{tbink}\rule{\linewidth}{2pt}}}
+\newcommand\tbcapitulo[1]{\begin{tikzpicture}
+  \fill[tbink](5pt,-5pt) rectangle (29mm,-33mm);\fill[tblima,draw=tbink,line width=2pt](0,0) rectangle (28mm,-32mm);
+  \node[font=\tbdisp\fontsize{64}{64}\selectfont] at (14mm,-16mm){\thechapter};\end{tikzpicture}\par\vspace{6mm}\tbtitulo{#1}}
+\titleformat{\chapter}[display]{\normalfont}{}{0pt}{\tbcapitulo}
+\titleformat{name=\chapter,numberless}[display]{\normalfont}{}{0pt}{\tbtitulo}
+\titlespacing*{\chapter}{0pt}{0pt}{8mm}
+\titleformat{\section}{\tbdisp\large}{\colorbox{tbink}{\color{tblima}\,\thesection\,}}{.6em}{\MakeUppercase}
+\titleformat{name=\section,numberless}{\tbdisp\large}{}{0pt}{\MakeUppercase}
+\titleformat{\subsection}{\bfseries\large}{\color{tbteal}\thesubsection}{.6em}{}
+% Cabecera: banda negra y número en lima
+\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}
+\fancyhf{}
+\fancyhead[L]{\begin{tikzpicture}[overlay]\fill[tbink](-40mm,-2.5mm) rectangle (\paperwidth,6mm);
+ \node[anchor=west,font=\tbdisp\scriptsize\color{tbpaper},text width=\dimexpr\headwidth-20mm\relax] at (0,1.8mm){\MakeUppercase{\asignatura}\ \ ·\ \ \leftmark};\end{tikzpicture}}
+\fancyhead[R]{\begin{tikzpicture}[overlay]\node[anchor=east,fill=tblima,font=\tbdisp\small,minimum height=8.5mm,minimum width=13mm] at (30mm,1.8mm){\thepage};\end{tikzpicture}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[R]{\tbdisp\small\thepage}}
+% Portada
+\newcommand\portadatema{\begin{titlepage}\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+ \fill[tbink] (current page.north west) rectangle ([yshift=-14mm]current page.north east);
+ \foreach \i in {0,...,6}{\node[anchor=west,font=\tbdisp\small\color{tblima}] at ([xshift=\i*34mm-8mm,yshift=-7mm]current page.north west) {APUNTES ///};}
+ \fill[tbink] ([xshift=26mm,yshift=54mm]current page.west) rectangle ([xshift=-14mm,yshift=-46mm]current page.east);
+ \fill[tbteal,draw=tbink,line width=2.4pt] ([xshift=20mm,yshift=60mm]current page.west) rectangle ([xshift=-20mm,yshift=-40mm]current page.east);
+ \node[anchor=west,fill=tblima,draw=tbink,line width=2.4pt,font=\tbdisp\small,inner sep=7pt] at ([xshift=30mm,yshift=60mm]current page.west) {QUINTO CURSO \,/\, DOBLE GRADO GII + ADE};
+ \node[anchor=north west,align=left,text width=150mm,font=\tbdisp\fontsize{36}{38}\selectfont\color{white}] at ([xshift=30mm,yshift=46mm]current page.west) {\expandafter\temapartir\asignatura{} \relax};
+ \node[anchor=south west,text width=150mm,font=\small\bfseries\color{white}] at ([xshift=30mm,yshift=-34mm]current page.west) {\descripcion};
+ \node[anchor=south west,font=\tbdisp\large] at ([xshift=20mm,yshift=26mm]current page.south west) {ISMAEL SALLAMI MORENO};
+ \node[anchor=south west,font=\small] at ([xshift=20mm,yshift=19mm]current page.south west) {elblogdeismael.github.io};
+ \node[anchor=south east,font=\tbdisp\fontsize{150}{150}\selectfont] at ([xshift=-12mm,yshift=-4mm]current page.south east) {\textpdfrender{TextRenderingMode=2,LineWidth=1.6,StrokeColor=tbink,FillColor=tbpaper}{05}};
+\end{tikzpicture}\end{titlepage}}

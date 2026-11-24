@@ -1,0 +1,78 @@
+% Tema «plano»: hoja de plano técnico. Marco con marcas de corte, cajetín al
+% pie, apertura de capítulo en azul de Prusia cuadriculado y acento naranja.
+\input{preambulos_oficiales/temas/_comun.tex}
+\usepackage[sfdefault]{plex-sans}\usepackage[scale=.9]{plex-mono}
+\definecolor{tpazul}{HTML}{0B3A66}\definecolor{tpcian}{HTML}{CFE3F5}\definecolor{tpnar}{HTML}{FF5A1F}\definecolor{tpink}{HTML}{14212E}
+\color{tpink}
+\newgeometry{top=30mm,bottom=36mm,left=26mm,right=26mm,headsep=8mm,footskip=17mm}
+\AddToShipoutPictureBG{\begin{tikzpicture}[remember picture,overlay]
+ \draw[tpazul,line width=.5pt] ([shift={(12mm,12mm)}]current page.south west) rectangle ([shift={(-12mm,-12mm)}]current page.north east);
+ \foreach \p/\a/\b in {north west/1/-1,north east/-1/-1,south west/1/1,south east/-1/1}
+   {\draw[tpazul,line width=.3pt] ([shift={(\a*6mm,\b*12mm)}]current page.\p) -- ++(\a*3mm,0); \draw[tpazul,line width=.3pt] ([shift={(\a*12mm,\b*6mm)}]current page.\p) -- ++(0,\b*3mm);}
+ \foreach \i in {1,...,8}{\node[font=\ttfamily\tiny,tpazul] at ([shift={(\i*23.25mm-11.6mm,-9mm)}]current page.north west){\i};
+   \draw[tpazul,line width=.3pt] ([shift={(\i*23.25mm,-12mm)}]current page.north west)--++(0,-2mm);}
+\end{tikzpicture}}
+\newcommand\tpcajetin{\begin{tikzpicture}[overlay]
+ \begin{scope}[shift={(-14mm,-5mm)},tpazul,line width=.5pt,font=\ttfamily\tiny]
+  \draw (0,0) rectangle (186mm,-12mm); \draw (62mm,0)--++(0,-12mm) (132mm,0)--++(0,-12mm) (166mm,0)--++(0,-12mm);
+  \node[anchor=north west] at (1.5mm,-1mm){ASIGNATURA}; \node[anchor=north west] at (63.5mm,-1mm){SECCIÓN}; \node[anchor=north west] at (133.5mm,-1mm){AUTOR}; \node[anchor=north west] at (167.5mm,-1mm){HOJA};
+  \node[anchor=south west,font=\sffamily\bfseries\scriptsize,tpink,text width=59mm] at (1.5mm,-11.5mm){\asignatura};
+  \node[anchor=south west,font=\sffamily\scriptsize,tpink,text width=67mm] at (63.5mm,-11.5mm){\leftmark};
+  \node[anchor=south west,font=\sffamily\scriptsize,tpink] at (133.5mm,-11.5mm){I. Sallami Moreno};
+  \node[anchor=south west,font=\ttfamily\small\bfseries,tpnar] at (167.5mm,-11.5mm){\thepage};
+ \end{scope}\end{tikzpicture}}
+\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}
+\fancyhf{}\fancyfoot[L]{\tpcajetin}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[L]{\tpcajetin}}
+% Cajas con esquineras
+\tcbset{tpcaja/.style={enhanced,breakable,sharp corners,boxrule=0pt,frame hidden,colback=#1,left=9pt,right=9pt,top=6pt,bottom=6pt,before skip=12pt,after skip=10pt,
+ overlay={\draw[tpazul,line width=1.2pt] ([yshift=-4mm]frame.north west)--(frame.north west)--++(4mm,0) ([yshift=4mm]frame.south east)--(frame.south east)--++(-4mm,0)
+   ([xshift=-4mm]frame.north east)--(frame.north east)--++(0,-4mm) ([xshift=4mm]frame.south west)--(frame.south west)--++(0,4mm);
+   \draw[tpazul,line width=.3pt,densely dashed] (frame.north west) rectangle (frame.south east);}}}
+\temaenvolver{definicion,ejercicio,ejercicioresuelto}{tpcaja=tpcian!45}
+\temaenvolver{teorema,proposicion,corolario,propuesta}{tpcaja=tpnar!8}
+\temaenvolver{ejemplo,solucion,demostracion}{tpcaja=white}
+\temaenvolver{anotacion,nota}{enhanced,breakable,sharp corners,boxrule=.4pt,colframe=tpnar,colback=white,left=8pt,before skip=10pt,after skip=10pt}
+\ifcsname Shaded\endcsname\renewenvironment{Shaded}{\begin{tcolorbox}[tpcaja=tpcian!25,top=2pt,bottom=2pt]}{\end{tcolorbox}}\fi
+\captionsetup{labelfont={tt,bf,color=tpnar},labelsep=quad}
+\setlist[itemize]{label={\color{tpnar}\ttfamily>},left=1.2em}
+% Capítulo: banda azul cuadriculada arriba de la página
+\newcommand\tpbanda[2]{\begin{tikzpicture}[remember picture,overlay]
+  \fill[tpazul] ([yshift=1mm]current page.north west) rectangle ([yshift=-100mm]current page.north east);
+  \draw[white,opacity=.12,step=5mm,line width=.3pt] (current page.north west) grid ([yshift=-100mm]current page.north east);
+  \draw[white,opacity=.25,step=25mm,line width=.6pt] (current page.north west) grid ([yshift=-100mm]current page.north east);
+  \node[anchor=north west,font=\ttfamily\bfseries\fontsize{84}{84}\selectfont,text=tpnar] at ([xshift=22mm,yshift=-14mm]current page.north west) {#1};
+  \node[anchor=south west,font=\bfseries\fontsize{24}{27}\selectfont,text=white,text width=150mm,align=left] at ([xshift=26mm,yshift=-92mm]current page.north west) {#2};
+  \draw[white,line width=.4pt,{Latex[length=2mm]}-{Latex[length=2mm]}] ([xshift=-30mm,yshift=-18mm]current page.north east) -- ([xshift=-30mm,yshift=-50mm]current page.north east);
+  \draw[white,line width=.4pt] ([xshift=-34mm,yshift=-18mm]current page.north east)--++(8mm,0) ([xshift=-34mm,yshift=-50mm]current page.north east)--++(8mm,0);
+ \end{tikzpicture}\vspace*{56mm}}
+\titleformat{\chapter}[display]{\normalfont}{}{0pt}{\tpbanda{T-\ifnum\value{chapter}<10 0\fi\thechapter}}
+\titleformat{name=\chapter,numberless}[display]{\normalfont}{}{0pt}{\tpbanda{}}
+\titlespacing*{\chapter}{0pt}{-12mm}{8mm}
+\titleformat{\section}{\large\bfseries\color{tpazul}}{\llap{\ttfamily\color{tpnar}\thesection\hspace{4mm}}}{0pt}{}[\vspace{-2mm}{\color{tpazul}\rule{\linewidth}{.4pt}}]
+\titleformat{\subsection}{\bfseries}{\color{tpnar}\ttfamily\thesubsection}{.6em}{}
+% Portada
+\newcommand\portadatema{\begin{titlepage}\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+ \fill[tpazul] (current page.south west) rectangle (current page.north east);
+ \draw[white,opacity=.10,step=5mm,line width=.3pt] (current page.south west) grid (current page.north east);
+ \draw[white,opacity=.22,step=25mm,line width=.5pt] (current page.south west) grid (current page.north east);
+ \begin{scope}[shift={([yshift=50mm]current page.center)},white,line width=.7pt]
+  \draw (0,0) -- (-60mm,-70mm) -- (60mm,-70mm) -- cycle;
+  \foreach \y in {1,...,6}{\draw[opacity=.5,line width=.3pt] ({-\y*60mm/7},{-\y*10mm}) -- ({\y*60mm/7},{-\y*10mm});}
+  \draw[tpnar,line width=1.2pt] (0,0) circle (4mm); \fill[tpnar] (0,0) circle (1.2mm);
+  \draw[line width=.4pt,{Latex[length=2.5mm]}-{Latex[length=2.5mm]}] (-60mm,-78mm) -- (60mm,-78mm) node[midway,fill=tpazul,font=\ttfamily\scriptsize]{ ALCANCE };
+  \draw[line width=.4pt,{Latex[length=2.5mm]}-{Latex[length=2.5mm]}] (70mm,0) -- (70mm,-70mm) node[midway,fill=tpazul,font=\ttfamily\scriptsize,rotate=90]{ PROFUNDIDAD };
+  \draw[line width=.3pt] (62mm,0)--(74mm,0) (62mm,-70mm)--(74mm,-70mm);
+ \end{scope}
+ \node[anchor=north west,font=\ttfamily\small,text=tpcian,align=left] at ([xshift=20mm,yshift=-20mm]current page.north west) {APUNTES · QUINTO CURSO\\DOBLE GRADO GII + ADE · UGR};
+ \node[anchor=north east,font=\ttfamily\small,text=tpnar] at ([xshift=-20mm,yshift=-20mm]current page.north east) {REV. \the\year};
+ \node[anchor=north west,font=\bfseries\fontsize{34}{38}\selectfont,text=white,text width=170mm,align=left] at ([xshift=18mm,yshift=-36mm]current page.west) {\MakeUppercase{\asignatura}};
+ \node[anchor=north west,font=\large,text=tpcian,text width=165mm,align=left] at ([xshift=20mm,yshift=-72mm]current page.west) {\descripcion};
+ \begin{scope}[shift={([xshift=-112mm,yshift=46mm]current page.south east)},white,line width=.6pt,font=\ttfamily\tiny]
+  \draw (0,0) rectangle (92mm,-30mm); \draw (0,-10mm)--(92mm,-10mm) (0,-20mm)--(92mm,-20mm) (46mm,-10mm)--(46mm,-30mm);
+  \node[anchor=west,font=\sffamily\bfseries\small] at (2mm,-5mm){ISMAEL SALLAMI MORENO};
+  \node[anchor=west] at (2mm,-15mm){CURSO\ \ 5.º}; \node[anchor=west] at (48mm,-15mm){UNIVERSIDAD DE GRANADA};
+  \node[anchor=west] at (2mm,-25mm){ESCALA\ \ 1:1}; \node[anchor=west,text=tpnar] at (48mm,-25mm){ELBLOGDEISMAEL.GITHUB.IO};
+ \end{scope}
+\end{tikzpicture}\end{titlepage}}
