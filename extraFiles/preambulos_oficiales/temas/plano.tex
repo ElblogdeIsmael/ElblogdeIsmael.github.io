@@ -1,3 +1,5 @@
+% The title block is anchored to the page corner so it sits exactly on the
+% bottom of the frame, 186 mm wide like the frame itself; long values are truncated to one line.
 % Tema «plano»: hoja de plano técnico. Marco con marcas de corte, cajetín al
 % pie, apertura de capítulo en azul de Prusia cuadriculado y acento naranja.
 \input{preambulos_oficiales/temas/_comun.tex}
@@ -12,12 +14,12 @@
  \foreach \i in {1,...,8}{\node[font=\ttfamily\tiny,tpazul] at ([shift={(\i*23.25mm-11.6mm,-9mm)}]current page.north west){\i};
    \draw[tpazul,line width=.3pt] ([shift={(\i*23.25mm,-12mm)}]current page.north west)--++(0,-2mm);}
 \end{tikzpicture}}
-\newcommand\tpcajetin{\begin{tikzpicture}[overlay]
- \begin{scope}[shift={(-14mm,-5mm)},tpazul,line width=.5pt,font=\ttfamily\tiny]
-  \draw (0,0) rectangle (186mm,-12mm); \draw (62mm,0)--++(0,-12mm) (132mm,0)--++(0,-12mm) (166mm,0)--++(0,-12mm);
+\newcommand\tpcajetin{\begin{tikzpicture}[remember picture,overlay]
+ \begin{scope}[shift={([shift={(12mm,24mm)}]current page.south west)},tpazul,line width=.5pt,font=\ttfamily\tiny]
+  \draw (0,0) rectangle ([shift={(-12mm,12mm)}]current page.south east); \draw (62mm,0)--++(0,-12mm) (132mm,0)--++(0,-12mm) (166mm,0)--++(0,-12mm);
   \node[anchor=north west] at (1.5mm,-1mm){ASIGNATURA}; \node[anchor=north west] at (63.5mm,-1mm){SECCIÓN}; \node[anchor=north west] at (133.5mm,-1mm){AUTOR}; \node[anchor=north west] at (167.5mm,-1mm){HOJA};
-  \node[anchor=south west,font=\sffamily\bfseries\scriptsize,tpink,text width=59mm] at (1.5mm,-11.5mm){\asignatura};
-  \node[anchor=south west,font=\sffamily\scriptsize,tpink,text width=67mm] at (63.5mm,-11.5mm){\leftmark};
+  \node[anchor=south west,font=\sffamily\bfseries\scriptsize,tpink] at (1.5mm,-11.5mm){\truncate{58mm}{\asignatura}};
+  \node[anchor=south west,font=\sffamily\scriptsize,tpink] at (63.5mm,-11.5mm){\truncate{66mm}{\leftmark}};
   \node[anchor=south west,font=\sffamily\scriptsize,tpink] at (133.5mm,-11.5mm){I. Sallami Moreno};
   \node[anchor=south west,font=\ttfamily\small\bfseries,tpnar] at (167.5mm,-11.5mm){\thepage};
  \end{scope}\end{tikzpicture}}
