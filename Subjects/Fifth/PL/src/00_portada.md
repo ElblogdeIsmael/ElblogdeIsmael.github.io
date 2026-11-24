@@ -1,5 +1,6 @@
 ---
 subject: "Procesadores de Lenguajes"
+tema: brutal
 type: info
 about: "Temario, Hoja Esquemática de Métodos, Relaciones Resueltas y Ejercicios de Examen (Temas 1 al 6)"
 header-includes: |

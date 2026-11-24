@@ -1,0 +1,12 @@
+% Piezas que comparten los tres temas nuevos. La carga estilo.latex justo antes
+% de \begin{document}, después de paquetes.tex, estilos.tex y de lo que pandoc
+% emite, así que aquí se redefine lo que ya existe.
+\usepackage{eso-pic,pdfrender,anyfontsize}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{arrows.meta}
+% Los entornos de amsthm de estilos.tex y comandos.tex se envuelven en una caja;
+% numeración y cabecera siguen siendo las suyas.
+\newcommand\temaenvolver[2]{\foreach \e in {#1}{\expandafter\tcolorboxenvironment\expandafter{\e}{#2}}}
+% Título partido: la primera palabra en macizo y el resto aparte (\temaresto).
+\def\temapartir#1 #2\relax{\temaprimera{#1}\ifblank{#2}{}{\temaresto{#2}}}
+\providecommand\temaprimera[1]{#1}\providecommand\temaresto[1]{ #1}

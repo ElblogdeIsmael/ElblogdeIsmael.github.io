@@ -1,5 +1,6 @@
 ---
 subject: "Dirección Financiera"
+tema: brutal
 type: ade
 about: "Teoría y Casos Prácticos"
 header-includes:

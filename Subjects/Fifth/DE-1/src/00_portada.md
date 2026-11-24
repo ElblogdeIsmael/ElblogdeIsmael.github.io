@@ -1,5 +1,6 @@
 ---
 subject: "Dirección Estratégica de la Empresa I"
+tema: plano
 type: ade
 about: "Actividades Prácticas y Casos de Debate"
 header-includes:
